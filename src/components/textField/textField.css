@@ -1,0 +1,32 @@
+.field input,
+.select-field select {
+  background: #fafafc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 329px;
+  height: 36px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: black;
+  border: none;
+  padding: 8px 14px;
+}
+
+.field input::placeholder {
+  color: #bdbdbd;
+}
+
+.field label,
+.select-field label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  display: block;
+  margin-bottom: 16px;
+}

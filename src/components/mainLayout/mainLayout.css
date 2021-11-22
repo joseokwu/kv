@@ -1,0 +1,16 @@
+.layout-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.layout-main {
+  display: grid;
+  grid-template-columns: minmax(200px, 278px) 6fr;
+}
+
+.layout-child {
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
