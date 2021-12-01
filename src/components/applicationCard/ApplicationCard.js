@@ -206,7 +206,7 @@ const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
             </section>
 
             <section className="row applicant-modal-content">
-              <div className="col-9">
+              <div className="col-3">
                 <section className="applicant-logo">
                   <img src={logo} alt="logo" className="" />
                 </section>
@@ -219,7 +219,7 @@ const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
                   </span>
                 </div>
               </div>
-              <div className="col-3">
+              <div className="col-9">
                 <section
                   className="d-flex justify-content-between"
                   style={{ marginBottom: 34 }}

@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./partnerRegisteration.css";
-import { ProgressBar } from "../../components/index";
-import hi from "../../assets/icons/hiEmoji.png";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import CompanyOverview from "./components/companyOverview/CompanyOverview";
-import OurOffering from "./components/ourOffering/OurOffering";
+import { ProgressBar } from "../../components";
+import hi from "../../assets/icons/hiEmoji.png";
+import { PersonalDetails } from "./components/personalDetails/PersonalDetails";
 
-export const PartnerRegistration = () => {
-  const wrapRef = useRef();
+export const InvestorRegistration = () => {
   const [progress, setProgress] = useState("50");
 
   const {
@@ -19,17 +16,8 @@ export const PartnerRegistration = () => {
     push(currentHash);
   };
 
-  useEffect(() => {
-    wrapRef.current.scrollTop = 0;
-    if (hash === "#offerings") {
-      setProgress("90");
-    } else {
-      setProgress("50");
-    }
-  }, [hash]);
-
   return (
-    <div className="register-wrap" ref={wrapRef}>
+    <div className="register-wrap">
       <section className="register-header">
         <div>
           <span>
@@ -40,11 +28,12 @@ export const PartnerRegistration = () => {
               <h4>Hi Micheal</h4>
               <img src={hi} alt="hi" />
             </section>
-            <p>Customise your profile</p>
+            <p>Let’s customise your experience</p>
           </span>
           <ProgressBar progress={progress} />
         </div>
       </section>
+
       <section className="register-grid">
         <div>
           <ul className="register-list">
@@ -55,22 +44,28 @@ export const PartnerRegistration = () => {
               Partner Details
             </li>
             <li
-              onClick={() => switchForm("#offerings")}
-              className={hash === "#offerings" && "active-li"}
+              onClick={() => switchForm("#investor")}
+              className={hash === "#investor" && "active-li"}
             >
-              Our Offerings
+              Investor Details
+            </li>
+            <li
+              onClick={() => switchForm("#approach")}
+              className={hash === "#approach" && "active-li"}
+            >
+              Investment Approach
+            </li>
+            <li
+              onClick={() => switchForm("#portfolio")}
+              className={hash === "#portfolio" && "active-li"}
+            >
+              Portfolio
             </li>
           </ul>
         </div>
 
         <div className="mt-2 d-flex justify-content-end">
-          {hash === "#details" ? (
-            <CompanyOverview />
-          ) : hash === "#offerings" ? (
-            <OurOffering />
-          ) : (
-            <CompanyOverview />
-          )}
+          <PersonalDetails />
         </div>
       </section>
     </div>

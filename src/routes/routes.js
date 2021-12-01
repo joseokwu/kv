@@ -15,6 +15,7 @@ import {
   Applicants,
   ContactUs,
   Notification,
+  InvestorRegistration,
 } from "../pages";
 
 const routes = [
@@ -36,8 +37,8 @@ const routes = [
     name: "RegisterPartner",
     path: "/RegisterPartner",
     exact: true,
-    component: PartnerRegistration,
-    protected: true,
+    component: WithRegisterLayout(PartnerRegistration),
+    protected: false,
   },
   {
     name: "SignUp",
@@ -117,6 +118,13 @@ const routes = [
     name: "Notification",
     path: "/notification",
     component: WithMainLayout(Notification),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "RegisterInvestor",
+    path: "/registerInvestor",
+    component: WithRegisterLayout(InvestorRegistration),
     exact: true,
     protected: false,
   },
