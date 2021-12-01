@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./header.css";
 import logo from "../../assets/images/kvLogo.png";
 import notification from "../../assets/icons/notification.svg";
@@ -6,9 +6,12 @@ import chat from "../../assets/icons/chat.svg";
 import angleDown from "../../assets/icons/angleDown.svg";
 import sampleUser from "../../assets/images/sampleUser.png";
 import { useHistory } from "react-router";
+import { Notification } from "../index";
 
 export const Header = () => {
   const { push } = useHistory();
+
+  const [openNotice, setOpenNotice] = useState(false);
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
       <section>
@@ -24,7 +27,10 @@ export const Header = () => {
               <p className="mb-0 header-text">Chat</p>
             </span>
           </li>
-          <li className="d-flex align-items-center">
+          <li
+            className="d-flex align-items-center"
+            onClick={() => setOpenNotice(!openNotice)}
+          >
             <img src={notification} alt="notification" />
           </li>
         </ul>
@@ -41,6 +47,11 @@ export const Header = () => {
           <img src={angleDown} alt="dropdown" />
         </div>
       </section>
+
+      <Notification
+        closeNotice={() => setOpenNotice(false)}
+        openNotice={openNotice}
+      />
     </div>
   );
 };

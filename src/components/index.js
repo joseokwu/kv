@@ -15,3 +15,5 @@ export * from "./alert/Alert";
 export * from "./authSide/AuthSide";
 export * from "./modal/Modal";
 export * from "./notification/Notification";
+export * from "./noticeItem/NoticeItem";
+export * from "./tabs/Tabs";

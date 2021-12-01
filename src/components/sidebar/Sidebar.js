@@ -35,7 +35,7 @@ export const Sidebar = () => {
             </a>
           </li>
           <li>
-            <a href="/applicants">
+            <a href="/applicants#all">
               <img src={startup} alt="dash" />
               <p className={`${activateLink("applicants")} side-text`}>
                 Startup Applicants

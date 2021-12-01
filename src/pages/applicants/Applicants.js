@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import search from "../../assets/icons/search.svg";
-import { ApplicationCard } from "../../components";
+import { ApplicationCard, Tabs } from "../../components";
 import filter from "../../assets/icons/filterFunnel.svg";
 import down from "../../assets/icons/chevronDown.svg";
 import logo from "../../assets/images/sampleApplicantsLogo.png";
 import searchSm from "../../assets/icons/searchSm.svg";
 import "./applicants.css";
+import { Tab } from "react-bootstrap";
 
 export const Applicants = ({ history }) => {
   const {
@@ -40,6 +41,15 @@ export const Applicants = ({ history }) => {
 
   const [dataToRender, setDataToRender] = useState([]);
 
+  const tabItems = [
+    "all",
+    "pending",
+    "approved",
+    "declined",
+    "expired",
+    "re-applied",
+  ];
+
   useEffect(() => {
     setDataToRender(
       data.filter((d, i) => {
@@ -61,7 +71,8 @@ export const Applicants = ({ history }) => {
       </section>
 
       <section className="d-flex align-items-center justify-content-between mb-4">
-        <ul className="applicant-tabs-list">
+        <Tabs tabItems={tabItems} />
+        {/* <ul className="applicant-tabs-list">
           <li
             className={`${hash === "#all" || hash === "" ? "active-tab" : ""}`}
             onClick={() => push("#all")}
@@ -98,7 +109,7 @@ export const Applicants = ({ history }) => {
           >
             Re-Applied
           </li>
-        </ul>
+        </ul> */}
 
         <div className="dropdown">
           <button
