@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { ProgressBar } from "../../components";
 import hi from "../../assets/icons/hiEmoji.png";
 import { PersonalDetails } from "./components/personalDetails/PersonalDetails";
+import { InvestorDetails } from "./components/investorDetails/InvestorDetails";
+import { InvestorDetails2 } from "./components/investorDetails2/InvestorDetails2";
+import { InvestmentApproach } from "./components/investmentApproach/InvestmentApproach";
+import { Portfolio } from "./components/portfolio/Portfolio";
 
 export const InvestorRegistration = () => {
-  const [progress, setProgress] = useState("50");
+  const wrapRef = useRef();
+  const [progress, setProgress] = useState("25");
 
   const {
     location: { hash },
@@ -16,8 +21,34 @@ export const InvestorRegistration = () => {
     push(currentHash);
   };
 
+  useEffect(() => {
+    wrapRef.current.scrollTop = 0;
+    switch (hash) {
+      case "#details":
+        setProgress("25");
+        break;
+      case "#investor":
+        setProgress("50");
+        break;
+
+      case "#investor2":
+        setProgress("55");
+        break;
+      case "#approach":
+        setProgress("75");
+        break;
+
+      case "#portfolio":
+        setProgress("95");
+        break;
+      default:
+        setProgress("25");
+        break;
+    }
+  }, [hash]);
+
   return (
-    <div className="register-wrap">
+    <div className="register-wrap" ref={wrapRef}>
       <section className="register-header">
         <div>
           <span>
@@ -45,7 +76,9 @@ export const InvestorRegistration = () => {
             </li>
             <li
               onClick={() => switchForm("#investor")}
-              className={hash === "#investor" && "active-li"}
+              className={
+                (hash === "#investor" || hash === "#investor2") && "active-li"
+              }
             >
               Investor Details
             </li>
@@ -65,7 +98,19 @@ export const InvestorRegistration = () => {
         </div>
 
         <div className="mt-2 d-flex justify-content-end">
-          <PersonalDetails />
+          {hash === "" || hash === "#details" ? (
+            <PersonalDetails />
+          ) : hash === "#investor" ? (
+            <InvestorDetails />
+          ) : hash === "#investor2" ? (
+            <InvestorDetails2 />
+          ) : hash === "#approach" ? (
+            <InvestmentApproach />
+          ) : hash === "#portfolio" ? (
+            <Portfolio />
+          ) : (
+            ""
+          )}
         </div>
       </section>
     </div>

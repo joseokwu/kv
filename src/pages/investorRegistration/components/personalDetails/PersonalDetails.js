@@ -2,15 +2,32 @@ import React from "react";
 import imageRep from "../../../../assets/icons/avatar.svg";
 import add from "../../../../assets/icons/addFile.svg";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
-import { Badge, PhoneInput, TextField } from "../../../../components";
+import {
+  Badge,
+  PhoneInput,
+  RowOption,
+  TextField,
+  Button,
+} from "../../../../components";
+import { useHistory } from "react-router";
 
 export const PersonalDetails = () => {
+  const hearOption = [
+    "news",
+    "social media",
+    "internet search",
+    "referral from startup",
+    "referral from investor",
+  ];
+
+  const { push } = useHistory();
+
   return (
     <div className="register-form-wrap">
       <h3>Personal Details</h3>
       <p>Let’s get to know you</p>
 
-      <div className="form-dp mb-4">
+      <div className="form-dp mb-4 bg-white">
         <span className="image-placeholder">
           <img src={imageRep} alt="placeholder" />
         </span>
@@ -22,7 +39,7 @@ export const PersonalDetails = () => {
       </div>
 
       <FormCard title="Personal Information">
-        <div className="row mb-4">
+        <div className="row">
           <section className="col-12 mb-4">
             <TextField
               label="Brief Introduction*"
@@ -175,12 +192,27 @@ export const PersonalDetails = () => {
             />
           </section>
 
-          <section className="mb-12 mb-4">
-            <p>How did you hear about Knight Venture?</p>
-            <div></div>
+          <section className="col-12 mb-4">
+            <p className="mb-3">How did you hear about Knight Venture?</p>
+            <div>
+              <RowOption options={hearOption} />
+            </div>
           </section>
         </div>
       </FormCard>
+
+      <section
+        className="d-flex align-items-center justify-content-end my-4"
+        style={{ columnGap: 9 }}
+      >
+        <Button label="Save" variant="secondary" />
+        <Button
+          label="Next"
+          onClick={() => {
+            push("#investor");
+          }}
+        />
+      </section>
     </div>
   );
 };

@@ -72,44 +72,6 @@ export const Applicants = ({ history }) => {
 
       <section className="d-flex align-items-center justify-content-between mb-4">
         <Tabs tabItems={tabItems} />
-        {/* <ul className="applicant-tabs-list">
-          <li
-            className={`${hash === "#all" || hash === "" ? "active-tab" : ""}`}
-            onClick={() => push("#all")}
-          >
-            All
-          </li>
-          <li
-            onClick={() => push("#pending")}
-            className={`${hash === "#pending" && "active-tab"}`}
-          >
-            Pending
-          </li>
-          <li
-            onClick={() => push("#approved")}
-            className={`${hash === "#approved" && "active-tab"}`}
-          >
-            Approved
-          </li>
-          <li
-            onClick={() => push("#declined")}
-            className={`${hash === "#declined" && "active-tab"}`}
-          >
-            Declined
-          </li>
-          <li
-            onClick={() => push("#expired")}
-            className={`${hash === "#expired" && "active-tab"}`}
-          >
-            Expired
-          </li>
-          <li
-            onClick={() => push("#re-applied")}
-            className={`${hash === "#re-applied" && "active-tab"}`}
-          >
-            Re-Applied
-          </li>
-        </ul> */}
 
         <div className="dropdown">
           <button

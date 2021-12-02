@@ -1,8 +1,8 @@
 import React from "react";
 
-const FormCard = ({ children, title = "" }) => {
+const FormCard = ({ children, title = "", className = "" }) => {
   return (
-    <div className="form-card">
+    <div className={`form-card ${className}`}>
       {title?.length > 0 && (
         <div className="contact-title">
           <h4>{title}</h4>
