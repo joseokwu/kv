@@ -18,3 +18,4 @@ export * from "./notification/Notification";
 export * from "./noticeItem/NoticeItem";
 export * from "./tabs/Tabs";
 export * from "./rowOptions/RowOption";
+export * from "./dashCard/DashCard";

@@ -1,13 +1,12 @@
 import React from "react";
 import "./dashboard.css";
-import DashCard from "./components/dashCard/DashCard";
 import total from "../../assets/icons/totalApp.svg";
 import newApp from "../../assets/icons/newApp.svg";
 import pending from "../../assets/icons/pendingApp.svg";
 import approved from "../../assets/icons/activeExpired.svg";
 import expired from "../../assets/icons/activeExpired.svg";
 import reApplied from "../../assets/icons/reApplied.svg";
-import { ApplicationCard } from "../../components/index";
+import { ApplicationCard, DashCard } from "../../components/index";
 import applicantLogo from "../../assets/images/sampleApplicantLogo.png";
 import ApplicationChart from "./components/applicationChart/ApplicationChart";
 

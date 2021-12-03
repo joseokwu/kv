@@ -1,7 +1,7 @@
 import React from "react";
 import "./dashCard.css";
 
-const DashCard = ({
+export const DashCard = ({
   icon = "",
   count = "100",
   name = "name",
@@ -27,8 +27,6 @@ const DashCard = ({
     </div>
   );
 };
-
-export default DashCard;
 
 const Star = ({ color }) => {
   return (
