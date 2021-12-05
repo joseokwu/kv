@@ -1,5 +1,7 @@
 import React from "react";
-import { DashCard } from "../../components";
+import { DashCard, EventCard, OpportunityCard, Tabs } from "../../components";
+import sampleConnect from "../../assets/images/sampleEventPerson.png";
+import "./investDashboard.css";
 
 export const InvestorDashboard = () => {
   const cardData = [
@@ -22,15 +24,73 @@ export const InvestorDashboard = () => {
         ))}
       </section>
 
-      <section className="row mt-5">
+      <section className="row mt-5 dash-main-content">
         <div className="col-lg-8">
-          <section className="d-flex align-items-center justify-content-between">
-            <p>Upcoming Events</p>
-            <p>See All</p>
-          </section>
+          <div>
+            <section className="d-flex align-items-center justify-content-between mb-3">
+              <p className="dash-sub-title">Upcoming Events</p>
+              <p className="see-all">See All</p>
+            </section>
+            <section
+              className="d-flex align-items-center flex-wrap"
+              style={{ columnGap: "1.125rem", rowGap: "1.12rem" }}
+            >
+              <EventCard color="#2E3192" />
+              <EventCard color="#62BFE4" />
+            </section>
+          </div>
+
+          <div style={{ marginTop: "2.38rem" }}>
+            <section className="d-flex align-items-center justify-content-between mb-3">
+              <p className="dash-sub-title">Opportunities</p>
+              <p className="see-all">See All</p>
+            </section>
+
+            <section className="row">
+              <div className="col-xl-6 mb-4">
+                <OpportunityCard />
+              </div>
+              <div className="col-xl-6 mb-4">
+                <OpportunityCard />
+              </div>
+              <div className="col-xl-6 mb-4">
+                <OpportunityCard />
+              </div>
+              <div className="col-xl-6 mb-4">
+                <OpportunityCard />
+              </div>
+            </section>
+          </div>
         </div>
 
-        <div className="col-lg-4"></div>
+        <div className="col-lg-4">
+          <section className="network-space mt-5">
+            <div className="network-space-header">
+              <h3>Networking</h3>
+              <p className="see-all">See All</p>
+            </div>
+
+            <div className="opp-connects">
+              <section className="mb-4">
+                <Tabs tabItems={["Requests", "My Connections"]} />
+              </section>
+
+              <section>
+                <div className="d-flex align-items-center">
+                  <img src={sampleConnect} alt="connect" />
+                  <section>
+                    <h5>Leo Ming</h5>
+                    <p>Founder and CEO at Apple Inc, Serial Investor</p>
+                    <div>
+                      <button>Accept</button>
+                      <button>Ignore</button>
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
       </section>
     </div>
   );

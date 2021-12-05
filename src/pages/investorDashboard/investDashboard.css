@@ -1,0 +1,45 @@
+.dash-sub-title {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.see-all {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #041b55;
+}
+
+.network-space {
+  background: #f9f9fc70;
+  border-radius: 10px 0px 0px 0px;
+}
+
+.network-space-header {
+  border-bottom: 1px solid #ececff;
+  padding: 1.56rem 2.2rem;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.network-space-header h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.opp-connects {
+  padding: 1rem 2.2rem;
+}

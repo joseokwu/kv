@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 
 export const Tabs = ({ tabItems }) => {
@@ -7,6 +7,12 @@ export const Tabs = ({ tabItems }) => {
     push,
     location: { hash },
   } = history;
+
+  useEffect(() => {
+    if (hash === "" && tabItems?.length > 0) {
+      push(`#${tabItems[0]}`);
+    }
+  }, [hash, tabItems, push]);
   return (
     <ul className="applicant-tabs-list">
       {tabItems.length > 0 &&

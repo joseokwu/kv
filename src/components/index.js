@@ -19,3 +19,5 @@ export * from "./noticeItem/NoticeItem";
 export * from "./tabs/Tabs";
 export * from "./rowOptions/RowOption";
 export * from "./dashCard/DashCard";
+export * from "./eventCard/EventCard";
+export * from "./opportunityCard/OpportunityCard";
