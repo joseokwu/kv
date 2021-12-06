@@ -8,13 +8,21 @@ import sampleUser from "../../assets/images/sampleUser.png";
 import { useHistory } from "react-router";
 import { Notification } from "../index";
 
-export const Header = () => {
+export const Header = ({ setOpen, open }) => {
   const { push } = useHistory();
 
   const [openNotice, setOpenNotice] = useState(false);
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
-      <section>
+      <section className="d-flex align-items-center">
+        <div
+          className={`${open ? "hams-open" : "hams-close"} hams`}
+          onClick={() => setOpen(!open)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
         <a href="/dashboard">
           <img src={logo} alt="logo" />
         </a>

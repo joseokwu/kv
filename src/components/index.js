@@ -21,3 +21,4 @@ export * from "./rowOptions/RowOption";
 export * from "./dashCard/DashCard";
 export * from "./eventCard/EventCard";
 export * from "./opportunityCard/OpportunityCard";
+export * from "./connectCard/ConnectCard";

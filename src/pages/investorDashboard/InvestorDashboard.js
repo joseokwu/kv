@@ -1,9 +1,15 @@
 import React from "react";
-import { DashCard, EventCard, OpportunityCard, Tabs } from "../../components";
-import sampleConnect from "../../assets/images/sampleEventPerson.png";
+import {
+  ConnectCard,
+  DashCard,
+  EventCard,
+  OpportunityCard,
+  Tabs,
+} from "../../components";
 import "./investDashboard.css";
 
 export const InvestorDashboard = () => {
+  const count = [1, 2, 3, 4];
   const cardData = [
     { name: "Total Applications", count: 50, color: "#E5FFE4" },
     { name: "Active Portfolio", count: 12, color: "#FAD7DC" },
@@ -25,7 +31,7 @@ export const InvestorDashboard = () => {
       </section>
 
       <section className="row mt-5 dash-main-content">
-        <div className="col-lg-8">
+        <div className="col-xl-8">
           <div>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Upcoming Events</p>
@@ -63,7 +69,7 @@ export const InvestorDashboard = () => {
           </div>
         </div>
 
-        <div className="col-lg-4">
+        <div className="col-xl-4">
           <section className="network-space mt-5">
             <div className="network-space-header">
               <h3>Networking</h3>
@@ -76,17 +82,13 @@ export const InvestorDashboard = () => {
               </section>
 
               <section>
-                <div className="d-flex align-items-center">
-                  <img src={sampleConnect} alt="connect" />
-                  <section>
-                    <h5>Leo Ming</h5>
-                    <p>Founder and CEO at Apple Inc, Serial Investor</p>
-                    <div>
-                      <button>Accept</button>
-                      <button>Ignore</button>
+                {count.map((c, i) => {
+                  return (
+                    <div key={`connect-${i}`} className="mb-5">
+                      <ConnectCard />
                     </div>
-                  </section>
-                </div>
+                  );
+                })}
               </section>
             </div>
           </section>
