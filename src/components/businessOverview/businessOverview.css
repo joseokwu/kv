@@ -1,0 +1,175 @@
+.business_overview {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.business_overview h3 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.business_overview p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: capitalize;
+  color: #323232;
+}
+
+.business_details {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+}
+
+.team_member {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+}
+
+.team_member h3 {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.team_member h2 {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #323232;
+}
+
+.team_member span {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 18px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.industry {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+}
+
+.founder_profile {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.founder_profile h3 {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.founder_profile h2 {
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+  color: #323232;
+}
+
+.founder_profile p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.founder_profile button {
+  background: #2e3192;
+  border-radius: 10px;
+  padding: 3px 30px;
+  color: #ffffff;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  border: none;
+}
+
+.founder_profile a {
+  color: #ffffff;
+}
+
+.founder_profile a:hover {
+  text-decoration: none;
+}
+
+.founder_profile h4 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  color: #000000;
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+}
+
+.current_investor_connect a {
+  font-family: DM Sans;
+  font-size: 12px;
+  line-height: 140%;
+  text-decoration: underline !important;
+  color: #5355a3;
+}
+
+.founder_profile span {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.product_road_map_title h3 {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.road_map {
+  border: 1px solid #d5d6f4;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.road_map h3 {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  color: #333333;
+}
+
+.road_map p {
+  font-family: DM Sans;
+  font-size: 12px;
+  line-height: 16px;
+  color: #888888;
+}

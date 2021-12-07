@@ -1,0 +1,35 @@
+.confirm_email_border {
+  border: 2px solid #00adef;
+  border-radius: 10px;
+}
+
+.confirm_email {
+  padding: 80px 18% !important;
+}
+
+.confirm_email h5 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #d5d6f4;
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+.confirm_email p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  letter-spacing: 0.01em;
+  color: #c0c1d4;
+}
+
+.resend_email {
+  color: #00adef !important;
+  text-decoration: underline;
+  margin-top: 4px;
+}

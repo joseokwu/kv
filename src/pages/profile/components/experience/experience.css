@@ -1,0 +1,41 @@
+.profile-offer-content > .mentor_experience_head {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #2e3192;
+}
+
+.profile-offer-content > .mentor_experience_sub {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 20px;
+  color: #323232;
+}
+
+.profile-offer-content > .mentor_experience_date {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 20px;
+  color: #323232;
+}
+
+.profile-offer-content > ul {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 20px;
+  color: #828282;
+}
+
+.profile-offer-content button {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 21px;
+  color: #40439a;
+  background: #f1f2ff;
+  border-radius: 10px;
+  padding: 10px 32px;
+  border: none;
+  margin-top: 20px;
+  margin-right: 20px;
+}

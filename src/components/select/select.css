@@ -1,0 +1,9 @@
+.select-field select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("../../assets/icons/down.svg");
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: 50%;
+  padding-right: 2rem !important;
+}

@@ -1,0 +1,32 @@
+.mentor_field input,
+.select_field select {
+  background:transparent;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 329px;
+  height: 36px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #F9F9FC;
+  border: 1px solid #E0E0E0;
+  padding: 8px 14px;
+}
+
+.mentor_field input::placeholder {
+  color: #bdbdbd;
+}
+
+.mentor_field label,
+.select_field label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #D5D6F4;
+  display: block;
+  margin-bottom: 16px;
+}

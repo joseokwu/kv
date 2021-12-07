@@ -1,0 +1,29 @@
+.mentor_consulting {
+    font-family: DM Sans;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    color: #323232;
+  }
+  
+  .mentor_consulting > .mentor_service {
+    font-family: DM Sans;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    color: #828282;
+  }
+  
+  .mentor_consult_modal button {
+    font-family: DM Sans;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    color: #323232;
+    padding: 10px 16px;
+    background: #dcebff;
+    border-radius: 5px;
+    border: none;
+  }
+  

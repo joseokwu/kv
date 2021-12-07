@@ -1,0 +1,52 @@
+.mentor_congrats_form_wrap {
+  background: #f9f9fc;
+  /* background: red; */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);
+  border-radius: 5px;
+  width: 60%;
+  height: 80%;
+  margin: 0 auto;
+  margin-top: 100px;
+  /* max-width: 100%; */
+  /* max-width: 929px; */
+  /* padding: 20px 5%; */
+  padding: 50px 0px;
+  /* margin-bottom: 50px; */
+  text-align: center;
+}
+
+.mentor_congrats_head h3 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #000000;
+  text-align: center;
+}
+
+.mentor_congrats_form_wrap > p {
+  font-family: DM Sans;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #828282;
+  margin-bottom: 44px;
+}
+
+.mentor_congrats_text p {
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 25px;
+  /* display: flex; */
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #828282;
+  padding-top: 15px;
+}
+
+.mentor_congrats_text a {
+  color: #00adef !important;
+  text-decoration: underline;
+}

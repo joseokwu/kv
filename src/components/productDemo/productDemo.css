@@ -1,0 +1,55 @@
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+  background: none;
+}
+ul.breadcrumb li {
+  display: inline;
+  font-size: 14px;
+  font-family: Lato;
+  line-height: 140%;
+  color: #000000;
+  opacity: 0.7;
+}
+ul.breadcrumb li + li:before {
+  padding: 8px;
+  color: black;
+  content: '\203A';
+}
+ul.breadcrumb li a {
+  color: #828282;
+  text-decoration: none;
+  font-family: Lato;
+  font-size: 14px;
+  line-height: 140%;
+}
+ul.breadcrumb li a:hover {
+  color: #828282;
+}
+
+.company_details {
+  background: linear-gradient(0deg, #dcebff, #dcebff);
+  border-radius: 5px;
+}
+
+.company_head h3 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.company_head p {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.product_demo p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 140%;
+  color: #323232;
+}

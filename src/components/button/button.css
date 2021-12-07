@@ -1,0 +1,68 @@
+.btn_primary {
+  background: #2e3192;
+}
+
+.btn_secondary {
+  background: #00adef;
+}
+
+.btn_primary:focus,
+.btn_primary:active {
+  outline: none;
+  background: #2e3192 !important;
+}
+.btn_secondary:focus,
+.btn_secondary:active {
+  outline: none;
+  background: #00adef !important;
+}
+.btn_main {
+  border-radius: 5px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-transform: capitalize;
+  padding: 10px 32px;
+  transition: all 0.4s;
+  border: none;
+}
+
+.btn_main:active {
+  outline: none !important;
+  box-shadow: none !important;
+  transform: scale(0.97, 0.97);
+  transition: all 0.4s;
+}
+
+.btn_main:focus {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none;
+}
+
+.btn_main:disabled {
+  background-color: lightgray;
+}
+
+.resend-code {
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+  justify-content: center;
+  max-width: 585px;
+  margin-top: 50px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(50, 52, 56, 0.6);
+}
+
+.resend-code p:last-child {
+  color: #2e3192;
+  font-weight: bold;
+}

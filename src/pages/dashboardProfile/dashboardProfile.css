@@ -1,0 +1,37 @@
+.dashboard_profile {
+}
+
+.dashboard_profile_banner {
+  position: relative;
+  height: 198px;
+  background: #00adef;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+.dashboard_profile_image {
+  display: inline-block;
+  width: 213px;
+  height: 213px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: -106px;
+  margin-left: 35px;
+}
+
+.dashboard_profile_image img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  z-index: 999;
+}
+
+.dashboard_profile_info h3 {
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+  color: #323232;
+}
