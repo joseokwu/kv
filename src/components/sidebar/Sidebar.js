@@ -11,19 +11,19 @@ const investorNavigators = [
   {
     title: "Dashboard",
     activator: "dashboard",
-    path: "investor/dashboard",
+    path: "/investor/dashboard",
     icon: dashboard,
   },
   {
     title: "Investment Opportunities",
     activator: "opportunities",
-    path: "investor/opportunities",
+    path: "/investor/opportunities",
     icon: startup,
   },
   {
     title: "Events",
     activator: "events",
-    path: "investor/events",
+    path: "/investor/events",
     icon: event,
   },
 ];

@@ -8,6 +8,8 @@ export const Tabs = ({ tabItems }) => {
     location: { hash },
   } = history;
 
+  console.log(`hash`, hash);
+
   useEffect(() => {
     if (hash === "" && tabItems?.length > 0) {
       push(`#${tabItems[0]}`);
@@ -19,7 +21,9 @@ export const Tabs = ({ tabItems }) => {
         tabItems.map((item, i) => {
           return (
             <li
-              className={`${hash === `#${item}` ? "active-tab" : ""}`}
+              className={`${
+                hash?.replaceAll("%20", " ") === `#${item}` ? "active-tab" : ""
+              }`}
               onClick={() => push(`#${item}`)}
               key={`tab-${i}`}
             >

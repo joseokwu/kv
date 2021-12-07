@@ -17,6 +17,8 @@ import {
   Notification,
   InvestorRegistration,
   InvestorDashboard,
+  InvestorOpportunity,
+  Opportunity,
 } from "../pages";
 
 const routes = [
@@ -133,6 +135,20 @@ const routes = [
     name: "InvestorDashboard",
     path: "/investor/dashboard",
     component: WithMainLayout(InvestorDashboard),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "InvestorOpportunity",
+    path: "/investor/opportunities",
+    component: WithMainLayout(InvestorOpportunity),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Opportunity",
+    path: "/investor/opportunities/:id",
+    component: WithMainLayout(Opportunity),
     exact: true,
     protected: false,
   },

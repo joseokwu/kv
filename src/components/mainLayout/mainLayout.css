@@ -36,7 +36,8 @@
 
   .sm-side-close {
     position: absolute;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     z-index: 200;
     left: -400px;
     transition: all 0.5s;

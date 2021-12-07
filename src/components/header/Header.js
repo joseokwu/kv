@@ -27,7 +27,7 @@ export const Header = ({ setOpen, open }) => {
           <img src={logo} alt="logo" />
         </a>
       </section>
-      <section className="d-flex align-items-center h-100">
+      <section className="h-100 header-right-content">
         <ul className="header-list">
           <li>
             <span className="header-chat d-flex align-items-center">

@@ -1,0 +1,33 @@
+.bread-start {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #828282;
+}
+
+.bread-end {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #000000;
+  opacity: 0.7;
+}
+
+.opp-page-card {
+  background-color: white;
+  padding: 2.58rem 2.0625rem;
+  border-radius: 1.25rem;
+}
+
+.opp-page-card-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: #000000;
+}
