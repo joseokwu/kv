@@ -1,6 +1,6 @@
 export const FinancialDetails = () => {
   return (
-    <div className="mt-4 opp-page-card py-3">
+    <div className="my-4 opp-page-card py-3">
       <h3 className="sub-card-title">Financial Details</h3>
 
       <section

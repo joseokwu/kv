@@ -8,6 +8,7 @@ import { FundingRound } from "./components/FundingRound";
 import { Product } from "./components/product/Product";
 import { PitchDeck } from "./components/pitchDeck/PitchDeck";
 import { Team } from "./components/team/Team";
+import { BusinessCanvas } from "./components/businessCanvas/BusinessCanvas";
 
 export const Opportunity = ({ history }) => {
   const {
@@ -31,6 +32,8 @@ export const Opportunity = ({ history }) => {
         return <PitchDeck />;
       case "#team":
         return <Team />;
+      case "#business canvas":
+        return <BusinessCanvas />;
 
       default:
         return <Product />;
