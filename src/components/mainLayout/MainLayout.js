@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header, Sidebar } from "../index";
 import "./mainLayout.css";
 
- const MainLayout = ({ children }) => {
+const MainLayout = ({ children }) => {
+  const [open, setOpen] = useState(false);
   return (
     <div>
       <section className="layout-header">
-        <Header />
+        <Header setOpen={setOpen} open={open} />
       </section>
       <section className="layout-main">
-        <div>
+        <div className={`${open ? "sm-side" : "sm-side-close"}`}>
           <Sidebar />
         </div>
         <div className="layout-child">{children}</div>
@@ -18,15 +19,14 @@ import "./mainLayout.css";
   );
 };
 
-
 export const WithMainLayout = (Component) => {
-	return (props) => {
-		return (
-			<>
-				<MainLayout>
-					<Component {...props} />
-				</MainLayout>
-			</>
-		);
-	};
+  return (props) => {
+    return (
+      <>
+        <MainLayout>
+          <Component {...props} />
+        </MainLayout>
+      </>
+    );
+  };
 };

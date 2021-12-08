@@ -120,3 +120,7 @@
   line-height: 31px;
   color: #2e3192;
 }
+
+.edit_input {
+  min-width: 100%;
+}

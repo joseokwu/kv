@@ -56,7 +56,7 @@ export const PartnerRegistration = () => {
             </li>
             <li
               onClick={() => switchForm("#offerings")}
-              className={(hash === "#offerings" || hash === "") && "active-li"}
+              className={hash === "#offerings" && "active-li"}
             >
               Our Offerings
             </li>

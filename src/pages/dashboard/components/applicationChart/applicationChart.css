@@ -4,6 +4,8 @@
   padding: 39px 6%;
   max-width: 463px;
   width: 100%;
+  position: sticky;
+  top: 30px;
 }
 
 .appChart-header {

@@ -1,0 +1,58 @@
+.opp-card {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 1.75rem 1.38rem;
+}
+
+.opp-content {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: #5d5d5e;
+  margin-top: 1rem;
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.opp-footer-text {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 140%;
+  color: #6466aa;
+}
+
+.opp-company {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.opp-tag {
+  background: #e8f6fc;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.625rem;
+  line-height: 0.81rem;
+  letter-spacing: 0.01em;
+  color: #5d5d5e;
+}
+
+.active-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #18a615;
+}

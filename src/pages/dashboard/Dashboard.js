@@ -1,24 +1,23 @@
 import React from "react";
 import "./dashboard.css";
-import DashCard from "./components/dashCard/DashCard";
 import total from "../../assets/icons/totalApp.svg";
 import newApp from "../../assets/icons/newApp.svg";
 import pending from "../../assets/icons/pendingApp.svg";
 import approved from "../../assets/icons/activeExpired.svg";
 import expired from "../../assets/icons/activeExpired.svg";
 import reApplied from "../../assets/icons/reApplied.svg";
-import { ApplicationCard } from "../../components/index";
+import { ApplicationCard, DashCard } from "../../components/index";
 import applicantLogo from "../../assets/images/sampleApplicantLogo.png";
 import ApplicationChart from "./components/applicationChart/ApplicationChart";
 
 export const Dashboard = () => {
   const cardData = [
-    { icon: total, name: "Total Applications", count: 500, color: "#3855B3" },
-    { icon: newApp, name: "new", count: 12, color: "#74BE8C" },
-    { icon: pending, name: "pending", count: 5, color: "#650A9D" },
-    { icon: approved, name: "approved", count: 60, color: "#1880AC" },
-    { icon: expired, name: "expired", count: 10, color: "#2196F3" },
-    { icon: reApplied, name: "Re-Applied", count: 20, color: "#7B61FF" },
+    { icon: total, name: "Total Applications", count: 50, color: "#E5FFE4" },
+    { icon: newApp, name: "new", count: 12, color: "#FAD7DC" },
+    { icon: pending, name: "pending", count: 5, color: "#DFF1FF" },
+    { icon: approved, name: "approved", count: 60, color: "#EEDAFB" },
+    { icon: expired, name: "expired", count: 10, color: "#E5FFE4" },
+    { icon: reApplied, name: "Re-Applied", count: 20, color: "#FDE591" },
   ];
 
   const appCardData = [1, 2, 3, 4, 5];

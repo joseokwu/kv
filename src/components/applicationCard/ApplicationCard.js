@@ -67,22 +67,26 @@ export const ApplicationCard = ({
         id={`applicantModal${index}`}
       />
       <section
-        className="d-flex align-items-start justify-content-between appCard-title"
+        className="appCard-title"
         data-toggle="modal"
         data-target={`#applicantModal${index}`}
       >
-        <img src={logo} alt="applicant logo" />
-        <div>
-          <h3>Applane Insteen.</h3>
+        <article>
+          <section className="d-flex align-items-center justify-content-between">
+            <div className="d-flex align-items-center mb-2">
+              <img src={logo} alt="applicant logo" />
+              <h3 className="ml-2">Applane Insteen.</h3>
+            </div>
+            <div>
+              <Badge name="Acceleration" />
+            </div>
+          </section>
           <section className="d-flex flex-wrap appCard-tag-group">
             <Tag name="Tech" />
             <Tag name="Engineering" color="#40439A" />
             <Tag name="Career" color="#E31937" />
           </section>
-        </div>
-        <section>
-          <Badge name="Acceleration" />
-        </section>
+        </article>
       </section>
       <section
         className="appCard-desc"
@@ -206,21 +210,20 @@ const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
                 <section className="applicant-logo">
                   <img src={logo} alt="logo" className="" />
                 </section>
+                <h1 className="applicant-modal-header">Applane Insteen.</h1>
+                <div>
+                  <span className="d-flex flex-wrap appCard-tag-group">
+                    <Tag name="Tech" />
+                    <Tag name="Engineering" color="#40439A" />
+                    <Tag name="Career" color="#E31937" />
+                  </span>
+                </div>
               </div>
               <div className="col-9">
                 <section
                   className="d-flex justify-content-between"
                   style={{ marginBottom: 34 }}
                 >
-                  <div>
-                    <h1 className="applicant-modal-header">Applane Insteen.</h1>
-                    <span className="d-flex flex-wrap appCard-tag-group">
-                      <Tag name="Tech" />
-                      <Tag name="Engineering" color="#40439A" />
-                      <Tag name="Career" color="#E31937" />
-                    </span>
-                  </div>
-
                   <div>
                     <Badge name="Acceleration" />
                   </div>

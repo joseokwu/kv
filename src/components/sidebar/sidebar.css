@@ -1,6 +1,6 @@
 .side-main {
   height: calc(100vh - 60px);
-  background: linear-gradient(180deg, #00adef -13.89%, #2e3192 88.73%);
+  background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
   color: white;
   padding: 60px 10%;
   display: flex;
@@ -58,7 +58,7 @@
 .side-text {
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 140%;
   color: #ffffff;
 }

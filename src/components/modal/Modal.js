@@ -1,7 +1,13 @@
 import React from "react";
 import "./modal.css";
 
-export const Modal = ({ title = "", children, position = "", id = "" }) => {
+export const Modal = ({
+  title = "",
+  children,
+  position = "",
+  id = "",
+  subTitle = "",
+}) => {
   return (
     <div className="modal fade" tabindex="-1" role="dialog" id={id}>
       <div
@@ -24,6 +30,7 @@ export const Modal = ({ title = "", children, position = "", id = "" }) => {
               </button>
             </div>
             <p className="kv-modal-title">{title}</p>
+            {subTitle.length > 0 && <p className="mt-3">{subTitle}</p>}
           </header>
           <section className="modal-body text-left">{children}</section>
         </div>
