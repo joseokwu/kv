@@ -19,15 +19,15 @@ export const BusinessModelCanva = () => {
       <section>
         <div className="row">
           <div className="col-lg-10">
-              <Problem />            
-              <Solution />
-              <MarketSize />
-              <TargetMarket />
-              <BusinessModel />
-              <KeyCompetitors />
-              <CompetitiveAdvantages />
-              <MarketStrategy />
-              <Partnership />
+            <Problem />
+            <Solution />
+            <MarketSize />
+            <TargetMarket />
+            <BusinessModel />
+            <KeyCompetitors />
+            <CompetitiveAdvantages />
+            <MarketStrategy />
+            <Partnership />
           </div>
         </div>
       </section>

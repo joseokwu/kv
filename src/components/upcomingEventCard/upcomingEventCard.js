@@ -3,7 +3,6 @@ import './upcomingEventCard.css'
 import dot from '../../assets/icons/dot.svg'
 import doc from '../../assets/images/doc.svg'
 import clock from '../../assets/images/clock.svg'
-import { Button } from '../../components'
 
 export const UpcomingEventCard = ({ history }) => {
   return (
@@ -35,7 +34,8 @@ export const UpcomingEventCard = ({ history }) => {
       </section>
 
       <section className="d-flex align-items-center justify-content-between">
-        <Button label="View Details" />
+        {/* <Button label="View Details" /> */}
+        <button><a href="/mentor/dashboard/view/details">View Details</a></button>
         <section className="event_people">
           <img src={doc} alt="doc" />
           <img src={doc} alt="doc" />

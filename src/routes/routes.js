@@ -162,19 +162,19 @@ const routes = [
     protected: false,
   },
   {
-   name: 'DealRoom',
-   path: '/mentor/deal-room',
-   component: WithMainLayout(DealRoom),
-   exact: true,
-   protected: false,
- },
- {
-  name: 'DashboardProfile',
-  path: '/mentor/dashboard/founder/profile',
-  component: WithMainLayout(DashboardProfile),
-  exact: true,
-  protected: false,
-},
+    name: 'DealRoom',
+    path: '/mentor/deal-room',
+    component: WithMainLayout(DealRoom),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'DashboardProfile',
+    path: '/mentor/dashboard/founder/profile',
+    component: WithMainLayout(DashboardProfile),
+    exact: true,
+    protected: false,
+  },
 ]
 
 export default routes

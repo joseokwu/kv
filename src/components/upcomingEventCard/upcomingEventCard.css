@@ -89,7 +89,7 @@
 }
 
 .event_date span {
-    font-weight: 800;
+  font-weight: 800;
 }
 
 .event_time {
@@ -97,4 +97,20 @@
   font-size: 12px;
   line-height: 140%;
   color: #858585;
+}
+
+.opp_card button {
+  background: #2e3192;
+  border-radius: 10px;
+  padding: 8px 30px;
+  border: none;
+}
+
+.opp_card a {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff!important;
+  text-decoration: none;
 }

@@ -63,20 +63,7 @@ const mentorNavigators = [
   },
 ];
 
-// const boosterNavigators = [
-//   {
-//     title: "Dashboard",
-//     activator: "dashboard",
-//     path: "/dashboard",
-//     icon: dashboard,
-//   },
-//   {
-//     title: "Startup Applicants",
-//     activator: "applicants",
-//     path: "/applicants",
-//     icon: dashboard,
-//   },
-// ];
+
 
 export const Sidebar = () => {
   const {
@@ -99,88 +86,7 @@ export const Sidebar = () => {
   }, [pathname]);
 
   return (
-    // <div className="side-main">
-    //   <section className="side-navigator">
-    //     <div>
-    //       <img src={user} alt="profile" />
-    //     </div>
-    //     <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
-    //     <p className="mb-0 side-text">Startup</p>
-
-    //     <ul className="side-list">
-    //       <li>
-    //         <a href="/mentor/dashboard">
-    //           <img src={dashboard} alt="dash" />
-    //           <p className={`${activateLink('dashboard')} side-text`}>
-    //             Dashboard
-    //           </p>
-    //         </a>
-    //       </li>
-    //       <li>
-    //         <a href="/mentor/evaluation">
-    //           <img src={evaluation} alt="dash" />
-    //           <p className={`${activateLink('evaluation')} side-text`}>
-    //             Evaluation
-    //           </p>
-    //         </a>
-    //       </li>
-    //       <li>
-    //         <a href="/mentor/program">
-    //           <img src={program} alt="dash" />
-    //           <p className={`${activateLink('program')} side-text`}>
-    //             Program
-    //           </p>
-    //         </a>
-    //       </li>
-    //       <li>
-    //         <a href="/mentor/assignments">
-    //           <img src={assignments} alt="dash" />
-    //           <p className={`${activateLink('assignments')} side-text`}>
-    //             Assignments
-    //           </p>
-    //         </a>
-    //       </li>
-    //       <li>
-    //         <a href="/mentor/events">
-    //           <img src={events} alt="dash" />
-    //           <p className={`${activateLink('events')} side-text`}>
-    //             Events
-    //           </p>
-    //         </a>
-    //       </li>
-    //       <li>
-    //         <a href="/mentor/schedule">
-    //           <img src={schedule} alt="dash" />
-    //           <p className={`${activateLink('schedule')} side-text`}>
-    //             Schedule
-    //           </p>
-    //         </a>
-    //       </li>
-    //       <li>
-    //         <a href="/mentor/networking">
-    //           <img src={network} alt="dash" />
-    //           <p className={`${activateLink('networking')} side-text`}>
-    //             Networking
-    //           </p>
-    //         </a>
-    //       </li>
-    //       <li>
-    //         <a href="/mentor/deal-room">
-    //           <img src={deal} alt="dash" />
-    //           <p className={`${activateLink('deal-room')} side-text`}>
-    //             Deal Room
-    //           </p>
-    //         </a>
-    //       </li>
-    //     </ul>
-    //   </section>
-    //   <section className="side-footer" onClick={() => push('/support')}>
-    //     <img src={helpDesk} alt="help" />
-    //     <p className="mb-0 side-text" role="button">
-    //       Need help? Contact us
-    //     </p>
-    //   </section>
-    // </div>
+    
     <div className="side-main">
       <section className="side-navigator">
         <div>

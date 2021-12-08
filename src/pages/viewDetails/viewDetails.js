@@ -1,13 +1,13 @@
 import React from 'react'
 import './viewDetails.css'
 import {
-  AuthButton,
-  BusinessModelCanva,
-  BusinessOverview,
   FinancialPlan,
   ProductDemo,
   Tabs,
 } from '../../components'
+import { PitchDeck } from '../pitchDeck/pitchDeck'
+import { BusinessOverview } from '../businessOverview/businessOverview'
+import { BusinessModelCanva } from '../businessModelCanva/businessModelCanva'
 
 export const ViewDetails = ({ history }) => {
   console.log(`history`, history)
@@ -23,7 +23,7 @@ export const ViewDetails = ({ history }) => {
         return <BusinessOverview />
 
       case '#Pitch Deck':
-        return <BusinessOverview />
+        return <PitchDeck />
 
       case '#Financial Plan':
         return <FinancialPlan />

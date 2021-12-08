@@ -7,7 +7,7 @@ import founder from '../../assets/images/founder.svg'
 import green from '../../assets/images/greenMap.svg'
 import blue from '../../assets/images/blueMap.svg'
 import gray from '../../assets/images/grayMap.svg'
-import { CurrentInvestorConnectCard } from '../currentInvestorConnectCard/currentInvestorConnectCard'
+import { CurrentInvestorConnectCard } from '../../components/currentInvestorConnectCard/currentInvestorConnectCard'
 
 export const BusinessOverview = () => {
   const conn = [1, 2]
