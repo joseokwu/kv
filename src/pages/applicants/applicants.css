@@ -30,7 +30,9 @@
 .applicant-tabs-list {
   list-style: none;
   display: flex;
-  column-gap: 7%;
+  flex-wrap: wrap;
+  column-gap: 4%;
+  row-gap: 8px;
   flex-basis: 70%;
   margin: 0;
   padding: 0;

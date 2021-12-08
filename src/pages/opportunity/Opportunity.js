@@ -1,9 +1,41 @@
 import React from "react";
 import left from "../../assets/icons/chervonLeft.svg";
-import logo from "../../assets/images/yeLogo.svg";
 import "./opportunity.css";
+import { Tabs, Tag } from "../../components";
+import { OppCompanyInfo } from "./components/OppCompanyInfo";
+import { FinancialDetails } from "./components/FinancialDetails";
+import { FundingRound } from "./components/FundingRound";
+import { Product } from "./components/product/Product";
+import { PitchDeck } from "./components/pitchDeck/PitchDeck";
+import { Team } from "./components/team/Team";
 
-export const Opportunity = () => {
+export const Opportunity = ({ history }) => {
+  const {
+    location: { hash },
+  } = history;
+  const tabItems = [
+    "product",
+    "pitch deck",
+    "team",
+    "business canvas",
+    "fundraising",
+    "Milestone/Timeline",
+    "Product Road Map",
+  ];
+
+  const renderContent = () => {
+    switch (hash.replaceAll("%20", " ")) {
+      case "#product":
+        return <Product />;
+      case "#pitch deck":
+        return <PitchDeck />;
+      case "#team":
+        return <Team />;
+
+      default:
+        return <Product />;
+    }
+  };
   return (
     <div>
       <article className="wrapper pt-2" style={{ background: "#F9F9FC" }}>
@@ -13,25 +45,21 @@ export const Opportunity = () => {
           <p className="bread-end">Applane Insteen.</p>
         </section>
 
-        <div className="row">
+        <div className="row mt-5">
           <div className="col-lg-7">
-            <section className="d-flex align-items-center justify-content-between mt-5 opp-page-card">
-              <div>
-                <img src={logo} alt="logo" className="mb-3" />
-                <h3 className="opp-page-card-title">Yebox Tech.</h3>
-              </div>
-
-              <div>
-                <section className="d-flex align-items-center">
-                  <p>Industry</p>
-                  <span>Tech</span>
-                </section>
-              </div>
-            </section>
+            <OppCompanyInfo />
+            <FinancialDetails />
           </div>
-
-          <div className="col-lg-5"></div>
+          <div className="col-lg-5">
+            <FundingRound />
+          </div>
         </div>
+      </article>
+
+      <article className="wrapper">
+        <Tabs tabItems={tabItems} />
+
+        <div className="py-4">{renderContent()}</div>
       </article>
     </div>
   );

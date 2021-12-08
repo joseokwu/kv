@@ -108,7 +108,7 @@ const routes = [
     path: "/support",
     component: WithMainLayout(ContactUs),
     exact: true,
-    protected: true,
+    protected: false,
   },
   {
     name: "Applicants",
