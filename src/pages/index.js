@@ -23,3 +23,4 @@ export * from "./investorSchedule/InvestorSchedule";
 export * from "./investorEvaluation/InvestorEvaluation";
 export * from "./investorNetwork/InvestorNetwork";
 export * from "./investorDeal/InvestorDeal";
+export * from "./founderProfile/FounderProfile";

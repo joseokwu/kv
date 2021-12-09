@@ -7,15 +7,17 @@ export const Button = ({
   label = "button",
   variant = "primary",
   className = "",
-  loading
+  loading,
+  ...rest
 }) => {
   return (
     <button
       onClick={onClick}
       disabled={loading}
       className={`btn-main btn-${variant} ${className}`}
+      {...rest}
     >
-      {  loading ? <CircularLoader /> : label }
+      {loading ? <CircularLoader /> : label}
     </button>
   );
 };
