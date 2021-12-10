@@ -12,6 +12,7 @@ import web from "../../../../assets/icons/webSm.svg";
 import split from "../../../../assets/icons/split.svg";
 import mail from "../../../../assets/icons/mail.svg";
 import yeLogo from "../../../../assets/images/yeLogo.svg";
+import { useParams } from "react-router";
 import "./product.css";
 
 export const Product = () => {
@@ -183,6 +184,8 @@ const InvestorInfo = () => {
 };
 
 const FounderInfo = () => {
+  const { id } = useParams();
+
   return (
     <div className="founder-info-modal">
       <section>
@@ -202,7 +205,10 @@ const FounderInfo = () => {
       >
         <img src={founderLg} alt="profile" className="modal-profile-img" />
         <div>
-          <article className="d-flex align-items-center">
+          <article
+            className="d-flex align-items-center flex-wrap"
+            style={{ rowGap: 10 }}
+          >
             <h2 className="mr-5">Mr Promise Amstel</h2>
             <span>
               <img src={twitter} alt="twitter" />
@@ -240,7 +246,7 @@ const FounderInfo = () => {
             <Button label="Schedule call" />
             <Button label="Send a message" variant="secondary" />
             <a
-              href="https://www.profile.com"
+              href={`/investor/opportunities/${id}/founder`}
               className="full-profile-link ml-3"
             >
               View full profile

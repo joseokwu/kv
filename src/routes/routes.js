@@ -26,6 +26,7 @@ import {
   InvestorEvaluation,
   InvestorNetwork,
   InvestorDeal,
+  FounderProfile,
 } from "../pages";
 
 const routes = [
@@ -156,6 +157,13 @@ const routes = [
     name: "Opportunity",
     path: "/investor/opportunities/:id",
     component: WithMainLayout(Opportunity),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Opportunity",
+    path: "/investor/opportunities/:id/founder",
+    component: WithMainLayout(FounderProfile),
     exact: true,
     protected: false,
   },
