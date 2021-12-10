@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 
-export const Tabs = ({ tabItems }) => {
+export const Tabs = ({
+  tabItems,
+  withState = false,
+  state = "",
+  setState = () => {},
+}) => {
   const history = useHistory();
   const {
     push,
     location: { hash },
   } = history;
-
-  console.log(`hash`, hash);
 
   useEffect(() => {
     if (hash === "" && tabItems?.length > 0) {
@@ -19,12 +22,22 @@ export const Tabs = ({ tabItems }) => {
     <ul className="applicant-tabs-list">
       {tabItems.length > 0 &&
         tabItems.map((item, i) => {
-          return (
+          return !withState ? (
             <li
               className={`${
                 hash?.replaceAll("%20", " ") === `#${item}` ? "active-tab" : ""
               }`}
               onClick={() => push(`#${item}`)}
+              key={`tab-${i}`}
+            >
+              {item}
+            </li>
+          ) : (
+            <li
+              className={`${
+                state?.toLowerCase() === item?.toLowerCase() ? "active-tab" : ""
+              }`}
+              onClick={() => setState(item)}
               key={`tab-${i}`}
             >
               {item}
