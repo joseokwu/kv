@@ -8,6 +8,7 @@
   justify-content: space-between;
   min-height: 500px;
   overflow-y: auto;
+  padding-bottom: 30px;
 }
 
 .side-navigator {
@@ -34,7 +35,7 @@
 }
 
 .side-list li {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .side-list img {

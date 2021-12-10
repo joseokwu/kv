@@ -3,9 +3,9 @@ import "./opportunity.css";
 import logo from "../../assets/images/yeLogo.svg";
 import { Tag } from "..";
 
-export const OpportunityCard = () => {
+export const OpportunityCard = ({ onClick }) => {
   return (
-    <div className="opp-card">
+    <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
         <span class="opp-tag">Idea Stage</span>

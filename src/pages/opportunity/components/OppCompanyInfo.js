@@ -61,7 +61,10 @@ export const OppCompanyInfo = () => {
         className="mt-4 d-flex align-items-center justify-content-between flex-wrap"
         style={{ rowGap: 10 }}
       >
-        <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
+        <div
+          className="d-flex align-items-center flex-wrap"
+          style={{ columnGap: 10, rowGap: 10 }}
+        >
           <Button label="Commit" />
           <Button label="Interested" variant="secondary" />
         </div>

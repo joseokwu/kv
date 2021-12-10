@@ -96,3 +96,114 @@
   text-decoration-line: underline;
   color: #5355a3;
 }
+
+.founder-info-modal {
+  padding: 0 3.5rem;
+  position: relative;
+}
+
+.close-founder-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.founder-links {
+  column-gap: 1.7rem;
+  row-gap: 10px;
+  margin-top: 8px;
+}
+.founder-links a,
+.founder-modal-mail a,
+.founder-modal-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #828282;
+}
+
+.founder-links span,
+.founder-modal-mail {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.founder-modal-title {
+  margin-bottom: 2.25rem;
+}
+
+.full-profile-link {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.31rem;
+  text-decoration-line: underline;
+  color: #2e3192;
+}
+
+.investor-modal-info {
+  background: #f7fbff;
+  border-radius: 5px;
+  padding: 1.75rem 1.31rem;
+}
+
+.close-investor-modal {
+  background-color: transparent !important;
+  border: none;
+}
+
+.close-investor-modal span {
+  font-size: 32px;
+}
+
+.investment-count {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 1.44rem;
+  letter-spacing: 0.01em;
+  color: #3e3e3e;
+}
+
+.investment-text {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.31rem;
+  letter-spacing: 0.01em;
+  color: #3e3e3e;
+}
+
+.investor-modal-subtitles {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.31rem;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 1.25rem;
+}
+
+.investment-name {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.modal-profile-img {
+  width: 161px;
+  height: 161px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+}

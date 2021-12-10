@@ -8,6 +8,10 @@ import { FundingRound } from "./components/FundingRound";
 import { Product } from "./components/product/Product";
 import { PitchDeck } from "./components/pitchDeck/PitchDeck";
 import { Team } from "./components/team/Team";
+import { BusinessCanvas } from "./components/businessCanvas/BusinessCanvas";
+import { Fundraising } from "./components/fundraising/Fundraising";
+import { Milestone } from "./components/milestone/Milestone";
+import { RoadMap } from "./components/roadMap/RoadMap";
 
 export const Opportunity = ({ history }) => {
   const {
@@ -20,7 +24,7 @@ export const Opportunity = ({ history }) => {
     "business canvas",
     "fundraising",
     "Milestone/Timeline",
-    "Product Road Map",
+    "product road map",
   ];
 
   const renderContent = () => {
@@ -31,6 +35,17 @@ export const Opportunity = ({ history }) => {
         return <PitchDeck />;
       case "#team":
         return <Team />;
+      case "#business canvas":
+        return <BusinessCanvas />;
+
+      case "#fundraising":
+        return <Fundraising />;
+
+      case "#Milestone/Timeline":
+        return <Milestone />;
+
+      case "#product road map":
+        return <RoadMap />;
 
       default:
         return <Product />;
@@ -56,7 +71,7 @@ export const Opportunity = ({ history }) => {
         </div>
       </article>
 
-      <article className="wrapper">
+      <article className="wrapper" style={{ background: "#fdfdff" }}>
         <Tabs tabItems={tabItems} />
 
         <div className="py-4">{renderContent()}</div>
