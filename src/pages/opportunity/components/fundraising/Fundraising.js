@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Tabs } from "../../../../components";
+import CapTable from "./components/CapTable";
+import FinancialProjection from "./components/FinancialProjection";
 import FundingAsk from "./components/FundingAsk";
+import FundUtilization from "./components/FundUtilization";
+import PreviousRound from "./components/PreviousRound";
+import "./fundraising.css";
 
 export const Fundraising = () => {
   const tabItems = [
@@ -8,13 +13,21 @@ export const Fundraising = () => {
     "fund utilization",
     "cap table",
     "previous round",
-    "Financial Projection",
+    "financial projection",
   ];
 
   const renderComponents = () => {
     switch (currentTab) {
       case "funding ask":
         return <FundingAsk />;
+      case "fund utilization":
+        return <FundUtilization />;
+      case "cap table":
+        return <CapTable />;
+      case "previous round":
+        return <PreviousRound />;
+      case "financial projection":
+        return <FinancialProjection />;
 
       default:
         return <FundingAsk />;
@@ -32,7 +45,7 @@ export const Fundraising = () => {
         withState={true}
       />
 
-      <section className="mt-4">{renderComponents()}</section>
+      <section className="mt-5">{renderComponents()}</section>
     </div>
   );
 };
