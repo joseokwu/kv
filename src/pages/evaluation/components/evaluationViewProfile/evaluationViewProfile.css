@@ -1,0 +1,22 @@
+.evaluation_view_profile {
+  background: #2e3192;
+  border-radius: 10px;
+  padding: 10px 30px;
+  border: none;
+}
+
+.evaluation_view_profile a {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff !important;
+}
+
+.evaluation_view_profile:hover {
+  background: #00adef;
+}
+
+.evaluation_view_profile:focus {
+  outline: none;
+}

@@ -4,7 +4,7 @@ import dot from '../../assets/icons/dot.svg'
 import doc from '../../assets/images/doc.svg'
 import clock from '../../assets/images/clock.svg'
 
-export const UpcomingEventCard = ({ history }) => {
+export const UpcomingEventCard = () => {
   return (
     <div className="opp_card">
       <section className="mb-2 d-flex align-items-center justify-content-between">
@@ -35,7 +35,7 @@ export const UpcomingEventCard = ({ history }) => {
 
       <section className="d-flex align-items-center justify-content-between">
         {/* <Button label="View Details" /> */}
-        <button><a href="/mentor/dashboard/view/details">View Details</a></button>
+        <a href="/mentor/dashboard/view">View Details</a>
         <section className="event_people">
           <img src={doc} alt="doc" />
           <img src={doc} alt="doc" />

@@ -1,55 +1,63 @@
 import React from 'react'
 import './viewDetails.css'
-import {
-  FinancialPlan,
-  ProductDemo,
-  Tabs,
-} from '../../components'
-import { PitchDeck } from '../pitchDeck/pitchDeck'
-import { BusinessOverview } from '../businessOverview/businessOverview'
-import { BusinessModelCanva } from '../businessModelCanva/businessModelCanva'
+import { ProductDemo, Tabs } from '../../components'
+import { PitchDeck } from './components/pitchDeck/pitchDeck'
+import { Product } from './components/product/product'
+import { BusinessModelCanva } from './components/businessModelCanva/businessModelCanva'
+import { Team } from './components/team/team'
+import { RoadMap } from './components/roadMap/RoadMap'
+import { Fundraising } from './components/fundraising/fundraising'
 
 export const ViewDetails = ({ history }) => {
-  console.log(`history`, history)
-
   const {
     location: { hash },
   } = history
 
-  console.log(`hash`, hash)
   const renderContent = () => {
-    switch (hash) {
-      case '#Business Overview':
-        return <BusinessOverview />
+    switch (hash.replaceAll('%20', '')) {
+      case '#Product':
+        return <Product />
 
       case '#Pitch Deck':
         return <PitchDeck />
 
-      case '#Financial Plan':
-        return <FinancialPlan />
+      case '#Team':
+        return <Team />
 
       case '#Business Model Canva':
         return <BusinessModelCanva />
 
+      case '#Fundraising':
+        return <Fundraising />
+
+      case '#Milestone/Timeline':
+        return <div>Milestone/Timeline</div>
+
+      case '#Product Road Map':
+        return <RoadMap />
+
       default:
-        return <BusinessOverview />
+        return <Product />
     }
   }
+
+  const tabItems = [
+    'Product',
+    'Pitch Deck',
+    'Team',
+    'Business Model Canva',
+    'Fundraising',
+    'Milestone/Timeline',
+    'Product Road Map',
+  ]
 
   return (
     <div className="dashboard-main">
       <ProductDemo />
 
-      <div className="pt-3">
+      <div className="mt-4">
         <section className="mb-3">
-          <Tabs
-            tabItems={[
-              'Business Overview',
-              'Pitch Deck',
-              'Financial Plan',
-              'Business Model Canva',
-            ]}
-          />
+          <Tabs tabItems={tabItems} />
         </section>
         <section className="mt-1">{renderContent()}</section>
       </div>

@@ -1,0 +1,9 @@
+.read-or-hide {
+    color: #00adef !important;
+    font-family: Lato;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration: underline;
+    cursor: pointer;
+}

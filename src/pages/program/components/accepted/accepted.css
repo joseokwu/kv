@@ -1,0 +1,10 @@
+.accepted_tag {
+    background: #DEF6FF;
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-family: DM Sans;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    color: #00ADEF;
+}

@@ -20,6 +20,9 @@ import {
   Schedule,
   Networking,
   DealRoom,
+  EvaluationViewProfile,
+  ContactUs,
+  CreateAssignment,
 } from '../pages'
 import { DashboardProfile } from '../pages/dashboardProfile/dashboardProfile'
 import { ViewDetails } from '../pages/viewDetails/viewDetails'
@@ -47,8 +50,15 @@ const routes = [
     protected: false,
   },
   {
+    name: 'ContactUS',
+    path: '/support',
+    component: WithMainLayout(ContactUs),
+    exact: true,
+    protected: false,
+  },
+  {
     name: 'ConfirmEmail',
-    path: '/mentor/forgot/password/check/mail',
+    path: '/mentor/forgot/password',
     component: ConfirmEmail,
     exact: true,
     protected: false,
@@ -100,7 +110,7 @@ const routes = [
   },
   {
     name: 'InvitePeer',
-    path: '/mentor/signup/invite/peer',
+    path: '/mentor/signup/invite',
     component: WithRegisterLayout(InvitePeer),
     exact: true,
     protected: false,
@@ -114,7 +124,7 @@ const routes = [
   },
   {
     name: 'ViewDetails',
-    path: '/mentor/dashboard/view/details',
+    path: '/mentor/dashboard/view',
     component: WithMainLayout(ViewDetails),
     exact: true,
     protected: false,
@@ -170,8 +180,29 @@ const routes = [
   },
   {
     name: 'DashboardProfile',
-    path: '/mentor/dashboard/founder/profile',
+    path: '/mentor/dashboard/founder',
     component: WithMainLayout(DashboardProfile),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Evaluation',
+    path: '/mentor/evaluation',
+    component: WithMainLayout(Evaluation),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'EvaluationViewProfile',
+    path: '/mentor/evaluation/view',
+    component: WithMainLayout(EvaluationViewProfile),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'CreateAssignment',
+    path: '/mentor/assignments/create',
+    component: WithMainLayout(CreateAssignment),
     exact: true,
     protected: false,
   },

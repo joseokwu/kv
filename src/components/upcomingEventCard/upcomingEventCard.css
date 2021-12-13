@@ -99,18 +99,25 @@
   color: #858585;
 }
 
-.opp_card button {
+.opp_card a {
   background: #2e3192;
   border-radius: 10px;
   padding: 8px 30px;
   border: none;
-}
-
-.opp_card a {
   font-family: DM Sans;
   font-weight: bold;
   font-size: 14px;
   line-height: 140%;
-  color: #ffffff!important;
+  color: #ffffff;
   text-decoration: none;
+}
+
+.opp_card a:hover {
+  background: none;
+  color: #2e3192;
+  border: 1.5px solid #2e3192;
+}
+
+.opp_card a:focus {
+  outline: none;
 }

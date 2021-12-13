@@ -1,0 +1,32 @@
+.pending_evaluation {
+  background: #00ADEF;  
+  border-radius: 5px;
+  color: #ffffff;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  padding: 8px 25px;
+  border: none;
+}
+
+.pending_evaluation:focus {
+  outline: none;
+}
+
+.pending_evaluation:hover {
+  background: none;
+  border: 1.5px solid#00ADEF;
+  color: #00ADEF;
+}
+
+.pending-tag {
+  background: #fffbd7;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0.01em;
+  color: #d3c013;
+}

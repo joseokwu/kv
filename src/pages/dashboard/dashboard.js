@@ -1,5 +1,9 @@
 import React from 'react'
-import { OpportunityCard, DashCard, UpcomingEventCard } from '../../components'
+import {
+  AssignedStartupCard,
+  DashCard,
+  UpcomingEventCard,
+} from '../../components'
 import './dashboard.css'
 
 export const Dashboard = () => {
@@ -32,13 +36,13 @@ export const Dashboard = () => {
 
             <section className="row">
               <div className="col-xl-4 mb-4">
-                <OpportunityCard />
+                <AssignedStartupCard />
               </div>
               <div className="col-xl-4 mb-4">
-                <OpportunityCard />
+                <AssignedStartupCard />
               </div>
               <div className="col-xl-4 mb-4">
-                <OpportunityCard />
+                <AssignedStartupCard />
               </div>
             </section>
           </div>
@@ -56,16 +60,14 @@ export const Dashboard = () => {
                 <UpcomingEventCard />
               </div>
               <div className="col-xl-4 mb-4">
-              <UpcomingEventCard />
+                <UpcomingEventCard />
               </div>
               <div className="col-xl-4 mb-4">
-              <UpcomingEventCard />
+                <UpcomingEventCard />
               </div>
             </section>
-            
           </div>
         </div>
-
       </section>
     </div>
   )
