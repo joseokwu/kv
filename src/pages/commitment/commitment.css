@@ -1,0 +1,117 @@
+.commit-company-card {
+  background: #dcebff;
+  width: 100%;
+  padding: 2rem 2rem;
+  display: flex;
+  align-items: center;
+  column-gap: 1.5rem;
+}
+
+.commit-company-card img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.commit-company-card p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: #000000;
+}
+
+.commit-header {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+  margin-bottom: 1.88rem;
+  margin-top: 1.375rem;
+}
+
+.commit-input {
+  max-width: 100% !important;
+}
+
+.commit-doc-card {
+  background: #f8f8fa;
+  border-radius: 10px;
+  padding: 2rem 1.9rem;
+  margin: 1.8rem 0;
+  margin-top: 1rem;
+}
+
+.commit-doc-card-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  color: #3e3e3e;
+}
+
+.commit-doc-view {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  text-decoration-line: underline;
+  color: #40439a;
+}
+
+.commit-extra-comment {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  color: #828282;
+}
+
+.commit-money {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.commit-total {
+  background: #2e3192;
+  padding: 1.2rem 1.5rem;
+}
+
+.commit-total p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #ffffff;
+}
+
+.committed-timestamp p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  color: #8394ce;
+}
+
+.commit-info-text {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #4f4f4f;
+}

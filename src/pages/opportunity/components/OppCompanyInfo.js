@@ -7,8 +7,13 @@ import twitter from "../../../assets/icons/twitterLogo.svg";
 import linkedIn from "../../../assets/icons/linkedInLogo.svg";
 import whatsApp from "../../../assets/icons/whatsapp.svg";
 import share from "../../../assets/icons/share.svg";
+import { useParams } from "react-router";
+import { useHistory } from "react-router";
 
 export const OppCompanyInfo = () => {
+  const { id } = useParams();
+  const { push } = useHistory();
+
   return (
     <section className="opp-page-card py-3">
       <div
@@ -65,7 +70,10 @@ export const OppCompanyInfo = () => {
           className="d-flex align-items-center flex-wrap"
           style={{ columnGap: 10, rowGap: 10 }}
         >
-          <Button label="Commit" />
+          <Button
+            label="Commit"
+            onClick={() => push(`/investor/opportunities/${id}/commitment`)}
+          />
           <Button label="Interested" variant="secondary" />
         </div>
 
