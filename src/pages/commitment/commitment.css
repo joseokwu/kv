@@ -96,3 +96,22 @@
   line-height: 140%;
   color: #ffffff;
 }
+
+.committed-timestamp p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  color: #8394ce;
+}
+
+.commit-info-text {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #4f4f4f;
+}
