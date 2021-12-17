@@ -26,7 +26,9 @@
   height: 49px;
   padding: 12px;
 }
-
+.filter-btn:focus {
+  outline: none;
+}
 .applicant-tabs-list {
   list-style: none;
   display: flex;
