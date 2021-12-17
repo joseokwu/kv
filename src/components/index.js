@@ -24,3 +24,6 @@ export * from "./opportunityCard/OpportunityCard";
 export * from "./connectCard/ConnectCard";
 export * from "./table/Table";
 export * from "./expenseChart/ExpenseChart";
+export * from "./lastChat/LastChat";
+export * from "./connectCard/ConnectCard";
+export * from "./groupCard/GroupCard";
