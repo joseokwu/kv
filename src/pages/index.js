@@ -16,3 +16,4 @@ export * from "./investorRegistration/InvestorRegistration";
 export * from "./investorDashboard/InvestorDashboard";
 export * from "./investorOpportunity/InvestorOpportunity";
 export * from "./opportunity/Opportunity";
+export * from "./startupRegistration";

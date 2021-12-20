@@ -11,7 +11,8 @@ import React, {
 import {
   DASHBOARD, WALLET,
   TRANSACTIONS, DATA_BANK,
-  CHART_SUPPORT, SETTINGS
+  CHART_SUPPORT, SETTINGS,
+  CHANGE_PAGE
 } from './reducer';
 
 import { businessReducers } from './reducer';
@@ -27,10 +28,17 @@ export const BusinessProvider = withRouter(({ children, history }) => {
       success:false, 
       message:null,
        autoClose:false,
-        action:false}
+        action:false, 
+      },
+      path:1
   })
 
-  const setAlert = ()=>{
+  const changePath = (value)=>{
+
+      dispatch({
+        type:CHANGE_PAGE,
+        payload:value
+      })
 
   }
 
@@ -38,7 +46,7 @@ export const BusinessProvider = withRouter(({ children, history }) => {
   return (
     <BusinessContext.Provider value={{
       state,
-      setAlert
+      changePath
     }}>
       {children}
     </BusinessContext.Provider>

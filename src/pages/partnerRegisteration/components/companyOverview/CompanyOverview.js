@@ -10,15 +10,19 @@ import {
   PhoneInput,
   TextArea,
 } from "../../../../components/index";
+import { Form } from "antd";
+import * as yup from "yup";
 import FormCard from "../formCard/FormCard";
 
 const CompanyOverview = () => {
   const { push } = useHistory();
   return (
+    
     <div className="register-form-wrap">
       <h3>Company Overview</h3>
       <p>Fill in partner details</p>
       <FormCard>
+  
         <div className="row mb-4">
           <section className="col-md-3">
             <div className="form-dp">

@@ -6,6 +6,8 @@ import dashboard from "../../assets/icons/dashboard.svg";
 import startup from "../../assets/icons/startupApplicants.svg";
 import event from "../../assets/icons/eventIcon.svg";
 import helpDesk from "../../assets/icons/helpDesk.svg";
+import { startUpRoutes } from "../../constants/sidebarRoutes";
+import { useActivity } from "../../hooks/useBusiness";
 
 const investorNavigators = [
   {
@@ -101,3 +103,46 @@ export const Sidebar = () => {
     </div>
   );
 };
+
+
+
+
+
+export const StartupSideBar = () => {
+
+
+  const { state : { path }, changePath } = useActivity()
+  
+
+  const activateLink = (pathNum) => {
+    return path === pathNum ? "active-side-start" : "side-text-start";
+  };
+
+  
+
+  return (
+    <div className="start-main">
+      <section className="side-navigator">
+      
+
+        <ul className="side-list-start">
+          { startUpRoutes &&
+            startUpRoutes.map((nav, i) => {
+              return (
+                <li key={i} >
+                  <span onClick={()=> changePath(nav.path)} >
+                  
+                    <p className={`${activateLink(nav.path)} side-text-start`}>
+                      {nav.title}
+                    </p>
+                  </span>
+                </li>
+              );
+            })}
+        </ul>
+      </section>
+
+    </div>
+  );
+};
+

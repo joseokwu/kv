@@ -1,5 +1,7 @@
 import React from "react";
 import "./modal.css";
+import Close from '../../assets/icons/Close.svg';
+
 
 export const Modal = ({
   title = "",
@@ -36,5 +38,18 @@ export const Modal = ({
         </div>
       </div>
     </div>
+  );
+};
+
+
+export const ModalCus = ({ children, closeModal }) => {
+  return (
+    <>
+      <div className="backDrop" onClick={() => closeModal(false)}></div>
+      <div className="app_modal">
+        <img className="modalCloseImg" onClick={() => closeModal(false)} src={Close} alt={""}/>
+        {children || "Enter element here"}
+      </div>
+    </>
   );
 };

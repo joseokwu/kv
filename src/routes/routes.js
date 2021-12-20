@@ -1,4 +1,6 @@
-import { WithMainLayout, WithRegisterLayout } from "../components";
+import { WithMainLayout, WithRegisterLayout,
+  WithStartupRegistrationLayout
+} from "../components";
 //import {WithRegisterLayout} from '../components/registerLayout/RegisterLayout';
 import {
   Dashboard,
@@ -19,6 +21,7 @@ import {
   InvestorDashboard,
   InvestorOpportunity,
   Opportunity,
+  StartUpRegistration
 } from "../pages";
 
 const routes = [
@@ -149,6 +152,13 @@ const routes = [
     name: "Opportunity",
     path: "/investor/opportunities/:id",
     component: WithMainLayout(Opportunity),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "StartupRegistration",
+    path: "/startupRegistration",
+    component: WithStartupRegistrationLayout(StartUpRegistration),
     exact: true,
     protected: false,
   },

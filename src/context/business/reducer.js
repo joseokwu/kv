@@ -4,6 +4,8 @@ export const TRANSACTIONS = 'Tranctions';
 export const DATA_BANK = 'Data Bank';
 export const CHART_SUPPORT = 'Chat Support';
 export const SETTINGS = 'Settings';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
+
 
 
 
@@ -40,6 +42,14 @@ export const businessReducers = (state, action) => {
                     ...state,
                     showPage: action.payload
             }
+
+                case CHANGE_PAGE :
+                    return {
+                        ...state,
+                        path:action.payload
+                    }
+
+
         default:
             return state;
 
