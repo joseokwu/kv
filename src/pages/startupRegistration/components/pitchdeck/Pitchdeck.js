@@ -84,7 +84,8 @@ const back  = () =>{
                                 
                                 </div>
                  </div>
-                 <div className='div'  >
+                            <div className='div'>
+
                                <img src={RedFile} alt='.#'  />
                                 <div id='div' className='' >
                                 <div className='d-flex' style={{marginLeft:'-1.2rem'}} >
