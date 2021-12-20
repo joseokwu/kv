@@ -1,0 +1,67 @@
+.sort-btn {
+  background: #ffffff;
+  border-radius: 5px;
+  border: none;
+  height: 3.063rem;
+  padding: 0.75rem;
+}
+
+.sort-btn p > span {
+  font-family: Lato;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #656363;
+}
+
+.event_title {
+  font-family: Lato;
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.events_card_bg {
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.events_card h3 {
+  font-family: Lato;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.event_card_body p {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #525151;
+}
+
+.event_card_footer a {
+  background: #2e3192;
+  border-radius: 10px;
+  padding: 8px 30px;
+  border: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.event_card_footer a:hover {
+  background: none;
+  color: #2e3192;
+  border: 1.5px solid #2e3192;
+}
+
+.event_card_footer a:focus {
+  outline: none;
+}

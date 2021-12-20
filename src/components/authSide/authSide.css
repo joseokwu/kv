@@ -16,7 +16,7 @@
   font-weight: bold;
   font-size: 65px;
   line-height: 75px;
-  color: #F9F9FC;
+  color: #f9f9fc;
   /* margin-top: 200px; */
   margin-bottom: 30px;
 }
@@ -27,7 +27,7 @@
   font-weight: normal;
   font-size: 20px;
   line-height: 30px;
-  color: #F9F9FC;
+  color: #f9f9fc;
 }
 
 .mentor_auth_side {
@@ -42,7 +42,7 @@
   }
 
   .mentor_auth p {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 26px;
   }
 }

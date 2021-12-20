@@ -2,8 +2,7 @@ import { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { ImageConfig } from '../../config/index'
-import uploadIcon from '../../assets/uploadicon.svg'
-import { AddCircleOutline } from '@material-ui/icons'
+import uploadIcon from '../../assets/icons/uploadicon.svg'
 import { Button } from '../../components'
 
 import './style.css'
@@ -44,16 +43,16 @@ const Upload = (props) => {
         onDragLeave={onDragLeave}
         onDrop={onDrop}
       >
-        <img className="ml-5" src={uploadIcon} alt="" />
+        <img className="pt-5 text-center" src={uploadIcon} alt="" />
 
-        <p className="ml-3 mt-3">You can also drag and drop your file here</p>
+        <p className="mt-3 first">Drag & Drop</p>
+
+        <p className="mt-3 last">Drag files or click here to upload</p>
 
         <input type="file" value="" onChange={onFileDrop} />
 
-        <Button className="btn-upload" style={{ background: '#787AFF' }}>
-          <AddCircleOutline className="pr-1" />
-          Upload
-        </Button>
+        <button className="assignment_upload mt-3">Upload Files</button>
+        
       </div>
       {fileList.length > 0 ? (
         <div className="upload_preview">

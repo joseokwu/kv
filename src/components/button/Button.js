@@ -4,19 +4,21 @@ import { CircularLoader } from "../CircluarLoader/CircularLoader";
 
 export const Button = ({
   onClick = () => {},
-  type ="submit",
+  // type ="submit",
   label = "button",
   variant = "primary",
-  disabled="",
+  // disabled="",
   className = "",
-  loading
+  loading,
+  ...rest
 }) => {
   return (
     <button
       onClick={onClick}
-      disabled={disabled}
+      disabled={loading}
       className={`btn_main btn_${variant} ${className}`}
-      type={type}
+      {...rest}
+      // type={type}
     >
       {  loading ? <CircularLoader /> : label }
     </button>

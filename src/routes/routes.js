@@ -1,5 +1,4 @@
 import { WithMainLayout, WithRegisterLayout } from '../components'
-//import {WithRegisterLayout} from '../components/registerLayout/RegisterLayout';
 import {
   Dashboard,
   SignUp,
@@ -23,10 +22,11 @@ import {
   EvaluationViewProfile,
   ContactUs,
   CreateAssignment,
+  MoreDetails,
+  ViewDetails,
+  DashboardProfile,
 } from '../pages'
-import { DashboardProfile } from '../pages/dashboardProfile/dashboardProfile'
-import { ViewDetails } from '../pages/viewDetails/viewDetails'
-
+import { ViewEvaluation } from '../pages/mentorAssignments/components/viewEvaluation/viewEvaluation'
 const routes = [
   {
     name: 'Signin',
@@ -203,6 +203,20 @@ const routes = [
     name: 'CreateAssignment',
     path: '/mentor/assignments/create',
     component: WithMainLayout(CreateAssignment),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'MoreDetails',
+    path: '/mentor/assignments/create/details',
+    component: WithMainLayout(MoreDetails),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'ViewEvaluation',
+    path: '/mentor/assignments/view',
+    component: WithMainLayout(ViewEvaluation),
     exact: true,
     protected: false,
   },

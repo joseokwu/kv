@@ -1,0 +1,110 @@
+.view_evaluation p {
+  font-family: DM Sans;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #323232;
+}
+
+.view_evaluation p > span {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #2e3192;
+}
+
+.view_evaluation_time {
+  font-family: Lato;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #525151;
+}
+
+.view_evaluation_date {
+  font-family: DM Sans;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #323232;
+}
+
+.view_evaluation_date b {
+  font-family: Lato;
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 140%;
+  color: #3855b3;
+}
+
+.view_evaluation_date span {
+  font-family: Lato;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #3855b3;
+}
+
+.assignment_head {
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.assignment_view_evaluation {
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  padding: 40px 80px;
+  margin: 6.25rem;
+}
+
+.assignment_template {
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.assignment_template p {
+  font-family: DM Sans;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #2e3192;
+}
+
+.assignment_table_head {
+  border-bottom: 1px solid #f9f9fc;
+}
+
+.assignment_table_head p {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #3e3e3e;
+}
+
+.assignment_startup p {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.assignment_status span {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 1.313rem;
+  letter-spacing: 0.01em;
+  color: #058dc1;
+  background: #def6ff;
+  border-radius: 0.313rem;
+  padding: 8px 16px;
+}
+
+.assignment_action a {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.313rem;
+  text-decoration-line: underline;
+  color: #2e3192;
+}
+
+.assignment_table_body {
+  border-bottom: 1px solid #f9f9fc;
+}

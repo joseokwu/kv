@@ -2,8 +2,7 @@
 import React from 'react'
 import './evaluationCompletedCard.css'
 import logo from '../../assets/images/yeLogo.svg'
-import { Tag, ReadMore } from '../../components'
-
+import { Tag } from '../../components'
 
 export const EvaluationCompletedCard = () => {
   return (
@@ -25,19 +24,17 @@ export const EvaluationCompletedCard = () => {
 
       <section className="opp-content mt-3">
         <p>
-          <ReadMore>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.
-          </ReadMore>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
+          morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit. <a href="#!">More Details</a>
         </p>
       </section>
 
       <section className="d-flex align-items-center justify-content-between opp-footer-text">
         <div>
-          <button disabled className="completed_evaluation">Evaluated</button>
+          <button disabled className="completed_evaluation">
+            Evaluated
+          </button>
         </div>
       </section>
     </div>

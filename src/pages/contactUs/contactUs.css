@@ -4,20 +4,20 @@
   max-width: 383px;
   padding: 22px 25px;
   column-gap: 7px;
-  margin-bottom: 18px;
+  margin-bottom: 1.125rem;
 }
 
 .contact-us-info p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 20px;
   color: #2e3192;
 }
 
 .social-links {
-  column-gap: 18px;
+  column-gap: 1.125rem;
   margin-top: 32px;
 }
 
@@ -55,7 +55,7 @@
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 24px;
   color: #3e3e3e;
 }

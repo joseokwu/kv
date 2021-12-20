@@ -1,0 +1,64 @@
+.accepted_tag {
+  background: #def6ff;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+  color: #00adef;
+}
+
+.view_schedule_modal {
+  background: rgba(220, 235, 255, 0.7);
+}
+
+.view_schedule_modal h3 {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: #000000;
+}
+
+.view_schedule_modal p {
+  font-family: DM Sans;
+  font-size: 0.875rem;
+  line-height: 1.313rem;
+  text-transform: capitalize;
+  color: #525151;
+}
+
+.event_link p {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: #000000;
+}
+
+.event_link a {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-decoration-line: underline;
+  color: #2e3192;
+}
+
+.view_schedule_modal_company {
+  /* border-bottom: 1px solid #e0e0e0; */
+}
+
+.view_schedule_modal_company p {
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.program_modal_head h3 {
+  font-family: Lato;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}

@@ -2,11 +2,16 @@
 import React from 'react'
 import './evaluationPendingCard.css'
 import logo from '../../assets/images/yeLogo.svg'
-import { Tag, ReadMore } from '../../components'
+import { Tag } from '../../components'
+import { Modal } from '../modal/Modal'
+import { EvaluationModal } from '../../pages/mentorEvaluation/components/evaluationModal'
 
 export const EvaluationPendingCard = () => {
   return (
     <div className="opp-card">
+      <Modal id="moreDetailsModal" withHeader={false}>
+        <EvaluationModal />
+      </Modal>
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
         <span class="pending-tag">Pending</span>
@@ -24,13 +29,9 @@ export const EvaluationPendingCard = () => {
 
       <section className="opp-content mt-3">
         <p>
-          <ReadMore>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.
-          </ReadMore>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
+          morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit. <a href="#!" data-toggle="modal" data-target="#moreDetailsModal">More Details</a>
         </p>
       </section>
 

@@ -42,7 +42,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
-  line-height: 18px;
+  line-height: 1.125rem;
   letter-spacing: 0.01em;
   color: #f9f9fc;
 }
@@ -65,25 +65,25 @@
   border-radius: 8px;
   padding: 17px 40px;
   color: #f9f9fc;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 1rem;
 }
 
 .mentor_switch_signUp button:hover {
   background-color: #00adef;
   border: none;
   color: white;
-  box-shadow: 0px 4px 16px rgba(50, 171, 226, 0.32) !important;
+  box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
 }
 
 .mentor_active_signUp {
   background-color: #00adef !important;
   border: none !important;
   color: white !important;
-  box-shadow: 0px 4px 16px rgba(50, 171, 226, 0.32) !important;
+  box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
 }
 
 .mentor_switch_signUp button:focus {
@@ -91,16 +91,16 @@
 }
 
 .mentor_checkbox_input {
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
   position: relative;
   display: inline-block;
 }
 .mentor_checkbox_input div {
   background: #ffffff;
   border-radius: 2px;
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;

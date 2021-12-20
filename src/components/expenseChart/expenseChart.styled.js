@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components/macro";
+import styled, { keyframes } from 'styled-components/macro'
 
 export const Card = styled.div`
   border: 1px solid #d5d6f4;
@@ -15,27 +15,27 @@ export const Card = styled.div`
     margin-bottom: 1.69rem;
   }
 
-  span{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 12px;
-      height: 12px;
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 12px;
   }
 
-  .legend-name{
+  .legend-name {
     font-family: DM Sans;
     font-weight: 500;
     font-size: 12px;
-    line-height: 18px;
+    line-height: 1.125rem;
     color: #333333;
     flex-basis: 40%;
   }
-  .percentage{
+  .percentage {
     font-family: DM Sans;
     font-weight: 500;
     font-size: 12px;
-    line-height: 18px;
+    line-height: 1.125rem;
     color: #757575;
   }
-`;
+`

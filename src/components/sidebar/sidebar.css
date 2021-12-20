@@ -34,13 +34,13 @@
 }
 
 .side-list li {
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .side-list img {
   flex-basis: 10%;
-  width: 18px;
-  height: 18px;
+  width: 1.125rem;
+  height: 1.125rem;
   object-fit: contain;
 }
 
@@ -66,7 +66,7 @@
 .side-header {
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 140%;
   color: #ffffff;
   margin-top: 13px;

@@ -28,7 +28,7 @@
 .mentor_congrats_form_wrap > p {
   font-family: DM Sans;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 21px;
   color: #828282;
   margin-bottom: 44px;
@@ -36,7 +36,7 @@
 
 .mentor_congrats_text p {
   font-family: DM Sans;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 25px;
   /* display: flex; */
   align-items: center;

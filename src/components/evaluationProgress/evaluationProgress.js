@@ -24,13 +24,9 @@ export const EvaluationProgress = () => {
 
       <section className="opp-content mt-3">
         <p>
-          <ReadMore>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.
-          </ReadMore>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
+          morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit. <a href="#!">More Details</a>
         </p>
       </section>
 

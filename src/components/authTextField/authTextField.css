@@ -1,6 +1,6 @@
 .mentor_field input,
 .select_field select {
-  background:transparent;
+  background: transparent;
   border-radius: 4px;
   width: 100%;
   max-width: 329px;
@@ -10,8 +10,8 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
-  color: #F9F9FC;
-  border: 1px solid #E0E0E0;
+  color: #f9f9fc;
+  border: 1px solid #e0e0e0;
   padding: 8px 14px;
 }
 
@@ -24,9 +24,9 @@
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 20px;
-  color: #D5D6F4;
+  color: #d5d6f4;
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
