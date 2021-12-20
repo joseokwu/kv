@@ -60,7 +60,7 @@ export const ApplicationCard = ({
     }
   };
   return (
-    <div className="appCard-main">
+    <div className="appCard-main" role="button">
       <ApplicantModal
         logo={logo}
         status={status}
@@ -109,8 +109,8 @@ export const ApplicationCard = ({
           <p>Contact Person: Ada Ify</p>
         </div>
         <div className="text-right">
-          <p>Applied 12/Oct/21</p>
-          <p>Contact Person: Ada Ify</p>
+          <p>Adaify@gmail.com</p>
+          <p>Contact No: 08092936789</p>
         </div>
       </section>
 

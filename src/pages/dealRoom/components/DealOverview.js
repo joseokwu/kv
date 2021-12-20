@@ -1,5 +1,5 @@
 import React from "react";
-import { Tag } from "../../../components";
+import { DeckCard, Tag } from "../../../components";
 import logo from "../../../assets/images/yeLogo.svg";
 import pic from "../../../assets/images/sampleinvestors.png";
 import doc from "../../../assets/icons/greenDoc.svg";
@@ -146,13 +146,18 @@ export const DealOverview = () => {
           <h3 className="page-title">Deal Termsheet</h3>
         </section>
         <section className="col-xl-4">
-          <article className="deck-card" style={{ width: 302 }}>
+          {/* <article className="deck-card" style={{ width: 302 }}>
             <div
               className="deck-card-img position-relative"
               style={{ maxWidth: 302 }}
             >
               <img src={doc} alt="document" />
-              <img src={editDoc} alt="edit document" className="edit-doc" />
+              <img
+                src={editDoc}
+                alt="edit document"
+                className="edit-doc"
+                role="button"
+              />
             </div>
             <div className="d-flex align-items-center  justify-content-between p-3">
               <section className="d-flex align-items-start">
@@ -162,9 +167,11 @@ export const DealOverview = () => {
                   <small>21MB</small>
                 </span>
               </section>
-              <img src={download} alt="download" />
+              <img src={download} alt="download" role="button" />
             </div>
-          </article>
+          </article> */}
+
+          <DeckCard />
         </section>
       </div>
     </section>

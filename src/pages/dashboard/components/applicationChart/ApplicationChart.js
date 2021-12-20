@@ -6,33 +6,36 @@ const ApplicationChart = () => {
   return (
     <div className="appChart-main">
       <h4 className="appChart-header">Applications</h4>
-      <Doughnut
-        data={{
-          labels: ["new", "pending", "approved", "expired", "re-applied"],
-          datasets: [
-            {
-              data: [12, 5, 60, 10, 20],
-              backgroundColor: [
-                "#74BE8C",
-                "#650A9D",
-                "#1880AC",
-                "#2196F3",
-                "#7B61FF",
-              ],
-              hoverOffset: 5,
-              cutout: 130,
+
+      <div style={{ maxWidth: 250 }} className="mx-auto">
+        <Doughnut
+          data={{
+            labels: ["new", "pending", "approved", "expired", "re-applied"],
+            datasets: [
+              {
+                data: [12, 5, 60, 10, 20],
+                backgroundColor: [
+                  "#74BE8C",
+                  "#650A9D",
+                  "#1880AC",
+                  "#2196F3",
+                  "#7B61FF",
+                ],
+                hoverOffset: 5,
+                cutout: 70,
+              },
+            ],
+          }}
+          // width={300}
+          options={{
+            plugins: {
+              legend: {
+                display: false,
+              },
             },
-          ],
-        }}
-        // width={300}
-        options={{
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      />
+          }}
+        />
+      </div>
 
       <section className="row mx-0 appChart-legend">
         <div className="col-6">

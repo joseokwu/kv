@@ -35,7 +35,7 @@ export const Dashboard = () => {
         ))}
       </section>
 
-      <section className="row mt-5 dash-main-content">
+      <section className="row mt-4 dash-main-content">
         <div className="col-lg-6">
           <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
             <h5>New Applications</h5>

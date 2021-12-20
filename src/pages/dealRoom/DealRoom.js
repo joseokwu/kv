@@ -4,6 +4,7 @@ import download from "../../assets/icons/cloudDownload.svg";
 
 import { Button, Tabs } from "../../components";
 import { OpportunityFilter } from "../investorDeal/InvestorDeal";
+import { DataRoom } from "./components/DataRoom";
 import { DealOverview } from "./components/DealOverview";
 import "./dealRoom.css";
 
@@ -18,7 +19,7 @@ export const DealRoom = ({ history }) => {
       case "#deal overview":
         return <DealOverview />;
       case "#data room":
-        return <div>Data Room</div>;
+        return <DataRoom />;
 
       default:
         return <DealOverview />;

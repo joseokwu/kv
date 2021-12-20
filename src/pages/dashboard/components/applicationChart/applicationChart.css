@@ -1,7 +1,7 @@
 .appChart-main {
   border: 1px solid #d5d6f4;
   border-radius: 10px;
-  padding: 39px 6%;
+  padding: 2rem 6%;
   max-width: 463px;
   width: 100%;
   position: sticky;
@@ -9,7 +9,7 @@
 }
 
 .appChart-header {
-  margin-bottom: 58px;
+  margin-bottom: 2rem;
   font-family: DM Sans;
   font-style: normal;
   font-weight: 500;
@@ -20,7 +20,7 @@
 }
 
 .appChart-legend {
-  margin-top: 58px;
+  margin-top: 2rem;
 }
 
 .appChart-label {

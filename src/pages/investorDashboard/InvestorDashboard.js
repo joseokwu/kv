@@ -8,7 +8,8 @@ import {
 } from "../../components";
 import "./investDashboard.css";
 
-export const InvestorDashboard = () => {
+export const InvestorDashboard = ({ history }) => {
+  const { push } = history;
   const count = [1, 2, 3, 4];
   const cardData = [
     { name: "Total Applications", count: 50, color: "#E5FFE4" },
@@ -35,7 +36,13 @@ export const InvestorDashboard = () => {
           <div>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Upcoming Events</p>
-              <p className="see-all">See All</p>
+              <p
+                className="see-all"
+                role="button"
+                onClick={() => push("/investor/events")}
+              >
+                See All
+              </p>
             </section>
             <section
               className="d-flex align-items-center flex-wrap"
@@ -49,21 +56,35 @@ export const InvestorDashboard = () => {
           <div style={{ marginTop: "2.38rem" }}>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Opportunities</p>
-              <p className="see-all">See All</p>
+              <p
+                className="see-all"
+                role="button"
+                onClick={() => push("/investor/opportunities")}
+              >
+                See All
+              </p>
             </section>
 
             <section className="row">
               <div className="col-xl-6 mb-4">
-                <OpportunityCard />
+                <OpportunityCard
+                  onClick={() => push(`/investor/opportunities/1`)}
+                />
               </div>
               <div className="col-xl-6 mb-4">
-                <OpportunityCard />
+                <OpportunityCard
+                  onClick={() => push(`/investor/opportunities/2`)}
+                />
               </div>
               <div className="col-xl-6 mb-4">
-                <OpportunityCard />
+                <OpportunityCard
+                  onClick={() => push(`/investor/opportunities/3`)}
+                />
               </div>
               <div className="col-xl-6 mb-4">
-                <OpportunityCard />
+                <OpportunityCard
+                  onClick={() => push(`/investor/opportunities/4`)}
+                />
               </div>
             </section>
           </div>
@@ -73,7 +94,13 @@ export const InvestorDashboard = () => {
           <section className="network-space mt-5">
             <div className="network-space-header">
               <h3>Networking</h3>
-              <p className="see-all">See All</p>
+              <p
+                className="see-all"
+                role="button"
+                onClick={() => push("/investor/networking")}
+              >
+                See All
+              </p>
             </div>
 
             <div className="opp-connects">
