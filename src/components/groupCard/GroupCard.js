@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import sampleConnect from "../../assets/images/sampleTeamMember.png";
 import more from "../../assets/icons/more.svg";
+import { Button, Modal } from "../../components/index";
 
 export const GroupCard = () => {
   return (
     <div className="connected-card py-4" style={{ borderRadius: 10 }}>
+      <Modal id="groupModal" title="Fintech Investment Group">
+        <GroupModal />
+      </Modal>
       <section
         className="d-flex align-items-start"
         style={{ rowGap: 10, columnGap: "1rem" }}
@@ -14,7 +18,9 @@ export const GroupCard = () => {
           <p className="name">Fintech Investment Group</p>
           <p className="position py-2">My Close company group of Idealist</p>
 
-          <p className="count">19 members</p>
+          <p className="count" data-toggle="modal" data-target="#groupModal">
+            19 members
+          </p>
         </div>
 
         <div>
@@ -50,6 +56,20 @@ const GroupMenu = () => {
           Delete group
         </button>
       </section>
+    </div>
+  );
+};
+
+const GroupModal = () => {
+  return (
+    <div>
+      <div>
+        <section>
+          <img src="" alt="" />
+          <input type="search" name="" id="" />
+        </section>
+        <Button label="Add members" />
+      </div>
     </div>
   );
 };

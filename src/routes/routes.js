@@ -28,6 +28,7 @@ import {
   InvestorDeal,
   FounderProfile,
   Commitment,
+  DealRoom,
 } from "../pages";
 
 const routes = [
@@ -183,6 +184,13 @@ const routes = [
     protected: false,
   },
   {
+    name: "Interested",
+    path: "/investor/interested/:id",
+    component: WithMainLayout(Opportunity),
+    exact: true,
+    protected: false,
+  },
+  {
     name: "Portfolio",
     path: "/investor/portfolio",
     component: WithMainLayout(InvestorPortfolio),
@@ -222,6 +230,13 @@ const routes = [
     name: "DealRoom",
     path: "/investor/deal_room",
     component: WithMainLayout(InvestorDeal),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "DealRoom",
+    path: "/investor/deal_room/:id",
+    component: WithMainLayout(DealRoom),
     exact: true,
     protected: false,
   },
