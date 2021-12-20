@@ -72,20 +72,30 @@ const back  = () =>{
                         <VideoWrapper>
                         <label> Pitch deck uploaded</label>
                             <div style={{display:'flex'}} >
-                               <div className='div' >
-                                    
-                    <img src={ DownloadOutlined } alt='.'/>
-                               
-                                   <div id='div' >
-                                   
-                                   </div>
-                               </div>
-                               <div className='div' >
-
-                                   <div id='div'>
-
-                                   </div>
-                               </div>  
+                            <div className='div'  >
+                               <img src={RedFile} alt='.#'  />
+                                <div id='div' className='' >
+                                <div className='d-flex' style={{marginLeft:'-1.2rem'}} >
+                                <img src={BlueFile} alt='.#' style={{marginLeft:'2rem',  width:'10%', height:'10%'}} className=''  />
+                                <p className='' style={{marginLeft:'0.2rem', fontSize:'0.9rem'}} >Product Demo</p>
+                                
+                                </div>
+                                <p className='my-n2 p' >2.5 mb</p>
+                                
+                                </div>
+                 </div>
+                 <div className='div'  >
+                               <img src={RedFile} alt='.#'  />
+                                <div id='div' className='' >
+                                <div className='d-flex' style={{marginLeft:'-1.2rem'}} >
+                                <img src={BlueFile} alt='.#' style={{marginLeft:'2rem',  width:'10%', height:'10%'}} className=''  />
+                                <p className='' style={{marginLeft:'0.2rem', fontSize:'0.9rem'}} >Product Demo</p>
+                                
+                                </div>
+                                <p className='my-n2 p' >2.5 mb</p>
+                                
+                                </div>
+                 </div>
                             </div>
                         </VideoWrapper>
                     </div>

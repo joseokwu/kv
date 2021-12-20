@@ -237,43 +237,46 @@ margin-top:5px;
 `
 
 export const VideoWrapper = styled.div`
-display: block;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 20px;
 
+padding: 3rem;
 width: 87%;
 height: 100%;
 background: #F9F9FC;
-margin:10px;
 
 box-sizing: border-box;
 border-radius: 6px;
 
-    img {
-        margin-left:16rem;
-        margin-top:0;
-    }
+   
 
  .div{
 
-width: 166px;
-height: 172px;
+width: 30%;
 background: #F9F9FC;
 border: 1px solid #E6E7E9;
 border-radius: 8px;
 
 
+
+
+img {
+ margin-left:35%;
+ margin-top:16px;
+}
+
 #div {
 
-position:absolute;
-padding: 16px;
-top:174px;
-width: 163px;
-height: 72px;
+margin-top:39px;
+width: 100%;
+
 background:#fff;
-border-radius:0 0 4px 4px;
+border-radius:0 0 8px 8px;
+
+    .p {
+       
+       margin-left:30%; 
+    
+    }
+
 
     }
 
