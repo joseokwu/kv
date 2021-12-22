@@ -1,64 +1,43 @@
 import { Tag } from "../../../components";
+import { FundRounding , Btn } from './styled';
 
 export const FundingRound = () => {
   return (
-    <div className=" opp-page-card py-4">
-      <h3 className="sub-card-title border-bottom pb-3 mb-4">
-        Funding Round Summary
-      </h3>
+    <div className="">
+    <FundRounding >
+      <h6>Startup Details</h6>
 
-      <section
-        className="d-flex align-items-center justify-content-between"
-        style={{ marginBottom: "1.75rem" }}
-      >
-        <div>
-          <p className="opp-tag-label">Funding Ask</p>
-          <Tag name="$50,000" color="#212463" />
-        </div>
-        <div className="text-right">
-          <p className="opp-tag-label">Dilution</p>
-          <Tag name="20%" color="#058DC1" />
-        </div>
-      </section>
+      <li><span>Industry :</span> <Btn bg='
+#DEF6FF' color='
+#00D1FF' w='23%' >Tech</Btn>  </li>
 
-      <section
-        className="d-flex align-items-center justify-content-between"
-        style={{ marginBottom: "1.75rem" }}
-      >
-        <div>
-          <p className="opp-tag-label">Total Commitment</p>
-          <Tag name="$100,000 (100%)" color="#212463" />
-        </div>
-        <div className="text-right">
-          <p className="opp-tag-label">Funding Stage</p>
-          <Tag name="Seed" color="#058DC1" />
-        </div>
-      </section>
+<li><span>Stage :</span> <Btn bg='
+#F1F2FE' color='
+#1021FF' w='50%' >Proof of concept</Btn>  </li>
 
-      <section
-        className="d-flex align-items-center justify-content-between"
-        style={{ marginBottom: "1.75rem" }}
-      >
-        <div>
-          <p className="opp-tag-label">Total Funding</p>
-          <Tag name="$50,000" color="#212463" />
-        </div>
-        <div className="text-right">
-          <p className="opp-tag-label">Last Funding Round</p>
-          <Tag name="Angel (9 Oct.,2021)" color="#058DC1" />
-        </div>
-      </section>
+    </FundRounding>
+    <FundRounding >
+      <h6>Financial Details</h6>
 
-      <section className="d-flex align-items-center justify-content-between">
-        <div>
-          <p className="opp-tag-label">Minimum Investment Amount</p>
-          <Tag name="$100,000 (100%)" color="#212463" />
-        </div>
-        <div className="text-right">
-          <p className="opp-tag-label">Round Type</p>
-          <Tag name="Seed" color="#058DC1" />
-        </div>
-      </section>
+      <li><span>Total Funding :</span> <Btn bg='
+#DEF6FF' color='
+#00D1FF' w='25%' >$50,000</Btn>  </li>
+
+<li><span>Last Funding:</span> <Btn bg='
+#F1F2FE' color='
+#1021FF' w='50%' >Angel (9 oct 2021)</Btn>  </li>
+
+<li><span>Investors :</span> <Btn bg='
+#F1F2FE' color='
+#1021FF' w='40%' >Mope Abudu</Btn> <Btn bg='
+#F1F2FE' color='
+#1021FF' w='15%' >+ 1</Btn>   </li>
+
+<li><span>Valuation :</span> <Btn bg='
+#F1F2FE' color='
+#1021FF' w='80%' >$ 50 million (9 oct 2021)</Btn>  </li>
+
+    </FundRounding>
     </div>
   );
 };

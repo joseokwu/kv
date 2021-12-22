@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Header, Sidebar } from "../index";
+import { Header, Sidebar , DashSidebar } from "../index";
 import "./mainLayout.css";
 
 const MainLayout = ({ children }) => {
@@ -26,6 +26,35 @@ export const WithMainLayout = (Component) => {
         <MainLayout>
           <Component {...props} />
         </MainLayout>
+      </>
+    );
+  };
+};
+
+export const DashboardLayout = ({children}) =>{
+  const [open, setOpen] = useState(false);
+  return (
+    <div>
+      <section className="layout-header">
+        <Header setOpen={setOpen} open={open} />
+      </section>
+      <section className="layout-main">
+        <div className={`${open ? "sm-side" : "sm-side-close"}`}>
+          <DashSidebar />
+        </div>
+        <div className="layout-child">{children}</div>
+      </section>
+    </div>
+  );
+}
+
+export const WithDashboardLayout = (Component) => {
+  return (props) => {
+    return (
+      <>
+        <DashboardLayout>
+          <Component {...props} />
+        </DashboardLayout>
       </>
     );
   };

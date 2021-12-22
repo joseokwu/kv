@@ -248,4 +248,32 @@ Domi data ends
   })
 }
 
+==================================================================
+=================================================================
+{ icon: newApp, name: "new", count: 12, color: "#FAD7DC" },
+{ icon: pending, name: "pending", count: 5, color: "#DFF1FF" },
+{ icon: approved, name: "approved", count: 60, color: "#EEDAFB" },
+{ icon: expired, name: "expired", count: 10, color: "#E5FFE4" },
+{ icon: reApplied, name: "Re-Applied", count: 20, color: "#FDE591" },
 
+==================================================================
+====================================================================
+<section className="row mt-5 dash-main-content">
+<div className="col-lg-6">
+  <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
+    <h5>New Applications</h5>
+    <span>See All</span>
+  </header>
+
+  <section>
+    {appCardData.map((data, i) => (
+      <div style={{ marginBottom: 21 }}>
+        <ApplicationCard logo={applicantLogo} key={i} />
+      </div>
+    ))}
+  </section>
+</div>
+<div className="col-lg-6 mt-5">
+  <ApplicationChart />
+</div>
+</section>

@@ -22,3 +22,5 @@ export * from "./dashCard/DashCard";
 export * from "./eventCard/EventCard";
 export * from "./opportunityCard/OpportunityCard";
 export * from "./connectCard/ConnectCard";
+export * from './dashSidebar/Sidebar';
+export * from './threedots';

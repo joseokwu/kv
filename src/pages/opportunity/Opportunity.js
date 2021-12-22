@@ -39,11 +39,7 @@ export const Opportunity = ({ history }) => {
   return (
     <div>
       <article className="wrapper pt-2" style={{ background: "#F9F9FC" }}>
-        <section className="d-flex align-items-center">
-          <p className="bread-start">Investment Opportunities</p>
-          <img src={left} alt="left" className="mx-3" />
-          <p className="bread-end">Applane Insteen.</p>
-        </section>
+
 
         <div className="row mt-5">
           <div className="col-lg-7">

@@ -1,5 +1,5 @@
 import { WithMainLayout, WithRegisterLayout,
-  WithStartupRegistrationLayout
+  WithStartupRegistrationLayout , WithDashboardLayout
 } from "../components";
 //import {WithRegisterLayout} from '../components/registerLayout/RegisterLayout';
 import {
@@ -21,7 +21,8 @@ import {
   InvestorDashboard,
   InvestorOpportunity,
   Opportunity,
-  StartUpRegistration
+  StartUpRegistration,
+  Program
 } from "../pages";
 
 const routes = [
@@ -35,7 +36,7 @@ const routes = [
   {
     name: "Dashboard",
     path: "/dashboard",
-    component: WithMainLayout(Dashboard),
+    component: WithDashboardLayout(Dashboard),
     exact: true,
     protected: false,
   },
@@ -100,8 +101,8 @@ const routes = [
   },
 
   {
-    name: "Profile",
-    path: "/profile",
+    name: "Pro",
+    path: "/prof",
     component: WithRegisterLayout(Profile),
     exact: true,
     protected: true,
@@ -129,8 +130,8 @@ const routes = [
   },
   {
     name: "RegisterInvestor",
-    path: "/investor/register",
-    component: WithRegisterLayout(InvestorRegistration),
+    path: "/program",
+    component: WithDashboardLayout(Program),
     exact: true,
     protected: false,
   },
@@ -149,9 +150,9 @@ const routes = [
     protected: false,
   },
   {
-    name: "Opportunity",
-    path: "/investor/opportunities/:id",
-    component: WithMainLayout(Opportunity),
+    name: "Profile",
+    path: "/profile",
+    component: WithDashboardLayout(Opportunity),
     exact: true,
     protected: false,
   },
