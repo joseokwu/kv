@@ -8,6 +8,7 @@ export const TextArea = ({
   cols = "",
   placeholder = "",
   onChange = () => {},
+  ...rest
 }) => {
   return (
     <div>
@@ -21,6 +22,7 @@ export const TextArea = ({
         className={`w-100 form-textarea ${className}`}
         placeholder={placeholder}
         onChange={onChange}
+        {...rest}
       ></textarea>
     </div>
   );

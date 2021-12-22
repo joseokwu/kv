@@ -1,27 +1,69 @@
 import React from "react";
 import more from "../../../assets/icons/more.svg";
 import clock from "../../../assets/icons/clock.svg";
-import eventImage from "../../../assets/icons/demoImg.png";
+import eventImage from "../../../assets/icons/eventImage.png";
+import person from "../../../assets/images/sampleEventPerson.png";
+
+import { Button } from "../../../components/index";
+import { ScheduleModal } from "./ScheduleModal";
+import { EditScheduleModal } from "./EditScheduleModal";
+import { DeleteScheduleModal } from "./DeleteScheduleModal";
 
 export const Upcoming = () => {
+  const data = [
+    { image: eventImage },
+    { image: "" },
+    { image: "" },
+    { image: eventImage },
+    { image: "" },
+    { image: eventImage },
+    { image: "" },
+    { image: "" },
+    { image: eventImage },
+  ];
+
+  const getColumn = (start, step) => {
+    const views = [];
+    for (let i = start; i < data.length; ) {
+      console.log(`i`, i);
+      i = i + step;
+      views.push(<ScheduleCard image={data[i]?.image} id={i} />);
+    }
+
+    return views;
+  };
   return (
     <div>
       <section className="row">
         <article className="col-xl-4 col-lg-6">
-          <ScheduleCard />
+          {data.map((d, i) => {
+            if (i === 0) {
+              return <ScheduleCard image={d.image} id={i} />;
+            }
+            if (i % 3 === 0) {
+              return <ScheduleCard image={d.image} id={i} />;
+            }
+          })}
         </article>
 
-        <article className="col-xl-4 col-lg-6"></article>
+        <article className="col-xl-4 col-lg-6">{getColumn(1, 3)}</article>
 
-        <article className="col-xl-4 col-lg-6"></article>
+        <article className="col-xl-4 col-lg-6">{getColumn(2, 3)}</article>
       </section>
     </div>
   );
 };
 
-const ScheduleCard = ({ eventName = "Appleiine House Demo" }) => {
+const ScheduleCard = ({
+  eventName = "Appleiine House Demo",
+  image = "",
+  id = 0,
+}) => {
   return (
-    <div className="scheduled-event-card">
+    <div className="scheduled-event-card mb-3">
+      <ScheduleModal image={image} id={id} />
+      <EditScheduleModal id={id} image={image} />
+      <DeleteScheduleModal id={id} />
       <section className="d-flex align-items-center justify-content-between mb-2">
         <h5>{eventName}</h5>
         <img src={more} alt="more" />
@@ -45,7 +87,31 @@ const ScheduleCard = ({ eventName = "Appleiine House Demo" }) => {
         </div>
       </section>
 
-      <section></section>
+      {image.toString().length > 0 && (
+        <section>
+          <img src={image} alt="event" className="schedule-event-image" />
+        </section>
+      )}
+
+      <section className="mb-4 mt-3">
+        <p className="event-desc-schedule">
+          Lorem ipsum dolor sit amet, consectetur g elit. Enim lectus morbi
+          elementum eu.Lorem ipsu.
+        </p>
+      </section>
+
+      <section className="d-flex align-items-center justify-content-between">
+        <Button
+          label="View Details"
+          data-toggle="modal"
+          data-target={`#scheduleModal-${id}`}
+        />
+        <section className="event-people schedule-people">
+          <img src={person} alt="person" />
+          <img src={person} alt="person" />
+          <img src={person} alt="person" />
+        </section>
+      </section>
     </div>
   );
 };

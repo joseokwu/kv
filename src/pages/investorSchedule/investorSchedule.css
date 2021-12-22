@@ -54,3 +54,139 @@
   line-height: 140%;
   color: #858585;
 }
+
+.schedule-event-image {
+  width: 100%;
+  height: 141px;
+  object-fit: cover;
+  object-position: center;
+  margin-top: 1.375rem;
+}
+
+.schedule-people img {
+  width: 29px !important;
+  height: 29px !important;
+}
+
+.event-desc-schedule {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #525151;
+}
+
+.schedule-count-down {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.31rem;
+  letter-spacing: 0.01em;
+  color: #e21919;
+}
+
+.schedule-host {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #3e3e3e;
+}
+
+.schedule-module-image {
+  width: 100%;
+  max-width: 542px;
+  max-height: 305px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.schedule-modal-desc {
+  background: rgba(220, 235, 255, 0.7);
+  padding: 1.87rem 1.5rem;
+  margin-top: 2.6rem;
+}
+
+.schedule-modal-desc h6 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.schedule-modal-desc p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #525151;
+}
+
+.guest-name {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #3e3e3e;
+  margin-left: 1rem;
+}
+
+.schedule-modal-subtitle {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.guest-initial {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.schedule-underlined {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #2e3192;
+  text-decoration: underline;
+}
+
+.schedule-modal-link {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration-line: underline;
+  color: #2e3192;
+}
+
+.edit-schedule-input {
+  min-width: 100%;
+}
