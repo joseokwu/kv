@@ -3,7 +3,7 @@ import back from "../../assets/icons/chervonLeft.svg";
 import download from "../../assets/icons/cloudDownload.svg";
 
 import { Button, Tabs } from "../../components";
-import { OpportunityFilter } from "../investorDeal/InvestorDeal";
+import { DealFilter } from "../investorDeal/InvestorDeal";
 import { DataRoom } from "./components/DataRoom";
 import { DealOverview } from "./components/DealOverview";
 import "./dealRoom.css";
@@ -36,7 +36,7 @@ export const DealRoom = ({ history }) => {
           <img src={back} alt="back" className="go-back-deal" />
           Deal Room
         </h5>
-        <OpportunityFilter />
+        <DealFilter />
       </section>
 
       <section className="mb-4 d-flex align-items-center justify-content-between">

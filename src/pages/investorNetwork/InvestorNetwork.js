@@ -7,7 +7,6 @@ import {
   Modal,
 } from "../../components/index";
 import down from "../../assets/icons/chevronDown.svg";
-import sampleChat from "../../assets/images/sampleTeamMember.png";
 import search from "../../assets/icons/search.svg";
 import "./investorNetwork.css";
 import { Request } from "./components/Request";

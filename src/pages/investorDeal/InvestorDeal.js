@@ -11,7 +11,7 @@ export const InvestorDeal = ({ history }) => {
         <h5 className="page-header" role="button">
           Deal Room
         </h5>
-        <OpportunityFilter />
+        <DealFilter />
       </section>
 
       <section>
@@ -31,7 +31,7 @@ export const InvestorDeal = ({ history }) => {
   );
 };
 
-export const OpportunityFilter = () => {
+export const DealFilter = () => {
   return (
     <div className="dropdown">
       <button

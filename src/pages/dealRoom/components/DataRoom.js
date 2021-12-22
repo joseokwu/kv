@@ -3,6 +3,7 @@ import file from "../../../assets/icons/fileIcon.svg";
 import more from "../../../assets/icons/more.svg";
 import person from "../../../assets/images/sampleEventPerson.png";
 import { DeckCard } from "../../../components";
+import { useHistory, useParams } from "react-router";
 
 export const DataRoom = () => {
   const data = [
@@ -15,20 +16,22 @@ export const DataRoom = () => {
   ];
   return (
     <div>
-      <p className="mb-5">Filter: All Documents</p>
+      <p className="mb-5 crumbs-text">
+        <b>Filter:</b> All Documents
+      </p>
 
       <p className="mb-4 page-title">Folders</p>
 
       <section className="row mb-5" style={{ width: "90%" }}>
         <div className="col-xl-4 mb-4">
-          <FolderCard />
+          <FolderCard name="First Folder" />
         </div>
         <div className="col-xl-4 mb-4">
-          <FolderCard color="#E9F6FB" />
+          <FolderCard color="#E9F6FB" name="Dynamic Docs" />
         </div>
 
         <div className="col-xl-4 mb-4">
-          <FolderCard />
+          <FolderCard name="Yebox Docs" />
         </div>
       </section>
 
@@ -48,11 +51,15 @@ export const DataRoom = () => {
 };
 
 const FolderCard = ({ color = "#F3F3FD", name = "New Files" }) => {
+  const { push } = useHistory();
+  const { id } = useParams();
   return (
     <section className="folder-card" style={{ background: color }}>
       <article
         className="d-flex align-items-center flex-wrap"
         style={{ columnGap: "1.63rem", rowGap: 10 }}
+        role="button"
+        onClick={() => push(`/investor/deal_room/${id}/${name}`)}
       >
         <img src={file} alt="file" />
         <div>
@@ -66,7 +73,7 @@ const FolderCard = ({ color = "#F3F3FD", name = "New Files" }) => {
           </span>
         </div>
       </article>
-      <img src={more} alt="more" />
+      <img src={more} alt="more" role="button" />
     </section>
   );
 };

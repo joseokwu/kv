@@ -26,3 +26,4 @@ export * from "./investorDeal/InvestorDeal";
 export * from "./founderProfile/FounderProfile";
 export * from "./commitment/Commitment";
 export * from "./dealRoom/DealRoom";
+export * from "./dealFolder/DealFolder";

@@ -29,6 +29,7 @@ import {
   FounderProfile,
   Commitment,
   DealRoom,
+  DealFolder,
 } from "../pages";
 
 const routes = [
@@ -237,6 +238,13 @@ const routes = [
     name: "DealRoom",
     path: "/investor/deal_room/:id",
     component: WithMainLayout(DealRoom),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "DealRoom",
+    path: "/investor/deal_room/:id/:folderName",
+    component: WithMainLayout(DealFolder),
     exact: true,
     protected: false,
   },

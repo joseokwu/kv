@@ -11,6 +11,7 @@ import schedule from "../../assets/icons/scheduleIcon.svg";
 import evaluation from "../../assets/icons/evaluationIcon.svg";
 import networking from "../../assets/icons/networkingIcon.svg";
 import helpDesk from "../../assets/icons/helpDesk.svg";
+import briefcase from "../../assets/icons/berifcase.svg";
 
 const investorNavigators = [
   {
@@ -66,7 +67,7 @@ const investorNavigators = [
     title: "Deal Room",
     activator: "deal_room",
     path: "/investor/deal_room",
-    icon: networking,
+    icon: briefcase,
   },
 ];
 

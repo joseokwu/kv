@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import sampleConnect from "../../assets/images/sampleTeamMember.png";
 import more from "../../assets/icons/more.svg";
+import searchIcon from "../../assets/icons/searchSm.svg";
 import { Button, Modal } from "../../components/index";
+import sampleChat from "../../assets/images/sampleTeamMember.png";
+
+import "./groupCard.css";
 
 export const GroupCard = () => {
   return (
     <div className="connected-card py-4" style={{ borderRadius: 10 }}>
-      <Modal id="groupModal" title="Fintech Investment Group">
-        <GroupModal />
-      </Modal>
+      {/* <GroupModal /> */}
       <section
         className="d-flex align-items-start"
         style={{ rowGap: 10, columnGap: "1rem" }}
@@ -18,7 +20,7 @@ export const GroupCard = () => {
           <p className="name">Fintech Investment Group</p>
           <p className="position py-2">My Close company group of Idealist</p>
 
-          <p className="count" data-toggle="modal" data-target="#groupModal">
+          <p className="count" data-toggle="modal" data-target="#modalGroup">
             19 members
           </p>
         </div>
@@ -60,16 +62,69 @@ const GroupMenu = () => {
   );
 };
 
-const GroupModal = () => {
+export const GroupModal = () => {
   return (
-    <div>
-      <div>
-        <section>
-          <img src="" alt="" />
-          <input type="search" name="" id="" />
+    // <div
+    //   className="modal fade"
+    //   id="modalGroup"
+    //   tabindex="-1"
+    //   role="dialog"
+    //   aria-labelledby="exampleModalLabel"
+    //   aria-hidden="true"
+    // >
+    //   <div
+    //     className="modal-dialog"
+    //     role="document"
+    //     style={{ marginTop: 120, maxWidth: 847 }}
+    //   >
+    //     <div className="modal-content" style={{ padding: 35 }}>
+    //       <div className="modal-body d-block">
+    <div className="px-3">
+      <section className="d-flex align-items-center justify-content-between mb-4">
+        <section className="search-input">
+          <img src={searchIcon} alt="search" />
+          <input type="search" placeholder="Search..." />
         </section>
         <Button label="Add members" />
-      </div>
+      </section>
+
+      <p className="mb-3">Group Members</p>
+
+      <section className="row">
+        {Array.from("winnings").map((x, i) => {
+          return (
+            <div className="col-xl-4 col-lg-6" key={`members-${i}`}>
+              <GroupMember />
+            </div>
+          );
+        })}
+      </section>
+    </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+  );
+};
+
+const GroupMember = () => {
+  return (
+    <div
+      className="d-flex align-items-center mb-4"
+      style={{ rowGap: 10, columnGap: "1rem" }}
+    >
+      <section className="chatter-img">
+        <img src={sampleChat} alt="chat buddy" />
+        <span className="activate"></span>
+      </section>
+
+      <section>
+        <h5 className="chatter-name">Jane Carter</h5>
+
+        <p className="chat-last">
+          Founder and CEO at Apple Inc, Serial Investor
+        </p>
+      </section>
     </div>
   );
 };
