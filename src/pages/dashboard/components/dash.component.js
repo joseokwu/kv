@@ -4,8 +4,8 @@ export const HeadWrapper = styled.div`
 
 
 color:#122198;
-background:#fff;
-width:94%;
+
+width:100%;
 padding:7px;
 border-radius:7px;
 
@@ -28,7 +28,7 @@ h6 {
     width:100%;
     color:#122198;
     font-size:0.8em;
-    margin-left:80%;
+    margin-left:78%;
     
 }
 

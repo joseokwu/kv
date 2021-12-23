@@ -15,27 +15,31 @@ h6 {
     font-weight:600;
 }
 
-li {
+p {
     display:flex;
     margin-top:9px;
+    font-size:16px;
+    color:#232323;
+}
 
-    span {
+span {
         color:#c2c2c2;
     }
 
-}
 
 
 `
 
-export const Btn = styled.button`
+export const Btn = styled.span`
 
        background:${(props) => props.bg};
-        width: ${(props) => props.w} ;
-        padding:0.3rem;
+        font-size:16px;
+        letter-spacing:0.01em;
+        line-height:21px;
         color: ${(props) => props.color };
         border:none;
         border-radius:6px;
-        margin-left:8px;
+        padding:4px 10px;
+        
 
 `

@@ -7,7 +7,7 @@ export const ProgramCardWrapper = styled.div`
 background:#F9F9FC;
 display:flex;
 border-radius: 5px;
-width:80%;
+width:95%;
 padding:1.5rem;
 margin:20px;
 

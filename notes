@@ -277,3 +277,14 @@ Domi data ends
   <ApplicationChart />
 </div>
 </section>
+=============================================
+==============================================
+case '#Fund Utilization':
+  return  <FundUtilization />;
+  case '#Cap Table':
+    return <CapTable />;
+  case '#Previous Round':
+    return <PreviousRound /> ;
+    case '#Financial Projection':
+      return <FinancialProjection /> ;
+

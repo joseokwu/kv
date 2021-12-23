@@ -22,7 +22,8 @@ import {
   InvestorOpportunity,
   Opportunity,
   StartUpRegistration,
-  Program
+  Program,
+  FundingRaising
 } from "../pages";
 
 const routes = [
@@ -129,7 +130,7 @@ const routes = [
     protected: false,
   },
   {
-    name: "RegisterInvestor",
+    name: "Program",
     path: "/program",
     component: WithDashboardLayout(Program),
     exact: true,
@@ -137,8 +138,8 @@ const routes = [
   },
   {
     name: "InvestorDashboard",
-    path: "/investor/dashboard",
-    component: WithMainLayout(InvestorDashboard),
+    path: "/fundraising",
+    component: WithDashboardLayout(FundingRaising),
     exact: true,
     protected: false,
   },

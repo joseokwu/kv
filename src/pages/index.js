@@ -18,5 +18,6 @@ export * from "./investorOpportunity/InvestorOpportunity";
 export * from "./opportunity/Opportunity";
 export * from "./startupRegistration";
 export * from './program';
+export * from './fundraising';
 
 

@@ -33,6 +33,16 @@ export  const stage = [
 
   ];
 
+  
+  export const cardFundData = [
+    { icon: newApp, name: "Founders Capital", count:'$100, 000', color: "#E5FFE4" },
+    { icon: pending, name: "Total Fund Raised", count:'$200, 000', color: "#FAD7DC" },
+    { icon: newApp, name: "Pre-Money Valuation", count:'$90, 000', color: "#FAD7DC" },
+    { icon: pending, name: "Post-Money Valuation", count:'$1 M', color: "#FAD7DC" },
+
+
+  ];
+
   export const cardFill = [
 
     {

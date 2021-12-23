@@ -1,6 +1,8 @@
 import { HeadWrapper, UpcomingCard } from './dash.component';
 import { CustomThreeDots } from '../../../components';
 import { images } from '../../../constants/domiData';
+import { Tag } from '../../../components';
+
 
 export const UpComing = ()=>{
 
@@ -25,7 +27,7 @@ export const UpComing = ()=>{
 
          <div className='d-flex justify-content-between my-5 date' >
             <h6>05 | September</h6>
-            <button>Today</button>
+            <Tag name='Today' color='#120398' bg='#DEF6FF' fz='14px' />
          </div>
 
          <div className='my-5'>

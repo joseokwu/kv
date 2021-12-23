@@ -1,9 +1,9 @@
-import { TodoCard } from './session.styled';
+import { TodoCard } from './styled';
 import person3 from "../../../../assets/icons/person3.svg";
 import { CustomThreeDots } from '../../../../components'
 import { Tag} from '../../../../components/tag/Tag';
-
-export const Session = () =>{
+import { images } from '../../../../constants/domiData';
+export const Assignment = ()=>{
 
     const todoArr = [ 
         { 
@@ -40,7 +40,7 @@ return (
          <div className='d-flex justify-content-between head' >
                     <div className='d-flex' >
                     <h6 className='mr-3' >Assignment</h6>
-                    <Tag name='Today' bg={i.bg} color={i.color} fz='15px' />
+                    
                     </div>
 
             <CustomThreeDots />
@@ -48,25 +48,28 @@ return (
 
          <div className='d-flex justify-content-between my-5 date' >
             <h6>05 | September</h6>
+            <Tag name='Today' bg={i.bg} color={i.color} fz='15px' />
          </div>
 
          <div className='my-5'>
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
          </div>
 
-         <div className='my-4 foot d-flex justify-content-between ' >
-            <span>Assigned</span>
-            <div className='d-flex mx-4'>
+         <div className='my-4 foot d-flex ' >
+            <span className='mr-3' >Assigned</span>
+  
         
                     <div>   
-                    <img className='mx-n2'  src={person3} />
+                    {
+                  images.map((data, i) =>(
+                    
+                    <img className='mx-n2' key={i} src={data.icon} />
+                    
+                ))
+            }
                     </div>
-                    <div className='d-block' >
-                        <p className='p' > james </p>
-                        <p className='secPara mr-4' > Data Scientist</p>
-                    </div>
-             
-            </div>
+                  
+  
          </div>
 
      </TodoCard>
@@ -74,5 +77,4 @@ return (
             }
     </div>
 )
-
 }

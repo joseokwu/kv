@@ -1,6 +1,7 @@
 import { HeadWrapper, TodoCard } from './dash.component';
 import { CustomThreeDots } from '../../../components';
 import { images } from '../../../constants/domiData';
+import { Tag } from '../../../components';
 
 export const TodoList = () =>{
 
@@ -10,7 +11,7 @@ export const TodoList = () =>{
         <>
     <HeadWrapper className='d-flex ' > 
         <h5  className='text-nowrap' >Tolist</h5>
-        <h6 style={{marginLeft:'90%'}} >See all</h6>
+        <h6 style={{marginLeft:'84%'}} >See all</h6>
      </HeadWrapper>
             <div className='row' >
             {
@@ -23,7 +24,7 @@ export const TodoList = () =>{
 
          <div className='d-flex justify-content-between my-5 date' >
             <h6>05 | September</h6>
-            <button>Today</button>
+            <Tag name='Today' color='#210198' bg='#DEF6FF' />
          </div>
 
          <div className='my-5'>

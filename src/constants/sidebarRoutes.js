@@ -1,11 +1,11 @@
-import user from "../assets/images/sampleUserSide.png";
+import dealroom from "../assets/icons/work_outline.svg";
 import dashboard from "../assets/icons/dashboard.svg";
-import startup from "../assets/icons/startupApplicants.svg";
+import startup from "../assets/icons/program.svg";
 import event from "../assets/icons/eventIcon.svg";
-import interested from "../assets/icons/interestedIcon.svg";
-import portfolio from "../assets/icons/portfolioIcon.svg";
-import schedule from "../assets/icons/scheduleIcon.svg";
-import evaluation from "../assets/icons/evaluationIcon.svg";
+import interested from "../assets/icons/payments.svg";
+import portfolio from "../assets/icons/booter.svg";
+import schedule from "../assets/icons/school.svg";
+import evaluation from "../assets/icons/list_alt.svg";
 import networking from "../assets/icons/networkingIcon.svg";
 
 
@@ -63,47 +63,47 @@ export const startUpRoutes = [
       icon: startup,
     },
     {
-      title: "Interested",
-      activator: "interested",
-      path: "/investor/interested",
+      title: "Fundraising",
+      activator: "fundraising",
+      path: "/fundraising",
       icon: interested,
     },
     {
-      title: "Portfolio",
-      activator: "portfolio",
-      path: "/investor/portfolio",
+      title: "Booster Partners",
+      activator: "boosterpartner",
+      path: "/boosterpartner",
       icon: portfolio,
     },
   
     {
       title: "Events",
       activator: "events",
-      path: "/investor/events",
+      path: "/events",
       icon: event,
     },
     {
-      title: "Schedule",
-      activator: "schedule",
-      path: "/investor/schedule",
+      title: "E-Academy",
+      activator: "eacademy",
+      path: "/eacademy",
       icon: schedule,
     },
     {
-      title: "Evaluation",
-      activator: "evaluation",
-      path: "/investor/evaluation",
+      title: "To-dolist",
+      activator: "todolist",
+      path: "/todolist",
       icon: evaluation,
     },
     {
       title: "Networking",
       activator: "networking",
-      path: "/investor/networking",
+      path: "/networking",
       icon: networking,
     },
     {
       title: "Deal Room",
       activator: "deal_room",
-      path: "/investor/deal_room",
-      icon: networking,
+      path: "/deal_room",
+      icon: dealroom,
     },
   ];
   
