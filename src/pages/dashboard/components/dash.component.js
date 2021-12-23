@@ -39,6 +39,7 @@ padding:18px;
 border-radius:12px;
 background:#fff;
 margin-top:10px;
+box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
 
 .head {
     h6 {
@@ -83,6 +84,7 @@ padding:18px;
 border-radius:12px;
 background:#fff;
 margin-top:10px;
+box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
 
 
 .head {
