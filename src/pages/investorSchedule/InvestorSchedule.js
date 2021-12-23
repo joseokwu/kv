@@ -3,6 +3,7 @@ import { Button, Tabs } from "../../components/index";
 import calender from "../../assets/icons/calender.svg";
 import "./investorSchedule.css";
 import { Upcoming } from "./components/Upcoming";
+import { CreateSchedule } from "./components/CreateSchedule";
 
 export const InvestorSchedule = ({ history }) => {
   const {
@@ -22,9 +23,15 @@ export const InvestorSchedule = ({ history }) => {
   };
   return (
     <div className="wrapper">
+      <CreateSchedule />
       <section className="d-flex align-items-center justify-content-between mb-4">
         <h1 className="page-title">My Schedule</h1>
-        <Button label="Create Events" variant="secondary" />
+        <Button
+          label="Create Events"
+          variant="secondary"
+          data-toggle="modal"
+          data-target="#createScheduleModal"
+        />
       </section>
 
       <section

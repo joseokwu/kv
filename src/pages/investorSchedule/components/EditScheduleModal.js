@@ -36,7 +36,7 @@ morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
         <section className="mb-4">
           <div className="d-flex align-items-center my-4">
             <p className="schedule-modal-subtitle">Add picture:</p>
-            <p className="schedule-underlined ml-1">Changephoto</p>
+            <p className="schedule-underlined ml-1">Change photo</p>
           </div>
         </section>
 
