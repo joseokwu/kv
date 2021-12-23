@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import sampleConnect from "../../assets/images/sampleTeamMember.png";
 import more from "../../assets/icons/more.svg";
+import { Button } from "../button/Button";
+import searchIcon from "../../assets/icons/searchSm.svg";
+import sampleChat from "../../assets/images/sampleTeamMember.png";
+import './groupCard.css'
 
 export const GroupCard = () => {
   return (
@@ -14,7 +18,7 @@ export const GroupCard = () => {
           <p className="name">Fintech Investment Group</p>
           <p className="position py-2">My Close company group of Idealist</p>
 
-          <p className="count">19 members</p>
+          <p className="count" data-toggle="modal" data-target="#modalGroup">19 members</p>
         </div>
 
         <div>
@@ -49,6 +53,54 @@ const GroupMenu = () => {
         >
           Delete group
         </button>
+      </section>
+    </div>
+  );
+};
+
+export const GroupModal = () => {
+  return (
+    <div className="px-3">
+      <section className="d-flex align-items-center justify-content-between mb-4">
+        <section className="search-input">
+          <img src={searchIcon} alt="search" />
+          <input type="search" placeholder="Search..." />
+        </section>
+        <Button label="Add members"  />
+      </section>
+
+      <p className="mb-3">Group Members</p>
+
+      <section className="row">
+        {Array.from("winnings").map((x, i) => {
+          return (
+            <div className="col-xl-4 col-lg-6" key={`members-${i}`}>
+              <GroupMember />
+            </div>
+          );
+        })}
+      </section>
+    </div>
+  );
+};
+
+const GroupMember = () => {
+  return (
+    <div
+      className="d-flex align-items-center mb-4"
+      style={{ rowGap: 10, columnGap: "1rem" }}
+    >
+      <section className="chatter-img">
+        <img src={sampleChat} alt="chat buddy" />
+        <span className="activate"></span>
+      </section>
+
+      <section>
+        <h5 className="chatter-name">Jane Carter</h5>
+
+        <p className="chat-last">
+          Founder and CEO at Apple Inc, Serial Investor
+        </p>
       </section>
     </div>
   );

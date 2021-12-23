@@ -16,16 +16,16 @@ export const Events = ({ history }) => {
         return <AllEvents />
 
       case '#Selection Day':
-        return <div></div>
+        return <AllEvents />
 
       case '#Demo Day':
-        return <div></div>
+        return <AllEvents />
 
       case '#Pitching Session':
-        return <div></div>
+        return <AllEvents />
 
       case '#Others':
-        return <div></div>
+        return <AllEvents />
 
       default:
         return <AllEvents />

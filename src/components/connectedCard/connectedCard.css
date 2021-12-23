@@ -30,6 +30,7 @@
   font-size: 13px;
   line-height: 140%;
   color: #0a6cf4;
+  cursor: pointer;
 }
 
 .connected-card .rep {

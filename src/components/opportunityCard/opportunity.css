@@ -1,5 +1,5 @@
 .opp-card {
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   padding: 1.75rem 1.38rem;
@@ -26,13 +26,6 @@
   font-size: 12px;
   line-height: 140%;
   color: #6466aa;
-}
-
-.opp-footer-text a{
-  font-family: Lato;
-  font-size: 12px;
-  line-height: 140%;
-  color: #6466aa!important;
 }
 
 .opp-company {

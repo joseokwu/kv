@@ -18,13 +18,15 @@ import {
   Assignments,
   Schedule,
   Networking,
-  DealRoom,
   EvaluationViewProfile,
   ContactUs,
   CreateAssignment,
   MoreDetails,
   ViewDetails,
   DashboardProfile,
+  MentorDealRoom,
+  DealFolder,
+  DealRoom,
 } from '../pages'
 import { ViewEvaluation } from '../pages/mentorAssignments/components/viewEvaluation/viewEvaluation'
 const routes = [
@@ -173,8 +175,22 @@ const routes = [
   },
   {
     name: 'DealRoom',
-    path: '/mentor/deal-room',
+    path: '/mentor/deal_room',
+    component: WithMainLayout(MentorDealRoom),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "DealRoom",
+    path: "/mentor/deal_room/:id",
     component: WithMainLayout(DealRoom),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "DealRoom",
+    path: "/mentor/deal_room/:id/:folderName",
+    component: WithMainLayout(DealFolder),
     exact: true,
     protected: false,
   },

@@ -16,6 +16,7 @@ export const EvaluationCompletedCard = () => {
         <h4 className="opp-company">Yebox Technology</h4>
         {/* <span className="active-dot"></span> */}
       </section>
+      
       <section className="d-flex align-items-center" style={{ columnGap: 10 }}>
         <Tag name="Fintech" />
         <Tag name="Incubation Program" color="#40439A" />

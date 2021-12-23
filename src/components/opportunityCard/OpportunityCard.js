@@ -1,10 +1,9 @@
-/* eslint-disable react/jsx-no-target-blank */
-import React from 'react'
-import './assignedStartupCard.css'
-import logo from '../../assets/images/yeLogo.svg'
-import { Tag } from '..'
+import React from "react";
+import "./opportunity.css";
+import logo from "../../assets/images/yeLogo.svg";
+import { Tag } from "..";
 
-export const AssignedStartupCard = ({ onClick }) => {
+export const OpportunityCard = ({ onClick }) => {
   return (
     <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
@@ -14,11 +13,12 @@ export const AssignedStartupCard = ({ onClick }) => {
 
       <section className="mb-2 d-flex align-items-center justify-content-between">
         <h4 className="opp-company">Yebox Technology</h4>
-        {/* <span className="active-dot"></span> */}
+        <span className="active-dot"></span>
       </section>
-      <section className="d-flex align-items-center" style={{ columnGap: 10 }}>
-        <Tag name="Fintech" />
-        <Tag name="Incubation Program" color="#40439A" />
+      <section className="d-flex align-items-center" style={{ columnGap: 4 }}>
+        <Tag name="Tech" />
+        <Tag name="Engineering" color="#40439A" />
+        <Tag name="Career" color="#E31937" />
       </section>
 
       <section className="opp-content">
@@ -31,16 +31,14 @@ export const AssignedStartupCard = ({ onClick }) => {
 
       <section className="d-flex align-items-center justify-content-between opp-footer-text">
         <div>
-          <p className="mb-2">
-            <a href="https://www.yebox.io/" target="_blank">
-              www.applane.com
-            </a>
-          </p>
+          <p className="mb-2">Transaction type: Round</p>
+          <p>Funding amount: $7</p>
         </div>
         <div className="text-right">
-          <p className="mb-2">Incorporation Date: 20/3/21</p>
+          <p className="mb-2">Last funding date: 20/3/21</p>
+          <p>Invest. requirement: $21</p>
         </div>
       </section>
     </div>
-  )
-}
+  );
+};

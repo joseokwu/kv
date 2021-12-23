@@ -35,7 +35,7 @@ export const UpcomingEventCard = () => {
 
       <section className="d-flex align-items-center justify-content-between">
         {/* <Button label="View Details" /> */}
-        <a href="/mentor/dashboard/view">View Details</a>
+        <a href="#!">View Details</a>
         <section className="event_people">
           <img src={doc} alt="doc" />
           <img src={doc} alt="doc" />

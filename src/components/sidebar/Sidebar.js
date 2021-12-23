@@ -57,8 +57,8 @@ const mentorNavigators = [
   },
   {
     title: 'Deal Room',
-    activator: 'deal-room',
-    path: '/mentor/deal-room',
+    activator: 'deal_room',
+    path: '/mentor/deal_room',
     icon: deal,
   },
 ];

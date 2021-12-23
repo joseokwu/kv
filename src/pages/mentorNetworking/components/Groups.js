@@ -1,9 +1,12 @@
 import React from "react";
-import { GroupCard } from "../../../components";
+import { GroupCard, GroupModal, Modal } from "../../../components";
 
 export const Groups = () => {
   return (
     <div>
+      <Modal id="modalGroup" title="Fintech Investment Group">
+        <GroupModal />
+      </Modal>
       <section className="row">
         {Array.from("coding").map((c, i) => {
           return (

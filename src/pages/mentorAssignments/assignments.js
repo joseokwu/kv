@@ -47,9 +47,9 @@ export const Assignments = () => {
         </div>
       </section>
 
-      <section className="row mt-5">
-        <div className="col d-flex assignment_card" style={{ columnGap: 50 }}>
-          <div className="opp-card ">
+      <section className="row mt-5 mr-4 ml-2">
+        <div className="d-flex assignment_card" style={{ columnGap: 30 }}>
+          <div className="col-lg-6 opp-card ">
             <h3>Create a business plan</h3>
             <p className="pt-2 pb-4 border-bottom">
               Attachments - <a href="#!">businessplan.pdf</a>
@@ -59,16 +59,16 @@ export const Assignments = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
               lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
               adipiscing elit.{' '}
-              <a href="/mentor/assignments/create/details">More Details</a>
+              <a href="#!">More Details</a>
             </p>
             <button
               className="pending_evaluation mt-4"
-              onClick={() => push('/mentor/assignments/view')}
+              // onClick={() => push('/mentor/assignments/view')}
             >
               View Evaluation
             </button>
           </div>
-          <div className="opp-card ">
+          <div className="col-lg-6 opp-card ">
             <h3>Create a business plan</h3>
             <p className="pt-2 pb-4 border-bottom">
               Attachments - <a href="#!">businessplan.pdf</a>
@@ -82,7 +82,7 @@ export const Assignments = () => {
             </p>
             <button
               className="pending_evaluation mt-4"
-              onClick={() => push('/mentor/assignments/view')}
+              // onClick={() => push('/mentor/assignments/view')}
             >
               View Evaluation
             </button>

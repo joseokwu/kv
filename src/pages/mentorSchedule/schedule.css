@@ -1,0 +1,30 @@
+.schedule h3 {
+  font-family: Lato;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.my_schedule_create a {
+  background: #00ADEF;
+  border-radius: 10px;
+  padding: 8px 30px;
+  border: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.my_schedule_create a:hover {
+  background: none;
+  color: #00ADEF;
+  border: 1.5px solid #00ADEF;
+}
+
+.my_schedule_create a:focus {
+  outline: none;
+}

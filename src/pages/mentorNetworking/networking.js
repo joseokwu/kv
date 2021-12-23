@@ -29,8 +29,10 @@ export const Networking = ({ history }) => {
 
       case "#my connections":
         return <Connections />;
+
       case "#groups":
         return <Groups />;
+        
       default:
         return <Request />;
     }

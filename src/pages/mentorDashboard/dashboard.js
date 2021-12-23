@@ -5,8 +5,11 @@ import {
   UpcomingEventCard,
 } from '../../components'
 import './dashboard.css'
+import { useHistory } from 'react-router-dom'
 
 export const Dashboard = () => {
+  const { push } = useHistory();
+
   const cardData = [
     { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
     { name: 'Partners', count: 20, color: '#DEF6FF' },
@@ -36,7 +39,7 @@ export const Dashboard = () => {
 
             <section className="row">
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard />
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
               </div>
               <div className="col-xl-4 mb-4">
                 <AssignedStartupCard />

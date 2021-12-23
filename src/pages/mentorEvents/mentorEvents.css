@@ -25,6 +25,7 @@
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
+  height: fit-content;
 }
 
 .events_card h3 {
@@ -64,4 +65,64 @@
 
 .event_card_footer a:focus {
   outline: none;
+}
+
+.event_schedule_modal_desc {
+  background: rgba(220, 235, 255, 0.7);
+}
+
+.event_schedule_modal_desc h4 {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.event_schedule_modal_desc p {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #525151;
+}
+
+.event_schedule_visibility p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.event_schedule_visibility span {
+  color: #2e3192;
+  text-decoration: underline;
+}
+
+.event_schedule_availability {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.event_schedule_availability button {
+  background: #f4f4f4;
+  border-radius: 5px;
+  padding: 10px 16px;
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #3e3e3e;
+  border: none;
+}
+
+.event_schedule_availability button:focus {
+  background: #e7f1ff;
+  outline: none;
+}
+
+.send_request a {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration-line: underline;
+  color: #2e3192;
 }
