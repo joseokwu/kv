@@ -12,6 +12,7 @@ export const TextField = ({
   className,
   required = false,
   placeholder,
+  ...rest
 }) => {
   return (
     <div className="field">
@@ -36,6 +37,7 @@ export const TextField = ({
           className={`${className}`}
           placeholder={placeholder}
           type={type}
+          {...rest}
         />
       </Form.Item>
     </div>

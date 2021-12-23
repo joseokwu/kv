@@ -7,6 +7,7 @@ import {
   TextField,
 } from "../../../components";
 import { GuestItem } from "./ScheduleModal";
+import copy from "../../../assets/icons/copy.svg";
 import remove from "../../../assets/icons/close.svg";
 
 export const EditScheduleModal = ({ id = "", image = "" }) => {
@@ -68,7 +69,7 @@ morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
             <p className="schedule-underlined ml-1">Public</p>
           </div>
 
-          <div className="d-flex align-items-center my-4">
+          <div className="d-flex align-items-center mt-4 mb-2">
             <p className="schedule-modal-subtitle">Join with:</p>
             <a
               href="https://meet.google.com"
@@ -76,6 +77,15 @@ morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
             >
               Google Meet
             </a>
+          </div>
+
+          <div className="copy-text-input mb-4">
+            <input
+              type="text"
+              id="google-meet"
+              defaultValue="meet.google.com/jce-wata-fux"
+            />
+            <img src={copy} alt="copy" />
           </div>
         </section>
 
