@@ -4,10 +4,12 @@ import calender from "../../assets/icons/calender.svg";
 import "./investorSchedule.css";
 import { Upcoming } from "./components/Upcoming";
 import { CreateSchedule } from "./components/CreateSchedule";
+import { Past } from "./components/Past";
 
 export const InvestorSchedule = ({ history }) => {
   const {
     location: { hash },
+    push,
   } = history;
 
   const renderComponent = () => {
@@ -15,8 +17,7 @@ export const InvestorSchedule = ({ history }) => {
       case "#upcoming":
         return <Upcoming />;
       case "#past":
-        return <div>Past</div>;
-
+        return <Past />;
       default:
         return <Upcoming />;
     }
@@ -50,6 +51,7 @@ export const InvestorSchedule = ({ history }) => {
             }
             variant="secondary"
             className="calender-btn"
+            onClick={() => push("/investor/schedule-calendar")}
           />
         </div>
       </section>
