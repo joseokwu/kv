@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import {
   DashCard,
   EvaluationCompletedCard,
@@ -10,7 +10,7 @@ import filter from '../../assets/icons/filterFunnel.svg'
 import down from '../../assets/icons/chevronDown.svg'
 import './evaluation.css'
 
-export const Evaluation = ({ history }) => {
+export const MentorEvaluation = ({ history }) => {
   const {
     location: { hash },
   } = history

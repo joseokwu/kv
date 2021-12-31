@@ -6,8 +6,9 @@ import chat from '../../assets/icons/mentorchat.svg'
 import angleDown from '../../assets/icons/angleDown.svg'
 import sampleUser from '../../assets/images/sampleUser.png'
 import { useHistory } from 'react-router-dom'
+import { Notification } from '../notification/Notification'
 
-export const Header = ({ setOpen, open}) => {
+export const Header = ({ setOpen, open }) => {
   const { push } = useHistory()
 
   const [openNotice, setOpenNotice] = useState(false)
@@ -54,6 +55,11 @@ export const Header = ({ setOpen, open}) => {
           <img src={angleDown} alt="dropdown" />
         </div>
       </section>
+
+      <Notification
+        closeNotice={() => setOpenNotice(false)}
+        openNotice={openNotice}
+      />
     </div>
   )
 }

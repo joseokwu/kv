@@ -18,7 +18,7 @@ export const Declined = () => {
             style={{ columnGap: 10 }}
           >
             <p className="pending_date">
-              <span>50</span> | September
+              <span>50</span> September
             </p>
             <p className="pending_time">
               <img src={bigClock} alt="clock" /> 10:00pm - 12pm

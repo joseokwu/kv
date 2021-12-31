@@ -24,7 +24,7 @@ export const AllEvents = () => {
 
         <section className="d-flex justify-content-between mt-2">
           <p className="pending_date pr-4">
-            <span>50</span> | September
+            <span>50</span> September
           </p>
 
           <p className="pending_time pt-1">
@@ -66,7 +66,7 @@ export const AllEvents = () => {
 
           <section className="d-flex justify-content-between mt-2">
             <p className="pending_date pr-4">
-              <span>50</span> | September
+              <span>50</span> September
             </p>
 
             <span class="accepted_tag">Ongoing</span>
@@ -98,7 +98,7 @@ export const AllEvents = () => {
 
           <section className="d-flex justify-content-between mt-2">
             <p className="pending_date pr-4">
-              <span>50</span> | September
+              <span>50</span> September
             </p>
 
             <p className="pending_time">

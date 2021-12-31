@@ -1,7 +1,7 @@
 import React from 'react'
 import demo from '../../../../assets/images/demo.svg'
 import founder from '../../../../assets/images/founder.svg'
-import fanai from '../../../../assets/images/fanai.svg'
+import fanai from '../../../../assets/images/fana.svg'
 import { CurrentInvestorConnectCard } from '../../../../components'
 import './product.css'
 

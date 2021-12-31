@@ -45,7 +45,7 @@ export const ViewEvaluation = ({ history }) => {
 
           <div className="text-right">
             <p className="view_evaluation_date">
-              Deadline: <b>50</b> <span>| September</span>
+              Deadline: <b>50</b> <span> September</span>
             </p>
             <p className="view_evaluation_time">
               <img src={clock} alt="clock" /> 10:00pm - 12pm

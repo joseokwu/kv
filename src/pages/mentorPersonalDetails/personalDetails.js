@@ -42,7 +42,7 @@ export const PersonalDetails = () => {
   }, [hash])
 
   return (
-    <div className="mentor_personal_details_wrap" ref={wrapRef}>
+    <div className="mentor_personal_details_wrap">
       <section className="mentor_personal_details_header">
         <div>
           <span>

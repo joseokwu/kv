@@ -33,6 +33,7 @@
   font-size: 1.25rem;
   line-height: 140%;
   color: #3855b3;
+  padding-right: 5px;
 }
 
 .view_evaluation_date span {
@@ -40,6 +41,8 @@
   font-size: 1rem;
   line-height: 140%;
   color: #3855b3;
+  border-left: 1px solid #3855b3;
+  padding-left: 6px;
 }
 
 .assignment_head {

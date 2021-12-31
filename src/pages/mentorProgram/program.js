@@ -61,7 +61,7 @@ export const Program = ({ history }) => {
         <Tabs tabItems={tabItems} />
       </div>
 
-      <div className="col-lg-12 pt-3">
+      <div className="col-lg-12 mt-5">
         <section className="mt-1">{renderContent()}</section>
       </div>
     </div>

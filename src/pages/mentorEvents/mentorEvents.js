@@ -44,12 +44,14 @@ export const Events = ({ history }) => {
       <div className="col-lg-12">
         <section className="d-flex align-items-center justify-content-between mb-4">
           <p className="event_title">Events</p>
-          <img src={searchIcon} alt="search"/>
+          <img src={searchIcon} alt="search" />
         </section>
       </div>
 
-      <div className="col-lg-12 d-flex justify-content-between">
-        <Tabs tabItems={tabItems} />
+      <div className="row col-lg-12 d-flex justify-content-between">
+        <div className="col">
+          <Tabs tabItems={tabItems} />
+        </div>
 
         <div>
           <button
@@ -65,7 +67,7 @@ export const Events = ({ history }) => {
         </div>
       </div>
 
-      <div className="col-lg-12 pt-3">
+      <div className="col-lg-12 col-xl-12 pt-3">
         <section className="mt-1">{renderContent()}</section>
       </div>
     </div>

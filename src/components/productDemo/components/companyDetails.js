@@ -7,8 +7,10 @@ import twitter from "../../../assets/icons/twitterLogo.svg";
 import linkedIn from "../../../assets/icons/linkedInLogo.svg";
 import whatsApp from "../../../assets/icons/whatsapp.svg";
 import share from "../../../assets/icons/share.svg";
+import { useHistory } from "react-router-dom";
 
 export const CompanyDetails = () => {
+  const { push } = useHistory();
   return (
     <section className="opp-page-card py-4">
       <div
@@ -62,7 +64,7 @@ export const CompanyDetails = () => {
         style={{ rowGap: 10 }}
       >
         <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
-          <Button label="Evaluate" />
+          <Button label="Evaluate" onClick={() => push('/mentor/evaluation/evaluate')} />
           <Button label="Schedule Call" variant="secondary" />
         </div>
 
@@ -72,7 +74,7 @@ export const CompanyDetails = () => {
             <p className="share-link">Share</p>
           </span>
 
-          <span>
+          <span style={{cursor: "pointer"}}>
             <img src={linkedIn} alt="linkedIn" width="24" height="24" />
             <img
               src={twitter}

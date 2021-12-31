@@ -48,9 +48,6 @@ export const Networking = ({ history }) => {
       <section className="d-flex align-items-center justify-content-between mb-4">
         <h1 className="page-title">Networking</h1>
         <div>
-          {/* <img src={search} alt="search" /> */}
-
-            {/* <button className="create-button" data-toggle="modal" data-target="#inviteModal">Create Group</button> */}
           <Button
             label="Create Group"
             className="create-button"

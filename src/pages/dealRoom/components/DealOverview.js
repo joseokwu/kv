@@ -2,10 +2,6 @@ import React from "react";
 import { DeckCard, Tag } from "../../../components";
 import logo from "../../../assets/images/yeLogo.svg";
 import pic from "../../../assets/images/sampleinvestors.png";
-// import doc from "../../../assets/icons/greenDoc.svg";
-// import docIcon from "../../../assets/icons/docIcon.svg";
-// import download from "../../../assets/icons/cloudDownloadB.svg";
-// import editDoc from "../../../assets/icons/editDoc.svg";
 
 export const DealOverview = () => {
   return (
@@ -146,31 +142,6 @@ export const DealOverview = () => {
           <h3 className="page-title">Deal Termsheet</h3>
         </section>
         <section className="col-xl-4">
-          {/* <article className="deck-card" style={{ width: 302 }}>
-            <div
-              className="deck-card-img position-relative"
-              style={{ maxWidth: 302 }}
-            >
-              <img src={doc} alt="document" />
-              <img
-                src={editDoc}
-                alt="edit document"
-                className="edit-doc"
-                role="button"
-              />
-            </div>
-            <div className="d-flex align-items-center  justify-content-between p-3">
-              <section className="d-flex align-items-start">
-                <img src={docIcon} alt="document icon" className="mr-2" />
-                <span>
-                  <p>Deal Termsheet</p>
-                  <small>21MB</small>
-                </span>
-              </section>
-              <img src={download} alt="download" role="button" />
-            </div>
-          </article> */}
-
           <DeckCard />
         </section>
       </div>

@@ -2,7 +2,8 @@ import React from "react";
 import twitter from "../../../../assets/icons/tweet.svg";
 import linkedIn from "../../../../assets/icons/link.svg";
 import whatsApp from "../../../../assets/icons/whatsapp.svg";
-import member from "../../../../assets/icons/whatsapp.svg";
+import member from "../../../../assets/images/sampleTeamMember.png";
+
 import "./team.css";
 
 export const Team = () => {

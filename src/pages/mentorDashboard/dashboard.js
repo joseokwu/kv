@@ -42,10 +42,10 @@ export const Dashboard = () => {
                 <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
               </div>
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard />
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
               </div>
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard />
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
               </div>
             </section>
           </div>

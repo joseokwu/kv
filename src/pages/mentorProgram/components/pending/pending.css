@@ -36,6 +36,8 @@
   font-size: 20px;
   line-height: 140%;
   color: #3855b3;
+  border-right: 1px solid #3855b3;
+  padding-right: 6px;
 }
 
 .pending_time {

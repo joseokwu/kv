@@ -203,14 +203,14 @@ const Details = () => {
       </FormCard>
 
       <section className="d-flex align-items-center justify-content-between">
-        <button
+        {/* <button
           className="back-btn"
           onClick={() => {
             goBack()
           }}
         >
           Go Back
-        </button>
+        </button> */}
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
           <Button label="Save" variant="secondary" />

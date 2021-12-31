@@ -27,16 +27,11 @@ import {
   MentorDealRoom,
   DealFolder,
   DealRoom,
+  Notification,
+  MentorEvaluation,
 } from '../pages'
 import { ViewEvaluation } from '../pages/mentorAssignments/components/viewEvaluation/viewEvaluation'
 const routes = [
-  {
-    name: 'Signin',
-    path: '/mentor/signin',
-    exact: true,
-    component: SignIn,
-    protected: false,
-  },
   {
     name: 'Dashboard',
     path: '/mentor/dashboard',
@@ -44,6 +39,14 @@ const routes = [
     exact: true,
     protected: false,
   },
+  {
+    name: 'Signin',
+    path: '/mentor/signin',
+    exact: true,
+    component: SignIn,
+    protected: false,
+  },
+
   {
     name: 'SignUp',
     path: '/mentor/signup',
@@ -55,6 +58,13 @@ const routes = [
     name: 'ContactUS',
     path: '/support',
     component: WithMainLayout(ContactUs),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Notification",
+    path: "/mentor/notification",
+    component: WithMainLayout(Notification),
     exact: true,
     protected: false,
   },
@@ -132,9 +142,9 @@ const routes = [
     protected: false,
   },
   {
-    name: 'Evaluation',
+    name: 'MentorEvaluation',
     path: '/mentor/evaluation',
-    component: WithMainLayout(Evaluation),
+    component: WithMainLayout(MentorEvaluation),
     exact: true,
     protected: false,
   },
@@ -181,15 +191,15 @@ const routes = [
     protected: false,
   },
   {
-    name: "DealRoom",
-    path: "/mentor/deal_room/:id",
+    name: 'DealRoom',
+    path: '/mentor/deal_room/:id',
     component: WithMainLayout(DealRoom),
     exact: true,
     protected: false,
   },
   {
-    name: "DealRoom",
-    path: "/mentor/deal_room/:id/:folderName",
+    name: 'DealRoom',
+    path: '/mentor/deal_room/:id/:folderName',
     component: WithMainLayout(DealFolder),
     exact: true,
     protected: false,
@@ -203,8 +213,8 @@ const routes = [
   },
   {
     name: 'Evaluation',
-    path: '/mentor/evaluation',
-    component: WithMainLayout(Evaluation),
+    path: '/mentor/evaluation/evaluate',
+    component: WithRegisterLayout(Evaluation),
     exact: true,
     protected: false,
   },

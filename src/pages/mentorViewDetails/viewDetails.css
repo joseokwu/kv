@@ -59,7 +59,7 @@
 }
 
 .active-tab {
-  border-bottom: 6px solid #0a6cf4;
+  border-bottom: 4px solid #0a6cf4;
   color: #0a6cf4 !important;
   font-weight: bold !important;
 }
