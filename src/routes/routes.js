@@ -38,7 +38,7 @@ const routes = [
     name: "Signin",
     path: "/",
     exact: true,
-    component: SignIn,
+    component: WithMainLayout(Dashboard), //for preview purpose
     protected: false,
   },
   {
@@ -113,7 +113,7 @@ const routes = [
     path: "/profile",
     component: WithRegisterLayout(Profile),
     exact: true,
-    protected: true,
+    protected: false,
   },
   {
     name: "ContactUs",

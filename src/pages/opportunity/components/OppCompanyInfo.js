@@ -7,12 +7,16 @@ import twitter from "../../../assets/icons/twitterLogo.svg";
 import linkedIn from "../../../assets/icons/linkedInLogo.svg";
 import whatsApp from "../../../assets/icons/whatsapp.svg";
 import share from "../../../assets/icons/share.svg";
+import interestedCheck from "../../../assets/icons/interestedCheck.svg";
 import { useParams } from "react-router";
 import { useHistory } from "react-router";
 
 export const OppCompanyInfo = () => {
   const { id } = useParams();
-  const { push } = useHistory();
+  const {
+    push,
+    location: { pathname },
+  } = useHistory();
 
   return (
     <section className="opp-page-card py-3">
@@ -66,16 +70,23 @@ export const OppCompanyInfo = () => {
         className="mt-4 d-flex align-items-center justify-content-between flex-wrap"
         style={{ rowGap: 10 }}
       >
-        <div
-          className="d-flex align-items-center flex-wrap"
-          style={{ columnGap: 10, rowGap: 10 }}
-        >
-          <Button
-            label="Commit"
-            onClick={() => push(`/investor/opportunities/${id}/commitment`)}
-          />
-          <Button label="Interested" variant="secondary" />
-        </div>
+        {pathname.includes("interested") ? (
+          <div className="flex-align interest-indicator">
+            <img src={interestedCheck} alt="interested" />
+            <p>Interested</p>
+          </div>
+        ) : (
+          <div
+            className="d-flex align-items-center flex-wrap"
+            style={{ columnGap: 10, rowGap: 10 }}
+          >
+            <Button
+              label="Commit"
+              onClick={() => push(`/investor/opportunities/${id}/commitment`)}
+            />
+            <Button label="Interested" variant="secondary" />
+          </div>
+        )}
 
         <div className="d-flex align-items-center">
           <span className="d-flex align-items-center mr-3">

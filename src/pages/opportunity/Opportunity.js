@@ -15,7 +15,8 @@ import { RoadMap } from "./components/roadMap/RoadMap";
 
 export const Opportunity = ({ history }) => {
   const {
-    location: { hash },
+    location: { hash, pathname },
+    push,
   } = history;
   const tabItems = [
     "product",
@@ -26,6 +27,8 @@ export const Opportunity = ({ history }) => {
     "Milestone/Timeline",
     "product road map",
   ];
+
+  console.log(`pathname`, pathname);
 
   const renderContent = () => {
     switch (hash.replaceAll("%20", " ")) {
@@ -55,7 +58,21 @@ export const Opportunity = ({ history }) => {
     <div>
       <article className="wrapper pt-3" style={{ background: "#F9F9FC" }}>
         <section className="d-flex align-items-center">
-          <p className="bread-start">Investment Opportunities</p>
+          <p
+            className="bread-start"
+            role="button"
+            onClick={() =>
+              push(
+                pathname.includes("interested")
+                  ? "/investor/interested"
+                  : "/investor/opportunities"
+              )
+            }
+          >
+            {pathname.includes("interested")
+              ? "Interested"
+              : `Investment Opportunities`}
+          </p>
           <img src={left} alt="left" className="mx-3" />
           <p className="bread-end">Applane Insteen.</p>
         </section>

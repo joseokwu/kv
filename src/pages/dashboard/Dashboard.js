@@ -10,7 +10,10 @@ import { ApplicationCard, DashCard } from "../../components/index";
 import applicantLogo from "../../assets/images/sampleApplicantLogo.png";
 import ApplicationChart from "./components/applicationChart/ApplicationChart";
 
-export const Dashboard = () => {
+export const Dashboard = ({ history }) => {
+  const { push, location } = history;
+
+  console.log(`history`, history);
   const cardData = [
     { icon: total, name: "Total Applications", count: 50, color: "#E5FFE4" },
     { icon: newApp, name: "new", count: 12, color: "#FAD7DC" },
@@ -39,7 +42,7 @@ export const Dashboard = () => {
         <div className="col-lg-6">
           <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
             <h5>New Applications</h5>
-            <span>See All</span>
+            <span onClick={() => push("/applicants#all")}>See All</span>
           </header>
 
           <section>

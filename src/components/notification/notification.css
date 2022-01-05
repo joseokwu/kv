@@ -62,9 +62,9 @@
 .kv-notice-main select {
   background: #f4f4f4;
   border-radius: 5px;
-  height: 49px;
+  height: 39px;
   width: 100%;
-  max-width: 79px;
+  max-width: 100px;
   font-family: Lato;
   font-style: normal;
   font-weight: normal;

@@ -12,6 +12,7 @@ import evaluation from "../../assets/icons/evaluationIcon.svg";
 import networking from "../../assets/icons/networkingIcon.svg";
 import helpDesk from "../../assets/icons/helpDesk.svg";
 import briefcase from "../../assets/icons/berifcase.svg";
+import { Link } from "react-router-dom";
 
 const investorNavigators = [
   {
@@ -32,12 +33,12 @@ const investorNavigators = [
     path: "/investor/interested",
     icon: interested,
   },
-  {
-    title: "Portfolio",
-    activator: "portfolio",
-    path: "/investor/portfolio",
-    icon: portfolio,
-  },
+  // {
+  //   title: "Portfolio",
+  //   activator: "portfolio",
+  //   path: "/investor/portfolio",
+  //   icon: portfolio,
+  // },
 
   {
     title: "Events",
@@ -88,7 +89,7 @@ const boosterNavigators = [
 
 export const Sidebar = () => {
   const {
-    location: { pathname },
+    location: { pathname, state },
     push,
   } = useHistory();
 
@@ -99,14 +100,22 @@ export const Sidebar = () => {
   const [navigator, setNavigator] = useState([]);
 
   useEffect(() => {
-    if (pathname.includes("investor")) {
-      setNavigator(investorNavigators);
+    if (pathname !== "/support") {
+      if (pathname.includes("investor")) {
+        setNavigator(investorNavigators);
+      } else {
+        setNavigator(boosterNavigators);
+      }
     } else {
-      setNavigator(boosterNavigators);
+      state?.from === "investor"
+        ? setNavigator(investorNavigators)
+        : setNavigator(boosterNavigators);
     }
   }, [pathname]);
 
+  console.log(`pathname`, pathname);
   console.log(`navigator`, navigator);
+  console.log(`state`, state);
 
   return (
     <div className="side-main">
@@ -124,18 +133,28 @@ export const Sidebar = () => {
             navigator.map((nav, i) => {
               return (
                 <li>
-                  <a href={nav.path}>
+                  <Link to={nav.path}>
                     <img src={nav.icon} alt="dash" />
                     <p className={`${activateLink(nav.activator)} side-text`}>
                       {nav.title}
                     </p>
-                  </a>
+                  </Link>
                 </li>
               );
             })}
         </ul>
       </section>
-      <section className="side-footer" onClick={() => push("/support")}>
+      <section
+        className="side-footer"
+        onClick={() =>
+          push({
+            pathname: "/support",
+            state: {
+              from: pathname.includes("investor") ? "investor" : "partner",
+            },
+          })
+        }
+      >
         <img src={helpDesk} alt="help" />
         <p className="mb-0 side-text" role="button">
           Need help? Contact us

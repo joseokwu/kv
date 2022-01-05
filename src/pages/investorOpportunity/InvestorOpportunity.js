@@ -35,7 +35,7 @@ export const InvestorOpportunity = ({ history }) => {
         className="mt-5 d-flex align-items-center justify-content-between flex-wrap"
         style={{ rowGap: "1rem" }}
       >
-        <Tabs tabItems={["opportunities", "share deals"]} />
+        <Tabs tabItems={["opportunities", "shared deals"]} />
 
         <div
           className="d-flex align-items-center"

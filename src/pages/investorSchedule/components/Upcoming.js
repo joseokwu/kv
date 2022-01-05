@@ -54,7 +54,7 @@ export const Upcoming = () => {
   );
 };
 
-const ScheduleCard = ({
+export const ScheduleCard = ({
   eventName = "Appleiine House Demo",
   image = "",
   id = 0,

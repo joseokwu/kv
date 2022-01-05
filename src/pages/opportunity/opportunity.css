@@ -87,3 +87,17 @@
   line-height: 140%;
   color: #2e3192;
 }
+
+.interest-indicator {
+  width: fit-content;
+  background: #dcf8dc;
+  border-radius: 10px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #138f11;
+  padding: 10px 18px;
+  column-gap: 7px;
+}

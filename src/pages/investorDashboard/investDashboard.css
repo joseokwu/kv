@@ -96,3 +96,8 @@
 .ignore-btn {
   background-color: #cbc8c8;
 }
+
+.investor-dash-card {
+  min-width: 180px;
+  max-width: 205px;
+}
