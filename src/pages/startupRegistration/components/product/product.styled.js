@@ -59,11 +59,10 @@ export const InputWrapper = styled.label`
 `
 
 export const FormWrapper = styled.div`
-width:90%;
+width:100%;
 height: ${(props) => props.height ? props.height : '80%'} ;
 padding:2rem;
 order:2;
-margin:3rem 0;
 flex:none;
 border:0 solid #D3D3D3;
 border-radius:5px;
@@ -145,7 +144,7 @@ input {
 textarea {
     border:none;
     background:#f4f4f4;
-    width:70%;
+    width:100%;
     margin-left:15px;
 
 }
@@ -241,22 +240,20 @@ export const VideoWrapper = styled.div`
 
 padding: 3rem;
 width: 87%;
-height: 100%;
-background: #F9F9FC;
 
+background: #F9F9FC;
+margin-top:10px;
 box-sizing: border-box;
 border-radius: 6px;
 
    
-
- .div{
-
-width: 30%;
+.div{
+width: 70%;
+padding:15px;
 background: #F9F9FC;
 border: 1px solid #E6E7E9;
-border-radius: 8px;
-
-
+border-bottom:0;
+border-radius:8px 8px 0 0;
 
 
 img {
@@ -264,20 +261,37 @@ img {
  margin-top:16px;
 }
 
-#div {
+@media ( max-width: 768px){
 
-margin-top:40px;
-width: 100%;
-height: 72px;
+width:100%;
+}
+
+
+
+    }
+
+    #div {
+
+width: 70%;
 background:#fff;
-border-radius:0 0 4px 4px;
+border-radius:0 0 8px 8px;
+margin-left:15px;
+margin-top:-0.64rem;
+    .p {
+       
+       margin-left:30%; 
+    
+    }
 
-
-
-
+    @media ( max-width: 768px){
+    width:100%;
+}
 
     }
 
-    }
+ @media ( max-width: 768px){
 
+  width:125%;
+  margin-left:-2.4rem;
+}
 `

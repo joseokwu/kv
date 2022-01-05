@@ -1,6 +1,5 @@
 import styled from 'styled-components/macro';
 
-
 export const Header = styled.div`
 
 h4 {
@@ -27,7 +26,7 @@ padding:4px 10px;
 color:#fff;
 }
 
-a {
+b {
 font-size: 15px;
 line-height: 31px;
 color:#2E3192
@@ -35,26 +34,7 @@ color:#2E3192
 
 `
 
-export const Table = styled.table`
 
-margin-top:1.3rem;
-
-thead {
-background: #F8F8FA;
-
-padding:10px;
-    tr {
-        border-radius:12px;
-    }
-    th {
-font-weight: 500;
-font-size: 16px;
-line-height: 140%;
-color: #9B9DC3;
-
-    }
-}
-`
 
 export const Section = styled.section`
 
@@ -71,4 +51,39 @@ display: flex;
 letter-spacing: 0.01em;
 color:#182399;
 }
-` 
+`
+
+export const VideoWrapper = styled.div`
+
+
+
+
+ .div{
+
+width: 20%;
+background: #F9F9FC;
+border: 1px 1px 0 0 solid #E6E7E9;
+border-radius:8px 8px 0 0;
+padding:40px;
+
+}
+
+    #div {
+
+width:20%;
+background:#fff;
+border-radius:0 0 8px 8px;
+padding:10px;
+box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
+
+    .p {
+       
+       margin-left:30%; 
+    
+    }
+
+
+    }
+
+`
+

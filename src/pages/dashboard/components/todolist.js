@@ -1,24 +1,31 @@
-import { HeadWrapper, TodoCard } from './dash.component'
-import { CustomThreeDots } from '../../../components'
-import { images } from '../../../constants/domiData'
-import { Tag } from '../../../components'
+import { HeadWrapper, TodoCard } from './dash.component';
+import { CustomThreeDots } from '../../../components';
+import { images } from '../../../constants/domiData';
+import { Tag } from '../../../components';
 
-export const TodoList = () => {
-  const todoArr = [1, 2]
+export const TodoList = () =>{
 
-  return (
-    <>
-      <HeadWrapper className="d-flex ">
-        <h5 className="text-nowrap">Tolist</h5>
-        <h6 style={{ marginLeft: '84%' }}>See all</h6>
-      </HeadWrapper>
-      <div className="row">
-        {todoArr.map((i) => (
-          <TodoCard key={i} className="col-6 mx-3">
-            <div className="d-flex justify-content-between head">
-              <h6>Assignment</h6>
-              <CustomThreeDots />
-            </div>
+    const todoArr = [1, 2];
+
+    return (
+        <>
+    <HeadWrapper className='d-flex justify-content-between' > 
+        <h5  className='text-nowrap' >Tolist</h5>
+        <span className='text-nowrap spn'  >See all</span>
+     </HeadWrapper>
+            <div className='row' >
+            {
+                todoArr.map(i =>(
+                    <TodoCard key={i} className='col-lg-6 col-12 mx-3' >
+         <div className='d-flex justify-content-between head' >
+            <h6>Assignment</h6>
+            <CustomThreeDots />
+         </div>
+
+         <div className='d-flex justify-content-between my-5 date' >
+            <h6>05 | September</h6>
+            <Tag name='Today' color='#210198' bg='#DEF6FF' />
+         </div>
 
             <div className="d-flex justify-content-between my-5 date">
               <h6>05 | September</h6>

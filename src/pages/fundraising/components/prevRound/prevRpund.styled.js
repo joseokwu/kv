@@ -1,6 +1,5 @@
 import styled from 'styled-components/macro';
 
-
 export const Header = styled.div`
 
 h4 {
@@ -27,7 +26,7 @@ padding:4px 10px;
 color:#fff;
 }
 
-a {
+b {
 font-size: 15px;
 line-height: 31px;
 color:#2E3192
@@ -53,6 +52,12 @@ line-height: 140%;
 color: #9B9DC3;
 
     }
+
+    td {
+        font-weight: 600; 
+        line-height: 140%;  
+    }
+
 }
 `
 
@@ -71,4 +76,7 @@ display: flex;
 letter-spacing: 0.01em;
 color:#182399;
 }
-` 
+`
+
+
+

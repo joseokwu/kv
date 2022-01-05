@@ -53,11 +53,11 @@ export const Rating = () =>{
             <div className='col-lg-6 ' >
              <p className='mb-5' >How was the session with your mentor?</p>
 
-            <div className='my-3 d-flex' >
+            <div className='my-3  d-flex' >
                 {
                     tagRating.map((i) =>{
                         return <Tag key={i} name={i.status} onClick={()=> setRating(i.status) }
-                        bg='#D4D4D4' className='mx-1' color={rating === i.status ? '#021098' : '#222222' }
+                        bg='#D4D4D4' className='mx-1 ' color={rating === i.status ? '#021098' : '#222222' }
                         fontWeight={ rating === i.status ? '600' : 'normal' }
                          />
                     })

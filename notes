@@ -288,3 +288,48 @@ case '#Fund Utilization':
     case '#Financial Projection':
       return <FinancialProjection /> ;
 
+====================================================
+==========================================================
+<section className="d-flex align-items-center appChart-label">
+<LabelCheck color="#2196F3" />
+<p className="label-name">Expired</p>
+<p className="label-percent">25%</p>
+</section>
+
+================================================
+=============================================
+
+function for making a download work 
+
+const downloadStatement = () => {
+  const element = document.querySelector('#account');
+  
+  let opt = {
+    margin: 1,
+    filename:'template.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+    };
+  
+    //console.log(html2pdf().from(element).set(opt).save())
+  
+    return  html2pdf().from(element).set(opt).save();
+  
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

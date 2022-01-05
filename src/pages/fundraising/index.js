@@ -7,6 +7,11 @@ import { ApplicationCard, DashCard ,
   import { Tabs } from '../../components/tabs/Tabs';
 import { FundingAsk } from './components/fundingask';
 import { useHistory } from 'react-router-dom';
+import { FundUtilization } from './components/fundutilization';
+import { CapTable } from './components/captable';
+import { PreviousRound } from './components/prevRound';
+import { FinancialProjection } from './components/financialProjection';
+
 
   export const FundingRaising = ()=>{
 
@@ -19,6 +24,14 @@ import { useHistory } from 'react-router-dom';
         switch (hash) {
           case '#Funding Ask':
             return <FundingAsk />;
+            case '#Fund Utilization':
+           return  <FundUtilization />;
+           case '#Cap Table':
+             return  <CapTable />;
+             case '#Previous Round':
+               return  <PreviousRound /> ;
+               case '#Financial Projection':
+                   return <FinancialProjection />
           default:
             return <FundingAsk />
         }

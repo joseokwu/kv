@@ -5,7 +5,27 @@ export const BodyWrapper = styled.div`
 
     margin-bottom:10px;
     margin-top:15px;
-    margin-left:15px;
+   width:100%;
+
+    .sold {
+        flex-direction: column;
+justify-content: center;
+align-items: center;
+padding:3rem;
+width:50%;
+
+background:#fff;
+margin:10px;
+border: 1.5px solid #E6E7E9;
+box-sizing: border-box;
+border-radius: 6px;
+
+@media (max-width:768px){
+
+    width:100%;
+}
+    }
+
     .span {
     font-family:DM Sans;
     font-weight:500;
@@ -25,10 +45,11 @@ align-items: center;
 letter-spacing: 0.01em;
 margin-top:10px;
 color: #828282;
+
 }
 hr {
     width:100%;
-    margin-top:15px;
+    margin-top:15px; 
     margin-bottom:5px;
     background:#808080;
 }
@@ -48,6 +69,10 @@ input {
     width:75%;
     margin-left:8px;
     margin-bottom:15px;
+
+    @media (max-width:768px){
+        width:100%;
+    }
 }
 
 textarea {
@@ -56,12 +81,20 @@ textarea {
     width:70%;
     margin-left:8px;
 
+    @media (max-width:768px){
+        width:100%;
+    }
+
 }
 .cust {
     border:none;
     background:#f4f4f4;
     width:70%;
     margin-left:15px; 
+
+    @media (max-width: 768px){
+        width:100%;
+    }
 }
   
     .custs {
@@ -95,10 +128,16 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding:3rem;
-width:70%;
+width:50%;
+
 background:#fff;
 margin:10px;
 border: 1.5px solid #E6E7E9;
 box-sizing: border-box;
 border-radius: 6px;
+
+@media (max-width:768px){
+
+    width:100%;
+}
 `

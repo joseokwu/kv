@@ -1,11 +1,10 @@
 import React from "react";
 import "./dashboard.css";
 import { cardData, cardFill } from '../../constants/domiData';
-import { ApplicationCard, DashCard , 
+import { DashCard , 
   CardFill
 } from "../../components/index";
-import applicantLogo from "../../assets/images/sampleApplicantLogo.png";
-import ApplicationChart from "./components/applicationChart/ApplicationChart";
+
 import { Card } from "react-bootstrap";
 import { TodoList } from './components/todolist';
 import { UpComing } from './components/upComing';
@@ -23,7 +22,7 @@ export const Dashboard = () => {
      
 
           <DashCard
-            className='col-3 '
+            className='col-lg-3 col-md-6 col-12 '
             icon={data.icon}
             name={data.name}
             count={data.count}

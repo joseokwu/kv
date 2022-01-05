@@ -14,7 +14,8 @@ import PhoneInput from 'react-phone-number-input';
 import {CustomButton} from '../../../../components/button/button.styled';
 import { useActivity } from '../../../../hooks/useBusiness';
 import { TeamModal, EducationModal } from "./teamModal";
-import { Select, Tag } from 'antd';
+import { Select } from 'antd';
+import {Tag} from '../../../../components/tag/Tag';
 import 'antd/dist/antd.css';
 const { Option } = Select;
 
@@ -111,14 +112,10 @@ for (let i = 0; i < skill.length; i++) {
             </div>
 
             <div style={{marginTop:'10px', marginLeft:"10px"}} >
-                 <ImageWrapper >
+                    <ImageWrapper >
 
-                    {
-                    disImg === null ? ( <UserOutlined />):(
                     <img className="" src={disImg }  style={{borderRadius:'70px', width:'90px', height:'90px'}}  alt=""/>
-                    ) 
-                    }
-
+                  
                     </ImageWrapper>
 
                     <InputWrapper for='found' >
@@ -157,7 +154,7 @@ for (let i = 0; i < skill.length; i++) {
                     className='form-group  col-lg-6 col-12'
                      >
                        <label>Date of Birth *</label>
-                    <DatePicker style={{padding:'15px'}} selected={startDate} onChange={(date) => setStartDate(date)} />
+                    <DatePicker className="custs p-2" style={{padding:'15px'}} selected={startDate} onChange={(date) => setStartDate(date)} />
                     </div>
                     <div className='form-group col-lg-4 col-12'>
                     <label>Country *</label>
@@ -186,24 +183,24 @@ for (let i = 0; i < skill.length; i++) {
                     international
                     name='phone'
                     countryCallingCodeEditable={true}
-                    className='custs'
+                    className='custs w-lg-50'
                     value={phone}
                     onChange={setPhone}
                     />
                 </div>
             </div>
-
+ 
            </FormWrapper>
            <FormWrapper height='80%' >
            <div className='div' >
-                <span  >Work Experience</span>   
+                <span >Work Experience</span>   
             </div>
              <hr />
             <div>
                 <span
                     onClick={()=> setShow(true)}
                     style={{color:'#120297', borderBottom:'1px solid #120297',
-                        fontWeight:'600'
+                        fontWeight:'600',cursor:' pointer'
                     }}
                 >Add work experience + </span>
             </div>
@@ -229,11 +226,13 @@ for (let i = 0; i < skill.length; i++) {
              <hr />
 
              <div className='form-group' >
-                 <label>What are your skills *</label>
+               <div>
+               <label>What are your skills *</label>
+               </div>
                  <Select
       mode="multiple"
       allowClear
-      style={{ width: '80%', color:'red' }}
+      style={{ width: '60%', color:'red' }}
       placeholder="Please select"
 
       onChange={handleChange}
@@ -291,12 +290,15 @@ for (let i = 0; i < skill.length; i++) {
 
              <div>
                  <label>Do you have a co-founder</label>
-                 <BntWrap>
-                 <button className='text-primary bg-info' >Yes</button> <button className='text-muted' >No</button>
-                 </BntWrap>
+
+                    <div className="d-flex" >
+                    <Tag name='Yes' color='#0000ff' bg='#00a0ff'  />
+                    <Tag name='No' color='#434343' bg='#201395' className='mx-2' />
+                    </div>
+  
                     <div className='sold' >
-                    <input type='file' onChange={onChangeImage} id='add' hidden />
-                    <label className='' style={{background:'#B7DAE7', width:'46%', padding:'0.7rem', borderRadius:'12px'}} for='add' > <PlusOutlined />  Add Co-founder</label>
+
+                    <Tag name='+ Add Co-founder' color='#646464' bg='#00a0ff' padding="8px 14px"  />
                     </div>
              </div>
      
@@ -320,15 +322,17 @@ for (let i = 0; i < skill.length; i++) {
      
              </FormWrapper>
 
-        <div className='d-flex justify-content-between' >
-            <div className='' >
-        <CustomButton  onClick={back}  background='#B4B4B4' >Back</CustomButton>
-    </div>
-    <div  >
-    <CustomButton  background='#00ADEF' > Save </CustomButton>
-        <CustomButton onClick={next} style={{marginLeft:'0.5rem', marginRight:'7rem'}} background='#031298' > Next </CustomButton>
-    </div>
-            </div>
+             <div className='row ' >
+                    <div className='col-3' >
+            <CustomButton className='' background='#D0D0D1'  onClick={back} >Back</CustomButton>
+
+                </div>
+               <div className='col-9 d-flex justify-content-lg-end'>
+                                <CustomButton className='mx-4'  background='#00ADEF' >Save</CustomButton>
+                                <CustomButton onClick={next}   style={{marginLeft:'0.5rem', marginRight:'7rem'}}  background='#2E3192' >Next</CustomButton>
+                            
+                        </div>
+                        </div>
        </form>
 
         </>

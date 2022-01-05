@@ -24,11 +24,13 @@ p {
     
 }
 
-h6 {
-    width:100%;
+
+
+span {
+   
     color:#122198;
     font-size:0.8em;
-    margin-left:78%;
+
     
 }
 
@@ -74,6 +76,9 @@ p {
     }
 }
 
+@media (max-width:768px){
+    width:100%;
+}
 
 `
 
@@ -124,5 +129,8 @@ p {
     }
 }
 
+@media (max-width:768px){
+    width:100%;
+}
 
 `

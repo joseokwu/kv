@@ -48,6 +48,10 @@ button {
     color:#fff;
     border:none;
     padding:0.5rem;
+
+    @media (max-width: 768px){
+        padding:0 0.19rem; 
+    }
 }
 
 }

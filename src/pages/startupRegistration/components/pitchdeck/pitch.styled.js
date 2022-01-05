@@ -60,7 +60,7 @@ export const InputWrapper = styled.label`
 `
 
 export const FormWrapper = styled.div`
-width:90%;
+width:100%;
 height: ${(props) => props.height ? props.height : '80%'} ;
 padding:2rem;
 order:2;
@@ -189,6 +189,11 @@ border: 1.5px dashed #E6E7E9;
 box-sizing: border-box;
 border-radius: 6px;
 
+@media ( max-width: 768px){
+
+    width:100%;
+}
+
 `
 export const FileText = styled.p`
 
@@ -239,23 +244,22 @@ margin-top:5px;
 export const VideoWrapper = styled.div`
 
 padding: 3rem;
-width: 87%;
-height: 100%;
-background: #F9F9FC;
+width: 78%;
 
+background: #F9F9FC;
+margin-top:10px;
 box-sizing: border-box;
 border-radius: 6px;
 
-   
+
 
  .div{
-
-width: 30%;
+width: 70%;
+padding:15px;
 background: #F9F9FC;
 border: 1px solid #E6E7E9;
-border-radius: 8px;
-
-
+border-bottom:0;
+border-radius:8px 8px 0 0;
 
 
 img {
@@ -263,23 +267,38 @@ img {
  margin-top:16px;
 }
 
-#div {
+@media ( max-width: 768px){
 
-margin-top:39px;
-width: 100%;
+width:100%;
+}
 
+
+
+    }
+
+    #div {
+
+width: 70%;
 background:#fff;
 border-radius:0 0 8px 8px;
-
+margin-left:15px;
+margin-top:-0.64rem;
     .p {
        
        margin-left:30%; 
     
     }
 
+    @media ( max-width: 768px){
+    width:100%;
+}
+
 
     }
 
-    }
+    @media ( max-width: 768px){
+
+width:100%;
+}
 
 `

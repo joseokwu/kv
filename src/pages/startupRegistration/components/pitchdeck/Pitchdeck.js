@@ -71,32 +71,37 @@ const back  = () =>{
                 <div className='form-group col-12'>
                         <VideoWrapper>
                         <label> Pitch deck uploaded</label>
-                            <div style={{display:'flex'}} >
-                            <div className='div'  >
-                               <img src={RedFile} alt='.#'  />
-                                <div id='div' className='' >
-                                <div className='d-flex' style={{marginLeft:'-1.2rem'}} >
-                                <img src={BlueFile} alt='.#' style={{marginLeft:'2rem',  width:'10%', height:'10%'}} className=''  />
-                                <p className='' style={{marginLeft:'0.2rem', fontSize:'0.9rem'}} >Product Demo</p>
-                                
-                                </div>
-                                <p className='my-n2 p' >2.5 mb</p>
-                                
-                                </div>
-                 </div>
-                            <div className='div'>
+                            <div className='row' >
+                            <div className=' col-lg-6 col-12'>
+                            <div className='div p-5'>
 
-                               <img src={RedFile} alt='.#'  />
-                                <div id='div' className='' >
-                                <div className='d-flex' style={{marginLeft:'-1.2rem'}} >
-                                <img src={BlueFile} alt='.#' style={{marginLeft:'2rem',  width:'10%', height:'10%'}} className=''  />
+                               <img src={RedFile} alt='.#'  />       
+                 </div>
+                  <div id='div' className='p-2' >
+                                <div className='d-flex mt-n2'>
+                                <img src={BlueFile} alt='.#' style={{ width:'10%', height:'10%'}} className='mt-3'  />
                                 <p className='' style={{marginLeft:'0.2rem', fontSize:'0.9rem'}} >Product Demo</p>
                                 
                                 </div>
                                 <p className='my-n2 p' >2.5 mb</p>
                                 
                                 </div>
+                                </div>
+                    <div className=' col-lg-6 col-12'>
+                            <div className='div p-5'>
+
+                               <img src={RedFile} alt='.#'  />       
                  </div>
+                  <div id='div' className='p-2' >
+                                <div className='d-flex mt-n2'>
+                                <img src={BlueFile} alt='.#' style={{ width:'10%', height:'10%'}} className='mt-3'  />
+                                <p className='' style={{marginLeft:'0.2rem', fontSize:'0.9rem'}} >Product Demo</p>
+                                
+                                </div>
+                                <p className='my-n2 p' >2.5 mb</p>
+                                
+                                </div>
+                                </div>
                             </div>
                         </VideoWrapper>
                     </div>
@@ -108,13 +113,13 @@ const back  = () =>{
 
                 
                 </FormWrapper>
-                <div className='d-flex justify-content-between' >
-                    <div >
-            <CustomButton background='#D0D0D1'  onClick={back} >Back</CustomButton>
+                <div className='row ' >
+                    <div className='col-3' >
+            <CustomButton className='' background='#D0D0D1'  onClick={back} >Back</CustomButton>
 
                 </div>
-               <div>
-                                <CustomButton background='#00ADEF' >Save</CustomButton>
+               <div className='col-9 d-flex justify-content-lg-end'>
+                                <CustomButton className='mx-4'  background='#00ADEF' >Save</CustomButton>
                                 <CustomButton onClick={next}   style={{marginLeft:'0.5rem', marginRight:'7rem'}}  background='#2E3192' >Next</CustomButton>
                             
                         </div>

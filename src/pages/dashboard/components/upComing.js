@@ -11,22 +11,22 @@ export const UpComing = ()=>{
     return (
         <>
 
-<HeadWrapper className='d-flex ' > 
+<HeadWrapper className='d-flex justify-content-between' > 
         <p  className='text-secondary text-nowrap' >Upcoming Events</p>
-        <h6  >See all</h6>
+        <span className='text-nowrap' >See all</span>
      </HeadWrapper>
 
      <div className='row' >
      {
                 todoArr.map(i =>(
-                    <UpcomingCard key={i} className='col-4 mx-3' >
+                    <UpcomingCard key={i} className='col-lg-4 col-12 col-md-6 mx-3' >
          <div className='d-flex justify-content-between head' >
             <h6>Assignment</h6>
             <CustomThreeDots />
          </div>
 
          <div className='d-flex justify-content-between my-5 date' >
-            <h6>05 | September</h6>
+            <span>05 | September</span>
             <Tag name='Today' color='#120398' bg='#DEF6FF' fz='14px' />
          </div>
 

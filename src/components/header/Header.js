@@ -8,8 +8,10 @@ import sampleUser from "../../assets/images/sampleUser.png";
 import { useHistory } from "react-router";
 import { Notification } from "../index";
 
-export const Header = ({ setOpen, open }) => {
+export const Header = () => {
   const { push } = useHistory();
+
+  const [open, setOpen] = useState(false);
 
   const [openNotice, setOpenNotice] = useState(false);
   return (

@@ -1,9 +1,13 @@
+
+/* @import '../node_modules/@syncfusion/ej2/material.css'; */
+
+
 body {
   margin: 0;
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f9fafa;
+  
 }
 
 ::-webkit-scrollbar {

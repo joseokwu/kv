@@ -14,19 +14,19 @@ export const FundUtilization = () =>{
     return (
         <>
     <BodyWrapper>
-    <span className='span' > Fund Utilization </span>
-                <p>  A document containing all your financial plan and statements for your business.  </p>
-                <hr />
+    <span className='span mx-n5 mx-lg-n0' > Fund Utilization </span>
+                <p className='mx-n5 mx-lg-n0' >  A document containing all your financial plan and statements for your business.  </p>
+                <hr className='mx-n5 mx-lg-n0' />
 
         <div className=' my-5' >
 
-        <div>
-            <DownloadableButton href='.' > 
+        <div className='' >
+            <DownloadableButton href='.' className='mx-n5 mx-lg-n0' > 
             <CloudUploadOutlined className='mx-2' /> Download fund utilization template here
              </DownloadableButton>
         </div>
         <div className='my-5' >
-    <FileWrapper className='d-flex justify-content-center text-center'  >
+    <FileWrapper className='d-flex justify-content-center text-center mx-n5 mx-lg-n0'  >
     <img src={DownloadIcon} alt='#' />
                      <FileText>Drag & Drop</FileText>
                      <FileText  >Drag files or click here to upload </FileText>
@@ -38,7 +38,7 @@ export const FundUtilization = () =>{
         </div>
 
         <div className='my-5' >
-            <VideoWrapper>
+            <VideoWrapper className='mx-n5 mx-lg-n0' >
             <label> Financial plan uploaded</label>
             <div className='div'  >
                                <img src={RedFile} alt='.#'  />

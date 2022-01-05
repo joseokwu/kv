@@ -166,7 +166,7 @@ const formik = useFormik({
                     onChange={value => formik.setFieldValue('stage', value.value)}
                      className='cust' />
                 </div>
-
+    
                 <div className='form-group col-12'>
                     <label>Enter the name of Accelerator /incubator in case you've worked with any </label>
                     <input type='text' name='acceleratornames' 

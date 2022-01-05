@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BodyWrapper, BntWrap, BoxBorder } from './fundAsk.styled';
 import { CustomSelect } from "../../../../../../components/select/customSelect";
 import {  PlusOutlined } from '@ant-design/icons'
+import {Tag} from '../../../../../../components/tag/Tag';
 
 export const FundAsk = () =>{
 
@@ -14,7 +15,7 @@ export const FundAsk = () =>{
         return (
 
             <>
-            <BodyWrapper className='container' >
+            <BodyWrapper className='' >
                 <span className='span' > Fund Ask </span>
                 <p>A brief description of funding ask</p>
                 <hr />
@@ -30,7 +31,7 @@ export const FundAsk = () =>{
                     <CustomSelect options={optionsNumb} 
                      className='cust' />
                     </div>
-                    <div className='form-group my-2 col-6' >
+                    <div className='form-group my-2 col-lg-6 col-12' >
                     <label >Select your round?*</label>
                     <CustomSelect options={optionsNumb} 
                      className='cust ' />
@@ -57,10 +58,9 @@ export const FundAsk = () =>{
                  <button className='text-primary bg-info' >Yes</button> <button className='text-muted' >No</button>
                  </BntWrap>
                     </div>
-                    <BoxBorder className='form-group my-3 col-12' >
-                    <input type='file'  id='add' hidden />
-                    <label className='' style={{background:'#B7DAE7', width:'46%', padding:'0.7rem', borderRadius:'12px'}} for='add' > <PlusOutlined />  Add Lead Investor</label>
-                    </BoxBorder>
+                    <div className='sold my-3 ' >
+                    <Tag name='+ Add Co-founder' color='#646464' bg='#00a0ff' padding="9px 10px"  />
+                    </div>
                     <div className='form-group col-12' >
                     <label > Mention any specific terms for this round If you have term sheet 500 words at most </label>
                     <textarea cols='5' rows='6' className='form-control' placeholder='Enter Terms for round' ></textarea>
