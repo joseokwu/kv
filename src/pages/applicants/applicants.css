@@ -31,25 +31,32 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 4%;
+  column-gap: 3%;
   row-gap: 8px;
   flex-basis: 70%;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .applicant-tabs-list li {
   font-family: DM Sans;
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.01em;
   color: #828282;
-  padding: 0 6px;
   padding-bottom: 8px;
+  /* padding: 0 6px; */
   cursor: pointer;
   text-transform: capitalize;
+}
+
+.applicant-tabs-list li:hover {
+  color: #0a6cf4;
+}
+
+.applicant-tabs-list li:active {
+  color: #0a6cf4;
 }
 
 .active-tab {

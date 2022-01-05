@@ -25,6 +25,7 @@ import {
   Program,
   FundingRaising
 } from "../pages";
+import { StartupTodoList } from "../pages/todoList/todoList";
 
 const routes = [
   {
@@ -133,6 +134,13 @@ const routes = [
     name: "Program",
     path: "/program",
     component: WithDashboardLayout(Program),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "TodoList",
+    path: "/todolist",
+    component: WithDashboardLayout(StartupTodoList),
     exact: true,
     protected: false,
   },

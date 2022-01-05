@@ -16,7 +16,7 @@ export * from "./authSide/AuthSide";
 export * from "./modal/Modal";
 export * from "./notification/Notification";
 export * from "./noticeItem/NoticeItem";
-export * from "./tabs/Tabs";
+export * from './tabs/Tabs';
 export * from "./rowOptions/RowOption";
 export * from "./dashCard/DashCard";
 export * from "./eventCard/EventCard";

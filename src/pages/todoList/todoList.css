@@ -1,0 +1,195 @@
+.todo_header h3 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.event_people {
+  display: flex;
+  align-items: flex-end;
+  border-right: 0.8px solid #c0c1d4;
+}
+
+.event_people img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+}
+
+.event_people img:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5);
+  z-index: 999;
+}
+
+.event_people img:nth-child(2) {
+  position: relative;
+  left: -9px;
+}
+
+.event_people img:nth-child(3) {
+  position: relative;
+  left: -16px;
+}
+
+.todo_light_btn {
+  border: 1px solid #2e3192;
+  border-radius: 10px;
+  padding: 6px 30px;
+  background: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2e3192;
+}
+
+.todo_light_btn:hover {
+  color: #ffffff;
+  background: #2e3192;
+}
+
+.todo_dark_btn {
+  border: none;
+  border-radius: 10px;
+  padding: 6px 30px;
+  background: #2e3192;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+}
+
+.todo_dark_btn:hover {
+  color: #2e3192;
+  background: none;
+  border: 1px solid #2e3192;
+}
+
+.todo_assignment h4 {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 140%;
+  color: rgba(189, 189, 198, 0.9);
+}
+
+.todo_assignment button {
+  background: #def6ff;
+  border-radius: 5px;
+  padding: 9px 25px;
+  border: none;
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  color: #525151;
+}
+
+.todo_add_member span {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #878181;
+}
+
+.add_member_btn button {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  background: #2e3192;
+  border-radius: 5px;
+  border: none;
+  padding: 9px 20px;
+}
+
+.add_new_task button {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 140%;
+  color: #ffffff;
+  background: #717177;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 25px;
+}
+
+.todo_add_new_date a {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration-line: underline;
+  color: #2e3192;
+}
+
+.todo_btn button {
+  background: #2e3192;
+  border-radius: 5px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+.todo_btn button:hover {
+  background: none;
+  border: #2e3192;
+  color: #2e3192;
+}
+
+.assignment_modal_header h4 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.assignment_modal_description h3 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.assignment_modal_description p {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.assignment_modal_remark p {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #525151;
+}
+
+.assignment_complete_btn button {
+  background: #717177;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  padding: 10px 25px;
+}
