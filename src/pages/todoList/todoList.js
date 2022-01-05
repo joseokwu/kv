@@ -25,13 +25,13 @@ const [openModal, setOpenModal] = useState(false);
         return <Assignment />
 
       case '#Task':
-        return <div>Task</div>
+        return <Assignment />
 
       case '#Completed':
         return <Completed />
 
       default:
-        return <div></div>
+        return <Assignment />
     }
   }
 

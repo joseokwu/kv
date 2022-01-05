@@ -25,7 +25,7 @@ export const Header = () => {
           <span></span>
           <span></span>
         </div>
-        <a href="/dashboard">
+        <a href="/">
           <img src={logo} alt="logo" />
         </a>
       </section>

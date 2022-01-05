@@ -30,14 +30,14 @@ import { StartupTodoList } from "../pages/todoList/todoList";
 const routes = [
   {
     name: "Signin",
-    path: "/",
+    path: "/signin",
     exact: true,
     component: SignIn,
     protected: false,
   },
   {
     name: "Dashboard",
-    path: "/dashboard",
+    path: "/",
     component: WithDashboardLayout(Dashboard),
     exact: true,
     protected: false,
