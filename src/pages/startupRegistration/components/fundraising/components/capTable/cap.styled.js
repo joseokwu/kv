@@ -31,6 +31,9 @@ hr {
     margin-top:15px;
     margin-bottom:5px;
     background:#808080;
+    @media (max-width:768px){
+        width:130%;
+    }
 }
 
 label {
@@ -48,6 +51,10 @@ input {
     width:75%;
     margin-left:8px;
     margin-bottom:15px;
+
+    @media (max-width:768px){
+        width:100%;
+    }
 }
 
 textarea {
@@ -55,6 +62,10 @@ textarea {
     background:#f4f4f4;
     width:70%;
     margin-left:8px;
+
+    @media (max-width:768px){
+        width:100%;
+    }
 
 }
 .cust {
@@ -102,6 +113,11 @@ color:#100298;
 font-size:1rem;
 padding:0.6rem;
 border-radius:20px;
+
+@media (max-width:768px){
+    width:125%;
+}
+
 `
 export const FileWrapper = styled.div`
 
@@ -117,6 +133,10 @@ margin:10px;
 border: 1.5px dashed #E6E7E9;
 box-sizing: border-box;
 border-radius: 6px;
+
+@media (max-width:768px){
+    width:130%;
+}
 
 `
 export const FileText = styled.p`
@@ -173,7 +193,9 @@ background: #F9F9FC;
 box-sizing: border-box;
 border-radius: 6px;
 
-   
+@media (max-width:768px){
+    width:130%;
+}
 
  .div{
 
@@ -182,7 +204,10 @@ background: #F9F9FC;
 border: 1px solid #E6E7E9;
 border-radius: 8px;
 
-
+@media (max-width:768px){
+    width:100%;
+    margin-left:-1.2rem;  
+}
 
 
 img {
@@ -197,6 +222,11 @@ width: 100%;
 
 background:#fff;
 border-radius:0 0 8px 8px;
+
+@media (max-width:768px){
+    width:100%;
+  
+}
 
     .p {
        

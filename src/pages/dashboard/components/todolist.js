@@ -9,14 +9,14 @@ export const TodoList = () =>{
 
     return (
         <>
-    <HeadWrapper className='d-flex ' > 
+    <HeadWrapper className='d-flex justify-content-between' > 
         <h5  className='text-nowrap' >Tolist</h5>
-        <h6 style={{marginLeft:'84%'}} >See all</h6>
+        <span className='text-nowrap spn'  >See all</span>
      </HeadWrapper>
             <div className='row' >
             {
                 todoArr.map(i =>(
-                    <TodoCard key={i} className='col-6 mx-3' >
+                    <TodoCard key={i} className='col-lg-6 col-12 mx-3' >
          <div className='d-flex justify-content-between head' >
             <h6>Assignment</h6>
             <CustomThreeDots />

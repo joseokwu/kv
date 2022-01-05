@@ -6,6 +6,26 @@ export const BodyWrapper = styled.div`
     margin-bottom:10px;
     margin-top:15px;
    width:100%;
+
+    .sold {
+        flex-direction: column;
+justify-content: center;
+align-items: center;
+padding:3rem;
+width:50%;
+
+background:#fff;
+margin:10px;
+border: 1.5px solid #E6E7E9;
+box-sizing: border-box;
+border-radius: 6px;
+
+@media (max-width:768px){
+
+    width:100%;
+}
+    }
+
     .span {
     font-family:DM Sans;
     font-weight:500;
@@ -60,6 +80,10 @@ textarea {
     background:#f4f4f4;
     width:70%;
     margin-left:8px;
+
+    @media (max-width:768px){
+        width:100%;
+    }
 
 }
 .cust {

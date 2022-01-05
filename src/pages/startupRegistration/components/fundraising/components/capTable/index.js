@@ -14,27 +14,27 @@ export const CapTable = () =>{
         <>
 
         <BodyWrapper>
-        <span className='span' > Cap Table </span>
-                <p>A document containing all your Cap Table and statements for your business.  </p>
+        <span className='span mx-n4 mx-lg-n0' > Cap Table </span>
+                <p className='mx-n4 mx-lg-n0' >A document containing all your Cap Table and statements for your business.  </p>
 
-            <hr />
+            <hr className='mx-n4 mx-lg-n0' />
 
             <div className=' row my-5'  >
-                <div className='col-6 form-group' >
+                <div className='col-lg-6 col-12 form-group mx-n4 mx-lg-n0' >
                 <label>Total fund raised till date (if any)</label>
                 <input type='text' className='form-control' placeholder='Enter Amount raised' />
                 </div>
-                <div className='col-6 form-group' >
+                <div className='col-lg-6 col-12 form-group mx-n4 mx-lg-n0' >
                 <label>Total capital raised by founders *</label>
                 <input type='text' className='form-control' placeholder='Enter Amount raised by founders' />
                 </div>
                 <div className='col-12 my-3' >
-                <DownloadableButton href='.' > 
+                <DownloadableButton href='.' className='mx-n4 mx-lg-n0' > 
             <CloudUploadOutlined className='mx-2' /> Download Capital table sample here
              </DownloadableButton>
                 </div>
                 <div className='col-12 my-5' >
-    <FileWrapper className='d-flex justify-content-center text-center'  >
+    <FileWrapper className='d-flex justify-content-center text-center mx-n4 mx-lg-n0'  >
     <img src={DownloadIcon} alt='#' />
                      <FileText>Drag & Drop</FileText>
                      <FileText  >Drag files or click here to upload </FileText>
@@ -44,8 +44,8 @@ export const CapTable = () =>{
 
         </FileWrapper>
         </div>
-        <div className='col-12 my-5' >
-            <VideoWrapper>
+        <div className='col-12 my-1' >
+            <VideoWrapper className='mx-n4 mx-lg-n0' >
             <label> Cap table uploaded</label>
             <div className='div'  >
                                <img src={RedFile} alt='.#'  />

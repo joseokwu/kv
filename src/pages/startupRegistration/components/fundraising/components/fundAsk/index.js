@@ -58,9 +58,9 @@ export const FundAsk = () =>{
                  <button className='text-primary bg-info' >Yes</button> <button className='text-muted' >No</button>
                  </BntWrap>
                     </div>
-                    <BoxBorder className=' my-3 ' >
-                    <Tag name='+ Add Co-founder' color='#646464' bg='#00a0ff' padding="8px 14px"  />
-                    </BoxBorder>
+                    <div className='sold my-3 ' >
+                    <Tag name='+ Add Co-founder' color='#646464' bg='#00a0ff' padding="9px 10px"  />
+                    </div>
                     <div className='form-group col-12' >
                     <label > Mention any specific terms for this round If you have term sheet 500 words at most </label>
                     <textarea cols='5' rows='6' className='form-control' placeholder='Enter Terms for round' ></textarea>

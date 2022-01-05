@@ -36,7 +36,7 @@ return (
     <div className='row' >
                 {
                 todoArr.map(i =>(
-                    <TodoCard key={i} className='col-6 mx-3' >
+                    <TodoCard key={i} className='col-lg-6 col-md-6 col-12 mx-3' >
          <div className='d-flex justify-content-between head' >
                     <div className='d-flex' >
                     <h6 className='mr-3' >Assignment</h6>
