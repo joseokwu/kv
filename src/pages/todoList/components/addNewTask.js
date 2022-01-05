@@ -81,11 +81,11 @@ export const AddNewTask = () => {
       </section>
 
       <section className="todo_add_new_date mt-5">
-          <a href="#!">Add date from calendar+</a>
+        <a href="#!">Add date from calendar+</a>
       </section>
 
       <section className="todo_btn">
-          <Button label="Create task"  />
+        <Button label="Create task" />
       </section>
     </div>
   )
