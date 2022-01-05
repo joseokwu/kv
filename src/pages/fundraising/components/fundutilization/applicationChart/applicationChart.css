@@ -1,0 +1,46 @@
+.appChart-main {
+  border: 1px solid #d5d6f4;
+  border-radius: 10px;
+  width: 100% !important;
+  
+  
+}
+
+.appChart-header {
+  margin-bottom: 58px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+  color: #181818;
+}
+
+.appChart-legend {
+  margin-top: 58px;
+}
+
+.appChart-label {
+  column-gap: 8px;
+  margin-bottom: 14px;
+}
+
+.label-name {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: #333333;
+  flex-basis: 40%;
+}
+
+.label-percent {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: #757575;
+}

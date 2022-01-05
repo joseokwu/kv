@@ -34,8 +34,9 @@ export const ImageWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   background:#fff;
+
+ 
 
 `
 export const InputWrapper = styled.label`
@@ -48,19 +49,25 @@ export const InputWrapper = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  top:418px;
-  left:126px;
-
+  top:400px;
+  left:134px;
+  
+ 
   input {
   width: inherit;
   height: inherit;
   opacity: 0;
     }
 
+    @media (max-width:768px){
+     top:418px;
+     left:136px;  
+    }
+
 `
 
 export const FormWrapper = styled.div`
-width:90%;
+width:100%;
 height: ${(props) => props.height ? props.height : '80%'} ;
 padding:3rem;
 order:2;
@@ -70,6 +77,9 @@ border:0 solid #D3D3D3;
 border-radius:5px;
 background:#fff;
 
+span {
+    cursor: pointer;
+  }
 
 hr {
         background:#636363;
@@ -86,7 +96,7 @@ hr {
     font-size:24px;
     line-height:30.83px;
     color:#2E3192; 
-      
+    cursor: pointer; 
 }
 
 
@@ -105,13 +115,19 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding:3rem;
-width:70%;
+width:50%;
 
 background:#fff;
 margin:10px;
 border: 1.5px solid #E6E7E9;
 box-sizing: border-box;
 border-radius: 6px;
+
+@media (max-width:768px){
+
+    width:100%;
+}
+
 }
 
 label {
@@ -126,7 +142,7 @@ label {
 input {
     border:none;
     background:#f4f4f4;
-    width:75%;
+    
     margin-left:15px;
     margin-bottom:15px;
 }
@@ -134,7 +150,7 @@ input {
 textarea {
     border:none;
     background:#f4f4f4;
-    width:70%;
+   
     margin-left:15px;
 
 }
@@ -143,21 +159,25 @@ textarea {
     background:#f4f4f4;
     width:70%;
     margin-left:15px; 
+
 }
   
     .custs {
     
     border:none;
     background:#f4f4f4;
-    width:70%;
+    width:100%;
     margin-left:15px; 
     border-radius:7px;
     outline:0;
     
-
-    
     &:focus {
         outline:0;
+    }
+
+    
+    @media (max-width:768px){
+        width:100%;  
     }
 
 

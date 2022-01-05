@@ -34,7 +34,7 @@ export const StartUpRegistration  = () =>{
 
     return (
         <>
-        <div >
+        <div className="container" >
             <WelcomeMessage>
                <h5>Hi Micheal <span style={{color:'rgb(199, 249, 15)', marginLeft:'9px'}} > &#128075;</span> </h5> 
                <p>Let's customize your experience</p>

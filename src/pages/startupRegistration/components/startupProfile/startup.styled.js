@@ -3,9 +3,7 @@ import styled from 'styled-components/macro';
 
 export const HeaderStartup = styled.div`
 
-width:224px;
 
-align-items:flex-start;
 h5 {
     font-family:DM Sans;
     font-weight:700;
@@ -60,7 +58,7 @@ export const InputWrapper = styled.label`
 `
 
 export const FormWrapper = styled.div`
-width:80%;
+width:100%;
 height: ${(props) => props.height ? props.height : '70%'} ;
 padding:2rem;
 order:2;
@@ -98,7 +96,7 @@ label {
 input {
     border:none;
     background:#f4f4f4;
-    width:95%;
+   
     margin-left:15px;
     margin-bottom:15px;
 }
@@ -106,7 +104,7 @@ input {
 textarea {
     border:none;
     background:#f4f4f4;
-    width:70%;
+  
     margin-left:15px;
 
 }

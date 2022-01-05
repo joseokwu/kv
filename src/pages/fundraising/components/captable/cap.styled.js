@@ -1,6 +1,5 @@
 import styled from 'styled-components/macro';
 
-
 export const Header = styled.div`
 
 h4 {
@@ -71,4 +70,5 @@ display: flex;
 letter-spacing: 0.01em;
 color:#182399;
 }
-` 
+`
+

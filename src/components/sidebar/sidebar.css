@@ -89,6 +89,7 @@
   background-color: white;
   color: #0060ef !important;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .active-side-start {
@@ -96,6 +97,7 @@
   background: #DCEBFF;
   color: #1c10c2 !important;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 
@@ -106,6 +108,7 @@
   font-size: 12px;
   line-height: 140%;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .side-text-start {
@@ -115,6 +118,7 @@
   line-height: 140%;
   color: #2e2c2c;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .side-header {

@@ -1,6 +1,5 @@
 import React , {useState} from "react";
 
-import { Modal } from 'react-bootstrap';
 import { BootModal, 
     CustoModal, ModalWrapper,
     CloseModal, ModalHeader,
