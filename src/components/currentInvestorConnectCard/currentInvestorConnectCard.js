@@ -11,7 +11,7 @@ export const CurrentInvestorConnectCard = () => {
           <p>Mr Promise Amstel</p>
         </span>
       </div>
-      <a href="https://www.yebox.io/">Connect</a>
+      <a href="#!">Connect</a>
     </section>
   )
 }

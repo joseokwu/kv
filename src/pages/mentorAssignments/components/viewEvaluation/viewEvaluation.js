@@ -28,7 +28,7 @@ export const ViewEvaluation = ({ history }) => {
         <section className="m-5">
           <button
             className="pending_evaluation"
-            onClick={() => push('/mentor/assignments/create/details')}
+            onClick={() => push('/assignments/create/details')}
           >
             Give Feedback
           </button>

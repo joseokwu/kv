@@ -23,7 +23,7 @@ export const Header = ({ setOpen, open }) => {
           <span></span>
           <span></span>
         </div>
-        <a href="/mentor/dashboard">
+        <a href="/">
           <img src={logo} alt="logo" />
         </a>
       </section>
@@ -45,7 +45,7 @@ export const Header = ({ setOpen, open }) => {
 
         <div
           className="d-flex align-items-center h-100"
-          onClick={() => push('/mentor/profile')}
+          onClick={() => push('/profile')}
           role="button"
         >
           <span className="d-flex align-items-center header-profile">

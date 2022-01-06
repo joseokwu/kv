@@ -89,7 +89,7 @@ export const CreateAssignment = ({ history }) => {
         </section>
       </div>
       <div className="text-right">
-        <AuthButton label="Save" onClick={() => push('/mentor/assignments/view')} />
+        <AuthButton label="Save" onClick={() => push('/assignments/view')} />
       </div>
     </div>
   )

@@ -8,7 +8,7 @@ import './dashboard.css'
 import { useHistory } from 'react-router-dom'
 
 export const Dashboard = () => {
-  const { push } = useHistory();
+  const { push } = useHistory()
 
   const cardData = [
     { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
@@ -18,15 +18,17 @@ export const Dashboard = () => {
   ]
   return (
     <div className="dashboard-main">
-      <section className="d-flex align-items-center dashboard-cards">
-        {cardData.map((data, i) => (
-          <DashCard
-            name={data.name}
-            count={data.count}
-            color={data.color}
-            key={i}
-          />
-        ))}
+      <section className="row">
+        <section className="col-lg-12 d-flex align-items-center dashboard-cards">
+          {cardData.map((data, i) => (
+            <DashCard
+              name={data.name}
+              count={data.count}
+              color={data.color}
+              key={i}
+            />
+          ))}
+        </section>
       </section>
 
       <section className="row mt-5 dash-main-content">
@@ -39,13 +41,13 @@ export const Dashboard = () => {
 
             <section className="row">
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
               </div>
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
               </div>
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
               </div>
             </section>
           </div>

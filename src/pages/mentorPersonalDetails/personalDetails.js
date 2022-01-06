@@ -24,25 +24,30 @@ export const PersonalDetails = () => {
 
   useEffect(() => {
     wrapRef.current.scrollTop = 0
-    if (hash === '#assistant_info') {
-      setProgress('100')
-    }
-    if (hash === '#consulting') {
-      setProgress('70')
-    }
-    if (hash === '#area_of_interest') {
-      setProgress('50')
-    }
-    if (hash === '#work_experience') {
-      setProgress('30')
-    }
-    if (hash === '#personal_details') {
-      setProgress('20')
+    switch (hash) {
+      case '#assistant_info':
+        setProgress('100');
+        break;
+      case '#consulting':
+        setProgress('70');
+        break;
+      case '#area_of_interest':
+        setProgress('50');
+        break;
+      case '#work_experience':
+        setProgress('30');
+        break;
+      case '#personal_details':
+        setProgress('20');
+        break;
+      default: 
+        setProgress('20');
+        break;
     }
   }, [hash])
 
   return (
-    <div className="mentor_personal_details_wrap">
+    <div className="mentor_personal_details_wrap" ref={wrapRef}>
       <section className="mentor_personal_details_header">
         <div>
           <span>

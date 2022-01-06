@@ -44,7 +44,7 @@ export const Product = () => {
           </section>
           <section className="founder_profile mt-3">
             <div className="text-center">
-              <a href="/mentor/dashboard/founder">View</a>
+              <a href="/dashboard/founder">View</a>
             </div>
           </section>
         </div>
@@ -60,7 +60,7 @@ export const Product = () => {
                 <small>Lead Investor</small>
               </span>
             </div>
-            <a href="https://www.yebox.io/">Connect</a>
+            <a href="#!">Connect</a>
           </section>
 
           {countInvestor.map((c, i) => {

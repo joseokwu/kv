@@ -143,7 +143,7 @@ export const Evaluation = ({ history }) => {
         )}
       </section>
 
-      <section className="evaluation_score ml-5 mr-5 py-4 px-5 d-flex justify-content-between">
+      {/* <section className="evaluation_score ml-5 mr-5 py-4 px-5 d-flex justify-content-between">
         <div>
           <p className="mt-2">Total Score: 100</p>
         </div>
@@ -168,7 +168,7 @@ export const Evaluation = ({ history }) => {
 
       <section className="evaluation_criteria ml-5 mt-3 pl-5 mb-5">
         <p>Scores below 100 will not be shortlisted for the next round.</p>
-      </section>
+      </section> */}
     </div>
   )
 }

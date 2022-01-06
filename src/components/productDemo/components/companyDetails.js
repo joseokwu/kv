@@ -64,7 +64,7 @@ export const CompanyDetails = () => {
         style={{ rowGap: 10 }}
       >
         <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
-          <Button label="Evaluate" onClick={() => push('/mentor/evaluation/evaluate')} />
+          <Button label="Evaluate" onClick={() => push('/evaluation/evaluate')} />
           <Button label="Schedule Call" variant="secondary" />
         </div>
 
