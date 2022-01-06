@@ -22,7 +22,7 @@ export const MentorDealRoom = ({ history }) => {
             return (
               <section className="col-xl-4 col-lg-6 mb-4">
                 <OpportunityCard
-                  onClick={() => push(`/mentor/deal_room/${i}`)}
+                  onClick={() => push(`/deal_room/${i}`)}
                 />
               </section>
             );

@@ -113,7 +113,7 @@ export const SignUp = ({ history }) => {
                 style={{ columnGap: 6 }}
               >
                 <p>Already have an account?</p>{' '}
-                <a href="/mentor/signin">Sign In</a>
+                <a href="/signin">Sign In</a>
               </section>
             </div>
           </Form>

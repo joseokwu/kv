@@ -48,7 +48,7 @@ export const VerifyOTP = ({ history }) => {
             <section>
               <AuthButton
                 label="Continue"
-                onClick={() => history.push('/mentor/reset/password')}
+                onClick={() => history.push('/reset/password')}
               />
             </section>
           </div>

@@ -2,7 +2,7 @@ import  { request } from '../utils/axios';
 
  export const register = async (values)=>{
     try{
-        const res = await request.post('/mentor/signup', values)
+        const res = await request.post('/signup', values)
         return res?.data
     }catch(err){
         const error = err?.response?.data?.message || err?.message;
@@ -12,7 +12,7 @@ import  { request } from '../utils/axios';
 
 export const userLogin = async (values) => {
     try {
-        const res = await request.post('/mentor/signin', values);
+        const res = await request.post('/signin', values);
         return res?.data;
 
     } catch (err) {

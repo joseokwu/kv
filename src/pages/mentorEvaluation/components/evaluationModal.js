@@ -39,7 +39,7 @@ export const EvaluationModal = () => {
           </p>
         </div>
 
-        <a href="/mentor/evaluation/view">View profile</a>
+        <a href="/evaluation/view">View profile</a>
         <div className="mb-4">
           <img className="pt-5" src={compitch} alt="company pitch" />
         </div>

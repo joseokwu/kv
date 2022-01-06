@@ -59,7 +59,7 @@ const FolderCard = ({ color = "#F3F3FD", name = "New Files" }) => {
         className="d-flex align-items-center flex-wrap"
         style={{ columnGap: "1.63rem", rowGap: 10 }}
         role="button"
-        onClick={() => push(`/mentor/deal_room/${id}/${name}`)}
+        onClick={() => push(`/deal_room/${id}/${name}`)}
       >
         <img src={file} alt="file" />
         <div>

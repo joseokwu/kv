@@ -7,7 +7,7 @@
 }
 
 .my_schedule_create a {
-  background: #00ADEF;
+  background: #00adef;
   border-radius: 10px;
   padding: 8px 30px;
   border: none;
@@ -21,10 +21,18 @@
 
 .my_schedule_create a:hover {
   background: none;
-  color: #00ADEF;
-  border: 1.5px solid #00ADEF;
+  color: #00adef;
+  border: 1.5px solid #00adef;
 }
 
 .my_schedule_create a:focus {
   outline: none;
+}
+
+.create_call_visibility a {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #2e3192;
+  text-decoration: underline;
 }

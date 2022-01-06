@@ -41,7 +41,7 @@ export const Assignments = () => {
         </div>
 
         <div>
-          <a className="create_assignment" href="/mentor/assignments/create">
+          <a className="create_assignment" href="/assignments/create">
             Create
           </a>
         </div>
@@ -78,7 +78,7 @@ export const Assignments = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
               lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
               adipiscing elit.
-              <a href="/mentor/assignments/create/details">More Details</a>
+              <a href="/assignments/create/details">More Details</a>
             </p>
             <button
               className="pending_evaluation mt-4"

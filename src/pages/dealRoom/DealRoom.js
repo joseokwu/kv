@@ -30,7 +30,7 @@ export const DealRoom = ({ history }) => {
       <section
         className="mb-5 d-flex align-items-center justify-content-between"
         role="button"
-        onClick={() => push("/mentor/deal_room")}
+        onClick={() => push("/deal_room")}
       >
         <h5 className="page-header d-flex align-items-center">
           <img src={back} alt="back" className="go-back-deal" />

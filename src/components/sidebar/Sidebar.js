@@ -16,54 +16,52 @@ const mentorNavigators = [
   {
     title: 'Dashboard',
     activator: 'dashboard',
-    path: '/mentor/dashboard',
+    path: '/',
     icon: dashboard,
   },
   {
     title: 'Evaluation',
     activator: 'evaluation',
-    path: '/mentor/evaluation',
+    path: '/evaluation',
     icon: evaluation,
   },
   {
     title: 'Program',
     activator: 'program',
-    path: '/mentor/program',
+    path: '/program',
     icon: program,
   },
   {
     title: 'Assignments',
     activator: 'assignments',
-    path: '/mentor/assignments',
+    path: '/assignments',
     icon: assignments,
   },
   {
     title: 'Events',
     activator: 'events',
-    path: '/mentor/events',
+    path: '/events',
     icon: events,
   },
   {
     title: 'Schedule',
     activator: 'schedule',
-    path: '/mentor/schedule',
+    path: '/schedule',
     icon: schedule,
   },
   {
     title: 'Networking',
     activator: 'networking',
-    path: '/mentor/networking',
+    path: '/networking',
     icon: network,
   },
   {
     title: 'Deal Room',
     activator: 'deal_room',
-    path: '/mentor/deal_room',
+    path: '/deal_room',
     icon: deal,
   },
-];
-
-
+]
 
 export const Sidebar = () => {
   const {
@@ -72,30 +70,27 @@ export const Sidebar = () => {
   } = useHistory()
 
   const activateLink = (path) => {
-    return pathname.includes(path) ? 'active-side' : '';
+    return pathname.includes(path) ? 'active-side' : ''
   }
 
-  const [navigator, setNavigator] = useState([]);
+  const [navigator, setNavigator] = useState([])
 
   useEffect(() => {
-    if (pathname.includes('mentor')) {
+    if (pathname.includes('')) {
       setNavigator(mentorNavigators)
     } else {
       setNavigator('')
     }
-  }, [pathname]);
+  }, [pathname])
 
   return (
-    
     <div className="side-main">
       <section className="side-navigator">
         <div>
           <img src={user} alt="profile" />
         </div>
         <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
-        <p className="mb-0 side-text">
-          {pathname.includes('mentor') ? 'mentor' : ''}
-        </p>
+        <p className="mb-0 side-text">{pathname.includes('') ? 'Mentor' : ''}</p>
 
         <ul className="side-list">
           {navigator.length > 0 &&

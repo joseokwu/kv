@@ -47,7 +47,7 @@ export const ResetPassword = ({ history }) => {
           <section>
             <AuthButton
               label="Reset"
-              onClick={() => history.push('/mentor/signin')}
+              onClick={() => history.push('/signin')}
             />
           </section>
         </div>
