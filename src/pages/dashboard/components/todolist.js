@@ -2,16 +2,18 @@ import { HeadWrapper, TodoCard } from './dash.component';
 import { CustomThreeDots } from '../../../components';
 import { images } from '../../../constants/domiData';
 import { Tag } from '../../../components';
+import { useHistory } from 'react-router-dom';
 
 export const TodoList = () =>{
 
     const todoArr = [1, 2];
+    const history = useHistory()
 
     return (
-        <>
+        <div className='container' >
     <HeadWrapper className='d-flex justify-content-between' > 
         <h5  className='text-nowrap' >Tolist</h5>
-        <span className='text-nowrap spn'  >See all</span>
+        <span className='text-nowrap spn ' onClick={()=> history.push('/todolist')}  >See all</span>
      </HeadWrapper>
             <div className='row' >
             {
@@ -26,11 +28,6 @@ export const TodoList = () =>{
             <h6>05 | September</h6>
             <Tag name='Today' color='#210198' bg='#DEF6FF' />
          </div>
-
-            <div className="d-flex justify-content-between my-5 date">
-              <h6>05 | September</h6>
-              <Tag name="Today" color="#210198" bg="#DEF6FF" />
-            </div>
 
             <div className="my-5">
               <p>
@@ -52,6 +49,6 @@ export const TodoList = () =>{
           </TodoCard>
         ))}
       </div>
-    </>
+    </div>
   )
 }

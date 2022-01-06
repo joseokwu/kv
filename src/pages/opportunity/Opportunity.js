@@ -8,15 +8,18 @@ import { FundingRound } from "./components/FundingRound";
 import { Product } from "./components/product/Product";
 import { PitchDeck } from "./components/pitchDeck/PitchDeck";
 import { Team } from "./components/team/Team";
+import { BusinessCanavas } from "./components/businessCanvas";
+
+
 
 export const Opportunity = ({ history }) => {
   const {
     location: { hash },
   } = history;
   const tabItems = [
-    "product",
     "pitch deck",
     "team",
+    "product",
     "business canvas",
     "fundraising",
     "Milestone/Timeline",
@@ -29,6 +32,8 @@ export const Opportunity = ({ history }) => {
         return <Product />;
       case "#pitch deck":
         return <PitchDeck />;
+        case "#business canvas":
+        return <BusinessCanavas />;
       case "#team":
         return <Team />;
 
@@ -42,11 +47,11 @@ export const Opportunity = ({ history }) => {
 
 
         <div className="row mt-5">
-          <div className="col-lg-7">
+          <div className="col-lg-7 col-12">
             <OppCompanyInfo />
             <FinancialDetails />
           </div>
-          <div className="col-lg-5">
+          <div className="col-lg-5 col-12 ">
             <FundingRound />
           </div>
         </div>

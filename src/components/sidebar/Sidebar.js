@@ -94,7 +94,7 @@ export const Sidebar = () => {
             })}
         </ul>
       </section>
-      <section className="side-footer" onClick={() => push("/support")}>
+      <section className="side-footer mt-5" onClick={() => push("/support")}>
         <img src={helpDesk} alt="help" />
         <p className="mb-0 side-text" role="button">
           Need help? Contact us
