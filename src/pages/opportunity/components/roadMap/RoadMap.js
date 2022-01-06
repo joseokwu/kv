@@ -93,8 +93,6 @@ export const RoadMap = () => {
                 </span>
                 <Button label="Completed" className="transparent-btn" />
               </div>
-
-              <Button label="Add new goal" />
             </section>
 
             <section>
