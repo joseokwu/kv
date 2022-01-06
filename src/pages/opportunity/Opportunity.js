@@ -9,6 +9,7 @@ import { Product } from "./components/product/Product";
 import { PitchDeck } from "./components/pitchDeck/PitchDeck";
 import { Team } from "./components/team/Team";
 import { BusinessCanavas } from "./components/businessCanvas";
+import { RoadMap } from "./components/roadMap/RoadMap";
 
 
 
@@ -34,6 +35,8 @@ export const Opportunity = ({ history }) => {
         return <PitchDeck />;
         case "#business canvas":
         return <BusinessCanavas />;
+      case "#Product Road Map":
+        return <RoadMap />;
       case "#team":
         return <Team />;
 
