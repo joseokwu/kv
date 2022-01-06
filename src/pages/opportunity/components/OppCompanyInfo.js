@@ -15,63 +15,22 @@ export const OppCompanyInfo = () => {
         className="d-flex align-items-center justify-content-between flex-wrap"
         style={{ rowGap: 10 }}
       >
+      
+
+  
+      </div>
+     
+      <section
+        className="mt-4 d-flex  justify-content-between flex-wrap"
+        style={{ rowGap: 10 }}
+      >
         <div>
           <img src={logo} alt="logo" className="mb-3" />
           <h3 className="opp-page-card-title">Yebox Tech.</h3>
         </div>
 
-        <div className="d-flex align-items-end flex-column">
-          <section className="d-flex align-items-center mb-3">
-            <p className="opp-tag-label">Industry</p>
-            <span className="opp-tag">Tech</span>
-          </section>
-
-          <section className="d-flex align-items-center">
-            <p className="opp-tag-label">Stage</p>
-            <span className="opp-tag">Proof of concept</span>
-          </section>
-        </div>
-      </div>
-      <section
-        className="d-flex align-items-center justify-content-between mt-4 border-bottom pb-4 flex-wrap"
-        style={{ rowGap: 10 }}
-      >
         <div className="d-flex align-items-center">
-          <img src={web} alt="web" />
-          <a
-            href="https://www.applaneinsteen.com"
-            className="ml-2 extra-info"
-            style={{ textDecoration: "underline", color: "#2E3192" }}
-          >
-            www.applaneinsteen.com
-          </a>
-        </div>
-        <div className="d-flex align-items-center">
-          <img src={clock} alt="web" width="20" height="20" />
-          <p className="ml-2 extra-info">Incorporated 2/09/19</p>
-        </div>
-
-        <div className="d-flex align-items-center">
-          <img src={office} alt="web" />
-          <p className="ml-2 extra-info">Lagos, Nigeria</p>
-        </div>
-      </section>
-
-      <section
-        className="mt-4 d-flex align-items-center justify-content-between flex-wrap"
-        style={{ rowGap: 10 }}
-      >
-        <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
-          <Button label="Commit" />
-          <Button label="Interested" variant="secondary" />
-        </div>
-
-        <div className="d-flex align-items-center">
-          <span className="d-flex align-items-center mr-3">
-            <img src={share} alt="share" className="mr-2" />
-            <p className="share-link">Share</p>
-          </span>
-
+    
           <span>
             <img src={linkedIn} alt="linkedIn" width="24" height="24" />
             <img
@@ -84,6 +43,12 @@ export const OppCompanyInfo = () => {
             <img src={whatsApp} alt="whatsapp" />
           </span>
         </div>
+      </section>
+      <section className="mt-3" >
+        <h6 className="mb-3" >Tech Industry</h6>
+        <p className="">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et amet, facilisi sodales cursus tellus nam ut. Enim, at imperdiet praesent velit. Eget consequat, sollicitudin molestie curabitur lobortis imperdiet. Vulputate malesuada tortor sit mi laoreet. Iaculis quis pretium urna.
+        </p>
       </section>
     </section>
   );

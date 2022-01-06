@@ -112,7 +112,7 @@ const routes = [
   {
     name: "ContactUs",
     path: "/support",
-    component: WithMainLayout(ContactUs),
+    component: WithDashboardLayout(ContactUs),
     exact: true,
     protected: false,
   },

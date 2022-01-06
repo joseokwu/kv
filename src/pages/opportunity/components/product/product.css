@@ -1,6 +1,26 @@
+
+.header {
+  color:#020498;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.headBtn {
+  padding:5px 11px;
+  color:#fff;
+  border-radius: 8px;
+  background: #14157e;
+}
+
 .product-wrap {
   background-color: white;
   padding: 1.5rem 1.75rem;
+}
+
+.wrap {
+  background: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px 15px;
 }
 
 .product-wrap h3 {

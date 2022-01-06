@@ -5,7 +5,7 @@ import clock from "../../../assets/icons/clock.svg";
 export const FundingRound = () => {
   return (
     <div className="">
-    <FundRounding className='my-3' >
+    <FundRounding className='' >
       <h6>Startup Details</h6>
 
     <div className='d-flex mb-3' >

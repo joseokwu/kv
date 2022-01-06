@@ -5,7 +5,7 @@ export const HeadWrapper = styled.div`
 
 color:#122198;
 
-width:100%;
+width:95%;
 padding:7px;
 border-radius:7px;
 
@@ -14,6 +14,7 @@ h5 {
     font-size:1.2em;
     color:#122198;
     font-weight:500;
+    cursor: pointer;
   
     
 }
@@ -30,9 +31,19 @@ span {
    
     color:#122198;
     font-size:0.8em;
+    cursor: pointer;
+   
 
+
+    @media(max-width:768px){
+        margin-left:0;
+    }
     
 }
+
+@media(max-width:768px){
+        width:100%;
+    }
 
 `
 export const TodoCard = styled.div`
@@ -47,12 +58,14 @@ box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
     h6 {
         font-size:1em;
         font-weight:600;
+        cursor: pointer;
     }
 }
 
 .date {
     h6 {
         color:#100298;
+        cursor: pointer;
     }
 
     button {

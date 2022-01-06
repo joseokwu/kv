@@ -13,20 +13,10 @@ export const DashSidebar = () => {
   } = useHistory();
 
   const activateLink = (path) => {
-    return pathname.includes(path) ? "active-side" : "";
+    return pathname.includes(path) ? "active-side" : "" ;
   };
 
-  const [navigator, setNavigator] = useState([]);
 
-  useEffect(() => {
-    if (pathname.includes("investor")) {
-      setNavigator(investorNavigators);
-    } else {
-      setNavigator(boosterNavigators);
-    }
-  }, [pathname]);
-
-  console.log(`navigator`, navigator);
 
   return (
     <div className="side-main">
@@ -36,7 +26,7 @@ export const DashSidebar = () => {
         </div>
         <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
         <p className="mb-0 side-text">
-          {pathname.includes("investor") ? "Investor" : "Partner"}
+          Startup
         </p>
 
         <ul className="side-list">
@@ -55,7 +45,7 @@ export const DashSidebar = () => {
             })}
         </ul>
       </section>
-      <section className="side-footer" onClick={() => push("/support")}>
+      <section className="side-footer my-5" onClick={() => push("/support")}>
         <img src={helpDesk} alt="help" />
         <p className="mb-0 side-text" role="button">
           Need help? Contact us
