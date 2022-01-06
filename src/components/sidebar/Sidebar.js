@@ -34,7 +34,7 @@ const boosterNavigators = [
   {
     title: "Dashboard",
     activator: "dashboard",
-    path: "/",
+    path: "/dashboard",
     icon: dashboard,
   },
   {
