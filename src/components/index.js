@@ -28,3 +28,5 @@ export * from "./lastChat/LastChat";
 export * from "./connectCard/ConnectCard";
 export * from "./groupCard/GroupCard";
 export * from "./deckCard/DeckCard";
+export * from "./milestoneList/MilestoneList";
+export * from "./milestoneCard/MilestoneCard";
