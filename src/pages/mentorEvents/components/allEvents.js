@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import dots from '../../../assets/icons/3dots.svg'
 import bigClock from '../../../assets/icons/bigclock.svg'
 import demo from '../../../assets/images/vidDemo.svg'
@@ -9,8 +9,13 @@ import pen from '../../../assets/icons/pen.svg'
 import down from '../../../assets/icons/downArrow.svg'
 import location from '../../../assets/icons/locationSm.svg'
 import name from '../../../assets/icons/initial.svg'
+import { useActivity } from '../../../hooks/useBusiness'
+
 
 export const AllEvents = () => {
+
+
+
   return (
     <div className="row">
       <Modal id="eventScheduleModal" withHeader={false}>
@@ -45,9 +50,9 @@ export const AllEvents = () => {
         </section>
 
         <section className="d-flex align-items-center justify-content-between mt-3 event_card_footer">
-          <a data-toggle="modal" data-target="#eventScheduleModal" href="#!">
+          <span data-toggle={'modal'} data-target="#eventScheduleModal" className='a'>
             Add to schedule
-          </a>
+          </span>
 
           <section className="event_people">
             <img src={doc} alt="doc" />
@@ -129,6 +134,8 @@ export const AllEvents = () => {
 }
 
 const EventScheduleModal = () => {
+
+
   return (
     <div className="px-4 pb-5">
       <section className="pt-2">
@@ -137,6 +144,7 @@ const EventScheduleModal = () => {
           class="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
+         
         >
           {/* <img className="pr-2" src={pen} alt="edit" />
           <img className="pr-2" src={trash} alt="trash" /> */}

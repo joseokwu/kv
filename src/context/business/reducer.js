@@ -4,6 +4,9 @@ export const TRANSACTIONS = 'Tranctions';
 export const DATA_BANK = 'Data Bank';
 export const CHART_SUPPORT = 'Chat Support';
 export const SETTINGS = 'Settings';
+export const SHOW_EVENT = 'Show_Event';
+
+
 
 
 
@@ -40,6 +43,13 @@ export const businessReducers = (state, action) => {
                     ...state,
                     showPage: action.payload
             }
+
+            case SHOW_EVENT :
+                return {
+                    ...state,
+                    showEvent:!state.showEvent
+                }
+
         default:
             return state;
 

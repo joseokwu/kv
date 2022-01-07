@@ -107,7 +107,7 @@
   color: #858585;
 }
 
-.opp_card a {
+.opp_card .span {
   background: #2e3192;
   border-radius: 10px;
   padding: 8px 30px;
@@ -118,6 +118,7 @@
   line-height: 140%;
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .opp_card a:hover {

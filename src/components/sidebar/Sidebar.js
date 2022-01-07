@@ -86,7 +86,9 @@ export const Sidebar = () => {
   return (
     <div className="side-main">
       <section className="side-navigator">
-        <div>
+        <div 
+        onClick={() => push('/profile')}
+         >
           <img src={user} alt="profile" />
         </div>
         <h5 className="mb-0 side-header">Hello Micheal Smith</h5>

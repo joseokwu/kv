@@ -11,7 +11,8 @@ import React, {
 import {
   DASHBOARD, WALLET,
   TRANSACTIONS, DATA_BANK,
-  CHART_SUPPORT, SETTINGS
+  CHART_SUPPORT, SETTINGS,
+  SHOW_EVENT
 } from './reducer';
 
 import { businessReducers } from './reducer';
@@ -27,18 +28,27 @@ export const BusinessProvider = withRouter(({ children, history }) => {
       success:false, 
       message:null,
        autoClose:false,
-        action:false}
+        action:false},
+        showEvent:false
   })
 
   const setAlert = ()=>{
 
   }
 
+  const showEventAction = ()=>{
+
+    dispatch({
+      type:SHOW_EVENT,
+    })
+  }
+
 
   return (
     <BusinessContext.Provider value={{
       state,
-      setAlert
+      setAlert,
+      showEventAction
     }}>
       {children}
     </BusinessContext.Provider>

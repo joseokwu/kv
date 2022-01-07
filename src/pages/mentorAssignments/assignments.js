@@ -40,7 +40,7 @@ export const Assignments = () => {
           </button>
         </div>
 
-        <div>
+        <div className='mt-3' >
           <a className="create_assignment" href="/assignments/create">
             Create
           </a>
@@ -48,8 +48,8 @@ export const Assignments = () => {
       </section>
 
       <section className="row mt-5 mr-4 ml-2">
-        <div className="d-flex assignment_card" style={{ columnGap: 30 }}>
-          <div className="col-lg-6 opp-card ">
+        <div className=" assignment_card" style={{ columnGap: 30 }}>
+          <div className="col-lg-6 opp-card col-12 ">
             <h3>Create a business plan</h3>
             <p className="pt-2 pb-4 border-bottom">
               Attachments - <a href="#!">businessplan.pdf</a>
@@ -68,7 +68,7 @@ export const Assignments = () => {
               View Evaluation
             </button>
           </div>
-          <div className="col-lg-6 opp-card ">
+          <div className="col-lg-6  opp-card  col-12">
             <h3>Create a business plan</h3>
             <p className="pt-2 pb-4 border-bottom">
               Attachments - <a href="#!">businessplan.pdf</a>
