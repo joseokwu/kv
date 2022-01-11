@@ -1,0 +1,58 @@
+<div className="row">
+            <div 
+              onClick={() => switchForm('#market_attractiveness')}
+              className={
+                (hash === '#market_attractiveness' || hash === '') &&
+                'li-active col-sm-3 mx-lg-2 '
+              }
+            >
+              Market Attractiveness
+            </div>
+
+            <div
+              onClick={() => switchForm('#product_feasibility')}
+              className={
+                (hash === '#product_feasibility') && 'li-active mx-lg-2 col-sm-3 '
+              }
+            >
+              Product Feasibility
+            </div>
+
+            <div
+              onClick={() => switchForm('#product_advantage')}
+              className={
+                (hash === '#product_advantage') && 'li-active mx-lg-2 col-sm-3 '
+              }
+            >
+              Product Advantage
+            </div>
+
+            <li
+              onClick={() => switchForm('#team_competence')}
+              className={
+                (hash === '#team_competence') && 'li-active mx-lg-2 col-lg-2 col-9'
+              }
+            >
+              Team Competence
+            </li>
+
+            <li
+              onClick={() => switchForm('#expected_return')}
+              className={
+                (hash === '#expected_return') && 'li-active mx-lg-2  col-lg-2 col-9'
+              }
+            >
+              Expected Return
+            </li>
+
+            <li
+              onClick={() => switchForm('#growth_potential')}
+              className={
+                (hash === '#growth_potential') && 'li-active mx-lg-2 col-lg-2 col-9'
+              }
+            >
+              Growth Potential
+            </li>
+          </div>
+        </section>
+      </div>

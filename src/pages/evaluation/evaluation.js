@@ -23,19 +23,19 @@ export const Evaluation = ({ history }) => {
   }
 
   return (
-    <div className="px-5 py-4">
+    <div className="px-2 py-4 mr-lg-5 mr-2">
       <div className="d-flex justify-content-between">
         <section
-          className="d-flex align-items-center mb-5"
+          className="d-flex  mb-5"
           role="button"
           onClick={goBack}
         >
           <img src={left} alt="left" style={{ transform: 'rotate(180deg)' }} />
-          <p className="ml-2 bread-start">Go Back</p>
+          <p className="ml-2 bread-start mt-3">Go Back</p>
         </section>
 
         <section>
-          <button className="watch_pitch_btn">Watch Pitch</button>
+          <button className="watch_pitch_btn mt-3 ">Watch Pitch</button>
         </section>
       </div>
 
@@ -45,14 +45,14 @@ export const Evaluation = ({ history }) => {
         </section>
       </div>
 
-      <div className="ml-5 mt-4 mb-4 mr-5">
-        <section className="evaluate_wrap  pl-2 pr-5">
-          <ul className="evaluate_list d-flex">
-            <li
+      <div className=" mt-4 mb-4">
+        <section className="evaluate_wrap mx-2">
+          <ul className="evaluate_list row mx-4">
+            <li 
               onClick={() => switchForm('#market_attractiveness')}
               className={
-                (hash === '#market_attractiveness' || hash === '') &&
-                'li-active'
+                (hash === '#market_attractiveness' || hash === '') ?
+                'li-active col-sm-2  col-7' : 'col-lg-2  col-7'
               }
             >
               Market Attractiveness
@@ -61,7 +61,7 @@ export const Evaluation = ({ history }) => {
             <li
               onClick={() => switchForm('#product_feasibility')}
               className={
-                (hash === '#product_feasibility' || hash === '') && 'li-active'
+                (hash === '#product_feasibility') ? 'li-active  col-lg-2 col-7' :' col-lg-2 col-7'
               }
             >
               Product Feasibility
@@ -70,7 +70,7 @@ export const Evaluation = ({ history }) => {
             <li
               onClick={() => switchForm('#product_advantage')}
               className={
-                (hash === '#product_advantage' || hash === '') && 'li-active'
+                (hash === '#product_advantage') ? 'li-active  col-lg-2 col-7' : 'col-lg-2 col-7'
               }
             >
               Product Advantage
@@ -79,7 +79,7 @@ export const Evaluation = ({ history }) => {
             <li
               onClick={() => switchForm('#team_competence')}
               className={
-                (hash === '#team_competence' || hash === '') && 'li-active'
+                (hash === '#team_competence') ? 'li-active col-lg-2 col-7' : ' col-lg-2 col-7'
               }
             >
               Team Competence
@@ -88,7 +88,7 @@ export const Evaluation = ({ history }) => {
             <li
               onClick={() => switchForm('#expected_return')}
               className={
-                (hash === '#expected_return' || hash === '') && 'li-active'
+                (hash === '#expected_return') ? 'li-active   col-lg-2 col-7' : '  col-lg-2 col-7'
               }
             >
               Expected Return
@@ -97,7 +97,7 @@ export const Evaluation = ({ history }) => {
             <li
               onClick={() => switchForm('#growth_potential')}
               className={
-                (hash === '#growth_potential' || hash === '') && 'li-active'
+                (hash === '#growth_potential') ? 'li-active  col-lg-2 col-7' : ' col-lg-2 col-7'
               }
             >
               Growth Potential
@@ -112,17 +112,17 @@ export const Evaluation = ({ history }) => {
             <img src={questionMark} alt="Question Mark" />
           </section>
 
-          <div className="row d-flex">
+          <div className="">
             <section className="evaluation_scale mt-1">
               <p>Scale -</p>
             </section>
 
-            <section className="evaluation_rate d-flex mt-1">
-              <p className="pr-3 pl-3">1-Poor</p>
-              <p className="pr-3 pl-3">2-Fair</p>
-              <p className="pr-3 pl-3">3-Good</p>
-              <p className="pr-3 pl-3">4-Very Good</p>
-              <p className="pr-3 pl-3">5-Excellent</p>
+            <section className="evaluation_rate row mt-1">
+              <p className=" pl-3 col-lg-2 col-12">1-Poor</p>
+              <p className="pl-3 col-lg-2 col-12">2-Fair</p>
+              <p className="pl-3 col-lg-2 col-12  text-nowrap">3-Good</p>
+              <p className="pl-3 col-lg-2 col-12  text-nowrap">4-Very Good</p>
+              <p className="pl-3 col-lg-2 col-12 mx-lg-5 mx-0 text-nowrap">5-Excellent</p>
             </section>
           </div>
         </div>

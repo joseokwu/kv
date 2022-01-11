@@ -11,6 +11,8 @@
   outline: none;
 }
 
+
+
 .evaluate_header h3 {
   font-family: DM Sans;
   font-weight: bold;
@@ -42,7 +44,7 @@
   margin-bottom: 8px;
   margin-top: 8px;
   cursor: pointer;
-  padding: 0.625rem 1rem;
+  padding: 5px 8px;
 }
 
 .li-active {
@@ -91,16 +93,17 @@
   border-right: 1px solid #323232;
   opacity: 0.2;
 }
-.evaluation_rate p:nth-child(4) {
-  border-right: 1px solid #323232;
+.evaluation_rate p:nth-child(5) {
+  border-left: 1px solid #323232;
   opacity: 0.2;
+  
 }
 
 .evaluation_questions p {
   font-family: DM Sans;
   font-weight: 500;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 140%;
   color: #242679;
 }
 
@@ -108,7 +111,7 @@
   font-family: DM Sans;
   font-weight: normal;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 140%;
   color: #000000;
 }
 
@@ -171,4 +174,31 @@
   font-size: 16px;
   line-height: 20px;
   color: #858585;
+}
+
+@media (max-width:768px){
+
+  .watch_pitch_btn {
+    font-weight: 400;
+    font-size: 9x;
+    line-height: 90%;
+    padding: 5px 10px;
+  }
+
+  .evaluation_rate p:nth-child(1) {
+    border:none
+  
+  }
+  .evaluation_rate p:nth-child(2) {
+    border:none
+  
+  }
+  .evaluation_rate p:nth-child(3) {
+    border:none
+  
+  }
+  .evaluation_rate p:nth-child(5) {
+    border:none
+  
+  }
 }

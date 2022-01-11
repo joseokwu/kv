@@ -30,7 +30,7 @@ export const Header = ({ setOpen, open }) => {
       <section className="d-flex align-items-center h-100">
         <ul className="header-list">
           <li>
-            <span className="header-chat d-flex align-items-center is-hidden-mobile">
+            <span className="header-chat d-flex align-items-center d-none d-lg-flex">
               <img src={chat} alt="chat" />
               <p className="mb-0 header-text">Chat</p>
             </span>
@@ -48,7 +48,7 @@ export const Header = ({ setOpen, open }) => {
         >
           <span 
            onClick={() => push('/profile')}
-           className="d-flex align-items-center header-profile is-hidden-mobile">
+           className="d-flex align-items-center header-profile d-none d-lg-flex">
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>
           </span>

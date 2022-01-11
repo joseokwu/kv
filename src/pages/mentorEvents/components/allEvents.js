@@ -21,7 +21,7 @@ export const AllEvents = () => {
       <Modal id="eventScheduleModal" withHeader={false}>
         <EventScheduleModal />
       </Modal>
-      <div className="col-lg-6 events_card_bg py-4 px-5 mt-4 ml-4">
+      <div className="col-lg-6  col-12 events_card_bg py-4 px-5 mt-4 ml-lg-4 ml-0">
         <section className="events_card d-flex justify-content-between">
           <h3>Appleiine House Demo</h3>
           <img src={dots} alt="" />
@@ -38,7 +38,7 @@ export const AllEvents = () => {
         </section>
 
         <section className="mt-4">
-          <img src={demo} alt="demo" />
+          <img src={demo} alt="demo" style={{width:'100%', height:'100%'}} />
         </section>
 
         <section className="event_card_body mt-5">
@@ -62,8 +62,8 @@ export const AllEvents = () => {
         </section>
       </div>
 
-      <div className="col-lg-5">
-        <div className="events_card_bg ml-2 py-4 px-4 mt-4 ml-4">
+      <div className="col-lg-5  col-12">
+        <div className=" events_card_bg ml-2 py-4 px-4 mt-4 ml-lg-4 ml-0">
           <section className="events_card d-flex justify-content-between">
             <h3>Appleiine House Demo</h3>
             <img src={dots} alt="" />
@@ -86,7 +86,7 @@ export const AllEvents = () => {
           </section>
 
           <section className="d-flex align-items-center justify-content-between mt-3 event_card_footer">
-            <a href="#!">Join Event</a>
+            <span className='a' >Join Event</span>
             <section className="event_people">
               <img src={doc} alt="doc" />
               <img src={doc} alt="doc" />
@@ -120,7 +120,7 @@ export const AllEvents = () => {
           </section>
 
           <section className="d-flex align-items-center justify-content-between mt-3 event_card_footer">
-            <a href="#!">Add to schedule</a>
+            <span className='a' >Add to schedule</span>
             <section className="event_people">
               <img src={doc} alt="doc" />
               <img src={doc} alt="doc" />

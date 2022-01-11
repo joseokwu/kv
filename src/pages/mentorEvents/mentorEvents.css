@@ -57,6 +57,8 @@
   text-decoration: none;
 }
 
+
+
 .event_card_footer a:hover {
   background: none;
   color: #2e3192;
@@ -125,4 +127,14 @@
   line-height: 20px;
   text-decoration-line: underline;
   color: #2e3192;
+}
+
+@media (max-width:768px){
+  .event_card_footer .a{
+    padding: 8px 20px;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 90%;
+  }
+ 
 }

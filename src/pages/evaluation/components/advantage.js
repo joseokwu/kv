@@ -9,7 +9,7 @@ export const Advantage = () => {
   } = useHistory()
 
   return (
-    <div>
+    <div className=''>
       <div className="mx-5 my-5">
         <section className="evaluation_questions">
           <p>
@@ -18,12 +18,12 @@ export const Advantage = () => {
           </p>
         </section>
 
-        <section className="evaluation_grade mt-4 mb-4">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+        <section className="evaluation_grade row mt-4 mb-4">
+          <button className='col-lg-2 col-12 mt-2' >1</button>
+          <button className='col-lg-2 col-12 mt-2' >2</button>
+          <button className='col-lg-2 col-12 mt-2' >3</button>
+          <button className='col-lg-2 col-12 mt-2' >4</button>
+          <button className='col-lg-2 col-12 mt-2' >5</button>
         </section>
 
         <section className="evaluation_questions">
