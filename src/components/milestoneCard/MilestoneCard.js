@@ -19,10 +19,10 @@ export const MilestoneCard = ({ side = "" }) => {
           <p className="desc mb-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non.
           </p>
-          <span className="d-flex align-items-center mile-actions">
+          {/* <span className="d-flex align-items-center mile-actions">
             <p className="mr-3 edit">Edit Milestone</p>
             <p className="delete">Delete</p>
-          </span>
+          </span> */}
         </section>
 
         <section className="date-card">

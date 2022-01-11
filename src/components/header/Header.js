@@ -1,15 +1,37 @@
 import React, { useState } from "react";
-import "./header.css";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/kvLogo.png";
 import notification from "../../assets/icons/notification.svg";
 import chat from "../../assets/icons/chat.svg";
 import angleDown from "../../assets/icons/angleDown.svg";
 import sampleUser from "../../assets/images/sampleUser.png";
-import { useHistory } from "react-router";
 import { Notification } from "../index";
+import "./header.css";
 
 export const Header = ({ setOpen, open }) => {
-  const { push } = useHistory();
+  const {
+    push,
+    location: { pathname },
+  } = useHistory();
+
+  console.log(`pathname`, pathname);
+
+  const getCurrentDashboard = () => {
+    if (pathname.includes("investor")) {
+      return "/investor/dashboard";
+    } else {
+      return "/dashboard";
+    }
+  };
+
+  const getCurrentProfile = () => {
+    if (pathname.includes("investor")) {
+      return () => push("/investor/profile");
+    } else {
+      return () => push("/profile");
+    }
+  };
 
   const [openNotice, setOpenNotice] = useState(false);
   return (
@@ -23,9 +45,9 @@ export const Header = ({ setOpen, open }) => {
           <span></span>
           <span></span>
         </div>
-        <a href="/dashboard">
+        <Link to={getCurrentDashboard()}>
           <img src={logo} alt="logo" />
-        </a>
+        </Link>
       </section>
       <section className="h-100 header-right-content">
         <ul className="header-list">
@@ -45,7 +67,7 @@ export const Header = ({ setOpen, open }) => {
 
         <div
           className="d-flex align-items-center h-100"
-          onClick={() => push("/profile")}
+          onClick={getCurrentProfile()}
           role="button"
         >
           <span className="d-flex align-items-center header-profile">

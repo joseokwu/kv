@@ -31,6 +31,7 @@ import {
   DealRoom,
   DealFolder,
   ScheduleCalendar,
+  InvestorProfile,
 } from "../pages";
 
 const routes = [
@@ -253,6 +254,14 @@ const routes = [
     name: "DealRoom",
     path: "/investor/deal_room/:id/:folderName",
     component: WithMainLayout(DealFolder),
+    exact: true,
+    protected: false,
+  },
+
+  {
+    name: "Investor profile",
+    path: "/investor/profile",
+    component: WithMainLayout(InvestorProfile),
     exact: true,
     protected: false,
   },

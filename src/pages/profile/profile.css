@@ -129,19 +129,25 @@
   padding: 0 2.6%;
   max-width: 1440px;
   margin: 0 auto;
+  column-gap: 40px;
 }
 
 .profile-tab h2 {
   height: inherit;
-  border-bottom: 7px solid#0A6CF4;
   display: flex;
   align-items: center;
   font-family: DM Sans;
   font-style: normal;
-  font-weight: 500;
+  font-weight: normal;
   font-size: 17px;
   line-height: 22px;
   letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.profile-tab .active {
+  font-weight: 500;
+  border-bottom: 7px solid#0A6CF4;
   color: #0a6cf4;
 }
 
