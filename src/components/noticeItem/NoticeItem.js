@@ -1,4 +1,4 @@
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 export const NoticeItem = ({
   noticeImage = "",

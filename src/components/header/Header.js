@@ -5,7 +5,7 @@ import notification from "../../assets/icons/notification.svg";
 import chat from "../../assets/icons/chat.svg";
 import angleDown from "../../assets/icons/angleDown.svg";
 import sampleUser from "../../assets/images/sampleUser.png";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { Notification } from "../index";
 
 export const Header = () => {

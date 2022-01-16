@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./sidebar.css";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { investorNavigators , boosterNavigators } from '../../constants/sidebarRoutes';
 import helpDesk from "../../assets/icons/helpDesk.svg";
 import user from "../../assets/images/sampleUserSide.png";

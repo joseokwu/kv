@@ -2,7 +2,7 @@ import React from "react";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
 import add from "../../../../assets/icons/add.svg";
 import { Button, Modal, TextArea, TextField } from "../../../../components";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import "./portfolio.css";
 
 export const Portfolio = () => {

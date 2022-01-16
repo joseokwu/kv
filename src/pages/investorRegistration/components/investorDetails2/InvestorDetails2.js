@@ -1,7 +1,7 @@
 import React from "react";
 import { RowOption, Select, TextField, Button } from "../../../../components";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 export const InvestorDetails2 = () => {
   const { push } = useHistory();

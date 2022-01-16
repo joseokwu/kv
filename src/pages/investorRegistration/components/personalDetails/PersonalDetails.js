@@ -9,7 +9,7 @@ import {
   TextField,
   Button,
 } from "../../../../components";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 export const PersonalDetails = () => {
   const hearOption = [
