@@ -17,7 +17,7 @@ export const MentorEvaluation = ({ history }) => {
 
   const cardData = [
     { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
-    { name: 'Partners', count: 20, color: '#DEF6FF' },
+    { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },
     { name: 'Total Startup Assigned', count: 300, color: '#D5D6F4' },
   ]
 
@@ -27,10 +27,10 @@ export const MentorEvaluation = ({ history }) => {
         return <AllEvaluationCard />
 
       case '#Pending':
-        return <EvaluationPendingCard />
+        return <div className="col-xl-6"><EvaluationPendingCard /></div>
 
       case '#Completed':
-        return <EvaluationCompletedCard />
+        return <div className="col-xl-6"><EvaluationCompletedCard /></div> 
 
       default:
         return <AllEvaluationCard />
@@ -61,8 +61,8 @@ export const MentorEvaluation = ({ history }) => {
             data-toggle="dropdown"
           >
             <img src={filter} alt="filter" />
-            <p>Filter</p>
-            <img src={down} alt="down" />
+            <span>Filter</span>
+            <img className="pl-1" src={down} alt="down" />
           </button>
         </div>
       </section>

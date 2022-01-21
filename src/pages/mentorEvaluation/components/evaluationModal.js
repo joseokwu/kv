@@ -5,11 +5,12 @@ import clock from '../../../assets/icons/clockTime.svg'
 import web from '../../../assets/icons/web.svg'
 import compitch from '../../../assets/images/companyPitch.svg'
 import { Button } from '../../../components'
+import { useHistory } from 'react-router-dom'
 
 export const EvaluationModal = () => {
+  const { push } = useHistory();
   return (
     <div className="px-4">
-
       <section className="pt-2">
         <button
           type="button"
@@ -44,7 +45,10 @@ export const EvaluationModal = () => {
           <img className="pt-5" src={compitch} alt="company pitch" />
         </div>
 
-        <Button label="Evaluate" />
+        <Button
+          label="Evaluate"
+          onClick={() => push('/evaluation/evaluate#market_attractiveness')}
+        />
       </section>
     </div>
   )

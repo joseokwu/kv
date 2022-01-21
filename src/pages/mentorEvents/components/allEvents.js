@@ -21,7 +21,7 @@ export const AllEvents = () => {
       <Modal id="eventScheduleModal" withHeader={false}>
         <EventScheduleModal />
       </Modal>
-      <div className="col-lg-6  col-12 events_card_bg py-4 px-5 mt-4 ml-lg-4 ml-0">
+      <div className="col-lg-6 col-12 events_card_bg py-4 px-5 mt-4 ml-lg-4 ml-0">
         <section className="events_card d-flex justify-content-between">
           <h3>Appleiine House Demo</h3>
           <img src={dots} alt="" />

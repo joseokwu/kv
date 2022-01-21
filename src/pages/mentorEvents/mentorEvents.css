@@ -1,5 +1,6 @@
 .sort-btn {
   background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   border: none;
   height: 3.063rem;
@@ -55,9 +56,8 @@
   line-height: 140%;
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
 }
-
-
 
 .event_card_footer a:hover {
   background: none;
@@ -129,12 +129,11 @@
   color: #2e3192;
 }
 
-@media (max-width:768px){
-  .event_card_footer .a{
+@media (max-width: 768px) {
+  .event_card_footer .a {
     padding: 8px 20px;
     font-size: 11px;
     font-weight: 400;
     line-height: 90%;
   }
- 
 }

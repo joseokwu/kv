@@ -86,10 +86,8 @@ export const Sidebar = () => {
   return (
     <div className="side-main">
       <section className="side-navigator">
-        <div 
-        onClick={() => push('/profile')}
-         >
-          <img src={user} alt="profile" />
+        <div>
+          <img src={user} alt="profile" onClick={() => push('/profile')} />
         </div>
         <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
         <p className="mb-0 side-text">{pathname.includes('') ? 'Mentor' : ''}</p>
@@ -101,9 +99,9 @@ export const Sidebar = () => {
                 <li>
                   <a href={nav.path}>
                     <img src={nav.icon} alt="dash" />
-                    <p className={`${activateLink(nav.activator)} side-text`}>
+                    <span className={`${activateLink(nav.activator)} side-text`}>
                       {nav.title}
-                    </p>
+                    </span>
                   </a>
                 </li>
               )
@@ -112,9 +110,9 @@ export const Sidebar = () => {
       </section>
       <section className="side-footer" onClick={() => push('/support')}>
         <img src={helpDesk} alt="help" />
-        <p className="mb-0 side-text" role="button">
+        <span className="mb-0 side-text" role="button">
           Need help? Contact us
-        </p>
+        </span>
       </section>
     </div>
   )

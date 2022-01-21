@@ -26,23 +26,23 @@ export const PersonalDetails = () => {
     wrapRef.current.scrollTop = 0
     switch (hash) {
       case '#assistant_info':
-        setProgress('100');
-        break;
+        setProgress('100')
+        break
       case '#consulting':
-        setProgress('70');
-        break;
+        setProgress('70')
+        break
       case '#area_of_interest':
-        setProgress('50');
-        break;
+        setProgress('50')
+        break
       case '#work_experience':
-        setProgress('30');
-        break;
+        setProgress('30')
+        break
       case '#personal_details':
-        setProgress('20');
-        break;
-      default: 
-        setProgress('20');
-        break;
+        setProgress('20')
+        break
+      default:
+        setProgress('20')
+        break
     }
   }, [hash])
 

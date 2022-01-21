@@ -29,13 +29,13 @@ export const Header = ({ setOpen, open }) => {
       </section>
       <section className="d-flex align-items-center h-100">
         <ul className="header-list">
-          <li>
+          {/* <li>
             <span className="header-chat d-flex align-items-center d-none d-lg-flex">
               <img src={chat} alt="chat" />
               <p className="mb-0 header-text">Chat</p>
             </span>
-          </li>
-          <li
+          </li> */}
+          <li style={{cursor: 'pointer'}}
             className="d-flex align-items-center"
             onClick={() => setOpenNotice(!openNotice)}
           >
@@ -52,7 +52,7 @@ export const Header = ({ setOpen, open }) => {
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>
           </span>
-          <img src={angleDown} alt="dropdown" />
+          <img style={{cursor: 'pointer'}} src={angleDown} alt="dropdown" />
         </div>
       </section>
 

@@ -1,16 +1,17 @@
-import { Button } from "../..";
-import logo from "../../../assets/images/yeLogo.svg";
-import web from "../../../assets/icons/webSm.svg";
-import clock from "../../../assets/icons/clock.svg";
-import office from "../../../assets/icons/office.svg";
-import twitter from "../../../assets/icons/twitterLogo.svg";
-import linkedIn from "../../../assets/icons/linkedInLogo.svg";
-import whatsApp from "../../../assets/icons/whatsapp.svg";
-import share from "../../../assets/icons/share.svg";
-import { useHistory } from "react-router-dom";
+import { Button } from '../..'
+import logo from '../../../assets/images/yeLogo.svg'
+import web from '../../../assets/icons/webSm.svg'
+import clock from '../../../assets/icons/clock.svg'
+import office from '../../../assets/icons/office.svg'
+import twitter from '../../../assets/icons/twitterLogo.svg'
+import linkedIn from '../../../assets/icons/linkedInLogo.svg'
+import whatsApp from '../../../assets/icons/whatsapp.svg'
+import share from '../../../assets/icons/share.svg'
+import { useHistory } from 'react-router-dom'
+
 
 export const CompanyDetails = () => {
-  const { push } = useHistory();
+  const { push } = useHistory()
   return (
     <section className="opp-page-card py-4">
       <div
@@ -24,12 +25,12 @@ export const CompanyDetails = () => {
 
         <div className="d-flex align-items-end flex-column">
           <section className="d-flex align-items-center mb-3">
-            <p className="opp-tag-label">Industry</p>
+            <span className="opp-tag-label">Industry</span>
             <span className="opp-tag">Tech</span>
           </section>
 
           <section className="d-flex align-items-center">
-            <p className="opp-tag-label">Stage</p>
+            <span className="opp-tag-label">Stage</span>
             <span className="opp-tag">Proof of concept</span>
           </section>
         </div>
@@ -43,19 +44,20 @@ export const CompanyDetails = () => {
           <a
             href="https://www.yebox.io/"
             className="ml-2 extra-info"
-            style={{ textDecoration: "underline", color: "#2E3192" }}
+            style={{ textDecoration: 'underline', color: '#2E3192' }}
           >
             www.applaneinsteen.com
           </a>
         </div>
+
         <div className="d-flex align-items-center">
           <img src={clock} alt="web" width="20" height="20" />
-          <p className="ml-2 extra-info">Incorporated 2/09/19</p>
+          <span className="ml-2 extra-info">Incorporated 2/09/19</span>
         </div>
 
         <div className="d-flex align-items-center">
           <img src={office} alt="web" />
-          <p className="ml-2 extra-info">Lagos, Nigeria</p>
+          <span className="ml-2 extra-info">Lagos, Nigeria</span>
         </div>
       </section>
 
@@ -64,17 +66,20 @@ export const CompanyDetails = () => {
         style={{ rowGap: 10 }}
       >
         <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
-          <Button label="Evaluate" onClick={() => push('/evaluation/evaluate')} />
+          <Button
+            label="Evaluate"
+            onClick={() => push('/evaluation/evaluate#market_attractiveness')}
+          />
           <Button label="Schedule Call" variant="secondary" />
         </div>
 
         <div className="d-flex align-items-center">
           <span className="d-flex align-items-center mr-3">
             <img src={share} alt="share" className="mr-2" />
-            <p className="share-link">Share</p>
+            <span className="share-link">Share</span>
           </span>
 
-          <span style={{cursor: "pointer"}}>
+          <span style={{ cursor: 'pointer' }}>
             <img src={linkedIn} alt="linkedIn" width="24" height="24" />
             <img
               src={twitter}
@@ -88,5 +93,5 @@ export const CompanyDetails = () => {
         </div>
       </section>
     </section>
-  );
-};
+  )
+}

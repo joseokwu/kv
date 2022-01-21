@@ -17,7 +17,7 @@
   background: #00adef !important;
 }
 .btn_main {
-  border-radius: 5px;
+  border-radius: 10px;
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
@@ -25,7 +25,7 @@
   line-height: 140%;
   color: #ffffff;
   text-transform: capitalize;
-  padding: 10px 32px;
+  padding: 10px 15px;
   transition: all 0.4s;
   border: none;
 }

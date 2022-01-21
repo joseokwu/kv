@@ -12,11 +12,11 @@ export const FundingRound = () => {
         style={{ marginBottom: "1.75rem" }}
       >
         <div>
-          <p className="opp-tag-label">Funding Ask</p>
+          <span className="opp-tag-label">Funding Ask</span>
           <Tag name="$50,000" color="#212463" />
         </div>
         <div className="text-right">
-          <p className="opp-tag-label">Dilution</p>
+          <span className="opp-tag-label">Dilution</span>
           <Tag name="20%" color="#058DC1" />
         </div>
       </section>
@@ -26,11 +26,11 @@ export const FundingRound = () => {
         style={{ marginBottom: "1.75rem" }}
       >
         <div>
-          <p className="opp-tag-label">Total Commitment</p>
+          <span className="opp-tag-label">Total Commitment</span>
           <Tag name="$100,000 (100%)" color="#212463" />
         </div>
         <div className="text-right">
-          <p className="opp-tag-label">Funding Stage</p>
+          <span className="opp-tag-label">Funding Stage</span>
           <Tag name="Seed" color="#058DC1" />
         </div>
       </section>
@@ -40,22 +40,22 @@ export const FundingRound = () => {
         style={{ marginBottom: "1.75rem" }}
       >
         <div>
-          <p className="opp-tag-label">Total Funding</p>
+          <span className="opp-tag-label">Total Funding</span>
           <Tag name="$50,000" color="#212463" />
         </div>
         <div className="text-right">
-          <p className="opp-tag-label">Last Funding Round</p>
+          <span className="opp-tag-label">Last Funding Round</span>
           <Tag name="Angel (9 Oct.,2021)" color="#058DC1" />
         </div>
       </section>
 
       <section className="d-flex align-items-center justify-content-between">
         <div>
-          <p className="opp-tag-label">Minimum Investment Amount</p>
+          <span className="opp-tag-label">Minimum Investment</span>
           <Tag name="$100,000 (100%)" color="#212463" />
         </div>
         <div className="text-right">
-          <p className="opp-tag-label">Round Type</p>
+          <span className="opp-tag-label">Round Type</span>
           <Tag name="Seed" color="#058DC1" />
         </div>
       </section>

@@ -24,7 +24,7 @@ export const EvaluationViewProfile = ({ history }) => {
       case '#Team':
         return <Team />
 
-      case '#Business Model Canva':
+      case '#Business Model Canvas':
         return <BusinessModelCanva />
 
       case '#Fundraising':
@@ -45,7 +45,7 @@ export const EvaluationViewProfile = ({ history }) => {
     'Product',
     'Pitch Deck',
     'Team',
-    'Business Model Canva',
+    'Business Model Canvas',
     'Fundraising',
     'Milestone/Timeline',
     'Product Road Map',

@@ -22,7 +22,7 @@ export const CreateAssignment = ({ history }) => {
         onClick={goBack}
       >
         <img src={left} alt="left" style={{ transform: 'rotate(180deg)' }} />
-        <p className="ml-2 bread-start">Go Back</p>
+        <span className="ml-2 bread-start">Go Back</span>
       </section>
 
       <div className="col-lg-12 create_assignment_form mb-4 p-5">

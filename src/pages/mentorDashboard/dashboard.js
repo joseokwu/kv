@@ -7,12 +7,13 @@ import {
 import './dashboard.css'
 import { useHistory } from 'react-router-dom'
 
+
 export const Dashboard = () => {
   const { push } = useHistory()
 
   const cardData = [
     { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
-    { name: 'Partners', count: 20, color: '#DEF6FF' },
+    { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },
     { name: 'Mentors', count: 20, color: '#D5D6F4' },
     { name: 'Investors', count: 30, color: '#DEF6FF' },
   ]
@@ -31,7 +32,7 @@ export const Dashboard = () => {
         </section>
       </section>
 
-      <section className="row mt-5 dash-main-content">
+      <section className="row mt-0 dash-main-content">
         <div className="col-lg-12">
           <div style={{ marginTop: '2.38rem' }}>
             <section className="d-flex align-items-center justify-content-between mb-3">
@@ -57,7 +58,7 @@ export const Dashboard = () => {
           <div style={{ marginTop: '2.38rem' }}>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Upcoming Events</p>
-              <p className="see-all">See All</p>
+              <p className="see-all"><a className="see-all-event" href="/events">See All</a></p>
             </section>
 
             <section className="row">

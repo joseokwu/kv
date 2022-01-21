@@ -10,8 +10,9 @@
   overflow-y: auto;
 }
 
-/* .side-navigator {
-} */
+.side-navigator img {
+  cursor: pointer;
+}
 
 .side-footer {
   display: flex;
@@ -58,7 +59,7 @@
 .side-text {
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 140%;
   color: #ffffff;
 }

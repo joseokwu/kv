@@ -11,8 +11,6 @@
   text-decoration: none;
 }
 
-
-
 .create_assignment:hover {
   background: none;
   border: 1.5px solid #2e3192;
@@ -40,7 +38,7 @@
   text-decoration: underline;
 }
 
-@media (max-width:768px){
+@media (max-width:768px) {
   .create_assignment {
     padding: 8px 20px;
     font-size: 11px;
@@ -48,3 +46,4 @@
     
   }
 }
+

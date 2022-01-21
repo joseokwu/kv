@@ -22,7 +22,7 @@ export const MoreDetails = ({ history }) => {
         onClick={goBack}
       >
         <img src={left} alt="left" style={{ transform: 'rotate(180deg)' }} />
-        <p className="ml-2 bread-start">Go Back</p>
+        <span className="ml-2 bread-start">Go Back</span>
       </section>
 
       <div className="business_model_canva_card m-5">

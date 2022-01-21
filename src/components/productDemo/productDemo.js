@@ -11,11 +11,11 @@ export const ProductDemo = () => {
 
   return (
     <div>
-      <article className="pt-2" style={{ background: '#F9F9FC' }}>
+      <article className="pt-2">
         <section className="d-flex align-items-center">
-          <p className="bread-start" role="button" onClick={() => {push('/')}}>Startups</p>
+          <span className="bread-start" role="button" onClick={() => {push('/')}}>Startups</span>
           <img src={right} alt="left" className="mx-3" />
-          <p className="bread-end">Applane Insteen.</p>
+          <span className="bread-end">Applane Insteen.</span>
         </section>
 
         <div className="row mt-5">

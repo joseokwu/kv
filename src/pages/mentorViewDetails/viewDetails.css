@@ -20,6 +20,7 @@
 
 .filter-btn {
   background: #ffffff;
+  box-shadow: 0px 4px 20px rgb(0 0 0 / 5%);
   border-radius: 5px;
   border: none;
   height: 3.063rem;

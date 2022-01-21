@@ -50,8 +50,8 @@ export const Program = ({ history }) => {
               data-toggle="dropdown"
             >
               <img src={filter} alt="filter" />
-              <p>Filter</p>
-              <img src={down} alt="down" />
+              <span>Filter</span>
+              <img className="pl-1" src={down} alt="down" />
             </button>
           </div>
         </section>

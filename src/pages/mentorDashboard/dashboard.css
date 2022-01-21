@@ -1,11 +1,13 @@
 .dashboard-main {
-  padding: 52px 26px;
+  padding: 20px 26px 52px 26px;
 }
 
 .dashboard-cards {
   column-gap: 19px;
   width: 100%;
   overflow-x: auto;
+  /* overflow-y: auto; */
+  padding-bottom: 20px;
 }
 
 .dashboard-cards::-webkit-scrollbar {
@@ -54,6 +56,22 @@
   line-height: 140%;
   color: #041b55;
   cursor: pointer;
+}
+
+.see-all-event {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #041b55;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.see-all-event:hover {
+  text-decoration: none;
+  color: #041b55;
 }
 
 .network-space {

@@ -6,12 +6,13 @@ export const DashCard = ({
   count = '100',
   name = 'name',
   color = '#E5FFE4',
+  className = '',
 }) => {
   return (
     <div className="dashCard-main">
       <section className="d-flex flex-column justify-content-between">
-        <h3>{name}</h3>
-        <p>{count}</p>
+        <p>{name}</p>
+        <span>{count}</span>
         <Star color={color} />
       </section>
     </div>
@@ -33,5 +34,5 @@ const Star = ({ color }) => {
         fill={color}
       />
     </svg>
-  );
-};
+  )
+}

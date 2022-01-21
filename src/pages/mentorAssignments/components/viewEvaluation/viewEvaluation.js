@@ -14,18 +14,18 @@ export const ViewEvaluation = ({ history }) => {
 
   const com = [1, 2, 3, 4]
   return (
-    <div className="">
+    <div className="container px-5 py-5">
       <div className="d-flex justify-content-between">
         <section
-          className="d-flex align-items-center m-5"
+          className="d-flex align-items-center"
           role="button"
           onClick={goBack}
         >
           <img src={left} alt="left" style={{ transform: 'rotate(180deg)' }} />
-          <p className="ml-2 bread-start">Go Back</p>
+          <span className="ml-2 bread-start">Go Back</span>
         </section>
 
-        <section className="m-5">
+        <section className="">
           <button
             className="pending_evaluation"
             onClick={() => push('/assignments/create/details')}
@@ -35,7 +35,7 @@ export const ViewEvaluation = ({ history }) => {
         </section>
       </div>
 
-      <div className="business_model_canva_card assignment_view_evaluation">
+      <div className="business_model_canva_card assignment_view_evaluation px-5 my-5">
         <section className="d-flex justify-content-between assignment_head pb-4">
           <div className="view_evaluation">
             <p>
@@ -70,13 +70,33 @@ export const ViewEvaluation = ({ history }) => {
         </section>
 
         <section className="mt-4">
-          <div className="d-flex justify-content-between assignment_table_head pb-3">
-            <p>Startup</p>
-            <p>Submission Status</p>
-            <p>Action</p>
-          </div>
+          {/* <div className="d-flex justify-content-between assignment_table_head pb-3">
+            <span>Startup</span>
+            <span>Submission Status</span>
+            <span>Action</span>
+          </div> */}
+          <table className="">
+            <thead className="">
+              <tr className="d-flex justify-content-between assignment_table_head text-center pb-3">
+                <th>Startup</th>
+                <th>Submission Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* <div className="text-left"> */}
+                {com.map((c, i) => {
+                  return (
+                    <section className="">
+                      <AssignmentStatus />
+                    </section>
+                  )
+                })}
+              {/* </div> */}
+            </tbody>
+          </table>
 
-          <div className="">
+          {/* <div className="text-left">
             {com.map((c, i) => {
               return (
                 <section className="">
@@ -84,7 +104,7 @@ export const ViewEvaluation = ({ history }) => {
                 </section>
               )
             })}
-          </div>
+          </div> */}
         </section>
       </div>
     </div>
@@ -93,17 +113,30 @@ export const ViewEvaluation = ({ history }) => {
 
 const AssignmentStatus = () => {
   return (
-    <div className="assignment_table_body d-flex justify-content-between pb-3">
-      <div className="assignment_startup mt-2">
+    // <div className="assignment_table_body d-flex justify-content-between pb-3">
+    //   <div className="assignment_startup mt-2">
+    //     <img src={logo} alt="company logo" />
+    //     <p className="pt-1">Yebox Technology</p>
+    //   </div>
+    //   <div className="assignment_status text-left mt-4">
+    //     <span>Not submitted</span>
+    //   </div>
+    //   <div className="assignment_action mt-4">
+    //     <a href="#!">View</a>
+    //   </div>
+    // </div>
+
+    <tr className="d-flex justify-content-between assignment_table_body pb-3">
+      <td className="assignment_startup mt-2">
         <img src={logo} alt="company logo" />
         <p className="pt-1">Yebox Technology</p>
-      </div>
-      <div className="assignment_status mt-4">
+      </td>
+      <td className="assignment_status text-left mt-4">
         <span>Not submitted</span>
-      </div>
-      <div className="assignment_action mt-4">
+      </td>
+      <td className="assignment_action mt-4">
         <a href="#!">View</a>
-      </div>
-    </div>
+      </td>
+    </tr>
   )
 }

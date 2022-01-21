@@ -53,9 +53,9 @@
   border: 1px solid #f2f2f2;
   box-sizing: border-box;
   padding: 40px 80px;
-  margin-left: 6.25rem;
-  margin-right: 6.25rem;
-  margin-bottom: 6.25rem;
+  /* margin-left: 6.25rem; */
+  /* margin-right: 6.25rem; */
+  /* margin-bottom: 6.25rem; */
 }
 
 .assignment_template {
@@ -69,11 +69,15 @@
   color: #2e3192;
 }
 
+table {
+  width: 100%;
+}
+
 .assignment_table_head {
   border-bottom: 1px solid #f9f9fc;
 }
 
-.assignment_table_head p {
+.assignment_table_head th {
   font-family: DM Sans;
   font-weight: 500;
   font-size: 1rem;

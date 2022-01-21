@@ -42,28 +42,28 @@ export const Events = ({ history }) => {
   return (
     <div className="dashboard-main">
       <div className="col-lg-12">
-        <section className="d-flex align-items-center justify-content-between mb-4">
-          <p className="event_title">Events</p>
-          <img src={searchIcon} alt="search" />
+        <section className="container d-flex align-items-center justify-content-end mb-4">
+          {/* <p className="event_title">Events</p> */}
+          {/* <img src={searchIcon} alt="search" /> */}
         </section>
       </div>
 
-      <div className="row col-lg-12 d-flex justify-content-between">
-        <div className="col">
+      <div className="container row d-flex justify-content-between">
+        <div className="col d-flex justify-content-between">
           <Tabs tabItems={tabItems} />
-        </div>
 
-        <div>
-          <button
-            className="d-flex align-items-center sort-btn"
-            style={{ columnGap: 7 }}
-            data-toggle="dropdown"
-          >
-            <p>
-              <span>Sort by: </span> Industry
-            </p>
-            <img src={down} alt="down" />
-          </button>
+          <div className="mx-4">
+            <button
+              className="d-flex align-items-center sort-btn"
+              style={{ columnGap: 7 }}
+              data-toggle="dropdown"
+            >
+              <span>
+                <span>Sort by: </span> Industry
+              </span>
+              <img src={down} alt="down" />
+            </button>
+          </div>
         </div>
       </div>
 

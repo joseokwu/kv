@@ -33,7 +33,7 @@ export const BusinessModelCanva = () => {
   return (
     <div className="pt-3">
       <section className="model_canva_title mb-3">
-        <h3 className="mb-4">Business Model Canva</h3>
+        {/* <h3 className="mb-4">Business Model Canva</h3> */}
         <Tabs
           tabItems={tabItems}
           state={currentTab}

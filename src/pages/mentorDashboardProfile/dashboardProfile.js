@@ -16,7 +16,9 @@ export const DashboardProfile = () => {
   return (
     <section className="container dashboard_profle mt-4">
       <div className="col">
-        <div className="dashboard_profile_banner"></div>
+        <div className="dashboard_profile_banner">
+          
+        </div>
         <div className="dashboard_profile_info">
           <span className="dashboard_profile_image">
             <img src={founderPic} alt="founder pic" />
@@ -56,30 +58,30 @@ export const DashboardProfile = () => {
 
               <div className="d-flex">
                 <div className="mr-3">
-                  <p>
+                  <span>
                     <img className="pr-2" src={globe} alt="mail" />
                     @promiseamstel
-                  </p>
+                  </span>
                 </div>
 
                 <div className="mr-3">
-                  <p>
+                  <span>
                     <img className="pr-2" src={split} alt="mail" />
                     @promiseamstel
-                  </p>
+                  </span>
                 </div>
                 <div>
-                  <p>
+                  <span>
                     <img className="pr-2" src={split} alt="mail" />
                     @promiseamstel
-                  </p>
+                  </span>
                 </div>
               </div>
             </section>
 
-            <section className="row mt-4">
+            <section className="d-flex mt-4">
               <Button className="mr-4" label="Schedule Call" />
-              <AuthButton label="Send a message" />
+              <AuthButton className="" label="Send a message" />
             </section>
           </article>
 

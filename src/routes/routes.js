@@ -129,7 +129,7 @@ const routes = [
   },
   {
     name: 'PersonalDetails',
-    path: '/mentor/registration',
+    path: '/registration',
     component: WithRegisterLayout(PersonalDetails),
     exact: true,
     protected: false,

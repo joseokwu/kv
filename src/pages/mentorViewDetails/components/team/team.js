@@ -10,7 +10,7 @@ export const Team = () => {
   const count = [1, 2, 3, 4, 5, 6];
   return (
     <div>
-      <h3 className="tab-section-title">Team</h3>
+      {/* <h3 className="tab-section-title">Team</h3> */}
 
       <section>
         <h4 className="team-group-title">Founder & Co-Founders</h4>
@@ -19,7 +19,7 @@ export const Team = () => {
           {count.slice(0, 3).map((c, i) => {
             return (
               <article className="col-lg-4 mb-4">
-                <TeamMember key={`founder-member-${i}`} />
+                <CoFounders key={`founder-member-${i}`} />
               </article>
             );
           })}
@@ -43,7 +43,7 @@ export const Team = () => {
   );
 };
 
-const TeamMember = () => {
+const CoFounders = () => {
   return (
     <div className="d-flex align-items-center flex-wrap member-card">
       <img src={member} alt="team member" className="mr-4" />
@@ -60,6 +60,30 @@ const TeamMember = () => {
             height="24"
           />
           <img src={whatsApp} alt="whatsapp" />
+        </span>
+      </section>
+    </div>
+  );
+};
+
+
+const TeamMember = () => {
+  return (
+    <div className="d-flex align-items-center flex-wrap member-card">
+      <img src={member} alt="team member" className="mr-4" />
+      <section>
+        <p>Prima Jakatar</p>
+        <p className="small">Founder and CEO</p>
+        <span className="d-flex">
+          <img src={linkedIn} alt="linkedIn" width="24" height="24" />
+          <img
+            src={twitter}
+            alt="twitter"
+            className="mx-2"
+            width="24"
+            height="24"
+          />
+          {/* <img src={whatsApp} alt="whatsapp" /> */}
         </span>
       </section>
     </div>

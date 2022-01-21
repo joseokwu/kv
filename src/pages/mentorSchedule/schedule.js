@@ -20,13 +20,13 @@ export const Schedule = () => {
         </div>
 
         <div className="d-flex">
-          <section className="mt-2 mr-3 event_card_footer">
+          <section className="mt-2 mr-3 my_schedule_create">
             <a
               data-toggle="modal"
               href="#!"
               data-target="#addAvailabilityModal"
             >
-              Add to schedule
+              Add to Availability
             </a>
           </section>
 

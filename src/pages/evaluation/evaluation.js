@@ -12,7 +12,7 @@ import { Growth } from './components/growth'
 import { Button } from '../../components'
 
 export const Evaluation = ({ history }) => {
-  const { goBack } = history
+  // const { goBack } = history
   const {
     location: { hash },
     push,
@@ -23,12 +23,12 @@ export const Evaluation = ({ history }) => {
   }
 
   return (
-    <div className="px-2 py-4 mr-lg-5 mr-2">
+    <div className="container px-2 py-4 mr-lg-5 mr-2">
       <div className="d-flex justify-content-between">
         <section
-          className="d-flex  mb-5"
+          className="d-flex mb-5"
           role="button"
-          onClick={goBack}
+          onClick={() => push('/evaluation')}
         >
           <img src={left} alt="left" style={{ transform: 'rotate(180deg)' }} />
           <p className="ml-2 bread-start mt-3">Go Back</p>
@@ -122,7 +122,7 @@ export const Evaluation = ({ history }) => {
               <p className="pl-3 col-lg-2 col-12">2-Fair</p>
               <p className="pl-3 col-lg-2 col-12  text-nowrap">3-Good</p>
               <p className="pl-3 col-lg-2 col-12  text-nowrap">4-Very Good</p>
-              <p className="pl-3 col-lg-2 col-12 mx-lg-5 mx-0 text-nowrap">5-Excellent</p>
+              <p className="pl-3 col-lg-2 col-12 ml-lg-5 text-nowrap">5-Excellent</p>
             </section>
           </div>
         </div>

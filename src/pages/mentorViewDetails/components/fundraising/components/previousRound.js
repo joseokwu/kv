@@ -84,7 +84,7 @@ const PreviousRound = () => {
   ];
   return (
     <section className="mb-4">
-      <h4 className="mb-5 fundraisingSubTitle">Previous Round</h4>
+      {/* <h4 className="mb-5 fundraisingSubTitle">Previous Round</h4> */}
 
       <section>
         <Table columns={columns} data={data} className="prev-table" />
