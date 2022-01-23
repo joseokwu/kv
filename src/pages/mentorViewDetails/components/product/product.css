@@ -108,6 +108,7 @@
   font-size: 14px;
   line-height: 140%;
   border: none;
+  text-decoration: none;
 }
 
 .founder_profile a:hover {

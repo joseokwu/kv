@@ -59,6 +59,20 @@
   cursor: pointer;
 }
 
+.event_card_footer .vd {
+  background: #00ADEF;
+  border-radius: 10px;
+  padding: 8px 30px;
+  border: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .event_card_footer a:hover {
   background: none;
   color: #2e3192;
@@ -130,10 +144,10 @@
 }
 
 @media (max-width: 768px) {
-  .event_card_footer .a {
-    padding: 8px 20px;
+  .event_card_footer .a, .vd {
+    /* padding: 8px 20px; */
     font-size: 11px;
     font-weight: 400;
-    line-height: 90%;
+    /* line-height: 90%; */
   }
 }

@@ -12,8 +12,8 @@ export const Events = ({ history }) => {
 
   const renderContent = () => {
     switch (hash) {
-      case '#All Events':
-        return <AllEvents />
+      // case '#All Events':
+      //   return <AllEvents />
 
       case '#Selection Day':
         return <AllEvents />
@@ -33,14 +33,14 @@ export const Events = ({ history }) => {
   }
 
   const tabItems = [
-    'All Events',
+    // 'All Events',
     'Selection Day',
     'Demo Day',
     'Pitching Session',
     'Others',
   ]
   return (
-    <div className="dashboard-main">
+    <div className="mb-5">
       <div className="col-lg-12">
         <section className="container d-flex align-items-center justify-content-end mb-4">
           {/* <p className="event_title">Events</p> */}

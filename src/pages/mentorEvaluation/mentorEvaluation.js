@@ -27,10 +27,18 @@ export const MentorEvaluation = ({ history }) => {
         return <AllEvaluationCard />
 
       case '#Pending':
-        return <div className="col-xl-6"><EvaluationPendingCard /></div>
+        return (
+          <div className="col-xl-6">
+            <EvaluationPendingCard />
+          </div>
+        )
 
       case '#Completed':
-        return <div className="col-xl-6"><EvaluationCompletedCard /></div> 
+        return (
+          <div className="col-xl-6">
+            <EvaluationCompletedCard />
+          </div>
+        )
 
       default:
         return <AllEvaluationCard />
@@ -40,21 +48,25 @@ export const MentorEvaluation = ({ history }) => {
   const tabItems = ['All', 'Pending', 'Completed']
 
   return (
-    <div className="dashboard-main">
-      <section className="d-flex align-items-center dashboard-cards">
-        {cardData.map((data, i) => (
-          <DashCard
-            name={data.name}
-            count={data.count}
-            color={data.color}
-            key={i}
-          />
-        ))}
+    <div className="dashboard_main container-fluid">
+      <section className="row pb-5">
+        <section
+          className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed"
+          style={{ background: '#fefefe' }}>
+          {cardData.map((data, i) => (
+            <DashCard
+              name={data.name}
+              count={data.count}
+              color={data.color}
+              key={i}
+            />
+          ))}
+        </section>
       </section>
 
-      <section className="mt-5 d-flex align-items-center justify-content-between">
+      <section className="mt-5 pt-5 d-flex align-items-center justify-content-between">
         <Tabs tabItems={tabItems} />
-        <div>
+        <div className="mt-5">
           <button
             className="d-flex align-items-center filter-btn"
             style={{ columnGap: 7 }}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import dots from '../../../assets/icons/3dots.svg'
 import bigClock from '../../../assets/icons/bigclock.svg'
 import demo from '../../../assets/images/vidDemo.svg'
@@ -11,17 +11,13 @@ import location from '../../../assets/icons/locationSm.svg'
 import name from '../../../assets/icons/initial.svg'
 import { useActivity } from '../../../hooks/useBusiness'
 
-
 export const AllEvents = () => {
-
-
-
   return (
-    <div className="row">
+    <div className="row" style={{ columnGap: 20 }}>
       <Modal id="eventScheduleModal" withHeader={false}>
         <EventScheduleModal />
       </Modal>
-      <div className="col-lg-6 col-12 events_card_bg py-4 px-5 mt-4 ml-lg-4 ml-0">
+      <div className="col-lg-5 col-12 events_card_bg py-4 mt-4 ml-lg-4">
         <section className="events_card d-flex justify-content-between">
           <h3>Appleiine House Demo</h3>
           <img src={dots} alt="" />
@@ -38,7 +34,11 @@ export const AllEvents = () => {
         </section>
 
         <section className="mt-4">
-          <img src={demo} alt="demo" style={{width:'100%', height:'100%'}} />
+          <img
+            src={demo}
+            alt="demo"
+            style={{ width: '100%', height: '100%' }}
+          />
         </section>
 
         <section className="event_card_body mt-5">
@@ -49,10 +49,18 @@ export const AllEvents = () => {
           </p>
         </section>
 
-        <section className="d-flex align-items-center justify-content-between mt-3 event_card_footer">
-          <span data-toggle={'modal'} data-target="#eventScheduleModal" className='a'>
-            Add to schedule
-          </span>
+        <section
+          className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+          style={{ rowGap: 10 }}
+        >
+          <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
+            <Button label="View details" variant="secondary" />
+            <Button
+              label="Add to schedule"
+              data-toggle={'modal'}
+              data-target="#eventScheduleModal"
+            />
+          </div>
 
           <section className="event_people">
             <img src={doc} alt="doc" />
@@ -62,8 +70,8 @@ export const AllEvents = () => {
         </section>
       </div>
 
-      <div className="col-lg-5  col-12">
-        <div className=" events_card_bg ml-2 py-4 px-4 mt-4 ml-lg-4 ml-0">
+      <div className="col-lg-6 col-12">
+        <div className=" events_card_bg py-4 px-3 mt-4">
           <section className="events_card d-flex justify-content-between">
             <h3>Appleiine House Demo</h3>
             <img src={dots} alt="" />
@@ -85,8 +93,18 @@ export const AllEvents = () => {
             </p>
           </section>
 
-          <section className="d-flex align-items-center justify-content-between mt-3 event_card_footer">
-            <span className='a' >Join Event</span>
+          <section
+            className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+            style={{ rowGap: 10 }}
+          >
+            <div
+              className="d-flex align-items-center"
+              style={{ columnGap: 10 }}
+            >
+              <Button label="Join Event" />
+              <Button label="View details" variant="secondary" />
+            </div>
+
             <section className="event_people">
               <img src={doc} alt="doc" />
               <img src={doc} alt="doc" />
@@ -95,7 +113,7 @@ export const AllEvents = () => {
           </section>
         </div>
 
-        <div className="events_card_bg ml-2 py-4 px-4 mt-4 ml-4">
+        <div className="events_card_bg py-4 px-3 mt-4">
           <section className="events_card d-flex justify-content-between">
             <h3>Appleiine House Demo</h3>
             <img src={dots} alt="" />
@@ -119,8 +137,18 @@ export const AllEvents = () => {
             </p>
           </section>
 
-          <section className="d-flex align-items-center justify-content-between mt-3 event_card_footer">
-            <span className='a' >Add to schedule</span>
+          <section
+            className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+            style={{ rowGap: 10 }}
+          >
+            <div
+              className="d-flex align-items-center"
+              style={{ columnGap: 10 }}
+            >
+              <Button label="View details" variant="secondary" />
+              <Button label="Add to schedule" />
+            </div>
+
             <section className="event_people">
               <img src={doc} alt="doc" />
               <img src={doc} alt="doc" />
@@ -134,8 +162,6 @@ export const AllEvents = () => {
 }
 
 const EventScheduleModal = () => {
-
-
   return (
     <div className="px-4 pb-5">
       <section className="pt-2">
@@ -144,7 +170,6 @@ const EventScheduleModal = () => {
           class="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
-         
         >
           {/* <img className="pr-2" src={pen} alt="edit" />
           <img className="pr-2" src={trash} alt="trash" /> */}
@@ -252,7 +277,7 @@ const EventScheduleModal = () => {
         </section>
 
         <section className="mt-5 event_card_footer">
-            <a href="#!">Add to schedule</a>
+          <a href="#!">Add to schedule</a>
         </section>
       </section>
     </div>

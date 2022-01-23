@@ -48,8 +48,8 @@ export const PersonalDetails = () => {
 
   return (
     <div className="mentor_personal_details_wrap" ref={wrapRef}>
-      <section className="mentor_personal_details_header">
-        <div>
+      <section className="mentor_personal_details_header mb-5">
+        <div className="position-fixed bg-pd-pro pt-3">
           <span>
             <section
               className="d-flex align-items-center"
@@ -60,12 +60,13 @@ export const PersonalDetails = () => {
             </section>
             <p>Let’s customise your experience</p>
           </span>
-          <ProgressBar progress={progress} />
-        </div>
+            <ProgressBar progress={progress} />
+        </div> 
       </section>
+
       <section className="mentor_personal_details_grid">
-        <div>
-          <ul className="mentor_personal_details_list">
+        <div className="my-5">
+          <ul className="mentor_personal_details_list position-fixed">
             <li
               onClick={() => switchForm('#personal_details')}
               className={
@@ -78,7 +79,8 @@ export const PersonalDetails = () => {
             <li
               onClick={() => switchForm('#work_experience')}
               className={
-                (hash === '#work_experience' || hash === '') && 'active-li'
+                (hash === '#work_experience' || hash === '#work_experience') &&
+                'active-li'
               }
             >
               Work Experience
@@ -86,32 +88,28 @@ export const PersonalDetails = () => {
 
             <li
               onClick={() => switchForm('#area_of_interest')}
-              className={
-                (hash === '#area_of_interest' || hash === '') && 'active-li'
-              }
+              className={hash === '#area_of_interest' && 'active-li'}
             >
               Area of interest / skills
             </li>
 
             <li
               onClick={() => switchForm('#consulting')}
-              className={(hash === '#consulting' || hash === '') && 'active-li'}
+              className={hash === '#consulting' && 'active-li'}
             >
               Consultant Offerings
             </li>
 
             <li
               onClick={() => switchForm('#assistant_info')}
-              className={
-                (hash === '#assistant_info' || hash === '') && 'active-li'
-              }
+              className={hash === '#assistant_info' && 'active-li'}
             >
               Assistant Info
             </li>
           </ul>
         </div>
-        <div className="mt-2 d-flex justify-content-end">
-          {hash === '#personal_details' ? (
+        <div className="mt-5 d-flex justify-content-end pt-5">
+          {hash === '' || hash === '#personal_details' ? (
             <Details />
           ) : hash === '#work_experience' ? (
             <WorkExperience />

@@ -10,7 +10,7 @@ import "./contactUs.css";
 
 export const ContactUs = () => {
   return (
-    <div className="wrapper">
+    <div className="mx-5 my-2">
       <section>
         <h1 className="contact-header">Contact Us</h1>
         <p className="contact-txt">
@@ -19,21 +19,21 @@ export const ContactUs = () => {
         </p>
       </section>
 
-      <section className="row mt-5">
-        <article className="col-lg-6 mt-2">
+      <section className="row mt-3">
+        <article className="col-lg-6 mt-4">
           <div className="d-flex align-items-center contact-us-info">
             <img src={map} alt="location" />
-            <p>San francisco United State</p>
+            <span>San francisco United State</span>
           </div>
 
           <div className="d-flex align-items-center contact-us-info">
             <img src={phone} alt="phone" />
-            <p>+234 789 504 345</p>
+            <span>+234 789 504 345</span>
           </div>
 
           <div className="d-flex align-items-center contact-us-info">
             <img src={web} alt="web" />
-            <p>www.michealsmith.com</p>
+            <span>www.michealsmith.com</span>
           </div>
 
           <div className="d-flex align-items-center social-links">

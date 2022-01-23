@@ -18,9 +18,9 @@ export const Dashboard = () => {
     { name: 'Investors', count: 30, color: '#DEF6FF' },
   ]
   return (
-    <div className="dashboard-main">
-      <section className="row">
-        <section className="col-lg-12 d-flex align-items-center dashboard-cards">
+    <div className="dashboard_main container-fluid">
+      <section className="row pb-5">
+        <section className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed mt-0" style={{background: '#fefefe'}}>
           {cardData.map((data, i) => (
             <DashCard
               name={data.name}
@@ -34,7 +34,7 @@ export const Dashboard = () => {
 
       <section className="row mt-0 dash-main-content">
         <div className="col-lg-12">
-          <div style={{ marginTop: '2.38rem' }}>
+          <div style={{ marginTop: '6.38rem' }}>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Assigned Startups</p>
               <p className="see-all">See All</p>

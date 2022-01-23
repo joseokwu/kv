@@ -33,7 +33,7 @@ export const PhoneInput = ({
           <div className="dropdown">
             <section data-toggle="dropdown">
               <span className="d-flex align-items-center">
-                <p className="phone-text">{prefix}</p>
+                <span className="phone-text">{prefix}</span>
                 <img src={down} alt="down" className="ml-2" />
               </span>
             </section>

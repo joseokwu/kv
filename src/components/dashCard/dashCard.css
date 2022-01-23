@@ -1,7 +1,7 @@
 .dashCard-main {
   padding: 14px 15px;
   /* max-width: 167px; */
-  width: 100%;
+  width: 18.5%;
   min-width: 150px;
   border-radius: 20px;
   color: white;
@@ -11,6 +11,10 @@
   position: relative;
   /* position: sticky; */
   overflow: hidden;
+}
+
+.dashboard_main {
+  padding: 0px 26px 52px 26px;
 }
 
 /* .dashCard-icon {

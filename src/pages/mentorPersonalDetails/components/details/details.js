@@ -140,14 +140,19 @@ const Details = () => {
           </section>
           <section className="col-md-6 mb-4">
             <TextField
-              label={'Google Meet*'}
-              placeholder={'Enter Google Meet link'}
+              label={'Zoom Link*'}
+              placeholder={'Enter Zoom Link'}
               required={true}
             />
           </section>
-
-          <section className="col-md-12 mb-4">
-            <PhoneInput label="Mobile Number" />
+          <section className="col-md-4 mb-4">
+            <TextField label={'Country'} placeholder={'Enter your country'} />
+          </section>
+          <section className="col-md-4 mb-4">
+            <TextField label={'State'} placeholder={'Enter your state'} />
+          </section>
+          <section className="col-md-4 mb-4">
+            <TextField label={'City'} placeholder={'Enter your city'} />
           </section>
 
           <section className="col-md-12 mb-4">
@@ -158,15 +163,13 @@ const Details = () => {
             />
           </section>
 
-          <section className="col-md-4 mb-4">
-            <TextField label={'Country'} placeholder={'Enter your country'} />
+          
+
+          <section className="col-md-12 mb-4">
+            <PhoneInput label="Mobile Number" />
           </section>
-          <section className="col-md-4 mb-4">
-            <TextField label={'State'} placeholder={'Enter your state'} />
-          </section>
-          <section className="col-md-4 mb-4">
-            <TextField label={'City'} placeholder={'Enter your city'} />
-          </section>
+
+         
         </div>
       </FormCard>
 

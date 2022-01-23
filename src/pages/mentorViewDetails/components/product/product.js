@@ -10,9 +10,9 @@ export const Product = () => {
   return (
     <div className="row">
       <section className="col-xl-8">
-        <div className="product-wrap">
+        <div className="product-wrap opp-page-card py-5">
           <h3>Product Description</h3>
-          <p className="border-bottom pb-3 mb-5 prod-desc">
+          <p className="pb-3 mb-5 prod-desc">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
             morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Enim lectus morbi elementum eu.Lorem ipsum dolor
@@ -27,13 +27,13 @@ export const Product = () => {
           <img
             src={demo}
             alt="demo video placeholder"
-            className="product-demo"
+            className="product-demo pb-4"
           />
         </div>
       </section>
 
       <section className="col-xl-4">
-        <div className="product-wrap mb-4">
+        <div className="product-wrap opp-page-card mb-4">
           <h3 className="border-bottom pb-3">Founder’s Profile</h3>
           <section className="d-flex align-items-center mt-3 product-founder">
             <img src={founder} alt="founder" />
@@ -49,7 +49,7 @@ export const Product = () => {
           </section>
         </div>
 
-        <div className="product-wrap">
+        <div className="product-wrap opp-page-card">
           <h3 className="border-bottom pb-3 mb-4">Investors</h3>
 
           <section className="d-flex align-items-center justify-content-between mt-4 product-investor">

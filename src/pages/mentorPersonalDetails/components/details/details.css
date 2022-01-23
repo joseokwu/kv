@@ -75,8 +75,7 @@
   background: #f9f9fc;
 }
 
-.male_btn,
-.female_btn:focus {
+.gender_choice :focus {
   color: #2e3192;
   background: #dcebff;
 }

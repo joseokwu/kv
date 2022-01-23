@@ -1,8 +1,9 @@
 .mentor_personal_details_wrap {
-  padding: 48px 9%;
+  /* padding: 48px 9%; */
+  padding: 0px 9% 48px 9%;
   background-color: #fdfdfd;
   height: calc(100vh - 60px);
-  overflow-y: auto;
+  /* overflow-y: auto; */
   scroll-behavior: smooth;
 }
 
@@ -10,6 +11,14 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1.125rem;
+  /* position:fixed; */
+  /* overflow-x:hidden; */
+}
+
+.bg-pd-pro {
+  /* background: #f9f9fc; */
+  background-color: #fdfdfd;
+  z-index: 999;
 }
 
 .mentor_personal_details_header h4 {
@@ -84,7 +93,7 @@
   overflow-y: auto; */
 }
 
-.register-form-wrap > h3 {
+/* .register-form-wrap > h3 {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
@@ -102,7 +111,7 @@
   line-height: 21px;
   color: #828282;
   margin-bottom: 44px;
-}
+} */
 
 .form-card {
   background-color: white;
@@ -219,14 +228,15 @@
   line-height: 20px;
 }
 
-.yes-btn {
-  color: #2e3192;
-  background: #dcebff;
-}
-
+.yes-btn,
 .no-btn {
   background: #f9f9fc;
   color: #4f4f4f;
+}
+
+.free-choice button:focus {
+  background: #dcebff;
+  color: #2e3192;
 }
 
 .free-choice {

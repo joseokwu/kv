@@ -37,15 +37,14 @@ const AssistantInfo = () => {
             />
           </section>
 
-          <section className="col-md-6 mb-4">
-            <TextField
-              label={'Email*'}
-              placeholder={'Michealsmith@gmail.com'}
-              required={true}
-            />
+          <section className="col-md-4 mb-4">
+            <TextField label={'Country'} placeholder={'Enter your country'} />
           </section>
-          <section className="col-md-6 mb-4">
-            <PhoneInput label="Mobile Number" />
+          <section className="col-md-4 mb-4">
+            <TextField label={'State'} placeholder={'Enter your state'} />
+          </section>
+          <section className="col-md-4 mb-4">
+            <TextField label={'City'} placeholder={'Enter your city'} />
           </section>
 
           <section className="col-md-12 mb-4">
@@ -57,14 +56,15 @@ const AssistantInfo = () => {
             />
           </section>
 
-          <section className="col-md-4 mb-4">
-            <TextField label={'Country'} placeholder={'Enter your country'} />
+          <section className="col-md-6 mb-4">
+            <TextField
+              label={'Email*'}
+              placeholder={'Michealsmith@gmail.com'}
+              required={true}
+            />
           </section>
-          <section className="col-md-4 mb-4">
-            <TextField label={'State'} placeholder={'Enter your state'} />
-          </section>
-          <section className="col-md-4 mb-4">
-            <TextField label={'City'} placeholder={'Enter your city'} />
+          <section className="col-md-6 mb-4">
+            <PhoneInput label="Mobile Number" />
           </section>
         </div>
       </FormCard>
@@ -82,9 +82,9 @@ const AssistantInfo = () => {
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
           <Button label="Save" variant="secondary" />
           <Button
-            label="Next"
+            label="Submit"
             onClick={() => {
-              push('#assistant_info')
+              push('#')
             }}
           />
         </div>
