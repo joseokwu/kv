@@ -40,7 +40,7 @@ const Star = ({ color }) => {
   );
 };
 
-export const CardFill = ({header, color, amount, time})=>{
+export const CardFill = ({header, color, amount, time, image})=>{
 
   return (
     <>
@@ -48,6 +48,7 @@ export const CardFill = ({header, color, amount, time})=>{
       <p> { header } </p>
       <h5> { amount } 
         <span> { time} </span>
+        <span>{image}</span>
        </h5>
     </CardWrap>
     </>

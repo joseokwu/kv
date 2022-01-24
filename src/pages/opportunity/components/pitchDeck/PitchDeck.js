@@ -8,10 +8,10 @@ import "./pitchDeck.css";
 
 export const PitchDeck = () => {
   return (
-    <div>
-      <h3 className="tab-section-title">Pitch Deck</h3>
+    <div className="">
+      {/* <h3 className="tab-section-title">Pitch Deck</h3> */}
 
-      <section className="row">
+      <section className="row pt-3">
         <div className="col-xl-3 col-lg-4 mb-4">
           <article className="deck-card">
             <div className="deck-card-img">

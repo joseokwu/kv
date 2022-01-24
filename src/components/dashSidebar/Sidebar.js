@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import "./sidebar.css";
-import { useHistory } from "react-router";
-import { investorNavigators , boosterNavigators } from '../../constants/sidebarRoutes';
-import helpDesk from "../../assets/icons/helpDesk.svg";
-import user from "../../assets/images/sampleUserSide.png";
-
+import React, { useEffect, useState } from 'react'
+import './sidebar.css'
+import { useHistory } from 'react-router-dom'
+import {
+  investorNavigators,
+  boosterNavigators,
+} from '../../constants/sidebarRoutes'
+import helpDesk from '../../assets/icons/helpDesk.svg'
+import user from '../../assets/images/sampleUserSide.png'
 
 export const DashSidebar = () => {
   const {
     location: { pathname },
     push,
-  } = useHistory();
+  } = useHistory()
 
   const activateLink = (path) => {
-    return pathname.includes(path) ? "active-side" : "" ;
-  };
-
-
+    return pathname.includes(path) ? 'active-side' : ''
+  }
 
   return (
     <div className="side-main">
@@ -25,9 +25,7 @@ export const DashSidebar = () => {
           <img src={user} alt="profile" />
         </div>
         <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
-        <p className="mb-0 side-text">
-          Startup
-        </p>
+        <p className="mb-0 side-text">Yebox Technologies</p>
 
         <ul className="side-list">
           {investorNavigators.length > 0 &&
@@ -41,16 +39,16 @@ export const DashSidebar = () => {
                     </p>
                   </a>
                 </li>
-              );
+              )
             })}
         </ul>
       </section>
-      <section className="side-footer my-5" onClick={() => push("/support")}>
+      <section className="side-footer my-5" onClick={() => push('/support')}>
         <img src={helpDesk} alt="help" />
         <p className="mb-0 side-text" role="button">
           Need help? Contact us
         </p>
       </section>
     </div>
-  );
-};
+  )
+}

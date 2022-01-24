@@ -1,15 +1,17 @@
-
 .header {
-  color:#020498;
+  color: #020498;
   font-size: 1.3rem;
   font-weight: bold;
 }
 
 .headBtn {
-  padding:5px 11px;
-  color:#fff;
-  border-radius: 8px;
-  background: #14157e;
+  padding: 5px 15px;
+  color: #ffffff;
+  border-radius: 10px;
+  background: #2e3192;
+  font-size: 14px;
+  line-height: 140%;
+  font-family: DM Sans;
 }
 
 .product-wrap {

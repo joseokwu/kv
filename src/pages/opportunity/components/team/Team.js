@@ -1,16 +1,18 @@
-import React from "react";
-import twitter from "../../../../assets/icons/twitterLogo.svg";
-import linkedIn from "../../../../assets/icons/linkedInLogo.svg";
-import whatsApp from "../../../../assets/icons/whatsapp.svg";
-import member from "../../../../assets/images/sampleTeamMember.png";
-import "./team.css";
+import React from 'react'
+import twitter from '../../../../assets/icons/twitterLogo.svg'
+import linkedIn from '../../../../assets/icons/linkedInLogo.svg'
+import whatsApp from '../../../../assets/icons/whatsapp.svg'
+import member from '../../../../assets/images/sampleTeamMember.png'
+import './team.css'
 
 export const Team = () => {
-  const count = [1, 2, 3, 4, 5, 6];
+  const count = [1, 2, 3, 4, 5, 6]
   return (
     <div>
-      <h3 className="tab-section-title">Team</h3>
-
+      {/* <h3 className="tab-section-title">Team</h3> */}
+      <section className="d-flex justify-content-end">
+        <span className="headBtn">Add team member</span>
+      </section>
       <section>
         <h4 className="team-group-title">Founder & Co-Founders</h4>
 
@@ -20,7 +22,7 @@ export const Team = () => {
               <article className="col-lg-4 mb-4">
                 <TeamMember key={`founder-member-${i}`} />
               </article>
-            );
+            )
           })}
         </div>
       </section>
@@ -34,13 +36,13 @@ export const Team = () => {
               <article className="col-lg-4 mb-4">
                 <TeamMember key={`member-${i}`} />
               </article>
-            );
+            )
           })}
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
 const TeamMember = () => {
   return (
@@ -62,5 +64,5 @@ const TeamMember = () => {
         </span>
       </section>
     </div>
-  );
-};
+  )
+}

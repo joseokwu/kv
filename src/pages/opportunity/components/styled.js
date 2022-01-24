@@ -5,7 +5,7 @@ export const FundRounding = styled.div`
 width:80%;
 padding:1.2rem;
 background:#fff;
-border-radius:8px;
+border-radius: 1.25rem;
 margin-bottom:10px;
 
 h6 {
@@ -15,15 +15,18 @@ h6 {
     font-weight:600;
 }
 
-p {
-    display:flex;
-    margin-top:9px;
+article {
+    /* display:flex; */
+    /* margin-top:9px; */
     font-size:16px;
-    color:#232323;
+    color: #828282;
+    line-height: 21px;
+    font-family: DM Sans;
+    letter-spacing: 0.01em;
 }
 
 span {
-        color:#c2c2c2;
+        /* color:#c2c2c2; */
     }
 
 

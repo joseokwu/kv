@@ -7,7 +7,7 @@ import './roadMap.css'
 export const RoadMap = () => {
   return (
     <div>
-      <h3 className="tab-section-title">Future Road Map</h3>
+      {/* <h3 className="tab-section-title">Future Road Map</h3> */}
 
       <section className="row">
         <div className="col-xl-4 col-lg-5 mb-4">

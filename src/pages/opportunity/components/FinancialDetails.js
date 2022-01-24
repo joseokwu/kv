@@ -7,11 +7,11 @@ import office from "../../../assets/icons/building.svg";
 
 export const FinancialDetails = () => {
   return (
-    <div className="mt-4 opp-page-card py-3">
+    <div className="mt-3 opp-page-card py-4">
       <h3 className="sub-card-title">Contact Details</h3>
 
       <section
-        className="d-flex align-items-center justify-content-between mt-4 border-bottom pb-4 flex-wrap"
+        className="d-flex align-items-center justify-content-between mt-4 pb-4 flex-wrap"
         style={{ rowGap: 10 }}
       >
         <div className="d-flex align-items-center">

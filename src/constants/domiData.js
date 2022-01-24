@@ -47,24 +47,25 @@ export  const stage = [
 
     {
       header:'Total Fund',
-      amount:'$ 700,000',
+      amount:'$700,000',
       color: '#2E3192'
     },
     {
       header:'Last Funding Round',
-      amount:'$ 500,000',
+      amount:'$500,000',
       color:'#00ADEF',
       time:'(9 oct 2021)'
       
     },
     {
       header:'Investors',
-      amount:'8',
+      // amount:'8',
+      image: require('../assets/icons/person1.svg'),
       color:'#2E3192'
     },
     {
       header:'Valuation',
-      amount:'$ 8',
+      amount:'$5',
       color:'#00ADEF',
       time:'(9 oct 2021)'
     }
