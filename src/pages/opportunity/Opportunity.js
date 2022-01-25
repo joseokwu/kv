@@ -22,7 +22,7 @@ export const Opportunity = ({ history }) => {
     "team",
     "product",
     "business canvas",
-    "fundraising",
+    // "fundraising",
     "Milestone/Timeline",
     "Product Road Map",
   ];
@@ -39,7 +39,8 @@ export const Opportunity = ({ history }) => {
         return <RoadMap />;
       case "#team":
         return <Team />;
-
+      case "#Milestone/Timeline":
+        return <div>Milestone/Timeline</div>;
       default:
         return <Product />;
     }

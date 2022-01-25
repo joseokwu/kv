@@ -61,14 +61,6 @@ export const RoadMap = () => {
             </div>
 
             <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
-              <MapPoint />
-              <span>
-                <p className="point-title">Revenue generating</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
-              </span>
-            </div>
-
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
               <MapPoint withStem={false} />
               <span>
                 <p className="point-title">Growth</p>
