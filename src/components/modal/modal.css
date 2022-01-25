@@ -58,6 +58,31 @@
   height: 80vh;
 }
 
+.large-modal {
+  width: 70% !important;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background: #fff; */
+  background: #f9f9fc;
+  /* padding: 20px; */
+  border-radius: 8px;
+  z-index: 999;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+  height: 80vh;
+}
+
+/* .top-grey {
+  position: absolute;
+  height: 198px;
+  background: #f9f9fc;
+  background: red;
+  z-index: -1;
+} */
+
 .modalCloseImg {
   cursor: pointer;
   /* float: right; */

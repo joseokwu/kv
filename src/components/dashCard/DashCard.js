@@ -1,26 +1,16 @@
-import React from "react";
-import "./dashCard.css";
-import { CardWrapper, CardWrap } from  "./dash.styled";
+import React from 'react'
+import './dashCard.css'
+import { CardWrapper, CardWrap } from './dash.styled'
 
-
-export const DashCard = ({
-  icon ,
-  count,
-  name ,
-  color 
-}) => {
+export const DashCard = ({ icon, count, name, color }) => {
   return (
-  
-
     <CardWrapper>
-      
-        <h3>{name}</h3>
-        <p>{count}</p>
-        <img src={icon} style={{color:color}} className="card-star"  />
-     
+      <h3>{name}</h3>
+      <p>{count}</p>
+      <img src={icon} style={{ color: color }} className="card-star" />
     </CardWrapper>
-  );
-};
+  )
+}
 
 const Star = ({ color }) => {
   return (
@@ -37,21 +27,19 @@ const Star = ({ color }) => {
         fill={color}
       />
     </svg>
-  );
-};
+  )
+}
 
-export const CardFill = ({header, color, amount, time, image})=>{
-
+export const CardFill = ({ header, color, amount, time }) => {
   return (
     <>
-    <CardWrap bg={color} >
-      <p> { header } </p>
-      <h5> { amount } 
-        <span> { time} </span>
-        <span>{image}</span>
-       </h5>
-    </CardWrap>
+      <CardWrap bg={color}>
+        <p> {header} </p>
+        <h5>
+          {amount}
+          <span> {time} </span>
+        </h5>
+      </CardWrap>
     </>
   )
-
 }

@@ -59,13 +59,12 @@ export  const stage = [
     },
     {
       header:'Investors',
-      // amount:'8',
-      image: require('../assets/icons/person1.svg'),
+      amount:'8',
       color:'#2E3192'
     },
     {
       header:'Valuation',
-      amount:'$5',
+      amount:'$5M',
       color:'#00ADEF',
       time:'(9 oct 2021)'
     }

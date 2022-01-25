@@ -11,9 +11,9 @@ export const Dashboard = () => {
   const appCardData = [1, 2, 3, 4, 5]
   return (
     <div className="dashboard-main">
-      <section className="startup-dash mb-4">
+      {/* <section className="startup-dash mb-4">
         <h2>Yebox Techologies</h2>
-      </section>
+      </section> */}
       <section className="row ">
         {cardData.map((data, i) => (
           <>
@@ -42,8 +42,10 @@ export const Dashboard = () => {
         ))}
       </section>
 
-      <section>
-        <TodoList />
+      <section className="row">
+        <div className="col-lg-12">
+          <TodoList />
+        </div>
       </section>
       <section className="my-4">
         <UpComing />
