@@ -63,7 +63,6 @@ export const Opportunity = ({ history }) => {
 
       <article className="wrapper">
         <Tabs tabItems={tabItems} />
-
         <div className="py-4">{renderContent()}</div>
       </article>
     </div>

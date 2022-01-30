@@ -28,7 +28,7 @@ export const Program = () => {
       case '#Assignment':
         return <Assignment />
       case '#Rating':
-        return <Rating />
+        return <div></div>
       default:
         return <span></span>
     }

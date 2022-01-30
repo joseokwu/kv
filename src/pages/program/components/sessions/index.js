@@ -1,6 +1,7 @@
-import { TodoCard } from './session.styled'
+import { TodoCard, TabFilterWrapper } from './session.styled'
 import person3 from '../../../../assets/icons/person3.svg'
 import clock from '../../../../assets/icons/clocksm.svg'
+import down from '../../../../assets/icons/downArrow.svg'
 import { CustomThreeDots } from '../../../../components'
 import { Tag } from '../../../../components/tag/Tag'
 
@@ -13,6 +14,21 @@ export const Session = () => {
 
   return (
     <div className="row mt-5">
+      {/* <TabFilterWrapper>
+      <div className="me-3 my-3 d-flex justify-content-end">
+          <button
+            className="d-flex align-items-center sort-btn"
+            style={{ columnGap: 7 }}
+            data-toggle="dropdown"
+          >
+            <span>
+              <span>Sort by: </span> Industry
+            </span>
+            <img src={down} alt="down" />
+          </button>
+        </div>
+      </TabFilterWrapper> */}
+
       {upArr.map((i) => (
         <TodoCard key={i} className="col-6 mx-3 px-5">
           <div className="d-flex justify-content-between head">

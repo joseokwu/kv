@@ -59,7 +59,7 @@
 }
 
 .large-modal {
-  width: 70% !important;
+  width: 65% !important;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -72,7 +72,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
-  height: 80vh;
+  height: 90vh;
 }
 
 /* .top-grey {

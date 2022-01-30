@@ -98,3 +98,20 @@ export const TodoCard = styled.div`
     width: 100%;
   }
 `
+
+// export const TabFilterWrapper = styled.div`
+//   .sort-btn {
+//     background: #F9F9FC;
+//     border-radius: 5px;
+//     border: none;
+//     height: 3.063rem;
+//     padding: 0.75rem;
+
+//     span {
+//       font-family: Lato;
+//       font-size: 1.125rem;
+//       line-height: 140%;
+//       color: #656363;
+//     }
+//   }
+// `

@@ -119,7 +119,7 @@ const FounderModal = () => {
             </p>
           </div>
 
-          <div className="mb-5 pb-5">
+          <div className="pb-3">
             <span>
               <img className="pr-1" src={globe} alt="globe" />
               @promiseamstel
@@ -141,69 +141,6 @@ const FounderModal = () => {
       <div className="col">
         <div className="dashboard_profile_banner"></div>
         <div className="dashboard_profile_info">
-          {/* <span className="dashboard_profile_image">
-            <img src={founder} alt="founder pic" />
-          </span> */}
-
-          {/* <article className="mx-5 mt-4 d-flex">
-          <span className="dashboard_profile_image">
-            <img src={founder} alt="founder pic" />
-          </span>
-            <section className="d-flex">
-              <div className="mr-5 founder_details">
-                <div>
-                  <h3>Prima Jakatar</h3>
-                </div>
-                <div>
-                  <p className="pt-3">Founder and CEO</p>
-                </div>
-              </div>
-
-              <div className="d-flex">
-                <div>
-                  <img className="pr-3" src={linkedIn} alt="linkedIn" />
-                </div>
-                <div>
-                  <img className="pr-3" src={twitter} alt="twitter" />
-                </div>
-                <div>
-                  <img className="pr-3" src={whatsApp} alt="whatsapp" />
-                </div>
-              </div>
-            </section>
-
-            <section className="mt-5 details_founder">
-              <div className="mb-2">
-                <p>
-                  <img className="pr-2" src={mail} alt="mail" />
-                  Promise_Amstel@gmail.com
-                </p>
-              </div>
-
-              <div className="d-flex">
-                <div className="mr-3">
-                  <span>
-                    <img className="pr-2" src={globe} alt="mail" />
-                    @promiseamstel
-                  </span>
-                </div>
-
-                <div className="mr-3">
-                  <span>
-                    <img className="pr-2" src={split} alt="mail" />
-                    @promiseamstel
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    <img className="pr-2" src={split} alt="mail" />
-                    @promiseamstel
-                  </span>
-                </div>
-              </div>
-            </section>
-          </article> */}
-
           <section className="row founder_main mt-5 pb-5 mb-5 py-5">
             <div className="col-lg-11 founder_card">
               <div className="p-4">

@@ -12,6 +12,7 @@
   font-size: 14px;
   line-height: 140%;
   font-family: DM Sans;
+  cursor: pointer;
 }
 
 .product-wrap {
@@ -117,4 +118,52 @@
   line-height: 140%;
   text-decoration-line: underline;
   color: #5355a3;
+}
+
+.product-desc h1 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.product-desc p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.youtube button {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  color: #ffffff;
+  background: #2e3192;
+  border-radius: 10px;
+  border: none;
+  padding: 8px 30px;
+}
+
+.product-update button {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  padding: 8px 30px;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  color: #ffffff;
+  background: #2e3192;
+  border-radius: 10px;
+  border: none;
 }

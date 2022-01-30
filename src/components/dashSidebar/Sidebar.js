@@ -19,7 +19,7 @@ export const DashSidebar = () => {
   }
 
   return (
-    <div className="side-main">
+    <div className="side_main">
       <section className="side-navigator">
         <div>
           <img src={user} alt="profile" />

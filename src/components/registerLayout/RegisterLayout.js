@@ -39,7 +39,7 @@ const StartupRegistrationLayout = ({ children }) => {
         <div className='col-lg-3 is-hidden-mobile' style={{background:'white'}} >
           <StartupSideBar />
         </div>
-        <div className="col-lg-9" style={{background:"#f0f0f0"}} >{children}</div>
+        <div className="col-lg-9" style={{background:""}} >{children}</div>
         </div>
 
       </section>
