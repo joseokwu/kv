@@ -14,7 +14,7 @@ export const Dashboard = () => {
       {/* <section className="startup-dash mb-4">
         <h2>Yebox Techologies</h2>
       </section> */}
-      <section className="row position-fixed" style={{zIndex: '999', background: '#FEFEFE'}}>
+      <section className="row" style={{zIndex: '999', background: '#FEFEFE'}}>
         {cardData.map((data, i) => (
           <>
             <DashCard
