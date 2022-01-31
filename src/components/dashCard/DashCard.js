@@ -38,7 +38,7 @@ export const CardFill = ({ header, color, amount, time }) => {
     <>
       <div
         className="col d-flex justify-content-center"
-        style={{ paddingTop: '150px' }}
+        // style={{ paddingTop: '150px' }}
       >
         <CardWrap bg={color}>
           <p> {header} </p>
