@@ -1,4 +1,4 @@
-.side-main {
+.side_main {
   height: calc(100vh - 60px);
   background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
   color: white;
@@ -7,11 +7,12 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 500px;
-  overflow-y: auto;
-  padding-bottom: 30px;
+  /* overflow-y: auto; */
+  /* padding-bottom: 30px; */
 }
 
-.side-navigator {
+.side-navigator img {
+  cursor: pointer;
 }
 
 .side-footer {
@@ -35,7 +36,7 @@
 }
 
 .side-list li {
-  margin-bottom: 24px;
+  margin-bottom: 1rem;
 }
 
 .side-list img {
@@ -59,7 +60,7 @@
 .side-text {
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 17px;
   line-height: 140%;
   color: #ffffff;
 }

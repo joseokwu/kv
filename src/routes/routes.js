@@ -25,6 +25,8 @@ import {
   Program,
   FundingRaising
 } from "../pages";
+import { StartupDealRoom } from "../pages/dealRoom/dealRoom";
+import { StartupNetworking } from "../pages/networking/networking";
 import { StartupTodoList } from "../pages/todoList/todoList";
 
 const routes = [
@@ -143,6 +145,16 @@ const routes = [
     component: WithDashboardLayout(StartupTodoList),
     exact: true,
     protected: false,
+  },
+  {
+    name: "Networking",
+    path: "/networking",
+    component: WithDashboardLayout(StartupNetworking),
+  },
+  {
+    name: "DealRoom",
+    path: "/dealroom",
+    component: WithDashboardLayout(StartupDealRoom),
   },
   {
     name: "InvestorDashboard",

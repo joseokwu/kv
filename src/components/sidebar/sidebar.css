@@ -20,7 +20,6 @@
   justify-content: space-between;
   min-height: 500px;
   overflow-y: auto;
-  
 }
 
 .side-navigator {
@@ -30,7 +29,6 @@
   display: flex;
   align-items: center;
   column-gap: 14px;
-  
 }
 
 .side-list {
@@ -82,7 +80,13 @@
 }
 
 .side-list-start span p {
-  color: #050505;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+  color: #525151;
 }
 
 .active-side {
@@ -95,13 +99,11 @@
 
 .active-side-start {
   padding: 10px 17px;
-  background: #DCEBFF;
-  color: #1c10c2 !important;
+  background: #dcebff;
+  color: #2E3192 !important;
   border-radius: 10px;
   cursor: pointer;
 }
-
-
 
 .side-text {
   font-style: normal;
@@ -134,6 +136,3 @@
 .side-header + p {
   opacity: 0.7;
 }
-
-
-

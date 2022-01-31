@@ -1,6 +1,5 @@
 .dashboard-main {
-  padding: 52px 26px;
-  
+  padding: 0px 15px 52px 15px;
 }
 
 .dashboard-cards {
@@ -38,4 +37,16 @@
 
 .dash-main-content {
   max-width: 1200px;
+}
+
+.startup-dash h2 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  color: #2e3192;
 }

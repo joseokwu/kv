@@ -9,7 +9,7 @@ fontWeight = 'normal', padding='4px 10px'
    <div onClick={onClick}>
       <span
       className={`tag-main ${className} `}
-      style={{ backgroundColor: `${bg}20`, 
+      style={{ backgroundColor: `${bg}`, 
       color: color, fontSize:fz, fontWeight:fontWeight , padding:padding  }}
     >
       {name}

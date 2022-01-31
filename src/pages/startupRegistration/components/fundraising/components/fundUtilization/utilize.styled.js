@@ -4,8 +4,8 @@ import styled from 'styled-components/macro';
 export const BodyWrapper = styled.div`
 
     margin-bottom:10px;
-    margin-top:15px;
-    margin-left:15px;
+    margin-top:30px;
+    margin-left:50px;
     .span {
     font-family:DM Sans;
     font-weight:500;
@@ -81,7 +81,7 @@ textarea {
     &:focus {
         outline:0;
     }
-
+}
 `
 
 export const BntWrap = styled.div`
@@ -96,14 +96,18 @@ export const BntWrap = styled.div`
 
 export const DownloadableButton = styled.a`
 
-width:45%;
+width:55%;
 display:flex;
 background:#F9F9FC;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-color:#100298;
-font-size:1rem;
+color: #2E3192;
+font-family: DM Sans;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 20px;
 padding:0.6rem;
 border-radius:20px;
 
@@ -119,7 +123,7 @@ justify-content: center;
 align-items: center;
 padding: 20px;
 
-width:60%;
+width:85%;
 height: 75%;
 background:#fff;
 margin:10px;

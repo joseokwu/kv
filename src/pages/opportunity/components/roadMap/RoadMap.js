@@ -7,7 +7,7 @@ import './roadMap.css'
 export const RoadMap = () => {
   return (
     <div>
-      <h3 className="tab-section-title">Future Road Map</h3>
+      {/* <h3 className="tab-section-title">Future Road Map</h3> */}
 
       <section className="row">
         <div className="col-xl-4 col-lg-5 mb-4">
@@ -48,14 +48,6 @@ export const RoadMap = () => {
               <MapPoint />
               <span>
                 <p className="point-title">Early customers</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
-              </span>
-            </div>
-
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
-              <MapPoint />
-              <span>
-                <p className="point-title">Revenue generating</p>
                 <p className="point-desc">Euismod netus eget donec diam.</p>
               </span>
             </div>

@@ -50,6 +50,7 @@
 .header-right-content {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {

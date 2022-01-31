@@ -101,8 +101,8 @@ export const startUpRoutes = [
     },
     {
       title: "Deal Room",
-      activator: "deal_room",
-      path: "/deal_room",
+      activator: "dealroom",
+      path: "/dealroom",
       icon: dealroom,
     },
   ];
