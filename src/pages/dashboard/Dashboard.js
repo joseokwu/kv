@@ -14,11 +14,11 @@ export const Dashboard = () => {
       {/* <section className="startup-dash mb-4">
         <h2>Yebox Techologies</h2>
       </section> */}
-      <section className="row ">
+      <section className="row position-fixed" style={{zIndex: '999', background: '#FEFEFE'}}>
         {cardData.map((data, i) => (
           <>
             <DashCard
-              className="col-lg-3 col-md-6 col-12 "
+              className="col-lg-3 col-md-6 col-12"
               icon={data.icon}
               name={data.name}
               count={data.count}

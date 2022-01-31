@@ -4,11 +4,14 @@ import { CardWrapper, CardWrap } from './dash.styled'
 
 export const DashCard = ({ icon, count, name, color }) => {
   return (
-    <CardWrapper>
-      <h3>{name}</h3>
-      <p>{count}</p>
-      <img src={icon} style={{ color: color }} className="card-star" />
-    </CardWrapper>
+    <div className="col d-flex justify-content-center">
+      {/* <CardWrapper className=" position-fixed" style={{ zIndex: '999' }}> */}
+      <CardWrapper className="">
+        <h3>{name}</h3>
+        <p>{count}</p>
+        <img src={icon} style={{ color: color }} className="card-star" />
+      </CardWrapper>
+    </div>
   )
 }
 
@@ -33,13 +36,18 @@ const Star = ({ color }) => {
 export const CardFill = ({ header, color, amount, time }) => {
   return (
     <>
-      <CardWrap bg={color}>
-        <p> {header} </p>
-        <h5>
-          {amount}
-          <span> {time} </span>
-        </h5>
-      </CardWrap>
+      <div
+        className="col d-flex justify-content-center"
+        style={{ paddingTop: '150px' }}
+      >
+        <CardWrap bg={color}>
+          <p> {header} </p>
+          <h5>
+            {amount}
+            <span> {time} </span>
+          </h5>
+        </CardWrap>
+      </div>
     </>
   )
 }

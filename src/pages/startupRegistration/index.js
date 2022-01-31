@@ -36,33 +36,36 @@ export const StartUpRegistration = () => {
 
   return (
     <>
-    <div className="mx-5">
-      <div className="container">
-        <WelcomeMessage>
-          <h5>
-            Hi Micheal{' '}
-            <span style={{ color: 'rgb(199, 249, 15)', marginLeft: '9px' }}>
-              {' '}
-              &#128075;
-            </span>{' '}
-          </h5>
-          <p>Let's customize your experience</p>
-        </WelcomeMessage>
-        <div style={{ width: '100%' }}>
-          <ProgressBar progress={progressStat} />
-        </div>
-        <RegCard>
-        <div className="reg-card py-5 px-5 my-5">
-          {path === 1 && <StartupProfile />}
-          {path === 2 && <PitchDeck />}
+      <div className="mx-5">
+        <div className="container">
+          <div className='position-fixed' style={{zIndex: '999', background: '#FFFFFF', width: '68%'}}>
+            <WelcomeMessage>
+              <h5>
+                Hi Micheal{' '}
+                <span style={{ color: 'rgb(199, 249, 15)', marginLeft: '9px' }}>
+                  {' '}
+                  &#128075;
+                </span>{' '}
+              </h5>
+              <p>Let's customize your experience</p>
+            </WelcomeMessage>
+            <div style={{ width: '100%' }}>
+              <ProgressBar progress={progressStat} />
+            </div>
+          </div>
 
-          {path === 3 && <TeamProfile />}
+          <RegCard>
+            <div className="reg-card py-5 px-5 my-5">
+              {path === 1 && <StartupProfile />}
+              {path === 2 && <PitchDeck />}
 
-          {path === 4 && <Product />}
-          {path === 5 && <FundRaising />}
-        </div>
-        </RegCard>
-        {/* <div style={{ marginTop: '15px' }} className="reg-card">
+              {path === 3 && <TeamProfile />}
+
+              {path === 4 && <Product />}
+              {path === 5 && <FundRaising />}
+            </div>
+          </RegCard>
+          {/* <div style={{ marginTop: '15px' }} className="reg-card">
           {path === 1 && <StartupProfile />}
           {path === 2 && <PitchDeck />}
 
@@ -71,7 +74,7 @@ export const StartUpRegistration = () => {
           {path === 4 && <Product />}
           {path === 5 && <FundRaising />}
         </div> */}
-      </div>
+        </div>
       </div>
     </>
   )

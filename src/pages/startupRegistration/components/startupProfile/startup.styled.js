@@ -35,12 +35,12 @@ export const InputWrapper = styled.label`
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  background: #d2d2d2;
+  background: #2BB4F0;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 250px;
-  left: 90px;
+  top: 320px;
+  left: 120px;
 
   input {
     width: inherit;

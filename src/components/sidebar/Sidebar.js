@@ -1,71 +1,71 @@
-import React, { useEffect, useState } from "react";
-import "./sidebar.css";
-import { useHistory } from "react-router";
-import user from "../../assets/images/sampleUserSide.png";
-import dashboard from "../../assets/icons/dashboard.svg";
-import startup from "../../assets/icons/startupApplicants.svg";
-import event from "../../assets/icons/eventIcon.svg";
-import helpDesk from "../../assets/icons/helpDesk.svg";
-import { startUpRoutes } from "../../constants/sidebarRoutes";
-import { useActivity } from "../../hooks/useBusiness";
+import React, { useEffect, useState } from 'react'
+import './sidebar.css'
+import { useHistory } from 'react-router'
+import user from '../../assets/images/sampleUserSide.png'
+import dashboard from '../../assets/icons/dashboard.svg'
+import startup from '../../assets/icons/startupApplicants.svg'
+import event from '../../assets/icons/eventIcon.svg'
+import helpDesk from '../../assets/icons/helpDesk.svg'
+import { startUpRoutes } from '../../constants/sidebarRoutes'
+import { useActivity } from '../../hooks/useBusiness'
 
 const investorNavigators = [
   {
-    title: "Dashboard",
-    activator: "dashboard",
-    path: "/investor/dashboard",
+    title: 'Dashboard',
+    activator: 'dashboard',
+    path: '/investor/dashboard',
     icon: dashboard,
   },
   {
-    title: "Investment Opportunities",
-    activator: "opportunities",
-    path: "/investor/opportunities",
+    title: 'Investment Opportunities',
+    activator: 'opportunities',
+    path: '/investor/opportunities',
     icon: startup,
   },
   {
-    title: "Events",
-    activator: "events",
-    path: "/investor/events",
+    title: 'Events',
+    activator: 'events',
+    path: '/investor/events',
     icon: event,
   },
-];
+]
 
 const boosterNavigators = [
   {
-    title: "Dashboard",
-    activator: "dashboard",
-    path: "/dashboard",
+    title: 'Dashboard',
+    activator: 'dashboard',
+    path: '/dashboard',
     icon: dashboard,
   },
   {
-    title: "Startup Applicants",
-    activator: "applicants",
-    path: "/applicants",
+    title: 'Startup Applicants',
+    activator: 'applicants',
+    path: '/applicants',
     icon: startup,
   },
-];
+]
 
 export const Sidebar = () => {
   const {
     location: { pathname },
     push,
-  } = useHistory();
+  } = useHistory()
 
   const activateLink = (path) => {
-    return pathname.includes(path) ? "active-side" : "";
-  };
+    return pathname.includes(path) ? 'active-side' : ''
+  }
 
-  const [navigator, setNavigator] = useState([]);
+  const [navigator, setNavigator] = useState([])
 
   useEffect(() => {
-    if (pathname.includes("investor")) {
-      setNavigator(investorNavigators);
+    if (pathname.includes('investor')) {
+      setNavigator(investorNavigators)
     } else {
-      setNavigator(boosterNavigators);
+      setNavigator(boosterNavigators)
     }
-  }, [pathname]);
+  }, [pathname])
 
-  console.log(`navigator`, navigator);
+  console.log(`navigator`, navigator)
 
   return (
     <div className="side-main">
@@ -75,7 +75,7 @@ export const Sidebar = () => {
         </div>
         <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
         <p className="mb-0 side-text">
-          {pathname.includes("investor") ? "Investor" : "Partner"}
+          {pathname.includes('investor') ? 'Investor' : 'Partner'}
         </p>
 
         <ul className="side-list">
@@ -90,59 +90,48 @@ export const Sidebar = () => {
                     </p>
                   </a>
                 </li>
-              );
+              )
             })}
         </ul>
       </section>
-      <section className="side-footer mt-5" onClick={() => push("/support")}>
+      <section className="side-footer mt-5" onClick={() => push('/support')}>
         <img src={helpDesk} alt="help" />
         <p className="mb-0 side-text" role="button">
           Need help? Contact us
         </p>
       </section>
     </div>
-  );
-};
-
-
-
-
+  )
+}
 
 export const StartupSideBar = () => {
-
-
-  const { state : { path }, changePath } = useActivity()
-  
+  const {
+    state: { path },
+    changePath,
+  } = useActivity()
 
   const activateLink = (pathNum) => {
-    return path === pathNum ? "active-side-start" : "side-text-start";
-  };
-
-  
+    return path === pathNum ? 'active-side-start' : 'side-text-start'
+  }
 
   return (
     <div className="start-main">
-      <section className="side-navigator">
-      
-
+      <section className="side-navigator position-fixed">
         <ul className="side-list-start">
-          { startUpRoutes &&
+          {startUpRoutes &&
             startUpRoutes.map((nav, i) => {
               return (
-                <li key={i} >
-                  <span onClick={()=> changePath(nav.path)} >
-                  
+                <li key={i}>
+                  <span onClick={() => changePath(nav.path)}>
                     <p className={`${activateLink(nav.path)} side-text-start`}>
                       {nav.title}
                     </p>
                   </span>
                 </li>
-              );
+              )
             })}
         </ul>
       </section>
-
     </div>
-  );
-};
-
+  )
+}

@@ -119,7 +119,7 @@ export const FundUtilization  = ()=>{
         <div>
                <Header className='d-flex justify-content-between' >
             <div>
-                <h4>Funding Utilization</h4>
+                {/* <h4>Funding Utilization</h4> */}
             </div>
             <div className='d-flex' >
                 <img src={downloadIcon} className='mr-2'  alt='.'  />

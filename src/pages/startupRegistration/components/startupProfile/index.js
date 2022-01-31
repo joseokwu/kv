@@ -92,7 +92,7 @@ export const StartupProfile = () => {
 
         <InputWrapper for="dp">
           <input type="file" onChange={onChangeImage} id="dp" hidden />
-          <PlusOutlined />
+          <PlusOutlined style={{color: 'white'}} />
         </InputWrapper>
       </div>
       <form onSubmit={formik.handleSubmit}>
