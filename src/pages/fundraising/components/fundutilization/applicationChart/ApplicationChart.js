@@ -7,8 +7,8 @@ const ApplicationChart = ({ header }) => {
   return (
     <ChartWrapper className="p-4">
       <h4 className="appChart-header">{header}</h4>
-      <div className="d-flex">
-        <div className="me-3">
+      <div className="row">
+        <div className="col-lg-7 me-3">
           <Doughnut
             data={{
               labels: [
@@ -29,7 +29,7 @@ const ApplicationChart = ({ header }) => {
                     '#890C85',
                   ],
                   hoverOffset: 5,
-                  // cutout: 90,
+                  cutout: '55%',
                 },
               ],
             }}
@@ -44,7 +44,7 @@ const ApplicationChart = ({ header }) => {
           />
         </div>
 
-        <section className="mx-3 my-5">
+        <section className="mx-3 my-5 col-lg-4 d-flex flex-column justify-content-center">
           <div className="d-flex mb-3">
             <LabelCheck color="#C5C5C5" />
             <article className="label-name">Other</article>

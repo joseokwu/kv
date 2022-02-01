@@ -2,6 +2,7 @@ import { Header, Table, Section } from './utilization'
 import downloadIcon from '../../../../assets/icons/downloadoutline.svg'
 import ApplicationChart from './applicationChart/ApplicationChart'
 import html2pdf from 'html2pdf.js'
+import { Select } from '../../../../components'
 
 export const FundUtilization = () => {
   const downloadStatement = () => {
@@ -122,7 +123,7 @@ export const FundUtilization = () => {
       </Header>
 
       <Section id="utilization" className="table-responsive">
-        <Table className="table ">
+        <Table className="table text-center">
           <thead className="">
             <tr>
               <th></th>
@@ -152,17 +153,33 @@ export const FundUtilization = () => {
       </Section>
 
       <Section className="row py-5">
-        <div className="col-xl-6 col-lg-6 mt-5">
-          <ApplicationChart header="Monthly Revenue" />
+        <div className="mb-4 d-flex justify-content-end">
+          <Select
+            options={[
+              'Month 1',
+              'Month 2',
+              'Month 3',
+              'Month 4',
+              'Month 5',
+              'Month 6',
+            ]}
+            placeholder={'Month 1'}
+          />
         </div>
-        <div className="col-xl-6 col-lg-6 mt-5">
-          <ApplicationChart header="Monthly Expenses" />
-        </div>
-        <div className="col-xl-6 col-lg-6 mt-5">
-          <ApplicationChart header="Burn Rate" />
-        </div>
-        <div className="col-xl-6 col-lg-6 mt-5">
-          <ApplicationChart header="Runway Months" />
+
+        <div className="row">
+          <div className="col-xl-6 col-lg-6 mt-5">
+            <ApplicationChart header="Monthly Revenue" />
+          </div>
+          <div className="col-xl-6 col-lg-6 mt-5">
+            <ApplicationChart header="Monthly Expenses" />
+          </div>
+          <div className="col-xl-6 col-lg-6 mt-5">
+            <ApplicationChart header="Burn Rate" />
+          </div>
+          <div className="col-xl-6 col-lg-6 mt-5">
+            <ApplicationChart header="Runway Months" />
+          </div>
         </div>
       </Section>
     </div>
