@@ -1,74 +1,91 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components/macro'
 
 export const Header = styled.div`
+  h4 {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 31px;
+    display: flex;
+    letter-spacing: 0.01em;
+    color: #2e3192;
+  }
 
-h4 {
-font-family: DM Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 24px;
-line-height: 31px;
-display: flex;
+  span {
+    background: #2e3192;
+    border-radius: 10px;
+    padding: 8px 25px;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 140%;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+  }
 
-letter-spacing: 0.01em;
-color:#2E3192
-
-}
-
-span {
-background: #2E3192;
-border-radius: 10px;
-flex: none;
-order: 1;
-flex-grow: 0;
-margin: 0px 8px;
-padding:4px 10px;
-color:#fff;
-}
-
-a {
-font-size: 15px;
-line-height: 31px;
-color:#2E3192
-}
-
+  a {
+    font-size: 14px;
+    line-height: 31px;
+    color: #2e3192;
+    text-decoration: underline;
+    font-family: DM Sans;
+    font-weight: bold;
+  }
 `
 
 export const Table = styled.table`
+  margin-top: 1.3rem;
 
-margin-top:1.3rem;
-
-thead {
-background: #F8F8FA;
-
-padding:10px;
+  thead {
+    /* background: #f8f8fa; */
+    text-align: center;
+    /* padding: 10px; */
     tr {
-        border-radius:12px;
+      background: #f8f8fa;
+      border-radius: 10px;
     }
     th {
-font-weight: 500;
-font-size: 16px;
-line-height: 140%;
-color: #9B9DC3;
-
+      font-family: DM Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 140%;
+      color: #2e3192;
+      padding: 20px 10px;
+      /* border-radius: 10px; */
     }
-}
+  }
+
+  td {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140%;
+    color: rgba(24, 24, 25, 0.9);
+    padding: 15px 0px;
+  }
+
+  tbody {
+    text-align: center;
+  }
 `
 
 export const Section = styled.section`
+  margin-top: 1.3rem;
 
-margin-top:1.3rem;
+  h4 {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 31px;
+    display: flex;
 
-h4 {
-font-family: DM Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-line-height: 31px;
-display: flex;
-
-letter-spacing: 0.01em;
-color:#182399;
-}
+    letter-spacing: 0.01em;
+    color: #182399;
+  }
 `
-

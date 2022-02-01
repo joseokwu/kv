@@ -1,6 +1,6 @@
 import { Header, Table, Section } from './prevRpund.styled'
 import html2pdf from 'html2pdf.js'
-import downloadIcon from '../../../../assets/icons/downloadIcon.svg'
+import downloadIcon from '../../../../assets/icons/downloadoutline.svg'
 
 export const PreviousRound = () => {
   const downloadStatement = () => {
@@ -69,16 +69,16 @@ export const PreviousRound = () => {
 
         <div className="d-flex">
           <img src={downloadIcon} className="mr-2" alt="." />
-          <a href="#" onClick={downloadStatement}>
-            Download.xlx
+          <a className="pe-3" href="#" onClick={downloadStatement}>
+            Download.xlsx
           </a>
           <span>Update details</span>
         </div>
       </Header>
       <Table className="table table-borderless">
-        <thead className="">
+        <thead>
           <tr>
-            <th>Investors</th>
+            <th>Investor</th>
             <th>Funding Date</th>
             <th>Deal Type </th>
             <th>Funding Round </th>
