@@ -1,11 +1,11 @@
 import React from 'react'
 import './dashCard.css'
 import { CardWrapper, CardWrap } from './dash.styled'
-
 export const DashCard = ({
   count = "100",
   name = "name",
   color = "#E5FFE4",
+  icon,
   ...rest
 }) => {
   return (

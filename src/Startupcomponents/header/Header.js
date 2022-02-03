@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./header.css";
+
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/kvLogo.png";
 import notification from "../../assets/icons/notification.svg";
 import chat from "../../assets/icons/chat.svg";
@@ -7,6 +8,7 @@ import angleDown from "../../assets/icons/angleDown.svg";
 import sampleUser from "../../assets/images/sampleUser.png";
 import { useHistory } from "react-router-dom";
 import { Notification } from "../index";
+import "./header.css";
 
 export const Header = () => {
   const { push } = useHistory();
@@ -47,7 +49,7 @@ export const Header = () => {
 
         <div
           className="d-flex align-items-center h-100"
-          onClick={() => push("/profile")}
+         
           role="button"
         >
           <span className="d-flex align-items-center header-profile">

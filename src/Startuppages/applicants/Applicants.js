@@ -62,7 +62,6 @@ export const Applicants = ({ history }) => {
     );
   }, [data, hash]);
 
-  console.log(`dataToRender`, dataToRender);
   return (
     <div className="wrapper">
       <section className="d-flex justify-content-between align-items-center applicant-header">

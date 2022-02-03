@@ -12,10 +12,7 @@ export * from "./profile/Profile";
 export * from "./applicants/Applicants";
 export * from "./contactUs/ContactUs";
 export * from "./notification/Notification";
-export * from "./investorRegistration/InvestorRegistration";
-export * from "./investorDashboard/InvestorDashboard";
-export * from "./investorOpportunity/InvestorOpportunity";
-export * from "./opportunity/Opportunity";
+
 export * from "./startupRegistration";
 export * from './program';
 export * from './fundraising';

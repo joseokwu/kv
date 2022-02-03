@@ -1,26 +1,11 @@
 import { WithMainLayout, WithRegisterLayout,
   WithStartupRegistrationLayout , WithDashboardLayout
 } from "../Startupcomponents";
+import {WithInvestorRegisterLayout, WithMainInvestorLayout } from '../components';
 //import {WithRegisterLayout} from '../Startupcomponents/registerLayout/RegisterLayout';
 import {
   Dashboard,
-  PartnerRegistration,
-  SignUp,
-  SignIn,
-  ConfirmEmail,
-  SignUpCompleted,
-  ForgotPassword,
-  CheckMail,
-  ResetPassword,
-  ForgotOTP,
   Profile,
-  Applicants,
-  ContactUs,
-  Notification,
-  InvestorRegistration,
-  InvestorDashboard,
-  InvestorOpportunity,
-  Opportunity,
   StartUpRegistration,
   Program,
   FundingRaising
@@ -30,7 +15,19 @@ import { StartupDealRoom } from "../Startuppages/dealRoom/dealRoom";
 import { EAcademy } from "../Startuppages/eAcademy/eAcademy";
 import { StartupNetworking } from "../Startuppages/networking/networking";
 import { StartupTodoList } from "../Startuppages/todoList/todoList";
-import {InvestorInterested,
+import {
+
+  BoosterDashboard,
+  PartnerRegistration,
+  BoosterProfile,
+  Applicants,
+  ContactUs,
+  Notification,
+  InvestorRegistration,
+  InvestorDashboard,
+  InvestorOpportunity,
+  Opportunity,
+  InvestorInterested,
   InvestorPortfolio,
   InvestorEvents,
   InvestorSchedule,
@@ -39,16 +36,14 @@ import {InvestorInterested,
   InvestorDeal,
   FounderProfile,
   Commitment,
-} from "../Investorspages";
+  DealRoom,
+  DealFolder,
+  ScheduleCalendar,
+  InvestorProfile,
+} from "../Investorpages"; 
 
 const routes = [
-  {
-    name: "Signin",
-    path: "/signin",
-    exact: true,
-    component: SignIn,
-    protected: false,
-  },
+
   {
     name: "Dashboard",
     path: "/",
@@ -60,58 +55,20 @@ const routes = [
     name: "RegisterPartner",
     path: "/RegisterPartner",
     exact: true,
-    component: WithRegisterLayout(PartnerRegistration),
+    component: WithInvestorRegisterLayout(PartnerRegistration),
     protected: false,
   },
   {
-    name: "SignUp",
-    path: "/signUp",
-    component: SignUp,
+    name: "RegisterInvestor",
+    path: "/investor/register",
+    component: WithInvestorRegisterLayout(InvestorRegistration),
     exact: true,
     protected: false,
   },
   {
-    name: "ConfirmEmail",
-    path: "/confirm_email",
-    component: ConfirmEmail,
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "CompleteSignUp",
-    path: "/complete_signUp",
-    component: SignUpCompleted,
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "ForgotPassword",
-    path: "/forgot_password",
-    component: ForgotPassword,
-    exact: true,
-    protected: false,
-  },
-
-  {
-    name: "CheckMail",
-    path: "/forgot_password/check_mail",
-    component: CheckMail,
-    exact: true,
-    protected: false,
-  },
-
-  {
-    name: "ResetPassword",
-    path: "/reset_password",
-    component: ResetPassword,
-    exact: true,
-    protected: false,
-  },
-
-  {
-    name: "ForgotOtp",
-    path: "/forgot_otp",
-    component: ForgotOTP,
+    name: "InvestorDashboard",
+    path: "/investor/dashboard",
+    component: WithMainInvestorLayout(InvestorDashboard),
     exact: true,
     protected: false,
   },
@@ -121,7 +78,7 @@ const routes = [
     path: "/prof",
     component: WithRegisterLayout(Profile),
     exact: true,
-    protected: true,
+    protected: false,
   },
   {
     name: "ContactUs",
@@ -133,14 +90,14 @@ const routes = [
   {
     name: "Applicants",
     path: "/applicants",
-    component: WithMainLayout(Applicants),
+    component: WithMainInvestorLayout(Applicants),
     exact: true,
     protected: false,
   },
   {
     name: "Notification",
     path: "/notification",
-    component: WithMainLayout(Notification),
+    component: WithMainInvestorLayout(Notification),
     exact: true,
     protected: false,
   },
@@ -232,6 +189,13 @@ const routes = [
     protected: false,
   },
   {
+    name: "Interested",
+    path: "/investor/interested/:id",
+    component: WithMainLayout(Opportunity),
+    exact: true,
+    protected: false,
+  },
+  {
     name: "Portfolio",
     path: "/investor/portfolio",
     component: WithMainLayout(InvestorPortfolio),
@@ -249,6 +213,13 @@ const routes = [
     name: "Schedule",
     path: "/investor/schedule",
     component: WithMainLayout(InvestorSchedule),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Schedule",
+    path: "/investor/schedule-calendar",
+    component: WithMainLayout(ScheduleCalendar),
     exact: true,
     protected: false,
   },
@@ -271,6 +242,28 @@ const routes = [
     name: "DealRoom",
     path: "/investor/deal_room",
     component: WithMainLayout(InvestorDeal),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "DealRoom",
+    path: "/investor/deal_room/:id",
+    component: WithMainLayout(DealRoom),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "DealRoom",
+    path: "/investor/deal_room/:id/:folderName",
+    component: WithMainLayout(DealFolder),
+    exact: true,
+    protected: false,
+  },
+
+  {
+    name: "Investor profile",
+    path: "/investor/profile",
+    component: WithMainLayout(InvestorProfile),
     exact: true,
     protected: false,
   },

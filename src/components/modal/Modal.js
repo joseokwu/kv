@@ -10,7 +10,13 @@ export const Modal = ({
   withHeader = true,
 }) => {
   return (
-    <div className="modal fade" tabindex="-1" role="dialog" id={id}>
+    <div
+      className="modal fade"
+      tabindex="-1"
+      role="dialog"
+      id={id}
+      style={{ overflowY: "auto" }}
+    >
       <div
         className={`modal-dialog ${
           position === "center" && "modal-dialog-centered"

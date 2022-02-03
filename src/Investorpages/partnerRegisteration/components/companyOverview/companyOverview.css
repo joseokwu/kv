@@ -1,0 +1,126 @@
+.register-form-wrap {
+  background: #f9f9fc;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);
+  border-radius: 5px;
+  width: 100%;
+  max-width: 929px;
+  padding: 20px 5%;
+  margin-bottom: 50px;
+  /* height: calc(100vh - 60px - 69px);
+  overflow-y: auto; */
+}
+
+.register-form-wrap > h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.register-form-wrap > p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #828282;
+  margin-bottom: 44px;
+}
+
+.form-card {
+  background-color: white;
+  padding: 45px 8.5%;
+  border: 1px solid #f2f2f2;
+  border-radius: 5px;
+  margin-bottom: 18px;
+}
+
+.form-dp {
+  width: 143px;
+  height: 143px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.image-placeholder {
+  display: block;
+  text-align: center;
+}
+
+.image-placeholder p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #bdbdbd;
+}
+
+.add-dp {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+}
+
+.add-dp input {
+  position: absolute;
+  top: 0;
+  width: inherit;
+  height: inherit;
+  opacity: 0;
+}
+
+.form-textarea {
+  background: #fafafc;
+  border-radius: 4px;
+  border: none;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 8px 14px;
+  color: #000000;
+}
+
+.form-textarea::placeholder {
+  color: #bdbdbd;
+}
+
+.form-label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+.contact-title {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.contact-title h4 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #2e3192;
+}
+
+.edit_input {
+  min-width: 100%;
+}

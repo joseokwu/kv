@@ -25,8 +25,6 @@ export * from "./connectCard/ConnectCard";
 export * from './dashSidebar/Sidebar';
 export * from './threedots';
 export * from './calender';
-export * from "./table/Table";
-export * from "./expenseChart/ExpenseChart";
-export * from "./lastChat/LastChat";
-export * from "./connectCard/ConnectCard";
-export * from "./groupCard/GroupCard";
+
+
+

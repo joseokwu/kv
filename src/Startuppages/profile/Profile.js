@@ -13,7 +13,7 @@ export const Profile = () => {
       </section>
 
       <section className="mb-3 profile-tab">
-        <h2>Our Offerings</h2>
+        <h2 className="active">Our Offerings</h2>
       </section>
 
       <section className="row profile-more">
