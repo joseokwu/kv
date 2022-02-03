@@ -1,12 +1,21 @@
 import React from 'react'
+import { Section } from './networking.styled'
+import comingSoon from '../../assets/images/comingsoon.svg'
 
 export const StartupNetworking = () => {
   return (
-    <div className="mx-auto text-center my-auto" style={{ padding: '25% 0' }}>
-      <h1 style={{ color: '#00adef', fontSize: '70px' }}>Coming Soon ...</h1>
-      <span style={{ color: '#242679', fontSize: '30px' }}>
-        Under Contruction
-      </span>
-    </div>
+    <>
+      <Section>
+        <div
+          className="mx-auto text-center my-auto"
+        >
+          <img src={comingSoon} alt="" />
+          <h3 className="py-5">Feature Under Construction</h3>
+          <p>
+            We know you really want to use this feature and we are <br /> excited to show you how awesomes it is but unfortunately it’s <br /> still under construction. Please exercise a little patient.
+          </p>
+        </div>
+      </Section>
+    </>
   )
 }

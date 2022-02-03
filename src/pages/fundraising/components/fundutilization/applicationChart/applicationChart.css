@@ -2,8 +2,6 @@
   border: 1px solid #d5d6f4;
   border-radius: 10px;
   width: 100% !important;
-  
-  
 }
 
 .appChart-header {
@@ -33,7 +31,8 @@
   font-size: 12px;
   line-height: 18px;
   color: #333333;
-  flex-basis: 40%;
+  padding: 0px 10px;
+  /* flex-basis: 40%; */
 }
 
 .label-percent {

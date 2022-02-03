@@ -1,8 +1,8 @@
 import React from 'react'
-import { Section } from './dealRoom.styled'
+import { Section } from './eAcademy.styled'
 import comingSoon from '../../assets/images/comingsoon.svg'
 
-export const StartupDealRoom = () => {
+export const EAcademy = () => {
   return (
     <>
       <Section>

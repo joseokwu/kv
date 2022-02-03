@@ -1,5 +1,5 @@
 import { Header, Table, Section } from './cap.styled'
-import downloadIcon from '../../../../assets/icons/downloadIcon.svg'
+import downloadIcon from '../../../../assets/icons/downloadoutline.svg'
 import html2pdf from 'html2pdf.js'
 
 export const CapTable = () => {
@@ -66,13 +66,12 @@ export const CapTable = () => {
 
   return (
     <div id="cap">
-      <Header className="d-flex justify-content-end">
-        {/* <h4>Cap Table</h4> */}
-
+      <Header className="d-flex justify-content-between">
+        <div>{/* <h4>Cap Table</h4> */}</div>
         <div className="d-flex">
           <img src={downloadIcon} className="mr-2" alt="." />
-          <a href="#" onClick={downloadStatement}>
-            Download.xlx
+          <a className="pe-3" href="#" onClick={downloadStatement}>
+            Download.xlsx
           </a>
           <span>Update details</span>
         </div>

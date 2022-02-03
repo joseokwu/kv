@@ -11,7 +11,6 @@ export const BodyWrapper = styled.div`
     align-items: center;
     padding: 3rem;
     width: 95%;
-
     background: #fff;
     margin: 10px;
     border: 1.5px solid #e6e7e9;

@@ -25,7 +25,9 @@ import {
   Program,
   FundingRaising
 } from "../pages";
+import { BoosterPartner } from "../pages/boosterPartner/boosterPartner";
 import { StartupDealRoom } from "../pages/dealRoom/dealRoom";
+import { EAcademy } from "../pages/eAcademy/eAcademy";
 import { StartupNetworking } from "../pages/networking/networking";
 import { StartupTodoList } from "../pages/todoList/todoList";
 
@@ -181,6 +183,20 @@ const routes = [
     name: "StartupRegistration",
     path: "/startupRegistration",
     component: WithStartupRegistrationLayout(StartUpRegistration),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "E-Academy",
+    path: "/eacademy",
+    component: WithDashboardLayout(EAcademy),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "BoosterPartner",
+    path: "/boosterpartner",
+    component: WithDashboardLayout(BoosterPartner),
     exact: true,
     protected: false,
   },

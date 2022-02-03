@@ -1,77 +1,82 @@
-import React from "react";
-import { Doughnut } from "react-chartjs-2";
-import "./applicationChart.css";
-import { ChartWrapper } from './chartWrap';
+import React from 'react'
+import { Doughnut } from 'react-chartjs-2'
+import './applicationChart.css'
+import { ChartWrapper } from './chartWrap'
 
-const ApplicationChart = ({header}) => {
+const ApplicationChart = ({ header }) => {
   return (
-    <ChartWrapper className="">
-      <h4 className="appChart-header">{header }</h4>
-      <div className='d-flex' >
-      <div className='mr-5' >
-      <Doughnut
-      
-      data={{
-        labels: ["Legend Label", "Legend Label", "approved", "expired", "re-applied"],
-        datasets: [
-          {
-            data: [12, 5, 30, 10, 60],
-            backgroundColor: [
-              "#C5C5C5",
-              "#50AEF4",
-              "#3AB011",
-              "#FF8E29",
-              "#890C85",
-            ],
-            hoverOffset: 5,
-            cutout: 90,
-          },
-        ],
-      }}
-      // width={300}
-      options={{
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      }}
-    />
-      </div>
+    <ChartWrapper className="p-4">
+      <h4 className="appChart-header">{header}</h4>
+      <div className="row">
+        <div className="col-lg-7 me-3">
+          <Doughnut
+            data={{
+              labels: [
+                'Legend Label',
+                'Legend Label',
+                'Legend Label',
+                'Legend Label',
+                'Legend Label',
+              ],
+              datasets: [
+                {
+                  data: [7, 25, 25, 25, 18],
+                  backgroundColor: [
+                    '#C5C5C5',
+                    '#50AEF4',
+                    '#3AB011',
+                    '#FF8E29',
+                    '#890C85',
+                  ],
+                  hoverOffset: 5,
+                  cutout: '55%',
+                },
+              ],
+            }}
+            // width={300}
+            options={{
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+            }}
+          />
+        </div>
 
-      <section className="mx-3 my-3">
-        <div className='d-flex mb-3' >
-        <LabelCheck color="#C5C5C5" />
-      <p className="label-name">Legend Label</p>
-      <p className="label-percent">25%</p>
-        </div>
-        <div className='d-flex mb-3' >
-        <LabelCheck color="#50AEF4" />
-      <p className="label-name">Legend Label </p>
-      <p className="label-percent">45%</p>
-        </div>
-        <div className='d-flex mb-3' >
-        <LabelCheck color="#3AB011" />
-      <p className="label-name">Legend Label </p>
-      <p className="label-percent">35%</p>
-        </div>
-        <div className='d-flex mb-3' >
-        <LabelCheck color="#FF8E29" />
-      <p className="label-name">Legend Label </p>
-      <p className="label-percent">55%</p>
-        </div>
-        <div className='d-flex mb-3' >
-        <LabelCheck color="#890C85" />
-      <p className="label-name">Legend Label </p>
-      <p className="label-percent">75%</p>
-        </div>
-      </section>
+        <section className="mx-3 my-5 col-lg-4 d-flex flex-column justify-content-center">
+          <div className="d-flex mb-3">
+            <LabelCheck color="#C5C5C5" />
+            <article className="label-name">Other</article>
+            <span className="label-percent">7%</span>
+          </div>
+          <div className="d-flex mb-3">
+            <LabelCheck color="#50AEF4" />
+            <p className="label-name">Legend Label </p>
+            <p className="label-percent">25%</p>
+          </div>
+          <div className="d-flex mb-3">
+            <LabelCheck color="#3AB011" />
+            <p className="label-name">Legend Label </p>
+            <p className="label-percent">25%</p>
+          </div>
+          <div className="d-flex mb-3">
+            <LabelCheck color="#FF8E29" />
+            <p className="label-name">Legend Label </p>
+            <p className="label-percent">25%</p>
+          </div>
+          <div className="d-flex mb-3">
+            <LabelCheck color="#890C85" />
+            <p className="label-name">Legend Label </p>
+            <p className="label-percent">18%</p>
+          </div>
+        </section>
       </div>
     </ChartWrapper>
-  );
-};
+  )
+}
 
-export default ApplicationChart;
+export default ApplicationChart
 
 const LabelCheck = ({ color }) => {
   return (
@@ -89,5 +94,5 @@ const LabelCheck = ({ color }) => {
         fill={color}
       />
     </svg>
-  );
-};
+  )
+}

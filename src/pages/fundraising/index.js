@@ -56,7 +56,7 @@ export const FundingRaising = () => {
           </>
         ))}
       </section>
-      <section className="my-5 container ">
+      <section className="my-5 container">
         <Tabs tabItems={tabList} />
       </section>
       <section className="mb-5 container ">{renderContent()}</section>

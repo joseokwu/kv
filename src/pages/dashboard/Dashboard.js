@@ -2,19 +2,17 @@ import React from 'react'
 import './dashboard.css'
 import { cardData, cardFill } from '../../constants/domiData'
 import { DashCard, CardFill } from '../../components/index'
-
-import { Card } from 'react-bootstrap'
 import { TodoList } from './components/todolist'
 import { UpComing } from './components/upComing'
 
 export const Dashboard = () => {
-  const appCardData = [1, 2, 3, 4, 5]
+  // const appCardData = [1, 2, 3, 4, 5]
   return (
     <div className="dashboard-main">
       {/* <section className="startup-dash mb-4">
         <h2>Yebox Techologies</h2>
       </section> */}
-      <section className="row" style={{zIndex: '999', background: '#FEFEFE'}}>
+      <section className="row" style={{ zIndex: '999', background: '#FEFEFE' }}>
         {cardData.map((data, i) => (
           <>
             <DashCard
