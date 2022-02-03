@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import hi from '../../assets/icons/hiEmoji.png'
-import { ProgressBar } from '../../components/index'
-import AssistantInfo from './components/assistantInfo/assistantInfo'
-import Consulting from './components/consulting/consulting'
-import Details from './components/details/details'
-import Interest from './components/interest/interest'
-import WorkExperience from './components/workExperience/workExperience'
+import { ProgressBar } from '../../mentorComponents/index'
+import AssistantInfo from './mentorComponents/assistantInfo/assistantInfo'
+import Consulting from './mentorComponents/consulting/consulting'
+import Details from './mentorComponents/details/details'
+import Interest from './mentorComponents/interest/interest'
+import WorkExperience from './mentorComponents/workExperience/workExperience'
 import './personalDetails.css'
 
 export const PersonalDetails = () => {
@@ -196,7 +196,7 @@ import {
   AssignedStartupCard,
   DashCard,
   UpcomingEventCard,
-} from '../../components'
+} from '../../mentorComponents'
 import './dashboard.css'
 import { useHistory } from 'react-router-dom'
 
@@ -391,7 +391,7 @@ import {
   AllEvaluationCard,
   Tabs,
   EvaluationPendingCard,
-} from '../../components'
+} from '../../mentorComponents'
 import filter from '../../assets/icons/filterFunnel.svg'
 import down from '../../assets/icons/chevronDown.svg'
 import './evaluation.css'

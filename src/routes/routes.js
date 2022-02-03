@@ -1,4 +1,4 @@
-import { WithMainLayout, WithRegisterLayout } from '../components'
+import { WithMainLayout, WithRegisterLayout } from '../mentorComponents'
 import {
   Dashboard,
   SignUp,
@@ -17,7 +17,7 @@ import {
   Events,
   Assignments,
   Schedule,
-  Networking,
+  MentorNetworking,
   EvaluationViewProfile,
   ContactUs,
   CreateAssignment,
@@ -25,13 +25,13 @@ import {
   ViewDetails,
   DashboardProfile,
   MentorDealRoom,
-  DealFolder,
-  DealRoom,
+  // DealFolder,
   Notification,
   MentorEvaluation,
-} from '../pages'
-import { ViewEvaluation } from '../pages/mentorAssignments/components/viewEvaluation/viewEvaluation'
-const routes = [
+} from '../mentorPages'
+import { ViewEvaluation } from '../mentorPages/mentorAssignments/components/viewEvaluation/viewEvaluation'
+
+const mentorRoutes = [
   {
     name: 'Dashboard',
     path: '/',
@@ -179,7 +179,7 @@ const routes = [
   {
     name: 'Networking',
     path: '/networking',
-    component: WithMainLayout(Networking),
+    component: WithMainLayout(MentorNetworking),
     exact: true,
     protected: false,
   },
@@ -193,17 +193,17 @@ const routes = [
   {
     name: 'DealRoom',
     path: '/deal_room/:id',
-    component: WithMainLayout(DealRoom),
+    component: WithMainLayout(MentorDealRoom),
     exact: true,
     protected: false,
   },
-  {
-    name: 'DealRoom',
-    path: '/deal_room/:id/:folderName',
-    component: WithMainLayout(DealFolder),
-    exact: true,
-    protected: false,
-  },
+  // {
+  //   name: 'DealRoom',
+  //   path: '/deal_room/:id/:folderName',
+  //   component: WithMainLayout(DealFolder),
+  //   exact: true,
+  //   protected: false,
+  // },
   {
     name: 'DashboardProfile',
     path: '/dashboard/founder',
@@ -248,4 +248,4 @@ const routes = [
   },
 ]
 
-export default routes
+export default mentorRoutes
