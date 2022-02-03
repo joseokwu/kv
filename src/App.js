@@ -2,7 +2,7 @@ import "./App.css";
 //import AppRoute from "./AppRouter";
 import { useState } from "react";
 import {Providers} from './context/provider';
-import { Alert } from "./components/index";
+import { Alert } from "./Startupcomponents/index";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 

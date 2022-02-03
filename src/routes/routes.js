@@ -1,7 +1,7 @@
 import { WithMainLayout, WithRegisterLayout,
   WithStartupRegistrationLayout , WithDashboardLayout
-} from "../components";
-//import {WithRegisterLayout} from '../components/registerLayout/RegisterLayout';
+} from "../Startupcomponents";
+//import {WithRegisterLayout} from '../Startupcomponents/registerLayout/RegisterLayout';
 import {
   Dashboard,
   PartnerRegistration,
@@ -24,12 +24,12 @@ import {
   StartUpRegistration,
   Program,
   FundingRaising
-} from "../pages";
-import { BoosterPartner } from "../pages/boosterPartner/boosterPartner";
-import { StartupDealRoom } from "../pages/dealRoom/dealRoom";
-import { EAcademy } from "../pages/eAcademy/eAcademy";
-import { StartupNetworking } from "../pages/networking/networking";
-import { StartupTodoList } from "../pages/todoList/todoList";
+} from "../Startuppages";
+import { BoosterPartner } from "../Startuppages/boosterPartner/boosterPartner";
+import { StartupDealRoom } from "../Startuppages/dealRoom/dealRoom";
+import { EAcademy } from "../Startuppages/eAcademy/eAcademy";
+import { StartupNetworking } from "../Startuppages/networking/networking";
+import { StartupTodoList } from "../Startuppages/todoList/todoList";
 
 const routes = [
   {
