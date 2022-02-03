@@ -2,15 +2,19 @@ import React from 'react'
 import './dashCard.css'
 import { CardWrapper, CardWrap } from './dash.styled'
 
-export const DashCard = ({ icon, count, name, color }) => {
+export const DashCard = ({
+  count = "100",
+  name = "name",
+  color = "#E5FFE4",
+  ...rest
+}) => {
   return (
-    <div className="col d-flex justify-content-center">
-      {/* <CardWrapper className=" position-fixed" style={{ zIndex: '999' }}> */}
-      <CardWrapper className="">
+    <div className={`dashCard-main ${rest?.className ?? ""}`}>
+      <section className="d-flex flex-column justify-content-between">
         <h3>{name}</h3>
         <p>{count}</p>
         <img src={icon} style={{ color: color }} className="card-star" />
-      </CardWrapper>
+      </section>
     </div>
   )
 }

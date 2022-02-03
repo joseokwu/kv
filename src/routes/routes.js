@@ -30,6 +30,16 @@ import { StartupDealRoom } from "../Startuppages/dealRoom/dealRoom";
 import { EAcademy } from "../Startuppages/eAcademy/eAcademy";
 import { StartupNetworking } from "../Startuppages/networking/networking";
 import { StartupTodoList } from "../Startuppages/todoList/todoList";
+import {InvestorInterested,
+  InvestorPortfolio,
+  InvestorEvents,
+  InvestorSchedule,
+  InvestorEvaluation,
+  InvestorNetwork,
+  InvestorDeal,
+  FounderProfile,
+  Commitment,
+} from "../Investorspages";
 
 const routes = [
   {
@@ -197,6 +207,70 @@ const routes = [
     name: "BoosterPartner",
     path: "/boosterpartner",
     component: WithDashboardLayout(BoosterPartner),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Opportunity",
+    path: "/investor/opportunities/:id/founder",
+    component: WithMainLayout(FounderProfile),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Opportunity",
+    path: "/investor/opportunities/:id/commitment",
+    component: WithMainLayout(Commitment),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Interested",
+    path: "/investor/interested",
+    component: WithMainLayout(InvestorInterested),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Portfolio",
+    path: "/investor/portfolio",
+    component: WithMainLayout(InvestorPortfolio),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Events",
+    path: "/investor/events",
+    component: WithMainLayout(InvestorEvents),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Schedule",
+    path: "/investor/schedule",
+    component: WithMainLayout(InvestorSchedule),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Evaluation",
+    path: "/investor/evaluation",
+    component: WithMainLayout(InvestorEvaluation),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Networking",
+    path: "/investor/networking",
+    component: WithMainLayout(InvestorNetwork),
+    exact: true,
+    protected: false,
+  },
+
+  {
+    name: "DealRoom",
+    path: "/investor/deal_room",
+    component: WithMainLayout(InvestorDeal),
     exact: true,
     protected: false,
   },

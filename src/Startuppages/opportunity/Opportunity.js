@@ -24,7 +24,7 @@ export const Opportunity = ({ history }) => {
     "business canvas",
     // "fundraising",
     "Milestone/Timeline",
-    "Product Road Map",
+    "product road map",
   ];
 
   const renderContent = () => {
@@ -49,7 +49,6 @@ export const Opportunity = ({ history }) => {
     <div>
       <article className="wrapper pt-2" style={{ background: "#F9F9FC" }}>
 
-
         <div className="row mt-5">
           <div className="col-lg-7 col-12">
             <OppCompanyInfo />
@@ -61,7 +60,7 @@ export const Opportunity = ({ history }) => {
         </div>
       </article>
 
-      <article className="wrapper">
+      <article className="wrapper" style={{ background: "#fdfdff" }}>
         <Tabs tabItems={tabItems} />
         <div className="py-4">{renderContent()}</div>
       </article>

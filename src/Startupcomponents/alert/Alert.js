@@ -24,9 +24,9 @@ export const Alert = () => {
 
   const closeAlert = () => {
    setAlert({ ...alert, message: "" });
-  };
+  };   
 
-  return (
+  return ( 
     <div
       className={`alert-wrap ${
         message && message?.trim().length > 0 ? "show-alert" : "close-alert"

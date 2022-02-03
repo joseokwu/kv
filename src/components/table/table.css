@@ -1,0 +1,29 @@
+.kv-table thead tr {
+  background: #f8f8fa;
+  border-radius: 10px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #9b9dc3;
+}
+
+.kv-table thead tr th {
+  padding: 1.31rem 1.38rem;
+}
+
+.kv-table tbody tr {
+  border-bottom: 1px solid #e6e7e9;
+}
+
+.kv-table tbody tr td {
+  padding: 1.2rem 1.38rem;
+  text-align: center;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #1d1d1e;
+}

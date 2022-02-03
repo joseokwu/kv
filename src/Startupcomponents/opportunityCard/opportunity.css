@@ -3,6 +3,7 @@
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   padding: 1.75rem 1.38rem;
+  cursor: pointer;
 }
 
 .opp-content {
