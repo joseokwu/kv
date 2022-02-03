@@ -1,6 +1,6 @@
 import { WithMainLayout, WithRegisterLayout } from '../mentorComponents'
 import {
-  Dashboard,
+  MentorDashboard,
   SignUp,
   SignIn,
   ConfirmEmail,
@@ -19,7 +19,7 @@ import {
   Schedule,
   MentorNetworking,
   EvaluationViewProfile,
-  ContactUs,
+  MentorContactUs,
   CreateAssignment,
   MoreDetails,
   ViewDetails,
@@ -35,7 +35,7 @@ const mentorRoutes = [
   {
     name: 'Dashboard',
     path: '/',
-    component: WithMainLayout(Dashboard),
+    component: WithMainLayout(MentorDashboard),
     exact: true,
     protected: false,
   },
@@ -57,7 +57,7 @@ const mentorRoutes = [
   {
     name: 'ContactUS',
     path: '/support',
-    component: WithMainLayout(ContactUs),
+    component: WithMainLayout(MentorContactUs),
     exact: true,
     protected: false,
   },

@@ -8,7 +8,7 @@ import facebook from '../../assets/icons/facebookLogo.svg'
 import linkedIn from '../../assets/icons/linkedInLogo.svg'
 import './contactUs.css'
 
-export const ContactUs = () => {
+export const MentorContactUs = () => {
   return (
     <div className="mx-5 my-2">
       <section>

@@ -7,7 +7,7 @@ import {
 import './dashboard.css'
 import { useHistory } from 'react-router-dom'
 
-export const Dashboard = () => {
+export const MentorDashboard = () => {
   const { push } = useHistory()
 
   const cardData = [
