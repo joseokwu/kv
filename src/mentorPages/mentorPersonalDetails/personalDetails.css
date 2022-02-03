@@ -1,0 +1,261 @@
+.mentor_personal_details_wrap {
+  /* padding: 48px 9%; */
+  padding: 0px 9% 48px 9%;
+  background-color: #fdfdfd;
+  height: calc(100vh - 60px);
+  /* overflow-y: auto; */
+  scroll-behavior: smooth;
+}
+
+.mentor_personal_details_header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.125rem;
+  /* position:fixed; */
+  /* overflow-x:hidden; */
+}
+
+.bg-pd-pro {
+  /* background: #f9f9fc; */
+  background-color: #fdfdfd;
+  z-index: 999;
+}
+
+.mentor_personal_details_header h4 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.mentor_personal_details_header p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 21px;
+  color: #828282;
+}
+
+.mentor_personal_details_header div {
+  width: 100%;
+  max-width: 931px;
+}
+
+.mentor_personal_details_header span {
+  display: block;
+  margin-bottom: -20px;
+}
+
+.mentor_personal_details_grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 250px) auto;
+}
+
+.mentor_personal_details_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mentor_personal_details_list li {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+  color: #525151;
+  margin-bottom: 10px;
+  cursor: pointer;
+  max-width: 190px;
+  padding: 1rem 14px;
+}
+
+.active-li {
+  background: #dcebff;
+  border-radius: 10px;
+  padding: 1rem 14px !important;
+}
+
+.register-form-wrap {
+  background: #f9f9fc;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);
+  border-radius: 5px;
+  width: 100%;
+  max-width: 929px;
+  padding: 20px 5%;
+  margin-bottom: 50px;
+  /* height: calc(100vh - 60px - 69px);
+  overflow-y: auto; */
+}
+
+/* .register-form-wrap > h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.register-form-wrap > p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 21px;
+  color: #828282;
+  margin-bottom: 44px;
+} */
+
+.form-card {
+  background-color: white;
+  padding: 45px 8.5%;
+  border: 1px solid #f2f2f2;
+  border-radius: 5px;
+  margin-bottom: 1.125rem;
+}
+
+.form-dp {
+  width: 143px;
+  height: 143px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.image-placeholder {
+  display: block;
+  text-align: center;
+}
+
+.image-placeholder p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #bdbdbd;
+}
+
+.add-dp {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+}
+
+.add-dp input {
+  position: absolute;
+  top: 0;
+  width: inherit;
+  height: inherit;
+  opacity: 0;
+}
+
+.form-textarea {
+  background: #fafafc;
+  border-radius: 4px;
+  border: none;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 8px 14px;
+  color: #000000;
+}
+
+.form-textarea::placeholder {
+  color: #bdbdbd;
+}
+
+.form-label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 20px;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.contact-title {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.contact-title h4 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #2e3192;
+}
+
+.offer-text {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 20px;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.yes-btn,
+.no-btn {
+  border: none;
+  width: 54px;
+  height: 40px;
+  padding: 10px 0;
+  border-radius: 10px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 20px;
+}
+
+.yes-btn,
+.no-btn {
+  background: #f9f9fc;
+  color: #4f4f4f;
+}
+
+.free-choice button:focus {
+  background: #dcebff;
+  color: #2e3192;
+}
+
+.free-choice {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.back-btn {
+  border: none;
+  background: #f4f4f4;
+  border-radius: 5px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #4f4f4f;
+  padding: 10px;
+  width: 100%;
+  max-width: 127px;
+}

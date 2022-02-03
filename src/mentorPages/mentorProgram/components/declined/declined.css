@@ -1,0 +1,10 @@
+.declined_tag {
+  background: #fff1f3;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-size: 12px;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+  color: #e31937;
+}

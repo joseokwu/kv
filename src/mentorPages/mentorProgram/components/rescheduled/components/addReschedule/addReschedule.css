@@ -1,0 +1,11 @@
+.addreschedule a {
+  color: #2e3192 !important;
+  text-decoration: underline;
+}
+
+.addreschedule {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 21px;
+  color: #858585;
+}

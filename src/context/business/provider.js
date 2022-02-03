@@ -12,7 +12,8 @@ import {
   DASHBOARD, WALLET,
   TRANSACTIONS, DATA_BANK,
   CHART_SUPPORT, SETTINGS,
-  CHANGE_PAGE
+  CHANGE_PAGE,
+  SHOW_EVENT,
 } from './reducer';
 
 import { businessReducers } from './reducer';
@@ -40,16 +41,30 @@ export const BusinessProvider = withRouter(({ children, history }) => {
         payload:value
       })
 
+        
+  }
+
+  const setAlert = ()=>{
+
+  }
+
+  const showEventAction = ()=>{
+
+    dispatch({
+      type:SHOW_EVENT,
+    })
   }
 
 
   return (
     <BusinessContext.Provider value={{
       state,
-      changePath
+      changePath,
+      setAlert,
+      showEventAction,
     }}>
       {children}
     </BusinessContext.Provider>
-  );
+  )
 
 });

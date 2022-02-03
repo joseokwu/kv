@@ -1,0 +1,23 @@
+.mentor_availability_question {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #323232;
+}
+
+.mentor_availabilty button {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 20px;
+  color: #4f4f4f;
+  padding: 10px 32px;
+  background: #f9f9fc;
+  border-radius: 10px;
+  border: none;
+}
+
+.mentor_availabilty button:focus {
+  background: #dcebff;
+  outline: none;
+}

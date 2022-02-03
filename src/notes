@@ -1,0 +1,461 @@
+import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import hi from '../../assets/icons/hiEmoji.png'
+import { ProgressBar } from '../../mentorComponents/index'
+import AssistantInfo from './mentorComponents/assistantInfo/assistantInfo'
+import Consulting from './mentorComponents/consulting/consulting'
+import Details from './mentorComponents/details/details'
+import Interest from './mentorComponents/interest/interest'
+import WorkExperience from './mentorComponents/workExperience/workExperience'
+import './personalDetails.css'
+
+export const PersonalDetails = () => {
+  const wrapRef = useRef();
+  const [progress, setProgress] = useState('');
+
+  const {
+    location: { hash },
+    push,
+  } = useHistory();
+
+  const switchForm = (currentHash) => {
+    push(currentHash)
+  };
+
+  useEffect(() => {
+    wrapRef.current.scrollTop = 0;
+    switch (hash) {
+      case '#assistant_info':
+        setProgress('100')
+        break;
+      case '#consulting':
+        setProgress('70')
+        break;
+      case '#area_of_interest':
+        setProgress('50')
+        break;
+      case '#work_experience':
+        setProgress('30')
+        break;
+      case '#personal_details':
+        setProgress('20')
+        break;
+      default:
+        setProgress('20')
+        break;
+    }
+  }, [hash]);
+
+  return (
+    <div className="mentor_personal_details_wrap" ref={wrapRef}>
+      <section className="mentor_personal_details_header">
+        <div>
+          <span>
+            <section
+              className="d-flex align-items-center"
+              style={{ columnGap: 12 }}
+            >
+              <h4>Hi Daniella</h4>
+              <img src={hi} alt={'hi'} />
+            </section>
+            <p>Let’s customise your experience</p>
+          </span>
+          <ProgressBar progress={progress} />
+        </div>
+
+        <section className="mentor_personal_details_grid">
+        <div>
+          <ul className="mentor_personal_details_list">
+            <li
+              onClick={() => switchForm('#personal_details')}
+              className={
+                (hash === '#personal_details' || hash === '') && 'active-li'
+              }
+            >
+              Personal Details
+            </li>
+
+            <li
+              onClick={() => switchForm('#work_experience')}
+              className={
+                (hash === '#work_experience' || hash === '#work_experience') && 'active-li'
+              }
+            >
+              Work Experience
+            </li>
+
+            <li
+              onClick={() => switchForm('#area_of_interest')}
+              className={
+                (hash === '#area_of_interest' && 'active-li') 
+              }
+            >
+              Area of interest / skills
+            </li>
+
+            <li
+              onClick={() => switchForm('#consulting')}
+              className={(hash === '#consulting' && 'active-li')}
+            >
+              Consultant Offerings
+            </li>
+
+            <li
+              onClick={() => switchForm('#assistant_info')}
+              className={
+                (hash === '#assistant_info' && 'active-li') 
+              }
+            >
+              Assistant Info
+            </li>
+          </ul>
+        </div>
+        </section>
+      </section>
+
+      <section className="mentor_personal_details_grid">
+        <div>
+          <ul className="mentor_personal_details_list">
+            <li
+              onClick={() => switchForm('#personal_details')}
+              className={
+                (hash === '#personal_details' || hash === '') && 'active-li'
+              }
+            >
+              Personal Details
+            </li>
+
+            <li
+              onClick={() => switchForm('#work_experience')}
+              className={
+                (hash === '#work_experience' || hash === '#work_experience') && 'active-li'
+              }
+            >
+              Work Experience
+            </li>
+
+            <li
+              onClick={() => switchForm('#area_of_interest')}
+              className={
+                (hash === '#area_of_interest' && 'active-li') 
+              }
+            >
+              Area of interest / skills
+            </li>
+
+            <li
+              onClick={() => switchForm('#consulting')}
+              className={(hash === '#consulting' && 'active-li')}
+            >
+              Consultant Offerings
+            </li>
+
+            <li
+              onClick={() => switchForm('#assistant_info')}
+              className={
+                (hash === '#assistant_info' && 'active-li') 
+              }
+            >
+              Assistant Info
+            </li>
+          </ul>
+        </div>
+    
+        <div className="mt-2 d-flex justify-content-end">
+          {hash === "" || hash === '#personal_details' ? (
+            <Details />
+          ) : hash === '#work_experience' ? (
+            <WorkExperience />
+          ) : hash === '#area_of_interest' ? (
+            <Interest />
+          ) : hash === '#consulting' ? (
+            <Consulting />
+          ) : hash === '#assistant_info' ? (
+            <AssistantInfo />
+          ) : (
+            hash === ''
+          )}
+        </div>
+      </section>
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+DashCard
+
+import React from 'react'
+import {
+  AssignedStartupCard,
+  DashCard,
+  UpcomingEventCard,
+} from '../../mentorComponents'
+import './dashboard.css'
+import { useHistory } from 'react-router-dom'
+
+
+export const Dashboard = () => {
+  const { push } = useHistory()
+
+  const cardData = [
+    { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
+    { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },
+    { name: 'Mentors', count: 20, color: '#D5D6F4' },
+    { name: 'Investors', count: 30, color: '#DEF6FF' },
+  ]
+  return (
+    <div className="dashboard-main">
+      <section className="row">
+        <section className="col-lg-12 d-flex align-items-center dashboard-cards">
+          {cardData.map((data, i) => (
+            <DashCard
+              name={data.name}
+              count={data.count}
+              color={data.color}
+              key={i}
+            />
+          ))}
+        </section>
+      </section>
+
+      <section className="row mt-0 dash-main-content">
+        <div className="col-lg-12">
+          <div style={{ marginTop: '2.38rem' }}>
+            <section className="d-flex align-items-center justify-content-between mb-3">
+              <p className="dash-sub-title">Assigned Startups</p>
+              <p className="see-all">See All</p>
+            </section>
+
+            <section className="row">
+              <div className="col-xl-4 mb-4">
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+              </div>
+              <div className="col-xl-4 mb-4">
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+              </div>
+              <div className="col-xl-4 mb-4">
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div className="col-lg-12">
+          <div style={{ marginTop: '2.38rem' }}>
+            <section className="d-flex align-items-center justify-content-between mb-3">
+              <p className="dash-sub-title">Upcoming Events</p>
+              <p className="see-all"><a className="see-all-event" href="/events">See All</a></p>
+            </section>
+
+            <section className="row">
+              <div className="col-xl-4 mb-4">
+                <UpcomingEventCard />
+              </div>
+              <div className="col-xl-4 mb-4">
+                <UpcomingEventCard />
+              </div>
+              <div className="col-xl-4 mb-4">
+                <UpcomingEventCard />
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+
+DashCard css
+
+
+.dashboard-main {
+  padding: 20px 26px 52px 26px;
+}
+
+.dashboard-cards {
+  column-gap: 19px;
+  width: 100%;
+  overflow-x: auto;
+  /* overflow-y: auto; */
+  padding-bottom: 20px;
+}
+
+.dashboard-cards::-webkit-scrollbar {
+  height: 0px;
+}
+
+.dashboard-applications-header {
+  margin-bottom: 1rem;
+}
+
+.dashboard-applications-header h5 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.dashboard-applications-header span {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.125rem;
+  line-height: 140%;
+  text-decoration-line: underline;
+  color: #2e3192;
+}
+
+.dash-main-content {
+  max-width: 1200px;
+}
+
+.dash-sub-title {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.see-all {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #041b55;
+  cursor: pointer;
+}
+
+.see-all-event {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #041b55;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.see-all-event:hover {
+  text-decoration: none;
+  color: #041b55;
+}
+
+.network-space {
+  background: #f9f9fc70;
+  border-radius: 10px 0px 0px 0px;
+}
+
+.network-space-header {
+  border-bottom: 1px solid #ececff;
+  padding: 1.56rem 2.2rem;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.network-space-header h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.opp-connects {
+  padding: 1rem 2.2rem;
+}
+
+
+
+
+
+import React from 'react'
+import {
+  DashCard,
+  EvaluationCompletedCard,
+  AllEvaluationCard,
+  Tabs,
+  EvaluationPendingCard,
+} from '../../mentorComponents'
+import filter from '../../assets/icons/filterFunnel.svg'
+import down from '../../assets/icons/chevronDown.svg'
+import './evaluation.css'
+
+export const MentorEvaluation = ({ history }) => {
+  const {
+    location: { hash },
+  } = history
+
+  const cardData = [
+    { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
+    { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },
+    { name: 'Total Startup Assigned', count: 300, color: '#D5D6F4' },
+  ]
+
+  const renderContent = () => {
+    switch (hash) {
+      case '#All':
+        return <AllEvaluationCard />
+
+      case '#Pending':
+        return <div className="col-xl-6"><EvaluationPendingCard /></div>
+
+      case '#Completed':
+        return <div className="col-xl-6"><EvaluationCompletedCard /></div> 
+
+      default:
+        return <AllEvaluationCard />
+    }
+  }
+
+  const tabItems = ['All', 'Pending', 'Completed']
+
+  return (
+    <div className="dashboard-main">
+      <section className="d-flex align-items-center dashboard-cards">
+        {cardData.map((data, i) => (
+          <DashCard
+            name={data.name}
+            count={data.count}
+            color={data.color}
+            key={i}
+          />
+        ))}
+      </section>
+
+      <section className="mt-5 d-flex align-items-center justify-content-between">
+        <Tabs tabItems={tabItems} />
+        <div>
+          <button
+            className="d-flex align-items-center filter-btn"
+            style={{ columnGap: 7 }}
+            data-toggle="dropdown"
+          >
+            <img src={filter} alt="filter" />
+            <span>Filter</span>
+            <img className="pl-1" src={down} alt="down" />
+          </button>
+        </div>
+      </section>
+
+      <div className="pt-3">
+        <section className="mt-1">{renderContent()}</section>
+      </div>
+    </div>
+  )
+}

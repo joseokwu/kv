@@ -1,0 +1,113 @@
+.program_card {
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+}
+
+.pending_program_title p {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.pending_tag {
+  background: #dcebff;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-size: 12px;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.pending_date {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #3855b3;
+}
+
+.pending_date span {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 140%;
+  color: #3855b3;
+  border-right: 1px solid #3855b3;
+  padding-right: 6px;
+}
+
+.pending_time {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #525151;
+}
+
+.program_accept_btn button {
+  background: #2e3192;
+  border-radius: 10px;
+  padding: 7px 35px;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  border: none;
+}
+
+.program_accept_btn button:hover {
+  background: none;
+  border: 1.5px solid #2e3192;
+  color: #2e3192;
+}
+
+.program_accept_btn button:focus {
+  outline: none;
+}
+
+.program_reschedule_btn button {
+  background: #00adef;
+  border-radius: 10px;
+  padding: 7px 35px;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  border: none;
+}
+
+.program_reschedule_btn button:hover {
+  background: none;
+  border: 1.5px solid#00adef;
+  color: #00adef;
+}
+
+.program_reschedule_btn button:focus {
+  outline: none;
+}
+
+.program_ignore_btn button {
+  background: none;
+  border-radius: 10px;
+  padding: 7px 35px;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #e31937;
+  border: 1.5px solid#E31937;
+}
+
+.program_ignore_btn button:hover {
+  background: #e31937;
+  color: #ffffff;
+}
+
+.program_ignore_btn button:focus {
+  outline: none;
+}

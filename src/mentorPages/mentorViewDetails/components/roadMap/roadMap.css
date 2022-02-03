@@ -1,0 +1,113 @@
+.road-map-card {
+  border: 1px solid #e6e7e9;
+  border-radius: 8px;
+  padding: 2.8rem 2.6rem;
+}
+
+.point-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  color: #333333;
+  margin-bottom: 2px;
+}
+
+.point-desc {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #888888;
+}
+
+.transparent-btn {
+  background-color: transparent;
+  border: 1px solid #d5d6f4;
+  border-radius: 5px;
+  color: #40439a;
+}
+
+.transparent-btn:hover {
+  background: #40439a;
+  color: #ffffff;
+}
+
+.transparent-btn:focus {
+  color: #ffffff;
+}
+
+.road-map-tag {
+  background: #ecfcf0;
+  border-radius: 5px;
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  color: #35d662;
+  cursor: pointer;
+}
+
+.road-map-tag div {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #35d662;
+  cursor: pointer;
+}
+
+.road-map-todo {
+  background: #ffffff;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 1.625rem 1.81rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  margin-bottom: 8px;
+  column-gap: 2rem;
+}
+
+.todo-contributor img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.todo-info-header {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 13px;
+  color: #2e3192;
+  margin-bottom: 4px;
+}
+
+.todo-task {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  letter-spacing: -0.04em;
+  color: #262627;
+}
+
+.todo-date {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 13px;
+  color: #262627;
+}
+
+.todo-progress {
+  height: 6px;
+}

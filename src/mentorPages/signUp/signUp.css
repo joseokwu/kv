@@ -1,0 +1,122 @@
+.mentor_gray_card {
+  display: flex;
+  align-items: center;
+  max-width: 585px;
+  border-radius: 10px;
+  padding: 200px 6%;
+}
+
+.mentor_auth_wrap {
+  height: 100%;
+  background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+}
+
+.mentor_auth_wrap > section {
+  height: inherit !important;
+}
+
+.mentor_gray_card_input {
+  background-color: transparent !important;
+  max-width: 100% !important;
+}
+
+.mentor_auth_agree {
+  column-gap: 19px;
+}
+
+.mentor_auth_agree input {
+  background-color: red;
+}
+
+.mentor_auth_agree label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #f9f9fc;
+}
+
+.mentor_switch_auth {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.125rem;
+  letter-spacing: 0.01em;
+  color: #f9f9fc;
+}
+
+.mentor_switch_auth a {
+  color: #00adef;
+  font-weight: 600;
+}
+
+.mentor_switch_signUp {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 10px;
+}
+
+.mentor_switch_signUp button {
+  background-color: transparent;
+  border: 1px solid #f9f9fc;
+  border-radius: 8px;
+  padding: 17px 40px;
+  color: #f9f9fc;
+  margin-bottom: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1rem;
+}
+
+.mentor_switch_signUp button:hover {
+  background-color: #00adef;
+  border: none;
+  color: white;
+  box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
+}
+
+.mentor_active_signUp {
+  background-color: #00adef !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
+}
+
+.mentor_switch_signUp button:focus {
+  outline: none !important;
+}
+
+.mentor_checkbox_input {
+  width: 1rem;
+  height: 1rem;
+  position: relative;
+  display: inline-block;
+}
+.mentor_checkbox_input div {
+  background: #ffffff;
+  border-radius: 2px;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  border: 1px solid gray;
+}
+
+.mentor_checkbox_input input {
+  width: inherit;
+  height: inherit;
+  position: relative;
+  z-index: 3;
+  opacity: 0;
+}
+
+.mentor_checkbox_input input:checked + div {
+  background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+}

@@ -7,7 +7,7 @@ export const DashCard = ({
   color = "#E5FFE4",
   icon,
   ...rest
-}) => {
+}) => {  
   return (
     <div className={`dashCard-main ${rest?.className ?? ""}`}>
       <section className="d-flex flex-column justify-content-between">

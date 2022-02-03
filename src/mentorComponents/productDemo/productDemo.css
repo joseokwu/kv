@@ -1,0 +1,91 @@
+.bread-start {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #828282;
+}
+
+.bread-end {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #000000;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.opp-page-card {
+  background-color: white;
+  padding: 2.58rem 2.0625rem;
+  border-radius: 1.25rem;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+}
+
+.opp-page-card-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: #000000;
+}
+
+.opp-tag {
+  background: #f4f4f4;
+  border-radius: 5px;
+  display: inline-block;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #212463;
+  padding: 4px 10px;
+  margin-left: 1rem;
+}
+
+.opp-tag-label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.extra-info {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #323232;
+}
+
+.share-link {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  text-decoration-line: underline;
+  color: #2e3192;
+  cursor: pointer;
+}
+
+.sub-card-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.187rem;
+  line-height: 140%;
+  color: #2e3192;
+}

@@ -1,0 +1,140 @@
+.date-card {
+  background: #0b6cf4;
+  border-radius: 10px;
+  padding: 13px 20px;
+  text-align: center;
+  color: white;
+}
+
+.mile-card {
+  column-gap: 2%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px 15px;
+  width: fit-content;
+  position: relative;
+  min-width: 320px;
+}
+
+.date-card .month {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.date-card .day {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 42px;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.date-card .year {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 10px;
+  letter-spacing: 0.01em;
+  color: #fbfbfb;
+}
+
+.mile-info .title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.mile-info .desc {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.mile-actions {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+}
+
+.mile-actions .delete {
+  color: #e31937;
+  text-decoration-line: underline;
+
+  text-decoration-color: #e31937 !important;
+}
+
+.mile-actions .edit {
+  color: #0b6cf4;
+  text-decoration-line: underline;
+
+  text-decoration-color: #0b6cf4 !important;
+}
+
+.milestone-header {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #ececec;
+}
+
+.mile-line {
+  border: 2px solid #ececec;
+  width: 0px;
+  margin: 0 auto;
+}
+
+.mile-dot {
+  display: block;
+  background-color: #0a6cf4;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  width: 22px;
+  min-width: 22px;
+  height: 22px;
+  position: relative;
+  z-index: 4;
+}
+
+.mile-triangle-left {
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-left: 0;
+  border-right: 16px solid white;
+  position: relative;
+  z-index: 4;
+}
+
+.mile-triangle-right {
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-right: 0;
+  border-left: 16px solid white;
+  position: relative;
+  z-index: 4;
+}
