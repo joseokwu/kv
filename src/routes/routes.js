@@ -2,6 +2,7 @@ import { WithMainLayout, WithRegisterLayout,
   WithStartupRegistrationLayout , WithDashboardLayout
 } from "../Startupcomponents";
 import {WithInvestorRegisterLayout, WithMainInvestorLayout } from '../components';
+import {WithMentorMainLayout, WithMentorRegisterLayout } from '../mentorComponents';
 //import {WithRegisterLayout} from '../Startupcomponents/registerLayout/RegisterLayout';
 import {
   Dashboard,
@@ -305,8 +306,8 @@ const routes = [
 
   {
     name:'DashboardMentor',
-    path:'/',
-    component: WithMainLayout(MentorDashboard),
+    path:'/mentor/dashboard',
+    component: WithMentorMainLayout(MentorDashboard),
     exact: true,
     protected: false,
   },
@@ -327,7 +328,7 @@ const routes = [
   {
     name:'ContactUS',
     path:'/support',
-    component: WithMainLayout(MentorContactUs),
+    component: WithMentorMainLayout(MentorContactUs),
     exact: true,
     protected: false,
   },
@@ -376,7 +377,7 @@ const routes = [
   {
     name: 'Congrats',
     path: '/signup/congrats',
-    component: WithRegisterLayout(Congrats),
+    component:  WithMentorRegisterLayout(Congrats),
     exact: true,
     protected: false,
   },
@@ -390,14 +391,14 @@ const routes = [
   {
     name: 'InvitePeer',
     path: '/signup/invite',
-    component: WithRegisterLayout(InvitePeer),
+    component:  WithMentorRegisterLayout(InvitePeer),
     exact: true,
     protected: false,
   },
   {
     name: 'PersonalDetails',
     path: '/registration',
-    component: WithRegisterLayout(PersonalDetails),
+    component:  WithMentorRegisterLayout(PersonalDetails),
     exact: true,
     protected: false,
   },
@@ -425,42 +426,42 @@ const routes = [
   {
     name: 'Assignmrnts',
     path: '/assignments',
-    component: WithMainLayout(Assignments),
+    component: WithMentorMainLayout(Assignments),
     exact: true,
     protected: false,
   },
   {
     name: 'Events',
     path: '/events',
-    component: WithMainLayout(Events),
+    component: WithMentorMainLayout(Events),
     exact: true,
     protected: false,
   },
   {
     name: 'Schedule',
     path: '/schedule',
-    component: WithMainLayout(Schedule),
+    component: WithMentorMainLayout(Schedule),
     exact: true,
     protected: false,
   },
   {
     name: 'Networking',
     path: '/networking',
-    component: WithMainLayout(MentorNetworking),
+    component:WithMentorMainLayout(MentorNetworking),
     exact: true,
     protected: false,
   },
   {
     name: 'DealRoom',
     path: '/deal_room',
-    component: WithMainLayout(MentorDealRoom),
+    component: WithMentorMainLayout(MentorDealRoom),
     exact: true,
     protected: false,
   },
   {
     name: 'DealRoom',
     path: '/deal_room/:id',
-    component: WithMainLayout(MentorDealRoom),
+    component: WithMentorMainLayout(MentorDealRoom),
     exact: true,
     protected: false,
   },
@@ -488,21 +489,21 @@ const routes = [
   {
     name: 'EvaluationViewProfile',
     path: '/evaluation/view',
-    component: WithMainLayout(EvaluationViewProfile),
+    component: WithMentorMainLayout(EvaluationViewProfile),
     exact: true,
     protected: false,
   },
   {
     name: 'CreateAssignment',
     path: '/assignments/create',
-    component: WithMainLayout(CreateAssignment),
+    component: WithMentorMainLayout(CreateAssignment),
     exact: true,
     protected: false,
   },
   {
     name: 'MoreDetails',
     path: '/assignments/create/details',
-    component: WithMainLayout(MoreDetails),
+    component:WithMentorMainLayout(MoreDetails),
     exact: true,
     protected: false,
   },

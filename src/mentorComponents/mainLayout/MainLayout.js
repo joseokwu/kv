@@ -19,7 +19,7 @@ const MainLayout = ({ children }) => {
   );
 };
 
-export const WithMainLayout = (Component) => {
+export const WithMentorMainLayout = (Component) => {
   return (props) => {
     return (
       <>

@@ -14,7 +14,7 @@ const RegisterLayout = ({ children }) => {
   )
 }
 
-export const WithRegisterLayout = (Component) => {
+export const WithMentorRegisterLayout = (Component) => {
   return (props) => {
     return (
       <>
