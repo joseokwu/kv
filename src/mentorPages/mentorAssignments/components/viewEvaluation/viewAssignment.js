@@ -1,5 +1,5 @@
 import React from 'react'
-import './viewEvaluation.css'
+import './viewAssignment.css'
 import clock from '../../../../assets/icons/clockTime.svg'
 import maindoc from '../../../../assets/images/mani-doc.svg'
 import pitchicon from '../../../../assets/icons/pitchd.svg'
@@ -7,7 +7,7 @@ import logo from '../../../../assets/images/yeLogo.svg'
 import left from '../../../../assets/icons/chervonLeft.svg'
 import { useHistory } from 'react-router-dom'
 
-export const ViewEvaluation = ({ history }) => {
+export const MentorViewAssignment = ({ history }) => {
   const { goBack } = history
 
   const { push } = useHistory()
@@ -28,7 +28,7 @@ export const ViewEvaluation = ({ history }) => {
         <section className="">
           <button
             className="pending_evaluation"
-            onClick={() => push('/assignments/create/details')}
+            onClick={() => push('/mentor/assignments/create/details')}
           >
             Give Feedback
           </button>

@@ -1,4 +1,4 @@
-.dashCard-main {
+.dashCard_main {
   padding: 14px 15px;
   /* max-width: 167px; */
   width: 18.5%;
@@ -27,7 +27,7 @@
   background: rgba(255, 255, 255, 0.1);
 } */
 
-.dashCard-main p {
+.dashCard_main p {
   font-style: normal;
   font-weight: 500;
   font-size: 1.125rem;
@@ -36,7 +36,7 @@
   text-transform: capitalize;
 }
 
-.dashCard-main span {
+.dashCard_main span {
   font-family: Lato;
   font-style: normal;
   font-weight: bold;
@@ -45,12 +45,12 @@
   color: #181819;
 }
 
-.card-star {
+.card_star {
   position: absolute;
   right: 0;
   bottom: 0;
 }
 
-.dashCard-main > section {
+.dashCard_main > section {
   height: 100%;
 }

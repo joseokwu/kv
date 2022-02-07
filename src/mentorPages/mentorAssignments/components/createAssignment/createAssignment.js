@@ -11,7 +11,8 @@ import Upload from '../../../../mentorComponents/upload'
 import left from '../../../../assets/icons/chervonLeft.svg'
 import { useHistory } from 'react-router-dom'
 
-export const CreateAssignment = ({ history }) => {
+
+export const MentorCreateAssignment = ({ history }) => {
   const { goBack } = history
   const onFileChange = (files) => {
     console.log(files)
@@ -93,7 +94,7 @@ export const CreateAssignment = ({ history }) => {
         </section>
       </div>
       <div className="text-right">
-        <AuthButton label="Save" onClick={() => push('/assignments/view')} />
+        <AuthButton label="Save" onClick={() => push('/mentor/assignments/view')} />
       </div>
     </div>
   )

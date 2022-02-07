@@ -13,25 +13,25 @@ import { useHistory } from 'react-router-dom'
 export const CompanyDetails = () => {
   const { push } = useHistory()
   return (
-    <section className="opp-page-card py-4">
+    <section className="opp_page_card py-4">
       <div
         className="d-flex align-items-center justify-content-between flex-wrap"
         style={{ rowGap: 10 }}
       >
         <div>
           <img src={logo} alt="logo" className="mb-3" />
-          <h3 className="opp-page-card-title">Yebox Tech.</h3>
+          <h3 className="opp_page_card_title">Yebox Tech.</h3>
         </div>
 
         <div className="d-flex align-items-end flex-column">
           <section className="d-flex align-items-center mb-3">
-            <span className="opp-tag-label">Industry</span>
-            <span className="opp-tag">Tech</span>
+            <span className="opp_tag_label">Industry</span>
+            <span className="opp_tag">Tech</span>
           </section>
 
           <section className="d-flex align-items-center">
-            <span className="opp-tag-label">Stage</span>
-            <span className="opp-tag">Proof of concept</span>
+            <span className="opp_tag_label">Stage</span>
+            <span className="opp_tag">Proof of concept</span>
           </section>
         </div>
       </div>
@@ -68,7 +68,7 @@ export const CompanyDetails = () => {
         <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
           <Button
             label="Evaluate"
-            onClick={() => push('/evaluation/evaluate#market_attractiveness')}
+            onClick={() => push('/mentor/evaluation/evaluate#market_attractiveness')}
           />
           <Button label="Schedule Call" variant="secondary" />
         </div>

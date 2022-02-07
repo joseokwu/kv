@@ -12,7 +12,7 @@ import blue from '../../assets/icons/blue.svg'
 import gray from '../../assets/icons/gray.svg'
 import { AuthButton, Button, Tag } from '../../mentorComponents'
 
-export const DashboardProfile = () => {
+export const MentorDashboardProfile = () => {
   return (
     <section className="container dashboard_profle mt-4">
       <div className="col">

@@ -57,7 +57,7 @@ const [openModal, setOpenModal] = useState(false);
         </div>
 
         <div className="d-flex">
-          <section className="mt-4 event_people">
+          <section className="mt-4 event-people">
             <img src={lady} alt="doc" />
             <img src={girl} alt="doc" />
             <img src={guy} alt="doc" />
