@@ -1,19 +1,27 @@
-export const DASHBOARD = 'Dashboard';
-export const WALLET = 'Wallet Balance';
-export const TRANSACTIONS = 'Tranctions';
-export const DATA_BANK = 'Data Bank';
-export const CHART_SUPPORT = 'Chat Support';
-export const SETTINGS = 'Settings';
-export const CHANGE_PAGE = 'CHANGE_PAGE';
-export const SHOW_EVENT = 'Show_Event';
+import {
+    DASHBOARD, WALLET,
+    TRANSACTIONS, DATA_BANK,
+    CHART_SUPPORT, SETTINGS,
+    CHANGE_PAGE,
+    SHOW_EVENT,
+  } from '../../actions/actions.types';
 
+  const INIT_STATE = {
+    loading: false,
+    showPage: 'Overview',
+    alert:{
+      success:false, 
+      message:null,
+       autoClose:false,
+        action:false, 
+      },
+      path:1
+};
 
-
-
-
-export const businessReducers = (state, action) => {
+ const businessReducer = (state = INIT_STATE, action)=>{
 
     switch (action.type) {
+
         case DASHBOARD:
             return {
                 ...state,
@@ -61,4 +69,7 @@ export const businessReducers = (state, action) => {
             return state;
 
     }
-}
+
+ }
+
+ export default businessReducer;

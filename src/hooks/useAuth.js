@@ -1,8 +1,15 @@
-import { useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { AuthContext } from '../context/auth/provider';
 
 export const useAuth = () => {
 
-    return useContext(AuthContext)
+const dispatch = useDispatch();
+
+const stateAuth = useSelector((state) => state );
+
+console.log(stateAuth);
+
+    return {
+        stateAuth   
+    };
 }

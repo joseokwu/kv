@@ -56,7 +56,7 @@ import {
   Congrats,
   InvitePeer,
   PersonalDetails,
-  Evaluation,
+  Evaluation,  
   //Program,
   Events,
   Assignments,

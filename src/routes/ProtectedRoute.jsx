@@ -7,7 +7,7 @@ import { setLocationHistory } from '../utils/helpers';
 export  const ProtectedRoute = ({roles, ...props})=>{
     const history = useHistory();
     const {state} = useAuth();
-    console.log(state.authenticated)
+    console.log(state)
     useEffect(()=>{
         if(state.authenticated === false){
 
