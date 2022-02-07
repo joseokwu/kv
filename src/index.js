@@ -5,12 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import 'bulma/css/bulma.min.css';
-
+import Root from './store'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Root>
+     <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Root>,
   document.getElementById('root')
 );
 

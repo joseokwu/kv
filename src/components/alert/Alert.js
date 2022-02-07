@@ -4,26 +4,27 @@ import successIcon from "../../assets/icons/successAlert.svg";
 import close from "../../assets/icons/closeButton.svg";
 //import { AlertContext } from "../../context/context";
 import {useActivity} from '../../hooks/useBusiness';
-
+import { useAuth } from "../../hooks/useAuth";
 
 export const Alert = () => {
 
+  const { state: { alert}  } = useActivity();
+  const {  stateAuth  } = useAuth();
 
-  const { state: { alert} , setAlert } = useActivity();
-
+  //console.log(alert) 
     // console.log(`data`, data);
 
   const { success, message, autoClose, action } = alert ;
   useEffect(() => {
     if (autoClose && message.length > 0) {
       setTimeout(() => {
-        setAlert({ ...alert, message: "" });
+        //setAlert({ ...alert, message: "" });
       }, 5000);
     }
-  }, [alert, setAlert, autoClose, message]);
+  }, [alert,  autoClose, message]);
 
   const closeAlert = () => {
-   setAlert({ ...alert, message: "" });
+ // setAlert({ ...alert, message: "" });
   };
 
   return (

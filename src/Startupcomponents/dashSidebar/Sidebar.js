@@ -31,7 +31,7 @@ export const DashSidebar = () => {
           {investorNavigators.length > 0 &&
             investorNavigators.map((nav, i) => {
               return (
-                <li>
+                <li key={i} >
                   <a href={nav.path}>
                     <img src={nav.icon} alt="dash" />
                     <p className={`${activateLink(nav.activator)} side-text`}>

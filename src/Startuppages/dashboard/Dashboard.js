@@ -14,7 +14,7 @@ export const Dashboard = () => {
       </section> */}
       <section className="row" style={{ zIndex: '999', background: '#FEFEFE' }}>
         {cardData.map((data, i) => (
-          <>
+        
             <DashCard
               className="col-lg-3 col-md-6 col-12"
               icon={data.icon}
@@ -23,7 +23,7 @@ export const Dashboard = () => {
               color={data.color}
               key={i}
             />
-          </>
+         
         ))}
       </section>
 
