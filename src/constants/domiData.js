@@ -29,6 +29,12 @@ export const cardData = [
   { icon: pending, name: 'Partners', count: 12, color: '#FAD7DC' },
 ]
 
+export const boosterData = [
+  { icon: newApp, name: 'New Deals', count: 200, color: '#E5FFE4' },
+  { icon: pending, name: 'Applied', count: 20, color: '#FAD7DC' },
+  { icon: newApp, name: 'Active', count: 20, color: '#FAD7DC' },
+]
+
 export const cardFundData = [
   {
     icon: newApp,

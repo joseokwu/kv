@@ -1,5 +1,6 @@
-.dashboard-main {
-  padding: 0px 15px 52px 15px;
+.dashboardMain {
+  padding: 0px 26px 52px 26px;
+  overflow-x: none;
 }
 
 .dashboard-cards {

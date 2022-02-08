@@ -2,7 +2,7 @@
   height: calc(100vh - 60px);
   background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
   color: white;
-  padding: 60px 10%;
+  padding: 40px 10%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

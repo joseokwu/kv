@@ -1,8 +1,8 @@
-.side_main {
+.sideMain {
   height: calc(100vh - 60px);
   background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
   color: white;
-  padding: 60px 10%;
+  padding: 40px 10%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -11,53 +11,53 @@
   /* padding-bottom: 30px; */
 }
 
-.side-navigator img {
+.sideNavigator img {
   cursor: pointer;
 }
 
-.side-footer {
+.sideFooter {
   display: flex;
   align-items: center;
   column-gap: 14px;
 }
 
-.side-list {
+.sideList {
   list-style: none;
   margin: 0;
   padding: 0;
   padding-top: 30px;
 }
 
-.side-list a {
+.sideList a {
   display: flex;
   align-items: center;
   column-gap: 20px;
   text-decoration: none;
 }
 
-.side-list li {
+.sideList li {
   margin-bottom: 1rem;
 }
 
-.side-list img {
+.sideList img {
   flex-basis: 10%;
   width: 18px;
   height: 18px;
   object-fit: contain;
 }
 
-.side-list a p {
+.sideList a span {
   color: #ffffff;
 }
 
-.active-side {
+.activeSide {
   padding: 10px 17px;
   background-color: white;
   color: #00adef !important;
   border-radius: 10px;
 }
 
-.side-text {
+.sideText {
   font-style: normal;
   font-weight: normal;
   font-size: 17px;
@@ -65,7 +65,7 @@
   color: #ffffff;
 }
 
-.side-header {
+.sideHeader {
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -74,6 +74,6 @@
   margin-top: 13px;
 }
 
-.side-header + p {
+.sideHeader + p {
   opacity: 0.7;
 }

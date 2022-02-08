@@ -44,7 +44,7 @@ export const Product = () => {
           </section>
           <section className="founder_profile mt-3">
             <div className="text-center">
-              <a href="/dashboard/founder">View</a>
+              <a href="/mentor/dashboard/founder">View</a>
             </div>
           </section>
         </div>

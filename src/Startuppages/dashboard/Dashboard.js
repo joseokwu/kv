@@ -8,13 +8,13 @@ import { UpComing } from './components/upComing'
 export const Dashboard = () => {
   // const appCardData = [1, 2, 3, 4, 5]
   return (
-    <div className="dashboard-main">
+    <div className="dashboardMain">
       {/* <section className="startup-dash mb-4">
         <h2>Yebox Techologies</h2>
       </section> */}
-      <section className="row" style={{ zIndex: '999', background: '#FEFEFE' }}>
+      <section className="row" style={{ zIndex: '998', background: '#FEFEFE' }}>
         {cardData.map((data, i) => (
-        
+          <>
             <DashCard
               className="col-lg-3 col-md-6 col-12"
               icon={data.icon}
@@ -23,7 +23,7 @@ export const Dashboard = () => {
               color={data.color}
               key={i}
             />
-         
+          </>
         ))}
       </section>
 

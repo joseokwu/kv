@@ -28,6 +28,15 @@
   padding: 41px 13.1%;
 }
 
+.message-card label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
 .message-header {
   font-family: DM Sans;
   font-style: normal;
@@ -62,4 +71,13 @@
 
 .message-input {
   max-width: 100% !important;
+}
+
+label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
 }

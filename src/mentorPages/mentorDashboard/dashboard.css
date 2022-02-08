@@ -1,15 +1,14 @@
-.dashboard-main {
-  padding: 20px 26px 52px 26px;
+.dashboard_main {
+  padding: 0px 26px 52px 26px;
 }
 
 .dashboard-cards {
   column-gap: 19px;
   width: 100%;
   overflow-x: auto;
-  /* overflow-y: auto; */
   padding-bottom: 20px;
-  /* position: fixed; */
-  z-index: 999;
+  background: #fefefe;
+  z-index: 900;
 }
 
 .dashboard-cards::-webkit-scrollbar {

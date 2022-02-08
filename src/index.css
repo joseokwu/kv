@@ -18,11 +18,15 @@ body {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(32, 165, 199); 
+  background: rgb(183, 186, 187); 
   border-radius: 4px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #369ce0; 
+}
+
+iframe {
+  pointer-events: none;
 }

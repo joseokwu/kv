@@ -21,7 +21,6 @@ export const MentorDashboard = () => {
       <section className="row pb-5">
         <section
           className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed mt-0"
-          style={{ background: '#fefefe' }}
         >
           {cardData.map((data, i) => (
             <MentorDashCard

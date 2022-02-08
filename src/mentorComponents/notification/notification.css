@@ -4,7 +4,7 @@
   position: fixed;
   top: 70px;
   background: #ffffff;
-  z-index: 100000 !important;
+  z-index: 998!important;
   max-height: 800px;
 }
 
