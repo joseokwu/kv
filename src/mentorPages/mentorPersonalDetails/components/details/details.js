@@ -40,15 +40,17 @@ const Details = () => {
 
         <div className="row">
           <section className="col-md-6 mb-4">
+            <label>First Name*</label>
             <TextField
-              label={'First Name*'}
+              // label={'First Name*'}
               placeholder={'Micheal'}
               required={true}
             />
           </section>
           <section className="col-md-6 mb-4">
+            <label>Last Name*</label>
             <TextField
-              label={'Last Name*'}
+              // label={'Last Name*'}
               placeholder={'Smith'}
               required={true}
             />
@@ -63,7 +65,11 @@ const Details = () => {
           </section>
 
           <section className="col-md-6 mb-4">
-            <TextField label={'Designation'} placeholder={'Ex. Engr'} />
+          <label>Designation</label>
+            <TextField 
+              // label={'Designation'} 
+              placeholder={'Ex. Engr'} 
+            />
           </section>
 
           <section className="col-md-12 mb-4">
@@ -84,40 +90,49 @@ const Details = () => {
 
         <div className="row">
           <section className="col-md-6 mb-4">
+          <label>LinkedIn*</label>
             <TextField
-              label={'LinkedIn*'}
+              // label={'LinkedIn*'}
               placeholder={'Enter LinkdIn link'}
               required={true}
             />
           </section>
           <section className="col-md-6 mb-4">
-            <TextField label={'Twitter'} placeholder={'Enter Twitter link'} />
+          <label>Twitter</label>
+            <TextField 
+              // label={'Twitter'} 
+              placeholder={'Enter Twitter link'} 
+            />
           </section>
 
           <section className="col-md-6 mb-4">
+          <label>Angelist</label>
             <TextField
-              label={'Angelist'}
+              // label={'Angelist'}
               placeholder={'Enter Angelist link'}
               wid
             />
           </section>
           <section className="col-md-6 mb-4">
+          <label>Crunchbase</label>
             <TextField
-              label={'Crunchbase'}
+              // label={'Crunchbase'}
               placeholder={'Enter Crunchbase link'}
             />
           </section>
 
           <section className="col-md-6 mb-4">
+          <label>Whatsapp*</label>
             <TextField
-              label={'Whatsapp*'}
+              // label={'Whatsapp*'}
               placeholder={'Enter Whatsapp number'}
               required={true}
             />
           </section>
           <section className="col-md-6 mb-4">
+          <label>Website</label>
             <TextField
-              label={'Website'}
+              // label={'Website'}
               placeholder={'Enter Webiste link'}
               wid
             />
@@ -132,27 +147,41 @@ const Details = () => {
 
         <div className="row">
           <section className="col-md-6 mb-4">
+          <label>Skype Id*</label>
             <TextField
-              label={'Skype Id*'}
+              // label={'Skype Id*'}
               placeholder={'www.knightventure/michealsmith'}
               required={true}
             />
           </section>
           <section className="col-md-6 mb-4">
+          <label>Zoom Link*</label>
             <TextField
-              label={'Zoom Link*'}
+              // label={'Zoom Link*'}
               placeholder={'Enter Zoom Link'}
               required={true}
             />
           </section>
           <section className="col-md-4 mb-4">
-            <TextField label={'Country'} placeholder={'Enter your country'} />
+          <label>Country</label>
+            <TextField 
+              // label={'Country'} 
+              placeholder={'Enter your country'} 
+            />
           </section>
           <section className="col-md-4 mb-4">
-            <TextField label={'State'} placeholder={'Enter your state'} />
+          <label>State</label>
+            <TextField 
+              // label={'State'}
+              placeholder={'Enter your state'} 
+            />
           </section>
           <section className="col-md-4 mb-4">
-            <TextField label={'City'} placeholder={'Enter your city'} />
+          <label>City</label>
+            <TextField 
+              // label={'City'} 
+              placeholder={'Enter your city'} 
+            />
           </section>
 
           <section className="col-md-12 mb-4">

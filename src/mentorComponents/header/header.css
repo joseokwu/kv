@@ -4,6 +4,7 @@
   width: 100%;
   padding: 0 3%;
   background-color: white;
+  z-index: 999;
 }
 
 .header-list {

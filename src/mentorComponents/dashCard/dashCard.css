@@ -1,4 +1,4 @@
-.dashCard-main {
+.dashCard_main {
   padding: 14px 15px;
   /* max-width: 167px; */
   width: 18.5%;
@@ -7,15 +7,13 @@
   color: white;
   background-color: white;
   box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
-  /* height: 124px; */
   position: relative;
-  /* position: sticky; */
   overflow: hidden;
 }
 
-.dashboard_main {
+/* .dashboard_main {
   padding: 0px 26px 52px 26px;
-}
+} */
 
 /* .dashCard-icon {
   width: 50px;
@@ -27,7 +25,7 @@
   background: rgba(255, 255, 255, 0.1);
 } */
 
-.dashCard-main p {
+.dashCard_main p {
   font-style: normal;
   font-weight: 500;
   font-size: 1.125rem;
@@ -36,7 +34,7 @@
   text-transform: capitalize;
 }
 
-.dashCard-main span {
+.dashCard_main span {
   font-family: Lato;
   font-style: normal;
   font-weight: bold;
@@ -45,12 +43,12 @@
   color: #181819;
 }
 
-.card-star {
+.card_star {
   position: absolute;
   right: 0;
   bottom: 0;
 }
 
-.dashCard-main > section {
+.dashCard_main > section {
   height: 100%;
 }

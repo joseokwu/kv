@@ -7,8 +7,9 @@ import { BusinessModelCanva } from '../../../mentorViewDetails/components/busine
 import { Team } from '../../../mentorViewDetails/components/team/team'
 import { RoadMap } from '../../../mentorViewDetails/components/roadMap/RoadMap'
 import { Fundraising } from '../../../mentorViewDetails/components/fundraising/fundraising'
+import { Milestone } from '../../../mentorViewDetails/components/milestone/Milestone'
 
-export const EvaluationViewProfile = ({ history }) => {
+export const MentorEvaluationViewProfile = ({ history }) => {
   const {
     location: { hash },
   } = history
@@ -31,7 +32,7 @@ export const EvaluationViewProfile = ({ history }) => {
         return <Fundraising />
 
       case '#Milestone/Timeline':
-        return <div>Milestone/Timeline</div>
+        return <Milestone />
 
       case '#Product Road Map':
         return <RoadMap />

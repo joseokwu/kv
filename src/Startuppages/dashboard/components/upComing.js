@@ -9,7 +9,7 @@ export const UpComing = () => {
 
   return (
     <div className="container">
-      <HeadWrapper className="d-flex justify-content-between py-4">
+      <HeadWrapper className="d-flex justify-content-between mt-5">
         <p className="text-nowrap">Upcoming Events</p>
         <span className="text-nowrap">See All</span>
       </HeadWrapper>
@@ -22,7 +22,7 @@ export const UpComing = () => {
               <CustomThreeDots />
             </div>
 
-            <div className="d-flex justify-content-between my-5 date">
+            <div className="d-flex justify-content-between my-4 date">
               <span>05 | September</span>
               <article className="event_time">
                 <img src={clock} alt="clock" /> 10:00pm - 12pm
@@ -30,14 +30,14 @@ export const UpComing = () => {
               {/* <Tag name="Today" color="#120398" bg="#DEF6FF" fz="14px" /> */}
             </div>
 
-            <div className="my-5">
+            <div className="">
               <p>
                 Lorem ipsum dolor sit amet, consectetur g elit. Enim lectus
                 morbi elementum eu.Lorem ipsu.
               </p>
             </div>
 
-            <div className="my-4 foot d-flex justify-content-between">
+            <div className="mt-4 mb-2 foot d-flex justify-content-between">
               <button>View Details</button>
               <span className="mx-4">
                 {images.map((data, i) => (

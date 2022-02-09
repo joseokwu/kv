@@ -7,13 +7,13 @@
   color: #2e3192;
 }
 
-.event_people {
+.event-people {
   display: flex;
   align-items: flex-end;
   border-right: 0.8px solid #c0c1d4;
 }
 
-.event_people img {
+.event-people img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -23,19 +23,19 @@
   cursor: pointer;
 }
 
-.event_people img:hover {
+.event-people img:hover {
   -ms-transform: scale(1.5); /* IE 9 */
   -webkit-transform: scale(1.5); /* Safari 3-8 */
   transform: scale(1.5);
   z-index: 999;
 }
 
-.event_people img:nth-child(2) {
+.event-people img:nth-child(2) {
   position: relative;
   left: -9px;
 }
 
-.event_people img:nth-child(3) {
+.event-people img:nth-child(3) {
   position: relative;
   left: -16px;
 }

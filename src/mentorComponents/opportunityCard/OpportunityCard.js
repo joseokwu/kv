@@ -5,15 +5,15 @@ import { Tag } from "..";
 
 export const OpportunityCard = ({ onClick }) => {
   return (
-    <div className="opp-card" onClick={onClick}>
+    <div className="opp_card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
-        <span class="opp-tag">Idea Stage</span>
+        <span class="opp_tag">Idea Stage</span>
       </section>
 
       <section className="mb-2 d-flex align-items-center justify-content-between">
-        <h4 className="opp-company">Yebox Technology</h4>
-        <span className="active-dot"></span>
+        <h4 className="opp_company">Yebox Technology</h4>
+        <span className="active_dot"></span>
       </section>
       <section className="d-flex align-items-center" style={{ columnGap: 4 }}>
         <Tag name="Tech" />
@@ -21,7 +21,7 @@ export const OpportunityCard = ({ onClick }) => {
         <Tag name="Career" color="#E31937" />
       </section>
 
-      <section className="opp-content">
+      <section className="opp_content">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
           morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -29,7 +29,7 @@ export const OpportunityCard = ({ onClick }) => {
         </p>
       </section>
 
-      <section className="d-flex align-items-center justify-content-between opp-footer-text">
+      <section className="d-flex align-items-center justify-content-between opp_footer_text">
         <div>
           <p className="mb-2">Transaction type: Round</p>
           <p>Funding amount: $7</p>

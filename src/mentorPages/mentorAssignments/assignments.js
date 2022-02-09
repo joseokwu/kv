@@ -1,5 +1,5 @@
 import React from 'react'
-import { DashCard } from '../../mentorComponents'
+import { MentorDashCard } from '../../mentorComponents'
 import down from '../../assets/icons/chevronDown.svg'
 import './assignments.css'
 import { useHistory } from 'react-router-dom'
@@ -22,7 +22,7 @@ export const Assignments = () => {
           style={{ background: '#fefefe' }}
         >
           {cardData.map((data, i) => (
-            <DashCard
+            <MentorDashCard
               name={data.name}
               count={data.count}
               color={data.color}
@@ -32,7 +32,7 @@ export const Assignments = () => {
         </section>
       </section>
 
-      <section className="mt-5 d-flex justify-content-between">
+      <section className="mt-5 pt-3 d-flex justify-content-between">
         <div className="mt-5">
           <button
             className="d-flex align-items-center filter-btn"
@@ -50,7 +50,7 @@ export const Assignments = () => {
         </div>
 
         <div className="mt-5">
-          <a className="create_assignment" href="/assignments/create">
+          <a className="create_assignment" href="/mentor/assignments/create">
             Create
           </a>
         </div>
@@ -85,7 +85,7 @@ export const AssignmentCard = () => {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
         morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
         elit.
-        <a href="/assignments/create/details">More Details</a>
+        <a href="/mentor/assignments/create/details">More Details</a>
       </p>
       <button
         className="pending_evaluation mt-4"

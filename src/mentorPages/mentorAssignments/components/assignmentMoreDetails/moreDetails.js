@@ -7,7 +7,7 @@ import { Modal } from '../../../../mentorComponents'
 import { FeedbackModal } from '../feedbackModal'
 import left from '../../../../assets/icons/chervonLeft.svg'
 
-export const MoreDetails = ({ history }) => {
+export const MentorMoreDetails = ({ history }) => {
   const { goBack } = history
 
   return (

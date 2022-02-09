@@ -16,49 +16,49 @@ const mentorNavigators = [
   {
     title: 'Dashboard',
     activator: 'dashboard',
-    path: '/',
+    path: '/mentor/dashboard',
     icon: dashboard,
   },
   {
     title: 'Evaluation',
     activator: 'evaluation',
-    path: '/evaluation',
+    path: '/mentor/evaluation',
     icon: evaluation,
   },
   {
     title: 'Program',
     activator: 'program',
-    path: '/program',
+    path: '/mentor/program#All',
     icon: program,
   },
   {
     title: 'Assignments',
     activator: 'assignments',
-    path: '/assignments',
+    path: '/mentor/assignments',
     icon: assignments,
   },
   {
     title: 'Events',
     activator: 'events',
-    path: '/events',
+    path: '/mentor/events',
     icon: events,
   },
   {
     title: 'Schedule',
     activator: 'schedule',
-    path: '/schedule',
+    path: '/mentor/schedule',
     icon: schedule,
   },
   {
     title: 'Networking',
     activator: 'networking',
-    path: '/networking',
+    path: '/mentor/networking',
     icon: network,
   },
   {
     title: 'Deal Room',
-    activator: 'deal_room',
-    path: '/deal_room',
+    activator: 'dealroom',
+    path: '/mentor/dealroom',
     icon: deal,
   },
 ]
@@ -76,10 +76,10 @@ export const Sidebar = () => {
   const [navigator, setNavigator] = useState([])
 
   useEffect(() => {
-    if (pathname.includes('')) {
+    if (pathname.includes('mentor')) {
       setNavigator(mentorNavigators)
     } else {
-      setNavigator('')
+      setNavigator(mentorNavigators)
     }
   }, [pathname])
 
@@ -87,16 +87,16 @@ export const Sidebar = () => {
     <div className="side-main">
       <section className="side-navigator">
         <div>
-          <img src={user} alt="profile" onClick={() => push('/profile')} />
+          <img src={user} alt="profile" onClick={() => push('/mentor/profile')} />
         </div>
         <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
-        <p className="mb-0 side-text">{pathname.includes('') ? 'Mentor' : ''}</p>
+        <p className="mb-0 side-text">{pathname.includes('mentor') ? 'Mentor' : 'mentor'}</p>
 
         <ul className="side-list">
           {navigator.length > 0 &&
             navigator.map((nav, i) => {
               return (
-                <li>
+                <li key={i}>
                   <a href={nav.path}>
                     <img src={nav.icon} alt="dash" />
                     <span className={`${activateLink(nav.activator)} side-text`}>
@@ -108,7 +108,7 @@ export const Sidebar = () => {
             })}
         </ul>
       </section>
-      <section className="side-footer" onClick={() => push('/support')}>
+      <section className="side-footer" onClick={() => push('/mentor/support')}>
         <img src={helpDesk} alt="help" />
         <span className="mb-0 side-text" role="button">
           Need help? Contact us

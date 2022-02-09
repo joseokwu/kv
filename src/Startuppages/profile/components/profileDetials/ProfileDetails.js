@@ -49,7 +49,7 @@ const ProfileDetails = () => {
 
           <div className="d-flex align-items-center justify-content-between mb-3">
             <span className="d-flex align-items-center contact-name">
-              <p>CONTACT : Winner Grace</p>
+              <p>CONTACT : Winner Graceoooo</p>
               <p>Manager</p>
             </span>
             <span>

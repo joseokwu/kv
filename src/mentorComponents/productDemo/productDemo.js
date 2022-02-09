@@ -17,7 +17,7 @@ export const ProductDemo = () => {
             className="bread-start"
             role="button"
             onClick={() => {
-              push('/')
+              push('/mentor/dashboard')
             }}
           >
             Startups
