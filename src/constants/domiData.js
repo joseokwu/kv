@@ -3,6 +3,7 @@ import pending from '../assets/icons/invst.svg'
 import person1 from '../assets/icons/person1.svg'
 import person2 from '../assets/icons/person2.svg'
 import person3 from '../assets/icons/person3.svg'
+import company from '../assets/images/appleoff.svg'
 
 export const options = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -85,6 +86,18 @@ export const cardFill = [
     color: '#00ADEF',
     time: '(9 oct 2021)',
   },
+]
+
+export const applicationCardData = [
+  {
+    title: 'Applane  Insteen.',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+  },
+]
+
+export const compImage = [
+  { logo: company }
 ]
 
 export const images = [
