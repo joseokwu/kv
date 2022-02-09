@@ -7,6 +7,7 @@ export const Modal = ({
   children,
   position = '',
   id = '',
+  bold = false,
   subTitle = '',
   withHeader = true,
 }) => {
@@ -32,7 +33,7 @@ export const Modal = ({
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <p className="kv-modal-title">{title}</p>
+              <p className={bold ? 'text-dark':"kv-modal-title" }>{title}</p>
               {subTitle.length > 0 && <p className="mt-3">{subTitle}</p>}
             </header>
           )}

@@ -9,7 +9,8 @@ import {
   Profile,
   StartUpRegistration,
   Program,
-  FundingRaising
+  FundingRaising,
+  StartupProfile
 } from "../Startuppages";
 import { BoosterPartner } from "../Startuppages/boosterPartner/boosterPartner";
 import { StartupDealRoom } from "../Startuppages/dealRoom/dealRoom";
@@ -176,9 +177,9 @@ const routes = [
     protected: false,
   },
   {
-    name: "Profile",
-    path: "/profile",
-    component: WithDashboardLayout(Opportunity),
+    name: "Startup-Profile",
+    path: "/startup-profile",
+    component: WithDashboardLayout(StartupProfile),
     exact: true,
     protected: false,
   },
@@ -375,7 +376,7 @@ const routes = [
   },
   {
     name: 'Profile',
-    path: '/profile',
+    path: '/prof',
     component: WithRegisterLayout(Profile),
     exact: true,
     protected: false,
