@@ -1,5 +1,41 @@
 
 import {
+  WithMentorMainLayout,
+  WithMentorRegisterLayout,
+} from '../mentorComponents'
+
+import {
+  MentorDashboard,
+  SignUp,
+  MentorSignIn,
+  MentorConfirmEmail,
+  MentorForgotPassword,
+  MentorCheckMail,
+  MentorResetPassword,
+  MentorVerifyOTP,
+  MentorProfile,
+  MentorNotification,
+  MentorCongrats,
+  MentorInvitePeer,
+  MentorPersonalDetails,
+  MentorEvaluate,
+  MentorProgram,
+  MentorEvents,
+  MentorAssignments,
+  MentorSchedule,
+  MentorNetworking,
+  MentorEvaluationViewProfile,
+  MentorContactUs,
+  MentorCreateAssignment,
+  MentorMoreDetails,
+  MentorViewDetails,
+  MentorDashboardProfile,
+  MentorDealRoom,
+  // DealFolder,
+  MentorEvaluation,
+} from '../mentorPages'
+import { MentorViewAssignment } from '../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment';
+import {
   WithInvestorRegisterLayout,
   WithMainInvestorLayout,
 } from "../components";
@@ -49,6 +85,7 @@ import {
   StartupContactUs,
   StartupNotification
 } from "../Startuppages";
+
 
 
 const routes = [
@@ -353,8 +390,224 @@ const routes = [
   },
   //Investor Routes End
   
+    // Mentor Routes Starts Here
+  {
+    name: 'signin',
+    path: '/mentor/signin',
+    exact: true,
+    component: MentorSignIn,
+    protected: false,
+  },
+  {
+    name: 'SignUp',
+    path: '/mentor/signup',
+    component: SignUp,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Congrats',
+    path: '/mentor/signup/congrats',
+    component: WithMentorRegisterLayout(MentorCongrats),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Notification',
+    path: '/mentor/notification',
+    component: WithMentorMainLayout(MentorNotification),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'ConfirmEmail',
+    path: '/mentor/forgot/password',
+    component: MentorConfirmEmail,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'ForgotPassword',
+    path: '/mentor/forgot-password',
+    component: MentorForgotPassword,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'CheckMail',
+    path: '/mentor/confirm/email',
+    component: MentorCheckMail,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'ResetPassword',
+    path: '/mentor/reset/password',
+    component: MentorResetPassword,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'VerifyOtp',
+    path: '/mentor/verify/otp',
+    component: MentorVerifyOTP,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'InvitePeer',
+    path: '/mentor/signup/invite',
+    component: WithMentorRegisterLayout(MentorInvitePeer),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'MentorDashboard',
+    path: '/mentor/dashboard',
+    component: WithMentorMainLayout(MentorDashboard),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'MentorDashboard',
+    path: '/mentor/profile',
+    component: WithMentorRegisterLayout(MentorProfile),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'PersonalDetails',
+    path: '/mentor/registration',
+    component: WithMentorRegisterLayout(MentorPersonalDetails),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'ViewDetails',
+    path: '/mentor/dashboard/view',
+    component: WithMentorMainLayout(MentorViewDetails),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'MentorEvaluation',
+    path: '/mentor/evaluation',
+    component: WithMentorMainLayout(MentorEvaluation),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Program',
+    path: '/mentor/program',
+    component: WithMentorMainLayout(MentorProgram),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Assignmrnts',
+    path: '/mentor/assignments',
+    component: WithMentorMainLayout(MentorAssignments),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Events',
+    path: '/mentor/events',
+    component: WithMentorMainLayout(MentorEvents),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Schedule',
+    path: '/mentor/schedule',
+    component: WithMentorMainLayout(MentorSchedule),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Networking',
+    path: '/mentor/networking',
+    component: WithMentorMainLayout(MentorNetworking),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'DealRoom',
+    path: '/mentor/dealroom',
+    component: WithMentorMainLayout(MentorDealRoom),
+    exact: true,
+    protected: false,
+  },
+  // {
+  //   name: 'DealRoom',
+  //   path: '/mentor/deal_room/:id',
+  //   component: WithMentorMainLayout(MentorDealRoom),
+  //   exact: true,
+  //   protected: false,
+  // },
+  // {
+  //   name: ‘DealRoom’,
+  //   path: ‘/deal_room/:id/:folderName’,
+  //   component: WithMainLayout(DealFolder),
+  //   exact: true,
+  //   protected: false,
+  // },
+  {
+    name: 'DashboardProfile',
+    path: '/mentor/dashboard/founder',
+    component: WithMentorMainLayout(MentorDashboardProfile),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'Evaluation',
+    path: '/mentor/evaluation/evaluate',
+    component: WithMentorRegisterLayout(MentorEvaluate),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'EvaluationViewProfile',
+    path: '/mentor/evaluation/view',
+    component: WithMentorMainLayout(MentorEvaluationViewProfile),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'CreateAssignment',
+    path: '/mentor/assignments/create',
+    component: WithMentorMainLayout(MentorCreateAssignment),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'MoreDetails',
+    path: '/mentor/assignments/create/details',
+    component: WithMentorMainLayout(MentorMoreDetails),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'ViewAssignmnet',
+    path: '/mentor/assignments/view',
+    component: WithMentorMainLayout(MentorViewAssignment),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: 'ContactUS',
+    path: '/mentor/support',
+    component: WithMentorMainLayout(MentorContactUs),
+    exact: true,
+    protected: false,
+  },
+
+  // Mentor Routes Ends Here
+  
 
 ];
 
 export default routes;
+
+
 
