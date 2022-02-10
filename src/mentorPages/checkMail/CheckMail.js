@@ -2,7 +2,7 @@ import React from 'react'
 import logo from '../../assets/icons/kvlogo.svg'
 import sentMail from '../../assets/images/mentorSentEmail.svg'
 
-export const CheckMail = () => {
+export const MentorCheckMail = () => {
   return (
     <div className="row mx-0 auth-wrap pt-5">
       <section className="layout-header">

@@ -1,4 +1,4 @@
-.opp-card {
+.opp_card {
   background: #ffffff;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
@@ -6,7 +6,7 @@
   cursor: pointer;
 }
 
-.opp-content {
+.opp_content {
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
@@ -19,7 +19,7 @@
   margin-bottom: 1rem;
 }
 
-.opp-footer-text {
+.opp_footer_text {
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
@@ -28,7 +28,7 @@
   color: #6466aa;
 }
 
-.opp-company {
+.opp_company {
   font-family: Lato;
   font-style: normal;
   font-weight: bold;
@@ -37,7 +37,7 @@
   color: rgba(24, 24, 25, 0.9);
 }
 
-.opp-tag {
+.opp_tag {
   background: #e8f6fc;
   border-radius: 5px;
   padding: 4px 10px;
@@ -50,7 +50,7 @@
   color: #5d5d5e;
 }
 
-.active-dot {
+.active_dot {
   display: inline-block;
   width: 6px;
   height: 6px;

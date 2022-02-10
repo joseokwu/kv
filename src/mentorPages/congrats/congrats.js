@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { Form } from 'antd'
 import './congrats.css'
 
-export const Congrats = ({ history }) => {
+export const MentorCongrats = ({ history }) => {
   const [loader, setLoader] = useState(false)
 
   return (

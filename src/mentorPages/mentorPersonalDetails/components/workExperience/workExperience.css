@@ -1,3 +1,12 @@
 .add_another_experience {
-    color: #5355A3;
+  color: #5355a3;
+}
+
+label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
 }

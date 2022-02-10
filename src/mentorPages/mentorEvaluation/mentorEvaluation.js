@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  DashCard,
+  MentorDashCard,
   EvaluationCompletedCard,
   AllEvaluationCard,
   Tabs,
@@ -55,7 +55,7 @@ export const MentorEvaluation = ({ history }) => {
           style={{ background: '#fefefe' }}
         >
           {cardData.map((data, i) => (
-            <DashCard
+            <MentorDashCard
               name={data.name}
               count={data.count}
               color={data.color}

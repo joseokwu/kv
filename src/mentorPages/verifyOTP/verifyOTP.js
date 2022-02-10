@@ -3,7 +3,7 @@ import logo from '../../assets/icons/kvlogo.svg'
 import './verifyOTP.css'
 import { AuthButton, AuthTextField } from '../../mentorComponents'
 
-export const VerifyOTP = ({ history }) => {
+export const MentorVerifyOTP = ({ history }) => {
   const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' })
 
   const handleOTPChange = (e) => {
@@ -48,7 +48,7 @@ export const VerifyOTP = ({ history }) => {
             <section>
               <AuthButton
                 label="Continue"
-                onClick={() => history.push('/reset/password')}
+                onClick={() => history.push('/mentor/reset/password')}
               />
             </section>
           </div>

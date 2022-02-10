@@ -1,21 +1,30 @@
 import React from 'react'
 import './dashCard.css'
 import { CardWrapper, CardWrap } from './dash.styled'
-export const DashCard = ({
-  count = "100",
-  name = "name",
-  color = "#E5FFE4",
-  icon,
-  ...rest
-}) => {  
+
+// export const DashCard = ({
+//   count = '100',
+//   name = 'name',
+//   color = '#E5FFE4',
+//   icon,
+//   ...rest
+// }) => {
+
+export const DashCard = ({ icon, count, name, color }) => {
   return (
-    <div className={`dashCard-main ${rest?.className ?? ""}`}>
-      <section className="d-flex flex-column justify-content-between">
-        <h3>{name}</h3>
-        <p>{count}</p>
-        <img src={icon} style={{ color: color }} className="card-star" />
-      </section>
-    </div>
+    // <div className={`dashCard-main ${rest?.className ?? ""}`}>
+    //   <section className="d-flex flex-column justify-content-between">
+    //     <h3>{name}</h3>
+    //     <p>{count}</p>
+    //     <img src={icon} style={{ color: color }} className="card-star" />
+    //   </section>
+    // </div>
+
+    <CardWrapper className="">
+      <h3>{name}</h3>
+      <p>{count}</p>
+      <img src={icon} style={{ color: color }} className="card_star" />
+    </CardWrapper>
   )
 }
 
@@ -40,18 +49,18 @@ const Star = ({ color }) => {
 export const CardFill = ({ header, color, amount, time }) => {
   return (
     <>
-      <div
+      {/* <div
         className="col d-flex justify-content-center"
         // style={{ paddingTop: '150px' }}
-      >
-        <CardWrap bg={color}>
-          <p> {header} </p>
-          <h5>
-            {amount}
-            <span> {time} </span>
-          </h5>
-        </CardWrap>
-      </div>
+      > */}
+      <CardWrap bg={color}>
+        <p> {header} </p>
+        <h5>
+          {amount}
+          <span> {time} </span>
+        </h5>
+      </CardWrap>
+      {/* </div> */}
     </>
   )
 }

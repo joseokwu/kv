@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 
 export const TodoList = () => {
   const todoArr = [1]
+  const toArr = [1]
   const history = useHistory()
 
   return (
@@ -16,7 +17,7 @@ export const TodoList = () => {
           See All
         </span>
       </HeadWrapper>
-      <div className="row" style={{ columnGap: 10 }}>
+      <div className="row" style={{ columnGap: 10}}>
         {todoArr.map((i) => (
           <TodoCard key={i} className="col-lg-6 col-12">
             <div className="d-flex justify-content-between head">
@@ -24,12 +25,12 @@ export const TodoList = () => {
               <CustomThreeDots />
             </div>
 
-            <div className="d-flex justify-content-between my-5 date">
+            <div className="d-flex justify-content-between my-3 date">
               <span>05 | September</span>
               <Tag name="Today" color="#058DC1" bg="#DEF6FF" />
             </div>
 
-            <div className="my-5">
+            <div className="">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
                 lectus morbi elementum eu.Lorem ipsum dolor sit amet,
@@ -37,7 +38,7 @@ export const TodoList = () => {
               </p>
             </div>
 
-            <div className="my-4 foot">
+            <div className="mt-4 mb-2 foot">
               <span>Assigned to</span>
               <span className="mx-4">
                 {images.map((data, i) => (
@@ -48,19 +49,19 @@ export const TodoList = () => {
           </TodoCard>
         ))}
 
-        {todoArr.map((i) => (
+        {toArr.map((i) => (
           <TodoCard key={i} className="col-lg-6 col-12">
             <div className="d-flex justify-content-between head">
               <h6>Business Canvas Assignment</h6>
               <CustomThreeDots />
             </div>
 
-            <div className="d-flex justify-content-between my-5 date">
+            <div className="d-flex justify-content-between my-3 date">
               <span>05 | September</span>
               <Tag name="Tomorrow" color="#4F5253" bg="#EFEFEF" />
             </div>
 
-            <div className="my-5">
+            <div className="">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
                 lectus morbi elementum eu.Lorem ipsum dolor sit amet,
@@ -68,7 +69,7 @@ export const TodoList = () => {
               </p>
             </div>
 
-            <div className="my-4 foot">
+            <div className="mt-4 mb-2 foot">
               <span>Assigned to</span>
               <span className="mx-4">
                 {images.map((data, i) => (

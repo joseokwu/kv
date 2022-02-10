@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, TextArea, Button } from '../../mentorComponents/index'
+import { TextArea, Button, TextField } from '../../mentorComponents'
 import map from '../../assets/images/mapBlue.svg'
 import phone from '../../assets/icons/phoneBlue.svg'
 import web from '../../assets/icons/webBlue.svg'
@@ -47,17 +47,19 @@ export const MentorContactUs = () => {
           <section className="message-card">
             <header className="message-header">Send a message</header>
             <div className="mb-4">
+              <label>Full Name</label>
               <TextField
-                label="Full Name"
-                placeholder=""
+                // label="Full Name"
+                placeholder="Micheal"
                 className="message-input"
               />
             </div>
 
             <div className="mb-4">
+            <label>Email Address</label>
               <TextField
-                label="Email Address"
-                placeholder=""
+                // label="Email Address"
+                placeholder="Micheal@gmail.com"
                 type="email"
                 className="message-input"
               />

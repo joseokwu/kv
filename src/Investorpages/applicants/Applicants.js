@@ -8,7 +8,7 @@ import searchSm from "../../assets/icons/searchSm.svg";
 import "./applicants.css";
 import { Tab } from "react-bootstrap";
 
-export const Applicants = ({ history }) => {
+export const BoosterApplicants = ({ history }) => {
   const {
     push,
     location: { hash },

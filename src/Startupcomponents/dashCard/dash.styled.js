@@ -6,14 +6,13 @@ export const CardWrapper = styled.div`
   margin-left: 12px;
   margin-top: 10px;
   background: #ffffff;
-  /* Cool 2 */
   padding: 25px;
   box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
   border-radius: 20px;
 
-  .card-star {
+  .card_star {
     position: relative;
-    top: -3.6rem;
+    top: -5.4rem;
     left: 159px;
     border-radius: 0 0 18px 0;
   }
@@ -23,16 +22,16 @@ export const CardWrapper = styled.div`
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
-    line-height: 140%;
-    color: #eff3f6;
+    line-height: 48px;
     color: #181819;
   }
 
   h3 {
+    font-family: DM Sans;
     font-style: normal;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 90%;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 140%;
     color: #828282;
     text-transform: capitalize;
   }

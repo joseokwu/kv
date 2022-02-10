@@ -12,7 +12,9 @@ import { useHistory } from 'react-router-dom'
 import { Assignment } from './components/assignment'
 import { Rating } from './components/rating'
 import { CalenderComponent } from './components/calender'
-export const Program = () => {
+
+
+export const StartupProgram = () => {
   const tabList = ['Calender', 'Session', 'Assignment', 'Rating']
 
   const {

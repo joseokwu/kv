@@ -4,7 +4,7 @@ import noticeImg from '../../assets/images/sampleNoticeImg.png'
 import sampleUser from '../../assets/images/sampleNoticePic.png'
 import './notification.css'
 
-export const Notification = () => {
+export const MentorNotification = () => {
   const tabItems = ['all', 'mentor', 'partner', 'investor', 'admin']
 
   const noticeItems = [

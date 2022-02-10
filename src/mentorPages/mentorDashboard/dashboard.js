@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   AssignedStartupCard,
-  DashCard,
+  MentorDashCard,
   UpcomingEventCard,
 } from '../../mentorComponents'
 import './dashboard.css'
@@ -21,10 +21,9 @@ export const MentorDashboard = () => {
       <section className="row pb-5">
         <section
           className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed mt-0"
-          style={{ background: '#fefefe' }}
         >
           {cardData.map((data, i) => (
-            <DashCard
+            <MentorDashCard
               name={data.name}
               count={data.count}
               color={data.color}
@@ -44,13 +43,13 @@ export const MentorDashboard = () => {
 
             <section className="row">
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
               </div>
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
               </div>
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
               </div>
             </section>
           </div>
@@ -61,7 +60,7 @@ export const MentorDashboard = () => {
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Upcoming Events</p>
               <p className="see-all">
-                <a className="see-all-event" href="/events">
+                <a className="see-all-event" href="/mentor/events">
                   See All
                 </a>
               </p>

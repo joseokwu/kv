@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import './modal.css'
+import React, { useState } from "react";
+import "./modal.css";
 import {
   BootModal,
   CustoModal,
   ModalWrapper,
   CloseModal,
   ModalHeader,
-} from './custom.styled'
-import Close from '../../assets/icons/close.svg'
+} from "./custom.styled";
+import Close from "../../assets/icons/close.svg";
 
 export const CustomModal = ({ children, handleClose, title }) => {
   return (
@@ -15,18 +15,18 @@ export const CustomModal = ({ children, handleClose, title }) => {
       <CustomModal onClick={() => handleClose(false)}> </CustomModal>
       <ModalWrapper>
         <ModalHeader>
-          <div style={{ marginLeft: '20px' }}>
-            <span className="text-nowrap" style={{ fontWeight: '700' }}>
+          <div style={{ marginLeft: "20px" }}>
+            <span className="text-nowrap" style={{ fontWeight: "700" }}>
               {title}
             </span>
           </div>
-          <CloseModal onClick={() => handleClose(false)} src={Close} alt={''} />
+          <CloseModal onClick={() => handleClose(false)} src={Close} alt={""} />
         </ModalHeader>
         {children}
       </ModalWrapper>
     </div>
-  )
-}
+  );
+};
 
 export const Modal = ({
   title = "",

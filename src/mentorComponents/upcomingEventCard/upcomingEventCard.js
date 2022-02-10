@@ -3,13 +3,12 @@ import './upcomingEventCard.css'
 import dot from '../../assets/icons/dot.svg'
 import doc from '../../assets/images/doc.svg'
 import clock from '../../assets/images/clock.svg'
-import { useHistory} from 'react-router-dom';
-import { useActivity } from '../../hooks/useBusiness';
+import { useHistory } from 'react-router-dom'
+import { useActivity } from '../../hooks/useBusiness'
 
 export const UpcomingEventCard = () => {
-
-  const history = useHistory();
-  const {  showEventAction } = useActivity()
+  const history = useHistory()
+  const { showEventAction } = useActivity()
 
   return (
     <div className="opp_card">
@@ -41,7 +40,17 @@ export const UpcomingEventCard = () => {
 
       <section className="d-flex align-items-center justify-content-between">
         {/* <Button label="View Details" /> */}
-        <span data-toggle='modal'  data-target="#eventScheduleModal" className='span' onClick={()=> {history.push('/events'); showEventAction() }} >View Details</span>
+        <span
+          data-toggle="modal"
+          data-target="#eventScheduleModal"
+          className="span"
+          onClick={() => {
+            history.push('/mentor/events')
+            showEventAction()
+          }}
+        >
+          View Details
+        </span>
         <section className="event_people">
           <img src={doc} alt="doc" />
           <img src={doc} alt="doc" />

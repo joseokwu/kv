@@ -4,7 +4,7 @@ import logo from '../../assets/icons/kvlogo.svg'
 import { AuthTextField, AuthButton } from '../../mentorComponents'
 import { emailRegex } from '../../utils/utils'
 
-export const ForgotPassword = ({ history }) => {
+export const MentorForgotPassword = ({ history }) => {
   const [input, setInput] = useState('')
   const [nextPath, setNextPath] = useState('')
 
@@ -14,9 +14,9 @@ export const ForgotPassword = ({ history }) => {
 
   useEffect(() => {
     if (Number(input) && input.length > 6) {
-      setNextPath('/verify/otp')
+      setNextPath('/mentor/verify/otp')
     } else if (emailRegex.test(input)) {
-      setNextPath('/forgot/password/check/mail')
+      setNextPath('/mentor/forgot/password/check/mail')
     } else {
       setNextPath('')
     }

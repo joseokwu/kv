@@ -1,20 +1,21 @@
-import React from 'react'
-import './modal.css'
-import Close from '../../assets/icons/close.svg'
+import React from "react";
+import "./modal.css";
+import Close from "../../assets/icons/close.svg";
 
 export const Modal = ({
-  title = '',
+  title = "",
   children,
-  position = '',
-  id = '',
-  subTitle = '',
+  position = "",
+  id = "",
+  bold = false,
+  subTitle = "",
   withHeader = true,
 }) => {
   return (
     <div className="modal fade" tabindex="-1" role="dialog" id={id}>
       <div
         className={`modal-dialog ${
-          position === 'center' && 'modal-dialog-centered'
+          position === "center" && "modal-dialog-centered"
         }`}
         role="document"
         style={{ maxWidth: 723, marginTop: 200 }}
@@ -32,7 +33,7 @@ export const Modal = ({
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <p className="kv-modal-title">{title}</p>
+              <p className={bold ? "text-dark" : "kv-modal-title"}>{title}</p>
               {subTitle.length > 0 && <p className="mt-3">{subTitle}</p>}
             </header>
           )}
@@ -40,8 +41,8 @@ export const Modal = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const ModalCus = ({ children, closeModal, title }) => {
   return (
@@ -55,15 +56,15 @@ export const ModalCus = ({ children, closeModal, title }) => {
             className="modalCloseImg"
             onClick={() => closeModal(false)}
             src={Close}
-            alt={''}
+            alt={""}
           />
         </div>
 
-        {children || 'Enter element here'}
+        {children || "Enter element here"}
       </div>
     </>
-  )
-}
+  );
+};
 
 export const LargeModal = ({ children, closeModal, title }) => {
   return (
@@ -78,12 +79,12 @@ export const LargeModal = ({ children, closeModal, title }) => {
             className="modalCloseImg mx-4 my-4"
             onClick={() => closeModal(false)}
             src={Close}
-            alt={''}
+            alt={""}
           />
         </div>
 
-        {children || 'Enter element here'}
+        {children || "Enter element here"}
       </div>
     </>
-  )
-}
+  );
+};

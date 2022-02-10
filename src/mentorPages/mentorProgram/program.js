@@ -9,7 +9,7 @@ import { Declined } from './components/declined/declined'
 import { AllProgramCard } from './components/allProgramCard/allProgramCard'
 import { Rescheduled } from './components/rescheduled/rescheduled'
 
-export const Program = ({ history }) => {
+export const MentorProgram = ({ history }) => {
   const {
     location: { hash },
   } = history

@@ -79,16 +79,18 @@ const WorkExperience = () => {
           </section>
 
           <section className="col-md-6 mb-4">
+          <label>Start Date*</label>
             <TextField
-              label={'Start Date*'}
+              // label={'Start Date*'}
               type={'date'}
               placeholder={'dd/mm/yy'}
               required={true}
             />
           </section>
           <section className="col-md-6 mb-4">
+          <label>End Date*</label>
             <TextField
-              label={'End Date*'}
+              // label={'End Date*'}
               placeholder={'dd/mm/yy'}
               required={true}
             />

@@ -5,7 +5,7 @@ import down from '../../assets/icons/downArrow.svg'
 import searchIcon from '../../assets/icons/searchIcon.svg'
 import { AllEvents } from './components/allEvents'
 
-export const Events = ({ history }) => {
+export const MentorEvents = ({ history }) => {
   const {
     location: { hash },
   } = history

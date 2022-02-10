@@ -37,6 +37,10 @@ export const Notification = ({ closeNotice, openNotice }) => {
       <section className="kv-notice-main">
         <select id="filter" className="mb-3">
           <option value="All">All</option>
+          <option value="Mentor">Mentor</option>
+          <option value="Partner">Partner</option>
+          <option value="Investor">Investor</option>
+          <option value="Admin">Admin</option>
         </select>
 
         {noticeItems.length > 0 &&

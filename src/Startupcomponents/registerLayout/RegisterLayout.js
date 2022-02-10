@@ -16,7 +16,7 @@ import { StartupSideBar } from "../sidebar/Sidebar";
 };
 
 
-export const WithRegisterLayout = (Component) => {
+export const WithStartupRegisterLayout = (Component) => {
 	return (props) => {
 		return (
 			<>

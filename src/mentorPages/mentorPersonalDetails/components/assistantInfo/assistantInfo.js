@@ -23,28 +23,42 @@ const AssistantInfo = () => {
 
         <div className="row">
           <section className="col-md-6 mb-4">
+          <label>First Name*</label>
             <TextField
-              label={'First Name*'}
+              // label={'First Name*'}
               placeholder={'Micheal'}
               required={true}
             />
           </section>
           <section className="col-md-6 mb-4">
+          <label>Last Name*</label>
             <TextField
-              label={'Last Name*'}
+              // label={'Last Name*'}
               placeholder={'Smith'}
               required={true}
             />
           </section>
 
           <section className="col-md-4 mb-4">
-            <TextField label={'Country'} placeholder={'Enter your country'} />
+          <label>Country</label>
+            <TextField 
+              // label={'Country'} 
+              placeholder={'Enter your country'} 
+            />
           </section>
           <section className="col-md-4 mb-4">
-            <TextField label={'State'} placeholder={'Enter your state'} />
+          <label>State</label>
+            <TextField 
+              // label={'State'} 
+              placeholder={'Enter your state'} 
+            />
           </section>
           <section className="col-md-4 mb-4">
-            <TextField label={'City'} placeholder={'Enter your city'} />
+          <label>City</label>
+            <TextField 
+              // label={'City'} 
+              placeholder={'Enter your city'} 
+            />
           </section>
 
           <section className="col-md-12 mb-4">
@@ -57,8 +71,9 @@ const AssistantInfo = () => {
           </section>
 
           <section className="col-md-6 mb-4">
+          <label className="mb-3">Email*</label>
             <TextField
-              label={'Email*'}
+              // label={'Email*'}
               placeholder={'Michealsmith@gmail.com'}
               required={true}
             />

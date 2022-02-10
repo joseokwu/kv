@@ -10,7 +10,7 @@ export const Product = () => {
   return (
     <div className="row">
       <section className="col-xl-8">
-        <div className="product-wrap opp-page-card py-5">
+        <div className="product-wrap opp_page_card py-5">
           <h3>Product Description</h3>
           <p className="pb-3 mb-5 prod-desc">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
@@ -33,7 +33,7 @@ export const Product = () => {
       </section>
 
       <section className="col-xl-4">
-        <div className="product-wrap opp-page-card mb-4">
+        <div className="product-wrap opp_page_card mb-4">
           <h3 className="border-bottom pb-3">Founder’s Profile</h3>
           <section className="d-flex align-items-center mt-3 product-founder">
             <img src={founder} alt="founder" />
@@ -44,12 +44,12 @@ export const Product = () => {
           </section>
           <section className="founder_profile mt-3">
             <div className="text-center">
-              <a href="/dashboard/founder">View</a>
+              <a href="/mentor/dashboard/founder">View</a>
             </div>
           </section>
         </div>
 
-        <div className="product-wrap opp-page-card">
+        <div className="product-wrap opp_page_card">
           <h3 className="border-bottom pb-3 mb-4">Investors</h3>
 
           <section className="d-flex align-items-center justify-content-between mt-4 product-investor">

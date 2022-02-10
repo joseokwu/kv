@@ -1,29 +1,16 @@
-import { WithMainLayout, WithRegisterLayout,
-  WithStartupRegistrationLayout , WithDashboardLayout
-} from "../Startupcomponents";
-import {WithInvestorRegisterLayout, WithMainInvestorLayout } from '../components';
-import {WithMentorMainLayout, WithMentorRegisterLayout } from '../mentorComponents';
-//import {WithRegisterLayout} from '../Startupcomponents/registerLayout/RegisterLayout';
-import {
-  Dashboard,
-  Profile,
-  StartUpRegistration,
-  Program,
-  FundingRaising
-} from "../Startuppages";
-import { BoosterPartner } from "../Startuppages/boosterPartner/boosterPartner";
-import { StartupDealRoom } from "../Startuppages/dealRoom/dealRoom";
-import { EAcademy } from "../Startuppages/eAcademy/eAcademy";
-import { StartupNetworking } from "../Startuppages/networking/networking";
-import { StartupTodoList } from "../Startuppages/todoList/todoList";
-import {
 
+import {
+  WithInvestorRegisterLayout,
+  WithMainInvestorLayout,
+} from "../components";
+
+import {
   BoosterDashboard,
-  PartnerRegistration,
+  BoosterPartnerRegistration,
   BoosterProfile,
-  Applicants,
-  ContactUs,
-  Notification,
+  BoosterApplicants,
+  InvestorContactUs,
+  InvestorNotification,
   InvestorRegistration,
   InvestorDashboard,
   InvestorOpportunity,
@@ -35,73 +22,140 @@ import {
   InvestorEvaluation,
   InvestorNetwork,
   InvestorDeal,
-  FounderProfile,
-  Commitment,
-  DealRoom,
-  DealFolder,
-  ScheduleCalendar,
+  InvestorFounderProfile,
+  InvestorCommitment,
+  InvestorDealRoom,
+  InvestorDealFolder,
+  InvestorScheduleCalendar,
   InvestorProfile,
-} from "../Investorpages"; 
+} from "../Investorpages";
+
+  
+import { WithStartupDashboardLayout, 
+  WithStartupRegistrationLayout ,
+} from "../Startupcomponents";
 
 import {
-  MentorDashboard,
-  SignUp,
-  SignIn,
-  ConfirmEmail,
-  ForgotPassword,
-  CheckMail,
-  ResetPassword,
-  VerifyOTP,
-  //Profile,
-  Congrats,
-  InvitePeer,
-  PersonalDetails,
-  Evaluation,
-  //Program,
-  Events,
-  Assignments,
-  Schedule,
-  MentorNetworking,
-  EvaluationViewProfile,
-  MentorContactUs,
-  CreateAssignment,
-  MoreDetails,
-  ViewDetails,
-  DashboardProfile,
-  MentorDealRoom,
-  
-  // DealFolder,
-  //Notification,
-  MentorEvaluation,
-} from '../mentorPages';
-
+  StartupDashboard,
+  StartupFundingRaising,
+  StartUpRegistration,
+  StartupProgram,
+  StartupBoosterPartner,
+  StartupEAcademy,
+  StartupDealRoom,
+  StartupTodoList,
+  StartupProfile,
+  StartupNetworking,
+  StartupContactUs,
+  StartupNotification
+} from "../Startuppages";
 
 
 const routes = [
 
+  // Start-up routes start
+
   {
-    name: "Dashboard",
-    path: "/",
-    component: WithDashboardLayout(Dashboard),
+    name: "StartupDashboard",
+    path: "/startup/dashboard",
+    component:WithStartupDashboardLayout(StartupDashboard) ,
+
+    exact: true,
+    protected: false,
+  },
+ 
+  {
+
+    name: "StartupProgram",
+    path: "/startup/program",
+    component:WithStartupDashboardLayout(StartupProgram) ,
+    exact: true,
+    protected: false,
+  },  
+
+  {
+    name: "StartupFundraising",
+    path: "/startup/fundraising",
+    component:WithStartupDashboardLayout(StartupFundingRaising) ,
     exact: true,
     protected: false,
   },
   {
-    name: "RegisterPartner",
-    path: "/RegisterPartner",
-    exact: true,
-    component: WithInvestorRegisterLayout(PartnerRegistration),
-    protected: false,
-  },
-  {
-    name: "RegisterInvestor",
-    path: "/investor/register",
-    component: WithInvestorRegisterLayout(InvestorRegistration),
+    name: "StartupBoosterpartner",
+    path: "/startup/boosterpartner",
+    component:WithStartupDashboardLayout(StartupBoosterPartner) ,
     exact: true,
     protected: false,
   },
   {
-    name: "InvestorDashboard",
+    name: "StartupEacademy",
+    path: "/startup/e-academy",
+    component:WithStartupDashboardLayout(StartupEAcademy) ,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "StartupTodolist",
+    path: "/startup/todolist",
+    component:WithStartupDashboardLayout(StartupTodoList) ,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "StartupNetworking",
+    path: "/startup/networking",
+    component:WithStartupDashboardLayout(StartupNetworking) ,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "StartupDealroom",
+    path: "/startup/dealroom",
+    component:WithStartupDashboardLayout(StartupDealRoom) ,
+    exact: true,
+    protected: false,
+  },
+
+  {
+    name: "StartupContactus",
+    path: "/startup/contactus",
+    component:WithStartupDashboardLayout(StartupContactUs) ,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "StartupRegistration",
+    path: "/startup/registration",
+    component:WithStartupRegistrationLayout(StartUpRegistration) ,
+
+    exact: true,
+    protected: false,
+  },
+
+  {
+
+    name: "StartupProfile",
+    path: "/startup/profile",
+    component:WithStartupDashboardLayout(StartupProfile) ,
+    exact: true,
+    protected: false,
+  },
+
+  {
+
+    name: "StartupNotification",
+    path: "/startup/notification",
+    component:StartupNotification ,
+    exact: true,
+    protected: false,
+  },
+
+
+  //Start-up routes End
+  
+    //Investor Routes Start
+  {
+    name: "Investor Dashboard",
     path: "/investor/dashboard",
     component: WithMainInvestorLayout(InvestorDashboard),
     exact: true,
@@ -109,415 +163,198 @@ const routes = [
   },
 
   {
-    name: "Pro",
-    path: "/prof",
-    component: WithRegisterLayout(Profile),
+    name: "Investor Registration",
+    path: "/investor/register",
+    component: WithInvestorRegisterLayout(InvestorRegistration),
     exact: true,
     protected: false,
   },
+
   {
-    name: "ContactUs",
-    path: "/support",
-    component: WithDashboardLayout(ContactUs),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Applicants",
-    path: "/applicants",
-    component: WithMainInvestorLayout(Applicants),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Notification",
-    path: "/notification",
-    component: WithMainInvestorLayout(Notification),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Program",
-    path: "/program",
-    component: WithDashboardLayout(Program),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "TodoList",
-    path: "/todolist",
-    component: WithDashboardLayout(StartupTodoList),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Networking",
-    path: "/networking",
-    component: WithDashboardLayout(StartupNetworking),
-  },
-  {
-    name: "DealRoom",
-    path: "/dealroom",
-    component: WithDashboardLayout(StartupDealRoom),
-  },
-  {
-    name: "InvestorDashboard",
-    path: "/fundraising",
-    component: WithDashboardLayout(FundingRaising),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "InvestorOpportunity",
+    name: "Investor Opportunities",
     path: "/investor/opportunities",
-    component: WithMainLayout(InvestorOpportunity),
+    component: WithMainInvestorLayout(InvestorOpportunity),
     exact: true,
     protected: false,
   },
+
   {
-    name: "Profile",
-    path: "/profile",
-    component: WithDashboardLayout(Opportunity),
+    name: "Investor Opportunities",
+    path: "/investor/opportunities/:id",
+    component: WithMainInvestorLayout(Opportunity),
     exact: true,
     protected: false,
   },
+
   {
-    name: "StartupRegistration",
-    path: "/startupRegistration",
-    component: WithStartupRegistrationLayout(StartUpRegistration),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "E-Academy",
-    path: "/eacademy",
-    component: WithDashboardLayout(EAcademy),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "BoosterPartner",
-    path: "/boosterpartner",
-    component: WithDashboardLayout(BoosterPartner),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Opportunity",
-    path: "/investor/opportunities/:id/founder",
-    component: WithMainLayout(FounderProfile),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Opportunity",
-    path: "/investor/opportunities/:id/commitment",
-    component: WithMainLayout(Commitment),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Interested",
+    name: "Investor Interested",
     path: "/investor/interested",
-    component: WithMainLayout(InvestorInterested),
+    component: WithMainInvestorLayout(InvestorInterested),
     exact: true,
     protected: false,
   },
   {
     name: "Interested",
     path: "/investor/interested/:id",
-    component: WithMainLayout(Opportunity),
+    component: WithMainInvestorLayout(Opportunity),
     exact: true,
     protected: false,
   },
+
   {
-    name: "Portfolio",
+    name: "Investor Portfolio",
     path: "/investor/portfolio",
-    component: WithMainLayout(InvestorPortfolio),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Events",
-    path: "/investor/events",
-    component: WithMainLayout(InvestorEvents),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Schedule",
-    path: "/investor/schedule",
-    component: WithMainLayout(InvestorSchedule),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Schedule",
-    path: "/investor/schedule-calendar",
-    component: WithMainLayout(ScheduleCalendar),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Evaluation",
-    path: "/investor/evaluation",
-    component: WithMainLayout(InvestorEvaluation),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "Networking",
-    path: "/investor/networking",
-    component: WithMainLayout(InvestorNetwork),
+    component: WithMainInvestorLayout(InvestorPortfolio),
     exact: true,
     protected: false,
   },
 
   {
-    name: "DealRoom",
-    path: "/investor/deal_room",
-    component: WithMainLayout(InvestorDeal),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "DealRoom",
-    path: "/investor/deal_room/:id",
-    component: WithMainLayout(DealRoom),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: "DealRoom",
-    path: "/investor/deal_room/:id/:folderName",
-    component: WithMainLayout(DealFolder),
-    exact: true,
-    protected: false,
-  },
-
-  {
-    name: "Investor profile",
+    name: "Investor Profile",
     path: "/investor/profile",
-    component: WithMainLayout(InvestorProfile),
+    component: WithMainInvestorLayout(InvestorProfile),
     exact: true,
     protected: false,
   },
 
+  {
+    name: "Investor Events",
+    path: "/investor/events",
+    component: WithMainInvestorLayout(InvestorEvents),
+    exact: true,
+    protected: false,
+  },
 
   {
-    name:'DashboardMentor',
-    path:'/mentor/dashboard',
-    component: WithMentorMainLayout(MentorDashboard),
+    name: "Investor Evaluation",
+    path: "/investor/evaluation",
+    component: WithMainInvestorLayout(InvestorEvaluation),
     exact: true,
     protected: false,
   },
-  {
-    name:'signin',
-    path:'/signin',
-    exact: true,
-    component: SignIn,
-    protected: false,
-  },
-  {
-    name:'SignUp',
-    path:'/signup',
-    component: SignUp,
-    exact: true,
-    protected: false,
-  },
-  {
-    name:'ContactUS',
-    path:'/support',
-    component: WithMentorMainLayout(MentorContactUs),
-    exact: true,
-    protected: false,
-  },
-  {
-    name:'Notification',
-    path:'/notification',
-    component: WithMainLayout(Notification),
-    exact: true,
-    protected: false,
-  },
-  {
-    name:'ConfirmEmail',
-    path:'/forgot/password',
-    component: ConfirmEmail,
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'ForgotPassword',
-    path: '/forgot-password',
-    component: ForgotPassword,
-    exact: true,
-    protected: false,
-  },
-  {
-    name:'CheckMail',
-    path:'/confirm/email',
-    component: CheckMail,
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'ResetPassword',
-    path: '/reset/password',
-    component: ResetPassword,
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'VerifyOtp',
-    path: '/verify/otp',
-    component: VerifyOTP,
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'Congrats',
-    path: '/signup/congrats',
-    component:  WithMentorRegisterLayout(Congrats),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'Profile',
-    path: '/profile',
-    component: WithRegisterLayout(Profile),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'InvitePeer',
-    path: '/signup/invite',
-    component:  WithMentorRegisterLayout(InvitePeer),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'PersonalDetails',
-    path: '/registration',
-    component:  WithMentorRegisterLayout(PersonalDetails),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'ViewDetails',
-    path: '/dashboard/view',
-    component: WithMainLayout(ViewDetails),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'MentorEvaluation',
-    path: '/evaluation',
-    component: WithMainLayout(MentorEvaluation),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'Program',
-    path: '/program',
-    component: WithMainLayout(Program),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'Assignmrnts',
-    path: '/assignments',
-    component: WithMentorMainLayout(Assignments),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'Events',
-    path: '/events',
-    component: WithMentorMainLayout(Events),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'Schedule',
-    path: '/schedule',
-    component: WithMentorMainLayout(Schedule),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'Networking',
-    path: '/networking',
-    component:WithMentorMainLayout(MentorNetworking),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'DealRoom',
-    path: '/deal_room',
-    component: WithMentorMainLayout(MentorDealRoom),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'DealRoom',
-    path: '/deal_room/:id',
-    component: WithMentorMainLayout(MentorDealRoom),
-    exact: true,
-    protected: false,
-  },
-  // {
-  //   name: ‘DealRoom’,
-  //   path: ‘/deal_room/:id/:folderName’,
-  //   component: WithMainLayout(DealFolder),
-  //   exact: true,
-  //   protected: false,
-  // },
-  {
-    name: 'DashboardProfile',
-    path: '/dashboard/founder',
-    component: WithMainLayout(DashboardProfile),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'Evaluation',
-    path: '/evaluation/evaluate',
-    component: WithRegisterLayout(Evaluation),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'EvaluationViewProfile',
-    path: '/evaluation/view',
-    component: WithMentorMainLayout(EvaluationViewProfile),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'CreateAssignment',
-    path: '/assignments/create',
-    component: WithMentorMainLayout(CreateAssignment),
-    exact: true,
-    protected: false,
-  },
-  {
-    name: 'MoreDetails',
-    path: '/assignments/create/details',
-    component:WithMentorMainLayout(MoreDetails),
-    exact: true,
-    protected: false,
-  },
-  // {
-  //   name: 'ViewEvaluation',
-  //   path: '/assignments/view',
-  //   component: WithMainLayout(ViewEvaluation),
-  //   exact: true,
-  //   protected: false,
-  // },
 
+  {
+    name: "Investor Network",
+    path: "/investor/networking",
+    component: WithMainInvestorLayout(InvestorNetwork),
+    exact: true,
+    protected: false,
+  },
 
+  {
+    name: "Investor schedule",
+    path: "/investor/schedule",
+    component: WithMainInvestorLayout(InvestorSchedule),
+    exact: true,
+    protected: false,
+  },
+    {
 
+    name: "Investor founder",
+    path: "/investor/founder_profile",
+    component: WithMainInvestorLayout(InvestorFounderProfile),
+    exact: true,
+    protected: false,
+  },
+   {
+    name: "Investor Commitment",
+    path: "/investor/opportunities/:id/commitment",
+    component: WithMainInvestorLayout(InvestorCommitment),
+    exact: true,
+    protected: false,
+  },
+    {
+
+    name: "Investor Deal",
+    path: "/investor/deal_room",
+    component: WithMainInvestorLayout(InvestorDeal),
+     exact: true,
+    protected: false,
+  },
+    {
+
+    name: "Investor Deal Room",
+    path: "/investor/deal_room/:id",
+    component: WithMainInvestorLayout(InvestorDealRoom),
+    exact: true,
+    protected: false,
+  },
+
+  {
+    name: "Investor Deal Room",
+    path: "/investor/deal_room/:id/:folderName",
+    component: WithMainInvestorLayout(InvestorDealFolder),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Investor Schedule",
+    path: "/investor/schedule-calendar",
+    component: WithMainInvestorLayout(InvestorScheduleCalendar),
+    exact: true,
+    protected: false,
+  },
+
+  {
+    name: "Investor Contact us",
+    path: "/investor/support",
+    component: WithMainInvestorLayout(InvestorContactUs),
+    exact: true,
+    protected: false,
+  },
+
+  {
+    name: "Booster Contact us",
+    path: "/booster/support",
+    component: WithMainInvestorLayout(InvestorContactUs),
+    exact: true,
+    protected: false,
+  },
+
+  {
+    name: "Investor  Notification",
+    path: "/investor/notification",
+    component: WithMainInvestorLayout(InvestorNotification),
+    exact: true,
+    protected: false,
+  },
+  
+
+  {
+    name: "Booster Dashboard",
+    path: "/booster/dashboard",
+    component: WithMainInvestorLayout(BoosterDashboard),
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "Booster Applicants",
+    path: "/booster/applicants",
+    component: WithMainInvestorLayout(BoosterApplicants),
+    exact: true,
+    protected: false,
+  },
+    {
+
+    name: "Booster Profile",
+    path: "/booster/profile",
+    component: WithMainInvestorLayout(BoosterProfile),
+    exact: true,
+    protected: false,
+  },
+  
+   {
+
+    name: "Booster Registration",
+    path: "/booster/register",
+    component: WithMainInvestorLayout(BoosterPartnerRegistration),
+    exact: true,
+    protected: false,
+  },
+  //Investor Routes End
+  
 
 ];
 
 export default routes;
+

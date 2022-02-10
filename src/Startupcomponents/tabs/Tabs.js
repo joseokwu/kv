@@ -47,3 +47,31 @@ export const Tabs = ({
     </ul>
   )
 }
+
+export const ModalTabs = ({
+  tabItems,     
+  state,
+  setState = () => {},
+}) => {
+
+  
+  return (
+    <ul className="applicant-tabs-list">
+      {tabItems.length > 0 &&
+        tabItems.map((item, i) => {
+          return (
+            <li
+              className={`${
+                state === i ? 'active-tab' : ''
+              }`}
+              onClick={() => setState(i)}
+              key={`tab-${i}`}
+            >
+              {item}
+            </li>
+          ) 
+        })}
+    </ul>
+  )
+}
+

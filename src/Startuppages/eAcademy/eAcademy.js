@@ -2,7 +2,7 @@ import React from 'react'
 import { Section } from './eAcademy.styled'
 import comingSoon from '../../assets/images/comingsoon.svg'
 
-export const EAcademy = () => {
+export const StartupEAcademy = () => {
   return (
     <>
       <Section>
