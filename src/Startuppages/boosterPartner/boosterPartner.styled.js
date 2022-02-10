@@ -35,6 +35,7 @@ export const ApplicationCard = styled.div`
       text-transform: capitalize;
       color: #2e3192;
       text-decoration: underline;
+      cursor: pointer;
     }
   }
 
