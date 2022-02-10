@@ -19,7 +19,7 @@ const MainLayout = ({ children }) => {
   );
 };
 
-export const WithMainLayout = (Component) => {
+export const WithStartupMainLayout = (Component) => {
   return (props) => {
     return (
       <>
@@ -48,7 +48,7 @@ export const DashboardLayout = ({children}) =>{
   );
 }
 
-export const WithDashboardLayout = (Component) => {
+export const WithStartupDashboardLayout = (Component) => {
   return (props) => {
     return (
       <>
