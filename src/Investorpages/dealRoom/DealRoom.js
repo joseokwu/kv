@@ -8,7 +8,7 @@ import { DataRoom } from "./components/DataRoom";
 import { DealOverview } from "./components/DealOverview";
 import "./dealRoom.css";
 
-export const DealRoom = ({ history }) => {
+export const InvestorDealRoom = ({ history }) => {
   const {
     location: { hash },
     push,

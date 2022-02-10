@@ -10,7 +10,7 @@ import { Button, Tag } from "../../components";
 
 import "./founderProfile.css";
 
-export const FounderProfile = () => {
+export const InvestorFounderProfile = () => {
   return (
     <div className="my-4 mx-5">
       <section

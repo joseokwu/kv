@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import CompanyOverview from "./components/companyOverview/CompanyOverview";
 import OurOffering from "./components/ourOffering/OurOffering";
 
-export const PartnerRegistration = () => {
+export const BoosterPartnerRegistration = () => {
   const wrapRef = useRef();
   const [progress, setProgress] = useState("50");
 

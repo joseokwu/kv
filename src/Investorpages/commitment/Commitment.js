@@ -10,7 +10,7 @@ import "./commitment.css";
 import TermsModal from "./components/termsModal/TermsModal";
 import LegalModal from "./components/legalModal/LegalModal";
 
-export const Commitment = ({ history }) => {
+export const InvestorCommitment = ({ history }) => {
   const { goBack } = history;
   const countInvestor = [1, 2, 3, 4];
 

@@ -8,7 +8,7 @@ import {
 } from "../../../components";
 import { GuestItem } from "./ScheduleModal";
 import copy from "../../../assets/icons/copy.svg";
-import remove from "../../../assets/icons/close.svg";
+import remove from "../../../assets/icons/Close.svg";
 
 export const EditScheduleModal = ({ id = "", image = "" }) => {
   return (
