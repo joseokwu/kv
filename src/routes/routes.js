@@ -1,4 +1,4 @@
-import { WithStartupDashboardLayout,
+import { WithStartupDashboardLayout, 
   WithStartupRegistrationLayout ,
 } from "../Startupcomponents";
 import {WithInvestorRegisterLayout, WithMainInvestorLayout } from '../components';
@@ -15,7 +15,8 @@ import {
   StartupTodoList,
   StartupProfile,
   StartupNetworking,
-  StartupContactUs
+  StartupContactUs,
+  StartupNotification
 } from "../Startuppages";
 
 import {
@@ -98,7 +99,7 @@ const routes = [
     component:WithStartupDashboardLayout(StartupProgram) ,
     exact: true,
     protected: false,
-  },
+  },  
 
   {
     name: "StartupFundraising",
@@ -116,7 +117,7 @@ const routes = [
   },
   {
     name: "StartupEacademy",
-    path: "/startup/eacademy",
+    path: "/startup/e-academy",
     component:WithStartupDashboardLayout(StartupEAcademy) ,
     exact: true,
     protected: false,
@@ -160,6 +161,13 @@ const routes = [
     name: "StartupProfile",
     path: "/startup/profile",
     component:WithStartupDashboardLayout(StartupProfile) ,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "StartupNotification",
+    path: "/startup/notification",
+    component:WithStartupDashboardLayout(StartupNotification) ,
     exact: true,
     protected: false,
   },
