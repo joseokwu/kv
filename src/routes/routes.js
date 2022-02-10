@@ -35,7 +35,7 @@ import {
 } from '../mentorPages'
 import { MentorViewAssignment } from '../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment'
 
-const routes = [
+const mentorRoutes = [
   // Mentor Routes Starts Here
   {
     name: 'signin',
@@ -251,4 +251,4 @@ const routes = [
   // Mentor Routes Ends Here
 ]
 
-export default routes
+export default mentorRoutes
