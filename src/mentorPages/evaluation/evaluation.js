@@ -11,7 +11,7 @@ import { Return } from './components/return'
 import { Growth } from './components/growth'
 import { Button } from '../../mentorComponents'
 
-export const Evaluation = ({ history }) => {
+export const MentorEvaluate = ({ history }) => {
   // const { goBack } = history
   const {
     location: { hash },

@@ -9,7 +9,7 @@ import { RoadMap } from './components/roadMap/RoadMap'
 import { Fundraising } from './components/fundraising/fundraising'
 import { Milestone } from './components/milestone/Milestone'
 
-export const ViewDetails = ({ history }) => {
+export const MentorViewDetails = ({ history }) => {
   const {
     location: { hash },
   } = history
