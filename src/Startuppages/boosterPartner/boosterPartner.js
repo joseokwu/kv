@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { AllOfferings } from './components/allOfferings'
 import { MyApplications } from './components/myApplications'
 
-export const BoosterPartner = () => {
+export const StartupBoosterPartner = () => {
   const history = useHistory()
   const {
     location: { hash },

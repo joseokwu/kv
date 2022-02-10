@@ -8,14 +8,15 @@ export * from "./forgotPassword/ForgotPassword";
 export * from "./checkMail/CheckMail";
 export * from "./resetPassword/ResetPassword";
 export * from "./forgotOTP/ForgotOTP";
-export * from "./profile/Profile";
 export * from "./startupProfile/startupProfile";
 export * from "./applicants/Applicants";
 export * from "./contactUs/ContactUs";
 export * from "./notification/Notification";
-
+export * from "./eAcademy/eAcademy";
+export * from "./todoList/todoList";
 export * from "./startupRegistration";
 export * from './program';
 export * from './fundraising';
-
-
+export * from './boosterPartner/boosterPartner';
+export * from './dealRoom/dealRoom';
+export * from './networking/networking';

@@ -15,7 +15,7 @@ export const BusinessCanavas = () => {
   const [state, setState] = useState(0);
 
   const [info, setInfo] = useState({});
-
+  const [close, setClose] = useState(false);
   
 
   const [data, setData] = useState({
@@ -52,7 +52,7 @@ const handleFunc = ()=>{
 
 const genSubmit = () =>{
 
-  console.log(data)
+    setClose(true);
 }
 
   return (
@@ -130,6 +130,8 @@ const genSubmit = () =>{
            padding:'6px 28px',
            color:'#fff'
          }}
+         data-dismiss={close ? 'modal':''}
+         aria-label={close ? 'Close': ''}
          onClick={()=>{ state < 3 ? handleFunc() : genSubmit() }}
          className='mx-2'
          > { state < 3 ? 'Next' : 'Create' } </button>
@@ -137,7 +139,7 @@ const genSubmit = () =>{
         </div>
       </Modal>
       <Wrapper  className="d-flex justify-content-center text-center">
-        <div data-target='#canvas' data-toggle={'modal'} >
+        <div data-target='#canvas' data-toggle={'modal'} onClick={()=>setClose(false)} >
           <img
             src={BlueFile}
             alt="."

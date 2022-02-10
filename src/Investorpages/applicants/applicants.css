@@ -149,3 +149,7 @@
   line-height: 28px;
   color: #000000;
 }
+
+p {
+  margin: 0 !important;
+}

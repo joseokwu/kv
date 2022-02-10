@@ -9,7 +9,7 @@ import createFolder from "../../assets/icons/create_new_folder.svg";
 import shareAccess from "../../assets/icons/person_add_share.svg";
 import "./dealFolder.css";
 
-export const DealFolder = ({ history }) => {
+export const InvestorDealFolder = ({ history }) => {
   const { id, folderName } = useParams();
   const { push } = history;
 

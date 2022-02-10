@@ -9,7 +9,7 @@ import { CapTable } from './components/captable'
 import { PreviousRound } from './components/prevRound'
 import { FinancialProjection } from './components/financialProjection'
 
-export const FundingRaising = () => {
+export const StartupFundingRaising = () => {
   const history = useHistory()
   const {
     location: { hash },

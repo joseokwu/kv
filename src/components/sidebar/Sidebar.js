@@ -76,13 +76,13 @@ const boosterNavigators = [
   {
     title: "Dashboard",
     activator: "dashboard",
-    path: "/dashboard",
+    path: "/booster/dashboard",
     icon: dashboard,
   },
   {
     title: "Startup Applicants",
     activator: "applicants",
-    path: "/applicants",
+    path: "/booster/applicants",
     icon: startup,
   },
 ];
@@ -148,7 +148,9 @@ export const Sidebar = () => {
         className="side-footer"
         onClick={() =>
           push({
-            pathname: "/support",
+            pathname: pathname.includes("investor")
+              ? "/investor/support"
+              : "/booster/support",
             state: {
               from: pathname.includes("investor") ? "investor" : "partner",
             },

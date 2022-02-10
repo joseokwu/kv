@@ -49,29 +49,29 @@ export const startUpRoutes = [
    
   ];
 
-   export const investorNavigators = [
+   export const dashboardRoutes = [
     {
       title: "Dashboard",
       activator: "dashboard",
-      path: "/",
+      path: "/startup/dashboard",
       icon: dashboard,
     },
     {
       title: "Program",
       activator: "program",
-      path: "/program",
+      path: "/startup/program",
       icon: startup,
     },
     {
       title: "Fundraising",
       activator: "fundraising",
-      path: "/fundraising",
+      path: "/startup/fundraising",
       icon: interested,
     },
     {
-      title: "Booster Partners",
+      title: "Boosterpartner",
       activator: "boosterpartner",
-      path: "/boosterpartner",
+      path: "/startup/boosterpartner",
       icon: portfolio,
     },
   
@@ -82,27 +82,27 @@ export const startUpRoutes = [
       icon: event,
     },
     {
-      title: "E-Academy",
-      activator: "eacademy",
-      path: "/eacademy",
+      title:"E-academy",
+      activator:"e-academy",
+      path: "/startup/e-academy",
       icon: schedule,
     },
     {
-      title: "To-dolist",
+      title: "Todolist",
       activator: "todolist",
-      path: "/todolist",
+      path: "/startup/todolist",
       icon: evaluation,
     },
     {
       title: "Networking",
-      activator: "networking",
-      path: "/networking",
+      activator:"networking",
+      path: "/startup/networking",
       icon: networking,
     },
     {
-      title: "Deal Room",
+      title: "Dealroom",
       activator: "dealroom",
-      path: "/dealroom",
+      path: "/startup/dealroom",
       icon: dealroom,
     },
   ];
