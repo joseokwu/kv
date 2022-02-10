@@ -413,7 +413,7 @@ const routes = [
 
   // Mentor Routes Starts Here
   {
-    name: "signin",
+    name: "SignIn",
     path: "/",
     exact: true,
     component: MentorSignIn,
@@ -421,14 +421,14 @@ const routes = [
   },
   {
     name: "SignUp",
-    path: "/mentor/signup",
+    path: "/signup",
     component: SignUp,
     exact: true,
     protected: false,
   },
   {
     name: "Congrats",
-    path: "/mentor/signup/congrats",
+    path: "/signup/congrats",
     component: WithMentorRegisterLayout(MentorCongrats),
     exact: true,
     protected: false,
@@ -443,35 +443,35 @@ const routes = [
   },
   {
     name: "ConfirmEmail",
-    path: "/mentor/forgot/password",
+    path: "/forgot/password",
     component: MentorConfirmEmail,
     exact: true,
     protected: false,
   },
   {
     name: "ForgotPassword",
-    path: "/mentor/forgot-password",
+    path: "/forgot-password",
     component: MentorForgotPassword,
     exact: true,
     protected: false,
   },
   {
     name: "CheckMail",
-    path: "/mentor/confirm/email",
+    path: "/confirm/email",
     component: MentorCheckMail,
     exact: true,
     protected: false,
   },
   {
     name: "ResetPassword",
-    path: "/mentor/reset/password",
+    path: "/reset/password",
     component: MentorResetPassword,
     exact: true,
     protected: false,
   },
   {
     name: "VerifyOtp",
-    path: "/mentor/verify/otp",
+    path: "/verify/otp",
     component: MentorVerifyOTP,
     exact: true,
     protected: false,
