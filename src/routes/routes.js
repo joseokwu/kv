@@ -414,7 +414,7 @@ const routes = [
   // Mentor Routes Starts Here
   {
     name: "signin",
-    path: "/mentor/signin",
+    path: "/",
     exact: true,
     component: MentorSignIn,
     protected: false,

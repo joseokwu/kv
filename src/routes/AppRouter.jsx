@@ -4,8 +4,11 @@ import routes from './routes';
 import { ProtectedRoute }  from './ProtectedRoute'
 import { useAuth } from '../hooks/useAuth';
 
+
 export  function AppRouter(props){
     const {stateAuth} = useAuth();
+   
+
     console.log(stateAuth)
     return (
         <Switch>
