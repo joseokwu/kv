@@ -29,7 +29,7 @@ import {
   InvestorProfile,
 } from "../Investorpages";
 
-const routes = [
+const InvestRoutes = [
   //Investor Routes Start
   {
     name: "Investor Dashboard",
@@ -226,4 +226,4 @@ const routes = [
   //Investor Routes End
 ];
 
-export default routes;
+export default InvestRoutes;
