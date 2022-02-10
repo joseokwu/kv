@@ -1,8 +1,6 @@
 import { WithStartupDashboardLayout, 
   WithStartupRegistrationLayout ,
 } from "../Startupcomponents";
-import {WithInvestorRegisterLayout, WithMainInvestorLayout } from '../components';
-import {WithMentorMainLayout, WithMentorRegisterLayout } from '../mentorComponents';
 
 import {
   StartupDashboard,
@@ -18,66 +16,6 @@ import {
   StartupContactUs,
   StartupNotification
 } from "../Startuppages";
-
-import {
-
-  BoosterDashboard,
-  PartnerRegistration,
-  BoosterProfile,
-  Applicants,
-  ContactUs,
-  Notification,
-  InvestorRegistration,
-  InvestorDashboard,
-  InvestorOpportunity,
-  Opportunity,
-  InvestorInterested,
-  InvestorPortfolio,
-  InvestorEvents,
-  InvestorSchedule,
-  InvestorEvaluation,
-  InvestorNetwork,
-  InvestorDeal,
-  FounderProfile,
-  Commitment,
-  DealRoom,
-  DealFolder,
-  ScheduleCalendar,
-  InvestorProfile,
-} from "../Investorpages"; 
-
-import {
-  MentorDashboard,
-  SignUp,
-  SignIn,
-  ConfirmEmail,
-  ForgotPassword,
-  CheckMail,
-  ResetPassword,
-  VerifyOTP,
-  //Profile,
-  Congrats,
-  InvitePeer,
-  PersonalDetails,
-  Evaluation,
-  MentorProgram,
-  Events,
-  Assignments,
-  Schedule,
-  MentorNetworking,
-  MentorEvaluationViewProfile,
-  MentorContactUs,
-  MentorCreateAssignment,
-  MentorMoreDetails,
-  ViewDetails,
-  MentorDashboardProfile,
-  MentorDealRoom,
-  
-  // DealFolder,
-  //Notification,
-  MentorEvaluation,
-} from '../mentorPages';
-import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 
 
 

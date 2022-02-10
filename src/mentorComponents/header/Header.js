@@ -23,7 +23,7 @@ export const Header = ({ setOpen, open }) => {
           <span></span>
           <span></span>
         </div>
-        <a href="/">
+        <a href="/mentor/dashboard">
           <img src={logo} alt="logo" />
         </a>
       </section>
@@ -47,7 +47,7 @@ export const Header = ({ setOpen, open }) => {
           className="d-flex align-items-center h-100"
         >
           <span 
-           onClick={() => push('/profile')}
+           onClick={() => push('/mentor/profile')}
            className="d-flex align-items-center header-profile d-none d-lg-flex">
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>

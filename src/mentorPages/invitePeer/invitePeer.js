@@ -24,7 +24,7 @@ const validationSchema = yup.object({
   linkedIn: yup.string().required('LinkedIn is required'),
 })
 
-export const InvitePeer = ({ history }) => {
+export const MentorInvitePeer = ({ history }) => {
   const [loader, setLoader] = useState(false)
 
   const [success] = useState(null)

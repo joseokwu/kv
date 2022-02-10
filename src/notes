@@ -903,6 +903,66 @@ export const MentorEvaluation = ({ history }) => {
 
 
 
+ import {
+
+  BoosterDashboard,
+  PartnerRegistration,
+  BoosterProfile,
+  Applicants,
+  ContactUs,
+  Notification,
+  InvestorRegistration,
+  InvestorDashboard,
+  InvestorOpportunity,
+  Opportunity,
+  InvestorInterested,
+  InvestorPortfolio,
+  InvestorEvents,
+  InvestorSchedule,
+  InvestorEvaluation,
+  InvestorNetwork,
+  InvestorDeal,
+  FounderProfile,
+  Commitment,
+  DealRoom,
+  DealFolder,
+  ScheduleCalendar,
+  InvestorProfile,
+} from "../Investorpages"; 
+
+import {
+  MentorDashboard,
+  SignUp,
+  MentorSignIn,
+  MentorConfirmEmail,
+  MentorForgotPassword,
+  MentorCheckMail,
+  MentorResetPassword,
+  MentorVerifyOTP,
+  MentorProfile,
+  MentorNotification,
+  MentorCongrats,
+  MentorInvitePeer,
+  MentorPersonalDetails,
+  MentorEvaluate,
+  MentorProgram,
+  Events,
+  Assignments,
+  Schedule,
+  MentorNetworking,
+  MentorEvaluationViewProfile,
+  MentorContactUs,
+  MentorCreateAssignment,
+  MentorMoreDetails,
+  ViewDetails,
+  MentorDashboardProfile,
+  MentorDealRoom,
+  
+  // DealFolder,
+  MentorEvaluation,
+} from '../mentorPages';
+import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
+
 
 
 
