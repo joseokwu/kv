@@ -3,6 +3,9 @@ import pending from '../assets/icons/invst.svg'
 import person1 from '../assets/icons/person1.svg'
 import person2 from '../assets/icons/person2.svg'
 import person3 from '../assets/icons/person3.svg'
+import company from '../assets/images/appleoff.svg'
+import applied from '../assets/images/appliedMap.svg'
+import declined from '../assets/images/declinedMap.svg'
 
 export const options = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -84,6 +87,61 @@ export const cardFill = [
     amount: '$5M',
     color: '#00ADEF',
     time: '(9 oct 2021)',
+  },
+]
+
+export const applicationCardData = [
+  {
+    title: 'Applane  Insteen.',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+  },
+]
+
+export const compdetailModal = [
+  {
+    detail:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+  },
+]
+
+export const cardDataModal = [
+  {
+    header: 'Applane  Insteen.',
+  },
+  {
+    header: '',
+    subtitle: 'Offerings',
+    body:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ',
+  },
+  {
+    header: '',
+    subtitle: 'Eligibility Criteria',
+    body:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ',
+  },
+  {
+    header: '',
+    subtitle: 'Important Note',
+    body:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ',
+  },
+  {
+    header: '',
+    subtitle: 'Process',
+    body:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ',
+  },
+]
+
+export const compImage = [{ logo: company }]
+
+export const Map = [
+  { 
+    approvedMap: applied,
+    declinedMap: declined,
+    title: 'Application Status',
   },
 ]
 

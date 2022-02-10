@@ -1,0 +1,123 @@
+.applyModal h4 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.applyModal h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.applyModal p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: capitalize;
+  color: #5d5d5e;
+}
+
+.applyModal h6 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: underline;
+  text-transform: capitalize;
+  color: #5d5d5e;
+  cursor: pointer;
+}
+
+.applyModal h2 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: capitalize;
+  color: #5d5d5e;
+  cursor: pointer;
+}
+
+.appliedGreen {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: capitalize;
+  color: #5d5d5e;
+}
+
+.appliedBlur {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: capitalize;
+  color: #d8d8d8;
+}
+
+.applyModalback {
+  background: #f4f4f4;
+  border-radius: 5px;
+  padding: 10px 35px;
+  border: none;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #4f4f4f;
+}
+
+.applyModalapply {
+  background: #2e3192;
+  border-radius: 5px;
+  padding: 10px 35px;
+  border: none;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+}
+
+.cancelApp {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2e3192;
+  background: none;
+  border: 1px solid #2e3192;
+  border-radius: 5px;
+  padding: 10px 10px;
+}
+
+.reapplyBtn {
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid #a8300a;
+  padding: 10px 35px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #a8300a;
+}
