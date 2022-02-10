@@ -38,7 +38,7 @@ export const StartupProfile = ({ history }) => {
         return <PitchDeck />;
         case "#business canvas":
         return <BusinessCanavas />;
-      case "#Product Road Map":
+      case "#product road map":
         return <RoadMap />;
       case "#team":
         return <Team />;

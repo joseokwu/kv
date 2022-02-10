@@ -3,6 +3,8 @@ import {} from './boosterPartner.styled'
 import { DashCard, Select, Tabs } from '../../Startupcomponents/index'
 import { boosterData } from '../../constants/domiData'
 import { useHistory } from 'react-router-dom'
+import { AllOfferings } from './components/allOfferings'
+import { MyApplications } from './components/myApplications'
 
 export const BoosterPartner = () => {
   const history = useHistory()
@@ -12,11 +14,11 @@ export const BoosterPartner = () => {
   const renderContent = () => {
     switch (hash) {
       case '#All Offerings':
-        return <div>All Offerings</div>
+        return <AllOfferings />
       case '#My Applications':
-        return <div>My Applications</div>
+        return <MyApplications />
       default:
-        return <span></span>
+        return <AllOfferings />
     }
   }
 
