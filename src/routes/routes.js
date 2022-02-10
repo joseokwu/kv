@@ -31,7 +31,6 @@ import {
 } from "../Investorpages";
 
   
-
 import { WithStartupDashboardLayout, 
   WithStartupRegistrationLayout ,
 } from "../Startupcomponents";
@@ -50,7 +49,6 @@ import {
   StartupContactUs,
   StartupNotification
 } from "../Startuppages";
-
 
 
 const routes = [
@@ -139,6 +137,15 @@ const routes = [
     name: "StartupProfile",
     path: "/startup/profile",
     component:WithStartupDashboardLayout(StartupProfile) ,
+    exact: true,
+    protected: false,
+  },
+
+  {
+
+    name: "StartupNotification",
+    path: "/startup/notification",
+    component:StartupNotification ,
     exact: true,
     protected: false,
   },
