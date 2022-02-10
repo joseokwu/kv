@@ -5,7 +5,7 @@ import { DashCard, CardFill } from '../../Startupcomponents/index'
 import { TodoList } from './components/todolist'
 import { UpComing } from './components/upComing'
 
-export const Dashboard = () => {
+export const StartupDashboard = () => {
   // const appCardData = [1, 2, 3, 4, 5]
   return (
     <div className="dashboardMain">

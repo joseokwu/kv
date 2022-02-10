@@ -9,7 +9,7 @@ import { RoadMap } from './components/roadMap/RoadMap'
 import { Fundraising } from './components/fundraising/fundraising'
 import { Milestone } from './components/milestone/Milestone'
 
-export const ViewDetails = ({ history }) => {
+export const MentorViewDetails = ({ history }) => {
   const {
     location: { hash },
   } = history
@@ -53,7 +53,7 @@ export const ViewDetails = ({ history }) => {
   ]
 
   return (
-    <div className="dashboard-main">
+    <div className="dashboard-main mx-3">
       <ProductDemo />
 
       <div className="mt-4">

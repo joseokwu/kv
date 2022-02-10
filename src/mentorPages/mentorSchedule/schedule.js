@@ -3,7 +3,7 @@ import { Button, Modal, Select, TextArea } from '../../mentorComponents'
 import down from '../../assets/icons/downArrow.svg'
 import './schedule.css'
 
-export const Schedule = () => {
+export const MentorSchedule = () => {
   return (
     <div className="px-4 pb-5 mx-3 my-4">
       <Modal id="addAvailabilityModal" title="Add Availability">

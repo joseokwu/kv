@@ -3,7 +3,7 @@ import './resetPassword.css'
 import logo from '../../assets/icons/kvlogo.svg'
 import { AuthTextField, AuthButton } from '../../mentorComponents'
 
-export const ResetPassword = ({ history }) => {
+export const MentorResetPassword = ({ history }) => {
   return (
     <div className="row mx-0 auth-wrap">
       <section className="layout-header">
@@ -45,7 +45,7 @@ export const ResetPassword = ({ history }) => {
           </section>
 
           <section>
-            <AuthButton label="Reset" onClick={() => history.push('/signin')} />
+            <AuthButton label="Reset" onClick={() => history.push('/mentor/signin')} />
           </section>
         </div>
       </section>

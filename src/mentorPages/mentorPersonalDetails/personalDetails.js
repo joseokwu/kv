@@ -9,7 +9,7 @@ import Interest from './components/interest/interest'
 import WorkExperience from './components/workExperience/workExperience'
 import './personalDetails.css'
 
-export const PersonalDetails = () => {
+export const MentorPersonalDetails = () => {
   const wrapRef = useRef()
   const [progress, setProgress] = useState('')
 

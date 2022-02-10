@@ -4,7 +4,7 @@ import down from '../../assets/icons/chevronDown.svg'
 import './assignments.css'
 import { useHistory } from 'react-router-dom'
 
-export const Assignments = () => {
+export const MentorAssignments = () => {
   const cardData = [
     { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
     { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },

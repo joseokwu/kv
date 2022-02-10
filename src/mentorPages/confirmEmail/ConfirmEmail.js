@@ -3,7 +3,7 @@ import './confirmEmail.css'
 import logo from '../../assets/icons/kvlogo.svg'
 import sentMail from '../../assets/images/mentorSentEmail.svg'
 
-export const ConfirmEmail = () => {
+export const MentorConfirmEmail = () => {
   return (
     <div className="row mx-0 auth-wrap pt-5">
       <section className="layout-header">

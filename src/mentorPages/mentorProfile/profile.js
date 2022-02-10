@@ -6,7 +6,7 @@ import Interest from './components/interest/interest'
 import Details from './components/details/details'
 import './profile.css'
 
-export const Profile = () => {
+export const MentorProfile = () => {
   return (
     <div className="profile">
       <section className="mb-3">
