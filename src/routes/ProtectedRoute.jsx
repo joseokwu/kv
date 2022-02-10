@@ -6,15 +6,15 @@ import { setLocationHistory } from '../utils/helpers';
 
 export  const ProtectedRoute = ({roles, ...props})=>{
     const history = useHistory();
-    const {state} = useAuth();
-    console.log(state)
+    const {stateAuth} = useAuth();
+   
     useEffect(()=>{
-        if(state.authenticated === false){
+        if(stateAuth.authenticated === false && !stateAuth.roles.includes(props.type)){
 
             setLocationHistory(history.location.pathname)
             history.push('/')
         }
-    }, [history, roles, state.authenticated ]);
+    }, [history, roles, stateAuth.authenticated ]);
 
     return <Route {...props} />
 }
