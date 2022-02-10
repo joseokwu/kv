@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../../components";
 import { CreateSchedule } from "../investorSchedule/components/CreateSchedule";
 
-export const ScheduleCalendar = () => {
+export const InvestorScheduleCalendar = () => {
   return (
     <div className="wrapper">
       <CreateSchedule />

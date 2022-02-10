@@ -21,7 +21,7 @@ export const Header = ({ setOpen, open }) => {
     if (pathname.includes("investor")) {
       return "/investor/dashboard";
     } else {
-      return "/dashboard";
+      return "/booster/dashboard";
     }
   };
 
@@ -29,7 +29,7 @@ export const Header = ({ setOpen, open }) => {
     if (pathname.includes("investor")) {
       return () => push("/investor/profile");
     } else {
-      return () => push("/profile");
+      return () => push("/booster/profile");
     }
   };
 
