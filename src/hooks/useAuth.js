@@ -5,9 +5,8 @@ export const useAuth = () => {
 
 const dispatch = useDispatch();
 
-const stateAuth = useSelector((state) => state );
+const stateAuth = useSelector((state) => state.auth );
 
-console.log(stateAuth);
 
     return {
         stateAuth   

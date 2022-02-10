@@ -7,7 +7,8 @@
     authenticated: false,
     user: null,
     error: false,
-    loading: false 
+    loading: false,
+    roles:['investor']
   }
 
   const authReducer = (state=INIT_STATE, action) =>{

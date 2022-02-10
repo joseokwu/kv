@@ -3,20 +3,31 @@ import { Route, useHistory} from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { setLocationHistory } from '../utils/helpers';
 
+import { LoadingIcon } from '../components/Loading';
+
 
 export  const ProtectedRoute = ({roles, ...props})=>{
     const history = useHistory();
-    const {state} = useAuth();
-    console.log(state)
+    const {stateAuth} = useAuth();
+   
+    const [loading, setLoading] = useState(true);
+
     useEffect(()=>{
-        if(state.authenticated === false){
+        setLoading(true);
+        if(stateAuth.authenticated === false){
 
             setLocationHistory(history.location.pathname)
             history.push('/')
         }
-    }, [history, roles, state.authenticated ]);
+        if(!stateAuth.roles.includes(props.type)){
+            history.push('/') 
+        }
 
-    return <Route {...props} />
+         setLoading(false);
+
+    }, [history, roles, stateAuth.authenticated ]);
+
+    return  loading ? <LoadingIcon fullscreen={true} /> : <Route {...props} /> 
 }
   
 
