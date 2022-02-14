@@ -2,6 +2,7 @@ import {
   WithMentorMainLayout,
   WithMentorRegisterLayout,
 } from "../mentorComponents";
+import {  lazy } from "react";
 
 import {
   MentorDashboard,
@@ -33,6 +34,8 @@ import {
   // DealFolder,
   MentorEvaluation,
 } from "../mentorPages";
+
+
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 import {
   WithInvestorRegisterLayout,
@@ -84,6 +87,8 @@ import {
   StartupContactUs,
   StartupNotification,
 } from "../Startuppages";
+
+
 
 const routes = [
   // Start-up routes start
@@ -381,7 +386,7 @@ const routes = [
     path: "/booster/dashboard",
     component: WithMainInvestorLayout(BoosterDashboard),
     exact: true,
-    protected: false,
+    protected: true,
     type: "booster",
   },
   {
@@ -442,7 +447,7 @@ const routes = [
     type: "mentor",
   },
   {
-    name: "ConfirmEmail",
+    name: "Co",
     path: "/forgot/password",
     component: MentorConfirmEmail,
     exact: true,

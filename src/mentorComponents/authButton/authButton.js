@@ -8,7 +8,7 @@ export const AuthButton = ({
   label = 'button',
   variant = 'primary',
   className = '',
-  disabled = '',
+  disabled ,
   loading,
 }) => {
   return (

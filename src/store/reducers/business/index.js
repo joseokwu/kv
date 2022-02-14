@@ -6,19 +6,10 @@ import {
     SHOW_EVENT,
   } from '../../actions/actions.types';
 
-  const INIT_STATE = {
-    loading: false,
-    showPage: 'Overview',
-    alert:{
-      success:false, 
-      message:null,
-       autoClose:false,
-        action:false, 
-      },
-      path:1
-};
+  import { INIT_STATE_BUSINESS } from '../../initialstates';
+  
 
- const businessReducer = (state = INIT_STATE, action)=>{
+ const businessReducer = (state =INIT_STATE_BUSINESS , action)=>{
 
     switch (action.type) {
 
