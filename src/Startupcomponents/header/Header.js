@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import { Link } from 'react-router-dom'
 import logo from '../../assets/images/kvLogo.png'
 import notification from '../../assets/icons/notification.svg'
@@ -9,6 +8,9 @@ import sampleUser from '../../assets/images/sampleUser.png'
 import { useHistory } from 'react-router-dom'
 import { Notification } from '../index'
 import './header.css'
+import view from '../../assets/icons/vp.svg'
+import edit from '../../assets/icons/ep.svg'
+import logout from '../../assets/icons/logout.svg'
 
 export const Header = () => {
   const { push } = useHistory()
@@ -71,6 +73,8 @@ export const Header = () => {
 }
 
 const HeaderDropdownMenu = () => {
+  const { push } = useHistory()
+  
   return (
     <div className="dropdown">
       <button
@@ -84,15 +88,13 @@ const HeaderDropdownMenu = () => {
       >
         <img src={angleDown} alt="dropdown" />
       </button>
-      <div className="dropdown-menu headerMenu">
-        <button className="dropdown-item text-center">View Profile</button>
-        <button className="dropdown-item text-center">Edit Profile</button>
+      <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
+        <button className="dropdown-item text-center py-2" onClick={() => push('/startup/profile')}> <img className="pe-1" src={view} alt=""/> View Profile</button>
+        <button className="dropdown-item text-center py-2 my-2"> <img className="pe-1" src={edit} alt=""/> Edit Profile</button>
         <button
-          className="dropdown-item text-center"
+          className="dropdown-item text-center py-2"
           style={{ color: '#D62828' }}
-        >
-          Log Out
-        </button>
+        > <img className="pe-1" src={logout} alt=""/> Log Out</button>
       </div>
     </div>
   )

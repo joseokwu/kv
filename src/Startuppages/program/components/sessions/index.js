@@ -24,6 +24,14 @@ export const Session = () => {
       ) : (
         <span></span>
       )}
+
+      {showModal ? (
+        <SmallModal id="completeModal" title="" closeModal={setShowModal}>
+          <CompleteModal />
+        </SmallModal>
+      ) : (
+        <span></span>
+      )}
       <div className="row mt-5">
         {/* <TabFilterWrapper>
       <div className="me-3 my-3 d-flex justify-content-end">
@@ -140,7 +148,13 @@ export const Session = () => {
         ))}
 
         {comArr.map((i) => (
-          <TodoCard key={i} className="col-6 mx-3 px-4">
+          <TodoCard
+            key={i}
+            className="col-6 mx-3 px-4"
+            data-target="#completeModal"
+            onClick={() => setShowModal(true)}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="d-flex justify-content-between head">
               <div className="d-flex">
                 <h6 className="mr-5">Business Canvas Demo</h6>
@@ -293,6 +307,83 @@ export const InProgressModal = () => {
         <div className="mb-5">
           <button>Join Session</button>
         </div>
+      </div>
+    </InProgress>
+  )
+}
+
+export const CompleteModal = () => {
+  return (
+    <InProgress>
+      <div className="mx-3">
+        <div className="d-flex">
+          <div>
+            <h2>Legal Frame Work</h2>
+          </div>
+          <div className="mt-1 ms-4">
+            <Tag name="Complete" bg="#D1FFD3" fz="12px" color="#337808" />
+          </div>
+        </div>
+
+        <div className="workshop mt-2">
+          <article>
+            <span>Workshop - </span> Legal Sessions
+          </article>
+        </div>
+
+        <div className="d-flex mt-3 date">
+          <h6>05 | September</h6>
+          <article className="pt-1 mx-4">Duration - 45minutes</article>
+
+          <div>
+            <img src={clock} alt="clock" />
+            <span className="ps-1">10am - 12pm</span>
+          </div>
+        </div>
+
+        <div className="mt-4 mentor">
+          <h3 className="pb-2">Mentor</h3>
+          <div className="d-flex">
+            <img src={lady} alt="mentor pic" />
+            <div className="ms-3">
+              <p>Prima Jakatar</p>
+              <span>Partner at Apple Inc. Canada</span>
+            </div>
+            <div className="ms-5">
+              <Tag name="Available" bg="#F0F1FF" fz="12px" color="#2E3192" />
+            </div>
+          </div>
+        </div>
+
+        <div className="sesDesc mt-5 mb-3">
+          <h6 className="pb-2">Session Description</h6>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
+            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+        </div>
+
+        <div className="sesDesc mb-5">
+          <h6 className="pb-2">Assignment</h6>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
+            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+          <h6 className="pt-4">Task Link</h6>
+          <a href="">https://example.net/airplane?bridge=board</a>
+
+          <div className="d-flex mt-3 date">
+            <article className="">Due Date - 10 September, 2021</article>
+          </div>
+        </div>
+
+        <div className="mb-5"></div>
       </div>
     </InProgress>
   )

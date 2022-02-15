@@ -122,6 +122,16 @@ export const InProgress = styled.div`
       text-transform: capitalize;
       color: #525151;
     }
+
+    a {
+      font-family: DM Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      text-decoration: underline;
+      color: #2e3192;
+    }
   }
 
   .mentor {
