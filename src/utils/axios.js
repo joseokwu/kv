@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from './helpers';
 
-import { BASE_URL } from 'config/constants';
+import { BASE_URL } from '../config/env';
 
 const options = {
     baseURL: BASE_URL,

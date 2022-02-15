@@ -2,6 +2,7 @@ import {
   WithMentorMainLayout,
   WithMentorRegisterLayout,
 } from "../mentorComponents";
+import {  lazy } from "react";
 
 import {
   MentorDashboard,
@@ -33,6 +34,8 @@ import {
   // DealFolder,
   MentorEvaluation,
 } from "../mentorPages";
+
+
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 import {
   WithInvestorRegisterLayout,
@@ -84,6 +87,8 @@ import {
   StartupContactUs,
   StartupNotification,
 } from "../Startuppages";
+
+
 
 const routes = [
   // Start-up routes start
@@ -382,7 +387,7 @@ const routes = [
     path: "/booster/dashboard",
     component: WithMainInvestorLayout(BoosterDashboard),
     exact: true,
-    protected: false,
+    protected: true,
     type: "booster",
   },
   {
@@ -414,22 +419,22 @@ const routes = [
 
   // Mentor Routes Starts Here
   {
-    name: "signin",
-    path: "/mentor/signin",
+    name: "SignIn",
+    path: "/",
     exact: true,
     component: MentorSignIn,
     protected: false,
   },
   {
     name: "SignUp",
-    path: "/mentor/signup",
+    path: "/signup",
     component: SignUp,
     exact: true,
     protected: false,
   },
   {
     name: "Congrats",
-    path: "/mentor/signup/congrats",
+    path: "/signup/congrats",
     component: WithMentorRegisterLayout(MentorCongrats),
     exact: true,
     protected: false,
@@ -443,36 +448,36 @@ const routes = [
     type: "mentor",
   },
   {
-    name: "ConfirmEmail",
-    path: "/mentor/forgot/password",
+    name: "Co",
+    path: "/forgot/password",
     component: MentorConfirmEmail,
     exact: true,
     protected: false,
   },
   {
     name: "ForgotPassword",
-    path: "/mentor/forgot-password",
+    path: "/forgot-password",
     component: MentorForgotPassword,
     exact: true,
     protected: false,
   },
   {
     name: "CheckMail",
-    path: "/mentor/confirm/email",
+    path: "/confirm/email",
     component: MentorCheckMail,
     exact: true,
     protected: false,
   },
   {
     name: "ResetPassword",
-    path: "/mentor/reset/password",
+    path: "/reset/password",
     component: MentorResetPassword,
     exact: true,
     protected: false,
   },
   {
     name: "VerifyOtp",
-    path: "/mentor/verify/otp",
+    path: "/verify/otp",
     component: MentorVerifyOTP,
     exact: true,
     protected: false,
