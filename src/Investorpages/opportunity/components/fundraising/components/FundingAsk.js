@@ -58,7 +58,7 @@ const FundingAskTable = () => {
   ];
   return (
     <section className="mb-4">
-      <h4 className="mb-5 fundraisingSubTitle">Funding Ask</h4>
+      {/* <h4 className="mb-5 fundraisingSubTitle">Funding Ask</h4> */}
 
       <section>
         <Table columns={columns} data={data} />

@@ -5,7 +5,7 @@ import docIcon from "../../../../../assets/icons/docIcon.svg";
 const FinancialProjection = () => {
   return (
     <div className="mb-4">
-      <h4 className="mb-5 fundraisingSubTitle">Financial Projection</h4>
+      {/* <h4 className="mb-5 fundraisingSubTitle">Financial Projection</h4> */}
 
       <section className="row">
         <div className="col-xl-4 col-lg-4 mb-4">

@@ -25,8 +25,8 @@ export const InvestorSchedule = ({ history }) => {
   return (
     <div className="wrapper">
       <CreateSchedule />
-      <section className="d-flex align-items-center justify-content-between mb-4">
-        <h1 className="page-title">My Schedule</h1>
+      <section className="d-flex align-items-center justify-content-end mb-4">
+        {/* <h1 className="page-title">My Schedule</h1> */}
         <Button
           label="Create Events"
           variant="secondary"
@@ -36,8 +36,8 @@ export const InvestorSchedule = ({ history }) => {
       </section>
 
       <section
-        className="d-flex align-items-center justify-content-between"
-        style={{ marginBottom: "2.5rem" }}
+        className="d-flex align-items-center justify-content-between tab-wrap"
+        style={{ marginBottom: "1rem" }}
       >
         <Tabs tabItems={["upcoming", "past"]} />
 

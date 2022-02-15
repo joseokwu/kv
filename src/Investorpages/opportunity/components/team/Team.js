@@ -9,7 +9,7 @@ export const Team = () => {
   const count = [1, 2, 3, 4, 5, 6];
   return (
     <div>
-      <h3 className="tab-section-title">Team</h3>
+      {/* <h3 className="tab-section-title">Team</h3> */}
 
       <section>
         <h4 className="team-group-title">Founder & Co-Founders</h4>

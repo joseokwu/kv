@@ -27,15 +27,15 @@ export const InvestorOpportunity = ({ history }) => {
 
   return (
     <div className="wrapper">
-      <section>
+      {/* <section>
         <h5 className="page-header">Investment Opportunities</h5>
-      </section>
+      </section> */}
 
       <section
-        className="mt-5 d-flex align-items-center justify-content-between flex-wrap"
+        className=" d-flex align-items-center justify-content-between flex-wrap tab-wrap"
         style={{ rowGap: "1rem" }}
       >
-        <Tabs tabItems={["opportunities", "shared deals"]} />
+        <Tabs tabItems={["opportunities", "shared deals", "Interested"]} />
 
         <div
           className="d-flex align-items-center"
@@ -45,7 +45,7 @@ export const InvestorOpportunity = ({ history }) => {
           <OpportunityFilter />
         </div>
       </section>
-      <section className="mt-4">{renderContent()}</section>
+      <section className="mt-3">{renderContent()}</section>
     </div>
   );
 };

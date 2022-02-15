@@ -10,7 +10,6 @@
 @import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-react-schedule/styles/material.css"; */
 
-
 p,
 h1,
 h2,
@@ -22,11 +21,19 @@ h6 {
 }
 
 .wrapper {
-  padding: 52px 26px;
+  padding: 1.5rem;
   max-width: 1440px;
 }
 
 .flex-align {
   display: flex;
   align-items: center;
+}
+
+.tab-wrap {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 8;
+  padding: 10px;
 }

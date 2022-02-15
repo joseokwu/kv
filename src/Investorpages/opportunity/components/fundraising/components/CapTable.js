@@ -73,7 +73,7 @@ const CapTable = () => {
   ];
   return (
     <section className="mb-4">
-      <h4 className="mb-5 fundraisingSubTitle">Cap Table</h4>
+      {/* <h4 className="mb-5 fundraisingSubTitle">Cap Table</h4> */}
 
       <section>
         <Table columns={columns} data={data} className="cap-table" />

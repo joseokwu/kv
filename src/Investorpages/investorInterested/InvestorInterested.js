@@ -23,13 +23,15 @@ export const InvestorInterested = ({ history }) => {
 
   return (
     <div className="wrapper">
-      <section>
+      {/* <section>
         <h5 className="page-header">Interested</h5>
-      </section>
+      </section> */}
 
       <section
-        className="mt-5 d-flex align-items-center justify-content-between flex-wrap"
-        style={{ rowGap: "1rem" }}
+        className="d-flex align-items-center justify-content-between flex-wrap tab-wrap"
+        style={{
+          rowGap: "1rem",
+        }}
       >
         <Tabs tabItems={["interested"]} />
 

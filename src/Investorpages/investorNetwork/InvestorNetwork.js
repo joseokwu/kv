@@ -44,7 +44,7 @@ export const InvestorNetwork = ({ history }) => {
         <CreateGroup />
       </Modal>
       <section className="d-flex align-items-center justify-content-between mb-4">
-        <h1 className="page-title">Networking</h1>
+        {/* <h1 className="page-title">Networking</h1> */}
         <div>
           {/* <img src={search} alt="search" /> */}
           <Button
