@@ -2,7 +2,7 @@ import {
   WithMentorMainLayout,
   WithMentorRegisterLayout,
 } from "../mentorComponents";
-import {  lazy } from "react";
+import { lazy } from "react";
 
 import {
   MentorDashboard,
@@ -34,7 +34,6 @@ import {
   // DealFolder,
   MentorEvaluation,
 } from "../mentorPages";
-
 
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 import {
@@ -87,8 +86,6 @@ import {
   StartupContactUs,
   StartupNotification,
 } from "../Startuppages";
-
-
 
 const routes = [
   // Start-up routes start
@@ -213,7 +210,7 @@ const routes = [
     path: "/investor/register",
     component: WithInvestorRegisterLayout(InvestorRegistration),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
