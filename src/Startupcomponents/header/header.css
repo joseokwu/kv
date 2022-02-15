@@ -58,3 +58,17 @@
     display: none;
   }
 }
+
+.headerMenu {
+  padding: 8px;
+}
+
+.headerMenu button {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+  border-radius: 4px;
+}

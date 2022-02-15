@@ -27,7 +27,7 @@ export const Header = () => {
           <span></span>
           <span></span>
         </div>
-        <a href="/">
+        <a href="/startup/dashboard">
           <img src={logo} alt="logo" />
         </a>
       </section>
@@ -55,7 +55,10 @@ export const Header = () => {
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>
           </span>
-          <img src={angleDown} alt="dropdown" />
+          <div>
+            {/* <img src={angleDown} alt="dropdown" /> */}
+            <HeaderDropdownMenu />
+          </div>
         </div>
       </section>
 
@@ -63,6 +66,34 @@ export const Header = () => {
         closeNotice={() => setOpenNotice(false)}
         openNotice={openNotice}
       />
+    </div>
+  )
+}
+
+const HeaderDropdownMenu = () => {
+  return (
+    <div className="dropdown">
+      <button
+        className="d-flex align-items-center filter-btn p-0"
+        data-toggle="dropdown"
+        style={{
+          columnGap: 7,
+          background: 'transparent',
+          height: 'fit-content',
+        }}
+      >
+        <img src={angleDown} alt="dropdown" />
+      </button>
+      <div className="dropdown-menu headerMenu">
+        <button className="dropdown-item text-center">View Profile</button>
+        <button className="dropdown-item text-center">Edit Profile</button>
+        <button
+          className="dropdown-item text-center"
+          style={{ color: '#D62828' }}
+        >
+          Log Out
+        </button>
+      </div>
     </div>
   )
 }
