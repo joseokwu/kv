@@ -38,7 +38,7 @@ const [openModal, setOpenModal] = useState(false);
   const tabItems = ['Assignment', 'Task', 'Completed']
 
   return (
-    <div className="row m-4">
+    <div className="m-4">
       {showModal ? (<ModalCus id="addMembers" title="Add member" closeModal={setShowModal}>
         <AddMembers />
       </ModalCus>) : (<span></span>)}

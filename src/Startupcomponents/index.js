@@ -25,6 +25,8 @@ export * from "./connectCard/ConnectCard";
 export * from './dashSidebar/Sidebar';
 export * from './threedots';
 export * from './calender';
+export * from './milestoneCard/MilestoneCard'
+export * from './milestoneList/MilestoneList'
 
 
 

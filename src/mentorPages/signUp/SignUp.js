@@ -112,7 +112,7 @@ export const SignUp = ({ history }) => {
                 className="d-flex align-items-center mentor_switch_auth"
                 style={{ columnGap: 6 }}
               >
-                <p>Already have an account?</p> <a href="/mentor/signin">Sign In</a>
+                <p>Already have an account?</p> <a href="/">Sign In</a>
               </section>
             </div>
           </Form>

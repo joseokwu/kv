@@ -3,7 +3,12 @@ import demo from '../../../../assets/icons/demoImg.png'
 import downloadIcon from '../../../../assets/icons/download.svg'
 import founder from '../../../../assets/images/sampleFounderImg.png'
 import investor from '../../../../assets/images/sampleinvestors.png'
-import { Button, ModalCus, TextArea, TextField } from '../../../../Startupcomponents'
+import {
+  Button,
+  ModalCus,
+  TextArea,
+  TextField,
+} from '../../../../Startupcomponents'
 import {
   FileSize,
   FileText,
@@ -25,15 +30,12 @@ export const Product = () => {
       ) : (
         <span></span>
       )}
-      <section className="d-flex justify-content-end">
-        {/* <h3 className="header" >Product </h3> */}
-        <span
-          className="headBtn"
-          data-target="#editProductModal"
-          onClick={() => setShowModal(true)}
-        >
-          Edit product
-        </span>
+      <section
+        className="d-flex justify-content-end"
+        data-target="#editProductModal"
+        onClick={() => setShowModal(true)}
+      >
+        <button className="teamBtn">Edit product</button>
       </section>
       <div className="row">
         <section className="col-xl-12">
@@ -98,7 +100,7 @@ const EditProductModal = () => {
           />
         </div>
 
-        <div className="col-lg-6 mt-5 pt-2 youtube">
+        <div className="col-lg-6 mt-4 pt-1 youtube">
           <button className="">Upload</button>
         </div>
       </div>

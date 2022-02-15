@@ -6,10 +6,10 @@ export const AuthSide = () => {
   return (
     <div className="mentor_auth">
       <div className="mentor_auth_side">
-          <div className="mb-5">
+          <div className="mb-3">
             <img src={logo} alt={"logo"}/>
           </div>
-        <section className="mentor_switch_signUp mb-5">
+        <section className="mentor_switch_signUp mb-4">
           <button>Startup</button>
           <button>Investor</button>
           <button className="mentor_active_signUp">Mentor</button>

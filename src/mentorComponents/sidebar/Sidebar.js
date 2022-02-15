@@ -84,13 +84,13 @@ export const Sidebar = () => {
   }, [pathname])
 
   return (
-    <div className="side-main">
-      <section className="side-navigator">
+    <div className="side_main">
+      <section className="side_navigator">
         <div>
           <img src={user} alt="profile" onClick={() => push('/mentor/profile')} />
         </div>
-        <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
-        <p className="mb-0 side-text">{pathname.includes('mentor') ? 'Mentor' : 'mentor'}</p>
+        <h5 className="mb-0 side_header">Hello Micheal Smith</h5>
+        <p className="mb-0 side_text">{pathname.includes('mentor') ? 'Mentor' : 'mentor'}</p>
 
         <ul className="side-list">
           {navigator.length > 0 &&
@@ -99,7 +99,7 @@ export const Sidebar = () => {
                 <li key={i}>
                   <a href={nav.path}>
                     <img src={nav.icon} alt="dash" />
-                    <span className={`${activateLink(nav.activator)} side-text`}>
+                    <span className={`${activateLink(nav.activator)} side_text`}>
                       {nav.title}
                     </span>
                   </a>
@@ -108,9 +108,9 @@ export const Sidebar = () => {
             })}
         </ul>
       </section>
-      <section className="side-footer" onClick={() => push('/mentor/support')}>
+      <section className="side_footer" onClick={() => push('/mentor/support')}>
         <img src={helpDesk} alt="help" />
-        <span className="mb-0 side-text" role="button">
+        <span className="mb-0 side_text" role="button">
           Need help? Contact us
         </span>
       </section>

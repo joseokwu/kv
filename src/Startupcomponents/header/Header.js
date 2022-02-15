@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import { Link } from "react-router-dom";
-import logo from "../../assets/images/kvLogo.png";
-import notification from "../../assets/icons/notification.svg";
-import chat from "../../assets/icons/chat.svg";
-import angleDown from "../../assets/icons/angleDown.svg";
-import sampleUser from "../../assets/images/sampleUser.png";
-import { useHistory } from "react-router-dom";
-import { Notification } from "../index";
-import "./header.css";
+import { Link } from 'react-router-dom'
+import logo from '../../assets/images/kvLogo.png'
+import notification from '../../assets/icons/notification.svg'
+import chat from '../../assets/icons/chat.svg'
+import angleDown from '../../assets/icons/angleDown.svg'
+import sampleUser from '../../assets/images/sampleUser.png'
+import { useHistory } from 'react-router-dom'
+import { Notification } from '../index'
+import './header.css'
 
 export const Header = () => {
-  const { push } = useHistory();
+  const { push } = useHistory()
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const [openNotice, setOpenNotice] = useState(false);
+  const [openNotice, setOpenNotice] = useState(false)
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
       <section className="d-flex align-items-center">
         <div
-          className={`${open ? "hams-open" : "hams-close"} hams`}
+          className={`${open ? 'hams-open' : 'hams-close'} hams`}
           onClick={() => setOpen(!open)}
         >
           <span></span>
@@ -47,12 +47,11 @@ export const Header = () => {
           </li>
         </ul>
 
-        <div
-          className="d-flex align-items-center h-100"
-         
-          role="button"
-        >
-          <span className="d-flex align-items-center header-profile">
+        <div className="d-flex align-items-center h-100" role="button">
+          <span
+            onClick={() => push('/startup/profile')}
+            className="d-flex align-items-center header-profile"
+          >
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>
           </span>
@@ -65,5 +64,5 @@ export const Header = () => {
         openNotice={openNotice}
       />
     </div>
-  );
-};
+  )
+}

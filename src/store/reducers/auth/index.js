@@ -4,11 +4,11 @@
 
 
   const INIT_STATE = {
-    authenticated: false,
+    authenticated: true,
     user: null,
     error: false,
     loading: false,
-    roles:['investor']
+    roles:['investor','startup','mentor']
   }
 
   const authReducer = (state=INIT_STATE, action) =>{

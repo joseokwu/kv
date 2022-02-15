@@ -6,6 +6,8 @@ import person3 from '../assets/icons/person3.svg'
 import company from '../assets/images/appleoff.svg'
 import applied from '../assets/images/appliedMap.svg'
 import declined from '../assets/images/declinedMap.svg'
+import expired from '../assets/images/expiredMap.svg'
+import approved from '../assets/images/approvedMap.svg'
 
 export const options = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -138,9 +140,11 @@ export const cardDataModal = [
 export const compImage = [{ logo: company }]
 
 export const Map = [
-  { 
-    approvedMap: applied,
+  {
+    appliedMap: applied,
     declinedMap: declined,
+    expiredMap: expired,
+    approvedMap: approved,
     title: 'Application Status',
   },
 ]

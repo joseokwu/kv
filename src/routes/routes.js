@@ -6,7 +6,7 @@ import {
 import {
   MentorDashboard,
   SignUp,
-  MentorSignIn,
+  SignIn,
   MentorConfirmEmail,
   MentorForgotPassword,
   MentorCheckMail,
@@ -416,7 +416,7 @@ const routes = [
     name: "SignIn",
     path: "/",
     exact: true,
-    component: MentorSignIn,
+    component: SignIn,
     protected: false,
   },
   {
