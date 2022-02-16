@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, TextArea, TextField } from "../../../mentorComponents";
-import close from "../../../assets/icons/Close.svg";
+import close from "../../../assets/icons/close.svg";
 import sampleUser from "../../../assets/images/sampleTeamMember.png";
 
 export const CreateGroup = () => {

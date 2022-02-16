@@ -32,20 +32,10 @@ export const MentorSignIn = () => {
        
        
      })  
-    // console.log(stateAuth.roles)
+   
   }
 
-  // useEffect(() =>{
-  //     if(authenticated){
-  //     const loca = getLocationHistory();
-  //     if(loca !== null){ 
-  //     window.open(loca, '_self')
-  //     console.log('worked')
-  //     }
-  //     window.open(`/${roles[0]}/dashboard`, '_self')
 
-  //     }
-  // },[authenticated, roles])
 
   return (
     <div className="row mx-0 auth-wrap">
