@@ -51,12 +51,12 @@ export const Header = ({ setOpen, open }) => {
       </section>
       <section className="h-100 header-right-content">
         <ul className="header-list">
-          <li>
+          {/* <li>
             <span className="header-chat d-flex align-items-center">
               <img src={chat} alt="chat" />
               <p className="mb-0 header-text">Chat</p>
             </span>
-          </li>
+          </li> */}
           <li
             className="d-flex align-items-center"
             onClick={() => setOpenNotice(!openNotice)}

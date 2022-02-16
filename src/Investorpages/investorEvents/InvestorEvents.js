@@ -28,9 +28,9 @@ export const InvestorEvents = ({ history }) => {
   };
   return (
     <div className="wrapper">
-      <section className="mb-4">
+      {/* <section className="mb-4">
         <h1>Events</h1>
-      </section>
+      </section> */}
 
       <section className="mb-4">
         <Tabs tabItems={tabsItems} />

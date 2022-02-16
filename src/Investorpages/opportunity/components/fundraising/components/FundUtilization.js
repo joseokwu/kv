@@ -59,7 +59,7 @@ const UtilizationTable = () => {
   ];
   return (
     <section className="mb-4">
-      <h4 className="mb-5 fundraisingSubTitle">Fund Utilization</h4>
+      {/* <h4 className="mb-5 fundraisingSubTitle">Fund Utilization</h4> */}
       <section style={{ overflow: "auto" }}>
         <table className="util-table">
           <thead>

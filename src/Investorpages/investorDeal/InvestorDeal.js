@@ -7,10 +7,10 @@ export const InvestorDeal = ({ history }) => {
   const { push } = history;
   return (
     <div className="wrapper">
-      <section className="mb-5 d-flex align-items-center justify-content-between">
-        <h5 className="page-header" role="button">
+      <section className="mb-3 d-flex align-items-center justify-content-end">
+        {/* <h5 className="page-header" role="button">
           Deal Room
-        </h5>
+        </h5> */}
         <DealFilter />
       </section>
 

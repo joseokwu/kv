@@ -36,7 +36,7 @@ export const Fundraising = () => {
   const [currentTab, setCurrentTab] = useState(tabItems[0]);
   return (
     <div>
-      <h3 className="tab-section-title">Fundraising</h3>
+      {/* <h3 className="tab-section-title">Fundraising</h3> */}
 
       <Tabs
         tabItems={tabItems}
