@@ -47,3 +47,7 @@
   .edit_input {
     min-width: 100%;
   }
+
+  input {
+    padding:0 !important;
+  }

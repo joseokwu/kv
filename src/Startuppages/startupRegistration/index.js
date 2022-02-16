@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { WelcomeMessage, RegCard } from './startup.styled'
-import { ProgressBarProps } from 'react-bootstrap'
 import { ProgressBar } from '../../Startupcomponents'
 import { StartupProfile } from './components/startupProfile'
 import { useActivity } from '../../hooks/useBusiness'
@@ -38,7 +37,10 @@ export const StartUpRegistration = () => {
     <>
       <div className="mx-5">
         <div className="container">
-          <div className='position-fixed' style={{zIndex: '999', background: '#FFFFFF', width: '68%'}}>
+          <div
+            className="position-fixed"
+            style={{ zIndex: '999', background: '#FFFFFF', width: '68%' }}
+          >
             <WelcomeMessage>
               <h5>
                 Hi Micheal{' '}
@@ -65,15 +67,6 @@ export const StartUpRegistration = () => {
               {path === 5 && <FundRaising />}
             </div>
           </RegCard>
-          {/* <div style={{ marginTop: '15px' }} className="reg-card">
-          {path === 1 && <StartupProfile />}
-          {path === 2 && <PitchDeck />}
-
-          {path === 3 && <TeamProfile />}
-
-          {path === 4 && <Product />}
-          {path === 5 && <FundRaising />}
-        </div> */}
         </div>
       </div>
     </>

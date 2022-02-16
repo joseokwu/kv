@@ -25,7 +25,7 @@ export const StartupProfile = ({ history }) => {
     "product",
     "business canvas",
     // "fundraising",
-    "Milestone/Timeline",
+    "milestone/timeline",
     "product road map",
   ];
 
@@ -43,7 +43,7 @@ export const StartupProfile = ({ history }) => {
         return <RoadMap />;
       case "#team":
         return <Team />;
-      case "#Milestone/Timeline":
+      case "#milestone/timeline":
         return <Milestone />
       default:
         return <Product />;

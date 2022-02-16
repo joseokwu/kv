@@ -1,9 +1,7 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   HeaderPitch,
   FormWrapper,
-  InputWrapper,
-  ImageWrapper,
   FileWrapper,
   FileText,
   FileSize,
@@ -13,7 +11,6 @@ import {
 import DownloadIcon from '../../../../assets/icons/downloadIcon.svg'
 import RedFile from '../../../../assets/icons/redFile.svg'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
-import { DownloadOutlined } from '@ant-design/icons'
 import { useActivity } from '../../../../hooks/useBusiness'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
 
@@ -50,7 +47,9 @@ export const PitchDeck = () => {
 
             <div className="row">
               <div className="form-group col-12">
-                <label className="py-4">Upload a Pitch deck for your startup</label>
+                <label className="py-4">
+                  Upload a Pitch deck for your startup
+                </label>
                 <FileWrapper className="d-flex justify-content-center text-center">
                   <img src={DownloadIcon} alt="#" />
                   <FileText>Drag & Drop</FileText>

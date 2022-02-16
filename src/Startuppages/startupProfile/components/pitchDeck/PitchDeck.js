@@ -12,7 +12,6 @@ import {
   LabelButton,
 } from '../../../startupRegistration/components/pitchdeck/pitch.styled'
 import './pitchDeck.css'
-import { Divider } from 'antd'
 import { SmallModal, TextArea } from '../../../../Startupcomponents'
 
 export const PitchDeck = () => {
@@ -100,8 +99,8 @@ export const AddPickDeckModal = () => {
         </FileWrapper>
       </div>
       <div className="my-5">
-          <button>Update</button>
-        </div>
+        <button>Update</button>
+      </div>
     </div>
   )
 }

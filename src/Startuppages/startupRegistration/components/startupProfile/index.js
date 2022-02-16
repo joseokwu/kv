@@ -16,6 +16,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
 import { useActivity } from '../../../../hooks/useBusiness'
+import { TextField } from '../../../../Startupcomponents'
 
 export const StartupProfile = () => {
   const [disImg, setImg] = useState(null)
@@ -116,13 +117,14 @@ export const StartupProfile = () => {
             </div>
             <div className="form-group col-lg-6 col-12">
               <label>Startup *</label>
-              <input
+              {/* <input
                 type="text"
                 name="startupname"
                 value={formik.values.startupname}
                 onChange={formik.handleChange}
                 className="form-control"
-              />
+              /> */}
+              <TextField />
             </div>
             <div className="form-group col-lg-6 col-12">
               <label>Brand *</label>

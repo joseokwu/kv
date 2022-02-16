@@ -223,6 +223,15 @@ export const InProgress = styled.div`
     color: #000000;
   }
 
+  h4 {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #3e3e3e;
+  }
+
   button {
     font-family: DM Sans;
     font-style: normal;
@@ -234,5 +243,40 @@ export const InProgress = styled.div`
     border-radius: 10px;
     border: none;
     padding: 10px 35px;
+  }
+
+  .completeScore {
+    button {
+      font-family: DM Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      color: #000000;
+      background: #f8f8fa;
+      border-radius: 4px;
+      border: none;
+      padding: 15px 18px;
+    }
+
+    button:focus {
+      background: #dcebff;
+      outline: none;
+    }
+  }
+
+  .upEvt {
+    button {
+      font-family: DM Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 140%;
+      color: #4f4f4f;
+      background: #f4f4f4;
+      border-radius: 5px;
+      border: none;
+      padding: 10px 35px;
+    }
   }
 `

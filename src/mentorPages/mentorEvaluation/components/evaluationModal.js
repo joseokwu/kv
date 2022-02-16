@@ -40,14 +40,14 @@ export const EvaluationModal = () => {
           </p>
         </div>
 
-        <a href="/evaluation/view">View profile</a>
+        <a href="/mentor/evaluation/evaluate#market_attractiveness">View profile</a>
         <div className="mb-4">
           <img className="pt-5" src={compitch} alt="company pitch" />
         </div>
 
         <Button
           label="Evaluate"
-          onClick={() => push('/evaluation/evaluate#market_attractiveness')}
+          onClick={() => push('/mentor/evaluation/evaluate#market_attractiveness')}
         />
       </section>
     </div>

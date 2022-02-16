@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { HeaderProduct, FormWrapper, VideoWrapper } from './product.styled'
 import { useActivity } from '../../../../hooks/useBusiness'
 import RedFile from '../../../../assets/icons/redFile.svg'

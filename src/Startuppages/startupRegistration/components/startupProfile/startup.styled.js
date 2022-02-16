@@ -39,8 +39,8 @@ export const InputWrapper = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 320px;
-  left: 120px;
+  top: 380px;
+  left: 200px;
 
   input {
     width: inherit;
