@@ -16,7 +16,9 @@
 .profile-banner {
   position: relative;
   height: 256px;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); */
+  background: #00adef;
+  border-radius: 20px 20px 0px 0px;
 }
 
 .edit-banner {
@@ -155,7 +157,7 @@
 
 .profile-more {
   max-width: 1440px;
-  margin: 0 auto;
+  margin: 0 auto !important;
 }
 
 .profile-offer-content {

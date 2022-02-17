@@ -384,7 +384,7 @@ const routes = [
     path: "/booster/dashboard",
     component: WithMainInvestorLayout(BoosterDashboard),
     exact: true,
-    protected: true,
+    protected: false,
     type: "booster",
   },
   {
@@ -392,7 +392,7 @@ const routes = [
     path: "/booster/applicants",
     component: WithMainInvestorLayout(BoosterApplicants),
     exact: true,
-    protected: true,
+    protected: false,
     type: "booster",
   },
   {
@@ -400,7 +400,7 @@ const routes = [
     path: "/booster/profile",
     component: WithMainInvestorLayout(BoosterProfile),
     exact: true,
-    protected: true,
+    protected: false,
     type: "booster",
   },
 
