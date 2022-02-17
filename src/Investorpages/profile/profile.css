@@ -75,6 +75,7 @@
   align-items: center;
   column-gap: 6px;
   color: inherit;
+  text-decoration: none;
 }
 
 .web-phone-local a:hover {
@@ -120,7 +121,7 @@
   color: #2e3192;
 }
 
-.profile-tab {
+.profile-tab-investor {
   height: 71px;
   background-color: white;
   display: flex;
@@ -132,7 +133,7 @@
   column-gap: 40px;
 }
 
-.profile-tab h2 {
+.profile-tab-investor h2 {
   height: inherit;
   display: flex;
   align-items: center;
@@ -143,9 +144,10 @@
   line-height: 22px;
   letter-spacing: 0.01em;
   color: #828282;
+  margin-bottom: 0;
 }
 
-.profile-tab .active {
+.profile-tab-investor .active {
   font-weight: 500;
   border-bottom: 7px solid#0A6CF4;
   color: #0a6cf4;
