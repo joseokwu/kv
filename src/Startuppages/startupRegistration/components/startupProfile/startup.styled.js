@@ -84,12 +84,13 @@ export const FormWrapper = styled.div`
   }
 
   input {
-    border: none;
-    background: #fafafc;
-    border-radius: 4px;
+    border: none !important;
+    background: #fafafc !important;
+    border-radius: 4px !important;
     /* padding: 8px 14px; */
-    margin-left: 15px;
-    margin-bottom: 15px;
+    margin-left: 15px !important;
+    margin-bottom: 15px !important;
+    
 
     ::placeholder {
       font-family: DM Sans;
@@ -119,7 +120,7 @@ export const FormWrapper = styled.div`
   }
   .cust {
     border: none;
-    background: #f4f4fa;
+   
     width: 70%;
     margin-left: 15px;
   }

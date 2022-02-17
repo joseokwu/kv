@@ -12,9 +12,9 @@ export const useActivity = () => {
     //const authSte = useSelector((state) => state);
     console.log(state);
 
-    const changePath = () =>{
+    const changePath = (value) =>{
 
-        dispatch(changeDPath());
+        dispatch(changeDPath(value));
     }
 
     const showEventAction = () =>{

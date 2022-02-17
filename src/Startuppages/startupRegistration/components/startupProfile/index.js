@@ -4,7 +4,8 @@ import {
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-} from './startup.styled'
+} from './startup.styled';
+import './style.css';
 import { UserOutlined, PlusOutlined } from '@ant-design/icons'
 import { useFormik } from 'formik'
 import * as yup from 'yup'

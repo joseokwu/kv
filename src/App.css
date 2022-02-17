@@ -1,3 +1,5 @@
+@import 'antd/dist/antd.css';
+
 /* 
 @import "../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
@@ -9,6 +11,8 @@
 @import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-react-schedule/styles/material.css"; */
+
+
 
 p,
 h1,
@@ -37,3 +41,6 @@ h6 {
   z-index: 8;
   padding: 10px;
 }
+/* input {
+  padding:0 !important;
+} */

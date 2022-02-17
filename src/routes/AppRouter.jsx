@@ -15,7 +15,7 @@ export  function AppRouter(props){
 			await userProfile();
 				if (getLocationHistory()) {
                     history.push(getLocationHistory());
-					//sessionStorage.removeItem('user:redirect:location')
+					sessionStorage.removeItem('user:redirect:location')
 				}
 			}
 		};

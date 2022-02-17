@@ -8,7 +8,7 @@ import {
 
 
   export const changeDPath = (value)=> (dispatch) => {
-
+      console.log(value)
     dispatch({
       type:CHANGE_PAGE,
       payload:value
