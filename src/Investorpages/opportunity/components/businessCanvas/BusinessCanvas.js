@@ -4,7 +4,7 @@ import "./businessCanvas.css";
 export const BusinessCanvas = () => {
   return (
     <div>
-      <h3 className="tab-section-title">Business Model Canvas</h3>
+      {/* <h3 className="tab-section-title">Business Model</h3> */}
 
       <section className="biz-card mb-4">
         <h4>Problem Statement</h4>

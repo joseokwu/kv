@@ -9,11 +9,19 @@ export const setAuthToken = (token) => {
 
 export const setLocationHistory = (location) => {
 
-     console.log(location)
-     localStorage.setItem('user:redirect:location', JSON.stringify(location))
+     console.log(location);
+     sessionStorage.setItem('user:redirect:location', JSON.stringify(location))
 }
 
 export const getLocationHistory = () => {
-    const loc = JSON.parse( localStorage.getItem('user:redirect:location'))
-    return loc;
+
+    return JSON.parse(sessionStorage.getItem('user:redirect:location'));
+    // const loc = JSON.parse(localStorage.getItem('user:redirect:location'))
+    // //console.log(loc)
+    // return loc;
 }
+
+// export const clearLocation = ()=>{
+    
+//     localStorage.removeItem('user:redirect:location')
+// }

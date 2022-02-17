@@ -50,7 +50,8 @@
 }
 
 .active-side {
-  padding: 10px 17px;
+  padding: 8px 14px;
+  font-size: 12px !important;
   background-color: white;
   color: #00adef !important;
   border-radius: 10px;
@@ -59,7 +60,7 @@
 .side-text {
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 140%;
   color: #ffffff;
 }

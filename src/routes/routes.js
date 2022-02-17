@@ -2,6 +2,7 @@ import {
   WithMentorMainLayout,
   WithMentorRegisterLayout,
 } from "../mentorComponents";
+import { lazy } from "react";
 
 import {
   MentorDashboard,
@@ -33,6 +34,7 @@ import {
   // DealFolder,
   MentorEvaluation,
 } from "../mentorPages";
+
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 import {
   WithInvestorRegisterLayout,
@@ -199,7 +201,7 @@ const routes = [
     path: "/investor/dashboard",
     component: WithMainInvestorLayout(InvestorDashboard),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -208,7 +210,7 @@ const routes = [
     path: "/investor/register",
     component: WithInvestorRegisterLayout(InvestorRegistration),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -217,7 +219,7 @@ const routes = [
     path: "/investor/opportunities",
     component: WithMainInvestorLayout(InvestorOpportunity),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -226,7 +228,7 @@ const routes = [
     path: "/investor/opportunities/:id",
     component: WithMainInvestorLayout(Opportunity),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -235,14 +237,15 @@ const routes = [
     path: "/investor/interested",
     component: WithMainInvestorLayout(InvestorInterested),
     exact: true,
-    protected: true,
+    protected: false,
+    type: "investor",
   },
   {
     name: "Interested",
     path: "/investor/interested/:id",
     component: WithMainInvestorLayout(Opportunity),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -251,7 +254,7 @@ const routes = [
     path: "/investor/portfolio",
     component: WithMainInvestorLayout(InvestorPortfolio),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -260,7 +263,7 @@ const routes = [
     path: "/investor/profile",
     component: WithMainInvestorLayout(InvestorProfile),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -269,25 +272,25 @@ const routes = [
     path: "/investor/events",
     component: WithMainInvestorLayout(InvestorEvents),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
   {
     name: "Investor Evaluation",
     path: "/investor/evaluation",
-    component: WithMainInvestorLayout(InvestorEvaluation),
+    component: WithMainInvestorLayout(MentorEvaluation),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
   {
     name: "Investor Network",
     path: "/investor/networking",
-    component: WithMainInvestorLayout(InvestorNetwork),
+    component: WithMainInvestorLayout(StartupNetworking),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -296,7 +299,7 @@ const routes = [
     path: "/investor/schedule",
     component: WithMainInvestorLayout(InvestorSchedule),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
   {
@@ -312,15 +315,15 @@ const routes = [
     path: "/investor/opportunities/:id/commitment",
     component: WithMainInvestorLayout(InvestorCommitment),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
   {
     name: "Investor Deal",
     path: "/investor/deal_room",
-    component: WithMainInvestorLayout(InvestorDeal),
+    component: WithMainInvestorLayout(StartupNetworking),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
   {
@@ -328,7 +331,7 @@ const routes = [
     path: "/investor/deal_room/:id",
     component: WithMainInvestorLayout(InvestorDealRoom),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -337,7 +340,7 @@ const routes = [
     path: "/investor/deal_room/:id/:folderName",
     component: WithMainInvestorLayout(InvestorDealFolder),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
   {
@@ -345,7 +348,7 @@ const routes = [
     path: "/investor/schedule-calendar",
     component: WithMainInvestorLayout(InvestorScheduleCalendar),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -354,7 +357,7 @@ const routes = [
     path: "/investor/support",
     component: WithMainInvestorLayout(InvestorContactUs),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
 
@@ -381,7 +384,7 @@ const routes = [
     path: "/booster/dashboard",
     component: WithMainInvestorLayout(BoosterDashboard),
     exact: true,
-    protected: false,
+    protected: true,
     type: "booster",
   },
   {
@@ -442,7 +445,7 @@ const routes = [
     type: "mentor",
   },
   {
-    name: "ConfirmEmail",
+    name: "Co",
     path: "/forgot/password",
     component: MentorConfirmEmail,
     exact: true,

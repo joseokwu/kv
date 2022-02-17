@@ -78,6 +78,7 @@ export const StartupSideBar = () => {
   } = useActivity()
 
   const activateLink = (pathNum) => {
+    
     return path === pathNum ? 'active-side-start' : 'side-text-start'
   }
 
@@ -89,7 +90,7 @@ export const StartupSideBar = () => {
             startUpRoutes.map((nav, i) => {
               return (
                 <li key={i}>
-                  <span onClick={() => changePath(nav.path)}>
+                  <span style={{cursor:'pointer'}} onClick={() => changePath(nav.path)}>
                     <p className={`${activateLink(nav.path)} side-text-start`}>
                       {nav.title}
                     </p>

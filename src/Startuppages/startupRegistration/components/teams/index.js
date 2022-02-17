@@ -74,6 +74,10 @@ export const TeamProfile = () => {
   function handleChange(value) {
     console.log(`selected ${value}`)
   }
+  
+  function btn(e) {
+    e.preventDefault()
+  }
 
   return (
     <>
@@ -97,17 +101,25 @@ export const TeamProfile = () => {
 
           <div style={{ marginTop: '10px', marginLeft: '10px' }}>
             <ImageWrapper>
-              <img
-                className=""
-                src={disImg}
-                style={{ borderRadius: '70px', width: '90px', height: '90px' }}
-                alt=""
-              />
+              {disImg === null ? (
+                <UserOutlined />
+              ) : (
+                <img
+                  className=""
+                  src={disImg}
+                  style={{
+                    borderRadius: '70px',
+                    width: '90px',
+                    height: '90px',
+                  }}
+                  alt=""
+                />
+              )}
             </ImageWrapper>
 
             <InputWrapper for="found">
               <input type="file" onChange={onChangeImage} id="found" hidden />
-              <PlusOutlined />
+              <PlusOutlined style={{color: '#ffffff'}} />
             </InputWrapper>
           </div>
 
@@ -121,7 +133,7 @@ export const TeamProfile = () => {
                 type="text"
                 name="bio"
                 placeholder="Enter a brief bio about yourself"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -130,7 +142,7 @@ export const TeamProfile = () => {
                 type="text"
                 name="firstname"
                 placeholder="Enter first name"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -139,7 +151,7 @@ export const TeamProfile = () => {
                 type="text"
                 name="lastname"
                 placeholder="Enter last name"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -148,7 +160,7 @@ export const TeamProfile = () => {
                 type="text"
                 name="email"
                 placeholder="Enter email address"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group  col-lg-6 col-12">
@@ -166,7 +178,7 @@ export const TeamProfile = () => {
                 type="text"
                 name="country"
                 placeholder="Enter your country"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -175,7 +187,7 @@ export const TeamProfile = () => {
                 type="text"
                 name="state"
                 placeholder="Enter your state"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -184,7 +196,7 @@ export const TeamProfile = () => {
                 type="text"
                 name="city"
                 placeholder="Enter your city"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group  col-12 ">
@@ -193,7 +205,7 @@ export const TeamProfile = () => {
                 international
                 name="phone"
                 countryCallingCodeEditable={true}
-                className="custs w-lg-50"
+                className="custs w-lg-50 ps-3"
                 value={phone}
                 onChange={setPhone}
               />
@@ -245,7 +257,7 @@ export const TeamProfile = () => {
 
           <div className="form-group">
             <div>
-              <label>What are your skills *</label>
+              <label>What are your skills*</label>
             </div>
             <Select
               mode="multiple"
@@ -260,58 +272,54 @@ export const TeamProfile = () => {
         </FormWrapper>
 
         <FormWrapper height="70%">
-          <div className="div">
+          <div className="div border-bottom pb-3">
             <span>Web & Social Media</span>
           </div>
-
-          <hr />
-
           <div className="row">
             <div className="form-group col-lg-6 col-12">
-              <label>Linkedin *</label>
+              <label>Linkedin*</label>
               <input
                 type="text"
                 name="linkedin"
                 placeholder="Enter Linkdin link"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Twitter *</label>
+              <label>Twitter*</label>
               <input
                 type="text"
                 name="twitter"
                 placeholder="Enter Twitter link"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Website *</label>
+              <label>Website*</label>
               <input
                 type="text"
                 name="website"
                 placeholder="Enter website"
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
           </div>
         </FormWrapper>
 
         <FormWrapper height="70%">
-          <div className="div">
+          <div className="div border-bottom pb-2">
             <span>Co-Founders</span>
-            <p>Create a profile for your co-founders</p>
+            <p className="pt-3">Create a profile for your Co-Founders</p>
           </div>
-          <hr />
-
-          <div>
-            <label>Do you have a co-founder</label>
+          
+          <div className="mt-4">
+            <label>Do you have Co-Founders?*</label>
 
             <div className="d-flex">
               <BntWrap>
-                <button className="me-3">Yes</button>
-                <button className="">No</button>
+                <button className="me-3" onClick={btn}>Yes</button>
+                <button className="" onClick={btn}>No</button>
               </BntWrap>
             </div>
 
@@ -328,20 +336,19 @@ export const TeamProfile = () => {
         </FormWrapper>
 
         <FormWrapper height="70%">
-          <div className="div">
+          <div className="div border-bottom pb-3">
             <span>Invite Team Members</span>
-            <p>Key team members</p>
+            <p className="pt-3">Key team members</p>
           </div>
-          <hr />
 
-          <div className="form-group my-2">
+          <div className="form-group mt-5 mb-4">
             <label>
               Invite a team member that can benefit from knight venture
             </label>
             <input
               type="text"
-              className="form-control my-2"
-              placeholder="Enter Team member"
+              className="form-control my-2 ps-3"
+              placeholder="Enter email address"
             />
           </div>
           <div className="my-3 mx-3">

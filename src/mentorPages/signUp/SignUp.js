@@ -9,16 +9,13 @@ import {
 } from '../../mentorComponents/index'
 import check from '../../assets/icons/checkmark.svg'
 import { Form } from 'antd'
+import { useAuth } from '../../hooks'
 
 export const SignUp = ({ history }) => {
   const [checkSat, setCheckSat] = useState(false)
-
+  const { stateAuth, register } = useAuth()
   const onFinish = (values) => {
-    if (checkSat) {
-      console.log(values)
-    } else {
-      alert('click check')
-    }
+    register(values)
   }
 
   return (
@@ -104,7 +101,11 @@ export const SignUp = ({ history }) => {
             </div>
 
             <div className="col-12 mb-4">
-              <AuthButton label="Create Account" />
+              <AuthButton
+                label="Create Account"
+                loading={stateAuth.loading}
+                disabled={stateAuth.loading}
+              />
             </div>
 
             <div className="col-12 mb-5">
@@ -112,7 +113,13 @@ export const SignUp = ({ history }) => {
                 className="d-flex align-items-center mentor_switch_auth"
                 style={{ columnGap: 6 }}
               >
-                <p>Already have an account?</p> <a href="/">Sign In</a>
+                <p>Already have an account?</p>{' '}
+                <span
+                  style={{ color: '#212198' }}
+                  onClick={() => history.push('/')}
+                >
+                  Sign In
+                </span>
               </section>
             </div>
           </Form>

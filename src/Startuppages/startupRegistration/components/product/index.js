@@ -29,11 +29,11 @@ export const Product = () => {
         <FormWrapper>
           <div className="div">
             <span>Product / Service Description</span>
-            <p>A brief description of your product</p>
+            <p className="pt-3">A brief description of your product</p>
 
             <hr />
 
-            <div className="row">
+            <div className="row mt-4">
               <div className="form-group col-12">
                 <div className="d-flex justify-content-between mt-2">
                   <label>
@@ -44,14 +44,14 @@ export const Product = () => {
                 <textarea
                   cols="5"
                   rows="5"
-                  classNam="form-control"
+                  classNam="form-control ps-3"
                   placeholder="Enter Brief info about your product"
                 ></textarea>
               </div>
               <div className="form-group col-12">
                 <div className="d-flex justify-content-between">
                   <label>
-                    What makes your solution unique from others in the market? *
+                  What makes your solution unique from others in the market? *
                   </label>
                   <label style={{color: '#828282'}}>250 words</label>
                 </div>
@@ -59,9 +59,9 @@ export const Product = () => {
                 <textarea
                   cols="5"
                   rows="5"
-                  classNam="form-control"
+                  classNam="form-control ps-3"
                   placeholder="Enter your uniqueness "
-                ></textarea>
+                />
               </div>
             </div>
 

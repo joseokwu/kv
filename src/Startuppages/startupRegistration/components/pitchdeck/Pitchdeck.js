@@ -8,7 +8,7 @@ import {
   LabelButton,
   VideoWrapper,
 } from './pitch.styled'
-import DownloadIcon from '../../../../assets/icons/downloadIcon.svg'
+import DownloadIcon from '../../../../assets/icons/download.svg'
 import RedFile from '../../../../assets/icons/redFile.svg'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
 import { useActivity } from '../../../../hooks/useBusiness'
@@ -38,7 +38,7 @@ export const PitchDeck = () => {
         <FormWrapper>
           <div className="div">
             <span>Pitch Deck</span>
-            <p>
+            <p className="pt-3">
               A brief presentation and overview about you startup. It can be a
               pdf, powerpoint presentation or keynote document
             </p>
@@ -47,7 +47,7 @@ export const PitchDeck = () => {
 
             <div className="row">
               <div className="form-group col-12">
-                <label className="py-4">
+                <label className="pt-4 pb-3">
                   Upload a Pitch deck for your startup
                 </label>
                 <FileWrapper className="d-flex justify-content-center text-center">
@@ -59,12 +59,12 @@ export const PitchDeck = () => {
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
                 </FileWrapper>
               </div>
-              <div className="form-group col-12">
+              <div className="form-group col-12 mt-3">
                 <label> Paste Youtube Link of pitch video </label>
-                <div className="d-flex">
+                <div className="d-flex my-2">
                   <input
                     type="text"
-                    className="form-control youtube-input"
+                    className="form-control youtube-input ps-3"
                     placeholder="Youtube link"
                   />
                   <button className="button">Upload</button>
@@ -78,7 +78,7 @@ export const PitchDeck = () => {
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
                 </FileWrapper>
               </div>
-              <div className="form-group col-12">
+              <div className="form-group col-12 mt-5">
                 <VideoWrapper>
                   <label> Pitch deck uploaded</label>
                   <div className="row">

@@ -67,7 +67,10 @@ export const InvestorRegistration = () => {
 
       <section className="register-grid">
         <div>
-          <ul className="register-list">
+          <ul
+            className="register-list"
+            style={{ position: "sticky", top: "2rem" }}
+          >
             <li
               onClick={() => switchForm("#details")}
               className={(hash === "#details" || hash === "") && "active-li"}

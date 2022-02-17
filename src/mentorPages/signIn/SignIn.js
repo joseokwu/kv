@@ -1,21 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import {
   AuthSide,
   AuthButton,
   AuthTextField,
   AuthPasswordField,
-} from '../../mentorComponents'
-
+} from '../../mentorComponents/index'
+import { useHistory } from 'react-router-dom';
 import './signIn.css'
-import { Form } from 'antd'
+import { Form } from 'antd';
+import { useAuth } from '../../hooks';
+import { getLocationHistory } from '../../utils/helpers';
 
-export const SignIn = ({ history }) => {
+export const MentorSignIn = () => {
   const [loader, setLoader] = useState(false)
-
+  const { stateAuth : { authenticated , loading , roles} , newLogin } = useAuth();
+  
+  const history = useHistory()
   const onFinish = (values) => {
-    alert('hello world')
-    console.log(values)
+    
+     newLogin(values).then(res =>{
+        
+        const loca = getLocationHistory();
+        if(loca !== null){
+
+          history.push(loca)
+          sessionStorage.removeItem('user:redirect:location')
+        }else {
+          console.log(loca)
+          history.push(`/${res?.roles[0]}/dashboard`)
+        }
+       
+       
+     })  
+   
   }
+
+
 
   return (
     <div className="row mx-0 auth-wrap">
@@ -59,7 +79,8 @@ export const SignIn = ({ history }) => {
               <div className="mb-4">
                 <AuthButton
                   label="Sign In"
-                  loading={loader}
+                  loading={loading}
+                  disabled={loading}
                   onClick={() => setLoader()}
                 />
               </div>
@@ -70,7 +91,7 @@ export const SignIn = ({ history }) => {
             className="d-flex align-items-center mentor_switch_auth"
             style={{ columnGap: 6 }}
           >
-            <p>Don’t have an account?</p> <a href="/signup">Sign Up</a>
+            <p>Don’t have an account?</p> <span style={{color:'#212198'}}  onClick={()=> history.push("/signup")} >Sign Up</span>
           </section>
         </div>
       </section>

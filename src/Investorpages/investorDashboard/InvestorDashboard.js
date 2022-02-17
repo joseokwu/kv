@@ -21,7 +21,7 @@ export const InvestorDashboard = ({ history }) => {
   ];
   return (
     <div className="dashboard-main">
-      <section className="d-flex align-items-center dashboard-cards">
+      <section className="d-flex align-items-center dashboard-cards tab-wrap">
         {cardData.map((data, i) => (
           <DashCard
             name={data.name}
@@ -33,8 +33,8 @@ export const InvestorDashboard = ({ history }) => {
         ))}
       </section>
 
-      <section className="row mt-5 dash-main-content">
-        <div className="col-xl-8">
+      <section className="row mt-3 dash-main-content">
+        <div className="col-xl-11">
           <div>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Upcoming Events</p>
@@ -59,7 +59,7 @@ export const InvestorDashboard = ({ history }) => {
             </section>
           </div>
 
-          <div style={{ marginTop: "2.38rem" }}>
+          <div style={{ marginTop: "1rem" }}>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Recent Opportunities</p>
               <p
@@ -96,7 +96,7 @@ export const InvestorDashboard = ({ history }) => {
           </div>
         </div>
 
-        <div className="col-xl-4">
+        {/* <div className="col-xl-4">
           <section className="network-space">
             <div className="network-space-header pt-0">
               <h3>Networking</h3>
@@ -125,7 +125,7 @@ export const InvestorDashboard = ({ history }) => {
               </section>
             </div>
           </section>
-        </div>
+        </div> */}
       </section>
     </div>
   );
