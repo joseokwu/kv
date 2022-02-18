@@ -270,7 +270,7 @@ const routes = [
   {
     name: "Investor Events",
     path: "/investor/events",
-    component: WithMainInvestorLayout(InvestorEvents),
+    component: WithMainInvestorLayout(MentorEvents),
     exact: true,
     protected: false,
     type: "investor",
@@ -297,7 +297,7 @@ const routes = [
   {
     name: "Investor schedule",
     path: "/investor/schedule",
-    component: WithMainInvestorLayout(InvestorSchedule),
+    component: WithMainInvestorLayout(MentorSchedule),
     exact: true,
     protected: false,
     type: "investor",
@@ -384,7 +384,7 @@ const routes = [
     path: "/booster/dashboard",
     component: WithMainInvestorLayout(BoosterDashboard),
     exact: true,
-    protected: true,
+    protected: false,
     type: "booster",
   },
   {
@@ -392,7 +392,7 @@ const routes = [
     path: "/booster/applicants",
     component: WithMainInvestorLayout(BoosterApplicants),
     exact: true,
-    protected: true,
+    protected: false,
     type: "booster",
   },
   {
@@ -400,7 +400,7 @@ const routes = [
     path: "/booster/profile",
     component: WithMainInvestorLayout(BoosterProfile),
     exact: true,
-    protected: true,
+    protected: false,
     type: "booster",
   },
 
