@@ -41,38 +41,40 @@ export const InvestorProfile = () => {
     }
   };
   return (
-    <div className="wrapper">
-      <section className="mb-3">
-        <InvestorDetails />
-      </section>
-      <section className="mb-3 profile-tab">
-        <h2
-          className={(hash === "#info" || hash === "") && `active`}
-          onClick={() => push("#info")}
-          role="button"
-        >
-          Investment Info
-        </h2>
-        <h2
+    <section style={{ background: "#edf1f4", minHeight: "100vh" }}>
+      <div className="wrapper">
+        <section className="mb-3">
+          <InvestorDetails />
+        </section>
+        <section className="mb-3 profile-tab-investor">
+          <h2
+            className={(hash === "#info" || hash === "") && `active`}
+            onClick={() => push("#info")}
+            role="button"
+          >
+            Investment Info
+          </h2>
+          {/* <h2
           className={hash === "#portfolio" && `active`}
           onClick={() => push("#portfolio")}
           role="button"
-        >
+          >
           Portfolio
-        </h2>
-      </section>
+        </h2> */}
+        </section>
 
-      <section className="row profile-more">
-        <div className="col-lg-8 pl-0">{renderComponent()}</div>
-        <div className="col-lg-4 pr-0">
-          <div>
-            <SectorExpertise />
+        <section className="row profile-more">
+          <div className="col-lg-8 pl-0">{renderComponent()}</div>
+          <div className="col-lg-4 pr-0">
+            <div>
+              <SectorExpertise />
+            </div>
+            <div>
+              <InvestorTypes />
+            </div>
           </div>
-          <div>
-            <InvestorTypes />
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </section>
   );
 };
