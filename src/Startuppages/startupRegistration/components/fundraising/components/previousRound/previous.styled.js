@@ -9,14 +9,12 @@ export const BodyWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 3rem;
-    width: 50%;
-
+    padding: 4rem;
+    width: 100%;
     background: #fff;
     margin: 10px;
-    border: 1.5px solid #e6e7e9;
-    box-sizing: border-box;
-    border-radius: 6px;
+    border: 1px solid #F2F2F2;
+    border-radius: 5px;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -59,12 +57,12 @@ export const BodyWrapper = styled.div`
   }
 
   .datePick {
-    background: #f4f4f4;
+    background: #fafafc!important;
   }
 
   input {
     border: none;
-    background: #fafafc;
+    background: #fafafc!important;
     border-radius: 4px;
     width: 75%;
     margin-left: 8px;
@@ -86,7 +84,7 @@ export const BodyWrapper = styled.div`
 
   textarea {
     border: none;
-    background: #f4f4f4;
+    background: #fafafc!important;
     width: 70%;
     margin-left: 8px;
   }

@@ -5,7 +5,7 @@ import sampleUser from "../../assets/images/sampleNoticePic.png";
 import "./notification.css";
 
 export const StartupNotification = () => {
-  const tabItems = ["all", "mentor", "partner", "investor", "admin"];
+  const tabItems = ["all", "program", "mentors", "investors", "startup team", "others", "event / workshop"];
 
   const noticeItems = [
     { noticeImage: noticeImg },

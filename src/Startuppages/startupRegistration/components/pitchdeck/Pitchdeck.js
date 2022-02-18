@@ -138,13 +138,13 @@ export const PitchDeck = () => {
               Back
             </CustomButton>
           </div>
-          <div className="col-9 d-flex justify-content-lg-end">
-            <CustomButton className="mx-4" background="#00ADEF">
+          <div className="col-9 d-flex justify-content-end">
+            <CustomButton className="mx-2" background="#00ADEF">
               Save
             </CustomButton>
             <CustomButton
               onClick={next}
-              style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
+              // style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
               background="#2E3192"
             >
               Next

@@ -105,7 +105,7 @@ export const BntWrap = styled.div`
 `
 
 export const DownloadableButton = styled.a`
-  width: 50%;
+  width: 65%;
   display: flex;
   background: #f9f9fc;
   flex-direction: row;
@@ -117,8 +117,10 @@ export const DownloadableButton = styled.a`
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  padding: 0.6rem;
   border-radius: 20px;
+  text-decoration: none;
+  padding: 20px 25px;
+  border-radius: 10px;
 
   @media (max-width: 768px) {
     width: 125%;

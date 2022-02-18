@@ -74,7 +74,7 @@ export const TeamProfile = () => {
   function handleChange(value) {
     console.log(`selected ${value}`)
   }
-  
+
   function btn(e) {
     e.preventDefault()
   }
@@ -119,7 +119,7 @@ export const TeamProfile = () => {
 
             <InputWrapper for="found">
               <input type="file" onChange={onChangeImage} id="found" hidden />
-              <PlusOutlined style={{color: '#ffffff'}} />
+              <PlusOutlined style={{ color: '#ffffff' }} />
             </InputWrapper>
           </div>
 
@@ -312,25 +312,31 @@ export const TeamProfile = () => {
             <span>Co-Founders</span>
             <p className="pt-3">Create a profile for your Co-Founders</p>
           </div>
-          
+
           <div className="mt-4">
             <label>Do you have Co-Founders?*</label>
 
             <div className="d-flex">
               <BntWrap>
-                <button className="me-3" onClick={btn}>Yes</button>
-                <button className="" onClick={btn}>No</button>
+                <button className="me-3" onClick={btn}>
+                  Yes
+                </button>
+                <button className="" onClick={btn}>
+                  No
+                </button>
               </BntWrap>
             </div>
 
             <div className="sold">
-              <Tag
-                name="+ Add Co-founder"
-                color="#4F4F4F"
-                bg="rgba(183, 218, 231, 0.5
+              <div className="d-flex justify-content-center">
+                <Tag
+                  name="+ Add Co-founder"
+                  color="#4F4F4F"
+                  bg="rgba(183, 218, 231, 0.5
                 "
-                padding="8px 14px"
-              />
+                  padding="8px 14px"
+                />
+              </div>
             </div>
           </div>
         </FormWrapper>
@@ -362,13 +368,13 @@ export const TeamProfile = () => {
               Back
             </CustomButton>
           </div>
-          <div className="col-9 d-flex justify-content-lg-end">
-            <CustomButton className="mx-4" background="#00ADEF">
+          <div className="col-9 d-flex justify-content-end">
+            <CustomButton className="mx-2" background="#00ADEF">
               Save
             </CustomButton>
             <CustomButton
               onClick={next}
-              style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
+              // style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
               background="#2E3192"
             >
               Next

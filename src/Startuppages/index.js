@@ -20,3 +20,4 @@ export * from './fundraising';
 export * from './boosterPartner/boosterPartner';
 export * from './dealRoom/dealRoom';
 export * from './networking/networking';
+export * from './teamMember/teamMember'

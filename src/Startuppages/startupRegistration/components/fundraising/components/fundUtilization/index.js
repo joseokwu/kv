@@ -7,8 +7,7 @@ import {
   LabelButton,
   VideoWrapper,
 } from './utilize.styled'
-import { CloudUploadOutlined } from '@ant-design/icons'
-// import DownloadIcon from '../../../../../../assets/icons/downloadIcon.svg'
+import Download from '../../../../../../assets/icons/downloadoutline.svg'
 import DownloadIcon from '../../../../../../assets/icons/download.svg'
 import RedFile from '../../../../../../assets/icons/redFile.svg'
 import BluFile from '../../../../../../assets/icons/bluFile.svg'
@@ -17,19 +16,17 @@ export const FundUtilization = () => {
   return (
     <>
       <BodyWrapper>
-        {/* <span className="span mx-n5 mx-lg-n0"> Fund Utilization </span> */}
         <p className="mx-n5 mx-lg-n0">
-          {' '}
           A document containing all your financial plan and statements for your
-          business.{' '}
+          business.
         </p>
         <hr className="mx-n5 mx-lg-n0" />
 
         <div className=" my-5">
           <div className="">
             <DownloadableButton href="." className="mx-n5 mx-lg-n0">
-              <CloudUploadOutlined className="mx-2" /> Download fund utilization
-              template here
+              <img className="pr-2" src={Download} alt=""/>
+               Download fund utilization  template here
             </DownloadableButton>
           </div>
           <div className="my-5">

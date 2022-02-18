@@ -7,8 +7,7 @@ import {
   LabelButton,
   VideoWrapper,
 } from './cap.styled.js'
-
-import { CloudUploadOutlined } from '@ant-design/icons'
+import Download from '../../../../../../assets/icons/downloadoutline.svg'
 import DownloadIcon from '../../../../../../assets/icons/download.svg'
 import RedFile from '../../../../../../assets/icons/redFile.svg'
 import BluFile from '../../../../../../assets/icons/bluFile.svg'
@@ -17,10 +16,9 @@ export const CapTable = () => {
   return (
     <>
       <BodyWrapper>
-        {/* <span className='span mx-n4 mx-lg-n0' > Cap Table </span> */}
         <p className="mx-n4 mx-lg-n0">
           A document containing all your Cap Table and statements for your
-          business.{' '}
+          business.
         </p>
 
         <hr className="mx-n4 mx-lg-n0" />
@@ -30,25 +28,25 @@ export const CapTable = () => {
             <label>Total fund raised till date (if any)</label>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter Amount raised"
+              className="form-control ps-3"
+              placeholder="$100,000"
             />
           </div>
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
-            <label>Total capital raised by founders *</label>
+            <label>Total Capital invested by Founders*</label>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter Amount raised by founders"
+              className="form-control ps-3"
+              placeholder="$150,000"
             />
           </div>
           <div className="col-12 my-3">
             <DownloadableButton href="." className="mx-n4 mx-lg-n0">
-              <CloudUploadOutlined className="mx-2" /> Download Capital Table
-              sample here
+              <img className="pr-2" src={Download} alt="" />
+              Download Capital Table sample here
             </DownloadableButton>
           </div>
-          <div className="col-12 my-5">
+          <div className="col-12 my-4">
             <FileWrapper className="d-flex justify-content-center text-center mx-n4 mx-lg-n0">
               <img src={DownloadIcon} alt="#" />
               <FileText>Drag & Drop</FileText>
@@ -58,9 +56,9 @@ export const CapTable = () => {
               <LabelButton for="cap">Upload Files</LabelButton>
             </FileWrapper>
           </div>
-          <div className="col-12 my-1">
+          <div className="col-12">
             <VideoWrapper className="mx-n4 mx-lg-n0">
-              <label> Cap table uploaded</label>
+              <label> Cap Table Uploaded</label>
               <div className="div">
                 <img src={RedFile} alt=".#" />
                 <div id="div" className="">
@@ -79,7 +77,7 @@ export const CapTable = () => {
                       className=""
                       style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
                     >
-                      Product Demo
+                      Cap Table Docum...
                     </p>
                   </div>
                   <p className="my-n2 p">2.5 mb</p>

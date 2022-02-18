@@ -10,7 +10,7 @@ import share from '../../../assets/icons/share.svg'
 
 export const OppCompanyInfo = () => {
   return (
-    <section className="opp-page-card py-5 mt-3">
+    <section className="opp-page-card py-4">
       <div
         className="d-flex align-items-center justify-content-between flex-wrap"
         style={{ rowGap: 10 }}

@@ -84,20 +84,17 @@ export const BntWrap = styled.div`
 `
 
 export const DownloadableButton = styled.a`
-  width: 50%;
-  display: flex;
+  width: 65%;
   background: #f9f9fc;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   color: #2e3192;
   font-family: DM Sans;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  padding: 0.6rem;
-  border-radius: 20px;
+  padding: 20px 25px;
+  border-radius: 10px;
+  text-decoration: none;
 `
 export const FileWrapper = styled.div`
   flex-direction: column;
@@ -152,26 +149,25 @@ export const VideoWrapper = styled.div`
   border-radius: 6px;
 
   .div {
-    width: 30%;
+    width: 50%;
     background: #f9f9fc;
     border: 1px solid #e6e7e9;
     border-radius: 8px;
 
     img {
-      margin-left: 35%;
+      margin-left: 40%;
       margin-top: 16px;
     }
 
     #div {
       margin-top: 39px;
       width: 100%;
-
       background: #fff;
       border-radius: 0 0 8px 8px;
 
-      .p {
+      /* .p {
         margin-left: 30%;
-      }
+      } */
     }
   }
 `

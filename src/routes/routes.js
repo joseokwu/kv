@@ -70,6 +70,7 @@ import {
 import {
   WithStartupDashboardLayout,
   WithStartupRegistrationLayout,
+  WithStartupRegisterLayout,
 } from "../Startupcomponents";
 
 import {
@@ -85,6 +86,7 @@ import {
   StartupNetworking,
   StartupContactUs,
   StartupNotification,
+  StartupTeamMember,
 } from "../Startuppages";
 
 const routes = [
@@ -156,7 +158,14 @@ const routes = [
     protected: true,
     type: "startup",
   },
-
+  {
+    name: "StartupTeamMember",
+    path: "/startup/team/member",
+    component: WithStartupRegisterLayout(StartupTeamMember),
+    exact: true,
+    protected: true,
+    type: "startup",
+  },
   {
     name: "StartupContactus",
     path: "/startup/contactus",
@@ -169,7 +178,6 @@ const routes = [
     name: "StartupRegistration",
     path: "/startup/registration",
     component: WithStartupRegistrationLayout(StartUpRegistration),
-
     exact: true,
     protected: true,
     type: "startup",
@@ -187,7 +195,7 @@ const routes = [
   {
     name: "StartupNotification",
     path: "/startup/notification",
-    component: StartupNotification,
+    component: WithStartupDashboardLayout(StartupNotification),
     exact: true,
     protected: true,
     type: "startup",
@@ -431,7 +439,7 @@ const routes = [
   },
   {
     name: "Congrats",
-    path: "/signup/congrats",
+    path: "/mentor/signup/congrats",
     component: WithMentorRegisterLayout(MentorCongrats),
     exact: true,
     protected: false,
@@ -574,6 +582,7 @@ const routes = [
     protected: true,
     type: "mentor",
   },
+ 
   // {
   //   name: 'DealRoom',
   //   path: '/mentor/deal_room/:id',

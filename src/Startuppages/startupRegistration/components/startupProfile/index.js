@@ -4,8 +4,8 @@ import {
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-} from './startup.styled';
-import './style.css';
+} from './startup.styled'
+import './style.css'
 import { UserOutlined, PlusOutlined } from '@ant-design/icons'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -94,7 +94,7 @@ export const StartupProfile = () => {
 
         <InputWrapper for="dp">
           <input type="file" onChange={onChangeImage} id="dp" hidden />
-          <PlusOutlined style={{color: 'white'}} />
+          <PlusOutlined style={{ color: 'white' }} />
         </InputWrapper>
       </div>
       <form onSubmit={formik.handleSubmit}>
@@ -336,17 +336,17 @@ export const StartupProfile = () => {
               />
             </div>
           </div>
-          <div className="d-flex my-4 justify-content-end">
-            <div>
-              <CustomButton background="#06ADEF">Save</CustomButton>
-            </div>
-            <div className="mx-2">
-              <CustomButton onClick={next} background="#2E3192">
-                Next
-              </CustomButton>
-            </div>
-          </div>
         </FormWrapper>
+        <div className="d-flex my-4 justify-content-end">
+          <div>
+            <CustomButton background="#06ADEF">Save</CustomButton>
+          </div>
+          <div className="mx-2">
+            <CustomButton onClick={next} background="#2E3192">
+              Next
+            </CustomButton>
+          </div>
+        </div>
       </form>
     </>
   )

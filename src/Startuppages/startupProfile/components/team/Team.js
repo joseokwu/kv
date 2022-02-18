@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import twitter from '../../../../assets/icons/twtsm.svg'
 import linkedIn from '../../../../assets/icons/lnkdsm.svg'
 import whatsApp from '../../../../assets/icons/whtsm.svg'
@@ -15,6 +16,7 @@ import founder from '../../../../assets/images/femaleFounder.svg'
 
 export const Team = () => {
   const count = [1, 2, 3, 4, 5, 6]
+  const {push} = useHistory();
 
   const [showModal, setShowModal] = useState(false)
   return (
@@ -28,7 +30,7 @@ export const Team = () => {
       )}
       {/* <h3 className="tab-section-title">Team</h3> */}
       <section className="d-flex justify-content-end">
-        <button className="teamBtn">Add team member</button>
+        <button className="teamBtn" onClick={() => push('/startup/team/member')}>Add team member</button>
       </section>
       <section>
         <h4 className="team-group-title">Founder & Co-Founders</h4>
