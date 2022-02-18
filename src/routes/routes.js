@@ -270,7 +270,7 @@ const routes = [
   {
     name: "Investor Events",
     path: "/investor/events",
-    component: WithMainInvestorLayout(InvestorEvents),
+    component: WithMainInvestorLayout(MentorEvents),
     exact: true,
     protected: false,
     type: "investor",
@@ -297,7 +297,7 @@ const routes = [
   {
     name: "Investor schedule",
     path: "/investor/schedule",
-    component: WithMainInvestorLayout(InvestorSchedule),
+    component: WithMainInvestorLayout(MentorSchedule),
     exact: true,
     protected: false,
     type: "investor",
