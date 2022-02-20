@@ -303,7 +303,7 @@ export const StartupTeamMember = () => {
 
             <div className="row">
               <div className="col-3">
-                <CustomButton className="mx-5" background="#D0D0D1" onClick={back}>
+                <CustomButton className="mx-5 px-3" background="#D0D0D1" onClick={back}>
                   Go Back
                 </CustomButton>
               </div>

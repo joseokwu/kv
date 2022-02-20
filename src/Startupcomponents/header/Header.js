@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import logo from '../../assets/images/kvLogo.png'
 import notification from '../../assets/icons/notification.svg'
-import chat from '../../assets/icons/chat.svg'
 import angleDown from '../../assets/icons/angleDown.svg'
 import sampleUser from '../../assets/images/sampleUser.png'
 import { useHistory } from 'react-router-dom'
@@ -13,7 +11,6 @@ import edit from '../../assets/icons/ep.svg'
 import logout from '../../assets/icons/logout.svg'
 
 export const Header = () => {
-  const { push } = useHistory()
 
   const [open, setOpen] = useState(false)
 
@@ -51,7 +48,6 @@ export const Header = () => {
 
         <div className="d-flex align-items-center h-100" role="button">
           <span
-            onClick={() => push('/startup/profile')}
             className="d-flex align-items-center header-profile"
           >
             <img src={sampleUser} alt="profile" className="" />
