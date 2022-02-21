@@ -11,7 +11,7 @@ import { Form } from 'antd';
 import { useAuth } from '../../hooks';
 import { getLocationHistory } from '../../utils/helpers';
 
-export const MentorSignIn = () => {
+export const SignIn = () => {
   const [loader, setLoader] = useState(false)
   const { stateAuth : { authenticated , loading , roles} , newLogin } = useAuth();
   
@@ -91,7 +91,7 @@ export const MentorSignIn = () => {
             className="d-flex align-items-center mentor_switch_auth"
             style={{ columnGap: 6 }}
           >
-            <p>Don’t have an account?</p> <span style={{color:'#212198'}}  onClick={()=> history.push("/signup")} >Sign Up</span>
+            <p>Don’t have an account?</p> <span style={{color:'#00adef', fontWeight: 'bold', cursor: 'pointer'}}  onClick={()=> history.push("/signup")} >Sign Up</span>
           </section>
         </div>
       </section>

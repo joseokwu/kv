@@ -87,6 +87,7 @@ import {
   StartupContactUs,
   StartupNotification,
   StartupTeamMember,
+  StartupEvents,
 } from "../Startuppages";
 
 const routes = [
@@ -162,6 +163,14 @@ const routes = [
     name: "StartupTeamMember",
     path: "/startup/team/member",
     component: WithStartupRegisterLayout(StartupTeamMember),
+    exact: true,
+    protected: true,
+    type: "startup",
+  },
+  {
+    name: "StartupEvents",
+    path: "/startup/events",
+    component: WithStartupDashboardLayout(StartupEvents),
     exact: true,
     protected: true,
     type: "startup",

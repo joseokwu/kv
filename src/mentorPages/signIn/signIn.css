@@ -12,6 +12,7 @@
   font-size: 1rem;
   line-height: 20px;
   color: #f9f9fc;
+  text-decoration: none!important;
 }
 
 .forgot_text:hover {

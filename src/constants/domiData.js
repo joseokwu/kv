@@ -8,6 +8,7 @@ import applied from '../assets/images/appliedMap.svg'
 import declined from '../assets/images/declinedMap.svg'
 import expired from '../assets/images/expiredMap.svg'
 import approved from '../assets/images/approvedMap.svg'
+import doctor from '../assets/images/doctor.svg'
 
 export const options = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -81,7 +82,8 @@ export const cardFill = [
   },
   {
     header: 'Investors',
-    amount: '8',
+    // amount: '8',
+    img: doctor,
     color: '#2E3192',
   },
   {

@@ -115,7 +115,7 @@ export const SignUp = ({ history }) => {
               >
                 <p>Already have an account?</p>{' '}
                 <span
-                  style={{ color: '#212198' }}
+                  style={{ color: '#00ADEF', fontWeight: 'bold', cursor: 'pointer' }}
                   onClick={() => history.push('/')}
                 >
                   Sign In

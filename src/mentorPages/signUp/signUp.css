@@ -60,7 +60,7 @@
 }
 
 .mentor_switch_signUp button {
-  background-color: transparent;
+  /* background-color: transparent!important; */
   border: 1px solid #f9f9fc;
   border-radius: 8px;
   padding: 17px 40px;
@@ -73,16 +73,16 @@
 }
 
 .mentor_switch_signUp button:hover {
-  background-color: #00adef;
+  background-color: #00adef!important;
   border: none;
   color: white;
   box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
 }
 
 .mentor_active_signUp {
-  background-color: #00adef !important;
-  border: none !important;
-  color: white !important;
+  background-color: #00adef!important;
+  border: none!important;
+  color: white!important;
   box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
 }
 

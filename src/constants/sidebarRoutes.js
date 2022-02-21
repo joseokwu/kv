@@ -78,7 +78,7 @@ export const startUpRoutes = [
     {
       title: "Events",
       activator: "events",
-      path: "/events",
+      path: "/startup/events",
       icon: event,
     },
     {
