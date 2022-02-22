@@ -1,9 +1,9 @@
 .btn-primary {
-  background: #2e3192;
+  background: #2e3192 !important;
 }
 
 .btn-secondary {
-  background: #00adef;
+  background: #00adef !important;
 }
 
 .btn-primary:focus,
@@ -17,7 +17,7 @@
   background: #00adef !important;
 }
 .btn-main {
-  border-radius: 5px;
+  border-radius: 10px;
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
@@ -25,7 +25,7 @@
   line-height: 140%;
   color: #ffffff;
   text-transform: capitalize;
-  padding: 10px 32px;
+  padding: 10px 26px;
   transition: all 0.4s;
   border: none;
 }
