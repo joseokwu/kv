@@ -18,16 +18,18 @@ import { formatBytes } from '../../../../utils/helpers';
 export const PitchDeck = () => {
 
   const [fileInfo, setFile] = useState([
-    {
-      file:null,
-      size:null,
-      name:'videoFile'
-    },
+
     {
       file:null,
       size:null,
       name:'infoFile'
+    },
+    {
+      file:null,
+      size:null,
+      name:'videoFile'
     }
+
   ]);
 
   const {
@@ -55,42 +57,27 @@ const handleChange = (e ) =>{
   }) )
 
 }
+    const handleSubmit = () =>{
+      const newFile = {
+        pitchDeckFile : [
+          {
+            url:fileInfo[0].file?.name
+          },
+          {
+            url:fileInfo[1].file?.name
+          }
+        ],
+        profileId: "61d5be4fb801676adafcf4f4"
+      }
+
+      console.log(newFile)
+
+    }
+
+
+
 
 console.log(fileInfo)
-
-const renderFunc = (filess) =>{
-  filess.map((item , i) =>{
-    if(item.file !== null){
-      return (
-        <div key={i} className="col-lg-6 col-12">
-        <div className="div p-5">
-          <img src={RedFile} alt=".#" />
-        </div>
-        <div id="div" className="p-2">
-          <div className="d-flex mt-n2">
-            <img
-              src={BlueFile}
-              alt=".#"
-              style={{ width: '10%', height: '10%' }}
-              className="mt-3"
-            />
-            <p
-              className=""
-              style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-            >
-              Product Demo
-            </p>
-          </div>
-          <p className="my-n2 p"> { item?.size} </p>
-        </div>
-      </div>
-      )
-   }
-
-  }
-
-  )
-}
 
 
   return (
@@ -117,10 +104,22 @@ const renderFunc = (filess) =>{
                 </label>
                 <FileWrapper className="d-flex justify-content-center text-center">
                   <img src={DownloadIcon} alt="#" />
-                  <FileText>Drag & Drop</FileText>
+                 {
+                  fileInfo[0].file !== null ? (
+                    <img src={RedFile} alt=".#" />
+                   ) : (
+                    <>
+                    <FileText>Drag & Drop</FileText>
                   <FileText>Drag files or click here to upload </FileText>
-                  <FileSize> {'(Max. File size 5mb)'} </FileSize>
-                  <input type="file" id="pitch-doc" hidden />
+                    </>
+                   )
+                 }
+                  <FileSize> { fileInfo[0].file !== null ? `${fileInfo[0].size}` : '(Max. File size 5mb)'  } </FileSize>
+                  <input type="file" 
+                    name='infoFile'
+                    id="pitch-doc"
+                    onChange={handleChange}
+                   hidden />
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
                 </FileWrapper>
               </div>
@@ -137,7 +136,7 @@ const renderFunc = (filess) =>{
                 <FileWrapper className="d-flex justify-content-center text-center">
                   <img src={DownloadIcon} alt="#" />
                  {
-                  fileInfo[0].file !== null ? (
+                  fileInfo[1].file !== null ? (
                     <img src={RedFile} alt=".#" />
                    ) : (
                     <>
@@ -146,7 +145,7 @@ const renderFunc = (filess) =>{
                     </>
                    )
                  }
-                  <FileSize> { fileInfo[0].file !== null ? `${fileInfo[0].size}` : '(Max. File size 5mb)'  } </FileSize>
+                  <FileSize> { fileInfo[1].file !== null ? `${fileInfo[1].size}` : '(Max. File size 5mb)'  } </FileSize>
                   <input type="file" 
                     name='videoFile'
                     id="pitch-docu"
@@ -160,7 +159,35 @@ const renderFunc = (filess) =>{
                   <label> Pitch deck uploaded</label>
                   <div className="row">
                     {
-                  fileInfo[0].file !== null ? renderFunc(fileInfo):(
+                  fileInfo[0].file !== null ? fileInfo.map((item , i)  =>
+                    
+                      item.file !== null && (
+                        <div key={i} className=" col-lg-6 col-12">
+                      <div className="div p-5">
+                        <img src={RedFile} alt=".#" />
+                      </div>
+                      <div id="div" className="p-2">
+                        <div className="d-flex mt-n2">
+                          <img
+                            src={BlueFile}
+                            alt=".#"
+                            style={{ width: '10%', height: '10%' }}
+                            className="mt-3"
+                          />
+                          <p
+                            className=""
+                            style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
+                          >
+                            { item?.file?.name }
+                          </p>
+                        </div>
+                        <p className="my-n2 p"> { item?.size} </p>
+                      </div>
+                    </div>
+                  
+                      )
+                    
+                  )   :(
                     <div className='my-4 d-flex justify-content-center text-center' >
                       <span>No File yesy</span>
                     </div>
@@ -183,7 +210,8 @@ const renderFunc = (filess) =>{
               Save
             </CustomButton>
             <CustomButton
-              onClick={next}
+              onClick={handleSubmit}
+              type='button'
               // style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
               background="#2E3192"
             >
