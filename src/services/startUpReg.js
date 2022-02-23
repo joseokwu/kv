@@ -13,3 +13,13 @@ export const startUpReg = async(values) =>{
         throw err;
     }
 }
+
+export const pitchDeck = async(values) => {
+    try {
+        const res = await request.post('startup/add-pitch-deck', values)
+        console.log(res?.data)
+        return res?.data
+    } catch (err) {
+        throw err;
+    }
+}

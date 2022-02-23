@@ -13,8 +13,25 @@ import RedFile from '../../../../assets/icons/redFile.svg'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
 import { useActivity } from '../../../../hooks/useBusiness'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
+import { startUpReg } from '../../../../services/startUpReg'
+import { formatBytes } from '../../../../utils/helpers'
+import { CompassOutlined, ConsoleSqlOutlined } from '@ant-design/icons'
 
 export const PitchDeck = () => {
+  // const [fileInfo, setFileInfo] = useState(null)
+  const [fileInfo, setFileInfo] = useState([
+    {
+      video: null,
+      size: null,
+
+    },
+    {
+      fileDoc: null,
+      size: null,
+
+    }
+  ])
+
   const {
     changePath,
     state: { path },
@@ -27,6 +44,16 @@ export const PitchDeck = () => {
   const back = () => {
     changePath(path - 1)
   }
+
+  const onChange = (e) => {
+    console.log('hello pitch deck')
+    const { files, name } = e.target
+    setFileInfo(...fileInfo, { [name] })
+    setFileInfo(files[0])
+    console.log(fileInfo)
+  }
+
+  // console.log(formatBytes(fileInfo && fileInfo?.size))
 
   return (
     <>
@@ -54,8 +81,18 @@ export const PitchDeck = () => {
                   <img src={DownloadIcon} alt="#" />
                   <FileText>Drag & Drop</FileText>
                   <FileText>Drag files or click here to upload </FileText>
-                  <FileSize> {'(Max. File size 5mb)'} </FileSize>
-                  <input type="file" id="pitch-doc" hidden />
+                  <FileSize>
+                    {' '}
+                    {fileInfo !== null
+                      ? `${formatBytes(fileInfo?.size)}`
+                      : '(Max. File size 5mb)'}{' '}
+                  </FileSize>
+                  <input
+                    type="file"
+                    id="pitch-doc"
+                    hidden
+                    onChange={onChange}
+                  />
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
                 </FileWrapper>
               </div>
@@ -71,10 +108,27 @@ export const PitchDeck = () => {
                 </div>
                 <FileWrapper className="d-flex justify-content-center text-center">
                   <img src={DownloadIcon} alt="#" />
-                  <FileText>Drag & Drop</FileText>
-                  <FileText>Drag files or click here to upload </FileText>
-                  <FileSize> {'(Max. File size 5mb)'} </FileSize>
-                  <input type="file" id="pitch-doc" hidden />
+                  {fileInfo !== null ? (
+                    <img src={RedFile} alt=".#" />
+                  ) : (
+                    <>
+                      <FileText>Drag & Drop</FileText>
+                      <FileText>Drag files or click here to upload </FileText>
+                    </>
+                  )}
+
+                  <FileSize>
+                    {' '}
+                    {fileInfo !== null
+                      ? `${formatBytes(fileInfo?.size)}`
+                      : '(Max. File size 5mb)'}{' '}
+                  </FileSize>
+                  <input
+                    type="file"
+                    id="pitch-doc"
+                    hidden
+                    onChange={onChange}
+                  />
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
                 </FileWrapper>
               </div>
@@ -82,28 +136,37 @@ export const PitchDeck = () => {
                 <VideoWrapper>
                   <label> Pitch deck uploaded</label>
                   <div className="row">
-                    <div className=" col-lg-6 col-12">
-                      <div className="div p-5">
-                        <img src={RedFile} alt=".#" />
-                      </div>
-                      <div id="div" className="p-2">
-                        <div className="d-flex mt-n2">
-                          <img
-                            src={BlueFile}
-                            alt=".#"
-                            style={{ width: '10%', height: '10%' }}
-                            className="mt-3"
-                          />
-                          <p
-                            className=""
-                            style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-                          >
-                            Product Demo
-                          </p>
+                    {
+                      fileInfo[0].file !== null ?  fileInfo.map((item, i) => (
+                        (
+                          <div className=" col-lg-6 col-12">
+                            <div className="div p-5"></div>
+                            <div id="div" className="p-2">
+                              <div className="d-flex mt-n2">
+                                <img
+                                  src={BlueFile}
+                                  alt=".#"
+                                  style={{ width: '10%', height: '10%' }}
+                                  className="mt-3"
+                                />
+                                <p
+                                  className=""
+                                  style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
+                                >
+                                  Product Demo
+                                </p>
+                              </div>
+                              <p className="my-n2 p">{items?.size}</p>
+                            </div>
+                          </div>
+                        )
+                      )) : (
+                        <div className="my-4 d-flex justify-content-center">
+                          <span>No file </span>
                         </div>
-                        <p className="my-n2 p">2.5 mb</p>
-                      </div>
-                    </div>
+                      )
+                    }
+                    
                     <div className=" col-lg-6 col-12">
                       <div className="div p-5">
                         <img src={RedFile} alt=".#" />
