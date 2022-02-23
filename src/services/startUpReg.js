@@ -5,8 +5,8 @@ export const startUpReg = async(values) =>{
 
     try{
 
-        const res = request.post('startup/add-startup-profile', values);
-
+        const res = await request.post('startup/add-startup-profile', values);
+        console.log(res?.data)
         return res?.data
 
     }catch(err){

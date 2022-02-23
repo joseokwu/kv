@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../assets/icons/kvlogo.svg";
 import { AuthContent } from "../authContent/authContent";
-
 import AuthData from '../../constants/AuthData'
 import "./authSide.css"
 

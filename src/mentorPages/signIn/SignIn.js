@@ -10,17 +10,21 @@ import './signIn.css'
 import { Form } from 'antd';
 import { useAuth } from '../../hooks';
 import { getLocationHistory } from '../../utils/helpers';
+import toast from 'react-hot-toast';
+
 
 export const SignIn = () => {
   const [loader, setLoader] = useState(false)
   const { stateAuth : { authenticated , loading , roles} , newLogin } = useAuth();
   
   const history = useHistory()
-  const onFinish = (values) => {
+  const onFinish = async(values) => {
     
-     newLogin(values).then(res =>{
-        
-        const loca = getLocationHistory();
+    try{
+
+      const res = await newLogin(values);
+      const loca = getLocationHistory();
+      if(res?.status){
         if(loca !== null){
 
           history.push(loca)
@@ -29,9 +33,12 @@ export const SignIn = () => {
           console.log(loca)
           history.push(`/${res?.roles[0]}/dashboard`)
         }
-       
-       
-     })  
+      }
+
+    }catch(err){
+      console.log('error')
+      toast.error('Network Error')
+    }
    
   }
 

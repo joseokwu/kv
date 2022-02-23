@@ -10,7 +10,6 @@ export const useActivity = () => {
     const dispatch = useDispatch();
 	const state = useSelector((state) => state.business);
     //const authSte = useSelector((state) => state);
-    console.log(state);
 
     const changePath = (value) =>{
 

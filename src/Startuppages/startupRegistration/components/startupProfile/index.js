@@ -50,8 +50,16 @@ export const StartupProfile = () => {
   const onSubmit = (value) => {
     setLoading(true);
     startUpReg(value).then(res =>{
-
+      if(res?.message){
+        console.log(res)
+        toast.success(res?.message)
+        setLoading(false);
+        next()
+      }
+    
     })
+   
+  
   }
 
   const formik = useFormik({
@@ -358,16 +366,7 @@ export const StartupProfile = () => {
             </div>
           </div>
         </FormWrapper>
-        <div className="d-flex my-4 justify-content-end">
-          <div>
-            <CustomButton background="#06ADEF">Save</CustomButton>
-          </div>
-          <div className="mx-2">
-            <CustomButton onClick={next} background="#2E3192">
-              Next
-            </CustomButton>
-          </div>
-        </div>
+      
       </form>
     </>
   )
