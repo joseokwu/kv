@@ -134,7 +134,7 @@ export const FormWrapper = styled.div`
 
   textarea {
     border: none;
-    background: #fafafc;
+    background: #fafafc!important;
     border-radius: 4px;
     width: 100%;
     margin-left: 15px;

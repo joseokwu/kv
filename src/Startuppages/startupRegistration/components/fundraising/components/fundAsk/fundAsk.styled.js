@@ -59,7 +59,7 @@ export const BodyWrapper = styled.div`
 
   input {
     border: none;
-    background: #fafafc;
+    background: #fafafc!important;
     border-radius: 4px;
     width: 75%;
     margin-left: 8px;
@@ -81,7 +81,7 @@ export const BodyWrapper = styled.div`
 
   textarea {
     border: none;
-    background: #fafafc;
+    background: #fafafc!important;
     border-radius: 4px;
     width: 100%;
     margin-left: 8px;

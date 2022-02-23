@@ -7,7 +7,7 @@ import { lazy } from "react";
 import {
   MentorDashboard,
   SignUp,
-  MentorSignIn,
+  SignIn,
   MentorConfirmEmail,
   MentorForgotPassword,
   MentorCheckMail,
@@ -70,6 +70,7 @@ import {
 import {
   WithStartupDashboardLayout,
   WithStartupRegistrationLayout,
+  WithStartupRegisterLayout,
 } from "../Startupcomponents";
 
 import {
@@ -85,11 +86,28 @@ import {
   StartupNetworking,
   StartupContactUs,
   StartupNotification,
+  StartupTeamMember,
+  StartupEvents,
+  TeamMemberSignUp,
+  TeamMemberSignIn
 } from "../Startuppages";
 
 const routes = [
   // Start-up routes start
-
+  {
+    name: "TeamMemberSignUp",
+    path: "/team-member/signup",
+    component: TeamMemberSignUp,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "TeamMemberSignIn",
+    path: "/team-member/signin",
+    component: TeamMemberSignIn,
+    exact: true,
+    protected: false,
+  },
   {
     name: "StartupDashboard",
     path: "/startup/dashboard",
@@ -98,7 +116,6 @@ const routes = [
     protected: true,
     type: "startup",
   },
-
   {
     name: "StartupProgram",
     path: "/startup/program",
@@ -156,7 +173,22 @@ const routes = [
     protected: true,
     type: "startup",
   },
-
+  {
+    name: "StartupTeamMember",
+    path: "/startup/team/member",
+    component: WithStartupRegisterLayout(StartupTeamMember),
+    exact: true,
+    protected: true,
+    type: "startup",
+  },
+  {
+    name: "StartupEvents",
+    path: "/startup/events",
+    component: WithStartupDashboardLayout(StartupEvents),
+    exact: true,
+    protected: true,
+    type: "startup",
+  },
   {
     name: "StartupContactus",
     path: "/startup/contactus",
@@ -169,7 +201,6 @@ const routes = [
     name: "StartupRegistration",
     path: "/startup/registration",
     component: WithStartupRegistrationLayout(StartUpRegistration),
-
     exact: true,
     protected: true,
     type: "startup",
@@ -187,7 +218,7 @@ const routes = [
   {
     name: "StartupNotification",
     path: "/startup/notification",
-    component: StartupNotification,
+    component: WithStartupDashboardLayout(StartupNotification),
     exact: true,
     protected: true,
     type: "startup",
@@ -419,7 +450,7 @@ const routes = [
     name: "SignIn",
     path: "/",
     exact: true,
-    component: MentorSignIn,
+    component: SignIn,
     protected: false,
   },
   {
@@ -431,7 +462,7 @@ const routes = [
   },
   {
     name: "Congrats",
-    path: "/signup/congrats",
+    path: "/mentor/signup/congrats",
     component: WithMentorRegisterLayout(MentorCongrats),
     exact: true,
     protected: false,
@@ -445,22 +476,22 @@ const routes = [
     type: "mentor",
   },
   {
-    name: "Co",
-    path: "/forgot/password",
+    name: "ConfirmEmail",
+    path: "/confirm/email",
     component: MentorConfirmEmail,
     exact: true,
     protected: false,
   },
   {
     name: "ForgotPassword",
-    path: "/forgot-password",
+    path: "/forgot/password",
     component: MentorForgotPassword,
     exact: true,
     protected: false,
   },
   {
     name: "CheckMail",
-    path: "/confirm/email",
+    path: "/check/email",
     component: MentorCheckMail,
     exact: true,
     protected: false,
@@ -574,6 +605,7 @@ const routes = [
     protected: true,
     type: "mentor",
   },
+ 
   // {
   //   name: 'DealRoom',
   //   path: '/mentor/deal_room/:id',

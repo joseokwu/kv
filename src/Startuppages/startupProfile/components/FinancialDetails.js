@@ -11,7 +11,7 @@ export const FinancialDetails = () => {
       <h3 className="sub-card-title">Contact Details</h3>
 
       <section
-        className="d-flex align-items-center justify-content-between mt-4 pb-4 flex-wrap"
+        className="d-flex align-items-center justify-content-between flex-wrap"
         style={{ rowGap: 10 }}
       >
         <div className="d-flex align-items-center">

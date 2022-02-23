@@ -96,20 +96,17 @@ export const BntWrap = styled.div`
 
 export const DownloadableButton = styled.a`
 
-width:55%;
-display:flex;
+width:65%;
 background:#F9F9FC;
-flex-direction: row;
-justify-content: center;
-align-items: center;
+text-decoration: none;
 color: #2E3192;
 font-family: DM Sans;
 font-style: normal;
 font-weight: 500;
 font-size: 16px;
 line-height: 20px;
-padding:0.6rem;
-border-radius:20px;
+padding: 20px 25px;
+border-radius:10px;
 
 @media (max-width:768px){
     width:130%;

@@ -57,7 +57,7 @@ export const FormWrapper = styled.div`
   height: ${(props) => (props.height ? props.height : '80%')};
   padding: 2rem;
   order: 2;
-  margin: 3rem 0;
+  margin: 2rem 0;
   flex: none;
   border: 0 solid #d3d3d3;
   border-radius: 5px;
@@ -97,7 +97,7 @@ export const FormWrapper = styled.div`
 
     input {
       width: 50%;
-      background: #fafafc;
+      background: #fafafc!important;
       border-radius: 4px;
 
       ::placeholder {

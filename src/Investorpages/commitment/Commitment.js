@@ -118,7 +118,7 @@ export const InvestorCommitment = ({ history }) => {
             <section className="border-bottom pb-3 mb-4 d-flex align-items-center justify-content-between">
               <h3 className="mb-0">Committed Investors</h3>
               <a
-                href="#"
+                href="!#"
                 className="see-all"
                 style={{ textDecoration: "underline" }}
               >

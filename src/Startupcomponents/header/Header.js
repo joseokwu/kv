@@ -1,33 +1,32 @@
-import React, { useState } from "react";
-
-import { Link } from "react-router-dom";
-import logo from "../../assets/images/kvLogo.png";
-import notification from "../../assets/icons/notification.svg";
-import chat from "../../assets/icons/chat.svg";
-import angleDown from "../../assets/icons/angleDown.svg";
-import sampleUser from "../../assets/images/sampleUser.png";
-import { useHistory } from "react-router-dom";
-import { Notification } from "../index";
-import "./header.css";
+import React, { useState } from 'react'
+import logo from '../../assets/images/kvLogo.png'
+import notification from '../../assets/icons/notification.svg'
+import angleDown from '../../assets/icons/angleDown.svg'
+import sampleUser from '../../assets/images/sampleUser.png'
+import { useHistory } from 'react-router-dom'
+import { Notification } from '../index'
+import './header.css'
+import view from '../../assets/icons/vp.svg'
+import edit from '../../assets/icons/ep.svg'
+import logout from '../../assets/icons/logout.svg'
 
 export const Header = () => {
-  const { push } = useHistory();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const [openNotice, setOpenNotice] = useState(false);
+  const [openNotice, setOpenNotice] = useState(false)
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
       <section className="d-flex align-items-center">
         <div
-          className={`${open ? "hams-open" : "hams-close"} hams`}
+          className={`${open ? 'hams-open' : 'hams-close'} hams`}
           onClick={() => setOpen(!open)}
         >
           <span></span>
           <span></span>
           <span></span>
         </div>
-        <a href="/">
+        <a href="/startup/dashboard">
           <img src={logo} alt="logo" />
         </a>
       </section>
@@ -47,16 +46,17 @@ export const Header = () => {
           </li>
         </ul>
 
-        <div
-          className="d-flex align-items-center h-100"
-         
-          role="button"
-        >
-          <span className="d-flex align-items-center header-profile">
+        <div className="d-flex align-items-center h-100" role="button">
+          <span
+            className="d-flex align-items-center header-profile"
+          >
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>
           </span>
-          <img src={angleDown} alt="dropdown" />
+          <div>
+            {/* <img src={angleDown} alt="dropdown" /> */}
+            <HeaderDropdownMenu />
+          </div>
         </div>
       </section>
 
@@ -65,5 +65,33 @@ export const Header = () => {
         openNotice={openNotice}
       />
     </div>
-  );
-};
+  )
+}
+
+const HeaderDropdownMenu = () => {
+  const { push } = useHistory()
+  
+  return (
+    <div className="dropdown">
+      <button
+        className="d-flex align-items-center filter-btn p-0"
+        data-toggle="dropdown"
+        style={{
+          columnGap: 7,
+          background: 'transparent',
+          height: 'fit-content',
+        }}
+      >
+        <img src={angleDown} alt="dropdown" />
+      </button>
+      <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
+        <button className="dropdown-item text-center py-2" onClick={() => push('/startup/profile')}> <img className="pe-1" src={view} alt=""/> View Profile</button>
+        <button className="dropdown-item text-center py-2 my-2"> <img className="pe-1" src={edit} alt=""/> Edit Profile</button>
+        <button
+          className="dropdown-item text-center py-2"
+          style={{ color: '#D62828' }}
+        > <img className="pe-1" src={logout} alt=""/> Log Out</button>
+      </div>
+    </div>
+  )
+}

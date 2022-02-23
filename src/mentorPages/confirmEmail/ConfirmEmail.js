@@ -5,35 +5,37 @@ import sentMail from '../../assets/images/mentorSentEmail.svg'
 
 export const MentorConfirmEmail = () => {
   return (
-    <div className="row mx-0 auth-wrap pt-5">
+    <div className="row mx-0 my-0 auth-wrap px-5">
       <section className="layout-header">
-        <div className="col-lg-6">
+        <div className="col-lg-6 mt-5">
           <img src={logo} alt={'logo'} />
         </div>
-      </section>
-      <section className="col-lg-6 forgot_illustration align-items-center">
-        <div>
-          <h2>Forgot Password?</h2>
-          <p>
-            Enter the email associated with your account, and we would send an
-            email with instruction to reset your password
-          </p>
-        </div>
-      </section>
 
-      <section className="col-md-6 d-flex align-items-center">
-        <div className="gray_signIn confirm_email confirm_email_border">
-          <section className="text-center">
-            <img src={sentMail} alt="email sent" />
-            <h5>Confirm your email address</h5>
-            <p>
-              Please check your inbox for a confirmation email. Didn’t receive
-              the email?
-            </p>
-            {/* <p className="resend_email">Resend email</p> */}
-            <a className="resend_email" href="#!">
-              Resend email
-            </a>
+        <div className="row">
+          <section className="col-lg-5 mx-3 forgot_illustration mt-4">
+            <div>
+              <h2>Forgot Password?</h2>
+              <span>
+                Enter the email associated with your account, and we would send
+                an email with instruction to reset your password
+              </span>
+            </div>
+          </section>
+
+          <section className="col-lg-6 d-flex align-items-center mx-3 mt-4">
+            <div className="gray_signIn confirm_email confirm_email_border">
+              <section className="text-center">
+                <img src={sentMail} alt="email sent" />
+                <h5>Confirm your email address</h5>
+                <p>
+                  Please check your inbox for a confirmation email. Didn’t
+                  receive the email?
+                </p>
+                <a className="resend_email" href="#!">
+                  Resend email
+                </a>
+              </section>
+            </div>
           </section>
         </div>
       </section>

@@ -4,8 +4,8 @@ import {
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-} from './startup.styled';
-import './style.css';
+} from './startup.styled'
+import './style.css'
 import { UserOutlined, PlusOutlined } from '@ant-design/icons'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -103,7 +103,7 @@ export const StartupProfile = () => {
 
         <InputWrapper for="dp">
           <input type="file" onChange={onChangeImage} id="dp" hidden />
-          <PlusOutlined style={{color: 'white'}} />
+          <PlusOutlined style={{ color: 'white' }} />
         </InputWrapper>
       </div>
       <form onSubmit={formik.handleSubmit}>
@@ -120,7 +120,7 @@ export const StartupProfile = () => {
                 placeholder="One line pitch 150 words maximum"
                 value={formik.values.elevatorpitch}
                 onChange={formik.handleChange}
-                rows="7"
+                rows="4"
                 cols="4"
                 className="form-control"
               ></textarea>
@@ -130,9 +130,10 @@ export const StartupProfile = () => {
               <input
                 type="text"
                 name="startupname"
+                placeholder="Entity Name As Per Registration"
                 value={formik.values.startupname}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -143,13 +144,13 @@ export const StartupProfile = () => {
                 placeholder="eg; Knight Ventures"
                 value={formik.values.brand}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
               <label>Year Founded *</label>
               <DatePicker
-                className="date-input col-lg-12"
+                className="date-input col-lg-12 ps-3 py-2"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
               />
@@ -163,7 +164,7 @@ export const StartupProfile = () => {
                 placeholder="1234567890"
                 value={formik.values.regNumber}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
 
@@ -180,7 +181,7 @@ export const StartupProfile = () => {
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Which sector does your business operate in *</label>
+              <label>Which sector does your business operate in?*</label>
               <CustomSelect
                 options={options}
                 value={formik.values.sector}
@@ -212,18 +213,18 @@ export const StartupProfile = () => {
                 placeholder="Enter Accelerator name"
                 value={formik.values.acceleratornames}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
           </div>
         </FormWrapper>
 
         <FormWrapper height="70%">
-          <div className="div">
+          <div className="div border-bottom pb-3">
             <span>Contact info</span>
           </div>
 
-          <div className="row">
+          <div className="row mt-4">
             <div className="form-group col-12">
               <label>Registered Address </label>
               <input
@@ -232,7 +233,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your registered address"
                 value={formik.values.address}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -243,7 +244,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your country"
                 value={formik.values.country}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -254,7 +255,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your state"
                 value={formik.values.state}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -265,7 +266,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your city"
                 value={formik.values.city}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group  col-lg-6 col-12 ">
@@ -274,7 +275,7 @@ export const StartupProfile = () => {
                 international
                 name="phone"
                 countryCallingCodeEditable={true}
-                className="custs"
+                className="custs ps-3"
                 value={phone}
                 onChange={setPhone}
               />
@@ -287,18 +288,18 @@ export const StartupProfile = () => {
                 placeholder="Enter your email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
           </div>
         </FormWrapper>
 
         <FormWrapper height="70%">
-          <div className="div">
+          <div className="div border-bottom pb-3">
             <span>Web & Social Media</span>
           </div>
 
-          <div className="row">
+          <div className="row mt-4">
             <div className="form-group col-lg-6 col-12">
               <label>What should be your startup profile handle </label>
               <input
@@ -307,7 +308,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your startup profile handle"
                 value={formik.values.profileHandle}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -318,7 +319,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your startup website"
                 value={formik.values.website}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -329,7 +330,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your Linkedin profile name"
                 value={formik.values.linkedin}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -340,7 +341,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your Twitter profile name"
                 value={formik.values.twitter}
                 onChange={formik.handleChange}
-                className="form-control"
+                className="form-control ps-3"
               />
             </div>
           </div>
@@ -357,6 +358,16 @@ export const StartupProfile = () => {
             </div>
           </div>
         </FormWrapper>
+        <div className="d-flex my-4 justify-content-end">
+          <div>
+            <CustomButton background="#06ADEF">Save</CustomButton>
+          </div>
+          <div className="mx-2">
+            <CustomButton onClick={next} background="#2E3192">
+              Next
+            </CustomButton>
+          </div>
+        </div>
       </form>
     </>
   )

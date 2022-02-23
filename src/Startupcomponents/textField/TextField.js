@@ -6,7 +6,6 @@ export const TextField = ({
   label,
   id = "",
   name,
-
   type,
   disabled = false,
   className,

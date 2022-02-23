@@ -93,15 +93,15 @@ export const FundRaising = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-lg-end">
-            <CustomButton className="mx-4" background="#00ADEF">
+            <CustomButton className="" background="#00ADEF">
               Save
             </CustomButton>
-            <OutlineButton className="mx-4" background="none">
+            <OutlineButton className="mx-2" background="none">
               Submit
             </OutlineButton>
             <CustomButton
               onClick={next}
-              style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
+              style={{ marginRight: '5rem' }}
               background="#2E3192"
             >
               Next
