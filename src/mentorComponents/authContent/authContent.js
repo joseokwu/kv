@@ -5,13 +5,13 @@ export const AuthContent = ({ authData, authDataIndex }) => {
   return (
     <div>
       {authData[authDataIndex].map((item, i) => (
-        <div className="">
+        <div className="authContent">
           <h4 className="py-4" key={i}>
             {item.title}
           </h4>
-          <article className="" key={i}>
+          <p className="" key={i}>
             {item.body}
-          </article>
+          </p>
         </div>
       ))}
     </div>

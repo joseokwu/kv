@@ -12,23 +12,27 @@ import DownloadIcon from '../../../../assets/icons/download.svg'
 import RedFile from '../../../../assets/icons/redFile.svg'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
 import { useActivity } from '../../../../hooks/useBusiness'
+import { pitchDeck } from './../../../../services/startUpReg'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
-import { formatBytes } from '../../../../utils/helpers';
+import { formatBytes } from '../../../../utils/helpers'
+import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { toast } from 'react-hot-toast'
 
 export const PitchDeck = () => {
+  const [loading, setLoading] = useState(false)
 
   const [fileInfo, setFile] = useState([
     {
-      file:null,
-      size:null,
-      name:'videoFile'
+      file: null,
+      size: null,
+      name: 'infoFile',
     },
     {
-      file:null,
-      size:null,
-      name:'infoFile'
-    }
-  ]);
+      file: null,
+      size: null,
+      name: 'videoFile',
+    },
+  ])
 
   const {
     changePath,
@@ -43,55 +47,47 @@ export const PitchDeck = () => {
     changePath(path - 1)
   }
 
-const handleChange = (e ) =>{
-  console.log('hello')
-  const { files , name } = e.target;
-  setFile(fileInfo.map(item =>{
-    if(name === item?.name){
-      item.file = files[0]
-      item.size = formatBytes(files[0].size)
+  const handleChange = (e) => {
+    console.log('hello')
+    const { files, name } = e.target
+    setFile(
+      fileInfo.map((item) => {
+        if (name === item?.name) {
+          item.file = files[0]
+          item.size = formatBytes(files[0].size)
+        }
+        return item
+      }),
+    )
+  }
+  const handleSubmit = () => {
+    const newFile = {
+      pitchDeckFile: [
+        {
+          url: fileInfo[0].file?.name,
+        },
+        {
+          url: fileInfo[1].file?.name,
+        },
+      ],
+      profileId: '61d5be4fb801676adafcf4f4',
     }
-    return item;
-  }) )
-
-}
-
-console.log(fileInfo)
-
-const renderFunc = (filess) =>{
-  filess.map((item , i) => {
-    if(item.file !== null){
-      return (
-        <div key={i} className="col-lg-6 col-12">
-        <div className="div p-5">
-          <img src={RedFile} alt=".#" />
-        </div>
-        <div id="div" className="p-2">
-          <div className="d-flex mt-n2">
-            <img
-              src={BlueFile}
-              alt=".#"
-              style={{ width: '10%', height: '10%' }}
-              className="mt-3"
-            />
-            <p
-              className=""
-              style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-            >
-              Product Demo
-            </p>
-          </div>
-          <p className="my-n2 p"> { item?.size} </p>
-        </div>
-      </div>
-      )
-   }
-
+      console.log(newFile)
   }
 
-  )
-}
+  console.log(fileInfo)
 
+  // const onSubmit = (value) => {
+  //   setLoading(true)
+  //   pitchDeck(value).then((res) => {
+  //     if (res?.message) {
+  //       console.log(res)
+  //       toast.success(res?.message)
+  //       setLoading(false)
+  //       next()
+  //     }
+  //   })
+  // }
 
   return (
     <>
@@ -117,19 +113,26 @@ const renderFunc = (filess) =>{
                 </label>
                 <FileWrapper className="d-flex justify-content-center text-center">
                   <img src={DownloadIcon} alt="#" />
-                  <FileText>Drag & Drop</FileText>
-                  <FileText>Drag files or click here to upload </FileText>
+                  {fileInfo[0].file !== null ? (
+                    <img src={RedFile} alt=".#" />
+                  ) : (
+                    <>
+                      <FileText>Drag & Drop</FileText>
+                      <FileText>Drag files or click here to upload </FileText>
+                    </>
+                  )}
                   <FileSize>
                     {' '}
-                    {fileInfo !== null
-                      ? `${formatBytes(fileInfo?.size)}`
+                    {fileInfo[0].file !== null
+                      ? `${fileInfo[0].size}`
                       : '(Max. File size 5mb)'}{' '}
                   </FileSize>
                   <input
                     type="file"
+                    name="infoFile"
                     id="pitch-doc"
-                    hidden
                     onChange={handleChange}
+                    hidden
                   />
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
                 </FileWrapper>
@@ -146,22 +149,27 @@ const renderFunc = (filess) =>{
                 </div>
                 <FileWrapper className="d-flex justify-content-center text-center">
                   <img src={DownloadIcon} alt="#" />
-                 {
-                  fileInfo[0].file !== null ? (
+                  {fileInfo[1].file !== null ? (
                     <img src={RedFile} alt=".#" />
-                   ) : (
+                  ) : (
                     <>
-                    <FileText>Drag & Drop</FileText>
-                  <FileText>Drag files or click here to upload </FileText>
+                      <FileText>Drag & Drop</FileText>
+                      <FileText>Drag files or click here to upload </FileText>
                     </>
-                   )
-                 }
-                  <FileSize> { fileInfo[0].file !== null ? `${fileInfo[0].size}` : '(Max. File size 5mb)'  } </FileSize>
-                  <input type="file" 
-                    name='videoFile'
+                  )}
+                  <FileSize>
+                    {' '}
+                    {fileInfo[1].file !== null
+                      ? `${fileInfo[1].size}`
+                      : '(Max. File size 5mb)'}{' '}
+                  </FileSize>
+                  <input
+                    type="file"
+                    name="videoFile"
                     id="pitch-docu"
                     onChange={handleChange}
-                   hidden />
+                    hidden
+                  />
                   <LabelButton for="pitch-docu">Upload Files</LabelButton>
                 </FileWrapper>
               </div>
@@ -169,13 +177,42 @@ const renderFunc = (filess) =>{
                 <VideoWrapper>
                   <label> Pitch deck uploaded</label>
                   <div className="row">
-                    {
-                  fileInfo[0].file !== null ? renderFunc(fileInfo):(
-                    <div className='my-4 d-flex justify-content-center text-center' >
-                      <span>No File yesy</span>
-                    </div>
-                  ) 
-                    }
+                    {fileInfo[0].file !== null ? (
+                      fileInfo.map(
+                        (item, i) =>
+                          item.file !== null && (
+                            <div key={i} className=" col-lg-6 col-12">
+                              <div className="div p-5">
+                                <img src={RedFile} alt=".#" />
+                              </div>
+                              <div id="div" className="p-2">
+                                <div className="d-flex mt-n2">
+                                  <img
+                                    src={BlueFile}
+                                    alt=".#"
+                                    style={{ width: '10%', height: '10%' }}
+                                    className="mt-3"
+                                  />
+                                  <p
+                                    className=""
+                                    style={{
+                                      marginLeft: '0.2rem',
+                                      fontSize: '0.9rem',
+                                    }}
+                                  >
+                                    {item?.file?.name}
+                                  </p>
+                                </div>
+                                <p className="my-n2 p"> {item?.size} </p>
+                              </div>
+                            </div>
+                          ),
+                      )
+                    ) : (
+                      <div className="my-4 d-flex justify-content-center text-center">
+                        <span>No File yesy</span>
+                      </div>
+                    )}
                   </div>
                 </VideoWrapper>
               </div>
@@ -192,13 +229,16 @@ const renderFunc = (filess) =>{
             <CustomButton className="mx-2" background="#00ADEF">
               Save
             </CustomButton>
-            <CustomButton
-              onClick={next}
-              // style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
-              background="#2E3192"
-            >
-              Next
-            </CustomButton>
+            <div className="">
+              <CustomButton
+                onClick={handleSubmit}
+                type="submit"
+                disabled={loading}
+                background="#2E3192"
+              >
+                { loading ? <CircularLoader /> : 'Next'}
+              </CustomButton>
+            </div>
           </div>
         </div>
       </form>

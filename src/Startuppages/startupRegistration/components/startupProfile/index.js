@@ -58,8 +58,6 @@ export const StartupProfile = () => {
       }
     
     })
-   
-  
   }
 
   const formik = useFormik({

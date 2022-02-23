@@ -21,7 +21,14 @@ import { TeamModal, EducationModal } from './teamModal'
 import { Select } from 'antd'
 import { Tag } from '../../../../Startupcomponents/tag/Tag'
 import 'antd/dist/antd.css'
+import { team } from './../../../../services/startUpReg';
+import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
+import { toast } from 'react-hot-toast';
+
+
+
 const { Option } = Select
+
 
 export const TeamProfile = () => {
   const [disImg, setImg] = useState(null)
@@ -32,7 +39,7 @@ export const TeamProfile = () => {
   // const handleShow = () => setShow(true);
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
-
+  const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState()
 
   const {
@@ -65,7 +72,6 @@ export const TeamProfile = () => {
     changePath(path + 1)
   }
 
-  const onSubmit = (value) => {}
   const children = []
   for (let i = 0; i < skill.length; i++) {
     children.push(<Option key={i}>{skill[i]}</Option>)
@@ -79,10 +85,39 @@ export const TeamProfile = () => {
     e.preventDefault()
   }
 
+  const onSubmit = (value) => {
+    setLoading(true);
+    team(value).then(res =>{
+      if(res?.message){
+        console.log(res)
+        toast.success(res?.message)
+        setLoading(false);
+        next()
+      }
+    
+    })
+  }
+
   const formik = useFormik({
     initialValues: {
-      
+      briefIntroduction: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      dob: startDate,
+      country: '',
+      state: '',
+      city: '',
+      mobile_number: phone,
+      skills: [],
+      experience: [],
+      education: [],
+      linkedIn: '',
+      twitter: '',
+      website: ''
     },
+    validateOnBlur: true,
+    onSubmit: (value) => onSubmit(value),
   })
 
   return (
@@ -98,7 +133,7 @@ export const TeamProfile = () => {
         <p className="text-nowrap">Let’s you introduce your Co-Founder(s)</p>
       </HeaderTeam>
 
-      <form style={{ marginBottom: '4rem' }}>
+      <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
         <FormWrapper height="70%">
           <div className="div">
             <span>Founder</span>
@@ -136,8 +171,10 @@ export const TeamProfile = () => {
                 <label style={{ color: '#828282' }}>10 words at most</label>
               </div>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.briefIntroduction}
                 type="text"
-                name="bio"
+                name="briefIntroduction"
                 placeholder="Enter a brief bio about yourself"
                 className="form-control ps-3"
               />
@@ -145,8 +182,10 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>First Name *</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.firstName}
                 type="text"
-                name="firstname"
+                name="firstName"
                 placeholder="Enter first name"
                 className="form-control ps-3"
               />
@@ -154,8 +193,10 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Last Name *</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.lastName}
                 type="text"
-                name="lastname"
+                name="lastName"
                 placeholder="Enter last name"
                 className="form-control ps-3"
               />
@@ -163,6 +204,8 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Email *</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.email}
                 type="text"
                 name="email"
                 placeholder="Enter email address"
@@ -181,6 +224,8 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-4 col-12">
               <label>Country *</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.country}
                 type="text"
                 name="country"
                 placeholder="Enter your country"
@@ -190,6 +235,8 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-4 col-12">
               <label>State *</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.state}
                 type="text"
                 name="state"
                 placeholder="Enter your state"
@@ -199,6 +246,8 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-4 col-12">
               <label>City *</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.city}
                 type="text"
                 name="city"
                 placeholder="Enter your city"
@@ -285,8 +334,10 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Linkedin*</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.linkedIn}
                 type="text"
-                name="linkedin"
+                name="linkedIn"
                 placeholder="Enter Linkdin link"
                 className="form-control ps-3"
               />
@@ -294,6 +345,8 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Twitter*</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.twitter}
                 type="text"
                 name="twitter"
                 placeholder="Enter Twitter link"
@@ -304,6 +357,8 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Website*</label>
               <input
+                onChange={formik.handleChange}
+                value={formik.values.website}
                 type="text"
                 name="website"
                 placeholder="Enter website"
@@ -379,11 +434,10 @@ export const TeamProfile = () => {
               Save
             </CustomButton>
             <CustomButton
-              onClick={next}
-              // style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
-              background="#2E3192"
-            >
-              Next
+              type="submit"
+              disabled={loading}
+              background="#2E3192">
+                { loading ? <CircularLoader /> : 'Next'}
             </CustomButton>
           </div>
         </div>

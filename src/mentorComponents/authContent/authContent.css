@@ -1,13 +1,13 @@
-h4 {
+.authContent h4 {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
-  font-size: 60px!important;
+  font-size: 60px;
   line-height: 75px;
   color: #f9f9fc;
 }
 
-article {
+.authContent p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
@@ -17,13 +17,13 @@ article {
 }
 
 @media (max-width: 1024px) {
-    h4 {
-      font-size: 32px;
-      line-height: 41px;
-    }
-  
-    article {
-      font-size: 1rem;
-      line-height: 26px;
-    }
+  .authContent h4 {
+    font-size: 32px;
+    line-height: 41px;
   }
+
+  .authContent p {
+    font-size: 1rem;
+    line-height: 26px;
+  }
+}

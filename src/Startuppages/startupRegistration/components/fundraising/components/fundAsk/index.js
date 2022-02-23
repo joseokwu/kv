@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { BodyWrapper, BntWrap, BoxBorder } from './fundAsk.styled'
 import { CustomSelect } from '../../../../../../Startupcomponents/select/customSelect'
 import { PlusOutlined } from '@ant-design/icons'
