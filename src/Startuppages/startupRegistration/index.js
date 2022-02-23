@@ -38,7 +38,7 @@ export const StartUpRegistration = () => {
       <div className="mx-5">
         <div className="container">
           <div
-            className=""
+            className="position-fixed"
             style={{ zIndex: '999', background: '#FFFFFF', width: '68%' }}
           >
             <WelcomeMessage>
