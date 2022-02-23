@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import './signUp.css'
+import './teamMemberSignup.css'
 import {
-  AuthSide,
+  TeamMemberAuthSide,
   AuthButton,
   AuthTextField,
   AuthPasswordField,
   LongPhoneInput,
-} from '../../mentorComponents/index'
+} from '../../Startupcomponents'
 import check from '../../assets/icons/checkmark.svg'
 import { Form } from 'antd'
 import { useAuth } from '../../hooks'
 
-export const SignUp = ({ history }) => {
+export const TeamMemberSignUp = ({ history }) => {
   const [checkSat, setCheckSat] = useState(false)
   const { stateAuth, register } = useAuth()
   const onFinish = (values) => {
@@ -21,7 +21,7 @@ export const SignUp = ({ history }) => {
   return (
     <div className="row mx-0 mentor_auth_wrap">
       <section className="col-md-6">
-        <AuthSide />
+        <TeamMemberAuthSide />
       </section>
       <section className="col-md-6">
         <div className="mentor_gray_card">
@@ -55,7 +55,7 @@ export const SignUp = ({ history }) => {
               <AuthTextField
                 name="email"
                 label="Email"
-                placeholder="Enter email address"
+                placeholder="Enter your email address"
                 className="mentor_gray_card_input"
               />
             </div>
@@ -116,7 +116,7 @@ export const SignUp = ({ history }) => {
                 <p>Already have an account?</p>{' '}
                 <span
                   style={{ color: '#00ADEF', fontWeight: 'bold', cursor: 'pointer' }}
-                  onClick={() => history.push('/')}
+                  onClick={() => history.push('/team-member/signin')}
                 >
                   Sign In
                 </span>

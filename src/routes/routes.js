@@ -88,11 +88,26 @@ import {
   StartupNotification,
   StartupTeamMember,
   StartupEvents,
+  TeamMemberSignUp,
+  TeamMemberSignIn
 } from "../Startuppages";
 
 const routes = [
   // Start-up routes start
-
+  {
+    name: "TeamMemberSignUp",
+    path: "/team-member/signup",
+    component: TeamMemberSignUp,
+    exact: true,
+    protected: false,
+  },
+  {
+    name: "TeamMemberSignIn",
+    path: "/team-member/signin",
+    component: TeamMemberSignIn,
+    exact: true,
+    protected: false,
+  },
   {
     name: "StartupDashboard",
     path: "/startup/dashboard",
@@ -101,7 +116,6 @@ const routes = [
     protected: true,
     type: "startup",
   },
-
   {
     name: "StartupProgram",
     path: "/startup/program",
@@ -462,22 +476,22 @@ const routes = [
     type: "mentor",
   },
   {
-    name: "Co",
-    path: "/forgot/password",
+    name: "ConfirmEmail",
+    path: "/confirm/email",
     component: MentorConfirmEmail,
     exact: true,
     protected: false,
   },
   {
     name: "ForgotPassword",
-    path: "/forgot-password",
+    path: "/forgot/password",
     component: MentorForgotPassword,
     exact: true,
     protected: false,
   },
   {
     name: "CheckMail",
-    path: "/confirm/email",
+    path: "/check/email",
     component: MentorCheckMail,
     exact: true,
     protected: false,

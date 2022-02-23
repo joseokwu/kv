@@ -18,10 +18,10 @@ export const StartupEvents = ({ history }) => {
       case '#Demo Day':
         return <SelectionDay />
 
-      case '#Pitching Session':
+      case '#Pitching Events':
         return <SelectionDay />
 
-      case '#Other Sessions':
+      case '#Other Events':
         return <SelectionDay />
 
       default:
@@ -32,8 +32,8 @@ export const StartupEvents = ({ history }) => {
   const tabItems = [
     'Selection Day',
     'Demo Day',
-    'Pitching Session',
-    'Other Sessions',
+    'Pitching Events',
+    'Other Events',
   ]
   return (
     <div className="mb-5">

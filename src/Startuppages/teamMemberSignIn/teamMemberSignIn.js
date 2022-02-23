@@ -1,48 +1,43 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
-  AuthSide,
+  TeamMemberAuthSide,
   AuthButton,
   AuthTextField,
   AuthPasswordField,
-} from '../../mentorComponents/index'
-import { useHistory } from 'react-router-dom';
-import './signIn.css'
-import { Form } from 'antd';
-import { useAuth } from '../../hooks';
-import { getLocationHistory } from '../../utils/helpers';
+} from '../../Startupcomponents'
+import { useHistory } from 'react-router-dom'
+import './teamMemberSignIn.css'
+import { Form } from 'antd'
+import { useAuth } from '../../hooks'
+import { getLocationHistory } from '../../utils/helpers'
 
-export const SignIn = () => {
+export const TeamMemberSignIn = () => {
   const [loader, setLoader] = useState(false)
-  const { stateAuth : { authenticated , loading , roles} , newLogin } = useAuth();
-  
+  const {
+    stateAuth: { authenticated, loading, roles },
+    newLogin,
+  } = useAuth()
+
   const history = useHistory()
   const onFinish = (values) => {
-    
-     newLogin(values).then(res =>{
-        
-        const loca = getLocationHistory();
-        if(loca !== null){
-
-          history.push(loca)
-          sessionStorage.removeItem('user:redirect:location')
-        }else {
-          console.log(loca)
-          history.push(`/${res?.roles[0]}/dashboard`)
-        }
-       
-       
-     })  
-   
+    newLogin(values).then((res) => {
+      const loca = getLocationHistory()
+      if (loca !== null) {
+        history.push(loca)
+        sessionStorage.removeItem('user:redirect:location')
+      } else {
+        console.log(loca)
+        history.push(`/${res?.roles[0]}/dashboard`)
+      }
+    })
   }
-
-
 
   return (
     <div className="row mx-0 auth-wrap">
       <section className="col-md-6">
-        <AuthSide />
+        <TeamMemberAuthSide />
       </section>
-      <section className="col-md-6 px-5 d-flex align-items-center">
+      <section className="col-md-6 d-flex align-items-center">
         <div className="gray_signIn">
           <Form
             name="login"
@@ -66,8 +61,8 @@ export const SignIn = () => {
               <AuthPasswordField
                 className="mentor_gray_card_input"
                 numb={8}
-                message="Password must not be less than 8"
-                placeholder={"Password must be at least 8 characters"}
+                message="Password must be at least 8 characters"
+                placeholder="Password must be at least 8 characters"
               />
             </div>
             <a
@@ -92,7 +87,17 @@ export const SignIn = () => {
             className="d-flex align-items-center mentor_switch_auth"
             style={{ columnGap: 6 }}
           >
-            <p>Don’t have an account?</p> <span style={{color:'#00adef', fontWeight: 'bold', cursor: 'pointer'}}  onClick={()=> history.push("/signup")} >Sign Up</span>
+            <p>Don’t have an account?</p>{' '}
+            <span
+              style={{
+                color: '#00adef',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+              }}
+              onClick={() => history.push('/team-member/signup')}
+            >
+              Sign Up
+            </span>
           </section>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
     LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL
 } from '../actions.types';
-import { register, userLogin , profile } from '../../../services';
+import { register, userLogin , profile, forgorPassword } from '../../../services';
 import toast from 'react-hot-toast';
 import { setAuthToken } from '../../../utils/helpers';
 
@@ -69,3 +69,5 @@ export const getProfile = async () => async(dispatch) =>{
         })
     }
 }
+
+

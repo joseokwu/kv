@@ -63,7 +63,7 @@ const [checkSat, setCheckSat] = useState(false)
               <TextField
                 name='email'
                 label="Email"
-                placeholder="Michealsmith@gmail.com"
+                placeholder="Enter email address"
                 className="gray-card-input"
               />
             </div>
@@ -79,7 +79,6 @@ const [checkSat, setCheckSat] = useState(false)
 
             <div className="col-12 mb-4">
               <PasswordField
-
                 numb={8}
                 message='Password must be 8 digits'
                 label="Create Password"

@@ -69,8 +69,8 @@ export const startUpRoutes = [
       icon: interested,
     },
     {
-      title: "Boosterpartner",
-      activator: "boosterpartner",
+      title: "Booster Partners",
+      activator: "boosterpartners",
       path: "/startup/boosterpartner",
       icon: portfolio,
     },
