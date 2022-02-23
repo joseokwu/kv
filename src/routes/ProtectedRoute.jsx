@@ -19,12 +19,12 @@ export  const ProtectedRoute = ({ ...props})=>{
             setLocationHistory(history.location.pathname)
             history.push('/')
         }
-        // if(!stateAuth.roles.includes(props.type)){
+        if(!stateAuth.roles.includes(props.type)){
 
-        //     history.push('/') 
-        //     console.log('e noh work')
-        //     console.log(!stateAuth.roles.includes(props.type))
-        // }
+            history.push('/') 
+            console.log('e noh work')
+            console.log(!stateAuth.roles.includes(props.type))
+        }
 
          setLoading(false);
 

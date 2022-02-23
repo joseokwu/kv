@@ -16,13 +16,18 @@ import { stage, optionsNumb, options } from '../../../../constants/domiData'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
-import { useActivity } from '../../../../hooks/useBusiness'
+import { useActivity } from '../../../../hooks/useBusiness';
+import { startUpReg } from './../../../../services/startUpReg';
+import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { toast } from 'react-hot-toast';
+
+
 
 export const StartupProfile = () => {
   const [disImg, setImg] = useState(null)
 
   const [startDate, setStartDate] = useState(new Date())
-
+  const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState()
 
   const {
@@ -42,7 +47,12 @@ export const StartupProfile = () => {
     changePath(path + 1)
   }
 
-  const onSubmit = (value) => {}
+  const onSubmit = (value) => {
+    setLoading(true);
+    startUpReg(value).then(res =>{
+
+    })
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -339,8 +349,10 @@ export const StartupProfile = () => {
               <CustomButton background="#06ADEF">Save</CustomButton>
             </div>
             <div className="mx-2">
-              <CustomButton onClick={next} background="#2E3192">
-                Next
+              <CustomButton type='submit'
+                disabled={loading}
+                background="#2E3192">
+                { loading ? <CircularLoader /> : 'Next' }
               </CustomButton>
             </div>
           </div>

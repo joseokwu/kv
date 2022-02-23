@@ -963,7 +963,14 @@ import {
 } from '../mentorPages';
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 
+======================================================================
+=================================================================
+Date formats
 
+const d = new Date();
+let hours = d.getHours()
+minute = d.getMinutes();
+hours = (hours % 12) || 12;
 
 
 
