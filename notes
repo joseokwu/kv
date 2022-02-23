@@ -319,6 +319,85 @@ const downloadStatement = () => {
 
   }
 
+=================================================================
+===================================================================
+<div className=" col-lg-6 col-12">
+<div className="div p-5">
+  <img src={RedFile} alt=".#" />
+</div>
+<div id="div" className="p-2">
+  <div className="d-flex mt-n2">
+    <img
+      src={BlueFile}
+      alt=".#"
+      style={{ width: '10%', height: '10%' }}
+      className="mt-3"
+    />
+    <p
+      className=""
+      style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
+    >
+      Product Demo
+    </p>
+  </div>
+  <p className="my-n2 p">2.5 mb</p>
+</div>
+</div>
+
+
+
+
+
+
+
+        <div className=" col-lg-6 col-12">
+                      <div className="div p-5">
+                        <img src={RedFile} alt=".#" />
+                      </div>
+                      <div id="div" className="p-2">
+                        <div className="d-flex mt-n2">
+                          <img
+                            src={BlueFile}
+                            alt=".#"
+                            style={{ width: '10%', height: '10%' }}
+                            className="mt-3"
+                          />
+                          <p
+                            className=""
+                            style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
+                          >
+                            Product Demo
+                          </p>
+                        </div>
+                        <p className="my-n2 p">2.5 mb</p>
+                      </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

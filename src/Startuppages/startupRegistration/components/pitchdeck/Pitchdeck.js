@@ -13,8 +13,23 @@ import RedFile from '../../../../assets/icons/redFile.svg'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
 import { useActivity } from '../../../../hooks/useBusiness'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
+import { formatBytes } from '../../../../utils/helpers';
 
 export const PitchDeck = () => {
+
+  const [fileInfo, setFile] = useState([
+    {
+      file:null,
+      size:null,
+      name:'videoFile'
+    },
+    {
+      file:null,
+      size:null,
+      name:'infoFile'
+    }
+  ]);
+
   const {
     changePath,
     state: { path },
@@ -27,6 +42,56 @@ export const PitchDeck = () => {
   const back = () => {
     changePath(path - 1)
   }
+
+const handleChange = (e ) =>{
+  console.log('hello')
+  const { files , name } = e.target;
+  setFile(fileInfo.map(item =>{
+    if(name === item?.name){
+      item.file = files[0]
+      item.size = formatBytes(files[0].size)
+    }
+    return item;
+  }) )
+
+}
+
+console.log(fileInfo)
+
+const renderFunc = (filess) =>{
+  filess.map((item , i) =>{
+    if(item.file !== null){
+      return (
+        <div key={i} className="col-lg-6 col-12">
+        <div className="div p-5">
+          <img src={RedFile} alt=".#" />
+        </div>
+        <div id="div" className="p-2">
+          <div className="d-flex mt-n2">
+            <img
+              src={BlueFile}
+              alt=".#"
+              style={{ width: '10%', height: '10%' }}
+              className="mt-3"
+            />
+            <p
+              className=""
+              style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
+            >
+              Product Demo
+            </p>
+          </div>
+          <p className="my-n2 p"> { item?.size} </p>
+        </div>
+      </div>
+      )
+   }
+
+  }
+
+  )
+}
+
 
   return (
     <>
@@ -71,61 +136,36 @@ export const PitchDeck = () => {
                 </div>
                 <FileWrapper className="d-flex justify-content-center text-center">
                   <img src={DownloadIcon} alt="#" />
-                  <FileText>Drag & Drop</FileText>
+                 {
+                  fileInfo[0].file !== null ? (
+                    <img src={RedFile} alt=".#" />
+                   ) : (
+                    <>
+                    <FileText>Drag & Drop</FileText>
                   <FileText>Drag files or click here to upload </FileText>
-                  <FileSize> {'(Max. File size 5mb)'} </FileSize>
-                  <input type="file" id="pitch-doc" hidden />
-                  <LabelButton for="pitch-doc">Upload Files</LabelButton>
+                    </>
+                   )
+                 }
+                  <FileSize> { fileInfo[0].file !== null ? `${fileInfo[0].size}` : '(Max. File size 5mb)'  } </FileSize>
+                  <input type="file" 
+                    name='videoFile'
+                    id="pitch-docu"
+                    onChange={handleChange}
+                   hidden />
+                  <LabelButton for="pitch-docu">Upload Files</LabelButton>
                 </FileWrapper>
               </div>
               <div className="form-group col-12 mt-5">
                 <VideoWrapper>
                   <label> Pitch deck uploaded</label>
                   <div className="row">
-                    <div className=" col-lg-6 col-12">
-                      <div className="div p-5">
-                        <img src={RedFile} alt=".#" />
-                      </div>
-                      <div id="div" className="p-2">
-                        <div className="d-flex mt-n2">
-                          <img
-                            src={BlueFile}
-                            alt=".#"
-                            style={{ width: '10%', height: '10%' }}
-                            className="mt-3"
-                          />
-                          <p
-                            className=""
-                            style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-                          >
-                            Product Demo
-                          </p>
-                        </div>
-                        <p className="my-n2 p">2.5 mb</p>
-                      </div>
+                    {
+                  fileInfo[0].file !== null ? renderFunc(fileInfo):(
+                    <div className='my-4 d-flex justify-content-center text-center' >
+                      <span>No File yesy</span>
                     </div>
-                    <div className=" col-lg-6 col-12">
-                      <div className="div p-5">
-                        <img src={RedFile} alt=".#" />
-                      </div>
-                      <div id="div" className="p-2">
-                        <div className="d-flex mt-n2">
-                          <img
-                            src={BlueFile}
-                            alt=".#"
-                            style={{ width: '10%', height: '10%' }}
-                            className="mt-3"
-                          />
-                          <p
-                            className=""
-                            style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-                          >
-                            Product Demo
-                          </p>
-                        </div>
-                        <p className="my-n2 p">2.5 mb</p>
-                      </div>
-                    </div>
+                  ) 
+                    }
                   </div>
                 </VideoWrapper>
               </div>
