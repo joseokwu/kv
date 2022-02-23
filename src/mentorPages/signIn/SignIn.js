@@ -11,7 +11,7 @@ import { Form } from 'antd';
 import { useAuth } from '../../hooks';
 import { getLocationHistory } from '../../utils/helpers';
 
-export const MentorSignIn = () => {
+export const SignIn = () => {
   const [loader, setLoader] = useState(false)
   const { stateAuth : { authenticated , loading , roles} , newLogin } = useAuth();
   
@@ -42,7 +42,7 @@ export const MentorSignIn = () => {
       <section className="col-md-6">
         <AuthSide />
       </section>
-      <section className="col-md-6 d-flex align-items-center">
+      <section className="col-md-6 px-5 d-flex align-items-center">
         <div className="gray_signIn">
           <Form
             name="login"
@@ -57,7 +57,7 @@ export const MentorSignIn = () => {
               <AuthTextField
                 name="email"
                 label="Email"
-                placeholder="Michealsmith@gmail.com"
+                placeholder="Enter your email address"
                 className="mentor_gray_card_input"
               />
             </div>
@@ -67,6 +67,7 @@ export const MentorSignIn = () => {
                 className="mentor_gray_card_input"
                 numb={8}
                 message="Password must not be less than 8"
+                placeholder={"Password must be at least 8 characters"}
               />
             </div>
             <a
@@ -91,7 +92,7 @@ export const MentorSignIn = () => {
             className="d-flex align-items-center mentor_switch_auth"
             style={{ columnGap: 6 }}
           >
-            <p>Don’t have an account?</p> <span style={{color:'#212198'}}  onClick={()=> history.push("/signup")} >Sign Up</span>
+            <p>Don’t have an account?</p> <span style={{color:'#00adef', fontWeight: 'bold', cursor: 'pointer'}}  onClick={()=> history.push("/signup")} >Sign Up</span>
           </section>
         </div>
       </section>

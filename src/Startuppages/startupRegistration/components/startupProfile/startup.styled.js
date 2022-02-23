@@ -39,8 +39,8 @@ export const InputWrapper = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 320px;
-  left: 120px;
+  top: 380px;
+  left: 200px;
 
   input {
     width: inherit;
@@ -106,7 +106,7 @@ export const FormWrapper = styled.div`
   textarea {
     border: none;
     margin-left: 15px;
-    background: #fafafc;
+    background: #fafafc!important;
     border-radius: 4px;
 
     ::placeholder {

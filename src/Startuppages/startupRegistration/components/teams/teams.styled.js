@@ -37,12 +37,12 @@ export const InputWrapper = styled.label`
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  background: #d2d2d2;
+  background: #2BB4F0;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 400px;
-  left: 134px;
+  top: 550px;
+  left: 240px;
 
   input {
     width: inherit;
@@ -127,7 +127,7 @@ export const FormWrapper = styled.div`
 
   input {
     border: none;
-    background: #fafafc;
+    background: #fafafc!important;
     border-radius: 4px;
     margin-left: 15px;
     margin-bottom: 15px;
@@ -143,8 +143,7 @@ export const FormWrapper = styled.div`
 
   textarea {
     border: none;
-    background: #f4f4f4;
-
+    background: #fafafc;
     margin-left: 15px;
   }
   .cust {
@@ -182,15 +181,15 @@ export const ModalForm = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
-  height: 70vh;
+  /* height: 70vh; */
 
   input {
-    background: #f7f9f9;
+    background: #fafafc!important;
     border: none;
   }
 
   textarea {
-    background: #f7f9f9;
+    background: #fafafc!important;
     border: none;
   }
   span {

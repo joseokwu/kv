@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import twitter from '../../../../assets/icons/twtsm.svg'
 import linkedIn from '../../../../assets/icons/lnkdsm.svg'
 import whatsApp from '../../../../assets/icons/whtsm.svg'
@@ -11,10 +12,11 @@ import blue from '../../../../assets/images/edublue.svg'
 import navy from '../../../../assets/images/navy.svg'
 import './team.css'
 import { LargeModal, Tag } from '../../../../Startupcomponents'
-import founder from '../../../../assets/images/founder.svg'
+import founder from '../../../../assets/images/femaleFounder.svg'
 
 export const Team = () => {
   const count = [1, 2, 3, 4, 5, 6]
+  const {push} = useHistory();
 
   const [showModal, setShowModal] = useState(false)
   return (
@@ -28,7 +30,7 @@ export const Team = () => {
       )}
       {/* <h3 className="tab-section-title">Team</h3> */}
       <section className="d-flex justify-content-end">
-        <span className="headBtn">Add team member</span>
+        <button className="teamBtn" onClick={() => push('/startup/team/member')}>Add team member</button>
       </section>
       <section>
         <h4 className="team-group-title">Founder & Co-Founders</h4>
@@ -94,13 +96,13 @@ const TeamMember = () => {
 
 const FounderModal = () => {
   return (
-    <section className="container dashboard_profle mt-4 mx-5">
-      <div className="row founder_profile">
-        <div className="col-lg-2">
+    <section className="container dashboard_profle mt-4">
+      <div className="row founder_profile px-5">
+        <div className="col-lg-2 me-5">
           <img src={founder} alt="" />
         </div>
-        <div className="col-lg-9 mx-3 mt-3">
-          <div className="d-flex justify-content-between">
+        <div className="col-lg-9 mt-3">
+          <div className="d-flex justify-content-between ">
             <div>
               <h1>Prima Jakatar</h1>
               <p>Founder and CEO</p>
@@ -139,7 +141,7 @@ const FounderModal = () => {
       </div>
 
       <div className="col">
-        <div className="dashboard_profile_banner"></div>
+        {/* <div className="dashboard_profile_banner"></div> */}
         <div className="dashboard_profile_info">
           <section className="row founder_main mt-5 pb-5 mb-5 py-5">
             <div className="col-lg-11 founder_card">
@@ -158,7 +160,7 @@ const FounderModal = () => {
                 <h3>Experience</h3>
                 <div className="mt-4 mb-4 d-flex">
                   <div>
-                    <img src={apple} alt="apple" style={{ width: '100px' }} />
+                    <img src={apple} alt="apple"  />
                   </div>
                   <div className="founder_experience ml-4">
                     <h3 className="">Applane Insteen</h3>
@@ -203,39 +205,6 @@ const FounderModal = () => {
                   </div>
                 </div>
               </div>
-
-              {/* <section className="industry">
-                <div className="row">
-                  <h3>Education</h3>
-                  <div className="row">
-                    <div className="">
-                      <div className="d-flex col-lg-6 mt-4 mr-5">
-                        <div>
-                          <img src={blue} alt="blue" />
-                        </div>
-                        <div className="founder_experience ml-4">
-                          <h3 className="">Manchester United University</h3>
-                          <p className="pt-2 pb-2">Computer Enginerring</p>
-                          <p className="pb-2">Master’s Degree</p>
-                          <p>2012 - 2018</p>
-                        </div>
-                      </div>
-
-                      <div className="col-lg-6 mt-4 d-flex">
-                        <div>
-                          <img src={navy} alt="navy" />
-                        </div>
-                        <div className="founder_experience ml-4">
-                          <h3 className="">Manchester United University</h3>
-                          <p className="pt-2 pb-2">Computer Enginerring</p>
-                          <p className="pb-2">Master’s Degree</p>
-                          <p>2012 - 2018</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section> */}
 
               <section className="col-lg mt-4 mb-5">
                 <h3 className="pb-3">Skills</h3>

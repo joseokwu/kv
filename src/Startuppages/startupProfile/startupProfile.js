@@ -10,6 +10,7 @@ import { PitchDeck } from "./components/pitchDeck/PitchDeck";
 import { Team } from "./components/team/Team";
 import { BusinessCanavas } from "./components/businessCanvas";
 import { RoadMap } from "./components/roadMap/RoadMap";
+import { Milestone } from "./components/milestone/Milestone";
 
 
 
@@ -24,7 +25,7 @@ export const StartupProfile = ({ history }) => {
     "product",
     "business canvas",
     // "fundraising",
-    "Milestone/Timeline",
+    "milestone/timeline",
     "product road map",
   ];
 
@@ -42,8 +43,8 @@ export const StartupProfile = ({ history }) => {
         return <RoadMap />;
       case "#team":
         return <Team />;
-      case "#Milestone/Timeline":
-        return <div>Milestone/Timeline</div>;
+      case "#milestone/timeline":
+        return <Milestone />
       default:
         return <Product />;
     }

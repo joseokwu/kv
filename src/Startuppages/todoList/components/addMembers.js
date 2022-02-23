@@ -6,7 +6,7 @@ import close from '../../../assets/icons/closesm.svg'
 
 export const AddMembers = () => {
   return (
-    <div className="px-5">
+    <div className="px-5 my-5">
       <TextArea
         label="Contributors"
         placeholder="Search for team members"

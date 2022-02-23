@@ -54,7 +54,7 @@ export const CardFill = ({ header, color, amount, time }) => {
         // style={{ paddingTop: '150px' }}
       > */}
       <CardWrap bg={color}>
-        <p> {header} </p>
+        <p className="pb-3"> {header} </p>
         <h5>
           {amount}
           <span> {time} </span>

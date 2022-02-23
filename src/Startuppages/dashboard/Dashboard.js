@@ -33,6 +33,7 @@ export const StartupDashboard = () => {
             key={i}
             header={info?.header}
             color={info?.color}
+            img={info?.img}
             amount={info?.amount}
             time={info?.time}
             className="col-3 col-6-md "

@@ -11,7 +11,7 @@ export const MentorDashCard = ({
   return (
     <div className="dashCard_main">
       <section className="d-flex flex-column justify-content-between">
-        <p>{name}</p>
+        <p className="pb-3">{name}</p>
         <span>{count}</span>
         <Star color={color} />
       </section>

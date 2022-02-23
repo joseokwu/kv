@@ -14,6 +14,8 @@ import linkedIn from '../../../../assets/images/profileLinkedIn.svg'
 import location from '../../../../assets/icons/locationSm.svg'
 import web from '../../../../assets/icons/webSm.svg'
 import './details.css'
+import { mentorReg } from '../../../../services/mentorReg'
+
 
 const Details = () => {
   return (

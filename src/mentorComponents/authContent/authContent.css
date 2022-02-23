@@ -1,0 +1,19 @@
+h1 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 60px!important;
+  line-height: 75px!important;
+  display: flex;
+  align-items: center;
+  color: #f9f9fc!important;
+}
+
+p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px!important;
+  line-height: 30px!important;
+  color: #ffffff!important;
+}

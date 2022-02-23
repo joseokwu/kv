@@ -7,28 +7,34 @@ import {
   LabelButton,
   VideoWrapper,
 } from './financial.styled'
-import { CloudUploadOutlined } from '@ant-design/icons'
+import Download from '../../../../../../assets/icons/downloadoutline.svg'
 import DownloadIcon from '../../../../../../assets/icons/download.svg'
 import RedFile from '../../../../../../assets/icons/redFile.svg'
 import BluFile from '../../../../../../assets/icons/bluFile.svg'
 
 export const FinancialProjection = () => {
+  
+  function btn(e) {
+    e.preventDefault()
+  }
+
   return (
     <>
       <BodyWrapper>
-        <span className="span"> Financial Projection </span>
-        <p>
-          {' '}
-          A document containing all your financial plan and statements for your
-          business.{' '}
-        </p>
+        <div className="mt-5">
+          <p>
+            A document containing all your financial plan and statements for
+            your business.
+          </p>
+        </div>
+
         <hr />
 
         <div className="my-5">
           <div>
             <DownloadableButton href=".">
-              <CloudUploadOutlined className="mx-2" /> Download fund utilization
-              template here
+            <img className="pr-2" src={Download} alt=""/>
+              Download fund utilization template here
             </DownloadableButton>
           </div>
           <div className="col-12 my-5">
@@ -65,7 +71,7 @@ export const FinancialProjection = () => {
                       Fund Utilization Summary
                     </p>
                   </div>
-                  <p className="my-n2 p">2.5 mb</p>
+                  <p className="my-n2 px-5 p">2.5 mb</p>
                 </div>
               </div>
             </VideoWrapper>

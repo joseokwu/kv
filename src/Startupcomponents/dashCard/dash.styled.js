@@ -12,7 +12,7 @@ export const CardWrapper = styled.div`
 
   .card_star {
     position: relative;
-    top: -5.4rem;
+    top: -4.4rem;
     left: 159px;
     border-radius: 0 0 18px 0;
   }

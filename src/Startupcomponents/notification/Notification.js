@@ -1,23 +1,25 @@
-import React from "react";
-import close from "../../assets/icons/closeButton.svg";
-import "./notification.css";
-import sampleUser from "../../assets/images/sampleNoticePic.png";
-import noticeImg from "../../assets/images/sampleNoticeImg.png";
-import { useHistory } from "react-router";
-import { NoticeItem } from "..";
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import close from '../../assets/icons/closeButton.svg'
+import './notification.css'
+import sampleUser from '../../assets/images/sampleNoticePic.png'
+import noticeImg from '../../assets/images/sampleNoticeImg.png'
+import { NoticeItem } from '..'
 
 export const Notification = ({ closeNotice, openNotice }) => {
   const noticeItems = [
     { noticeImage: noticeImg },
-    { noticeImage: "" },
-    { noticeImage: "" },
+    { noticeImage: '' },
+    { noticeImage: '' },
     { noticeImage: noticeImg },
     { noticeImage: noticeImg },
-  ];
+  ]
+  const {push} = useHistory();
+
   return (
     <div
       className={`kv-notification shadow-sm ${
-        openNotice ? "open-notice" : "close-notice"
+        openNotice ? 'open-notice' : 'close-notice'
       }`}
     >
       <section className="notice-head position-relative">
@@ -35,13 +37,15 @@ export const Notification = ({ closeNotice, openNotice }) => {
       </section>
 
       <section className="kv-notice-main">
-        <select id="filter" className="mb-3">
-          <option value="All">All</option>
-          <option value="Mentor">Mentor</option>
-          <option value="Partner">Partner</option>
-          <option value="Investor">Investor</option>
-          <option value="Admin">Admin</option>
-        </select>
+        <div className="d-flex justify-content-between">
+          <select id="filter" className="mb-3 d-flex justify-content-between">
+            <option value="All">All</option>
+          </select>
+
+          <div className="noty-all">
+            <span onClick={() => push('/startup/notification')}>See All</span>
+          </div>
+        </div>
 
         {noticeItems.length > 0 &&
           noticeItems.map((items, i) => {
@@ -51,9 +55,9 @@ export const Notification = ({ closeNotice, openNotice }) => {
                 userImage={sampleUser}
                 key={`notice-items-${i}`}
               />
-            );
+            )
           })}
       </section>
     </div>
-  );
-};
+  )
+}

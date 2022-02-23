@@ -50,7 +50,29 @@ export const ModalCus = ({ children, closeModal, title }) => {
       <div className="backDrop" onClick={() => closeModal(false)}></div>
 
       <div className="app_modal">
-        <div className="m-5 d-flex justify-content-between">
+        <div className="m-0 d-flex justify-content-between">
+          <p className="kv-modal-title px-5">{title}</p>
+          <img
+            className="modalCloseImg"
+            onClick={() => closeModal(false)}
+            src={Close}
+            alt={""}
+          />
+        </div>
+
+        {children || "Enter element here"}
+      </div>
+    </>
+  );
+};
+
+export const SmallModal = ({ children, closeModal, title }) => {
+  return (
+    <>
+      <div className="backDrop" onClick={() => closeModal(false)}></div>
+
+      <div className="small-modal">
+        <div className="m-0 d-flex justify-content-between">
           <p className="kv-modal-title">{title}</p>
           <img
             className="modalCloseImg"

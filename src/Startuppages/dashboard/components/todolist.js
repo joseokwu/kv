@@ -1,5 +1,4 @@
 import { HeadWrapper, TodoCard } from './dash.component'
-import { CustomThreeDots } from '../../../Startupcomponents'
 import { images } from '../../../constants/domiData'
 import { Tag } from '../../../Startupcomponents'
 import { useHistory } from 'react-router-dom'
@@ -13,7 +12,7 @@ export const TodoList = () => {
     <div className="container">
       <HeadWrapper className="d-flex justify-content-between">
         <h5 className="text-nowrap">To Do List</h5>
-        <span className="text-nowrap" onClick={() => history.push('/todolist')}>
+        <span className="text-nowrap" onClick={() => history.push('/startup/todolist')}>
           See All
         </span>
       </HeadWrapper>
@@ -22,7 +21,7 @@ export const TodoList = () => {
           <TodoCard key={i} className="col-lg-6 col-12">
             <div className="d-flex justify-content-between head">
               <h6>Assignment</h6>
-              <CustomThreeDots />
+              {/* <CustomThreeDots /> */}
             </div>
 
             <div className="d-flex justify-content-between my-3 date">
@@ -53,7 +52,7 @@ export const TodoList = () => {
           <TodoCard key={i} className="col-lg-6 col-12">
             <div className="d-flex justify-content-between head">
               <h6>Business Canvas Assignment</h6>
-              <CustomThreeDots />
+              {/* <CustomThreeDots /> */}
             </div>
 
             <div className="d-flex justify-content-between my-3 date">

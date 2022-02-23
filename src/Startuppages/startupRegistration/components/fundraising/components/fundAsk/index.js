@@ -12,21 +12,24 @@ export const FundAsk = () => {
   ]
 
   function btn(e) {
-      e.preventDefault();
+    e.preventDefault()
   }
 
   return (
     <>
       <BodyWrapper className="">
-        {/* <span className="span"> Fund Ask </span> */}
         <p>A brief description of funding ask</p>
         <hr />
-        <div className="row">
+        <div className="row mt-4">
           <div className="form-group col-12">
             <label>Have you fundraised before?*</label>
             <BntWrap>
-              <button className="me-3" onClick={btn}>Yes</button>
-              <button className="" onClick={btn}>No</button>
+              <button className="me-3" onClick={btn}>
+                Yes
+              </button>
+              <button className="" onClick={btn}>
+                No
+              </button>
             </BntWrap>
           </div>
           <div className="form-group my-3 col-12">
@@ -41,52 +44,58 @@ export const FundAsk = () => {
           </div>
           <div className="form-group my-2 col-12">
             <label>
-              How much investment is your company looking to raise?*{' '}
+              How much investment is your company looking to raise?*
             </label>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter Amount"
+              className="form-control ps-3"
+              placeholder="Enter amount"
             />
           </div>
           <div className="form-group my-2 col-12">
-            <label> Duration (%) * </label>
+            <label>Dilution (%)*</label>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter duration for investment"
+              className="form-control ps-3"
+              placeholder="Enter what your business does"
             />
           </div>
           <div className="form-group my-2 col-12">
-            <label> What is your pre-money valuation?* </label>
+            <label>What is your pre-money valuation?*</label>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter pre-money Valuation"
+              className="form-control ps-3"
+              placeholder="Enter amount"
             />
           </div>
           <div className="form-group my-2 col-12">
-            <label> What is your post-money valuation?* </label>
+            <label>Post-Money valuation*</label>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter post-money Valuation"
+              className="form-control ps-3"
+              placeholder="Enter what your business does"
             />
           </div>
           <div className="form-group col-12">
             <label> Do you have a lead investor for this round?* </label>
             <BntWrap>
-              <button className="me-3" onClick={btn}>Yes</button>
-              <button className="" onClick={btn}>No</button>
+              <button className="me-3" onClick={btn}>
+                Yes
+              </button>
+              <button className="" onClick={btn}>
+                No
+              </button>
             </BntWrap>
           </div>
           <div className="sold my-3">
-            <Tag
-              name="+ Add Co-founder"
-              color="#4F4F4F"
-              bg="rgba(183, 218, 231, 0.5)"
-              padding="9px 30px"
-            />
+            <div className="d-flex justify-content-center">
+              <Tag
+                name="+ Add Co-founder"
+                color="#4F4F4F"
+                bg="rgba(183, 218, 231, 0.5)"
+                padding="9px 30px"
+              />
+            </div>
           </div>
           <div className="form-group col-12 mt-3">
             <div className="d-flex justify-content-between">
@@ -101,9 +110,9 @@ export const FundAsk = () => {
             <textarea
               cols="5"
               rows="5"
-              className="form-control"
+              className="form-control ps-3"
               placeholder="Enter Terms for round"
-            ></textarea>
+            />
           </div>
         </div>
       </BodyWrapper>
