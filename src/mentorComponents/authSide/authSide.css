@@ -10,25 +10,25 @@
   margin-bottom: 100px;
 }
 
-.mentor_auth h1 {
+/* .mentor_auth h1 {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 65px;
   line-height: 75px;
   color: #f9f9fc;
-  /* margin-top: 200px; */
+  margin-top: 200px;
   margin-bottom: 30px;
-}
+} */
 
-.mentor_auth p {
+/* .mentor_auth p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
   line-height: 30px;
   color: #f9f9fc;
-}
+} */
 
 .mentor_auth_side {
   margin-left: 60px;

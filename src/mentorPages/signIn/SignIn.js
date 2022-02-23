@@ -45,22 +45,22 @@ export const SignIn = () => {
 
 
   return (
-    <div className="row mx-0 auth-wrap">
+    <div className="row mx-0 mentor_auth_wrap">
       <section className="col-md-6">
         <AuthSide />
       </section>
-      <section className="col-md-6 px-5 d-flex align-items-center">
-        <div className="gray_signIn">
+      <section className="col-md-6">
+        <div className="mentor_gray_card">
           <Form
             name="login"
-            className=""
+            className="row"
             initialValues={{
               remember: true,
             }}
             layout="vertical"
             onFinish={onFinish}
           >
-            <div className="mb-4">
+            <div className="col-lg-12 col-12 mb-4">
               <AuthTextField
                 name="email"
                 label="Email"
@@ -69,8 +69,9 @@ export const SignIn = () => {
               />
             </div>
 
-            <div className="">
+            <div className="col-12 col-lg-12 mb-4">
               <AuthPasswordField
+                label={'Password'}
                 className="mentor_gray_card_input"
                 numb={8}
                 message="Password must not be less than 8"
@@ -84,7 +85,7 @@ export const SignIn = () => {
               Forgot password?
             </a>
             <Form.Item>
-              <div className="mb-4">
+              <div className="col-12 mb-4">
                 <AuthButton
                   label="Sign In"
                   loading={loading}

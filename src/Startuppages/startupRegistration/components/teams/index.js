@@ -79,6 +79,12 @@ export const TeamProfile = () => {
     e.preventDefault()
   }
 
+  const formik = useFormik({
+    initialValues: {
+      
+    },
+  })
+
   return (
     <>
       {show ? <TeamModal handleClose={setShow} /> : <span></span>}
