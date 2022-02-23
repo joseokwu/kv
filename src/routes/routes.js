@@ -121,7 +121,7 @@ const routes = [
     path: "/startup/program",
     component: WithStartupDashboardLayout(StartupProgram),
     exact: true,
-    protected: true,
+    protected: false,
     type: "startup",
   },
 
@@ -328,7 +328,7 @@ const routes = [
   {
     name: "Investor schedule",
     path: "/investor/schedule",
-    component: WithMainInvestorLayout(MentorSchedule),
+    component: WithMainInvestorLayout(InvestorScheduleCalendar),
     exact: true,
     protected: false,
     type: "investor",
