@@ -9,7 +9,7 @@ export const UpComing = () => {
 
   return (
     <div className="container">
-      <HeadWrapper className="d-flex justify-content-between mt-5">
+      <HeadWrapper className="d-flex justify-content-between mt-5 mb-3">
         <p className="text-nowrap">Upcoming Events</p>
         <span className="text-nowrap" onClick={() => history.push('/startup/events')}>See All</span>
       </HeadWrapper>

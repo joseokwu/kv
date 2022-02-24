@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { BodyWrapper, BntWrap, BoxBorder } from './fundAsk.styled'
+import { BodyWrapper, BntWrap } from './fundAsk.styled'
+import { useFormik } from 'formik'
 import { CustomSelect } from '../../../../../../Startupcomponents/select/customSelect'
-import { PlusOutlined } from '@ant-design/icons'
 import { Tag } from '../../../../../../Startupcomponents/tag/Tag'
+import { fundraising } from '../../../../../../services/startUpReg'
+// import { toast } from 'react-hot-toast';
 
 export const FundAsk = () => {
   const optionsNumb = [
@@ -15,8 +17,34 @@ export const FundAsk = () => {
     e.preventDefault()
   }
 
+  // const onSubmit = (value) => {
+  //   fundraising(value).then(res =>{
+  //     if(res?.message){
+  //       console.log(res)
+  //       toast.success(res?.message)
+  //     }
+  //   })
+  // }
+  
+  // const formik = useFormik ({
+  //   initialValues: {
+  //     hasPreviousFundraising: false,
+  //     description: '',
+  //     instrumentForRound: 'instrumentForRound',
+  //     numberOfRounds: 'numberOfRounds',
+  //     fundraisingAmount: '',
+  //     dilution: '',
+  //     preMoneyValuation: '',
+  //     hasLeadInvestor: '',
+  //     terms: []
+  //   },
+  //   validateOnBlur: true,
+  //   onSubmit: (value) => onSubmit(value)
+  // })
+
   return (
     <>
+    <form>
       <BodyWrapper className="">
         <p>A brief description of funding ask</p>
         <hr />
@@ -36,44 +64,66 @@ export const FundAsk = () => {
             <label>
               Which instrument would you prefer to use for your current round?*
             </label>
-            <CustomSelect options={optionsNumb} className="cust" />
+            <CustomSelect 
+              options={optionsNumb} 
+              className="cust" 
+              // value={formik.value.instrumentForRound}
+              // onChange={(value) => formik.setFieldValue('instrumentForRound', value.value)}
+            />
           </div>
           <div className="form-group my-2 col-lg-6 col-12">
             <label>Select your round?*</label>
-            <CustomSelect options={optionsNumb} className="cust " />
+            <CustomSelect 
+              options={optionsNumb} 
+              className="cust" 
+              // value={formik.value.numberOfRounds}
+              // onChange={(value) => formik.setFieldValue('numberOfRounds', value.value)}
+            />
           </div>
           <div className="form-group my-2 col-12">
             <label>
               How much investment is your company looking to raise?*
             </label>
             <input
+              name="fundraisingAmount"
               type="text"
               className="form-control ps-3"
               placeholder="Enter amount"
+              // value={formik.values.fundraisingAmount}
+              // onChange={formik.handleChange}
             />
           </div>
           <div className="form-group my-2 col-12">
             <label>Dilution (%)*</label>
             <input
+              name="dilution"
               type="text"
               className="form-control ps-3"
               placeholder="Enter what your business does"
+              // value={formik.values.dilution}
+              // onChange={formik.handleChange}
             />
           </div>
           <div className="form-group my-2 col-12">
             <label>What is your pre-money valuation?*</label>
             <input
+              name="preMoneyValuation"
               type="text"
               className="form-control ps-3"
               placeholder="Enter amount"
+              // value={formik.values.preMoneyValuation}
+              // onChange={formik.handleChange}
             />
           </div>
           <div className="form-group my-2 col-12">
             <label>Post-Money valuation*</label>
             <input
+              name="postMoneyValuation"
               type="text"
               className="form-control ps-3"
               placeholder="Enter what your business does"
+              // value={formik.values.postMoneyValuation}
+              // onChange={formik.handleChange}
             />
           </div>
           <div className="form-group col-12">
@@ -82,7 +132,7 @@ export const FundAsk = () => {
               <button className="me-3" onClick={btn}>
                 Yes
               </button>
-              <button className="" onClick={btn}>
+              <button className="" onClick={btn} >
                 No
               </button>
             </BntWrap>
@@ -108,14 +158,18 @@ export const FundAsk = () => {
             </div>
 
             <textarea
+              name="terms"
               cols="5"
               rows="5"
               className="form-control ps-3"
               placeholder="Enter Terms for round"
+              // value={formik.values.terms}
+              // onChange={formik.handleChange}
             />
           </div>
         </div>
       </BodyWrapper>
+      </form>
     </>
   )
 }

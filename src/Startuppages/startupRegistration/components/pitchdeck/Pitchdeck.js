@@ -60,7 +60,7 @@ export const PitchDeck = () => {
       }),
     )
   }
-  const handleSubmit = () => {
+  const handleSubmit = (value) => {
     const newFile = {
       pitchDeckFile: [
         {
@@ -72,6 +72,15 @@ export const PitchDeck = () => {
       ],
       profileId: '61d5be4fb801676adafcf4f4',
     }
+    setLoading(true)
+    pitchDeck(value).then((res) => {
+      if (res?.message) {
+        console.log(res)
+        toast.success(res?.message)
+        setLoading(false)
+        next()
+      }
+    })
       console.log(newFile)
   }
 
@@ -95,7 +104,7 @@ export const PitchDeck = () => {
         <h5> Pitch Deck </h5>
         <p>Let's get to know your startup</p>
       </HeaderPitch>
-      <form style={{ marginBottom: '4rem' }}>
+      <form style={{ marginBottom: '4rem' }} onSubmit={handleSubmit}>
         <FormWrapper>
           <div className="div">
             <span>Pitch Deck</span>
@@ -231,7 +240,7 @@ export const PitchDeck = () => {
             </CustomButton>
             <div className="">
               <CustomButton
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
                 type="submit"
                 disabled={loading}
                 background="#2E3192"
