@@ -89,7 +89,7 @@ import {
   StartupTeamMember,
   StartupEvents,
   TeamMemberSignUp,
-  TeamMemberSignIn
+  TeamMemberSignIn,
 } from "../Startuppages";
 
 const routes = [
@@ -301,7 +301,7 @@ const routes = [
   {
     name: "Investor Events",
     path: "/investor/events",
-    component: WithMainInvestorLayout(MentorEvents),
+    component: WithMainInvestorLayout(InvestorEvents),
     exact: true,
     protected: false,
     type: "investor",
@@ -605,7 +605,7 @@ const routes = [
     protected: true,
     type: "mentor",
   },
- 
+
   // {
   //   name: 'DealRoom',
   //   path: '/mentor/deal_room/:id',
