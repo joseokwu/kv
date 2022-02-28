@@ -15,8 +15,6 @@ export const Header = ({ setOpen, open }) => {
     location: { pathname },
   } = useHistory();
 
-  console.log(`pathname`, pathname);
-
   const getCurrentDashboard = () => {
     if (pathname.includes("investor")) {
       return "/investor/dashboard";

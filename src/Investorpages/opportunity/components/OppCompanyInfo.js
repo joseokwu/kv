@@ -71,9 +71,18 @@ export const OppCompanyInfo = () => {
         style={{ rowGap: 10 }}
       >
         {pathname.includes("interested") ? (
-          <div className="flex-align interest-indicator">
-            <img src={interestedCheck} alt="interested" />
-            <p>Interested</p>
+          <div
+            style={{ columnGap: "1rem" }}
+            className="d-flex align-items-center"
+          >
+            <Button
+              label="Commit"
+              onClick={() => push(`/investor/opportunities/${id}/commitment`)}
+            />
+            <div className="flex-align interest-indicator">
+              <img src={interestedCheck} alt="interested" />
+              <p>Interested</p>
+            </div>
           </div>
         ) : (
           <div

@@ -4,10 +4,9 @@ import down from "../../assets/icons/chevronDown.svg";
 import filter from "../../assets/icons/filterFunnel.svg";
 import "./investorOpportunity.css";
 import { Opportunities } from "./components/Opportunities";
+import { Interests } from "../investorInterested/components/Interests";
 
 export const InvestorOpportunity = ({ history }) => {
-  console.log(`history`, history);
-
   const {
     location: { hash },
   } = history;
@@ -19,6 +18,9 @@ export const InvestorOpportunity = ({ history }) => {
 
       case "#share deals":
         return <Opportunities />;
+
+      case "#interested":
+        return <Interests />;
 
       default:
         return <Opportunities />;
@@ -35,7 +37,7 @@ export const InvestorOpportunity = ({ history }) => {
         className=" d-flex align-items-center justify-content-between flex-wrap tab-wrap"
         style={{ rowGap: "1rem" }}
       >
-        <Tabs tabItems={["opportunities", "shared deals", "Interested"]} />
+        <Tabs tabItems={["opportunities", "shared deals", "interested"]} />
 
         <div
           className="d-flex align-items-center"

@@ -22,17 +22,17 @@ const investorNavigators = [
     icon: dashboard,
   },
   {
-    title: "Investment Opportunities",
+    title: "Opportunities",
     activator: "opportunities",
     path: "/investor/opportunities",
     icon: startup,
   },
-  {
-    title: "Interested",
-    activator: "interested",
-    path: "/investor/interested",
-    icon: interested,
-  },
+  // {
+  //   title: "Interested",
+  //   activator: "interested",
+  //   path: "/investor/interested",
+  //   icon: interested,
+  // },
   // {
   //   title: "Portfolio",
   //   activator: "portfolio",
@@ -94,7 +94,11 @@ export const Sidebar = () => {
   } = useHistory();
 
   const activateLink = (path) => {
-    return pathname.includes(path) ? "active-side" : "";
+    if (pathname.includes("interested") && path === "opportunities") {
+      return "active-side";
+    } else {
+      return pathname.includes(path) ? "active-side" : "";
+    }
   };
 
   const [navigator, setNavigator] = useState([]);
@@ -112,10 +116,6 @@ export const Sidebar = () => {
         : setNavigator(boosterNavigators);
     }
   }, [pathname]);
-
-  console.log(`pathname`, pathname);
-  console.log(`navigator`, navigator);
-  console.log(`state`, state);
 
   return (
     <div className="side-main">
