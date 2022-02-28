@@ -34,7 +34,7 @@ export const TeamMemberSignUp = ({ history }) => {
             layout="vertical"
             onFinish={onFinish}
           >
-            <div className="col-md-6 col-12 mb-4">
+            <div className="col-md-6 col-12 mb-2">
               <AuthTextField
                 name="first name"
                 label="First Name"
@@ -42,7 +42,7 @@ export const TeamMemberSignUp = ({ history }) => {
                 className="mentor_gray_card_input"
               />
             </div>
-            <div className="col-md-6 col-12 mb-4">
+            <div className="col-md-6 col-12 mb-2">
               <AuthTextField
                 name="last name"
                 label="Last Name"
@@ -51,7 +51,7 @@ export const TeamMemberSignUp = ({ history }) => {
               />
             </div>
 
-            <div className="col-12 mb-4">
+            <div className="col-12 mb-2">
               <AuthTextField
                 name="email"
                 label="Email"
@@ -60,7 +60,7 @@ export const TeamMemberSignUp = ({ history }) => {
               />
             </div>
 
-            <div className="col-12 mb-4">
+            <div className="col-12 mb-2">
               <AuthPasswordField
                 numb={8}
                 message="Password must be 8 digits"
@@ -108,7 +108,7 @@ export const TeamMemberSignUp = ({ history }) => {
               />
             </div>
 
-            <div className="col-12 mb-5">
+            <div className="col-12 mb-3">
               <section
                 className="d-flex align-items-center mentor_switch_auth"
                 style={{ columnGap: 6 }}

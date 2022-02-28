@@ -10,7 +10,7 @@ export const TeamMemberAuthSide = () => {
           <img src={logo} alt={'logo'} />
         </div>
         <h1>Grow your startups. Become a KV member today.</h1>
-        <p>
+        <p className="py-4">
           We are inviting startups to help them incubate and accelerate business
           idea to funding
         </p>

@@ -30,6 +30,16 @@ export const team = async (values) => {
   }
 }
 
+export const product = async (values) => {
+    try {
+        const res = await request.post('', values)
+        console.log(res?.data)
+        return res?.data
+    } catch (err) {
+        throw err
+    }
+}
+
 export const fundraising = async (values) => {
     try {
         const res = await request.post('startup/add-fundraising', values)

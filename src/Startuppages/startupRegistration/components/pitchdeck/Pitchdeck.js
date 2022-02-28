@@ -60,6 +60,7 @@ export const PitchDeck = () => {
       }),
     )
   }
+  
   const handleSubmit = (value) => {
     const newFile = {
       pitchDeckFile: [
@@ -219,7 +220,7 @@ export const PitchDeck = () => {
                       )
                     ) : (
                       <div className="my-4 d-flex justify-content-center text-center">
-                        <span>No File yesy</span>
+                        <span>No File Uploaded</span>
                       </div>
                     )}
                   </div>
