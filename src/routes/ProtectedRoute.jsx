@@ -14,7 +14,7 @@ export  const ProtectedRoute = ({ ...props})=>{
 
     useEffect(()=>{ 
         setLoading(true);
-        if(stateAuth.authenticated === false && !stateAuth.roles.includes(props.type)){
+        if(!stateAuth.authenticated && !stateAuth.roles.includes(props.type)){
             // console.log(history.location.pathname)
             setLocationHistory(history.location.pathname)
             history.push('/')
@@ -22,6 +22,7 @@ export  const ProtectedRoute = ({ ...props})=>{
         if(!stateAuth.roles.includes(props.type)){
 
             history.push('/') 
+            // setLocationHistory(history.location.pathname)
             console.log('e noh work')
             console.log(!stateAuth.roles.includes(props.type))
         }

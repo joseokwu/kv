@@ -4,7 +4,11 @@ import {
     CHART_SUPPORT, SETTINGS,
     CHANGE_PAGE,
     SHOW_EVENT,
+    GET_EVENTS_FAILED,
+    GET_EVENTS_SUCCESS
   } from '../actions.types';
+
+import { getEvents } from '../../../services/events';
 
 
   export const changeDPath = (value)=> (dispatch) => {
@@ -15,6 +19,22 @@ import {
     })
 
       
+}
+
+export  const events = (id) => async(dispatch) =>{
+    try{
+      const res = await getEvents(id);
+        dispatch({
+          type:GET_EVENTS_SUCCESS
+        })
+
+        return res;
+
+    }catch(err){
+      dispatch({
+        type: GET_EVENTS_FAILED
+      })
+    }
 }
 
 // const setAlert = ()=>{

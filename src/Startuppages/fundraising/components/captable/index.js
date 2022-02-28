@@ -21,10 +21,10 @@ export const CapTable = () => {
 
   const capTable = [
     {
-      shareHolders: 'John Carter Robinson',
-      shareType: 'Angel Investor',
-      noShare: '5',
-      sharePercent: '2.5 %',
+      "shareHolders": "John Carter Robinson",
+      "shareType": "Angel Investor",
+      "noShare": "5",
+      "sharePercent": "2.5 %",
     },
     {
       shareHolders: 'John Carter Robinson',

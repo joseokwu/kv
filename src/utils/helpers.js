@@ -40,3 +40,17 @@ export const formatBytes = (bytes, decimals = 2) => {
 
 	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 };
+
+export const convertToMillion = (num = '0') => {
+  console.log(num)
+    const strNum = num?.replaceAll(",", "");
+    if (/^\d+$/.test(strNum) && num?.length >= 7) {
+      let integerPart = strNum.substr(0, strNum.length - 6);
+      let decimalPart = strNum.substr(strNum.length - 6, strNum.length - 1);
+      let newNum = `${integerPart}.${decimalPart}`;
+      return `${Math.round(Number(newNum))}M`;
+    } else {
+      return num;
+    }
+  };
+  

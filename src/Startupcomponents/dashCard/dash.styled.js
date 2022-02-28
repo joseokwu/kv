@@ -65,7 +65,7 @@ export const CardWrap = styled.div`
 
   span {
     font-size: 0.6rem;
-    line-height: 30%;
+    line-height: 120%;
     margin-top: 0.7rem;
     margin-left: 4px;
   }
