@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './dashboard.css'
 import { cardData, cardFill } from '../../constants/domiData'
 import { DashCard, CardFill } from '../../Startupcomponents/index'
 import { TodoList } from './components/todolist'
 import { UpComing } from './components/upComing'
+import {} from '../../'
+import { getDashboardInfo } from '../../services'
 
 export const StartupDashboard = () => {
   // const appCardData = [1, 2, 3, 4, 5]
+  const [ dashInfo, setDashInfo ] = useState({})
+
+  const fetchData = async() => {
+    const res = await getDashboardInfo();
+    setDashInfo(res);
+  }
+  
+  useEffect (() => {
+    fetchData();
+
+    return () => {
+      setDashInfo({})
+    }
+  }, [])
+  console.log(dashInfo)
+
+
   return (
     <div className="dashboardMain">
       {/* <section className="startup-dash mb-4">

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import {
-  AuthSide,
   AuthButton,
   AuthTextField,
   AuthPasswordField,
+  SignInAuthSide,
 } from '../../mentorComponents/index'
 import { useHistory } from 'react-router-dom'
 import './signIn.css'
@@ -42,7 +42,7 @@ export const SignIn = () => {
   return (
     <div className="row mx-0 auth-wrap">
       <section className="col-md-6">
-        <AuthSide />
+        <SignInAuthSide />
       </section>
       <section className="col-md-6 px-5 d-flex align-items-center">
         <div className="gray_signIn">
