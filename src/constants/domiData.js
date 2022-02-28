@@ -37,7 +37,7 @@ export const cardData = [
 
 export const boosterData = [
   { icon: newApp, name: 'New Deals', count: 200, color: '#E5FFE4' },
-  { icon: pending, name: 'Applied', count: 20, color: '#FAD7DC' },
+  { icon: pending, name: 'Applied', count: 20, color:"#FAD7DC"},
   { icon: newApp, name: 'Active', count: 20, color: '#FAD7DC' },
 ]
 
@@ -163,4 +163,15 @@ export const images = [
   },
 ]
 
-
+// assignments: (2) [{…}, {…}]
+// events: (3) [{…}, {…}, {…}]
+// founders: "20"
+// invest: []
+// investors: "30"
+// lastFund: {amount: '500,000', date: 'Thu Mar 24 2022 10:00:00 GMT+0100 (West Africa Standard Time)'}
+// mentors: "20"
+// partners: "10"
+// startupInvestors: []
+// total: "900,000"
+// totalFund: {amount: '700,000'}
+// valuation: {amount: '5,000,000
