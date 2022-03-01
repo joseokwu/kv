@@ -2,14 +2,11 @@ import { HeadWrapper, TodoCard } from './dash.component'
 import { images } from '../../../constants/domiData'
 import { Tag } from '../../../Startupcomponents'
 import { useHistory } from 'react-router-dom'
-import dateFormat from "dateformat";
 
-export const TodoList = ({data}) => {
+export const TodoList = () => {
   const todoArr = [1]
   const toArr = [1]
   const history = useHistory()
-
-  console.log(data)
 
   return (
     <div className="container">

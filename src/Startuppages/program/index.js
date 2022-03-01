@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from 'react'
 import {
   ProgramCardWrapper,
   TabFilterWrapper,
@@ -12,10 +13,27 @@ import { useHistory } from 'react-router-dom'
 import { Assignment } from './components/assignment'
 import { Rating } from './components/rating'
 import { CalenderComponent } from './components/calender'
+import { getProgramInfo } from '../../services'
 
 
 export const StartupProgram = () => {
   const tabList = ['Calender', 'Session', 'Assignment', 'Rating']
+
+  const [programInfo, setProgramInfo] = useState({})
+
+  const getData = async () => {
+    const res = await getProgramInfo()
+    setProgramInfo(res)
+  }
+
+  useEffect(() => {
+    getData()
+
+    return () => {
+      setProgramInfo({})
+    }
+  }, [])
+  console.log(programInfo)
 
   const {
     location: { hash },
@@ -26,13 +44,13 @@ export const StartupProgram = () => {
       case '#Calender':
         return <CalenderComponent />
       case '#Session':
-        return <Session />
+        return <Session data={programInfo?.sessions} />
       case '#Assignment':
-        return <Assignment />
+        return <Assignment data={programInfo?.assignment} />
       case '#Rating':
         return <div></div>
       default:
-        return <span></span>
+        return <CalenderComponent />
     }
   }
 

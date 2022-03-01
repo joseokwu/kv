@@ -20,20 +20,19 @@ const [checkSat, setCheckSat] = useState(false)
 }
 
   return (
-    <div className="row mx-0 auth-wrap">
+    <div className="row mx-0 auth-wrap my-0">
       <section className="col-md-6">
         <AuthSide />
       </section>
       <section className="col-md-6">
         <div className="gray-card">
-          <section className="switch-signUp mb-5">
+          <section className="switch-signUp">
             <button>Startup</button>
             <button>Investor</button>
             <button>Mentor</button>
             <button className="active-signUp">Booster Partner</button>
           </section>
           <Form 
-
               name='Sign-Up'
               className="row"
           		initialValues={{

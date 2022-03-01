@@ -22,7 +22,7 @@ export const MentorConfirmEmail = () => {
             </div>
           </section>
 
-          <section className="col-lg-6 d-flex align-items-center mx-3 mt-4">
+          <section className="col-lg-6 d-flex align-items-center mx-3" style={{marginTop: '100px'}}>
             <div className="gray_signIn confirm_email confirm_email_border">
               <section className="text-center">
                 <img src={sentMail} alt="email sent" />

@@ -8,23 +8,24 @@ import {
   LabelButton,
 } from '../../../../startupRegistration/components/pitchdeck/pitch.styled'
 import downloadIcon from '../../../../../assets/icons/download.svg'
+import { months } from '../../../../../utils/helpers'
 
-export const NotSubmitted = () => {
+export const NotSubmitted = ({ data }) => {
   const assArr = [1, 2, 3, 4]
   const [showModal, setShowModal] = useState(false)
 
   return (
     <div>
-      {showModal ? (
-        <SmallModal id="submitAssignment" title="" closeModal={setShowModal}>
-          <SubmitAssignmentModal />
-        </SmallModal>
-      ) : (
-        <span></span>
-      )}
       <div className="row mt-3">
-        {assArr.map((i) => (
+        {data && data.map((info, i) => (
           <TodoCard key={i} className="col-lg-6 col-md-6 col-12 mx-3 px-4 mt-3">
+            {showModal ? (
+              <SmallModal id={i} title="" closeModal={setShowModal}>
+                <SubmitAssignmentModal data={info} />
+              </SmallModal>
+            ) : (
+              <span></span>
+            )}
             <div className="d-flex justify-content-between head">
               <div className="d-flex">
                 <h6 className="mr-3">Assignment</h6>
@@ -32,7 +33,10 @@ export const NotSubmitted = () => {
             </div>
 
             <div className="d-flex justify-content-between my-2 date">
-              <h6>05 | September</h6>
+              <h6>
+                {new Date(info?.date).getDate()} |{' '}
+                {months[new Date(info?.date).getMonth()]}
+              </h6>
               <Tag
                 name="Not Submitted"
                 bg="#F8F8F8"
@@ -43,17 +47,12 @@ export const NotSubmitted = () => {
 
             <div className="my-2 body">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
+                {info?.description}
               </p>
             </div>
 
             <div className="my-4 notSubAssbtn">
-              <button
-                data-target="#submitAssignment"
-                onClick={() => setShowModal(true)}
-              >
+              <button data-target={i} onClick={() => setShowModal(true)}>
                 Submit
               </button>
             </div>

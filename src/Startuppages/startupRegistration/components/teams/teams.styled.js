@@ -1,5 +1,18 @@
 import styled from 'styled-components/macro'
 
+export const CoInputWrapper = styled.label`
+  position: absolute;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: #2BB4F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 310px;
+  left: 120px;
+ ` 
+
 export const HeaderTeam = styled.div`
   width: 224px;
 
