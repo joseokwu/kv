@@ -1,4 +1,4 @@
-h1 {
+.authContent h1 {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
@@ -9,7 +9,7 @@ h1 {
   color: #f9f9fc;
 }
 
-p {
+.authContent p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;

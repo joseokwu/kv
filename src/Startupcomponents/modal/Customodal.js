@@ -7,7 +7,7 @@ import {
   CloseModal,
   ModalHeader,
 } from "./custom.styled";
-import Close from "../../assets/icons/close.svg";
+import Close from "../../assets/icons/Close.svg";
 
 export const CustomModal = ({ children, handleClose, title }) => {
   return (
