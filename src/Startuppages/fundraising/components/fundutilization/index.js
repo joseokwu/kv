@@ -51,17 +51,18 @@ export const FundUtilization = ({ data = {} }) => {
           </thead>
 
           <tbody>
-            {uitlizations.map((data) => (
-              <tr key={data}>
-                <td style={{ fontWeight: "bolder" }}> {data?.head} </td>
-                <td> {data?.month1} </td>
-                <td> {data?.month2} </td>
-                <td> {data?.month3} </td>
-                <td> {data?.month4} </td>
-                <td> {data?.month5} </td>
-                <td> {data?.month6} </td>
-              </tr>
-            ))}
+            {uitlizations?.length > 0 &&
+              uitlizations.map((data) => (
+                <tr key={data}>
+                  <td style={{ fontWeight: "bolder" }}> {data?.head} </td>
+                  <td> {data?.month1} </td>
+                  <td> {data?.month2} </td>
+                  <td> {data?.month3} </td>
+                  <td> {data?.month4} </td>
+                  <td> {data?.month5} </td>
+                  <td> {data?.month6} </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </Section>

@@ -47,14 +47,15 @@ export const CapTable = (data = []) => {
             </tr>
           </thead>
           <tbody>
-            {capTable.map((data) => (
-              <tr key={data}>
-                <td> {data?.shareHolders} </td>
-                <td> {data?.shareType} </td>
-                <td> {data?.noShare} </td>
-                <td> {data?.sharePercent} </td>
-              </tr>
-            ))}
+            {capTable?.length > 0 &&
+              capTable.map((data) => (
+                <tr key={data}>
+                  <td> {data?.shareHolders} </td>
+                  <td> {data?.shareType} </td>
+                  <td> {data?.noShare} </td>
+                  <td> {data?.sharePercent} </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </Section>

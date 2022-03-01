@@ -58,7 +58,7 @@ export const StartupFundingRaising = () => {
       case "#Financial Projection":
         return <FinancialProjection />;
       default:
-        return <FundingAsk />;
+        return <FundingAsk data={fundData?.fundAsk} />;
     }
   };
 

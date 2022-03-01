@@ -49,42 +49,43 @@ export const PreviousRound = ({ data = [] }) => {
           </tr>
         </thead>
         <tbody>
-          {preRoundArr.map((data) => (
-            <tr key={data}>
-              <td style={{ fontWeight: "600", lineHeight: "130%" }}>
-                {" "}
-                {data?.invest}{" "}
-              </td>
-              <td style={{ fontWeight: "600", lineHeight: "130%" }}>
-                {" "}
-                {data?.fundDate}{" "}
-              </td>
-              <td style={{ fontWeight: "600", lineHeight: "130%" }}>
-                {" "}
-                {data?.dealType}{" "}
-              </td>
-              <td style={{ fontWeight: "600", lineHeight: "130%" }}>
-                {" "}
-                {data?.fundRound}{" "}
-              </td>
-              <td style={{ fontWeight: "600", lineHeight: "130%" }}>
-                {" "}
-                {data?.investAmnt}{" "}
-              </td>
-              <td style={{ fontWeight: "600", lineHeight: "130%" }}>
-                {" "}
-                {data?.dulition}{" "}
-              </td>
-              <td style={{ fontWeight: "600", lineHeight: "130%" }}>
-                {" "}
-                {data?.preMoney}{" "}
-              </td>
-              <td style={{ fontWeight: "600", lineHeight: "130%" }}>
-                {" "}
-                {data?.pstMoney}{" "}
-              </td>
-            </tr>
-          ))}
+          {preRoundArr?.length > 0 &&
+            preRoundArr.map((data) => (
+              <tr key={data}>
+                <td style={{ fontWeight: "600", lineHeight: "130%" }}>
+                  {" "}
+                  {data?.invest}{" "}
+                </td>
+                <td style={{ fontWeight: "600", lineHeight: "130%" }}>
+                  {" "}
+                  {data?.fundDate}{" "}
+                </td>
+                <td style={{ fontWeight: "600", lineHeight: "130%" }}>
+                  {" "}
+                  {data?.dealType}{" "}
+                </td>
+                <td style={{ fontWeight: "600", lineHeight: "130%" }}>
+                  {" "}
+                  {data?.fundRound}{" "}
+                </td>
+                <td style={{ fontWeight: "600", lineHeight: "130%" }}>
+                  {" "}
+                  {data?.investAmnt}{" "}
+                </td>
+                <td style={{ fontWeight: "600", lineHeight: "130%" }}>
+                  {" "}
+                  {data?.dulition}{" "}
+                </td>
+                <td style={{ fontWeight: "600", lineHeight: "130%" }}>
+                  {" "}
+                  {data?.preMoney}{" "}
+                </td>
+                <td style={{ fontWeight: "600", lineHeight: "130%" }}>
+                  {" "}
+                  {data?.pstMoney}{" "}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </Table>
     </div>
