@@ -29,7 +29,7 @@ export const getProgramInfo = async () => {
     }
 }
 
-export const getBoosterPartnerInfo = async () => {
+export const getBoosterData = async () => {
     try {
         const res = await request.post('startup/boosterpartner')
         return res?.data;

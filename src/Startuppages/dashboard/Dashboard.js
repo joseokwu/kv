@@ -14,7 +14,6 @@ export const StartupDashboard = () => {
 
   const fetchData = async () => {
     const res = await getDashboardInfo()
-
     setDashInfo(res)
   }
 
