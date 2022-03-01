@@ -110,7 +110,7 @@ export const StartupDashboard = () => {
         </div>
       </section>
       <section className="my-4">
-        <UpComing data={dashInfo?.UpComingEvents} />
+        <UpComing data={dashInfo?.events} />
       </section>
     </div>
   )

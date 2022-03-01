@@ -19,3 +19,21 @@ export const getEventInfo = async () => {
         throw err;
     }
 }
+
+export const getProgramInfo = async () => {
+    try {
+        const res = await request.post('startup/programs');
+        return res?.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export const getBoosterPartnerInfo = async () => {
+    try {
+        const res = await request.post('startup/boosterpartner')
+        return res?.data;
+    } catch (err) {
+        throw err;
+    }
+}

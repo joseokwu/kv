@@ -4,48 +4,44 @@ import { Feedback, TodoCard } from '../styled'
 import doc from '../../../../../assets/icons/assdoc.svg'
 import docIcon from '../../../../../assets/icons/docIcon.svg'
 import lady from '../../../../../assets/images/smileLady.svg'
+import { months } from '../../../../../utils/helpers'
 
-export const Submitted = () => {
+export const Submitted = ({ data }) => {
   const buscomArr = [1, 2, 3, 4]
   const [showModal, setShowModal] = useState(false)
 
   return (
     <div>
-      {showModal ? (
-        <LargeModal id="feedback" title="" closeModal={setShowModal}>
-          <AssignmentFeedBackModal />
-        </LargeModal>
-      ) : (
-        <span></span>
-      )}
-
       <div className="row mt-3">
-        {buscomArr.map((i) => (
+        {data.map((info, i) => (
           <TodoCard key={i} className="col-lg-6 col-md-6 col-12 mx-3 px-4 mt-3">
+            {showModal ? (
+              <LargeModal id={i} title="" closeModal={setShowModal}>
+                <AssignmentFeedBackModal data={info} />
+              </LargeModal>
+            ) : (
+              <span></span>
+            )}
             <div className="d-flex justify-content-between head">
               <div className="d-flex">
-                <h6 className="mr-3">Business Canvas Assignment</h6>
+                <h6 className="mr-3">{info?.topic}</h6>
               </div>
             </div>
 
             <div className="d-flex justify-content-between my-2 date">
-              <h6>05 | September</h6>
+              <h6>
+                {new Date(info?.date).getDate()} |{' '}
+                {months[new Date(info?.date).getMonth()]}
+              </h6>
               <Tag name="Complete" bg="#D1FFD3" color="#337808" fz="12px" />
             </div>
 
             <div className="my-2 body">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
-              </p>
+              <p>{info?.description}</p>
             </div>
 
             <div className="my-4 subAssbtn">
-              <button
-                data-target="#feedback"
-                onClick={() => setShowModal(true)}
-              >
+              <button data-target={i} onClick={() => setShowModal(true)}>
                 View Feedback
               </button>
             </div>
@@ -56,7 +52,7 @@ export const Submitted = () => {
   )
 }
 
-export const AssignmentFeedBackModal = () => {
+export const AssignmentFeedBackModal = ({ data }) => {
   return (
     <Feedback className="mx-4 mb-5">
       <div className="row mx-5">
@@ -78,10 +74,13 @@ export const AssignmentFeedBackModal = () => {
           </article>
         </div>
         <div className="col-lg-7 mx-2 my-5">
-          <h4 className="pt-5 pb-2">Business plan for Applane Insteen</h4>
-          <span style={{ color: '#525151' }}>Submitted On</span>
+          <h4 className="pt-5 pb-2">{data?.topic}</h4>
+          <span style={{ color: '#525151' }}>{data?.status} On</span>
           <div className="my-4 ">
-            <h3>05 | September</h3>
+            <h3>
+              {new Date(data?.date).getDate()} |{' '}
+              {months[new Date(data?.date).getMonth()]}
+            </h3>
           </div>
         </div>
 
@@ -89,20 +88,14 @@ export const AssignmentFeedBackModal = () => {
           <div className="d-flex mb-5">
             <img src={lady} alt="mentor pic" />
             <div className="ms-3">
-              <h4>Joan Amanpour</h4>
-              <span>Data Scientist</span>
+              <h4>{data?.host?.name}</h4>
+              <span>{data?.host?.position}</span>
             </div>
             <div className="ms-5 mt-4">
               <Tag name="2 Days Ago" bg="none" fz="12px" color="#2E3192" />
             </div>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.{' '}
-          </p>
+          <p>{data?.description}</p>
         </div>
       </div>
     </Feedback>
