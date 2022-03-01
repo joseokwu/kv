@@ -28,8 +28,6 @@ export const Opportunity = ({ history }) => {
     "product road map",
   ];
 
-  console.log(`pathname`, pathname);
-
   const renderContent = () => {
     switch (hash.replaceAll("%20", " ")) {
       case "#product":

@@ -13,7 +13,7 @@ import expired from '../../../assets/icons/ex.svg'
 import cancel from '../../../assets/icons/cancel.svg'
 import '../boosterPartner.css'
 
-export const AllApplication = () => {
+export const AllApplication = ({data}) => {
   const appliedArr = [1, 2]
   const approvedArr = [1]
   const expiredArr = [1]
@@ -54,7 +54,7 @@ export const AllApplication = () => {
       {/* Approved Modal end here */}
 
       {/* Approved */}
-      {approvedArr.map((i) => (
+      {data && data.map((item , i) => (
         <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
           <div>
             {compImage.map((comp, i) => (
@@ -62,20 +62,20 @@ export const AllApplication = () => {
             ))}
           </div>
           <div className="my-2">
-            {applicationCardData.map((data, i) => (
-              <h3 key={i}>{data.title}</h3>
-            ))}
+           
+              <h3> {item?.name} </h3>
+          
           </div>
           <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
           <div className="my-3">
-            {applicationCardData.map((data, i) => (
-              <p key={i}>
-                {data.content}
+            
+              <p >
+                {data.description}
                 <span data-target="#approved" data-toggle="modal">
                   Read More
                 </span>
               </p>
-            ))}
+            
           </div>
           <div>
             <button className="approvedBtn mt-2">
@@ -164,36 +164,7 @@ export const AllApplication = () => {
       {/* Declined Modal end here */}
 
       {/* Declined Card */}
-      {declinedArr.map((i) => (
-        <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
-          <div>
-            {compImage.map((comp, i) => (
-              <img className="" key={i} src={comp.logo} alt="company logo" />
-            ))}
-          </div>
-          <div className="my-2">
-            {applicationCardData.map((data, i) => (
-              <h3 key={i}>{data.title}</h3>
-            ))}
-          </div>
-          <Tag name="Cloud Computing" bg="#DEF6FF" color="#058DC1" fz="12px" />
-          <div className="my-3">
-            {applicationCardData.map((data, i) => (
-              <p key={i}>
-                {data.content}
-                <span data-target="#declined" data-toggle="modal">
-                  Read More
-                </span>
-              </p>
-            ))}
-          </div>
-          <button className="reapplyBtn mt-2 me-2">Re-Apply</button>
-          <button className="declinedBtn mt-2">
-            <img className="mr-2 mb-1" src={cancel} alt="declined icon" />
-            Declined
-          </button>
-        </ApplicationCard>
-      ))}
+      
     </div>
   )
 }

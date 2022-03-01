@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { OptionWrap, Option } from "./RowOption.styled";
 
-export const RowOption = ({ options = [], getSelected = () => {} }) => {
-  const [selected, setSelected] = useState("");
+export const RowOption = ({
+  options = [],
+  getSelected = () => {},
+  currentSelected = "",
+}) => {
+  const [selected, setSelected] = useState(currentSelected);
 
   const handleClick = (selectedOption) => {
     setSelected(selectedOption);

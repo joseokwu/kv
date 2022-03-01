@@ -8,13 +8,16 @@ import { Tag } from '../../../../Startupcomponents/tag/Tag'
 import { SmallModal } from '../../../../Startupcomponents'
 import lady from '../../../../assets/images/smileLady.svg'
 import question from '../../../../assets/icons/que.svg'
+import { months } from '../../../../utils/helpers'
 
-export const Session = () => {
-  const upArr = [1, 2]
-  const proArr = [1, 2]
-  const comArr = [1, 2]
-  const reArr = [1, 2]
+export const Session = ({ data = [] }) => {
+  // const upArr = [1, 2]
+  // const proArr = [1, 2]
+  // const comArr = [1, 2]
+  // const reArr = [1, 2]
   const [showModal, setShowModal] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
+  const [displayModal, setDisplayModal] = useState(false)
 
   return (
     <div>
@@ -26,16 +29,16 @@ export const Session = () => {
         <span></span>
       )}
 
-      {showModal ? (
-        <SmallModal id="completeModal" title="" closeModal={setShowModal}>
+      {openModal ? (
+        <SmallModal id="completeModal" title="" closeModal={setOpenModal}>
           <CompleteModal />
         </SmallModal>
       ) : (
         <span></span>
       )}
 
-      {showModal ? (
-        <SmallModal id="upcomingModal" title="" closeModal={setShowModal}>
+      {displayModal ? (
+        <SmallModal id="upcomingModal" title="" closeModal={setDisplayModal}>
           <UpcomingModal />
         </SmallModal>
       ) : (
@@ -57,23 +60,26 @@ export const Session = () => {
         </div>
       </TabFilterWrapper> */}
 
-        {upArr.map((i) => (
+        {data.map((info, i) => (
           <TodoCard
             key={i}
             className="col-6 mx-3 px-4"
-            data-target="#upcomingModal"
+            // data-target="#upcomingModal"
             onClick={() => setShowModal(true)}
             style={{ cursor: 'pointer' }}
           >
             <div className="d-flex justify-content-between head">
               <div className="d-flex">
-                <h6 className="mr-5">Business Canvas Demo</h6>
-                <Tag name="Upcoming" bg="#DEF6FF" fz="12px" color="#058DC1" />
+                <h6 className="mr-5">{info?.topic}</h6>
+                <Tag name={info?.status} bg={info?.status === 'rescheduled' ? '#E8E8E8' : info?.status === 'in-progress' ? '#F0F1FF' : info?.status === 'on-going' ? '#DEF6FF' : info?.status === 'completed' ? '#D1FFD3' :""} fz='12px' color={info?.status === 'rescheduled' ? '#181818' : info?.status === 'on-going' ? '#058DC1' : info?.status === 'in-progress' ? '#2E3192' : info?.status === 'completed' ? '#337808' :''} />
               </div>
             </div>
 
             <div className="d-flex my-2 date">
-              <h6>05 | September</h6>
+              <h6>
+                {new Date(info?.date).getDate()} | {' '}
+                {months[new Date(info?.date).getMonth()]}
+              </h6>
               <article className="pt-1 mx-4">Duration - 45minutes</article>
 
               <div>
@@ -84,9 +90,7 @@ export const Session = () => {
 
             <div className="my-4 body">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
+                {info?.description}
               </p>
             </div>
 
@@ -97,161 +101,15 @@ export const Session = () => {
                   <img className="" src={person3} alt="" />
                 </div>
                 <div className="d-block ms-2 mt-2">
-                  <p className="p"> James </p>
-                  <p className="secPara mr-4"> Data Scientist</p>
+                  <p className="p">{info?.host?.name}</p>
+                  <p className="secPara mr-4">{info?.host?.position}</p>
                 </div>
               </div>
             </div>
           </TodoCard>
         ))}
 
-        {proArr.map((i) => (
-          <TodoCard
-            key={i}
-            className="col-6 mx-3 px-4"
-            data-target="#inProgressModal"
-            onClick={() => setShowModal(true)}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="d-flex justify-content-between head">
-              <div className="d-flex">
-                <h6 className="mr-5">Business Canvas Demo</h6>
-                <Tag
-                  name="In-progress"
-                  bg="#F0F1FF"
-                  fz="12px"
-                  color="#2E3192"
-                />
-              </div>
-            </div>
-
-            <div className="d-flex my-2 date">
-              <h6>05 | September</h6>
-              <article className="pt-1 mx-4">Duration - 45minutes</article>
-
-              <div>
-                <img src={clock} alt="clock" />
-                <span className="ps-1">10am - 12pm</span>
-              </div>
-            </div>
-
-            <div className="my-4 body">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
-              </p>
-            </div>
-
-            <div className="my-2 foot d-flex justify-content-between ">
-              <button>View Session</button>
-              <div className="d-flex mx-4">
-                <div>
-                  <img className="" src={person3} alt="" />
-                </div>
-                <div className="d-block ms-2 mt-2">
-                  <p className="p"> James </p>
-                  <p className="secPara mr-4"> Data Scientist</p>
-                </div>
-              </div>
-            </div>
-          </TodoCard>
-        ))}
-
-        {comArr.map((i) => (
-          <TodoCard
-            key={i}
-            className="col-6 mx-3 px-4"
-            data-target="#completeModal"
-            onClick={() => setShowModal(true)}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="d-flex justify-content-between head">
-              <div className="d-flex">
-                <h6 className="mr-5">Business Canvas Demo</h6>
-                <Tag name="Complete" bg="#D1FFD3" fz="12px" color="#337808" />
-              </div>
-            </div>
-
-            <div className="d-flex my-2 date">
-              <h6>05 | September</h6>
-              <article className="pt-1 mx-4">Duration - 45minutes</article>
-
-              <div>
-                <img src={clock} alt="clock" />
-                <span className="ps-1">10am - 12pm</span>
-              </div>
-            </div>
-
-            <div className="my-4 body">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
-              </p>
-            </div>
-
-            <div className="my-2 foot d-flex justify-content-between ">
-              <button>View Session</button>
-              <div className="d-flex mx-4">
-                <div>
-                  <img className="" src={person3} alt="" />
-                </div>
-                <div className="d-block ms-2 mt-2">
-                  <p className="p"> James </p>
-                  <p className="secPara mr-4"> Data Scientist</p>
-                </div>
-              </div>
-            </div>
-          </TodoCard>
-        ))}
-
-        {reArr.map((i) => (
-          <TodoCard key={i} className="col-6 mx-3 px-4">
-            <div className="d-flex justify-content-between head">
-              <div className="d-flex">
-                <h6 className="mr-5">Business Canvas Demo</h6>
-                <Tag
-                  name="Rescheduled"
-                  bg="#E8E8E8"
-                  fz="12px"
-                  color="#181818"
-                />
-              </div>
-            </div>
-
-            <div className="d-flex my-2 date">
-              <h6>05 | September</h6>
-              <article className="pt-1 mx-4">Duration - 45minutes</article>
-
-              <div>
-                <img src={clock} alt="clock" />
-                <span className="ps-1">10am - 12pm</span>
-              </div>
-            </div>
-
-            <div className="my-4 body">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
-              </p>
-            </div>
-
-            <div className="my-2 foot d-flex justify-content-between ">
-              <button>View Session</button>
-              <div className="d-flex mx-4">
-                <div>
-                  <img className="" src={person3} alt="" />
-                </div>
-                <div className="d-block ms-2 mt-2">
-                  <p className="p"> James </p>
-                  <p className="secPara mr-4"> Data Scientist</p>
-                </div>
-              </div>
-            </div>
-          </TodoCard>
-        ))}
+       
       </div>
     </div>
   )
@@ -417,7 +275,7 @@ export const UpcomingModal = () => {
             <h2>Legal Frame Work</h2>
           </div>
           <div className="mt-1 ms-4">
-            <Tag name="In-progress" bg="#F0F1FF" fz="12px" color="#2E3192" />
+            <Tag name="Upcoming" bg="#DEF6FF" fz="12px" color="#058DC1" />
           </div>
         </div>
 

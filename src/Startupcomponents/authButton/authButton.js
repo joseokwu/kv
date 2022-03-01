@@ -15,7 +15,7 @@ export const AuthButton = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`btn-main btn-${variant} ${className}`}
+      className={`btn_main btn_${variant} ${className}`}
       type={type}
     >
       {loading ? <CircularLoader /> : label}

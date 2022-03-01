@@ -1,19 +1,29 @@
-h1 {
+.authContent h4 {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 60px;
   line-height: 75px;
-  display: flex;
-  align-items: center;
   color: #f9f9fc;
 }
 
-p {
+.authContent p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
   line-height: 30px;
   color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+  .authContent h4 {
+    font-size: 32px;
+    line-height: 41px;
+  }
+
+  .authContent p {
+    font-size: 1rem;
+    line-height: 26px;
+  }
 }

@@ -4,6 +4,10 @@ import { useActivity } from '../../../../hooks/useBusiness'
 import RedFile from '../../../../assets/icons/redFile.svg'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
+import { product } from './../../../../services/startUpReg'
+import { formatBytes } from '../../../../utils/helpers'
+import { toast } from 'react-hot-toast'
+
 import {
   FileWrapper,
   FileText,
@@ -13,6 +17,16 @@ import {
 import DownloadIcon from '../../../../assets/icons/download.svg'
 
 export const Product = () => {
+  const [loading, setLoading] = useState(false)
+
+  const [fileInfo, setFile] = useState([
+    {
+      file: null,
+      size: null,
+      name: 'infoFile',
+    },
+  ])
+
   const {
     changePath,
     state: { path },
@@ -26,13 +40,48 @@ export const Product = () => {
     changePath(path - 1)
   }
 
+  const handleChange = (e) => {
+    console.log('hello')
+    const { files, name } = e.target
+    setFile(
+      fileInfo.map((item) => {
+        if (name === item?.name) {
+          item.file = files
+          item.size = formatBytes(files.size)
+        }
+        return item
+      }),
+    )
+  }
+
+  const handleSubmit = (value) => {
+    const newFile = {
+      pitchDeckFile: [
+        {
+          url: fileInfo.file?.name,
+        },
+      ],
+      // profileId: '61d5be4fb801676adafcf4f4',
+    }
+    setLoading(true)
+    product(value).then((res) => {
+      if (res?.message) {
+        console.log(res)
+        toast.success(res?.message)
+        setLoading(false)
+        next()
+      }
+    })
+      console.log(newFile)
+  }
+
   return (
     <>
       <HeaderProduct>
         <h5 className="text-nowrap"> Product / Services </h5>
         <p className="text-nowrap">Let's help you explain your product</p>
       </HeaderProduct>
-      <form style={{ marginBottom: '4rem' }}>
+      <form style={{ marginBottom: '4rem' }} onSubmit={handleSubmit}>
         <FormWrapper>
           <div className="div">
             <span>Product / Service Description</span>

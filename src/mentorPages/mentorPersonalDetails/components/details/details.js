@@ -18,6 +18,7 @@ const Details = () => {
     <div className="mentor_details_form_wrap">
       <h3>Personal Details</h3>
       <p>Let’s get to know you</p>
+      <form>
       <div className="row mb-4">
         <section className="col-md">
           <div className="form-dp">
@@ -250,6 +251,7 @@ const Details = () => {
           />
         </div>
       </section>
+      </form>
     </div>
   )
 }

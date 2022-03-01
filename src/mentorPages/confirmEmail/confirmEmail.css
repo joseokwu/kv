@@ -4,7 +4,7 @@
 }
 
 .confirm_email {
-  padding: 50px 18% !important;  
+  padding: 50px 18% !important;
 }
 
 .confirm_email h5 {
@@ -18,7 +18,7 @@
   margin-bottom: 1rem;
 }
 
-.confirm_email span {
+.confirm_email p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
