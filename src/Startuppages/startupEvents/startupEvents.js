@@ -1,40 +1,62 @@
-import React from 'react'
-import { Tabs } from '../../Startupcomponents'
-import './startupEvents.css'
-import down from '../../assets/icons/downArrow.svg'
-import { SelectionDay } from './components/selectionDay'
+import React, { useEffect, useState } from "react";
+import { Tabs } from "../../Startupcomponents";
+import "./startupEvents.css";
+import down from "../../assets/icons/downArrow.svg";
+import { SelectionDay } from "./components/selectionDay";
+import { getEvents } from "../../services/events";
 
 export const StartupEvents = ({ history }) => {
   const {
     location: { hash },
-  } = history
+  } = history;
+
+  const [events, setEvents] = useState([]);
+  const [selectionEvents, setSelectionEvents] = useState([]);
+  const [demoEvents, setDemoEvents] = useState([]);
+  const [pitchEvents, setPitchEvents] = useState([]);
+  const [otherEvents, setOtherEvents] = useState([]);
+
+  const fetchData = async () => {
+    const res = await getEvents();
+    setEvents(res?.data);
+    setSelectionEvents(() =>
+      res?.data?.filter((x) => x.eventType === "selectionDay")
+    );
+    setDemoEvents(() => res?.data?.filter((x) => x.eventType === "demoDay"));
+    setPitchEvents(() =>
+      res?.data?.filter((x) => x.eventType === "pitchSession")
+    );
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const renderContent = () => {
     switch (hash) {
+      case "#Selection Day":
+        return <SelectionDay data={selectionEvents} />;
 
-      case '#Selection Day':
-        return <SelectionDay />
+      case "#Demo Day":
+        return <SelectionDay data={demoEvents} />;
 
-      case '#Demo Day':
-        return <SelectionDay />
+      case "#Pitching Events":
+        return <SelectionDay data={pitchEvents} />;
 
-      case '#Pitching Events':
-        return <SelectionDay />
-
-      case '#Other Events':
-        return <SelectionDay />
+      case "#Other Events":
+        return <SelectionDay data={events} />;
 
       default:
-        return <SelectionDay />
+        return <SelectionDay data={selectionEvents} />;
     }
-  }
+  };
 
   const tabItems = [
-    'Selection Day',
-    'Demo Day',
-    'Pitching Events',
-    'Other Events',
-  ]
+    "Selection Day",
+    "Demo Day",
+    "Pitching Events",
+    "Other Events",
+  ];
   return (
     <div className="mb-5">
       <div className="col-lg-12">
@@ -67,5 +89,5 @@ export const StartupEvents = ({ history }) => {
         <section className="mt-1">{renderContent()}</section>
       </div>
     </div>
-  )
-}
+  );
+};
