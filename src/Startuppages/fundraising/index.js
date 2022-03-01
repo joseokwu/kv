@@ -4,7 +4,6 @@ import {
   DashCard,
   CardFill,
 } from "../../Startupcomponents/index";
-import { cardFundData } from "../../constants/domiData";
 import { Tabs } from "../../Startupcomponents/tabs/Tabs";
 import { FundingAsk } from "./components/fundingask";
 import { useHistory } from "react-router-dom";
@@ -26,24 +25,12 @@ export const StartupFundingRaising = () => {
 
   const getData = async () => {
     const res = await getFundraisingData();
-    console.log("reserfe", res);
     setFundData(res);
   };
 
   useEffect(() => {
     getData();
   }, []);
-
-  console.log("fundData", fundData);
-
-  const cardFundData2 = [
-    {
-      icon: newApp,
-      name: "Founder's Capital",
-      count: "$100,000",
-      color: "#E5FFE4",
-    },
-  ];
 
   const renderContent = () => {
     switch (hash) {

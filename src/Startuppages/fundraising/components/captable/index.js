@@ -14,12 +14,8 @@ export const CapTable = (data = []) => {
       jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
     };
 
-    //console.log(html2pdf().from(element).set(opt).save())
-
     return html2pdf().from(element).set(opt).save();
   };
-
-  console.log("data", data.data);
 
   const capTable = [...data?.data];
 

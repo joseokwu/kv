@@ -16,8 +16,6 @@ export const FundUtilization = ({ data = {} }) => {
       jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
     };
 
-    //console.log(html2pdf().from(element).set(opt).save())
-
     return html2pdf().from(element).set(opt).save();
   };
 

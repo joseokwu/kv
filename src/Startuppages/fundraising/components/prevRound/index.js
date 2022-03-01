@@ -3,7 +3,6 @@ import html2pdf from "html2pdf.js";
 import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
 
 export const PreviousRound = ({ data = [] }) => {
-  console.log("data", data);
   const downloadStatement = () => {
     const element = document.querySelector("#fndRound");
 
@@ -14,8 +13,6 @@ export const PreviousRound = ({ data = [] }) => {
       html2canvas: { scale: 2 },
       jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
     };
-
-    //console.log(html2pdf().from(element).set(opt).save())
 
     return html2pdf().from(element).set(opt).save();
   };
