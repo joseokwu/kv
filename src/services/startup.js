@@ -10,3 +10,17 @@ export const getDashbordInfo = async() =>{
         throw err;
     }
 }
+
+export const getFundRaise = async() =>{
+
+    try{
+        const res = await request.post('startup/fundraising');
+        console.log(res?.data)
+        return res?.data;
+    }catch(err){
+        throw err;
+    }
+}
+
+getFundRaise();
+

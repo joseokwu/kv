@@ -391,6 +391,405 @@ founders: "20"
 investors: "30"
 mentors: "20"
 partners: "10"
+=================================================================
+"postMoney":"7,000,000",
+            "fundAsk":{
+            "requirement":[
+             "$100,000",
+            "Common Equity",
+            "Seed",
+            "10%",
+            "$20,000",
+            "$30,000",
+            "20 November, 2021",
+            ],
+            "committment":[
+            {
+              "investor": "Prima Juma Umbe",
+              "investType": "Angel Investor",
+              "amnt": "$100,000",
+              "ledInvest": "Yes",
+            },
+            {
+              "investor":"John Juma Umbe",
+              "investType": "Angel Investor",
+              "amnt": "$120,000",
+              "ledInvest":"No",
+            },
+            {
+              "investor": "Kim saje",
+              "investType": "Angel Investor",
+              "amnt": "$20,000",
+              "ledInvest": "No",
+            },
+            {
+              "investor": "shaun ken",
+              "investType": "Angel Investor",
+              "amnt": "$5,000",
+              "ledInvest": "Yes",
+            },
+            {
+              "investor": "kassy franee",
+              "investType": "Angel Investor",
+              "amnt": "$40,000",
+              "ledInvest":"No",
+            },
+            {
+              "investor": "Leo jimmy",
+              "investType": "Angel Investor",
+              "amnt": "$900,000",
+              "ledInvest": "Yes",
+            },
+                ]
+               },
+               "fundUtilization":[
+               
+                           {
+                  "head": "Revenue",
+                  "month1": "$200,000",
+                  "month2": "$25, 000",
+                  "month3": "$200, 000",
+                  "month4": "$200,000",
+                  "month5": "$300,000",
+                  "month6": "$200,000",
+                },
+                {
+                 " head": "Growth %",
+                  "month1": "",
+                  "month2": "",
+                  "month3": "",
+                  "month4": "",
+                  "month5": "",
+                  "month6": "",
+                },
+                {
+                  "head": "Expenses",
+                  "month1": "$200,000",
+                  "month2": "$25, 000",
+                  "month3": "$200, 000",
+                  "month4": "$200,000",
+                  "month5": "$300,000",
+                  "month6": "$200,000",
+                },
+                     {
+                  "head": "Burn Rate",
+                  "month1": "$200,000",
+                  "month2": "$125, 000",
+                  "month3": "$230, 000",
+                  "month4": "$45,000",
+                  "month5": "$31,000",
+                  "month6": "$24,220",
+                },
+                 {
+                  "head": "Runway Months",
+                  "month1": "$200,000",
+                  "month2": "$125, 000",
+                  "month3": "$230, 000",
+                  "month4": "$45,000",
+                  "month5": "$31,000",
+                  "month6": "$24,220",
+                },
+        
+               ],
+                 "capTable":[
+                    {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "",
+                  "shareType": "Total",
+                  "noShare": "",
+                  "sharePercent": "%",
+                },
+                 ],
+                 "previousRound":[
+                        {
+                      "invest": "James Parker",
+                     "fundDate": "20 November 2021",
+                      "dealType": "Common Equity",
+                      "fundRound": "Seed",
+                      "investAmnt": "$30,000",
+                      "dilution": "20 %",
+                      "preMoney": "$5, 000",
+                      "pstMoney": "$10, 000",
+                    },
+                    {
+                  "invest": "James Parker",
+                 "fundDate": "20 November 2021",
+                  "dealType": "Common Equity",
+                  "fundRound": "Seed",
+                  "investAmnt": "$30,000",
+                  "dilution": "20 %",
+                  "preMoney": "$5, 000",
+                  "pstMoney": "$10, 000",
+                },
+                {
+                  "invest": "James Parker",
+                 "fundDate": "20 November 2021",
+                  "dealType": "Common Equity",
+                  "fundRound": "Pres-Series A",
+                  "investAmnt": "$30,000",
+                  "dilution": "20 %",
+                  "preMoney": "$5, 000",
+                  "pstMoney": "$10, 000",
+                },
+                {
+                  "invest": "James Parker",
+                 "fundDate": "20 November 2021",
+                  "dealType": "Debt Financing",
+                  "fundRound": "Series A",
+                  "investAmnt": "$30,000",
+                  "dilution": "20 %",
+                  "preMoney": "$5, 000",
+                  "pstMoney": "$10, 000",
+                },
+                 ]
+
+===============================================================
+"foundersCapitial":"100,000",
+"totalFund":"300,000",
+"preMoney":"400,000",
+"postMoney":"7,000,000",
+"fundAsk":{
+"requirement":[
+ "$100,000",
+"Common Equity",
+"Seed",
+"10%",
+"$20,000",
+"$30,000",
+"20 November, 2021"
+],
+"committment":[
+{
+  "investor": "Prima Juma Umbe",
+  "investType": "Angel Investor",
+  "amnt": "$100,000",
+  "ledInvest": "Yes"
+},
+{
+  "investor":"John Juma Umbe",
+  "investType": "Angel Investor",
+  "amnt": "$120,000",
+  "ledInvest":"No"
+},
+{
+  "investor": "Kim saje",
+  "investType": "Angel Investor",
+  "amnt": "$20,000",
+  "ledInvest": "No"
+},
+{
+  "investor": "shaun ken",
+  "investType": "Angel Investor",
+  "amnt": "$5,000",
+  "ledInvest": "Yes"
+},
+{
+  "investor": "kassy franee",
+  "investType": "Angel Investor",
+  "amnt": "$40,000",
+  "ledInvest":"No"
+},
+{
+  "investor": "Leo jimmy",
+  "investType": "Angel Investor",
+  "amnt": "$900,000",
+  "ledInvest": "Yes"
+}
+    ]
+},
+"fundUtilization":[
+   
+{
+  "head": "Revenue",
+  "month1": "$200,000",
+  "month2": "$25, 000",
+  "month3": "$200, 000",
+  "month4": "$200,000",
+  "month5": "$300,000",
+  "month6": "$200,000"
+},
+{
+ " head": "Growth %",
+  "month1": "",
+  "month2": "",
+  "month3": "",
+  "month4": "",
+  "month5": "",
+  "month6": ""
+},
+{
+  "head": "Expenses",
+  "month1": "$200,000",
+  "month2": "$25, 000",
+  "month3": "$200, 000",
+  "month4": "$200,000",
+  "month5": "$300,000",
+  "month6": "$200,000"
+},
+     {
+  "head": "Burn Rate",
+  "month1": "$200,000",
+  "month2": "$125, 000",
+  "month3": "$230, 000",
+  "month4": "$45,000",
+  "month5": "$31,000",
+  "month6": "$24,220"
+},
+ {
+  "head": "Runway Months",
+  "month1": "$200,000",
+  "month2": "$125, 000",
+  "month3": "$230, 000",
+  "month4": "$45,000",
+  "month5": "$31,000",
+  "month6": "$24,220"
+}
+],
+"capTable":[
+
+{
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "",
+  "shareType": "Total",
+  "noShare": "",
+  "sharePercent": "%"
+}
+ ],
+ "previousRound":[
+        {
+      "invest": "James Parker",
+     "fundDate": "20 November 2021",
+      "dealType": "Common Equity",
+      "fundRound": "Seed",
+      "investAmnt": "$30,000",
+      "dilution": "20 %",
+      "preMoney": "$5, 000",
+      "pstMoney": "$10, 000"
+    },
+    {
+  "invest": "James Parker",
+ "fundDate": "20 November 2021",
+  "dealType": "Common Equity",
+  "fundRound": "Seed",
+  "investAmnt": "$30,000",
+  "dilution": "20 %",
+  "preMoney": "$5, 000",
+  "pstMoney": "$10, 000"
+},
+{
+  "invest": "James Parker",
+ "fundDate": "20 November 2021",
+  "dealType": "Common Equity",
+  "fundRound": "Pres-Series A",
+  "investAmnt": "$30,000",
+  "dilution": "20 %",
+  "preMoney": "$5, 000",
+  "pstMoney": "$10, 000"
+},
+{
+  "invest": "James Parker",
+ "fundDate": "20 November 2021",
+  "dealType": "Debt Financing",
+  "fundRound": "Series A",
+  "investAmnt": "$30,000",
+  "dilution": "20 %",
+  "preMoney": "$5, 000",
+  "pstMoney": "$10, 000"
+}
+ ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
