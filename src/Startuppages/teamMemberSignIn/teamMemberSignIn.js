@@ -48,7 +48,7 @@ export const TeamMemberSignIn = () => {
             layout="vertical"
             onFinish={onFinish}
           >
-            <div className="mb-4">
+            <div className="mb-2">
               <AuthTextField
                 name="email"
                 label="Email"
@@ -67,12 +67,12 @@ export const TeamMemberSignIn = () => {
             </div>
             <a
               href="/forgot_password"
-              className="d-block text-right forgot_text mb-4 mt-3"
+              className="d-block text-right forgot_text mb-2 mt-3"
             >
               Forgot password?
             </a>
             <Form.Item>
-              <div className="mb-4">
+              <div className="mb-0">
                 <AuthButton
                   label="Sign In"
                   loading={loading}
