@@ -26,8 +26,6 @@ export const StartupDashboard = () => {
     };
   }, []);
 
-  console.log("dash info", dashInfo);
-
   return (
     <div className="dashboardMain">
       {/* <section className="startup-dash mb-4">

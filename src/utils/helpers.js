@@ -7,7 +7,6 @@ export const setAuthToken = (token) => {
 };
 
 export const setLocationHistory = (location) => {
-  console.log(location);
   sessionStorage.setItem("user:redirect:location", JSON.stringify(location));
 };
 
@@ -36,9 +35,7 @@ export const formatBytes = (bytes, decimals = 2) => {
 };
 
 export const convertToMillion = (num = "0") => {
-  console.log(num);
   const strNum = num?.replaceAll(",", "");
-  console.log("strNum", strNum);
   if (/^\d+$/.test(strNum) && strNum?.length >= 7) {
     let integerPart = strNum.substr(0, strNum.length - 6);
     let decimalPart = strNum.substr(strNum.length - 6, strNum.length - 1);
