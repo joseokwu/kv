@@ -49,7 +49,7 @@ export const InvestorRegistration = () => {
 
   return (
     <div className="register-wrap" ref={wrapRef}>
-      <section className="register-header">
+      <section className="register-header" style={{ maxWidth: 1440 }}>
         <div>
           <span>
             <section
@@ -65,7 +65,7 @@ export const InvestorRegistration = () => {
         </div>
       </section>
 
-      <section className="register-grid">
+      <section className="register-grid" style={{ maxWidth: 1440 }}>
         <div>
           <ul
             className="register-list"

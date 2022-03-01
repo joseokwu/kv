@@ -15,5 +15,5 @@ export const AuthContent = ({ authData, authDataIndex }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};

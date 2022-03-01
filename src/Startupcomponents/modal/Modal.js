@@ -1,6 +1,6 @@
 import React from "react";
 import "./modal.css";
-import Close from "../../assets/icons/close.svg";
+import Close from "../../assets/icons/Close.svg";
 
 export const Modal = ({
   title = "",
