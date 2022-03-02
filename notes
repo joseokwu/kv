@@ -877,6 +877,58 @@ partners: "10"
     <button className="applyBtn mt-2">Apply</button>
   </ApplicationCard>
 ))}
+=====================================================================
+=======================================================
+
+<div className="col-xl-6 mb-4">
+<OpportunityCard
+  onClick={() => push(`/investor/opportunities/1`)}
+/>
+</div>
+<div className="col-xl-6 mb-4">
+<OpportunityCard
+  onClick={() => push(`/investor/opportunities/2`)}
+/>
+</div>
+<div className="col-xl-6 mb-4">
+<OpportunityCard
+  onClick={() => push(`/investor/opportunities/3`)}
+/>
+</div>
+<div className="col-xl-6 mb-4">
+<OpportunityCard
+  onClick={() => push(`/investor/opportunities/4`)}
+/>
+</div>
+
+===========================================
+<Tag name="Tech" />
+<Tag name="Engineering" color="#40439A" />
+<Tag name="Career" color="#E31937" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
