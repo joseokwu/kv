@@ -9,3 +9,13 @@ export const addInvestorProfile = async (values) => {
     throw new Error(error);
   }
 };
+
+export const getInvestorDashboard = async (values) => {
+  try {
+    const result = await request.post("investor/dashboard", values);
+    return result.data;
+  } catch (err) {
+    const error = err?.response?.data?.message || err?.message;
+    throw new Error(error);
+  }
+};

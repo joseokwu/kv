@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   ConnectCard,
   DashCard,
@@ -8,29 +8,75 @@ import {
 } from "../../components";
 import { ScheduleCard } from "../investorSchedule/components/Upcoming";
 import "./investDashboard.css";
+import { getInvestorDashboard } from '../../services/investor'
 
 export const InvestorDashboard = ({ history }) => {
+
+  const [dashData, setDashData] = useState({})
+
+  const fetchDashboard = async () => {
+    const res = await getInvestorDashboard()
+    setDashData(res)
+  }
+
+  useEffect(() => {
+    fetchDashboard()
+
+    return () => {
+      setDashData({})
+    }
+  }, [])
+  console.log(dashData)
+
   const { push } = history;
-  const count = [1, 2, 3, 4];
-  const cardData = [
-    { name: "Total Investments", count: 50, color: "#E5FFE4" },
-    { name: "Active Portfolio", count: 12, color: "#FAD7DC" },
-    { name: "Deals Assigned", count: 5, color: "#EEDAFB" },
-    { name: "Pitch Attended", count: 60, color: "#E0DAFC" },
-    { name: "Network Connections", count: 10, color: "#DFF1FF" },
-  ];
+  // const count = [1, 2, 3, 4];
+  // const cardData = [
+  //   { name: "Total Investments", count: 50, color: "#E5FFE4" },
+  //   { name: "Active Portfolio", count: 12, color: "#FAD7DC" },
+  //   { name: "Deals Assigned", count: 5, color: "#EEDAFB" },
+  //   { name: "Pitch Attended", count: 60, color: "#E0DAFC" },
+  //   { name: "Network Connections", count: 10, color: "#DFF1FF" },
+  // ];
   return (
     <div className="dashboard-main">
       <section className="d-flex align-items-center dashboard-cards tab-wrap">
-        {cardData.map((data, i) => (
+        {/* {cardData.map((data, i) => ( */}
           <DashCard
-            name={data.name}
-            count={data.count}
-            color={data.color}
-            key={i}
+            name={"Total Investments"}
+            count={dashData?.totalInvestor}
+            color={"#E5FFE4"}
+            // key={i}
             className="investor-dash-card"
           />
-        ))}
+           <DashCard
+            name={"Active Portfolio"}
+            count={dashData?.activePortfolio}
+            color={"#FAD7DC"}
+            // key={i}
+            className="investor-dash-card"
+          />
+           <DashCard
+            name={"Deals Assigned"}
+            count={dashData?.dealsAssigned}
+            color={"#EEDAFB"}
+            // key={i}
+            className="investor-dash-card"
+          />
+           <DashCard
+            name={"Pitch Attended"}
+            count={dashData?.pitchAttended}
+            color={"#E0DAFC"}
+            // key={i}
+            className="investor-dash-card"
+          />
+          <DashCard
+            name={"Network Connections"}
+            count={dashData?.networkConnection}
+            color={"#DFF1FF"}
+            // key={i}
+            className="investor-dash-card"
+          />
+        {/* ))} */}
       </section>
 
       <section className="row mt-3 dash-main-content">
@@ -51,11 +97,11 @@ export const InvestorDashboard = ({ history }) => {
               style={{ columnGap: "1.125rem", rowGap: "1.12rem" }}
             >
               <div>
-                <ScheduleCard />
+                <ScheduleCard data={dashData?.upcomingEvents} />
               </div>
-              <div>
+              {/* <div>
                 <ScheduleCard />
-              </div>
+              </div> */}
             </section>
           </div>
 
