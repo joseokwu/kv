@@ -22,21 +22,23 @@ export const StartupBoosterPartner = () => {
       setBoosterData({})
     }
   }, [])
-  console.log(boosterData)
+ 
 
   const history = useHistory()
 
-
+  const alOff =boosterData?.offerings && boosterData?.offerings.filter(item => item?.status !== 'declined' )
+  //console.log(alOff)
+  const apli = boosterData?.offerings && boosterData?.offerings.filter(item => item?.status !== 'not-applied' )
   const {
     location: { hash },
-  } = history
+  } = history 
 
   const renderContent = () => {
     switch (hash) {
       case '#All Offerings':
-        return <AllOfferings data={boosterData?.offerings} />
+        return <AllOfferings data={alOff} />
       case '#My Applications':
-        return <MyApplications />
+        return <MyApplications data={apli}  />
       default:
         return <AllOfferings data={boosterData?.offerings} />
     }

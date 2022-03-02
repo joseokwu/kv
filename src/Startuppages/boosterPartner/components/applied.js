@@ -3,12 +3,12 @@ import { ApplicationCard } from '../boosterPartner.styled'
 import { compImage, applicationCardData } from '../../../constants/domiData'
 import { Tag } from '../../../Startupcomponents'
 
-export const Applied = () => {
+export const Applied = ({data}) => {
   const appliedArr = [1, 2, 3]
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
-      {appliedArr.map((i) => (
+      {data && data.map((item, i) => (
         <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6">
           <div>
             {compImage.map((comp, i) => (
@@ -16,20 +16,19 @@ export const Applied = () => {
             ))}
           </div>
           <div className="my-2">
-            {applicationCardData.map((data, i) => (
-              <h3 key={i}>{data.title}</h3>
-            ))}
+          
+              <h3 >{item?.name}</h3>
+           
           </div>
           <Tag name="Bike Rental" bg="#EDDEFF" color="#1405C1" fz="12px" />
           <div className="my-3">
-            {applicationCardData.map((data, i) => (
-              <p key={i}>
-                {data.content}
+            
+              <p >
+                {item?.description}
                 <span>Read More</span>
               </p>
-            ))}
-          </div>
-          <button className="appliedBtn mt-2">Applied</button>
+           </div>
+          <button className={item?.status === 'applied' ? "appliedBtn mt-2" : "applyBtn mt-2" }> {item?.status === 'applied' ? 'Applied' : 'Apply' } </button>
         </ApplicationCard>
       ))}
     </div>

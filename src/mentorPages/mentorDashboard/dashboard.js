@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   AssignedStartupCard,
   MentorDashCard,
@@ -6,30 +6,65 @@ import {
 } from '../../mentorComponents'
 import './dashboard.css'
 import { useHistory } from 'react-router-dom'
+import { getMentorDashboardData } from '../../services'
 
 export const MentorDashboard = () => {
+  const [ mentorDashData, setMentorDashData ] = useState({})
+
+  const getData = async () => {
+    const res = await getMentorDashboardData()
+    setMentorDashData(res)
+  }
+
+  useEffect(() => {
+    getData()
+    return () => {
+      setMentorDashData({})
+    }
+  }, [])
+  console.log(mentorDashData)
+
+
   const { push } = useHistory()
 
-  const cardData = [
-    { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
-    { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },
-    { name: 'Mentors', count: 20, color: '#D5D6F4' },
-    { name: 'Investors', count: 30, color: '#DEF6FF' },
-  ]
+  // const cardData = [
+  //   { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
+  //   { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },
+  //   { name: 'Mentors', count: 20, color: '#D5D6F4' },
+  //   { name: 'Investors', count: 30, color: '#DEF6FF' },
+  // ]
   return (
     <div className="dashboard_main container-fluid">
       <section className="row pb-5">
         <section
           className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed mt-0"
         >
-          {cardData.map((data, i) => (
+          {/* {cardData.map((data, i) => ( */}
             <MentorDashCard
-              name={data.name}
-              count={data.count}
-              color={data.color}
-              key={i}
+              name={mentorDashData?.cards?.title}
+              count={mentorDashData?.cards?.count}
+              color={'#D5D6F4'}
+              // key={i}
             />
-          ))}
+            <MentorDashCard
+              name={mentorDashData?.cards?.title}
+              count={mentorDashData?.cards?.count}
+              color={'#DEF6FF'}
+              // key={i}
+            />
+            <MentorDashCard
+              name={mentorDashData?.cards?.title}
+              count={mentorDashData?.cards?.count}
+              color={'#D5D6F4'}
+              // key={i}
+            />
+            <MentorDashCard
+              name={mentorDashData?.cards?.title}
+              count={mentorDashData?.cards?.count}
+              color={'#DEF6FF'}
+              // key={i}
+            />
+          {/* ))} */}
         </section>
       </section>
 
@@ -43,14 +78,14 @@ export const MentorDashboard = () => {
 
             <section className="row">
               <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} data={mentorDashData?.AssignedStartups} />
               </div>
-              <div className="col-xl-4 mb-4">
+              {/* <div className="col-xl-4 mb-4">
                 <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
-              </div>
-              <div className="col-xl-4 mb-4">
+              </div> */}
+              {/* <div className="col-xl-4 mb-4">
                 <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
-              </div>
+              </div> */}
             </section>
           </div>
         </div>
