@@ -21,31 +21,8 @@ export const AllApplication = ({data}) => {
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
-      {/* Apply Card
-      {applyArr.map((i) => (
-        <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
-          <div>
-            {compImage.map((comp, i) => (
-              <img className="" key={i} src={comp.logo} alt="company logo" />
-            ))}
-          </div>
-          <div className="my-2">
-            {applicationCardData.map((data, i) => (
-              <h3 key={i}>{data.title}</h3>
-            ))}
-          </div>
-          <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
-          <div className="my-3">
-            {applicationCardData.map((data, i) => (
-              <p key={i}>
-                {data.content}
-                <span>Read More</span>
-              </p>
-            ))}
-          </div>
-          <button className="applyBtn mt-2">Apply</button>
-        </ApplicationCard>
-      ))} */}
+      Apply Card
+ 
 
       {/* Approved Modal starts here */}
       <Modal id="approved" withHeader={false}>
@@ -70,7 +47,7 @@ export const AllApplication = ({data}) => {
           <div className="my-3">
             
               <p >
-                {data.description}
+                {data?.description}
                 <span data-target="#approved" data-toggle="modal">
                   Read More
                 </span>
@@ -78,92 +55,35 @@ export const AllApplication = ({data}) => {
             
           </div>
           <div>
-            <button className="approvedBtn mt-2">
-              <img className="mr-2 mb-1" src={approved} alt="approved icon" />
-              Approved
-            </button>
+
+              {
+
+  item?.status === 'approved' ? ( <button className="approvedBtn mt-2">
+
+<img className="mr-2 mb-1" src={ approved } alt="approved icon" />
+ Approved
+</button>) : item?.status === 'declined' ? (
+  <button className="declinedBtn mt-2">
+  <img className="mr-2 mb-1" src={ cancel } alt="declined icon" />
+  Declined
+  </button>
+): item?.status === 'applied' ? (
+  <button className="expiredBtn mt-2">
+      <img className="mr-2 mb-1" src={expired} alt="expired icon" />
+      Expired
+    </button>
+): ( <span /> )
+
+              }
+
           </div>
         </ApplicationCard>
       ))}
 
-      {/* Applied Modal starts here */}
-      <Modal id="applied" withHeader={false}>
-        <AppliedModal />
-      </Modal>
-      {/* Applied Modal end here */}
+     
+     
 
-      {/* Applied Card */}
-      {appliedArr.map((i) => (
-        <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
-          <div>
-            {compImage.map((comp, i) => (
-              <img className="" key={i} src={comp.logo} alt="company logo" />
-            ))}
-          </div>
-          <div className="my-2">
-            {applicationCardData.map((data, i) => (
-              <h3 key={i}>{data.title}</h3>
-            ))}
-          </div>
-          <Tag name="Bike Rental" bg="#EDDEFF" color="#1405C1" fz="12px" />
-          <div className="my-3">
-            {applicationCardData.map((data, i) => (
-              <p key={i}>
-                {data.content}
-                <span data-target="#applied" data-toggle="modal">
-                  Read More
-                </span>
-              </p>
-            ))}
-          </div>
-          <button className="appliedBtn mt-2">Applied</button>
-        </ApplicationCard>
-      ))}
-
-      {/* Expired Modal starts here */}
-      <Modal id="expired" withHeader={false}>
-        <ExpiredModal />
-      </Modal>
-      {/* Expired Modal end here */}
-
-      {/* Expired Card */}
-      {expiredArr.map((i) => (
-        <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
-          <div>
-            {compImage.map((comp, i) => (
-              <img className="" key={i} src={comp.logo} alt="company logo" />
-            ))}
-          </div>
-          <div className="my-2">
-            {applicationCardData.map((data, i) => (
-              <h3 key={i}>{data.title}</h3>
-            ))}
-          </div>
-          <Tag name="Customer Support" bg="#FFFCDE" color="#C17605" fz="12px" />
-          <div className="my-3">
-            {applicationCardData.map((data, i) => (
-              <p key={i}>
-                {data.content}
-                <span data-target="#expired" data-toggle="modal">
-                  Read More
-                </span>
-              </p>
-            ))}
-          </div>
-          <button className="expiredBtn mt-2">
-            <img className="mr-2 mb-1" src={expired} alt="expired icon" />
-            Expired
-          </button>
-        </ApplicationCard>
-      ))}
-
-      {/* Declined Modal starts here  */}
-      <Modal id="declined" withHeader={false}>
-        <DeclinedModal />
-      </Modal>
-      {/* Declined Modal end here */}
-
-      {/* Declined Card */}
+    
       
     </div>
   )

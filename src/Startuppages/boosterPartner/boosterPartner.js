@@ -29,6 +29,8 @@ export const StartupBoosterPartner = () => {
   const alOff =boosterData?.offerings && boosterData?.offerings.filter(item => item?.status !== 'declined' )
   //console.log(alOff)
   const apli = boosterData?.offerings && boosterData?.offerings.filter(item => item?.status !== 'not-applied' )
+  
+  console.log(apli)
   const {
     location: { hash },
   } = history 

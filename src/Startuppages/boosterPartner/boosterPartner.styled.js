@@ -77,14 +77,16 @@ export const ApplicationCard = styled.div`
   }
 
   .expiredBtn {
+    background: transparent;
+    border-radius: 5px;
     font-family: Lato;
     font-style: normal;
     font-weight: normal;
+    padding: 10px 35px;
     font-size: 16px;
     line-height: 140%;
     color: #838077;
-    background: none;
-    border: none;
+    border: 1px solid #838077;
   }
 
   .reapplyBtn {
@@ -101,14 +103,16 @@ export const ApplicationCard = styled.div`
   }
 
   .declinedBtn {
-    font-family: Lato;
+    background: transparent;
+    border-radius: 5px;
+    border: 1px solid #a8300a;
+    padding: 10px 35px;
+    font-family: DM Sans;
     font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: 14px;
     line-height: 140%;
-    color: #A8300A;
-    background: none;
-    border: none;
+    color: #a8300a;
   }
 
   @media (max-width: 768px) {
