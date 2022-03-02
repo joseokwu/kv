@@ -4,7 +4,7 @@ import { cardData, cardFill } from "../../constants/domiData";
 import { DashCard, CardFill } from "../../Startupcomponents/index";
 import { TodoList } from "./components/todolist";
 import { UpComing } from "./components/upComing";
-import { getDashbordInfo } from "../../services";
+import { getDashboardInfo } from "../../services";
 import newApp from "../../assets/icons/Star.svg";
 import dateFormat from "dateformat";
 import { convertToMillion } from "../../utils/helpers";
@@ -13,7 +13,7 @@ export const StartupDashboard = () => {
   const [dashInfo, setDashInfo] = useState({});
 
   const fetchData = async () => {
-    const res = await getDashbordInfo();
+    const res = await getDashboardInfo();
 
     setDashInfo(res);
   };
