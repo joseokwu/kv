@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useEffect} from "react";
 import "./dashboard.css";
 import total from "../../assets/icons/totalApp.svg";
 import newApp from "../../assets/icons/newApp.svg";
@@ -9,6 +9,8 @@ import reApplied from "../../assets/icons/reApplied.svg";
 import { ApplicationCard, DashCard } from "../../components/index";
 import applicantLogo from "../../assets/images/sampleApplicantLogo.png";
 import ApplicationChart from "./components/applicationChart/ApplicationChart";
+
+
 
 export const BoosterDashboard = ({ history }) => {
   const { push, location } = history;
@@ -24,6 +26,12 @@ export const BoosterDashboard = ({ history }) => {
   ];
 
   const appCardData = [1, 2, 3, 4, 5];
+
+
+
+
+
+
   return (
     <div className="dashboard-main">
       <section className="d-flex align-items-center dashboard-cards">

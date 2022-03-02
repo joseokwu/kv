@@ -9,3 +9,25 @@ export const addInvestorProfile = async (values) => {
     throw new Error(error);
   }
 };
+
+export const getInvestorDashboard = async () =>{
+  try{
+    const result = await request.post("investor/dashboard");
+    return result.data;
+  }catch(err){
+    throw err;
+  }
+}
+
+
+// industry: (3) ['Tech', 'Engineering', 'Career']
+// logo: "Yebox"
+// name: "Yebox Technology"
+// stage: "idea-stage"
+
+//opportunities
+
+{/* <OpportunityCard
+onClick={() => push(`/investor/opportunities/1`)}
+/> */}
+

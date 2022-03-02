@@ -391,6 +391,556 @@ founders: "20"
 investors: "30"
 mentors: "20"
 partners: "10"
+=================================================================
+"postMoney":"7,000,000",
+            "fundAsk":{
+            "requirement":[
+             "$100,000",
+            "Common Equity",
+            "Seed",
+            "10%",
+            "$20,000",
+            "$30,000",
+            "20 November, 2021",
+            ],
+            "committment":[
+            {
+              "investor": "Prima Juma Umbe",
+              "investType": "Angel Investor",
+              "amnt": "$100,000",
+              "ledInvest": "Yes",
+            },
+            {
+              "investor":"John Juma Umbe",
+              "investType": "Angel Investor",
+              "amnt": "$120,000",
+              "ledInvest":"No",
+            },
+            {
+              "investor": "Kim saje",
+              "investType": "Angel Investor",
+              "amnt": "$20,000",
+              "ledInvest": "No",
+            },
+            {
+              "investor": "shaun ken",
+              "investType": "Angel Investor",
+              "amnt": "$5,000",
+              "ledInvest": "Yes",
+            },
+            {
+              "investor": "kassy franee",
+              "investType": "Angel Investor",
+              "amnt": "$40,000",
+              "ledInvest":"No",
+            },
+            {
+              "investor": "Leo jimmy",
+              "investType": "Angel Investor",
+              "amnt": "$900,000",
+              "ledInvest": "Yes",
+            },
+                ]
+               },
+               "fundUtilization":[
+               
+                           {
+                  "head": "Revenue",
+                  "month1": "$200,000",
+                  "month2": "$25, 000",
+                  "month3": "$200, 000",
+                  "month4": "$200,000",
+                  "month5": "$300,000",
+                  "month6": "$200,000",
+                },
+                {
+                 " head": "Growth %",
+                  "month1": "",
+                  "month2": "",
+                  "month3": "",
+                  "month4": "",
+                  "month5": "",
+                  "month6": "",
+                },
+                {
+                  "head": "Expenses",
+                  "month1": "$200,000",
+                  "month2": "$25, 000",
+                  "month3": "$200, 000",
+                  "month4": "$200,000",
+                  "month5": "$300,000",
+                  "month6": "$200,000",
+                },
+                     {
+                  "head": "Burn Rate",
+                  "month1": "$200,000",
+                  "month2": "$125, 000",
+                  "month3": "$230, 000",
+                  "month4": "$45,000",
+                  "month5": "$31,000",
+                  "month6": "$24,220",
+                },
+                 {
+                  "head": "Runway Months",
+                  "month1": "$200,000",
+                  "month2": "$125, 000",
+                  "month3": "$230, 000",
+                  "month4": "$45,000",
+                  "month5": "$31,000",
+                  "month6": "$24,220",
+                },
+        
+               ],
+                 "capTable":[
+                    {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "John Carter Robinson",
+                  "shareType": "Angel Investor",
+                  "noShare": "5",
+                  "sharePercent": "2.5 %",
+                },
+                   {
+                  "shareHolders": "",
+                  "shareType": "Total",
+                  "noShare": "",
+                  "sharePercent": "%",
+                },
+                 ],
+                 "previousRound":[
+                        {
+                      "invest": "James Parker",
+                     "fundDate": "20 November 2021",
+                      "dealType": "Common Equity",
+                      "fundRound": "Seed",
+                      "investAmnt": "$30,000",
+                      "dilution": "20 %",
+                      "preMoney": "$5, 000",
+                      "pstMoney": "$10, 000",
+                    },
+                    {
+                  "invest": "James Parker",
+                 "fundDate": "20 November 2021",
+                  "dealType": "Common Equity",
+                  "fundRound": "Seed",
+                  "investAmnt": "$30,000",
+                  "dilution": "20 %",
+                  "preMoney": "$5, 000",
+                  "pstMoney": "$10, 000",
+                },
+                {
+                  "invest": "James Parker",
+                 "fundDate": "20 November 2021",
+                  "dealType": "Common Equity",
+                  "fundRound": "Pres-Series A",
+                  "investAmnt": "$30,000",
+                  "dilution": "20 %",
+                  "preMoney": "$5, 000",
+                  "pstMoney": "$10, 000",
+                },
+                {
+                  "invest": "James Parker",
+                 "fundDate": "20 November 2021",
+                  "dealType": "Debt Financing",
+                  "fundRound": "Series A",
+                  "investAmnt": "$30,000",
+                  "dilution": "20 %",
+                  "preMoney": "$5, 000",
+                  "pstMoney": "$10, 000",
+                },
+                 ]
+
+===============================================================
+"foundersCapitial":"100,000",
+"totalFund":"300,000",
+"preMoney":"400,000",
+"postMoney":"7,000,000",
+"fundAsk":{
+"requirement":[
+ "$100,000",
+"Common Equity",
+"Seed",
+"10%",
+"$20,000",
+"$30,000",
+"20 November, 2021"
+],
+"committment":[
+{
+  "investor": "Prima Juma Umbe",
+  "investType": "Angel Investor",
+  "amnt": "$100,000",
+  "ledInvest": "Yes"
+},
+{
+  "investor":"John Juma Umbe",
+  "investType": "Angel Investor",
+  "amnt": "$120,000",
+  "ledInvest":"No"
+},
+{
+  "investor": "Kim saje",
+  "investType": "Angel Investor",
+  "amnt": "$20,000",
+  "ledInvest": "No"
+},
+{
+  "investor": "shaun ken",
+  "investType": "Angel Investor",
+  "amnt": "$5,000",
+  "ledInvest": "Yes"
+},
+{
+  "investor": "kassy franee",
+  "investType": "Angel Investor",
+  "amnt": "$40,000",
+  "ledInvest":"No"
+},
+{
+  "investor": "Leo jimmy",
+  "investType": "Angel Investor",
+  "amnt": "$900,000",
+  "ledInvest": "Yes"
+}
+    ]
+},
+"fundUtilization":[
+   
+{
+  "head": "Revenue",
+  "month1": "$200,000",
+  "month2": "$25, 000",
+  "month3": "$200, 000",
+  "month4": "$200,000",
+  "month5": "$300,000",
+  "month6": "$200,000"
+},
+{
+ " head": "Growth %",
+  "month1": "",
+  "month2": "",
+  "month3": "",
+  "month4": "",
+  "month5": "",
+  "month6": ""
+},
+{
+  "head": "Expenses",
+  "month1": "$200,000",
+  "month2": "$25, 000",
+  "month3": "$200, 000",
+  "month4": "$200,000",
+  "month5": "$300,000",
+  "month6": "$200,000"
+},
+     {
+  "head": "Burn Rate",
+  "month1": "$200,000",
+  "month2": "$125, 000",
+  "month3": "$230, 000",
+  "month4": "$45,000",
+  "month5": "$31,000",
+  "month6": "$24,220"
+},
+ {
+  "head": "Runway Months",
+  "month1": "$200,000",
+  "month2": "$125, 000",
+  "month3": "$230, 000",
+  "month4": "$45,000",
+  "month5": "$31,000",
+  "month6": "$24,220"
+}
+],
+"capTable":[
+
+{
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "John Carter Robinson",
+  "shareType": "Angel Investor",
+  "noShare": "5",
+  "sharePercent": "2.5 %"
+},
+   {
+  "shareHolders": "",
+  "shareType": "Total",
+  "noShare": "",
+  "sharePercent": "%"
+}
+ ],
+ "previousRound":[
+        {
+      "invest": "James Parker",
+     "fundDate": "20 November 2021",
+      "dealType": "Common Equity",
+      "fundRound": "Seed",
+      "investAmnt": "$30,000",
+      "dilution": "20 %",
+      "preMoney": "$5, 000",
+      "pstMoney": "$10, 000"
+    },
+    {
+  "invest": "James Parker",
+ "fundDate": "20 November 2021",
+  "dealType": "Common Equity",
+  "fundRound": "Seed",
+  "investAmnt": "$30,000",
+  "dilution": "20 %",
+  "preMoney": "$5, 000",
+  "pstMoney": "$10, 000"
+},
+{
+  "invest": "James Parker",
+ "fundDate": "20 November 2021",
+  "dealType": "Common Equity",
+  "fundRound": "Pres-Series A",
+  "investAmnt": "$30,000",
+  "dilution": "20 %",
+  "preMoney": "$5, 000",
+  "pstMoney": "$10, 000"
+},
+{
+  "invest": "James Parker",
+ "fundDate": "20 November 2021",
+  "dealType": "Debt Financing",
+  "fundRound": "Series A",
+  "investAmnt": "$30,000",
+  "dilution": "20 %",
+  "preMoney": "$5, 000",
+  "pstMoney": "$10, 000"
+}
+ ]
+
+ {appliedArr.map((i) => (
+  <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
+    <div>
+      {compImage.map((comp, i) => (
+        <img className="" key={i} src={comp.logo} alt="company logo" />
+      ))}
+    </div>
+    <div className="my-2">
+      {applicationCardData.map((data, i) => (
+        <h3 key={i}>{data.title}</h3>
+      ))}
+    </div>
+    <Tag name="Bike Rental" bg="#EDDEFF" color="#1405C1" fz="12px" />
+    <div className="my-3">
+      {applicationCardData.map((data, i) => (
+        <p key={i}>
+          {data.content}
+          <span data-target="#applied" data-toggle="modal">
+            Read More
+          </span>
+        </p>
+      ))}
+    </div>
+    <button className="appliedBtn mt-2">Applied</button>
+  </ApplicationCard>
+))}
+
+
+
+  {/* Expired Modal starts here */}
+  <Modal id="expired" withHeader={false}>
+  <ExpiredModal />
+</Modal>
+{/* Expired Modal end here */}
+
+{/* Expired Card */}
+{expiredArr.map((i) => (
+  <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
+    <div>
+      {compImage.map((comp, i) => (
+        <img className="" key={i} src={comp.logo} alt="company logo" />
+      ))}
+    </div>
+    <div className="my-2">
+      {applicationCardData.map((data, i) => (
+        <h3 key={i}>{data.title}</h3>
+      ))}
+    </div>
+    <Tag name="Customer Support" bg="#FFFCDE" color="#C17605" fz="12px" />
+    <div className="my-3">
+      {applicationCardData.map((data, i) => (
+        <p key={i}>
+          {data.content}
+          <span data-target="#expired" data-toggle="modal">
+            Read More
+          </span>
+        </p>
+      ))}
+    </div>
+    <button className="expiredBtn mt-2">
+      <img className="mr-2 mb-1" src={expired} alt="expired icon" />
+      Expired
+    </button>
+  </ApplicationCard>
+))}
+
+{/* Declined Modal starts here  */}
+<Modal id="declined" withHeader={false}>
+  <DeclinedModal />
+</Modal>
+{/* Declined Modal end here */}
+
+{/* Declined Card */}
+
+
+
+ {/* Applied Modal starts here */}
+ <Modal id="applied" withHeader={false}>
+ <AppliedModal />
+</Modal>
+{/* Applied Modal end here */}
+
+{/* Applied Card */}
+
+
+{applyArr.map((i) => (
+  <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
+    <div>
+      {compImage.map((comp, i) => (
+        <img className="" key={i} src={comp.logo} alt="company logo" />
+      ))}
+    </div>
+    <div className="my-2">
+      {applicationCardData.map((data, i) => (
+        <h3 key={i}>{data.title}</h3>
+      ))}
+    </div>
+    <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
+    <div className="my-3">
+      {applicationCardData.map((data, i) => (
+        <p key={i}>
+          {data.content}
+          <span>Read More</span>
+        </p>
+      ))}
+    </div>
+    <button className="applyBtn mt-2">Apply</button>
+  </ApplicationCard>
+))}
+=====================================================================
+=======================================================
+
+<div className="col-xl-6 mb-4">
+<OpportunityCard
+  onClick={() => push(`/investor/opportunities/1`)}
+/>
+</div>
+<div className="col-xl-6 mb-4">
+<OpportunityCard
+  onClick={() => push(`/investor/opportunities/2`)}
+/>
+</div>
+<div className="col-xl-6 mb-4">
+<OpportunityCard
+  onClick={() => push(`/investor/opportunities/3`)}
+/>
+</div>
+<div className="col-xl-6 mb-4">
+<OpportunityCard
+  onClick={() => push(`/investor/opportunities/4`)}
+/>
+</div>
+
+===========================================
+<Tag name="Tech" />
+<Tag name="Engineering" color="#40439A" />
+<Tag name="Career" color="#E31937" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

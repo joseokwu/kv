@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useEffect , useState } from "react";
 import {
   ConnectCard,
   DashCard,
@@ -8,10 +8,13 @@ import {
 } from "../../components";
 import { ScheduleCard } from "../investorSchedule/components/Upcoming";
 import "./investDashboard.css";
+import { getInvestorDashboard } from '../../services/investor';
+
 
 export const InvestorDashboard = ({ history }) => {
   const { push } = history;
   const count = [1, 2, 3, 4];
+  const [investDash, setInvetDash] = useState(null)
   const cardData = [
     { name: "Total Investments", count: 50, color: "#E5FFE4" },
     { name: "Active Portfolio", count: 12, color: "#FAD7DC" },
@@ -19,6 +22,30 @@ export const InvestorDashboard = ({ history }) => {
     { name: "Pitch Attended", count: 60, color: "#E0DAFC" },
     { name: "Network Connections", count: 10, color: "#DFF1FF" },
   ];
+
+      const fetchDashboard = async() =>{
+          try{
+            const res = await getInvestorDashboard();
+            setInvetDash(res);
+            console.log(res)
+          } catch(err){
+              console.log(err)
+          }
+      }
+
+
+  useEffect(() =>{
+
+    fetchDashboard()
+
+    return () =>{
+      setInvetDash([])
+    }
+
+  }, [])
+
+
+
   return (
     <div className="dashboard-main">
       <section className="d-flex align-items-center dashboard-cards tab-wrap">
@@ -72,26 +99,17 @@ export const InvestorDashboard = ({ history }) => {
             </section>
 
             <section className="row">
-              <div className="col-xl-6 mb-4">
+              {
+                investDash && investDash?.opportunities.map((item, i) =>(
+                  <div key={i} className="col-xl-6 mb-4">
                 <OpportunityCard
-                  onClick={() => push(`/investor/opportunities/1`)}
+                  data={item}
+                  onClick={() => push(`/investor/opportunities/${i}`)}
                 />
-              </div>
-              <div className="col-xl-6 mb-4">
-                <OpportunityCard
-                  onClick={() => push(`/investor/opportunities/2`)}
-                />
-              </div>
-              <div className="col-xl-6 mb-4">
-                <OpportunityCard
-                  onClick={() => push(`/investor/opportunities/3`)}
-                />
-              </div>
-              <div className="col-xl-6 mb-4">
-                <OpportunityCard
-                  onClick={() => push(`/investor/opportunities/4`)}
-                />
-              </div>
+                 </div>
+                )) 
+               
+              }
             </section>
           </div>
         </div>
