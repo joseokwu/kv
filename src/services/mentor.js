@@ -1,4 +1,5 @@
-import { request } from "../utils/axios";
+
+import { request } from '../utils/axios'
 
 export const getDashboard = async () => {
   try {
@@ -19,3 +20,4 @@ export const mentorEvaluations = async () => {
     throw err;
   }
 };
+
