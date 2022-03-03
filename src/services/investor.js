@@ -20,14 +20,5 @@ export const getInvestorDashboard = async () =>{
 }
 
 
-// industry: (3) ['Tech', 'Engineering', 'Career']
-// logo: "Yebox"
-// name: "Yebox Technology"
-// stage: "idea-stage"
 
-//opportunities
-
-{/* <OpportunityCard
-onClick={() => push(`/investor/opportunities/1`)}
-/> */}
 
