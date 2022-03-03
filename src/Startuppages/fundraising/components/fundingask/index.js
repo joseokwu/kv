@@ -1,56 +1,7 @@
-import { Header, Table, Section } from './ask.styled'
-import downloadIcon from '../../../../assets/icons/downloadoutline.svg'
+import { Header, Table, Section } from "./ask.styled";
+import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
 
-export const FundingAsk = () => {
-  const tabArr = [
-    '$100,000',
-    'Common Equity',
-    'Seed',
-    '10%',
-    '$20,000',
-    '$30,000',
-    '20 November, 2021',
-  ]
-
-  const investorsArr = [
-    {
-      invst: 'Prima Juma Umbe',
-      investType: 'Angel Investor',
-      amnt: '$100,000',
-      ledInvest: 'Yes',
-    },
-    {
-      invst: 'John Juma Umbe',
-      investType: 'Angel Investor',
-      amnt: '$120,000',
-      ledInvest: 'No',
-    },
-    {
-      invst: 'Kim saje',
-      investType: 'Angel Investor',
-      amnt: '$20,000',
-      ledInvest: 'No',
-    },
-    {
-      invst: 'shaun ken',
-      investType: 'Angel Investor',
-      amnt: '$5,000',
-      ledInvest: 'Yes',
-    },
-    {
-      invst: 'kassy franee',
-      investType: 'Angel Investor',
-      amnt: '$40,000',
-      ledInvest: 'No',
-    },
-    {
-      invst: 'Leo jimmy',
-      investType: 'Angel Investor',
-      amnt: '$900,000',
-      ledInvest: 'Yes',
-    },
-  ]
-
+export const FundingAsk = ({ data = {} }) => {
   return (
     <div>
       <Header className="d-flex justify-content-end">
@@ -78,12 +29,12 @@ export const FundingAsk = () => {
           </thead>
           <tbody>
             <tr>
-              {tabArr.map((i) => (
-                <td style={{ borderBottom: '1px solid #E6E7E9' }} key={i}>
-                  {' '}
-                  {i}{' '}
-                </td>
-              ))}
+              {data?.requirement?.length > 0 &&
+                data?.requirement?.map((i) => (
+                  <td style={{ borderBottom: "1px solid #E6E7E9" }} key={i}>
+                    {i}
+                  </td>
+                ))}
             </tr>
           </tbody>
         </Table>
@@ -101,17 +52,18 @@ export const FundingAsk = () => {
             </tr>
           </thead>
           <tbody>
-            {investorsArr.map((data) => (
-              <tr key={data}>
-                <td> {data?.invst} </td>
-                <td> {data?.investType} </td>
-                <td> {data?.amnt} </td>
-                <td> {data?.ledInvest} </td>
-              </tr>
-            ))}
+            {data?.committment?.length > 0 &&
+              data?.committment.map((data) => (
+                <tr key={data?.investor}>
+                  <td> {data?.investor} </td>
+                  <td> {data?.investType} </td>
+                  <td> {data?.amnt} </td>
+                  <td> {data?.ledInvest} </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </Section>
     </div>
-  )
-}
+  );
+};
