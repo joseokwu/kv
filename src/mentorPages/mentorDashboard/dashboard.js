@@ -1,9 +1,12 @@
+
 import React, { useEffect, useState } from "react";
+
 import {
   AssignedStartupCard,
   MentorDashCard,
   UpcomingEventCard,
-} from "../../mentorComponents";
+
+} from '../../mentorComponents'
 import "./dashboard.css";
 import { useHistory } from "react-router-dom";
 import { getDashboard } from "../../services/mentor";
@@ -34,11 +37,12 @@ export const MentorDashboard = () => {
     <div className="dashboard_main container-fluid">
       <section className="row pb-5">
         <section className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed mt-0">
-          {cardData.map((data, i) => (
+          {dashInfo.map((data, i) => (
+
             <MentorDashCard
-              name={data.name}
-              count={data.count}
-              color={data.color}
+              name={data?.cards?.title}
+              count={data?.cards?.count}
+              color={'#D5D6F4'}
               key={i}
             />
           ))}
@@ -55,6 +59,16 @@ export const MentorDashboard = () => {
 
             <section className="row">
               <div className="col-xl-4 mb-4">
+
+              <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} data={dashInfo?.AssignedStartups} />
+              </div>
+              {/* <div className="col-xl-4 mb-4">
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
+              </div> */}
+              {/* <div className="col-xl-4 mb-4">
+                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
+              </div> */}
+                <div>
                 <AssignedStartupCard
                   onClick={() => push("/mentor/dashboard/view")}
                 />
@@ -69,6 +83,7 @@ export const MentorDashboard = () => {
                   onClick={() => push("/mentor/dashboard/view")}
                 />
               </div>
+
             </section>
           </div>
         </div>

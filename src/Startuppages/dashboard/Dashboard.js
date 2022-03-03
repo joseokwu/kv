@@ -93,8 +93,10 @@ export const StartupDashboard = () => {
             typeof dashInfo?.valuation?.amount !== undefined &&
             convertToMillion(dashInfo?.valuation?.amount)
           }
+
           time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
+
         />
       </section>
 

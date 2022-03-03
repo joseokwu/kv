@@ -10,12 +10,13 @@ export const addInvestorProfile = async (values) => {
   }
 };
 
-export const getInvestorDashboard = async () =>{
-  try{
-    const result = await request.post("investor/dashboard");
+export const getInvestorDashboard = async (values) => {
+  try {
+    const result = await request.post("investor/dashboard", values);
     return result.data;
-  }catch(err){
-    throw err;
+  } catch (err) {
+    const error = err?.response?.data?.message || err?.message;
+    throw new Error(error);
   }
 }
 

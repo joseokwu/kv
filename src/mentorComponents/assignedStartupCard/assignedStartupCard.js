@@ -4,7 +4,7 @@ import './assignedStartupCard.css'
 import logo from '../../assets/images/yeLogo.svg'
 import { Tag } from '..'
 
-export const AssignedStartupCard = ({ onClick }) => {
+export const AssignedStartupCard = ({ onClick, data }) => {
   return (
     <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
