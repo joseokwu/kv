@@ -1,104 +1,99 @@
-import React, { useEffect, useState } from 'react'
-import './dashboard.css'
-import { DashCard, CardFill } from '../../Startupcomponents/index'
-import { TodoList } from './components/todolist'
-import { UpComing } from './components/upComing'
-import { getDashboardInfo } from '../../services'
-import newApp from '../../assets/icons/Star.svg'
-import dateFormat from 'dateformat'
-import { convertToMillion } from '../../utils/helpers'
+import React, { useEffect, useState } from "react";
+import "./dashboard.css";
+import { cardData, cardFill } from "../../constants/domiData";
+import { DashCard, CardFill } from "../../Startupcomponents/index";
+import { TodoList } from "./components/todolist";
+import { UpComing } from "./components/upComing";
+import { getDashboardInfo } from "../../services";
+import newApp from "../../assets/icons/Star.svg";
+import dateFormat from "dateformat";
+import { convertToMillion } from "../../utils/helpers";
 
 export const StartupDashboard = () => {
-  // const appCardData = [1, 2, 3, 4, 5]
-  const [dashInfo, setDashInfo] = useState({})
+  const [dashInfo, setDashInfo] = useState({});
 
   const fetchData = async () => {
-    const res = await getDashboardInfo()
-    setDashInfo(res)
-  }
+    const res = await getDashboardInfo();
+
+    setDashInfo(res);
+  };
 
   useEffect(() => {
-    fetchData()
+    fetchData();
 
     return () => {
-      setDashInfo({})
-    }
-  }, [])
-
-  console.log(dashInfo)
-  console.log(
-    typeof dashInfo?.valuation?.amount !== undefined &&
-      convertToMillion(dashInfo?.valuation?.amount),
-  )
+      setDashInfo({});
+    };
+  }, []);
 
   return (
     <div className="dashboardMain">
       {/* <section className="startup-dash mb-4">
         <h2>Yebox Techologies</h2>
       </section> */}
-      <section className="row" style={{ zIndex: '998', background: '#FEFEFE' }}>
+      <section className="row" style={{ zIndex: "998", background: "#FEFEFE" }}>
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
-          name={'Founders'}
+          name={"Founders"}
           count={dashInfo?.founders}
-          color={'#E5FFE4'}
+          color={"#E5FFE4"}
         />
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
-          name={'Investors'}
+          name={"Investors"}
           count={dashInfo?.investors}
-          color={'#FAD7DC'}
+          color={"#FAD7DC"}
         />
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
-          name={'Mentors'}
+          name={"Mentors"}
           count={dashInfo?.mentors}
-          color={'#E5FFE4'}
+          color={"#E5FFE4"}
         />
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
-          name={'Partners'}
+          name={"Partners"}
           count={dashInfo?.partners}
-          color={'#FAD7DC '}
+          color={"#FAD7DC "}
         />
       </section>
 
       <section className="container row my-5">
         <CardFill
-          header={'Total Fund'}
-          color={'#2E3192'}
-          img={''}
+          header={"Total Fund"}
+          color={"#2E3192"}
+          img={""}
           amount={dashInfo?.totalFund?.amount}
-          time={''}
+          time={""}
           className="col-3 col-6-md "
         />
         <CardFill
-          header={'Last Funding Round'}
-          color={'#00ADEF'}
-          img={''}
+          header={"Last Funding Round"}
+          color={"#00ADEF"}
+          img={""}
           amount={dashInfo?.lastFund?.amount}
-          time={dateFormat(dashInfo?.lastFund?.date, 'fullDate')}
+          time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
         />
         <CardFill
-          header={'Investors'}
-          color={'#00ADEF'}
-          img={''}
+          header={"Investors"}
+          color={"#00ADEF"}
+          img={""}
           className="col-3 col-6-md "
         />
         <CardFill
-          header={'Valuation'}
-          color={'#2E3192'}
-          img={''}
+          header={"Valuation"}
+          color={"#2E3192"}
+          img={""}
           amount={
             typeof dashInfo?.valuation?.amount !== undefined &&
             convertToMillion(dashInfo?.valuation?.amount)
           }
-          time={dateFormat(dashInfo?.lastFund?.date, 'fullDate')}
+          time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
         />
       </section>
@@ -112,5 +107,5 @@ export const StartupDashboard = () => {
         <UpComing data={dashInfo?.events} />
       </section>
     </div>
-  )
-}
+  );
+};
