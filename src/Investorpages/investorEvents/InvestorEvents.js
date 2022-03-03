@@ -44,6 +44,8 @@ import React from "react";
 import { Tabs } from "../../Startupcomponents";
 import down from "../../assets/icons/downArrow.svg";
 import { SelectionDay } from "./components/selectionDay";
+import { getEvents } from "../../services/events";
+
 
 export const InvestorEvents = ({ history }) => {
   const {
