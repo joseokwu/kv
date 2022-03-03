@@ -1,26 +1,21 @@
-import React from 'react'
-import demo from '../../../../assets/images/demo.svg'
-import founder from '../../../../assets/images/founder.svg'
-import fanai from '../../../../assets/images/fana.svg'
-import { CurrentInvestorConnectCard } from '../../../../mentorComponents'
-import './product.css'
+import React from "react";
+import demo from "../../../../assets/images/demo.svg";
+import founder from "../../../../assets/images/founder.svg";
+import fanai from "../../../../assets/images/fana.svg";
+import { CurrentInvestorConnectCard } from "../../../../mentorComponents";
+import "./product.css";
+import { useSelector } from "react-redux";
 
 export const Product = () => {
-  const countInvestor = [1, 2, 3, 4]
+  const countInvestor = [1, 2, 3, 4];
+  const { dash_view } = useSelector((state) => state.business);
+
   return (
     <div className="row">
       <section className="col-xl-8">
         <div className="product-wrap opp_page_card py-5">
           <h3>Product Description</h3>
-          <p className="pb-3 mb-5 prod-desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Enim lectus morbi elementum eu.Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Enim lectus morbi elementum
-            eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-            lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Enim lectus morbi elementum
-          </p>
+          <p className="pb-3 mb-5 prod-desc">{dash_view?.productDescription}</p>
 
           <h3>Product Demo</h3>
 
@@ -38,8 +33,11 @@ export const Product = () => {
           <section className="d-flex align-items-center mt-3 product-founder">
             <img src={founder} alt="founder" />
             <div>
-              <p>Mr Promise Amstel</p>
-              <small>CEO Applean Insteen</small>
+              <p>{dash_view?.founderProfile?.fullName}</p>
+              <small>
+                {dash_view?.founderProfile?.designation}{" "}
+                {dash_view?.founderProfile?.company}
+              </small>
             </div>
           </section>
           <section className="founder_profile mt-3">
@@ -52,7 +50,7 @@ export const Product = () => {
         <div className="product-wrap opp_page_card">
           <h3 className="border-bottom pb-3 mb-4">Investors</h3>
 
-          <section className="d-flex align-items-center justify-content-between mt-4 product-investor">
+          {/* <section className="d-flex align-items-center justify-content-between mt-4 product-investor">
             <div className="d-flex align-items-center">
               <img src={fanai} alt="investor" className="mr-3" />
               <span>
@@ -61,17 +59,17 @@ export const Product = () => {
               </span>
             </div>
             <a href="#!">Connect</a>
-          </section>
+          </section> */}
 
-          {countInvestor.map((c, i) => {
+          {dash_view?.investors.map((c, i) => {
             return (
               <div key={`conn-${1}`} className="mb-3">
-                <CurrentInvestorConnectCard />
+                <CurrentInvestorConnectCard data={c} />
               </div>
-            )
+            );
           })}
         </div>
       </section>
     </div>
-  )
-}
+  );
+};

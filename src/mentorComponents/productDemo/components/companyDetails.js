@@ -1,17 +1,21 @@
-import { Button } from '../..'
-import logo from '../../../assets/images/yeLogo.svg'
-import web from '../../../assets/icons/webSm.svg'
-import clock from '../../../assets/icons/clock.svg'
-import office from '../../../assets/icons/office.svg'
-import twitter from '../../../assets/icons/twitterLogo.svg'
-import linkedIn from '../../../assets/icons/linkedInLogo.svg'
-import whatsApp from '../../../assets/icons/whatsapp.svg'
-import share from '../../../assets/icons/share.svg'
-import { useHistory } from 'react-router-dom'
-
+import { Button } from "../..";
+import logo from "../../../assets/images/yeLogo.svg";
+import web from "../../../assets/icons/webSm.svg";
+import clock from "../../../assets/icons/clock.svg";
+import office from "../../../assets/icons/office.svg";
+import twitter from "../../../assets/icons/twitterLogo.svg";
+import linkedIn from "../../../assets/icons/linkedInLogo.svg";
+import whatsApp from "../../../assets/icons/whatsapp.svg";
+import share from "../../../assets/icons/share.svg";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const CompanyDetails = () => {
-  const { push } = useHistory()
+  const { push } = useHistory();
+
+  const { dash_view } = useSelector((state) => state.business);
+
+  console.log("dash_view", dash_view);
   return (
     <section className="opp_page_card py-4">
       <div
@@ -20,18 +24,18 @@ export const CompanyDetails = () => {
       >
         <div>
           <img src={logo} alt="logo" className="mb-3" />
-          <h3 className="opp_page_card_title">Yebox Tech.</h3>
+          <h3 className="opp_page_card_title">{dash_view?.name}.</h3>
         </div>
 
         <div className="d-flex align-items-end flex-column">
           <section className="d-flex align-items-center mb-3">
             <span className="opp_tag_label">Industry</span>
-            <span className="opp_tag">Tech</span>
+            <span className="opp_tag">{dash_view?.industry}</span>
           </section>
 
           <section className="d-flex align-items-center">
             <span className="opp_tag_label">Stage</span>
-            <span className="opp_tag">Proof of concept</span>
+            <span className="opp_tag">{dash_view?.stage}</span>
           </section>
         </div>
       </div>
@@ -42,22 +46,24 @@ export const CompanyDetails = () => {
         <div className="d-flex align-items-center">
           <img src={web} alt="web" />
           <a
-            href="https://www.yebox.io/"
+            href={`https://${dash_view?.website}`}
             className="ml-2 extra-info"
-            style={{ textDecoration: 'underline', color: '#2E3192' }}
+            style={{ textDecoration: "underline", color: "#2E3192" }}
           >
-            www.applaneinsteen.com
+            {dash_view?.website}
           </a>
         </div>
 
         <div className="d-flex align-items-center">
           <img src={clock} alt="web" width="20" height="20" />
-          <span className="ml-2 extra-info">Incorporated 2/09/19</span>
+          <span className="ml-2 extra-info">
+            Incorporated {dash_view?.incorporationDate}
+          </span>
         </div>
 
         <div className="d-flex align-items-center">
           <img src={office} alt="web" />
-          <span className="ml-2 extra-info">Lagos, Nigeria</span>
+          <span className="ml-2 extra-info">{dash_view?.location}</span>
         </div>
       </section>
 
@@ -68,7 +74,9 @@ export const CompanyDetails = () => {
         <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
           <Button
             label="Evaluate"
-            onClick={() => push('/mentor/evaluation/evaluate#market_attractiveness')}
+            onClick={() =>
+              push("/mentor/evaluation/evaluate#market_attractiveness")
+            }
           />
           <Button label="Schedule Call" variant="secondary" />
         </div>
@@ -79,7 +87,7 @@ export const CompanyDetails = () => {
             <span className="share-link">Share</span>
           </span>
 
-          <span style={{ cursor: 'pointer' }}>
+          <span style={{ cursor: "pointer" }}>
             <img src={linkedIn} alt="linkedIn" width="24" height="24" />
             <img
               src={twitter}
@@ -93,5 +101,5 @@ export const CompanyDetails = () => {
         </div>
       </section>
     </section>
-  )
-}
+  );
+};
