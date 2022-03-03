@@ -1,44 +1,47 @@
-import React, { useState } from 'react'
-import './fundraising.css'
-import { Tabs } from '../../../../mentorComponents'
-import { FundingAsk } from './components/fundingAsk'
-import FundUtilization from './components/fundUtilization'
-import CapTable from './components/capTable'
-import PreviousRound from './components/previousRound'
-import FinancialProjection from './components/financialProjection'
+import React, { useState } from "react";
+import "./fundraising.css";
+import { Tabs } from "../../../../mentorComponents";
+import { FundingAsk } from "./components/fundingAsk";
+import FundUtilization from "./components/fundUtilization";
+import CapTable from "./components/capTable";
+import PreviousRound from "./components/previousRound";
+import FinancialProjection from "./components/financialProjection";
+import { useSelector } from "react-redux";
 
 export const Fundraising = () => {
+  const { dash_view } = useSelector((state) => state.business);
+
   const renderContent = () => {
     switch (currentTab) {
-      case 'Funding Ask':
-        return <FundingAsk />
+      case "Funding Ask":
+        return <FundingAsk />;
 
-      case 'Fund Utilization':
-        return <FundUtilization />
+      case "Fund Utilization":
+        return <FundUtilization />;
 
-      case 'Cap Table':
-        return <CapTable />
+      case "Cap Table":
+        return <CapTable />;
 
-      case 'Previous Round':
-        return <PreviousRound />
+      case "Previous Round":
+        return <PreviousRound />;
 
-      case 'Financial Projection':
-        return <FinancialProjection />
+      case "Financial Projection":
+        return <FinancialProjection />;
 
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   const tabItems = [
-    'Funding Ask',
-    'Fund Utilization',
-    'Cap Table',
-    'Previous Round',
-    'Financial Projection',
-  ]
+    "Funding Ask",
+    "Fund Utilization",
+    "Cap Table",
+    "Previous Round",
+    "Financial Projection",
+  ];
 
-  const [currentTab, setCurrentTab] = useState(tabItems[0])
+  const [currentTab, setCurrentTab] = useState(tabItems[0]);
 
   return (
     <div className="pt-3">
@@ -53,5 +56,5 @@ export const Fundraising = () => {
       </section>
       <section className="mt-1">{renderContent()}</section>
     </div>
-  )
-}
+  );
+};

@@ -1,34 +1,38 @@
-import React, { useState } from 'react'
-import { Tabs } from '../../../../mentorComponents'
-import './businessModelCanva.css'
-import { Brand } from './components/brand/brand'
-import { BusinessModel } from './components/businessModel/businessModel'
-import { Market } from './components/market/market'
-import { Planning } from './components/planning/planning'
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Tabs } from "../../../../mentorComponents";
+import "./businessModelCanva.css";
+import { Brand } from "./components/brand/brand";
+import { BusinessModel } from "./components/businessModel/businessModel";
+import { Market } from "./components/market/market";
+import { Planning } from "./components/planning/planning";
 
 export const BusinessModelCanva = () => {
+  const {
+    dash_view: { businessModelCanva },
+  } = useSelector((state) => state.business);
   const renderContent = () => {
     switch (currentTab) {
-      case 'Market':
-        return <Market />
+      case "Market":
+        return <Market data={businessModelCanva?.market} />;
 
-      case 'Brand':
-        return <Brand />
+      case "Brand":
+        return <Brand data={businessModelCanva?.brand} />;
 
-      case 'Business Modeling':
-        return <BusinessModel />
+      case "Business Modeling":
+        return <BusinessModel data={businessModelCanva?.businessModelling} />;
 
-      case 'Planning':
-        return <Planning />
+      case "Planning":
+        return <Planning data={businessModelCanva?.planning} />;
 
       default:
-        return <Market />
+        return <Market data={businessModelCanva?.market} />;
     }
-  }
+  };
 
-  const tabItems = ['Market', 'Brand', 'Business Modeling', 'Planning']
+  const tabItems = ["Market", "Brand", "Business Modeling", "Planning"];
 
-  const [currentTab, setCurrentTab] = useState(tabItems[0])
+  const [currentTab, setCurrentTab] = useState(tabItems[0]);
 
   return (
     <div className="pt-3">
@@ -43,5 +47,5 @@ export const BusinessModelCanva = () => {
       </section>
       <section className="mt-1">{renderContent()}</section>
     </div>
-  )
-}
+  );
+};

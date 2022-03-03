@@ -5,9 +5,12 @@ import whatsApp from "../../../../assets/icons/whatsapp.svg";
 import member from "../../../../assets/images/sampleTeamMember.png";
 
 import "./team.css";
+import { useSelector } from "react-redux";
 
 export const Team = () => {
-  const count = [1, 2, 3, 4, 5, 6];
+  const {
+    dash_view: { teams },
+  } = useSelector((state) => state.business);
   return (
     <div>
       {/* <h3 className="tab-section-title">Team</h3> */}
@@ -16,10 +19,10 @@ export const Team = () => {
         <h4 className="team-group-title">Founder & Co-Founders</h4>
 
         <div className="row">
-          {count.slice(0, 3).map((c, i) => {
+          {teams.slice(0, 3).map((member, i) => {
             return (
               <article className="col-lg-4 mb-4">
-                <CoFounders key={`founder-member-${i}`} />
+                <CoFounders key={`founder-member-${i}`} data={member} />
               </article>
             );
           })}
@@ -30,10 +33,10 @@ export const Team = () => {
         <h4 className="team-group-title mt-5">Team Members</h4>
 
         <div className="row">
-          {count.map((c, i) => {
+          {teams.slice(3, teams?.length).map((member, i) => {
             return (
               <article className="col-lg-4 mb-4">
-                <TeamMember key={`member-${i}`} />
+                <TeamMember key={`member-${i}`} data={member} />
               </article>
             );
           })}
@@ -43,13 +46,13 @@ export const Team = () => {
   );
 };
 
-const CoFounders = () => {
+const CoFounders = ({ data = {} }) => {
   return (
     <div className="d-flex align-items-center flex-wrap member-card">
       <img src={member} alt="team member" className="mr-4" />
       <section>
-        <p>Prima Jakatar</p>
-        <p className="small">Founder and CEO</p>
+        <p>{data?.name}</p>
+        <p className="small">{data?.designation}</p>
         <span className="d-flex">
           <img src={linkedIn} alt="linkedIn" width="24" height="24" />
           <img
@@ -66,14 +69,13 @@ const CoFounders = () => {
   );
 };
 
-
-const TeamMember = () => {
+const TeamMember = ({ data = {} }) => {
   return (
     <div className="d-flex align-items-center flex-wrap member-card">
       <img src={member} alt="team member" className="mr-4" />
       <section>
-        <p>Prima Jakatar</p>
-        <p className="small">Founder and CEO</p>
+        <p>{data?.name}</p>
+        <p className="small">{data?.designation}</p>
         <span className="d-flex">
           <img src={linkedIn} alt="linkedIn" width="24" height="24" />
           <img

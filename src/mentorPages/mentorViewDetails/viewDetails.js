@@ -1,56 +1,57 @@
-import React from 'react'
-import './viewDetails.css'
-import { ProductDemo, Tabs } from '../../mentorComponents'
-import { PitchDeck } from './components/pitchDeck/pitchDeck'
-import { Product } from './components/product/product'
-import { BusinessModelCanva } from './components/businessModelCanva/businessModelCanva'
-import { Team } from './components/team/team'
-import { RoadMap } from './components/roadMap/RoadMap'
-import { Fundraising } from './components/fundraising/fundraising'
-import { Milestone } from './components/milestone/Milestone'
+import React from "react";
+import "./viewDetails.css";
+import { ProductDemo, Tabs } from "../../mentorComponents";
+import { PitchDeck } from "./components/pitchDeck/pitchDeck";
+import { Product } from "./components/product/product";
+import { BusinessModelCanva } from "./components/businessModelCanva/businessModelCanva";
+import { Team } from "./components/team/team";
+import { RoadMap } from "./components/roadMap/RoadMap";
+import { Fundraising } from "./components/fundraising/fundraising";
+import { Milestone } from "./components/milestone/Milestone";
+import { useSelector } from "react-redux";
 
 export const MentorViewDetails = ({ history }) => {
   const {
     location: { hash },
-  } = history
+  } = history;
 
   const renderContent = () => {
-    switch (hash.replaceAll('%20', '')) {
-      case '#Product':
-        return <Product />
+    switch (hash.replaceAll("%20", "")) {
+      case "#Product":
+        return <Product />;
 
-      case '#Pitch Deck':
-        return <PitchDeck />
+      case "#Pitch Deck":
+        return <PitchDeck />;
 
-      case '#Team':
-        return <Team />
+      case "#Team":
+        return <Team />;
 
-      case '#Business Model Canva':
-        return <BusinessModelCanva />
+      case "#Business Model Canva":
+        return <BusinessModelCanva />;
 
-      case '#Fundraising':
-        return <Fundraising />
+      case "#Fundraising":
+        return <Fundraising />;
 
-      case '#Milestone/Timeline':
-        return <Milestone />
+      case "#Milestone/Timeline":
+        return <Milestone />;
 
-      case '#Product Road Map':
-        return <RoadMap />
+      case "#Product Road Map":
+        return <RoadMap />;
 
       default:
-        return <Product />
+        return <Product />;
     }
-  }
+  };
 
   const tabItems = [
-    'Product',
-    'Pitch Deck',
-    'Team',
-    'Business Model Canva',
-    'Fundraising',
-    'Milestone/Timeline',
-    'Product Road Map',
-  ]
+    "Product",
+    "Pitch Deck",
+    "Team",
+    "Business Model Canva",
+    "Fundraising",
+    "Milestone/Timeline",
+    "Product Road Map",
+  ];
 
   return (
     <div className="dashboard-main mx-3">
@@ -63,5 +64,5 @@ export const MentorViewDetails = ({ history }) => {
         <section className="mt-1">{renderContent()}</section>
       </div>
     </div>
-  )
-}
+  );
+};

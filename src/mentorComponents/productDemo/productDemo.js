@@ -1,13 +1,16 @@
-import React from 'react'
-import right from '../../assets/icons/right.svg'
-import './productDemo.css'
-import { CompanyDetails } from './components/companyDetails'
-import { FinancialDetails } from './components/financialDetails'
-import { FundingRound } from './components/FundingRound'
-import { useHistory } from 'react-router-dom'
+import React from "react";
+import right from "../../assets/icons/right.svg";
+import "./productDemo.css";
+import { CompanyDetails } from "./components/companyDetails";
+import { FinancialDetails } from "./components/financialDetails";
+import { FundingRound } from "./components/FundingRound";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const ProductDemo = () => {
-  const { push } = useHistory()
+  const { push } = useHistory();
+
+  const { dash_view } = useSelector((state) => state.business);
 
   return (
     <div>
@@ -17,13 +20,13 @@ export const ProductDemo = () => {
             className="bread-start"
             role="button"
             onClick={() => {
-              push('/mentor/dashboard')
+              push("/mentor/dashboard");
             }}
           >
             Startups
           </span>
           <img src={right} alt="left" className="mx-3" />
-          <span className="bread-end">Applane Insteen.</span>
+          <span className="bread-end">{dash_view?.name}</span>
         </section>
 
         <div className="row mt-5">
@@ -37,5 +40,5 @@ export const ProductDemo = () => {
         </div>
       </article>
     </div>
-  )
-}
+  );
+};
