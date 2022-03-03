@@ -39,7 +39,7 @@ export const Upcoming = () => {
         <article className="col-xl-4 col-lg-6">
           {data.map((d, i) => {
             if (i === 0) {
-              return <ScheduleCard image={d.image} id={i} />
+              return <ScheduleCard image={d.image} id={i}  />
             }
             if (i % 3 === 0) {
               return <ScheduleCard image={d.image} id={i} />

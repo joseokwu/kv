@@ -8,3 +8,12 @@ export const getMentorDashboardData = async () => {
     throw err
   }
 }
+
+export const getMentorEvaluationData = async () => {
+  try {
+    const res = await request.post('/mentor/evaluation')
+    return res?.data
+  } catch (err) {
+    throw err
+  }
+}

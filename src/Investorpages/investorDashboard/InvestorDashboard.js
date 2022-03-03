@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React , { useEffect , useState } from "react";
 import {
   ConnectCard,
   DashCard,
@@ -8,11 +8,12 @@ import {
 } from "../../components";
 import { ScheduleCard } from "../investorSchedule/components/Upcoming";
 import "./investDashboard.css";
-import { getInvestorDashboard } from '../../services/investor'
+import { getInvestorDashboard } from '../../services/investor';
+
 
 export const InvestorDashboard = ({ history }) => {
 
-  const [dashData, setDashData] = useState({})
+  const [dashData, setDashData] = useState(null)
 
   const fetchDashboard = async () => {
     const res = await getInvestorDashboard()
@@ -23,7 +24,7 @@ export const InvestorDashboard = ({ history }) => {
     fetchDashboard()
 
     return () => {
-      setDashData({})
+      setDashData([])
     }
   }, [])
   console.log(dashData)
@@ -118,26 +119,17 @@ export const InvestorDashboard = ({ history }) => {
             </section>
 
             <section className="row">
-              <div className="col-xl-6 mb-4">
+              {
+                dashData && dashData?.opportunities.map((item, i) =>(
+                  <div key={i} className="col-xl-6 mb-4">
                 <OpportunityCard
-                  onClick={() => push(`/investor/opportunities/1`)}
+                  data={item}
+                  onClick={() => push(`/investor/opportunities/${i}`)}
                 />
-              </div>
-              <div className="col-xl-6 mb-4">
-                <OpportunityCard
-                  onClick={() => push(`/investor/opportunities/2`)}
-                />
-              </div>
-              <div className="col-xl-6 mb-4">
-                <OpportunityCard
-                  onClick={() => push(`/investor/opportunities/3`)}
-                />
-              </div>
-              <div className="col-xl-6 mb-4">
-                <OpportunityCard
-                  onClick={() => push(`/investor/opportunities/4`)}
-                />
-              </div>
+                 </div>
+                )) 
+               
+              }
             </section>
           </div>
         </div>
