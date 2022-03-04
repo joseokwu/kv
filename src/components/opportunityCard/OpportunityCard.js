@@ -4,6 +4,8 @@ import logo from "../../assets/images/yeLogo.svg";
 import { Tag } from "..";
 
 export const OpportunityCard = ({ onClick , data }) => {
+
+  console.log(data)
   return (
     <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
@@ -26,9 +28,7 @@ export const OpportunityCard = ({ onClick , data }) => {
 
       <section className="opp-content">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-          morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit...
+          {data?.description}
         </p>
       </section>
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import left from "../../assets/icons/chervonLeft.svg";
 import "./opportunity.css";
 import { Tabs, Tag } from "../../components";
@@ -13,7 +13,10 @@ import { Fundraising } from "./components/fundraising/Fundraising";
 import { Milestone } from "./components/milestone/Milestone";
 import { RoadMap } from "./components/roadMap/RoadMap";
 
+
 export const Opportunity = ({ history }) => {
+
+
   const {
     location: { hash, pathname },
     push,

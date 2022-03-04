@@ -1,6 +1,4 @@
-
 import React, { useEffect, useState } from "react";
-
 import {
   AssignedStartupCard,
   MentorDashCard,
@@ -30,6 +28,7 @@ export const MentorDashboard = () => {
   console.log("dashInfo", dashInfo);
 
   useEffect(() => {
+    
     fetchData();
   }, []);
 
@@ -45,6 +44,7 @@ export const MentorDashboard = () => {
               color={'#D5D6F4'}
               key={i}
             />
+            
           ))}
         </section>
       </section>
