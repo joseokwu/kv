@@ -3,14 +3,13 @@ import twitter from "../../../../assets/icons/tweet.svg";
 import linkedIn from "../../../../assets/icons/link.svg";
 import whatsApp from "../../../../assets/icons/whatsapp.svg";
 import member from "../../../../assets/images/sampleTeamMember.png";
-
+import { useActivity } from "../../../../hooks";
 import "./team.css";
-import { useSelector } from "react-redux";
 
 export const Team = () => {
   const {
-    dash_view: { teams },
-  } = useSelector((state) => state.business);
+    state: { teams },
+  } = useActivity();
   return (
     <div>
       {/* <h3 className="tab-section-title">Team</h3> */}

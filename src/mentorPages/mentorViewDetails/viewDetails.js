@@ -8,7 +8,6 @@ import { Team } from "./components/team/team";
 import { RoadMap } from "./components/roadMap/RoadMap";
 import { Fundraising } from "./components/fundraising/fundraising";
 import { Milestone } from "./components/milestone/Milestone";
-import { useSelector } from "react-redux";
 
 export const MentorViewDetails = ({ history }) => {
   const {

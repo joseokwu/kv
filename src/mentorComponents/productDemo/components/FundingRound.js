@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useActivity } from "../../../hooks";
 import { Tag } from "../../../mentorComponents";
 
 export const FundingRound = () => {
   const {
-    dash_view: { fundingRoundSummary },
-  } = useSelector((state) => state.business);
+    state: {
+      dash_view: { fundingRoundSummary },
+    },
+  } = useActivity();
+
   return (
     <div className=" opp_page_card py-4">
       <h3 className="sub-card-title border-bottom pb-3 mb-4">

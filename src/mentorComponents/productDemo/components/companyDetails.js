@@ -8,14 +8,15 @@ import linkedIn from "../../../assets/icons/linkedInLogo.svg";
 import whatsApp from "../../../assets/icons/whatsapp.svg";
 import share from "../../../assets/icons/share.svg";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useActivity } from "../../../hooks";
 
 export const CompanyDetails = () => {
   const { push } = useHistory();
 
-  const { dash_view } = useSelector((state) => state.business);
+  const {
+    state: { dash_view },
+  } = useActivity();
 
-  console.log("dash_view", dash_view);
   return (
     <section className="opp_page_card py-4">
       <div

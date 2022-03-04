@@ -4,11 +4,12 @@ import founder from "../../../../assets/images/founder.svg";
 import fanai from "../../../../assets/images/fana.svg";
 import { CurrentInvestorConnectCard } from "../../../../mentorComponents";
 import "./product.css";
-import { useSelector } from "react-redux";
+import { useActivity } from "../../../../hooks";
 
 export const Product = () => {
-  const countInvestor = [1, 2, 3, 4];
-  const { dash_view } = useSelector((state) => state.business);
+  const {
+    state: { dash_view },
+  } = useActivity();
 
   return (
     <div className="row">

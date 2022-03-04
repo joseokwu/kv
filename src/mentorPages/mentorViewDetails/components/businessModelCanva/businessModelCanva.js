@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useActivity } from "../../../../hooks";
 import { Tabs } from "../../../../mentorComponents";
 import "./businessModelCanva.css";
 import { Brand } from "./components/brand/brand";
@@ -9,8 +9,10 @@ import { Planning } from "./components/planning/planning";
 
 export const BusinessModelCanva = () => {
   const {
-    dash_view: { businessModelCanva },
-  } = useSelector((state) => state.business);
+    state: {
+      dash_view: { businessModelCanva },
+    },
+  } = useActivity();
   const renderContent = () => {
     switch (currentTab) {
       case "Market":

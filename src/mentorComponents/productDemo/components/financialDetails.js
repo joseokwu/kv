@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useActivity } from "../../../hooks";
 
 export const FinancialDetails = () => {
   const {
-    dash_view: { financialDetails },
-  } = useSelector((state) => state.business);
+    state: {
+      dash_view: { financialDetails },
+    },
+  } = useActivity();
   return (
     <div className="mt-4 opp_page_card py-3 mb-4">
       <h3 className="sub-card-title">Financial Details</h3>
