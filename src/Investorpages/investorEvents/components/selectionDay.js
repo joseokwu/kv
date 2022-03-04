@@ -7,155 +7,109 @@ import { Button, Modal, Select, TextField } from "../../../Startupcomponents";
 import down from "../../../assets/icons/downArrow.svg";
 import location from "../../../assets/icons/locationSm.svg";
 import name from "../../../assets/icons/initial.svg";
+import { months } from "../../../utils/helpers";
+import { ExceptionMap } from "antd/lib/result";
 
-export const SelectionDay = () => {
+export const SelectionDay = ({data}) => {
+
+  console.log(data)
+
+  const dte = new Date();
+
   return (
     <div className="row" style={{ columnGap: 10 }}>
       <Modal id="eventScheduleModal" withHeader={false}>
         <EventScheduleModal />
       </Modal>
-      <div className="col-lg-5 col-12 events_card_bg py-4 mt-4 ml-lg-4 px-4">
-        <section className="events_card d-flex justify-content-between">
-          <h3>Appleiine House Demo 101</h3>
-          {/* <img src={dots} alt="" /> */}
-        </section>
+    
+    {
 
-        <section className="d-flex justify-content-between mt-2">
-          <p className="pending_date pr-4">
-            <span>50</span> September
-          </p>
+      data && data.map((item, i) =>{
+        let compareDate = new Date(item?.startTime)
+        let endTime = new Date(item?.endTime) 
+        return (
 
-          <p className="pending_time pt-1">
-            <img src={bigClock} alt="clock" /> 10:00pm - 12pm
-          </p>
-        </section>
+<div key={i} className={`col-lg-5 col-12   events_card_bg py-4 mt-4 ml-lg-4 px-4`}>
+<section className="events_card d-flex justify-content-between">
+<h3> { item?.titleOfEvent } </h3>
+{/* <img src={dots} alt="" /> */}
+</section>
 
-        <section className="mt-4">
-          <img
-            src={demo}
-            alt="demo"
-            style={{ width: "100%", height: "100%" }}
-          />
-        </section>
+<section className="d-flex justify-content-between mt-2">
+<p className="pending_date pr-4">
+<span>{ compareDate.getDate() } </span> <em className="mx-2" >{months[compareDate.getMonth()] }</em>
+</p>
 
-        <section className="event_card_body mt-5">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit.
-          </p>
-        </section>
+<p className="pending_time pt-1">
+ { dte.getDate() === compareDate.getDate() ? ( <span class="accepted_tag">Ongoing</span>) : (<> <img src={bigClock} alt="clock" /> { `${compareDate.getHours()}:00${compareDate.getHours() >= 12 ? 'PM' : 'AM'} ` + "-" +  `${endTime.getHours()}:00${endTime.getHours() >=12 ? 'PM' : 'AM'} ` }  </> ) }
+</p>
+</section>
 
-        <section
-          className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
-          style={{ rowGap: 10 }}
-        >
-          <div className="d-flex align-items-center" style={{ columnGap: 10 }}>
-            <button className="se_view">View details</button>
-            {/* <Button label="View details" variant="secondary" /> */}
-            {/* <Button
-              label="Add to schedule"
-              data-toggle={'modal'}
-              data-target="#eventScheduleModal"
-            /> */}
-          </div>
+<section className="mt-4">
+{  item?.image ? (<img
+src={item?.image}
+alt="demo"
+style={{ width: "100%", height: "100%" }}
+/>) : <span/> }
+</section>
 
-          <section className="event_people">
-            <img src={doc} alt="doc" />
-            <img src={doc} alt="doc" />
-            <img src={doc} alt="doc" />
-          </section>
-        </section>
-      </div>
+<section className="event_card_body mt-5">
+<p>
+  {
+    item?.eventDescription
+  }
+</p>
+</section>
 
-      <div className="col-lg-6 col-12">
-        <div className=" events_card_bg py-4 px-4 mt-4">
-          <section className="events_card d-flex justify-content-between">
-            <h3>Appleiine House Demo</h3>
-            {/* <img src={dots} alt="" /> */}
-          </section>
+{
+ dte.getHours() === compareDate.getHours() ? (
+  <section
+  className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+  style={{ rowGap: 10 }}
+>
+  <div
+    className="d-flex align-items-center"
+    style={{ columnGap: 10 }}
+  >
+    <button className="se_join">Join Event</button>
+    <button className="se_view">View details</button>
+  </div>
 
-          <section className="d-flex justify-content-between mt-2">
-            <p className="pending_date pr-4">
-              <span>50</span> September
-            </p>
+  <section className="event_people">
+    <img src={doc} alt="doc" />
+    <img src={doc} alt="doc" />
+    <img src={doc} alt="doc" />
+  </section>
+</section>
+  ):(
+  <section
+className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+style={{ rowGap: 10 }}
+>
+<div className="d-flex align-items-center" style={{ columnGap: 10 }}>
+<button className="se_view">View details</button>
 
-            <span class="accepted_tag">Ongoing</span>
-          </section>
+</div>
 
-          <section className="event_card_body mt-3">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-              lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit.{" "}
-            </p>
-          </section>
+<section className="event_people">
+<img src={doc} alt="doc" />
+<img src={doc} alt="doc" />
+<img src={doc} alt="doc" />
+</section>
+</section>
+ )
 
-          <section
-            className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
-            style={{ rowGap: 10 }}
-          >
-            <div
-              className="d-flex align-items-center"
-              style={{ columnGap: 10 }}
-            >
-              <button className="se_join">Join Event</button>
-              <button className="se_view">View details</button>
-            </div>
+}
+ 
+</div> 
+        )
+       
+      })
+      
+    }
 
-            <section className="event_people">
-              <img src={doc} alt="doc" />
-              <img src={doc} alt="doc" />
-              <img src={doc} alt="doc" />
-            </section>
-          </section>
-        </div>
-
-        <div className="events_card_bg py-4 px-4 mt-4">
-          <section className="events_card d-flex justify-content-between">
-            <h3>Appleiine House Demo</h3>
-            {/* <img src={dots} alt="" /> */}
-          </section>
-
-          <section className="d-flex justify-content-between mt-2">
-            <p className="pending_date pr-4">
-              <span>50</span> September
-            </p>
-
-            <p className="pending_time">
-              <img src={bigClock} alt="clock" /> 10:00pm - 12pm
-            </p>
-          </section>
-
-          <section className="event_card_body mt-3">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-              lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit.{" "}
-            </p>
-          </section>
-
-          <section
-            className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
-            style={{ rowGap: 10 }}
-          >
-            <div
-              className="d-flex align-items-center"
-              style={{ columnGap: 10 }}
-            >
-              <button className="se_view">View details</button>
-            </div>
-
-            <section className="event_people">
-              <img src={doc} alt="doc" />
-              <img src={doc} alt="doc" />
-              <img src={doc} alt="doc" />
-            </section>
-          </section>
-        </div>
-      </div>
     </div>
-  );
+  );  
 };
 
 const EventScheduleModal = () => {

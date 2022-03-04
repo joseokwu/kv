@@ -1,46 +1,5 @@
-// import React from "react";
-// import { Tabs } from "../../components/index";
 
-// export const InvestorEvents = ({ history }) => {
-//   const {
-//     location: { hash },
-//   } = history;
-//   const tabsItems = [
-//     "all events",
-//     "selection day",
-//     "pitching session",
-//     "others",
-//   ];
-
-//   const renderComponents = () => {
-//     switch (hash?.replaceAll("%20", " ")) {
-//       case "#all events":
-//         return <div>All Events</div>;
-//       case "#selection day":
-//         return <div>Selection Day</div>;
-//       case "#pitching session":
-//         return <div>Pitching Session</div>;
-//       case "#others":
-//         return <div>Others</div>;
-//       default:
-//         return <div>all events</div>;
-//     }
-//   };
-//   return (
-//     <div className="wrapper">
-//       {/* <section className="mb-4">
-//         <h1>Events</h1>
-//       </section> */}
-
-//       <section className="mb-4">
-//         <Tabs tabItems={tabsItems} />
-//       </section>
-//       <section>{renderComponents()}</section>
-//     </div>
-//   );
-// };
-
-import React from "react";
+import React , { useEffect , useState } from "react";
 import { Tabs } from "../../Startupcomponents";
 import down from "../../assets/icons/downArrow.svg";
 import { SelectionDay } from "./components/selectionDay";
@@ -52,10 +11,27 @@ export const InvestorEvents = ({ history }) => {
     location: { hash },
   } = history;
 
+  const [selectionEvents, setSelectionEvents] = useState([]);
+  const [demoEvents, setDemoEvents] = useState([]);
+  const [pitchEvents, setPitchEvents] = useState([]);
+
+  const fetchData = async () => {
+    const res = await getEvents();
+    
+    setSelectionEvents(res?.data?.filter((x) => x.eventType === "selectionDay")
+    );
+    setDemoEvents(() => res?.data?.filter((x) => x.eventType === "demoDay"));
+    setPitchEvents(() =>
+      res?.data?.filter((x) => x.eventType === "pitchSession")
+    );
+  };
+
+  console.log(selectionEvents)
+
   const renderContent = () => {
     switch (hash) {
       case "#Selection Day":
-        return <SelectionDay />;
+        return <SelectionDay data={selectionEvents.length > 0 && selectionEvents } />;
 
       case "#Demo Day":
         return <SelectionDay />;
@@ -77,6 +53,18 @@ export const InvestorEvents = ({ history }) => {
     "Pitching Events",
     "Other Events",
   ];
+
+  useEffect(() =>{
+    fetchData();
+    return () =>{
+      setDemoEvents([]);
+      setSelectionEvents([]);
+      setPitchEvents([]);
+    }
+  },[])
+
+
+
   return (
     <div className="mb-5">
       <div className="col-lg-12">
