@@ -6,11 +6,8 @@ import FundUtilization from "./components/fundUtilization";
 import CapTable from "./components/capTable";
 import PreviousRound from "./components/previousRound";
 import FinancialProjection from "./components/financialProjection";
-import { useSelector } from "react-redux";
 
 export const Fundraising = () => {
-  const { dash_view } = useSelector((state) => state.business);
-
   const renderContent = () => {
     switch (currentTab) {
       case "Funding Ask":

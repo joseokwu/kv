@@ -3,14 +3,15 @@ import maindoc from "../../../../assets/images/mani-doc.svg";
 import pitchicon from "../../../../assets/icons/pitchd.svg";
 import playicon from "../../../../assets/icons/play.svg";
 import play from "../../../../assets/images/play.svg";
-
 import "./pitchDeck.css";
-import { useSelector } from "react-redux";
+import { useActivity } from "../../../../hooks";
 
 export const PitchDeck = () => {
   const {
-    dash_view: { pitchDeck },
-  } = useSelector((state) => state.business);
+    state: {
+      dash_view: { pitchDeck },
+    },
+  } = useActivity();
 
   return (
     <div>

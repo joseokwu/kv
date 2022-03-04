@@ -5,12 +5,14 @@ import { CompanyDetails } from "./components/companyDetails";
 import { FinancialDetails } from "./components/financialDetails";
 import { FundingRound } from "./components/FundingRound";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useActivity } from "../../hooks/index";
 
 export const ProductDemo = () => {
   const { push } = useHistory();
 
-  const { dash_view } = useSelector((state) => state.business);
+  const {
+    state: { dash_view },
+  } = useActivity();
 
   return (
     <div>
