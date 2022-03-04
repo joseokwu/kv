@@ -66,6 +66,12 @@ export const SelectionDay = ({ data = [] }) => {
               className="d-flex align-items-center"
               style={{ columnGap: 10 }}
             >
+              {new Date().getTime() >= new Date(data[0]?.startTime) &&
+              new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
+                <button className="se_join">Join Event</button>
+              ) : (
+                <button className="se_join">Add Schedule</button>
+              )}
               <button className="se_view">View details</button>
               {/* <Button label="View details" variant="secondary" /> */}
               {/* <Button
@@ -97,19 +103,19 @@ export const SelectionDay = ({ data = [] }) => {
                 <span>{new Date(data[1]?.startDate).getDate()}</span>{" "}
                 {months[new Date(data[1]?.startDate).getMonth()]}
               </p>
-              {new Date().getTime() >= new Date(data[0]?.startTime) &&
-              new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
+              {new Date().getTime() >= new Date(data[1]?.startTime) &&
+              new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
                 <span class="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
                   <img src={bigClock} alt="clock" />{" "}
-                  {`${new Date(data[0]?.startTime).getHours()}`}:
-                  {`${new Date(data[0]?.startTime).getMinutes()}${
-                    new Date(data[0]?.startTime).getMinutes() < 10 ? 0 : ""
+                  {`${new Date(data[1]?.startTime).getHours()}`}:
+                  {`${new Date(data[1]?.startTime).getMinutes()}${
+                    new Date(data[1]?.startTime).getMinutes() < 10 ? 0 : ""
                   }`}
-                  - {`${new Date(data[0]?.endTime).getHours()}`}:
-                  {`${new Date(data[0]?.endTime).getMinutes()}${
-                    new Date(data[0]?.endTime).getMinutes() < 10 ? 0 : ""
+                  - {`${new Date(data[1]?.endTime).getHours()}`}:
+                  {`${new Date(data[1]?.endTime).getMinutes()}${
+                    new Date(data[1]?.endTime).getMinutes() < 10 ? 0 : ""
                   }`}
                 </p>
               )}{" "}
@@ -127,7 +133,12 @@ export const SelectionDay = ({ data = [] }) => {
                 className="d-flex align-items-center"
                 style={{ columnGap: 10 }}
               >
-                <button className="se_join">Join Event</button>
+                {new Date().getTime() >= new Date(data[1]?.startTime) &&
+                new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
+                  <button className="se_join">Join Event</button>
+                ) : (
+                  <button className="se_join">Add Schedule</button>
+                )}
                 <button className="se_view">View details</button>
               </div>
 
@@ -143,29 +154,29 @@ export const SelectionDay = ({ data = [] }) => {
         {data?.length > 2 && (
           <div className="events_card_bg py-4 px-4 mt-4">
             <section className="events_card d-flex justify-content-between">
-              <h3>{data[0]?.titleOfEvent}</h3>
+              <h3>{data[2]?.titleOfEvent}</h3>
               {/* <img src={dots} alt="" /> */}
             </section>
 
             <section className="d-flex justify-content-between mt-2">
               <p className="pending_date pr-4">
-                <span>{new Date(data[0]?.startDate).getDate()}</span>{" "}
-                {months[new Date(data[0]?.startDate).getMonth()]}{" "}
+                <span>{new Date(data[2]?.startDate).getDate()}</span>{" "}
+                {months[new Date(data[2]?.startDate).getMonth()]}{" "}
               </p>
 
-              {new Date().getTime() >= new Date(data[0]?.startTime) &&
-              new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
+              {new Date().getTime() >= new Date(data[2]?.startTime) &&
+              new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
                 <span class="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
                   <img src={bigClock} alt="clock" />{" "}
-                  {`${new Date(data[0]?.startTime).getHours()}`}:
-                  {`${new Date(data[0]?.startTime).getMinutes()}${
-                    new Date(data[0]?.startTime).getMinutes() < 10 ? 0 : ""
+                  {`${new Date(data[2]?.startTime).getHours()}`}:
+                  {`${new Date(data[2]?.startTime).getMinutes()}${
+                    new Date(data[2]?.startTime).getMinutes() < 10 ? 0 : ""
                   }`}
-                  - {`${new Date(data[0]?.endTime).getHours()}`}:
-                  {`${new Date(data[0]?.endTime).getMinutes()}${
-                    new Date(data[0]?.endTime).getMinutes() < 10 ? 0 : ""
+                  - {`${new Date(data[2]?.endTime).getHours()}`}:
+                  {`${new Date(data[2]?.endTime).getMinutes()}${
+                    new Date(data[2]?.endTime).getMinutes() < 10 ? 0 : ""
                   }`}
                 </p>
               )}
@@ -183,6 +194,12 @@ export const SelectionDay = ({ data = [] }) => {
                 className="d-flex align-items-center"
                 style={{ columnGap: 10 }}
               >
+                {new Date().getTime() >= new Date(data[2]?.startTime) &&
+                new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
+                  <button className="se_join">Join Event</button>
+                ) : (
+                  <button className="se_join">Add Schedule</button>
+                )}
                 <button className="se_view">View details</button>
               </div>
 
@@ -242,7 +259,12 @@ export const SelectionDay = ({ data = [] }) => {
                       className="d-flex align-items-center"
                       style={{ columnGap: 10 }}
                     >
-                      <button className="se_join">Join Event</button>
+                      {new Date().getTime() >= new Date(d?.startTime) &&
+                      new Date().getTime() <= new Date(d?.endTime).getTime() ? (
+                        <button className="se_join">Join Event</button>
+                      ) : (
+                        <button className="se_join">Add Schedule</button>
+                      )}
                       <button className="se_view">View details</button>
                     </div>
 
