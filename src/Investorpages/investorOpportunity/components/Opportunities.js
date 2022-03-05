@@ -20,3 +20,4 @@ export const Opportunities = ({ data = []}) => {
     </div>
   );
 };
+

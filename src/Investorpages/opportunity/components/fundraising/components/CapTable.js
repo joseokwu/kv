@@ -1,82 +1,41 @@
 import React, { useMemo } from "react";
 import { Table } from "../../../../../components";
 
-const CapTable = () => {
-  const columns = useMemo(
-    () => [
+const CapTable = ({data}) => {
+
+  const columns = 
+  [
       {
         Header: "Shareholders",
-        accessor: "fundingRequirement",
+        accessor: "shareHolders",
       },
       {
         Header: "Shareholder Type",
-        accessor: "dealType",
+        accessor: "shareType",
       },
       {
         Header: "Number of shares",
-        accessor: "fundingRound",
+        accessor: "noShare",
       },
       {
         Header: "Percentage (%) of shares",
-        accessor: "dilution",
+        accessor: "sharePercent",
       },
-    ],
-    []
-  );
+    ]
+   
 
-  const data = [
-    {
-      fundingRequirement: "John Carter Robinson",
-      dealType: "Angel Investor",
-      fundingRound: "5",
-      dilution: "2.5%",
-      preMoney: "$20,000",
-      postMoney: "$30,000",
-      fundingClosingDate: "20 November, 2021",
-    },
-    {
-      fundingRequirement: "John Carter Robinson",
-      dealType: "Angel Investor",
-      fundingRound: "5",
-      dilution: "2.5%",
-      preMoney: "$20,000",
-      postMoney: "$30,000",
-      fundingClosingDate: "20 November, 2021",
-    },
-    {
-      fundingRequirement: "John Carter Robinson",
-      dealType: "Angel Investor",
-      fundingRound: "5",
-      dilution: "2.5%",
-      preMoney: "$20,000",
-      postMoney: "$30,000",
-      fundingClosingDate: "20 November, 2021",
-    },
-    {
-      fundingRequirement: "John Carter Robinson",
-      dealType: "Angel Investor",
-      fundingRound: "5",
-      dilution: "2.5%",
-      preMoney: "$20,000",
-      postMoney: "$30,000",
-      fundingClosingDate: "20 November, 2021",
-    },
-    {
-      fundingRequirement: "John Carter Robinson",
-      dealType: "Angel Investor",
-      fundingRound: "5",
-      dilution: "2.5%",
-      preMoney: "$20,000",
-      postMoney: "$30,000",
-      fundingClosingDate: "20 November, 2021",
-    },
-  ];
+
   return (
     <section className="mb-4">
       {/* <h4 className="mb-5 fundraisingSubTitle">Cap Table</h4> */}
 
       <section>
-        <Table columns={columns} data={data} className="cap-table" />
+        {
+          data && data.length > 0 && (
+            <Table columns={columns} data={data} className="cap-table" />
+          )
+        }
+        
       </section>
     </section>
   );

@@ -16,6 +16,8 @@ export const Fundraising = ({data}) => {
     "financial projection",
   ];
 
+  console.log(data)
+
   const renderComponents = () => {
     switch (currentTab) {
       case "funding ask":

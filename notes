@@ -905,7 +905,46 @@ partners: "10"
 <Tag name="Tech" />
 <Tag name="Engineering" color="#40439A" />
 <Tag name="Career" color="#E31937" />
+=============================================================
+           "file":"",
+             "name":"Financial Projection",
+             "size":"20mb"
+  
+return (
+  <section style={{ overflow: "auto" }}>
+    <table
+     className="table table-striped"
+    >
+      <thead>
+        <tr style={{ background: "#f8f8fa", color:"#a3a3a3"}} >
+         {
+           columns.map((item, i) =>(
+            
+          
+          <th key={i} > {item?.Header}</th>
+        
+           
+           ))
+         }
+         </tr>
+      </thead>
+      <tbody>
+      <tr >
+        {data && data.map((row, i) => {
+          
+          return (
+             
+            <td> { row } </td>
+              
+          );
 
+        })}
+        </tr>
+      </tbody>
+    </table>
+  </section>
+);
+};
 
 
 

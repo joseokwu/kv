@@ -9,7 +9,7 @@ export const Table = ({ columns, data, ...rest }) => {
       data,
     });
 
-  console.log(`headerGroups`, headerGroups);
+
   return (
     <section style={{ overflow: "auto" }}>
       <table
@@ -27,6 +27,7 @@ export const Table = ({ columns, data, ...rest }) => {
         </thead>
         <tbody {...getTableBodyProps()}>
           {rows.map((row, i) => {
+       
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>

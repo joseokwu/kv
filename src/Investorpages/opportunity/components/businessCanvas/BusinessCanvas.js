@@ -38,9 +38,12 @@ export const BusinessCanvas = ({data = []}) => {
         <h4>Key Competitors</h4>
 
         <ul>
-          {/* <li>Lorem ipsum dolor sit amet, consectetur</li> */}
-          {/* <li>Lorem ipsum dolor sit amet, consectetur</li> */}
-          {/* <li>Lorem ipsum dolor sit amet, consectetur</li> */}
+
+        {
+           data?.competitors?.map((item , i) =>(
+            <li key={i} > { item} </li>
+           ))
+        }  
         </ul>
       </section>
 

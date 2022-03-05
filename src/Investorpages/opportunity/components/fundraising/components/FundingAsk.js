@@ -1,18 +1,21 @@
 import React from "react";
 import { Table } from "../../../../../components";
 
-const FundingAsk = () => {
+const FundingAsk = ({data}) => {
+  
   return (
     <div>
-      <FundingAskTable />
-      <CommitmentTable />
+      <FundingAskTable info={data && data?.requirement} />
+      <CommitmentTable data={data?.committment} />
     </div>
   );
 };
 
-const FundingAskTable = () => {
-  const columns = React.useMemo(
-    () => [
+const FundingAskTable = ({info}) => {
+
+
+  const columns = 
+   [
       {
         Header: "Fund Requirement",
         accessor: "fundingRequirement",
@@ -41,35 +44,30 @@ const FundingAskTable = () => {
         Header: "Funding Closing Date",
         accessor: "fundingClosingDate",
       },
-    ],
-    []
-  );
+    ]
+  
+  
 
-  const data = [
-    {
-      fundingRequirement: "$1000,000",
-      dealType: "Common Equity",
-      fundingRound: "Seed",
-      dilution: "10%",
-      preMoney: "$20,000",
-      postMoney: "$30,000",
-      fundingClosingDate: "20 November, 2021",
-    },
-  ];
+ 
+
   return (
     <section className="mb-4">
       {/* <h4 className="mb-5 fundraisingSubTitle">Funding Ask</h4> */}
 
       <section>
-        <Table columns={columns} data={data} />
+      {
+        info && info.length > 0 && (
+          <Table columns={columns} data={info} />
+        )
+      }
       </section>
     </section>
   );
 };
 
-const CommitmentTable = () => {
-  const columns = React.useMemo(
-    () => [
+const CommitmentTable = ({data}) => {
+  const columns = 
+    [
       {
         Header: "Investors",
         accessor: "investor",
@@ -85,36 +83,20 @@ const CommitmentTable = () => {
       {
         Header: "Lead Investor",
         accessor: "leadInvestor",
-      },
-    ],
-    []
-  );
+      }
+    ]
+  
 
-  const data = [
-    {
-      investor: "Prima Jakatar Umbre",
-      InvestorType: "Angel Investor",
-      amount: "$100,000",
-      leadInvestor: "Yes",
-    },
-    {
-      investor: "Prima Jakatar Umbre",
-      InvestorType: "Angel Investor",
-      amount: "$100,000",
-      leadInvestor: "Yes",
-    },
-    {
-      investor: "Prima Jakatar Umbre",
-      InvestorType: "Angel Investor",
-      amount: "$100,000",
-      leadInvestor: "Yes",
-    },
-  ];
+
   return (
     <section className="pt-2">
       <h4 className="mb-5 fundraisingSubTitle">Commitments</h4>
       <section>
-        <Table columns={columns} data={data} />
+        {
+        data && data.length > 0 && (
+            <Table columns={columns} data={data} />
+          )
+        }
       </section>
     </section>
   );
