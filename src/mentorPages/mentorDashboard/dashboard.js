@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   AssignedStartupCard,
   MentorDashCard,
@@ -27,6 +26,7 @@ export const MentorDashboard = () => {
   };
 
   useEffect(() => {
+    
     fetchData();
   }, []);
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4", "#DEF6FF"];

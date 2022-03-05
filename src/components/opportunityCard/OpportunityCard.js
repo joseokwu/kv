@@ -4,6 +4,8 @@ import logo from "../../assets/images/yeLogo.svg";
 import { Tag } from "..";
 
 export const OpportunityCard = ({ onClick , data }) => {
+
+  console.log(data)
   return (
     <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
@@ -18,7 +20,7 @@ export const OpportunityCard = ({ onClick , data }) => {
       <section className="d-flex align-items-center" style={{ columnGap: 4 }}>
       {
         data?.industry?.map((item, i) =>(
-          <Tag name={item} color={item === 'Engineering' ? '#40439A' : item === 'Career' ? '#E31937' : '#3f3f3f3' } /> 
+          <Tag name={item} color={item === 'Tech' ? '#058DC1' : item === 'Engineering' ? '#40439A' : item === 'Career' ? '#E31937' : '#3f3f3f3' } /> 
         ))
       }
    
@@ -26,9 +28,7 @@ export const OpportunityCard = ({ onClick , data }) => {
 
       <section className="opp-content">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-          morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit...
+          {data?.description}
         </p>
       </section>
 

@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "../../components";
 import down from "../../assets/icons/chevronDown.svg";
 import filter from "../../assets/icons/filterFunnel.svg";
 import "./investorOpportunity.css";
 import { Opportunities } from "./components/Opportunities";
 import { Interests } from "../investorInterested/components/Interests";
+import { getInvestorOpportunity } from  '../../services/investor';
+
 
 export const InvestorOpportunity = ({ history }) => {
+
+  const [oppData, setOppData] = useState([])
+
+  const getOpp = async () => {
+    const res = await getInvestorOpportunity()
+    setOppData(res)
+  }
+
+  useEffect(() => {
+    getOpp()
+
+    return () => {
+      setOppData([])
+    }
+  }, [])
+  console.log(oppData)
+
   const {
     location: { hash },
   } = history;
@@ -14,16 +33,16 @@ export const InvestorOpportunity = ({ history }) => {
   const renderContent = () => {
     switch (hash) {
       case "#opportunities":
-        return <Opportunities />;
+        return <Opportunities data={oppData?.opportunity} />;
 
       case "#share deals":
-        return <Opportunities />;
+        return <Opportunities data={oppData?.opportunity} />;
 
       case "#interested":
-        return <Interests />;
+        return <Interests data={oppData?.opportunity} />;
 
       default:
-        return <Opportunities />;
+        return <Opportunities data={oppData?.opportunity} />;
     }
   };
 

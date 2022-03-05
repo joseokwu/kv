@@ -49,7 +49,7 @@ export const TodoList = ({ data }) => {
               <span>Assigned to</span>
               <span className="mx-4">
                 {images.map((data, i) => (
-                  <img className="mx-n2" key={i} src={data.icon} />
+                  <img className="mx-n2 assImg" key={i} src={data.icon} style={{ cursor: 'pointer'}} />
                 ))}
               </span>
             </div>
