@@ -29,3 +29,13 @@ export const getInvestorOpportunity = async (values) => {
     throw new Error(error);
   }
 }
+
+export const getStartupInvesrtorProfile = async (values) => {
+  try {
+    const result = await request.post("investor/opportunity/profile", values);
+    return result.data;
+  } catch (err) {
+    const error = err?.response?.data?.message || err?.message;
+    throw new Error(error);
+  }
+}

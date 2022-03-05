@@ -39,7 +39,7 @@ export const InvestorOpportunity = ({ history }) => {
         return <Opportunities data={oppData?.opportunity} />;
 
       case "#interested":
-        return <Interests />;
+        return <Interests data={oppData?.opportunity} />;
 
       default:
         return <Opportunities data={oppData?.opportunity} />;

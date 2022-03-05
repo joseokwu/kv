@@ -3,49 +3,55 @@ import {
   AssignedStartupCard,
   MentorDashCard,
   UpcomingEventCard,
-
-} from '../../mentorComponents'
+} from "../../mentorComponents";
 import "./dashboard.css";
 import { useHistory } from "react-router-dom";
 import { getDashboard } from "../../services/mentor";
+import { useDispatch } from "react-redux";
+import { DASH_VIEW } from "../../store/actions/actions.types";
 
 export const MentorDashboard = () => {
   const { push } = useHistory();
   const [dashInfo, setDashInfo] = useState({});
-
-  const cardData = [
-    { name: "Incubation Program", count: 200, color: "#D5D6F4" },
-    { name: "Acceleration Program", count: 20, color: "#DEF6FF" },
-    { name: "Mentors", count: 20, color: "#D5D6F4" },
-    { name: "Investors", count: 30, color: "#DEF6FF" },
-  ];
+  const [assignedStartups, setAssignedStartups] = useState([]);
+  const [upcoming, setUpcoming] = useState([]);
+  const dispatch = useDispatch();
 
   const fetchData = async () => {
     const res = await getDashboard();
-    setDashInfo(res);
-  };
 
-  console.log("dashInfo", dashInfo);
+    setDashInfo(res);
+    setAssignedStartups(res?.AssignedStartups);
+    setUpcoming(res?.upcomingEvents);
+  };
 
   useEffect(() => {
     
     fetchData();
   }, []);
+  const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4", "#DEF6FF"];
+
+  const cardData = dashInfo?.cards?.map((dash, i) => {
+    return {
+      name: dash?.title,
+      count: dash?.count,
+      color: cardColors[i],
+    };
+  });
 
   return (
     <div className="dashboard_main container-fluid">
       <section className="row pb-5">
         <section className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed mt-0">
-          {dashInfo.map((data, i) => (
-
-            <MentorDashCard
-              name={data?.cards?.title}
-              count={data?.cards?.count}
-              color={'#D5D6F4'}
-              key={i}
-            />
-            
-          ))}
+          {cardData?.length > 0 &&
+            cardData.map((data, i) => (
+              <MentorDashCard
+                name={data.name}
+                count={data.count}
+                color={data.color}
+                key={i}
+              />
+            ))}
         </section>
       </section>
 
@@ -58,32 +64,20 @@ export const MentorDashboard = () => {
             </section>
 
             <section className="row">
-              <div className="col-xl-4 mb-4">
-
-              <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} data={dashInfo?.AssignedStartups} />
-              </div>
-              {/* <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
-              </div> */}
-              {/* <div className="col-xl-4 mb-4">
-                <AssignedStartupCard onClick={() => push('/mentor/dashboard/view')} />
-              </div> */}
-                <div>
-                <AssignedStartupCard
-                  onClick={() => push("/mentor/dashboard/view")}
-                />
-              </div>
-              <div className="col-xl-4 mb-4">
-                <AssignedStartupCard
-                  onClick={() => push("/mentor/dashboard/view")}
-                />
-              </div>
-              <div className="col-xl-4 mb-4">
-                <AssignedStartupCard
-                  onClick={() => push("/mentor/dashboard/view")}
-                />
-              </div>
-
+              {assignedStartups.length > 0 &&
+                assignedStartups.map((assigned, i) => {
+                  return (
+                    <div className="col-xl-4 mb-4">
+                      <AssignedStartupCard
+                        onClick={() => {
+                          push("/mentor/dashboard/view");
+                          dispatch({ type: DASH_VIEW, payload: assigned });
+                        }}
+                        data={assigned}
+                      />
+                    </div>
+                  );
+                })}
             </section>
           </div>
         </div>
@@ -100,15 +94,14 @@ export const MentorDashboard = () => {
             </section>
 
             <section className="row">
-              <div className="col-xl-4 mb-4">
-                <UpcomingEventCard />
-              </div>
-              <div className="col-xl-4 mb-4">
-                <UpcomingEventCard />
-              </div>
-              <div className="col-xl-4 mb-4">
-                <UpcomingEventCard />
-              </div>
+              {upcoming?.length > 0 &&
+                upcoming?.map((event, i) => {
+                  return (
+                    <div className="col-xl-4 mb-4">
+                      <UpcomingEventCard data={event} />
+                    </div>
+                  );
+                })}
             </section>
           </div>
         </div>

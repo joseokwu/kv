@@ -12,9 +12,24 @@ import { BusinessCanvas } from "./components/businessCanvas/BusinessCanvas";
 import { Fundraising } from "./components/fundraising/Fundraising";
 import { Milestone } from "./components/milestone/Milestone";
 import { RoadMap } from "./components/roadMap/RoadMap";
+import { getStartupInvesrtorProfile } from '../../services/investor';
 
 
 export const Opportunity = ({ history }) => {
+  const [profileData, setProfileData] = useState({});
+
+  const getData = async () => {
+    const res = await getStartupInvesrtorProfile();
+    setProfileData(res);
+  };
+
+  useEffect(() => {
+    getData();
+    return () => {
+      setProfileData({});
+    };
+  }, []);
+  console.log(profileData)
 
 
   const {
@@ -34,16 +49,16 @@ export const Opportunity = ({ history }) => {
   const renderContent = () => {
     switch (hash.replaceAll("%20", " ")) {
       case "#product":
-        return <Product />;
+        return <Product data={profileData?.product} />;
       case "#pitch deck":
-        return <PitchDeck />;
+        return <PitchDeck data={profileData?.pitchDeck} />;
       case "#team":
-        return <Team />;
+        return <Team data={profileData?.team} />;
       case "#business canvas":
-        return <BusinessCanvas />;
+        return <BusinessCanvas data={profileData?.businessCanvas} />;
 
       case "#fundraising":
-        return <Fundraising />;
+        return <Fundraising data={profileData?.fundRaising} />;
 
       case "#Milestone/Timeline":
         return <Milestone />;
@@ -52,7 +67,7 @@ export const Opportunity = ({ history }) => {
         return <RoadMap />;
 
       default:
-        return <Product />;
+        return <Product data={profileData?.product} />;
     }
   };
   return (
@@ -81,10 +96,10 @@ export const Opportunity = ({ history }) => {
         <div className="row mt-5">
           <div className="col-lg-7">
             <OppCompanyInfo />
-            <FinancialDetails />
+            <FinancialDetails data={profileData?.financialDetails} />
           </div>
           <div className="col-lg-5">
-            <FundingRound />
+            <FundingRound  data={profileData?.fundingRound}/>
           </div>
         </div>
       </article>

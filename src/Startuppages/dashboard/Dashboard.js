@@ -25,6 +25,7 @@ export const StartupDashboard = () => {
       setDashInfo({});
     };
   }, []);
+  
 
   return (
     <div className="dashboardMain">
@@ -58,7 +59,7 @@ export const StartupDashboard = () => {
           icon={newApp}
           name={"Partners"}
           count={dashInfo?.partners}
-          color={"#FAD7DC "}
+          color={"#FAD7DC"}
         />
       </section>
 

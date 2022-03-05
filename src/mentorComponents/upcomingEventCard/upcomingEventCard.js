@@ -1,20 +1,21 @@
-import React from 'react'
-import './upcomingEventCard.css'
-import dot from '../../assets/icons/dot.svg'
-import doc from '../../assets/images/doc.svg'
-import clock from '../../assets/images/clock.svg'
-import { useHistory } from 'react-router-dom'
-import { useActivity } from '../../hooks/useBusiness'
+import React from "react";
+import "./upcomingEventCard.css";
+import dot from "../../assets/icons/dot.svg";
+import doc from "../../assets/images/doc.svg";
+import clock from "../../assets/images/clock.svg";
+import { useHistory } from "react-router-dom";
+import { useActivity } from "../../hooks/useBusiness";
+import { months } from "../../utils/helpers";
 
-export const UpcomingEventCard = () => {
-  const history = useHistory()
-  const { showEventAction } = useActivity()
+export const UpcomingEventCard = ({ data = {} }) => {
+  const history = useHistory();
+  const { showEventAction } = useActivity();
 
   return (
     <div className="opp_card">
       <section className="mb-2 d-flex align-items-center justify-content-between">
-        <h4 className="opp_company">Appleiine House Demo</h4>
-        <img src={dot} alt="dots" />
+        <h4 className="opp_company">{data?.titleOfEvent}</h4>
+        {/* <img src={dot} alt="dots" /> */}
         {/* <span className="active_dot"></span> */}
       </section>
       <section
@@ -22,20 +23,30 @@ export const UpcomingEventCard = () => {
         style={{ columnGap: 10 }}
       >
         <p className="event_date">
-          {' '}
-          <span>50</span> | September
+          <span>{new Date(data?.startDate).getDate()}</span> |
+          {months[new Date(data?.startDate).getMonth()]}
         </p>
-        <p className="event_time">
-          {' '}
-          <img src={clock} alt="clock" /> 10:00pm - 12pm
-        </p>
+
+        {new Date().getTime() >= new Date(data?.startTime) &&
+        new Date().getTime() <= new Date(data?.endTime).getTime() ? (
+          <span class="accepted_tag">Ongoing</span>
+        ) : (
+          <p className="event_time pt-1">
+            <img src={clock} alt="clock" />{" "}
+            {`${new Date(data?.startTime).getHours()}`}:
+            {`${new Date(data?.startTime).getMinutes()}${
+              new Date(data?.startTime).getMinutes() < 10 ? 0 : ""
+            }`}
+            - {`${new Date(data?.endTime).getHours()}`}:
+            {`${new Date(data?.endTime).getMinutes()}${
+              new Date(data?.endTime).getMinutes() < 10 ? 0 : ""
+            }`}
+          </p>
+        )}
       </section>
 
       <section className="opp_content">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur g elit. Enim lectus morbi
-          elementum eu.Lorem ipsu.
-        </p>
+        <p>{data?.eventDescription}</p>
       </section>
 
       <section className="d-flex align-items-center justify-content-between">
@@ -45,8 +56,8 @@ export const UpcomingEventCard = () => {
           data-target="#eventScheduleModal"
           className="span"
           onClick={() => {
-            history.push('/mentor/events')
-            showEventAction()
+            history.push("/mentor/events");
+            showEventAction();
           }}
         >
           View Details
@@ -58,5 +69,5 @@ export const UpcomingEventCard = () => {
         </section>
       </section>
     </div>
-  )
-}
+  );
+};
