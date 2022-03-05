@@ -67,17 +67,17 @@ export const ScheduleCard = ({
       <EditScheduleModal id={id} image={image} />
       <DeleteScheduleModal id={id} />
 
-      {data.map((d, i) => (
-        <div key={i}>
+      {/* {data.map((d, i) => ( */}
+        <div>
           <section className="d-flex align-items-center justify-content-between mb-2">
-            <h5>{d?.topic}</h5>
+            <h5>{data?.topic}</h5>
             <img src={more} alt="more" />
           </section>
 
           <section className="d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
               {/* <p className="date-day-schedule"></p> */}
-              <p className="month-schedule">{d?.date}</p>
+              <p className="month-schedule">{data?.date}</p>
             </div>
 
             <div className="d-flex align-items-center time-schedule">
@@ -88,7 +88,7 @@ export const ScheduleCard = ({
                 height="12"
                 className="mr-1"
               />
-              <p>{d?.time}</p>
+              <p>{data?.time}</p>
             </div>
           </section>
 
@@ -100,7 +100,7 @@ export const ScheduleCard = ({
 
           <section className="mb-4 mt-3">
             <p className="event-desc-schedule">
-              {d?.description}
+              {data?.description}
             </p>
           </section>
 
@@ -114,11 +114,11 @@ export const ScheduleCard = ({
               {/* <img src={person} alt="person" />
               <img src={person} alt="person" />
               <img src={person} alt="person" /> */}
-              {d?.attendees}
+              {data?.attendees}
             </section>
           </section>
         </div>
-      ))}
+      {/* ))} */}
     </div>
   )
 }

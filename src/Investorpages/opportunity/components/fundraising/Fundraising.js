@@ -7,7 +7,7 @@ import FundUtilization from "./components/FundUtilization";
 import PreviousRound from "./components/PreviousRound";
 import "./fundraising.css";
 
-export const Fundraising = () => {
+export const Fundraising = ({data}) => {
   const tabItems = [
     "funding ask",
     "fund utilization",
@@ -19,18 +19,18 @@ export const Fundraising = () => {
   const renderComponents = () => {
     switch (currentTab) {
       case "funding ask":
-        return <FundingAsk />;
+        return <FundingAsk data={data?.fundAsk} />;
       case "fund utilization":
-        return <FundUtilization />;
+        return <FundUtilization data={data?.fundUtilization} />;
       case "cap table":
-        return <CapTable />;
+        return <CapTable data={data?.capTable} />;
       case "previous round":
-        return <PreviousRound />;
+        return <PreviousRound data={data?.previousRound} />;
       case "financial projection":
-        return <FinancialProjection />;
+        return <FinancialProjection data={data?.financialProjection} />;
 
       default:
-        return <FundingAsk />;
+        return <FundingAsk data={data?.fundAsk} />;
     }
   };
   const [currentTab, setCurrentTab] = useState(tabItems[0]);

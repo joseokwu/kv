@@ -97,11 +97,14 @@ export const InvestorDashboard = ({ history }) => {
               className="d-flex align-items-center"
               style={{ columnGap: "1.125rem", rowGap: "1.12rem" }}
             >
-              <div>
-                <ScheduleCard data={dashData?.upcomingEvents} />
+              {dashData && dashData?.upcomingEvents.map((d, i) => (
+                <div key={i}>
+                <ScheduleCard  data={d} />
               </div>
+              ))}
+              
               {/* <div>
-                <ScheduleCard />
+                <ScheduleCard data={dashData?.upcomingEvents} />
               </div> */}
             </section>
           </div>

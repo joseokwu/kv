@@ -1,4 +1,4 @@
-export const FinancialDetails = () => {
+export const FinancialDetails = ({ data }) => {
   return (
     <div className="my-4 opp-page-card py-3">
       <h3 className="sub-card-title">Financial Details</h3>
@@ -12,7 +12,7 @@ export const FinancialDetails = () => {
           style={{ rowGap: 10 }}
         >
           <p className="opp-tag-label">Investors</p>
-          <span className="opp-tag">Mope Abudu</span>
+          <span className="opp-tag">{data?.investor}</span>
           <span className="opp-tag">+1</span>
         </div>
 
@@ -21,7 +21,7 @@ export const FinancialDetails = () => {
           style={{ rowGap: 10 }}
         >
           <p className="opp-tag-label">Valuation</p>
-          <span className="opp-tag">$5 Million (9 Oct.,2021)</span>
+          <span className="opp-tag">{data?.valuation}</span>
         </div>
       </section>
     </div>
