@@ -18,7 +18,7 @@ import add from "../../../../assets/icons/addFile.svg";
 import imageRep from "../../../../assets/icons/image.svg";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
 
-const ProfileDetails = () => {
+const ProfileDetails = ({data}) => {
   return (
     <section className="profile-info">
       <div className="profile-banner">
@@ -45,12 +45,12 @@ const ProfileDetails = () => {
         </span>
 
         <article>
-          <h1 className="mb-4 profile-name">Digital Ocean</h1>
+          <h1 className="mb-4 profile-name"> { data?.name } </h1>
 
           <div className="d-flex align-items-center justify-content-between mb-3">
             <span className="d-flex align-items-center contact-name">
-              <p>CONTACT : Winner Grace</p>
-              <p>Manager</p>
+              <p>CONTACT : { data?.contactName }  </p>
+              <p> { data?.position } </p>
             </span>
             <span>
               <img src={twitter} alt="twitter" className="mr-3" />
@@ -60,22 +60,20 @@ const ProfileDetails = () => {
 
           <div className="d-flex align-items-center web-phone-local mb-3">
             <p>
-              <img src={location} alt="location" /> San francisco United State
+              <img src={location} alt="location" /> { data?.location }
             </p>
             <p>
-              <img src={phone} alt="phone" /> +234 709 245 2345
+              <img src={phone} alt="phone" /> { data?.contactPhone }
             </p>
             <a href="https://www.michealsmith.com">
               <img src={web} alt="web" />
-              www.michealsmith.com
+             { data?.url }
             </a>
           </div>
 
           <div className="profile-bio pb-5">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation{" "}
+             { data?.bio }
             </p>
           </div>
         </article>

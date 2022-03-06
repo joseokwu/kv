@@ -13,7 +13,7 @@ import logout from '../../assets/icons/logout.svg'
 export const Header = () => {
 
   const [open, setOpen] = useState(false)
-
+  const  history = useHistory();
   const [openNotice, setOpenNotice] = useState(false)
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
@@ -46,7 +46,7 @@ export const Header = () => {
           </li>
         </ul>
 
-        <div className="d-flex align-items-center h-100" role="button">
+        <div onClick={() => history.push('/startup/profile')} className="d-flex align-items-center h-100" role="button">
           <span
             className="d-flex align-items-center header-profile"
           >

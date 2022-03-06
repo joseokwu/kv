@@ -2,7 +2,7 @@ import React from "react";
 import { Tag, Modal, Select, Button } from "../../../../components";
 import edit from "../../../../assets/icons/edit.svg";
 
-const ProfileCategory = () => {
+const ProfileCategory = ({data}) => {
   return (
     <section className="profile-offering mb-3">
       <span className="text-right d-block">
@@ -21,7 +21,7 @@ const ProfileCategory = () => {
       <div>
         <section className="mb-5">
           <p className="partner-cat-header mb-4">Partner Category</p>
-          <span className="cat-tag">Cloud</span>
+          <span className="cat-tag"> { data?.category } </span> 
         </section>
 
         <section>
@@ -30,11 +30,14 @@ const ProfileCategory = () => {
             className="d-flex align-items-center flex-wrap"
             style={{ columnGap: 10, rowGap: 10 }}
           >
-            <Tag name="Tech" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Career" color="#E31937" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Career" color="#E31937" />
+             {
+              data?.industry?.map((item, i) =>{
+                  return (
+                    <Tag name={item} color={item === 'Engineering'  ? '#40439A' : item === 'Career' ? '#E31937' : '#ACACAC' }  />
+                   )
+              })
+            }
+           
           </span>
         </section>
       </div>

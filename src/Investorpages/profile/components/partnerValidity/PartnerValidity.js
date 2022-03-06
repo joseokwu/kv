@@ -2,7 +2,7 @@ import React from "react";
 import edit from "../../../../assets/icons/edit.svg";
 import { Modal, Select, Button } from "../../../../components";
 
-const PartnerValidity = () => {
+const PartnerValidity = ({ data }) => {
   return (
     <section className="profile-offering">
       <span className="text-right d-block">
@@ -24,11 +24,11 @@ const PartnerValidity = () => {
       >
         <section className="mb-4">
           <p className="partner-cat-txt mb-3">Partnership Validity</p>
-          <span className="cat-tag">3 months</span>
+          <span className="cat-tag"> { data?.validity} </span>
         </section>
         <section className="mb-4">
           <p className="partner-cat-txt mb-3">Turnaround Time</p>
-          <span className="cat-tag">10 days</span>
+          <span className="cat-tag"> { data?.turnarround } </span>
         </section>
       </div>
 

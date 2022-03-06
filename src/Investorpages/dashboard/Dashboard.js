@@ -1,4 +1,4 @@
-import React , { useEffect} from "react";
+import React , { useEffect , useState} from "react";
 import "./dashboard.css";
 import total from "../../assets/icons/totalApp.svg";
 import newApp from "../../assets/icons/newApp.svg";
@@ -9,11 +9,12 @@ import reApplied from "../../assets/icons/reApplied.svg";
 import { ApplicationCard, DashCard } from "../../components/index";
 import applicantLogo from "../../assets/images/sampleApplicantLogo.png";
 import ApplicationChart from "./components/applicationChart/ApplicationChart";
-
-
+import { getPartners } from './../../services/partners';
+import { generateRandomColor } from "../../utils/helpers";
 
 export const BoosterDashboard = ({ history }) => {
   const { push, location } = history;
+  const [bossterRes, setBoosterRes] = useState(null);
 
   console.log(`history`, history);
   const cardData = [
@@ -27,20 +28,33 @@ export const BoosterDashboard = ({ history }) => {
 
   const appCardData = [1, 2, 3, 4, 5];
 
+    const fetchData = async() =>{
+
+      const res = await getPartners();
+        setBoosterRes(res);
+    }
 
 
+useEffect(() =>{
+
+  fetchData();
+
+  return () =>{
+    setBoosterRes(null)
+  }
+},[])
 
 
 
   return (
     <div className="dashboard-main">
       <section className="d-flex align-items-center dashboard-cards">
-        {cardData.map((data, i) => (
+        {bossterRes && bossterRes?.cards.map((data, i) => (
           <DashCard
-            icon={data.icon}
+            icon={total}
             name={data.name}
             count={data.count}
-            color={data.color}
+            color={generateRandomColor()}
             key={i}
           />
         ))}
@@ -54,9 +68,9 @@ export const BoosterDashboard = ({ history }) => {
           </header>
 
           <section>
-            {appCardData.map((data, i) => (
+            {bossterRes && bossterRes?.application.map((data, i) => (
               <div style={{ marginBottom: 21 }}>
-                <ApplicationCard logo={applicantLogo} key={i} />
+                <ApplicationCard data={data} logo={applicantLogo} key={i} />
               </div>
             ))}
           </section>
