@@ -5,7 +5,7 @@ import clock from "../../../assets/icons/clock.svg";
 import office from "../../../assets/icons/building.svg";
 
 
-export const FinancialDetails = () => {
+export const FinancialDetails = ({data}) => {
   return (
     <div className="mt-3 opp-page-card py-4">
       <h3 className="sub-card-title">Contact Details</h3>
@@ -21,7 +21,7 @@ export const FinancialDetails = () => {
             className="ml-2 extra-info"
             style={{ textDecoration: "underline", color: "#2E3192" }}
           >
-            www.applaneinsteen.com
+            { data?.url }
           </a>
         </div>
         <div className="d-flex align-items-center">
@@ -31,7 +31,7 @@ export const FinancialDetails = () => {
 
         <div className="d-flex align-items-center">
           <img src={office} alt="web" />
-          <p className="ml-2 extra-info">Lagos, Nigeria</p>
+          <p className="ml-2 extra-info"> { data?.location } </p>
         </div>
       </section>
     </div>

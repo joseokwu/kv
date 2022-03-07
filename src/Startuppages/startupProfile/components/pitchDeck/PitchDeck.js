@@ -14,7 +14,7 @@ import {
 import './pitchDeck.css'
 import { SmallModal, TextArea } from '../../../../Startupcomponents'
 
-export const PitchDeck = () => {
+export const PitchDeck = ({data}) => {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -27,35 +27,25 @@ export const PitchDeck = () => {
         <span></span>
       )}
       <section className="row pt-3">
-        <div className="col-xl-3 col-lg-4 mb-4">
-          <article className="deck-card">
-            <div className="deck-card-img">
-              <img src={doc} alt="document" />
-            </div>
-            <div className="d-flex align-items-start p-3">
-              <img src={docIcon} alt="document icon" className="mr-2" />
-              <span>
-                <p>Pitch Deck Document</p>
-                <small>21MB</small>
-              </span>
-            </div>
-          </article>
-        </div>
 
-        <div className="col-xl-3 col-lg-4 mb-4">
-          <article className="deck-card">
+            {
+              data && data.map((item, i) =>(
+                <div className="col-xl-3 col-lg-4 mb-4">
+            <article className="deck-card">
             <div className="deck-card-img">
-              <img src={videoDemo} alt="video demo" />
+              <img src={item?.file === 'file' ? doc : videoDemo } alt="document" />
             </div>
             <div className="d-flex align-items-start p-3">
-              <img src={videoIcon} alt="video icon" className="mr-2" />
+              <img src={item?.file === 'file' ? docIcon : videoIcon} alt="document icon" className="mr-2" />
               <span>
-                <p>Pitch Video</p>
-                <small>100MB</small>
+                <p> { item?.filename.toUpperCase() } </p>
+                <small> { item?.size } </small>
               </span>
             </div>
           </article>
         </div>
+              ))
+            }
 
         <div className="col-lg-4 create_pitch my-5 ms-5">
           <img

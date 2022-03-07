@@ -1,15 +1,11 @@
-import React from "react";
+import React , { useState } from "react";
 import "./profileOffering.css";
 import edit from "../../../../assets/icons/edit.svg";
 import { TextArea, Modal, Button } from "../../../../components";
 
-const ProfileOfferings = () => {
-  const data = [
-    { name: "Offerings" },
-    { name: "Eligibility Criteria " },
-    { name: "Important Note" },
-    { name: "Process" },
-  ];
+const ProfileOfferings = ({data}) => {
+ 
+
   return (
     <div className="profile-offering">
       <section className="text-right pb-0">
@@ -21,33 +17,42 @@ const ProfileOfferings = () => {
           role="button"
         />
         <Modal title="Edit Offerings" id="editOffering">
-          <EditOfferings />
+          <EditOfferings  />
         </Modal>
       </section>
 
-      {data.map((d, i) => {
-        return (
-          <OfferContent title={d.name} i={i} key={i} length={data.length} />
-        );
-      })}
+          <OfferContent title={'Offerings'}  className={'profile-offer-content pb-0 border-0'}
+           data={data?.offerings} 
+          />
+            <OfferContent title={'Eligibility Criteria'}  className={'profile-offer-content pb-0 border-0'}
+           data={data?.eligibility} 
+          />
+            <OfferContent title={'Important Note'}  className={'profile-offer-content pb-0 border-0'}
+           data={data?.note} 
+          />
+            <OfferContent title={'Process'}  className={'profile-offer-content pb-0 border-0'}
+           data={data?.process} 
+          />
+   
     </div>
   );
 };
 
 export default ProfileOfferings;
 
-const OfferContent = ({ title, i, length }) => {
+const OfferContent = ({ title,  className, data }) => {
+  
+  const [see, setSee] = useState(100);
+  
   return (
     <section
-      className={`profile-offer-content ${
-        i === length - 1 ? "pb-0 border-0" : ""
-      }`}
+      className={className}
     >
       <h3>{title}</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation <span>see more</span>
+       { data && data.substr(0, see) } <span style={{
+         cursor:'pointer'
+       }} onClick={() => { see === 100 ? setSee(data.length) : setSee(100) }} > { see === 100 ? 'see more' : 'see less' } </span>
       </p>
     </section>
   );
