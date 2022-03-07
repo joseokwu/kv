@@ -576,7 +576,7 @@ const routes = [
   {
     name: "Events",
     path: "/mentor/events",
-    component: WithMentorMainLayout(StartupEvents),
+    component: WithMentorMainLayout(MentorEvents),
     exact: true,
     protected: true,
     type: "mentor",
