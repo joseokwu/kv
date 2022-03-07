@@ -22,7 +22,7 @@ export const MentorDashboard = () => {
 
     setDashInfo(res);
     setAssignedStartups(res?.AssignedStartups);
-    setUpcoming(res?.upcomingEvents);
+    setUpcoming(res?.events);
   };
 
   useEffect(() => {

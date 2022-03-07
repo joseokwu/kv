@@ -1,5 +1,4 @@
-
-import { request } from '../utils/axios'
+import { request } from "../utils/axios";
 
 export const getDashboard = async () => {
   try {
@@ -21,3 +20,12 @@ export const mentorEvaluations = async () => {
   }
 };
 
+export const mentorPrograms = async () => {
+  try {
+    const res = await request.post("mentor/program");
+
+    return res?.data;
+  } catch (err) {
+    throw err;
+  }
+};
