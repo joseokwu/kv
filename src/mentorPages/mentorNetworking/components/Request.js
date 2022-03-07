@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ConnectCard } from "../../../mentorComponents";
 import info from "../../../assets/icons/infoIcon.svg";
-import close from "../../../assets/icons/close.svg";
+import close from "../../../assets/icons/Close.svg";
 
 export const Request = () => {
   const count = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
