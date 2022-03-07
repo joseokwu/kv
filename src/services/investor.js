@@ -18,7 +18,7 @@ export const getInvestorDashboard = async (values) => {
     const error = err?.response?.data?.message || err?.message;
     throw new Error(error);
   }
-}
+};
 
 export const getInvestorOpportunity = async (values) => {
   try {
@@ -28,7 +28,7 @@ export const getInvestorOpportunity = async (values) => {
     const error = err?.response?.data?.message || err?.message;
     throw new Error(error);
   }
-}
+};
 
 export const getStartupInvesrtorProfile = async (values) => {
   try {
@@ -38,4 +38,14 @@ export const getStartupInvesrtorProfile = async (values) => {
     const error = err?.response?.data?.message || err?.message;
     throw new Error(error);
   }
-}
+};
+
+export const getInvestorEvaluation = async (values) => {
+  try {
+    const result = await request.post("investor/evaluation", values);
+    return result.data;
+  } catch (err) {
+    const error = err?.response?.data?.message || err?.message;
+    throw new Error(error);
+  }
+};
