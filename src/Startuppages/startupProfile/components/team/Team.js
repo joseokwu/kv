@@ -14,7 +14,7 @@ import './team.css'
 import { LargeModal, Tag } from '../../../../Startupcomponents'
 import founder from '../../../../assets/images/femaleFounder.svg'
 
-export const Team = () => {
+export const Team = ({data}) => {
   const count = [1, 2, 3, 4, 5, 6]
   const {push} = useHistory();
 
@@ -36,7 +36,7 @@ export const Team = () => {
         <h4 className="team-group-title">Founder & Co-Founders</h4>
 
         <div className="row">
-          {count.slice(0, 3).map((c, i) => {
+          {data && data.slice(0, 3).map((c, i) => {
             return (
               <article
                 data-target="#founderModal"
@@ -48,7 +48,7 @@ export const Team = () => {
                 {/* <Modal id="founderModal" withHeader={false}>
                   <FounderModal />
                 </Modal> */}
-                <TeamMember key={`founder-member-${i}`} />
+                <TeamMember data={c} key={`founder-member-${i}`} />
               </article>
             )
           })}
@@ -58,10 +58,10 @@ export const Team = () => {
       <section>
         <h4 className="team-group-title mt-5">Team Members</h4>
         <div className="row">
-          {count.map((c, i) => {
+          {data && data.map((c, i) => {
             return (
               <article className="col-lg-4 mb-4">
-                <TeamMember key={`member-${i}`} />
+                <TeamMember data={c} key={`member-${i}`} />
               </article>
             )
           })}
@@ -71,13 +71,13 @@ export const Team = () => {
   )
 }
 
-const TeamMember = () => {
+const TeamMember = ({data}) => {
   return (
     <div className="d-flex align-items-center flex-wrap member-card">
       <img src={member} alt="team member" className="mr-4" />
       <section>
-        <p>Prima Jakatar</p>
-        <p className="small">Founder and CEO</p>
+        <p> { data?.name } </p>
+        <p className="small"> { data?.position} </p>
         <span className="d-flex">
           <img src={linkedIn} alt="linkedIn" width="24" height="24" />
           <img

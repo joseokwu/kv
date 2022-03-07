@@ -29,7 +29,11 @@ export const StartupProfile = ({ history }) => {
     "product road map",
   ];
   const [prof, setProf] = useState(null);
-
+  const fetchData = async() =>{
+    const res = await getStartupProfile();
+      console.log(res)
+    setProf(res);
+  }
 
   console.log(`pathname`, pathname);
 
@@ -38,13 +42,13 @@ export const StartupProfile = ({ history }) => {
       case "#product":
         return <Product />;
       case "#pitch deck":
-        return <PitchDeck />;
+        return <PitchDeck data={prof?.pitchDeck} />;
         case "#business canvas":
         return <BusinessCanavas />;
       case "#product road map":
         return <RoadMap />;
       case "#team":
-        return <Team />;
+        return <Team  data={prof?.team} />;
       case "#milestone/timeline":
         return <Milestone />
       default:
@@ -52,11 +56,7 @@ export const StartupProfile = ({ history }) => {
     }
   };
 
-      const fetchData = async() =>{
-        const res = await getStartupProfile();
-          console.log(res)
-        setProf(res);
-      }
+    
 
   useEffect(() =>{
     fetchData();
