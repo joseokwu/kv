@@ -27,10 +27,10 @@ export const MentorEvaluation = ({ history }) => {
     setEvalCardsData(res?.cards);
     setAssigned(res?.AssignedStartups);
     setPending(() =>
-      res?.AssignedStartups.filter((x) => x.status === "Pending")
+      res?.AssignedStartups?.filter((x) => x.status === "Pending")
     );
     setCompleted(() =>
-      res?.AssignedStartups.filter((x) => x.status === "Completed")
+      res?.AssignedStartups?.filter((x) => x.status === "Completed")
     );
   };
 
@@ -40,13 +40,32 @@ export const MentorEvaluation = ({ history }) => {
 
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4"];
 
-  const cardData = evalCardsData?.map((card, i) => {
-    return {
-      name: card.title,
-      count: card.count,
-      color: cardColors[i],
-    };
-  });
+  const cardData =
+    evalCardsData?.length > 0
+      ? evalCardsData?.map((card, i) => {
+          return {
+            name: card.title,
+            count: card.count,
+            color: cardColors[i],
+          };
+        })
+      : [
+          {
+            name: "Incubation Program",
+            count: 0,
+            color: cardColors[0],
+          },
+          {
+            name: "Partners",
+            count: 0,
+            color: cardColors[1],
+          },
+          {
+            name: "Total Startup Assigned",
+            count: 0,
+            color: cardColors[2],
+          },
+        ];
 
   const renderContent = () => {
     switch (hash) {
@@ -100,7 +119,7 @@ export const MentorEvaluation = ({ history }) => {
     <div className="dashboard_main container-fluid">
       <section className="row pb-5">
         <section
-          className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed"
+          className="col-lg-12 d-flex align-items-center dashboard-cards position-sticky"
           style={{ background: "#fefefe" }}
         >
           {cardData.map((data, i) => (
@@ -114,9 +133,9 @@ export const MentorEvaluation = ({ history }) => {
         </section>
       </section>
 
-      <section className="mt-5 pt-5 d-flex align-items-center justify-content-between">
+      <section className=" d-flex align-items-center justify-content-between">
         <Tabs tabItems={tabItems} />
-        <div className="mt-5">
+        <div className="">
           <button
             className="d-flex align-items-center filter-btn"
             style={{ columnGap: 7 }}
