@@ -310,7 +310,7 @@ const routes = [
   {
     name: "Investor Evaluation",
     path: "/investor/evaluation",
-    component: WithMainInvestorLayout(MentorEvaluation),
+    component: WithMainInvestorLayout(InvestorEvaluation),
     exact: true,
     protected: false,
     type: "investor",
