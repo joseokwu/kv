@@ -38,11 +38,10 @@ export const InvestorEvaluation = ({ history }) => {
     fetchData();
   }, []);
 
-  console.log("pending", pending);
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4"];
 
   const cardData =
-    evalCardsData?.assignedStartups.length > 0
+    evalCardsData?.assignedStartups?.length > 0
       ? [
           {
             name: "Incubation Program",
