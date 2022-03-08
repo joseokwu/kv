@@ -38,8 +38,8 @@ export const StartUpRegistration = () => {
       <div className="mx-5">
         <div className="container">
           <div
-            className="position-fixed"
-            style={{ zIndex: '999', background: '#FFFFFF', width: '68%' }}
+            className="tab-wrap "
+            style={{ zIndex: '999', background: '#FFFFFF', width: '100%' }}
           >
             <WelcomeMessage>
               <h5>
@@ -57,7 +57,7 @@ export const StartUpRegistration = () => {
           </div>
 
           <RegCard>
-            <div className="reg-card py-5 px-5 my-5">
+            <div className="reg-card py-5 px-5">
               {path === 1 && <StartupProfile />}
               {path === 2 && <PitchDeck />}
 

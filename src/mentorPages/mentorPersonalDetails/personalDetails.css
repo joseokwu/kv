@@ -55,6 +55,12 @@
   grid-template-columns: minmax(220px, 250px) auto;
 }
 
+@media (max-width: 768px) {
+  .mentor_personal_details_grid {
+    grid-template-columns: none;
+  }
+}
+
 .mentor_personal_details_list {
   list-style: none;
   margin: 0;

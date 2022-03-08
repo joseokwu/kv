@@ -105,7 +105,7 @@ const HeaderDropdownMenu = () => {
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button
           className="dropdown-item text-center py-2"
-          onClick={() => push('/startup/profile')}
+          onClick={() => push('/investor/opportunities/0#product')}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile

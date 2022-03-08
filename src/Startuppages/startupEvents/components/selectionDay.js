@@ -1,13 +1,12 @@
-import React from 'react'
-import dots from '../../../assets/icons/3dots.svg'
-import bigClock from '../../../assets/icons/bigclock.svg'
-import demo from '../../../assets/images/vidDemo.svg'
-import doc from '../../../assets/images/doc.svg'
-import { Button, Modal, Select, TextField } from '../../../Startupcomponents'
-import { months } from '../../../utils/helpers'
-import down from '../../../assets/icons/downArrow.svg'
-import location from '../../../assets/icons/locationSm.svg'
-import name from '../../../assets/icons/initial.svg'
+import React from "react";
+import bigClock from "../../../assets/icons/bigclock.svg";
+import demo from "../../../assets/images/vidDemo.svg";
+import doc from "../../../assets/images/doc.svg";
+import { Modal, Select, TextField } from "../../../Startupcomponents";
+import { formatTime, months } from "../../../utils/helpers";
+import down from "../../../assets/icons/downArrow.svg";
+import location from "../../../assets/icons/locationSm.svg";
+import name from "../../../assets/icons/initial.svg";
 
 export const SelectionDay = ({ data = [] }) => {
   return (
@@ -33,15 +32,8 @@ export const SelectionDay = ({ data = [] }) => {
               <span className="accepted_tag">Ongoing</span>
             ) : (
               <p className="pending_time pt-1">
-                <img src={bigClock} alt="clock" />{' '}
-                {`${new Date(data[0]?.startTime).getHours()}`}:
-                {`${new Date(data[0]?.startTime).getMinutes()}${
-                  new Date(data[0]?.startTime).getMinutes() < 10 ? 0 : ''
-                }`}
-                - {`${new Date(data[0]?.endTime).getHours()}`}:
-                {`${new Date(data[0]?.endTime).getMinutes()}${
-                  new Date(data[0]?.endTime).getMinutes() < 10 ? 0 : ''
-                }`}
+                <img src={bigClock} alt="clock" />{" "}
+                {formatTime(data[0]?.startTime)}-{formatTime(data[0]?.endTime)}
               </p>
             )}
           </section>
@@ -108,15 +100,9 @@ export const SelectionDay = ({ data = [] }) => {
                 <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
-                  <img src={bigClock} alt="clock" />{' '}
-                  {`${new Date(data[1]?.startTime).getHours()}`}:
-                  {`${new Date(data[1]?.startTime).getMinutes()}${
-                    new Date(data[1]?.startTime).getMinutes() < 10 ? 0 : ''
-                  }`}
-                  - {`${new Date(data[1]?.endTime).getHours()}`}:
-                  {`${new Date(data[1]?.endTime).getMinutes()}${
-                    new Date(data[1]?.endTime).getMinutes() < 10 ? 0 : ''
-                  }`}
+                  <img src={bigClock} alt="clock" />{" "}
+                  {formatTime(data[1]?.startTime)}-
+                  {formatTime(data[1]?.endTime)}
                 </p>
               )}{' '}
             </section>
@@ -169,15 +155,9 @@ export const SelectionDay = ({ data = [] }) => {
                 <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
-                  <img src={bigClock} alt="clock" />{' '}
-                  {`${new Date(data[2]?.startTime).getHours()}`}:
-                  {`${new Date(data[2]?.startTime).getMinutes()}${
-                    new Date(data[2]?.startTime).getMinutes() < 10 ? 0 : ''
-                  }`}
-                  - {`${new Date(data[2]?.endTime).getHours()}`}:
-                  {`${new Date(data[2]?.endTime).getMinutes()}${
-                    new Date(data[2]?.endTime).getMinutes() < 10 ? 0 : ''
-                  }`}
+                  <img src={bigClock} alt="clock" />{" "}
+                  {formatTime(data[2]?.startTime)}-
+                  {formatTime(data[2]?.endTime)}
                 </p>
               )}
             </section>
@@ -228,21 +208,14 @@ export const SelectionDay = ({ data = [] }) => {
                       <span>{new Date(d?.startDate).getDate()}</span>{' '}
                       {months[new Date(d?.startDate).getMonth()]}
                     </p>
-                    {new Date().getTime() >= new Date(data[0]?.startTime) &&
+                    {new Date().getTime() >= new Date(d?.startTime) &&
                     new Date().getTime() <=
                       new Date(data[0]?.endTime).getTime() ? (
                       <span className="accepted_tag">Ongoing</span>
                     ) : (
                       <p className="pending_time pt-1">
-                        <img src={bigClock} alt="clock" />{' '}
-                        {`${new Date(d?.startTime).getHours()}`}:
-                        {`${new Date(d?.startTime).getMinutes()}${
-                          new Date(d?.startTime).getMinutes() < 10 ? 0 : ''
-                        }`}
-                        - {`${new Date(d?.endTime).getHours()}`}:
-                        {`${new Date(d?.endTime).getMinutes()}${
-                          new Date(d?.endTime).getMinutes() < 10 ? 0 : ''
-                        }`}
+                        <img src={bigClock} alt="clock" />{" "}
+                        {formatTime(d?.startTime)}-{formatTime(d?.endTime)}
                       </p>
                     )}{' '}
                   </section>

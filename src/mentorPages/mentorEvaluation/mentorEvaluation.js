@@ -27,10 +27,14 @@ export const MentorEvaluation = ({ history }) => {
     setEvalCardsData(res?.cards);
     setAssigned(res?.AssignedStartups);
     setPending(() =>
-      res?.AssignedStartups?.filter((x) => x.status === "Pending")
+      res?.AssignedStartups?.filter(
+        (x) => x.status?.toLowerCase() === "pending"
+      )
     );
     setCompleted(() =>
-      res?.AssignedStartups?.filter((x) => x.status === "Completed")
+      res?.AssignedStartups?.filter(
+        (x) => x.status?.toLowerCase() === "completed"
+      )
     );
   };
 
