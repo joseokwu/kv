@@ -10,7 +10,7 @@ export const ViewScheduleModal = ({ data = {} }) => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal"
+          className="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
         >
@@ -56,7 +56,7 @@ export const ViewScheduleModal = ({ data = {} }) => {
         {data?.startups?.length > 0 &&
           data?.startups?.map((d, i) => {
             return (
-              <div className="col-sm-4 mt-3">
+              <div className="col-sm-4 mt-3" key={`startups-${i}`}>
                 <img src={compLogo} alt="company logo" />
                 <p className="pt-2">{d?.companyName}</p>
               </div>

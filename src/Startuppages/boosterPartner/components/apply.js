@@ -1,15 +1,16 @@
-import React from 'react'
-import { ApplicationCard } from '../boosterPartner.styled'
+import React from "react";
+import { ApplicationCard } from "../boosterPartner.styled";
 import {
   compImage,
   applicationCardData,
-  cardDataModal, compdetailModal
-} from '../../../constants/domiData'
-import { Modal, Tag } from '../../../Startupcomponents'
-import '../boosterPartner.css'
+  cardDataModal,
+  compdetailModal,
+} from "../../../constants/domiData";
+import { Modal, Tag } from "../../../Startupcomponents";
+import "../boosterPartner.css";
 
 export const Apply = () => {
-  const applyArr = [1, 2, 3]
+  const applyArr = [1, 2, 3];
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
@@ -34,10 +35,7 @@ export const Apply = () => {
             {applicationCardData.map((data, i) => (
               <p key={i}>
                 {data.content}
-                <span
-                  data-target="#apply"
-                  data-toggle="modal"
-                >
+                <span data-target="#apply" data-toggle="modal">
                   Read More
                 </span>
               </p>
@@ -47,8 +45,8 @@ export const Apply = () => {
         </ApplicationCard>
       ))}
     </div>
-  )
-}
+  );
+};
 
 const ApplyModal = () => {
   return (
@@ -56,7 +54,7 @@ const ApplyModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal px-4 py-2"
+          className="close close-founder-modal px-4 py-2"
           data-dismiss="modal"
           aria-label="Close"
         >
@@ -102,9 +100,9 @@ const ApplyModal = () => {
         ))}
       </div>
       <div className="d-flex justify-content-between my-5">
-          <button className="applyModalback">Back</button>
-          <button className="applyModalapply">Apply</button>
+        <button className="applyModalback">Back</button>
+        <button className="applyModalapply">Apply</button>
       </div>
     </div>
-  )
-}
+  );
+};

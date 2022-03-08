@@ -1,133 +1,108 @@
-import React from 'react'
-import { Table } from '../../../../../mentorComponents'
+import React, { useEffect, useState } from "react";
+import { Table } from "../../../../../mentorComponents";
 
-export const FundingAsk = () => {
+export const FundingAsk = ({ data = {} }) => {
+  console.log("data fund tab", data);
   return (
     <div>
-      <FundingAskTable />
-      <CommitmentTable />
+      <FundingAskTable data={data?.fundingAsk} />
+      <CommitmentTable data={data?.committments} />
     </div>
-  )
-}
+  );
+};
 
-const FundingAskTable = () => {
+const FundingAskTable = ({ data = [] }) => {
+  console.log("data in table fund", data);
+  const [dataToUse, setDataToUse] = useState([]);
+
+  useEffect(() => {
+    const dataForState = [];
+    if (data) {
+      dataForState.push(data);
+      setDataToUse(dataForState);
+    }
+  }, [data]);
+
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Fund Requirement',
-        accessor: 'fundingRequirement',
+        Header: "Fund Requirement",
+        accessor: "fundRequirement",
       },
       {
-        Header: 'Deal Type',
-        accessor: 'dealType',
+        Header: "Deal Type",
+        accessor: "dealType",
       },
       {
-        Header: 'Funding Round',
-        accessor: 'fundingRound',
+        Header: "Funding Round",
+        accessor: "fundingRound",
       },
       {
-        Header: 'Dilution',
-        accessor: 'dilution',
+        Header: "Dilution",
+        accessor: "dilution",
       },
       {
-        Header: 'Pre-Money',
-        accessor: 'preMoney',
+        Header: "Pre-Money",
+        accessor: "preMoneyValuation",
       },
       {
-        Header: 'Post-Money',
-        accessor: 'postMoney',
+        Header: "Post-Money",
+        accessor: "postMoneyValuation",
       },
       {
-        Header: 'Funding Closing Date',
-        accessor: 'fundingClosingDate',
+        Header: "Funding Closing Date",
+        accessor: "fundClosingDate",
       },
     ],
-    [],
-  )
+    []
+  );
 
-  const data = [
-    {
-      fundingRequirement: '$1,000,000',
-      dealType: 'Common Equity',
-      fundingRound: 'Seed',
-      dilution: '10%',
-      preMoney: '$20,000',
-      postMoney: '$30,000',
-      fundingClosingDate: '20 November, 2021',
-    },
-  ]
+  // const data = [
+  //   {
+  //     fundingRequirement: "$1,000,000",
+  //     dealType: "Common Equity",
+  //     fundingRound: "Seed",
+  //     dilution: "10%",
+  //     preMoney: "$20,000",
+  //     postMoney: "$30,000",
+  //     fundingClosingDate: "20 November, 2021",
+  //   },
+  // ];
   return (
     <section className="mb-4">
       {/* <h4 className="mb-5 fundraisingSubTitle">Funding Ask</h4> */}
 
       <section>
-        <Table columns={columns} data={data} />
+        <Table columns={columns} data={dataToUse} />
       </section>
     </section>
-  )
-}
+  );
+};
 
-const CommitmentTable = () => {
+const CommitmentTable = ({ data = [] }) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Investors',
-        accessor: 'investor',
+        Header: "Investors",
+        accessor: "investor",
       },
       {
-        Header: 'Investor Type',
-        accessor: 'InvestorType',
+        Header: "Investor Type",
+        accessor: "investorType",
       },
       {
-        Header: 'Amount',
-        accessor: 'amount',
+        Header: "Amount",
+        accessor: "amount",
       },
       {
-        Header: 'Lead Investor',
-        accessor: 'leadInvestor',
+        Header: "Lead Investor",
+        accessor: "leadInvestor",
       },
     ],
-    [],
-  )
+    []
+  );
 
-  const data = [
-    {
-      investor: 'Prima Jakatar Umbre',
-      InvestorType: 'Angel Investor',
-      amount: '$100,000',
-      leadInvestor: 'Yes',
-    },
-    {
-      investor: 'John Carter Lumber',
-      InvestorType: 'Angel Investor',
-      amount: '$100,000',
-      leadInvestor: 'No',
-    },
-    {
-      investor: 'Leo Ming Chang',
-      InvestorType: 'Angel Investor',
-      amount: '$100,000',
-      leadInvestor: 'No',
-    },
-    {
-      investor: 'Chun Lee Queen',
-      InvestorType: 'Angel Investor',
-      amount: '$100,000',
-      leadInvestor: 'No',
-    },
-    {
-      investor: 'Chun Lee Queen',
-      InvestorType: 'Angel Investor',
-      amount: '$100,000',
-      leadInvestor: 'No',
-    },
-    {
-      investor: 'Chun Lee Queen',
-      InvestorType: 'Angel Investor',
-      amount: '$100,000',
-      leadInvestor: 'No',
-    },
-  ]
+  //
   return (
     <section className="pt-2">
       <h4 className="mb-5 fundraisingSubTitle">Commitments</h4>
@@ -135,7 +110,7 @@ const CommitmentTable = () => {
         <Table columns={columns} data={data} />
       </section>
     </section>
-  )
-}
+  );
+};
 
-export default FundingAsk
+export default FundingAsk;

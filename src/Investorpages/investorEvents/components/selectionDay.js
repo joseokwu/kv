@@ -10,9 +10,8 @@ import name from "../../../assets/icons/initial.svg";
 import { months } from "../../../utils/helpers";
 import { ExceptionMap } from "antd/lib/result";
 
-export const SelectionDay = ({data}) => {
-
-  console.log(data)
+export const SelectionDay = ({ data }) => {
+  console.log(data);
 
   const dte = new Date();
 
@@ -21,95 +20,105 @@ export const SelectionDay = ({data}) => {
       <Modal id="eventScheduleModal" withHeader={false}>
         <EventScheduleModal />
       </Modal>
-    
-    {
 
-      data && data.map((item, i) =>{
-        let compareDate = new Date(item?.startTime)
-        let endTime = new Date(item?.endTime) 
-        return (
+      {data &&
+        data.map((item, i) => {
+          let compareDate = new Date(item?.startTime);
+          let endTime = new Date(item?.endTime);
+          return (
+            <div
+              key={i}
+              className={`col-lg-5 col-12   events_card_bg py-4 mt-4 ml-lg-4 px-4`}
+            >
+              <section className="events_card d-flex justify-content-between">
+                <h3> {item?.titleOfEvent} </h3>
+                {/* <img src={dots} alt="" /> */}
+              </section>
 
-<div key={i} className={`col-lg-5 col-12   events_card_bg py-4 mt-4 ml-lg-4 px-4`}>
-<section className="events_card d-flex justify-content-between">
-<h3> { item?.titleOfEvent } </h3>
-{/* <img src={dots} alt="" /> */}
-</section>
+              <section className="d-flex justify-content-between mt-2">
+                <p className="pending_date pr-4">
+                  <span>{compareDate.getDate()} </span>{" "}
+                  <em className="mx-2">{months[compareDate.getMonth()]}</em>
+                </p>
 
-<section className="d-flex justify-content-between mt-2">
-<p className="pending_date pr-4">
-<span>{ compareDate.getDate() } </span> <em className="mx-2" >{months[compareDate.getMonth()] }</em>
-</p>
+                <p className="pending_time pt-1">
+                  {dte.getDate() === compareDate.getDate() ? (
+                    <span className="accepted_tag">Ongoing</span>
+                  ) : (
+                    <>
+                      {" "}
+                      <img src={bigClock} alt="clock" />{" "}
+                      {`${compareDate.getHours()}:00${
+                        compareDate.getHours() >= 12 ? "PM" : "AM"
+                      } ` +
+                        "-" +
+                        `${endTime.getHours()}:00${
+                          endTime.getHours() >= 12 ? "PM" : "AM"
+                        } `}{" "}
+                    </>
+                  )}
+                </p>
+              </section>
 
-<p className="pending_time pt-1">
- { dte.getDate() === compareDate.getDate() ? ( <span class="accepted_tag">Ongoing</span>) : (<> <img src={bigClock} alt="clock" /> { `${compareDate.getHours()}:00${compareDate.getHours() >= 12 ? 'PM' : 'AM'} ` + "-" +  `${endTime.getHours()}:00${endTime.getHours() >=12 ? 'PM' : 'AM'} ` }  </> ) }
-</p>
-</section>
+              <section className="mt-4">
+                {item?.image ? (
+                  <img
+                    src={item?.image}
+                    alt="demo"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                ) : (
+                  <span />
+                )}
+              </section>
 
-<section className="mt-4">
-{  item?.image ? (<img
-src={item?.image}
-alt="demo"
-style={{ width: "100%", height: "100%" }}
-/>) : <span/> }
-</section>
+              <section className="event_card_body mt-5">
+                <p>{item?.eventDescription}</p>
+              </section>
 
-<section className="event_card_body mt-5">
-<p>
-  {
-    item?.eventDescription
-  }
-</p>
-</section>
+              {dte.getHours() === compareDate.getHours() ? (
+                <section
+                  className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+                  style={{ rowGap: 10 }}
+                >
+                  <div
+                    className="d-flex align-items-center"
+                    style={{ columnGap: 10 }}
+                  >
+                    <button className="se_join">Join Event</button>
+                    <button className="se_view">View details</button>
+                  </div>
 
-{
- dte.getHours() === compareDate.getHours() ? (
-  <section
-  className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
-  style={{ rowGap: 10 }}
->
-  <div
-    className="d-flex align-items-center"
-    style={{ columnGap: 10 }}
-  >
-    <button className="se_join">Join Event</button>
-    <button className="se_view">View details</button>
-  </div>
+                  <section className="event_people">
+                    <img src={doc} alt="doc" />
+                    <img src={doc} alt="doc" />
+                    <img src={doc} alt="doc" />
+                  </section>
+                </section>
+              ) : (
+                <section
+                  className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+                  style={{ rowGap: 10 }}
+                >
+                  <div
+                    className="d-flex align-items-center"
+                    style={{ columnGap: 10 }}
+                  >
+                    <button className="se_view">View details</button>
+                  </div>
 
-  <section className="event_people">
-    <img src={doc} alt="doc" />
-    <img src={doc} alt="doc" />
-    <img src={doc} alt="doc" />
-  </section>
-</section>
-  ):(
-  <section
-className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
-style={{ rowGap: 10 }}
->
-<div className="d-flex align-items-center" style={{ columnGap: 10 }}>
-<button className="se_view">View details</button>
-
-</div>
-
-<section className="event_people">
-<img src={doc} alt="doc" />
-<img src={doc} alt="doc" />
-<img src={doc} alt="doc" />
-</section>
-</section>
- )
-
-}
- 
-</div> 
-        )
-       
-      })
-      
-    }
-
+                  <section className="event_people">
+                    <img src={doc} alt="doc" />
+                    <img src={doc} alt="doc" />
+                    <img src={doc} alt="doc" />
+                  </section>
+                </section>
+              )}
+            </div>
+          );
+        })}
     </div>
-  );  
+  );
 };
 
 const EventScheduleModal = () => {
@@ -118,7 +127,7 @@ const EventScheduleModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal"
+          className="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
         >

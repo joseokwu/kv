@@ -9,7 +9,7 @@ export const AssignedStartupCard = ({ onClick, data = {} }) => {
     <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
-        <span class="opp_tag">{data?.stage}</span>
+        <span className="opp_tag">{data?.stage}</span>
       </section>
 
       <section className="mb-2 d-flex align-items-center justify-content-between">

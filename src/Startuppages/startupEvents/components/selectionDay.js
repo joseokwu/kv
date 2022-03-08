@@ -30,7 +30,7 @@ export const SelectionDay = ({ data = [] }) => {
 
             {new Date().getTime() >= new Date(data[0]?.startTime) &&
             new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
-              <span class="accepted_tag">Ongoing</span>
+              <span className="accepted_tag">Ongoing</span>
             ) : (
               <p className="pending_time pt-1">
                 <img src={bigClock} alt="clock" />{" "}
@@ -98,7 +98,7 @@ export const SelectionDay = ({ data = [] }) => {
               </p>
               {new Date().getTime() >= new Date(data[1]?.startTime) &&
               new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
-                <span class="accepted_tag">Ongoing</span>
+                <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
                   <img src={bigClock} alt="clock" />{" "}
@@ -153,7 +153,7 @@ export const SelectionDay = ({ data = [] }) => {
 
               {new Date().getTime() >= new Date(data[2]?.startTime) &&
               new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
-                <span class="accepted_tag">Ongoing</span>
+                <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
                   <img src={bigClock} alt="clock" />{" "}
@@ -212,7 +212,7 @@ export const SelectionDay = ({ data = [] }) => {
                     {new Date().getTime() >= new Date(d?.startTime) &&
                     new Date().getTime() <=
                       new Date(data[0]?.endTime).getTime() ? (
-                      <span class="accepted_tag">Ongoing</span>
+                      <span className="accepted_tag">Ongoing</span>
                     ) : (
                       <p className="pending_time pt-1">
                         <img src={bigClock} alt="clock" />{" "}
@@ -263,7 +263,7 @@ const EventScheduleModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal"
+          className="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
         >

@@ -30,7 +30,7 @@ export const Modal = ({
               <div className="w-100">
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >

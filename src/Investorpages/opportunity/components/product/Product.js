@@ -15,7 +15,7 @@ import yeLogo from "../../../../assets/images/yeLogo.svg";
 import { useParams } from "react-router";
 import "./product.css";
 
-export const Product = ({data}) => {
+export const Product = ({ data }) => {
   const countInvestor = [1, 2, 3, 4];
   return (
     <div className="row">
@@ -77,7 +77,7 @@ export const Product = ({data}) => {
                   <img src={investor} alt="investor" className="mr-3" />
                   <span>
                     <p>{c.name}</p>
-                    <small>{'Lead Investor'}</small>
+                    <small>{"Lead Investor"}</small>
                   </span>
                 </div>
                 <a href="http://www.google.com">Connect</a>
@@ -186,7 +186,7 @@ const FounderInfo = () => {
       <section>
         <button
           type="button"
-          class="close close-founder-modal"
+          className="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
         >

@@ -1,9 +1,9 @@
-import React from 'react'
-import './assignmentCard.css'
-import dots from '../../assets/icons/3dots.svg'
-import lady from '../../assets/icons/person1.svg'
-import girl from '../../assets/icons/person2.svg'
-import guy from '../../assets/icons/person3.svg'
+import React from "react";
+import "./assignmentCard.css";
+import dots from "../../assets/icons/3dots.svg";
+import lady from "../../assets/icons/person1.svg";
+import girl from "../../assets/icons/person2.svg";
+import guy from "../../assets/icons/person3.svg";
 
 export const AssignmentCard = () => {
   return (
@@ -22,7 +22,7 @@ export const AssignmentCard = () => {
           <span>50</span> September
         </p>
 
-        <span class="today_tag">Today</span>
+        <span className="today_tag">Today</span>
       </section>
 
       <section className="assignment_card_body mt-5">
@@ -42,8 +42,8 @@ export const AssignmentCard = () => {
         </section>
       </section>
     </div>
-  )
-}
+  );
+};
 
 export const Assignment_Canvas_Card = () => {
   return (
@@ -62,7 +62,7 @@ export const Assignment_Canvas_Card = () => {
           <span>50</span> September
         </p>
 
-        <span class="tomorrow_tag">Tomorrow</span>
+        <span className="tomorrow_tag">Tomorrow</span>
       </section>
 
       <section className="assignment_card_body mt-5">
@@ -82,8 +82,8 @@ export const Assignment_Canvas_Card = () => {
         </section>
       </section>
     </div>
-  )
-}
+  );
+};
 
 export const Completed_Todolist = () => {
   return (
@@ -102,7 +102,7 @@ export const Completed_Todolist = () => {
           <span>50</span> September
         </p>
 
-        <span class="completed_tag">Completed</span>
+        <span className="completed_tag">Completed</span>
       </section>
 
       <section className="assignment_card_body mt-5">
@@ -122,5 +122,5 @@ export const Completed_Todolist = () => {
         </section>
       </section>
     </div>
-  )
-}
+  );
+};
