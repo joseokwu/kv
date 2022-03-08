@@ -48,8 +48,8 @@ export const MentorPersonalDetails = () => {
 
   return (
     <div className="mentor_personal_details_wrap" ref={wrapRef}>
-      <section className="mentor_personal_details_header mb-5">
-        <div className="position-fixed bg-pd-pro pt-3">
+      <section className="mentor_personal_details_header tab-wrap mb-5">
+        <div className="bg-pd-pro pt-3">
           <span>
             <section
               className="d-flex align-items-center"
@@ -66,7 +66,7 @@ export const MentorPersonalDetails = () => {
 
       <section className="mentor_personal_details_grid">
         <div className="my-5">
-          <ul className="mentor_personal_details_list position-fixed">
+          <ul className="mentor_personal_details_list">
             <li
               onClick={() => switchForm('#personal_details')}
               className={

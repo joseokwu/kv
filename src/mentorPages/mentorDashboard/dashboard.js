@@ -85,7 +85,6 @@ export const MentorDashboard = () => {
               <p className="dash-sub-title">Assigned Startups</p>
               <p className="see-all">See All</p>
             </section>
-
             <section className="row">
               {assignedStartups?.length > 0 &&
                 assignedStartups?.map((assigned, i) => {
