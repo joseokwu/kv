@@ -12,25 +12,25 @@ export const AllProgramCard = ({ data = [] }) => {
         data?.map((d, i) => {
           if (d?.status?.toLowerCase() === "pending") {
             return (
-              <div className="mt-3">
+              <div className="mt-3" key={`all-${i}`}>
                 <Pending data={d} />
               </div>
             );
           } else if (d?.status?.toLowerCase() === "accepted") {
             return (
-              <div className="mt-3">
+              <div className="mt-3" key={`all-${i}`}>
                 <Accepted data={d} />
               </div>
             );
           } else if (d?.status?.toLowerCase() === "rescheduled") {
             return (
-              <div className="mt-3">
+              <div className="mt-3" key={`all-${i}`}>
                 <Rescheduled data={d} />
               </div>
             );
           } else if (d?.status?.toLowerCase() === "declined") {
             return (
-              <div className="mt-3">
+              <div className="mt-3" key={`all-${i}`}>
                 <Declined data={d} />
               </div>
             );

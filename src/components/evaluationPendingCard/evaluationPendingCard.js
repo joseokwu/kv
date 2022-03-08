@@ -14,7 +14,7 @@ export const EvaluationPendingCard = ({ data = {} }) => {
       </Modal>
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
-        <span class="pending-tag">Pending</span>
+        <span className="pending-tag">Pending</span>
       </section>
 
       <section className="mb-2 d-flex align-items-center justify-content-between">
