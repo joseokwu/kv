@@ -37,6 +37,7 @@ import {
 
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 import {
+  PageLoader,
   WithInvestorRegisterLayout,
   WithMainInvestorLayout,
 } from "../components";
@@ -678,6 +679,15 @@ const routes = [
   },
 
   // Mentor Routes Ends Here
+
+  {
+    name: "test loader",
+    path: "/loading",
+    component: WithMentorMainLayout(PageLoader),
+    exact: true,
+    protected: true,
+    type: "mentor",
+  },
 ];
 
 export default routes;
