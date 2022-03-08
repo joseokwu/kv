@@ -1,66 +1,66 @@
-import React from 'react'
-import { ExpenseChart, Select } from '../../../../../mentorComponents'
+import React from "react";
+import { ExpenseChart, Select } from "../../../../../mentorComponents";
 
-const FundUtilization = () => {
+const FundUtilization = ({ data = {} }) => {
   return (
     <div>
       <section>
-        <UtilizationTable />
+        <UtilizationTable data={data} />
       </section>
     </div>
-  )
-}
+  );
+};
 
-const UtilizationTable = () => {
+const UtilizationTable = ({ data = {} }) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: '',
-        accessor: 'fundingRequirement',
+        Header: "",
+        accessor: "fundingRequirement",
       },
       {
-        Header: 'Deal Type',
-        accessor: 'dealType',
+        Header: "Deal Type",
+        accessor: "dealType",
       },
       {
-        Header: 'Funding Round',
-        accessor: 'fundingRound',
+        Header: "Funding Round",
+        accessor: "fundingRound",
       },
       {
-        Header: 'Dilution',
-        accessor: 'dilution',
+        Header: "Dilution",
+        accessor: "dilution",
       },
       {
-        Header: 'Pre-Money',
-        accessor: 'preMoney',
+        Header: "Pre-Money",
+        accessor: "preMoney",
       },
       {
-        Header: 'Post-Money',
-        accessor: 'postMoney',
+        Header: "Post-Money",
+        accessor: "postMoney",
       },
       {
-        Header: 'Funding Closing Date',
-        accessor: 'fundingClosingDate',
+        Header: "Funding Closing Date",
+        accessor: "fundingClosingDate",
       },
     ],
-    [],
-  )
+    []
+  );
 
-  const data = [
-    {
-      fundingRequirement: '$1,000,000',
-      dealType: 'Common Equity',
-      fundingRound: 'Seed',
-      dilution: '10%',
-      preMoney: '$20,000',
-      postMoney: '$30,000',
-      fundingClosingDate: '20 November, 2021',
-    },
-  ]
+  // const data = [
+  //   {
+  //     fundingRequirement: "$1,000,000",
+  //     dealType: "Common Equity",
+  //     fundingRound: "Seed",
+  //     dilution: "10%",
+  //     preMoney: "$20,000",
+  //     postMoney: "$30,000",
+  //     fundingClosingDate: "20 November, 2021",
+  //   },
+  // ];
   return (
     <section className="mb-4">
       {/* <h4 className="mb-5 fundraisingSubTitle">Fund Utilization</h4> */}
-      <section style={{ overflow: 'auto' }}>
+      <section style={{ overflow: "auto" }}>
         <table className="util-table text-center">
           <thead>
             <tr>
@@ -77,12 +77,10 @@ const UtilizationTable = () => {
           <tbody>
             <tr>
               <td className="title">Revenue</td>
-              <td>$200,000</td>
-              <td>$300,000</td>
-              <td>$120,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
+              {Object.values(data?.revenue).length > 0 &&
+                Object.values(data?.revenue).map((d, i) => {
+                  return <td>{d}</td>;
+                })}
             </tr>
             <tr>
               <td>Growth %</td>
@@ -95,12 +93,10 @@ const UtilizationTable = () => {
             </tr>
             <tr>
               <td className="title">Expenses</td>
-              <td>$200,000</td>
-              <td>$300,000</td>
-              <td>$120,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
+              {Object.values(data?.expenses).length > 0 &&
+                Object.values(data?.expenses).map((d, i) => {
+                  return <td>{d}</td>;
+                })}
             </tr>
             <tr>
               <td>Growth %</td>
@@ -113,30 +109,24 @@ const UtilizationTable = () => {
             </tr>
             <tr>
               <td className="title">Burn rate</td>
-              <td>$200,000</td>
-              <td>$300,000</td>
-              <td>$120,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
+              {Object.values(data?.burnRate).length > 0 &&
+                Object.values(data?.burnRate).map((d, i) => {
+                  return <td>{d}</td>;
+                })}
             </tr>
             <tr>
               <td className="title">Runway Months</td>
-              <td>$200,000</td>
-              <td>$300,000</td>
-              <td>$120,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
+              {Object.values(data?.runwayMonths).length > 0 &&
+                Object.values(data?.runwayMonths).map((d, i) => {
+                  return <td>{d}</td>;
+                })}
             </tr>
             <tr>
               <td className="title">No. of customers</td>
-              <td>50</td>
-              <td>10</td>
-              <td>20</td>
-              <td>30</td>
-              <td>100</td>
-              <td>100</td>
+              {Object.values(data?.noOfCustomers).length > 0 &&
+                Object.values(data?.noOfCustomers).map((d, i) => {
+                  return <td>{d}</td>;
+                })}
             </tr>
             <tr>
               <td>Growth %</td>
@@ -149,12 +139,10 @@ const UtilizationTable = () => {
             </tr>
             <tr>
               <td className="title">No. of employees</td>
-              <td>50</td>
-              <td>10</td>
-              <td>20</td>
-              <td>30</td>
-              <td>100</td>
-              <td>100</td>
+              {Object.values(data?.noOfEmployees).length > 0 &&
+                Object.values(data?.noOfEmployees).map((d, i) => {
+                  return <td>{d}</td>;
+                })}
             </tr>
           </tbody>
         </table>
@@ -164,14 +152,14 @@ const UtilizationTable = () => {
         <div className="mb-4 d-flex justify-content-end">
           <Select
             options={[
-              'Month 1',
-              'Month 2',
-              'Month 3',
-              'Month 4',
-              'Month 5',
-              'Month 6',
+              "Month 1",
+              "Month 2",
+              "Month 3",
+              "Month 4",
+              "Month 5",
+              "Month 6",
             ]}
-            placeholder={'Month 1'}
+            placeholder={"Month 1"}
           />
         </div>
         <div className="row">
@@ -190,7 +178,7 @@ const UtilizationTable = () => {
         </div>
       </section>
     </section>
-  )
-}
+  );
+};
 
-export default FundUtilization
+export default FundUtilization;

@@ -1,8 +1,8 @@
-import React from 'react'
-import docIcon from '../../../../../assets/icons/doc.svg'
-import findoc from '../../../../../assets/images/finDoc.svg'
+import React from "react";
+import docIcon from "../../../../../assets/icons/doc.svg";
+import findoc from "../../../../../assets/images/finDoc.svg";
 
-const FinancialProjection = () => {
+const FinancialProjection = ({ data = [] }) => {
   return (
     <div className="mb-4">
       {/* <h4 className="mb-5 fundraisingSubTitle">Financial Projection</h4> */}
@@ -24,7 +24,7 @@ const FinancialProjection = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
 export default FinancialProjection;
