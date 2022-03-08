@@ -1,9 +1,10 @@
-import React from 'react'
-import bigClock from '../../../../assets/icons/bigclock.svg'
-import location from '../../../../assets/icons/locationSm.svg'
-import compLogo from '../../../../assets/images/compLogo.svg'
+import React from "react";
+import bigClock from "../../../../assets/icons/bigclock.svg";
+import location from "../../../../assets/icons/locationSm.svg";
+import compLogo from "../../../../assets/images/compLogo.svg";
+import { months } from "../../../../utils/helpers";
 
-export const ViewScheduleModal = () => {
+export const ViewScheduleModal = ({ data = {} }) => {
   return (
     <div className="px-4 pb-5">
       <section className="pt-2">
@@ -19,12 +20,13 @@ export const ViewScheduleModal = () => {
 
       <section className="mt-5">
         <section className="program_modal_head">
-          <h3>Appleiine House Demo</h3>
+          <h3>{data?.name}</h3>
         </section>
 
         <section className="d-flex mt-3">
           <p className="pending_date pr-4">
-            <span>50</span> | September
+            <span>{new Date(data?.date).getDate()}</span>{" "}
+            {months[new Date(data?.date).getMonth()]}
           </p>
 
           <p className="pending_time pt-1">
@@ -35,20 +37,14 @@ export const ViewScheduleModal = () => {
 
       <section className="view_schedule_modal mt-5 p-4">
         <h3>Description</h3>
-        <p className="pt-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-          morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-          lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit.{' '}
-        </p>
+        <p className="pt-4">{data?.description}</p>
       </section>
 
       <section className="event_link">
         <p className="pt-5 pb-3">Event Link</p>
         <a href="https://www.yebox.io/" target="_blank">
-          <img className="pr-3" src={location} alt="location" />{' '}
-          meet.google.com/jce-wata-fux
+          <img className="pr-3" src={location} alt="location" />{" "}
+          {data?.eventLink}
         </a>
       </section>
 
@@ -56,20 +52,17 @@ export const ViewScheduleModal = () => {
         <p>Startups</p>
       </section>
 
-      <section className="view_schedule_modal_company d-flex mb-5 pb-4">
-        <div className="col-lg-4 mt-3">
-          <img src={compLogo} alt="company logo" />
-          <p className="pt-2">Yebox Technology</p>
-        </div>
-        <div className="col-lg-4 mt-3">
-          <img src={compLogo} alt="company logo" />
-          <p className="pt-2">Yebox Technology</p>
-        </div>
-        <div className=" col-lg-4 mt-3">
-          <img src={compLogo} alt="company logo" />
-          <p className="pt-2">Yebox Technology</p>
-        </div>
+      <section className="row view_schedule_modal_company">
+        {data?.startups?.length > 0 &&
+          data?.startups?.map((d, i) => {
+            return (
+              <div className="col-sm-4 mt-3">
+                <img src={compLogo} alt="company logo" />
+                <p className="pt-2">{d?.companyName}</p>
+              </div>
+            );
+          })}
       </section>
     </div>
-  )
-}
+  );
+};

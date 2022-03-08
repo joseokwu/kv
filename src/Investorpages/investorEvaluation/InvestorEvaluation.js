@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import filter from "../../assets/icons/filterFunnel.svg";
 import down from "../../assets/icons/chevronDown.svg";
-import { mentorEvaluations } from "../../services/mentor";
+import { getInvestorEvaluation } from "../../services/investor";
 import {
   DashCard,
   EvaluationCompletedCard,
@@ -21,16 +21,16 @@ export const InvestorEvaluation = ({ history }) => {
   const [completed, setCompleted] = useState([]);
 
   const fetchData = async () => {
-    const res = await mentorEvaluations();
+    const res = await getInvestorEvaluation();
 
     console.log("res", res);
-    setEvalCardsData(res?.cards);
-    setAssigned(res?.AssignedStartups);
+    setEvalCardsData(res);
+    setAssigned(res?.startups);
     setPending(() =>
-      res?.AssignedStartups?.filter((x) => x.status === "Pending")
+      res?.startups?.filter((x) => x.status?.toLowerCase() === "pending")
     );
     setCompleted(() =>
-      res?.AssignedStartups?.filter((x) => x.status === "Completed")
+      res?.startups?.filter((x) => x.status?.toLowerCase() === "completed")
     );
   };
 
@@ -41,14 +41,24 @@ export const InvestorEvaluation = ({ history }) => {
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4"];
 
   const cardData =
-    evalCardsData?.length > 0
-      ? evalCardsData?.map((card, i) => {
-          return {
-            name: card.title,
-            count: card.count,
-            color: cardColors[i],
-          };
-        })
+    evalCardsData?.assignedStartups?.length > 0
+      ? [
+          {
+            name: "Incubation Program",
+            count: evalCardsData?.incubations,
+            color: cardColors[0],
+          },
+          {
+            name: "Partner",
+            count: evalCardsData?.partners,
+            color: cardColors[1],
+          },
+          {
+            name: "Total Startup Assigned",
+            count: evalCardsData?.assignedStartups,
+            color: cardColors[2],
+          },
+        ]
       : [
           {
             name: "Incubation Program",
@@ -109,7 +119,7 @@ export const InvestorEvaluation = ({ history }) => {
         );
 
       default:
-        return <AllEvaluationCard />;
+        return <AllEvaluationCard data={assigned} />;
     }
   };
 

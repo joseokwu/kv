@@ -1,15 +1,16 @@
-import React from 'react'
-import bigClock from '../../../../assets/icons/bigclock.svg'
-import { ReadMore } from '../../../../mentorComponents'
-import './declined.css'
+import React from "react";
+import bigClock from "../../../../assets/icons/bigclock.svg";
+import { ReadMore } from "../../../../mentorComponents";
+import { formatTime, months } from "../../../../utils/helpers";
+import "./declined.css";
 
-export const Declined = () => {
+export const Declined = ({ data = {} }) => {
   return (
     <div>
       <div className="program_card">
         <section className="pending_program_card p-4">
           <div className="d-flex justify-content-between">
-            <p className="pending_program_title">Corporate Training</p>
+            <p className="pending_program_title">{data?.name}</p>
             <span class="declined_tag">Declined</span>
           </div>
 
@@ -18,22 +19,18 @@ export const Declined = () => {
             style={{ columnGap: 10 }}
           >
             <p className="pending_date">
-              <span>50</span> September
+              <span>{new Date(data?.date).getDate()}</span>{" "}
+              {months[new Date(data?.date).getMonth()]}
             </p>
             <p className="pending_time">
-              <img src={bigClock} alt="clock" /> 10:00pm - 12pm
+              <img src={bigClock} alt="clock" /> {formatTime(data?.startTime)} -{" "}
+              {formatTime(data?.endTime)}
             </p>
           </section>
 
           <section className="mt-3">
             <p>
-              <ReadMore>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Enim lectus morbi elementum
-                eu.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </ReadMore>
+              <ReadMore>{data?.description}</ReadMore>
             </p>
           </section>
 
@@ -45,5 +42,5 @@ export const Declined = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};

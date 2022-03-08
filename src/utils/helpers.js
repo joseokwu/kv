@@ -62,11 +62,22 @@ export const months = [
 ];
 
 export function generateRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
+  var letters = "0123456789ABCDEF";
+  var color = "#";
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
 }
 
+export function formatTime(timeToFormat) {
+  return `${
+    new Date(timeToFormat).getHours() > 12
+      ? new Date(timeToFormat).getHours() - 12
+      : new Date(timeToFormat).getHours()
+  }:${
+    new Date(timeToFormat).getMinutes() > 9
+      ? new Date(timeToFormat).getMinutes()
+      : new Date(timeToFormat).getMinutes() + "0"
+  } ${new Date(timeToFormat).getHours() > 12 ? "pm" : "am"}`;
+}
