@@ -22,22 +22,45 @@ export const MentorDashboard = () => {
 
     setDashInfo(res);
     setAssignedStartups(res?.AssignedStartups);
-    setUpcoming(res?.upcomingEvents);
+    setUpcoming(res?.events);
   };
 
   useEffect(() => {
-    
     fetchData();
   }, []);
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4", "#DEF6FF"];
 
-  const cardData = dashInfo?.cards?.map((dash, i) => {
-    return {
-      name: dash?.title,
-      count: dash?.count,
-      color: cardColors[i],
-    };
-  });
+  const cardData =
+    dashInfo?.cards && dashInfo?.cards?.length > 0
+      ? dashInfo?.cards?.map((dash, i) => {
+          return {
+            name: dash?.title,
+            count: dash?.count,
+            color: cardColors[i],
+          };
+        })
+      : [
+          {
+            name: "Incubation Program",
+            count: 0,
+            color: cardColors[0],
+          },
+          {
+            name: "Accelerators",
+            count: 0,
+            color: cardColors[1],
+          },
+          {
+            name: "Mentors",
+            count: 0,
+            color: cardColors[2],
+          },
+          {
+            name: "Investors",
+            count: 0,
+            color: cardColors[2],
+          },
+        ];
 
   return (
     <div className="dashboard_main container-fluid">
@@ -64,8 +87,8 @@ export const MentorDashboard = () => {
             </section>
 
             <section className="row">
-              {assignedStartups.length > 0 &&
-                assignedStartups.map((assigned, i) => {
+              {assignedStartups?.length > 0 &&
+                assignedStartups?.map((assigned, i) => {
                   return (
                     <div className="col-xl-4 mb-4">
                       <AssignedStartupCard
