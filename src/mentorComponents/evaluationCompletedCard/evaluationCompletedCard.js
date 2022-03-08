@@ -31,7 +31,7 @@ export const EvaluationCompletedCard = ({ data = {} }) => {
 
       <section className="d-flex align-items-center justify-content-between opp-footer-text">
         <div>
-          <button disabled className="completed_evaluation">
+          <button disabled={true} className="completed_evaluation">
             Evaluated
           </button>
         </div>

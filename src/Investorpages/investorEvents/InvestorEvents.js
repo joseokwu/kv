@@ -34,10 +34,10 @@ export const InvestorEvents = ({ history }) => {
         return <SelectionDay data={selectionEvents.length > 0 && selectionEvents } />;
 
       case "#Demo Day":
-        return <SelectionDay />;
+        return <SelectionDay data={demoEvents.length > 0 && demoEvents  } />;
 
       case "#Pitching Events":
-        return <SelectionDay />;
+        return <SelectionDay data={pitchEvents.length > 0 && pitchEvents } />;
 
       case "#Other Events":
         return <SelectionDay />;
