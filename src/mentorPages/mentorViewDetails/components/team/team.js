@@ -8,7 +8,7 @@ import "./team.css";
 
 export const Team = () => {
   const {
-    state: { teams },
+    state: {dash_view  },
   } = useActivity();
   return (
     <div>
@@ -17,8 +17,8 @@ export const Team = () => {
       <section>
         <h4 className="team-group-title">Founder & Co-Founders</h4>
 
-        <div className="row">
-          {teams.slice(0, 3).map((member, i) => {
+        <div className="row">  
+          {dash_view?.teams.slice(0, 3).map((member, i) => {
             return (
               <article className="col-lg-4 mb-4">
                 <CoFounders key={`founder-member-${i}`} data={member} />
@@ -32,7 +32,7 @@ export const Team = () => {
         <h4 className="team-group-title mt-5">Team Members</h4>
 
         <div className="row">
-          {teams.slice(3, teams?.length).map((member, i) => {
+          {dash_view?.teams.slice(3, dash_view?.teams?.length).map((member, i) => {
             return (
               <article className="col-lg-4 mb-4">
                 <TeamMember key={`member-${i}`} data={member} />

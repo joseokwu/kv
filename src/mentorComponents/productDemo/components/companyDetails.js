@@ -30,7 +30,7 @@ export const CompanyDetails = () => {
 
         <div className="d-flex align-items-end flex-column">
           <section className="d-flex align-items-center mb-3">
-            <span className="opp_tag_label">Industry</span>
+            <span className="opp_tag_label">Industry </span>
             <span className="opp_tag">{dash_view?.industry}</span>
           </section>
 
