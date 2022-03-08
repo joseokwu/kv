@@ -32,7 +32,7 @@ export const MentorAssignments = () => {
         </section>
       </section>
 
-      <section className="mt-5 pt-3 d-flex justify-content-between">
+      <section className="mt-5 pt-5 d-flex justify-content-between">
         <div className="mt-5">
           <button
             className="d-flex align-items-center filter-btn"

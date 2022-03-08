@@ -14,7 +14,7 @@ export const Pending = () => {
         <section className="pending_program_card p-4">
           <div className="d-flex justify-content-between">
             <p className="pending_program_title">Corporate Training</p>
-            <span class="pending_tag">Pending</span>
+            <span className="pending_tag">Pending</span>
           </div>
 
           <section

@@ -22,7 +22,7 @@ export const AssignmentCard = () => {
           <span>50</span> September
         </p>
 
-        <span class="today_tag">Today</span>
+        <span className="today_tag">Today</span>
       </section>
 
       <section className="assignment_card_body mt-5">
@@ -62,7 +62,7 @@ export const Assignment_Canvas_Card = () => {
           <span>50</span> September
         </p>
 
-        <span class="tomorrow_tag">Tomorrow</span>
+        <span className="tomorrow_tag">Tomorrow</span>
       </section>
 
       <section className="assignment_card_body mt-5">
@@ -102,7 +102,7 @@ export const Completed_Todolist = () => {
           <span>50</span> September
         </p>
 
-        <span class="completed_tag">Completed</span>
+        <span className="completed_tag">Completed</span>
       </section>
 
       <section className="assignment_card_body mt-5">

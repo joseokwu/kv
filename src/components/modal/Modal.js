@@ -12,7 +12,7 @@ export const Modal = ({
   return (
     <div
       className="modal fade"
-      tabindex="-1"
+      tabIndex="-1"
       role="dialog"
       id={id}
       style={{ overflowY: "auto" }}
@@ -30,7 +30,7 @@ export const Modal = ({
               <div className="w-100">
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >

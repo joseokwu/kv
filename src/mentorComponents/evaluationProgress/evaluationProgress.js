@@ -9,7 +9,7 @@ export const EvaluationProgress = ({ data = {} }) => {
     <div className="opp-card">
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
-        <span class="progress-tag">In-Progress</span>
+        <span className="progress-tag">In-Progress</span>
       </section>
 
       <section className="mb-2 d-flex align-items-center justify-content-between">

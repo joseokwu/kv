@@ -9,7 +9,7 @@ export const ViewScheduleModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal"
+          className="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
         >

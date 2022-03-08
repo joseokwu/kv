@@ -31,7 +31,7 @@ export const Select = ({
         </option>
         {options.length > 0 &&
           options.map((option, i) => {
-            return <option value={option}>{displayOption[i] ?? option}</option>;
+            return <option defaultValue={option}>{displayOption[i] ?? option}</option>;
           })}
       </select>
     </div>

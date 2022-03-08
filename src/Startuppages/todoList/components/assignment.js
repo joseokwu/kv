@@ -62,7 +62,7 @@ const AssignmentModal = () => {
 
       <section className="d-flex mt-5">
         <p className="mr-4">Task type</p>
-        <span class="today_tag">Assignment</span>
+        <span className="today_tag">Assignment</span>
       </section>
 
       <section className="d-flex mt-5">
@@ -117,16 +117,21 @@ const AssignmentModal = () => {
 
       <section className="assignment_modal_description mt-5">
         <h3>Remark</h3>
-        <TextArea rows={6}/>
+        <TextArea rows={6} />
       </section>
 
       <section className="assignment_modal_remark d-flex mt-5">
-        <img src={lady} alt="lady"/>
+        <img src={lady} alt="lady" />
         <p className="pt-2 pl-3">Janice Atkinson</p>
       </section>
 
       <section className="mt-3">
-        <TextArea placeholder={'@chris Anthony Adjust the remaining documents and upload'} rows={1}/>
+        <TextArea
+          placeholder={
+            '@chris Anthony Adjust the remaining documents and upload'
+          }
+          rows={1}
+        />
       </section>
 
       <section className="assignment_complete_btn mt-5">

@@ -10,7 +10,7 @@ export const AddReschedule = () => {
         <section className="pending_program_card p-4">
           <div className="d-flex justify-content-between">
             <p className="pending_program_title">Corporate Training</p>
-            <span class="accepted_tag">Rescheduled</span>
+            <span className="accepted_tag">Rescheduled</span>
           </div>
 
           <section

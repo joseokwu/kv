@@ -29,7 +29,7 @@ export const UpcomingEventCard = ({ data = {} }) => {
 
         {new Date().getTime() >= new Date(data?.startTime) &&
         new Date().getTime() <= new Date(data?.endTime).getTime() ? (
-          <span class="accepted_tag">Ongoing</span>
+          <span className="accepted_tag">Ongoing</span>
         ) : (
           <p className="event_time pt-1">
             <img src={clock} alt="clock" />{" "}

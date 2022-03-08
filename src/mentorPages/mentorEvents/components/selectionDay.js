@@ -30,7 +30,7 @@ export const SelectionDay = ({ data = [] }) => {
 
             {new Date().getTime() >= new Date(data[0]?.startTime) &&
             new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
-              <span class="accepted_tag">Ongoing</span>
+              <span className="accepted_tag">Ongoing</span>
             ) : (
               <p className="pending_time pt-1">
                 <img src={bigClock} alt="clock" />{" "}
@@ -105,7 +105,7 @@ export const SelectionDay = ({ data = [] }) => {
               </p>
               {new Date().getTime() >= new Date(data[1]?.startTime) &&
               new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
-                <span class="accepted_tag">Ongoing</span>
+                <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
                   <img src={bigClock} alt="clock" />{" "}
@@ -166,7 +166,7 @@ export const SelectionDay = ({ data = [] }) => {
 
               {new Date().getTime() >= new Date(data[2]?.startTime) &&
               new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
-                <span class="accepted_tag">Ongoing</span>
+                <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
                   <img src={bigClock} alt="clock" />{" "}
@@ -216,7 +216,7 @@ export const SelectionDay = ({ data = [] }) => {
         {data?.length > 0 &&
           data?.slice(3, data?.length - 1).map((d, i) => {
             return (
-              <section className="col-lg-6">
+              <section key={i} className="col-lg-6">
                 <div className=" events_card_bg py-4 px-4 mt-4">
                   <section className="events_card d-flex justify-content-between">
                     <h3>{d?.titleOfEvent}</h3>
@@ -231,7 +231,7 @@ export const SelectionDay = ({ data = [] }) => {
                     {new Date().getTime() >= new Date(data[0]?.startTime) &&
                     new Date().getTime() <=
                       new Date(data[0]?.endTime).getTime() ? (
-                      <span class="accepted_tag">Ongoing</span>
+                      <span className="accepted_tag">Ongoing</span>
                     ) : (
                       <p className="pending_time pt-1">
                         <img src={bigClock} alt="clock" />{" "}
@@ -289,7 +289,7 @@ const EventScheduleModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal"
+          className="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
         >

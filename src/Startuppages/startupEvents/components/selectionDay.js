@@ -1,13 +1,13 @@
-import React from "react";
-import dots from "../../../assets/icons/3dots.svg";
-import bigClock from "../../../assets/icons/bigclock.svg";
-import demo from "../../../assets/images/vidDemo.svg";
-import doc from "../../../assets/images/doc.svg";
-import { Button, Modal, Select, TextField } from "../../../Startupcomponents";
-import { months } from "../../../utils/helpers";
-import down from "../../../assets/icons/downArrow.svg";
-import location from "../../../assets/icons/locationSm.svg";
-import name from "../../../assets/icons/initial.svg";
+import React from 'react'
+import dots from '../../../assets/icons/3dots.svg'
+import bigClock from '../../../assets/icons/bigclock.svg'
+import demo from '../../../assets/images/vidDemo.svg'
+import doc from '../../../assets/images/doc.svg'
+import { Button, Modal, Select, TextField } from '../../../Startupcomponents'
+import { months } from '../../../utils/helpers'
+import down from '../../../assets/icons/downArrow.svg'
+import location from '../../../assets/icons/locationSm.svg'
+import name from '../../../assets/icons/initial.svg'
 
 export const SelectionDay = ({ data = [] }) => {
   return (
@@ -24,23 +24,23 @@ export const SelectionDay = ({ data = [] }) => {
 
           <section className="d-flex justify-content-between mt-2">
             <p className="pending_date pr-4">
-              <span>{new Date(data[0]?.startDate).getDate()}</span>{" "}
+              <span>{new Date(data[0]?.startDate).getDate()}</span>{' '}
               {months[new Date(data[0]?.startDate).getMonth()]}
             </p>
 
             {new Date().getTime() >= new Date(data[0]?.startTime) &&
             new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
-              <span class="accepted_tag">Ongoing</span>
+              <span className="accepted_tag">Ongoing</span>
             ) : (
               <p className="pending_time pt-1">
-                <img src={bigClock} alt="clock" />{" "}
+                <img src={bigClock} alt="clock" />{' '}
                 {`${new Date(data[0]?.startTime).getHours()}`}:
                 {`${new Date(data[0]?.startTime).getMinutes()}${
-                  new Date(data[0]?.startTime).getMinutes() < 10 ? 0 : ""
+                  new Date(data[0]?.startTime).getMinutes() < 10 ? 0 : ''
                 }`}
                 - {`${new Date(data[0]?.endTime).getHours()}`}:
                 {`${new Date(data[0]?.endTime).getMinutes()}${
-                  new Date(data[0]?.endTime).getMinutes() < 10 ? 0 : ""
+                  new Date(data[0]?.endTime).getMinutes() < 10 ? 0 : ''
                 }`}
               </p>
             )}
@@ -50,7 +50,7 @@ export const SelectionDay = ({ data = [] }) => {
             <img
               src={demo}
               alt="demo"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: '100%', height: '100%' }}
             />
           </section>
 
@@ -100,25 +100,25 @@ export const SelectionDay = ({ data = [] }) => {
 
             <section className="d-flex justify-content-between mt-2">
               <p className="pending_date pr-4">
-                <span>{new Date(data[1]?.startDate).getDate()}</span>{" "}
+                <span>{new Date(data[1]?.startDate).getDate()}</span>{' '}
                 {months[new Date(data[1]?.startDate).getMonth()]}
               </p>
               {new Date().getTime() >= new Date(data[1]?.startTime) &&
               new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
-                <span class="accepted_tag">Ongoing</span>
+                <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
-                  <img src={bigClock} alt="clock" />{" "}
+                  <img src={bigClock} alt="clock" />{' '}
                   {`${new Date(data[1]?.startTime).getHours()}`}:
                   {`${new Date(data[1]?.startTime).getMinutes()}${
-                    new Date(data[1]?.startTime).getMinutes() < 10 ? 0 : ""
+                    new Date(data[1]?.startTime).getMinutes() < 10 ? 0 : ''
                   }`}
                   - {`${new Date(data[1]?.endTime).getHours()}`}:
                   {`${new Date(data[1]?.endTime).getMinutes()}${
-                    new Date(data[1]?.endTime).getMinutes() < 10 ? 0 : ""
+                    new Date(data[1]?.endTime).getMinutes() < 10 ? 0 : ''
                   }`}
                 </p>
-              )}{" "}
+              )}{' '}
             </section>
 
             <section className="event_card_body mt-3">
@@ -160,23 +160,23 @@ export const SelectionDay = ({ data = [] }) => {
 
             <section className="d-flex justify-content-between mt-2">
               <p className="pending_date pr-4">
-                <span>{new Date(data[2]?.startDate).getDate()}</span>{" "}
-                {months[new Date(data[2]?.startDate).getMonth()]}{" "}
+                <span>{new Date(data[2]?.startDate).getDate()}</span>{' '}
+                {months[new Date(data[2]?.startDate).getMonth()]}{' '}
               </p>
 
               {new Date().getTime() >= new Date(data[2]?.startTime) &&
               new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
-                <span class="accepted_tag">Ongoing</span>
+                <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
-                  <img src={bigClock} alt="clock" />{" "}
+                  <img src={bigClock} alt="clock" />{' '}
                   {`${new Date(data[2]?.startTime).getHours()}`}:
                   {`${new Date(data[2]?.startTime).getMinutes()}${
-                    new Date(data[2]?.startTime).getMinutes() < 10 ? 0 : ""
+                    new Date(data[2]?.startTime).getMinutes() < 10 ? 0 : ''
                   }`}
                   - {`${new Date(data[2]?.endTime).getHours()}`}:
                   {`${new Date(data[2]?.endTime).getMinutes()}${
-                    new Date(data[2]?.endTime).getMinutes() < 10 ? 0 : ""
+                    new Date(data[2]?.endTime).getMinutes() < 10 ? 0 : ''
                   }`}
                 </p>
               )}
@@ -225,26 +225,26 @@ export const SelectionDay = ({ data = [] }) => {
 
                   <section className="d-flex justify-content-between mt-2">
                     <p className="pending_date pr-4">
-                      <span>{new Date(d?.startDate).getDate()}</span>{" "}
+                      <span>{new Date(d?.startDate).getDate()}</span>{' '}
                       {months[new Date(d?.startDate).getMonth()]}
                     </p>
                     {new Date().getTime() >= new Date(data[0]?.startTime) &&
                     new Date().getTime() <=
                       new Date(data[0]?.endTime).getTime() ? (
-                      <span class="accepted_tag">Ongoing</span>
+                      <span className="accepted_tag">Ongoing</span>
                     ) : (
                       <p className="pending_time pt-1">
-                        <img src={bigClock} alt="clock" />{" "}
+                        <img src={bigClock} alt="clock" />{' '}
                         {`${new Date(d?.startTime).getHours()}`}:
                         {`${new Date(d?.startTime).getMinutes()}${
-                          new Date(d?.startTime).getMinutes() < 10 ? 0 : ""
+                          new Date(d?.startTime).getMinutes() < 10 ? 0 : ''
                         }`}
                         - {`${new Date(d?.endTime).getHours()}`}:
                         {`${new Date(d?.endTime).getMinutes()}${
-                          new Date(d?.endTime).getMinutes() < 10 ? 0 : ""
+                          new Date(d?.endTime).getMinutes() < 10 ? 0 : ''
                         }`}
                       </p>
-                    )}{" "}
+                    )}{' '}
                   </section>
 
                   <section className="event_card_body mt-3">
@@ -276,12 +276,12 @@ export const SelectionDay = ({ data = [] }) => {
                   </section>
                 </div>
               </section>
-            );
+            )
           })}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const EventScheduleModal = () => {
   return (
@@ -289,7 +289,7 @@ const EventScheduleModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal"
+          className="close close-founder-modal"
           data-dismiss="modal"
           aria-label="Close"
         >
@@ -300,7 +300,7 @@ const EventScheduleModal = () => {
       </section>
 
       <section className="mt-2">
-        <p className="" style={{ color: "#E21919" }}>
+        <p className="" style={{ color: '#E21919' }}>
           2 days : 30mins : 05 secs
         </p>
 
@@ -326,7 +326,7 @@ const EventScheduleModal = () => {
             morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
             elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.{" "}
+            consectetur adipiscing elit.{' '}
           </p>
         </section>
 
@@ -342,7 +342,7 @@ const EventScheduleModal = () => {
 
         <section className="event_link">
           <a href="https://www.yebox.io/" target="_blank">
-            <img className="pr-3" src={location} alt="location" />{" "}
+            <img className="pr-3" src={location} alt="location" />{' '}
             meet.google.com/jce-wata-fux
           </a>
         </section>
@@ -375,22 +375,22 @@ const EventScheduleModal = () => {
             <button className="mr-3">No</button>
             <button className="mr-4">Maybe</button>
             <span>
-              Request to reschedule{" "}
+              Request to reschedule{' '}
               <img className="pl-2" src={down} alt="arrow down" />
             </span>
           </div>
         </section>
 
         <section className="mt-5">
-          <TextField label={"Day"} placeholder={"Thursday 17th Oct 2021"} />
+          <TextField label={'Day'} placeholder={'Thursday 17th Oct 2021'} />
         </section>
 
         <section className="row mt-5">
           <div className="col-lg-5">
-            <Select label={"Start time"} placeholder={"Time"} />
+            <Select label={'Start time'} placeholder={'Time'} />
           </div>
           <div className="col-lg-5">
-            <Select label={"End time"} placeholder={"Time"} />
+            <Select label={'End time'} placeholder={'Time'} />
           </div>
         </section>
 
@@ -403,5 +403,5 @@ const EventScheduleModal = () => {
         </section>
       </section>
     </div>
-  );
-};
+  )
+}

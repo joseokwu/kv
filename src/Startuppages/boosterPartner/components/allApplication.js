@@ -13,7 +13,7 @@ import expired from '../../../assets/icons/ex.svg'
 import cancel from '../../../assets/icons/cancel.svg'
 import '../boosterPartner.css'
 
-export const AllApplication = ({data}) => {
+export const AllApplication = ({ data }) => {
   const appliedArr = [1, 2]
   const approvedArr = [1]
   const expiredArr = [1]
@@ -22,69 +22,58 @@ export const AllApplication = ({data}) => {
   return (
     <div className="row" style={{ columnGap: 10 }}>
       Apply Card
- 
-
       {/* Approved Modal starts here */}
       <Modal id="approved" withHeader={false}>
         <ApprovedModal />
       </Modal>
       {/* Approved Modal end here */}
-
       {/* Approved */}
-      {data && data.map((item , i) => (
-        <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
-          <div>
-            {compImage.map((comp, i) => (
-              <img className="" key={i} src={comp.logo} alt="company logo" />
-            ))}
-          </div>
-          <div className="my-2">
-           
+      {data &&
+        data.map((item, i) => (
+          <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
+            <div>
+              {compImage.map((comp, i) => (
+                <img className="" key={i} src={comp.logo} alt="company logo" />
+              ))}
+            </div>
+            <div className="my-2">
               <h3> {item?.name} </h3>
-          
-          </div>
-          <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
-          <div className="my-3">
-            
-              <p >
+            </div>
+            <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
+            <div className="my-3">
+              <p>
                 {data?.description}
                 <span data-target="#approved" data-toggle="modal">
                   Read More
                 </span>
               </p>
-            
-          </div>
-          <div>
-
-              {
-
-  item?.status === 'approved' ? ( <button className="approvedBtn mt-2">
-
-<img className="mr-2 mb-1" src={ approved } alt="approved icon" />
- Approved
-</button>) : item?.status === 'declined' ? (
-  <button className="declinedBtn mt-2">
-  <img className="mr-2 mb-1" src={ cancel } alt="declined icon" />
-  Declined
-  </button>
-): item?.status === 'applied' ? (
-  <button className="expiredBtn mt-2">
-      <img className="mr-2 mb-1" src={expired} alt="expired icon" />
-      Expired
-    </button>
-): ( <span /> )
-
-              }
-
-          </div>
-        </ApplicationCard>
-      ))}
-
-     
-     
-
-    
-      
+            </div>
+            <div>
+              {item?.status === 'approved' ? (
+                <button className="approvedBtn mt-2">
+                  <img
+                    className="mr-2 mb-1"
+                    src={approved}
+                    alt="approved icon"
+                  />
+                  Approved
+                </button>
+              ) : item?.status === 'declined' ? (
+                <button className="declinedBtn mt-2">
+                  <img className="mr-2 mb-1" src={cancel} alt="declined icon" />
+                  Declined
+                </button>
+              ) : item?.status === 'applied' ? (
+                <button className="expiredBtn mt-2">
+                  <img className="mr-2 mb-1" src={expired} alt="expired icon" />
+                  Expired
+                </button>
+              ) : (
+                <span />
+              )}
+            </div>
+          </ApplicationCard>
+        ))}
     </div>
   )
 }
@@ -96,7 +85,7 @@ const AppliedModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal px-4"
+          className="close close-founder-modal px-4"
           data-dismiss="modal"
           aria-label="Close"
         >
@@ -173,7 +162,7 @@ const DeclinedModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal px-4"
+          className="close close-founder-modal px-4"
           data-dismiss="modal"
           aria-label="Close"
         >
@@ -250,7 +239,7 @@ const ExpiredModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal px-4"
+          className="close close-founder-modal px-4"
           data-dismiss="modal"
           aria-label="Close"
         >
@@ -327,7 +316,7 @@ const ApprovedModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal px-4"
+          className="close close-founder-modal px-4"
           data-dismiss="modal"
           aria-label="Close"
         >
@@ -349,7 +338,7 @@ const ApprovedModal = () => {
         <h6 className="mt-2">flutter.co</h6>
       </div>
       <div className="mb-4">
-      <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
+        <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
       </div>
       <div className="">
         {compdetailModal.map((data, i) => (

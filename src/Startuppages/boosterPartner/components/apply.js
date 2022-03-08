@@ -3,7 +3,8 @@ import { ApplicationCard } from '../boosterPartner.styled'
 import {
   compImage,
   applicationCardData,
-  cardDataModal, compdetailModal
+  cardDataModal,
+  compdetailModal,
 } from '../../../constants/domiData'
 import { Modal, Tag } from '../../../Startupcomponents'
 import '../boosterPartner.css'
@@ -34,10 +35,7 @@ export const Apply = () => {
             {applicationCardData.map((data, i) => (
               <p key={i}>
                 {data.content}
-                <span
-                  data-target="#apply"
-                  data-toggle="modal"
-                >
+                <span data-target="#apply" data-toggle="modal">
                   Read More
                 </span>
               </p>
@@ -56,7 +54,7 @@ const ApplyModal = () => {
       <section className="pt-2">
         <button
           type="button"
-          class="close close-founder-modal px-4 py-2"
+          className="close close-founder-modal px-4 py-2"
           data-dismiss="modal"
           aria-label="Close"
         >
@@ -102,8 +100,8 @@ const ApplyModal = () => {
         ))}
       </div>
       <div className="d-flex justify-content-between my-5">
-          <button className="applyModalback">Back</button>
-          <button className="applyModalapply">Apply</button>
+        <button className="applyModalback">Back</button>
+        <button className="applyModalapply">Apply</button>
       </div>
     </div>
   )

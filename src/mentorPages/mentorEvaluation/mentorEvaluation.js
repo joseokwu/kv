@@ -78,7 +78,7 @@ export const MentorEvaluation = ({ history }) => {
             {pending?.length > 0 ? (
               pending?.map((p, i) => {
                 return (
-                  <div className="col-xl-6 mb-3">
+                  <div key={i} className="col-xl-6 mb-3">
                     <EvaluationPendingCard data={p} />
                   </div>
                 );
@@ -96,7 +96,7 @@ export const MentorEvaluation = ({ history }) => {
           <div className="row">
             {completed?.length > 0 ? (
               completed?.map((c, i) => {
-                <div className="col-xl-6">
+                <div key={i} className="col-xl-6">
                   <EvaluationCompletedCard data={c} />
                 </div>;
               })

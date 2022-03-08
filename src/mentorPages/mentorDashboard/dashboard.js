@@ -22,7 +22,7 @@ export const MentorDashboard = () => {
 
     setDashInfo(res);
     setAssignedStartups(res?.AssignedStartups);
-    setUpcoming(res?.upcomingEvents);
+    setUpcoming(res?.events);
   };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const MentorDashboard = () => {
 
       <section className="row mt-0 dash-main-content">
         <div className="col-lg-12">
-          <div style={{ marginTop: "6.38rem" }}>
+          <div style={{ marginTop: "8.38rem" }}>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Assigned Startups</p>
               <p className="see-all">See All</p>
@@ -67,7 +67,7 @@ export const MentorDashboard = () => {
               {assignedStartups.length > 0 &&
                 assignedStartups.map((assigned, i) => {
                   return (
-                    <div className="col-xl-4 mb-4">
+                    <div key={i} className="col-xl-4 mb-4">
                       <AssignedStartupCard
                         onClick={() => {
                           push("/mentor/dashboard/view");
@@ -83,7 +83,7 @@ export const MentorDashboard = () => {
         </div>
 
         <div className="col-lg-12">
-          <div style={{ marginTop: "2.38rem" }}>
+          <div style={{ marginTop: "1.38rem" }}>
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Upcoming Events</p>
               <p className="see-all">
@@ -97,7 +97,7 @@ export const MentorDashboard = () => {
               {upcoming?.length > 0 &&
                 upcoming?.map((event, i) => {
                   return (
-                    <div className="col-xl-4 mb-4">
+                    <div key={i} className="col-xl-4 mb-4">
                       <UpcomingEventCard data={event} />
                     </div>
                   );

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import "./modal.css";
+import React, { useState } from 'react'
+import './modal.css'
 import {
   BootModal,
   CustoModal,
   ModalWrapper,
   CloseModal,
   ModalHeader,
-} from "./custom.styled";
-import Close from "../../assets/icons/close.svg";
+} from './custom.styled'
+import Close from '../../assets/icons/close.svg'
 
 export const CustomModal = ({ children, handleClose, title }) => {
   return (
@@ -15,32 +15,32 @@ export const CustomModal = ({ children, handleClose, title }) => {
       <CustomModal onClick={() => handleClose(false)}> </CustomModal>
       <ModalWrapper>
         <ModalHeader>
-          <div style={{ marginLeft: "20px" }}>
-            <span className="text-nowrap" style={{ fontWeight: "700" }}>
+          <div style={{ marginLeft: '20px' }}>
+            <span className="text-nowrap" style={{ fontWeight: '700' }}>
               {title}
             </span>
           </div>
-          <CloseModal onClick={() => handleClose(false)} src={Close} alt={""} />
+          <CloseModal onClick={() => handleClose(false)} src={Close} alt={''} />
         </ModalHeader>
         {children}
       </ModalWrapper>
     </div>
-  );
-};
+  )
+}
 
 export const Modal = ({
-  title = "",
+  title = '',
   children,
-  position = "",
-  id = "",
-  subTitle = "",
+  position = '',
+  id = '',
+  subTitle = '',
   withHeader = true,
 }) => {
   return (
-    <div className="modal fade" tabindex="-1" role="dialog" id={id}>
+    <div className="modal fade" tabIndex="-1" role="dialog" id={id}>
       <div
         className={`modal-dialog ${
-          position === "center" && "modal-dialog-centered"
+          position === 'center' && 'modal-dialog-centered'
         }`}
         role="document"
         style={{ maxWidth: 723, marginTop: 200 }}
@@ -51,7 +51,7 @@ export const Modal = ({
               <div className="w-100">
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >
@@ -66,5 +66,5 @@ export const Modal = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

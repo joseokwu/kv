@@ -10,7 +10,7 @@ export const OpportunityCard = ({ onClick , data }) => {
     <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
-        <span class="opp-tag"> { data?.stage} </span>
+        <span className="opp-tag"> { data?.stage} </span>
       </section>
 
       <section className="mb-2 d-flex align-items-center justify-content-between">
