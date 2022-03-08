@@ -9,7 +9,7 @@ export const EvaluationCompletedCard = ({ data = {} }) => {
     <div className="opp-card">
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
-        <span class="completed-tag">Completed</span>
+        <span className="completed-tag">Completed</span>
       </section>
 
       <section className="mb-2 d-flex align-items-center justify-content-between">
