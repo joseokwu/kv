@@ -14,7 +14,6 @@ export const StartupEvents = ({ history }) => {
   const [selectionEvents, setSelectionEvents] = useState([]);
   const [demoEvents, setDemoEvents] = useState([]);
   const [pitchEvents, setPitchEvents] = useState([]);
-  const [otherEvents, setOtherEvents] = useState([]);
 
   const fetchData = async () => {
     const res = await getEvents();
