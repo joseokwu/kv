@@ -27,19 +27,19 @@ export const MentorEvaluation = ({ history }) => {
     setEvalCardsData(res?.cards);
     setAssigned(res?.AssignedStartups);
     setPending(() =>
-      res?.AssignedStartups?.filter((x) => x.status === "Pending")
+      res?.AssignedStartups?.filter((x) => x.status === "pending")
     );
     setCompleted(() =>
-      res?.AssignedStartups?.filter((x) => x.status === "Completed")
+      res?.AssignedStartups?.filter((x) => x.status === "completed")
     );
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [hash]);
 
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4"];
-
+  console.log(completed)
   const cardData =
     evalCardsData?.length > 0
       ? evalCardsData?.map((card, i) => {

@@ -7,6 +7,7 @@ import { Tag } from "../../mentorComponents";
 export const EvaluationCompletedCard = ({ data = {} }) => {
   return (
     <div className="opp-card">
+  
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
         <span class="completed-tag">Completed</span>
