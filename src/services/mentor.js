@@ -29,3 +29,13 @@ export const mentorPrograms = async () => {
     throw err;
   }
 };
+
+export const mentorAssignments = async () => {
+  try {
+    const res = await request.post("mentor/assignment");
+
+    return res?.data;
+  } catch (err) {
+    throw err;
+  }
+};
