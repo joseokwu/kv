@@ -10,9 +10,9 @@ import view from '../../assets/icons/vp.svg'
 import edit from '../../assets/icons/ep.svg'
 import logout from '../../assets/icons/logout.svg'
 
-export const Header = () => {
+export const Header = ({ setOpen, open}) => {
 
-  const [open, setOpen] = useState(false)
+  
   const  history = useHistory();
   const [openNotice, setOpenNotice] = useState(false)
   return (
@@ -30,7 +30,7 @@ export const Header = () => {
           <img src={logo} alt="logo" />
         </a>
       </section>
-      <section className="h-100 header-right-content">
+      <section className="d-flex align-items-center h-100">
         <ul className="header-list">
           {/* <li>
             <span className="header-chat d-flex align-items-center">
@@ -39,6 +39,7 @@ export const Header = () => {
             </span>
           </li> */}
           <li
+            style={{cursor: 'pointer'}}
             className="d-flex align-items-center"
             onClick={() => setOpenNotice(!openNotice)}
           >
@@ -46,9 +47,10 @@ export const Header = () => {
           </li>
         </ul>
 
-        <div onClick={() => history.push('/startup/profile')} className="d-flex align-items-center h-100" role="button">
+        <div  className="d-flex align-items-center h-100">
           <span
-            className="d-flex align-items-center header-profile"
+            onClick={() => history.push('/startup/profile')}
+            className="d-flex align-items-center header-profile d-none d-lg-flex"
           >
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>

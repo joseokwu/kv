@@ -117,9 +117,9 @@ export const MentorEvaluation = ({ history }) => {
 
   return (
     <div className="dashboard_main container-fluid">
-      <section className="row pb-5">
+      <section className="row tab-wrap">
         <section
-          className="col-lg-12 d-flex align-items-center dashboard-cards position-sticky"
+          className="col-lg-12 d-flex align-items-center dashboard-cards"
           style={{ background: "#fefefe" }}
         >
           {cardData.map((data, i) => (

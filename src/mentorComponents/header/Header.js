@@ -7,6 +7,9 @@ import angleDown from '../../assets/icons/angleDown.svg'
 import sampleUser from '../../assets/images/sampleUser.png'
 import { useHistory } from 'react-router-dom'
 import { Notification } from '../notification/Notification'
+import view from '../../assets/icons/vp.svg'
+import edit from '../../assets/icons/ep.svg'
+import logout from '../../assets/icons/logout.svg'
 
 export const Header = ({ setOpen, open }) => {
   const { push } = useHistory()
@@ -17,7 +20,7 @@ export const Header = ({ setOpen, open }) => {
       <section className="d-flex align-items-center">
         <div
           className={`${open ? 'hams-open' : 'hams-close'} hams`}
-          onClick={setOpen}
+          onClick={() => setOpen(!open)}
         >
           <span></span>
           <span></span>
@@ -35,7 +38,8 @@ export const Header = ({ setOpen, open }) => {
               <p className="mb-0 header-text">Chat</p>
             </span>
           </li> */}
-          <li style={{cursor: 'pointer'}}
+          <li
+            style={{ cursor: 'pointer' }}
             className="d-flex align-items-center"
             onClick={() => setOpenNotice(!openNotice)}
           >
@@ -43,16 +47,17 @@ export const Header = ({ setOpen, open }) => {
           </li>
         </ul>
 
-        <div
-          className="d-flex align-items-center h-100"
-        >
-          <span 
-           onClick={() => push('/mentor/profile')}
-           className="d-flex align-items-center header-profile d-none d-lg-flex">
+        <div className="d-flex align-items-center h-100">
+          <span
+            onClick={() => push('/mentor/profile')}
+            className="d-flex align-items-center header-profile d-none d-lg-flex"
+          >
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>
           </span>
-          <img style={{cursor: 'pointer'}} src={angleDown} alt="dropdown" />
+          <div>
+            <HeaderDropdownMenu />
+          </div>
         </div>
       </section>
 
@@ -60,6 +65,46 @@ export const Header = ({ setOpen, open }) => {
         closeNotice={() => setOpenNotice(false)}
         openNotice={openNotice}
       />
+    </div>
+  )
+}
+
+const HeaderDropdownMenu = () => {
+  const { push } = useHistory()
+
+  return (
+    <div className="dropdown">
+      <button
+        className="d-flex align-items-center filter-btn p-0"
+        data-toggle="dropdown"
+        style={{
+          columnGap: 7,
+          background: 'transparent',
+          height: 'fit-content',
+        }}
+      >
+        <img src={angleDown} alt="dropdown" />
+      </button>
+      <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
+        <button
+          className="dropdown-item text-center py-2"
+          onClick={() => push('/startup/profile')}
+        >
+          {' '}
+          <img className="pe-1" src={view} alt="" /> View Profile
+        </button>
+        <button className="dropdown-item text-center py-2 my-2">
+          {' '}
+          <img className="pe-1" src={edit} alt="" /> Edit Profile
+        </button>
+        <button
+          className="dropdown-item text-center py-2"
+          style={{ color: '#D62828' }}
+        >
+          {' '}
+          <img className="pe-1" src={logout} alt="" /> Log Out
+        </button>
+      </div>
     </div>
   )
 }
