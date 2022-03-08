@@ -27,10 +27,14 @@ export const MentorEvaluation = ({ history }) => {
     setEvalCardsData(res?.cards);
     setAssigned(res?.AssignedStartups);
     setPending(() =>
-      res?.AssignedStartups?.filter((x) => x.status === "pending")
+      res?.AssignedStartups?.filter(
+        (x) => x.status?.toLowerCase() === "pending"
+      )
     );
     setCompleted(() =>
-      res?.AssignedStartups?.filter((x) => x.status === "completed")
+      res?.AssignedStartups?.filter(
+        (x) => x.status?.toLowerCase() === "completed"
+      )
     );
   };
 
@@ -96,9 +100,11 @@ export const MentorEvaluation = ({ history }) => {
           <div className="row">
             {completed?.length > 0 ? (
               completed?.map((c, i) => {
-                <div className="col-xl-6">
-                  <EvaluationCompletedCard data={c} />
-                </div>;
+                return (
+                  <div className="col-xl-6">
+                    <EvaluationCompletedCard data={c} />
+                  </div>
+                );
               })
             ) : (
               <div className="col-12 my-5 text-center">
