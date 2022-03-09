@@ -21,7 +21,6 @@ export const AllApplication = ({ data }) => {
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
-      Apply Card
       {/* Approved Modal starts here */}
       <Modal id="approved" withHeader={false}>
         <ApprovedModal />
