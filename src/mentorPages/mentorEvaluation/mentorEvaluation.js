@@ -40,10 +40,10 @@ export const MentorEvaluation = ({ history }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [hash]);
 
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4"];
-
+  //console.log(completed)
   const cardData =
     evalCardsData?.length > 0
       ? evalCardsData?.map((card, i) => {

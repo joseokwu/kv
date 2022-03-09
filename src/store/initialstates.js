@@ -9,6 +9,7 @@ export  const INIT_STATE = {
   export const INIT_STATE_BUSINESS = {
     loading: false,
     showPage: 'Overview',
+    dash_view:null,
     alert:{
       success:false, 
       message:null,

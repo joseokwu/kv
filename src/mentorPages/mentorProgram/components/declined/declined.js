@@ -11,7 +11,7 @@ export const Declined = ({ data = {} }) => {
         <section className="pending_program_card p-4">
           <div className="d-flex justify-content-between">
             <p className="pending_program_title">{data?.name}</p>
-            <span class="declined_tag">Declined</span>
+            <span className="declined_tag">Declined</span>
           </div>
 
           <section

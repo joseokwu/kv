@@ -41,6 +41,12 @@ export const MentorProgram = ({ history }) => {
 
   useEffect(() => {
     fetchData();
+    return () => {
+      setPrograms([]);
+      setAcceptedPrograms([]);
+      setDeclinedPrograms([]);
+      setPendingPrograms([]);
+    };
   }, []);
 
   const renderContent = () => {
@@ -111,7 +117,9 @@ export const MentorProgram = ({ history }) => {
     <div className="dashboard-main">
       <div className="col-lg-12">
         <section className="d-flex align-items-center justify-content-between mb-3">
-          <p className="program-sub-title">6 programs assigned to you</p>
+          <p className="program-sub-title">
+            {programs?.length} programs assigned to you
+          </p>
           <div>
             <button
               className="d-flex align-items-center filter-btn"

@@ -1,18 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
 import search from "../../assets/icons/search.svg";
-import { ApplicationCard, Tabs } from "../../components";
+import { Tabs } from "../../components";
 import filter from "../../assets/icons/filterFunnel.svg";
 import down from "../../assets/icons/chevronDown.svg";
-import logo from "../../assets/images/sampleApplicantsLogo.png";
 import searchSm from "../../assets/icons/searchSm.svg";
 import "./applicants.css";
 import { Tab } from "react-bootstrap";
-import { getApplicant } from '../../services/partners';
-import { AllComponent , ApproveComponent ,
-ReapplyComponent, DeclineComponent, PendingComponent, ExpireComponent
-} from '../containers';
-
-
+import { getApplicant } from "../../services/partners";
+import {
+  AllComponent,
+  ApproveComponent,
+  ReapplyComponent,
+  DeclineComponent,
+  PendingComponent,
+  ExpireComponent,
+} from "../containers";
 
 export const BoosterApplicants = ({ history }) => {
   const {
@@ -20,50 +22,46 @@ export const BoosterApplicants = ({ history }) => {
     location: { hash },
   } = history;
 
-const [applicants, setApplicatnts] = useState(null);
+  const [applicants, setApplicatnts] = useState(null);
 
-  const getFetchData = async() =>{
+  const getFetchData = async () => {
     const res = await getApplicant();
-    console.log(res)
+    console.log(res);
     setApplicatnts(res?.all);
-  }
+  };
 
-const pendin = applicants && applicants?.filter(item => item?.status === 'pending');
-const approve = applicants && applicants?.filter(item => item?.status === 'approved');
-const decline = applicants && applicants?.filter(item => item?.status === 'declined');
-const expire = applicants && applicants?.filter(item => item?.status === 'expired');
-const reApply = applicants && applicants?.filter(item => item?.status === 're-applied');
+  const pendin =
+    applicants && applicants?.filter((item) => item?.status === "pending");
+  const approve =
+    applicants && applicants?.filter((item) => item?.status === "approved");
+  const decline =
+    applicants && applicants?.filter((item) => item?.status === "declined");
+  const expire =
+    applicants && applicants?.filter((item) => item?.status === "expired");
+  const reApply =
+    applicants && applicants?.filter((item) => item?.status === "re-applied");
 
-const renderContent = () => {
-  switch (hash.replaceAll("%20", " ")) {
-    case "#all":
-      return <AllComponent data={applicants} />
-    case "#pending":
-      return <PendingComponent data={pendin} />
-    case "#approved":
-     return <ApproveComponent data={approve} />
-    
-    case "#declined":
-      return <DeclineComponent data={decline} />
+  const renderContent = () => {
+    switch (hash.replaceAll("%20", " ")) {
+      case "#all":
+        return <AllComponent data={applicants} />;
+      case "#pending":
+        return <PendingComponent data={pendin} />;
+      case "#approved":
+        return <ApproveComponent data={approve} />;
 
-    case "#expired":
-    return <ExpireComponent data={expire} />
+      case "#declined":
+        return <DeclineComponent data={decline} />;
 
-    case "#re-applied":
-    return <ReapplyComponent data={reApply} />
-    default:
-      return <AllComponent data={applicants} />
-  }
-}
+      case "#expired":
+        return <ExpireComponent data={expire} />;
 
-
-
-
-
-
-
-
-  
+      case "#re-applied":
+        return <ReapplyComponent data={reApply} />;
+      default:
+        return <AllComponent data={applicants} />;
+    }
+  };
 
   const tabItems = [
     "all",
@@ -75,17 +73,14 @@ const renderContent = () => {
   ];
 
   useEffect(() => {
-   
-      getFetchData();
+    getFetchData();
 
-      return () =>{
-        setApplicatnts(null)
-      }
+    return () => {
+      setApplicatnts(null);
+    };
+  }, [hash]);
 
-
-  }, [ hash]);
-
-      console.log(applicants)
+  console.log(applicants);
 
   return (
     <div className="wrapper">
@@ -185,11 +180,7 @@ const renderContent = () => {
         </div>
       </section>
 
-      <section className="row application-card-list">
-        {
-          renderContent()
-        }
-      </section>
+      <section className="row application-card-list">{renderContent()}</section>
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import React from 'react'
-import bigClock from '../../../../../../assets/icons/bigclock.svg'
-import { ReadMore } from '../../../../../../mentorComponents'
-import './pendingReschedule.css'
+import React from "react";
+import bigClock from "../../../../../../assets/icons/bigclock.svg";
+import { ReadMore } from "../../../../../../mentorComponents";
+import "./pendingReschedule.css";
 
 export const PendingReschedule = () => {
   return (
@@ -47,5 +47,5 @@ export const PendingReschedule = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};

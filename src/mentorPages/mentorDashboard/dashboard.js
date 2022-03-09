@@ -12,14 +12,14 @@ import { DASH_VIEW } from "../../store/actions/actions.types";
 
 export const MentorDashboard = () => {
   const { push } = useHistory();
-  const [dashInfo, setDashInfo] = useState({});
+  const [dashInfo, setDashInfo] = useState(null);
   const [assignedStartups, setAssignedStartups] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const dispatch = useDispatch();
 
   const fetchData = async () => {
     const res = await getDashboard();
-
+    console.log(res)
     setDashInfo(res);
     setAssignedStartups(res?.AssignedStartups);
     setUpcoming(res?.events);
@@ -62,11 +62,13 @@ export const MentorDashboard = () => {
           },
         ];
 
+
+
   return (
     <div className="dashboard_main container-fluid">
       <section className="row tab-wrap">
         <section className="col-lg-12 d-flex align-items-center dashboard-cards mt-0">
-          {cardData?.length > 0 &&
+          {cardData && cardData?.length > 0 &&
             cardData.map((data, i) => (
               <MentorDashCard
                 name={data.name}
@@ -116,7 +118,7 @@ export const MentorDashboard = () => {
             </section>
 
             <section className="row">
-              {upcoming?.length > 0 &&
+              { upcoming && upcoming?.length > 0 &&
                 upcoming?.map((event, i) => {
                   return (
                     <div key={i} className="col-xl-4 mb-4">

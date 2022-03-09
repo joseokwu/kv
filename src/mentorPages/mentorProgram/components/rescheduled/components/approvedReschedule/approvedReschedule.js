@@ -1,7 +1,7 @@
-import React from 'react'
-import bigClock from '../../../../../../assets/icons/bigclock.svg'
-import { ReadMore } from '../../../../../../mentorComponents'
-import './approvedReschedule.css'
+import React from "react";
+import bigClock from "../../../../../../assets/icons/bigclock.svg";
+import { ReadMore } from "../../../../../../mentorComponents";
+import "./approvedReschedule.css";
 
 export const ApprovedReschedule = () => {
   return (
@@ -49,5 +49,5 @@ export const ApprovedReschedule = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};

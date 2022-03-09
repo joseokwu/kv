@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-pascal-case */
-import React, { useState } from 'react'
-import calender from '../../../assets/icons/calend.svg'
-import { ModalCus, TextArea } from '../../../Startupcomponents'
+import React, { useState } from "react";
+import calender from "../../../assets/icons/calend.svg";
+import { ModalCus, TextArea } from "../../../Startupcomponents";
 import {
   AssignmentCard,
   Assignment_Canvas_Card,
-} from '../../../Startupcomponents/assignmentCard/assignmentCard'
-import lady from '../../../assets/icons/person1.svg'
-import girl from '../../../assets/icons/person2.svg'
-import guy from '../../../assets/icons/person3.svg'
+} from "../../../Startupcomponents/assignmentCard/assignmentCard";
+import lady from "../../../assets/icons/person1.svg";
+import girl from "../../../assets/icons/person2.svg";
+import guy from "../../../assets/icons/person3.svg";
 
 export const Assignment = () => {
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="">
@@ -50,8 +50,8 @@ export const Assignment = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
 const AssignmentModal = () => {
   return (
@@ -128,7 +128,7 @@ const AssignmentModal = () => {
       <section className="mt-3">
         <TextArea
           placeholder={
-            '@chris Anthony Adjust the remaining documents and upload'
+            "@chris Anthony Adjust the remaining documents and upload"
           }
           rows={1}
         />
@@ -138,5 +138,5 @@ const AssignmentModal = () => {
         <button>Complete</button>
       </section>
     </div>
-  )
-}
+  );
+};

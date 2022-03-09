@@ -1,125 +1,261 @@
-import React from 'react'
-import dots from '../../../assets/icons/3dots.svg'
-import bigClock from '../../../assets/icons/bigclock.svg'
-import demo from '../../../assets/images/vidDemo.svg'
-import doc from '../../../assets/images/doc.svg'
-import { Button, Modal, Select, TextField } from '../../../Startupcomponents'
-import down from '../../../assets/icons/downArrow.svg'
-import location from '../../../assets/icons/locationSm.svg'
-import name from '../../../assets/icons/initial.svg'
-import { months } from '../../../utils/helpers'
-import { ExceptionMap } from 'antd/lib/result'
+import React from "react";
+import dots from "../../../assets/icons/3dots.svg";
+import bigClock from "../../../assets/icons/bigclock.svg";
+import demo from "../../../assets/images/vidDemo.svg";
+import doc from "../../../assets/images/doc.svg";
+import { Button, Modal, Select, TextField } from "../../../Startupcomponents";
+import { formatTime, months } from "../../../utils/helpers";
+import down from "../../../assets/icons/downArrow.svg";
+import location from "../../../assets/icons/locationSm.svg";
+import name from "../../../assets/icons/initial.svg";
 
-export const SelectionDay = ({ data }) => {
-  console.log(data)
-
-  const dte = new Date()
-
+export const SelectionDay = ({ data = [] }) => {
   return (
     <div className="row" style={{ columnGap: 10 }}>
       <Modal id="eventScheduleModal" withHeader={false}>
         <EventScheduleModal />
       </Modal>
+      {data?.length > 0 && (
+        <div className="col-lg-5 col-12 events_card_bg py-4 mt-4 ml-lg-4 px-4">
+          <section className="events_card d-flex justify-content-between">
+            <h3>{data[0]?.titleOfEvent}</h3>
+            {/* <img src={dots} alt="" /> */}
+          </section>
 
-      {data &&
-        data.map((item, i) => {
-          let compareDate = new Date(item?.startTime)
-          let endTime = new Date(item?.endTime)
-          return (
+          <section className="d-flex justify-content-between mt-2">
+            <p className="pending_date pr-4">
+              <span>{new Date(data[0]?.startDate).getDate()}</span>{" "}
+              {months[new Date(data[0]?.startDate).getMonth()]}
+            </p>
+
+            {new Date().getTime() >= new Date(data[0]?.startTime) &&
+            new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
+              <span class="accepted_tag">Ongoing</span>
+            ) : (
+              <p className="pending_time pt-1">
+                <img src={bigClock} alt="clock" />{" "}
+                {formatTime(data[0]?.startTime)}-{formatTime(data[0]?.endTime)}
+              </p>
+            )}
+          </section>
+
+          <section className="mt-4">
+            <img
+              src={demo}
+              alt="demo"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </section>
+
+          <section className="event_card_body mt-5">
+            <p>{data[0]?.eventDescription}</p>
+          </section>
+
+          <section
+            className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+            style={{ rowGap: 10 }}
+          >
             <div
-              key={i}
-              className={`col-lg-5 col-12   events_card_bg py-4 mt-4 ml-lg-4 px-4`}
+              className="d-flex align-items-center"
+              style={{ columnGap: 10 }}
             >
-              <section className="events_card d-flex justify-content-between">
-                <h3> {item?.titleOfEvent} </h3>
-                {/* <img src={dots} alt="" /> */}
-              </section>
-
-              <section className="d-flex justify-content-between mt-2">
-                <p className="pending_date pr-4">
-                  <span>{compareDate.getDate()} </span>{' '}
-                  <em className="mx-2">{months[compareDate.getMonth()]}</em>
-                </p>
-
-                <p className="pending_time pt-1">
-                  {dte.getDate() === compareDate.getDate() ? (
-                    <span className="accepted_tag">Ongoing</span>
-                  ) : (
-                    <>
-                      {' '}
-                      <img src={bigClock} alt="clock" />{' '}
-                      {`${compareDate.getHours()}:00${
-                        compareDate.getHours() >= 12 ? 'PM' : 'AM'
-                      } ` +
-                        '-' +
-                        `${endTime.getHours()}:00${
-                          endTime.getHours() >= 12 ? 'PM' : 'AM'
-                        } `}{' '}
-                    </>
-                  )}
-                </p>
-              </section>
-
-              <section className="mt-4">
-                {item?.image ? (
-                  <img
-                    src={item?.image}
-                    alt="demo"
-                    style={{ width: '100%', height: '100%' }}
-                  />
-                ) : (
-                  <span />
-                )}
-              </section>
-
-              <section className="event_card_body mt-5">
-                <p>{item?.eventDescription}</p>
-              </section>
-
-              {dte.getHours() === compareDate.getHours() ? (
-                <section
-                  className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
-                  style={{ rowGap: 10 }}
-                >
-                  <div
-                    className="d-flex align-items-center"
-                    style={{ columnGap: 10 }}
-                  >
-                    <button className="se_join">Join Event</button>
-                    <button className="se_view">View details</button>
-                  </div>
-
-                  <section className="event_people">
-                    <img src={doc} alt="doc" />
-                    <img src={doc} alt="doc" />
-                    <img src={doc} alt="doc" />
-                  </section>
-                </section>
+              {new Date().getTime() >= new Date(data[0]?.startTime) &&
+              new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
+                <button className="se_join">Join Event</button>
               ) : (
-                <section
-                  className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
-                  style={{ rowGap: 10 }}
-                >
-                  <div
-                    className="d-flex align-items-center"
-                    style={{ columnGap: 10 }}
-                  >
-                    <button className="se_view">View details</button>
-                  </div>
-
-                  <section className="event_people">
-                    <img src={doc} alt="doc" />
-                    <img src={doc} alt="doc" />
-                    <img src={doc} alt="doc" />
-                  </section>
-                </section>
+                <button className="se_join">Add Schedule</button>
               )}
+              <button className="se_view">View details</button>
+              {/* <Button label="View details" variant="secondary" /> */}
+              {/* <Button
+              label="Add to schedule"
+              data-toggle={'modal'}
+              data-target="#eventScheduleModal"
+            /> */}
             </div>
-          )
-        })}
+
+            <section className="event_people">
+              <img src={doc} alt="doc" />
+              <img src={doc} alt="doc" />
+              <img src={doc} alt="doc" />
+            </section>
+          </section>
+        </div>
+      )}
+
+      <div className="col-lg-6 col-12">
+        {data?.length > 1 && (
+          <div className=" events_card_bg py-4 px-4 mt-4">
+            <section className="events_card d-flex justify-content-between">
+              <h3>{data[1]?.titleOfEvent}</h3>
+              {/* <img src={dots} alt="" /> */}
+            </section>
+
+            <section className="d-flex justify-content-between mt-2">
+              <p className="pending_date pr-4">
+                <span>{new Date(data[1]?.startDate).getDate()}</span>{" "}
+                {months[new Date(data[1]?.startDate).getMonth()]}
+              </p>
+              {new Date().getTime() >= new Date(data[1]?.startTime) &&
+              new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
+                <span class="accepted_tag">Ongoing</span>
+              ) : (
+                <p className="pending_time pt-1">
+                  <img src={bigClock} alt="clock" />{" "}
+                  {formatTime(data[1]?.startTime)}-
+                  {formatTime(data[1]?.endTime)}
+                </p>
+              )}{" "}
+            </section>
+
+            <section className="event_card_body mt-3">
+              <p>{data[1]?.eventDescription}</p>
+            </section>
+
+            <section
+              className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+              style={{ rowGap: 10 }}
+            >
+              <div
+                className="d-flex align-items-center"
+                style={{ columnGap: 10 }}
+              >
+                {new Date().getTime() >= new Date(data[1]?.startTime) &&
+                new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
+                  <button className="se_join">Join Event</button>
+                ) : (
+                  <button className="se_join">Add Schedule</button>
+                )}
+                <button className="se_view">View details</button>
+              </div>
+
+              <section className="event_people">
+                <img src={doc} alt="doc" />
+                <img src={doc} alt="doc" />
+                <img src={doc} alt="doc" />
+              </section>
+            </section>
+          </div>
+        )}
+
+        {data?.length > 2 && (
+          <div className="events_card_bg py-4 px-4 mt-4">
+            <section className="events_card d-flex justify-content-between">
+              <h3>{data[2]?.titleOfEvent}</h3>
+              {/* <img src={dots} alt="" /> */}
+            </section>
+
+            <section className="d-flex justify-content-between mt-2">
+              <p className="pending_date pr-4">
+                <span>{new Date(data[2]?.startDate).getDate()}</span>{" "}
+                {months[new Date(data[2]?.startDate).getMonth()]}{" "}
+              </p>
+
+              {new Date().getTime() >= new Date(data[2]?.startTime) &&
+              new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
+                <span class="accepted_tag">Ongoing</span>
+              ) : (
+                <p className="pending_time pt-1">
+                  <img src={bigClock} alt="clock" />{" "}
+                  {formatTime(data[2]?.startTime)}-
+                  {formatTime(data[2]?.endTime)}
+                </p>
+              )}
+            </section>
+
+            <section className="event_card_body mt-3">
+              <p>{data[2]?.eventDescription}</p>
+            </section>
+
+            <section
+              className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+              style={{ rowGap: 10 }}
+            >
+              <div
+                className="d-flex align-items-center"
+                style={{ columnGap: 10 }}
+              >
+                {new Date().getTime() >= new Date(data[2]?.startTime) &&
+                new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
+                  <button className="se_join">Join Event</button>
+                ) : (
+                  <button className="se_join">Add Schedule</button>
+                )}
+                <button className="se_view">View details</button>
+              </div>
+
+              <section className="event_people">
+                <img src={doc} alt="doc" />
+                <img src={doc} alt="doc" />
+                <img src={doc} alt="doc" />
+              </section>
+            </section>
+          </div>
+        )}
+      </div>
+      <div className="row">
+        {data?.length > 0 &&
+          data?.slice(3, data?.length - 1).map((d, i) => {
+            return (
+              <section className="col-lg-6">
+                <div className=" events_card_bg py-4 px-4 mt-4">
+                  <section className="events_card d-flex justify-content-between">
+                    <h3>{d?.titleOfEvent}</h3>
+                    {/* <img src={dots} alt="" /> */}
+                  </section>
+
+                  <section className="d-flex justify-content-between mt-2">
+                    <p className="pending_date pr-4">
+                      <span>{new Date(d?.startDate).getDate()}</span>{" "}
+                      {months[new Date(d?.startDate).getMonth()]}
+                    </p>
+                    {new Date().getTime() >= new Date(d?.startTime) &&
+                    new Date().getTime() <=
+                      new Date(data[0]?.endTime).getTime() ? (
+                      <span class="accepted_tag">Ongoing</span>
+                    ) : (
+                      <p className="pending_time pt-1">
+                        <img src={bigClock} alt="clock" />{" "}
+                        {formatTime(d?.startTime)}-{formatTime(d?.endTime)}
+                      </p>
+                    )}{" "}
+                  </section>
+
+                  <section className="event_card_body mt-3">
+                    <p>{d?.eventDescription}</p>
+                  </section>
+
+                  <section
+                    className="d-flex align-items-center justify-content-between mt-3 event_card_footer flex-wrap"
+                    style={{ rowGap: 10 }}
+                  >
+                    <div
+                      className="d-flex align-items-center"
+                      style={{ columnGap: 10 }}
+                    >
+                      {new Date().getTime() >= new Date(d?.startTime) &&
+                      new Date().getTime() <= new Date(d?.endTime).getTime() ? (
+                        <button className="se_join">Join Event</button>
+                      ) : (
+                        <button className="se_join">Add Schedule</button>
+                      )}
+                      <button className="se_view">View details</button>
+                    </div>
+
+                    <section className="event_people">
+                      <img src={doc} alt="doc" />
+                      <img src={doc} alt="doc" />
+                      <img src={doc} alt="doc" />
+                    </section>
+                  </section>
+                </div>
+              </section>
+            );
+          })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 const EventScheduleModal = () => {
   return (
