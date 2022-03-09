@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Tabs } from "../../Startupcomponents";
+import "./mentorEvents.css";
 import down from "../../assets/icons/downArrow.svg";
 import { SelectionDay } from "./components/selectionDay";
 import { getEvents } from "../../services/events";
@@ -13,6 +14,7 @@ export const MentorEvents = ({ history }) => {
   const [selectionEvents, setSelectionEvents] = useState([]);
   const [demoEvents, setDemoEvents] = useState([]);
   const [pitchEvents, setPitchEvents] = useState([]);
+  const [otherEvents, setOtherEvents] = useState([]);
 
   const fetchData = async () => {
     const res = await getEvents();

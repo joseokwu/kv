@@ -197,7 +197,7 @@ export const SelectionDay = ({ data = [] }) => {
         {data?.length > 0 &&
           data?.slice(3, data?.length - 1).map((d, i) => {
             return (
-              <section className="col-lg-6">
+              <section key={i} className="col-lg-6">
                 <div className=" events_card_bg py-4 px-4 mt-4">
                   <section className="events_card d-flex justify-content-between">
                     <h3>{d?.titleOfEvent}</h3>

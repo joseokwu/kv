@@ -48,9 +48,9 @@ export const MentorPersonalDetails = () => {
 
   return (
     <div className="mentor_personal_details_wrap" ref={wrapRef}>
-      <section className="mentor_personal_details_header mb-5">
-        <div className="position-fixed bg-pd-pro pt-3">
-          <span>
+      <section className="mentor_personal_details_header mb-5 tab-wrap">
+        <div className="pt-3">
+          <span className="">
             <section
               className="d-flex align-items-center"
               style={{ columnGap: 12 }}
@@ -65,8 +65,9 @@ export const MentorPersonalDetails = () => {
       </section>
 
       <section className="mentor_personal_details_grid">
-        <div className="my-5">
-          <ul className="mentor_personal_details_list position-fixed">
+        <div className="d-none d-lg-flex">
+          {/* <div className="tab-wrap"> */}
+          <ul className="mentor_personal_details_list">
             <li
               onClick={() => switchForm('#personal_details')}
               className={
@@ -107,6 +108,7 @@ export const MentorPersonalDetails = () => {
               Assistant Info
             </li>
           </ul>
+          {/* </div> */}
         </div>
         <div className="mt-5 d-flex justify-content-end pt-5">
           {hash === '' || hash === '#personal_details' ? (

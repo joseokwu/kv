@@ -19,14 +19,33 @@
   text-decoration: none;
 }
 
-.my_schedule_create a:hover {
-  background: none;
-  color: #00adef;
-  border: 1.5px solid #00adef;
-}
-
 .my_schedule_create a:focus {
   outline: none;
+}
+
+.my_schedule_create a:hover {
+  color: #ffffff;
+}
+
+.my_add_ava a {
+  background: #2E3192;
+  border-radius: 10px;
+  padding: 8px 30px;
+  border: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.my_add_ava a:focus {
+  outline: none;
+}
+
+.my_add_ava a:hover {
+  color: #ffffff;
 }
 
 .create_call_visibility a {

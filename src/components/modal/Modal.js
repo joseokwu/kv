@@ -12,7 +12,7 @@ export const Modal = ({
   return (
     <div
       className="modal fade"
-      tabindex="-1"
+      tabIndex="-1"
       role="dialog"
       id={id}
       style={{ overflowY: "auto" }}

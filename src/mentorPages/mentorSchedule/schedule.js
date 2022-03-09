@@ -1,5 +1,11 @@
 import React from 'react'
-import { Button, Modal, Select, TextArea } from '../../mentorComponents'
+import {
+  Button,
+  Calender,
+  Modal,
+  Select,
+  TextArea,
+} from '../../mentorComponents'
 import down from '../../assets/icons/downArrow.svg'
 import './schedule.css'
 
@@ -14,32 +20,37 @@ export const MentorSchedule = () => {
         <CreateCallSchedule />
       </Modal>
 
-      <div className="row schedule d-flex justify-content-between">
-        <div>
-          <h3>My Schedule</h3>
-        </div>
+      <div className="row schedule  mb-4">
+        <div className="d-flex justify-content-between">
+          <div>
+            <h3>My Schedule</h3>
+          </div>
+          <div className="d-flex">
+            <section className="mt-2 mr-3 my_add_ava">
+              <a
+                data-toggle="modal"
+                href="#!"
+                data-target="#addAvailabilityModal"
+              >
+                Add to Availability
+              </a>
+            </section>
 
-        <div className="d-flex">
-          <section className="mt-2 mr-3 my_schedule_create">
-            <a
-              data-toggle="modal"
-              href="#!"
-              data-target="#addAvailabilityModal"
-            >
-              Add to Availability
-            </a>
-          </section>
-
-          <section className="mt-2 my_schedule_create">
-            <a
-              data-toggle="modal"
-              data-target="#createCallScheduleModal"
-              href="#!"
-            >
-              Create Schedule
-            </a>
-          </section>
+            <section className="mt-2 my_schedule_create">
+              <a
+                data-toggle="modal"
+                data-target="#createCallScheduleModal"
+                href="#!"
+              >
+                Create Schedule
+              </a>
+            </section>
+          </div>
         </div>
+      </div>
+
+      <div>
+        <Calender />
       </div>
     </div>
   )

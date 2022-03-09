@@ -274,7 +274,7 @@ const EventScheduleModal = () => {
       </section>
 
       <section className="mt-2">
-        <p className="" style={{ color: "#E21919" }}>
+        <p className="" style={{ color: '#E21919' }}>
           2 days : 30mins : 05 secs
         </p>
 
@@ -300,7 +300,7 @@ const EventScheduleModal = () => {
             morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
             elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.{" "}
+            consectetur adipiscing elit.{' '}
           </p>
         </section>
 
@@ -316,7 +316,7 @@ const EventScheduleModal = () => {
 
         <section className="event_link">
           <a href="https://www.yebox.io/" target="_blank">
-            <img className="pr-3" src={location} alt="location" />{" "}
+            <img className="pr-3" src={location} alt="location" />{' '}
             meet.google.com/jce-wata-fux
           </a>
         </section>
@@ -349,22 +349,22 @@ const EventScheduleModal = () => {
             <button className="mr-3">No</button>
             <button className="mr-4">Maybe</button>
             <span>
-              Request to reschedule{" "}
+              Request to reschedule{' '}
               <img className="pl-2" src={down} alt="arrow down" />
             </span>
           </div>
         </section>
 
         <section className="mt-5">
-          <TextField label={"Day"} placeholder={"Thursday 17th Oct 2021"} />
+          <TextField label={'Day'} placeholder={'Thursday 17th Oct 2021'} />
         </section>
 
         <section className="row mt-5">
           <div className="col-lg-5">
-            <Select label={"Start time"} placeholder={"Time"} />
+            <Select label={'Start time'} placeholder={'Time'} />
           </div>
           <div className="col-lg-5">
-            <Select label={"End time"} placeholder={"Time"} />
+            <Select label={'End time'} placeholder={'Time'} />
           </div>
         </section>
 
@@ -377,5 +377,5 @@ const EventScheduleModal = () => {
         </section>
       </section>
     </div>
-  );
-};
+  )
+}

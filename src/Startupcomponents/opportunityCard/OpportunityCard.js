@@ -1,7 +1,7 @@
-import React from "react";
-import "./opportunity.css";
-import logo from "../../assets/images/yeLogo.svg";
-import { Tag } from "..";
+import React from 'react'
+import './opportunity.css'
+import logo from '../../assets/images/yeLogo.svg'
+import { Tag } from '..'
 
 export const OpportunityCard = ({ onClick }) => {
   return (
@@ -40,5 +40,5 @@ export const OpportunityCard = ({ onClick }) => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}

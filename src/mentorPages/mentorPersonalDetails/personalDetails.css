@@ -17,8 +17,8 @@
 
 .bg-pd-pro {
   /* background: #f9f9fc; */
-  background-color: #fdfdfd;
-  z-index: 999;
+  /* background-color: #fdfdfd; */
+  /* z-index: 999; */
 }
 
 .mentor_personal_details_header h4 {
@@ -53,6 +53,12 @@
 .mentor_personal_details_grid {
   display: grid;
   grid-template-columns: minmax(220px, 250px) auto;
+}
+
+@media (max-width: 768px) {
+  .mentor_personal_details_grid {
+    grid-template-columns: none;
+  }
 }
 
 .mentor_personal_details_list {

@@ -20,7 +20,7 @@ export const WelcomeMessage = styled.div`
 `
 
 export const RegCard = styled.div`
-  padding-top: 150px;
+  padding-top: 50px;
   .reg-card {
     background: #f9f9fc;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);

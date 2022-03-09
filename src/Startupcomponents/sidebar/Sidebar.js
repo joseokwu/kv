@@ -83,8 +83,8 @@ export const StartupSideBar = () => {
   }
 
   return (
-    <div className="start-main">
-      <section className="side-navigator position-fixed">
+    <div className="start-main tab-wrap d-none d-lg-flex">
+      <section className="side-navigator">
         <ul className="side-list-start">
           {startUpRoutes &&
             startUpRoutes.map((nav, i) => {

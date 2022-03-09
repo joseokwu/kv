@@ -42,9 +42,9 @@ export const MentorAssignments = () => {
 
   return (
     <div className="dashboard_main container-fluid">
-      <section className="row pb-5">
+      <section className="row tab-wrap">
         <section
-          className="col-lg-12 d-flex align-items-center dashboard-cards position-fixed"
+          className="col-lg-12 d-flex align-items-center dashboard-cards"
           style={{ background: "#fefefe" }}
         >
           {cardData.map((data, i) => (
@@ -58,8 +58,8 @@ export const MentorAssignments = () => {
         </section>
       </section>
 
-      <section className="mt-5 pt-3 d-flex justify-content-between">
-        <div className="mt-5">
+      <section className="d-flex justify-content-between">
+        <div className="">
           <button
             className="d-flex align-items-center filter-btn"
             style={{ columnGap: 7 }}

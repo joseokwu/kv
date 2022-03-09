@@ -82,7 +82,7 @@ export const MentorEvaluation = ({ history }) => {
             {pending?.length > 0 ? (
               pending?.map((p, i) => {
                 return (
-                  <div className="col-xl-6 mb-3">
+                  <div key={i} className="col-xl-6 mb-3">
                     <EvaluationPendingCard data={p} />
                   </div>
                 );
@@ -100,11 +100,9 @@ export const MentorEvaluation = ({ history }) => {
           <div className="row">
             {completed?.length > 0 ? (
               completed?.map((c, i) => {
-                return (
-                  <div className="col-xl-6">
-                    <EvaluationCompletedCard data={c} />
-                  </div>
-                );
+                <div key={i} className="col-xl-6">
+                  <EvaluationCompletedCard data={c} />
+                </div>;
               })
             ) : (
               <div className="col-12 my-5 text-center">
@@ -123,9 +121,9 @@ export const MentorEvaluation = ({ history }) => {
 
   return (
     <div className="dashboard_main container-fluid">
-      <section className="row pb-5">
+      <section className="row tab-wrap">
         <section
-          className="col-lg-12 d-flex align-items-center dashboard-cards position-sticky"
+          className="col-lg-12 d-flex align-items-center dashboard-cards"
           style={{ background: "#fefefe" }}
         >
           {cardData.map((data, i) => (
