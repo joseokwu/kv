@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   Button,
   SmallModal,
   TextArea,
   TextField,
-} from '../../../../Startupcomponents'
-import { RoadMapTodo } from './components/RoadMapTodo'
-import { MapPoint } from './components/MapPoint'
-import './roadMap.css'
-import { NewGoalModal } from './roadMap.styled'
-import close from '../../../../assets/icons/closesm.svg'
-import girl from '../../../../assets/icons/person2.svg'
-import guy from '../../../../assets/icons/person3.svg'
+} from "../../../../Startupcomponents";
+import { RoadMapTodo } from "./components/RoadMapTodo";
+import { MapPoint } from "./components/MapPoint";
+import "./roadMap.css";
+import { NewGoalModal } from "./roadMap.styled";
+import close from "../../../../assets/icons/closesm.svg";
+import girl from "../../../../assets/icons/person2.svg";
+import guy from "../../../../assets/icons/person3.svg";
 
-export const RoadMap = () => {
-  const [showModal, setShowModal] = useState(false)
+export const RoadMap = ({ data = [] }) => {
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
@@ -28,7 +28,7 @@ export const RoadMap = () => {
       <section className="row">
         <div className="col-xl-4 col-lg-5 mb-4">
           <article className="road-map-card">
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
+            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
               <MapPoint color="#35D662" />
               <span>
                 <p className="point-title">Stage</p>
@@ -36,7 +36,7 @@ export const RoadMap = () => {
               </span>
             </div>
 
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
+            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
               <MapPoint color="#2E3192" />
               <span>
                 <p className="point-title">Idea</p>
@@ -44,7 +44,7 @@ export const RoadMap = () => {
               </span>
             </div>
 
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
+            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
               <MapPoint />
               <span>
                 <p className="point-title">Prototype</p>
@@ -52,7 +52,7 @@ export const RoadMap = () => {
               </span>
             </div>
 
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
+            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
               <MapPoint />
               <span>
                 <p className="point-title">Minimum Viable Product</p>
@@ -60,7 +60,7 @@ export const RoadMap = () => {
               </span>
             </div>
 
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
+            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
               <MapPoint />
               <span>
                 <p className="point-title">Early customers</p>
@@ -68,7 +68,7 @@ export const RoadMap = () => {
               </span>
             </div>
 
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
+            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
               <MapPoint />
               <span>
                 <p className="point-title">Revenue generating</p>
@@ -76,7 +76,7 @@ export const RoadMap = () => {
               </span>
             </div>
 
-            <div className="d-flex mb-4" style={{ columnGap: '1rem' }}>
+            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
               <MapPoint withStem={false} />
               <span>
                 <p className="point-title">Growth</p>
@@ -87,14 +87,14 @@ export const RoadMap = () => {
         </div>
 
         <div className="col-xl-8 col-lg-7 mb-4">
-          <article className="road-map-card" style={{ background: 'white' }}>
+          <article className="road-map-card" style={{ background: "white" }}>
             <section
               className="d-flex align-items-center justify-content-between flex-wrap mb-5"
               style={{ rowGap: 10 }}
             >
               <div
                 className="d-flex align-items-center flex-wrap"
-                style={{ rowGap: 10, columnGap: '1rem' }}
+                style={{ rowGap: 10, columnGap: "1rem" }}
               >
                 <span className="road-map-tag">
                   <div></div> Ongoing
@@ -103,7 +103,7 @@ export const RoadMap = () => {
               </div>
 
               <Button
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
                 data-target="#addNewGoalModal"
                 onClick={() => setShowModal(true)}
                 label="Add new goal"
@@ -111,22 +111,20 @@ export const RoadMap = () => {
             </section>
 
             <section>
-              <RoadMapTodo progress={50} />
-              <RoadMapTodo progress={32} />
-              <RoadMapTodo progress={40} />
-              <RoadMapTodo progress={20} />
-              <RoadMapTodo progress={50} />
-              <RoadMapTodo progress={25} />
+              {data?.length > 0 &&
+                data?.map((item, i) => {
+                  return <RoadMapTodo data={item} progress={item?.progress} />;
+                })}
             </section>
           </article>
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
 export const AddNewGoalModal = () => {
-  const actArr = [1, 2]
+  const actArr = [1, 2];
   return (
     <NewGoalModal>
       <div className="mx-4">
@@ -143,7 +141,7 @@ export const AddNewGoalModal = () => {
         <div className="my-4">
           <TextArea
             label="Description"
-            placeholder={'Search for team members'}
+            placeholder={"Search for team members"}
             rows={5}
           />
         </div>
@@ -171,7 +169,7 @@ export const AddNewGoalModal = () => {
         <div className="row activities">
           <div className="w-75">
             <TextArea
-              placeholder={'Et integer fringilla.Et integer fringilla.'}
+              placeholder={"Et integer fringilla.Et integer fringilla."}
               rows={1}
             />
           </div>
@@ -202,5 +200,5 @@ export const AddNewGoalModal = () => {
         </div>
       </div>
     </NewGoalModal>
-  )
-}
+  );
+};
