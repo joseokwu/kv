@@ -53,7 +53,7 @@ export const FundingRound = () => {
         <div className="text-right">
           <span className="opp_tag_label">Last Funding Round</span>
           <Tag
-            name={fundingRoundSummary?.lastFundingRoundAndDate}
+            name={fundingRoundSummary?.lastFundingRoundAndDate.substr(0,10)}
             color="#058DC1"
           />
         </div>
