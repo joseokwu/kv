@@ -3,7 +3,8 @@ export  const INIT_STATE = {
     user: null,
     error: false,
     loading: false,
-    roles:[]
+    roles:[],
+    signUpStatus:'startup'
   }
 
   export const INIT_STATE_BUSINESS = {

@@ -1,5 +1,6 @@
 import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
-    LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL
+    LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL , 
+    SET_SIGNUP_STATUS, GET_SIGNUP_STATUS
 } from '../actions.types';
 import { register, userLogin , profile, forgorPassword } from '../../../services';
 import toast from 'react-hot-toast';
@@ -72,4 +73,9 @@ export const getProfile = async () => async(dispatch) =>{
     }
 }
 
-
+export const changeStatus =  (value) => async(dispatch) =>{
+    dispatch({
+        type:SET_SIGNUP_STATUS,
+        payload:value
+    })
+}

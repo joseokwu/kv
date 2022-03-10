@@ -1,7 +1,7 @@
 import { LOGIN_FAILED, AUTH_START,
   REGISTER_FAILED, LOGIN_SUCCESS,
   REGISTER_SUCCESS , USER_PROFILE,
-  USER_PROFILE_FAIL
+  USER_PROFILE_FAIL, SET_SIGNUP_STATUS
 
 } from '../../actions/actions.types';
 import { INIT_STATE } from '../../initialstates';
@@ -43,7 +43,8 @@ import { INIT_STATE } from '../../initialstates';
                   loading:false ,
                   authenticated:true,
                   user:action?.payload?.user,
-                  roles:action?.payload?.roles
+                  roles:action?.payload?.roles,
+                  
                 }
                 case USER_PROFILE_FAIL :
                   return {
@@ -51,6 +52,11 @@ import { INIT_STATE } from '../../initialstates';
                     loading:false ,
                     
                   }
+                 case SET_SIGNUP_STATUS:
+                   return {
+                     ...state,
+                     signUpStatus:action.payload
+                   } 
 
         default:
             return state;
