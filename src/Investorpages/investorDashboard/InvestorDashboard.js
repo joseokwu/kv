@@ -20,7 +20,7 @@ export const InvestorDashboard = ({ history }) => {
     setLoading(true);
     const res = await getInvestorDashboard()
     setDashData(res)
-    setLoading(true);
+    setLoading(false);
   }
 
   useEffect(() => {

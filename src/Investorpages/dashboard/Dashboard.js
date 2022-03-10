@@ -39,8 +39,10 @@ useEffect(() =>{
   }
 },[])
 
-      if(loading === true){
-        return <PageLoader dashboard />
+console.log(bossterRes);
+
+      if(loading){
+        return <PageLoader />
       }else{
         
   return (
