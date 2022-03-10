@@ -1,10 +1,32 @@
-import React from "react";
+import React , {useEffect, useState} from "react";
 import { Button } from "../../components";
 import { Calender } from "../../Startupcomponents/index";
 import { AddAvailability } from "../investorSchedule/components/AddAvailability";
 import { CreateCallSchedule } from "../investorSchedule/components/CreateCallSchedule";
+import { getAllSchedule } from './../../services/schedule';
 
 export const InvestorScheduleCalendar = () => {
+
+
+  const [schedules, setSchedule] = useState(null);
+
+  const fetchData = async() =>{
+    const res = await getAllSchedule();
+  
+    setSchedule(res?.dataSource);
+  }
+
+
+useEffect(() =>{
+
+  fetchData();
+
+  return () =>{
+    setSchedule()
+  }
+
+},[])
+
   return (
     <div className="wrapper">
       <CreateCallSchedule />
@@ -30,7 +52,7 @@ export const InvestorScheduleCalendar = () => {
       </section>
 
       <section>
-        <Calender />
+        <Calender data={schedules} />
       </section>
     </div>
   );

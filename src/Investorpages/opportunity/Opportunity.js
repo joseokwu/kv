@@ -95,7 +95,7 @@ export const Opportunity = ({ history }) => {
 
         <div className="row mt-5">
           <div className="col-lg-7">
-            <OppCompanyInfo />
+            <OppCompanyInfo name={profileData?.name} />
             <FinancialDetails data={profileData?.financialDetails} />
           </div>
           <div className="col-lg-5">

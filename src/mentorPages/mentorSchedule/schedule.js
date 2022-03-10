@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useEffect, useState} from 'react'
 import {
   Button,
   Calender,
@@ -8,8 +8,33 @@ import {
 } from '../../mentorComponents'
 import down from '../../assets/icons/downArrow.svg'
 import './schedule.css'
+import { getAllSchedule } from './../../services/schedule';
 
 export const MentorSchedule = () => {
+
+
+const [schedules, setSchedule] = useState(null);
+
+  const fetchData = async() =>{
+    const res = await getAllSchedule();
+  
+    setSchedule(res?.dataSource);
+  }
+
+
+useEffect(() =>{
+
+  fetchData();
+
+  return () =>{
+    setSchedule()
+  }
+
+},[])
+
+
+
+
   return (
     <div className="px-4 pb-5 mx-3 my-4">
       <Modal id="addAvailabilityModal" title="Add Availability">
@@ -50,7 +75,7 @@ export const MentorSchedule = () => {
       </div>
 
       <div>
-        <Calender />
+        <Calender data={ schedules !== null && schedules} />
       </div>
     </div>
   )
