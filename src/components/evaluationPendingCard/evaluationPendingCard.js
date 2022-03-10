@@ -4,7 +4,7 @@ import "./evaluationPendingCard.css";
 import logo from "../../assets/images/yeLogo.svg";
 import { Tag } from "../../components";
 import { Modal } from "../modal/Modal";
-import { EvaluationModal } from "../../mentorPages/mentorEvaluation/components/evaluationModal";
+import { EvaluationModal } from "../../Investorpages/investorEvaluation/components/evaluationModal";
 
 export const EvaluationPendingCard = ({ data = {} }) => {
   return (
