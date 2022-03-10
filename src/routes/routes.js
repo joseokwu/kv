@@ -92,6 +92,7 @@ import {
   TeamMemberSignUp,
   TeamMemberSignIn,
 } from "../Startuppages";
+import { InvestorEvaluate } from "../Investorpages/evaluation/evaluation";
 
 const routes = [
   // Start-up routes start
@@ -408,6 +409,15 @@ const routes = [
     component: WithMainInvestorLayout(InvestorNotification),
     exact: true,
     protected: true,
+    type: "investor",
+  },
+
+  {
+    name: "Evaluation",
+    path: "/investor/evaluation/evaluate",
+    component: WithMainInvestorLayout(InvestorEvaluate),
+    exact: true,
+    protected: false,
     type: "investor",
   },
 

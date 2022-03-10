@@ -81,3 +81,9 @@ export function formatTime(timeToFormat) {
       : new Date(timeToFormat).getMinutes() + "0"
   } ${new Date(timeToFormat).getHours() > 12 ? "pm" : "am"}`;
 }
+
+export function formatDate(dateToFormat) {
+  return `${new Date(dateToFormat).getDate()} ${
+    months[new Date(dateToFormat).getMonth()]
+  }, ${new Date(dateToFormat).getFullYear()}`;
+}

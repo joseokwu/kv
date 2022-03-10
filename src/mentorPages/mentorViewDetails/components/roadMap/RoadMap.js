@@ -97,12 +97,16 @@ export const RoadMap = () => {
             </section>
 
             <section>
-              <RoadMapTodo progress={50} />
-              <RoadMapTodo progress={32} />
-              <RoadMapTodo progress={40} />
-              <RoadMapTodo progress={20} />
-              <RoadMapTodo progress={50} />
-              <RoadMapTodo progress={25} />
+              {ProductRoadMap?.length > 0 &&
+                ProductRoadMap?.map((product, i) => {
+                  return (
+                    <RoadMapTodo
+                      data={product}
+                      progress={product?.progress}
+                      key={`map-todo-${i}`}
+                    />
+                  );
+                })}
             </section>
           </article>
         </div>

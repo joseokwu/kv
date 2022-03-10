@@ -1,0 +1,205 @@
+.watch_pitch_btn {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 140%;
+  color: #242679;
+  padding: 8px 32px;
+  background-color: transparent;
+  border: 1px solid #242679;
+  border-radius: 5px;
+  outline: none;
+}
+
+
+
+.evaluate_header h3 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  color: #242679;
+}
+
+.evaluate_wrap {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  /* max-width: auto; */
+}
+
+.evaluate_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.evaluate_list li {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #4f4f4f;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  padding: 5px 8px;
+}
+
+.li-active {
+  background: #dcebff;
+  border-radius: 10px;
+  text-align: center;
+  /* padding: 0.625rem 1rem !important; */
+}
+
+.market_body {
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.evaluation_scale p {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #242679;
+}
+
+.evaluation_scale_border {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.evaluation_rate p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #323232;
+  opacity: 0.2;
+}
+
+.evaluation_rate p:nth-child(1) {
+  border-right: 1px solid #323232;
+  opacity: 0.2;
+}
+
+.evaluation_rate p:nth-child(2) {
+  border-right: 1px solid #323232;
+  opacity: 0.2;
+}
+
+.evaluation_rate p:nth-child(3) {
+  border-right: 1px solid #323232;
+  opacity: 0.2;
+}
+.evaluation_rate p:nth-child(5) {
+  border-left: 1px solid #323232;
+  opacity: 0.2;
+  
+}
+
+.evaluation_questions p {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  color: #242679;
+}
+
+.evaluation_questions span {
+  font-family: DM Sans;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.evaluation_grade button {
+  background: #f8f8fa;
+  border-radius: 4px;
+  padding: 15px 20px;
+  border: none;
+  margin-right: 20px;
+}
+
+.evaluation_grade button::placeholder {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.evaluation_grade button:focus {
+  background: #dcebff;
+  outline: none;
+}
+
+.evaluation_comment p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #3e3e3e;
+}
+
+.evaluation_score {
+  background: #f5f5f7fd;
+}
+
+.evaluation_score p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.btn-back {
+  border: none;
+  background: #ececec;
+  border-radius: 5px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #4f4f4f;
+  padding: 10px;
+  width: 100%;
+  max-width: 127px;
+}
+
+.evaluation_criteria p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #858585;
+}
+
+@media (max-width:768px){
+
+  .watch_pitch_btn {
+    font-weight: 400;
+    font-size: 9x;
+    line-height: 90%;
+    padding: 5px 10px;
+  }
+
+  .evaluation_rate p:nth-child(1) {
+    border:none
+  
+  }
+  .evaluation_rate p:nth-child(2) {
+    border:none
+  
+  }
+  .evaluation_rate p:nth-child(3) {
+    border:none
+  
+  }
+  .evaluation_rate p:nth-child(5) {
+    border:none
+  
+  }
+}
