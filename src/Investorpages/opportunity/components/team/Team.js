@@ -49,11 +49,11 @@ const TeamMember = ({data}) => {
       <section>
         <p> { data?.name } </p>
         <p className="small"> { data?.position} </p>
-        <span className="d-flex">
+        <span className="d-flex pt-1">
 
         {
           data?.socialMedia.map(c  =>(
-            <img src={ c === 'linkedin' ? linkedIn : c === 'facebook' ? twitter : c === 'Whatsapp' ? whatsApp : '' } alt={c} width="24" height="24" />
+            <img className="me-1" src={ c === 'linkedin' ? linkedIn : c === 'facebook' ? twitter : c === 'Whatsapp' ? whatsApp : '' } alt={c} width="24" height="24"  />
           ))
         }  
         </span>
