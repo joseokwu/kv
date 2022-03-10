@@ -1,47 +1,37 @@
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-export const PageLoader = ({ dashboard = false }) => {
+export const PageLoader = ({ dashboard = false , num }) => {
+
+  const renderCard =(num) =>{
+    num.map(item => {
+      return (
+        <div key={item} className="col-lg-3 mb-3">
+      <Skeleton width={160} height={120} />
+    </div>
+      )
+    })
+  }
+
   return (
-    <div className="mx-5">
+    <div className="mx-1">
       {dashboard ? (
         <article>
-          <section className="row p-4">
-            <div className="col-lg-3 mb-3">
-              <Skeleton height={120} />
+          <section className="row ">
+            {
+              num.map((item, i) => {
+              return (
+                <div key={i} className="col-lg-2 mb-3 mx-4">
+              <Skeleton width={160} height={120} />
             </div>
-            <div className="col-lg-3 mb-3">
-              <Skeleton height={120} />
-            </div>
-            <div className="col-lg-3 mb-3">
-              <Skeleton height={120} />
-            </div>
-            <div className="col-lg-3 mb-3">
-              <Skeleton height={120} />
-            </div>
+              )
+            })
+            }
+            
+           
           </section>
-          <section className="px-4">
-            <Skeleton width={300} />
-          </section>
-          <section className="row p-4">
-            <div className="col-lg-4 mb-3">
-              <Skeleton height={300} />
-            </div>
-            <div className="col-lg-4 mb-3">
-              <Skeleton height={300} />
-            </div>
-            <div className="col-lg-4 mb-3">
-              <Skeleton height={300} />
-            </div>
-            <div className="col-lg-4 mb-3">
-              <Skeleton height={300} />
-            </div>
-            <div className="col-lg-4 mb-3">
-              <Skeleton height={300} />
-            </div>
-            <div className="col-lg-4 mb-3">
-              <Skeleton height={300} />
-            </div>
+          <section>
+
           </section>
         </article>
       ) : (
