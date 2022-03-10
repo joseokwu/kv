@@ -1,9 +1,8 @@
 import React from "react";
-import dots from "../../../assets/icons/3dots.svg";
 import bigClock from "../../../assets/icons/bigclock.svg";
 import demo from "../../../assets/images/vidDemo.svg";
 import doc from "../../../assets/images/doc.svg";
-import { Button, Modal, Select, TextField } from "../../../Startupcomponents";
+import { Modal, Select, TextField } from "../../../Startupcomponents";
 import { formatTime, months } from "../../../utils/helpers";
 import down from "../../../assets/icons/downArrow.svg";
 import location from "../../../assets/icons/locationSm.svg";
@@ -13,7 +12,7 @@ export const SelectionDay = ({ data = [] }) => {
   return (
     <div className="row" style={{ columnGap: 10 }}>
       <Modal id="eventScheduleModal" withHeader={false}>
-        <EventScheduleModal />  
+        <EventScheduleModal />
       </Modal>
       {data?.length > 0 && (
         <div className="col-lg-5 col-12 events_card_bg py-4 mt-4 ml-lg-4 px-4">
@@ -59,11 +58,13 @@ export const SelectionDay = ({ data = [] }) => {
               className="d-flex align-items-center"
               style={{ columnGap: 10 }}
             >
-              {new Date().getTime() >= new Date(data[0]?.startTime) &&
-              new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
+              {new Date().getTime() >= new Date(data[0]?.startDate).getTime() &&
+              new Date().getTime() <= new Date(data[0]?.endDate).getTime() ? (
                 <button className="se_join">Join Event</button>
               ) : (
-                <button className="se_join">Add Schedule</button>
+                new Date().getTime() < new Date(data[0]?.endDate).getTime() && (
+                  <button className="se_join">Add Schedule</button>
+                )
               )}
               <button className="se_view">View details</button>
               {/* <Button label="View details" variant="secondary" /> */}
@@ -120,11 +121,15 @@ export const SelectionDay = ({ data = [] }) => {
                 className="d-flex align-items-center"
                 style={{ columnGap: 10 }}
               >
-                {new Date().getTime() >= new Date(data[1]?.startTime) &&
-                new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
+                {new Date().getTime() >=
+                  new Date(data[1]?.startDate).getTime() &&
+                new Date().getTime() <= new Date(data[1]?.endDate).getTime() ? (
                   <button className="se_join">Join Event</button>
                 ) : (
-                  <button className="se_join">Add Schedule</button>
+                  new Date().getTime() <
+                    new Date(data[1]?.endDate).getTime() && (
+                    <button className="se_join">Add Schedule</button>
+                  )
                 )}
                 <button className="se_view">View details</button>
               </div>
@@ -151,7 +156,7 @@ export const SelectionDay = ({ data = [] }) => {
                 {months[new Date(data[2]?.startDate).getMonth()]}{" "}
               </p>
 
-              {new Date().getTime() >= new Date(data[2]?.startTime) &&
+              {new Date().getTime() >= new Date(data[2]?.startTime).getTime() &&
               new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
                 <span className="accepted_tag">Ongoing</span>
               ) : (
@@ -175,11 +180,15 @@ export const SelectionDay = ({ data = [] }) => {
                 className="d-flex align-items-center"
                 style={{ columnGap: 10 }}
               >
-                {new Date().getTime() >= new Date(data[2]?.startTime) &&
-                new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
+                {new Date().getTime() >=
+                  new Date(data[2]?.startDate).getTime() &&
+                new Date().getTime() <= new Date(data[2]?.endDate).getTime() ? (
                   <button className="se_join">Join Event</button>
                 ) : (
-                  <button className="se_join">Add Schedule</button>
+                  new Date().getTime() <
+                    new Date(data[2]?.endDate).getTime() && (
+                    <button className="se_join">Add Schedule</button>
+                  )
                 )}
                 <button className="se_view">View details</button>
               </div>
@@ -197,7 +206,7 @@ export const SelectionDay = ({ data = [] }) => {
         {data?.length > 0 &&
           data?.slice(3, data?.length - 1).map((d, i) => {
             return (
-              <section key={i} className="col-lg-6">
+              <section className="col-lg-6">
                 <div className=" events_card_bg py-4 px-4 mt-4">
                   <section className="events_card d-flex justify-content-between">
                     <h3>{d?.titleOfEvent}</h3>
@@ -210,8 +219,7 @@ export const SelectionDay = ({ data = [] }) => {
                       {months[new Date(d?.startDate).getMonth()]}
                     </p>
                     {new Date().getTime() >= new Date(d?.startTime) &&
-                    new Date().getTime() <=
-                      new Date(data[0]?.endTime).getTime() ? (
+                    new Date().getTime() <= new Date(d?.endTime).getTime() ? (
                       <span className="accepted_tag">Ongoing</span>
                     ) : (
                       <p className="pending_time pt-1">
@@ -233,11 +241,14 @@ export const SelectionDay = ({ data = [] }) => {
                       className="d-flex align-items-center"
                       style={{ columnGap: 10 }}
                     >
-                      {new Date().getTime() >= new Date(d?.startTime) &&
-                      new Date().getTime() <= new Date(d?.endTime).getTime() ? (
+                      {new Date().getTime() >= new Date(d?.startDate) &&
+                      new Date().getTime() <= new Date(d?.endDate).getTime() ? (
                         <button className="se_join">Join Event</button>
                       ) : (
-                        <button className="se_join">Add Schedule</button>
+                        new Date().getTime() <
+                          new Date(d?.endDate).getTime() && (
+                          <button className="se_join">Add Schedule</button>
+                        )
                       )}
                       <button className="se_view">View details</button>
                     </div>
