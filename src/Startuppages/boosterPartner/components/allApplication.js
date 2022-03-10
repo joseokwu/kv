@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ApplicationCard } from "../boosterPartner.styled";
 import {
   compImage,
@@ -19,11 +19,13 @@ export const AllApplication = ({ data }) => {
   const expiredArr = [1];
   const declinedArr = [1, 2];
 
+  const [selectedData, setSelectedData] = useState({});
+
   return (
     <div className="row" style={{ columnGap: 10 }}>
       {/* Approved Modal starts here */}
       <Modal id="approved" withHeader={false}>
-        <ApprovedModal />
+        <ApprovedModal data={selectedData} />
       </Modal>
       {/* Approved Modal end here */}
       {/* Approved */}
@@ -42,7 +44,11 @@ export const AllApplication = ({ data }) => {
             <div className="my-3">
               <p>
                 {data?.description}
-                <span data-target="#approved" data-toggle="modal">
+                <span
+                  data-target="#approved"
+                  data-toggle="modal"
+                  onClick={() => setSelectedData(item)}
+                >
                   Read More
                 </span>
               </p>
@@ -309,7 +315,7 @@ const ExpiredModal = () => {
 };
 
 //Approved Modal
-const ApprovedModal = () => {
+const ApprovedModal = ({ data = {} }) => {
   return (
     <div className="applyModal px-4">
       <section className="pt-2">
@@ -329,22 +335,18 @@ const ApprovedModal = () => {
         ))}
       </div>
       <div className="mt-3 d-flex justify-content-between">
-        {cardDataModal.map((data, i) => (
-          <div>
-            <h3 key={i}>{data.header}</h3>
-          </div>
-        ))}
+        <div>
+          <h3>{data.name}</h3>
+        </div>
         <h6 className="mt-2">flutter.co</h6>
       </div>
       <div className="mb-4">
         <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
       </div>
       <div className="">
-        {compdetailModal.map((data, i) => (
-          <div>
-            <p key={i}>{data.detail}</p>
-          </div>
-        ))}
+        <div>
+          <p>{data.description}</p>
+        </div>
       </div>
       <div className="mt-5">
         {Map.map((approved, i) => (
@@ -381,9 +383,14 @@ const ApprovedModal = () => {
         <button className="applyModalback">Back</button>
         <div>
           {/* <button className="cancelApp">Cancel Application</button> */}
-          <button className="approvedBtn mt-2">
-            <img className="mr-2 mb-1" src={approved} alt="approved icon" />
-            Approved
+          <button
+            className={`${data?.status}Btn mt-2`}
+            disabled={data?.status === "applied"}
+          >
+            {data?.status === "approved" && (
+              <img className="mr-2 mb-1" src={approved} alt="approved icon" />
+            )}
+            {data?.status === "declined" ? "Re-apply" : data?.status}
           </button>
         </div>
       </div>
