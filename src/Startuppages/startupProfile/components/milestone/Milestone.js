@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   MilestoneList,
   SmallModal,
   TextArea,
   TextField,
-} from '../../../../Startupcomponents'
-import { MilestoneModal } from './milestone.styled'
+} from "../../../../Startupcomponents";
+import { MilestoneModal } from "./milestone.styled";
 
-export const Milestone = () => {
-  const [showModal, setShowModal] = useState(false)
+export const Milestone = ({ data = [] }) => {
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
@@ -32,10 +32,10 @@ export const Milestone = () => {
           Update
         </button>
       </section>
-      <MilestoneList />
+      <MilestoneList data={data} />
     </div>
-  )
-}
+  );
+};
 
 export const UpdateMilestoneModal = () => {
   return (
@@ -53,7 +53,7 @@ export const UpdateMilestoneModal = () => {
         <TextArea
           className="col-lg-8 mt-1"
           label="Date of achievement"
-          placeholder={'yyyy-mm-dd'}
+          placeholder={"yyyy-mm-dd"}
           rows={1}
         />
         <div className="mt-5">
@@ -61,5 +61,5 @@ export const UpdateMilestoneModal = () => {
         </div>
       </div>
     </MilestoneModal>
-  )
-}
+  );
+};
