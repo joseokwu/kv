@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useEffect, useState }  from "react";
 import "./viewDetails.css";
 import { ProductDemo, Tabs } from "../../mentorComponents";
 import { PitchDeck } from "./components/pitchDeck/pitchDeck";
@@ -8,11 +8,22 @@ import { Team } from "./components/team/team";
 import { RoadMap } from "./components/roadMap/RoadMap";
 import { Fundraising } from "./components/fundraising/fundraising";
 import { Milestone } from "./components/milestone/Milestone";
+import { getStartupInvesrtorProfile } from '../../services/investor';
+
+
+
 
 export const MentorViewDetails = ({ history }) => {
   const {
     location: { hash },
   } = history;
+
+  const [profileData, setProfileData] = useState({});
+
+  const getData = async () => {
+    const res = await getStartupInvesrtorProfile();
+    setProfileData(res);
+  };
 
   const renderContent = () => {
     switch (hash.replaceAll("%20", "")) {
@@ -51,6 +62,15 @@ export const MentorViewDetails = ({ history }) => {
     "Milestone/Timeline",
     "Product Road Map",
   ];
+
+
+  useEffect(() => {
+    getData();
+    return () => {
+      setProfileData({});
+    };
+  }, []);
+
 
   return (
     <div className="dashboard-main mx-3">

@@ -18,6 +18,8 @@ export const SignUp = ({ history }) => {
     register(values)
   }
 
+  console.log(stateAuth)
+
   return (
     <div className="row mx-0 mentor_auth_wrap">
       <section className="col-md-6">

@@ -1,4 +1,5 @@
 import { useActivity } from "../../../hooks";
+import { convertToMillion } from './../../../utils/helpers';
 
 export const FinancialDetails = () => {
   const {
@@ -6,6 +7,9 @@ export const FinancialDetails = () => {
       dash_view: { financialDetails },
     },
   } = useActivity();
+
+  console.log(financialDetails?.valuate)
+
   return (
     <div className="mt-4 opp_page_card py-3 mb-4">
       <h3 className="sub-card-title">Financial Details</h3>
@@ -22,9 +26,9 @@ export const FinancialDetails = () => {
 
         <div className="d-flex align-items-center">
           <span className="opp_tag_label">Valuation</span>
-          <span className="opp_tag">{financialDetails?.valuationAndDate}</span>
+          <span className="opp_tag">{`${convertToMillion(financialDetails?.valuate)} ${financialDetails?.date.substr(0,10)}`}</span>
         </div>
-      </section>
+      </section>  
     </div>
   );
 };
