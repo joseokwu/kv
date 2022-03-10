@@ -100,9 +100,11 @@ export const MentorEvaluation = ({ history }) => {
           <div className="row">
             {completed?.length > 0 ? (
               completed?.map((c, i) => {
-                <div key={i} className="col-xl-6">
-                  <EvaluationCompletedCard data={c} />
-                </div>;
+                return (
+                  <div key={i} className="col-xl-6">
+                    <EvaluationCompletedCard data={c} />
+                  </div>
+                );
               })
             ) : (
               <div className="col-12 my-5 text-center">
