@@ -52,8 +52,6 @@
   font-weight: 600;
 }
 
-
-
 .mentor_checkbox_input {
   width: 1rem;
   height: 1rem;
@@ -83,4 +81,29 @@
 
 .mentor_checkbox_input input:checked + div {
   background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+}
+
+.inputContainer label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 20px;
+  color: #d5d6f4 !important;
+}
+
+.inputContainer select {
+  background: transparent !important;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 329px;
+  height: 36px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #f9f9fc !important;
+  border: 1px solid #e0e0e0 !important;
+  padding: 8px 14px !important;
 }

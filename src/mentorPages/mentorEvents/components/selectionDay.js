@@ -1,19 +1,19 @@
-import React from "react";
-import dots from "../../../assets/icons/3dots.svg";
-import bigClock from "../../../assets/icons/bigclock.svg";
-import demo from "../../../assets/images/vidDemo.svg";
-import doc from "../../../assets/images/doc.svg";
-import { Button, Modal, Select, TextField } from "../../../Startupcomponents";
-import { formatTime, months } from "../../../utils/helpers";
-import down from "../../../assets/icons/downArrow.svg";
-import location from "../../../assets/icons/locationSm.svg";
-import name from "../../../assets/icons/initial.svg";
+import React from 'react'
+import dots from '../../../assets/icons/3dots.svg'
+import bigClock from '../../../assets/icons/bigclock.svg'
+import demo from '../../../assets/images/vidDemo.svg'
+import doc from '../../../assets/images/doc.svg'
+import { Button, Modal, Select, TextField } from '../../../mentorComponents'
+import { formatTime, months } from '../../../utils/helpers'
+import down from '../../../assets/icons/downArrow.svg'
+import location from '../../../assets/icons/locationSm.svg'
+import name from '../../../assets/icons/initial.svg'
 
 export const SelectionDay = ({ data = [] }) => {
   return (
     <div className="row" style={{ columnGap: 10 }}>
       <Modal id="eventScheduleModal" withHeader={false}>
-        <EventScheduleModal />  
+        <EventScheduleModal />
       </Modal>
       {data?.length > 0 && (
         <div className="col-lg-5 col-12 events_card_bg py-4 mt-4 ml-lg-4 px-4">
@@ -24,7 +24,7 @@ export const SelectionDay = ({ data = [] }) => {
 
           <section className="d-flex justify-content-between mt-2">
             <p className="pending_date pr-4">
-              <span>{new Date(data[0]?.startDate).getDate()}</span>{" "}
+              <span>{new Date(data[0]?.startDate).getDate()}</span>{' '}
               {months[new Date(data[0]?.startDate).getMonth()]}
             </p>
 
@@ -33,7 +33,7 @@ export const SelectionDay = ({ data = [] }) => {
               <span className="accepted_tag">Ongoing</span>
             ) : (
               <p className="pending_time pt-1">
-                <img src={bigClock} alt="clock" />{" "}
+                <img src={bigClock} alt="clock" />{' '}
                 {formatTime(data[0]?.startTime)}-{formatTime(data[0]?.endTime)}
               </p>
             )}
@@ -43,7 +43,7 @@ export const SelectionDay = ({ data = [] }) => {
             <img
               src={demo}
               alt="demo"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: '100%', height: '100%' }}
             />
           </section>
 
@@ -63,7 +63,13 @@ export const SelectionDay = ({ data = [] }) => {
               new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
                 <button className="se_join">Join Event</button>
               ) : (
-                <button className="se_join">Add Schedule</button>
+                <button
+                  className="se_join"
+                  data-target="#eventScheduleModal"
+                  data-toggle={'modal'}
+                >
+                  Add Schedule
+                </button>
               )}
               <button className="se_view">View details</button>
               {/* <Button label="View details" variant="secondary" /> */}
@@ -93,7 +99,7 @@ export const SelectionDay = ({ data = [] }) => {
 
             <section className="d-flex justify-content-between mt-2">
               <p className="pending_date pr-4">
-                <span>{new Date(data[1]?.startDate).getDate()}</span>{" "}
+                <span>{new Date(data[1]?.startDate).getDate()}</span>{' '}
                 {months[new Date(data[1]?.startDate).getMonth()]}
               </p>
               {new Date().getTime() >= new Date(data[1]?.startTime) &&
@@ -101,11 +107,11 @@ export const SelectionDay = ({ data = [] }) => {
                 <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
-                  <img src={bigClock} alt="clock" />{" "}
+                  <img src={bigClock} alt="clock" />{' '}
                   {formatTime(data[1]?.startTime)}-
                   {formatTime(data[1]?.endTime)}
                 </p>
-              )}{" "}
+              )}{' '}
             </section>
 
             <section className="event_card_body mt-3">
@@ -147,8 +153,8 @@ export const SelectionDay = ({ data = [] }) => {
 
             <section className="d-flex justify-content-between mt-2">
               <p className="pending_date pr-4">
-                <span>{new Date(data[2]?.startDate).getDate()}</span>{" "}
-                {months[new Date(data[2]?.startDate).getMonth()]}{" "}
+                <span>{new Date(data[2]?.startDate).getDate()}</span>{' '}
+                {months[new Date(data[2]?.startDate).getMonth()]}{' '}
               </p>
 
               {new Date().getTime() >= new Date(data[2]?.startTime) &&
@@ -156,7 +162,7 @@ export const SelectionDay = ({ data = [] }) => {
                 <span className="accepted_tag">Ongoing</span>
               ) : (
                 <p className="pending_time pt-1">
-                  <img src={bigClock} alt="clock" />{" "}
+                  <img src={bigClock} alt="clock" />{' '}
                   {formatTime(data[2]?.startTime)}-
                   {formatTime(data[2]?.endTime)}
                 </p>
@@ -206,7 +212,7 @@ export const SelectionDay = ({ data = [] }) => {
 
                   <section className="d-flex justify-content-between mt-2">
                     <p className="pending_date pr-4">
-                      <span>{new Date(d?.startDate).getDate()}</span>{" "}
+                      <span>{new Date(d?.startDate).getDate()}</span>{' '}
                       {months[new Date(d?.startDate).getMonth()]}
                     </p>
                     {new Date().getTime() >= new Date(d?.startTime) &&
@@ -215,10 +221,10 @@ export const SelectionDay = ({ data = [] }) => {
                       <span className="accepted_tag">Ongoing</span>
                     ) : (
                       <p className="pending_time pt-1">
-                        <img src={bigClock} alt="clock" />{" "}
+                        <img src={bigClock} alt="clock" />{' '}
                         {formatTime(d?.startTime)}-{formatTime(d?.endTime)}
                       </p>
-                    )}{" "}
+                    )}{' '}
                   </section>
 
                   <section className="event_card_body mt-3">
@@ -250,12 +256,12 @@ export const SelectionDay = ({ data = [] }) => {
                   </section>
                 </div>
               </section>
-            );
+            )
           })}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const EventScheduleModal = () => {
   return (
@@ -274,7 +280,7 @@ const EventScheduleModal = () => {
       </section>
 
       <section className="mt-2">
-        <p className="" style={{ color: "#E21919" }}>
+        <p className="" style={{ color: '#E21919' }}>
           2 days : 30mins : 05 secs
         </p>
 
@@ -285,7 +291,7 @@ const EventScheduleModal = () => {
 
         <section className="d-flex mt-3">
           <p className="pending_date pr-5">
-            <span>50</span> | September
+            <span>50</span> September
           </p>
 
           <p className="pending_time pt-1">
@@ -300,26 +306,33 @@ const EventScheduleModal = () => {
             morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
             elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.{" "}
+            consectetur adipiscing elit.{' '}
           </p>
         </section>
 
-        <section className="event_schedule_visibility mt-4 mb-3">
+        {/* <section className="event_schedule_visibility mt-4 mb-3">
           <p>
-            Visibility : <span>Public</span> <img src={down} alt="down arrow" />
+            Visibility : <span>Public</span>
           </p>
-        </section>
+        </section> */}
 
-        <section className="mb-3">
+        {/* <section className="mb-3">
           <button className="back-btn">Join Event</button>
-        </section>
+        </section> */}
+        <div className="justify-content-between">
+          <section className="event_link">
+            <a href="!#" target="_blank">
+              <img className="pr-3" src={location} alt="location" />{' '}
+              meet.google.com/jce-wata-fux
+            </a>
+          </section>
 
-        <section className="event_link">
-          <a href="https://www.yebox.io/" target="_blank">
-            <img className="pr-3" src={location} alt="location" />{" "}
-            meet.google.com/jce-wata-fux
-          </a>
-        </section>
+          <section className="event_schedule_visibility mt-4 mb-3">
+            <p>
+              Visibility : <span>Public</span>
+            </p>
+          </section>
+        </div>
 
         <section className="mt-5">
           <p>Attendees</p>
@@ -349,22 +362,30 @@ const EventScheduleModal = () => {
             <button className="mr-3">No</button>
             <button className="mr-4">Maybe</button>
             <span>
-              Request to reschedule{" "}
+              Request to reschedule{' '}
               <img className="pl-2" src={down} alt="arrow down" />
             </span>
           </div>
         </section>
 
         <section className="mt-5">
-          <TextField label={"Day"} placeholder={"Thursday 17th Oct 2021"} />
+          <TextField
+            type="date"
+            label={'Day'}
+            placeholder={'Thursday 17th Oct 2021'}
+          />
         </section>
 
         <section className="row mt-5">
           <div className="col-lg-5">
-            <Select label={"Start time"} placeholder={"Time"} />
+            <Select
+              label={'Start time'}
+              placeholder={'Time'}
+              options={['12pm']}
+            />
           </div>
           <div className="col-lg-5">
-            <Select label={"End time"} placeholder={"Time"} />
+            <Select label={'End time'} placeholder={'Time'} options={['2pm']} />
           </div>
         </section>
 
@@ -377,5 +398,5 @@ const EventScheduleModal = () => {
         </section>
       </section>
     </div>
-  );
-};
+  )
+}
