@@ -26,7 +26,7 @@ export const OppCompanyInfo = ({name}) => {
       >
         <div>
           <img src={logo} alt="logo" className="mb-3" />
-          <h3 className="opp-page-card-title"> { name } </h3>
+          <h3 className="opp-page-card-title">{name}</h3>
         </div>
 
         <div className="d-flex align-items-end flex-column">

@@ -26,13 +26,7 @@ export const Header = ({ setOpen, open }) => {
     }
   }
 
-  const getCurrentProfile = () => {
-    if (pathname.includes('investor')) {
-      return () => push('/investor/profile')
-    } else {
-      return () => push('/booster/profile')
-    }
-  }
+
 
   const [openNotice, setOpenNotice] = useState(false)
   return (
@@ -68,7 +62,7 @@ export const Header = ({ setOpen, open }) => {
         </ul>
 
         <div className="d-flex align-items-center h-100">
-          <span onClick={getCurrentProfile()} className="d-flex align-items-center header-profile d-none d-lg-flex">
+          <span className="d-flex align-items-center header-profile d-none d-lg-flex">
             <img src={sampleUser} alt="profile" className="" />
             <p className="mb-0 header-text">Micheal Smith</p>
           </span>
@@ -87,7 +81,18 @@ export const Header = ({ setOpen, open }) => {
 }
 
 const HeaderDropdownMenu = () => {
-  const { push } = useHistory()
+  const {
+    push,
+    location: { pathname },
+  } = useHistory()
+  const getCurrentProfile = () => {
+    if (pathname.includes('investor')) {
+      return () => push('/investor/profile')
+    } else {
+      return () => push('/booster/profile')
+    }
+  }
+
 
   return (
     <div className="dropdown">
@@ -105,7 +110,7 @@ const HeaderDropdownMenu = () => {
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button
           className="dropdown-item text-center py-2"
-          onClick={() => push('/investor/opportunities/0#product')}
+          onClick={getCurrentProfile()}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile

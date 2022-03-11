@@ -36,7 +36,7 @@ export const MentorCreateAssignment = ({ history }) => {
         </section>
 
         <section className="col-lg-12 mb-4 mt-4">
-          <Select label={'Programs'} placeholder={'Select'} />
+          <Select label={'Programs'} placeholder={'Select'} options={["Technology"]} />
         </section>
 
         <section className="col-lg-12 mb-4">
@@ -53,6 +53,7 @@ export const MentorCreateAssignment = ({ history }) => {
 
         <section className="col-lg-12 mb-4">
           <TextField
+            type={'date'}
             label={'Deadline (day)'}
             placeholder={'Thursday 17th Oct 2021'}
           />
@@ -60,11 +61,11 @@ export const MentorCreateAssignment = ({ history }) => {
 
         <div className="row col-lg-12">
           <section className="col-lg-6 mb-4">
-            <Select label={'Start time'} placeholder={'Time'} />
+            <Select label={'Start time'} placeholder={'Time'} options={["12pm"]} />
           </section>
 
           <section className="col-lg-6 mb-4">
-            <Select label={'End time'} placeholder={'Time'} />
+            <Select label={'Deadline time'} placeholder={'Time'} options={["2pm"]} />
           </section>
         </div>
 
@@ -94,7 +95,7 @@ export const MentorCreateAssignment = ({ history }) => {
         </section>
       </div>
       <div className="text-right">
-        <AuthButton label="Save" onClick={() => push('/mentor/assignments/view')} />
+        <AuthButton label="Create" onClick={() => push()} />
       </div>
     </div>
   )

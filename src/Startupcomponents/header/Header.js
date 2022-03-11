@@ -48,7 +48,6 @@ export const Header = ({ setOpen, open}) => {
 
         <div  className="d-flex align-items-center h-100">
           <span
-            onClick={() => history.push('/startup/registration')}
             className="d-flex align-items-center header-profile d-none d-lg-flex"
           >
             <img src={sampleUser} alt="profile" className="" />

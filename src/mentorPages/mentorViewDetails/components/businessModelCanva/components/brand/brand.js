@@ -13,7 +13,7 @@ export const Brand = ({ data = [] }) => {
         {data?.length > 0 &&
           data?.map((d, i) => {
             return (
-              <div className="col-lg-10">
+              <div key={i} className="col-lg-10">
                 <ValueProposition data={Object.values(d)[0]} />
               </div>
             );

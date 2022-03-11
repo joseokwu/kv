@@ -16,7 +16,7 @@ export const PitchDeck = ({data}) => {
         data && data.map((item, i) =>{
          
            return (
-            <div className="col-xl-3 col-lg-4 mb-4">
+            <div key={i} className="col-xl-3 col-lg-4 mb-4">
           <article className="deck-card">
             <div className="deck-card-img">
               <img src={item?.file === 'file' ? doc : videoDemo } alt="document" />

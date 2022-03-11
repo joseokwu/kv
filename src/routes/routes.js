@@ -35,7 +35,7 @@ import {
   MentorEvaluation,
 } from "../mentorPages";
 
-import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
+import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewAssignment/viewAssignment";
 import {
   PageLoader,
   WithInvestorRegisterLayout,
@@ -92,7 +92,11 @@ import {
   TeamMemberSignUp,
   TeamMemberSignIn,
 } from "../Startuppages";
+<<<<<<< HEAD
+import { MentorViewFeedback } from "../mentorPages/mentorAssignments/components/viewFeedback/viewFeedback";
+=======
 import { InvestorEvaluate } from "../Investorpages/evaluation/evaluation";
+>>>>>>> 76d5bfea605566b2c717c9d45a2af73e77a2516e
 
 const routes = [
   // Start-up routes start
@@ -667,6 +671,14 @@ const routes = [
     name: "MoreDetails",
     path: "/mentor/assignments/create/details",
     component: WithMentorMainLayout(MentorMoreDetails),
+    exact: true,
+    protected: true,
+    type: "mentor",
+  },
+  {
+    name: "ViewFeedback",
+    path: "/mentor/assignments/view/feedback",
+    component: WithMentorMainLayout(MentorViewFeedback),
     exact: true,
     protected: true,
     type: "mentor",

@@ -132,7 +132,7 @@ export const Sidebar = () => {
           {navigator.length > 0 &&
             navigator.map((nav, i) => {
               return (
-                <li>
+                <li key={i}>
                   <Link to={nav.path}>
                     <img src={nav.icon} alt="dash" />
                     <p className={`${activateLink(nav.activator)} side-text`}>

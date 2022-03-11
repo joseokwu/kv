@@ -37,6 +37,8 @@ export const Fundraising = ({ data = {} }) => {
     }
   };
 
+  console.log(fundRaising)
+
   const tabItems = [
     "Funding Ask",
     "Fund Utilization",

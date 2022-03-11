@@ -19,6 +19,7 @@ export const OpportunityCard = ({ onClick, data }) => {
       <section className="d-flex align-items-center" style={{ columnGap: 4 }}>
         {data?.industry?.map((item, i) => (
           <Tag
+            key={i}
             name={item}
             color={
               item === "Tech"

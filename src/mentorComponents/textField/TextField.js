@@ -11,6 +11,9 @@ export const TextField = ({
   className,
   required = false,
   placeholder,
+  onFocus,
+  onBlur,
+  ...rest
 }) => {
   return (
     <div className="field">
@@ -30,7 +33,7 @@ export const TextField = ({
         type={type}
         label={label}
       >
-        <Input id={name} className={`${className}`} placeholder={placeholder} />
+        <Input onBlur={onBlur} type={type} id={name} className={`${className}`} placeholder={placeholder} {...rest} />
       </Form.Item>
     </div>
   )

@@ -34,7 +34,7 @@ export const Select = ({
         </option>
         {options.length > 0 &&
           options.map((option, i) => {
-            return <option value={option}>{displayOption[i] ?? option}</option>;
+            return <option key={i} value={option}>{displayOption[i] ?? option}</option>;
           })}
       </select>
     </div>
