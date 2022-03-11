@@ -16,8 +16,8 @@ const FinancialProjection = ({ data = [] }) => {
             <div className="d-flex align-items-start p-3">
               <img src={docIcon} alt="document icon" className="mr-2" />
               <span>
-                <p>Financial Statements Projection</p>
-                <small>21MB</small>
+                <p>{data?.fileName}</p>
+                <small>{data?.fileSize}</small>
               </span>
             </div>
           </article>
