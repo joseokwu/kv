@@ -10,13 +10,10 @@ import share from "../../../assets/icons/share.svg";
 import { useHistory } from "react-router-dom";
 import { useActivity } from "../../../hooks";
 
-export const CompanyDetails = () => {
+export const CompanyDetails = ({ data = {} }) => {
   const { push } = useHistory();
 
-  const {
-    state: { dash_view },
-  } = useActivity();
-
+  console.log("data", data?.url);
   return (
     <section className="opp_page_card py-4">
       <div
@@ -25,18 +22,18 @@ export const CompanyDetails = () => {
       >
         <div>
           <img src={logo} alt="logo" className="mb-3" />
-          <h3 className="opp_page_card_title">{dash_view?.name}.</h3>
+          <h3 className="opp_page_card_title">{data?.name}.</h3>
         </div>
 
         <div className="d-flex align-items-end flex-column">
           <section className="d-flex align-items-center mb-3">
             <span className="opp_tag_label">Industry </span>
-            <span className="opp_tag">{dash_view?.industry}</span>
+            <span className="opp_tag">{data?.industry}</span>
           </section>
 
           <section className="d-flex align-items-center">
             <span className="opp_tag_label">Stage</span>
-            <span className="opp_tag">{dash_view?.stage}</span>
+            <span className="opp_tag">{data?.stage}</span>
           </section>
         </div>
       </div>
@@ -47,24 +44,24 @@ export const CompanyDetails = () => {
         <div className="d-flex align-items-center">
           <img src={web} alt="web" />
           <a
-            href={`https://${dash_view?.website}`}
+            href={`https://${data?.url}`}
             className="ml-2 extra-info"
             style={{ textDecoration: "underline", color: "#2E3192" }}
           >
-            {dash_view?.website}
+            {data?.url}
           </a>
         </div>
 
         <div className="d-flex align-items-center">
           <img src={clock} alt="web" width="20" height="20" />
           <span className="ml-2 extra-info">
-            Incorporated {dash_view?.incorporationDate}
+            Incorporated {data?.incorporationDate}
           </span>
         </div>
 
         <div className="d-flex align-items-center">
           <img src={office} alt="web" />
-          <span className="ml-2 extra-info">{dash_view?.location}</span>
+          <span className="ml-2 extra-info">{data?.location}</span>
         </div>
       </section>
 

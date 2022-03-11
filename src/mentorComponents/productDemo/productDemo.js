@@ -7,7 +7,7 @@ import { FundingRound } from "./components/FundingRound";
 import { useHistory } from "react-router-dom";
 import { useActivity } from "../../hooks/index";
 
-export const ProductDemo = () => {
+export const ProductDemo = ({ data = {} }) => {
   const { push } = useHistory();
 
   const {
@@ -28,16 +28,16 @@ export const ProductDemo = () => {
             Startups
           </span>
           <img src={right} alt="left" className="mx-3" />
-          <span className="bread-end">{dash_view?.name}</span>
+          <span className="bread-end">{data?.name}</span>
         </section>
 
         <div className="row mt-5">
           <div className="col-lg-7">
-            <CompanyDetails />
-            <FinancialDetails />
+            <CompanyDetails data={data} />
+            <FinancialDetails data={data?.financialDetails} />
           </div>
           <div className="col-lg-5">
-            <FundingRound />
+            <FundingRound data={data?.fundingRoundSummary} />
           </div>
         </div>
       </article>

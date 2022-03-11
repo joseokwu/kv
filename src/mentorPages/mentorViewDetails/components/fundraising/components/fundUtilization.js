@@ -75,15 +75,27 @@ const UtilizationTable = ({ data = {} }) => {
           </thead>
 
           <tbody>
-            <tr>
+            {data?.length > 0 &&
+              data.map((d) => (
+                <tr key={d}>
+                  <td style={{ fontWeight: "bolder" }}> {d?.head} </td>
+                  <td> {d?.month1} </td>
+                  <td> {d?.month2} </td>
+                  <td> {d?.month3} </td>
+                  <td> {d?.month4} </td>
+                  <td> {d?.month5} </td>
+                  <td> {d?.month6} </td>
+                </tr>
+              ))}
+            {/* <tr>
               <td className="title">Revenue</td>
               {Object.values(data?.revenue).length > 0 &&
                 Object.values(data?.revenue).map((d, i) => {
                   return <td>{d}</td>;
                 })}
-            </tr>
-            <tr>
-              <td>Growth %</td>
+            </tr> */}
+            {/* <tr> */}
+            {/* <td>Growth %</td>
               <td></td>
               <td></td>
               <td></td>
@@ -127,8 +139,8 @@ const UtilizationTable = ({ data = {} }) => {
                 Object.values(data?.noOfCustomers).map((d, i) => {
                   return <td>{d}</td>;
                 })}
-            </tr>
-            <tr>
+            </tr> */}
+            {/* <tr>
               <td>Growth %</td>
               <td></td>
               <td></td>
@@ -143,7 +155,7 @@ const UtilizationTable = ({ data = {} }) => {
                 Object.values(data?.noOfEmployees).map((d, i) => {
                   return <td>{d}</td>;
                 })}
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </section>

@@ -6,19 +6,19 @@ const CapTable = ({ data = [] }) => {
     () => [
       {
         Header: "Shareholders",
-        accessor: "shareHolder",
+        accessor: "shareHolders",
       },
       {
         Header: "Shareholder Type",
-        accessor: "shareHolderType",
+        accessor: "shareType",
       },
       {
         Header: "Number of shares",
-        accessor: "numberOfShares",
+        accessor: "noShares",
       },
       {
         Header: "Percentage (%) of shares",
-        accessor: "percentageOfShares",
+        accessor: "sharePercent",
       },
     ],
     []
