@@ -8,14 +8,17 @@ import { getDashboardInfo } from "../../services";
 import newApp from "../../assets/icons/Star.svg";
 import dateFormat from "dateformat";
 import { convertToMillion } from "../../utils/helpers";
+import { PageLoader } from "../../components";
 
 export const StartupDashboard = () => {
   const [dashInfo, setDashInfo] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await getDashboardInfo();
-
     setDashInfo(res);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -25,7 +28,20 @@ export const StartupDashboard = () => {
       setDashInfo({});
     };
   }, []);
-  
+
+  if (loading) {
+    return (
+      <PageLoader
+        dashboard={true}
+        num={[
+          dashInfo?.founders,
+          dashInfo?.investors,
+          dashInfo?.mentors,
+          dashInfo?.partners,
+        ]}
+      />
+    );
+  }
 
   return (
     <div className="dashboardMain">
@@ -94,10 +110,8 @@ export const StartupDashboard = () => {
             typeof dashInfo?.valuation?.amount !== undefined &&
             convertToMillion(dashInfo?.valuation?.amount)
           }
-
           time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
-
         />
       </section>
 
