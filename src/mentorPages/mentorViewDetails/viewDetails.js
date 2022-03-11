@@ -1,4 +1,4 @@
-import React , { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import "./viewDetails.css";
 import { ProductDemo, Tabs } from "../../mentorComponents";
 import { PitchDeck } from "./components/pitchDeck/pitchDeck";
@@ -8,10 +8,8 @@ import { Team } from "./components/team/team";
 import { RoadMap } from "./components/roadMap/RoadMap";
 import { Fundraising } from "./components/fundraising/fundraising";
 import { Milestone } from "./components/milestone/Milestone";
-import { getStartupInvesrtorProfile } from '../../services/investor';
-
-
-
+import { getStartupInvesrtorProfile } from "../../services/investor";
+import { getStartupProfile, profile } from "../../services";
 
 export const MentorViewDetails = ({ history }) => {
   const {
@@ -21,35 +19,35 @@ export const MentorViewDetails = ({ history }) => {
   const [profileData, setProfileData] = useState({});
 
   const getData = async () => {
-    const res = await getStartupInvesrtorProfile();
+    const res = await getStartupProfile();
     setProfileData(res);
   };
 
   const renderContent = () => {
     switch (hash.replaceAll("%20", "")) {
       case "#Product":
-        return <Product />;
+        return <Product data={profileData?.product} />;
 
       case "#Pitch Deck":
-        return <PitchDeck />;
+        return <PitchDeck data={profileData?.pitchDeck} />;
 
       case "#Team":
-        return <Team />;
+        return <Team data={profileData?.team} />;
 
       case "#Business Model Canva":
         return <BusinessModelCanva />;
 
       case "#Fundraising":
-        return <Fundraising />;
+        return <Fundraising data={profileData?.fundRaising} />;
 
       case "#Milestone/Timeline":
-        return <Milestone />;
+        return <Milestone data={profileData?.mileStone} />;
 
       case "#Product Road Map":
-        return <RoadMap />;
+        return <RoadMap data={profileData?.ProductRoadMap} />;
 
       default:
-        return <Product />;
+        return <Product data={profileData?.product} />;
     }
   };
 
@@ -63,7 +61,6 @@ export const MentorViewDetails = ({ history }) => {
     "Product Road Map",
   ];
 
-
   useEffect(() => {
     getData();
     return () => {
@@ -71,10 +68,9 @@ export const MentorViewDetails = ({ history }) => {
     };
   }, []);
 
-
   return (
     <div className="dashboard-main mx-3">
-      <ProductDemo />
+      <ProductDemo data={profileData} />
 
       <div className="mt-4">
         <section className="mb-3">

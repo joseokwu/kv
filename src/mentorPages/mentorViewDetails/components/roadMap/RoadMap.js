@@ -5,13 +5,7 @@ import { MapPoint } from "./components/MapPoint";
 import "./roadMap.css";
 import { useActivity } from "../../../../hooks";
 
-export const RoadMap = () => {
-  const {
-    state: {
-      dash_view: { ProductRoadMap },
-    },
-  } = useActivity();
-
+export const RoadMap = ({ data = [] }) => {
   return (
     <div>
       {/* <h3 className="tab-section-title">Future Road Map</h3> */}
@@ -97,8 +91,8 @@ export const RoadMap = () => {
             </section>
 
             <section>
-              {ProductRoadMap?.length > 0 &&
-                ProductRoadMap?.map((product, i) => {
+              {data?.length > 0 &&
+                data?.map((product, i) => {
                   return (
                     <RoadMapTodo
                       data={product}

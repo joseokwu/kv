@@ -7,8 +7,8 @@ export const CurrentInvestorConnectCard = ({ data = {} }) => {
       <div className="d-flex align-items-center">
         <img src={kenny} alt="investor" className="mr-3" />
         <span>
-          <p>{data?.fullName}</p>
-          {data?.postion.length > 0 && <small>{data?.postion}</small>}
+          <p>{data?.name}</p>
+          {data?.position?.length > 0 && <small>{data?.position}</small>}
         </span>
       </div>
       <a href="#!">Connect</a>

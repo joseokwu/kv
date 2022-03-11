@@ -6,11 +6,11 @@ const PreviousRound = ({ data = [] }) => {
     () => [
       {
         Header: "Investor",
-        accessor: "investor",
+        accessor: "invest",
       },
       {
         Header: "Funding Date",
-        accessor: "fundingDate",
+        accessor: "fundDate",
       },
       {
         Header: "Deal Type",
@@ -18,11 +18,11 @@ const PreviousRound = ({ data = [] }) => {
       },
       {
         Header: "Funding Round",
-        accessor: "fundingRound",
+        accessor: "fundRound",
       },
       {
         Header: "Investment Amount",
-        accessor: "investmentAmount",
+        accessor: "investAmnt",
       },
       {
         Header: "Dilution",
@@ -34,7 +34,7 @@ const PreviousRound = ({ data = [] }) => {
       },
       {
         Header: "Post-Money",
-        accessor: "postMoney",
+        accessor: "pstMoney",
       },
     ],
     []
