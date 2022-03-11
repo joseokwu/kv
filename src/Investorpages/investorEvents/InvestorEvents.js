@@ -4,7 +4,7 @@ import { Tabs } from "../../Startupcomponents";
 import down from "../../assets/icons/downArrow.svg";
 import { SelectionDay } from "./components/selectionDay";
 import { getEvents } from "../../services/events";
-
+import { PageLoader } from "../../components/pageLoader/PageLoader";
 
 export const InvestorEvents = ({ history }) => {
   const {
@@ -14,8 +14,10 @@ export const InvestorEvents = ({ history }) => {
   const [selectionEvents, setSelectionEvents] = useState([]);
   const [demoEvents, setDemoEvents] = useState([]);
   const [pitchEvents, setPitchEvents] = useState([]);
+  const [loading , setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await getEvents();
     
     setSelectionEvents(res?.data?.filter((x) => x.eventType === "selectionDay")
@@ -24,6 +26,7 @@ export const InvestorEvents = ({ history }) => {
     setPitchEvents(() =>
       res?.data?.filter((x) => x.eventType === "pitchSession")
     );
+    setLoading(false);
   };
 
   console.log(selectionEvents)
@@ -63,7 +66,10 @@ export const InvestorEvents = ({ history }) => {
     }
   },[])
 
-
+  if(loading){
+    return <PageLoader dashboard={true} num={[1,2,3,4
+     ]} />
+  }else{
 
   return (
     <div className="mb-5">
@@ -97,5 +103,6 @@ export const InvestorEvents = ({ history }) => {
         <section className="mt-1">{renderContent()}</section>
       </div>
     </div>
-  );
+  )
+  }
 };

@@ -9,6 +9,8 @@ import {
   Tabs,
   EvaluationPendingCard,
 } from "../../components";
+import { PageLoader } from "../../components/pageLoader/PageLoader";
+
 
 export const InvestorEvaluation = ({ history }) => {
   const {
@@ -19,8 +21,11 @@ export const InvestorEvaluation = ({ history }) => {
   const [assigned, setAssigned] = useState([]);
   const [pending, setPending] = useState([]);
   const [completed, setCompleted] = useState([]);
+  const [loading , setLoading] = useState(false);
+
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await getInvestorEvaluation();
 
     console.log("res", res);
@@ -32,6 +37,7 @@ export const InvestorEvaluation = ({ history }) => {
     setCompleted(() =>
       res?.startups?.filter((x) => x.status?.toLowerCase() === "completed")
     );
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -127,42 +133,48 @@ export const InvestorEvaluation = ({ history }) => {
 
   const tabItems = ["All", "Pending", "Completed"];
 
-  return (
-    <div className="dashboard_main container-fluid">
-      <section className="row pb-5">
-        <section
-          className="col-lg-12 d-flex align-items-center dashboard-cards position-sticky"
-          style={{ background: "#fefefe" }}
-        >
-          {cardData.map((data, i) => (
-            <DashCard
-              name={data.name}
-              count={data.count}
-              color={data.color}
-              key={i}
-            />
-          ))}
-        </section>
-      </section>
-
-      <section className=" d-flex align-items-center justify-content-between">
-        <Tabs tabItems={tabItems} />
-        <div>
-          <button
-            className="d-flex align-items-center filter-btn"
-            style={{ columnGap: 7 }}
-            data-toggle="dropdown"
-          >
-            <img src={filter} alt="filter" />
-            <span>Filter</span>
-            <img className="pl-1" src={down} alt="down" />
-          </button>
-        </div>
-      </section>
-
-      <div className="pt-3">
-        <section className="mt-1">{renderContent()}</section>
-      </div>
-    </div>
-  );
+      if(loading){
+        return <PageLoader dashboard={true} num={[ 1, 2,3, 4
+           ]} />
+      }else{
+        return (
+          <div className="dashboard_main container-fluid">
+            <section className="row pb-5">
+              <section
+                className="col-lg-12 d-flex align-items-center dashboard-cards position-sticky"
+                style={{ background: "#fefefe" }}
+              >
+                {cardData.map((data, i) => (
+                  <DashCard
+                    name={data.name}
+                    count={data.count}
+                    color={data.color}
+                    key={i}
+                  />
+                ))}
+              </section>
+            </section>
+      
+            <section className=" d-flex align-items-center justify-content-between">
+              <Tabs tabItems={tabItems} />
+              <div>
+                <button
+                  className="d-flex align-items-center filter-btn"
+                  style={{ columnGap: 7 }}
+                  data-toggle="dropdown"
+                >
+                  <img src={filter} alt="filter" />
+                  <span>Filter</span>
+                  <img className="pl-1" src={down} alt="down" />
+                </button>
+              </div>
+            </section>
+      
+            <div className="pt-3">
+              <section className="mt-1">{renderContent()}</section>
+            </div>
+          </div>
+        );
+      }
+  
 };

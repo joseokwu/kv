@@ -6,15 +6,18 @@ import "./investorOpportunity.css";
 import { Opportunities } from "./components/Opportunities";
 import { Interests } from "../investorInterested/components/Interests";
 import { getInvestorOpportunity } from  '../../services/investor';
-
+import { PageLoader } from "../../components/pageLoader/PageLoader";
 
 export const InvestorOpportunity = ({ history }) => {
 
   const [oppData, setOppData] = useState([])
+  const [loading , setLoading] = useState(false);
 
   const getOpp = async () => {
+    setLoading(true);
     const res = await getInvestorOpportunity()
-    setOppData(res)
+    setOppData(res);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -46,6 +49,11 @@ export const InvestorOpportunity = ({ history }) => {
     }
   };
 
+
+  if(loading){
+    return <PageLoader dashboard={true} num={[1,2,3,4
+     ]} />
+  }else{
   return (
     <div className="wrapper">
       {/* <section>
@@ -68,7 +76,8 @@ export const InvestorOpportunity = ({ history }) => {
       </section>
       <section className="mt-3">{renderContent()}</section>
     </div>
-  );
+  )
+    }
 };
 
 const OpportunityFilter = () => {
