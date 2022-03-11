@@ -52,7 +52,7 @@ export const StartupProgram = () => {
       case "#Rating":
         return <div></div>;
       default:
-        return <CalenderComponent />;
+        return <CalenderComponent data={programInfo?.calendar} />
     }
   };
 
@@ -71,11 +71,9 @@ export const StartupProgram = () => {
         <div className="div col-lg-6">
           <h5> Welcome to Knight Ventures Program</h5>
           <p className="my-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et amet,
-            facilisi sodales cursus tellus nam ut. Enim, at imperdiet praesent
-            velit. Eget consequat, sollicitudin molestie curabitur lobortis
-            imperdiet. Vulputate malesuada tortor sit mi laoreet. Iaculis quis
-            pretium urna.
+           {
+            programInfo?.description
+           }
           </p>
           <div className="my-5">
             <button>
