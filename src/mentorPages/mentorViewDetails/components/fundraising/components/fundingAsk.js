@@ -5,29 +5,18 @@ export const FundingAsk = ({ data = {} }) => {
   console.log("data fund tab", data);
   return (
     <div>
-      <FundingAskTable data={data?.fundingAsk} />
-      <CommitmentTable data={data?.committments} />
+      <FundingAskTable data={data?.requirement} />
+      <CommitmentTable data={data?.committment} />
     </div>
   );
 };
 
 const FundingAskTable = ({ data = [] }) => {
-  console.log("data in table fund", data);
-  const [dataToUse, setDataToUse] = useState([]);
-
-  useEffect(() => {
-    const dataForState = [];
-    if (data) {
-      dataForState.push(data);
-      setDataToUse(dataForState);
-    }
-  }, [data]);
-
   const columns = React.useMemo(
     () => [
       {
         Header: "Fund Requirement",
-        accessor: "fundRequirement",
+        accessor: "fundingRequirement",
       },
       {
         Header: "Deal Type",
@@ -43,15 +32,15 @@ const FundingAskTable = ({ data = [] }) => {
       },
       {
         Header: "Pre-Money",
-        accessor: "preMoneyValuation",
+        accessor: "preMoney",
       },
       {
         Header: "Post-Money",
-        accessor: "postMoneyValuation",
+        accessor: "postMoney",
       },
       {
         Header: "Funding Closing Date",
-        accessor: "fundClosingDate",
+        accessor: "fundingClosingDate",
       },
     ],
     []
@@ -73,7 +62,7 @@ const FundingAskTable = ({ data = [] }) => {
       {/* <h4 className="mb-5 fundraisingSubTitle">Funding Ask</h4> */}
 
       <section>
-        <Table columns={columns} data={dataToUse} />
+        <Table columns={columns} data={data} />
       </section>
     </section>
   );

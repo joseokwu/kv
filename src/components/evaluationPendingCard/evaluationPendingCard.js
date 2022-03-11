@@ -4,7 +4,7 @@ import "./evaluationPendingCard.css";
 import logo from "../../assets/images/yeLogo.svg";
 import { Tag } from "../../components";
 import { Modal } from "../modal/Modal";
-import { EvaluationModal } from "../../mentorPages/mentorEvaluation/components/evaluationModal";
+import { EvaluationModal } from "../../Investorpages/investorEvaluation/components/evaluationModal";
 
 export const EvaluationPendingCard = ({ data = {} }) => {
   return (
@@ -25,12 +25,10 @@ export const EvaluationPendingCard = ({ data = {} }) => {
         <Tag name={data?.category} />
       </section>
 
-      <section className="opp-content mt-3">
+      <section data-toggle="modal" data-target="#moreDetailsModal" className="opp-content mt-3">
         <p>
-          {data?.productDescription}
-          <a href="#!" data-toggle="modal" data-target="#moreDetailsModal">
-            More Details
-          </a>
+          {data?.description}
+          
         </p>
       </section>
 

@@ -20,10 +20,10 @@ export const EvaluationProgress = ({ data = {} }) => {
         <Tag name={data.category} />
       </section>
 
-      <section className="opp-content mt-3">
+      <section data-toggle="modal" data-target="#moreDetailsModal" className="opp-content mt-3">
         <p>
-          {data?.productDescription}
-          elit. <a href="#!">More Details</a>
+          {data?.description}
+         
         </p>
       </section>
 

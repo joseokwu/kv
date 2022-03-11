@@ -7,8 +7,7 @@ Day, WorkWeek, Month
 
 export const Calender = ({ data })=>{
 
-   
-
+    console.log(data)
    const localData = {
 
     dataSource:data,
@@ -23,7 +22,7 @@ export const Calender = ({ data })=>{
     return (
         <ScheduleComponent currentView='Week'
         height='570px' 
-        selectedDate={new Date(2019, 0, 11)}
+        selectedDate={new Date()}
           eventSettings={localData} >
           <ViewsDirective>
               <ViewDirective option='Week' ></ViewDirective>

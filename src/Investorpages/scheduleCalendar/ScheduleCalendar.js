@@ -27,6 +27,8 @@ useEffect(() =>{
 
 },[])
 
+//console.log(schedules)
+
   return (
     <div className="wrapper">
       <CreateCallSchedule />
@@ -52,7 +54,7 @@ useEffect(() =>{
       </section>
 
       <section>
-        <Calender data={schedules} />
+        <Calender data={schedules && schedules } />
       </section>
     </div>
   );

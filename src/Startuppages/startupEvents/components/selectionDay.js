@@ -23,7 +23,7 @@ export const SelectionDay = ({ data = [] }) => {
 
           <section className="d-flex justify-content-between mt-2">
             <p className="pending_date pr-4">
-              <span>{new Date(data[0]?.startDate).getDate()}</span>{' '}
+              <span>{new Date(data[0]?.startDate).getDate()}</span>{" "}
               {months[new Date(data[0]?.startDate).getMonth()]}
             </p>
 
@@ -42,7 +42,7 @@ export const SelectionDay = ({ data = [] }) => {
             <img
               src={demo}
               alt="demo"
-              style={{ width: '100%', height: '100%' }}
+              style={{ width: "100%", height: "100%" }}
             />
           </section>
 
@@ -58,11 +58,13 @@ export const SelectionDay = ({ data = [] }) => {
               className="d-flex align-items-center"
               style={{ columnGap: 10 }}
             >
-              {new Date().getTime() >= new Date(data[0]?.startTime) &&
-              new Date().getTime() <= new Date(data[0]?.endTime).getTime() ? (
+              {new Date().getTime() >= new Date(data[0]?.startDate).getTime() &&
+              new Date().getTime() <= new Date(data[0]?.endDate).getTime() ? (
                 <button className="se_join">Join Event</button>
               ) : (
-                <button className="se_join">Add Schedule</button>
+                new Date().getTime() < new Date(data[0]?.endDate).getTime() && (
+                  <button className="se_join">Add Schedule</button>
+                )
               )}
               <button className="se_view">View details</button>
               {/* <Button label="View details" variant="secondary" /> */}
@@ -92,7 +94,7 @@ export const SelectionDay = ({ data = [] }) => {
 
             <section className="d-flex justify-content-between mt-2">
               <p className="pending_date pr-4">
-                <span>{new Date(data[1]?.startDate).getDate()}</span>{' '}
+                <span>{new Date(data[1]?.startDate).getDate()}</span>{" "}
                 {months[new Date(data[1]?.startDate).getMonth()]}
               </p>
               {new Date().getTime() >= new Date(data[1]?.startTime) &&
@@ -104,7 +106,7 @@ export const SelectionDay = ({ data = [] }) => {
                   {formatTime(data[1]?.startTime)}-
                   {formatTime(data[1]?.endTime)}
                 </p>
-              )}{' '}
+              )}{" "}
             </section>
 
             <section className="event_card_body mt-3">
@@ -119,11 +121,15 @@ export const SelectionDay = ({ data = [] }) => {
                 className="d-flex align-items-center"
                 style={{ columnGap: 10 }}
               >
-                {new Date().getTime() >= new Date(data[1]?.startTime) &&
-                new Date().getTime() <= new Date(data[1]?.endTime).getTime() ? (
+                {new Date().getTime() >=
+                  new Date(data[1]?.startDate).getTime() &&
+                new Date().getTime() <= new Date(data[1]?.endDate).getTime() ? (
                   <button className="se_join">Join Event</button>
                 ) : (
-                  <button className="se_join">Add Schedule</button>
+                  new Date().getTime() <
+                    new Date(data[1]?.endDate).getTime() && (
+                    <button className="se_join">Add Schedule</button>
+                  )
                 )}
                 <button className="se_view">View details</button>
               </div>
@@ -146,11 +152,11 @@ export const SelectionDay = ({ data = [] }) => {
 
             <section className="d-flex justify-content-between mt-2">
               <p className="pending_date pr-4">
-                <span>{new Date(data[2]?.startDate).getDate()}</span>{' '}
-                {months[new Date(data[2]?.startDate).getMonth()]}{' '}
+                <span>{new Date(data[2]?.startDate).getDate()}</span>{" "}
+                {months[new Date(data[2]?.startDate).getMonth()]}{" "}
               </p>
 
-              {new Date().getTime() >= new Date(data[2]?.startTime) &&
+              {new Date().getTime() >= new Date(data[2]?.startTime).getTime() &&
               new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
                 <span className="accepted_tag">Ongoing</span>
               ) : (
@@ -174,11 +180,15 @@ export const SelectionDay = ({ data = [] }) => {
                 className="d-flex align-items-center"
                 style={{ columnGap: 10 }}
               >
-                {new Date().getTime() >= new Date(data[2]?.startTime) &&
-                new Date().getTime() <= new Date(data[2]?.endTime).getTime() ? (
+                {new Date().getTime() >=
+                  new Date(data[2]?.startDate).getTime() &&
+                new Date().getTime() <= new Date(data[2]?.endDate).getTime() ? (
                   <button className="se_join">Join Event</button>
                 ) : (
-                  <button className="se_join">Add Schedule</button>
+                  new Date().getTime() <
+                    new Date(data[2]?.endDate).getTime() && (
+                    <button className="se_join">Add Schedule</button>
+                  )
                 )}
                 <button className="se_view">View details</button>
               </div>
@@ -205,19 +215,18 @@ export const SelectionDay = ({ data = [] }) => {
 
                   <section className="d-flex justify-content-between mt-2">
                     <p className="pending_date pr-4">
-                      <span>{new Date(d?.startDate).getDate()}</span>{' '}
+                      <span>{new Date(d?.startDate).getDate()}</span>{" "}
                       {months[new Date(d?.startDate).getMonth()]}
                     </p>
                     {new Date().getTime() >= new Date(d?.startTime) &&
-                    new Date().getTime() <=
-                      new Date(data[0]?.endTime).getTime() ? (
+                    new Date().getTime() <= new Date(d?.endTime).getTime() ? (
                       <span className="accepted_tag">Ongoing</span>
                     ) : (
                       <p className="pending_time pt-1">
                         <img src={bigClock} alt="clock" />{" "}
                         {formatTime(d?.startTime)}-{formatTime(d?.endTime)}
                       </p>
-                    )}{' '}
+                    )}{" "}
                   </section>
 
                   <section className="event_card_body mt-3">
@@ -232,11 +241,14 @@ export const SelectionDay = ({ data = [] }) => {
                       className="d-flex align-items-center"
                       style={{ columnGap: 10 }}
                     >
-                      {new Date().getTime() >= new Date(d?.startTime) &&
-                      new Date().getTime() <= new Date(d?.endTime).getTime() ? (
+                      {new Date().getTime() >= new Date(d?.startDate) &&
+                      new Date().getTime() <= new Date(d?.endDate).getTime() ? (
                         <button className="se_join">Join Event</button>
                       ) : (
-                        <button className="se_join">Add Schedule</button>
+                        new Date().getTime() <
+                          new Date(d?.endDate).getTime() && (
+                          <button className="se_join">Add Schedule</button>
+                        )
                       )}
                       <button className="se_view">View details</button>
                     </div>
@@ -249,12 +261,12 @@ export const SelectionDay = ({ data = [] }) => {
                   </section>
                 </div>
               </section>
-            )
+            );
           })}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const EventScheduleModal = () => {
   return (
@@ -273,7 +285,7 @@ const EventScheduleModal = () => {
       </section>
 
       <section className="mt-2">
-        <p className="" style={{ color: '#E21919' }}>
+        <p className="" style={{ color: "#E21919" }}>
           2 days : 30mins : 05 secs
         </p>
 
@@ -299,7 +311,7 @@ const EventScheduleModal = () => {
             morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
             elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.{' '}
+            consectetur adipiscing elit.{" "}
           </p>
         </section>
 
@@ -315,7 +327,7 @@ const EventScheduleModal = () => {
 
         <section className="event_link">
           <a href="https://www.yebox.io/" target="_blank">
-            <img className="pr-3" src={location} alt="location" />{' '}
+            <img className="pr-3" src={location} alt="location" />{" "}
             meet.google.com/jce-wata-fux
           </a>
         </section>
@@ -348,22 +360,22 @@ const EventScheduleModal = () => {
             <button className="mr-3">No</button>
             <button className="mr-4">Maybe</button>
             <span>
-              Request to reschedule{' '}
+              Request to reschedule{" "}
               <img className="pl-2" src={down} alt="arrow down" />
             </span>
           </div>
         </section>
 
         <section className="mt-5">
-          <TextField label={'Day'} placeholder={'Thursday 17th Oct 2021'} />
+          <TextField label={"Day"} placeholder={"Thursday 17th Oct 2021"} />
         </section>
 
         <section className="row mt-5">
           <div className="col-lg-5">
-            <Select label={'Start time'} placeholder={'Time'} />
+            <Select label={"Start time"} placeholder={"Time"} />
           </div>
           <div className="col-lg-5">
-            <Select label={'End time'} placeholder={'Time'} />
+            <Select label={"End time"} placeholder={"Time"} />
           </div>
         </section>
 
@@ -376,5 +388,5 @@ const EventScheduleModal = () => {
         </section>
       </section>
     </div>
-  )
-}
+  );
+};

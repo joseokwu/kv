@@ -13,14 +13,16 @@ import { Fundraising } from "./components/fundraising/Fundraising";
 import { Milestone } from "./components/milestone/Milestone";
 import { RoadMap } from "./components/roadMap/RoadMap";
 import { getStartupInvesrtorProfile } from '../../services/investor';
-
+import { PageLoader } from "../../components/pageLoader/PageLoader";
 
 export const Opportunity = ({ history }) => {
   const [profileData, setProfileData] = useState({});
-
+  const [loading , setLoading] = useState(false);
   const getData = async () => {
+    setLoading(true);
     const res = await getStartupInvesrtorProfile();
     setProfileData(res);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -61,15 +63,20 @@ export const Opportunity = ({ history }) => {
         return <Fundraising data={profileData?.fundRaising} />;
 
       case "#Milestone/Timeline":
-        return <Milestone />;
+        return <Milestone data={profileData?.mileStone} />;
 
       case "#product road map":
-        return <RoadMap />;
+        return <RoadMap data={profileData?.productRoadMap} />;
 
       default:
         return <Product data={profileData?.product} />;
     }
   };
+
+  if(loading){
+    return <PageLoader dashboard={true} num={[1,2,3,4
+     ]} big={false} />
+  }else{
   return (
     <div>
       <article className="wrapper pt-3" style={{ background: "#F9F9FC" }}>
@@ -110,5 +117,6 @@ export const Opportunity = ({ history }) => {
         <div className="py-4">{renderContent()}</div>
       </article>
     </div>
-  );
+  )
+          }
 };

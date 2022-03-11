@@ -1,4 +1,4 @@
-import React , { useEffect , useState } from "react";
+import React, { useEffect, useState } from "react";
 import left from "../../assets/icons/chervonLeft.svg";
 import "./opportunity.css";
 import { Tabs, Tag } from "../../Startupcomponents";
@@ -12,7 +12,6 @@ import { BusinessCanavas } from "./components/businessCanvas";
 import { RoadMap } from "./components/roadMap/RoadMap";
 import { Milestone } from "./components/milestone/Milestone";
 import { getStartupProfile } from "../../services";
-
 
 export const StartupProfile = ({ history }) => {
   const {
@@ -29,11 +28,10 @@ export const StartupProfile = ({ history }) => {
     "product road map",
   ];
   const [prof, setProf] = useState(null);
-  const fetchData = async() =>{
+  const fetchData = async () => {
     const res = await getStartupProfile();
-      console.log(res)
     setProf(res);
-  }
+  };
 
   console.log(`pathname`, pathname);
 
@@ -43,36 +41,30 @@ export const StartupProfile = ({ history }) => {
         return <Product />;
       case "#pitch deck":
         return <PitchDeck data={prof?.pitchDeck} />;
-        case "#business canvas":
+      case "#business canvas":
         return <BusinessCanavas />;
       case "#product road map":
-        return <RoadMap />;
+        return <RoadMap data={prof?.ProductRoadMap} />;
       case "#team":
-        return <Team  data={prof?.team} />;
+        return <Team data={prof?.team} />;
       case "#milestone/timeline":
-        return <Milestone />
+        return <Milestone data={prof?.mileStone} />;
       default:
         return <Product />;
     }
   };
 
-    
-
-  useEffect(() =>{
+  useEffect(() => {
     fetchData();
 
-    return () =>{
-      setProf(null)
-    }
-
-  },[])
-
-
+    return () => {
+      setProf(null);
+    };
+  }, []);
 
   return (
     <div>
       <article className="wrapper pt-3" style={{ background: "#F9F9FC" }}>
-   
         <div className="row mt-5">
           <div className="col-lg-7 col-12">
             <OppCompanyInfo data={prof} />

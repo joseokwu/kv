@@ -1,7 +1,7 @@
 import { useActivity } from "../../../hooks";
 import { Tag } from "../../../mentorComponents";
 
-export const FundingRound = () => {
+export const FundingRound = ({ data = {} }) => {
   const {
     state: {
       dash_view: { fundingRoundSummary },
@@ -20,11 +20,11 @@ export const FundingRound = () => {
       >
         <div>
           <span className="opp_tag_label">Funding Ask</span>
-          <Tag name={fundingRoundSummary?.fundingAsk} color="#212463" />
+          <Tag name={data?.fundingAsk} color="#212463" />
         </div>
         <div className="text-right">
           <span className="opp_tag_label">Dilution</span>
-          <Tag name={fundingRoundSummary?.dilution} color="#058DC1" />
+          <Tag name={data?.dilution} color="#058DC1" />
         </div>
       </section>
 
@@ -34,11 +34,11 @@ export const FundingRound = () => {
       >
         <div>
           <span className="opp_tag_label">Total Commitment</span>
-          <Tag name={fundingRoundSummary?.totalCommittment} color="#212463" />
+          <Tag name={data?.totalCommittment} color="#212463" />
         </div>
         <div className="text-right">
           <span className="opp_tag_label">Funding Stage</span>
-          <Tag name={fundingRoundSummary?.fundingStage} color="#058DC1" />
+          <Tag name={data?.fundingStage} color="#058DC1" />
         </div>
       </section>
 
@@ -48,12 +48,12 @@ export const FundingRound = () => {
       >
         <div>
           <span className="opp_tag_label">Total Funding</span>
-          <Tag name={fundingRoundSummary?.totalFunding} color="#212463" />
+          <Tag name={data?.totalFunding} color="#212463" />
         </div>
         <div className="text-right">
           <span className="opp_tag_label">Last Funding Round</span>
           <Tag
-            name={fundingRoundSummary?.lastFundingRoundAndDate.substr(0,10)}
+            name={data?.lastFundingRoundAndDate?.substr(0, 10)}
             color="#058DC1"
           />
         </div>
@@ -62,14 +62,11 @@ export const FundingRound = () => {
       <section className="d-flex align-items-center justify-content-between">
         <div>
           <span className="opp_tag_label">Minimum Investment</span>
-          <Tag
-            name={fundingRoundSummary?.minimumInvestmentAmount}
-            color="#212463"
-          />
+          <Tag name={data?.minimumInvestmentAmount} color="#212463" />
         </div>
         <div className="text-right">
           <span className="opp_tag_label">Round Type</span>
-          <Tag name={fundingRoundSummary?.roundType} color="#058DC1" />
+          <Tag name={data?.roundType} color="#058DC1" />
         </div>
       </section>
     </div>

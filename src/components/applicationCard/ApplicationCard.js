@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState } from "react";
 import "./applicationCard.css";
 import comment from "../../assets/icons/comment.svg";
 import approvedIcon from "../../assets/icons/greenCircleCheck.svg";
@@ -6,6 +6,8 @@ import declinedIcon from "../../assets/icons/declinedIcon.svg";
 import expiredIcon from "../../assets/icons/expired.svg";
 import sampleCommenter from "../../assets/images/sampleCommenter.png";
 import { Button, Tag, Badge } from "../index";
+import { ReadMore } from './../../mentorComponents/readMore/readMore';
+
 export const ApplicationCard = ({
   logo = "",
   status = "pending",
@@ -14,6 +16,7 @@ export const ApplicationCard = ({
 }) => {
 
   const date = new Date(data?.applied)
+  const [numVal, setNum] = useState(120);
 
   const statusRender = () => {
     switch (data?.status) {
@@ -103,9 +106,10 @@ export const ApplicationCard = ({
         data-target={`#applicantModal${index}`}
       >
         <p className="appCard-text">
-          {
-            data?.description
-          }
+          <ReadMore>{
+            data?.description ?? ""
+          }</ReadMore>
+          
         </p>
       </section>
       <section

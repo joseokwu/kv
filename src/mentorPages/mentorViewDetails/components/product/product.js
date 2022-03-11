@@ -6,17 +6,13 @@ import { CurrentInvestorConnectCard } from "../../../../mentorComponents";
 import "./product.css";
 import { useActivity } from "../../../../hooks";
 
-export const Product = () => {
-  const {
-    state: { dash_view },
-  } = useActivity();
-
+export const Product = ({ data = {} }) => {
   return (
     <div className="row">
       <section className="col-xl-8">
         <div className="product-wrap opp_page_card py-5">
           <h3>Product Description</h3>
-          <p className="pb-3 mb-5 prod-desc">{dash_view?.productDescription}</p>
+          <p className="pb-3 mb-5 prod-desc">{data?.productDes}</p>
 
           <h3>Product Demo</h3>
 
@@ -34,11 +30,8 @@ export const Product = () => {
           <section className="d-flex align-items-center mt-3 product-founder">
             <img src={founder} alt="founder" />
             <div>
-              <p>{dash_view?.founderProfile?.fullName}</p>
-              <small>
-                {dash_view?.founderProfile?.designation}{" "}
-                {dash_view?.founderProfile?.company}
-              </small>
+              <p>{data?.founderProfile?.name}</p>
+              <small>{data?.founderProfile?.position}</small>
             </div>
           </section>
           <section className="founder_profile mt-3">
@@ -62,7 +55,7 @@ export const Product = () => {
             <a href="#!">Connect</a>
           </section> */}
 
-          {dash_view?.investors.map((c, i) => {
+          {data?.investor?.map((c, i) => {
             return (
               <div key={`conn-${1}`} className="mb-3">
                 <CurrentInvestorConnectCard data={c} />

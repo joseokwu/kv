@@ -14,6 +14,7 @@ import { FinancialProjection } from "./components/financialProjection";
 import { getFundraisingData } from "../../services";
 import newApp from "../../assets/icons/Star.svg";
 import { convertToMillion } from "../../utils/helpers";
+import { PageLoader } from "../../components";
 
 export const StartupFundingRaising = () => {
   const history = useHistory();
@@ -22,10 +23,13 @@ export const StartupFundingRaising = () => {
   } = history;
 
   const [fundData, setFundData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getData = async () => {
+    setLoading(true);
     const res = await getFundraisingData();
     setFundData(res);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -56,6 +60,20 @@ export const StartupFundingRaising = () => {
     "Previous Round",
     "Financial Projection",
   ];
+
+  if (loading) {
+    return (
+      <PageLoader
+        dashboard={true}
+        num={[
+          fundData?.fundAsk,
+          fundData?.fundUtilization,
+          fundData?.capTable,
+          fundData?.previousRound,
+        ]}
+      />
+    );
+  }
 
   return (
     <div className="container">

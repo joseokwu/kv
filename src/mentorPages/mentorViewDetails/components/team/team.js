@@ -6,10 +6,7 @@ import member from "../../../../assets/images/sampleTeamMember.png";
 import { useActivity } from "../../../../hooks";
 import "./team.css";
 
-export const Team = () => {
-  const {
-    state: {dash_view  },
-  } = useActivity();
+export const Team = ({ data = [] }) => {
   return (
     <div>
       {/* <h3 className="tab-section-title">Team</h3> */}
@@ -17,14 +14,16 @@ export const Team = () => {
       <section>
         <h4 className="team-group-title">Founder & Co-Founders</h4>
 
-        <div className="row">  
-          {dash_view?.teams.slice(0, 3).map((member, i) => {
-            return (
-              <article className="col-lg-4 mb-4">
-                <CoFounders key={`founder-member-${i}`} data={member} />
-              </article>
-            );
-          })}
+        <div className="row">
+          {data
+            .filter((x) => x?.position?.toLowerCase() === "founder and ceo")
+            .map((member, i) => {
+              return (
+                <article className="col-lg-4 mb-4">
+                  <CoFounders key={`founder-member-${i}`} data={member} />
+                </article>
+              );
+            })}
         </div>
       </section>
 
@@ -32,13 +31,15 @@ export const Team = () => {
         <h4 className="team-group-title mt-5">Team Members</h4>
 
         <div className="row">
-          {dash_view?.teams.slice(3, dash_view?.teams?.length).map((member, i) => {
-            return (
-              <article className="col-lg-4 mb-4">
-                <TeamMember key={`member-${i}`} data={member} />
-              </article>
-            );
-          })}
+          {data
+            .filter((x) => x?.position?.toLowerCase() !== "founder and ceo")
+            .map((member, i) => {
+              return (
+                <article className="col-lg-4 mb-4">
+                  <TeamMember key={`member-${i}`} data={member} />
+                </article>
+              );
+            })}
         </div>
       </section>
     </div>

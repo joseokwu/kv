@@ -6,12 +6,13 @@ import { Upcoming } from "./components/Upcoming";
 import { CreateSchedule } from "./components/CreateSchedule";
 import { Past } from "./components/Past";
 
+
 export const InvestorSchedule = ({ history }) => {
   const {
     location: { hash },
     push,
   } = history;
-
+ 
   const renderComponent = () => {
     switch (hash.replaceAll("%20", " ")) {
       case "#upcoming":

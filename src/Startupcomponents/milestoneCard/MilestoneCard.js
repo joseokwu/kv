@@ -1,7 +1,8 @@
 import React from "react";
+import { months } from "../../utils/helpers";
 import "./milestone.css";
 
-export const MilestoneCard = ({ side = "" }) => {
+export const MilestoneCard = ({ side = "", data = {} }) => {
   return (
     <div
       className={`flex-align position-relative`}
@@ -15,20 +16,20 @@ export const MilestoneCard = ({ side = "" }) => {
       )}
       <div className="d-flex align-items-center mile-card shadow">
         <section className="mile-info">
-          <p className="title mb-2">Company Inauguration</p>
-          <p className="desc mb-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non.
-          </p>
-          <span className="d-flex align-items-center mile-actions">
+          <p className="title mb-2">{data?.title}</p>
+          <p className="desc mb-2">{data?.description}</p>
+          {/* <span className="d-flex align-items-center mile-actions">
             <p className="mr-3 edit">Edit Milestone</p>
             <p className="delete">Delete</p>
-          </span>
+          </span> */}
         </section>
 
         <section className="date-card">
-          <p className="month">Oct.</p>
-          <p className="day">20</p>
-          <p className="year">2021</p>
+          <p className="month">
+            {months[new Date(data?.date).getMonth()].substring(0, 3)}.
+          </p>
+          <p className="day">{new Date(data?.date).getDate()}</p>
+          <p className="year">{new Date(data?.date).getFullYear()}</p>
         </section>
       </div>
       {side === "left" && (

@@ -8,7 +8,7 @@ import PreviousRound from "./components/previousRound";
 import FinancialProjection from "./components/financialProjection";
 import { useActivity } from "../../../../hooks";
 
-export const Fundraising = () => {
+export const Fundraising = ({ data = {} }) => {
   const {
     state: {
       dash_view: { fundRaising },
@@ -18,19 +18,19 @@ export const Fundraising = () => {
   const renderContent = () => {
     switch (currentTab) {
       case "Funding Ask":
-        return <FundingAsk data={fundRaising?.fundingAskTab} />;
+        return <FundingAsk data={data?.fundAsk} />;
 
       case "Fund Utilization":
-        return <FundUtilization data={fundRaising?.fundUtilization} />;
+        return <FundUtilization data={data?.fundUtilization} />;
 
       case "Cap Table":
-        return <CapTable data={fundRaising?.capTable} />;
+        return <CapTable data={data?.capTable} />;
 
       case "Previous Round":
-        return <PreviousRound data={fundRaising?.previousRound} />;
+        return <PreviousRound data={data?.previousRound} />;
 
       case "Financial Projection":
-        return <FinancialProjection data={fundRaising?.financialProjection} />;
+        return <FinancialProjection data={data?.financialProjection} />;
 
       default:
         return null;
