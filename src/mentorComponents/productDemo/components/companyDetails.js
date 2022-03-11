@@ -9,6 +9,7 @@ import whatsApp from "../../../assets/icons/whatsapp.svg";
 import share from "../../../assets/icons/share.svg";
 import { useHistory } from "react-router-dom";
 import { useActivity } from "../../../hooks";
+import { formatDate } from "../../../utils/helpers";
 
 export const CompanyDetails = ({ data = {} }) => {
   const { push } = useHistory();
@@ -33,7 +34,7 @@ export const CompanyDetails = ({ data = {} }) => {
 
           <section className="d-flex align-items-center">
             <span className="opp_tag_label">Stage</span>
-            <span className="opp_tag">{data?.stage}</span>
+            <span className="opp_tag">{data?.stage ?? "Seed"}</span>
           </section>
         </div>
       </div>
@@ -55,7 +56,7 @@ export const CompanyDetails = ({ data = {} }) => {
         <div className="d-flex align-items-center">
           <img src={clock} alt="web" width="20" height="20" />
           <span className="ml-2 extra-info">
-            Incorporated {data?.incorporationDate}
+            Incorporated {formatDate(data?.incorporation)}
           </span>
         </div>
 
