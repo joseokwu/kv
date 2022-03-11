@@ -34,7 +34,7 @@ export const CompanyDetails = ({ data = {} }) => {
 
           <section className="d-flex align-items-center">
             <span className="opp_tag_label">Stage</span>
-            <span className="opp_tag">{data?.stage}</span>
+            <span className="opp_tag">{data?.stage ?? "Seed"}</span>
           </section>
         </div>
       </div>

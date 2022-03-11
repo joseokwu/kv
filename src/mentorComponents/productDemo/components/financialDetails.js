@@ -21,7 +21,7 @@ export const FinancialDetails = ({ data = {} }) => {
         <div className="d-flex align-items-center">
           <span className="opp_tag_label">Investors</span>
           <span className="opp_tag">{data?.investor}</span>
-          <span className="opp_tag">{data?.count}</span>
+          <span className="opp_tag">{data?.count ?? 2}</span>
         </div>
 
         <div className="d-flex align-items-center">
