@@ -92,11 +92,8 @@ import {
   TeamMemberSignUp,
   TeamMemberSignIn,
 } from "../Startuppages";
-<<<<<<< HEAD
 import { MentorViewFeedback } from "../mentorPages/mentorAssignments/components/viewFeedback/viewFeedback";
-=======
 import { InvestorEvaluate } from "../Investorpages/evaluation/evaluation";
->>>>>>> 76d5bfea605566b2c717c9d45a2af73e77a2516e
 
 const routes = [
   // Start-up routes start
