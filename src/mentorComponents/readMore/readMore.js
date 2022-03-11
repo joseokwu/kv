@@ -10,7 +10,7 @@ export const ReadMore = ({ children }) => {
   }
   return (
     <p className="text">
-      {isReadMore ? text.slice(0, 100) : text}
+      {isReadMore ? text.slice(0, 200) : text}
       <span onClick={toggleReadMore} className="read-or-hide">
         {isReadMore ? <span className="pl-1">More Details</span> : <span className="pl-1">Less Details</span>}
       </span>

@@ -61,10 +61,10 @@ export const Opportunity = ({ history }) => {
         return <Fundraising data={profileData?.fundRaising} />;
 
       case "#Milestone/Timeline":
-        return <Milestone />;
+        return <Milestone data={profileData?.mileStone} />;
 
       case "#product road map":
-        return <RoadMap />;
+        return <RoadMap data={profileData?.productRoadMap} />;
 
       default:
         return <Product data={profileData?.product} />;
