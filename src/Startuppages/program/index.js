@@ -19,7 +19,7 @@ import { PageLoader } from "../../components";
 export const StartupProgram = () => {
   const tabList = ["Calender", "Session", "Assignment", "Rating"];
 
-  const [programInfo, setProgramInfo] = useState({});
+  const [programInfo, setProgramInfo] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const getData = async () => {
@@ -41,10 +41,12 @@ export const StartupProgram = () => {
     location: { hash },
   } = useHistory();
 
+   console.log(programInfo  && programInfo?.calendar)
+
   const renderComponent = () => {
     switch (hash) {
       case "#Calender":
-        return <CalenderComponent />;
+        return <CalenderComponent  data={ programInfo !== undefined && programInfo?.calendar} />;
       case "#Session":
         return <Session data={programInfo?.sessions} />;
       case "#Assignment":
@@ -52,7 +54,7 @@ export const StartupProgram = () => {
       case "#Rating":
         return <div></div>;
       default:
-        return <CalenderComponent data={programInfo?.calendar} />
+        return <CalenderComponent data={ programInfo !== undefined && programInfo?.calendar} />
     }
   };
 
