@@ -35,9 +35,8 @@ import {
   MentorEvaluation,
 } from "../mentorPages";
 
-import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewAssignment/viewAssignment";
+import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 import {
-  PageLoader,
   WithInvestorRegisterLayout,
   WithMainInvestorLayout,
 } from "../components";
@@ -92,11 +91,6 @@ import {
   TeamMemberSignUp,
   TeamMemberSignIn,
 } from "../Startuppages";
-<<<<<<< HEAD
-import { MentorViewFeedback } from "../mentorPages/mentorAssignments/components/viewFeedback/viewFeedback";
-=======
-import { InvestorEvaluate } from "../Investorpages/evaluation/evaluation";
->>>>>>> 76d5bfea605566b2c717c9d45a2af73e77a2516e
 
 const routes = [
   // Start-up routes start
@@ -316,7 +310,7 @@ const routes = [
   {
     name: "Investor Evaluation",
     path: "/investor/evaluation",
-    component: WithMainInvestorLayout(InvestorEvaluation),
+    component: WithMainInvestorLayout(MentorEvaluation),
     exact: true,
     protected: false,
     type: "investor",
@@ -413,15 +407,6 @@ const routes = [
     component: WithMainInvestorLayout(InvestorNotification),
     exact: true,
     protected: true,
-    type: "investor",
-  },
-
-  {
-    name: "Evaluation",
-    path: "/investor/evaluation/evaluate",
-    component: WithMainInvestorLayout(InvestorEvaluate),
-    exact: true,
-    protected: false,
     type: "investor",
   },
 
@@ -591,7 +576,7 @@ const routes = [
   {
     name: "Events",
     path: "/mentor/events",
-    component: WithMentorMainLayout(MentorEvents),
+    component: WithMentorMainLayout(StartupEvents),
     exact: true,
     protected: true,
     type: "mentor",
@@ -676,14 +661,6 @@ const routes = [
     type: "mentor",
   },
   {
-    name: "ViewFeedback",
-    path: "/mentor/assignments/view/feedback",
-    component: WithMentorMainLayout(MentorViewFeedback),
-    exact: true,
-    protected: true,
-    type: "mentor",
-  },
-  {
     name: "ViewAssignmnet",
     path: "/mentor/assignments/view",
     component: WithMentorMainLayout(MentorViewAssignment),
@@ -701,15 +678,6 @@ const routes = [
   },
 
   // Mentor Routes Ends Here
-
-  {
-    name: "test loader",
-    path: "/loading",
-    component: WithMentorMainLayout(PageLoader),
-    exact: true,
-    protected: true,
-    type: "mentor",
-  },
 ];
 
 export default routes;
