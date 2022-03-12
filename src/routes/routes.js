@@ -337,10 +337,10 @@ const routes = [
   },
   {
     name: "Investor founder",
-    path: "/investor/founder_profile",
+    path: "/investor/opportunities/:id/founder",
     component: WithMainInvestorLayout(InvestorFounderProfile),
     exact: true,
-    protected: true,
+    protected: false,
     type: "investor",
   },
   {
