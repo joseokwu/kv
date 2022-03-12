@@ -1,12 +1,13 @@
-import React from "react";
-import bigClock from "../../../assets/icons/bigclock.svg";
-import demo from "../../../assets/images/vidDemo.svg";
-import doc from "../../../assets/images/doc.svg";
-import { Modal, Select, TextField } from "../../../Startupcomponents";
-import { formatTime, months } from "../../../utils/helpers";
-import down from "../../../assets/icons/downArrow.svg";
-import location from "../../../assets/icons/locationSm.svg";
-import name from "../../../assets/icons/initial.svg";
+import React from 'react'
+import dots from '../../../assets/icons/3dots.svg'
+import bigClock from '../../../assets/icons/bigclock.svg'
+import demo from '../../../assets/images/vidDemo.svg'
+import doc from '../../../assets/images/doc.svg'
+import { Button, Modal, Select, TextField } from '../../../mentorComponents'
+import { formatTime, months } from '../../../utils/helpers'
+import down from '../../../assets/icons/downArrow.svg'
+import location from '../../../assets/icons/locationSm.svg'
+import name from '../../../assets/icons/initial.svg'
 
 export const SelectionDay = ({ data = [] }) => {
   return (
@@ -62,9 +63,13 @@ export const SelectionDay = ({ data = [] }) => {
               new Date().getTime() <= new Date(data[0]?.endDate).getTime() ? (
                 <button className="se_join">Join Event</button>
               ) : (
-                new Date().getTime() < new Date(data[0]?.endDate).getTime() && (
-                  <button className="se_join">Add Schedule</button>
-                )
+                <button
+                  className="se_join"
+                  data-target="#eventScheduleModal"
+                  data-toggle={'modal'}
+                >
+                  Add Schedule
+                </button>
               )}
               <button className="se_view">View details</button>
               {/* <Button label="View details" variant="secondary" /> */}
