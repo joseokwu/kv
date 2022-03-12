@@ -10,9 +10,6 @@ import { useActivity } from "../../hooks/index";
 export const ProductDemo = ({ data = {} }) => {
   const { push } = useHistory();
 
-  const {
-    state: { dash_view },
-  } = useActivity();
 
   return (
     <div>
@@ -37,7 +34,7 @@ export const ProductDemo = ({ data = {} }) => {
             <FinancialDetails data={data?.financialDetails} />
           </div>
           <div className="col-lg-5">
-            <FundingRound data={data?.fundingRoundSummary} />
+            <FundingRound data={data?.fundingRoundSummary && data?.fundingRoundSummary} />
           </div>
         </div>
       </article>

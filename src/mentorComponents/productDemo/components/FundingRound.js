@@ -2,11 +2,7 @@ import { useActivity } from "../../../hooks";
 import { Tag } from "../../../mentorComponents";
 
 export const FundingRound = ({ data = {} }) => {
-  const {
-    state: {
-      dash_view: { fundingRoundSummary },
-    },
-  } = useActivity();
+
 
   return (
     <div className=" opp_page_card py-4">

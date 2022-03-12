@@ -57,4 +57,14 @@ export const getStartupProfile = async () => {
   }
 };
 
+export const getStartupFounderProfile = async () => {
+  try {
+    const res = await request.post("startup/founder-profile");
+
+    return res?.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 

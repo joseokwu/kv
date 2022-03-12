@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useState, useEffect} from 'react'
 import './dashboardProfile.css'
 import founderPic from '../../assets/images/dashImg.svg'
 import twitter from '../../assets/images/dashtwitter.svg'
@@ -11,8 +11,29 @@ import apple from '../../assets/icons/appleSmall.svg'
 import blue from '../../assets/icons/blue.svg'
 import gray from '../../assets/icons/gray.svg'
 import { AuthButton, Button, Tag } from '../../mentorComponents'
+import { getStartupFounderProfile } from '../../services'
+
+
 
 export const MentorDashboardProfile = () => {
+
+  const [profile, setProfile] = useState(null);
+
+  const fetchProfile = async() =>{
+    const res = await getStartupFounderProfile();
+     setProfile(res)
+  }
+
+useEffect(() =>{
+  fetchProfile();
+
+  return () =>{
+    setProfile();
+  }
+
+},[])
+
+
   return (
     <section className="container dashboard_profle mt-4">
       <div className="col">
@@ -26,10 +47,10 @@ export const MentorDashboardProfile = () => {
             <section className="d-flex">
               <div className="mr-5 founder_details">
                 <div>
-                  <h3>Mr Promise Amstel</h3>
+                  <h3> { profile?.name } </h3>
                 </div>
                 <div>
-                  <p className="pt-3">CEO Applean Insteen</p>
+                  <p className="pt-3"> { profile?.position } </p>
                 </div>
               </div>
 
@@ -50,7 +71,7 @@ export const MentorDashboardProfile = () => {
               <div className="mb-2">
                 <p>
                   <img className="pr-2" src={mail} alt="mail" />
-                  Promise_Amstel@gmail.com
+                 { profile?.email }
                 </p>
               </div>
 
@@ -58,20 +79,20 @@ export const MentorDashboardProfile = () => {
                 <div className="mr-3">
                   <span>
                     <img className="pr-2" src={globe} alt="mail" />
-                    @promiseamstel
+                   { profile?.socialMedia?.twitter }
                   </span>
                 </div>
 
                 <div className="mr-3">
                   <span>
                     <img className="pr-2" src={split} alt="mail" />
-                    @promiseamstel
+                    { profile?.socialMedia?.facebook }
                   </span>
                 </div>
                 <div>
-                  <span>
+                  <span> 
                     <img className="pr-2" src={split} alt="mail" />
-                    @promiseamstel
+                    { profile?.socialMedia?.linkedIn }
                   </span>
                 </div>
               </div>
@@ -88,64 +109,72 @@ export const MentorDashboardProfile = () => {
               <div className="p-4">
                 <h3 className="pb-3">About </h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                  lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit. Enim lectus morbi elementum
-                  eu.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Enim lectus morbi elementum eu.
+                { profile?.about }
                 </p>
               </div>
 
               <div className="p-4 industry">
                 <h3>Experience</h3>
-                <div className="mt-4 d-flex">
-                  <div>
-                    <img src={apple} alt="apple" />
-                  </div>
-                  <div className="founder_experience ml-4">
-                    <h3 className="">Applane Insteen</h3>
-                    <p className="pt-2 pb-2">CEO Applean Insteen</p>
-                    <p className="pb-4">United State</p>
+                  
 
-                    <h4>2015 - Present 5 yrs</h4>
+                    {
+                      profile?.experience.length > 0 && profile?.experience.map((item , i) => (
+                        <>
+                <div key={i} className="mt-4 d-flex">
+                    <div style={{width:'170px', height:'40px', borderRadius:'50%', overflow:'hidden'}} >
+                    <img src={`${item?.companyLogo}`} alt="apple" style={{
+                      width:'100%',
+                      height:"100%"
+                    }} />
+                  </div>
+                  <div  className="founder_experience ml-4">
+                    <h3 className=""> {item?.companyName} </h3>
+                    <p className="pt-2 pb-2"> { item?.postionHeld } </p>
+                    <p className="pb-4"> { item?.companyLocation } </p>
+
+                    <h4> { item?.duration } </h4>
                     <p className="pt-3">
-                      My responsibility as the product lead is to ensure the
-                      success of our product team. As a B2B product team, we
-                      help our clients realize their product development goals.
-                      I work with the design and engineering teams to craft and
-                      develop cutting edge software that meets market standards.
+                      { item?.roleDescription }
                     </p>
                   </div>
-                </div>
+                  </div>
+                        </>
+                        
+                      ))
+                    }
+
+               
+            
               </div>
 
               <section className="industry">
                 <div className="p-4">
                   <h3>Education</h3>
                   <div className="row">
-                    <div className="col-lg mt-4 d-flex mr-5">
+                    {
+                      profile?.education.length > 0 && profile?.education.map((item , i) => {
+                        let start_date = new Date(item?.startDate);
+                        let end_date = new Date(item?.endDate) 
+                        return (
+                          <div className="col-lg mt-4 d-flex mr-5">
                       <div>
                         <img src={blue} alt="blue" />
                       </div>
                       <div className="founder_experience ml-4">
-                        <h3 className="">Manchester United University</h3>
-                        <p className="pt-2 pb-2">Computer Enginerring</p>
-                        <p className="pb-2">Master’s Degree</p>
-                        <p>2012 - 2018</p>
+                        <h3 className=""> { item?.schoolName } </h3>
+                        <p className="pt-2 pb-2"> { item?.courseOfStudy } </p>
+                        <p className="pb-2"> { item?.degree } </p>
+                        <p> { `${start_date.getFullYear()} - ${end_date.getFullYear()}` } </p>
                       </div>
                     </div>
+                        )
+                      }
+                  
+                      )
+                    }
+         
 
-                    <div className="mt-4 d-flex">
-                      <div>
-                        <img src={gray} alt="gray" />
-                      </div>
-                      <div className="founder_experience ml-4">
-                        <h3 className="">Manchester United University</h3>
-                        <p className="pt-2 pb-2">Computer Enginerring</p>
-                        <p className="pb-2">Master’s Degree</p>
-                        <p>2012 - 2018</p>
-                      </div>
-                    </div>
+
                   </div>
                 </div>
               </section>
@@ -156,11 +185,11 @@ export const MentorDashboardProfile = () => {
                   className="d-flex align-items-center flex-wrap"
                   style={{ columnGap: 10, rowGap: 10 }}
                 >
-                  <Tag name="Technology" />
-                  <Tag name="Engineering" color="#40439A" />
-                  <Tag name="Career" color="#E31937" />
-                  <Tag name="Engineering" color="#40439A" />
-                  <Tag name="Tech" />
+                {
+                 profile?.skills.map((item, i) =>(
+                  <Tag name={item} color={item === 'Engineering' ? '#40439A' : item === 'Career' ? '#E31937' : '#ACACAC' }  />
+                 )) 
+                }
                 </span>
               </section>
             </div>
