@@ -7,6 +7,7 @@ import { mentorAssignments } from "../../services";
 import { PageLoader } from "../../components";
 
 export const MentorAssignments = () => {
+  const { push } = useHistory();
   const [assignments, setAssignments] = useState([]);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
