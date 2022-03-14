@@ -14,10 +14,9 @@ export const MentorConfirmEmail = () => {
         <div className="row">
           <section className="col-lg-5 mx-3 forgot_illustration mt-4">
             <div>
-              <h2>Forgot Password?</h2>
+              <h2>Grow your business today with our accelerator program</h2>
               <span>
-                Enter the email associated with your account, and we would send
-                an email with instruction to reset your password
+                We are inviting startups to help them incubate and accelerate business idea to funding
               </span>
             </div>
           </section>
