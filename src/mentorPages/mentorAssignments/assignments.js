@@ -7,9 +7,7 @@ import { mentorAssignments } from "../../services";
 import { PageLoader } from "../../components";
 
 export const MentorAssignments = () => {
-
   const { push } = useHistory();
-
 
   const [assignments, setAssignments] = useState([]);
   const [cards, setCards] = useState([]);
@@ -101,6 +99,29 @@ export const MentorAssignments = () => {
             );
           })}
       </section>
+    </div>
+  );
+};
+export const AssignmentCard = ({ data = {} }) => {
+  const { push } = useHistory();
+
+  return (
+    <div className="assignment_card opp-card my-3">
+      <h3>{data?.topic}</h3>
+      <p className="pt-2 pb-4 border-bottom">
+        Attachments - <span>businessplan.pdf</span>
+      </p>
+
+      <p className="pt-3 pb-3 border-bottom">
+        {data?.description}   
+        <span onClick={() => push('/mentor/assignments/create/details')}>More Details</span>
+      </p>
+      <button
+        className="pending_evaluation mt-4"
+        onClick={() => push("/mentor/assignments/view")}
+      >
+        View Assignment
+      </button>
     </div>
   );
 };
