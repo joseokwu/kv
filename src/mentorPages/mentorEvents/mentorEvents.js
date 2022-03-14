@@ -4,6 +4,7 @@ import "./mentorEvents.css";
 import down from "../../assets/icons/downArrow.svg";
 import { SelectionDay } from "./components/selectionDay";
 import { getEvents } from "../../services/events";
+import { PageLoader } from "../../components";
 
 export const MentorEvents = ({ history }) => {
   const {
@@ -15,8 +16,10 @@ export const MentorEvents = ({ history }) => {
   const [demoEvents, setDemoEvents] = useState([]);
   const [pitchEvents, setPitchEvents] = useState([]);
   const [otherEvents, setOtherEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await getEvents();
     setEvents(res?.data);
     setSelectionEvents(() =>
@@ -26,6 +29,7 @@ export const MentorEvents = ({ history }) => {
     setPitchEvents(() =>
       res?.data?.filter((x) => x.eventType === "pitchSession")
     );
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -57,6 +61,15 @@ export const MentorEvents = ({ history }) => {
     "Pitching Events",
     "Other Events",
   ];
+
+  if (loading) {
+    return (
+      <PageLoader
+        dashboard={true}
+        num={[selectionEvents, demoEvents, pitchEvents, events]}
+      />
+    );
+  }
   return (
     <div className="mb-5">
       <div className="col-lg-12">

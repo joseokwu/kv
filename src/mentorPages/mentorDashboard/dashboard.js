@@ -9,19 +9,23 @@ import { useHistory } from "react-router-dom";
 import { getDashboard } from "../../services/mentor";
 import { useDispatch } from "react-redux";
 import { DASH_VIEW } from "../../store/actions/actions.types";
+import { PageLoader } from "../../components";
 
 export const MentorDashboard = () => {
   const { push } = useHistory();
   const [dashInfo, setDashInfo] = useState(null);
   const [assignedStartups, setAssignedStartups] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await getDashboard();
     console.log(res);
     setDashInfo(res);
     setAssignedStartups(res?.AssignedStartups);
     setUpcoming(res?.events);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -60,6 +64,10 @@ export const MentorDashboard = () => {
             color: cardColors[2],
           },
         ];
+
+  if (loading) {
+    return <PageLoader dashboard={true} num={[dashInfo]} />;
+  }
 
   return (
     <div className="dashboard_main container-fluid">
