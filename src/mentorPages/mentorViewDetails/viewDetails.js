@@ -10,6 +10,7 @@ import { Fundraising } from "./components/fundraising/fundraising";
 import { Milestone } from "./components/milestone/Milestone";
 import { getStartupInvesrtorProfile } from "../../services/investor";
 import { getStartupProfile, profile } from "../../services";
+import { PageLoader } from "../../components";
 
 export const MentorViewDetails = ({ history }) => {
   const {
@@ -17,10 +18,13 @@ export const MentorViewDetails = ({ history }) => {
   } = history;
 
   const [profileData, setProfileData] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const getData = async () => {
+    setLoading(true);
     const res = await getStartupProfile();
     setProfileData(res);
+    setLoading(false);
   };
 
   const renderContent = () => {
@@ -68,6 +72,9 @@ export const MentorViewDetails = ({ history }) => {
     };
   }, []);
 
+  if (loading) {
+    return <PageLoader />;
+  }
   return (
     <div className="dashboard-main mx-3">
       <ProductDemo data={profileData} />
