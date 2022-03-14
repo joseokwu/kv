@@ -19,3 +19,4 @@ export const GET_EVENTS_FAILED = "GET_EVENTS_FAILED";
 export const GET_SIGNUP_STATUS = "GET_SIGNUP_STATUS";
 export const SET_SIGNUP_STATUS = "SET_SIGNUP_STATUS";
 export const DASH_VIEW = "DASH_VIEW";
+export const LOG_OUT = "LOG_OUT";

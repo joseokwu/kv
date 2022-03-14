@@ -18,6 +18,7 @@ export  const ProtectedRoute = ({ ...props})=>{
             // console.log(history.location.pathname)
             setLocationHistory(history.location.pathname)
             history.push('/')
+            
         }
         if(!stateAuth.roles.includes(props.type)){
 

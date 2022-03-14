@@ -16,10 +16,10 @@ export const AuthSide = ({ history }) => {
             <img src={logo} alt={"logo"}/>
           </div>
         <section className="mentor_switch_signUp mb-4">
-          <button onClick={() => {setActive('startup'); changeSignup('startup')}}>Startup</button>
-          <button onClick={() => {setActive('investor'); changeSignup('others')}}>Investor</button>
-          <button onClick={() => {setActive('mentor'); changeSignup('others')}} className="">Mentor</button>
-          <button onClick={() => {setActive('boosterpartner'); changeSignup('others')}}>Booster Partner</button>
+          <button onClick={() => {setActive('startup'); changeSignup('startup')}} className={active === 'startup' ? 'activ' : ''} >Startup</button>
+          <button onClick={() => {setActive('investor'); changeSignup('investor')}}  className={active === 'investor' ? 'activ' : ''} >Investor</button>
+          <button onClick={() => {setActive('mentor'); changeSignup('mentor')}} className={active === 'mentor' ? 'activ' : ''}>Mentor</button>
+          <button onClick={() => {setActive('boosterpartner'); changeSignup('boosterpartner')}} className={active === 'boosterpartner' ? 'activ' : ''} >Booster Partner</button>
         </section>
 
         { active === 'startup' && <AuthContent authData={AuthData} authDataIndex={0} /> }

@@ -7,7 +7,7 @@ import { getToken , getLocationHistory } from '../utils/helpers.js';
 import { LoadingIcon } from './../components/Loading/Loading';
 
 export  function AppRouter(props){
-    const { userProfile, stateAuth : { loading , authenticated, roles }} = useAuth();
+    const { userProfile, stateAuth : { loading , authenticated }} = useAuth();
     const history = useHistory();
     useEffect(()=>{
         const getP = async () => {
@@ -18,6 +18,7 @@ export  function AppRouter(props){
 					sessionStorage.removeItem('user:redirect:location')
 				}
 			}
+            
 		};
 		getP();    
     },[userProfile, authenticated, history])  

@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { registerUser, loginUser, getProfile  as profile , changeStatus } from '../store/actions/auth';
+import { registerUser, loginUser, getProfile  as profile , changeStatus , 
+logout
+} from '../store/actions/auth';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -35,12 +37,16 @@ const userProfile = useCallback(async () =>{
        dispatch(changeStatus(value))
    } 
   
+   const userLogout = () =>{
+       dispatch(logout())
+   }
 
     return {
         stateAuth,
         register,
         newLogin ,
         userProfile , 
-        changeSignup
+        changeSignup,
+        userLogout,
     };
 }

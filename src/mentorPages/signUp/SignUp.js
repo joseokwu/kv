@@ -10,6 +10,7 @@ import {
 import check from '../../assets/icons/checkmark.svg'
 import { Form } from 'antd'
 import { useAuth } from '../../hooks'
+import { setRole  } from '../../utils/helpers';
 
 export const SignUp = ({ history }) => {
   const [checkSat, setCheckSat] = useState(false)
@@ -17,7 +18,17 @@ export const SignUp = ({ history }) => {
 
   console.log(stateAuth?.signUpStatus)
   const onFinish = (values) => {
-    register(values)
+
+    console.log({
+      ...values,
+      role:stateAuth?.signUpStatus
+    })
+
+    register({
+      ...values,
+      role:stateAuth?.signUpStatus
+    })
+   setRole(stateAuth?.signUpStatus)
   }
 
   console.log(stateAuth)
@@ -40,7 +51,7 @@ export const SignUp = ({ history }) => {
           >
             <div className="col-md-6 col-12 mb-2">
               <AuthTextField
-                name={"first name"}
+                name={"firstname"}
                 label={stateAuth?.signUpStatus === 'startup' ? "Startup Name" : "First name"}
                 placeholder="Enter your first name"
                 className="mentor_gray_card_input"
@@ -134,7 +145,7 @@ export const SignUp = ({ history }) => {
               </div>
                ) :(
                 <AuthTextField
-                name="last name"
+                name="lastname"
                 label="Last Name"
                 placeholder="Enter your last name"
                 className="mentor_gray_card_input"
