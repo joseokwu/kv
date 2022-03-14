@@ -25,7 +25,7 @@ export const EvaluationCompletedCard = ({ data = {} }) => {
       <section className="opp-content mt-3">
         <p>
           {data?.productDescription}
-          elit. <a href="#!">More Details</a>
+          elit. <span>More Details</span>
         </p>
       </section>
 

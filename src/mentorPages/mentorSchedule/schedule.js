@@ -12,7 +12,6 @@ import { getAllSchedule } from './../../services/schedule';
 
 export const MentorSchedule = () => {
 
-
 const [schedules, setSchedule] = useState(null);
 
   const fetchData = async() =>{
@@ -52,23 +51,21 @@ useEffect(() =>{
           </div>
           <div className="d-flex">
             <section className="mt-2 mr-3 my_add_ava">
-              <a
+              <span
                 data-toggle="modal"
-                href="#!"
                 data-target="#addAvailabilityModal"
               >
                 Add to Availability
-              </a>
+              </span>
             </section>
 
             <section className="mt-2 my_schedule_create">
-              <a
+              <span
                 data-toggle="modal"
                 data-target="#createCallScheduleModal"
-                href="#!"
               >
                 Create Schedule
-              </a>
+              </span>
             </section>
           </div>
         </div>
@@ -151,33 +148,33 @@ const CreateCallSchedule = () => {
       <section className="create_call_visibility mt-4">
         <p>
           Visibility :{' '}
-          <a href="#!">
+          <span>
             Personal <img className="pl-1" src={down} alt="" />
-          </a>
+          </span>
         </p>
       </section>
 
       <section className="create_call_visibility mt-4">
         <p>
           Join with :{' '}
-          <a href="#!">
+          <span>
             Google meet <img className="pl-1" src={down} alt="" />
-          </a>
+          </span>
         </p>
       </section>
 
       <section className="create_call_visibility mt-4">
-        <a href="#!">
+        <span>
           Add Location <img className="pl-1" src={down} alt="" />
-        </a>
+        </span>
       </section>
 
       <section className="create_call_visibility mt-4">
         <p>
           Notify me :{' '}
-          <a href="#!">
+          <span>
             30 minutes before <img className="pl-1" src={down} alt="" />
-          </a>
+          </span>
         </p>
       </section>
 

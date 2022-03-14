@@ -9,6 +9,7 @@
   color: #ffffff;
   padding: 12px 50px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .create_assignment:hover {
@@ -33,7 +34,7 @@
   color: #525151;
 }
 
-.assignment_card p > a {
+.assignment_card p > span {
   color: #00adef !important;
   text-decoration: underline;
 }

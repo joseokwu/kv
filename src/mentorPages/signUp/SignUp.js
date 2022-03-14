@@ -53,7 +53,7 @@ export const SignUp = ({ history }) => {
               <AuthTextField
                 name={"firstname"}
                 label={stateAuth?.signUpStatus === 'startup' ? "Startup Name" : "First name"}
-                placeholder="Enter your first name"
+                placeholder={stateAuth?.signUpStatus === 'startup' ? 'Enter your Startup name' : 'Enter your first name'}
                 className="mentor_gray_card_input"
               />
             </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './sidebar.css'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import user from '../../assets/images/sampleUserSide.png'
 import dashboard from '../../assets/icons/dashboard.svg'
 import evaluation from '../../assets/icons/evsluation.svg'
@@ -97,12 +97,12 @@ export const Sidebar = () => {
             navigator.map((nav, i) => {
               return (
                 <li key={i}>
-                  <a href={nav.path}>
+                  <Link to={nav.path}>
                     <img src={nav.icon} alt="dash" />
                     <span className={`${activateLink(nav.activator)} side_text`}>
                       {nav.title}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               )
             })}

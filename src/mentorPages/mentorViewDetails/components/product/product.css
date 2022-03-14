@@ -88,7 +88,7 @@
   color: #828282;
 }
 
-.product-investor a {
+.product-investor article {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
@@ -98,7 +98,7 @@
   color: #5355a3;
 }
 
-.founder_profile a {
+.founder_profile span {
   background: #2e3192;
   border-radius: 10px;
   padding: 3px 30px;
@@ -109,6 +109,7 @@
   line-height: 140%;
   border: none;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .founder_profile a:hover {
