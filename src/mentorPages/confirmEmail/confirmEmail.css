@@ -30,6 +30,16 @@
 
 .resend_email {
   color: #00adef !important;
-  text-decoration: underline;
+  text-decoration: none;
+  font-weight: bold;
   margin-top: 4px;
+  cursor: pointer;
+}
+
+.forgot_illustration h2 {
+    font-weight: bold;
+    font-size: 50px !important;
+    line-height: 65px !important;
+    color: #F9F9FC;
+    margin-bottom: 2.55rem;
 }

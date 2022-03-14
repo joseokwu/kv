@@ -10,10 +10,11 @@ import { Notification } from '../notification/Notification'
 import view from '../../assets/icons/vp.svg'
 import edit from '../../assets/icons/ep.svg'
 import logout from '../../assets/icons/logout.svg'
+import { useAuth } from './../../hooks/useAuth';
 
 export const Header = ({ setOpen, open }) => {
   const { push } = useHistory()
-
+  const { userLogout } = useAuth();
   const [openNotice, setOpenNotice] = useState(false)
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
@@ -26,9 +27,9 @@ export const Header = ({ setOpen, open }) => {
           <span></span>
           <span></span>
         </div>
-        <a href="/mentor/dashboard">
+        <span onClick={() => push("/mentor/dashboard")}>
           <img src={logo} alt="logo" />
-        </a>
+        </span>
       </section>
       <section className="d-flex align-items-center h-100">
         <ul className="header-list">
@@ -70,7 +71,7 @@ export const Header = ({ setOpen, open }) => {
 
 const HeaderDropdownMenu = () => {
   const { push } = useHistory()
-
+  const { userLogout } = useAuth();
   return (
     <div className="dropdown">
       <button
@@ -99,6 +100,7 @@ const HeaderDropdownMenu = () => {
         <button
           className="dropdown-item text-center py-2"
           style={{ color: '#D62828' }}
+          onClick={() => userLogout()}
         >
           {' '}
           <img className="pe-1" src={logout} alt="" /> Log Out

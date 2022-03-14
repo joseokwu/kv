@@ -1,7 +1,8 @@
 import { LOGIN_FAILED, AUTH_START,
   REGISTER_FAILED, LOGIN_SUCCESS,
   REGISTER_SUCCESS , USER_PROFILE,
-  USER_PROFILE_FAIL, SET_SIGNUP_STATUS
+  USER_PROFILE_FAIL, SET_SIGNUP_STATUS,
+  LOG_OUT
 
 } from '../../actions/actions.types';
 import { INIT_STATE } from '../../initialstates';
@@ -57,6 +58,12 @@ import { INIT_STATE } from '../../initialstates';
                      ...state,
                      signUpStatus:action.payload
                    } 
+                 case LOG_OUT:
+                   return {
+                     ...state,
+                     authenticated:false,
+                     roles:[]
+                   }  
 
         default:
             return state;

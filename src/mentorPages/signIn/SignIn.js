@@ -30,7 +30,7 @@ export const SignIn = () => {
           sessionStorage.removeItem('user:redirect:location')
         } else {
           console.log(loca)
-          history.push(`/${res?.roles[0]}/dashboard`)
+          history.push(`/${res?.roles[0]}/registration`)
         }
       }
     } catch (err) {

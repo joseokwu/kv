@@ -1,9 +1,37 @@
 import React from 'react'
-import './confirmEmail.css'
+import './confirmEmail.css';
+import {useHistory} from 'react-router-dom';
 import logo from '../../assets/icons/kvlogo.svg'
 import sentMail from '../../assets/images/mentorSentEmail.svg'
+import { useAuth } from '../../hooks';
+import { getRole } from '../../utils/helpers';
 
 export const MentorConfirmEmail = () => {
+  const history = useHistory();
+
+  const { stateAuth } = useAuth()
+
+  const renderPage =() =>{
+
+    switch(getRole()){
+      case 'startup':
+        return (
+          <div>
+          <h2> Grow your business today with our accelerator program </h2>
+          <span>
+         
+We are inviting startups to help them incubate and accelerate business idea to funding
+          </span>
+        </div>
+        )
+
+        default :
+         return <h1>hello world</h1>
+    }
+  }
+
+
+
   return (
     <div className="row mx-0 my-0 auth-wrap px-5">
       <section className="layout-header">
@@ -13,12 +41,9 @@ export const MentorConfirmEmail = () => {
 
         <div className="row">
           <section className="col-lg-5 mx-3 forgot_illustration mt-4">
-            <div>
-              <h2>Grow your business today with our accelerator program</h2>
-              <span>
-                We are inviting startups to help them incubate and accelerate business idea to funding
-              </span>
-            </div>
+          {
+            renderPage()
+          }
           </section>
 
           <section className="col-lg-6 d-flex align-items-center mx-3" style={{marginTop: '100px'}}>
@@ -30,9 +55,9 @@ export const MentorConfirmEmail = () => {
                   Please check your inbox for a confirmation email. Didn’t
                   receive the email?
                 </p>
-                <a className="resend_email" href="#!">
-                  Resend email
-                </a>
+                <p  className="resend_email" onClick={() => history.push('/')} >
+                  Sign in
+                </p>
               </section>
             </div>
           </section>

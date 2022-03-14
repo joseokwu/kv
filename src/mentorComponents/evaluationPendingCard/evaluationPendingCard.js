@@ -7,6 +7,7 @@ import { Modal } from "../modal/Modal";
 import { EvaluationModal } from "../../mentorPages/mentorEvaluation/components/evaluationModal";
 
 export const EvaluationPendingCard = ({ data = {} }) => {
+
   return (
     <div className="opp-card">
       <Modal id="moreDetailsModal" withHeader={false}>
@@ -28,9 +29,7 @@ export const EvaluationPendingCard = ({ data = {} }) => {
       <section className="opp-content mt-3">
         <p>
           {data?.productDescription}
-          <a href="#!" data-toggle="modal" data-target="#moreDetailsModal">
-            More Details
-          </a>
+          <span data-toggle="modal" data-target="#moreDetailsModal">More Details</span>
         </p>
       </section>
 

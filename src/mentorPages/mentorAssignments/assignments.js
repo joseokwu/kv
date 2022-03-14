@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { mentorAssignments } from "../../services";
 
 export const MentorAssignments = () => {
+  const { push } = useHistory();
 
   const [assignments, setAssignments] = useState([]);
   const [cards, setCards] = useState([]);
@@ -75,9 +76,9 @@ export const MentorAssignments = () => {
         </div>
 
         <div className="mt-3">
-          <a className="create_assignment" href="/mentor/assignments/create">
+          <span className="create_assignment" onClick={() => push('/mentor/assignments/create')} >
             Create
-          </a>
+          </span>
         </div>
       </section>
 
@@ -101,12 +102,12 @@ export const AssignmentCard = ({ data = {} }) => {
     <div className="assignment_card opp-card my-3">
       <h3>{data?.topic}</h3>
       <p className="pt-2 pb-4 border-bottom">
-        Attachments - <a href="#!">businessplan.pdf</a>
+        Attachments - <span href="#!">businessplan.pdf</span>
       </p>
 
       <p className="pt-3 pb-3 border-bottom">
-        {data?.description}
-        <a href="/mentor/assignments/create/details">More Details</a>
+        {data?.description}   
+        <span onClick={() => push('/mentor/assignments/create/details')}>More Details</span>
       </p>
       <button
         className="pending_evaluation mt-4"

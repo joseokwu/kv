@@ -242,7 +242,7 @@ const Details = () => {
         </button> */}
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
-          <Button label="Save" variant="secondary" />
+          <Button onClick={() => push('/mentor/dashboard')} label="Save" variant="secondary" />
           <Button
             label="Next"
             onClick={() => {

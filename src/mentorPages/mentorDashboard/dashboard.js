@@ -108,9 +108,9 @@ export const MentorDashboard = () => {
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Upcoming Events</p>
               <p className="see-all">
-                <a className="see-all-event" href="/mentor/events">
+                <span className="see-all-event" onClick={() => push("/mentor/events")}>
                   See All
-                </a>
+                </span>
               </p>
             </section>
 
