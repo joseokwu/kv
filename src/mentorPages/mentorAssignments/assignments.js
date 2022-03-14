@@ -4,16 +4,19 @@ import down from "../../assets/icons/chevronDown.svg";
 import "./assignments.css";
 import { useHistory } from "react-router-dom";
 import { mentorAssignments } from "../../services";
+import { PageLoader } from "../../components";
 
 export const MentorAssignments = () => {
-
   const [assignments, setAssignments] = useState([]);
   const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await mentorAssignments();
     setAssignments(res?.assignments ?? []);
     setCards(res?.cards ?? []);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -39,6 +42,9 @@ export const MentorAssignments = () => {
         })
       : cardDataTemplate;
 
+  if (loading) {
+    return <PageLoader dashboard={true} num={[assignments, cardData]} />;
+  }
   return (
     <div className="dashboard_main container-fluid">
       <section className="row tab-wrap">
@@ -110,7 +116,7 @@ export const AssignmentCard = ({ data = {} }) => {
       </p>
       <button
         className="pending_evaluation mt-4"
-        onClick={() => push('/mentor/assignments/view')}
+        onClick={() => push("/mentor/assignments/view")}
       >
         View Assignment
       </button>

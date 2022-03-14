@@ -9,6 +9,7 @@ import { Declined } from "./components/declined/declined";
 import { AllProgramCard } from "./components/allProgramCard/allProgramCard";
 import { Rescheduled } from "./components/rescheduled/rescheduled";
 import { mentorPrograms } from "../../services";
+import { PageLoader } from "../../components";
 
 export const MentorProgram = ({ history }) => {
   const {
@@ -20,8 +21,10 @@ export const MentorProgram = ({ history }) => {
   const [acceptedPrograms, setAcceptedPrograms] = useState([]);
   const [rescheduledPrograms, setRescheduledPrograms] = useState([]);
   const [declinedPrograms, setDeclinedPrograms] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await mentorPrograms();
     setPrograms(res?.programs);
     setAcceptedPrograms(() =>
@@ -37,6 +40,7 @@ export const MentorProgram = ({ history }) => {
     setPendingPrograms(() =>
       res?.programs?.filter((p) => p?.status?.toLowerCase() === "pending")
     );
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -113,6 +117,9 @@ export const MentorProgram = ({ history }) => {
 
   const tabItems = ["All", "Pending", "Accepted", "Rescheduled", "Declined"];
 
+  if (loading) {
+    return <PageLoader big={true} />;
+  }
   return (
     <div className="dashboard-main">
       <div className="col-lg-12">
