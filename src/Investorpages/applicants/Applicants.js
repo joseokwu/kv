@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import search from "../../assets/icons/search.svg";
-import { Tabs } from "../../components";
+import { PageLoader, Tabs } from "../../components";
 import filter from "../../assets/icons/filterFunnel.svg";
 import down from "../../assets/icons/chevronDown.svg";
 import searchSm from "../../assets/icons/searchSm.svg";
@@ -23,11 +23,13 @@ export const BoosterApplicants = ({ history }) => {
   } = history;
 
   const [applicants, setApplicatnts] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const getFetchData = async () => {
+    setLoading(true);
     const res = await getApplicant();
-    console.log(res);
     setApplicatnts(res?.all);
+    setLoading(false);
   };
 
   const pendin =
@@ -81,6 +83,15 @@ export const BoosterApplicants = ({ history }) => {
   }, [hash]);
 
   console.log(applicants);
+
+  if (loading) {
+    return (
+      <PageLoader
+        dashboard={true}
+        num={[applicants, pendin, approve, decline, expire, reApply]}
+      />
+    );
+  }
 
   return (
     <div className="wrapper">

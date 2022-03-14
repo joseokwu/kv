@@ -4,17 +4,23 @@ import down from "../../assets/icons/chevronDown.svg";
 import "./assignments.css";
 import { useHistory } from "react-router-dom";
 import { mentorAssignments } from "../../services";
+import { PageLoader } from "../../components";
 
 export const MentorAssignments = () => {
+
   const { push } = useHistory();
+
 
   const [assignments, setAssignments] = useState([]);
   const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await mentorAssignments();
     setAssignments(res?.assignments ?? []);
     setCards(res?.cards ?? []);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -40,6 +46,9 @@ export const MentorAssignments = () => {
         })
       : cardDataTemplate;
 
+  if (loading) {
+    return <PageLoader dashboard={true} num={[assignments, cardData]} />;
+  }
   return (
     <div className="dashboard_main container-fluid">
       <section className="row tab-wrap">
@@ -92,29 +101,6 @@ export const MentorAssignments = () => {
             );
           })}
       </section>
-    </div>
-  );
-};
-export const AssignmentCard = ({ data = {} }) => {
-  const { push } = useHistory();
-
-  return (
-    <div className="assignment_card opp-card my-3">
-      <h3>{data?.topic}</h3>
-      <p className="pt-2 pb-4 border-bottom">
-        Attachments - <span href="#!">businessplan.pdf</span>
-      </p>
-
-      <p className="pt-3 pb-3 border-bottom">
-        {data?.description}   
-        <span onClick={() => push('/mentor/assignments/create/details')}>More Details</span>
-      </p>
-      <button
-        className="pending_evaluation mt-4"
-        onClick={() => push('/mentor/assignments/view')}
-      >
-        View Assignment
-      </button>
     </div>
   );
 };
