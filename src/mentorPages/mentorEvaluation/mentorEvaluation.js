@@ -10,6 +10,7 @@ import filter from "../../assets/icons/filterFunnel.svg";
 import down from "../../assets/icons/chevronDown.svg";
 import "./evaluation.css";
 import { mentorEvaluations } from "../../services/mentor";
+import { PageLoader } from "../../components";
 
 export const MentorEvaluation = ({ history }) => {
   const {
@@ -20,8 +21,10 @@ export const MentorEvaluation = ({ history }) => {
   const [assigned, setAssigned] = useState([]);
   const [pending, setPending] = useState([]);
   const [completed, setCompleted] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await mentorEvaluations();
 
     setEvalCardsData(res?.cards);
@@ -36,6 +39,7 @@ export const MentorEvaluation = ({ history }) => {
         (x) => x.status?.toLowerCase() === "completed"
       )
     );
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -128,6 +132,12 @@ export const MentorEvaluation = ({ history }) => {
   };
 
   const tabItems = ["All", "Pending", "Completed"];
+
+  if (loading) {
+    return (
+      <PageLoader dashboard={true} num={[evalCardsData, pending, completed]} />
+    );
+  }
 
   return (
     <div className="dashboard_main container-fluid">
