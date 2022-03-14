@@ -72,7 +72,7 @@ useEffect(() =>{
       </div>
 
       <div>
-        <Calender data={ schedules !== null && schedules} />
+        <Calender data={ schedules && schedules} />
       </div>
     </div>
   )

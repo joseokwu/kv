@@ -5,7 +5,6 @@ import "./assignments.css";
 import { useHistory } from "react-router-dom";
 import { mentorAssignments } from "../../services";
 import { PageLoader } from "../../components";
-import { AssignmentCard } from './../../Startupcomponents/assignmentCard/assignmentCard';
 
 export const MentorAssignments = () => {
 
