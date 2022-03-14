@@ -27,9 +27,9 @@ export const Header = ({ setOpen, open }) => {
           <span></span>
           <span></span>
         </div>
-        <a href="/mentor/dashboard">
+        <span onClick={() => push("/mentor/dashboard")}>
           <img src={logo} alt="logo" />
-        </a>
+        </span>
       </section>
       <section className="d-flex align-items-center h-100">
         <ul className="header-list">

@@ -105,13 +105,14 @@ table {
   padding: 8px 16px;
 }
 
-.assignment_action a {
+.assignment_action span {
   font-family: DM Sans;
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.313rem;
   text-decoration-line: underline;
   color: #2e3192;
+  cursor: pointer;
 }
 
 .assignment_table_body {

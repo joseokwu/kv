@@ -3,8 +3,11 @@ import React from "react";
 import "./evaluationProgress.css";
 import logo from "../../assets/images/yeLogo.svg";
 import { Tag, ReadMore } from "../../mentorComponents";
+import { useHistory } from 'react-router-dom';
 
 export const EvaluationProgress = ({ data = {} }) => {
+  const { push } = useHistory();
+
   return (
     <div className="opp-card">
       <section className="d-flex align-items-center justify-content-between mb-2">
@@ -23,7 +26,7 @@ export const EvaluationProgress = ({ data = {} }) => {
       <section className="opp-content mt-3">
         <p>
           {data?.productDescription}
-          elit. <a href="#!">More Details</a>
+          elit. <span onClick={() => push("#!")}>More Details</span>
         </p>
       </section>
 

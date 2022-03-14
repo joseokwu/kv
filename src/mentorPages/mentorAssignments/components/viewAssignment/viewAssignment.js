@@ -106,6 +106,7 @@ export const MentorViewAssignment = ({ history }) => {
 }
 
 const AssignmentStatus = () => {
+  const { push } = useHistory();
 
   return (
     // <div className="assignment_table_body d-flex justify-content-between pb-3">
@@ -130,7 +131,7 @@ const AssignmentStatus = () => {
         <span>Not submitted</span>
       </td>
       <td className="assignment_action mt-4">
-        <a href="/mentor/assignments/create/details">View</a>
+        <span onClick={() => push("/mentor/assignments/create/details")}>View</span>
       </td>
     </tr>
   )
