@@ -18,6 +18,7 @@ export  function AppRouter(props){
 					sessionStorage.removeItem('user:redirect:location')
 				}
 			}
+          
             
 		};
 		getP();    

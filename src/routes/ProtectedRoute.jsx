@@ -18,15 +18,15 @@ export  const ProtectedRoute = ({ ...props})=>{
             // console.log(history.location.pathname)
             setLocationHistory(history.location.pathname)
             history.push('/')
-            
-        }
-        if(!stateAuth.roles.includes(props.type)){
 
-            history.push('/') 
-            // setLocationHistory(history.location.pathname)
-            console.log('e noh work')
-            console.log(!stateAuth.roles.includes(props.type))
         }
+        // if(!stateAuth.roles.includes(props.type)){
+
+        //     history.push('/') 
+        //     // setLocationHistory(history.location.pathname)
+        //     console.log('e noh work')
+        //     console.log(!stateAuth.roles.includes(props.type))
+        // }
 
          setLoading(false);
 

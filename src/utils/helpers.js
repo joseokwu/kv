@@ -27,7 +27,8 @@ export const setRole = (role) =>{
 }
 
 export const getRole = () =>{
-  return localStorage.getItem("kv:user:role")
+ let role = localStorage.getItem("kv:user:role");
+ return role;
 }
  
 export const formatBytes = (bytes, decimals = 2) => {

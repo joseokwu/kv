@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom'
 import './signIn.css'
 import { Form } from 'antd'
 import { useAuth } from '../../hooks'
-import { getLocationHistory } from '../../utils/helpers'
+import { getLocationHistory , getRole } from '../../utils/helpers'
 import toast from 'react-hot-toast'
 
 export const SignIn = () => {
@@ -24,13 +24,16 @@ export const SignIn = () => {
     try {
       const res = await newLogin(values)
       const loca = getLocationHistory()
+    
       if (res?.status) {
         if (loca !== null) {
           history.push(loca)
           sessionStorage.removeItem('user:redirect:location')
-        } else {
-          console.log(loca)
-          history.push(`/${res?.roles[0]}/registration`)
+        }
+        if(getRole() !== null){
+          let role = getRole();
+          console.log(role)
+          history.push(`/${role}/registration`)
         }
       }
     } catch (err) {

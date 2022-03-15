@@ -38,7 +38,10 @@ const userProfile = useCallback(async () =>{
    } 
   
    const userLogout = () =>{
-       dispatch(logout())
+     dispatch(logout())
+
+     history.push('/')
+
    }
 
     return {

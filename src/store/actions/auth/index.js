@@ -87,4 +87,5 @@ export const logout = () => dispatch =>{
         type:LOG_OUT
     })
     localStorage.removeItem("user:token")
+    
 }
