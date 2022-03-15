@@ -96,7 +96,9 @@ export const FundRaising = () => {
             <CustomButton className="" background="#00ADEF">
               Save
             </CustomButton>
-            <OutlineButton className="mx-2" background="none">
+            <OutlineButton
+            onClick={() => history.push('/startup/dashboard')}
+             className="mx-2" background="none">
               Submit
             </OutlineButton>
             <CustomButton

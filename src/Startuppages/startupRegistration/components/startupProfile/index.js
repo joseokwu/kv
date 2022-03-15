@@ -20,6 +20,7 @@ import { useActivity } from '../../../../hooks/useBusiness';
 import { startUpReg } from './../../../../services/startUpReg';
 import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import { toast } from 'react-hot-toast';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -29,7 +30,7 @@ export const StartupProfile = () => {
   const [startDate, setStartDate] = useState(new Date())
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState()
-
+  const history = useHistory();
   const {
     changePath,
     state: { path },
@@ -353,7 +354,9 @@ export const StartupProfile = () => {
           </div>
           <div className="d-flex my-4 justify-content-end">
             <div>
-              <CustomButton background="#06ADEF">Save</CustomButton>
+              <CustomButton 
+              onClick={() => history.push('/startup/dashboard')}
+               background="#06ADEF">Save</CustomButton>
             </div>
             <div className="mx-2">
               <CustomButton type='submit'
