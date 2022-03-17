@@ -11,6 +11,7 @@ import view from '../../assets/icons/vp.svg'
 import edit from '../../assets/icons/ep.svg'
 import logout from '../../assets/icons/logout.svg'
 import './header.css'
+import { useAuth } from '../../hooks';
 
 export const Header = ({ setOpen, open }) => {
   const {
@@ -85,6 +86,8 @@ const HeaderDropdownMenu = () => {
     push,
     location: { pathname },
   } = useHistory()
+  const { userLogout } = useAuth();
+
   const getCurrentProfile = () => {
     if (pathname.includes('investor')) {
       return () => push('/investor/profile')
@@ -115,13 +118,16 @@ const HeaderDropdownMenu = () => {
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile
         </button>
-        <button className="dropdown-item text-center py-2 my-2">
+        <button
+         onClick={() => userLogout()}
+         className="dropdown-item text-center py-2 my-2">
           {' '}
           <img className="pe-1" src={edit} alt="" /> Edit Profile
         </button>
         <button
           className="dropdown-item text-center py-2"
           style={{ color: '#D62828' }}
+          onClick={() => userLogout()}
         >
           {' '}
           <img className="pe-1" src={logout} alt="" /> Log Out

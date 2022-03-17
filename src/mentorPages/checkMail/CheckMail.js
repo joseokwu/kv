@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../../assets/icons/kvlogo.svg'
 import sentMail from '../../assets/images/mentorSentEmail.svg'
+import { Link } from 'react-router-dom';
 
 export const MentorCheckMail = () => {
   return (
@@ -32,9 +33,9 @@ export const MentorCheckMail = () => {
                   Please check your inbox for a confirmation email. Didn’t
                   receive the email?
                 </p>
-                <a className="resend_email" href="#!">
+                <Link className="resend_email" href="#!">
                   Resend email
-                </a>
+                </Link>
               </section>
             </div>
           </section>

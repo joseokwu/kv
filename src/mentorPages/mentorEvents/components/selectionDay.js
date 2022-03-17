@@ -400,11 +400,11 @@ const EventScheduleModal = () => {
         </section>
 
         <section className="send_request mt-5">
-          <a href="#!">Send Request</a>
+          <span>Send Request</span>
         </section>
 
         <section className="mt-5 event_card_footer">
-          <a href="#!">Add to schedule</a>
+          <span>Add to schedule</span>
         </section>
       </section>
     </div>

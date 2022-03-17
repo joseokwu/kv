@@ -23,8 +23,34 @@ export const MentorConfirmEmail = () => {
 We are inviting startups to help them incubate and accelerate business idea to funding
           </span>
         </div>
-        )
-
+        );
+        case 'investor':
+          return (
+            <div>
+            <h2> Partner with startups. Become a Booster Partner</h2>
+            <span>
+            We are onboarding Booster Partners to our startup eco system for mutual benefits
+            </span>
+          </div>
+          )  
+          case 'mentor':
+            return (
+              <div>
+              <h2> Build personal brand. Become a mentor </h2>
+              <span>
+              We are onboarding Mentors to our startup eco system for mutual benefits
+              </span>
+            </div>
+            )   
+            case 'boosterpartner':
+            return (
+              <div>
+              <h2> Partner with startups. Become a Booster Partner </h2>
+              <span>
+              We are onboarding Booster Partners to our startup eco system for mutual benefits
+              </span>
+            </div>
+            ) 
         default :
          return <h1>hello world</h1>
     }

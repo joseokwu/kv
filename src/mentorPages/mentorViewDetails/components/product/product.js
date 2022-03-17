@@ -5,8 +5,10 @@ import fanai from "../../../../assets/images/fana.svg";
 import { CurrentInvestorConnectCard } from "../../../../mentorComponents";
 import "./product.css";
 import { useActivity } from "../../../../hooks";
+import { useHistory } from 'react-router-dom';
 
 export const Product = ({ data = {} }) => {
+  const { push } = useHistory();
   return (
     <div className="row">
       <section className="col-xl-8">
@@ -36,7 +38,7 @@ export const Product = ({ data = {} }) => {
           </section>
           <section className="founder_profile mt-3">
             <div className="text-center">
-              <a href="/mentor/dashboard/founder">View</a>
+              <span onClick={() => push("/mentor/dashboard/founder")}>View</span>
             </div>
           </section>
         </div>

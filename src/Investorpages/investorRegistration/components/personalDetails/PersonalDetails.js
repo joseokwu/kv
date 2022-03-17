@@ -205,7 +205,11 @@ export const PersonalDetails = () => {
         className="d-flex align-items-center justify-content-end my-4"
         style={{ columnGap: 9 }}
       >
-        <Button label="Save" variant="secondary" />
+        <Button
+        onClick={() => {
+            push("/investor/dashboard");
+          }}
+         label="Save" variant="secondary" />
         <Button
           label="Next"
           onClick={() => {

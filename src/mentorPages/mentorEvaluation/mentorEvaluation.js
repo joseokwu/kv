@@ -44,7 +44,15 @@ export const MentorEvaluation = ({ history }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+
+    return () =>{
+      setCompleted();
+      setPending();
+      setAssigned(); 
+      setEvalCardsData();     
+    }
+
+  }, [hash]);
 
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4"];
   //console.log(completed)

@@ -3,8 +3,10 @@ import React from "react";
 import "./assignedStartupCard.css";
 import logo from "../../assets/images/yeLogo.svg";
 import { Tag } from "..";
+import { useHistory } from 'react-router-dom';
 
 export const AssignedStartupCard = ({ onClick, data = {} }) => {
+  const { push } = useHistory()
   return (
     <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
@@ -27,9 +29,9 @@ export const AssignedStartupCard = ({ onClick, data = {} }) => {
       <section className="d-flex align-items-center justify-content-between opp-footer-text">
         <div>
           <p className="mb-2">
-            <a href={`https://${data?.website}`} target="_blank">
+            <span onClick={() => push(`https://${data?.website}`)}>
               {data?.website}
-            </a>
+            </span>
           </p>
         </div>
         <div className="text-right">

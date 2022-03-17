@@ -73,13 +73,13 @@
   cursor: pointer;
 }
 
-.event_card_footer a:hover {
+.event_card_footer span:hover {
   background: none;
   color: #2e3192;
   border: 1.5px solid #2e3192;
 }
 
-.event_card_footer a:focus {
+.event_card_footer span:focus {
   outline: none;
 }
 
@@ -135,12 +135,13 @@
   outline: none;
 }
 
-.send_request a {
+.send_request span {
   font-family: DM Sans;
   font-size: 16px;
   line-height: 20px;
   text-decoration-line: underline;
   color: #2e3192;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

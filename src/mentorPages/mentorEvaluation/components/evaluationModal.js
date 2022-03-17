@@ -5,7 +5,7 @@ import clock from "../../../assets/icons/clockTime.svg";
 import web from "../../../assets/icons/web.svg";
 import compitch from "../../../assets/images/companyPitch.svg";
 import { Button } from "../../../mentorComponents";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 export const EvaluationModal = ({ data = {} }) => {
   const { push } = useHistory();
@@ -41,9 +41,9 @@ export const EvaluationModal = ({ data = {} }) => {
           </p>
         </div>
 
-        <a href="/mentor/evaluation/evaluate#market_attractiveness">
+        <span onClick={() => push("/mentor/evaluation/evaluate#market_attractiveness")}>
           View profile
-        </a>
+        </span>
         <div className="mb-4">
           <img className="pt-5" src={compitch} alt="company pitch" />
         </div>

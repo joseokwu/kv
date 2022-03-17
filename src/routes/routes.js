@@ -242,7 +242,7 @@ const routes = [
 
   {
     name: "Investor Registration",
-    path: "/investor/register",
+    path: "/investor/registration",
     component: WithInvestorRegisterLayout(InvestorRegistration),
     exact: true,
     protected: false,
@@ -441,7 +441,7 @@ const routes = [
 
   {
     name: "Booster Registration",
-    path: "/booster/register",
+    path: "/boosterpartner/registration",
     component: WithMainInvestorLayout(BoosterPartnerRegistration),
     exact: true,
     protected: false,
