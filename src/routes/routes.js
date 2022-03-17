@@ -93,6 +93,8 @@ import {
 } from "../Startuppages";
 import { MentorViewFeedback } from "../mentorPages/mentorAssignments/components/viewFeedback/viewFeedback";
 import { InvestorEvaluate } from "../Investorpages/evaluation/evaluation";
+import { WithAdminLayout } from "../adminComponents";
+import { AllMentors, UserManagement, ViewMentor } from "../adminPages";
 
 const routes = [
   // Start-up routes start
@@ -688,6 +690,136 @@ const routes = [
   },
 
   // Mentor Routes Ends Here
+
+  // Admin Routes
+
+  {
+    name: "admin dashboard",
+    path: "/admin/",
+    component: WithAdminLayout(() => <div>Admin</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin dashboard",
+    path: "/admin/dashboard",
+    component: WithAdminLayout(() => <div>Admin</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin application management",
+    path: "/admin/application_mgt",
+    component: WithAdminLayout(() => <div>Application Management</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process",
+    component: WithAdminLayout(() => <div>Selection Process</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program",
+    component: WithAdminLayout(() => <div>Program</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin User Management",
+    path: "/admin/users",
+    component: WithAdminLayout(UserManagement),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin User Management",
+    path: "/admin/users/mentors",
+    component: WithAdminLayout(AllMentors),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin User Management",
+    path: "/admin/users/mentors/:id",
+    component: ViewMentor,
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Booster Partners",
+    path: "/admin/booster_partners",
+    component: WithAdminLayout(() => <div>Booster Partners</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin To-do list",
+    path: "/admin/todo",
+    component: WithAdminLayout(() => <div>To-Do list</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/events",
+    component: WithAdminLayout(() => <div>Events</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin E-academy",
+    path: "/admin/academy",
+    component: WithAdminLayout(() => <div>E-Academy</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin documents",
+    path: "/admin/documents",
+    component: WithAdminLayout(() => <div>Documents</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Permission Control",
+    path: "/admin/permission",
+    component: WithAdminLayout(() => <div>Permission Control</div>),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  //Admin Routes Ends Here
 ];
 
 export default routes;

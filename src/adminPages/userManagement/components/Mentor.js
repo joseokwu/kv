@@ -1,0 +1,312 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { Table } from "../../../adminComponents";
+import { Button, DashCard, Modal, Tag } from "../../../components";
+import userPic from "../../../assets/images/sampleUser.png";
+import styles from "../user.module.css";
+import { formatDate, formatTime } from "../../../utils/helpers";
+import apple from "../../../assets/images/apple.svg";
+import { AddMentor } from "./AddMentor";
+import { useHistory } from "react-router-dom";
+
+export const Mentor = () => {
+  const { push } = useHistory();
+  const cardDetails = [
+    {
+      name: "No. of Mentors",
+      count: 12,
+      color: "#D5D6F4",
+    },
+    {
+      name: "Total Sessions",
+      count: 30,
+      color: "#DEF6FF",
+    },
+    {
+      name: "Confirmed Session",
+      count: 12,
+      color: "#D5D6F4",
+    },
+    {
+      name: "Pending Sessions",
+      count: 10,
+      color: "#DEF6FF",
+    },
+    {
+      name: "Rejected Sessions",
+      count: 8,
+      color: "#D5D6F4",
+    },
+  ];
+
+  const headers = [
+    { title: "Name", accessor: "name" },
+    { title: "Core Skills", accessor: "skills" },
+    { title: "Company", accessor: "company" },
+    { title: "Sessions", accessor: "sessions" },
+    { title: "Actions", accessor: "actions" },
+  ];
+
+  const data = [
+    {
+      name: (
+        <div className="d-flex align-items-center space-out">
+          <img src={userPic} alt="user" className={styles.userPic} />
+          <p className="mb-0">Kate Mcbeth Joan</p>
+        </div>
+      ),
+      skills: (
+        <div className="d-flex space-out flex-wrap">
+          <Tag name="Design" />
+          <Tag name="3D Printing" color="#40439A" />
+          <Tag name="Front end development" color="#40439A" />
+        </div>
+      ),
+      company: "Seam Technologies Inc.",
+      sessions: 3,
+      actions: (
+        <div className="d-flex align-items-center space-out">
+          <Link to="/admin/users/mentors/0" className="view-link">
+            View
+          </Link>
+          <Link to="/" className="delete-link">
+            Delete
+          </Link>
+        </div>
+      ),
+    },
+    {
+      name: (
+        <div className="d-flex align-items-center space-out">
+          <img src={userPic} alt="user" className={styles.userPic} />
+          <p className="mb-0">Kate Mcbeth Joan</p>
+        </div>
+      ),
+      skills: (
+        <div className="d-flex space-out flex-wrap">
+          <Tag name="Design" />
+          <Tag name="3D Printing" color="#40439A" />
+          <Tag name="Front end development" color="#40439A" />
+        </div>
+      ),
+      company: "Seam Technologies Inc.",
+      sessions: 3,
+      actions: (
+        <div className="d-flex align-items-center space-out">
+          <Link to="/admin/users/mentors/1" className="view-link">
+            View
+          </Link>
+          <Link to="/" className="delete-link">
+            Delete
+          </Link>
+        </div>
+      ),
+    },
+  ];
+
+  const sessionHeaders = [
+    { title: "Startups", accessor: "startups" },
+    { title: "Mentor", accessor: "mentor" },
+    { title: "Data and time", accessor: "duration" },
+    { title: "Status", accessor: "status" },
+    { title: "Actions", accessor: "actions" },
+  ];
+
+  const sessionData = [
+    {
+      mentor: (
+        <div className="d-flex align-items-center space-out">
+          <img src={userPic} alt="user" className={styles.userPic} />
+          <p className="mb-0">Kate Mcbeth Joan</p>
+        </div>
+      ),
+      status: (
+        <div className="d-flex space-out flex-wrap">
+          <Tag name="Completed" color="#18A615" />
+        </div>
+      ),
+      startups: (
+        <section className="event_people">
+          {Array.from("fiver").map((item, i) => {
+            return (
+              <img
+                src={apple}
+                alt="doc"
+                key={`over-${i}`}
+                style={{ position: "relative", left: i * -5 }}
+              />
+            );
+          })}
+        </section>
+      ),
+      duration: (
+        <div>
+          <p>{formatDate(new Date(2022, 8, 13))}</p>
+          <p>
+            {formatTime(new Date(2022, 8, 13, 10, 0))}-
+            {formatTime(new Date(2022, 8, 13, 14, 0))}
+          </p>
+        </div>
+      ),
+      actions: (
+        <div className="d-flex align-items-center space-out">
+          <Link to="/" className="view-link">
+            View
+          </Link>
+          <Link to="/" className="delete-link">
+            Delete
+          </Link>
+        </div>
+      ),
+    },
+    {
+      mentor: (
+        <div className="d-flex align-items-center space-out">
+          <img src={userPic} alt="user" className={styles.userPic} />
+          <p className="mb-0">Kate Mcbeth Joan</p>
+        </div>
+      ),
+      status: (
+        <div className="d-flex space-out flex-wrap">
+          <Tag name="Rescheduled" color="#00ADEF" />
+        </div>
+      ),
+      startups: (
+        <section className="event_people">
+          {Array.from("fiver").map((item, i) => {
+            return (
+              <img
+                src={apple}
+                alt="doc"
+                key={`over-${i}`}
+                style={{ position: "relative", left: i * -5 }}
+              />
+            );
+          })}
+        </section>
+      ),
+      duration: (
+        <div>
+          <p>{formatDate(new Date(2022, 8, 13))}</p>
+          <p>
+            {formatTime(new Date(2022, 8, 13, 10, 0))}-
+            {formatTime(new Date(2022, 8, 13, 14, 0))}
+          </p>
+        </div>
+      ),
+      actions: (
+        <div className="d-flex align-items-center space-out">
+          <Link to="/" className="view-link">
+            View
+          </Link>
+          <Link to="/" className="delete-link">
+            Delete
+          </Link>
+        </div>
+      ),
+    },
+    {
+      mentor: (
+        <div className="d-flex align-items-center space-out">
+          <img src={userPic} alt="user" className={styles.userPic} />
+          <p className="mb-0">Kate Mcbeth Joan</p>
+        </div>
+      ),
+      status: (
+        <div className="d-flex space-out flex-wrap">
+          <Tag name="Active" color="#2E3192" />
+        </div>
+      ),
+      startups: (
+        <section className="event_people">
+          {Array.from("fiver").map((item, i) => {
+            return (
+              <img
+                src={apple}
+                alt="doc"
+                key={`over-${i}`}
+                style={{ position: "relative", left: i * -5 }}
+              />
+            );
+          })}
+        </section>
+      ),
+      duration: (
+        <div>
+          <p>{formatDate(new Date())}</p>
+          <p>
+            {formatTime(new Date(2022, 1, 13, 10, 0))}-
+            {formatTime(new Date(2022, 1, 13, 18, 0))}
+          </p>
+        </div>
+      ),
+      actions: (
+        <div className="d-flex align-items-center space-out">
+          <Link to="/" className="view-link">
+            View
+          </Link>
+          <Link to="/" className="delete-link">
+            Delete
+          </Link>
+        </div>
+      ),
+    },
+  ];
+  return (
+    <div>
+      <Modal id="addMentor" title="Add Mentor" width={568}>
+        <AddMentor />
+      </Modal>
+      <section className="d-flex align-items-center dashboard-cards mb-4">
+        {cardDetails.length > 0 &&
+          cardDetails.map((card, i) => {
+            return (
+              <DashCard
+                name={card?.name}
+                color={card.color}
+                count={card?.count}
+              />
+            );
+          })}
+      </section>
+
+      <section className="mb-4">
+        <div className="d-flex align-items-center justify-content-between white-strip mb-3">
+          <h2 className="mb-0">Mentors</h2>
+
+          <div style={{ columnGap: 10 }} className="d-flex align-items-center">
+            <Button
+              label="View all"
+              variant="trans"
+              onClick={() => push("/admin/users/mentors")}
+            />
+            <Button
+              label="Add Mentor"
+              variant="secondary"
+              data-target="#addMentor"
+              data-toggle="modal"
+            />
+          </div>
+        </div>
+
+        <div>
+          <Table headers={headers} data={data} />
+        </div>
+      </section>
+
+      <section className="mb-4">
+        <div className="d-flex align-items-center justify-content-between white-strip mb-3">
+          <h2 className="mb-0">Sessions</h2>
+
+          <div style={{ columnGap: 10 }} className="d-flex align-items-center">
+            <Button label="View all" variant="trans" />
+          </div>
+        </div>
+
+        <div>
+          <Table headers={sessionHeaders} data={sessionData} />
+        </div>
+      </section>
+    </div>
+  );
+};

@@ -6,6 +6,12 @@
   background: #00adef !important;
 }
 
+.btn-trans {
+  background-color: transparent !important;
+  border: 1px solid #2e3192 !important;
+  color: #2e3192 !important;
+}
+
 .btn-primary:focus,
 .btn-primary:active {
   outline: none;

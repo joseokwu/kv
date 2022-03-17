@@ -1,0 +1,46 @@
+.contact_card {
+  background-color: #f9f9fc;
+  width: 100%;
+  min-height: 300px;
+  border-radius: 5px;
+}
+
+.userDp {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 50%;
+}
+
+.text {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #3e3e3e;
+  text-decoration: none;
+}
+
+.user_name {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.rate {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: #323232;
+}
+
+.contact_det a {
+  flex-basis: 28%;
+}
