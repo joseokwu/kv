@@ -48,7 +48,7 @@ export const StartupDashboard = () => {
       {/* <section className="startup-dash mb-4">
         <h2>Yebox Techologies</h2>
       </section> */}
-      <section className="row" style={{ zIndex: "998", background: "#FEFEFE" }}>
+      <section className="row tab-wrap" style={{ zIndex: "998", background: "#FEFEFE" }}>
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
@@ -80,6 +80,7 @@ export const StartupDashboard = () => {
       </section>
 
       <section className="container row my-5">
+
         <CardFill
           header={"Total Fund"}
           color={"#2E3192"}
@@ -113,6 +114,7 @@ export const StartupDashboard = () => {
           time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
         />
+
       </section>
 
       <section className="row">

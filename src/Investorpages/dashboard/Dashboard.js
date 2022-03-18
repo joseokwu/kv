@@ -47,7 +47,7 @@ console.log(bossterRes);
         
   return (
     <div className="dashboard-main">
-      <section className="d-flex align-items-center dashboard-cards">
+      <section className="tab-wrap d-flex align-items-center dashboard-cards">
         {bossterRes && bossterRes?.cards.map((data, i) => (
           <DashCard
             icon={total}
@@ -63,7 +63,7 @@ console.log(bossterRes);
         <div className="col-lg-6">
           <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
             <h5>New Applications</h5>
-            <span onClick={() => push("/applicants#all")}>See All</span>
+            <span onClick={() => push("/booster/applicants#all")}>See All</span>
           </header>
 
           <section>

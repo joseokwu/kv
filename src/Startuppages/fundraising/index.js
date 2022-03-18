@@ -77,7 +77,7 @@ export const StartupFundingRaising = () => {
 
   return (
     <div className="container">
-      <section className="row ">
+      <section className="row tab-wrap">
         <>
           <DashCard
             className="col-3 "
