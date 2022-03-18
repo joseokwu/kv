@@ -39,7 +39,7 @@ export const StartUpRegistration = () => {
         <div className="container">
           <div
             className="tab-wrap "
-            style={{ zIndex: '999', background: '#FFFFFF', width: '100%' }}
+            style={{ zIndex: '', background: '#FFFFFF', width: '100%' }}
           >
             <WelcomeMessage>
               <h5>

@@ -48,7 +48,7 @@ export const StartupDashboard = () => {
       {/* <section className="startup-dash mb-4">
         <h2>Yebox Techologies</h2>
       </section> */}
-      <section className="row tab-wrap" style={{ zIndex: "998", background: "#FEFEFE" }}>
+      <section className="row tab-wrap" style={{ zIndex: "", background: "#FEFEFE" }}>
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}

@@ -88,6 +88,18 @@ export const TodoCard = styled.div`
       padding: 10px 35px;
       border: none;
     }
+    .download-ass {
+      font-family: DM Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 140%;
+      color: #2e3192;
+      background: transparent;
+      border-radius: 5px;
+      padding: 10px 35px;
+      border: 1px solid #2e3192;
+    }
   }
 
   .subAssbtn {
