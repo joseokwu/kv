@@ -13,10 +13,10 @@ export const TodoList = ({ data }) => {
   return (
     <div className="container">
       <HeadWrapper className="d-flex justify-content-between">
-        <h5 className="text-nowrap">To Do List</h5>
+        <h5 className="text-nowrap">Assignment</h5>
         <span
           className="text-nowrap"
-          onClick={() => history.push("/startup/todolist")}
+          onClick={() => history.push("/startup/program#Assignment")}
         >
           See All
         </span>

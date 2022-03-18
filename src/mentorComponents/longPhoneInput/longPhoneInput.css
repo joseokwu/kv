@@ -25,6 +25,10 @@
   border: 0;
 }
 
+.input-phone:focus {
+  outline: none;
+}
+
 .phoneNumber label {
   font-family: DM Sans;
   font-style: normal;

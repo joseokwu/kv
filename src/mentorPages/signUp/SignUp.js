@@ -178,6 +178,7 @@ export const SignUp = ({ history }) => {
               <LongPhoneInput
                 label="Mobile Number"
                 message="Enter a phone number"
+                
               />
             </div>
 

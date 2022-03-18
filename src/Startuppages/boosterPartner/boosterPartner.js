@@ -50,7 +50,7 @@ export const StartupBoosterPartner = () => {
 
   return (
     <div className="mx-3">
-      <section className="row" style={{ zIndex: '900', background: '#FEFEFE' }}>
+      <section className="row tab-wrap" style={{ zIndex: '900', background: '#FEFEFE' }}>
         {/* {boosterData.map((data, i) => ( */}
           {/* <> */}
             <DashCard
