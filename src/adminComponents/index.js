@@ -5,3 +5,5 @@ export * from "./notification/Notification";
 export * from "./noticeItem/NoticeItem";
 export * from "./table/Table";
 export * from "./expCard/ExpCard";
+export * from "./listCard/ListCard";
+export * from "./interestCard/InterestCard";

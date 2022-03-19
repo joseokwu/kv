@@ -10,6 +10,7 @@ import web from "../../assets/icons/webSm.svg";
 import { Tabs } from "../../components";
 import { WorkExp } from "./components";
 import { useHistory } from "react-router-dom";
+import { AreaOfInterest } from "./components/AreaOfInterest";
 
 export const ViewMentor = () => {
   const tabItems = [
@@ -27,7 +28,7 @@ export const ViewMentor = () => {
       case `#${tabItems[0]}`:
         return <WorkExp />;
       case `#${tabItems[1]}`:
-        return <div>Area of Interest/Skills</div>;
+        return <AreaOfInterest />;
       case `#${tabItems[2]}`:
         return <div>Consulting Offerings</div>;
       case `#${tabItems[3]}`:

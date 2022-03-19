@@ -56,11 +56,21 @@ h6 {
 }
 
 .delete-link {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
   color: #e31937;
   text-decoration: underline;
 }
 
 .view-link {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
   color: #2e3192;
   text-decoration: underline;
 }
