@@ -46,6 +46,10 @@ h6 {
   border-radius: 8px;
 }
 
+.white-strip > div {
+  flex-basis: 50%;
+}
+
 .white-strip h2 {
   font-family: "DM Sans";
   font-style: normal;

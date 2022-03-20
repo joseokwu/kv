@@ -5,21 +5,23 @@ export const Tabs = ({
   tabItems,
   withState = false,
   state = "",
+  className = "",
   setState = () => {},
+  ...rest
 }) => {
   const history = useHistory();
   const {
-    push,
+    replace,
     location: { hash },
   } = history;
 
   useEffect(() => {
     if (hash === "" && tabItems?.length > 0) {
-      push(`#${tabItems[0]}`);
+      replace(`#${tabItems[0]}`);
     }
-  }, [hash, tabItems, push]);
+  }, [hash, tabItems, replace]);
   return (
-    <ul className="applicant-tabs-list">
+    <ul className={`applicant-tabs-list ${className}`} {...rest}>
       {tabItems.length > 0 &&
         tabItems.map((item, i) => {
           return !withState ? (
@@ -27,7 +29,7 @@ export const Tabs = ({
               className={`${
                 hash?.replaceAll("%20", " ") === `#${item}` ? "active-tab" : ""
               }`}
-              onClick={() => push(`#${item}`)}
+              onClick={() => replace(`#${item}`)}
               key={`tab-${i}`}
             >
               {item}

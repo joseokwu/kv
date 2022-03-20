@@ -94,7 +94,12 @@ import {
 import { MentorViewFeedback } from "../mentorPages/mentorAssignments/components/viewFeedback/viewFeedback";
 import { InvestorEvaluate } from "../Investorpages/evaluation/evaluation";
 import { WithAdminLayout } from "../adminComponents";
-import { AllMentors, UserManagement, ViewMentor } from "../adminPages";
+import {
+  AllMentors,
+  AllSessions,
+  UserManagement,
+  ViewMentor,
+} from "../adminPages";
 
 const routes = [
   // Start-up routes start
@@ -760,6 +765,15 @@ const routes = [
     name: "admin User Management",
     path: "/admin/users/mentors/:id",
     component: ViewMentor,
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin User Management",
+    path: "/admin/users/sessions",
+    component: WithAdminLayout(AllSessions),
     exact: true,
     protected: false,
     type: "admin",

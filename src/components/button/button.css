@@ -12,6 +12,11 @@
   color: #2e3192 !important;
 }
 
+.btn-gray {
+  background: #f4f4f4 !important;
+  color: #4f4f4f !important;
+}
+
 .btn-primary:focus,
 .btn-primary:active {
   outline: none;

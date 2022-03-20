@@ -1,109 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Table, ViewSession } from "../../../adminComponents";
-import { Button, DashCard, Modal, Tag } from "../../../components";
-import userPic from "../../../assets/images/sampleUser.png";
-import styles from "../user.module.css";
-import { formatDate, formatTime } from "../../../utils/helpers";
-import apple from "../../../assets/images/apple.svg";
-import { AddMentor } from "./AddMentor";
-import { useHistory } from "react-router-dom";
+import { Table, ViewSession } from "../../adminComponents";
+import { Modal, Tabs, Tag } from "../../components";
+import apple from "../../assets/images/apple.svg";
+import userPic from "../../assets/images/sampleUser.png";
+import left from "../../assets/icons/chervonLeft.svg";
+import { formatDate, formatTime } from "../../utils/helpers";
+import styles from "../userManagement/user.module.css";
 
-export const Mentor = () => {
-  const { push } = useHistory();
-  const cardDetails = [
-    {
-      name: "No. of Mentors",
-      count: 12,
-      color: "#D5D6F4",
-    },
-    {
-      name: "Total Sessions",
-      count: 30,
-      color: "#DEF6FF",
-    },
-    {
-      name: "Confirmed Session",
-      count: 12,
-      color: "#D5D6F4",
-    },
-    {
-      name: "Pending Sessions",
-      count: 10,
-      color: "#DEF6FF",
-    },
-    {
-      name: "Rejected Sessions",
-      count: 8,
-      color: "#D5D6F4",
-    },
-  ];
-
-  const headers = [
-    { title: "Name", accessor: "name" },
-    { title: "Core Skills", accessor: "skills" },
-    { title: "Company", accessor: "company" },
-    { title: "Sessions", accessor: "sessions" },
-    { title: "Actions", accessor: "actions" },
-  ];
-
-  const data = [
-    {
-      name: (
-        <div className="d-flex align-items-center space-out">
-          <img src={userPic} alt="user" className={styles.userPic} />
-          <p className="mb-0">Kate Mcbeth Joan</p>
-        </div>
-      ),
-      skills: (
-        <div className="d-flex space-out flex-wrap">
-          <Tag name="Design" />
-          <Tag name="3D Printing" color="#40439A" />
-          <Tag name="Front end development" color="#40439A" />
-        </div>
-      ),
-      company: "Seam Technologies Inc.",
-      sessions: 3,
-      actions: (
-        <div className="d-flex align-items-center space-out">
-          <Link to="/admin/users/mentors/0" className="view-link">
-            View
-          </Link>
-          <Link to="/admin/users" className="delete-link">
-            Delete
-          </Link>
-        </div>
-      ),
-    },
-    {
-      name: (
-        <div className="d-flex align-items-center space-out">
-          <img src={userPic} alt="user" className={styles.userPic} />
-          <p className="mb-0">Kate Mcbeth Joan</p>
-        </div>
-      ),
-      skills: (
-        <div className="d-flex space-out flex-wrap">
-          <Tag name="Design" />
-          <Tag name="3D Printing" color="#40439A" />
-          <Tag name="Front end development" color="#40439A" />
-        </div>
-      ),
-      company: "Seam Technologies Inc.",
-      sessions: 3,
-      actions: (
-        <div className="d-flex align-items-center space-out">
-          <Link to="/admin/users/mentors/1" className="view-link">
-            View
-          </Link>
-          <Link to="/admin/users" className="delete-link">
-            Delete
-          </Link>
-        </div>
-      ),
-    },
-  ];
-
+export const AllSessions = () => {
   const sessionHeaders = [
     { title: "Startups", accessor: "startups" },
     { title: "Mentor", accessor: "mentor" },
@@ -268,75 +173,46 @@ export const Mentor = () => {
     },
   ];
 
+  const testData = []
+    .concat(sessionData)
+    .concat(sessionData)
+    .concat(sessionData)
+    .concat(sessionData)
+    .concat(sessionData);
   return (
-    <div>
-      <Modal id="addMentor" title="Add Mentor" width={568}>
-        <AddMentor />
-      </Modal>
+    <div className="p-5">
       <Modal id="viewSession" withHeader={false} width={723}>
         <ViewSession />
       </Modal>
+      <section className="d-flex align-items-center justify-content-between white-strip mb-3">
+        <h2 className="mb-0">Sessions (20)</h2>
 
-      <section className="d-flex align-items-center dashboard-cards mb-4">
-        {cardDetails.length > 0 &&
-          cardDetails.map((card, i) => {
-            return (
-              <DashCard
-                name={card?.name}
-                color={card.color}
-                count={card?.count}
-              />
-            );
-          })}
-      </section>
-
-      <section className="mb-4">
-        <div className="d-flex align-items-center justify-content-between white-strip mb-3">
-          <h2 className="mb-0">Mentors</h2>
-
-          <div
-            style={{ columnGap: 10 }}
-            className="d-flex align-items-center justify-content-end"
-          >
-            <Button
-              label="View all"
-              variant="trans"
-              onClick={() => push("/admin/users/mentors")}
-            />
-            <Button
-              label="Add Mentor"
-              variant="secondary"
-              data-target="#addMentor"
-              data-toggle="modal"
-            />
-          </div>
-        </div>
-
-        <div>
-          <Table headers={headers} data={data} />
+        <div
+          style={{ columnGap: 10 }}
+          className="d-flex align-items-center justify-content-end"
+        >
+          <Tabs
+            tabItems={["All", "Active", "Completed", "Rescheduled"]}
+            className="justify-content-end"
+            style={{ columnGap: "1.5rem" }}
+          />
         </div>
       </section>
 
-      <section className="mb-4">
-        <div className="d-flex align-items-center justify-content-between white-strip mb-3">
-          <h2 className="mb-0">Sessions</h2>
-
-          <div
-            style={{ columnGap: 10 }}
-            className="d-flex align-items-center justify-content-end"
-          >
-            <Button
-              label="View all"
-              variant="trans"
-              onClick={() => push("/admin/users/sessions")}
-            />
-          </div>
-        </div>
-
-        <div>
-          <Table headers={sessionHeaders} data={sessionData} />
-        </div>
+      <section>
+        <Table headers={sessionHeaders} data={testData} />
       </section>
+      <div className="d-flex align-item-center pt-4 justify-content-end">
+        <p className="page-num">1 of 26</p>
+        <img
+          src={left}
+          alt="left"
+          className="mx-3"
+          style={{ transform: "rotate(180deg)" }}
+          role="button"
+        />
+        <img src={left} alt="left" className="mx-3" role="button" />
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./viewMentor.module.css";
 import userPic from "../../assets/images/sampleUser.png";
 import stars from "../../assets/icons/Stars.svg";
@@ -7,18 +7,21 @@ import linkedIn from "../../assets/images/profileLinkedIn.svg";
 import location from "../../assets/icons/locationSm.svg";
 import phone from "../../assets/icons/phoneSm.svg";
 import web from "../../assets/icons/webSm.svg";
-import { Tabs } from "../../components";
-import { WorkExp } from "./components";
+import { Modal, Tabs } from "../../components";
+import { WorkExp, AreaOfInterest, Consult, Availability } from "./components";
 import { useHistory } from "react-router-dom";
-import { AreaOfInterest } from "./components/AreaOfInterest";
+import { RatingCard } from "../../adminComponents";
 
 export const ViewMentor = () => {
-  const tabItems = [
-    "Work Experience",
-    "Area of Interest/Skills",
-    "Consulting Offerings",
-    "Availability",
-  ];
+  const tabItems = useMemo(
+    () => [
+      "Work Experience",
+      "Area of Interest/Skills",
+      "Consulting Offerings",
+      "Availability",
+    ],
+    []
+  );
 
   const {
     location: { hash },
@@ -30,22 +33,32 @@ export const ViewMentor = () => {
       case `#${tabItems[1]}`:
         return <AreaOfInterest />;
       case `#${tabItems[2]}`:
-        return <div>Consulting Offerings</div>;
+        return <Consult />;
       case `#${tabItems[3]}`:
-        return <div>Availability</div>;
+        return <Availability />;
       default:
         return <WorkExp />;
     }
   };
   return (
     <div className="p-5">
+      <Modal id="viewRating" title="View Ratings" width={568}>
+        <RatingCard />
+      </Modal>
       <section className={`${styles.contact_card} row mx-0 p-5 mb-5`}>
         <div className="col-lg-6">
           <article className="d-flex align-items-center space-out mb-2">
             <img src={userPic} alt="user" className={styles.userDp} />
             <img src={stars} alt="stars" className="ml-2" />
             <p className={`ml-2 mb-0 ${styles.rate}`}>4.5</p>
-            <p className="view-link mb-0">View rating</p>
+            <p
+              className="view-link mb-0"
+              role="button"
+              data-target="#viewRating"
+              data-toggle="modal"
+            >
+              View rating
+            </p>
           </article>
 
           <h4 className={styles.user_name}>Micheal Smith</h4>

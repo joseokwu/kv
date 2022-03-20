@@ -104,7 +104,10 @@ export const AllMentors = () => {
         <div className="d-flex align-items-center justify-content-between white-strip mb-3">
           <h2 className="mb-0">Mentors (20)</h2>
 
-          <div style={{ columnGap: 10 }} className="d-flex align-items-center">
+          <div
+            style={{ columnGap: 10 }}
+            className="d-flex align-items-center justify-content-end"
+          >
             <Button
               label="Add Mentor"
               variant="secondary"

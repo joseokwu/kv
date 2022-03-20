@@ -7,3 +7,5 @@ export * from "./table/Table";
 export * from "./expCard/ExpCard";
 export * from "./listCard/ListCard";
 export * from "./interestCard/InterestCard";
+export * from "./viewSession/ViewSession";
+export * from "./ratingCard/RatingCard";
