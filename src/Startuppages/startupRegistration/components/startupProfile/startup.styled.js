@@ -86,10 +86,10 @@ export const FormWrapper = styled.div`
   input {
     border: none !important;
     background: #fafafc !important;
-    border-radius: 4px !important;
-    /* padding: 8px 14px; */
-    margin-left: 15px !important;
-    margin-bottom: 15px !important;
+    /* border-radius: 4px !important; */
+    padding: 8px 14px;
+    /* margin-left: 15px !important; */
+    /* margin-bottom: 15px !important; */
     
 
     ::placeholder {

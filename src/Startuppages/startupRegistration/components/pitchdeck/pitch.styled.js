@@ -189,6 +189,13 @@ export const FileWrapper = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
 
+  /* .download {
+    color: #ffffff!important ;
+    background: #2e3192;
+    cursor: pointer;
+  } */
+
+
   @media (max-width: 768px) {
     width: 100%;
   }
