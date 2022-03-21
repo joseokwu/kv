@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Table, ViewSession } from "../../adminComponents";
+import { DeleteModal, Table, ViewSession } from "../../adminComponents";
 import { Modal, Tabs, Tag } from "../../components";
 import apple from "../../assets/images/apple.svg";
 import userPic from "../../assets/images/sampleUser.png";
@@ -63,9 +63,14 @@ export const AllSessions = () => {
           >
             View
           </p>
-          <Link to="/admin/users" className="delete-link">
+          <p
+            role="button"
+            data-target="#deleteSession"
+            data-toggle="modal"
+            className="delete-link"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -114,9 +119,14 @@ export const AllSessions = () => {
           >
             View
           </p>
-          <Link to="/admin/users" className="delete-link">
+          <p
+            role="button"
+            data-target="#deleteSession"
+            data-toggle="modal"
+            className="delete-link"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -165,9 +175,14 @@ export const AllSessions = () => {
           >
             View
           </p>
-          <Link to="/admin/users" className="delete-link">
+          <p
+            role="button"
+            data-target="#deleteSession"
+            data-toggle="modal"
+            className="delete-link"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -181,6 +196,11 @@ export const AllSessions = () => {
     .concat(sessionData);
   return (
     <div className="p-5">
+      <DeleteModal
+        id="deleteSession"
+        title="Delete Session"
+        desc="Are you sure you want to delete session with Kate Mcbeth Joan"
+      />
       <Modal id="viewSession" withHeader={false} width={723}>
         <ViewSession />
       </Modal>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Tabs } from "../../components";
-import { Mentor } from "./components";
+import { Investor, Mentor } from "./components";
 
 export const UserManagement = () => {
   const tabItems = ["Mentor", "Investor", "Partner", "Kv Member"];
@@ -14,7 +14,7 @@ export const UserManagement = () => {
       case `#${tabItems[0]}`:
         return <Mentor />;
       case `#${tabItems[1]}`:
-        return <div>Investor</div>;
+        return <Investor />;
       case `#${tabItems[2]}`:
         return <div>Partner</div>;
       case `#${tabItems[3]}`:

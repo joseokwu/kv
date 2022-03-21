@@ -17,6 +17,11 @@
   color: #4f4f4f !important;
 }
 
+.btn-danger {
+  background-color: #cb1313;
+  color: #fff;
+}
+
 .btn-primary:focus,
 .btn-primary:active {
   outline: none;

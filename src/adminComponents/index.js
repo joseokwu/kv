@@ -9,3 +9,5 @@ export * from "./listCard/ListCard";
 export * from "./interestCard/InterestCard";
 export * from "./viewSession/ViewSession";
 export * from "./ratingCard/RatingCard";
+export * from "./yesNo/YesNo";
+export * from "./deleteModal/DeleteModal";

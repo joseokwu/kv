@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Table, ViewSession } from "../../../adminComponents";
+import { DeleteModal, Table, ViewSession } from "../../../adminComponents";
 import { Button, DashCard, Modal, Tag } from "../../../components";
 import userPic from "../../../assets/images/sampleUser.png";
 import styles from "../user.module.css";
@@ -69,9 +69,14 @@ export const Mentor = () => {
           <Link to="/admin/users/mentors/0" className="view-link">
             View
           </Link>
-          <Link to="/admin/users" className="delete-link">
+          <p
+            role="button"
+            className="delete-link"
+            data-target="#deleteMentor"
+            data-toggle="modal"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -96,9 +101,14 @@ export const Mentor = () => {
           <Link to="/admin/users/mentors/1" className="view-link">
             View
           </Link>
-          <Link to="/admin/users" className="delete-link">
+          <p
+            role="button"
+            className="delete-link"
+            data-target="#deleteMentor"
+            data-toggle="modal"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -158,9 +168,14 @@ export const Mentor = () => {
           >
             View
           </p>
-          <Link to="/admin/users" className="delete-link">
+          <p
+            role="button"
+            data-target="#deleteSession"
+            data-toggle="modal"
+            className="delete-link"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -209,9 +224,14 @@ export const Mentor = () => {
           >
             View
           </p>
-          <Link to="/admin/users" className="delete-link">
+          <p
+            role="button"
+            data-target="#deleteSession"
+            data-toggle="modal"
+            className="delete-link"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -260,9 +280,14 @@ export const Mentor = () => {
           >
             View
           </p>
-          <Link to="/admin/users" className="delete-link">
+          <p
+            role="button"
+            data-target="#deleteSession"
+            data-toggle="modal"
+            className="delete-link"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -276,6 +301,18 @@ export const Mentor = () => {
       <Modal id="viewSession" withHeader={false} width={723}>
         <ViewSession />
       </Modal>
+
+      <DeleteModal
+        id="deleteMentor"
+        title="Delete Mentor"
+        desc="Are you sure you want to delete Kate Mcbeth Joan"
+      />
+
+      <DeleteModal
+        id="deleteSession"
+        title="Delete Session"
+        desc="Are you sure you want to delete session with Kate Mcbeth Joan"
+      />
 
       <section className="d-flex align-items-center dashboard-cards mb-4">
         {cardDetails.length > 0 &&

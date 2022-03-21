@@ -98,6 +98,7 @@ import {
   AllMentors,
   AllSessions,
   UserManagement,
+  ViewInvestor,
   ViewMentor,
 } from "../adminPages";
 
@@ -774,6 +775,15 @@ const routes = [
     name: "admin User Management",
     path: "/admin/users/sessions",
     component: WithAdminLayout(AllSessions),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin User Management",
+    path: "/admin/users/investors/:id",
+    component: ViewInvestor,
     exact: true,
     protected: false,
     type: "admin",

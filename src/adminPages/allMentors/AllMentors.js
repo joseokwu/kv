@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { Table } from "../../adminComponents";
+import { DeleteModal, Table } from "../../adminComponents";
 import left from "../../assets/icons/chervonLeft.svg";
 import { Button, Modal, Tag } from "../../components";
 import userPic from "../../assets/images/sampleUser.png";
@@ -41,9 +41,14 @@ export const AllMentors = () => {
           <Link to="/admin/users/mentors/0" className="view-link">
             View
           </Link>
-          <Link to="/" className="delete-link">
+          <p
+            role="button"
+            className="delete-link"
+            data-target="#deleteMentor"
+            data-toggle="modal"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -68,9 +73,14 @@ export const AllMentors = () => {
           <Link to="/admin/users/mentors/1" className="view-link">
             View
           </Link>
-          <Link to="/" className="delete-link">
+          <p
+            role="button"
+            className="delete-link"
+            data-target="#deleteMentor"
+            data-toggle="modal"
+          >
             Delete
-          </Link>
+          </p>
         </div>
       ),
     },
@@ -88,6 +98,11 @@ export const AllMentors = () => {
       <Modal id="addMentor" title="Add Mentor" width={568}>
         <AddMentor />
       </Modal>
+      <DeleteModal
+        id="deleteMentor"
+        title="Delete Mentor"
+        desc="Are you sure you want to delete Kate Mcbeth Joan"
+      />
       <section className="d-flex align-items-center mb-3">
         <p
           className="bread-start"
