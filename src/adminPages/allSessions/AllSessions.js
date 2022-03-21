@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { DeleteModal, Table, ViewSession } from "../../adminComponents";
 import { Modal, Tabs, Tag } from "../../components";
 import apple from "../../assets/images/apple.svg";
@@ -9,6 +9,8 @@ import { formatDate, formatTime } from "../../utils/helpers";
 import styles from "../userManagement/user.module.css";
 
 export const AllSessions = () => {
+  const { push } = useHistory();
+
   const sessionHeaders = [
     { title: "Startups", accessor: "startups" },
     { title: "Mentor", accessor: "mentor" },
@@ -204,6 +206,17 @@ export const AllSessions = () => {
       <Modal id="viewSession" withHeader={false} width={723}>
         <ViewSession />
       </Modal>
+      <section className="d-flex align-items-center mb-3">
+        <p
+          className="bread-start"
+          role="button"
+          onClick={() => push("/admin/users#Mentor")}
+        >
+          User Management
+        </p>
+        <img src={left} alt="left" className="mx-3" />
+        <p className="bread-end">Sessions</p>
+      </section>
       <section className="d-flex align-items-center justify-content-between white-strip mb-3">
         <h2 className="mb-0">Sessions (20)</h2>
 

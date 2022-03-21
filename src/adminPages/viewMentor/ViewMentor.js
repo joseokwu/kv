@@ -7,6 +7,7 @@ import linkedIn from "../../assets/images/profileLinkedIn.svg";
 import location from "../../assets/icons/locationSm.svg";
 import phone from "../../assets/icons/phoneSm.svg";
 import web from "../../assets/icons/webSm.svg";
+import left from "../../assets/icons/chervonLeft.svg";
 import { Modal, Tabs } from "../../components";
 import { WorkExp, AreaOfInterest, Consult, Availability } from "./components";
 import { useHistory } from "react-router-dom";
@@ -25,6 +26,7 @@ export const ViewMentor = () => {
 
   const {
     location: { hash },
+    goBack,
   } = useHistory();
   const renderComponent = () => {
     switch (hash) {
@@ -45,6 +47,17 @@ export const ViewMentor = () => {
       <Modal id="viewRating" title="View Ratings" width={568}>
         <RatingCard />
       </Modal>
+      <section className="d-flex align-items-center mb-3">
+        <img
+          src={left}
+          alt="left"
+          className="mr-2"
+          style={{ transform: "rotate(180deg)" }}
+        />
+        <p className="bread-start" role="button" onClick={() => goBack()}>
+          Go back
+        </p>
+      </section>
       <section className={`${styles.contact_card} row mx-0 p-5 mb-5`}>
         <div className="col-lg-6">
           <article className="d-flex align-items-center space-out mb-2">

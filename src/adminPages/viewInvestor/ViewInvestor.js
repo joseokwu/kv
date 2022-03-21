@@ -4,14 +4,16 @@ import stars from "../../assets/icons/Stars.svg";
 import twitter from "../../assets/images/profileTwitter.svg";
 import linkedIn from "../../assets/images/profileLinkedIn.svg";
 import location from "../../assets/icons/locationSm.svg";
-import phone from "../../assets/icons/phoneSm.svg";
 import web from "../../assets/icons/webSm.svg";
+import left from "../../assets/icons/chervonLeft.svg";
 import styles from "./viewInvestor.module.css";
 import { useHistory } from "react-router-dom";
 import { Tabs } from "../../components";
 import { InvestmentInfo, InvestorInfo, StartupPortfolio } from "./components";
 
 export const ViewInvestor = () => {
+  const { goBack } = useHistory();
+
   const tabItems = useMemo(
     () => ["Investment Info", "Investor Info", "Start-up Portfolio"],
     []
@@ -35,6 +37,17 @@ export const ViewInvestor = () => {
   };
   return (
     <div className="p-5">
+      <section className="d-flex align-items-center mb-3">
+        <img
+          src={left}
+          alt="left"
+          className="mr-2"
+          style={{ transform: "rotate(180deg)" }}
+        />
+        <p className="bread-start" role="button" onClick={() => goBack()}>
+          Go back
+        </p>
+      </section>
       <section className={`${styles.contact_card} row mx-0 p-5 mb-5`}>
         <div className="col-lg-6">
           <article className="d-flex align-items-center space-out mb-2">

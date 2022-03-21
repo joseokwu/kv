@@ -4,7 +4,7 @@ import { Tabs } from "../../components";
 import { Investor, Mentor } from "./components";
 
 export const UserManagement = () => {
-  const tabItems = ["Mentor", "Investor", "Partner", "Kv Member"];
+  const tabItems = ["Mentor", "Investor", "Partner"];
 
   const {
     location: { hash },
@@ -17,8 +17,8 @@ export const UserManagement = () => {
         return <Investor />;
       case `#${tabItems[2]}`:
         return <div>Partner</div>;
-      case `#${tabItems[3]}`:
-        return <div>Kv Member</div>;
+      // case `#${tabItems[3]}`:
+      //   return <div>Kv Member</div>;
       default:
         return <Mentor />;
     }
