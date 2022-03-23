@@ -38,7 +38,8 @@ export const StartupBoosterPartner = () => {
   const renderContent = () => {
     switch (hash) {
       case '#All Offerings':
-        return <AllOfferings data={alOff} />
+        // return <AllOfferings data={alOff} />
+        return <AllOfferings data={boosterData?.offerings} />
       case '#My Applications':
         return <MyApplications data={apli}  />
       default:
@@ -50,7 +51,7 @@ export const StartupBoosterPartner = () => {
 
   return (
     <div className="mx-3">
-      <section className="row tab-wrap" style={{ zIndex: '900', background: '#FEFEFE' }}>
+      <section className="row tab-wrap" style={{ zIndex: '', background: '#FEFEFE' }}>
         {/* {boosterData.map((data, i) => ( */}
           {/* <> */}
             <DashCard

@@ -7,6 +7,7 @@ export const AllOfferings = ({data}) => {
     <div>
       <div className="my-4">
         <Applied data={data} />
+        <Apply data={data} />
       </div>
   
     </div>

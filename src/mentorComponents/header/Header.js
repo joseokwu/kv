@@ -27,7 +27,7 @@ export const Header = ({ setOpen, open }) => {
           <span></span>
           <span></span>
         </div>
-        <span onClick={() => push("/mentor/dashboard")}>
+        <span style={{cursor: "pointer"}} onClick={() => push("/mentor/dashboard")}>
           <img src={logo} alt="logo" />
         </span>
       </section>

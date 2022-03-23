@@ -64,6 +64,7 @@ export const PhoneInput = ({
         </div>
         <div className="w-100">
           <input
+            maxLength={10}
             type="text"
             id={id}
             className="input-phone phone-text"

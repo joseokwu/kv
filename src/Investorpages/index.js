@@ -29,3 +29,4 @@ export * from "./dealRoom/DealRoom";
 export * from "./dealFolder/DealFolder";
 export * from "./scheduleCalendar/ScheduleCalendar";
 export * from "./investorProfile/InvestorProfile";
+export * from "./boosterNotification/boosterNotification"

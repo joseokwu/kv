@@ -1,6 +1,7 @@
-.dashCard-main {
+.dash-card-main {
   padding: 14px 15px;
-  max-width: 200px;
+  /* max-width: 167px;  */
+/*   max-width: 200px; */
   width: 100%;
   min-width: 150px;
   border-radius: 20px;
@@ -13,7 +14,7 @@
 }
 
 .dashCard-icon {
-  width: 50px;
+  width: 10px;
   height: 50px;
   border-radius: 50%;
   display: flex;
@@ -22,7 +23,7 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-.dashCard-main h3 {
+.dash-card-main h3 {
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -31,13 +32,12 @@
   text-transform: capitalize;
 }
 
-.dashCard-main p {
+.dash-card-main p {
   font-family: Lato;
   font-style: normal;
   font-weight: bold;
   font-size: 40px;
   line-height: 140%;
-  color: #eff3f6;
   color: #181819;
 }
 
@@ -47,6 +47,6 @@
   bottom: 0;
 }
 
-.dashCard-main > section {
+.dash-card-main > section {
   height: 100%;
 }

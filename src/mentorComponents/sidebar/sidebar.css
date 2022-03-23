@@ -10,9 +10,9 @@
   overflow-y: auto;
 }
 
-.side_navigator img {
+/* .side_navigator img {
   cursor: pointer;
-}
+} */
 
 .side_footer {
   display: flex;

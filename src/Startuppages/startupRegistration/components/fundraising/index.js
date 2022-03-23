@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
   HeaderFund,
@@ -10,7 +10,10 @@ import {
 } from './fund.styled'
 import { FundAsk } from './components/fundAsk'
 import { Tabs } from '../../../../Startupcomponents/tabs/Tabs'
-import { CustomButton, OutlineButton } from '../../../../Startupcomponents/button/button.styled'
+import {
+  CustomButton,
+  OutlineButton,
+} from '../../../../Startupcomponents/button/button.styled'
 import { useActivity } from '../../../../hooks/useBusiness'
 import { FundUtilization } from './components/fundUtilization'
 import { CapTable } from './components/capTable'
@@ -66,6 +69,7 @@ export const FundRaising = () => {
 
   return (
     <>
+    
       <HeaderFund>
         <h5> Fund Raising </h5>
         <p className="text-nowrap">
@@ -97,17 +101,20 @@ export const FundRaising = () => {
               Save
             </CustomButton>
             <OutlineButton
-            onClick={() => history.push('/startup/dashboard')}
-             className="mx-2" background="none">
+              onClick={() => history.push('/startup/dashboard')}
+              className="ms-2"
+              style={{ marginRight: '5rem' }}
+              background="none"
+            >
               Submit
             </OutlineButton>
-            <CustomButton
+            {/* <CustomButton
               onClick={next}
               style={{ marginRight: '5rem' }}
               background="#2E3192"
             >
               Next
-            </CustomButton>
+            </CustomButton> */}
           </div>
         </div>
       </form>

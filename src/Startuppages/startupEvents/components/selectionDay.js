@@ -64,6 +64,7 @@ export const SelectionDay = ({ data = [] }) => {
               ) : (
                 new Date().getTime() < new Date(data[0]?.endDate).getTime() && (
                   <button className="se_join">Add Schedule</button>
+                  // <button className="se_join">Join Event</button>
                 )
               )}
               <button className="se_view">View details</button>

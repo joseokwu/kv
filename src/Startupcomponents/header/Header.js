@@ -52,7 +52,7 @@ export const Header = ({ setOpen, open}) => {
             className="d-flex align-items-center header-profile d-none d-lg-flex"
           >
             <img src={sampleUser} alt="profile" className="" />
-            <p className="mb-0 header-text">Micheal Smith</p>
+            <p className=" w- mb-0 header-text">Micheal Smith</p>
           </span>
           <div>
             {/* <img src={angleDown} alt="dropdown" /> */}
