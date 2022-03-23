@@ -87,7 +87,7 @@ export const Sidebar = () => {
     <div className="side_main">
       <section className="side_navigator">
         <div>
-          <img src={user} alt="profile" onClick={() => push('/mentor/profile')} />
+          <img src={user} alt="profile" />
         </div>
         <h5 className="mb-0 side_header">Hello Micheal Smith</h5>
         <p className="mb-0 side_text">{pathname.includes('mentor') ? 'Mentor' : 'mentor'}</p>

@@ -21,7 +21,7 @@ export const CardWrapper = styled.div`
     font-family: Lato;
     font-style: normal;
     font-weight: bold;
-    font-size: 33px;
+    font-size: 30px;
     line-height: 48px;
     color: #181819;
   }

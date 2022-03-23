@@ -13,7 +13,7 @@
 }
 
 .dashCard-icon {
-  width: 50px;
+  width: 10px;
   height: 50px;
   border-radius: 50%;
   display: flex;
@@ -37,7 +37,6 @@
   font-weight: bold;
   font-size: 40px;
   line-height: 140%;
-  color: #eff3f6;
   color: #181819;
 }
 

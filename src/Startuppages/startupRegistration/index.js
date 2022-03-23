@@ -14,12 +14,12 @@ export const StartUpRegistration = () => {
     changePath,
   } = useActivity()
 
-  const [progressStat, setProgressStat] = useState(25)
+  const [progressStat, setProgressStat] = useState()
 
   useEffect(() => {
     switch (path) {
       case 1:
-        return setProgressStat(20)
+        return setProgressStat(0)
       case 2:
         return setProgressStat(40)
       case 3:
@@ -38,7 +38,7 @@ export const StartUpRegistration = () => {
       <div className="mx-5">
         <div className="container">
           <div
-            className="tab-wrap "
+            className=""
             style={{ zIndex: '', background: '#FFFFFF', width: '100%' }}
           >
             <WelcomeMessage>
