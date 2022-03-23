@@ -41,7 +41,7 @@ export const Apply = () => {
               </p>
             ))}
           </div>
-          <button className="applyBtn mt-2">Apply</button>
+          <button className="applyBtn mt-2" data-target="#apply" data-toggle="modal">Apply</button>
         </ApplicationCard>
       ))}
     </div>
