@@ -8,6 +8,7 @@ export const Modal = ({
   id = "",
   subTitle = "",
   withHeader = true,
+  width = 847,
 }) => {
   return (
     <div
@@ -22,7 +23,7 @@ export const Modal = ({
           position === "center" && "modal-dialog-centered"
         }`}
         role="document"
-        style={{ maxWidth: 847, marginTop: 200 }}
+        style={{ maxWidth: width, marginTop: 200 }}
       >
         <div className="modal-content kv-modal-content">
           {withHeader && (

@@ -1,0 +1,91 @@
+.text {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #3e3e3e;
+  text-decoration: none;
+}
+
+.contact_card {
+  background-color: #f9f9fc;
+  width: 100%;
+  min-height: 300px;
+  border-radius: 5px;
+}
+
+.userDp {
+  width: 82px;
+  height: 82px;
+  min-width: 82px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 50%;
+}
+
+.partnerContact {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #2e3192;
+  column-gap: 16px;
+}
+
+.partnerContact span {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  min-width: 3px;
+  border-radius: 50%;
+  background-color: #2e3192;
+  margin-right: 7px;
+}
+
+.offerCard {
+  background: #fdfdff;
+  border-radius: 5px;
+  padding: 2.93rem 2.75rem;
+  list-style: none;
+}
+
+.offerItem {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.offerItem h6 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.offerItem p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #3e3e3e;
+}
+
+.offerItem span {
+  color: #00adef !important;
+  cursor: pointer;
+}
+
+.offerCard h6 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
