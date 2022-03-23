@@ -5,6 +5,7 @@ export const RowOption = ({
   options = [],
   getSelected = () => {},
   currentSelected = "",
+  selectAll = false,
 }) => {
   const [selected, setSelected] = useState(currentSelected);
 
@@ -19,7 +20,7 @@ export const RowOption = ({
         options.map((option, i) => {
           return (
             <Option
-              bg={selected === option ? "#DCEBFF" : ""}
+              bg={selected === option || selectAll ? "#DCEBFF" : ""}
               onClick={() => handleClick(option)}
             >
               {option}

@@ -1,0 +1,23 @@
+.decision span {
+  display: inline-block;
+  height: 8px;
+  width: 6px;
+  min-width: 6px;
+  background-color: #00adef;
+}
+
+.decision p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.decision {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}

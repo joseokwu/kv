@@ -1,4 +1,4 @@
-@import 'antd/dist/antd.css';
+@import "antd/dist/antd.css";
 /* 
 @import "../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
@@ -10,8 +10,6 @@
 @import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-react-schedule/styles/material.css"; */
-
-
 
 p,
 h1,
@@ -26,7 +24,7 @@ h6 {
 .wrapper {
   padding: 1.5rem;
   max-width: 1440px;
-  background: #F9FAFA;
+  background: #f9fafa;
 }
 
 .flex-align {
@@ -41,6 +39,64 @@ h6 {
   z-index: 8;
   padding: 10px;
 }
-/* input {
-  padding:0 !important;
-} */
+
+.white-strip {
+  background-color: white;
+  padding: 20px 16px;
+  border-radius: 8px;
+}
+
+.white-strip > div {
+  flex-basis: 50%;
+}
+
+.white-strip h2 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.delete-link {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #e31937;
+  text-decoration: underline;
+}
+
+.view-link {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2e3192;
+  text-decoration: underline;
+}
+
+.space-out {
+  column-gap: 10px;
+}
+
+.max_fill {
+  max-width: 100% !important;
+}
+
+.page-num {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+
+.mb-45 {
+  margin-bottom: 2.5rem;
+}
