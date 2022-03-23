@@ -6,6 +6,9 @@
   line-height: 140%;
   color: rgba(24, 24, 25, 0.9);
 }
+.dashboard-main {
+  width: 100%;
+}
 
 .see-all {
   font-family: Lato;

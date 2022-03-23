@@ -5,13 +5,13 @@ export const CoInputWrapper = styled.label`
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  background: #2BB4F0;
+  background: #2bb4f0;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 310px;
   left: 120px;
- ` 
+`
 
 export const HeaderTeam = styled.div`
   width: 224px;
@@ -50,11 +50,11 @@ export const InputWrapper = styled.label`
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  background: #2BB4F0;
+  background: #2bb4f0;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 550px;
+  top: 520px;
   left: 240px;
 
   input {
@@ -86,7 +86,7 @@ export const FormWrapper = styled.div`
 
   hr {
     background: #636363;
-    width: 95%;
+    width: 100%;
   }
 
   .div {
@@ -140,7 +140,7 @@ export const FormWrapper = styled.div`
 
   input {
     border: none;
-    background: #fafafc!important;
+    background: #fafafc !important;
     border-radius: 4px;
     margin-left: 15px;
     margin-bottom: 15px;
@@ -172,15 +172,48 @@ export const FormWrapper = styled.div`
     width: 100%;
     margin-left: 15px;
     border-radius: 7px;
-    outline: 0;
+    outline: none;
+
+    input:focus {
+      outline: none;
+    }
 
     &:focus {
-      outline: 0;
+      outline: none;
     }
 
     @media (max-width: 768px) {
       width: 100%;
     }
+  }
+
+  .ant-select-multiple .ant-select-selection-item {
+    background: #6466aa;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 21px;
+    font-family: 'DM Sans';
+    letter-spacing: 0.01em;
+  }
+
+  .ant-select-multiple .ant-select-selection-item-remove svg {
+    color: #fff;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    background: #fafafc;
+    border-radius: 4px;
+    border: none;
+    padding: 5px 0px 5px 5px;
+  }
+
+  .skiil-select {
+    background: #fafafc !important;
+    border-radius: 4px;
+    border: none !important;
   }
 `
 
@@ -197,12 +230,12 @@ export const ModalForm = styled.div`
   /* height: 70vh; */
 
   input {
-    background: #fafafc!important;
+    background: #fafafc !important;
     border: none;
   }
 
   textarea {
-    background: #fafafc!important;
+    background: #fafafc !important;
     border: none;
   }
   span {

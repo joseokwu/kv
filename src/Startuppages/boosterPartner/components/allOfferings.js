@@ -12,8 +12,8 @@ export const AllOfferings = ({data}) => {
   return (
     <div>
       <div className="my-4">
-        <Applied data={data !== undefined && aplied} />
-        <Apply data={ data !== undefined && notApplied} />
+        <Applied data={data} />
+        <Apply data={data} />
       </div>
   
     </div>

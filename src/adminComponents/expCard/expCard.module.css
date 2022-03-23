@@ -1,0 +1,52 @@
+.card {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  width: 100%;
+  min-height: 250px;
+  margin-bottom: 2rem;
+  padding: 3rem 1.87rem;
+}
+
+.card h6 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #2e3192;
+  margin-bottom: 1rem;
+}
+
+.card > p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #323232;
+  margin-bottom: 1rem !important;
+}
+
+.card li {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #828282;
+}
+
+.card span {
+  padding: 10px 1rem;
+}
+
+.text {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #828282;
+  text-decoration: none;
+}

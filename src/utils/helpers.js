@@ -22,15 +22,15 @@ export const getLocationHistory = () => {
 //     localStorage.removeItem('user:redirect:location')
 // }
 
-export const setRole = (role) =>{
- localStorage.setItem("kv:user:role", role);
-}
+export const setRole = (role) => {
+  localStorage.setItem("kv:user:role", role);
+};
 
-export const getRole = () =>{
- let role = localStorage.getItem("kv:user:role");
- return role;
-}
- 
+export const getRole = () => {
+  let role = localStorage.getItem("kv:user:role");
+  return role;
+};
+
 export const formatBytes = (bytes, decimals = 2) => {
   if (bytes === 0) return "0 Bytes";
 
@@ -88,7 +88,7 @@ export function formatTime(timeToFormat) {
     new Date(timeToFormat).getMinutes() > 9
       ? new Date(timeToFormat).getMinutes()
       : new Date(timeToFormat).getMinutes() + "0"
-  } ${new Date(timeToFormat).getHours() > 12 ? "pm" : "am"}`;
+  }${new Date(timeToFormat).getHours() > 12 ? "pm" : "am"}`;
 }
 
 export function formatDate(dateToFormat) {

@@ -77,7 +77,7 @@ export const TeamModal = ({ handleClose }) => {
                 onChange={(date) => setStartDate(date)}
               />
             </div>
-            <div className="col-6 my-4">
+            <div className="col-7 my-4">
               <span
                 style={{
                   color: '#120297',
@@ -90,7 +90,7 @@ export const TeamModal = ({ handleClose }) => {
               </span>
             </div>
             <div
-              className="col-6 d-flex justify-content-end"
+              className="col-4 d-flex justify-content-end"
               style={{ marginTop: '4rem' }}
             >
               <CustomButton

@@ -1,13 +1,17 @@
 import React from 'react'
 import { ApplicationCard } from '../boosterPartner.styled'
 import { compImage, applicationCardData } from '../../../constants/domiData'
-import { Tag } from '../../../Startupcomponents'
+import { Modal, Tag } from '../../../Startupcomponents'
+import { AppliedModal } from './allApplication'
 
 export const Applied = ({data}) => {
   const appliedArr = [1, 2, 3]
   
   return (
     <div className="row" style={{ columnGap: 10 }}>
+      <Modal id="applied" withHeader={false}>
+        <AppliedModal />
+      </Modal>
       {data && data.map((item, i) => (
         <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6">
           <div>
@@ -25,7 +29,8 @@ export const Applied = ({data}) => {
             
               <p >
                 {item?.description}
-                <span>Read More</span>
+                <span data-target="#applied"
+                  data-toggle="modal">Read More</span>
               </p>
            </div>
           <button className={item?.status === 'applied' ? "appliedBtn mt-2" : "applyBtn mt-2" }> {item?.status === 'applied' ? 'Applied' : 'Apply' } </button>

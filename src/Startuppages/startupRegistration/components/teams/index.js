@@ -270,6 +270,7 @@ export const TeamProfile = () => {
                 className="custs w-lg-50 ps-3"
                 value={phone}
                 onChange={setPhone}
+                MaxLength={17}
               />
             </div>
           </div>
@@ -324,9 +325,10 @@ export const TeamProfile = () => {
             <Select
               mode="multiple"
               allowClear
-              style={{ width: '60%', color: 'red' }}
-              placeholder="Please select"
+              style={{ width: '100%', color: 'red' }}
+              placeholder="Please click to select"
               onChange={handleChange}
+              className="skiil-select"
             >
               {children}
             </Select>

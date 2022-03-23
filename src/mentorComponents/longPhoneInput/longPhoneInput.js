@@ -69,6 +69,7 @@ export const LongPhoneInput = ({
             className="input-phone phone-text"
             onChange={handleChange}
             placeholder="0000 0000 0000"
+            maxLength={10}
           />
         </div>
       </section>

@@ -37,7 +37,8 @@ useEffect(() =>{
   return () =>{
     setBoosterRes(null)
   }
-},[])
+},[]);
+const dashCardColors = ["#E5FFE4", "#FAD7DC", "#DFF1FF"];
 
 console.log(bossterRes);
 
@@ -47,13 +48,13 @@ console.log(bossterRes);
         
   return (
     <div className="dashboard-main">
-      <section className="tab-wrap d-flex align-items-center dashboard-cards">
+      <section className="d-flex align-items-center dashboard-cards tab-wrap">
         {bossterRes && bossterRes?.cards.map((data, i) => (
           <DashCard
             icon={total}
             name={data.name}
             count={data.count}
-            color={generateRandomColor()}
+            color={dashCardColors[i]}
             key={i}
           />
         ))}
