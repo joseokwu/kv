@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
 import location from "../../../assets/icons/locationSm.svg";
 import phone from "../../../assets/icons/phoneSm.svg";
 import { Button } from "../../../components";
 import styles from "../viewMentor.module.css";
+import "react-calendar/dist/Calendar.css";
 
 export const Availability = () => {
+  const [value, onChange] = useState(new Date());
   return (
     <div className="row mx-0">
       <section className="col-12">
@@ -39,7 +42,10 @@ export const Availability = () => {
         </div>
       </section>
 
-      <section className="col-lg-4"></section>
+      <section className="col-lg-4">
+        {" "}
+        <Calendar onChange={onChange} value={value} />
+      </section>
       <section className="col-lg-8">
         <div
           className={`d-flex align-items-center justify-content-center ${styles.availCard}`}

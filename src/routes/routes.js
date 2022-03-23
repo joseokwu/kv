@@ -100,6 +100,7 @@ import {
   UserManagement,
   ViewInvestor,
   ViewMentor,
+  ViewPartner,
 } from "../adminPages";
 
 const routes = [
@@ -784,6 +785,15 @@ const routes = [
     name: "admin User Management",
     path: "/admin/users/investors/:id",
     component: ViewInvestor,
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin User Management",
+    path: "/admin/users/partners/:id",
+    component: ViewPartner,
     exact: true,
     protected: false,
     type: "admin",

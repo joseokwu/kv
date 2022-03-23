@@ -4,3 +4,11 @@
   min-width: 25px;
   border-radius: 50%;
 }
+
+.brandIcon {
+  width: 37px;
+  height: 37px;
+  min-width: 37px;
+  object-fit: contain;
+  object-position: center;
+}

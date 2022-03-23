@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import userPic from "../../assets/images/sampleUser.png";
-import stars from "../../assets/icons/Stars.svg";
 import twitter from "../../assets/images/profileTwitter.svg";
 import linkedIn from "../../assets/images/profileLinkedIn.svg";
 import location from "../../assets/icons/locationSm.svg";
@@ -32,7 +31,7 @@ export const ViewInvestor = () => {
       case `#${tabItems[2]}`:
         return <StartupPortfolio />;
       default:
-        return "investment info";
+        return <InvestmentInfo />;
     }
   };
   return (
