@@ -52,7 +52,7 @@ export const StartupProgram = () => {
       case "#Assignment":
         return <Assignment data={programInfo?.assignment} />;
       case "#Rating":
-        return <div></div>;
+        return <Rating />;
       default:
         return <CalenderComponent data={ programInfo !== undefined && programInfo?.calendar} />
     }
@@ -90,7 +90,7 @@ export const StartupProgram = () => {
         <section className="my-3 mx-3 container d-flex justify-content-between">
           <Tabs tabItems={tabList} />
 
-          <div className="me-3">
+          {/* <div className="me-3">
             <button
               className="d-flex align-items-center sort-btn"
               style={{ columnGap: 7 }}
@@ -101,7 +101,7 @@ export const StartupProgram = () => {
               </span>
               <img src={down} alt="down" />
             </button>
-          </div>
+          </div> */}
         </section>
       </TabFilterWrapper>
 

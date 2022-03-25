@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Tabs } from "../../Startupcomponents";
+// import { Tabs } from "../../Startupcomponents";
+import { Tabs, Select } from '../../mentorComponents'
 import "./mentorEvents.css";
 import down from "../../assets/icons/downArrow.svg";
 import { SelectionDay } from "./components/selectionDay";
@@ -10,6 +11,46 @@ export const MentorEvents = ({ history }) => {
   const {
     location: { hash },
   } = history;
+
+  const industry = [
+    "Category: All",
+    'Accounting',
+    'Analytics',
+    'Bike Rentals',
+    'Cloud Computing',
+    'Cloud Telephony',
+    'Content Services',
+    'CRM',
+    'Customer Engagement',
+    'Customer Support',
+    'E-Learning',
+    'Email Marketing',
+    'Employee Benefit',
+    'Finance',
+    'Fitness',
+    'Food and Beverages',
+    'Garage Services',
+    'Gifts and Confectionery',
+    'Health and Wellness',
+    'Home and Furnishing',
+    'Hospitality',
+    'Human Resources',
+    'Insurance',
+    'Investments',
+    'IT Rentals',
+    'Legal',
+    'Loans',
+    'Marketing',
+    'Merchandise',
+    'Messaging',
+    'Personal Finance',
+    'Printing',
+    'Sales Support',
+    'Salons and Spas',
+    'Signing Solutions',
+    'Travel',
+    'Virtual Assistant',
+  ]
 
   const [events, setEvents] = useState([]);
   const [selectionEvents, setSelectionEvents] = useState([]);
@@ -84,16 +125,17 @@ export const MentorEvents = ({ history }) => {
           <Tabs tabItems={tabItems} />
 
           <div className="mx-4">
-            <button
+            {/* <button
               className="d-flex align-items-center sort-btn"
               style={{ columnGap: 7 }}
               data-toggle="dropdown"
-            >
-              <span>
+            > */}
+            <Select placeholder={"Sort by: Industry"} options={industry} />
+              {/* <span>
                 <span>Sort by: </span> Industry
               </span>
-              <img src={down} alt="down" />
-            </button>
+              <img src={down} alt="down" /> */}
+            {/* </button> */}
           </div>
         </div>
       </div>

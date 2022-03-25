@@ -1,16 +1,16 @@
-import React from "react";
-import { ApplicationCard } from "../boosterPartner.styled";
+import React from 'react'
+import { ApplicationCard } from '../boosterPartner.styled'
 import {
   compImage,
   applicationCardData,
   cardDataModal,
   compdetailModal,
-} from "../../../constants/domiData";
-import { Modal, Tag } from "../../../Startupcomponents";
-import "../boosterPartner.css";
+} from '../../../constants/domiData'
+import { Modal, Tag } from '../../../Startupcomponents'
+import '../boosterPartner.css'
 
 export const Apply = () => {
-  const applyArr = [1, 2, 3];
+  const applyArr = [1, 2, 3]
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
@@ -41,12 +41,18 @@ export const Apply = () => {
               </p>
             ))}
           </div>
-          <button className="applyBtn mt-2" data-target="#apply" data-toggle="modal">Apply</button>
+          <button
+            className="applyBtn mt-2"
+            data-target="#apply"
+            data-toggle="modal"
+          >
+            Apply
+          </button>
         </ApplicationCard>
       ))}
     </div>
-  );
-};
+  )
+}
 
 const ApplyModal = () => {
   return (
@@ -104,5 +110,5 @@ const ApplyModal = () => {
         <button className="applyModalapply">Apply</button>
       </div>
     </div>
-  );
-};
+  )
+}

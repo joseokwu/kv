@@ -52,12 +52,12 @@ const investorNavigators = [
     path: "/investor/schedule",
     icon: schedule,
   },
-  {
-    title: "Evaluation",
-    activator: "evaluation",
-    path: "/investor/evaluation",
-    icon: evaluation,
-  },
+  // {
+  //   title: "Evaluation",
+  //   activator: "evaluation",
+  //   path: "/investor/evaluation",
+  //   icon: evaluation,
+  // },
   {
     title: "Networking",
     activator: "networking",

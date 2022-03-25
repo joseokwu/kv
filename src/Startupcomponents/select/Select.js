@@ -11,6 +11,7 @@ export const Select = ({
   onChange = () => {},
   displayOption = [],
   placeholder = "Choose option",
+  style={}
 }) => {
   return (
     <div className="select-field">
@@ -25,6 +26,7 @@ export const Select = ({
         disabled={disabled}
         required={required}
         className={className}
+        style={style}
       >
         <option disabled selected hidden value="">
           {placeholder}

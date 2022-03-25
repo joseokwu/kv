@@ -35,7 +35,7 @@ export const EvaluationPendingCard = ({ data = {} }) => {
 
       <section className="d-flex align-items-center justify-content-between opp-footer-text">
         <div>
-          <button className="pending_evaluation">Evaluation</button>
+          <button className="pending_evaluation">Evaluate</button>
         </div>
       </section>
     </div>

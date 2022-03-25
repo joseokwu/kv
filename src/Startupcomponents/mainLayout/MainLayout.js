@@ -42,7 +42,7 @@ export const DashboardLayout = ({children}) =>{
         <div className={`${open ? "sm-side" : "sm-side-close"}`}>
           <DashSidebar />
         </div>
-        <div className="layout-child">{children}</div>
+        <div className="layoutChild">{children}</div>
       </section>
     </div>
   );

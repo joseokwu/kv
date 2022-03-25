@@ -319,14 +319,14 @@ const routes = [
     type: "investor",
   },
 
-  {
-    name: "Investor Evaluation",
-    path: "/investor/evaluation",
-    component: WithMainInvestorLayout(MentorEvaluation),
-    exact: true,
-    protected: false,
-    type: "investor",
-  },
+  // {
+  //   name: "Investor Evaluation",
+  //   path: "/investor/evaluation",
+  //   component: WithMainInvestorLayout(MentorEvaluation),
+  //   exact: true,
+  //   protected: false,
+  //   type: "investor",
+  // },
 
   {
     name: "Investor Network",
