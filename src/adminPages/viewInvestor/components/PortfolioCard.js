@@ -1,14 +1,22 @@
 import React from "react";
 import styles from "../viewInvestor.module.css";
 import apple from "../../../assets/images/apple.svg";
-import { Tag } from "../../../components";
+import { Badge, Tag } from "../../../components";
 
-export const PortfolioCard = () => {
+export const PortfolioCard = ({ data = {} }) => {
+  const statusList = {
+    active: "#0E760C",
+    "in-active": "#E31919",
+  };
   return (
     <div className={styles.portfolioCard}>
       <section className="d-flex justify-content-between mb-2">
         <img src={apple} alt="startup logo" />
-        <p>Transaction type: Round</p>
+        {/* <p>Transaction type: Round</p> */}
+        <Badge
+          name={data?.status}
+          color={statusList[data?.status?.toLowerCase()]}
+        />
       </section>
 
       <section>

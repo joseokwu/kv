@@ -9,5 +9,6 @@
   line-height: 13px;
   letter-spacing: 0.01em;
   color: #979797;
-  text-transform: capitalize;
+  text-transform: none !important;
+  height: fit-content;
 }
