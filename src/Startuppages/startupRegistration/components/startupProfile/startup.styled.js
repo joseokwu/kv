@@ -31,7 +31,7 @@ export const ImageWrapper = styled.span`
   background: #fff;
 `
 export const InputWrapper = styled.label`
-  position: absolute;
+  position: relative;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -39,8 +39,8 @@ export const InputWrapper = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 380px;
-  left: 200px;
+  top: -30px;
+  left: 60px;
 
   input {
     width: inherit;
@@ -101,6 +101,10 @@ export const FormWrapper = styled.div`
       text-transform: capitalize;
       color: #bdbdbd;
     }
+
+    :focus{
+      outline: none!important;
+    }
   }
 
   textarea {
@@ -120,7 +124,6 @@ export const FormWrapper = styled.div`
   }
   .cust {
     border: none;
-   
     width: 70%;
     margin-left: 15px;
   }

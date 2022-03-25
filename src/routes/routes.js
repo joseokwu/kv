@@ -65,6 +65,7 @@ import {
   InvestorDealFolder,
   InvestorScheduleCalendar,
   InvestorProfile,
+  BoosterNotification,
 } from "../Investorpages";
 
 import {
@@ -413,7 +414,7 @@ const routes = [
   },
 
   {
-    name: "Investor  Notification",
+    name: "Investor Notification",
     path: "/investor/notification",
     component: WithMainInvestorLayout(InvestorNotification),
     exact: true,
@@ -438,9 +439,17 @@ const routes = [
     type: "booster",
   },
   {
+    name: "Booster Notification",
+    path: "/booster/notification",
+    component: WithMainInvestorLayout(BoosterNotification),
+    exact: true,
+    protected: true,
+    type: "booster",
+  },
+  {
     name: "Booster Profile",
     path: "/booster/profile",
-    component: WithMainInvestorLayout(BoosterProfile),
+    component: WithInvestorRegisterLayout(BoosterProfile),
     exact: true,
     protected: false,
     type: "booster",
@@ -449,7 +458,7 @@ const routes = [
   {
     name: "Booster Registration",
     path: "/boosterpartner/registration",
-    component: WithMainInvestorLayout(BoosterPartnerRegistration),
+    component: WithInvestorRegisterLayout(BoosterPartnerRegistration),
     exact: true,
     protected: false,
     type: "booster",

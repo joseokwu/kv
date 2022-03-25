@@ -285,6 +285,7 @@ export const StartupProfile = () => {
                 className="custs ps-3"
                 value={phone}
                 onChange={setPhone}
+
               />
             </div>
             <div className="form-group col-lg-6 col-12">

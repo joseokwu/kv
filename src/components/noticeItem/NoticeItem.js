@@ -5,13 +5,20 @@ export const NoticeItem = ({
   userImage = "",
   container = "",
 }) => {
-  const { push } = useHistory();
+  const { push, location: { pathname } } = useHistory();
+  const getCurrentNotification = () => {
+    if (pathname.includes('investor')) {
+      return '/investor/notification#all'
+    } else {
+      return '/booster/notification#all'
+    }
+  }
   return (
     <>
       {container !== "page" ? (
         <article
           className="d-flex align-items-start notice-item"
-          onClick={() => push("/investor/notification#all")}
+          onClick={() => push(getCurrentNotification())}
         >
           <img src={userImage} alt="user" className="notice-from-img" />
           <section className="notice-text">
@@ -28,7 +35,7 @@ export const NoticeItem = ({
       ) : (
         <article
           className="d-flex align-items-start justify-content-between notice-item w-100"
-          onClick={() => push("/investor/notification#all")}
+          onClick={() => push(getCurrentNotification())}
         >
           <div className="d-flex align-items-center">
             <img src={userImage} alt="user" className="notice-from-img" />

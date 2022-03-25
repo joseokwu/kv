@@ -23,12 +23,9 @@ export const AllApplication = ({ data }) => {
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
-      {/* Approved Modal starts here */}
       <Modal id="approved" withHeader={false}>
         <ApprovedModal data={selectedData} />
       </Modal>
-      {/* Approved Modal end here */}
-      {/* Approved */}
       {data &&
         data.map((item, i) => (
           <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
@@ -84,7 +81,7 @@ export const AllApplication = ({ data }) => {
 };
 
 //Applied Modal
-const AppliedModal = () => {
+export const AppliedModal = () => {
   return (
     <div className="applyModal px-4">
       <section className="pt-2">

@@ -8,7 +8,7 @@ export const DashCard = ({
   ...rest
 }) => {
   return (
-    <div className={`dashCard-main ${rest?.className ?? ""}`}>
+    <div className={`dash-card-main ${rest?.className ?? ""}`}>
       <section className="d-flex flex-column justify-content-between">
         <h3>{name}</h3>
         <p>{count}</p>
