@@ -41,7 +41,7 @@ export const MentorPersonalDetails = () => {
         setProgress('20')
         break
       default:
-        setProgress('20')
+        setProgress('0')
         break
     }
   }, [hash])
@@ -110,7 +110,7 @@ export const MentorPersonalDetails = () => {
           </ul>
           {/* </div> */}
         </div>
-        <div className="mt-5 d-flex justify-content-end pt-5">
+        <div className="mt-0 d-flex justify-content-end">
           {hash === '' || hash === '#personal_details' ? (
             <Details />
           ) : hash === '#work_experience' ? (

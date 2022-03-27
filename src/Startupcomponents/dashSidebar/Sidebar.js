@@ -31,18 +31,18 @@ export const DashSidebar = () => {
             dashboardRoutes.map((nav, i) => {
               return (
                 <li key={i} >
-                  <a href={nav.path}>
+                  <span className="sidebar_link" onClick={() => push(nav.path)}>
                     <img src={nav.icon} alt="dash" />
                     <span className={`${activateLink(nav.activator)} sideText`}>
                       {nav.title}
                     </span>
-                  </a>
+                  </span>
                 </li>
               )
             })}
         </ul>
       </section>
-      <section className="sideFooter my-4" onClick={() => push('/support')}>
+      <section className="sideFooter my-4" onClick={() => push('/startup/support')}>
         <img src={helpDesk} alt="help" />
         <p className="mb-0 sideText" role="button">
           Need help? Contact us

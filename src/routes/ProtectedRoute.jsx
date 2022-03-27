@@ -32,7 +32,7 @@ export  const ProtectedRoute = ({ ...props})=>{
 
     }, [history, stateAuth.roles, stateAuth.authenticated, props.type]);
 
-    return  loading ? <LoadingIcon fullscreen={true} /> : <Route {...props} />
+    return  <Route {...props} />
 }
   
 

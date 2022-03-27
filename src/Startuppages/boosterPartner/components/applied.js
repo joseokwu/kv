@@ -6,7 +6,7 @@ import { AppliedModal } from './allApplication'
 
 export const Applied = ({ data }) => {
   const appliedArr = [1, 2, 3]
-
+  
   return (
     <div className="row" style={{ columnGap: 10 }}>
       {

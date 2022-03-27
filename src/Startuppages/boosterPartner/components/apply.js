@@ -12,13 +12,16 @@ import '../boosterPartner.css'
 export const Apply = () => {
   const applyArr = [1, 2, 3]
 
+  //console.log(data)
+
   return (
     <div className="row" style={{ columnGap: 10 }}>
-      <Modal id="apply" withHeader={false}>
-        <ApplyModal />
-      </Modal>
+     
+     <Modal id='apply' withHeader={false}>
+              <ApplyModal  />
+               </Modal>
 
-      {applyArr.map((i) => (
+      {/* {applyArr.map((i) => (
         <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6">
           <div>
             {compImage.map((comp, i) => (
@@ -26,16 +29,19 @@ export const Apply = () => {
             ))}
           </div>
           <div className="my-2">
-            {applicationCardData.map((data, i) => (
+            {applicationCardData.map((data, i) => ( 
               <h3 key={i}>{data.title}</h3>
             ))}
           </div>
           <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
           <div className="my-3">
-            {applicationCardData.map((data, i) => (
+            {data.map((data, i) => (
               <p key={i}>
+              
                 {data.content}
-                <span data-target="#apply" data-toggle="modal">
+                <span data-target={`#apply`} data-toggle="modal" 
+              
+                >
                   Read More
                 </span>
               </p>
@@ -49,12 +55,13 @@ export const Apply = () => {
             Apply
           </button>
         </ApplicationCard>
-      ))}
+      ))} */}
     </div>
   )
 }
 
-const ApplyModal = () => {
+const ApplyModal = ({data}) => {
+  console.log(data)
   return (
     <div className="applyModal px-4">
       <section className="pt-2">
