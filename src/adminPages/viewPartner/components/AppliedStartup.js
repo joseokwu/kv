@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Tabs } from "../../../components";
+import { AllApplied } from "./AllApplied";
 
 export const AppliedStartup = () => {
   const [active, setActive] = useState("All");
@@ -12,20 +13,41 @@ export const AppliedStartup = () => {
     "Re-Applied",
   ];
 
+  const data = [
+    { status: "pending" },
+    { status: "declined" },
+    { status: "approved" },
+    { status: "declined" },
+    { status: "expired" },
+    { status: "declined" },
+    { status: "expired" },
+    { status: "pending" },
+    { status: "pending" },
+    { status: "approved" },
+  ];
+
   const renderComponent = () => {
     switch (active) {
       case `${tabItems[0]}`:
-        return "All";
+        return <AllApplied data={data} />;
       case `${tabItems[1]}`:
-        return "Pending";
+        return (
+          <AllApplied data={data?.filter((x) => x.status === "pending")} />
+        );
       case `${tabItems[2]}`:
-        return "Approved";
+        return (
+          <AllApplied data={data?.filter((x) => x.status === "approved")} />
+        );
       case `${tabItems[3]}`:
-        return "Declined";
+        return (
+          <AllApplied data={data?.filter((x) => x.status === "declined")} />
+        );
       case `${tabItems[4]}`:
-        return "Expired";
+        return (
+          <AllApplied data={data?.filter((x) => x.status === "expired")} />
+        );
       case `${tabItems[5]}`:
-        return "Re-Applied";
+        return <AllApplied data={data} />;
       default:
         return "All";
     }
@@ -42,7 +64,7 @@ export const AppliedStartup = () => {
         />
       </section>
 
-      <section>{renderComponent()}</section>
+      <section style={{ maxWidth: 1540 }}>{renderComponent()}</section>
     </div>
   );
 };
