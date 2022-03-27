@@ -36,10 +36,11 @@ export const loginUser = async(value) => async(dispatch) =>{
             type:AUTH_START
         })
         const res = await userLogin(value);
-        setAuthToken(res?.token);
+        setAuthToken(res?.data?.token);
+        console.log(res)
         dispatch({
             type:LOGIN_SUCCESS,
-            payload: res?.roles
+            payload: res?.data?.user
         })
        
         return res;
@@ -60,12 +61,12 @@ export const getProfile = async () => async(dispatch) =>{
             type:AUTH_START
         })
         const res = await profile();
-            
-        dispatch({
-            type:USER_PROFILE,
-            payload: res
-        })
-
+            if(res){
+                dispatch({
+                    type:USER_PROFILE,
+                    payload:res?.data?.user
+                })
+            }
     
     }catch(err){
         dispatch({

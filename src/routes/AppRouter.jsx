@@ -10,16 +10,16 @@ export  function AppRouter(props){
     const { userProfile, stateAuth : { loading , authenticated }} = useAuth();
     const history = useHistory();
     useEffect(()=>{
+        console.log(loading)
         const getP = async () => {
 			if (getToken()) {
+                console.log('hello tokk')
 			await userProfile();
 				if (getLocationHistory()) {
                     history.push(getLocationHistory());
 					sessionStorage.removeItem('user:redirect:location')
 				}
-			}
-          
-            
+			}       
 		};
 		getP();    
     },[userProfile, authenticated, history])  

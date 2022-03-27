@@ -43,8 +43,8 @@ import { INIT_STATE } from '../../initialstates';
                   ...state,
                   loading:false ,
                   authenticated:true,
-                  user:action?.payload?.user,
-                  roles:action?.payload?.roles,
+                  user:action?.payload,
+                  roles:action?.payload?.type,
                   
                 }
                 case USER_PROFILE_FAIL :

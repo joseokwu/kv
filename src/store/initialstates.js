@@ -2,7 +2,7 @@ export  const INIT_STATE = {
     authenticated: false,
     user: null,
     error: false,
-    loading: false,
+    loading:false,
     roles:[],
     signUpStatus:'startup'
   }
