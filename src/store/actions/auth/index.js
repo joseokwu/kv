@@ -32,7 +32,7 @@ export const registerUser = async(value) => async(dispatch) =>{
 export const loginUser = async(value) => async(dispatch) =>{
 
     try{
-        dispatch({
+        dispatch({   
             type:AUTH_START
         })
         const res = await userLogin(value);
@@ -54,17 +54,17 @@ export const loginUser = async(value) => async(dispatch) =>{
     }
 }
 
-export const getProfile = async () => async(dispatch) =>{
+export const getProfile = async (value) => async(dispatch) =>{
 
     try{
         dispatch({
             type:AUTH_START
         })
-        const res = await profile();
+        const res = await profile(value);
             if(res){
                 dispatch({
                     type:USER_PROFILE,
-                    payload:res?.data?.user
+                    payload:res?.data
                 })
             }
     

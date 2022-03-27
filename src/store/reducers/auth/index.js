@@ -30,7 +30,9 @@ import { INIT_STATE } from '../../initialstates';
             case LOGIN_SUCCESS :
               return {
                 ...state,
-                loading:false, roles: action.payload,
+                  loading:false,
+                 roles: action.payload?.type,
+                 username:action.payload?.startupname ? action.payload?.startupname : action.payload?.firstname , 
                 authenticated:true
               }
               case LOGIN_FAILED:

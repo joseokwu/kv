@@ -17,71 +17,120 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
 import { useActivity } from '../../../../hooks/useBusiness';
-import { startUpReg } from './../../../../services/startUpReg';
+import { updateFounderProfile } from '../../../../services/startup';
 import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import { toast } from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
-
+import { useAuth } from './../../../../hooks/useAuth';
 
 
 export const StartupProfile = () => {
-  const [disImg, setImg] = useState(null)
 
-  const [startDate, setStartDate] = useState(new Date())
-  const [loading, setLoading] = useState(false);
-  const [phone, setPhone] = useState()
-  const history = useHistory();
   const {
     changePath,
     state: { path },
   } = useActivity()
+  const  { stateAuth } = useAuth();
+  const [disImg, setImg] = useState(null)
+  const [opts , setOpts] = useState('')
+  const [startDate, setStartDate] = useState(new Date())
+  const [loading, setLoading] = useState(false);
+  const [nextloading, setNextLoading] = useState(false);
+  const [phone, setPhone] = useState(stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber)
+  const [contacts, setContacts] = useState({
+      registeredAddress:stateAuth?.user?.startUpProfile?.contactInfo?.registeredAddress ?stateAuth?.user?.startUpProfile?.contactInfo?.registeredAddress :'',
+      country:stateAuth?.user?.startUpProfile?.contactInfo?.country ? stateAuth?.user?.startUpProfile?.contactInfo?.country : '',
+      state:stateAuth?.user?.startUpProfile?.contactInfo?.state ? stateAuth?.user?.startUpProfile?.contactInfo?.state : '',
+      city:stateAuth?.user?.startUpProfile?.contactInfo?.city ? stateAuth?.user?.startUpProfile?.contactInfo?.city : '',
+      companyEmail:stateAuth?.user?.startUpProfile?.contactInfo?.companyEmail ? stateAuth?.user?.startUpProfile?.contactInfo?.companyEmail : '',
+  })
+ const [socialMedia , setSocialmedia] = useState({
+  profileHandle:stateAuth?.user?.startUpProfile?.socialMedia?.profileHandle ? stateAuth?.user?.startUpProfile?.socialMedia?.profileHandle : '',
+  companyWebsite:stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite ? stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite : "",
+  linkedInHandle:stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle ? stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle : "",
+  twitterHandle:stateAuth?.user?.startUpProfile?.socialMedia ? stateAuth?.user?.startUpProfile?.socialMedia?.twitterHandle : ""
+ }) 
+  const history = useHistory();
 
   const onChangeImage = (e) => {
     const { files } = e.target
-
+    
     if (files && files[0]) {
       setImg(URL.createObjectURL(files[0]))
     }
   }
 
+  const onChange = (e) =>{
+    setContacts({...contacts , [e.target.name] : e.target.value })
+    
+  }
+ // console.log(stateAuth?.user?.startUpProfile)
+  const onChangeMedia = (e) =>{
+    setSocialmedia({...socialMedia , [e.target.name]: e.target.value })
+  }
   const next = () => {
     changePath(path + 1)
   }
 
-  const onSubmit = (value) => {
-    setLoading(true);
-    startUpReg(value).then(res =>{
-      if(res?.message){
-        console.log(res)
-        toast.success(res?.message)
-        setLoading(false);
-        next()
+  const onSubmit = async(value) => {
+    
+    let lastIndex ;
+    let inputs = document.getElementsByTagName('input');
+    lastIndex = inputs.length;
+      console.log(inputs[lastIndex - 1])
+   
+      try{
+        
+        const startupProfile = {
+          type:"startUpProfile",
+          accType:"startup",
+          values:{
+            ...value,
+            contactInfo:{
+              ...contacts,
+              phoneNumber:phone
+            },
+           socialMedia
+          },
+          userId:stateAuth?.user?.userId
+        }
+        console.log(startupProfile)
+        if(opts === 'next'){
+          setOpts(true)
+          let result = await updateFounderProfile(startupProfile)
+         
+        if(result?.success){
+          toast.success('Profile' + " " + result?.message)
+          setOpts(false);
+          return changePath(path + 1)
+        }
+        }
+        setLoading(true);
+        let result = await updateFounderProfile(startupProfile)
+         
+        if(result?.success){
+          toast.success('Profile' + " " + result?.message)
+          setLoading(false);
+        }
+      }catch(err){
+        toast.error(err?.response?.data?.message || 'There was an error in updating profile')
       }
     
-    })
+    
   }
 
   const formik = useFormik({
     initialValues: {
-      startupname: '',
-      brand: '',
-      elevatorpitch: '',
+      logo:"https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
+      startupName:stateAuth?.user?.businessname ? stateAuth?.user?.businessname : '',
+      elevatorPitch:stateAuth?.user?.startUpProfile?.elevatorPitch ? stateAuth?.user?.startUpProfile?.elevatorPitch : '',
+      brand:stateAuth?.user?.startUpProfile ? stateAuth?.user?.startUpProfile?.brand : '',
       yearFounded: startDate,
-      regNumber: '',
-      companySize: 'Select-size',
-      sector: 'Select-sector',
-      stage: 'Select-stage',
-      acceleratornames: '',
-      address: '',
-      country: '',
-      state: '',
-      city: '',
-      email: '',
-      phone: phone,
-      profileHandle: '',
-      website: '',
-      linkedin: '',
-      twitter: '',
+      registrationNumber:stateAuth?.user?.startUpProfile?.registrationNumber ? stateAuth?.user?.startUpProfile?.registrationNumber : '',
+      companySize:stateAuth?.user?.startUpProfile?.companySize ? stateAuth?.user?.startUpProfile?.companySize : 'Select-size',
+      businessSector:stateAuth?.user?.startUpProfile?.businessSector ? stateAuth?.user?.startUpProfile?.businessSector : 'Select-sector',
+      startupStage:stateAuth?.user?.startUpProfile?.startupStage ? stateAuth?.user?.startUpProfile?.startupStage : 'Select-stage',
+      acceleratorName:stateAuth?.user?.startUpProfile?.acceleratorName ? stateAuth?.user?.startUpProfile?.acceleratorName : ''
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
@@ -123,9 +172,9 @@ export const StartupProfile = () => {
             <div className="form-group col-12">
               <label>Elevator Pitch *</label>
               <textarea
-                name="elevatorpitch"
+                name="elevatorPitch"
                 placeholder="One line pitch 150 words maximum"
-                value={formik.values.elevatorpitch}
+                value={formik.values.elevatorPitch}
                 onChange={formik.handleChange}
                 rows="4"
                 cols="4"
@@ -136,9 +185,10 @@ export const StartupProfile = () => {
               <label>Startup *</label>
               <input
                 type="text"
-                name="startupname"
+                name="startupName"
+                disabled={formik.values.startupName !== ''}
                 placeholder="Entity Name As Per Registration"
-                value={formik.values.startupname}
+                value={formik.values.startupName}
                 onChange={formik.handleChange}
                 className="form-control ps-3"
               />
@@ -167,9 +217,9 @@ export const StartupProfile = () => {
               <label>Registration Number *</label>
               <input
                 type="text"
-                name="regNumber"
+                name="registrationNumber"
                 placeholder="1234567890"
-                value={formik.values.regNumber}
+                value={formik.values.registrationNumber}
                 onChange={formik.handleChange}
                 className="form-control ps-3"
               />
@@ -177,36 +227,57 @@ export const StartupProfile = () => {
 
             <div className="form-group col-lg-6 col-12">
               <label>Company Size *</label>
-              <CustomSelect
-                options={optionsNumb}
-                value={formik.values.companySize}
-                onChange={(value) =>
-                  formik.setFieldValue('companySize', value.value)
-                }
-                className="cust"
-              />
+              <div>
+              <select
+              name={'companySize'}
+              value={formik.values.companySize}
+              onChange={formik.handleChange}
+              className="sel"
+              >
+                  {
+                    optionsNumb.map((item, i) =>(
+                      <option key={i} value={item.value} > { item.label} </option>
+                    ))
+                  }
+              </select>
+              </div>
+              
             </div>
 
             <div className="form-group col-lg-6 col-12">
               <label>Which sector does your business operate in?*</label>
-              <CustomSelect
-                options={options}
-                value={formik.values.sector}
-                onChange={(value) =>
-                  formik.setFieldValue('sector', value.value)
-                }
-                className="cust"
-              />
+              <div>
+              <select
+              name={'businessSector'}
+              value={formik.values.businessSector}
+              onChange={formik.handleChange}
+              className="sel"
+              >
+                  {
+                    options.map((item, i) =>(
+                      <option key={i} value={item.value} > { item.label} </option>
+                    ))
+                  }
+              </select>
+              </div>
+
             </div>
 
             <div className="form-group col-lg-6 col-12">
               <label>What stage is your business in *</label>
-              <CustomSelect
-                options={stage}
-                value={formik.values.stage}
-                onChange={(value) => formik.setFieldValue('stage', value.value)}
-                className="cust"
-              />
+              <select
+              name={'startupStage'}
+              value={formik.values.startupStage}
+              onChange={formik.handleChange}
+              className="sel"
+              >
+                  {
+                    stage.map((item, i) =>(
+                      <option key={i} value={item.value} > { item.label} </option>
+                    ))
+                  }
+              </select>
+             
             </div>
 
             <div className="form-group col-12">
@@ -216,9 +287,9 @@ export const StartupProfile = () => {
               </label>
               <input
                 type="text"
-                name="acceleratornames"
+                name="acceleratorName"
                 placeholder="Enter Accelerator name"
-                value={formik.values.acceleratornames}
+                value={formik.values.acceleratorName}
                 onChange={formik.handleChange}
                 className="form-control ps-3"
               />
@@ -236,10 +307,10 @@ export const StartupProfile = () => {
               <label>Registered Address </label>
               <input
                 type="text"
-                name="address"
+                name="registeredAddress"
                 placeholder="Enter your registered address"
-                value={formik.values.address}
-                onChange={formik.handleChange}
+                value={contacts.registeredAddress}
+                onChange={onChange}
                 className="form-control ps-3"
               />
             </div>
@@ -249,8 +320,8 @@ export const StartupProfile = () => {
                 type="text"
                 name="country"
                 placeholder="Enter your country"
-                value={formik.values.country}
-                onChange={formik.handleChange}
+                value={contacts.country}
+                onChange={onChange}
                 className="form-control ps-3"
               />
             </div>
@@ -260,8 +331,8 @@ export const StartupProfile = () => {
                 type="text"
                 name="state"
                 placeholder="Enter your state"
-                value={formik.values.state}
-                onChange={formik.handleChange}
+                value={contacts.state}
+                onChange={onChange}
                 className="form-control ps-3"
               />
             </div>
@@ -271,8 +342,8 @@ export const StartupProfile = () => {
                 type="text"
                 name="city"
                 placeholder="Enter your city"
-                value={formik.values.city}
-                onChange={formik.handleChange}
+                value={contacts.city}
+                onChange={onChange}
                 className="form-control ps-3"
               />
             </div>
@@ -280,10 +351,10 @@ export const StartupProfile = () => {
               <label>Mobile Number *</label>
               <PhoneInput
                 international
-                name="phone"
+                name="phoneNumber"
                 countryCallingCodeEditable={true}
                 className="custs ps-3"
-                value={phone}
+                value={stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber ? stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber : phone}
                 onChange={setPhone}
 
               />
@@ -292,10 +363,10 @@ export const StartupProfile = () => {
               <label>Company Email *</label>
               <input
                 type="text"
-                name="email"
+                name="companyEmail"
                 placeholder="Enter your email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
+                value={contacts.companyEmail}
+                onChange={onChange}
                 className="form-control ps-3"
               />
             </div>
@@ -314,8 +385,8 @@ export const StartupProfile = () => {
                 type="text"
                 name="profileHandle"
                 placeholder="Enter your startup profile handle"
-                value={formik.values.profileHandle}
-                onChange={formik.handleChange}
+                value={socialMedia.profileHandle}
+                onChange={onChangeMedia}
                 className="form-control ps-3"
               />
             </div>
@@ -323,10 +394,10 @@ export const StartupProfile = () => {
               <label>Website *</label>
               <input
                 type="text"
-                name="website"
+                name="companyWebsite"
                 placeholder="Enter your startup website"
-                value={formik.values.website}
-                onChange={formik.handleChange}
+                value={socialMedia.companyWebsite}
+                onChange={onChangeMedia}
                 className="form-control ps-3"
               />
             </div>
@@ -334,10 +405,10 @@ export const StartupProfile = () => {
               <label>Linkedin *</label>
               <input
                 type="text"
-                name="linkedin"
+                name="linkedInHandle"
                 placeholder="Enter your Linkedin profile name"
-                value={formik.values.linkedin}
-                onChange={formik.handleChange}
+                value={socialMedia.linkedInHandle}
+                onChange={onChangeMedia}
                 className="form-control ps-3"
               />
             </div>
@@ -345,10 +416,10 @@ export const StartupProfile = () => {
               <label>Twitter *</label>
               <input
                 type="text"
-                name="twitter"
+                name="twitterHandle"
                 placeholder="Enter your Twitter profile name"
-                value={formik.values.twitter}
-                onChange={formik.handleChange}
+                value={socialMedia.twitterHandle}
+                onChange={onChangeMedia}
                 className="form-control ps-3"
               />
             </div>
@@ -356,14 +427,18 @@ export const StartupProfile = () => {
           <div className="d-flex my-4 justify-content-end">
             <div>
               <CustomButton 
-              onClick={() => history.push('/startup/dashboard')}
-               background="#06ADEF">Save</CustomButton>
+              type='submit'
+              disabled={loading}
+               background="#06ADEF">
+               { loading ? <CircularLoader /> : 'Save' }
+               </CustomButton>
             </div>
             <div className="mx-2">
               <CustomButton type='submit'
-                disabled={loading}
+                disabled={nextloading}
+                onClick={() => setOpts('next')}
                 background="#2E3192">
-                { loading ? <CircularLoader /> : 'Next' }
+                { nextloading ? <CircularLoader /> : 'Next' }
               </CustomButton>
             </div>
           </div>

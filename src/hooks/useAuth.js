@@ -27,9 +27,9 @@ const newLogin = async (values) =>{
         return res;
 }
 
-const userProfile = useCallback(async () =>{
+const userProfile = useCallback(async (value) =>{
     
-        dispatch(await profile());
+        dispatch(await profile(value));  
 
     }, [])
 

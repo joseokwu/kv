@@ -45,7 +45,7 @@ export const StartUpRegistration = () => {
           >
             <WelcomeMessage>
               <h5>
-                 Hi {stateAuth?.user?.startupname}
+                 Hi {stateAuth?.user?.businessname}
                 <span style={{ color: 'rgb(199, 249, 15)', marginLeft: '9px' }}>
                   {' '}
                   &#128075;

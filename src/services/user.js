@@ -23,13 +23,14 @@ export const userLogin = async (values) => {
     }  
 }  
 
-export const profile = async () => {
+export const profile = async (value) => {
     try {
+        console.log(value)
         console.log('trying to make request')
-        const res = await request.post('identity_service/verify', {});
-       console.log(res.data)
-       console.log('request made...')
-        return res?.data;
+        const res = await request.post('identity_service/getProfile', {type:value});
+     
+      
+       return res?.data;
 
     } catch (err) {
         console.log(err)

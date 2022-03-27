@@ -5,6 +5,7 @@ export const CustomSelect = ({
   options,
   onChange,
   value,
+  name,
   className,
   ...props
 }) => {
@@ -16,6 +17,7 @@ export const CustomSelect = ({
     <div>
       <Select
         value={defaultValue(options, value)}
+        name={name}
         // onChange={(value) => onChange(value)}
         onChange={(value)}
         options={options}
