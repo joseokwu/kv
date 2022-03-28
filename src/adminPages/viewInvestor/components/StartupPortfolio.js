@@ -35,6 +35,7 @@ export const StartupPortfolio = () => {
             <div className="col-lg-4 mb-4" key={`portfolio-${i}`}>
               <PortfolioCard
                 data={p}
+                role="button"
                 onClick={() => {
                   setPortfolioInView(portfolios[i]);
                   setOpen(!open);
@@ -123,6 +124,7 @@ const OpenPortfolio = ({ close = () => {}, portfolio = {} }) => {
       <i
         className={`bi bi-arrow-left ${styles.backToPortfolios}`}
         onClick={close}
+        role="button"
       ></i>
       <div
         className={`d-flex align-items-center justify-content-between ${styles.portfolioHeader}`}
