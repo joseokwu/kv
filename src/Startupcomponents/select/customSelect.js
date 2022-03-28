@@ -1,5 +1,5 @@
-import React from 'react'
-import Select from 'react-select'
+import React from 'react';
+import Select from 'react-select';
 
 export const CustomSelect = ({
   options,
@@ -10,8 +10,8 @@ export const CustomSelect = ({
   ...props
 }) => {
   const defaultValue = (option, value) => {
-    return option ? option.find((option) => option.value === value) : ''
-  }
+    return option ? option.find((option) => option.value === value) : '';
+  };
 
   return (
     <div>
@@ -19,11 +19,11 @@ export const CustomSelect = ({
         value={defaultValue(options, value)}
         name={name}
         // onChange={(value) => onChange(value)}
-        onChange={(value)}
+        onChange={value}
         options={options}
         className={className}
         {...props}
       />
     </div>
-  )
-}
+  );
+};
