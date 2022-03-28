@@ -52,12 +52,12 @@ export const Sidebar = () => {
         path: "/admin/users",
         icon: userMgt,
       },
-      {
-        title: "Booster Partners",
-        activator: "booster_partners",
-        path: "/admin/booster_partners",
-        icon: booster,
-      },
+      // {
+      //   title: "Booster Partners",
+      //   activator: "booster_partners",
+      //   path: "/admin/booster_partners",
+      //   icon: booster,
+      // },
       {
         title: "To-Do List",
         activator: "todo",

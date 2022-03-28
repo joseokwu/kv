@@ -24,7 +24,7 @@ export const UserManagement = () => {
     }
   };
   return (
-    <div className="p-5">
+    <div className="p-5" style={{ maxWidth: 2000 }}>
       <section className="mb-4">
         <Tabs tabItems={tabItems} />
       </section>
