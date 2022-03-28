@@ -26,7 +26,7 @@ export const EvaluationProgress = ({ data = {} }) => {
       <section className="opp-content mt-3">
         <p>
           {data?.productDescription}
-          elit. <span onClick={() => push("#!")}>More Details</span>
+          elit. <span>More Details</span>
         </p>
       </section>
 

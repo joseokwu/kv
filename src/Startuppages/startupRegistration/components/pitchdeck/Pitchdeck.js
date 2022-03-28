@@ -17,9 +17,15 @@ import { CustomButton } from '../../../../Startupcomponents/button/button.styled
 import { formatBytes } from '../../../../utils/helpers'
 import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import { toast } from 'react-hot-toast'
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../../../hooks/useAuth';
+
 
 export const PitchDeck = () => {
   const [loading, setLoading] = useState(false)
+  const [nextloading, setNextLoading] = useState(false);
+  const { stateAuth } = useAuth();
+  
 
   const [fileInfo, setFile] = useState([
     {

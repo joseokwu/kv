@@ -3,7 +3,7 @@ import { TodoCard, TabFilterWrapper, InProgress } from './session.styled'
 import person3 from '../../../../assets/icons/person3.svg'
 import clock from '../../../../assets/icons/clocksm.svg'
 import down from '../../../../assets/icons/downArrow.svg'
-import { CustomThreeDots } from '../../../../Startupcomponents'
+import { CustomThreeDots, RowOption, Select } from '../../../../Startupcomponents'
 import { Tag } from '../../../../Startupcomponents/tag/Tag'
 import { SmallModal } from '../../../../Startupcomponents'
 import lady from '../../../../assets/images/smileLady.svg'
@@ -18,6 +18,45 @@ export const Session = ({ data = [] }) => {
   const [showModal, setShowModal] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [displayModal, setDisplayModal] = useState(false)
+  const industry = [
+    "Category: All",
+    'Accounting',
+    'Analytics',
+    'Bike Rentals',
+    'Cloud Computing',
+    'Cloud Telephony',
+    'Content Services',
+    'CRM',
+    'Customer Engagement',
+    'Customer Support',
+    'E-Learning',
+    'Email Marketing',
+    'Employee Benefit',
+    'Finance',
+    'Fitness',
+    'Food and Beverages',
+    'Garage Services',
+    'Gifts and Confectionery',
+    'Health and Wellness',
+    'Home and Furnishing',
+    'Hospitality',
+    'Human Resources',
+    'Insurance',
+    'Investments',
+    'IT Rentals',
+    'Legal',
+    'Loans',
+    'Marketing',
+    'Merchandise',
+    'Messaging',
+    'Personal Finance',
+    'Printing',
+    'Sales Support',
+    'Salons and Spas',
+    'Signing Solutions',
+    'Travel',
+    'Virtual Assistant',
+  ]
 
   return (
     <div>
@@ -44,7 +83,26 @@ export const Session = ({ data = [] }) => {
       ) : (
         <span></span>
       )}
-      <div className="row mt-5">
+
+      <div className="me-3 d-flex justify-content-end">
+        {/* <button
+          className="d-flex align-items-center sort-btn"
+          style={{ columnGap: 7 }}
+          data-toggle="dropdown"
+        > */}
+          <Select
+            placeholder={"Sort by: Industry"}
+            // style={{background: "#FFFFFF"}}
+            options={industry}
+          />
+          {/* <span>
+            <span>Sort by: </span> Industry
+          </span> */}
+          {/* <img src={down} alt="down" /> */}
+        {/* </button> */}
+      </div>
+
+      <div className="row mt-2">
         {/* <TabFilterWrapper>
       <div className="me-3 my-3 d-flex justify-content-end">
           <button
@@ -71,13 +129,38 @@ export const Session = ({ data = [] }) => {
             <div className="d-flex justify-content-between head">
               <div className="d-flex">
                 <h6 className="mr-5">{info?.topic}</h6>
-                <Tag name={info?.status} bg={info?.status === 'rescheduled' ? '#E8E8E8' : info?.status === 'in-progress' ? '#F0F1FF' : info?.status === 'on-going' ? '#DEF6FF' : info?.status === 'completed' ? '#D1FFD3' :""} fz='12px' color={info?.status === 'rescheduled' ? '#181818' : info?.status === 'on-going' ? '#058DC1' : info?.status === 'in-progress' ? '#2E3192' : info?.status === 'completed' ? '#337808' :''} />
+                <Tag
+                  name={info?.status}
+                  bg={
+                    info?.status === 'rescheduled'
+                      ? '#E8E8E8'
+                      : info?.status === 'in-progress'
+                      ? '#F0F1FF'
+                      : info?.status === 'on-going'
+                      ? '#DEF6FF'
+                      : info?.status === 'completed'
+                      ? '#D1FFD3'
+                      : ''
+                  }
+                  fz="12px"
+                  color={
+                    info?.status === 'rescheduled'
+                      ? '#181818'
+                      : info?.status === 'on-going'
+                      ? '#058DC1'
+                      : info?.status === 'in-progress'
+                      ? '#2E3192'
+                      : info?.status === 'completed'
+                      ? '#337808'
+                      : ''
+                  }
+                />
               </div>
             </div>
 
             <div className="d-flex my-2 date">
               <h6>
-                {new Date(info?.date).getDate()} | {' '}
+                {new Date(info?.date).getDate()} |{' '}
                 {months[new Date(info?.date).getMonth()]}
               </h6>
               <article className="pt-1 mx-4">Duration - 45minutes</article>
@@ -89,9 +172,7 @@ export const Session = ({ data = [] }) => {
             </div>
 
             <div className="my-4 body">
-              <p>
-                {info?.description}
-              </p>
+              <p>{info?.description}</p>
             </div>
 
             <div className="my-2 foot d-flex justify-content-between ">
@@ -108,8 +189,6 @@ export const Session = ({ data = [] }) => {
             </div>
           </TodoCard>
         ))}
-
-       
       </div>
     </div>
   )

@@ -157,7 +157,7 @@ export const MentorEvaluation = ({ history }) => {
         </section>
       </section>
 
-      <section className=" d-flex align-items-center justify-content-between">
+      <section className="mt-3 d-flex align-items-center justify-content-between">
         <Tabs tabItems={tabItems} />
         <div className="">
           <button

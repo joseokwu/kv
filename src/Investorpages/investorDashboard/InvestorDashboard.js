@@ -82,7 +82,7 @@ export const InvestorDashboard = ({ history }) => {
           </section>
     
           <section className="row mt-3 dash-main-content">
-            <div className="col-xl-11">
+            <div className="">
               <div>
                 <section className="d-flex align-items-center justify-content-between mb-3">
                   <p className="dash-sub-title">Upcoming Events</p>

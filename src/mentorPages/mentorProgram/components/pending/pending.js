@@ -1,9 +1,9 @@
-import React from "react";
-import bigClock from "../../../../assets/icons/bigclock.svg";
-import { Modal, ReadMore } from "../../../../mentorComponents";
-import { formatTime, months } from "../../../../utils/helpers";
-import "./pending.css";
-import { RescheduleModal } from "./rescheduleModal";
+import React from 'react'
+import bigClock from '../../../../assets/icons/bigclock.svg'
+import { Modal, ReadMore } from '../../../../mentorComponents'
+import { formatTime, months } from '../../../../utils/helpers'
+import './pending.css'
+import { RescheduleModal } from './rescheduleModal'
 
 export const Pending = ({ data = {} }) => {
   return (
@@ -23,7 +23,7 @@ export const Pending = ({ data = {} }) => {
             style={{ columnGap: 10 }}
           >
             <p className="pending_date">
-              <span>{new Date(data?.date).getDate()}</span>{" "}
+              <span>{new Date(data?.date).getDate()}</span>{' '}
               {months[new Date(data?.date).getMonth()]}
             </p>
             <p className="pending_time">
@@ -34,7 +34,7 @@ export const Pending = ({ data = {} }) => {
 
           <section className="mt-3">
             <p>
-              <ReadMore>{data?.description ?? ""}</ReadMore>
+              <ReadMore>{data?.description ?? ''}</ReadMore>
             </p>
           </section>
 
@@ -48,6 +48,11 @@ export const Pending = ({ data = {} }) => {
                   Reschedule
                 </button>
               </div>
+              <div className="ml-3 program_accept_btn">
+                <button data-toggle="modal" data-target="#viewScheduleModal">
+                  View schedule
+                </button>
+              </div>
             </div>
 
             <div className="program_ignore_btn">
@@ -57,5 +62,5 @@ export const Pending = ({ data = {} }) => {
         </section>
       </div>
     </div>
-  );
-};
+  )
+}
