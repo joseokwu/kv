@@ -1185,6 +1185,104 @@ const EventScheduleModal = () => {
   );
 };
 
+==============================================================
+==========================================================
+
+
+
+"values":{
+  "logo":"https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
+  "elevatorPitch":"jane",
+  "startupName":"male",
+  "yearFounded":"Sat Mar 26 2022 15:59:18 GMT+0100 (West Africa Standard Time)",
+  "regisrationNumber":"90876655",
+  "companySize":"jane9038",
+  "businessSector":"twine.io",
+  "startupStage":"ganeee",
+  "acceleratorName":"yeuwiw",
+  "contactInfo":{
+      "registeredAddress":"address",
+      "country":"nigeria",
+      "state":"Lagos",
+      "city":"merian",
+      "phoneNumber":"903948392",
+      "companyEmail":"yuiiiytu@gmail.com"
+  },
+  "socialMedia":{
+      "profileHandle":"handle",
+      "companyWebsite":"https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
+      "linkedInHandle":"https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
+      "twitterHandle":"https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current"
+  }
+  "type":"startUpProfile",
+  "accType":"startup",
+},
+
+onClick={() => history.push('/startup/dashboard')}
+
+{/* 
+              <CustomSelect
+                name={'businessSector'}
+                options={options}
+                value={formik.values.businessSector}
+                onChange={(value) =>
+                  (value) => formik.setFieldValue('startupStage', value.value)
+                }
+                className="cust"
+              /> */}
+
+              <CustomSelect
+              name={'startupStage'}
+              options={stage}
+              value={formik.values.startupStage}
+              onChange={(value) => formik.setFieldValue('startupStage', value.value)}
+              className="cust"
+            />
+
+<CustomSelect
+                name='companySize'
+                options={optionsNumb}
+                value={formik.values.companySize}
+                onChange={
+                  formik.handleChange
+                }
+                className="cust"
+              />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

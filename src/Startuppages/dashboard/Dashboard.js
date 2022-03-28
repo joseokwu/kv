@@ -25,7 +25,7 @@ export const StartupDashboard = () => {
     fetchData();
 
     return () => {
-      setDashInfo({});
+      setDashInfo();
     };
   }, []);
 

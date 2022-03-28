@@ -2,9 +2,10 @@ export  const INIT_STATE = {
     authenticated: false,
     user: null,
     error: false,
-    loading: false,
+    loading:false,
     roles:[],
-    signUpStatus:'startup'
+    signUpStatus:'startup',
+    username:''
   }
 
   export const INIT_STATE_BUSINESS = {

@@ -26,10 +26,15 @@ import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/Cir
 import { toast } from 'react-hot-toast'
 import { CoFounder } from './coFounder'
 import { LargeModal } from '../../../../Startupcomponents'
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../../../hooks/useAuth';
+
 
 const { Option } = Select
 
 export const TeamProfile = () => {
+
+  const  { stateAuth } = useAuth();
   const [disImg, setImg] = useState(null)
 
   const [show, setShow] = useState(false)
@@ -40,7 +45,10 @@ export const TeamProfile = () => {
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
   const [loading, setLoading] = useState(false)
-  const [phone, setPhone] = useState()
+  const [phone, setPhone] = useState(stateAuth?.user?.team?.contactInfo?.phoneNumber)
+const [socialMedia, setSocialMedia] = useState({
+  
+})
 
   const {
     changePath,
@@ -99,6 +107,7 @@ export const TeamProfile = () => {
 
   const formik = useFormik({
     initialValues: {
+      avatar: "",
       briefIntroduction: '',
       firstName: '',
       lastName: '',
@@ -107,7 +116,7 @@ export const TeamProfile = () => {
       country: '',
       state: '',
       city: '',
-      mobile_number: phone,
+      // mobile_number: phone,
       skills: [],
       experience: [],
       education: [],
@@ -265,10 +274,10 @@ export const TeamProfile = () => {
               <label>Mobile Number *</label>
               <PhoneInput
                 international
-                name="phone"
+                name="mobile_number"
                 countryCallingCodeEditable={true}
                 className="custs w-lg-50 ps-3"
-                value={phone}
+                value={stateAuth?.user?.team?.contactInfo?.mobile_number?stateAuth?.user?.team?.contactInfo?.mobile_number : phone}
                 onChange={setPhone}
                 MaxLength={17}
               />

@@ -12,7 +12,7 @@ import { Growth } from './components/growth'
 import { Button } from '../../mentorComponents'
 
 export const MentorEvaluate = ({ history }) => {
-  // const { goBack } = history
+  const { goBack } = history
   const {
     location: { hash },
     push,
@@ -28,10 +28,11 @@ export const MentorEvaluate = ({ history }) => {
         <section
           className="d-flex mb-5"
           role="button"
-          onClick={() => push('/mentor/evaluation')}
+          // onClick={() => push('/mentor/evaluation')}
+          // onClick={() => goBack()}
         >
           <img src={left} alt="left" style={{ transform: 'rotate(180deg)' }} />
-          <p className="ml-2 bread-start mt-3">Go Back</p>
+          <p className="ml-2 bread-start mt-0" role="button" onClick={() => push('/mentor/evaluation')}>Go Back</p>
         </section>
 
         <section>
@@ -45,7 +46,7 @@ export const MentorEvaluate = ({ history }) => {
         </section>
       </div>
 
-      <div className=" mt-4 mb-4">
+      <div className="mt-4 mb-4">
         <section className="evaluate_wrap mx-2">
           <ul className="evaluate_list row mx-4">
             <li

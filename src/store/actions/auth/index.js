@@ -32,14 +32,15 @@ export const registerUser = async(value) => async(dispatch) =>{
 export const loginUser = async(value) => async(dispatch) =>{
 
     try{
-        dispatch({
+        dispatch({   
             type:AUTH_START
         })
         const res = await userLogin(value);
-        setAuthToken(res?.token);
+        setAuthToken(res?.data?.token);
+        console.log(res)
         dispatch({
             type:LOGIN_SUCCESS,
-            payload: res?.roles
+            payload: res?.data?.user
         })
        
         return res;
@@ -53,19 +54,19 @@ export const loginUser = async(value) => async(dispatch) =>{
     }
 }
 
-export const getProfile = async () => async(dispatch) =>{
+export const getProfile = async (value) => async(dispatch) =>{
 
     try{
         dispatch({
             type:AUTH_START
         })
-        const res = await profile();
-            
-        dispatch({
-            type:USER_PROFILE,
-            payload: res
-        })
-
+        const res = await profile(value);
+            if(res){
+                dispatch({
+                    type:USER_PROFILE,
+                    payload:res?.data
+                })
+            }
     
     }catch(err){
         dispatch({

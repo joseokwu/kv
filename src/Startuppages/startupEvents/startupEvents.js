@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Tabs } from "../../Startupcomponents";
+import { Select, Tabs } from "../../Startupcomponents";
 import "./startupEvents.css";
 import down from "../../assets/icons/downArrow.svg";
 import { SelectionDay } from "./components/selectionDay";
@@ -7,6 +7,47 @@ import { getEvents } from "../../services/events";
 import { PageLoader } from "../../components";
 
 export const StartupEvents = ({ history }) => {
+
+  const industry = [
+    "Category: All",
+    'Accounting',
+    'Analytics',
+    'Bike Rentals',
+    'Cloud Computing',
+    'Cloud Telephony',
+    'Content Services',
+    'CRM',
+    'Customer Engagement',
+    'Customer Support',
+    'E-Learning',
+    'Email Marketing',
+    'Employee Benefit',
+    'Finance',
+    'Fitness',
+    'Food and Beverages',
+    'Garage Services',
+    'Gifts and Confectionery',
+    'Health and Wellness',
+    'Home and Furnishing',
+    'Hospitality',
+    'Human Resources',
+    'Insurance',
+    'Investments',
+    'IT Rentals',
+    'Legal',
+    'Loans',
+    'Marketing',
+    'Merchandise',
+    'Messaging',
+    'Personal Finance',
+    'Printing',
+    'Sales Support',
+    'Salons and Spas',
+    'Signing Solutions',
+    'Travel',
+    'Virtual Assistant',
+  ]
+
   const {
     location: { hash },
   } = history;
@@ -88,16 +129,17 @@ export const StartupEvents = ({ history }) => {
           <Tabs tabItems={tabItems} />
 
           <div className="mx-4">
-            <button
+            {/* <button
               className="d-flex align-items-center sort-btn"
               style={{ columnGap: 7 }}
               data-toggle="dropdown"
-            >
-              <span>
+            > */}
+            <Select placeholder={"Sort by: Industry"} options={industry} />
+              {/* <span>
                 <span>Sort by: </span> Industry
               </span>
-              <img src={down} alt="down" />
-            </button>
+              <img src={down} alt="down" /> */}
+            {/* </button> */}
           </div>
         </div>
       </div>

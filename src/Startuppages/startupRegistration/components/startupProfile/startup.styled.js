@@ -141,6 +141,19 @@ export const FormWrapper = styled.div`
     }
   }
 
+  .sel {
+  width: 70%;
+  background: ${(props) => (props.bg ? props.bg : "#fafafc")};
+  color: #4f4f4f;
+  border-radius:7px;
+  cursor: pointer;
+  text-transform: capitalize;
+  outline: 0;
+  min-height: 2.56rem;
+  margin-left: 15px;
+  border:0.1rem solid #fefefe;
+  }
+
   .date-input {
     padding: 8px 14px;
     background: #fafafc;

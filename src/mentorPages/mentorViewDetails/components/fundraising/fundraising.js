@@ -9,11 +9,11 @@ import FinancialProjection from "./components/financialProjection";
 import { useActivity } from "../../../../hooks";
 
 export const Fundraising = ({ data = {} }) => {
-  const {
-    state: {
-      dash_view: { fundRaising },
-    },
-  } = useActivity();
+  // const {
+  //   state: {
+  //     dash_view: { fundRaising },
+  //   },
+  // } = useActivity();
 
   const renderContent = () => {
     switch (currentTab) {
@@ -37,7 +37,7 @@ export const Fundraising = ({ data = {} }) => {
     }
   };
 
-  console.log(fundRaising)
+  // console.log(fundRaising)
 
   const tabItems = [
     "Funding Ask",

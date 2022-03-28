@@ -3,23 +3,24 @@ import {Route, Switch , useHistory} from 'react-router-dom';
 import routes from './routes';
 import { ProtectedRoute }  from './ProtectedRoute'
 import { useAuth } from '../hooks/useAuth';
-import { getToken , getLocationHistory } from '../utils/helpers.js';
+import { getToken , getLocationHistory , getRole } from '../utils/helpers.js';
 import { LoadingIcon } from './../components/Loading/Loading';
 
 export  function AppRouter(props){
     const { userProfile, stateAuth : { loading , authenticated }} = useAuth();
     const history = useHistory();
     useEffect(()=>{
+        console.log(loading)
         const getP = async () => {
 			if (getToken()) {
-			await userProfile();
+                const userRole = getRole();
+               // console.log(userRole)
+			await userProfile(userRole && userRole);
 				if (getLocationHistory()) {
                     history.push(getLocationHistory());
 					sessionStorage.removeItem('user:redirect:location')
 				}
-			}
-          
-            
+			}       
 		};
 		getP();    
     },[userProfile, authenticated, history])  

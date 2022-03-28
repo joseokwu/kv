@@ -1,16 +1,16 @@
-import React from "react";
-import { ApplicationCard } from "../boosterPartner.styled";
+import React from 'react'
+import { ApplicationCard } from '../boosterPartner.styled'
 import {
   compImage,
   applicationCardData,
   cardDataModal,
   compdetailModal,
-} from "../../../constants/domiData";
-import { Modal, Tag } from "../../../Startupcomponents";
-import "../boosterPartner.css";
+} from '../../../constants/domiData'
+import { Modal, Tag } from '../../../Startupcomponents'
+import '../boosterPartner.css'
 
-export const Apply = (data) => {
-  const applyArr = [1, 2, 3];
+export const Apply = () => {
+  const applyArr = [1, 2, 3]
 
   //console.log(data)
 
@@ -47,12 +47,18 @@ export const Apply = (data) => {
               </p>
             ))}
           </div>
-          <button className="applyBtn mt-2" data-target="#apply" data-toggle="modal">Apply</button>
+          <button
+            className="applyBtn mt-2"
+            data-target="#apply"
+            data-toggle="modal"
+          >
+            Apply
+          </button>
         </ApplicationCard>
       ))} */}
     </div>
-  );
-};
+  )
+}
 
 const ApplyModal = ({data}) => {
   console.log(data)
@@ -111,5 +117,5 @@ const ApplyModal = ({data}) => {
         <button className="applyModalapply">Apply</button>
       </div>
     </div>
-  );
-};
+  )
+}
