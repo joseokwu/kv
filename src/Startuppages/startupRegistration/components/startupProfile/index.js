@@ -35,7 +35,7 @@ export const StartupProfile = () => {
   const [loading, setLoading] = useState(false);
   const [nextloading, setNextLoading] = useState(false);
   const [phone, setPhone] = useState(
-    stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber
+    stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber ?? ''
   );
   const [contacts, setContacts] = useState({
     registeredAddress: stateAuth?.user?.startUpProfile?.contactInfo
@@ -448,17 +448,13 @@ export const StartupProfile = () => {
                 name='phoneNumber'
                 countryCallingCodeEditable={true}
                 className='custs ps-3'
-                value={
-                  stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber
-                    ? stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber
-                    : phone
-                }
+                value={phone}
                 onChange={setPhone}
                 onBlur={formik.handleBlur}
               />
-              {/* {formik.touched.phoneNumber && !phone ? (
+              {formik.touched.phoneNumber && !phone ? (
                 <label className='error'>Required</label>
-              ) : null} */}
+              ) : null}
             </div>
             <div className='form-group col-lg-6 col-12'>
               <label>Company Email *</label>
