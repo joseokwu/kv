@@ -108,11 +108,16 @@ export const StartupProfile = () => {
         setLoading(true);
         let result = await updateFounderProfile(startupProfile)
          
-        if(result?.success){
+        if(!result?.success){
+           toast.error( result?.message || 'There was an error in updating profile')
+           setLoading(false);
+           return ;
+          }
           toast.success('Profile' + " " + result?.message)
           setLoading(false);
-        }
+          return ;
       }catch(err){
+        setLoading(false);
         toast.error(err?.response?.data?.message || 'There was an error in updating profile')
       }
     
