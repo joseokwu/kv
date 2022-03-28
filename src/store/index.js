@@ -6,20 +6,12 @@ import reduxPromise from "redux-promise";
 import reducers from "./reducers";
 
 //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //https://github.com/zalmoxisus/redux-devtools-extension
-let storedData = sessionStorage.getItem("kv")
-  ? JSON.parse(sessionStorage.getItem("kv"))
-  : {};
-const logger = (store) => (next) => (action) => {
-  let result = next(action);
-  sessionStorage.setItem("kv", JSON.stringify(store.getState()));
-  return result;
-};
-const middlewares = [thunk, reduxPromise, logger];
+
+const middlewares = [thunk, reduxPromise];
 
 const Root = ({ children, initialState = {} }) => {
   const store = createStore(
     reducers,
-    { ...storedData },
     compose(applyMiddleware(...middlewares))
   );
   return <Provider store={store}>{children}</Provider>;

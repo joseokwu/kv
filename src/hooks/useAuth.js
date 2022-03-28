@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 export const useAuth = () => {
 
-const history = useHistory()
+const history = useHistory() 
 
 const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const stateAuth = useSelector((state) => state.auth );
 const register = async(values) =>{
  
     const res = await dispatch(registerUser(values));
-        if(res?.success){
+        if(res?.status){
             history.push('/confirm/email')
         }
 }
@@ -27,9 +27,9 @@ const newLogin = async (values) =>{
         return res;
 }
 
-const userProfile = useCallback(async () =>{
+const userProfile = useCallback(async (value) =>{
     
-        dispatch(await profile());
+        dispatch(await profile(value));  
 
     }, [])
 

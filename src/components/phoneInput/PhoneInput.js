@@ -9,6 +9,8 @@ export const PhoneInput = ({
   disabled = false,
   required = false,
   onChange = () => {},
+  setPhone ,
+  
 }) => {
   const [prefix, setPrefix] = useState("+234");
   const [countryAbv, setCountryAbv] = useState("NG");
@@ -19,6 +21,7 @@ export const PhoneInput = ({
 
   const handleChange = (e) => {
     onChange({ id: `${prefix}${e.target.value}` });
+    setPhone(e.target.value)
   };
   return (
     <div className="phoneNumber">

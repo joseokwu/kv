@@ -15,30 +15,29 @@ import toast from 'react-hot-toast'
 export const SignIn = () => {
   const [loader, setLoader] = useState(false)
   const {
-    stateAuth: { authenticated, loading, roles },
+    stateAuth: { authenticated, loading, roles , user },
     newLogin,
   } = useAuth()
 
   const history = useHistory()
   const onFinish = async (values) => {
     try {
+      console.log(values)
       const res = await newLogin(values)
       const loca = getLocationHistory()
-    
+     console.log(res)
       if (res?.status) {
         if (loca !== null) {
           history.push(loca)
-          sessionStorage.removeItem('user:redirect:location')
+         return sessionStorage.removeItem('user:redirect:location')
         }
-        if(getRole() !== null){
-          let role = getRole();
-          console.log(role)
-          history.push(`/${role}/registration`)
-        }
+        
+        history.push(`/${res?.data?.user?.type[0]}/registration`)
+        
       }
     } catch (err) {
       console.log('error')
-      toast.error('Network Error')
+      toast.error(err?.response?.data?.message)
     }
   }
 

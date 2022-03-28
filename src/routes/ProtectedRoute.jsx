@@ -11,9 +11,10 @@ export  const ProtectedRoute = ({ ...props})=>{
     const {stateAuth} = useAuth();
    
     const [loading, setLoading] = useState(true);
-
+    //user:token
     useEffect(()=>{ 
-        setLoading(true);
+        setLoading(false);
+        console.log(stateAuth.authenticated)
         if(!stateAuth.authenticated && !stateAuth.roles.includes(props.type)){
             // console.log(history.location.pathname)
             setLocationHistory(history.location.pathname)
@@ -32,7 +33,7 @@ export  const ProtectedRoute = ({ ...props})=>{
 
     }, [history, stateAuth.roles, stateAuth.authenticated, props.type]);
 
-    return  <Route {...props} />
+    return  <Route {...props} /> 
 }
   
 

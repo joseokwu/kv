@@ -7,13 +7,15 @@ import { PitchDeck } from './components/pitchdeck/Pitchdeck'
 import { TeamProfile } from './components/teams'
 import { Product } from './components/product'
 import { FundRaising } from './components/fundraising'
+import { useAuth } from '../../hooks/useAuth';
 
 export const StartUpRegistration = () => {
   const {
     state: { path },
     changePath,
   } = useActivity()
-
+  const  { stateAuth } = useAuth()
+  console.log(stateAuth)
   const [progressStat, setProgressStat] = useState()
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export const StartUpRegistration = () => {
           >
             <WelcomeMessage>
               <h5>
-                Hi Micheal{' '}
+                 Hi {stateAuth?.user?.businessname}
                 <span style={{ color: 'rgb(199, 249, 15)', marginLeft: '9px' }}>
                   {' '}
                   &#128075;

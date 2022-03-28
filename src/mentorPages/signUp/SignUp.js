@@ -8,30 +8,50 @@ import {
   LongPhoneInput,
 } from '../../mentorComponents/index'
 import check from '../../assets/icons/checkmark.svg'
-import { Form } from 'antd'
+import { Form , Select} from 'antd'
 import { useAuth } from '../../hooks'
 import { setRole  } from '../../utils/helpers';
+import { PhoneInput } from '../../components';
+
+const { Option } = Select;
 
 export const SignUp = ({ history }) => {
   const [checkSat, setCheckSat] = useState(false)
   const { stateAuth, register } = useAuth()
+  const [industry , setIndustry] = useState('')
+  const [phone, setPhone]  = useState('');
+
+  function handleChange(value) {
+    setIndustry(value)
+  }
 
   console.log(stateAuth?.signUpStatus)
   const onFinish = (values) => {
-
-    console.log({
-      ...values,
-      role:stateAuth?.signUpStatus
-    })
+      if(stateAuth?.signUpStatus === 'startup'){
+        console.log({
+          ...values,
+          type:stateAuth?.signUpStatus,
+          industry:industry,
+          phone: phone
+        })
+        register({
+          ...values,
+          type:stateAuth?.signUpStatus,
+          industry:industry,
+          phone: phone
+        })
+      }
+    
 
     register({
       ...values,
-      role:stateAuth?.signUpStatus
+      type:stateAuth?.signUpStatus,
+      phone: phone
     })
    setRole(stateAuth?.signUpStatus)
   }
 
-  console.log(stateAuth)
+
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
@@ -51,7 +71,7 @@ export const SignUp = ({ history }) => {
           >
             <div className="col-md-6 col-12 mb-2">
               <AuthTextField
-                name={"firstname"}
+                name={stateAuth?.signUpStatus === 'startup' ? "startupname" : "firstname"}
                 label={stateAuth?.signUpStatus === 'startup' ? "Startup Name" : "First name"}
                 placeholder={stateAuth?.signUpStatus === 'startup' ? 'Enter your Startup name' : 'Enter your first name'}
                 className="mentor_gray_card_input"
@@ -60,87 +80,59 @@ export const SignUp = ({ history }) => {
             <div className="col-md-6 col-12 mb-2">
               {
                stateAuth?.signUpStatus === 'startup' ? (
-                <div class="inputContainer">
+                <div className="inputContainer">
                 <label>Industry</label>
-                <div class="select">
-                  <select
+                <div className="select">
+                  <Select
+                   onChange={handleChange}
                     id="industry1"
-                    name="industry1"
+                    name="industry"
                     placeholder="Select your industry"
                   >
-                    <option disabled selected>Select your industry</option>
-                    <option value="Advanced manufacturing and materials">
+                    <Option disabled selected>Select your industry</Option>
+                    <Option value="Advanced manufacturing and materials">
                       Advanced manufacturing and materials
-                    </option>
-                    <option value="Agriculture, food and beverages">
+                    </Option>
+                    <Option value="Agriculture, food and beverages">
                       Agriculture, food and beverages
-                    </option>
-                    <option value="Energy">Energy</option>
-                    <option value="Engineering and Technology">
+                    </Option>
+                    <Option value="Energy">Energy</Option>
+                    <Option value="Engineering and Technology">
                       Engineering and Technology
-                    </option>
-                    <option value="Finance">Finance</option>
-                    <option value="Health: Pharmaceuticals and Biotechnology">
+                    </Option>
+                    <Option value="Finance">Finance</Option>
+                    <Option value="Health: Pharmaceuticals and Biotechnology">
                       Health: Pharmaceuticals and Biotechnology
-                    </option>
-                    <option value="Healthcare: Devices and Supplies">
+                    </Option>
+                    <Option value="Healthcare: Devices and Supplies">
                       Healthcare Devices and Supplies
-                    </option>
-                    <option value="Healthcare: Other services and Technologies">
+                    </Option>
+                    <Option value="Healthcare: Other services and Technologies">
                       Healthcare: Other services and Technologies
-                    </option>
-                    <option
+                    </Option>
+                    <Option
                       value="Information and Communication Technology(ICT)"
                     >
                       Information and Communication Technology(ICT)
-                    </option>
-                    <option value="Life-science Technologies">
+                    </Option>
+                    <Option value="Life-science Technologies">
                       Life-science Technologies
-                    </option>
-                    <option value="Micro/name-electronic and photonics">
+                    </Option>
+                    <Option value="Micro/name-electronic and photonics">
                       Micro/name-electronic and photonics
-                    </option>
-                    <option value="Security and Connectivity">
+                    </Option>
+                    <Option value="Security and Connectivity">
                       Security and Connectivity
-                    </option>
-                    <option value="Space and Aerospace">
+                    </Option>
+                    <Option value="Space and Aerospace">
                       Space and Aerospace
-                    </option>
-                    <option value="Sustainability and circular economy">
+                    </Option>
+                    <Option value="Sustainability and circular economy">
                       Sustainability and circular economy
-                    </option>
-                    <option value="Transportation">Transportation</option>
-                    <option value="Others">Others</option>
-                    <option value="Financial Services">
-                      Financial Services
-                    </option>
-                    <option value="Education">Education</option>
-                    <option value="Health">Health</option>
-                    <option value="Agriculture">Agriculture</option>
-                    <option value="Insurance">Insurance</option>
-                    <option value="Clean Energy">Clean Energy</option>
-                    <option value="Construction">Construction</option>
-                    <option value="Mobility/Logistics">
-                      Mobility/Logistics
-                    </option>
-                    <option value="Social Impact">Social Impact</option>
-                    <option value="Artificial Intelligence">
-                      Artificial Intelligence
-                    </option>
-                    <option value="Blockchain">Blockchain</option>
-                    <option value="Internet of Things">
-                      Internet of Things
-                    </option>
-                    <option value="Mobile">Mobile</option>
-                    <option value="Software as a Service">
-                      Software as a Service
-                    </option>
-                    <option value="Sports">Sports</option>
-                    <option value="B2B">B2B</option>
-                    <option value="B2C">B2C</option>
-                    <option value="D2C">D2C</option>
-                    <option value="Marketplace">Marketplace</option>
-                  </select>
+                    </Option>
+                    <Option value="Transportation">Transportation</Option>
+                    
+                  </Select>
                 </div>
               </div>
                ) :(
@@ -175,11 +167,8 @@ export const SignUp = ({ history }) => {
             </div>
 
             <div className="col-12 mb-4">
-              <LongPhoneInput
-                label="Mobile Number"
-                message="Enter a phone number"
-                
-              />
+            
+               <PhoneInput setPhone={setPhone} />
             </div>
 
             <div className="col-12 mb-4">
@@ -188,7 +177,7 @@ export const SignUp = ({ history }) => {
                   <input
                     type="checkbox"
                     name=""
-                    onClick={() => setCheckSat(!checkSat)}
+                   onChange={() => setCheckSat(!checkSat)}
                     id="agreement"
                     checked={checkSat}
                   />
