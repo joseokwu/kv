@@ -52,8 +52,8 @@ export const WorkExperience = ({
         <p>{description}</p>
       </div>
       <div className='buttons'>
-        <img src={editIcon} alt='edit' onClick={handleEdit} />{' '}
-        <img src={deleteIcon} alt='delete' />
+        <img className='img' src={editIcon} alt='edit' onClick={handleEdit} />{' '}
+        <img className='img' src={deleteIcon} alt='delete' />
       </div>
       <div></div>
     </div>
