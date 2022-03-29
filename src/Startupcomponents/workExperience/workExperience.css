@@ -17,3 +17,6 @@ h6 {
 .title {
   margin-bottom: 0.85rem;
 }
+.img {
+  cursor: pointer;
+}

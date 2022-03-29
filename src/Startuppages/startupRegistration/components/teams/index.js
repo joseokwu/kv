@@ -47,10 +47,12 @@ export const TeamProfile = () => {
     stateAuth?.user?.team?.contactInfo?.phoneNumber
   );
   const [socialMedia, setSocialMedia] = useState({});
+  const [editIndex, setEditIndex] = useState();
 
   const {
     changePath,
-    state: { path },
+    setWorkExperience,
+    state: { path, workExperience },
   } = useActivity();
 
   const onChangeImage = (e) => {
@@ -125,10 +127,37 @@ export const TeamProfile = () => {
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
   });
+  const handleWorkDetails = ({
+    title,
+    location,
+    position,
+    description,
+    startDate,
+    endDate,
+  }) => {
+    setWorkExperience({
+      title,
+      location,
+      position,
+      description,
+      startDate,
+      endDate,
+    });
+  };
 
   return (
     <>
-      {show ? <TeamModal handleClose={setShow} /> : <span></span>}
+      {console.log(workExperience)}
+      {show ? (
+        <TeamModal
+          handleClose={setShow}
+          handleWorkDetails={handleWorkDetails}
+          editIndex={editIndex}
+          workExperience={workExperience}
+        />
+      ) : (
+        <span></span>
+      )}
       {showEducation ? (
         <EducationModal handleClose={setShowEducation} />
       ) : (
@@ -291,7 +320,19 @@ export const TeamProfile = () => {
             <span>Work Experience</span>
           </div>
           <hr />
-          <WorkExperience />
+          {workExperience.length > 0 &&
+            workExperience.map((item, index) => {
+              return (
+                <WorkExperience
+                  key={index}
+                  {...item}
+                  showTeamModal={() => setShow(true)}
+                  setEditIndex={setEditIndex}
+                  id={index}
+                />
+              );
+            })}
+
           <hr />
           <div>
             <span
