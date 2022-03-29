@@ -8,10 +8,10 @@ import {
   CHANGE_PAGE,
   SHOW_EVENT,
   DASH_VIEW,
-  ADD_WORK_EXPERIENCE
-} from "../../actions/actions.types";
+  SET_WORK_EXPERIENCE,
+} from '../../actions/actions.types';
 
-import { INIT_STATE_BUSINESS } from "../../initialstates";
+import { INIT_STATE_BUSINESS } from '../../initialstates';
 
 const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
   switch (action.type) {
@@ -60,11 +60,17 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
     case DASH_VIEW:
       return { ...state, dash_view: action.payload };
     
-    case  ADD_WORK_EXPERIENCE :
+    // case  ADD_WORK_EXPERIENCE :
+    //   return {
+    //     ...state , 
+    //     workExperience:[action.payload, ...state.workExperience]
+    //   }  
+
+    case SET_WORK_EXPERIENCE:
       return {
-        ...state , 
-        workExperience:[action.payload, ...state.workExperience]
-      }  
+        ...state,
+        workExperience: [...state.workExperience, action.payload],
+      };
 
     default:
       return state;

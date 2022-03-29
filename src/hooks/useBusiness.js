@@ -1,34 +1,33 @@
- 
 import { useSelector, useDispatch } from 'react-redux';
-import { changeDPath, showDEventAction , addwork } from '../store/actions/business';
-import {useAuth } from './useAuth';
+import {
+  changeDPath,
+  showDEventAction,
+  setDWorkExperience,
+} from '../store/actions/business';
+import { useAuth } from './useAuth';
 
 export const useActivity = () => {
-    const { 
-        stateAuth   
-    } = useAuth();
-    const dispatch = useDispatch();
-	const state = useSelector((state) => state.business);
-    //const authSte = useSelector((state) => state);
+  const { stateAuth } = useAuth();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.business);
+  //const authSte = useSelector((state) => state);
 
-    const changePath = (value) =>{
+  const changePath = (value) => {
+    dispatch(changeDPath(value));
+  };
 
-        dispatch(changeDPath(value));
-    }
+  const showEventAction = () => {
+    dispatch(showDEventAction());
+  };
 
-    const showEventAction = () =>{
-        dispatch(showDEventAction())
-    }
+  const setWorkExperience = (values) => {
+    dispatch(setDWorkExperience(values));
+  };
 
-    const addWork = (values) =>{
-      
-        dispatch(addwork(values))
-    }
-
-    return {
-        state,
-        changePath,
-        showEventAction,
-        addWork
-    };
-}
+  return {
+    state,
+    changePath,
+    showEventAction,
+    setWorkExperience,
+  };
+};
