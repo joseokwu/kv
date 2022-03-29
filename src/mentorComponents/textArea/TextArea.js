@@ -3,6 +3,7 @@ import React from "react";
 export const TextArea = ({
   label = "",
   id = "",
+  type,
   className = "",
   rows = "8",
   cols = "",
@@ -15,6 +16,7 @@ export const TextArea = ({
         {label}
       </label>
       <textarea
+        type={type}
         id={id}
         rows={rows}
         cols={cols}

@@ -97,7 +97,7 @@ export const BoosterApplicants = ({ history }) => {
     <div className="wrapper">
       <section className="d-flex justify-content-between align-items-center applicant-header">
         <h1>Startup Application</h1>
-        <img src={search} alt="search" />
+        {/* <img src={search} alt="search" /> */}
       </section>
 
       <section className="d-flex align-items-center justify-content-between mb-4">

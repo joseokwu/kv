@@ -52,7 +52,7 @@ export const StartupProgram = () => {
       case "#Assignment":
         return <Assignment data={programInfo?.assignment} />;
       case "#Rating":
-        return <div></div>;
+        return <Rating />;
       default:
         return <CalenderComponent data={ programInfo !== undefined && programInfo?.calendar} />
     }
@@ -89,19 +89,6 @@ export const StartupProgram = () => {
       <TabFilterWrapper className="pt-3">
         <section className="my-3 mx-3 container d-flex justify-content-between">
           <Tabs tabItems={tabList} />
-
-          <div className="me-3">
-            <button
-              className="d-flex align-items-center sort-btn"
-              style={{ columnGap: 7 }}
-              data-toggle="dropdown"
-            >
-              <span>
-                <span>Sort by: </span> Industry
-              </span>
-              <img src={down} alt="down" />
-            </button>
-          </div>
         </section>
       </TabFilterWrapper>
 

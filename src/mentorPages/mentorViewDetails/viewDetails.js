@@ -27,6 +27,15 @@ export const MentorViewDetails = ({ history }) => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    getData();
+    return () => {
+      setProfileData();
+    };
+  }, []);
+
+  console.log(profileData)
+
   const renderContent = () => {
     switch (hash.replaceAll("%20", "")) {
       case "#Product":
@@ -65,12 +74,8 @@ export const MentorViewDetails = ({ history }) => {
     "Product Road Map",
   ];
 
-  useEffect(() => {
-    getData();
-    return () => {
-      setProfileData({});
-    };
-  }, []);
+
+
 
   if (loading) {
     return <PageLoader />;
