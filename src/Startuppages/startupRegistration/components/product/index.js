@@ -7,6 +7,9 @@ import BlueFile from '../../../../assets/icons/bluFile.svg'
 import { product } from './../../../../services/startUpReg'
 import { formatBytes } from '../../../../utils/helpers'
 import { toast } from 'react-hot-toast'
+import { useAuth } from '../../../../hooks/useAuth';
+import { updateFounderProfile } from '../../../../services';
+
 
 import {
   FileWrapper,
@@ -17,7 +20,18 @@ import {
 import DownloadIcon from '../../../../assets/icons/download.svg'
 
 export const Product = () => {
+  const  { stateAuth } = useAuth();
   const [loading, setLoading] = useState(false)
+  const [nextLoading, setnextLoading] = useState(false);
+  const [opts, setOpts] = useState('')
+  const [productInfo, setProductInfo] = useState({
+    product: stateAuth?.user?.product?.product,
+    market: stateAuth?.user?.product?.market,
+  })
+
+  const onChange = (e) => {
+    setProductInfo({...productInfo, [e.target.name] : e.target.value})
+  }
 
   const [fileInfo, setFile] = useState([
     {
@@ -115,7 +129,7 @@ export const Product = () => {
                 <textarea
                   cols="5"
                   rows="5"
-                  classNam="form-control ps-3"
+                  className="form-control ps-3"
                   placeholder="Enter your uniqueness "
                 />
               </div>

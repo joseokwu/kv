@@ -361,6 +361,7 @@ export const StartupProfile = () => {
                 className="custs ps-3"
                 value={stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber ? stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber : phone}
                 onChange={setPhone}
+                MaxLength={17}
 
               />
             </div>

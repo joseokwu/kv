@@ -154,7 +154,7 @@ export const FundAsk = () => {
             <div className="sold my-3">
               <div className="d-flex justify-content-center" data-target="#cofounder" onClick={() => setShowModal(true)}>
                 <Tag
-                  name="+ Add Co-founder"
+                  name="+ Add Lead Investor"
                   color="#4F4F4F"
                   bg="rgba(183, 218, 231, 0.5)"
                   padding="9px 30px"

@@ -28,6 +28,7 @@ import { CoFounder } from './coFounder'
 import { LargeModal } from '../../../../Startupcomponents'
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
+import { updateFounderProfile } from '../../../../services'
 
 
 const { Option } = Select
@@ -45,10 +46,22 @@ export const TeamProfile = () => {
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
   const [loading, setLoading] = useState(false)
-  const [phone, setPhone] = useState(stateAuth?.user?.team?.contactInfo?.phoneNumber)
-const [socialMedia, setSocialMedia] = useState({
-  
+  const [nextLoading, setnextLoading] = useState(false);
+  const [opts , setOpts] = useState('')
+  const [phone, setPhone] = useState(stateAuth?.user?.team?.founderInfo?.mobile_number)
+  const [contacts, setContacts] = useState({
+    email: stateAuth?.user?.team?.founderInfo?.email,
+    country: stateAuth?.user?.team?.founderInfo?.country,
+    state: stateAuth?.user?.team?.founderInfo?.state,
+    city: stateAuth?.user?.team?.founderInfo?.city,
+  })
+  const [socialMedia, setSocialMedia] = useState({
+  linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
+  twitter: stateAuth?.user?.team?.socialMedia?.twitter,
+  website: stateAuth?.user?.team?.socialMedia?.website
 })
+
+const [coFounder, setCoFounder] = useState('');
 
   const {
     changePath,
@@ -62,6 +75,11 @@ const [socialMedia, setSocialMedia] = useState({
       setImg(URL.createObjectURL(files[0]))
     }
   }
+
+  const onChange = (e) =>{
+    setContacts({...contacts , [e.target.name] : e.target.value })
+  }
+
   let colors = []
 
   for (let i = 0; i < 20; i++) {
@@ -70,6 +88,10 @@ const [socialMedia, setSocialMedia] = useState({
     if (value2.length === 6) {
       colors.push(value2)
     }
+  }
+
+  const onChangeMedia = (e) =>{
+    setSocialMedia({...socialMedia , [e.target.name]: e.target.value })
   }
 
   const back = () => {
@@ -93,36 +115,71 @@ const [socialMedia, setSocialMedia] = useState({
     e.preventDefault()
   }
 
-  const onSubmit = (value) => {
-    setLoading(true)
-    team(value).then((res) => {
-      if (res?.message) {
-        console.log(res)
-        toast.success(res?.message)
-        setLoading(false)
-        next()
+  const onSubmit = async(value) => {
+    let lastIndex;
+    let inputs = document.getElementsByTagName('input');
+    lastIndex = inputs.length;
+    console.log(inputs[lastIndex - 1])
+    try {
+      const team = {
+        type: 'team',
+        accType: 'startup',
+        values: {
+          ...value,
+          founderInfo: {
+            ...contacts,
+            mobile_number: phone
+          },
+          socialMedia
+      },
+      userId:stateAuth?.user?.userId
+    }
+    console.log(team)
+    if (opts === 'next') {
+      setOpts(true)
+      let result = await updateFounderProfile(team)
+
+      if (result?.success) {
+        toast.success('Team' + '' + result?.message)
+        setOpts(false);
+        return changePath(path + 1)
       }
-    })
+    }
+    setLoading(true);
+    let result = await updateFounderProfile(team)
+
+    if (!result?.success) {
+      toast.error(result?.message || 'There was an error in updating team')
+      setLoading(false);
+      return;
+    }
+    toast.success('Team' + '' + result?.message)
+    setLoading(false);
+    return;
+    } catch (err) {
+      setLoading(false);
+      toast.error(err?.res?.data?.message || 'There was an error updating team')
+    }
+    // setLoading(true)
+    // team(value).then((res) => {
+    //   if (res?.message) {
+    //     console.log(res)
+    //     toast.success(res?.message)
+    //     setLoading(false)
+    //     next()
+    //   }
+    // })
   }
 
   const formik = useFormik({
     initialValues: {
-      avatar: "",
-      briefIntroduction: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      dob: startDate,
-      country: '',
-      state: '',
-      city: '',
-      // mobile_number: phone,
+      avatar: "https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
+      briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
+      firstName: stateAuth?.user?.team?.firstName,
+      lastName: stateAuth?.user?.team?.lastName,
       skills: [],
       experience: [],
       education: [],
-      linkedIn: '',
-      twitter: '',
-      website: '',
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
@@ -180,7 +237,7 @@ const [socialMedia, setSocialMedia] = useState({
             </InputWrapper>
           </div>
 
-          <div className="row my-3">
+          <div className="row my-5">
             <div className="form-group col-12">
               <div className="d-flex justify-content-between">
                 <label>Brief Introduction *</label>
@@ -220,8 +277,8 @@ const [socialMedia, setSocialMedia] = useState({
             <div className="form-group col-lg-6 col-12">
               <label>Email *</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.email}
+                onChange={onChange}
+                value={contacts.email}
                 type="text"
                 name="email"
                 placeholder="Enter email address"
@@ -240,8 +297,8 @@ const [socialMedia, setSocialMedia] = useState({
             <div className="form-group col-lg-4 col-12">
               <label>Country *</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.country}
+                onChange={onChange}
+                value={contacts.country}
                 type="text"
                 name="country"
                 placeholder="Enter your country"
@@ -251,8 +308,8 @@ const [socialMedia, setSocialMedia] = useState({
             <div className="form-group col-lg-4 col-12">
               <label>State *</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.state}
+                onChange={onChange}
+                value={contacts.state}
                 type="text"
                 name="state"
                 placeholder="Enter your state"
@@ -262,8 +319,8 @@ const [socialMedia, setSocialMedia] = useState({
             <div className="form-group col-lg-4 col-12">
               <label>City *</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.city}
+                onChange={onChange}
+                value={contacts.city}
                 type="text"
                 name="city"
                 placeholder="Enter your city"
@@ -277,7 +334,7 @@ const [socialMedia, setSocialMedia] = useState({
                 name="mobile_number"
                 countryCallingCodeEditable={true}
                 className="custs w-lg-50 ps-3"
-                value={stateAuth?.user?.team?.contactInfo?.mobile_number?stateAuth?.user?.team?.contactInfo?.mobile_number : phone}
+                value={stateAuth?.user?.team?.founderInfo?.mobile_number?stateAuth?.user?.team?.founderInfo?.mobile_number : phone}
                 onChange={setPhone}
                 MaxLength={17}
               />
@@ -336,7 +393,8 @@ const [socialMedia, setSocialMedia] = useState({
               allowClear
               style={{ width: '100%', color: 'red' }}
               placeholder="Please click to select"
-              onChange={handleChange}
+              value={formik.skills}
+              onChange={formik.handleChange}
               className="skiil-select"
             >
               {children}
@@ -352,8 +410,8 @@ const [socialMedia, setSocialMedia] = useState({
             <div className="form-group col-lg-6 col-12">
               <label>Linkedin*</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.linkedIn}
+                onChange={onChangeMedia}
+                value={socialMedia.linkedIn}
                 type="text"
                 name="linkedIn"
                 placeholder="Enter Linkdin link"
@@ -363,8 +421,8 @@ const [socialMedia, setSocialMedia] = useState({
             <div className="form-group col-lg-6 col-12">
               <label>Twitter*</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.twitter}
+                onChange={onChangeMedia}
+                value={socialMedia.twitter}
                 type="text"
                 name="twitter"
                 placeholder="Enter Twitter link"
@@ -375,8 +433,8 @@ const [socialMedia, setSocialMedia] = useState({
             <div className="form-group col-lg-6 col-12">
               <label>Website*</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.website}
+                onChange={onChangeMedia}
+                value={socialMedia.website}
                 type="text"
                 name="website"
                 placeholder="Enter website"
@@ -397,10 +455,10 @@ const [socialMedia, setSocialMedia] = useState({
 
             <div className="d-flex">
               <BntWrap>
-                <button className="me-3" onClick={btn}>
+                <button className={`me-3 ${coFounder === 'yes' && 'active'}`} onClick={(e) => {e.preventDefault(); setCoFounder('yes')}}>
                   Yes
                 </button>
-                <button className="" onClick={btn}>
+                <button className={`me-3 ${coFounder === 'no' && 'active'}`} onClick={(e) => {e.preventDefault(); setCoFounder('no')}}>
                   No
                 </button>
               </BntWrap>
@@ -438,7 +496,7 @@ const [socialMedia, setSocialMedia] = useState({
             />
           </div>
           <div className="my-3 mx-3">
-            <CustomButton background="#031298"> Invite </CustomButton>
+            <CustomButton type="submit" background="#031298"> Invite </CustomButton>
           </div>
         </FormWrapper>
 
@@ -449,11 +507,11 @@ const [socialMedia, setSocialMedia] = useState({
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-end">
-            <CustomButton className="mx-2" background="#00ADEF">
-              Save
+            <CustomButton type='submit' disabled={loading} className="mx-2" background="#00ADEF">
+              { loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
-            <CustomButton type="submit" disabled={loading} background="#2E3192">
-              {loading ? <CircularLoader /> : 'Next'}
+            <CustomButton type="submit" disabled={nextLoading} onClick={() => setOpts('next')} background="#2E3192">
+              { nextLoading ? <CircularLoader /> : 'Next'}
             </CustomButton>
           </div>
         </div>
