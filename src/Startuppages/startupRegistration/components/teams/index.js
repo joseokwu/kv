@@ -5,57 +5,72 @@ import {
   InputWrapper,
   FormWrapper,
   BntWrap,
-} from './teams.styled';
+  Education
+} from './teams.styled'
 
-import { UserOutlined, PlusOutlined } from '@ant-design/icons';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { CustomSelect } from '../../../../Startupcomponents/select/customSelect';
-import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
-import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
-import { useActivity } from '../../../../hooks/useBusiness';
-import { TeamModal, EducationModal } from './teamModal';
-import { Select } from 'antd';
-import { Tag } from '../../../../Startupcomponents/tag/Tag';
-import 'antd/dist/antd.css';
-import { team } from './../../../../services/startUpReg';
-import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
-import { toast } from 'react-hot-toast';
-import { CoFounder } from './coFounder';
-import { LargeModal, WorkExperience } from '../../../../Startupcomponents';
-import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../../../hooks/useAuth';
+import { UserOutlined, PlusOutlined } from '@ant-design/icons'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { CustomSelect } from '../../../../Startupcomponents/select/customSelect'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
+import { useActivity } from '../../../../hooks/useBusiness'
+import { TeamModal, EducationModal } from './teamModal'
+import { Select } from 'antd'
+import { Tag } from '../../../../Startupcomponents/tag/Tag'
+import 'antd/dist/antd.css'
+import { team } from './../../../../services/startUpReg'
+import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
+import { toast } from 'react-hot-toast'
+import { CoFounder } from './coFounder'
+import { LargeModal, WorkExperience } from '../../../../Startupcomponents'
+import { useHistory } from 'react-router-dom'
+import { useAuth } from '../../../../hooks/useAuth'
+import { updateFounderProfile } from '../../../../services'
+import logo from '../../../../assets/images/edublue.svg'
 
-const { Option } = Select;
+const { Option } = Select
 
 export const TeamProfile = () => {
-  const { stateAuth } = useAuth();
-  const [disImg, setImg] = useState(null);
+  const { stateAuth } = useAuth()
+  const [disImg, setImg] = useState(null)
 
-  const [show, setShow] = useState(false);
-  const [showEducation, setShowEducation] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [show, setShow] = useState(false)
+  const [showEducation, setShowEducation] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
-  const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express'];
-  const [startDate, setStartDate] = useState(new Date());
-  const [loading, setLoading] = useState(false);
+  const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
+  const [startDate, setStartDate] = useState(new Date())
+  const [loading, setLoading] = useState(false)
+  const [nextLoading, setNextLoading] = useState(false)
+  const [opts, setOpts] = useState('')
   const [phone, setPhone] = useState(
-    stateAuth?.user?.team?.contactInfo?.phoneNumber
-  );
-  const [socialMedia, setSocialMedia] = useState({});
+    stateAuth?.user?.team?.founderInfo?.mobile_number,
+  )
+  // const [contacts, setContacts] = useState({
+  //   email: stateAuth?.user?.team?.founderInfo?.email,
+  //   country: stateAuth?.user?.team?.founderInfo?.country,
+  //   state: stateAuth?.user?.team?.founderInfo?.state,
+  //   city: stateAuth?.user?.team?.founderInfo?.city,
+  // })
+  // const [socialMedia, setSocialMedia] = useState({
+  //   linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
+  //   twitter: stateAuth?.user?.team?.socialMedia?.twitter,
+  //   website: stateAuth?.user?.team?.socialMedia?.website,
+  // })
   const [editIndex, setEditIndex] = useState();
-
- 
-
+  const [coFounder, setCoFounder] = useState('')
 
   const {
     changePath,
     setWorkExperience,
-    state: { path, workExperience },
+    addEducation,
+
+    state: { path, workExperience, },
   } = useActivity();
 
   const onChangeImage = (e) => {
@@ -64,7 +79,12 @@ export const TeamProfile = () => {
     if (files && files[0]) {
       setImg(URL.createObjectURL(files[0]));
     }
-  };
+  }
+
+  // const onChange = (e) => {
+  //   setContacts({ ...contacts, [e.target.name]: e.target.value })
+  // }
+
   let colors = [];
 
   for (let i = 0; i < 20; i++) {
@@ -74,6 +94,10 @@ export const TeamProfile = () => {
       colors.push(value2);
     }
   }
+
+  // const onChangeMedia = (e) => {
+  //   setSocialMedia({ ...socialMedia, [e.target.name]: e.target.value })
+  // }
 
   const back = () => {
     changePath(path - 1);
@@ -96,17 +120,65 @@ export const TeamProfile = () => {
     e.preventDefault();
   }
 
-  const onSubmit = (value) => {
-    setLoading(true);
-    team(value).then((res) => {
-      if (res?.message) {
-        console.log(res);
-        toast.success(res?.message);
-        setLoading(false);
-        next();
+  const onSubmit = async (value) => {
+    let lastIndex
+    let inputs = document.getElementsByTagName('input')
+    lastIndex = inputs.length
+    console.log(inputs[lastIndex - 1])
+    try {
+      const team = {
+        type: 'team',
+        accType: 'startup',
+        values: {
+          ...value,
+        },
+        userId: stateAuth?.user?.userId,
       }
-    });
-  };
+      console.log(team)
+      if (opts === 'next') {
+        setOpts(true)
+        let result = await updateFounderProfile(team)
+
+        if (result?.success) {
+          toast.success('Team' + '' + result?.message)
+          setOpts(false)
+          return changePath(path + 1)
+        }
+      }
+      setLoading(true)
+      let result = await updateFounderProfile(team)
+
+      if (!result?.success) {
+        toast.error(result?.message || 'There was an error in updating team')
+        setLoading(false)
+        return
+      }
+      toast.success('Team' + '' + result?.message)
+      setLoading(false)
+      return
+    } catch (err) {
+      setLoading(false)
+      toast.error(err?.res?.data?.message || 'There was an error updating team')
+    }
+    // setLoading(true)
+    // team(value).then((res) => {
+    //   if (res?.message) {
+    //     console.log(res)
+    //     toast.success(res?.message)
+    //     setLoading(false)
+    //     next()
+    //   }
+    // })
+  }
+
+  // const formik = useFormik({
+  //   initialValues: {
+  //     avatar:
+  //       'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
+  //     briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
+  //     firstName: stateAuth?.user?.team?.firstName,
+  //     lastName: stateAuth?.user?.team?.lastName,
+
 
   const formik = useFormik({
     initialValues: {
@@ -123,9 +195,6 @@ export const TeamProfile = () => {
       skills: [],
       experience: [],
       education: [],
-      linkedIn: '',
-      twitter: '',
-      website: '',
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
@@ -167,7 +236,7 @@ export const TeamProfile = () => {
         <span></span>
       )}
       {showModal ? (
-        <LargeModal id='cofounder' title='' closeModal={setShowModal}>
+        <LargeModal id="cofounder" title="" closeModal={setShowModal}>
           <CoFounder />
         </LargeModal>
       ) : (
@@ -210,9 +279,9 @@ export const TeamProfile = () => {
             </InputWrapper>
           </div>
 
-          <div className='row my-3'>
-            <div className='form-group col-12'>
-              <div className='d-flex justify-content-between'>
+          <div className="row my-5">
+            <div className="form-group col-12">
+              <div className="d-flex justify-content-between">
                 <label>Brief Introduction *</label>
                 <label style={{ color: '#828282' }}>10 words at most</label>
               </div>
@@ -306,10 +375,10 @@ export const TeamProfile = () => {
                 international
                 name='mobile_number'
                 countryCallingCodeEditable={true}
-                className='custs w-lg-50 ps-3'
+                className="custs w-lg-50 ps-3"
                 value={
-                  stateAuth?.user?.team?.contactInfo?.mobile_number
-                    ? stateAuth?.user?.team?.contactInfo?.mobile_number
+                  stateAuth?.user?.team?.mobile_number
+                    ? stateAuth?.user?.team?.mobile_number
                     : phone
                 }
                 onChange={setPhone}
@@ -357,6 +426,9 @@ export const TeamProfile = () => {
             <span>Education</span>
           </div>
           <hr />
+
+          <AddEducation />
+
           <span
             onClick={() => setShowEducation(true)}
             style={{
@@ -383,9 +455,10 @@ export const TeamProfile = () => {
               mode='multiple'
               allowClear
               style={{ width: '100%', color: 'red' }}
-              placeholder='Please click to select'
-              onChange={handleChange}
-              className='skiil-select'
+              placeholder="Please click to select"
+              value={formik.skills}
+              onChange={formik.handleChange}
+              className="skiil-select"
             >
               {children}
             </Select>
@@ -445,20 +518,32 @@ export const TeamProfile = () => {
 
             <div className='d-flex'>
               <BntWrap>
-                <button className='me-3' onClick={btn}>
+                <button
+                  className={`me-3 ${coFounder === 'yes' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setCoFounder('yes')
+                  }}
+                >
                   Yes
                 </button>
-                <button className='' onClick={btn}>
+                <button
+                  className={`me-3 ${coFounder === 'no' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setCoFounder('no')
+                  }}
+                >
                   No
                 </button>
               </BntWrap>
             </div>
 
-            <div className='sold'>
-              <div className='d-flex justify-content-center'>
+            <div className="sold">
+              <div className="d-flex justify-content-center">
                 <div
-                  className=''
-                  data-target='#cofounder'
+                  className=""
+                  data-target="#cofounder"
                   onClick={() => setShowModal(true)}
                 >
                   <Tag
@@ -489,8 +574,11 @@ export const TeamProfile = () => {
               placeholder='Enter email address'
             />
           </div>
-          <div className='my-3 mx-3'>
-            <CustomButton background='#031298'> Invite </CustomButton>
+          <div className="my-3 mx-3">
+            <CustomButton type="submit" background="#031298">
+              {' '}
+              Invite{' '}
+            </CustomButton>
           </div>
         </FormWrapper>
 
@@ -500,16 +588,46 @@ export const TeamProfile = () => {
               Back
             </CustomButton>
           </div>
-          <div className='col-9 d-flex justify-content-end'>
-            <CustomButton className='mx-2' background='#00ADEF'>
-              Save
+          <div className="col-9 d-flex justify-content-end">
+            <CustomButton
+              type="submit"
+              disabled={loading}
+              className="mx-2"
+              background="#00ADEF"
+            >
+              {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
-            <CustomButton type='submit' disabled={loading} background='#2E3192'>
-              {loading ? <CircularLoader /> : 'Next'}
+            <CustomButton
+              type="submit"
+              disabled={nextLoading}
+              onClick={() => setOpts('next')}
+              background="#2E3192"
+            >
+              {nextLoading ? <CircularLoader /> : 'Next'}
             </CustomButton>
           </div>
         </div>
       </form>
     </>
-  );
-};
+  )
+}
+
+const AddEducation = () => {
+  return (
+    <>
+      <Education>
+        <div className="my-4 addEducation d-flex">
+          <div>
+            <img src={logo} alt="" />
+          </div>
+          <div>
+            <h4>Manchester University</h4>
+            <h2>Computer Engineering</h2>
+            <p>Master’s Degree</p>
+            <p>2012 - 2018</p>
+          </div>
+        </div>
+      </Education>
+    </>
+  )
+}

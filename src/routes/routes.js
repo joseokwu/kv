@@ -125,7 +125,7 @@ const routes = [
     path: '/startup/dashboard',
     component: WithStartupDashboardLayout(StartupDashboard),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {

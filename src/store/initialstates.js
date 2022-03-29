@@ -13,6 +13,7 @@ export const INIT_STATE_BUSINESS = {
   showPage: 'Overview',
   dash_view: null,
   workExperience: [],
+  education: [],
   alert: {
     success: false,
     message: null,

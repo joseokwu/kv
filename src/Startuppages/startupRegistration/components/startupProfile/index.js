@@ -447,6 +447,7 @@ export const StartupProfile = () => {
                 className='custs ps-3'
                 value={phone}
                 onChange={setPhone}
+                MaxLength={17}
                 onBlur={formik.handleBlur}
               />
               {formik.touched.phoneNumber && !phone ? (

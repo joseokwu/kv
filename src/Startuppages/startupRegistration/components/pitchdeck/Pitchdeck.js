@@ -9,6 +9,7 @@ import {
   VideoWrapper,
 } from './pitch.styled'
 import DownloadIcon from '../../../../assets/icons/download.svg'
+import { useFormik } from 'formik'
 import RedFile from '../../../../assets/icons/redFile.svg'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
 import { useActivity } from '../../../../hooks/useBusiness'
@@ -19,12 +20,18 @@ import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/C
 import { toast } from 'react-hot-toast'
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
+import { updateFounderProfile } from '../../../../services'
 
 
 export const PitchDeck = () => {
+  const { stateAuth } = useAuth();
   const [loading, setLoading] = useState(false)
   const [nextloading, setNextLoading] = useState(false);
-  const { stateAuth } = useAuth();
+  const [opts, setOpts] = useState('')
+  const [upload, setUpload] = useState({
+    pitchDeckFile: stateAuth?.user?.pitchDeck?.pitchDeckFile,
+    pitchDeckVideo: stateAuth?.user?.pitchDeck?.pitchDeckVideo,
+  })
   
 
   const [fileInfo, setFile] = useState([
@@ -93,6 +100,59 @@ export const PitchDeck = () => {
 
   console.log(fileInfo)
 
+  const onSubmit = async(value) => {
+    let lastIndex;
+    let uploads = document.getElementsByTagName('input');
+    lastIndex = uploads.length;
+    console.log(uploads[lastIndex - 1])
+     try {
+     
+      const pitchDeck = {
+        type: 'pitchDeck',
+        accType: 'startup',
+        valuess: {
+          ...value
+        },
+        userId: stateAuth?.user?.userId
+      }
+      console.log(pitchDeck)
+
+      if (opts === 'next') {
+        setOpts(true)
+        let result = await updateFounderProfile(pitchDeck)
+
+        if (result?.success) {
+          toast.success('Pitch Deck' + '' + result?.message)
+          setOpts(false);
+          return changePath(path + 1)
+        }
+      }
+      setLoading(true);
+      let result = await updateFounderProfile(pitchDeck)
+
+      if (!result?.success) {
+        toast.error(result?.message || 'There was an error updating the pitchDeck')
+        setLoading(false);
+        return;
+      }
+      toast.success('Pitch Deck' + '' + result?.message)
+      setLoading(false);
+      return;
+     } catch (err) {
+       setLoading(false);
+       toast.error(err?.res?.data?.message || 'The was an error updating pitch deck')
+     }
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      pitchDeckFile: stateAuth?.user?.pitchDeck?.pitchDeckFile,
+      pitchDeckVideo: stateAuth?.user?.pitchDeck?.pitchDeckVideo,
+    },
+    validateOnBlur: true,
+    onSubmit: (value) => onSubmit(value),
+  })
+
   // const onSubmit = (value) => {
   //   setLoading(true)
   //   pitchDeck(value).then((res) => {
@@ -111,7 +171,7 @@ export const PitchDeck = () => {
         <h5> Pitch Deck </h5>
         <p>Let's get to know your startup</p>
       </HeaderPitch>
-      <form style={{ marginBottom: '4rem' }} onSubmit={handleSubmit}>
+      <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
         <FormWrapper>
           <div className="div">
             <span>Pitch Deck</span>
@@ -145,9 +205,10 @@ export const PitchDeck = () => {
                   </FileSize>
                   <input
                     type="file"
-                    name="infoFile"
+                    name="pitchDeckFile"
                     id="pitch-doc"
-                    onChange={handleChange}
+                    value={formik.values.pitchDeckFile}
+                    onChange={formik.handleChange}
                     hidden
                   />
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
@@ -158,6 +219,9 @@ export const PitchDeck = () => {
                 <div className="d-flex my-2">
                   <input
                     type="text"
+                    name="pitchDeckVideo"
+                    value={formik.values.pitchDeckVideo}
+                    onChange={formik.handleChange}
                     className="form-control youtube-input ps-3"
                     placeholder="Youtube link"
                   />
@@ -181,9 +245,10 @@ export const PitchDeck = () => {
                   </FileSize>
                   <input
                     type="file"
-                    name="videoFile"
+                    name="pitchDeckVideo"
                     id="pitch-docu"
-                    onChange={handleChange}
+                    value={formik.values.pitchDeckVideo}
+                    onChange={formik.handleChange}
                     hidden
                   />
                   <LabelButton for="pitch-docu">Upload Files</LabelButton>
@@ -242,17 +307,17 @@ export const PitchDeck = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-end">
-            <CustomButton className="mx-2" background="#00ADEF">
-              Save
+            <CustomButton type="submit" disabled={loading} className="mx-2" background="#00ADEF">
+              {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
             <div className="">
               <CustomButton
-                // onClick={handleSubmit}
+                onClick={() => setOpts('next')}
                 type="submit"
-                disabled={loading}
+                disabled={nextloading}
                 background="#2E3192"
               >
-                { loading ? <CircularLoader /> : 'Next'}
+                { nextloading ? <CircularLoader /> : 'Next'}
               </CustomButton>
             </div>
           </div>
