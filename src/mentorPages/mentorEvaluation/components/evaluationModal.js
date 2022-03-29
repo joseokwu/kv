@@ -41,7 +41,7 @@ export const EvaluationModal = ({ data = {} }) => {
           </p>
         </div>
 
-        <span onClick={() => push("/mentor/evaluation/evaluate#market_attractiveness")}>
+        <span onClick={() => push("/mentor/evaluation/view#Product")}>
           View profile
         </span>
         <div className="mb-4">

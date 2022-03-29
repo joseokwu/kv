@@ -52,12 +52,12 @@ const investorNavigators = [
     path: "/investor/schedule",
     icon: schedule,
   },
-  {
-    title: "Evaluation",
-    activator: "evaluation",
-    path: "/investor/evaluation",
-    icon: evaluation,
-  },
+  // {
+  //   title: "Evaluation",
+  //   activator: "evaluation",
+  //   path: "/investor/evaluation",
+  //   icon: evaluation,
+  // },
   {
     title: "Networking",
     activator: "networking",
@@ -135,7 +135,7 @@ export const Sidebar = () => {
                 <li key={i}>
                   <Link to={nav.path}>
                     <img src={nav.icon} alt="dash" />
-                    <p className={`${activateLink(nav.activator)} side-text`}>
+                    <p className={`${activateLink(nav.activator)} side_text`}>
                       {nav.title}
                     </p>
                   </Link>

@@ -394,3 +394,62 @@ const ApprovedModal = ({ data = {} }) => {
     </div>
   );
 };
+
+const ApplyModal = () => {
+  return (
+    <div className="applyModal px-4">
+      <section className="pt-2">
+        <button
+          type="button"
+          className="close close-founder-modal px-4 py-2"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </section>
+
+      <div className="mt-5">
+        {compImage.map((comp, i) => (
+          <img className="" key={i} src={comp.logo} alt="company logo" />
+        ))}
+      </div>
+      <div className="mt-3 d-flex justify-content-between">
+        {cardDataModal.map((data, i) => (
+          <div>
+            <h3 key={i}>{data.header}</h3>
+          </div>
+        ))}
+        <h6 className="mt-2">flutter.co</h6>
+      </div>
+      <div className="mb-4">
+        <Tag
+          className=""
+          name="Analytics"
+          bg="#F5FFDE"
+          color="#05C118"
+          fz="12px"
+        />
+      </div>
+      <div className="">
+        {compdetailModal.map((data, i) => (
+          <div>
+            <p key={i}>{data.detail}</p>
+          </div>
+        ))}
+      </div>
+      <div className="border-bottom pb-4">
+        {cardDataModal.map((data, i) => (
+          <div>
+            <h4 className="mt-5 mb-3">{data.subtitle}</h4>
+            <p key={i}>{data.body}</p>
+          </div>
+        ))}
+      </div>
+      <div className="d-flex justify-content-between my-5">
+        <button className="applyModalback">Back</button>
+        <button className="applyModalapply">Apply</button>
+      </div>
+    </div>
+  )
+}

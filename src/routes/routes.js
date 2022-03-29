@@ -214,8 +214,9 @@ const routes = [
     path: '/startup/registration',
     component: WithStartupRegistrationLayout(StartUpRegistration),
     exact: true,
-    protected: false,
+    protected: true,
     type: 'startup',
+
   },
 
   {
@@ -327,6 +328,15 @@ const routes = [
     protected: false,
     type: 'investor',
   },
+
+  // {
+  //   name: "Investor Evaluation",
+  //   path: "/investor/evaluation",
+  //   component: WithMainInvestorLayout(MentorEvaluation),
+  //   exact: true,
+  //   protected: false,
+  //   type: "investor",
+  // },
 
   {
     name: 'Investor Network',
