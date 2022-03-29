@@ -16,10 +16,14 @@ export const FundAsk = () => {
     { value: 'Fund 3', label: 'Fund 3' },
   ];
   const [showModal, setShowModal] = useState(false);
+  const [havePreviouslyFundraised, setHavePreviouslyFundraised] =
+    useState('no');
+  const [hasLeadInvestor, setHasLeadInvestor] = useState('no');
 
-  function btn(e) {
-    e.preventDefault();
-  }
+  // function btn(e) {
+  //   e.preventDefault();
+  //   setHavePreviouslyFundraised(e.target.dataset.id);
+  // }
 
   const onSubmit = (value) => {
     fundraising(value).then((res) => {
@@ -72,10 +76,24 @@ export const FundAsk = () => {
             <div className='form-group col-12'>
               <label>Have you fundraised before?*</label>
               <BntWrap>
-                <button className='me-3' onClick={btn}>
+                <button
+                  className={`me-3 ${
+                    havePreviouslyFundraised === 'yes' && 'active'
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setHavePreviouslyFundraised('yes');
+                  }}
+                >
                   Yes
                 </button>
-                <button className='' onClick={btn}>
+                <button
+                  className={havePreviouslyFundraised === 'no' && 'active'}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setHavePreviouslyFundraised('no');
+                  }}
+                >
                   No
                 </button>
               </BntWrap>
@@ -85,25 +103,33 @@ export const FundAsk = () => {
                 Which instrument would you prefer to use for your current
                 round?*
               </label>
-              <CustomSelect
-                id={'instrumentForRound'}
-                name={'instrumentForRound'}
-                options={optionsNumb}
-                className='cust'
-                // value={formik.value.instrumentForRound}
-                // onChange={(value) => formik.setFieldValue('instrumentForRound', value.value)}
-              />
+              <select
+                id='instrumentForRound'
+                name='instrumentForRound'
+                // options={optionsNumb}
+                className='cust extra'
+                value={formik.values.instrumentForRound}
+                onChange={formik.handleChange}
+              >
+                {optionsNumb.map((item, index) => {
+                  return <option key={index}>{item.label}</option>;
+                })}
+              </select>
             </div>
             <div className='form-group my-2 col-lg-6 col-12'>
               <label>Select your round?*</label>
-              <CustomSelect
+              <select
                 id={'numberOfRounds'}
                 name={'numberOfRounds'}
-                options={optionsNumb}
-                className='cust'
-                // value={formik.value.numberOfRounds}
-                // onChange={(value) => formik.setFieldValue('numberOfRounds', value.value)}
-              />
+                // options={optionsNumb}
+                className='cust extra'
+                value={formik.values.numberOfRounds}
+                onChange={formik.handleChange}
+              >
+                {optionsNumb.map((item, index) => {
+                  return <option key={index}>{item.label}</option>;
+                })}
+              </select>
             </div>
             <div className='form-group my-2 col-12'>
               <label>
@@ -121,7 +147,9 @@ export const FundAsk = () => {
               />
               {formik.touched.fundraisingAmount &&
               formik.errors.fundraisingAmount ? (
-                <label>{formik.errors.fundraisingAmount}</label>
+                <label className='error'>
+                  {formik.errors.fundraisingAmount}
+                </label>
               ) : null}
             </div>
             <div className='form-group my-2 col-12'>
@@ -137,7 +165,7 @@ export const FundAsk = () => {
                 onChange={formik.handleChange}
               />
               {formik.touched.dilution && formik.errors.dilution ? (
-                <label>{formik.errors.dilution}</label>
+                <label className='error'>{formik.errors.dilution}</label>
               ) : null}
             </div>
             <div className='form-group my-2 col-12'>
@@ -154,7 +182,9 @@ export const FundAsk = () => {
               />
               {formik.touched.preMoneyValuation &&
               formik.errors.preMoneyValuation ? (
-                <label>{formik.errors.preMoneyValuation}</label>
+                <label className='error'>
+                  {formik.errors.preMoneyValuation}
+                </label>
               ) : null}
             </div>
             <div className='form-group my-2 col-12'>
@@ -171,16 +201,30 @@ export const FundAsk = () => {
               />
               {formik.touched.postMoneyValuation &&
               formik.errors.postMoneyValuation ? (
-                <label>{formik.errors.postMoneyValuation}</label>
+                <label className='error'>
+                  {formik.errors.postMoneyValuation}
+                </label>
               ) : null}
             </div>
             <div className='form-group col-12'>
               <label> Do you have a lead investor for this round?* </label>
               <BntWrap>
-                <button className='me-3' onClick={btn}>
+                <button
+                  className={`me-3 ${hasLeadInvestor === 'yes' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setHasLeadInvestor('yes');
+                  }}
+                >
                   Yes
                 </button>
-                <button className='' onClick={btn}>
+                <button
+                  className={hasLeadInvestor === 'no' && 'active'}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setHasLeadInvestor('no');
+                  }}
+                >
                   No
                 </button>
               </BntWrap>

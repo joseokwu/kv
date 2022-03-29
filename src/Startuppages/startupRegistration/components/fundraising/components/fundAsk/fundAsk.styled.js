@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
 
 export const BodyWrapper = styled.div`
   margin-bottom: 10px;
@@ -59,7 +59,7 @@ export const BodyWrapper = styled.div`
 
   input {
     border: none;
-    background: #fafafc!important;
+    background: #fafafc !important;
     border-radius: 4px;
     width: 75%;
     margin-left: 8px;
@@ -81,7 +81,7 @@ export const BodyWrapper = styled.div`
 
   textarea {
     border: none;
-    background: #fafafc!important;
+    background: #fafafc !important;
     border-radius: 4px;
     width: 100%;
     margin-left: 8px;
@@ -111,6 +111,14 @@ export const BodyWrapper = styled.div`
     }
   }
 
+  .extra {
+    height: 2.4rem;
+  }
+
+  .error {
+    color: red;
+  }
+
   .custs {
     border: none;
     background: #f4f4f4;
@@ -123,7 +131,7 @@ export const BodyWrapper = styled.div`
       outline: 0;
     }
   }
-`
+`;
 
 export const BntWrap = styled.div`
   button {
@@ -135,12 +143,16 @@ export const BntWrap = styled.div`
     padding: 10px 15px;
     margin-top: 10px;
 
-    :focus {
+    /* :focus {
       background: #dcebff;
       color: #2e3192;
-    }
+    } */
   }
-`
+  .active {
+    background: #dcebff;
+    color: #2e3192;
+  }
+`;
 
 export const BoxBorder = styled.div`
   flex-direction: column;
@@ -158,4 +170,4 @@ export const BoxBorder = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
