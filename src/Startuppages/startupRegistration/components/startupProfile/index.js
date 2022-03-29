@@ -146,7 +146,7 @@ export const StartupProfile = () => {
   const formik = useFormik({
     initialValues: {
       logo: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
-      startupName: stateAuth?.user?.startUpProfile?.businessname ?? '',
+      startupName: stateAuth?.user?.businessname ?? '',
       elevatorPitch: stateAuth?.user?.startUpProfile?.elevatorPitch ?? '',
       brand: stateAuth?.user?.startUpProfile?.brand ?? '',
       yearFounded: startDate,
