@@ -20,3 +20,4 @@ export const GET_SIGNUP_STATUS = "GET_SIGNUP_STATUS";
 export const SET_SIGNUP_STATUS = "SET_SIGNUP_STATUS";
 export const DASH_VIEW = "DASH_VIEW";
 export const LOG_OUT = "LOG_OUT";
+export const ADD_WORK_EXPERIENCE = 'ADD_WORK_EXPERIENCE';

@@ -18,5 +18,6 @@ export  const INIT_STATE = {
        autoClose:false,
         action:false, 
       },
-      path:1
+      path:1,
+      workExperience:[]
 };

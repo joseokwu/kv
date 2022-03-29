@@ -48,9 +48,12 @@ export const TeamProfile = () => {
   );
   const [socialMedia, setSocialMedia] = useState({});
 
+ 
+
+
   const {
     changePath,
-    state: { path },
+    state: { path , workExperience},
   } = useActivity();
 
   const onChangeImage = (e) => {
@@ -291,8 +294,20 @@ export const TeamProfile = () => {
             <span>Work Experience</span>
           </div>
           <hr />
-          <WorkExperience />
-          <hr />
+
+                  {
+                    workExperience.length > 0 && workExperience.map((item , i) =>(
+                     
+                        <WorkExperience key={i} 
+                         position={item.position}
+                         country={item.country}
+                         description={item.description}
+                         title={item.title}  />
+                      
+                    ))
+                  }
+
+          
           <div>
             <span
               onClick={() => setShow(true)}
