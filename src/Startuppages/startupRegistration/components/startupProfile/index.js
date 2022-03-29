@@ -92,55 +92,52 @@ export const StartupProfile = () => {
   };
 
   const onSubmit = async (value) => {
-    let lastIndex;
-    let inputs = document.getElementsByTagName('input');
-    lastIndex = inputs.length;
-    console.log(inputs[lastIndex - 1]);
+  
 
-    // try {
-    //   const startupProfile = {
-    //     type: 'startUpProfile',
-    //     accType: 'startup',
-    //     values: {
-    //       ...value,
-    //       contactInfo: {
-    //         ...contacts,
-    //         phoneNumber: phone,
-    //       },
-    //       socialMedia,
-    //     },
-    //     userId: stateAuth?.user?.userId,
-    //   };
-    //   console.log(startupProfile);
-    //   if (opts === 'next') {
-    //     setOpts(true);
-    //     let result = await updateFounderProfile(startupProfile);
+    try {
+      const startupProfile = {
+        type: 'startUpProfile',
+        accType: 'startup',
+        values: {
+          ...value,
+          contactInfo: {
+            ...contacts,
+            phoneNumber: phone,
+          },
+          socialMedia,
+        },
+        userId: stateAuth?.user?.userId,
+      };
+      console.log(startupProfile);
+      if (opts === 'next') {
+        setOpts(true);
+        let result = await updateFounderProfile(startupProfile);
 
-    //     if (result?.success) {
-    //       toast.success('Profile' + ' ' + result?.message);
-    //       setOpts(false);
-    //       return changePath(path + 1);
-    //     }
-    //   }
-    //   setLoading(true);
-    //   let result = await updateFounderProfile(startupProfile);
+        if (result?.success) {
+          toast.success('Profile' + ' ' + result?.message);
+          setOpts(false);
+          return changePath(path + 1);
+        }
+      }
+      setLoading(true);
+      let result = await updateFounderProfile(startupProfile);
 
-    //   if (!result?.success) {
-    //     toast.error(
-    //       result?.message || 'There was an error in updating profile'
-    //     );
-    //     setLoading(false);
-    //     return;
-    //   }
-    //   toast.success('Profile' + ' ' + result?.message);
-    //   setLoading(false);
-    //   return;
-    // } catch (err) {
-    //   setLoading(false);
-    //   toast.error(
-    //     err?.response?.data?.message || 'There was an error in updating profile'
-    //   );
-    // }
+      if (!result?.success) {
+        toast.error(
+          result?.message || 'There was an error in updating profile'
+        );
+        setLoading(false);
+        return;
+      }
+      toast.success('Profile' + ' ' + result?.message);
+      setLoading(false);
+      return;
+    } catch (err) {
+      setLoading(false);
+      toast.error(
+        err?.response?.data?.message || 'There was an error in updating profile'
+      );
+    }
   };
 
   const formik = useFormik({
