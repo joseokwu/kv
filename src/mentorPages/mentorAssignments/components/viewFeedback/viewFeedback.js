@@ -7,12 +7,14 @@ import apple from '../../../../assets/icons/appleSmall.svg'
 import maindoc from '../../../../assets/images/mani-doc.svg'
 import pitchicon from '../../../../assets/icons/pitchd.svg'
 import { FeedbackModal } from '../feedbackModal'
+import { useHistory } from 'react-router'
 
 export const MentorViewFeedback = ({ history }) => {
   const {
     goBack,
     location: { hash },
   } = history
+  const { push } = useHistory;
 
   const renderContent = () => {
     switch (hash.replaceAll('%20', '')) {
@@ -35,7 +37,7 @@ export const MentorViewFeedback = ({ history }) => {
         <section
           className="d-flex align-items-center"
           role="button"
-          onClick={goBack}
+          onClick={() => history.push('/mentor/assignments')}
         >
           <img src={left} alt="left" style={{ transform: 'rotate(180deg)' }} />
           <span className="ml-2 bread-start">Go Back</span>
@@ -57,7 +59,7 @@ const SubmittedFeedback = () => {
 
   const contentRef = useRef(null)
 
-  const feedArr = [1,2,3]
+  const feedArr = [1]
 
   useEffect(() => {
     contentRef.current.style.maxHeight = active

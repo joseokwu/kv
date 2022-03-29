@@ -44,7 +44,7 @@ export const UpComing = ({ data = [] }) => {
             </div>
 
             <div className="mt-4 mb-2 foot d-flex justify-content-between">
-              <button>View Details</button>
+              <button onClick={() => history.push("/startup/events")}>View Details</button>
               <span className="mx-4">
                 {images.map((data, i) => (
                   <img className="mx-n2" key={i} src={data.icon} />
