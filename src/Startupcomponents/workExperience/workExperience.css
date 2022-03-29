@@ -1,0 +1,19 @@
+.main {
+  display: grid;
+  grid-template-columns: 0.1fr 0.8fr 0.1fr;
+}
+h5 {
+  margin-bottom: 0.85rem;
+}
+h6 {
+  color: #828282;
+}
+.date {
+  margin-top: 2rem;
+}
+.position {
+  margin-bottom: 0.85rem;
+}
+.title {
+  margin-bottom: 0.85rem;
+}
