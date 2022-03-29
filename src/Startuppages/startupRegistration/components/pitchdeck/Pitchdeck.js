@@ -86,15 +86,15 @@ export const PitchDeck = () => {
       ],
       profileId: '61d5be4fb801676adafcf4f4',
     }
-    setLoading(true)
-    pitchDeck(value).then((res) => {
-      if (res?.message) {
-        console.log(res)
-        toast.success(res?.message)
-        setLoading(false)
-        next()
-      }
-    })
+    
+    next();
+
+    // pitchDeck(value).then((res) => {
+    //   if (res?.message) {
+    //     console.log(res)
+    //     toast.success(res?.message)  
+    //   }
+    // })
       console.log(newFile)
   }
 

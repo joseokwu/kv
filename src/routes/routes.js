@@ -216,7 +216,6 @@ const routes = [
     exact: true,
     protected: false,
     type: 'startup',
-
   },
 
   {

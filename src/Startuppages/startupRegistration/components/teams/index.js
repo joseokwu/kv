@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   HeaderTeam,
   ImageWrapper,
@@ -26,7 +26,7 @@ import { team } from './../../../../services/startUpReg'
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
 import { toast } from 'react-hot-toast'
 import { CoFounder } from './coFounder'
-import { LargeModal } from '../../../../Startupcomponents'
+import { LargeModal, WorkExperience } from '../../../../Startupcomponents'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../../hooks/useAuth'
 import { updateFounderProfile } from '../../../../services'
@@ -37,7 +37,6 @@ const { Option } = Select
 export const TeamProfile = () => {
   const { stateAuth } = useAuth()
   const [disImg, setImg] = useState(null)
-  const { addEdu } = useActivity();
 
   const [show, setShow] = useState(false)
   const [showEducation, setShowEducation] = useState(false)
@@ -47,75 +46,78 @@ export const TeamProfile = () => {
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
   const [loading, setLoading] = useState(false)
-  const [nextLoading, setnextLoading] = useState(false)
+  const [nextLoading, setNextLoading] = useState(false)
   const [opts, setOpts] = useState('')
   const [phone, setPhone] = useState(
     stateAuth?.user?.team?.founderInfo?.mobile_number,
   )
-  const [contacts, setContacts] = useState({
-    email: stateAuth?.user?.team?.founderInfo?.email,
-    country: stateAuth?.user?.team?.founderInfo?.country,
-    state: stateAuth?.user?.team?.founderInfo?.state,
-    city: stateAuth?.user?.team?.founderInfo?.city,
-  })
-  const [socialMedia, setSocialMedia] = useState({
-    linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
-    twitter: stateAuth?.user?.team?.socialMedia?.twitter,
-    website: stateAuth?.user?.team?.socialMedia?.website,
-  })
-
+  // const [contacts, setContacts] = useState({
+  //   email: stateAuth?.user?.team?.founderInfo?.email,
+  //   country: stateAuth?.user?.team?.founderInfo?.country,
+  //   state: stateAuth?.user?.team?.founderInfo?.state,
+  //   city: stateAuth?.user?.team?.founderInfo?.city,
+  // })
+  // const [socialMedia, setSocialMedia] = useState({
+  //   linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
+  //   twitter: stateAuth?.user?.team?.socialMedia?.twitter,
+  //   website: stateAuth?.user?.team?.socialMedia?.website,
+  // })
+  const [editIndex, setEditIndex] = useState();
   const [coFounder, setCoFounder] = useState('')
 
   const {
     changePath,
-    state: { path },
-  } = useActivity()
+    setWorkExperience,
+    addEducation,
+
+    state: { path, workExperience, },
+  } = useActivity();
 
   const onChangeImage = (e) => {
-    const { files } = e.target
+    const { files } = e.target;
 
     if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]))
+      setImg(URL.createObjectURL(files[0]));
     }
   }
 
-  const onChange = (e) => {
-    setContacts({ ...contacts, [e.target.name]: e.target.value })
-  }
+  // const onChange = (e) => {
+  //   setContacts({ ...contacts, [e.target.name]: e.target.value })
+  // }
 
-  let colors = []
+  let colors = [];
 
   for (let i = 0; i < 20; i++) {
-    let value2 = Math.floor(Math.random() * 237897).toString()
+    let value2 = Math.floor(Math.random() * 237897).toString();
 
     if (value2.length === 6) {
-      colors.push(value2)
+      colors.push(value2);
     }
   }
 
-  const onChangeMedia = (e) => {
-    setSocialMedia({ ...socialMedia, [e.target.name]: e.target.value })
-  }
+  // const onChangeMedia = (e) => {
+  //   setSocialMedia({ ...socialMedia, [e.target.name]: e.target.value })
+  // }
 
   const back = () => {
-    changePath(path - 1)
-  }
+    changePath(path - 1);
+  };
 
   const next = () => {
-    changePath(path + 1)
-  }
+    changePath(path + 1);
+  };
 
-  const children = []
+  const children = [];
   for (let i = 0; i < skill.length; i++) {
-    children.push(<Option key={i}>{skill[i]}</Option>)
+    children.push(<Option key={i}>{skill[i]}</Option>);
   }
 
   function handleChange(value) {
-    console.log(`selected ${value}`)
+    console.log(`selected ${value}`);
   }
 
   function btn(e) {
-    e.preventDefault()
+    e.preventDefault();
   }
 
   const onSubmit = async (value) => {
@@ -129,11 +131,6 @@ export const TeamProfile = () => {
         accType: 'startup',
         values: {
           ...value,
-          founderInfo: {
-            ...contacts,
-            mobile_number: phone,
-          },
-          socialMedia,
         },
         userId: stateAuth?.user?.userId,
       }
@@ -174,24 +171,65 @@ export const TeamProfile = () => {
     // })
   }
 
+  // const formik = useFormik({
+  //   initialValues: {
+  //     avatar:
+  //       'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
+  //     briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
+  //     firstName: stateAuth?.user?.team?.firstName,
+  //     lastName: stateAuth?.user?.team?.lastName,
+
+
   const formik = useFormik({
     initialValues: {
-      avatar:
-        'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
-      briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
-      firstName: stateAuth?.user?.team?.firstName,
-      lastName: stateAuth?.user?.team?.lastName,
+      avatar: '',
+      briefIntroduction: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      dob: startDate,
+      country: '',
+      state: '',
+      city: '',
+      // mobile_number: phone,
       skills: [],
       experience: [],
       education: [],
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
-  })
+  });
+  const handleWorkDetails = ({
+    title,
+    location,
+    position,
+    description,
+    startDate,
+    endDate,
+  }) => {
+    setWorkExperience({
+      title,
+      location,
+      position,
+      description,
+      startDate,
+      endDate,
+    });
+  };
 
   return (
     <>
-      {show ? <TeamModal handleClose={setShow} /> : <span></span>}
+      {console.log(workExperience)}
+      {show ? (
+        <TeamModal
+          handleClose={setShow}
+          handleWorkDetails={handleWorkDetails}
+          editIndex={editIndex}
+          workExperience={workExperience}
+        />
+      ) : (
+        <span></span>
+      )}
       {showEducation ? (
         <EducationModal handleClose={setShowEducation} />
       ) : (
@@ -207,12 +245,12 @@ export const TeamProfile = () => {
 
       <HeaderTeam>
         <h5> Team</h5>
-        <p className="text-nowrap">Let’s you introduce your Co-Founder(s)</p>
+        <p className='text-nowrap'>Let’s you introduce your Co-Founder(s)</p>
       </HeaderTeam>
 
       <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
-        <FormWrapper height="70%">
-          <div className="div">
+        <FormWrapper height='70%'>
+          <div className='div'>
             <span>Founder</span>
             <p>A brief profile of founders</p>
           </div>
@@ -223,20 +261,20 @@ export const TeamProfile = () => {
                 <UserOutlined />
               ) : (
                 <img
-                  className=""
+                  className=''
                   src={disImg}
                   style={{
                     borderRadius: '70px',
                     width: '90px',
                     height: '90px',
                   }}
-                  alt=""
+                  alt=''
                 />
               )}
             </ImageWrapper>
 
-            <InputWrapper for="found">
-              <input type="file" onChange={onChangeImage} id="found" hidden />
+            <InputWrapper for='found'>
+              <input type='file' onChange={onChangeImage} id='found' hidden />
               <PlusOutlined style={{ color: '#ffffff' }} />
             </InputWrapper>
           </div>
@@ -250,97 +288,97 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.briefIntroduction}
-                type="text"
-                name="briefIntroduction"
-                placeholder="Enter a brief bio about yourself"
-                className="form-control ps-3"
+                type='text'
+                name='briefIntroduction'
+                placeholder='Enter a brief bio about yourself'
+                className='form-control ps-3'
               />
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>First Name *</label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.firstName}
-                type="text"
-                name="firstName"
-                placeholder="Enter first name"
-                className="form-control ps-3"
+                type='text'
+                name='firstName'
+                placeholder='Enter first name'
+                className='form-control ps-3'
               />
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Last Name *</label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.lastName}
-                type="text"
-                name="lastName"
-                placeholder="Enter last name"
-                className="form-control ps-3"
+                type='text'
+                name='lastName'
+                placeholder='Enter last name'
+                className='form-control ps-3'
               />
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Email *</label>
               <input
-                onChange={onChange}
-                value={contacts.email}
-                type="text"
-                name="email"
-                placeholder="Enter email address"
-                className="form-control ps-3"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                type='text'
+                name='email'
+                placeholder='Enter email address'
+                className='form-control ps-3'
               />
             </div>
-            <div className="form-group  col-lg-6 col-12">
+            <div className='form-group  col-lg-6 col-12'>
               <label>Date of Birth *</label>
               <DatePicker
-                className="custs p-2"
+                className='custs p-2'
                 style={{ padding: '15px' }}
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
               />
             </div>
-            <div className="form-group col-lg-4 col-12">
+            <div className='form-group col-lg-4 col-12'>
               <label>Country *</label>
               <input
-                onChange={onChange}
-                value={contacts.country}
-                type="text"
-                name="country"
-                placeholder="Enter your country"
-                className="form-control ps-3"
+                onChange={formik.handleChange}
+                value={formik.values.country}
+                type='text'
+                name='country'
+                placeholder='Enter your country'
+                className='form-control ps-3'
               />
             </div>
-            <div className="form-group col-lg-4 col-12">
+            <div className='form-group col-lg-4 col-12'>
               <label>State *</label>
               <input
-                onChange={onChange}
-                value={contacts.state}
-                type="text"
-                name="state"
-                placeholder="Enter your state"
-                className="form-control ps-3"
+                onChange={formik.handleChange}
+                value={formik.values.state}
+                type='text'
+                name='state'
+                placeholder='Enter your state'
+                className='form-control ps-3'
               />
             </div>
-            <div className="form-group col-lg-4 col-12">
+            <div className='form-group col-lg-4 col-12'>
               <label>City *</label>
               <input
-                onChange={onChange}
-                value={contacts.city}
-                type="text"
-                name="city"
-                placeholder="Enter your city"
-                className="form-control ps-3"
+                onChange={formik.handleChange}
+                value={formik.values.city}
+                type='text'
+                name='city'
+                placeholder='Enter your city'
+                className='form-control ps-3'
               />
             </div>
-            <div className="form-group  col-12 ">
+            <div className='form-group  col-12 '>
               <label>Mobile Number *</label>
               <PhoneInput
                 international
-                name="mobile_number"
+                name='mobile_number'
                 countryCallingCodeEditable={true}
                 className="custs w-lg-50 ps-3"
                 value={
-                  stateAuth?.user?.team?.founderInfo?.mobile_number
-                    ? stateAuth?.user?.team?.founderInfo?.mobile_number
+                  stateAuth?.user?.team?.mobile_number
+                    ? stateAuth?.user?.team?.mobile_number
                     : phone
                 }
                 onChange={setPhone}
@@ -349,10 +387,24 @@ export const TeamProfile = () => {
             </div>
           </div>
         </FormWrapper>
-        <FormWrapper height="80%">
-          <div className="div">
+        <FormWrapper height='80%'>
+          <div className='div'>
             <span>Work Experience</span>
           </div>
+          <hr />
+          {workExperience.length > 0 &&
+            workExperience.map((item, index) => {
+              return (
+                <WorkExperience
+                  key={index}
+                  {...item}
+                  showTeamModal={() => setShow(true)}
+                  setEditIndex={setEditIndex}
+                  id={index}
+                />
+              );
+            })}
+
           <hr />
           <div>
             <span
@@ -369,8 +421,8 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-        <FormWrapper height="70%">
-          <div className="div">
+        <FormWrapper height='70%'>
+          <div className='div'>
             <span>Education</span>
           </div>
           <hr />
@@ -389,18 +441,18 @@ export const TeamProfile = () => {
           </span>
         </FormWrapper>
 
-        <FormWrapper height="70%">
-          <div className="div">
+        <FormWrapper height='70%'>
+          <div className='div'>
             <span>Skills</span>
           </div>
           <hr />
 
-          <div className="form-group">
+          <div className='form-group'>
             <div>
               <label>What are your skills*</label>
             </div>
             <Select
-              mode="multiple"
+              mode='multiple'
               allowClear
               style={{ width: '100%', color: 'red' }}
               placeholder="Please click to select"
@@ -413,58 +465,58 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-        <FormWrapper height="70%">
-          <div className="div border-bottom pb-3">
+        <FormWrapper height='70%'>
+          <div className='div border-bottom pb-3'>
             <span>Web & Social Media</span>
           </div>
-          <div className="row">
-            <div className="form-group col-lg-6 col-12">
+          <div className='row'>
+            <div className='form-group col-lg-6 col-12'>
               <label>Linkedin*</label>
               <input
-                onChange={onChangeMedia}
-                value={socialMedia.linkedIn}
-                type="text"
-                name="linkedIn"
-                placeholder="Enter Linkdin link"
-                className="form-control ps-3"
+                onChange={formik.handleChange}
+                value={formik.values.linkedIn}
+                type='text'
+                name='linkedIn'
+                placeholder='Enter Linkdin link'
+                className='form-control ps-3'
               />
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Twitter*</label>
               <input
-                onChange={onChangeMedia}
-                value={socialMedia.twitter}
-                type="text"
-                name="twitter"
-                placeholder="Enter Twitter link"
-                className="form-control ps-3"
+                onChange={formik.handleChange}
+                value={formik.values.twitter}
+                type='text'
+                name='twitter'
+                placeholder='Enter Twitter link'
+                className='form-control ps-3'
               />
             </div>
 
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Website*</label>
               <input
-                onChange={onChangeMedia}
-                value={socialMedia.website}
-                type="text"
-                name="website"
-                placeholder="Enter website"
-                className="form-control ps-3"
+                onChange={formik.handleChange}
+                value={formik.values.website}
+                type='text'
+                name='website'
+                placeholder='Enter website'
+                className='form-control ps-3'
               />
             </div>
           </div>
         </FormWrapper>
 
-        <FormWrapper height="70%">
-          <div className="div border-bottom pb-2">
+        <FormWrapper height='70%'>
+          <div className='div border-bottom pb-2'>
             <span>Co-Founders</span>
-            <p className="pt-3">Create a profile for your Co-Founders</p>
+            <p className='pt-3'>Create a profile for your Co-Founders</p>
           </div>
 
-          <div className="mt-4">
+          <div className='mt-4'>
             <label>Do you have Co-Founders?*</label>
 
-            <div className="d-flex">
+            <div className='d-flex'>
               <BntWrap>
                 <button
                   className={`me-3 ${coFounder === 'yes' && 'active'}`}
@@ -495,10 +547,10 @@ export const TeamProfile = () => {
                   onClick={() => setShowModal(true)}
                 >
                   <Tag
-                    name="+ Add Co-founder"
-                    color="#4F4F4F"
-                    bg="rgba(183, 218, 231, 0.5"
-                    padding="8px 14px"
+                    name='+ Add Co-founder'
+                    color='#4F4F4F'
+                    bg='rgba(183, 218, 231, 0.5'
+                    padding='8px 14px'
                   />
                 </div>
               </div>
@@ -506,20 +558,20 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-        <FormWrapper height="70%">
-          <div className="div border-bottom pb-3">
+        <FormWrapper height='70%'>
+          <div className='div border-bottom pb-3'>
             <span>Invite Team Members</span>
-            <p className="pt-3">Key team members</p>
+            <p className='pt-3'>Key team members</p>
           </div>
 
-          <div className="form-group mt-5 mb-4">
+          <div className='form-group mt-5 mb-4'>
             <label>
               Invite a team member that can benefit from knight venture
             </label>
             <input
-              type="text"
-              className="form-control my-2 ps-3"
-              placeholder="Enter email address"
+              type='text'
+              className='form-control my-2 ps-3'
+              placeholder='Enter email address'
             />
           </div>
           <div className="my-3 mx-3">
@@ -530,9 +582,9 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-        <div className="row ">
-          <div className="col-3">
-            <CustomButton className="" background="#D0D0D1" onClick={back}>
+        <div className='row '>
+          <div className='col-3'>
+            <CustomButton className='' background='#D0D0D1' onClick={back}>
               Back
             </CustomButton>
           </div>

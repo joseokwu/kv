@@ -66,6 +66,33 @@ export const FundRaising = () => {
     changePath(path + 1);
   };
 
+  const forwardHash = () => {
+    if (hash === '#Funding Ask' || hash === '#Funding%20Ask') {
+      return '#Fund Utilization';
+    } else if (hash === '#Fund Utilization') {
+      return '#Cap Table';
+    } else if (hash === '#Cap Table') {
+      return '#Previous Round';
+    } else if (hash === '#Previous Round') {
+      return '#Financial Projection';
+    }
+  };
+
+  const backwardHash = (e) => {
+    e.preventDefault();
+    if (hash === '#Funding Ask') {
+      return back();
+    } else if (hash === '#Fund Utilization') {
+      return history.push('#Funding Ask');
+    } else if (hash === '#Cap Table') {
+      return history.push('#Fund Utilization');
+    } else if (hash === '#Previous Round') {
+      return history.push('#Cap Table');
+    } else if (hash === '#Financial Projection') {
+      return history.push('#Previous Round');
+    }
+  };
+
   return (
     <>
       <HeaderFund>
@@ -87,29 +114,54 @@ export const FundRaising = () => {
             have questions, please reach out to privacy@knightventures.com
           </p>
         </Terms>
-
+        {console.log(hash)}
         <div className='row mt-4'>
-          {/* <div className="col-3">
-            <CustomButton className="" background="#D0D0D1" onClick={back}>
+          <div className='col-3'>
+            <CustomButton
+              className=''
+              background='#D0D0D1'
+              onClick={backwardHash}
+            >
               Back
             </CustomButton>
           </div>
-          <div className="col-9 d-flex justify-content-lg-end">
-            <CustomButton className="" background="#00ADEF">
-              Save
-            </CustomButton>
-            <OutlineButton
-              onClick={() => history.push('/startup/dashboard')}
-              className="ms-2"
-              style={{ marginRight: '5rem' }}
-              background="none"
-            >
-              Submit
-            </OutlineButton>
-           
-          </div> */}
+          <div className='col-9 d-flex justify-content-lg-end'>
+            {hash === '#Financial Projection' ? (
+              <>
+                <CustomButton className='' background='#00ADEF'>
+                  Save
+                </CustomButton>
+                <OutlineButton
+                  onClick={() => history.push('/startup/dashboard')}
+                  className='ms-2'
+                  style={{ marginRight: '5rem' }}
+                  background='none'
+                >
+                  Submit
+                </OutlineButton>
+              </>
+            ) : (
+              <OutlineButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  history.push(forwardHash());
+                }}
+                className='ms-2'
+                style={{ marginRight: '5rem' }}
+                background='none'
+              >
+                Next
+              </OutlineButton>
+            )}
+          </div>
         </div>
       </form>
     </>
   );
 };
+
+// My responsibility as the product lead is to ensure the success of our
+//           product team. As a B2B product team, we help our clients realize their
+//           product development goals. I work with the design and engineering
+//           teams to craft and develop cutting edge software that meets market
+//           standards.

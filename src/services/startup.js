@@ -60,7 +60,7 @@ export const getStartupProfile = async () => {
 export const getStartupFounderProfile = async () => {
   try {
     const res = await request.post("startup/founder-profile");
-
+    console.log(res?.data)
     return res?.data;
   } catch (err) {
     throw err;
