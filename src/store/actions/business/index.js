@@ -5,7 +5,8 @@ import {
     CHANGE_PAGE,
     SHOW_EVENT,
     GET_EVENTS_FAILED,
-    GET_EVENTS_SUCCESS
+    GET_EVENTS_SUCCESS,
+    ADD_EDUCATION
   } from '../actions.types';
 
 import { getEvents } from '../../../services/events';
@@ -45,5 +46,12 @@ export const showDEventAction = ()=> (dispatch) => {
 
   dispatch({
     type:SHOW_EVENT,
+  })
+}
+
+export const addEducation = (value) => (dispatch) => {
+  dispatch({
+    type: ADD_EDUCATION,
+    payload: value
   })
 }

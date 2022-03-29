@@ -1,6 +1,6 @@
  
 import { useSelector, useDispatch } from 'react-redux';
-import { changeDPath, showDEventAction } from '../store/actions/business';
+import { changeDPath, showDEventAction, addEducation } from '../store/actions/business';
 import {useAuth } from './useAuth';
 
 export const useActivity = () => {
@@ -20,10 +20,15 @@ export const useActivity = () => {
         dispatch(showDEventAction())
     }
 
+    const addEdu = (value) => {
+        dispatch(addEducation (value))
+    }
+
 
     return {
         state,
         changePath,
-        showEventAction
+        showEventAction,
+        addEdu
     };
 }

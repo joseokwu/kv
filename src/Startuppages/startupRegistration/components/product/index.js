@@ -18,6 +18,8 @@ import {
   LabelButton,
 } from '../pitchdeck/pitch.styled'
 import DownloadIcon from '../../../../assets/icons/download.svg'
+import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
+import { useFormik } from 'formik'
 
 export const Product = () => {
   const  { stateAuth } = useAuth();
@@ -25,8 +27,10 @@ export const Product = () => {
   const [nextLoading, setnextLoading] = useState(false);
   const [opts, setOpts] = useState('')
   const [productInfo, setProductInfo] = useState({
-    product: stateAuth?.user?.product?.product,
-    market: stateAuth?.user?.product?.market,
+    description: stateAuth?.user?.productService?.description ?? '',
+    competitiveEdge: stateAuth?.user?.productService?.competitiveEdge ?? '',
+    youtubeDemoUrl: stateAuth?.user?.productService?.youtubeDemoUrl ?? '',
+    files: stateAuth?.user?.productService?.files ?? '',
   })
 
   const onChange = (e) => {
@@ -75,19 +79,72 @@ export const Product = () => {
           url: fileInfo.file?.name,
         },
       ],
-      // profileId: '61d5be4fb801676adafcf4f4',
+      profileId: '61d5be4fb801676adafcf4f4',
     }
-    setLoading(true)
-    product(value).then((res) => {
-      if (res?.message) {
-        console.log(res)
-        toast.success(res?.message)
-        setLoading(false)
-        next()
-      }
-    })
-      console.log(newFile)
+    // setLoading(true)
+    // product(value).then((res) => {
+    //   if (res?.message) {
+    //     console.log(res)
+    //     toast.success(res?.message)
+    //     setLoading(false)
+    //     next()
+    //   }
+    // })
+    //   console.log(newFile)
   }
+
+  const onSubmit = async (value) => {
+    let lastIndex;
+    let inputs = document.getElementsByTagName('input');
+    lastIndex = inputs.length;
+    console.log(inputs[lastIndex - 1])
+    try {
+      const product = {
+        type: 'product',
+        accType: 'startup',
+        values: {
+          ...value
+        },
+        userId:stateAuth?.user?.userId
+      }
+      console.log(product)
+      if (opts === 'next') {
+        setOpts(true)
+        let result = await updateFounderProfile(product)
+
+        if (result?.success) {
+          toast.success('Product' + '' + result?.message)
+          setOpts(false);
+          return changePath(path + 1)
+        }
+      }
+      setLoading(true);
+      let result = await updateFounderProfile(product)
+
+      if(!result?.success) {
+        toast.error(result?.message || 'There was an error in updating product')
+        setLoading(false);
+        return;
+      }
+      toast.success('Product' + '' + result?.message)
+      setLoading(false);
+      return;
+      } catch (err) {
+        setLoading(false);
+        toast.error(err?.res?.data?.message || 'There was an error updating product')
+      }
+    }
+
+    const formik = useFormik({
+      initialValues: {
+        description: stateAuth?.user?.productService?.description ?? '',
+        competitiveEdge: stateAuth?.user?.productService?.competitiveEdge ?? '',
+        youtubeDemoUrl: stateAuth?.user?.productService?.youtubeDemoUrl ?? '',
+        files: stateAuth?.user?.productService?.files ?? '',
+      },
+      validateOnBlur: true,
+      onSubmit: (value) => onSubmit(value),
+    })
 
   return (
     <>
@@ -95,7 +152,7 @@ export const Product = () => {
         <h5 className="text-nowrap"> Product / Services </h5>
         <p className="text-nowrap">Let's help you explain your product</p>
       </HeaderProduct>
-      <form style={{ marginBottom: '4rem' }} onSubmit={handleSubmit}>
+      <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
         <FormWrapper>
           <div className="div">
             <span>Product / Service Description</span>
@@ -114,7 +171,10 @@ export const Product = () => {
                 <textarea
                   cols="5"
                   rows="5"
-                  classNam="form-control ps-3"
+                  name="description"
+                  className="form-control ps-3"
+                  onChange={formik.handleChange}
+                  value={formik.values.description}
                   placeholder="Enter Brief info about your product"
                 ></textarea>
               </div>
@@ -129,6 +189,9 @@ export const Product = () => {
                 <textarea
                   cols="5"
                   rows="5"
+                  name="competitiveEdge"
+                  onChange={formik.handleChange}
+                  value={formik.values.competitiveEdge}
                   className="form-control ps-3"
                   placeholder="Enter your uniqueness "
                 />
@@ -139,6 +202,9 @@ export const Product = () => {
               <div className="d-flex my-2">
                 <input
                   type="text"
+                  name="youtubeDemoUrl"
+                  onChange={formik.handleChange}
+                  value={formik.values.youtubeDemoUrl}
                   className="form-control youtube-input ps-3"
                   placeholder="Youtube link"
                 />
@@ -149,7 +215,7 @@ export const Product = () => {
                 <FileText>Drag & Drop</FileText>
                 <FileText>Drag files or click here to upload </FileText>
                 <FileSize> {'(Max. File size 5mb)'} </FileSize>
-                <input type="file" id="pitch-doc" hidden />
+                <input name="files" onChange={onChange} value={productInfo.files} type="file" id="pitch-doc" hidden />
                 <LabelButton for="pitch-doc">Upload Files</LabelButton>
               </FileWrapper>
             </div>
@@ -186,15 +252,11 @@ export const Product = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-lg-end">
-            <CustomButton className="mx-2" background="#00ADEF">
-              Save
+            <CustomButton type="submit" disabled={loading} className="mx-2" background="#00ADEF">
+              { loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
-            <CustomButton
-              onClick={next}
-              // style={{ marginLeft: '0.5rem', marginRight: '7rem' }}
-              background="#2E3192"
-            >
-              Next
+            <CustomButton type="submit" disabled={nextLoading} onClick={() => setOpts('next')} background="#2E3192">
+              { nextLoading ? <CircularLoader /> : 'Next'}
             </CustomButton>
           </div>
         </div>

@@ -5,6 +5,7 @@ import {
   InputWrapper,
   FormWrapper,
   BntWrap,
+  Education
 } from './teams.styled'
 
 import { UserOutlined, PlusOutlined } from '@ant-design/icons'
@@ -26,17 +27,17 @@ import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/Cir
 import { toast } from 'react-hot-toast'
 import { CoFounder } from './coFounder'
 import { LargeModal } from '../../../../Startupcomponents'
-import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../../../hooks/useAuth';
+import { useHistory } from 'react-router-dom'
+import { useAuth } from '../../../../hooks/useAuth'
 import { updateFounderProfile } from '../../../../services'
-
+import logo from '../../../../assets/images/edublue.svg'
 
 const { Option } = Select
 
 export const TeamProfile = () => {
-
-  const  { stateAuth } = useAuth();
+  const { stateAuth } = useAuth()
   const [disImg, setImg] = useState(null)
+  const { addEdu } = useActivity();
 
   const [show, setShow] = useState(false)
   const [showEducation, setShowEducation] = useState(false)
@@ -46,9 +47,11 @@ export const TeamProfile = () => {
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
   const [loading, setLoading] = useState(false)
-  const [nextLoading, setnextLoading] = useState(false);
-  const [opts , setOpts] = useState('')
-  const [phone, setPhone] = useState(stateAuth?.user?.team?.founderInfo?.mobile_number)
+  const [nextLoading, setnextLoading] = useState(false)
+  const [opts, setOpts] = useState('')
+  const [phone, setPhone] = useState(
+    stateAuth?.user?.team?.founderInfo?.mobile_number,
+  )
   const [contacts, setContacts] = useState({
     email: stateAuth?.user?.team?.founderInfo?.email,
     country: stateAuth?.user?.team?.founderInfo?.country,
@@ -56,12 +59,12 @@ export const TeamProfile = () => {
     city: stateAuth?.user?.team?.founderInfo?.city,
   })
   const [socialMedia, setSocialMedia] = useState({
-  linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
-  twitter: stateAuth?.user?.team?.socialMedia?.twitter,
-  website: stateAuth?.user?.team?.socialMedia?.website
-})
+    linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
+    twitter: stateAuth?.user?.team?.socialMedia?.twitter,
+    website: stateAuth?.user?.team?.socialMedia?.website,
+  })
 
-const [coFounder, setCoFounder] = useState('');
+  const [coFounder, setCoFounder] = useState('')
 
   const {
     changePath,
@@ -76,8 +79,8 @@ const [coFounder, setCoFounder] = useState('');
     }
   }
 
-  const onChange = (e) =>{
-    setContacts({...contacts , [e.target.name] : e.target.value })
+  const onChange = (e) => {
+    setContacts({ ...contacts, [e.target.name]: e.target.value })
   }
 
   let colors = []
@@ -90,8 +93,8 @@ const [coFounder, setCoFounder] = useState('');
     }
   }
 
-  const onChangeMedia = (e) =>{
-    setSocialMedia({...socialMedia , [e.target.name]: e.target.value })
+  const onChangeMedia = (e) => {
+    setSocialMedia({ ...socialMedia, [e.target.name]: e.target.value })
   }
 
   const back = () => {
@@ -115,10 +118,10 @@ const [coFounder, setCoFounder] = useState('');
     e.preventDefault()
   }
 
-  const onSubmit = async(value) => {
-    let lastIndex;
-    let inputs = document.getElementsByTagName('input');
-    lastIndex = inputs.length;
+  const onSubmit = async (value) => {
+    let lastIndex
+    let inputs = document.getElementsByTagName('input')
+    lastIndex = inputs.length
     console.log(inputs[lastIndex - 1])
     try {
       const team = {
@@ -128,36 +131,36 @@ const [coFounder, setCoFounder] = useState('');
           ...value,
           founderInfo: {
             ...contacts,
-            mobile_number: phone
+            mobile_number: phone,
           },
-          socialMedia
-      },
-      userId:stateAuth?.user?.userId
-    }
-    console.log(team)
-    if (opts === 'next') {
-      setOpts(true)
+          socialMedia,
+        },
+        userId: stateAuth?.user?.userId,
+      }
+      console.log(team)
+      if (opts === 'next') {
+        setOpts(true)
+        let result = await updateFounderProfile(team)
+
+        if (result?.success) {
+          toast.success('Team' + '' + result?.message)
+          setOpts(false)
+          return changePath(path + 1)
+        }
+      }
+      setLoading(true)
       let result = await updateFounderProfile(team)
 
-      if (result?.success) {
-        toast.success('Team' + '' + result?.message)
-        setOpts(false);
-        return changePath(path + 1)
+      if (!result?.success) {
+        toast.error(result?.message || 'There was an error in updating team')
+        setLoading(false)
+        return
       }
-    }
-    setLoading(true);
-    let result = await updateFounderProfile(team)
-
-    if (!result?.success) {
-      toast.error(result?.message || 'There was an error in updating team')
-      setLoading(false);
-      return;
-    }
-    toast.success('Team' + '' + result?.message)
-    setLoading(false);
-    return;
+      toast.success('Team' + '' + result?.message)
+      setLoading(false)
+      return
     } catch (err) {
-      setLoading(false);
+      setLoading(false)
       toast.error(err?.res?.data?.message || 'There was an error updating team')
     }
     // setLoading(true)
@@ -173,7 +176,8 @@ const [coFounder, setCoFounder] = useState('');
 
   const formik = useFormik({
     initialValues: {
-      avatar: "https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
+      avatar:
+        'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
       briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
       firstName: stateAuth?.user?.team?.firstName,
       lastName: stateAuth?.user?.team?.lastName,
@@ -193,7 +197,7 @@ const [coFounder, setCoFounder] = useState('');
       ) : (
         <span></span>
       )}
-       {showModal ? (
+      {showModal ? (
         <LargeModal id="cofounder" title="" closeModal={setShowModal}>
           <CoFounder />
         </LargeModal>
@@ -334,7 +338,11 @@ const [coFounder, setCoFounder] = useState('');
                 name="mobile_number"
                 countryCallingCodeEditable={true}
                 className="custs w-lg-50 ps-3"
-                value={stateAuth?.user?.team?.founderInfo?.mobile_number?stateAuth?.user?.team?.founderInfo?.mobile_number : phone}
+                value={
+                  stateAuth?.user?.team?.founderInfo?.mobile_number
+                    ? stateAuth?.user?.team?.founderInfo?.mobile_number
+                    : phone
+                }
                 onChange={setPhone}
                 MaxLength={17}
               />
@@ -366,6 +374,9 @@ const [coFounder, setCoFounder] = useState('');
             <span>Education</span>
           </div>
           <hr />
+
+          <AddEducation />
+
           <span
             onClick={() => setShowEducation(true)}
             style={{
@@ -455,10 +466,22 @@ const [coFounder, setCoFounder] = useState('');
 
             <div className="d-flex">
               <BntWrap>
-                <button className={`me-3 ${coFounder === 'yes' && 'active'}`} onClick={(e) => {e.preventDefault(); setCoFounder('yes')}}>
+                <button
+                  className={`me-3 ${coFounder === 'yes' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setCoFounder('yes')
+                  }}
+                >
                   Yes
                 </button>
-                <button className={`me-3 ${coFounder === 'no' && 'active'}`} onClick={(e) => {e.preventDefault(); setCoFounder('no')}}>
+                <button
+                  className={`me-3 ${coFounder === 'no' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setCoFounder('no')
+                  }}
+                >
                   No
                 </button>
               </BntWrap>
@@ -466,7 +489,11 @@ const [coFounder, setCoFounder] = useState('');
 
             <div className="sold">
               <div className="d-flex justify-content-center">
-                <div className="" data-target="#cofounder" onClick={() => setShowModal(true)}>
+                <div
+                  className=""
+                  data-target="#cofounder"
+                  onClick={() => setShowModal(true)}
+                >
                   <Tag
                     name="+ Add Co-founder"
                     color="#4F4F4F"
@@ -496,7 +523,10 @@ const [coFounder, setCoFounder] = useState('');
             />
           </div>
           <div className="my-3 mx-3">
-            <CustomButton type="submit" background="#031298"> Invite </CustomButton>
+            <CustomButton type="submit" background="#031298">
+              {' '}
+              Invite{' '}
+            </CustomButton>
           </div>
         </FormWrapper>
 
@@ -507,15 +537,45 @@ const [coFounder, setCoFounder] = useState('');
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-end">
-            <CustomButton type='submit' disabled={loading} className="mx-2" background="#00ADEF">
-              { loading ? <CircularLoader /> : 'Save'}
+            <CustomButton
+              type="submit"
+              disabled={loading}
+              className="mx-2"
+              background="#00ADEF"
+            >
+              {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
-            <CustomButton type="submit" disabled={nextLoading} onClick={() => setOpts('next')} background="#2E3192">
-              { nextLoading ? <CircularLoader /> : 'Next'}
+            <CustomButton
+              type="submit"
+              disabled={nextLoading}
+              onClick={() => setOpts('next')}
+              background="#2E3192"
+            >
+              {nextLoading ? <CircularLoader /> : 'Next'}
             </CustomButton>
           </div>
         </div>
       </form>
+    </>
+  )
+}
+
+const AddEducation = () => {
+  return (
+    <>
+      <Education>
+        <div className="my-4 addEducation d-flex">
+          <div>
+            <img src={logo} alt="" />
+          </div>
+          <div>
+            <h4>Manchester University</h4>
+            <h2>Computer Engineering</h2>
+            <p>Master’s Degree</p>
+            <p>2012 - 2018</p>
+          </div>
+        </div>
+      </Education>
     </>
   )
 }

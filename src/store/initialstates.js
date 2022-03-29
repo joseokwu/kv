@@ -20,3 +20,5 @@ export  const INIT_STATE = {
       },
       path:1
 };
+
+export const EDUCATION = []

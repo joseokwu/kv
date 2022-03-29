@@ -111,10 +111,7 @@ export const PitchDeck = () => {
         type: 'pitchDeck',
         accType: 'startup',
         valuess: {
-          ...value,
-          pitchDeck: {
-            ...upload,
-          },
+          ...value
         },
         userId: stateAuth?.user?.userId
       }
