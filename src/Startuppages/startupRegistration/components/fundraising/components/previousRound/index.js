@@ -14,7 +14,7 @@ export const PreviousRound = () => {
     { value: 'Fund 3', label: 'Fund 3' },
   ];
 
-  const [stateDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState();
 
   const [hasLeadInvestor, setHasLeadInvestor] = useState('no');
 
@@ -37,12 +37,14 @@ export const PreviousRound = () => {
       dilution: '',
       preMoneyValuation: '',
       postMoneyValuation: '',
+      timeOfFunding: '',
     },
     validationSchema: Yup.object({
       fundraisingAmount: Yup.string().required('Required'),
       dilution: Yup.string().required('Required'),
       preMoneyValuation: Yup.string().required('Required'),
       postMoneyValuation: Yup.string().required('Required'),
+      timeOfFunding: Yup.string().required('Required'),
     }),
     onSubmit: (value) => onSubmit(value),
   });
@@ -74,7 +76,6 @@ export const PreviousRound = () => {
               })}
             </select>
           </div>
-
           <div className='form-group my-2 col-lg-6 col-12'>
             <label>Select your previous round*</label>
             <select
@@ -95,11 +96,17 @@ export const PreviousRound = () => {
             <label>In which month/year did you get funding?*</label>
             <div>
               <DatePicker
+                id='timeOfFunding'
+                name='timeOfFunding'
                 style={{ background: '#FAFAFC', border: 'none' }}
                 className='form-control w-lg-50 w-100 datePick mx-3'
+                onBlur={formik.handleBlur}
                 onChange={(date) => setStartDate(date)}
               />
             </div>
+            {formik.touched.timeOfFunding && !startDate ? (
+              <label className='error'>{formik.errors.timeOfFunding}</label>
+            ) : null}
           </div>
 
           <div className='form-group my-2 col-12'>
