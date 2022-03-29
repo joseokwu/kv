@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   HeaderFund,
   ImageWrapper,
@@ -7,31 +7,30 @@ import {
   FormWrapper,
   BntWrap,
   Terms,
-} from './fund.styled'
-import { FundAsk } from './components/fundAsk'
-import { Tabs } from '../../../../Startupcomponents/tabs/Tabs'
+} from './fund.styled';
+import { FundAsk } from './components/fundAsk';
+import { Tabs } from '../../../../Startupcomponents/tabs/Tabs';
 import {
   CustomButton,
   OutlineButton,
-} from '../../../../Startupcomponents/button/button.styled'
-import { useActivity } from '../../../../hooks/useBusiness'
-import { FundUtilization } from './components/fundUtilization'
-import { CapTable } from './components/capTable'
-import { PreviousRound } from './components/previousRound'
-import { FinancialProjection } from './components/financialProjection'
-
+} from '../../../../Startupcomponents/button/button.styled';
+import { useActivity } from '../../../../hooks/useBusiness';
+import { FundUtilization } from './components/fundUtilization';
+import { CapTable } from './components/capTable';
+import { PreviousRound } from './components/previousRound';
+import { FinancialProjection } from './components/financialProjection';
 
 export const FundRaising = () => {
-  const history = useHistory()
+  const history = useHistory();
 
   const {
     changePath,
     state: { path },
-  } = useActivity()
+  } = useActivity();
 
   const {
     location: { hash },
-  } = history
+  } = history;
 
   const tabList = [
     'Funding Ask',
@@ -39,50 +38,49 @@ export const FundRaising = () => {
     'Cap Table',
     'Previous Round',
     'Financial Projection',
-  ]
+  ];
 
   const renderContent = () => {
     switch (hash) {
       case '#Funding Ask':
-        return <FundAsk />
+        return <FundAsk />;
       case '#Fund Utilization':
-        return <FundUtilization />
+        return <FundUtilization />;
       case '#Cap Table':
-        return <CapTable />
+        return <CapTable />;
       case '#Previous Round':
-        return <PreviousRound />
+        return <PreviousRound />;
       case '#Financial Projection':
-        return <FinancialProjection />
+        return <FinancialProjection />;
 
       default:
-        return <FundAsk />
+        return <FundAsk />;
     }
-  }
+  };
 
   const back = () => {
-    changePath(path - 1)
-  }
+    changePath(path - 1);
+  };
 
   const next = () => {
-    changePath(path + 1)
-  }
+    changePath(path + 1);
+  };
 
   return (
     <>
-    
       <HeaderFund>
         <h5> Fund Raising </h5>
-        <p className="text-nowrap">
+        <p className='text-nowrap'>
           Let’s help you explain your fund raising plan
         </p>
       </HeaderFund>
       <form style={{ marginBottom: '4rem' }}>
-        <FormWrapper height="85%">
+        <FormWrapper height='85%'>
           <Tabs tabItems={tabList} />
           {renderContent()}
         </FormWrapper>
 
-        <Terms className="">
+        <Terms className=''>
           <p>
             By clicking submit, you are agreeing to our{' '}
             <span>Terms of Use</span> and <span>Privacy Policy</span>. If you
@@ -90,8 +88,8 @@ export const FundRaising = () => {
           </p>
         </Terms>
 
-        <div className="row mt-4">
-          <div className="col-3">
+        <div className='row mt-4'>
+          {/* <div className="col-3">
             <CustomButton className="" background="#D0D0D1" onClick={back}>
               Back
             </CustomButton>
@@ -108,16 +106,10 @@ export const FundRaising = () => {
             >
               Submit
             </OutlineButton>
-            {/* <CustomButton
-              onClick={next}
-              style={{ marginRight: '5rem' }}
-              background="#2E3192"
-            >
-              Next
-            </CustomButton> */}
-          </div>
+           
+          </div> */}
         </div>
       </form>
     </>
-  )
-}
+  );
+};
