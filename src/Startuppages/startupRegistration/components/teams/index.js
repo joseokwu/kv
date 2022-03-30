@@ -70,7 +70,7 @@ export const TeamProfile = () => {
     setWorkExperience,
     addEducation,
 
-    state: { path, workExperience, },
+    state: { path, workExperience, education},
   } = useActivity();
 
   const onChangeImage = (e) => {
@@ -121,41 +121,40 @@ export const TeamProfile = () => {
   }
 
   const onSubmit = async (value) => {
-    let lastIndex
-    let inputs = document.getElementsByTagName('input')
-    lastIndex = inputs.length
-    console.log(inputs[lastIndex - 1])
+ 
     try {
       const team = {
         type: 'team',
         accType: 'startup',
         values: {
           ...value,
+          experience:workExperience,
+          education:education
         },
         userId: stateAuth?.user?.userId,
       }
       console.log(team)
-      if (opts === 'next') {
-        setOpts(true)
-        let result = await updateFounderProfile(team)
+      // if (opts === 'next') {
+      //   setOpts(true)
+      //   let result = await updateFounderProfile(team)
 
-        if (result?.success) {
-          toast.success('Team' + '' + result?.message)
-          setOpts(false)
-          return changePath(path + 1)
-        }
-      }
-      setLoading(true)
-      let result = await updateFounderProfile(team)
+      //   if (result?.success) {
+      //     toast.success('Team' + '' + result?.message)
+      //     setOpts(false)
+      //     return changePath(path + 1)
+      //   }
+      // }
+      // setLoading(true)
+      // let result = await updateFounderProfile(team)
 
-      if (!result?.success) {
-        toast.error(result?.message || 'There was an error in updating team')
-        setLoading(false)
-        return
-      }
-      toast.success('Team' + '' + result?.message)
-      setLoading(false)
-      return
+      // if (!result?.success) {
+      //   toast.error(result?.message || 'There was an error in updating team')
+      //   setLoading(false)
+      //   return
+      // }
+      // toast.success('Team' + '' + result?.message)
+      // setLoading(false)
+      // return
     } catch (err) {
       setLoading(false)
       toast.error(err?.res?.data?.message || 'There was an error updating team')
@@ -193,8 +192,8 @@ export const TeamProfile = () => {
       city: '',
       // mobile_number: phone,
       skills: [],
-      experience: [],
-      education: [],
+      
+      
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
@@ -219,7 +218,7 @@ export const TeamProfile = () => {
 
   return (
     <>
-      {console.log(workExperience)}
+      
       {show ? (
         <TeamModal
           handleClose={setShow}
@@ -426,8 +425,15 @@ export const TeamProfile = () => {
             <span>Education</span>
           </div>
           <hr />
-
-          <AddEducation />
+              {
+          education.length > 0 && education.map((item, i) =>(
+            <AddEducation  key={i} name={item?.name} course={item?.course} 
+            degree={item?.degree} startDate={item?.startDate}
+            endDate={item?.endDate}
+              />
+          ))
+              }
+          
 
           <span
             onClick={() => setShowEducation(true)}
@@ -477,7 +483,7 @@ export const TeamProfile = () => {
                 value={formik.values.linkedIn}
                 type='text'
                 name='linkedIn'
-                placeholder='Enter Linkdin link'
+                placeholder='Enter Linkedin link'
                 className='form-control ps-3'
               />
             </div>
@@ -612,7 +618,10 @@ export const TeamProfile = () => {
   )
 }
 
-const AddEducation = () => {
+const AddEducation = ({name, course, degree, startDate, endDate, activities}) => {
+  const dat = new Date(startDate).getFullYear().toString().substring(0,10);
+  const endD = new Date(endDate).getFullYear().toString().substring(0,10);
+  
   return (
     <>
       <Education>
@@ -621,10 +630,12 @@ const AddEducation = () => {
             <img src={logo} alt="" />
           </div>
           <div>
-            <h4>Manchester University</h4>
-            <h2>Computer Engineering</h2>
-            <p>Master’s Degree</p>
-            <p>2012 - 2018</p>
+            <h4> { name } </h4>
+            <h2> { course } </h2>
+            <p> { degree } </p>
+            <p>
+            { dat + "     -    "  +  `     ${typeof endDate === 'object' ? endD : endDate }` }
+             </p>
           </div>
         </div>
       </Education>

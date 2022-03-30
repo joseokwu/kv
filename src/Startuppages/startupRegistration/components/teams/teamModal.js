@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useActivity} from '../../../../hooks/useBusiness';
 
 export const TeamModal = ({
   handleClose,
@@ -200,19 +201,49 @@ export const TeamModal = ({
 };
 
 export const EducationModal = ({ handleClose }) => {
+  const { addEducation } = useActivity();
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [checked, setChecked] = useState(false);
+
+  const onSubmit = (e) => {
+    console.log({
+      ...e,
+      startDate:startDate,
+      endDate:checked ? 'Present' : endDate,
+    })
+    addEducation({...e,
+      startDate:startDate,
+      endDate:checked ? 'Present' : endDate,
+    });
+    handleClose(false);
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      course: '',
+      degree: '',
+      activities:''
+    },
+    onSubmit: (values) => onSubmit(values)
+  })
+
 
   return (
     <ModalCus closeModal={handleClose}>
       <div className='mx-5'>
         <HeaderModal>Add Education</HeaderModal>
-        <hr style={{ background: '#323232' }} />
-        <form>
+        <hr style={{ background: '#323232' }}/>
+        <form onSubmit={formik.handleSubmit}>
           <ModalForm className='row'>
             <div className='col-12 form-group'>
               <label>School*</label>
               <input
                 type='text'
+                name='name'
+                value={formik.values.name}
+                onChange={formik.handleChange}
                 className='form-control ps-3'
                 placeholder='Enter School name'
               />
@@ -221,6 +252,9 @@ export const EducationModal = ({ handleClose }) => {
               <label>Degree*</label>
               <input
                 type='text'
+                name='degree'
+                value={formik.values.degree}
+                onChange={formik.handleChange}
                 className='form-control ps-3'
                 placeholder='Enter Degree '
               />
@@ -229,6 +263,9 @@ export const EducationModal = ({ handleClose }) => {
               <label>Filed of study*</label>
               <input
                 type='text'
+                name='course'
+                value={formik.values.course}
+                onChange={formik.handleChange}
                 className='form-control ps-3'
                 placeholder='Enter filed of study'
               />
@@ -244,11 +281,21 @@ export const EducationModal = ({ handleClose }) => {
               <textarea
                 cols='5'
                 rows='6'
+                name='activities'
+                value={formik.values.activities}
+                onChange={formik.handleChange}
                 className='form-control ps-3'
                 placeholder='Enter Activities and Societies'
               />
             </div>
-
+            <div className='col-12 form-group' >
+            <input
+                type='checkbox'
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+              />
+               <span>I current school here.</span>
+            </div>
             <div className='col-6 form-group'>
               <label>Entry Date*</label>
               <DatePicker
@@ -258,15 +305,20 @@ export const EducationModal = ({ handleClose }) => {
                 onChange={(date) => setStartDate(date)}
               />
             </div>
-            <div className='col-6 form-group'>
+           {
+             !checked && (
+              <div className='col-6 form-group'>
               <label>Graduation Date*</label>
               <DatePicker
                 className='p-2'
+                name='endDate'
                 style={{ padding: '15px' }}
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
               />
             </div>
+             )
+           }
             <div className='col-6 my-4'>
               <span
                 style={{
@@ -284,7 +336,7 @@ export const EducationModal = ({ handleClose }) => {
               style={{ marginTop: '4rem' }}
             >
               <CustomButton
-                onClick={() => handleClose(false)}
+                type='submit'
                 background='#021098'
                 style={{ marginLeft: '7rem' }}
               >
