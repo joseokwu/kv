@@ -7,6 +7,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useActivity } from '../../../../hooks/useBusiness';
+
 
 export const TeamModal = ({
   handleClose,
@@ -323,7 +325,7 @@ export const EducationModal = ({
               ) : null}
             </div>
             <div className='col-12 form-group'>
-              <label>Filed of study*</label>
+              <label>Field of study*</label>
               <input
                 id='course'
                 name='course'
@@ -369,6 +371,14 @@ export const EducationModal = ({
                 <label className='error'>{formik.errors.activities}</label>
               ) : null}
             </div>
+            <div className='col-12 form-group'>
+              <input
+                type='checkbox'
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+              />
+              <span>I current school here.</span>
+            </div>
 
             <div className='col-6 form-group'>
               <label>Entry Date*</label>
@@ -383,6 +393,23 @@ export const EducationModal = ({
                 onChange={(date) => setEduStartDate(date)}
               />
             </div>
+
+            {!checked && (
+              <div className='col-6 form-group'>
+                <label>Graduation Date*</label>
+                <DatePicker
+                  id='eduEndDate'
+                  name='eduEndDate'
+                  className='p-2'
+                  style={{ padding: '15px' }}
+                  selected={
+                    isEditing ? education[editIndex]?.eduEndDate : eduEndDate
+                  }
+                  onChange={(date) => setEduEndDate(date)}
+                />
+              </div>
+            )}
+
             <div className='col-6 form-group'>
               <label>Graduation Date*</label>
               <DatePicker
@@ -396,6 +423,7 @@ export const EducationModal = ({
                 onChange={(date) => setEduEndDate(date)}
               />
             </div>
+
             <div className='col-6 my-4'>
               <span
                 style={{
