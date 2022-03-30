@@ -8,8 +8,9 @@ import {
   CHANGE_PAGE,
   SHOW_EVENT,
   DASH_VIEW,
-  ADD_EDUCATION,
   SET_WORK_EXPERIENCE,
+  SET_EDUCATION,
+  SET_FUNDRAISING,
 } from '../../actions/actions.types';
 
 import { INIT_STATE_BUSINESS } from '../../initialstates';
@@ -59,26 +60,30 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         showEvent: !state.showEvent,
       };
     case DASH_VIEW:
-      return { 
-        ...state, 
-        dash_view: 
-        action.payload,
-      };
-    case ADD_EDUCATION:
+
       return {
         ...state,
-        education: [
-          action.payload,
-          ...state.education
-        ]
-      }
+        dash_view: action.payload,
+      };
+
+      return { ...state, dash_view: action.payload };
+
     case SET_WORK_EXPERIENCE:
       return {
         ...state,
-        workExperience: [
-          ...state.workExperience, 
-          action.payload
-        ],
+        workExperience: [...state.workExperience, action.payload],
+      };
+
+    case SET_EDUCATION:
+      return {
+        ...state,
+        education: [...state.education, action.payload],
+      };
+
+    case SET_FUNDRAISING:
+      return {
+        ...state,
+        fundraising: { ...state.fundraising, ...action.payload },
       };
 
     default:
