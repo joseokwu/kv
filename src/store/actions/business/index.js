@@ -1,14 +1,19 @@
 import {
-    DASHBOARD, WALLET,
-    TRANSACTIONS, DATA_BANK,
-    CHART_SUPPORT, SETTINGS,
-    CHANGE_PAGE,
-    SHOW_EVENT,
-    GET_EVENTS_FAILED,
-    GET_EVENTS_SUCCESS,
-    ADD_EDUCATION,
-    SET_WORK_EXPERIENCE,
-  } from '../actions.types';
+
+  DASHBOARD,
+  WALLET,
+  TRANSACTIONS,
+  DATA_BANK,
+  CHART_SUPPORT,
+  SETTINGS,
+  CHANGE_PAGE,
+  SHOW_EVENT,
+  GET_EVENTS_FAILED,
+  GET_EVENTS_SUCCESS,
+  SET_WORK_EXPERIENCE,
+  SET_EDUCATION,
+} from '../actions.types';
+
 
 import { getEvents } from '../../../services/events';
 
@@ -60,9 +65,18 @@ export const setDWorkExperience = (values) => (dispatch) => {
   });
 };
 
+
+export const setDEducation = (values) => (dispatch) => {
+  dispatch({
+    type: SET_EDUCATION,
+    payload: values,
+  });
+};
+
 export const addDEducation = (value) => (dispatch) => {
   dispatch({
     type: ADD_EDUCATION,
     payload: value
   })
 }
+

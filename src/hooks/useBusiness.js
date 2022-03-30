@@ -4,8 +4,10 @@ import {
   showDEventAction,
   addDEducation,
   setDWorkExperience,
-} from '../store/actions/business'
-import { useAuth } from './useAuth'
+  setDEducation,
+} from '../store/actions/business';
+import { useAuth } from './useAuth';
+
 
 export const useActivity = () => {
   const { stateAuth } = useAuth()
@@ -29,11 +31,21 @@ export const useActivity = () => {
     dispatch(addDEducation(value))
   }
 
+  const setEducation = (values) => {
+    dispatch(setDEducation(values));
+  };
+
   return {
     state,
     changePath,
     showEventAction,
     setWorkExperience,
-    addEducation,
+   addEducation,
+    setEducation,
+  };
+};
+
+ 
   }
 }
+

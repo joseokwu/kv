@@ -1,46 +1,45 @@
-import React , { useState} from 'react';
-import './workExperience.css';
-import appleSmall from '../../assets/icons/appleSmall.svg';
+import React from 'react';
+import './education.css';
+import blue from '../../assets/icons/blue.svg';
 import editIcon from '../../assets/icons/editIcon.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 
-
-export const WorkExperience = ({
-  title,
-  position,
-  location,
-  startDate,
-  endDate,
-  description,
-  showTeamModal,
+export const Education = ({
+  school,
+  course,
+  degree,
+  eduStartDate,
+  eduEndDate,
+  showEducationModal,
   setEditIndex,
   id,
   setIsEditing,
 }) => {
-  const endDateYear = endDate === 'present' ? 'present' : endDate.getFullYear();
-  const endDateMonth = endDate === 'present' ? 'present' : endDate.getMonth();
-  const startDateYear = startDate.getFullYear();
-  const startDateMonth = startDate.getMonth();
+  const endDateYear =
+    eduEndDate === 'present' ? 'present' : eduEndDate.getFullYear();
+  // const endDateMonth = endDate === 'present' ? 'present' : endDate.getMonth();
+  const startDateYear = eduStartDate.getFullYear();
+  // const startDateMonth = startDate.getMonth();
 
   const handleEdit = (e) => {
     e.preventDefault();
     setEditIndex(id);
     setIsEditing(true);
-    showTeamModal();
+    showEducationModal();
   };
 
   return (
     <>
       <div className='main'>
         <div className='icon'>
-          <img src={appleSmall} alt='apple' />
+          <img src={blue} alt='apple' />
         </div>
         <div className='info'>
-          <h5 className='title'>{title}</h5>
-          <h6 className='position'>{position}</h6>
-          <h6 className='country'>{location}</h6>
-          <h6 className='date'>
-            {startDateYear} - {endDate === 'present' ? 'present' : endDateYear}{' '}
+          <h5 className='school'>{school}</h5>
+          <h6 className='course'>{course}</h6>
+          <h6 className='degree'>{degree}</h6>
+          <h6 className='year'>
+            {/* {startDateYear} - {endDate === 'present' ? 'present' : endDateYear}{' '}
             {endDate !== 'present' && endDateYear - startDateYear > 0
               ? `${endDateYear - startDateYear} years`
               : endDate !== 'present' && endDateYear - startDateYear < 1
@@ -51,9 +50,9 @@ export const WorkExperience = ({
               : endDate === 'present' &&
                 new Date().getFullYear() - startDateYear < 1
               ? `${new Date().getMonth() - startDateMonth} months`
-              : null}
+              : null} */}
+            {startDateYear} - {endDateYear}
           </h6>
-          <p>{description}</p>
         </div>
         <div className='buttons'>
           <img className='img' src={editIcon} alt='edit' onClick={handleEdit} />{' '}

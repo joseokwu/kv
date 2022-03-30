@@ -5,34 +5,40 @@ import {
   InputWrapper,
   FormWrapper,
   BntWrap,
+
+} from './teams.styled';
+
+import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { CustomSelect } from '../../../../Startupcomponents/select/customSelect';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
+import { useActivity } from '../../../../hooks/useBusiness';
+import { TeamModal, EducationModal } from './teamModal';
+import { Select } from 'antd';
+import { Tag } from '../../../../Startupcomponents/tag/Tag';
+import 'antd/dist/antd.css';
+import { team } from './../../../../services/startUpReg';
+import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { toast } from 'react-hot-toast';
+import { CoFounder } from './coFounder';
+import {
+  LargeModal,
+  WorkExperience,
+  Education,
+} from '../../../../Startupcomponents';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../../../hooks/useAuth';
+
+const { Option } = Select;
+
   Education
 } from './teams.styled'
 
-import { UserOutlined, PlusOutlined } from '@ant-design/icons'
-import { useFormik } from 'formik'
-import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import { CustomSelect } from '../../../../Startupcomponents/select/customSelect'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
-import { useActivity } from '../../../../hooks/useBusiness'
-import { TeamModal, EducationModal } from './teamModal'
-import { Select } from 'antd'
-import { Tag } from '../../../../Startupcomponents/tag/Tag'
-import 'antd/dist/antd.css'
-import { team } from './../../../../services/startUpReg'
-import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
-import { toast } from 'react-hot-toast'
-import { CoFounder } from './coFounder'
-import { LargeModal, WorkExperience } from '../../../../Startupcomponents'
-import { useHistory } from 'react-router-dom'
-import { useAuth } from '../../../../hooks/useAuth'
-import { updateFounderProfile } from '../../../../services'
-import logo from '../../../../assets/images/edublue.svg'
-
-const { Option } = Select
 
 export const TeamProfile = () => {
   const { stateAuth } = useAuth()
@@ -63,14 +69,19 @@ export const TeamProfile = () => {
   //   website: stateAuth?.user?.team?.socialMedia?.website,
   // })
   const [editIndex, setEditIndex] = useState();
+
+  const [isEditing, setIsEditing] = useState(false);
+
   const [coFounder, setCoFounder] = useState('')
+
 
   const {
     changePath,
     setWorkExperience,
+    setEducation,
+
     addEducation,
 
-    state: { path, workExperience, education},
   } = useActivity();
 
   const onChangeImage = (e) => {
@@ -199,49 +210,84 @@ export const TeamProfile = () => {
     onSubmit: (value) => onSubmit(value),
   });
   const handleWorkDetails = ({
+    from,
     title,
     location,
     position,
     description,
     startDate,
     endDate,
+    school,
+    course,
+    degree,
+    activities,
+    eduStartDate,
+    eduEndDate,
   }) => {
-    setWorkExperience({
-      title,
-      location,
-      position,
-      description,
-      startDate,
-      endDate,
-    });
+    if (from === 'workExperience') {
+      setWorkExperience({
+        title,
+        location,
+        position,
+        description,
+        startDate,
+        endDate,
+      });
+      setIsEditing(false);
+    } else if (from === 'education') {
+      setEducation({
+        school,
+        course,
+        degree,
+        activities,
+        eduStartDate,
+        eduEndDate,
+      });
+      setIsEditing(false);
+    }
   };
 
   return (
     <>
-      
+
       {show ? (
         <TeamModal
           handleClose={setShow}
           handleWorkDetails={handleWorkDetails}
           editIndex={editIndex}
           workExperience={workExperience}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
         />
       ) : (
         <span></span>
       )}
       {showEducation ? (
-        <EducationModal handleClose={setShowEducation} />
+        <EducationModal
+          handleClose={setShowEducation}
+          handleWorkDetails={handleWorkDetails}
+          editIndex={editIndex}
+          education={education}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+        />
       ) : (
         <span></span>
       )}
       {showModal ? (
-        <LargeModal id="cofounder" title="" closeModal={setShowModal}>
-          <CoFounder />
-        </LargeModal>
+
+        <LargeModal id='cofounder' title='' closeModal={setShowModal}>
+          <CoFounder
+            handleClose={setShowModal}
+            handleWorkDetails={handleWorkDetails}
+            editIndex={editIndex}
+            workExperience={workExperience}
+            education={education}
+          />
+
       ) : (
         <span></span>
       )}
-
       <HeaderTeam>
         <h5> Team</h5>
         <p className='text-nowrap'>Let’s you introduce your Co-Founder(s)</p>
@@ -399,12 +445,12 @@ export const TeamProfile = () => {
                   {...item}
                   showTeamModal={() => setShow(true)}
                   setEditIndex={setEditIndex}
+                  setIsEditing={setIsEditing}
                   id={index}
                 />
               );
             })}
 
-          <hr />
           <div>
             <span
               onClick={() => setShow(true)}
@@ -425,6 +471,19 @@ export const TeamProfile = () => {
             <span>Education</span>
           </div>
           <hr />
+          {education.length > 0 &&
+            education.map((item, index) => {
+              return (
+                <Education
+                  key={index}
+                  {...item}
+                  showEducationModal={() => setShowEducation(true)}
+                  setEditIndex={setEditIndex}
+                  setIsEditing={setIsEditing}
+                  id={index}
+                />
+              );
+            })}
               {
           education.length > 0 && education.map((item, i) =>(
             <AddEducation  key={i} name={item?.name} course={item?.course} 
@@ -434,7 +493,6 @@ export const TeamProfile = () => {
           ))
               }
           
-
           <span
             onClick={() => setShowEducation(true)}
             style={{
