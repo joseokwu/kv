@@ -46,13 +46,16 @@ import { INIT_STATE } from '../../initialstates';
                   loading:false ,
                   authenticated:true,
                   user:action?.payload,
-                  roles:action?.payload?.type,
+                  roles:action?.payload?.role,
                   
                 }
                 case USER_PROFILE_FAIL :
                   return {
                     ...state,
-                    loading:false ,
+                    loading:false,
+                    authenticated:false,
+                    user:null,
+                    roles:[]
                     
                   }
                  case SET_SIGNUP_STATUS:
