@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { BodyWrapper, BntWrap, BoxBorder } from './previous.styled';
+import { BodyWrapper, BntWrap, BoxBorder, Terms } from './previous.styled';
+import { useHistory } from 'react-router-dom';
+import {
+  CustomButton,
+  OutlineButton,
+} from '../../../../../../Startupcomponents/button/button.styled';
 import { CustomSelect } from '../../../../../../Startupcomponents/select/customSelect';
 import { DatePicker } from 'antd';
 import { useFormik } from 'formik';
@@ -7,7 +12,12 @@ import * as Yup from 'yup';
 import 'antd/dist/antd.css';
 import { Tag } from '../../../../../../Startupcomponents/tag/Tag';
 
-export const PreviousRound = () => {
+export const PreviousRound = ({ setFundraising }) => {
+  const history = useHistory();
+
+  const {
+    location: { hash },
+  } = history;
   const optionsNumb = [
     { value: 'Fund 1', label: 'Fund 1' },
     { value: 'Fund 2', label: 'Fund 2' },
@@ -23,28 +33,38 @@ export const PreviousRound = () => {
   // }
 
   const onSubmit = (value) => {
-    // fundraising(value).then((res) => {
-    //   if (res?.message) {
-    //     console.log(res);
-    //     toast.success(res?.message);
-    //   }
-    // });
+    setFundraising({
+      previousRound: {
+        instrumentForRound: formik.getFieldProps('instrumentForRound').value,
+        numberOfRounds: formik.getFieldProps('numberOfRounds').value,
+        fundraisingAmount: formik.getFieldProps('fundraisingAmount').value,
+        dilution: formik.getFieldProps('dilution').value,
+        preMoneyValuation: formik.getFieldProps('preMoneyValuation').value,
+        hasLeadInvestor,
+        terms: formik.getFieldProps('terms').value,
+        dateOfFunding: formik.getFieldProps('dateOfFunding').value,
+      },
+    });
+
+    history.push('#Financial Projection');
   };
 
   const formik = useFormik({
     initialValues: {
+      instrumentForRound: 'Fund1',
+      numberOfRounds: 'Fund1',
       fundraisingAmount: '',
       dilution: '',
       preMoneyValuation: '',
       postMoneyValuation: '',
-      timeOfFunding: '',
+      dateOfFunding: '',
     },
     validationSchema: Yup.object({
       fundraisingAmount: Yup.string().required('Required'),
       dilution: Yup.string().required('Required'),
       preMoneyValuation: Yup.string().required('Required'),
       postMoneyValuation: Yup.string().required('Required'),
-      timeOfFunding: Yup.string().required('Required'),
+      dateOfFunding: Yup.string().required('Required'),
     }),
     onSubmit: (value) => onSubmit(value),
   });
@@ -97,16 +117,16 @@ export const PreviousRound = () => {
             <label>In which month/year did you get funding?*</label>
             <div>
               <DatePicker
-                id='timeOfFunding'
-                name='timeOfFunding'
+                id='dateOfFunding'
+                name='dateOfFunding'
                 style={{ background: '#FAFAFC', border: 'none' }}
                 className='form-control w-lg-50 w-100 datePick mx-3'
                 onBlur={formik.handleBlur}
                 onChange={(date) => setStartDate(date)}
               />
             </div>
-            {formik.touched.timeOfFunding && !startDate ? (
-              <label className='error'>{formik.errors.timeOfFunding}</label>
+            {formik.touched.dateOfFunding && !startDate ? (
+              <label className='error'>{formik.errors.dateOfFunding}</label>
             ) : null}
           </div>
 
@@ -229,6 +249,38 @@ export const PreviousRound = () => {
           </div>
         </div>
       </BodyWrapper>
+      <Terms className=''>
+        <p>
+          By clicking submit, you are agreeing to our <span>Terms of Use</span>{' '}
+          and <span>Privacy Policy</span>. If you have questions, please reach
+          out to privacy@knightventures.com
+        </p>
+      </Terms>
+      <div className='row mt-4'>
+        <div className='col-3'>
+          <CustomButton
+            className=''
+            background='#D0D0D1'
+            onClick={() => history.push('#Cap Table')}
+          >
+            Back
+          </CustomButton>
+        </div>
+        <div className='col-9 d-flex justify-content-lg-end'>
+          <OutlineButton
+            type='button'
+            onClick={(e) => {
+              e.preventDefault();
+              onSubmit();
+            }}
+            className='ms-2'
+            style={{ marginRight: '5rem' }}
+            background='none'
+          >
+            Next
+          </OutlineButton>
+        </div>
+      </div>
     </>
   );
 };

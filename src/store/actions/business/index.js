@@ -11,6 +11,7 @@ import {
   GET_EVENTS_SUCCESS,
   SET_WORK_EXPERIENCE,
   SET_EDUCATION,
+  SET_FUNDRAISING,
 } from '../actions.types';
 
 import { getEvents } from '../../../services/events';
@@ -58,6 +59,13 @@ export const setDWorkExperience = (values) => (dispatch) => {
 export const setDEducation = (values) => (dispatch) => {
   dispatch({
     type: SET_EDUCATION,
+    payload: values,
+  });
+};
+
+export const setDFundraising = (values) => (dispatch) => {
+  dispatch({
+    type: SET_FUNDRAISING,
     payload: values,
   });
 };

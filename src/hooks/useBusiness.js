@@ -4,6 +4,7 @@ import {
   showDEventAction,
   setDWorkExperience,
   setDEducation,
+  setDFundraising,
 } from '../store/actions/business';
 import { useAuth } from './useAuth';
 
@@ -29,11 +30,16 @@ export const useActivity = () => {
     dispatch(setDEducation(values));
   };
 
+  const setFundraising = (values) => {
+    dispatch(setDFundraising(values));
+  };
+
   return {
     state,
     changePath,
     showEventAction,
     setWorkExperience,
     setEducation,
+    setFundraising,
   };
 };

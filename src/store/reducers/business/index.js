@@ -10,6 +10,7 @@ import {
   DASH_VIEW,
   SET_WORK_EXPERIENCE,
   SET_EDUCATION,
+  SET_FUNDRAISING,
 } from '../../actions/actions.types';
 
 import { INIT_STATE_BUSINESS } from '../../initialstates';
@@ -71,6 +72,12 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
       return {
         ...state,
         education: [...state.education, action.payload],
+      };
+
+    case SET_FUNDRAISING:
+      return {
+        ...state,
+        fundraising: { ...state.fundraising, ...action.payload },
       };
 
     default:

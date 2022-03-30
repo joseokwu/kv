@@ -159,3 +159,19 @@ export const BoxBorder = styled.div`
     width: 100%;
   }
 `;
+export const Terms = styled.div`
+  width: 85%;
+  p {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #828282;
+
+    span {
+      color: #121298;
+      font-weight: 600;
+    }
+  }
+`;

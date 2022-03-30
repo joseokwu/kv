@@ -25,7 +25,8 @@ export const FundRaising = () => {
 
   const {
     changePath,
-    state: { path },
+    setFundraising,
+    state: { path, fundraising },
   } = useActivity();
 
   const {
@@ -43,21 +44,21 @@ export const FundRaising = () => {
   const renderContent = () => {
     switch (hash) {
       case '#Funding Ask':
-        return <FundAsk />;
+        return <FundAsk setFundraising={setFundraising} back={back} />;
       case '#Fund Utilization':
-        return <FundUtilization />;
+        return <FundUtilization setFundraising={setFundraising} />;
       case '#Cap Table':
-        return <CapTable />;
+        return <CapTable setFundraising={setFundraising} />;
       case '#Previous Round':
-        return <PreviousRound />;
+        return <PreviousRound setFundraising={setFundraising} />;
       case '#Financial Projection':
-        return <FinancialProjection />;
+        return <FinancialProjection setFundraising={setFundraising} />;
 
       default:
-        return <FundAsk />;
+        return <FundAsk setFundraising={setFundraising} back={back} />;
     }
   };
-
+  console.log(hash);
   const back = () => {
     changePath(path - 1);
   };
@@ -66,32 +67,34 @@ export const FundRaising = () => {
     changePath(path + 1);
   };
 
-  const forwardHash = () => {
-    if (hash === '#Funding Ask' || hash === '#Funding%20Ask') {
-      return '#Fund Utilization';
-    } else if (hash === '#Fund Utilization') {
-      return '#Cap Table';
-    } else if (hash === '#Cap Table') {
-      return '#Previous Round';
-    } else if (hash === '#Previous Round') {
-      return '#Financial Projection';
-    }
-  };
+  // const forwardHash = () => {
+  //   if (hash === '#Funding Ask' || hash === '#Funding%20Ask') {
+  //     return '#Fund Utilization';
+  //   } else if (hash === '#Fund Utilization') {
+  //     return '#Cap Table';
+  //   } else if (hash === '#Cap Table') {
+  //     return '#Previous Round';
+  //   } else if (hash === '#Previous Round') {
+  //     return '#Financial Projection';
+  //   }
+  // };
 
-  const backwardHash = (e) => {
-    e.preventDefault();
-    if (hash === '#Funding Ask') {
-      return back();
-    } else if (hash === '#Fund Utilization') {
-      return history.push('#Funding Ask');
-    } else if (hash === '#Cap Table') {
-      return history.push('#Fund Utilization');
-    } else if (hash === '#Previous Round') {
-      return history.push('#Cap Table');
-    } else if (hash === '#Financial Projection') {
-      return history.push('#Previous Round');
-    }
-  };
+  // const backwardHash = (e) => {
+  //   e.preventDefault();
+  //   if (hash === '#Funding Ask') {
+  //     return back();
+  //   } else if (hash === '#Fund Utilization') {
+  //     return history.push('#Funding Ask');
+  //   } else if (hash === '#Cap Table') {
+  //     return history.push('#Fund Utilization');
+  //   } else if (hash === '#Previous Round') {
+  //     return history.push('#Cap Table');
+  //   } else if (hash === '#Financial Projection') {
+  //     return history.push('#Previous Round');
+  //   }
+  // };
+
+  console.log(fundraising);
 
   return (
     <>
@@ -106,55 +109,6 @@ export const FundRaising = () => {
           <Tabs tabItems={tabList} />
           {renderContent()}
         </FormWrapper>
-
-        <Terms className=''>
-          <p>
-            By clicking submit, you are agreeing to our{' '}
-            <span>Terms of Use</span> and <span>Privacy Policy</span>. If you
-            have questions, please reach out to privacy@knightventures.com
-          </p>
-        </Terms>
-        {console.log(hash)}
-        <div className='row mt-4'>
-          <div className='col-3'>
-            <CustomButton
-              className=''
-              background='#D0D0D1'
-              onClick={backwardHash}
-            >
-              Back
-            </CustomButton>
-          </div>
-          <div className='col-9 d-flex justify-content-lg-end'>
-            {hash === '#Financial Projection' ? (
-              <>
-                <CustomButton className='' background='#00ADEF'>
-                  Save
-                </CustomButton>
-                <OutlineButton
-                  onClick={() => history.push('/startup/dashboard')}
-                  className='ms-2'
-                  style={{ marginRight: '5rem' }}
-                  background='none'
-                >
-                  Submit
-                </OutlineButton>
-              </>
-            ) : (
-              <OutlineButton
-                onClick={(e) => {
-                  e.preventDefault();
-                  history.push(forwardHash());
-                }}
-                className='ms-2'
-                style={{ marginRight: '5rem' }}
-                background='none'
-              >
-                Next
-              </OutlineButton>
-            )}
-          </div>
-        </div>
       </form>
     </>
   );

@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { BodyWrapper, BntWrap } from './fundAsk.styled';
+import { useHistory } from 'react-router-dom';
+import { BodyWrapper, BntWrap, Terms } from './fundAsk.styled';
+import {
+  CustomButton,
+  OutlineButton,
+} from '../../../../../../Startupcomponents/button/button.styled';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { CustomSelect } from '../../../../../../Startupcomponents/select/customSelect';
@@ -9,37 +14,50 @@ import { LargeModal } from '../../../../../../Startupcomponents';
 import { CoFounder } from '../../../teams/coFounder';
 import { toast } from 'react-hot-toast';
 
-export const FundAsk = () => {
+export const FundAsk = ({ setFundraising, back }) => {
+  const history = useHistory();
+
+  const {
+    location: { hash },
+  } = history;
+
   const optionsNumb = [
     { value: 'Fund 1', label: 'Fund 1' },
     { value: 'Fund 2', label: 'Fund 2' },
     { value: 'Fund 3', label: 'Fund 3' },
   ];
   const [showModal, setShowModal] = useState(false);
-  const [havePreviouslyFundraised, setHavePreviouslyFundraised] =
-    useState('no');
+  const [hasPreviousFundraising, setHasPreviousFundraising] = useState('no');
   const [hasLeadInvestor, setHasLeadInvestor] = useState('no');
 
   // function btn(e) {
   //   e.preventDefault();
-  //   setHavePreviouslyFundraised(e.target.dataset.id);
+  //   setHasPreviousFundraising(e.target.dataset.id);
   // }
 
-  const onSubmit = (value) => {
-    fundraising(value).then((res) => {
-      if (res?.message) {
-        console.log(res);
-        toast.success(res?.message);
-      }
+  const onSubmit = () => {
+    setFundraising({
+      FundAsk: {
+        hasPreviousFundraising,
+        instrumentForRound: formik.getFieldProps('instrumentForRound').value,
+        numberOfRounds: formik.getFieldProps('numberOfRounds').value,
+        fundraisingAmount: formik.getFieldProps('fundraisingAmount').value,
+        dilution: formik.getFieldProps('dilution').value,
+        preMoneyValuation: formik.getFieldProps('preMoneyValuation').value,
+        hasLeadInvestor,
+        terms: formik.getFieldProps('terms').value,
+      },
     });
+
+    history.push('#Fund Utilization');
   };
 
   const formik = useFormik({
     initialValues: {
       hasPreviousFundraising: false,
       description: '',
-      instrumentForRound: 'instrumentForRound',
-      numberOfRounds: 'numberOfRounds',
+      instrumentForRound: 'Fund1',
+      numberOfRounds: 'Fund1',
       fundraisingAmount: '',
       dilution: '',
       preMoneyValuation: '',
@@ -78,20 +96,20 @@ export const FundAsk = () => {
               <BntWrap>
                 <button
                   className={`me-3 ${
-                    havePreviouslyFundraised === 'yes' && 'active'
+                    hasPreviousFundraising === 'yes' && 'active'
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
-                    setHavePreviouslyFundraised('yes');
+                    setHasPreviousFundraising('yes');
                   }}
                 >
                   Yes
                 </button>
                 <button
-                  className={havePreviouslyFundraised === 'no' && 'active'}
+                  className={hasPreviousFundraising === 'no' && 'active'}
                   onClick={(e) => {
                     e.preventDefault();
-                    setHavePreviouslyFundraised('no');
+                    setHasPreviousFundraising('no');
                   }}
                 >
                   No
@@ -267,6 +285,42 @@ export const FundAsk = () => {
             </div>
           </div>
         </BodyWrapper>
+        <Terms className=''>
+          <p>
+            By clicking submit, you are agreeing to our{' '}
+            <span>Terms of Use</span> and <span>Privacy Policy</span>. If you
+            have questions, please reach out to privacy@knightventures.com
+          </p>
+        </Terms>
+        <div className='row mt-4'>
+          <div className='col-3'>
+            <CustomButton
+              className=''
+              background='#D0D0D1'
+              onClick={() => back()}
+            >
+              Back
+            </CustomButton>
+          </div>
+          <div className='col-9 d-flex justify-content-lg-end'>
+            <OutlineButton
+              type='submit'
+              // onClick={(e) => {
+              //   e.preventDefault();
+              //   history.push(forwardHash());
+              // }}
+              onClick={(e) => {
+                e.preventDefault();
+                onSubmit();
+              }}
+              className='ms-2'
+              style={{ marginRight: '5rem' }}
+              background='none'
+            >
+              Next
+            </OutlineButton>
+          </div>
+        </div>
       </form>
     </>
   );

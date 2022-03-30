@@ -14,6 +14,13 @@ export const INIT_STATE_BUSINESS = {
   dash_view: null,
   workExperience: [],
   education: [],
+  fundraising: {
+    fundAsk: {},
+    fundUtilization: {},
+    capTable: {},
+    previousRound: {},
+    finalProjection: {},
+  },
   alert: {
     success: false,
     message: null,
