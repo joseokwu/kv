@@ -32,3 +32,4 @@ export * from './authButton/authButton';
 export * from './authTextField/authTextField';
 export * from './longPhoneInput/longPhoneInput';
 export * from './workExperience/WorkExperience';
+export * from './education/Education';

@@ -3,6 +3,7 @@ import {
   changeDPath,
   showDEventAction,
   setDWorkExperience,
+  setDEducation,
 } from '../store/actions/business';
 import { useAuth } from './useAuth';
 
@@ -24,10 +25,15 @@ export const useActivity = () => {
     dispatch(setDWorkExperience(values));
   };
 
+  const setEducation = (values) => {
+    dispatch(setDEducation(values));
+  };
+
   return {
     state,
     changePath,
     showEventAction,
     setWorkExperience,
+    setEducation,
   };
 };

@@ -21,3 +21,4 @@ export const SET_SIGNUP_STATUS = 'SET_SIGNUP_STATUS';
 export const DASH_VIEW = 'DASH_VIEW';
 export const LOG_OUT = 'LOG_OUT';
 export const SET_WORK_EXPERIENCE = 'SET_WORK_EXPERIENCE';
+export const SET_EDUCATION = 'SET_EDUCATION';

@@ -9,13 +9,13 @@ h5 {
 h6 {
   color: #828282;
 }
-.date {
-  margin-top: 2rem;
-}
-.position {
+.degree {
   margin-bottom: 0.85rem;
 }
-.title {
+.course {
+  margin-bottom: 0.85rem;
+}
+.school {
   margin-bottom: 0.85rem;
 }
 .img {

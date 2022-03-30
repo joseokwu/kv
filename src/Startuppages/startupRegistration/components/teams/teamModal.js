@@ -13,14 +13,17 @@ export const TeamModal = ({
   handleWorkDetails,
   editIndex,
   workExperience,
+  isEditing,
+  setIsEditing,
 }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [checked, setChecked] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e, from) => {
     e.preventDefault();
     handleWorkDetails({
+      from,
       title: formik.getFieldProps('title').value,
       location: formik.getFieldProps('location').value,
       position: formik.getFieldProps('position').value,
@@ -52,11 +55,18 @@ export const TeamModal = ({
   });
 
   return (
-    <ModalCus closeModal={handleClose}>
+    <ModalCus
+      closeModal={() => {
+        setIsEditing(false);
+        handleClose();
+      }}
+    >
       <div className='mx-5'>
-        <HeaderModal>Add Work Experience</HeaderModal>
+        <HeaderModal>
+          {isEditing ? 'Edit Work Experience' : 'Add Work Experience'}
+        </HeaderModal>
         <hr style={{ background: '#323232' }} />
-        <form onSubmit={onSubmit}>
+        <form onSubmit={(e) => onSubmit(e, 'workExperience')}>
           <ModalForm className='row'>
             <div className='col-12 form-group'>
               <label>Title *</label>
@@ -66,7 +76,11 @@ export const TeamModal = ({
                 type='text'
                 className='form-control ps-3'
                 placeholder='CEO and Founder'
-                value={workExperience[editIndex]?.title || formik.values.title}
+                value={
+                  isEditing
+                    ? workExperience[editIndex]?.title
+                    : formik.values.title
+                }
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
@@ -83,7 +97,9 @@ export const TeamModal = ({
                 className='form-control ps-3'
                 placeholder='United state of America'
                 value={
-                  workExperience[editIndex]?.location || formik.values.location
+                  isEditing
+                    ? workExperience[editIndex]?.location
+                    : formik.values.location
                 }
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -101,7 +117,9 @@ export const TeamModal = ({
                 className='form-control ps-3'
                 placeholder='gane@gmail.com'
                 value={
-                  workExperience[editIndex]?.position || formik.values.position
+                  isEditing
+                    ? workExperience[editIndex]?.position
+                    : formik.values.position
                 }
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -126,8 +144,9 @@ export const TeamModal = ({
                 className='form-control ps-3'
                 placeholder='Tell us about your role'
                 value={
-                  workExperience[editIndex]?.description ||
-                  formik.values.description
+                  isEditing
+                    ? workExperience[editIndex]?.description
+                    : formik.values.description
                 }
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -151,7 +170,9 @@ export const TeamModal = ({
                 name='startDate'
                 className='p-2'
                 style={{ padding: '15px' }}
-                selected={workExperience[editIndex]?.startDate || startDate}
+                selected={
+                  isEditing ? workExperience[editIndex]?.startDate : startDate
+                }
                 onChange={(date) => setStartDate(date)}
               />
             </div>
@@ -163,7 +184,9 @@ export const TeamModal = ({
                   name='endDate'
                   className='p-2'
                   style={{ padding: '15px' }}
-                  selected={workExperience[editIndex]?.endDate || endDate}
+                  selected={
+                    isEditing ? workExperience[editIndex]?.endDate : endDate
+                  }
                   onChange={(date) => setEndDate(date)}
                 />
               </div>
@@ -199,39 +222,125 @@ export const TeamModal = ({
   );
 };
 
-export const EducationModal = ({ handleClose }) => {
-  const [startDate, setStartDate] = useState(new Date());
+export const EducationModal = ({
+  handleClose,
+  handleWorkDetails,
+  editIndex,
+  education,
+  isEditing,
+  setIsEditing,
+}) => {
+  const [eduStartDate, setEduStartDate] = useState(new Date());
+  const [eduEndDate, setEduEndDate] = useState(new Date());
+  const [checked, setChecked] = useState(false);
+
+  const onSubmit = (e, from) => {
+    e.preventDefault();
+    handleWorkDetails({
+      from,
+      school: formik.getFieldProps('school').value,
+      course: formik.getFieldProps('course').value,
+      degree: formik.getFieldProps('degree').value,
+      activities: formik.getFieldProps('activities').value,
+      eduStartDate: eduStartDate,
+      eduEndDate: checked ? 'present' : eduEndDate,
+    });
+    handleClose(false);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      school: '',
+      course: '',
+      degree: '',
+      activities: '',
+      eduStartDate: '',
+      eduEndDate: '',
+    },
+    validationSchema: Yup.object({
+      school: Yup.string().required('Required'),
+      course: Yup.string().required('Required'),
+      degree: Yup.string().required('Required'),
+      activities: Yup.string().required('Required'),
+      eduStartDate: Yup.string().required('Required'),
+      eduEndDate: Yup.string().required('Required'),
+    }),
+    onSubmit: (values) => console.log('df'),
+  });
 
   return (
-    <ModalCus closeModal={handleClose}>
+    <ModalCus
+      closeModal={() => {
+        setIsEditing(false);
+        handleClose();
+      }}
+    >
       <div className='mx-5'>
-        <HeaderModal>Add Education</HeaderModal>
+        <HeaderModal>
+          {isEditing ? 'Edit Education' : 'Add Education'}
+        </HeaderModal>
         <hr style={{ background: '#323232' }} />
-        <form>
+        <form onSubmit={(e) => onSubmit(e, 'education')}>
           <ModalForm className='row'>
             <div className='col-12 form-group'>
               <label>School*</label>
               <input
+                id='school'
+                name='school'
                 type='text'
                 className='form-control ps-3'
                 placeholder='Enter School name'
+                value={
+                  isEditing
+                    ? education[editIndex]?.school
+                    : formik.values.school
+                }
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
               />
+              {formik.touched.school && formik.errors.school ? (
+                <label className='error'>{formik.errors.school}</label>
+              ) : null}
             </div>
             <div className='col-12 form-group'>
               <label>Degree*</label>
               <input
+                id='degree'
+                name='degree'
                 type='text'
                 className='form-control ps-3'
                 placeholder='Enter Degree '
+                value={
+                  isEditing
+                    ? education[editIndex]?.degree
+                    : formik.values.degree
+                }
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
               />
+              {formik.touched.degree && formik.errors.degree ? (
+                <label className='error'>{formik.errors.degree}</label>
+              ) : null}
             </div>
             <div className='col-12 form-group'>
               <label>Filed of study*</label>
               <input
+                id='course'
+                name='course'
                 type='text'
                 className='form-control ps-3'
                 placeholder='Enter filed of study'
+                value={
+                  isEditing
+                    ? education[editIndex]?.course
+                    : formik.values.course
+                }
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
               />
+              {formik.touched.course && formik.errors.course ? (
+                <label className='error'>{formik.errors.course}</label>
+              ) : null}
             </div>
             <div className='col-12 form-group'>
               <div className='d-flex justify-content-between'>
@@ -242,29 +351,49 @@ export const EducationModal = ({ handleClose }) => {
               </div>
 
               <textarea
+                id='activities'
+                name='activities'
                 cols='5'
                 rows='6'
                 className='form-control ps-3'
                 placeholder='Enter Activities and Societies'
+                value={
+                  isEditing
+                    ? education[editIndex]?.activities
+                    : formik.values.activities
+                }
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
               />
+              {formik.touched.activities && formik.errors.activities ? (
+                <label className='error'>{formik.errors.activities}</label>
+              ) : null}
             </div>
 
             <div className='col-6 form-group'>
               <label>Entry Date*</label>
               <DatePicker
+                id='eduStartDate'
+                name='eduStartDate'
                 className='p-2'
                 style={{ padding: '15px' }}
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                selected={
+                  isEditing ? education[editIndex]?.eduStartDate : eduStartDate
+                }
+                onChange={(date) => setEduStartDate(date)}
               />
             </div>
             <div className='col-6 form-group'>
               <label>Graduation Date*</label>
               <DatePicker
+                id='eduEndDate'
+                name='eduEndDate'
                 className='p-2'
                 style={{ padding: '15px' }}
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                selected={
+                  isEditing ? education[editIndex]?.eduEndDate : eduEndDate
+                }
+                onChange={(date) => setEduEndDate(date)}
               />
             </div>
             <div className='col-6 my-4'>
@@ -284,7 +413,7 @@ export const EducationModal = ({ handleClose }) => {
               style={{ marginTop: '4rem' }}
             >
               <CustomButton
-                onClick={() => handleClose(false)}
+                type='submit'
                 background='#021098'
                 style={{ marginLeft: '7rem' }}
               >

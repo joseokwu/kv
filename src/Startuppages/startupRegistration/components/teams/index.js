@@ -25,7 +25,11 @@ import { team } from './../../../../services/startUpReg';
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import { toast } from 'react-hot-toast';
 import { CoFounder } from './coFounder';
-import { LargeModal, WorkExperience } from '../../../../Startupcomponents';
+import {
+  LargeModal,
+  WorkExperience,
+  Education,
+} from '../../../../Startupcomponents';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
 
@@ -48,11 +52,13 @@ export const TeamProfile = () => {
   );
   const [socialMedia, setSocialMedia] = useState({});
   const [editIndex, setEditIndex] = useState();
+  const [isEditing, setIsEditing] = useState(false);
 
   const {
     changePath,
     setWorkExperience,
-    state: { path, workExperience },
+    setEducation,
+    state: { path, workExperience, education },
   } = useActivity();
 
   const onChangeImage = (e) => {
@@ -128,49 +134,82 @@ export const TeamProfile = () => {
     onSubmit: (value) => onSubmit(value),
   });
   const handleWorkDetails = ({
+    from,
     title,
     location,
     position,
     description,
     startDate,
     endDate,
+    school,
+    course,
+    degree,
+    activities,
+    eduStartDate,
+    eduEndDate,
   }) => {
-    setWorkExperience({
-      title,
-      location,
-      position,
-      description,
-      startDate,
-      endDate,
-    });
+    if (from === 'workExperience') {
+      setWorkExperience({
+        title,
+        location,
+        position,
+        description,
+        startDate,
+        endDate,
+      });
+      setIsEditing(false);
+    } else if (from === 'education') {
+      setEducation({
+        school,
+        course,
+        degree,
+        activities,
+        eduStartDate,
+        eduEndDate,
+      });
+      setIsEditing(false);
+    }
   };
 
   return (
     <>
-      {console.log(workExperience)}
       {show ? (
         <TeamModal
           handleClose={setShow}
           handleWorkDetails={handleWorkDetails}
           editIndex={editIndex}
           workExperience={workExperience}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
         />
       ) : (
         <span></span>
       )}
       {showEducation ? (
-        <EducationModal handleClose={setShowEducation} />
+        <EducationModal
+          handleClose={setShowEducation}
+          handleWorkDetails={handleWorkDetails}
+          editIndex={editIndex}
+          education={education}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+        />
       ) : (
         <span></span>
       )}
       {showModal ? (
         <LargeModal id='cofounder' title='' closeModal={setShowModal}>
-          <CoFounder />
+          <CoFounder
+            handleClose={setShowModal}
+            handleWorkDetails={handleWorkDetails}
+            editIndex={editIndex}
+            workExperience={workExperience}
+            education={education}
+          />
         </LargeModal>
       ) : (
         <span></span>
       )}
-
       <HeaderTeam>
         <h5> Team</h5>
         <p className='text-nowrap'>Let’s you introduce your Co-Founder(s)</p>
@@ -328,12 +367,12 @@ export const TeamProfile = () => {
                   {...item}
                   showTeamModal={() => setShow(true)}
                   setEditIndex={setEditIndex}
+                  setIsEditing={setIsEditing}
                   id={index}
                 />
               );
             })}
 
-          <hr />
           <div>
             <span
               onClick={() => setShow(true)}
@@ -354,6 +393,19 @@ export const TeamProfile = () => {
             <span>Education</span>
           </div>
           <hr />
+          {education.length > 0 &&
+            education.map((item, index) => {
+              return (
+                <Education
+                  key={index}
+                  {...item}
+                  showEducationModal={() => setShowEducation(true)}
+                  setEditIndex={setEditIndex}
+                  setIsEditing={setIsEditing}
+                  id={index}
+                />
+              );
+            })}
           <span
             onClick={() => setShowEducation(true)}
             style={{

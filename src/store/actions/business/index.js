@@ -10,6 +10,7 @@ import {
   GET_EVENTS_FAILED,
   GET_EVENTS_SUCCESS,
   SET_WORK_EXPERIENCE,
+  SET_EDUCATION,
 } from '../actions.types';
 
 import { getEvents } from '../../../services/events';
@@ -50,6 +51,13 @@ export const showDEventAction = () => (dispatch) => {
 export const setDWorkExperience = (values) => (dispatch) => {
   dispatch({
     type: SET_WORK_EXPERIENCE,
+    payload: values,
+  });
+};
+
+export const setDEducation = (values) => (dispatch) => {
+  dispatch({
+    type: SET_EDUCATION,
     payload: values,
   });
 };
