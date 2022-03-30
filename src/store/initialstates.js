@@ -21,4 +21,5 @@ export const INIT_STATE_BUSINESS = {
     action: false,
   },
   path: 1,
+  
 };
