@@ -142,7 +142,7 @@ const routes = [
     path: '/startup/fundraising',
     component: WithStartupDashboardLayout(StartupFundingRaising),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
@@ -150,7 +150,7 @@ const routes = [
     path: '/startup/boosterpartner',
     component: WithStartupDashboardLayout(StartupBoosterPartner),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
@@ -198,15 +198,15 @@ const routes = [
     path: '/startup/events',
     component: WithStartupDashboardLayout(StartupEvents),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
     name: 'StartupContactus',
-    path: '/startup/contactus',
+    path: '/startup/support',
     component: WithStartupDashboardLayout(StartupContactUs),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
@@ -223,7 +223,7 @@ const routes = [
     path: '/startup/profile',
     component: WithStartupDashboardLayout(StartupProfile),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
 

@@ -85,7 +85,7 @@
 
 .activ {
   background-color: #00adef !important;
-  border: none;
+  border: none!important;
   color: white;
   box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
 }
