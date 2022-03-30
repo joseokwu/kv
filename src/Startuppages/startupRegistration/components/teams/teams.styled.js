@@ -273,7 +273,7 @@ export const BntWrap = styled.div`
 
 `;
 
-`
+
 
 export const Education = styled.div`
   .addEducation {
@@ -308,4 +308,4 @@ export const Education = styled.div`
     letter-spacing: 0.01em;
     color: #828282;
   }
-
+`
