@@ -39,6 +39,14 @@ export const events = (id) => async (dispatch) => {
   }
 };
 
+// export const addwork = (value) => (dispatch) =>{
+
+//   dispatch({
+//     type:ADD_WORK_EXPERIENCE,
+//     payload:value
+//   })
+// }
+
 // const setAlert = ()=>{
 
 // }

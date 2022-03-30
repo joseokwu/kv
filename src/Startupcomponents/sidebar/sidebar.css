@@ -14,7 +14,7 @@
   /* height: calc(100vh - 60px); */
   background: #fff;
   color: #0e0d0d;
-  padding: 60px 10%;
+  padding: 60px 5%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -40,10 +40,10 @@
 
 .side-list-start {
   list-style: none;
-  margin: 0;
-  padding: 0;
-  padding-top: 30px;
-  margin-left: 2rem;
+  /* margin: 0; */
+  /* padding: 0; */
+  padding-top: 100px;
+  margin-left: 5rem;
 }
 
 .side-list a {
@@ -81,6 +81,7 @@
 
 .side-list-start span p {
   font-family: DM Sans;
+  font-weight: 400;
   font-style: normal;
   font-weight: normal;
   font-size: 17px;
@@ -89,20 +90,26 @@
   color: #525151;
 }
 
-.active-side {
+/* .active-side {
   padding: 10px 17px;
   background-color: white;
-  color: #0060ef !important;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.active-side-start {
-  padding: 10px 17px;
-  background: #dcebff;
   color: #2E3192 !important;
   border-radius: 10px;
   cursor: pointer;
+} */
+
+.active-side-start {
+  padding: 10px 20px;
+  background: #dcebff;
+  color: #2e3192 !important;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
 }
 
 .side-text {

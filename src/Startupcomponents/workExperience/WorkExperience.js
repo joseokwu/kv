@@ -1,8 +1,9 @@
-import React from 'react';
+import React , { useState} from 'react';
 import './workExperience.css';
 import appleSmall from '../../assets/icons/appleSmall.svg';
 import editIcon from '../../assets/icons/editIcon.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
+
 
 export const WorkExperience = ({
   title,

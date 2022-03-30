@@ -113,3 +113,9 @@ export const FundRaising = () => {
     </>
   );
 };
+
+// My responsibility as the product lead is to ensure the success of our
+//           product team. As a B2B product team, we help our clients realize their
+//           product development goals. I work with the design and engineering
+//           teams to craft and develop cutting edge software that meets market
+//           standards.
