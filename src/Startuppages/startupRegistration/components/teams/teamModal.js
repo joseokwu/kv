@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useActivity} from '../../../../hooks/useBusiness';
+import { useActivity } from '../../../../hooks/useBusiness';
 
 export const TeamModal = ({
   handleClose,
@@ -223,7 +223,6 @@ export const TeamModal = ({
   );
 };
 
-
 export const EducationModal = ({
   handleClose,
   handleWorkDetails,
@@ -270,7 +269,6 @@ export const EducationModal = ({
     onSubmit: (values) => console.log('df'),
   });
 
-
   return (
     <ModalCus
       closeModal={() => {
@@ -279,13 +277,11 @@ export const EducationModal = ({
       }}
     >
       <div className='mx-5'>
-
         <HeaderModal>
           {isEditing ? 'Edit Education' : 'Add Education'}
         </HeaderModal>
         <hr style={{ background: '#323232' }} />
         <form onSubmit={(e) => onSubmit(e, 'education')}>
-
           <ModalForm className='row'>
             <div className='col-12 form-group'>
               <label>School*</label>
@@ -293,9 +289,6 @@ export const EducationModal = ({
                 id='school'
                 name='school'
                 type='text'
-                name='name'
-                value={formik.values.name}
-                onChange={formik.handleChange}
                 className='form-control ps-3'
                 placeholder='Enter School name'
                 value={
@@ -316,9 +309,6 @@ export const EducationModal = ({
                 id='degree'
                 name='degree'
                 type='text'
-                name='degree'
-                value={formik.values.degree}
-                onChange={formik.handleChange}
                 className='form-control ps-3'
                 placeholder='Enter Degree '
                 value={
@@ -334,14 +324,11 @@ export const EducationModal = ({
               ) : null}
             </div>
             <div className='col-12 form-group'>
-              <label>Filed of study*</label>
+              <label>Field of study*</label>
               <input
                 id='course'
                 name='course'
                 type='text'
-                name='course'
-                value={formik.values.course}
-                onChange={formik.handleChange}
                 className='form-control ps-3'
                 placeholder='Enter filed of study'
                 value={
@@ -369,9 +356,6 @@ export const EducationModal = ({
                 name='activities'
                 cols='5'
                 rows='6'
-                name='activities'
-                value={formik.values.activities}
-                onChange={formik.handleChange}
                 className='form-control ps-3'
                 placeholder='Enter Activities and Societies'
                 value={
@@ -386,13 +370,13 @@ export const EducationModal = ({
                 <label className='error'>{formik.errors.activities}</label>
               ) : null}
             </div>
-            <div className='col-12 form-group' >
-            <input
+            <div className='col-12 form-group'>
+              <input
                 type='checkbox'
                 checked={checked}
                 onChange={() => setChecked(!checked)}
               />
-               <span>I current school here.</span>
+              <span>I current school here.</span>
             </div>
             <div className='col-6 form-group'>
               <label>Entry Date*</label>
@@ -407,29 +391,21 @@ export const EducationModal = ({
                 onChange={(date) => setEduStartDate(date)}
               />
             </div>
-           {
-             !checked && (
+            {!checked && (
               <div className='col-6 form-group'>
-              <label>Graduation Date*</label>
-              <DatePicker
-                id='eduEndDate'
-                name='eduEndDate'
-                className='p-2'
-                name='endDate'
-                style={{ padding: '15px' }}
-
-                selected={
-                  isEditing ? education[editIndex]?.eduEndDate : eduEndDate
-                }
-                onChange={(date) => setEduEndDate(date)}
-
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-
-              />
-            </div>
-             )
-           }
+                <label>Graduation Date*</label>
+                <DatePicker
+                  id='eduEndDate'
+                  name='eduEndDate'
+                  className='p-2'
+                  style={{ padding: '15px' }}
+                  selected={
+                    isEditing ? education[editIndex]?.eduEndDate : eduEndDate
+                  }
+                  onChange={(date) => setEduEndDate(date)}
+                />
+              </div>
+            )}
             <div className='col-6 my-4'>
               <span
                 style={{

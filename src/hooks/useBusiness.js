@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import {
   changeDPath,
   showDEventAction,
@@ -9,28 +9,23 @@ import {
 } from '../store/actions/business';
 import { useAuth } from './useAuth';
 
-
 export const useActivity = () => {
-  const { stateAuth } = useAuth()
-  const dispatch = useDispatch()
-  const state = useSelector((state) => state.business)
+  const { stateAuth } = useAuth();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.business);
   //const authSte = useSelector((state) => state);
 
   const changePath = (value) => {
-    dispatch(changeDPath(value))
-  }
+    dispatch(changeDPath(value));
+  };
 
   const showEventAction = () => {
-    dispatch(showDEventAction())
-  }
+    dispatch(showDEventAction());
+  };
 
   const setWorkExperience = (values) => {
-    dispatch(setDWorkExperience(values))
-  }
-
-  const addEducation = (value) => {
-    dispatch(addDEducation(value))
-  }
+    dispatch(setDWorkExperience(values));
+  };
 
   const setEducation = (values) => {
     dispatch(setDEducation(values));
@@ -45,13 +40,7 @@ export const useActivity = () => {
     changePath,
     showEventAction,
     setWorkExperience,
-   addEducation,
     setEducation,
     setFundraising,
   };
 };
-
- 
-  }
-}
-

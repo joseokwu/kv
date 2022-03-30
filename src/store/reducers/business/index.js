@@ -8,7 +8,6 @@ import {
   CHANGE_PAGE,
   SHOW_EVENT,
   DASH_VIEW,
-  ADD_EDUCATION,
   SET_WORK_EXPERIENCE,
   SET_EDUCATION,
   SET_FUNDRAISING,
@@ -61,26 +60,14 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         showEvent: !state.showEvent,
       };
     case DASH_VIEW:
-      return { 
-        ...state, 
-        dash_view: 
-        action.payload,
-      };
-    case ADD_EDUCATION:
       return {
         ...state,
-        education: [
-          action.payload,
-          ...state.education
-        ]
-      }
+        dash_view: action.payload,
+      };
     case SET_WORK_EXPERIENCE:
       return {
         ...state,
-        workExperience: [
-          ...state.workExperience, 
-          action.payload
-        ],
+        workExperience: [...state.workExperience, action.payload],
       };
 
     case SET_EDUCATION:

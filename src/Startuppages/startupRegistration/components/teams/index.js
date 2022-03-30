@@ -5,7 +5,6 @@ import {
   InputWrapper,
   FormWrapper,
   BntWrap,
-
 } from './teams.styled';
 
 import { UserOutlined, PlusOutlined } from '@ant-design/icons';
@@ -36,27 +35,23 @@ import { useAuth } from '../../../../hooks/useAuth';
 
 const { Option } = Select;
 
-  Education
-} from './teams.styled'
-
-
 export const TeamProfile = () => {
-  const { stateAuth } = useAuth()
-  const [disImg, setImg] = useState(null)
+  const { stateAuth } = useAuth();
+  const [disImg, setImg] = useState(null);
 
-  const [show, setShow] = useState(false)
-  const [showEducation, setShowEducation] = useState(false)
-  const [showModal, setShowModal] = useState(false)
+  const [show, setShow] = useState(false);
+  const [showEducation, setShowEducation] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
-  const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
-  const [startDate, setStartDate] = useState(new Date())
-  const [loading, setLoading] = useState(false)
-  const [nextLoading, setNextLoading] = useState(false)
-  const [opts, setOpts] = useState('')
+  const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express'];
+  const [startDate, setStartDate] = useState(new Date());
+  const [loading, setLoading] = useState(false);
+  const [nextLoading, setNextLoading] = useState(false);
+  const [opts, setOpts] = useState('');
   const [phone, setPhone] = useState(
-    stateAuth?.user?.team?.founderInfo?.mobile_number,
-  )
+    stateAuth?.user?.team?.founderInfo?.mobile_number
+  );
   // const [contacts, setContacts] = useState({
   //   email: stateAuth?.user?.team?.founderInfo?.email,
   //   country: stateAuth?.user?.team?.founderInfo?.country,
@@ -72,16 +67,13 @@ export const TeamProfile = () => {
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const [coFounder, setCoFounder] = useState('')
-
+  const [coFounder, setCoFounder] = useState('');
 
   const {
     changePath,
     setWorkExperience,
     setEducation,
-
-    addEducation,
-
+    state: { path, workExperience, education },
   } = useActivity();
 
   const onChangeImage = (e) => {
@@ -90,7 +82,7 @@ export const TeamProfile = () => {
     if (files && files[0]) {
       setImg(URL.createObjectURL(files[0]));
     }
-  }
+  };
 
   // const onChange = (e) => {
   //   setContacts({ ...contacts, [e.target.name]: e.target.value })
@@ -132,19 +124,18 @@ export const TeamProfile = () => {
   }
 
   const onSubmit = async (value) => {
- 
     try {
       const team = {
         type: 'team',
         accType: 'startup',
         values: {
           ...value,
-          experience:workExperience,
-          education:education
+          experience: workExperience,
+          education: education,
         },
         userId: stateAuth?.user?.userId,
-      }
-      console.log(team)
+      };
+      console.log(team);
       // if (opts === 'next') {
       //   setOpts(true)
       //   let result = await updateFounderProfile(team)
@@ -167,8 +158,10 @@ export const TeamProfile = () => {
       // setLoading(false)
       // return
     } catch (err) {
-      setLoading(false)
-      toast.error(err?.res?.data?.message || 'There was an error updating team')
+      setLoading(false);
+      toast.error(
+        err?.res?.data?.message || 'There was an error updating team'
+      );
     }
     // setLoading(true)
     // team(value).then((res) => {
@@ -179,7 +172,7 @@ export const TeamProfile = () => {
     //     next()
     //   }
     // })
-  }
+  };
 
   // const formik = useFormik({
   //   initialValues: {
@@ -188,7 +181,6 @@ export const TeamProfile = () => {
   //     briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
   //     firstName: stateAuth?.user?.team?.firstName,
   //     lastName: stateAuth?.user?.team?.lastName,
-
 
   const formik = useFormik({
     initialValues: {
@@ -203,8 +195,6 @@ export const TeamProfile = () => {
       city: '',
       // mobile_number: phone,
       skills: [],
-      
-      
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
@@ -249,7 +239,6 @@ export const TeamProfile = () => {
 
   return (
     <>
-
       {show ? (
         <TeamModal
           handleClose={setShow}
@@ -275,7 +264,6 @@ export const TeamProfile = () => {
         <span></span>
       )}
       {showModal ? (
-
         <LargeModal id='cofounder' title='' closeModal={setShowModal}>
           <CoFounder
             handleClose={setShowModal}
@@ -284,7 +272,7 @@ export const TeamProfile = () => {
             workExperience={workExperience}
             education={education}
           />
-
+        </LargeModal>
       ) : (
         <span></span>
       )}
@@ -324,9 +312,9 @@ export const TeamProfile = () => {
             </InputWrapper>
           </div>
 
-          <div className="row my-5">
-            <div className="form-group col-12">
-              <div className="d-flex justify-content-between">
+          <div className='row my-5'>
+            <div className='form-group col-12'>
+              <div className='d-flex justify-content-between'>
                 <label>Brief Introduction *</label>
                 <label style={{ color: '#828282' }}>10 words at most</label>
               </div>
@@ -420,7 +408,7 @@ export const TeamProfile = () => {
                 international
                 name='mobile_number'
                 countryCallingCodeEditable={true}
-                className="custs w-lg-50 ps-3"
+                className='custs w-lg-50 ps-3'
                 value={
                   stateAuth?.user?.team?.mobile_number
                     ? stateAuth?.user?.team?.mobile_number
@@ -484,15 +472,6 @@ export const TeamProfile = () => {
                 />
               );
             })}
-              {
-          education.length > 0 && education.map((item, i) =>(
-            <AddEducation  key={i} name={item?.name} course={item?.course} 
-            degree={item?.degree} startDate={item?.startDate}
-            endDate={item?.endDate}
-              />
-          ))
-              }
-          
           <span
             onClick={() => setShowEducation(true)}
             style={{
@@ -519,10 +498,10 @@ export const TeamProfile = () => {
               mode='multiple'
               allowClear
               style={{ width: '100%', color: 'red' }}
-              placeholder="Please click to select"
+              placeholder='Please click to select'
               value={formik.skills}
               onChange={formik.handleChange}
-              className="skiil-select"
+              className='skiil-select'
             >
               {children}
             </Select>
@@ -585,8 +564,8 @@ export const TeamProfile = () => {
                 <button
                   className={`me-3 ${coFounder === 'yes' && 'active'}`}
                   onClick={(e) => {
-                    e.preventDefault()
-                    setCoFounder('yes')
+                    e.preventDefault();
+                    setCoFounder('yes');
                   }}
                 >
                   Yes
@@ -594,8 +573,8 @@ export const TeamProfile = () => {
                 <button
                   className={`me-3 ${coFounder === 'no' && 'active'}`}
                   onClick={(e) => {
-                    e.preventDefault()
-                    setCoFounder('no')
+                    e.preventDefault();
+                    setCoFounder('no');
                   }}
                 >
                   No
@@ -603,11 +582,11 @@ export const TeamProfile = () => {
               </BntWrap>
             </div>
 
-            <div className="sold">
-              <div className="d-flex justify-content-center">
+            <div className='sold'>
+              <div className='d-flex justify-content-center'>
                 <div
-                  className=""
-                  data-target="#cofounder"
+                  className=''
+                  data-target='#cofounder'
                   onClick={() => setShowModal(true)}
                 >
                   <Tag
@@ -638,8 +617,8 @@ export const TeamProfile = () => {
               placeholder='Enter email address'
             />
           </div>
-          <div className="my-3 mx-3">
-            <CustomButton type="submit" background="#031298">
+          <div className='my-3 mx-3'>
+            <CustomButton type='submit' background='#031298'>
               {' '}
               Invite{' '}
             </CustomButton>
@@ -652,20 +631,20 @@ export const TeamProfile = () => {
               Back
             </CustomButton>
           </div>
-          <div className="col-9 d-flex justify-content-end">
+          <div className='col-9 d-flex justify-content-end'>
             <CustomButton
-              type="submit"
+              type='submit'
               disabled={loading}
-              className="mx-2"
-              background="#00ADEF"
+              className='mx-2'
+              background='#00ADEF'
             >
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
             <CustomButton
-              type="submit"
+              type='submit'
               disabled={nextLoading}
               onClick={() => setOpts('next')}
-              background="#2E3192"
+              background='#2E3192'
             >
               {nextLoading ? <CircularLoader /> : 'Next'}
             </CustomButton>
@@ -673,30 +652,5 @@ export const TeamProfile = () => {
         </div>
       </form>
     </>
-  )
-}
-
-const AddEducation = ({name, course, degree, startDate, endDate, activities}) => {
-  const dat = new Date(startDate).getFullYear().toString().substring(0,10);
-  const endD = new Date(endDate).getFullYear().toString().substring(0,10);
-  
-  return (
-    <>
-      <Education>
-        <div className="my-4 addEducation d-flex">
-          <div>
-            <img src={logo} alt="" />
-          </div>
-          <div>
-            <h4> { name } </h4>
-            <h2> { course } </h2>
-            <p> { degree } </p>
-            <p>
-            { dat + "     -    "  +  `     ${typeof endDate === 'object' ? endD : endDate }` }
-             </p>
-          </div>
-        </div>
-      </Education>
-    </>
-  )
-}
+  );
+};
