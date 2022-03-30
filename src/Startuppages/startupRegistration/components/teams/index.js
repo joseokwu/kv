@@ -654,6 +654,7 @@ export const TeamProfile = () => {
               background='#2E3192'
             >
               {nextLoading ? <CircularLoader /> : 'Next'}
+              </CustomButton>
 
             <CustomButton className='mx-2' background='#00ADEF'>
               Save
@@ -667,4 +668,3 @@ export const TeamProfile = () => {
     </>
   );
 };
-

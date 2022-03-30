@@ -158,7 +158,7 @@ const routes = [
     path: '/startup/e-academy',
     component: WithStartupDashboardLayout(StartupEAcademy),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
@@ -166,7 +166,7 @@ const routes = [
     path: '/startup/todolist',
     component: WithStartupDashboardLayout(StartupTodoList),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
@@ -174,7 +174,7 @@ const routes = [
     path: '/startup/networking',
     component: WithStartupDashboardLayout(StartupNetworking),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
@@ -182,7 +182,7 @@ const routes = [
     path: '/startup/dealroom',
     component: WithStartupDashboardLayout(StartupDealRoom),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
@@ -190,7 +190,7 @@ const routes = [
     path: '/startup/team/member',
     component: WithStartupRegisterLayout(StartupTeamMember),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
   {
@@ -232,7 +232,7 @@ const routes = [
     path: '/startup/notification',
     component: WithStartupDashboardLayout(StartupNotification),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
 
