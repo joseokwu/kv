@@ -270,8 +270,12 @@ export const BntWrap = styled.div`
       color: #2e3192;
     }
   }
-
 `;
+
+// export const Education = styled.div`
+//   .addEducation {
+//     column-gap: 20px;
+//   }
 
 
 
@@ -289,15 +293,35 @@ export const Education = styled.div`
     color: #323232;
   }
 
-  h2 {
-    font-family: 'DM Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 23px;
-    letter-spacing: 0.01em;
-    color: #525151;
-  }
+
+//   h4 {
+//     font-family: 'Lato';
+//     font-style: normal;
+//     font-weight: 700;
+//     font-size: 20px;
+//     line-height: 140%;
+//     color: #323232;
+//   }
+
+//   h2 {
+//     font-family: 'DM Sans';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-size: 18px;
+//     line-height: 23px;
+//     letter-spacing: 0.01em;
+//     color: #525151;
+//   }
+
+//   p {
+//     font-family: 'DM Sans';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-size: 16px;
+//     line-height: 21px;
+//     letter-spacing: 0.01em;
+//     color: #828282;
+//   }
 
   p {
     font-family: 'DM Sans';

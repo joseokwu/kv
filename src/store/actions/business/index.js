@@ -11,6 +11,7 @@ import {
   GET_EVENTS_SUCCESS,
   SET_WORK_EXPERIENCE,
   SET_EDUCATION,
+  SET_FUNDRAISING,
 } from '../actions.types';
 
 import { getEvents } from '../../../services/events';
@@ -38,6 +39,16 @@ export const events = (id) => async (dispatch) => {
   }
 };
 
+
+// export const addwork = (value) => (dispatch) =>{
+
+//   dispatch({
+//     type:ADD_WORK_EXPERIENCE,
+//     payload:value
+//   })
+// }
+
+
 // const setAlert = ()=>{
 
 // }
@@ -60,4 +71,13 @@ export const setDEducation = (values) => (dispatch) => {
     type: SET_EDUCATION,
     payload: values,
   });
+
 };
+
+export const setDFundraising = (values) => (dispatch) => {
+  dispatch({
+    type: SET_FUNDRAISING,
+    payload: values,
+  });
+};
+

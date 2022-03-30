@@ -47,13 +47,29 @@ export const TeamProfile = () => {
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express'];
   const [startDate, setStartDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
+  const [nextLoading, setNextLoading] = useState(false);
+  const [opts, setOpts] = useState('');
   const [phone, setPhone] = useState(
-    stateAuth?.user?.team?.contactInfo?.phoneNumber
+    stateAuth?.user?.team?.founderInfo?.mobile_number
   );
+  // const [contacts, setContacts] = useState({
+  //   email: stateAuth?.user?.team?.founderInfo?.email,
+  //   country: stateAuth?.user?.team?.founderInfo?.country,
+  //   state: stateAuth?.user?.team?.founderInfo?.state,
+  //   city: stateAuth?.user?.team?.founderInfo?.city,
+  // })
+  // const [socialMedia, setSocialMedia] = useState({
+  //   linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
+  //   twitter: stateAuth?.user?.team?.socialMedia?.twitter,
+  //   website: stateAuth?.user?.team?.socialMedia?.website,
+  // })
+
   const [socialMedia, setSocialMedia] = useState({});
+
   const [editIndex, setEditIndex] = useState();
   const [isEditing, setIsEditing] = useState(false);
 
+  const [coFounder, setCoFounder] = useState('');
   const {
     changePath,
     setWorkExperience,
@@ -68,6 +84,12 @@ export const TeamProfile = () => {
       setImg(URL.createObjectURL(files[0]));
     }
   };
+
+
+  // const onChange = (e) => {
+  //   setContacts({ ...contacts, [e.target.name]: e.target.value })
+  // }
+
   let colors = [];
 
   for (let i = 0; i < 20; i++) {
@@ -99,17 +121,66 @@ export const TeamProfile = () => {
     e.preventDefault();
   }
 
-  const onSubmit = (value) => {
-    setLoading(true);
-    team(value).then((res) => {
-      if (res?.message) {
-        console.log(res);
-        toast.success(res?.message);
-        setLoading(false);
-        next();
-      }
-    });
+
+  const onSubmit = async (value) => {
+    try {
+      const team = {
+        type: 'team',
+        accType: 'startup',
+        values: {
+          ...value,
+          experience: workExperience,
+          education: education,
+        },
+        userId: stateAuth?.user?.userId,
+      };
+      console.log(team);
+      // if (opts === 'next') {
+      //   setOpts(true)
+      //   let result = await updateFounderProfile(team)
+
+      //   if (result?.success) {
+      //     toast.success('Team' + '' + result?.message)
+      //     setOpts(false)
+      //     return changePath(path + 1)
+      //   }
+      // }
+      // setLoading(true)
+      // let result = await updateFounderProfile(team)
+
+      // if (!result?.success) {
+      //   toast.error(result?.message || 'There was an error in updating team')
+      //   setLoading(false)
+      //   return
+      // }
+      // toast.success('Team' + '' + result?.message)
+      // setLoading(false)
+      // return
+    } catch (err) {
+      setLoading(false);
+      toast.error(
+        err?.res?.data?.message || 'There was an error updating team'
+      );
+    }
+    // setLoading(true)
+    // team(value).then((res) => {
+    //   if (res?.message) {
+    //     console.log(res)
+    //     toast.success(res?.message)
+    //     setLoading(false)
+    //     next()
+    //   }
+    // })
   };
+
+  // const formik = useFormik({
+  //   initialValues: {
+  //     avatar:
+  //       'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
+  //     briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
+  //     firstName: stateAuth?.user?.team?.firstName,
+  //     lastName: stateAuth?.user?.team?.lastName,
+
 
   const formik = useFormik({
     initialValues: {
@@ -124,11 +195,6 @@ export const TeamProfile = () => {
       city: '',
       // mobile_number: phone,
       skills: [],
-      experience: [],
-      education: [],
-      linkedIn: '',
-      twitter: '',
-      website: '',
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
@@ -246,7 +312,8 @@ export const TeamProfile = () => {
             </InputWrapper>
           </div>
 
-          <div className='row my-3'>
+
+          <div className='row my-5'>
             <div className='form-group col-12'>
               <div className='d-flex justify-content-between'>
                 <label>Brief Introduction *</label>
@@ -433,7 +500,8 @@ export const TeamProfile = () => {
               allowClear
               style={{ width: '100%', color: 'red' }}
               placeholder='Please click to select'
-              onChange={handleChange}
+              value={formik.skills}
+              onChange={formik.handleChange}
               className='skiil-select'
             >
               {children}
@@ -494,10 +562,24 @@ export const TeamProfile = () => {
 
             <div className='d-flex'>
               <BntWrap>
-                <button className='me-3' onClick={btn}>
+
+                <button
+                  className={`me-3 ${coFounder === 'yes' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCoFounder('yes');
+                  }}
+                >
                   Yes
                 </button>
-                <button className='' onClick={btn}>
+                <button
+                  className={`me-3 ${coFounder === 'no' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCoFounder('no');
+                  }}
+                  >
+
                   No
                 </button>
               </BntWrap>
@@ -539,7 +621,14 @@ export const TeamProfile = () => {
             />
           </div>
           <div className='my-3 mx-3'>
+
+            <CustomButton type='submit' background='#031298'>
+              {' '}
+              Invite{' '}
+            </CustomButton>
+
             <CustomButton background='#031298'> Invite </CustomButton>
+
           </div>
         </FormWrapper>
 
@@ -550,6 +639,22 @@ export const TeamProfile = () => {
             </CustomButton>
           </div>
           <div className='col-9 d-flex justify-content-end'>
+            <CustomButton
+              type='submit'
+              disabled={loading}
+              className='mx-2'
+              background='#00ADEF'
+            >
+              {loading ? <CircularLoader /> : 'Save'}
+            </CustomButton>
+            <CustomButton
+              type='submit'
+              disabled={nextLoading}
+              onClick={() => setOpts('next')}
+              background='#2E3192'
+            >
+              {nextLoading ? <CircularLoader /> : 'Next'}
+
             <CustomButton className='mx-2' background='#00ADEF'>
               Save
             </CustomButton>
@@ -562,3 +667,4 @@ export const TeamProfile = () => {
     </>
   );
 };
+
