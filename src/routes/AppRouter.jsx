@@ -5,9 +5,11 @@ import { ProtectedRoute }  from './ProtectedRoute'
 import { useAuth } from '../hooks/useAuth';
 import { getToken , getLocationHistory , getRole } from '../utils/helpers.js';
 import { LoadingIcon } from './../components/Loading/Loading';
+import { useActivity } from '../hooks/useBusiness';
 
 export  function AppRouter(props){
     const { userProfile, stateAuth : { loading , authenticated }} = useAuth();
+    const  { state } = useActivity();
     const history = useHistory();
     useEffect(()=>{
         console.log(loading)
@@ -23,7 +25,7 @@ export  function AppRouter(props){
 			}       
 		};
 		getP();    
-    },[userProfile, authenticated, history])  
+    },[userProfile, authenticated, history , state.path])  
 
     if(loading){
         return <LoadingIcon fullscreen />

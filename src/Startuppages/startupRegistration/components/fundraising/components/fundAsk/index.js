@@ -236,10 +236,10 @@ export const FundAsk = () => {
                 onClick={() => setShowModal(true)}
               >
                 <Tag
-                  name='+ Add Co-founder'
-                  color='#4F4F4F'
-                  bg='rgba(183, 218, 231, 0.5)'
-                  padding='9px 30px'
+                  name="+ Add Lead Investor"
+                  color="#4F4F4F"
+                  bg="rgba(183, 218, 231, 0.5)"
+                  padding="9px 30px"
                 />
               </div>
             </div>

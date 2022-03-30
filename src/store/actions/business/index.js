@@ -1,4 +1,5 @@
 import {
+
   DASHBOARD,
   WALLET,
   TRANSACTIONS,
@@ -12,6 +13,7 @@ import {
   SET_WORK_EXPERIENCE,
   SET_EDUCATION,
 } from '../actions.types';
+
 
 import { getEvents } from '../../../services/events';
 
@@ -38,6 +40,14 @@ export const events = (id) => async (dispatch) => {
   }
 };
 
+// export const addwork = (value) => (dispatch) =>{
+  
+//   dispatch({
+//     type:ADD_WORK_EXPERIENCE,
+//     payload:value
+//   })
+// }
+
 // const setAlert = ()=>{
 
 // }
@@ -55,9 +65,18 @@ export const setDWorkExperience = (values) => (dispatch) => {
   });
 };
 
+
 export const setDEducation = (values) => (dispatch) => {
   dispatch({
     type: SET_EDUCATION,
     payload: values,
   });
 };
+
+export const addDEducation = (value) => (dispatch) => {
+  dispatch({
+    type: ADD_EDUCATION,
+    payload: value
+  })
+}
+
