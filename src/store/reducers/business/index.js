@@ -60,10 +60,14 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         showEvent: !state.showEvent,
       };
     case DASH_VIEW:
+
       return {
         ...state,
         dash_view: action.payload,
       };
+
+      return { ...state, dash_view: action.payload };
+
     case SET_WORK_EXPERIENCE:
       return {
         ...state,

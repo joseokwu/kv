@@ -39,6 +39,7 @@ export const events = (id) => async (dispatch) => {
   }
 };
 
+
 // export const addwork = (value) => (dispatch) =>{
 
 //   dispatch({
@@ -46,6 +47,7 @@ export const events = (id) => async (dispatch) => {
 //     payload:value
 //   })
 // }
+
 
 // const setAlert = ()=>{
 
@@ -69,6 +71,7 @@ export const setDEducation = (values) => (dispatch) => {
     type: SET_EDUCATION,
     payload: values,
   });
+
 };
 
 export const setDFundraising = (values) => (dispatch) => {
@@ -77,3 +80,4 @@ export const setDFundraising = (values) => (dispatch) => {
     payload: values,
   });
 };
+

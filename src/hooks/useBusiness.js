@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   changeDPath,
   showDEventAction,
-  addDEducation,
   setDWorkExperience,
   setDEducation,
   setDFundraising,
@@ -44,3 +43,5 @@ export const useActivity = () => {
     setFundraising,
   };
 };
+
+

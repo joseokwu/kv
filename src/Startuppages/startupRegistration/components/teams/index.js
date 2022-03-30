@@ -63,12 +63,13 @@ export const TeamProfile = () => {
   //   twitter: stateAuth?.user?.team?.socialMedia?.twitter,
   //   website: stateAuth?.user?.team?.socialMedia?.website,
   // })
-  const [editIndex, setEditIndex] = useState();
 
+  const [socialMedia, setSocialMedia] = useState({});
+
+  const [editIndex, setEditIndex] = useState();
   const [isEditing, setIsEditing] = useState(false);
 
   const [coFounder, setCoFounder] = useState('');
-
   const {
     changePath,
     setWorkExperience,
@@ -84,6 +85,7 @@ export const TeamProfile = () => {
     }
   };
 
+
   // const onChange = (e) => {
   //   setContacts({ ...contacts, [e.target.name]: e.target.value })
   // }
@@ -97,10 +99,6 @@ export const TeamProfile = () => {
       colors.push(value2);
     }
   }
-
-  // const onChangeMedia = (e) => {
-  //   setSocialMedia({ ...socialMedia, [e.target.name]: e.target.value })
-  // }
 
   const back = () => {
     changePath(path - 1);
@@ -122,6 +120,7 @@ export const TeamProfile = () => {
   function btn(e) {
     e.preventDefault();
   }
+
 
   const onSubmit = async (value) => {
     try {
@@ -181,6 +180,7 @@ export const TeamProfile = () => {
   //     briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
   //     firstName: stateAuth?.user?.team?.firstName,
   //     lastName: stateAuth?.user?.team?.lastName,
+
 
   const formik = useFormik({
     initialValues: {
@@ -312,6 +312,7 @@ export const TeamProfile = () => {
             </InputWrapper>
           </div>
 
+
           <div className='row my-5'>
             <div className='form-group col-12'>
               <div className='d-flex justify-content-between'>
@@ -410,8 +411,8 @@ export const TeamProfile = () => {
                 countryCallingCodeEditable={true}
                 className='custs w-lg-50 ps-3'
                 value={
-                  stateAuth?.user?.team?.mobile_number
-                    ? stateAuth?.user?.team?.mobile_number
+                  stateAuth?.user?.team?.contactInfo?.mobile_number
+                    ? stateAuth?.user?.team?.contactInfo?.mobile_number
                     : phone
                 }
                 onChange={setPhone}
@@ -520,7 +521,7 @@ export const TeamProfile = () => {
                 value={formik.values.linkedIn}
                 type='text'
                 name='linkedIn'
-                placeholder='Enter Linkedin link'
+                placeholder='Enter Linkdin link'
                 className='form-control ps-3'
               />
             </div>
@@ -561,6 +562,7 @@ export const TeamProfile = () => {
 
             <div className='d-flex'>
               <BntWrap>
+
                 <button
                   className={`me-3 ${coFounder === 'yes' && 'active'}`}
                   onClick={(e) => {
@@ -576,7 +578,8 @@ export const TeamProfile = () => {
                     e.preventDefault();
                     setCoFounder('no');
                   }}
-                >
+                  >
+
                   No
                 </button>
               </BntWrap>
@@ -618,10 +621,14 @@ export const TeamProfile = () => {
             />
           </div>
           <div className='my-3 mx-3'>
+
             <CustomButton type='submit' background='#031298'>
               {' '}
               Invite{' '}
             </CustomButton>
+
+            <CustomButton background='#031298'> Invite </CustomButton>
+
           </div>
         </FormWrapper>
 
@@ -647,6 +654,12 @@ export const TeamProfile = () => {
               background='#2E3192'
             >
               {nextLoading ? <CircularLoader /> : 'Next'}
+
+            <CustomButton className='mx-2' background='#00ADEF'>
+              Save
+            </CustomButton>
+            <CustomButton type='submit' disabled={loading} background='#2E3192'>
+              {loading ? <CircularLoader /> : 'Next'}
             </CustomButton>
           </div>
         </div>
@@ -654,3 +667,4 @@ export const TeamProfile = () => {
     </>
   );
 };
+

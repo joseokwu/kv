@@ -9,6 +9,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useActivity } from '../../../../hooks/useBusiness';
 
+
 export const TeamModal = ({
   handleClose,
   handleWorkDetails,
@@ -378,6 +379,7 @@ export const EducationModal = ({
               />
               <span>I current school here.</span>
             </div>
+
             <div className='col-6 form-group'>
               <label>Entry Date*</label>
               <DatePicker
@@ -391,6 +393,7 @@ export const EducationModal = ({
                 onChange={(date) => setEduStartDate(date)}
               />
             </div>
+
             {!checked && (
               <div className='col-6 form-group'>
                 <label>Graduation Date*</label>
@@ -406,6 +409,21 @@ export const EducationModal = ({
                 />
               </div>
             )}
+
+            <div className='col-6 form-group'>
+              <label>Graduation Date*</label>
+              <DatePicker
+                id='eduEndDate'
+                name='eduEndDate'
+                className='p-2'
+                style={{ padding: '15px' }}
+                selected={
+                  isEditing ? education[editIndex]?.eduEndDate : eduEndDate
+                }
+                onChange={(date) => setEduEndDate(date)}
+              />
+            </div>
+
             <div className='col-6 my-4'>
               <span
                 style={{
