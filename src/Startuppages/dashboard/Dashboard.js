@@ -9,39 +9,14 @@ import newApp from "../../assets/icons/Star.svg";
 import dateFormat from "dateformat";
 import { convertToMillion } from "../../utils/helpers";
 import { PageLoader } from "../../components";
+import { useAuth} from '../../hooks/useAuth';
+
 
 export const StartupDashboard = () => {
   const [dashInfo, setDashInfo] = useState({});
   const [loading, setLoading] = useState(false);
+  const { stateAuth } = useAuth();
 
-  const fetchData = async () => {
-    setLoading(true);
-    const res = await getDashboardInfo();
-    setDashInfo(res);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchData();
-
-    return () => {
-      setDashInfo();
-    };
-  }, []);
-
-  if (loading) {
-    return (
-      <PageLoader
-        dashboard={true}
-        num={[
-          dashInfo?.founders,
-          dashInfo?.investors,
-          dashInfo?.mentors,
-          dashInfo?.partners,
-        ]}
-      />
-    );
-  }
 
   return (
     <div className="dashboardMain">
@@ -53,28 +28,28 @@ export const StartupDashboard = () => {
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
           name={"Founders"}
-          count={dashInfo?.founders}
+          count={stateAuth?.user?.founders ?? 0}
           color={"#E5FFE4"}
         />
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
           name={"Investors"}
-          count={dashInfo?.investors}
+          count={stateAuth?.user?.investors ?? 0}
           color={"#FAD7DC"}
         />
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
           name={"Mentors"}
-          count={dashInfo?.mentors}
+          count={stateAuth?.user?.mentors ?? 0}
           color={"#E5FFE4"}
         />
         <DashCard
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
           name={"Partners"}
-          count={dashInfo?.partners}
+          count={stateAuth?.user?.partners ?? 0}
           color={"#FAD7DC"}
         />
       </section>
@@ -119,11 +94,11 @@ export const StartupDashboard = () => {
 
       <section className="row">
         <div className="col-lg-12">
-          <TodoList data={dashInfo?.assignments} />
+          <TodoList data={stateAuth?.user?.assignment?.data ?? []} />
         </div>
       </section>
       <section className="my-4">
-        <UpComing data={dashInfo?.events} />
+        <UpComing data={stateAuth?.user?.event?.data} />
       </section>
     </div>
   );

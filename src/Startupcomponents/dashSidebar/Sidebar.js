@@ -6,12 +6,15 @@ import {
 } from '../../constants/sidebarRoutes'
 import helpDesk from '../../assets/icons/helpDesk.svg'
 import user from '../../assets/images/sampleUserSide.png'
+import { useAuth } from '../../hooks/useAuth';
 
 export const DashSidebar = () => {
   const {
     location: { pathname },
     push,
   } = useHistory()
+
+  const { stateAuth } = useAuth();
 
   const activateLink = (path) => {
     return pathname.includes(path) ? 'activeSide' : ''
@@ -21,10 +24,11 @@ export const DashSidebar = () => {
     <div className="sideMain">
       <section className="sideNavigator">
         <div>
-          <img src={user} alt="profile" />
+        <img src={ stateAuth?.user?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.user?.businessname}`
+             } alt="profile" className="rounded-circle" />
         </div>
-        <h5 className="mb-0 sideHeader">Hello Micheal Smith</h5>
-        <p className="mb-0 sideText">Yebox Technologies</p>
+        <h5 className="mb-0 sideHeader">Hello </h5>
+        <p className="mb-0 sideText"> { stateAuth?.user?.businessname } </p>
 
         <ul className="sideList">
           {dashboardRoutes.length > 0 &&

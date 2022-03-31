@@ -24,14 +24,14 @@ export const UpComing = ({ data = [] }) => {
         {data.map((d, i) => (
           <UpcomingCard key={i} className="col-lg-4 col-12 col-md-6">
             <div className="d-flex justify-content-between head">
-              <h6>{d?.topic}</h6>
+              <h6>{d?.titleOfEvent}</h6>
               {/* <CustomThreeDots /> */}
             </div>
 
             <div className="d-flex justify-content-between my-4 date">
               <span>
-                {new Date(d?.date).getDate()} |{" "}
-                {months[new Date(d?.date).getMonth()]}
+                {new Date(d?.startDate).getDate()} |{" "}
+                {months[new Date(d?.startTime).getMonth()]}
               </span>
               <article className="event_time">
                 <img src={clock} alt="clock" /> {d?.period}
@@ -40,7 +40,7 @@ export const UpComing = ({ data = [] }) => {
             </div>
 
             <div className="">
-              <p>{d?.description}</p>
+              <p>{d?.eventDescription}</p>
             </div>
 
             <div className="mt-4 mb-2 foot d-flex justify-content-between">

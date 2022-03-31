@@ -13,8 +13,10 @@ import { useAuth } from './../../hooks/useAuth';
 
 export const Header = ({ setOpen, open}) => {
 
+  const { stateAuth } = useAuth();
+
   const  history = useHistory();
-  const [openNotice, setOpenNotice] = useState(false)
+  const [openNotice, setOpenNotice ] = useState(false)
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
       <section className="d-flex align-items-center">
@@ -51,8 +53,9 @@ export const Header = ({ setOpen, open}) => {
           <span
             className="d-flex align-items-center header-profile d-none d-lg-flex"
           >
-            <img src={sampleUser} alt="profile" className="" />
-            <p className=" w- mb-0 header-text">Micheal Smith</p>
+            <img src={ stateAuth?.user?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.user?.businessname}`
+             } alt="profile" className="" />
+            <p className=" w- mb-0 header-text">{ stateAuth?.user?.businessname }</p>
           </span>
           <div>
             {/* <img src={angleDown} alt="dropdown" /> */}
