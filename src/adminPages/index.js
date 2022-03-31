@@ -4,3 +4,6 @@ export * from "./viewMentor/ViewMentor";
 export * from "./allSessions/AllSessions";
 export * from "./viewInvestor/ViewInvestor";
 export * from "./viewPartner/ViewPartner";
+export * from "./applicationMgt/ApplicationMgt";
+export * from "./pendingApplication/PendingApplication";
+export * from "./acceptedApplication/AcceptedApplication";

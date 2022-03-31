@@ -96,8 +96,11 @@ import { MentorViewFeedback } from "../mentorPages/mentorAssignments/components/
 import { InvestorEvaluate } from "../Investorpages/evaluation/evaluation";
 import { WithAdminLayout } from "../adminComponents";
 import {
+  AcceptedApplication,
   AllMentors,
   AllSessions,
+  ApplicationMgt,
+  PendingApplication,
   UserManagement,
   ViewInvestor,
   ViewMentor,
@@ -730,7 +733,25 @@ const routes = [
   {
     name: "admin application management",
     path: "/admin/application_mgt",
-    component: WithAdminLayout(() => <div>Application Management</div>),
+    component: WithAdminLayout(ApplicationMgt),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin application management",
+    path: "/admin/application_mgt/pending/:id",
+    component: WithAdminLayout(PendingApplication),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin application management",
+    path: "/admin/application_mgt/accepted/:id",
+    component: WithAdminLayout(AcceptedApplication),
     exact: true,
     protected: false,
     type: "admin",

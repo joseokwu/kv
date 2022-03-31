@@ -10,7 +10,10 @@ export const Tag = ({
   return (
     <span
       className={`tag-main ${className}`}
-      style={{ backgroundColor: `${color}20`, color: color }}
+      style={{
+        backgroundColor: color === "#235405" ? "#F2FEF2" : `${color}20`,
+        color: color,
+      }}
       {...rest}
     >
       {name}
