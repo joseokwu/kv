@@ -9,7 +9,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useActivity } from '../../../../hooks/useBusiness';
 
-
 export const TeamModal = ({
   handleClose,
   handleWorkDetails,
@@ -32,6 +31,7 @@ export const TeamModal = ({
       description: formik.getFieldProps('description').value,
       startDate: startDate,
       endDate: checked ? 'present' : endDate,
+      founder: true,
     });
     handleClose(false);
   };
@@ -193,26 +193,15 @@ export const TeamModal = ({
                 />
               </div>
             )}
-            <div className='col-7 my-4'>
-              <span
-                style={{
-                  color: '#120297',
-                  borderBottom: '1px solid #120297',
-                  fontWeight: '600',
-                  marginTop: '10px',
-                }}
-              >
-                Add another work experience +
-              </span>
-            </div>
+
             <div
-              className='col-4 d-flex justify-content-end'
+              className='col-12 d-flex justify-content-end'
               style={{ marginTop: '4rem' }}
             >
               <CustomButton
                 type='submit'
                 background='#021098'
-                style={{ marginLeft: '7rem' }}
+                // style={{ marginLeft: '7rem' }}
               >
                 Save
               </CustomButton>
@@ -246,6 +235,7 @@ export const EducationModal = ({
       activities: formik.getFieldProps('activities').value,
       eduStartDate: eduStartDate,
       eduEndDate: checked ? 'present' : eduEndDate,
+      founder: true,
     });
     handleClose(false);
   };
@@ -410,40 +400,14 @@ export const EducationModal = ({
               </div>
             )}
 
-            <div className='col-6 form-group'>
-              <label>Graduation Date*</label>
-              <DatePicker
-                id='eduEndDate'
-                name='eduEndDate'
-                className='p-2'
-                style={{ padding: '15px' }}
-                selected={
-                  isEditing ? education[editIndex]?.eduEndDate : eduEndDate
-                }
-                onChange={(date) => setEduEndDate(date)}
-              />
-            </div>
-
-            <div className='col-6 my-4'>
-              <span
-                style={{
-                  color: '#120297',
-                  borderBottom: '1px solid #120297',
-                  fontWeight: '600',
-                  marginTop: '10px',
-                }}
-              >
-                Add another education +
-              </span>
-            </div>
             <div
-              className='col-6 d-flex justify-content-end'
-              style={{ marginTop: '4rem' }}
+              className='col-12 d-flex justify-content-end'
+              style={{ marginTop: '2rem' }}
             >
               <CustomButton
                 type='submit'
                 background='#021098'
-                style={{ marginLeft: '7rem' }}
+                // style={{ marginLeft: '7rem' }}
               >
                 Save
               </CustomButton>

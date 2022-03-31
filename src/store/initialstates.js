@@ -13,7 +13,9 @@ export const INIT_STATE_BUSINESS = {
   showPage: 'Overview',
   dash_view: null,
   workExperience: [],
+  workExperienceCoFounder: [],
   education: [],
+  educationCoFounder: [],
   fundraising: {
     fundAsk: {},
     fundUtilization: {},

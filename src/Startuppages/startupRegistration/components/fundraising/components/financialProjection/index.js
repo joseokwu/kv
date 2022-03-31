@@ -17,8 +17,12 @@ import Download from '../../../../../../assets/icons/downloadoutline.svg';
 import DownloadIcon from '../../../../../../assets/icons/download.svg';
 import RedFile from '../../../../../../assets/icons/redFile.svg';
 import BluFile from '../../../../../../assets/icons/bluFile.svg';
+import { useActivity } from '../../../../../../hooks/useBusiness';
 
 export const FinancialProjection = () => {
+  const {
+    state: { fundraising },
+  } = useActivity();
   const history = useHistory();
 
   const {
@@ -111,7 +115,10 @@ export const FinancialProjection = () => {
             Save
           </CustomButton>
           <OutlineButton
-            onClick={() => history.push('/startup/dashboard')}
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(fundraising);
+            }}
             className='ms-2'
             style={{ marginRight: '5rem' }}
             background='none'

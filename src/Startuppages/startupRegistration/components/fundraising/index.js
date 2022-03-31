@@ -58,7 +58,6 @@ export const FundRaising = () => {
         return <FundAsk setFundraising={setFundraising} back={back} />;
     }
   };
-  console.log(hash);
   const back = () => {
     changePath(path - 1);
   };
@@ -93,8 +92,6 @@ export const FundRaising = () => {
   //     return history.push('#Previous Round');
   //   }
   // };
-
-  console.log(fundraising);
 
   return (
     <>

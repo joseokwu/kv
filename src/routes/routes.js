@@ -214,7 +214,7 @@ const routes = [
     path: '/startup/registration',
     component: WithStartupRegistrationLayout(StartUpRegistration),
     exact: true,
-    protected:true,
+    protected: false,
     type: 'startup',
   },
 
