@@ -31,9 +31,9 @@ export const StartupTeamMember = () => {
   const [loading, setLoading] = useState(false)
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
-  const [phone, setPhone] = useState(
-    stateAuth?.user?.team?.founderInfo?.mobile_number,
-  )
+  const [phone, setPhone] = useState(stateAuth?.user?.teamMember?.mobile_number)
+  const [editIndex, setEditIndex] = useState()
+  const [isEditing, setIsEditing] = useState(false)
   const {
     changePath,
     setWorkExperience,
@@ -108,14 +108,69 @@ export const StartupTeamMember = () => {
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
   })
+  const handleWorkDetails = ({
+    from,
+    title,
+    location,
+    position,
+    description,
+    startDate,
+    endDate,
+    school,
+    course,
+    degree,
+    activities,
+    eduStartDate,
+    eduEndDate,
+  }) => {
+    if (from === 'workExperience') {
+      setWorkExperience({
+        title,
+        location,
+        position,
+        description,
+        startDate,
+        endDate,
+      })
+      setIsEditing(false)
+    } else if (from === 'education') {
+      setEducation({
+        school,
+        course,
+        degree,
+        activities,
+        eduStartDate,
+        eduEndDate,
+      })
+      setIsEditing(false)
+    }
+  }
 
   return (
     <>
       <TeamMemberWrapper>
         <div className="mt-5">
-          {show ? <TeamMemberModal handleClose={setShow} /> : <span></span>}
+          {show ? (
+            <TeamMemberModal
+              handleClose={setShow}
+              handleWorkDetails={handleWorkDetails}
+              editIndex={editIndex}
+              workExperience={workExperience}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+            />
+          ) : (
+            <span></span>
+          )}
           {showEducation ? (
-            <EducationModal handleClose={setShowEducation} />
+            <EducationModal
+              handleClose={setShowEducation}
+              handleWorkDetails={handleWorkDetails}
+              editIndex={editIndex}
+              education={education}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+            />
           ) : (
             <span></span>
           )}
@@ -261,8 +316,8 @@ export const StartupTeamMember = () => {
                     countryCallingCodeEditable={true}
                     className="custs w-lg-50 ps-3"
                     value={
-                      stateAuth?.user?.team?.contactInfo?.mobile_number
-                        ? stateAuth?.user?.team?.contactInfo?.mobile_number
+                      stateAuth?.user?.teamMember?.mobile_number
+                        ? stateAuth?.user?.teamMember?.mobile_number
                         : phone
                     }
                     onChange={setPhone}
@@ -276,6 +331,19 @@ export const StartupTeamMember = () => {
                 <span>Work Experience</span>
               </div>
               <hr />
+              {workExperience.length > 0 &&
+                workExperience.map((item, index) => {
+                  return (
+                    <WorkExperience
+                      key={index}
+                      {...item}
+                      showTeamModal={() => setShow(true)}
+                      setEditIndex={setEditIndex}
+                      setIsEditing={setIsEditing}
+                      id={index}
+                    />
+                  )
+                })}
               <div>
                 <span
                   onClick={() => setShow(true)}
@@ -296,6 +364,19 @@ export const StartupTeamMember = () => {
                 <span>Education</span>
               </div>
               <hr />
+              {education.length > 0 &&
+                education.map((item, index) => {
+                  return (
+                    <Education
+                      key={index}
+                      {...item}
+                      showEducationModal={() => setShowEducation(true)}
+                      setEditIndex={setEditIndex}
+                      setIsEditing={setIsEditing}
+                      id={index}
+                    />
+                  )
+                })}
               <span
                 onClick={() => setShowEducation(true)}
                 style={{

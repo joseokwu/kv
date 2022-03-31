@@ -89,8 +89,8 @@ export const TeamMemberModal = ({ handleClose }) => {
               </span>
             </div>
             <div
-              className="col-6 d-flex justify-content-end"
-              style={{ marginTop: '4rem' }}
+              className="col-12 d-flex justify-content-end"
+              style={{ marginTop: '2rem' }}
             >
               <CustomButton
                 onClick={() => handleClose(false)}
@@ -188,8 +188,8 @@ export const EducationModal = ({ handleClose }) => {
               </span>
             </div>
             <div
-              className="col-6 d-flex justify-content-end"
-              style={{ marginTop: '4rem' }}
+              className="col-12 d-flex justify-content-end"
+              style={{ marginTop: '2rem' }}
             >
               <CustomButton
                 onClick={() => handleClose(false)}

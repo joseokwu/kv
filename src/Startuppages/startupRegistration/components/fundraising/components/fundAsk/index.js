@@ -248,7 +248,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 </label>
               ) : null}
             </div>
-            <div className='form-group col-12'>
+            {/* <div className='form-group col-12'>
               <label> Do you have a lead investor for this round?* </label>
               <BntWrap>
                 <button
@@ -270,8 +270,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                   No
                 </button>
               </BntWrap>
-            </div>
-            <div className='sold my-3'>
+            </div> */}
+            {/* <div className='sold my-3'>
               <div
                 className='d-flex justify-content-center'
                 data-target='#cofounder'
@@ -284,7 +284,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                   padding='9px 30px'
                 />
               </div>
-            </div>
+            </div> */}
             <div className='form-group col-12 mt-3'>
               <div className='d-flex justify-content-between'>
                 <label>
