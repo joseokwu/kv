@@ -12,9 +12,12 @@ import * as Yup from 'yup';
 import 'antd/dist/antd.css';
 import { Tag } from '../../../../../../Startupcomponents/tag/Tag';
 import { useActivity } from '../../../../../../hooks/useBusiness';
+import { useAuth } from '../../../../../../hooks/useAuth';
 
 export const PreviousRound = ({ setFundraising }) => {
   const history = useHistory();
+  const { stateAuth } = useAuth();
+
   const {
     state: { fundraising },
   } = useActivity();
@@ -28,10 +31,12 @@ export const PreviousRound = ({ setFundraising }) => {
     { value: 'Fund 3', label: 'Fund 3' },
   ];
 
-  const [startDate, setStartDate] = useState();
+  const [startDate, setStartDate] = useState(
+    stateAuth?.user?.fundraising?.startDate ?? ''
+  );
 
   const [hasLeadInvestor, setHasLeadInvestor] = useState(
-    fundraising.previousRound.hasLeadInvestor || 'no'
+    stateAuth?.user?.fundraising?.hasLeadInvestor ?? 'no'
   );
 
   // function btn(e) {
@@ -58,15 +63,16 @@ export const PreviousRound = ({ setFundraising }) => {
   const formik = useFormik({
     initialValues: {
       instrumentForRound:
-        fundraising.previousRound.instrumentForRound || 'Fund1',
-      numberOfRounds: fundraising.previousRound.numberOfRounds || 'Fund1',
-      fundraisingAmount: fundraising.previousRound.fundraisingAmount || '',
-      dilution: fundraising.previousRound.dilution || '',
-      preMoneyValuation: fundraising.previousRound.preMoneyValuation || '',
-      postMoneyValuation: fundraising.previousRound.postMoneyValuation || '',
-      hasLeadInvestor: fundraising.previousRound.hasLeadInvestor || '',
-      terms: fundraising.previousRound.terms || [],
-      dateOfFunding: fundraising.previousRound.dateOfFunding || '',
+        stateAuth?.user?.fundraising?.instrumentForRound ?? 'Fund1',
+      numberOfRounds: stateAuth?.user?.fundraising?.numberOfRounds ?? 'Fund1',
+      fundraisingAmount: stateAuth?.user?.fundraising?.fundraisingAmount ?? '',
+      dilution: stateAuth?.user?.fundraising?.dilution ?? '',
+      preMoneyValuation: stateAuth?.user?.fundraising?.preMoneyValuation ?? '',
+      postMoneyValuation:
+        stateAuth?.user?.fundraising?.postMoneyValuation ?? '',
+      hasLeadInvestor: stateAuth?.user?.fundraising?.hasLeadInvestor ?? '',
+      terms: stateAuth?.user?.fundraising?.terms ?? [],
+      dateOfFunding: stateAuth?.user?.fundraising?.dateOfFunding ?? '',
     },
     validationSchema: Yup.object({
       fundraisingAmount: Yup.string().required('Required'),

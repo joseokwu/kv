@@ -58,15 +58,13 @@ export const CoFounder = ({
     }
   };
 
-  console.log(editIndex);
-
   const children = [];
   for (let i = 0; i < skill.length; i++) {
     children.push(<Option key={i}>{skill[i]}</Option>);
   }
 
   function handleChange(value) {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   }
 
   const {
