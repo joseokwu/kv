@@ -14,6 +14,7 @@ export const PhoneInput = ({
 }) => {
   const [prefix, setPrefix] = useState("+234");
   const [countryAbv, setCountryAbv] = useState("NG");
+ 
 
   const getFlag = (abv) => {
     return `http://purecatamphetamine.github.io/country-flag-icons/3x2/${abv}.svg`;

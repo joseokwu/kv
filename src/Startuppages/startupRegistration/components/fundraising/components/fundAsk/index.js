@@ -45,7 +45,7 @@ export const FundAsk = ({ setFundraising, back }) => {
 
   const onSubmit = () => {
     setFundraising({
-      fundAsk: {
+      fundingAsk: {
         hasPreviousFundraising,
         instrumentForRound: formik.getFieldProps('instrumentForRound').value,
         numberOfRounds: formik.getFieldProps('numberOfRounds').value,

@@ -3,33 +3,42 @@ import { useActivity } from '../../hooks/useBusiness'
 import 'antd/dist/antd.css'
 import { Select } from 'antd'
 import { UserOutlined, PlusOutlined } from '@ant-design/icons'
+import { useFormik } from 'formik'
 import { TeamMemberModal, EducationModal } from './teamMemberModal'
 import {
   HeaderTeam,
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-  BntWrap,
   TeamMemberWrapper,
 } from './teamMember.styled'
 import DatePicker from 'react-datepicker'
 import PhoneInput from 'react-phone-number-input'
 import { Tag } from '../../Startupcomponents'
 import { CustomButton } from '../../Startupcomponents/button/button.styled'
+import { toast } from 'react-hot-toast'
 import { useHistory } from 'react-router'
+import { useAuth } from '../../hooks/useAuth'
+import { LargeModal, WorkExperience, Education } from '../../Startupcomponents'
 
 const { Option } = Select
 
 export const StartupTeamMember = () => {
+  const { stateAuth } = useAuth()
   const [disImg, setImg] = useState(null)
   const [show, setShow] = useState(false)
   const [showEducation, setShowEducation] = useState(false)
+  const [loading, setLoading] = useState(false)
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
-  const [phone, setPhone] = useState()
+  const [phone, setPhone] = useState(
+    stateAuth?.user?.team?.founderInfo?.mobile_number,
+  )
   const {
     changePath,
-    state: { path },
+    setWorkExperience,
+    setEducation,
+    state: { path, workExperience, education },
   } = useActivity()
 
   const onChangeImage = (e) => {
@@ -52,7 +61,7 @@ export const StartupTeamMember = () => {
   const back = () => {
     changePath(path - 1)
   }
-  
+
   const children = []
   for (let i = 0; i < skill.length; i++) {
     children.push(<Option key={i}>{skill[i]}</Option>)
@@ -62,6 +71,43 @@ export const StartupTeamMember = () => {
     console.log(`selected ${value}`)
   }
 
+  const onSubmit = async (value) => {
+    try {
+      const teamMember = {
+        type: 'teamMember',
+        accType: 'startup',
+        values: {
+          ...value,
+          experience: workExperience,
+          education: education,
+        },
+        userId: stateAuth?.user?.userId,
+      }
+      console.log(teamMember)
+    } catch (err) {
+      setLoading(false)
+      toast.error(
+        err?.res?.data?.message || 'There was an error updating team member',
+      )
+    }
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      avatar: '',
+      briefIntroduction: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      dob: startDate,
+      country: '',
+      state: '',
+      city: '',
+      skills: [],
+    },
+    validateOnBlur: true,
+    onSubmit: (value) => onSubmit(value),
+  })
 
   return (
     <>
@@ -84,7 +130,7 @@ export const StartupTeamMember = () => {
             <FormWrapper height="70%">
               <div
                 style={{
-                //   marginTop: '10px',
+                  //   marginTop: '10px',
                   marginLeft: '10px',
                   position: 'relative',
                 }}
@@ -124,8 +170,10 @@ export const StartupTeamMember = () => {
                     <label style={{ color: '#828282' }}>10 words at most</label>
                   </div>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.briefIntroduction}
                     type="text"
-                    name="bio"
+                    name="briefIntroduction"
                     placeholder="Enter brief bio about your"
                     className="form-control ps-3"
                   />
@@ -133,8 +181,10 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-6 col-12">
                   <label>First Name *</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.firstName}
                     type="text"
-                    name="firstname"
+                    name="firstName"
                     placeholder="Enter first name"
                     className="form-control ps-3"
                   />
@@ -142,8 +192,10 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-6 col-12">
                   <label>Last Name *</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.lastName}
                     type="text"
-                    name="lastname"
+                    name="lastName"
                     placeholder="Enter last name"
                     className="form-control ps-3"
                   />
@@ -151,6 +203,8 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-6 col-12">
                   <label>Email *</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
                     type="text"
                     name="email"
                     placeholder="Enter email address"
@@ -169,6 +223,8 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-4 col-12">
                   <label>Country *</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.country}
                     type="text"
                     name="country"
                     placeholder="Enter your country"
@@ -178,6 +234,8 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-4 col-12">
                   <label>State *</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.state}
                     type="text"
                     name="state"
                     placeholder="Enter your state"
@@ -187,6 +245,8 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-4 col-12">
                   <label>City *</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.city}
                     type="text"
                     name="city"
                     placeholder="Enter your city"
@@ -197,11 +257,16 @@ export const StartupTeamMember = () => {
                   <label>Mobile Number *</label>
                   <PhoneInput
                     international
-                    name="phone"
+                    name="mobile_number"
                     countryCallingCodeEditable={true}
                     className="custs w-lg-50 ps-3"
-                    value={phone}
+                    value={
+                      stateAuth?.user?.team?.contactInfo?.mobile_number
+                        ? stateAuth?.user?.team?.contactInfo?.mobile_number
+                        : phone
+                    }
                     onChange={setPhone}
+                    MaxLength={17}
                   />
                 </div>
               </div>
@@ -303,7 +368,11 @@ export const StartupTeamMember = () => {
 
             <div className="row">
               <div className="col-3">
-                <CustomButton className="mx-5 px-3" background="#D0D0D1" onClick={back}>
+                <CustomButton
+                  className="mx-5 px-3"
+                  background="#D0D0D1"
+                  onClick={back}
+                >
                   Go Back
                 </CustomButton>
               </div>
