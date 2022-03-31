@@ -403,7 +403,7 @@ export const TeamProfile = () => {
                 className='form-control ps-3'
               />
             </div>
-            <div className='form-group  col-12 '>
+            <div className='form-group  col-6 '>
               <label>Mobile Number *</label>
               <PhoneInput
                 international
@@ -621,14 +621,7 @@ export const TeamProfile = () => {
             />
           </div>
           <div className='my-3 mx-3'>
-
-            <CustomButton type='submit' background='#031298'>
-              {' '}
-              Invite{' '}
-            </CustomButton>
-
             <CustomButton background='#031298'> Invite </CustomButton>
-
           </div>
         </FormWrapper>
 
@@ -656,12 +649,12 @@ export const TeamProfile = () => {
               {nextLoading ? <CircularLoader /> : 'Next'}
               </CustomButton>
 
-            <CustomButton className='mx-2' background='#00ADEF'>
+            {/* <CustomButton className='mx-2' background='#00ADEF'>
               Save
-            </CustomButton>
-            <CustomButton type='submit' disabled={loading} background='#2E3192'>
+            </CustomButton> */}
+            {/* <CustomButton type='submit' disabled={loading} background='#2E3192'>
               {loading ? <CircularLoader /> : 'Next'}
-            </CustomButton>
+            </CustomButton> */}
           </div>
         </div>
       </form>
