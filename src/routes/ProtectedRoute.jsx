@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Route, useHistory} from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useActivity } from '../hooks/useBusiness';
 import { setLocationHistory } from '../utils/helpers';
 
 import { LoadingIcon } from '../components/Loading';
@@ -10,6 +11,7 @@ export  const ProtectedRoute = ({ ...props})=>{
     const history = useHistory();
     const {stateAuth} = useAuth();
    
+
     const [loading, setLoading] = useState(true);
     //user:token
     useEffect(()=>{ 

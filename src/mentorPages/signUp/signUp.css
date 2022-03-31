@@ -107,3 +107,11 @@
   border: 1px solid #e0e0e0 !important;
   padding: 8px 14px !important;
 }
+
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  color: #f9f9fc;
+}

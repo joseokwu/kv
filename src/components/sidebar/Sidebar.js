@@ -13,6 +13,9 @@ import networking from "../../assets/icons/networkingIcon.svg";
 import helpDesk from "../../assets/icons/helpDesk.svg";
 import briefcase from "../../assets/icons/berifcase.svg";
 import { Link } from "react-router-dom";
+import { useAuth } from '../../hooks/useAuth';
+
+
 
 const investorNavigators = [
   {
@@ -93,6 +96,8 @@ export const Sidebar = () => {
     push,
   } = useHistory();
 
+  const { stateAuth } = useAuth();
+
   const activateLink = (path) => {
     if (pathname.includes("interested") && path === "opportunities") {
       return "active-side";
@@ -123,7 +128,7 @@ export const Sidebar = () => {
         <div>
           <img src={user} alt="profile" />
         </div>
-        <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
+        <h5 className="mb-0 side-header">Hello { stateAuth?.user?.businessname } </h5>
         <p className="mb-0 side-text">
           {pathname.includes("investor") ? "Investor" : "Partner"}
         </p>

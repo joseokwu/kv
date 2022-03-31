@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
 
 export const BodyWrapper = styled.div`
   margin-bottom: 10px;
@@ -13,7 +13,7 @@ export const BodyWrapper = styled.div`
     width: 100%;
     background: #fff;
     margin: 10px;
-    border: 1px solid #F2F2F2;
+    border: 1px solid #f2f2f2;
     border-radius: 5px;
 
     @media (max-width: 768px) {
@@ -57,12 +57,12 @@ export const BodyWrapper = styled.div`
   }
 
   .datePick {
-    background: #fafafc!important;
+    background: #fafafc !important;
   }
 
   input {
     border: none;
-    background: #fafafc!important;
+    background: #fafafc !important;
     border-radius: 4px;
     width: 75%;
     margin-left: 8px;
@@ -84,7 +84,7 @@ export const BodyWrapper = styled.div`
 
   textarea {
     border: none;
-    background: #fafafc!important;
+    background: #fafafc !important;
     width: 70%;
     margin-left: 8px;
   }
@@ -99,6 +99,14 @@ export const BodyWrapper = styled.div`
     }
   }
 
+  .extra {
+    height: 2.4rem;
+  }
+
+  .error {
+    color: red;
+  }
+
   .custs {
     border: none;
     background: #f4f4f4;
@@ -107,11 +115,15 @@ export const BodyWrapper = styled.div`
     border-radius: 7px;
     outline: 0;
 
-    &:focus {
+    /* &:focus {
       outline: 0;
-    }
+    } */
   }
-`
+  .active {
+    background: #dcebff;
+    color: #2e3192;
+  }
+`;
 
 export const BntWrap = styled.div`
   button {
@@ -128,7 +140,7 @@ export const BntWrap = styled.div`
       color: #2e3192;
     }
   }
-`
+`;
 
 export const BoxBorder = styled.div`
   flex-direction: column;
@@ -146,4 +158,20 @@ export const BoxBorder = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
+export const Terms = styled.div`
+  width: 85%;
+  p {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #828282;
+
+    span {
+      color: #121298;
+      font-weight: 600;
+    }
+  }
+`;

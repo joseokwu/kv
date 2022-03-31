@@ -8,9 +8,12 @@ import {
   CHANGE_PAGE,
   SHOW_EVENT,
   DASH_VIEW,
-} from "../../actions/actions.types";
+  SET_WORK_EXPERIENCE,
+  SET_EDUCATION,
+  SET_FUNDRAISING,
+} from '../../actions/actions.types';
 
-import { INIT_STATE_BUSINESS } from "../../initialstates";
+import { INIT_STATE_BUSINESS } from '../../initialstates';
 
 const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
   switch (action.type) {
@@ -57,7 +60,45 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         showEvent: !state.showEvent,
       };
     case DASH_VIEW:
-      return { ...state, dash_view: action.payload };
+      return {
+        ...state,
+        dash_view: action.payload,
+      };
+
+    case SET_WORK_EXPERIENCE:
+      if (action.payload.founder) {
+        return {
+          ...state,
+          workExperience: [...state.workExperience, action.payload],
+        };
+      } else {
+        return {
+          ...state,
+          workExperienceCoFounder: [
+            ...state.workExperienceCoFounder,
+            action.payload,
+          ],
+        };
+      }
+
+    case SET_EDUCATION:
+      if (action.payload.founder) {
+        return {
+          ...state,
+          education: [...state.education, action.payload],
+        };
+      } else {
+        return {
+          ...state,
+          educationCoFounder: [...state.educationCoFounder, action.payload],
+        };
+      }
+
+    case SET_FUNDRAISING:
+      return {
+        ...state,
+        fundraising: { ...state.fundraising, ...action.payload },
+      };
 
     default:
       return state;

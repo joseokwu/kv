@@ -5,21 +5,21 @@ import {
   AuthButton,
   AuthTextField,
   AuthPasswordField,
-  LongPhoneInput,
+  PhoneInput,
 } from '../../mentorComponents/index'
 import check from '../../assets/icons/checkmark.svg'
-import { Form , Select} from 'antd'
+import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
-import { setRole  } from '../../utils/helpers';
-import { PhoneInput } from '../../components';
+import { setRole } from '../../utils/helpers'
+// import { PhoneInput } from '../../components'
 
-const { Option } = Select;
+const { Option } = Select
 
 export const SignUp = ({ history }) => {
   const [checkSat, setCheckSat] = useState(false)
   const { stateAuth, register } = useAuth()
-  const [industry , setIndustry] = useState('')
-  const [phone, setPhone]  = useState('');
+  const [industry, setIndustry] = useState('')
+  const [phone, setPhone] = useState('')
 
   function handleChange(value) {
     setIndustry(value)
@@ -27,31 +27,28 @@ export const SignUp = ({ history }) => {
 
   console.log(stateAuth?.signUpStatus)
   const onFinish = (values) => {
-      if(stateAuth?.signUpStatus === 'startup'){
-        console.log({
-          ...values,
-          type:stateAuth?.signUpStatus,
-          industry:industry,
-          phone: phone
-        })
-        register({
-          ...values,
-          type:stateAuth?.signUpStatus,
-          industry:industry,
-          phone: phone
-        })
-      }
-    
+    if (stateAuth?.signUpStatus === 'startup') {
+      console.log({
+        ...values,
+        type: stateAuth?.signUpStatus,
+        industry: industry,
+        phone: phone,
+      })
+      register({
+        ...values,
+        type: stateAuth?.signUpStatus,
+        industry: industry,
+        phone: phone,
+      })
+    }
 
     register({
       ...values,
-      type:stateAuth?.signUpStatus,
-      phone: phone
+      type: stateAuth?.signUpStatus,
+      phone: phone,
     })
-   setRole(stateAuth?.signUpStatus)
+    setRole(stateAuth?.signUpStatus)
   }
-
-
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
@@ -71,79 +68,88 @@ export const SignUp = ({ history }) => {
           >
             <div className="col-md-6 col-12 mb-2">
               <AuthTextField
-                name={stateAuth?.signUpStatus === 'startup' ? "startupname" : "firstname"}
-                label={stateAuth?.signUpStatus === 'startup' ? "Startup Name" : "First name"}
-                placeholder={stateAuth?.signUpStatus === 'startup' ? 'Enter your Startup name' : 'Enter your first name'}
+                name={
+                  stateAuth?.signUpStatus === 'startup'
+                    ? 'startup name'
+                    : 'first name'
+                }
+                label={
+                  stateAuth?.signUpStatus === 'startup'
+                    ? 'Startup Name'
+                    : 'First name'
+                }
+                placeholder={
+                  stateAuth?.signUpStatus === 'startup'
+                    ? 'Enter your Startup name'
+                    : 'Enter your first name'
+                }
                 className="mentor_gray_card_input"
               />
             </div>
             <div className="col-md-6 col-12 mb-2">
-              {
-               stateAuth?.signUpStatus === 'startup' ? (
+              {stateAuth?.signUpStatus === 'startup' ? (
                 <div className="inputContainer">
-                <label>Industry</label>
-                <div className="select">
-                  <Select
-                   onChange={handleChange}
-                    id="industry1"
-                    name="industry"
-                    placeholder="Select your industry"
-                  >
-                    <Option disabled selected>Select your industry</Option>
-                    <Option value="Advanced manufacturing and materials">
-                      Advanced manufacturing and materials
-                    </Option>
-                    <Option value="Agriculture, food and beverages">
-                      Agriculture, food and beverages
-                    </Option>
-                    <Option value="Energy">Energy</Option>
-                    <Option value="Engineering and Technology">
-                      Engineering and Technology
-                    </Option>
-                    <Option value="Finance">Finance</Option>
-                    <Option value="Health: Pharmaceuticals and Biotechnology">
-                      Health: Pharmaceuticals and Biotechnology
-                    </Option>
-                    <Option value="Healthcare: Devices and Supplies">
-                      Healthcare Devices and Supplies
-                    </Option>
-                    <Option value="Healthcare: Other services and Technologies">
-                      Healthcare: Other services and Technologies
-                    </Option>
-                    <Option
-                      value="Information and Communication Technology(ICT)"
+                  <label>Industry</label>
+                  <div className="select">
+                    <Select
+                      onChange={handleChange}
+                      id="industry1"
+                      name="industry"
+                      placeholder="Select your industry"
                     >
-                      Information and Communication Technology(ICT)
-                    </Option>
-                    <Option value="Life-science Technologies">
-                      Life-science Technologies
-                    </Option>
-                    <Option value="Micro/name-electronic and photonics">
-                      Micro/name-electronic and photonics
-                    </Option>
-                    <Option value="Security and Connectivity">
-                      Security and Connectivity
-                    </Option>
-                    <Option value="Space and Aerospace">
-                      Space and Aerospace
-                    </Option>
-                    <Option value="Sustainability and circular economy">
-                      Sustainability and circular economy
-                    </Option>
-                    <Option value="Transportation">Transportation</Option>
-                    
-                  </Select>
+                      <Option disabled selected>
+                        Select your industry
+                      </Option>
+                      <Option value="Advanced manufacturing and materials">
+                        Advanced manufacturing and materials
+                      </Option>
+                      <Option value="Agriculture, food and beverages">
+                        Agriculture, food and beverages
+                      </Option>
+                      <Option value="Energy">Energy</Option>
+                      <Option value="Engineering and Technology">
+                        Engineering and Technology
+                      </Option>
+                      <Option value="Finance">Finance</Option>
+                      <Option value="Health: Pharmaceuticals and Biotechnology">
+                        Health: Pharmaceuticals and Biotechnology
+                      </Option>
+                      <Option value="Healthcare: Devices and Supplies">
+                        Healthcare Devices and Supplies
+                      </Option>
+                      <Option value="Healthcare: Other services and Technologies">
+                        Healthcare: Other services and Technologies
+                      </Option>
+                      <Option value="Information and Communication Technology(ICT)">
+                        Information and Communication Technology(ICT)
+                      </Option>
+                      <Option value="Life-science Technologies">
+                        Life-science Technologies
+                      </Option>
+                      <Option value="Micro/name-electronic and photonics">
+                        Micro/name-electronic and photonics
+                      </Option>
+                      <Option value="Security and Connectivity">
+                        Security and Connectivity
+                      </Option>
+                      <Option value="Space and Aerospace">
+                        Space and Aerospace
+                      </Option>
+                      <Option value="Sustainability and circular economy">
+                        Sustainability and circular economy
+                      </Option>
+                      <Option value="Transportation">Transportation</Option>
+                    </Select>
+                  </div>
                 </div>
-              </div>
-               ) :(
+              ) : (
                 <AuthTextField
-                name="lastname"
-                label="Last Name"
-                placeholder="Enter your last name"
-                className="mentor_gray_card_input"
-              />
-               ) 
-              }
+                  name="lastname"
+                  label="Last Name"
+                  placeholder="Enter your last name"
+                  className="mentor_gray_card_input"
+                />
+              )}
             </div>
 
             <div className="col-12 mb-2">
@@ -167,8 +173,9 @@ export const SignUp = ({ history }) => {
             </div>
 
             <div className="col-12 mb-4">
-            
-               <PhoneInput setPhone={setPhone} />
+              <PhoneInput
+                setPhone={setPhone}
+              />
             </div>
 
             <div className="col-12 mb-4">
@@ -177,7 +184,7 @@ export const SignUp = ({ history }) => {
                   <input
                     type="checkbox"
                     name=""
-                   onChange={() => setCheckSat(!checkSat)}
+                    onChange={() => setCheckSat(!checkSat)}
                     id="agreement"
                     checked={checkSat}
                   />
@@ -208,7 +215,11 @@ export const SignUp = ({ history }) => {
               >
                 <p>Already have an account?</p>{' '}
                 <span
-                  style={{ color: '#00ADEF', fontWeight: 'bold', cursor: 'pointer' }}
+                  style={{
+                    color: '#00ADEF',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                  }}
                   onClick={() => history.push('/')}
                 >
                   Sign In
