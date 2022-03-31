@@ -104,7 +104,7 @@ export const PreviousRound = ({ setFundraising }) => {
               className='cust mx-3 extra'
               // placeholder='Choose your instrument for your round'
               value={
-                fundraising.previousRound.instrumentForRound ||
+                stateAuth?.user?.fundraising?.instrumentForRound ??
                 formik.values.instrumentForRound
               }
               onChange={formik.handleChange}
@@ -124,7 +124,7 @@ export const PreviousRound = ({ setFundraising }) => {
               className='cust mx-3 extra'
               // placeholder='Choose round'
               value={
-                fundraising.previousRound.numberOfRounds ||
+                stateAuth?.user?.fundraising?.numberOfRounds ??
                 formik.values.numberOfRounds
               }
               onChange={formik.handleChange}
@@ -162,7 +162,7 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter amount raised'
               onBlur={formik.handleBlur}
               value={
-                fundraising.previousRound.fundraisingAmount ||
+                stateAuth?.user?.fundraising?.fundraisingAmount ??
                 formik.values.fundraisingAmount
               }
               onChange={formik.handleChange}
@@ -182,7 +182,7 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter what your business does'
               onBlur={formik.handleBlur}
               value={
-                fundraising.previousRound.dilution || formik.values.dilution
+                stateAuth?.user?.fundraising?.dilution ?? formik.values.dilution
               }
               onChange={formik.handleChange}
             />
@@ -200,7 +200,7 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter amount'
               onBlur={formik.handleBlur}
               value={
-                fundraising.previousRound.preMoneyValuation ||
+                stateAuth?.user?.fundraising?.preMoneyValuation ??
                 formik.values.preMoneyValuation
               }
               onChange={formik.handleChange}
@@ -220,7 +220,7 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter what your business does'
               onBlur={formik.handleBlur}
               value={
-                fundraising.previousRound.postMoneyValuation ||
+                stateAuth?.user?.fundraising?.postMoneyValuation ??
                 formik.values.postMoneyValuation
               }
               onChange={formik.handleChange}
