@@ -65,8 +65,6 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         dash_view: action.payload,
       };
 
-      return { ...state, dash_view: action.payload };
-
     case SET_WORK_EXPERIENCE:
       if (action.payload.founder) {
         return {
