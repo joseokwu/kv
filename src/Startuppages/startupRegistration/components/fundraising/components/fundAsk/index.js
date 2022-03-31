@@ -13,9 +13,13 @@ import { fundraising } from '../../../../../../services/startUpReg';
 import { LargeModal } from '../../../../../../Startupcomponents';
 import { CoFounder } from '../../../teams/coFounder';
 import { toast } from 'react-hot-toast';
+import { useActivity } from '../../../../../../hooks/useBusiness';
 
 export const FundAsk = ({ setFundraising, back }) => {
   const history = useHistory();
+  const {
+    state: { fundraising },
+  } = useActivity();
 
   const {
     location: { hash },
@@ -27,8 +31,12 @@ export const FundAsk = ({ setFundraising, back }) => {
     { value: 'Fund 3', label: 'Fund 3' },
   ];
   const [showModal, setShowModal] = useState(false);
-  const [hasPreviousFundraising, setHasPreviousFundraising] = useState('no');
-  const [hasLeadInvestor, setHasLeadInvestor] = useState('no');
+  const [hasPreviousFundraising, setHasPreviousFundraising] = useState(
+    fundraising.fundAsk.hasPreviousFundraising || 'no'
+  );
+  const [hasLeadInvestor, setHasLeadInvestor] = useState(
+    fundraising.fundAsk.hasLeadInvestor || 'no'
+  );
 
   // function btn(e) {
   //   e.preventDefault();
@@ -37,7 +45,7 @@ export const FundAsk = ({ setFundraising, back }) => {
 
   const onSubmit = () => {
     setFundraising({
-      FundAsk: {
+      fundAsk: {
         hasPreviousFundraising,
         instrumentForRound: formik.getFieldProps('instrumentForRound').value,
         numberOfRounds: formik.getFieldProps('numberOfRounds').value,
@@ -54,16 +62,17 @@ export const FundAsk = ({ setFundraising, back }) => {
 
   const formik = useFormik({
     initialValues: {
-      hasPreviousFundraising: false,
-      description: '',
-      instrumentForRound: 'Fund1',
-      numberOfRounds: 'Fund1',
-      fundraisingAmount: '',
-      dilution: '',
-      preMoneyValuation: '',
-      postMoneyValuation: '',
-      hasLeadInvestor: '',
-      terms: [],
+      hasPreviousFundraising:
+        fundraising.fundAsk.hasPreviousFundraising || false,
+      description: fundraising.fundAsk.description || '',
+      instrumentForRound: fundraising.fundAsk.instrumentForRound || 'Fund1',
+      numberOfRounds: fundraising.fundAsk.numberOfRounds || 'Fund1',
+      fundraisingAmount: fundraising.fundAsk.fundraisingAmount || '',
+      dilution: fundraising.fundAsk.dilution || '',
+      preMoneyValuation: fundraising.fundAsk.preMoneyValuation || '',
+      postMoneyValuation: fundraising.fundAsk.postMoneyValuation || '',
+      hasLeadInvestor: fundraising.fundAsk.hasLeadInvestor || '',
+      terms: fundraising.fundAsk.terms || [],
     },
     validationSchema: Yup.object({
       fundraisingAmount: Yup.string().required('Required'),
@@ -96,7 +105,7 @@ export const FundAsk = ({ setFundraising, back }) => {
               <BntWrap>
                 <button
                   className={`me-3 ${
-                    hasPreviousFundraising === 'yes' && 'active'
+                    hasPreviousFundraising === 'yes' ? 'active' : ''
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
@@ -126,7 +135,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                 name='instrumentForRound'
                 // options={optionsNumb}
                 className='cust extra'
-                value={formik.values.instrumentForRound}
+                value={
+                  fundraising.fundAsk.instrumentForRound ||
+                  formik.values.instrumentForRound
+                }
                 onChange={formik.handleChange}
               >
                 {optionsNumb.map((item, index) => {
@@ -141,7 +153,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                 name={'numberOfRounds'}
                 // options={optionsNumb}
                 className='cust extra'
-                value={formik.values.numberOfRounds}
+                value={
+                  fundraising.fundAsk.numberOfRounds ||
+                  formik.values.numberOfRounds
+                }
                 onChange={formik.handleChange}
               >
                 {optionsNumb.map((item, index) => {
@@ -160,7 +175,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                 className='form-control ps-3'
                 placeholder='Enter amount'
                 onBlur={formik.handleBlur}
-                value={formik.values.fundraisingAmount}
+                value={
+                  fundraising.fundAsk.fundraisingAmount ||
+                  formik.values.fundraisingAmount
+                }
                 onChange={formik.handleChange}
               />
               {formik.touched.fundraisingAmount &&
@@ -179,7 +197,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 className='form-control ps-3'
                 placeholder='Enter what your business does'
                 onBlur={formik.handleBlur}
-                value={formik.values.dilution}
+                value={fundraising.fundAsk.dilution || formik.values.dilution}
                 onChange={formik.handleChange}
               />
               {formik.touched.dilution && formik.errors.dilution ? (
@@ -195,7 +213,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                 className='form-control ps-3'
                 placeholder='Enter amount'
                 onBlur={formik.handleBlur}
-                value={formik.values.preMoneyValuation}
+                value={
+                  fundraising.fundAsk.preMoneyValuation ||
+                  formik.values.preMoneyValuation
+                }
                 onChange={formik.handleChange}
               />
               {formik.touched.preMoneyValuation &&
@@ -214,7 +235,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                 className='form-control ps-3'
                 placeholder='Enter what your business does'
                 onBlur={formik.handleBlur}
-                value={formik.values.postMoneyValuation}
+                value={
+                  fundraising.fundAsk.postMoneyValuation ||
+                  formik.values.postMoneyValuation
+                }
                 onChange={formik.handleChange}
               />
               {formik.touched.postMoneyValuation &&
@@ -254,10 +278,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                 onClick={() => setShowModal(true)}
               >
                 <Tag
-                  name="+ Add Lead Investor"
-                  color="#4F4F4F"
-                  bg="rgba(183, 218, 231, 0.5)"
-                  padding="9px 30px"
+                  name='+ Add Lead Investor'
+                  color='#4F4F4F'
+                  bg='rgba(183, 218, 231, 0.5)'
+                  padding='9px 30px'
                 />
               </div>
             </div>
@@ -279,7 +303,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 rows='5'
                 className='form-control ps-3'
                 placeholder='Enter Terms for round'
-                value={formik.values.terms}
+                value={fundraising.fundAsk.terms || formik.values.terms}
                 onChange={formik.handleChange}
               />
             </div>

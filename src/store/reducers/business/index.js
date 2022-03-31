@@ -60,7 +60,6 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         showEvent: !state.showEvent,
       };
     case DASH_VIEW:
-
       return {
         ...state,
         dash_view: action.payload,
@@ -69,16 +68,33 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
       return { ...state, dash_view: action.payload };
 
     case SET_WORK_EXPERIENCE:
-      return {
-        ...state,
-        workExperience: [...state.workExperience, action.payload],
-      };
+      if (action.payload.founder) {
+        return {
+          ...state,
+          workExperience: [...state.workExperience, action.payload],
+        };
+      } else {
+        return {
+          ...state,
+          workExperienceCoFounder: [
+            ...state.workExperienceCoFounder,
+            action.payload,
+          ],
+        };
+      }
 
     case SET_EDUCATION:
-      return {
-        ...state,
-        education: [...state.education, action.payload],
-      };
+      if (action.payload.founder) {
+        return {
+          ...state,
+          education: [...state.education, action.payload],
+        };
+      } else {
+        return {
+          ...state,
+          educationCoFounder: [...state.educationCoFounder, action.payload],
+        };
+      }
 
     case SET_FUNDRAISING:
       return {

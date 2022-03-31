@@ -6,6 +6,11 @@ import {
   HeaderModal,
   ModalForm,
 } from './teams.styled';
+import {
+  LargeModal,
+  WorkExperience,
+  Education,
+} from '../../../../Startupcomponents';
 import { UserOutlined, PlusOutlined } from '@ant-design/icons';
 import { useActivity } from '../../../../hooks/useBusiness';
 import DatePicker from 'react-datepicker';
@@ -25,8 +30,11 @@ export const CoFounder = ({
   handleClose,
   handleWorkDetails,
   editIndex,
-  workExperience,
-  education,
+  setEditIndex,
+  workExperienceCoFounder,
+  educationCoFounder,
+  isEditing,
+  setIsEditing,
 }) => {
   const [disImg, setImg] = useState(null);
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express'];
@@ -39,6 +47,9 @@ export const CoFounder = ({
   const [eduStartDate, setEduStartDate] = useState(new Date());
   const [eduEndDate, setEduEndDate] = useState(new Date());
   const [checked, setChecked] = useState(false);
+  const [displayWorkExperience, setDisplayWorkExperience] = useState();
+  const [displayEducation, setDisplayEducation] = useState();
+
   const onChangeImage = (e) => {
     const { files } = e.target;
 
@@ -46,6 +57,8 @@ export const CoFounder = ({
       setImg(URL.createObjectURL(files[0]));
     }
   };
+
+  console.log(editIndex);
 
   const children = [];
   for (let i = 0; i < skill.length; i++) {
@@ -85,8 +98,24 @@ export const CoFounder = ({
       activities: formik.getFieldProps('activities').value,
       eduStartDate: eduStartDate,
       eduEndDate: checked ? 'present' : eduEndDate,
+      founder: false,
     });
-    handleClose(false);
+    formik.resetForm({
+      values: {
+        title: '',
+        location: '',
+        position: '',
+        description: '',
+        startDate: '',
+        endDate: '',
+        school: '',
+        course: '',
+        degree: '',
+        activities: '',
+        eduStartDate: '',
+        eduEndDate: '',
+      },
+    });
   };
 
   const formik = useFormik({
@@ -299,287 +328,396 @@ export const CoFounder = ({
               Add work experience +{' '}
             </span>
           </div> */}
-          <div className='mx-5'>
-            <HeaderModal>Add Work Experience</HeaderModal>
-            <hr style={{ background: '#323232' }} />
-            <form>
-              <ModalForm className='row'>
-                <div className='col-12 form-group'>
-                  <label>Title *</label>
-                  <input
-                    id='title'
-                    name='title'
-                    type='text'
-                    className='form-control ps-3'
-                    placeholder='CEO and Founder'
-                    value={
-                      workExperience[editIndex]?.title || formik.values.title
-                    }
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.title && formik.errors.title ? (
-                    <label className='error'>{formik.errors.title}</label>
-                  ) : null}
-                </div>
-                <div className='col-12 form-group'>
-                  <label>Location *</label>
-                  <input
-                    id='location'
-                    name='location'
-                    type='text'
-                    className='form-control ps-3'
-                    placeholder='United state of America'
-                    value={
-                      workExperience[editIndex]?.location ||
-                      formik.values.location
-                    }
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.location && formik.errors.location ? (
-                    <label className='error'>{formik.errors.location}</label>
-                  ) : null}
-                </div>
-                <div className='col-12 form-group'>
-                  <label>Company Title *</label>
-                  <input
-                    id='position'
-                    name='position'
-                    type='text'
-                    className='form-control ps-3'
-                    placeholder='gane@gmail.com'
-                    value={
-                      workExperience[editIndex]?.position ||
-                      formik.values.position
-                    }
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.position && formik.errors.position ? (
-                    <label className='error'>{formik.errors.position}</label>
-                  ) : null}
-                </div>
-                <div className='col-12 form-group'>
-                  <div className='d-flex justify-content-between'>
-                    <label>Description *</label>
-                    <label style={{ color: '#828282' }}>
-                      50 characters at most
-                    </label>
+          {!displayWorkExperience ? (
+            <div className='mx-5'>
+              <HeaderModal>
+                {' '}
+                {isEditing ? 'Edit Work Experience' : 'Add Work Experience'}
+              </HeaderModal>
+              <hr style={{ background: '#323232' }} />
+              <form>
+                <ModalForm className='row'>
+                  <div className='col-12 form-group'>
+                    <label>Title *</label>
+                    <input
+                      id='title'
+                      name='title'
+                      type='text'
+                      className='form-control ps-3'
+                      placeholder='CEO and Founder'
+                      value={
+                        workExperienceCoFounder[editIndex]?.title ||
+                        formik.values.title
+                      }
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.title && formik.errors.title ? (
+                      <label className='error'>{formik.errors.title}</label>
+                    ) : null}
                   </div>
+                  <div className='col-12 form-group'>
+                    <label>Location *</label>
+                    <input
+                      id='location'
+                      name='location'
+                      type='text'
+                      className='form-control ps-3'
+                      placeholder='United state of America'
+                      value={
+                        workExperienceCoFounder[editIndex]?.location ||
+                        formik.values.location
+                      }
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.location && formik.errors.location ? (
+                      <label className='error'>{formik.errors.location}</label>
+                    ) : null}
+                  </div>
+                  <div className='col-12 form-group'>
+                    <label>Company Title *</label>
+                    <input
+                      id='position'
+                      name='position'
+                      type='text'
+                      className='form-control ps-3'
+                      placeholder='gane@gmail.com'
+                      value={
+                        workExperienceCoFounder[editIndex]?.position ||
+                        formik.values.position
+                      }
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.position && formik.errors.position ? (
+                      <label className='error'>{formik.errors.position}</label>
+                    ) : null}
+                  </div>
+                  <div className='col-12 form-group'>
+                    <div className='d-flex justify-content-between'>
+                      <label>Description *</label>
+                      <label style={{ color: '#828282' }}>
+                        50 characters at most
+                      </label>
+                    </div>
 
-                  <textarea
-                    id='description'
-                    name='description'
-                    cols='5'
-                    rows='5'
-                    className='form-control ps-3'
-                    placeholder='Tell us about your role'
-                    value={
-                      workExperience[editIndex]?.description ||
-                      formik.values.description
-                    }
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.description && formik.errors.description ? (
-                    <label className='error'>{formik.errors.description}</label>
-                  ) : null}
-                </div>
-                <div className='col-12 form-group'>
-                  <input
-                    type='checkbox'
-                    checked={checked}
-                    onChange={() => setChecked(!checked)}
-                  />
-                  <span>I current work in this role</span>
-                </div>
-                <div className='col-6 form-group'>
-                  <label>Start Date *</label>
-                  <DatePicker
-                    id='startDate'
-                    name='startDate'
-                    className='p-2'
-                    style={{ padding: '15px' }}
-                    selected={workExperience[editIndex]?.startDate || startDate}
-                    onChange={(date) => setStartDate(date)}
-                  />
-                </div>
-                {!checked && (
+                    <textarea
+                      id='description'
+                      name='description'
+                      cols='5'
+                      rows='5'
+                      className='form-control ps-3'
+                      placeholder='Tell us about your role'
+                      value={
+                        workExperienceCoFounder[editIndex]?.description ||
+                        formik.values.description
+                      }
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.description && formik.errors.description ? (
+                      <label className='error'>
+                        {formik.errors.description}
+                      </label>
+                    ) : null}
+                  </div>
+                  <div className='col-12 form-group'>
+                    <input
+                      type='checkbox'
+                      checked={checked}
+                      onChange={() => setChecked(!checked)}
+                    />
+                    <span>I current work in this role</span>
+                  </div>
                   <div className='col-6 form-group'>
-                    <label>End Date*</label>
+                    <label>Start Date *</label>
                     <DatePicker
-                      id='endDate'
-                      name='endDate'
+                      id='startDate'
+                      name='startDate'
                       className='p-2'
                       style={{ padding: '15px' }}
-                      selected={workExperience[editIndex]?.endDate || endDate}
-                      onChange={(date) => setEndDate(date)}
+                      selected={
+                        workExperienceCoFounder[editIndex]?.startDate ||
+                        startDate
+                      }
+                      onChange={(date) => setStartDate(date)}
                     />
                   </div>
-                )}
-                <div className='col-7 my-4'>
-                  <span
-                    style={{
-                      color: '#120297',
-                      borderBottom: '1px solid #120297',
-                      fontWeight: '600',
-                      marginTop: '10px',
-                    }}
+                  {!checked && (
+                    <div className='col-6 form-group'>
+                      <label>End Date*</label>
+                      <DatePicker
+                        id='endDate'
+                        name='endDate'
+                        className='p-2'
+                        style={{ padding: '15px' }}
+                        selected={
+                          workExperienceCoFounder[editIndex]?.endDate || endDate
+                        }
+                        onChange={(date) => setEndDate(date)}
+                      />
+                    </div>
+                  )}
+                  {displayWorkExperience === false && (
+                    <div className='col-7 my-4'>
+                      <span
+                        style={{
+                          color: '#120297',
+                          borderBottom: '1px solid #120297',
+                          fontWeight: '600',
+                          marginTop: '10px',
+                        }}
+                        onClick={() => setDisplayWorkExperience(true)}
+                      >
+                        Cancel
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    className='col-4 d-flex justify-content-start'
+                    style={{ marginTop: '4rem' }}
                   >
-                    Add another work experience +
-                  </span>
-                </div>
-                <div
-                  className='col-4 d-flex justify-content-end'
-                  style={{ marginTop: '4rem' }}
+                    <CustomButton
+                      type='button'
+                      onClick={(e) => {
+                        onSubmit(e, 'workExperience');
+                        setDisplayWorkExperience(true);
+                      }}
+                      background='#021098'
+                      style={{
+                        marginLeft: displayWorkExperience ? '7rem' : '0rem',
+                      }}
+                    >
+                      Save
+                    </CustomButton>
+                  </div>
+                </ModalForm>
+              </form>
+            </div>
+          ) : (
+            <div className='mx-5'>
+              <HeaderModal>Work Experience</HeaderModal>
+              <hr style={{ background: '#323232' }} />
+              {workExperienceCoFounder.length > 0 &&
+                workExperienceCoFounder.map((item, index) => {
+                  return (
+                    <WorkExperience
+                      key={index}
+                      {...item}
+                      showTeamModal={() => setDisplayWorkExperience(false)}
+                      setEditIndex={setEditIndex}
+                      setIsEditing={setIsEditing}
+                      id={index}
+                    />
+                  );
+                })}
+              <div className='col-7 my-4'>
+                <span
+                  style={{
+                    color: '#120297',
+                    borderBottom: '1px solid #120297',
+                    fontWeight: '600',
+                    marginTop: '10px',
+                  }}
+                  onClick={() => setDisplayWorkExperience(false)}
                 >
-                  <CustomButton
-                    type='button'
-                    onClick={(e) => onSubmit(e, 'workExperience')}
-                    background='#021098'
-                    style={{ marginLeft: '7rem' }}
-                  >
-                    Save
-                  </CustomButton>
-                </div>
-              </ModalForm>
-            </form>
-          </div>
+                  Add another work experience +
+                </span>
+              </div>
+            </div>
+          )}
         </FormWrapper>
 
         <FormWrapper height='70%'>
-          <div className='mx-5'>
-            <HeaderModal>Add Education</HeaderModal>
-            <hr style={{ background: '#323232' }} />
-            <form>
-              <ModalForm className='row'>
-                <div className='col-12 form-group'>
-                  <label>School*</label>
-                  <input
-                    id='school'
-                    name='school'
-                    type='text'
-                    className='form-control ps-3'
-                    placeholder='Enter School name'
-                    value={education[editIndex]?.school || formik.values.school}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.school && formik.errors.school ? (
-                    <label className='error'>{formik.errors.school}</label>
-                  ) : null}
-                </div>
-                <div className='col-12 form-group'>
-                  <label>Degree*</label>
-                  <input
-                    id='degree'
-                    name='degree'
-                    type='text'
-                    className='form-control ps-3'
-                    placeholder='Enter Degree '
-                    value={education[editIndex]?.degree || formik.values.degree}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.degree && formik.errors.degree ? (
-                    <label className='error'>{formik.errors.degree}</label>
-                  ) : null}
-                </div>
-                <div className='col-12 form-group'>
-                  <label>Filed of study*</label>
-                  <input
-                    id='course'
-                    name='course'
-                    type='text'
-                    className='form-control ps-3'
-                    placeholder='Enter filed of study'
-                    value={education[editIndex]?.course || formik.values.course}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.course && formik.errors.course ? (
-                    <label className='error'>{formik.errors.course}</label>
-                  ) : null}
-                </div>
-                <div className='col-12 form-group'>
-                  <div className='d-flex justify-content-between'>
-                    <label>Activities and societies*</label>
-                    <label style={{ color: '#828282' }}>
-                      50 characters at most
-                    </label>
+          {!displayEducation ? (
+            <div className='mx-5'>
+              <HeaderModal>
+                {isEditing ? 'Edit Education' : 'Add Education'}
+              </HeaderModal>
+              <hr style={{ background: '#323232' }} />
+              <form>
+                <ModalForm className='row'>
+                  <div className='col-12 form-group'>
+                    <label>School*</label>
+                    <input
+                      id='school'
+                      name='school'
+                      type='text'
+                      className='form-control ps-3'
+                      placeholder='Enter School name'
+                      value={
+                        educationCoFounder[editIndex]?.school ||
+                        formik.values.school
+                      }
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.school && formik.errors.school ? (
+                      <label className='error'>{formik.errors.school}</label>
+                    ) : null}
+                  </div>
+                  <div className='col-12 form-group'>
+                    <label>Degree*</label>
+                    <input
+                      id='degree'
+                      name='degree'
+                      type='text'
+                      className='form-control ps-3'
+                      placeholder='Enter Degree '
+                      value={
+                        educationCoFounder[editIndex]?.degree ||
+                        formik.values.degree
+                      }
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.degree && formik.errors.degree ? (
+                      <label className='error'>{formik.errors.degree}</label>
+                    ) : null}
+                  </div>
+                  <div className='col-12 form-group'>
+                    <label>Filed of study*</label>
+                    <input
+                      id='course'
+                      name='course'
+                      type='text'
+                      className='form-control ps-3'
+                      placeholder='Enter filed of study'
+                      value={
+                        educationCoFounder[editIndex]?.course ||
+                        formik.values.course
+                      }
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.course && formik.errors.course ? (
+                      <label className='error'>{formik.errors.course}</label>
+                    ) : null}
+                  </div>
+                  <div className='col-12 form-group'>
+                    <div className='d-flex justify-content-between'>
+                      <label>Activities and societies*</label>
+                      <label style={{ color: '#828282' }}>
+                        50 characters at most
+                      </label>
+                    </div>
+
+                    <textarea
+                      id='activities'
+                      name='activities'
+                      cols='5'
+                      rows='6'
+                      className='form-control ps-3'
+                      placeholder='Enter Activities and Societies'
+                      value={
+                        educationCoFounder[editIndex]?.activities ||
+                        formik.values.activities
+                      }
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.activities && formik.errors.activities ? (
+                      <label className='error'>
+                        {formik.errors.activities}
+                      </label>
+                    ) : null}
                   </div>
 
-                  <textarea
-                    id='activities'
-                    name='activities'
-                    cols='5'
-                    rows='6'
-                    className='form-control ps-3'
-                    placeholder='Enter Activities and Societies'
-                    value={
-                      education[editIndex]?.activities ||
-                      formik.values.activities
-                    }
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.activities && formik.errors.activities ? (
-                    <label className='error'>{formik.errors.activities}</label>
-                  ) : null}
-                </div>
-
-                <div className='col-6 form-group'>
-                  <label>Entry Date*</label>
-                  <DatePicker
-                    id='eduStartDate'
-                    name='eduStartDate'
-                    className='p-2'
-                    style={{ padding: '15px' }}
-                    selected={
-                      education[editIndex]?.eduStartDate || eduStartDate
-                    }
-                    onChange={(date) => setEduStartDate(date)}
-                  />
-                </div>
-                <div className='col-6 form-group'>
-                  <label>Graduation Date*</label>
-                  <DatePicker
-                    id='eduEndDate'
-                    name='eduEndDate'
-                    className='p-2'
-                    style={{ padding: '15px' }}
-                    selected={education[editIndex]?.eduEndDate || eduEndDate}
-                    onChange={(date) => setEduEndDate(date)}
-                  />
-                </div>
-                <div className='col-6 my-4'>
-                  <span
-                    style={{
-                      color: '#120297',
-                      borderBottom: '1px solid #120297',
-                      fontWeight: '600',
-                      marginTop: '10px',
-                    }}
+                  <div className='col-6 form-group'>
+                    <label>Entry Date*</label>
+                    <DatePicker
+                      id='eduStartDate'
+                      name='eduStartDate'
+                      className='p-2'
+                      style={{ padding: '15px' }}
+                      selected={
+                        educationCoFounder[editIndex]?.eduStartDate ||
+                        eduStartDate
+                      }
+                      onChange={(date) => setEduStartDate(date)}
+                    />
+                  </div>
+                  <div className='col-6 form-group'>
+                    <label>Graduation Date*</label>
+                    <DatePicker
+                      id='eduEndDate'
+                      name='eduEndDate'
+                      className='p-2'
+                      style={{ padding: '15px' }}
+                      selected={
+                        educationCoFounder[editIndex]?.eduEndDate || eduEndDate
+                      }
+                      onChange={(date) => setEduEndDate(date)}
+                    />
+                  </div>
+                  {displayEducation === false && (
+                    <div className='col-7 my-4'>
+                      <span
+                        style={{
+                          color: '#120297',
+                          borderBottom: '1px solid #120297',
+                          fontWeight: '600',
+                          marginTop: '10px',
+                        }}
+                        onClick={() => setDisplayEducation(true)}
+                      >
+                        Cancel
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    className='col-6 d-flex justify-content-start'
+                    style={{ marginTop: '4rem' }}
                   >
-                    Add another education +
-                  </span>
-                </div>
-                <div
-                  className='col-6 d-flex justify-content-end'
-                  style={{ marginTop: '4rem' }}
+                    <CustomButton
+                      onClick={(e) => {
+                        onSubmit(e, 'education');
+                        setDisplayEducation(true);
+                      }}
+                      background='#021098'
+                      style={{
+                        marginLeft: displayEducation ? '7rem' : '0rem',
+                      }}
+                    >
+                      Save
+                    </CustomButton>
+                  </div>
+                </ModalForm>
+              </form>
+            </div>
+          ) : (
+            <div className='mx-5'>
+              <HeaderModal>Education</HeaderModal>
+              <hr style={{ background: '#323232' }} />
+              {educationCoFounder.length > 0 &&
+                educationCoFounder.map((item, index) => {
+                  return (
+                    <Education
+                      key={index}
+                      {...item}
+                      showEducationModal={() => setDisplayEducation(false)}
+                      setEditIndex={setEditIndex}
+                      setIsEditing={setIsEditing}
+                      id={index}
+                    />
+                  );
+                })}
+              <div className='col-6 my-4'>
+                <span
+                  style={{
+                    color: '#120297',
+                    borderBottom: '1px solid #120297',
+                    fontWeight: '600',
+                    marginTop: '10px',
+                  }}
+                  onClick={() => setDisplayEducation(false)}
                 >
-                  <CustomButton
-                    onClick={(e) => onSubmit(e, 'education')}
-                    background='#021098'
-                    style={{ marginLeft: '7rem' }}
-                  >
-                    Save
-                  </CustomButton>
-                </div>
-              </ModalForm>
-            </form>
-          </div>
+                  Add another education +
+                </span>
+              </div>
+            </div>
+          )}
         </FormWrapper>
 
         <FormWrapper height='70%'>

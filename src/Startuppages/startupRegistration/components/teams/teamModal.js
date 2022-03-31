@@ -9,7 +9,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useActivity } from '../../../../hooks/useBusiness';
 
-
 export const TeamModal = ({
   handleClose,
   handleWorkDetails,
@@ -32,6 +31,7 @@ export const TeamModal = ({
       description: formik.getFieldProps('description').value,
       startDate: startDate,
       endDate: checked ? 'present' : endDate,
+      founder: true,
     });
     handleClose(false);
   };
@@ -246,6 +246,7 @@ export const EducationModal = ({
       activities: formik.getFieldProps('activities').value,
       eduStartDate: eduStartDate,
       eduEndDate: checked ? 'present' : eduEndDate,
+      founder: true,
     });
     handleClose(false);
   };

@@ -74,7 +74,13 @@ export const TeamProfile = () => {
     changePath,
     setWorkExperience,
     setEducation,
-    state: { path, workExperience, education },
+    state: {
+      path,
+      workExperience,
+      workExperienceCoFounder,
+      education,
+      educationCoFounder,
+    },
   } = useActivity();
 
   const onChangeImage = (e) => {
@@ -84,7 +90,6 @@ export const TeamProfile = () => {
       setImg(URL.createObjectURL(files[0]));
     }
   };
-
 
   // const onChange = (e) => {
   //   setContacts({ ...contacts, [e.target.name]: e.target.value })
@@ -120,7 +125,6 @@ export const TeamProfile = () => {
   function btn(e) {
     e.preventDefault();
   }
-
 
   const onSubmit = async (value) => {
     try {
@@ -181,7 +185,6 @@ export const TeamProfile = () => {
   //     firstName: stateAuth?.user?.team?.firstName,
   //     lastName: stateAuth?.user?.team?.lastName,
 
-
   const formik = useFormik({
     initialValues: {
       avatar: '',
@@ -213,6 +216,7 @@ export const TeamProfile = () => {
     activities,
     eduStartDate,
     eduEndDate,
+    founder,
   }) => {
     if (from === 'workExperience') {
       setWorkExperience({
@@ -222,6 +226,7 @@ export const TeamProfile = () => {
         description,
         startDate,
         endDate,
+        founder,
       });
       setIsEditing(false);
     } else if (from === 'education') {
@@ -232,6 +237,7 @@ export const TeamProfile = () => {
         activities,
         eduStartDate,
         eduEndDate,
+        founder,
       });
       setIsEditing(false);
     }
@@ -269,8 +275,11 @@ export const TeamProfile = () => {
             handleClose={setShowModal}
             handleWorkDetails={handleWorkDetails}
             editIndex={editIndex}
-            workExperience={workExperience}
-            education={education}
+            setEditIndex={setEditIndex}
+            workExperienceCoFounder={workExperienceCoFounder}
+            educationCoFounder={educationCoFounder}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
           />
         </LargeModal>
       ) : (
@@ -311,7 +320,6 @@ export const TeamProfile = () => {
               <PlusOutlined style={{ color: '#ffffff' }} />
             </InputWrapper>
           </div>
-
 
           <div className='row my-5'>
             <div className='form-group col-12'>
@@ -562,7 +570,6 @@ export const TeamProfile = () => {
 
             <div className='d-flex'>
               <BntWrap>
-
                 <button
                   className={`me-3 ${coFounder === 'yes' && 'active'}`}
                   onClick={(e) => {
@@ -578,8 +585,7 @@ export const TeamProfile = () => {
                     e.preventDefault();
                     setCoFounder('no');
                   }}
-                  >
-
+                >
                   No
                 </button>
               </BntWrap>
@@ -621,14 +627,12 @@ export const TeamProfile = () => {
             />
           </div>
           <div className='my-3 mx-3'>
-
             <CustomButton type='submit' background='#031298'>
               {' '}
               Invite{' '}
             </CustomButton>
 
             <CustomButton background='#031298'> Invite </CustomButton>
-
           </div>
         </FormWrapper>
 
@@ -654,7 +658,7 @@ export const TeamProfile = () => {
               background='#2E3192'
             >
               {nextLoading ? <CircularLoader /> : 'Next'}
-
+            </CustomButton>
             <CustomButton className='mx-2' background='#00ADEF'>
               Save
             </CustomButton>
@@ -667,4 +671,3 @@ export const TeamProfile = () => {
     </>
   );
 };
-
