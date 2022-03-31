@@ -206,8 +206,8 @@ export const TeamModal = ({
               </span>
             </div>
             <div
-              className='col-4 d-flex justify-content-end'
-              style={{ marginTop: '4rem' }}
+              className='col-12 d-flex justify-content-end'
+              style={{ marginTop: '2rem' }}
             >
               <CustomButton
                 type='submit'
@@ -437,8 +437,8 @@ export const EducationModal = ({
               </span>
             </div>
             <div
-              className='col-6 d-flex justify-content-end'
-              style={{ marginTop: '4rem' }}
+              className='col-12 d-flex justify-content-end'
+              style={{ marginTop: '2rem' }}
             >
               <CustomButton
                 type='submit'
