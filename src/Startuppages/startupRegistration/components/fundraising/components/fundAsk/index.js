@@ -68,8 +68,7 @@ export const FundAsk = ({ setFundraising, back }) => {
       hasPreviousFundraising:
         stateAuth?.user?.fundraising?.hasPreviousFundraising ?? false,
       description: stateAuth?.user?.fundraising?.description ?? '',
-      instrumentForRound:
-        stateAuth?.user?.fundraising?.instrumentForRound ?? 'Fund1',
+      instrumentForRound: stateAuth?.user?.fundraising?.instrumentForRound ?? 'Fund1',
       numberOfRounds: stateAuth?.user?.fundraising?.numberOfRounds ?? 'Fund1',
       fundraisingAmount: stateAuth?.user?.fundraising?.fundraisingAmount ?? '',
       dilution: stateAuth?.user?.fundraising?.dilution ?? '',
@@ -141,7 +140,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 // options={optionsNumb}
                 className='cust extra'
                 value={
-                  fundraising.fundAsk.instrumentForRound ||
+                
                   formik.values.instrumentForRound
                 }
                 onChange={formik.handleChange}
