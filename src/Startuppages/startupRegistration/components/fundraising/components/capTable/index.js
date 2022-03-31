@@ -78,7 +78,8 @@ export const CapTable = ({ setFundraising }) => {
               className='form-control ps-3'
               placeholder='$100,000'
               value={
-                fundraising.capTable.amountRaised || formik.values.amountRaised
+                stateAuth?.user?.fundraising?.amountRaised ??
+                formik.values.amountRaised
               }
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -93,7 +94,7 @@ export const CapTable = ({ setFundraising }) => {
               className='form-control ps-3'
               placeholder='$150,000'
               value={
-                fundraising.capTable.amountInvestedByFounders ||
+                stateAuth?.user?.fundraising?.amountInvestedByFounders ??
                 formik.values.amountInvestedByFounders
               }
               onBlur={formik.handleBlur}
