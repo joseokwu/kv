@@ -5,6 +5,9 @@ import down from "../../assets/icons/downArrow.svg";
 import { SelectionDay } from "./components/selectionDay";
 import { getEvents } from "../../services/events";
 import { PageLoader } from "../../components";
+import { useAuth} from '../../hooks/useAuth';
+import Pagination from 'react-bootstrap/Pagination'
+
 
 export const StartupEvents = ({ history }) => {
 
@@ -52,46 +55,71 @@ export const StartupEvents = ({ history }) => {
     location: { hash },
   } = history;
 
+  const { stateAuth } = useAuth();
   const [events, setEvents] = useState([]);
+  const pages = []
+	const [currentPage, setCurrentPage] = useState(1)
   const [selectionEvents, setSelectionEvents] = useState([]);
   const [demoEvents, setDemoEvents] = useState([]);
   const [pitchEvents, setPitchEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState('');
 
+	const nextPage = ()=>{
+    setCurrentPage(currentPage+1)
+ 
+   }
+ 
+   const prevPage = ()=>{
+     setCurrentPage(currentPage-1)
+ 
+   }
+   
+	const movePage =(id)=>{
+		setCurrentPage(id)
+
+	}
+
+  
   const fetchData = async () => {
     setLoading(true);
-    const res = await getEvents();
-    setEvents(res?.data);
-    setSelectionEvents(() =>
-      res?.data?.filter((x) => x.eventType === "selectionDay")
-    );
-    setDemoEvents(() => res?.data?.filter((x) => x.eventType === "demoDay"));
-    setPitchEvents(() =>
-      res?.data?.filter((x) => x.eventType === "pitchSession")
-    );
-    setLoading(false);
-  };
+    const res = await getEvents({ 
+      userId:stateAuth?.user?.userId,
+      page:currentPage,
+      limit:5
+    });
+    setEvents(res?.data)
+    setTotal(res?.data?.total)
 
+    setLoading(false)
+  };
+  
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [currentPage]);
+
+  
+  for(let i = 1; i <= events?.total; i++){
+		pages.push(i)
+	}
+
 
   const renderContent = () => {
     switch (hash) {
       case "#Selection Day":
-        return <SelectionDay data={selectionEvents} />;
+        return <SelectionDay data={events && events?.data} />;
 
       case "#Demo Day":
-        return <SelectionDay data={demoEvents} />;
+        return <SelectionDay data={events && events?.data} />;
 
       case "#Pitching Events":
-        return <SelectionDay data={pitchEvents} />;
+        return <SelectionDay data={events && events?.data} />;
 
       case "#Other Events":
-        return <SelectionDay data={events} />;
+        return <SelectionDay data={events && events?.data} />;
 
       default:
-        return <SelectionDay data={selectionEvents} />;
+        return <SelectionDay data={events && events?.data} />;
     }
   };
 
@@ -147,6 +175,43 @@ export const StartupEvents = ({ history }) => {
       <div className="col-lg-12 col-xl-12 pt-3">
         <section className="mt-1">{renderContent()}</section>
       </div>
+      <div className="d-flex justify-content-end">
+				<Pagination>
+
+				{
+				events &&	events?.results?.currentPage > 1 ? (
+						 <>
+				  <Pagination.Prev onClick={prevPage} className='mx-1' />
+						{
+			
+					
+					<Pagination.Item  className='mx-1' >{ `${currentPage} of  ${events?.results?.limit}` }</Pagination.Item>
+						
+
+				}
+				 			{
+              	events?.results?.currentPage === events?.results?.limit ? <span />:<Pagination.Next onClick={nextPage} className='mx-1' /> 
+							 }
+						 </>
+
+					):(
+						<>
+            {
+
+      <Pagination.Item onClick={()=> movePage(currentPage + 1)} className='mx-1' >{ `${currentPage} of  ${events?.results?.limit}` }</Pagination.Item>
+        
+    }
+
+                        {
+                   events &&  events?.results?.currentPage === events?.results?.limit ? <span /> : <Pagination.Next onClick={nextPage} className='mx-1' />
+							     }
+
+						</>
+					)
+				}
+
+				</Pagination>
+			</div>
     </div>
   );
 };

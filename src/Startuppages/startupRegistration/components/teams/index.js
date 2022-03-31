@@ -632,41 +632,33 @@ export const TeamProfile = () => {
               Invite{' '}
             </CustomButton>
 
-            <CustomButton background='#031298'> Invite </CustomButton>
+            <div className='row '>
+              <div className='col-3'>
+                <CustomButton className='' background='#D0D0D1' onClick={back}>
+                  Back
+                </CustomButton>
+              </div>
+              <div className='col-9 d-flex justify-content-end'>
+                <CustomButton
+                  type='submit'
+                  disabled={loading}
+                  className='mx-2'
+                  background='#00ADEF'
+                >
+                  {loading ? <CircularLoader /> : 'Save'}
+                </CustomButton>
+                <CustomButton
+                  type='submit'
+                  disabled={nextLoading}
+                  onClick={() => setOpts('next')}
+                  background='#2E3192'
+                >
+                  {nextLoading ? <CircularLoader /> : 'Next'}
+                </CustomButton>
+              </div>
+            </div>
           </div>
         </FormWrapper>
-
-        <div className='row '>
-          <div className='col-3'>
-            <CustomButton className='' background='#D0D0D1' onClick={back}>
-              Back
-            </CustomButton>
-          </div>
-          <div className='col-9 d-flex justify-content-end'>
-            <CustomButton
-              type='submit'
-              disabled={loading}
-              className='mx-2'
-              background='#00ADEF'
-            >
-              {loading ? <CircularLoader /> : 'Save'}
-            </CustomButton>
-            <CustomButton
-              type='submit'
-              disabled={nextLoading}
-              onClick={() => setOpts('next')}
-              background='#2E3192'
-            >
-              {nextLoading ? <CircularLoader /> : 'Next'}
-            </CustomButton>
-            <CustomButton className='mx-2' background='#00ADEF'>
-              Save
-            </CustomButton>
-            <CustomButton type='submit' disabled={loading} background='#2E3192'>
-              {loading ? <CircularLoader /> : 'Next'}
-            </CustomButton>
-          </div>
-        </div>
       </form>
     </>
   );

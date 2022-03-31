@@ -115,7 +115,10 @@ export const FinancialProjection = () => {
             Save
           </CustomButton>
           <OutlineButton
-            onClick={() => console.log(fundraising)}
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(fundraising);
+            }}
             className='ms-2'
             style={{ marginRight: '5rem' }}
             background='none'

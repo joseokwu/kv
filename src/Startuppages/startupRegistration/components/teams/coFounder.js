@@ -459,25 +459,20 @@ export const CoFounder = ({
                       />
                     </div>
                   )}
-                  {displayWorkExperience === false && (
-                    <div className='col-7 my-4'>
-                      <span
-                        style={{
-                          color: '#120297',
-                          borderBottom: '1px solid #120297',
-                          fontWeight: '600',
-                          marginTop: '10px',
-                        }}
+
+                  <div
+                    className='col-12 d-flex justify-content-between'
+                    style={{ marginTop: '4rem' }}
+                  >
+                    {displayWorkExperience === false && (
+                      <CustomButton
+                        background='#D0D0D1'
                         onClick={() => setDisplayWorkExperience(true)}
                       >
                         Cancel
-                      </span>
-                    </div>
-                  )}
-                  <div
-                    className='col-4 d-flex justify-content-start'
-                    style={{ marginTop: '4rem' }}
-                  >
+                      </CustomButton>
+                    )}
+
                     <CustomButton
                       type='button'
                       onClick={(e) => {
@@ -651,25 +646,19 @@ export const CoFounder = ({
                       onChange={(date) => setEduEndDate(date)}
                     />
                   </div>
-                  {displayEducation === false && (
-                    <div className='col-7 my-4'>
-                      <span
-                        style={{
-                          color: '#120297',
-                          borderBottom: '1px solid #120297',
-                          fontWeight: '600',
-                          marginTop: '10px',
-                        }}
+
+                  <div
+                    className='col-12 d-flex justify-content-between'
+                    style={{ marginTop: '4rem' }}
+                  >
+                    {displayEducation === false && (
+                      <CustomButton
+                        background='#D0D0D1'
                         onClick={() => setDisplayEducation(true)}
                       >
                         Cancel
-                      </span>
-                    </div>
-                  )}
-                  <div
-                    className='col-6 d-flex justify-content-start'
-                    style={{ marginTop: '4rem' }}
-                  >
+                      </CustomButton>
+                    )}
                     <CustomButton
                       onClick={(e) => {
                         onSubmit(e, 'education');

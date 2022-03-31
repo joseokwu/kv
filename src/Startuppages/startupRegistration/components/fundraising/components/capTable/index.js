@@ -168,10 +168,6 @@ export const CapTable = ({ setFundraising }) => {
           </CustomButton>
         </div>
         <div className='col-9 d-flex justify-content-lg-end'>
-          <CustomButton className='' background='#00ADEF'>
-            Save
-          </CustomButton>
-
           <OutlineButton
             type='button'
             onClick={(e) => {
