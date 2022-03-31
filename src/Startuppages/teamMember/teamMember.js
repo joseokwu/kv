@@ -32,6 +32,16 @@ export const StartupTeamMember = () => {
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
   const [phone, setPhone] = useState(stateAuth?.user?.teamMember?.mobile_number)
+  const [teamMemberInfo, setTeamMemberInfo] = useState({
+    avatar: stateAuth?.user?.teamMember?.avatar ?? '',
+    briefIntroduction: stateAuth?.user?.teamMember?.briefIntroduction ?? '',
+    firstName: stateAuth?.user?.teamMember?.firstName ?? '',
+    lastName: stateAuth?.user?.teamMember?.lastName ?? '',
+    email: stateAuth?.user?.teamMember?.email ?? '',
+    country: stateAuth?.user?.teamMember?.country ?? '',
+    state: stateAuth?.user?.teamMember?.state ?? '',
+    city: stateAuth?.user?.teamMember?.city ?? '',
+  })
   const [editIndex, setEditIndex] = useState()
   const [isEditing, setIsEditing] = useState(false)
   const {
@@ -40,6 +50,10 @@ export const StartupTeamMember = () => {
     setEducation,
     state: { path, workExperience, education },
   } = useActivity()
+
+  const onChange = (e) => {
+    setTeamMemberInfo({ ...teamMemberInfo, [e.target.name]: e.target.value })
+  }
 
   const onChangeImage = (e) => {
     const { files } = e.target
@@ -92,17 +106,30 @@ export const StartupTeamMember = () => {
     }
   }
 
+  // const formik = useFormik({
+  //   initialValues: {
+  //     avatar: '',
+  //     briefIntroduction: '',
+  //     firstName: '',
+  //     lastName: '',
+  //     email: '',
+  //     dob: startDate,
+  //     country: '',
+  //     state: '',
+  //     city: '',
+  //     skills: [],
+  //   },
   const formik = useFormik({
     initialValues: {
-      avatar: '',
-      briefIntroduction: '',
-      firstName: '',
-      lastName: '',
-      email: '',
+      avatar: stateAuth?.user?.teamMember?.avatar ?? '',
+      briefIntroduction: stateAuth?.user?.teamMember?.avatar ?? '',
+      firstName: stateAuth?.user?.teamMember?.firstName ?? '',
+      lastName: stateAuth?.user?.teamMember?.lastName ?? '',
+      email: stateAuth?.user?.teamMember?.email ?? '',
       dob: startDate,
-      country: '',
-      state: '',
-      city: '',
+      country: stateAuth?.user?.teamMember?.country ?? '',
+      state: stateAuth?.user?.teamMember?.state ?? '',
+      city: stateAuth?.user?.teamMember?.city ?? '',
       skills: [],
     },
     validateOnBlur: true,
@@ -181,7 +208,7 @@ export const StartupTeamMember = () => {
             </p>
           </HeaderTeam>
 
-          <form style={{ marginBottom: '4rem' }}>
+          <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
             <FormWrapper height="70%">
               <div
                 style={{
@@ -458,7 +485,15 @@ export const StartupTeamMember = () => {
                 </CustomButton>
               </div>
               <div className="col-9 d-flex justify-content-end">
-                <CustomButton className="mx-4" background="#00ADEF">
+                <CustomButton
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    onSubmit()
+                  }}
+                  className="mx-4"
+                  background="#00ADEF"
+                >
                   Save
                 </CustomButton>
               </div>
