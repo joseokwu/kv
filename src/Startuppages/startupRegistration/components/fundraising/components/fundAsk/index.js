@@ -140,7 +140,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 // options={optionsNumb}
                 className='cust extra'
                 value={
-                
+                  stateAuth?.user?.fundraising?.instrumentForRound ??
                   formik.values.instrumentForRound
                 }
                 onChange={formik.handleChange}
@@ -158,7 +158,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 // options={optionsNumb}
                 className='cust extra'
                 value={
-                  fundraising.fundAsk.numberOfRounds ||
+                  stateAuth?.user?.fundraising?.numberOfRounds ??
                   formik.values.numberOfRounds
                 }
                 onChange={formik.handleChange}
@@ -180,7 +180,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 placeholder='Enter amount'
                 onBlur={formik.handleBlur}
                 value={
-                  fundraising.fundAsk.fundraisingAmount ||
+                  stateAuth?.user?.fundraising?.fundraisingAmount ??
                   formik.values.fundraisingAmount
                 }
                 onChange={formik.handleChange}
@@ -201,7 +201,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                 className='form-control ps-3'
                 placeholder='Enter what your business does'
                 onBlur={formik.handleBlur}
-                value={fundraising.fundAsk.dilution || formik.values.dilution}
+                value={
+                  stateAuth?.user?.fundraising?.dilution ??
+                  formik.values.dilution
+                }
                 onChange={formik.handleChange}
               />
               {formik.touched.dilution && formik.errors.dilution ? (
@@ -218,7 +221,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 placeholder='Enter amount'
                 onBlur={formik.handleBlur}
                 value={
-                  fundraising.fundAsk.preMoneyValuation ||
+                  stateAuth?.user?.fundraising?.preMoneyValuation ??
                   formik.values.preMoneyValuation
                 }
                 onChange={formik.handleChange}
@@ -240,7 +243,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 placeholder='Enter what your business does'
                 onBlur={formik.handleBlur}
                 value={
-                  fundraising.fundAsk.postMoneyValuation ||
+                  stateAuth?.user?.fundraising?.postMoneyValuation ??
                   formik.values.postMoneyValuation
                 }
                 onChange={formik.handleChange}
@@ -307,7 +310,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                 rows='5'
                 className='form-control ps-3'
                 placeholder='Enter Terms for round'
-                value={fundraising.fundAsk.terms || formik.values.terms}
+                value={
+                  stateAuth?.user?.fundraising?.terms ?? formik.values.terms
+                }
                 onChange={formik.handleChange}
               />
             </div>

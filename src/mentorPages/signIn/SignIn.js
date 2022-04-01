@@ -22,10 +22,11 @@ export const SignIn = () => {
   const history = useHistory()
   const onFinish = async (values) => {
     try {
+      console.log('eegggggggg')
       console.log(values)
       const res = await newLogin(values)
       const loca = getLocationHistory()
-     console.log(res)
+     
       if (res?.status) {
         if (loca !== null) {
           history.push(loca)
@@ -36,7 +37,8 @@ export const SignIn = () => {
         
       }
     } catch (err) {
-      console.log('error')
+      console.log('hhddjdkd')
+      console.log(err)
       toast.error(err?.response?.data?.message)
     }
   }

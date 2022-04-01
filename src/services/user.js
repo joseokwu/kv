@@ -18,8 +18,8 @@ export const userLogin = async (values) => {
         return res?.data;
   
     } catch (err) {
-        const error = err?.response?.data?.message || err?.message;
-        throw new Error(error)
+        
+        throw err
     }  
 }  
 
@@ -47,5 +47,14 @@ export const forgorPassword = async (values) => {
     } catch (err) {
         const error = err?.response?.data?.message || err?.message;
         throw new Error(error)
+    }
+}
+
+
+export const verifyEmail = async() =>{
+    try{
+        const res = await request.post('identity_service/getProfile');  
+    }catch(err){
+
     }
 }
