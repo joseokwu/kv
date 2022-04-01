@@ -20,9 +20,12 @@ import BluFile from '../../../../../../assets/icons/bluFile.svg';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useActivity } from '../../../../../../hooks/useBusiness';
+import { useAuth } from '../../../../../../hooks/useAuth';
 
 export const CapTable = ({ setFundraising }) => {
   const history = useHistory();
+  const { stateAuth } = useAuth();
+
   const {
     state: { fundraising },
   } = useActivity();
@@ -45,9 +48,9 @@ export const CapTable = ({ setFundraising }) => {
 
   const formik = useFormik({
     initialValues: {
-      amountRaised: fundraising.capTable.amountRaised || '',
+      amountRaised: stateAuth?.user?.fundraising?.amountRaised ?? '',
       amountInvestedByFounders:
-        fundraising.capTable.amountInvestedByFounders || '',
+        stateAuth?.user?.fundraising?.amountInvestedByFounders ?? '',
     },
     validationSchema: Yup.object({
       amountInvestedByFounders: Yup.string().required('Required'),
@@ -75,7 +78,8 @@ export const CapTable = ({ setFundraising }) => {
               className='form-control ps-3'
               placeholder='$100,000'
               value={
-                fundraising.capTable.amountRaised || formik.values.amountRaised
+                stateAuth?.user?.fundraising?.amountRaised ??
+                formik.values.amountRaised
               }
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -90,7 +94,7 @@ export const CapTable = ({ setFundraising }) => {
               className='form-control ps-3'
               placeholder='$150,000'
               value={
-                fundraising.capTable.amountInvestedByFounders ||
+                stateAuth?.user?.fundraising?.amountInvestedByFounders ??
                 formik.values.amountInvestedByFounders
               }
               onBlur={formik.handleBlur}

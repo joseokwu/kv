@@ -17,11 +17,11 @@ export const INIT_STATE_BUSINESS = {
   education: [],
   educationCoFounder: [],
   fundraising: {
-    fundAsk: {},
+    fundingAsk: {},
     fundUtilization: {},
     capTable: {},
     previousRound: {},
-    finalProjection: {},
+    financialProjection: {},
   },
   alert: {
     success: false,
@@ -30,5 +30,4 @@ export const INIT_STATE_BUSINESS = {
     action: false,
   },
   path: 1,
-  
 };
