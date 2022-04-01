@@ -172,7 +172,7 @@ export const FormWrapper = styled.div`
 
   .custs {
     border: none;
-    background: #f4f4f4;
+    background: #fafafc;
     width: 100%;
     margin-left: 15px;
     border-radius: 7px;
