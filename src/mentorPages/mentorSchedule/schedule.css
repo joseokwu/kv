@@ -6,7 +6,7 @@
   color: rgba(24, 24, 25, 0.9);
 }
 
-.my_schedule_create a {
+.my_schedule_create span {
   background: #00adef;
   border-radius: 10px;
   padding: 8px 30px;
@@ -17,22 +17,46 @@
   line-height: 140%;
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.my_schedule_create a:hover {
-  background: none;
-  color: #00adef;
-  border: 1.5px solid #00adef;
-}
-
-.my_schedule_create a:focus {
+.my_schedule_create span:focus {
   outline: none;
 }
 
-.create_call_visibility a {
+.my_schedule_create span:hover {
+  color: #ffffff;
+}
+
+.my_add_ava span {
+  background: #2E3192;
+  border-radius: 10px;
+  padding: 8px 30px;
+  border: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+.my_add_ava span:focus {
+  outline: none;
+}
+
+.my_add_ava span:hover {
+  color: #ffffff;
+}
+
+.create_call_visibility span {
   font-family: DM Sans;
   font-size: 16px;
   line-height: 20px;
   color: #2e3192;
   text-decoration: underline;
+  cursor: pointer;
+
 }

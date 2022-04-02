@@ -1,7 +1,7 @@
-import React from 'react'
-import { Button, TextArea, TextField } from '../../../mentorComponents'
-import close from '../../../assets/icons/close.svg'
-import sampleUser from '../../../assets/images/sampleTeamMember.png'
+import React from "react";
+import { Button, TextArea, TextField } from "../../../mentorComponents";
+import close from "../../../assets/icons/close.svg";
+import sampleUser from "../../../assets/images/sampleTeamMember.png";
 
 export const CreateGroup = () => {
   return (
@@ -22,24 +22,24 @@ export const CreateGroup = () => {
         />
       </section>
 
-      {Array.from('kaka').map((k, i) => {
+      {Array.from("kaka").map((k, i) => {
         return (
           <section className="d-flex align-items-center justify-content-between members-in-create mb-3">
             <div
               className="d-flex align-items-center"
-              style={{ columnGap: '1.5rem' }}
+              style={{ columnGap: "1.5rem" }}
             >
               <img src={sampleUser} alt="user" className="member-img" />
               <p>Kate Mcbeth Joan</p>
             </div>
             <img src={close} alt="close" role="button" />
           </section>
-        )
+        );
       })}
 
       <section className="d-flex justify-content-end my-4">
         <Button label="Create Group" />
       </section>
     </div>
-  )
-}
+  );
+};

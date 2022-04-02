@@ -14,46 +14,49 @@ export const MentorForgotPassword = ({ history }) => {
 
   useEffect(() => {
     if (Number(input) && input.length > 6) {
-      setNextPath('/mentor/verify/otp')
+      setNextPath('/verify/otp')
     } else if (emailRegex.test(input)) {
-      setNextPath('/mentor/forgot/password/check/mail')
+      setNextPath('/check/mail')
     } else {
       setNextPath('')
     }
   }, [input])
   return (
-    <div className="row mx-0 auth-wrap pt-5">
+    <div className="row mx-0 auth-wrap px-5">
       <section className="layout-header">
-        <div className="col-lg-6">
+        <div className="col-lg-6 mt-5">
           <img src={logo} alt={'logo'} />
         </div>
-      </section>
-      <section className="col-lg-6 forgot_illustration">
-        <div>
-          <h2>Forgot Password?</h2>
-          <p>
-            Enter the email associated with your account, and we would send an
-            email with instruction to reset your password
-          </p>
-        </div>
-      </section>
-      <section className="col-lg-6 forgot_form">
-        <div className="gray_signIn">
-          <section className="mb-4">
-            <AuthTextField
-              label="Email"
-              placeholder="Michealsmith@gmail.com"
-              className="mentor_gray_card_input"
-              type="text"
-              onChange={handleChange}
-            />
+
+        <div className="row">
+          <section className="col-lg-5 mx-3 forgot_illustration mt-4">
+            <div className="">
+              <h2>Forgot Password?</h2>
+              <span>
+                Enter the email associated with your account, and we would send an email with instruction to reset your password
+              </span>
+            </div>
           </section>
-          <section>
-            <AuthButton
-              label="Submit"
-              onClick={() => history.push(nextPath)}
-              // disabled={nextPath.length === 0}
-            />
+          
+          <section className="col-lg-6 forgot_form mx-3 mt-4">
+            <div className="gray_signIn">
+              <section className="mb-4 ">
+                <label className="e-label pb-2">Email</label>
+                <AuthTextField
+                  placeholder="Enter your email address"
+                  className="mentor_gray_card_input"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </section>
+              <section>
+                <AuthButton
+                  label="Submit"
+                  onClick={() => history.push(nextPath)}
+                  // disabled={nextPath.length === 0}
+                />
+              </section>
+            </div>
           </section>
         </div>
       </section>

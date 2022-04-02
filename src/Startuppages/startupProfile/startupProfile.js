@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import left from "../../assets/icons/chervonLeft.svg";
 import "./opportunity.css";
 import { Tabs, Tag } from "../../Startupcomponents";
@@ -10,8 +10,8 @@ import { PitchDeck } from "./components/pitchDeck/PitchDeck";
 import { Team } from "./components/team/Team";
 import { BusinessCanavas } from "./components/businessCanvas";
 import { RoadMap } from "./components/roadMap/RoadMap";
-
-
+import { Milestone } from "./components/milestone/Milestone";
+import { getStartupProfile } from "../../services";
 
 export const StartupProfile = ({ history }) => {
   const {
@@ -24,9 +24,14 @@ export const StartupProfile = ({ history }) => {
     "product",
     "business canvas",
     // "fundraising",
-    "Milestone/Timeline",
+    "milestone/timeline",
     "product road map",
   ];
+  const [prof, setProf] = useState(null);
+  const fetchData = async () => {
+    const res = await getStartupProfile();
+    setProf(res);
+  };
 
   console.log(`pathname`, pathname);
 
@@ -35,30 +40,38 @@ export const StartupProfile = ({ history }) => {
       case "#product":
         return <Product />;
       case "#pitch deck":
-        return <PitchDeck />;
-        case "#business canvas":
+        return <PitchDeck data={prof?.pitchDeck} />;
+      case "#business canvas":
         return <BusinessCanavas />;
       case "#product road map":
-        return <RoadMap />;
+        return <RoadMap data={prof?.ProductRoadMap} />;
       case "#team":
-        return <Team />;
-      case "#Milestone/Timeline":
-        return <div>Milestone/Timeline</div>;
+        return <Team data={prof?.team} />;
+      case "#milestone/timeline":
+        return <Milestone data={prof?.mileStone} />;
       default:
         return <Product />;
     }
   };
+
+  useEffect(() => {
+    fetchData();
+
+    return () => {
+      setProf(null);
+    };
+  }, []);
+
   return (
     <div>
       <article className="wrapper pt-3" style={{ background: "#F9F9FC" }}>
-   
         <div className="row mt-5">
           <div className="col-lg-7 col-12">
-            <OppCompanyInfo />
-            <FinancialDetails />
+            <OppCompanyInfo data={prof} />
+            <FinancialDetails data={prof} />
           </div>
           <div className="col-lg-5 col-12 ">
-            <FundingRound />
+            <FundingRound data={prof && prof?.financialDetails} />
           </div>
         </div>
       </article>

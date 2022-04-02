@@ -15,14 +15,15 @@ import location from '../../../../assets/icons/locationSm.svg'
 import web from '../../../../assets/icons/webSm.svg'
 import './details.css'
 
-const Details = () => {
+
+const Details = ({data}) => {
   return (
     <section className="mentor_profile_info">
       <div className="mentor_profile_banner"></div>
 
       <div className="mentor_profile_contact_info">
         <Modal title="Edit Intro" id="mentorProfileEditModal">
-          <ProfileInfo />
+          <ProfileInfo data={data} />
         </Modal>
         <span className="edit-info">
           <img
@@ -38,36 +39,34 @@ const Details = () => {
         </span>
 
         <article>
-          <h1 className="mb-0 profile-name">Micheal Smith</h1>
+          <h1 className="mb-0 profile-name">{ data?.name }</h1>
 
           <div className="d-flex align-items-center justify-content-between mb-0">
             <span className="d-flex align-items-center profile-bio">
-              <p>Michealsmith@gmail.com</p>
+              <p> { data?.email} </p>
             </span>
             <span className="text-right">
               <img src={twitter} alt="twitter" className="mr-3" />
               <img src={linkedIn} alt="linkedIn" />
               <p className="mentor_profile_site mt-2">
-                www.Knightventure/michealsmith
+                { data?.url }
               </p>
             </span>
           </div>
 
           <div className="d-flex align-items-center web-phone-local mb-3">
             <p>
-              <img src={location} alt="location" /> San francisco United State
+              <img src={location} alt="location" /> { data?.location }
             </p>
             <a href="https://www.michealsmith.com">
               <img src={web} alt="web" />
-              www.michealsmith.com
+              { data?.url }
             </a>
           </div>
 
           <div className="profile-bio pb-5">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation{' '}
+             { data?.bio }
             </p>
           </div>
         </article>

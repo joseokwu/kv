@@ -1,68 +1,23 @@
-import { Header, Table, Section } from './cap.styled'
-import downloadIcon from '../../../../assets/icons/downloadoutline.svg'
-import html2pdf from 'html2pdf.js'
+import { Header, Table, Section } from "./cap.styled";
+import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
+import html2pdf from "html2pdf.js";
 
-export const CapTable = () => {
+export const CapTable = (data = []) => {
   const downloadStatement = () => {
-    const element = document.querySelector('#cap')
+    const element = document.querySelector("#cap");
 
     let opt = {
       margin: 1,
-      filename: 'capital table.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
+      filename: "capital table.pdf",
+      image: { type: "jpeg", quality: 0.98 },
       html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-    }
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
 
-    //console.log(html2pdf().from(element).set(opt).save())
+    return html2pdf().from(element).set(opt).save();
+  };
 
-    return html2pdf().from(element).set(opt).save()
-  }
-
-  const capTable = [
-    {
-      shareHolders: 'John Carter Robinson',
-      shareType: 'Angel Investor',
-      noShare: '5',
-      sharePercent: '2.5 %',
-    },
-    {
-      shareHolders: 'John Carter Robinson',
-      shareType: 'Angel Investor',
-      noShare: '15',
-      sharePercent: '5.6 %',
-    },
-    {
-      shareHolders: 'John Carter Robinson',
-      shareType: 'Angel Investor',
-      noShare: '10',
-      sharePercent: '9.5 %',
-    },
-    {
-      shareHolders: 'John Carter Robinson',
-      shareType: 'Angel Investor',
-      noShare: '5',
-      sharePercent: '7.5 %',
-    },
-    {
-      shareHolders: 'John Carter Robinson',
-      shareType: 'Angel Investor',
-      noShare: '19',
-      sharePercent: '5.5 %',
-    },
-    {
-      shareHolders: 'John Carter Robinson',
-      shareType: 'Angel Investor',
-      noShare: '30',
-      sharePercent: '9.5 %',
-    },
-    {
-      shareHolders: 'Total',
-      shareType: '',
-      noShare: '',
-      sharePercent: '',
-    },
-  ]
+  const capTable = [...data?.data];
 
   return (
     <div id="cap">
@@ -88,17 +43,18 @@ export const CapTable = () => {
             </tr>
           </thead>
           <tbody>
-            {capTable.map((data) => (
-              <tr key={data}>
-                <td> {data?.shareHolders} </td>
-                <td> {data?.shareType} </td>
-                <td> {data?.noShare} </td>
-                <td> {data?.sharePercent} </td>
-              </tr>
-            ))}
+            {capTable?.length > 0 &&
+              capTable.map((data) => (
+                <tr key={data}>
+                  <td> {data?.shareHolders} </td>
+                  <td> {data?.shareType} </td>
+                  <td> {data?.noShare} </td>
+                  <td> {data?.sharePercent} </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </Section>
     </div>
-  )
-}
+  );
+};

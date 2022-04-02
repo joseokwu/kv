@@ -6,6 +6,9 @@ import person3 from '../assets/icons/person3.svg'
 import company from '../assets/images/appleoff.svg'
 import applied from '../assets/images/appliedMap.svg'
 import declined from '../assets/images/declinedMap.svg'
+import expired from '../assets/images/expiredMap.svg'
+import approved from '../assets/images/approvedMap.svg'
+import doctor from '../assets/images/doctor.svg'
 
 export const options = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -34,7 +37,7 @@ export const cardData = [
 
 export const boosterData = [
   { icon: newApp, name: 'New Deals', count: 200, color: '#E5FFE4' },
-  { icon: pending, name: 'Applied', count: 20, color: '#FAD7DC' },
+  { icon: pending, name: 'Applied', count: 20, color:"#FAD7DC"},
   { icon: newApp, name: 'Active', count: 20, color: '#FAD7DC' },
 ]
 
@@ -79,7 +82,8 @@ export const cardFill = [
   },
   {
     header: 'Investors',
-    amount: '8',
+    // amount: '8',
+    img: doctor,
     color: '#2E3192',
   },
   {
@@ -138,9 +142,11 @@ export const cardDataModal = [
 export const compImage = [{ logo: company }]
 
 export const Map = [
-  { 
-    approvedMap: applied,
+  {
+    appliedMap: applied,
     declinedMap: declined,
+    expiredMap: expired,
+    approvedMap: approved,
     title: 'Application Status',
   },
 ]
@@ -156,3 +162,16 @@ export const images = [
     icon: person3,
   },
 ]
+
+// assignments: (2) [{…}, {…}]
+// events: (3) [{…}, {…}, {…}]
+// founders: "20"
+// invest: []
+// investors: "30"
+// lastFund: {amount: '500,000', date: 'Thu Mar 24 2022 10:00:00 GMT+0100 (West Africa Standard Time)'}
+// mentors: "20"
+// partners: "10"
+// startupInvestors: []
+// total: "900,000"
+// totalFund: {amount: '700,000'}
+// valuation: {amount: '5,000,000

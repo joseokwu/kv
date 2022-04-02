@@ -46,8 +46,10 @@ export const Portfolio = () => {
         </button>
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
-          <Button label="Save" variant="secondary" />
-          <Button label="Done" />
+         
+          <Button label="Done" onClick={() => {
+            push("/investor/dashboard");
+          }} />
         </div>
       </section>
     </div>

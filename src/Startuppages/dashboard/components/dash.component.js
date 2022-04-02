@@ -94,11 +94,20 @@ export const TodoCard = styled.div`
       line-height: 140%;
       color: #525151;
     }
+
+    .assImg:hover {
+      -ms-transform: scale(1.5); /* IE 9 */
+      -webkit-transform: scale(1.5); /* Safari 3-8 */
+      transform: scale(1.5);
+      z-index: 999;
+    }
   }
 
   @media (max-width: 768px) {
     width: 100%;
   }
+
+  
 `
 
 export const UpcomingCard = styled.div`

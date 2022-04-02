@@ -1,73 +1,175 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   HeaderStartup,
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-} from './startup.styled'
-import { UserOutlined, PlusOutlined } from '@ant-design/icons'
-import { useFormik } from 'formik'
-import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import { CustomSelect } from '../../../../Startupcomponents/select/customSelect'
-import { stage, optionsNumb, options } from '../../../../constants/domiData'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
-import { useActivity } from '../../../../hooks/useBusiness'
+} from './startup.styled';
+import './style.css';
+import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { CustomSelect } from '../../../../Startupcomponents/select/customSelect';
+import { stage, optionsNumb, options } from '../../../../constants/domiData';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
+import { useActivity } from '../../../../hooks/useBusiness';
+import { updateFounderProfile } from '../../../../services/startup';
+import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { toast } from 'react-hot-toast';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from './../../../../hooks/useAuth';
 
 export const StartupProfile = () => {
-  const [disImg, setImg] = useState(null)
-
-  const [startDate, setStartDate] = useState(new Date())
-
-  const [phone, setPhone] = useState()
-
   const {
     changePath,
     state: { path },
-  } = useActivity()
+  } = useActivity();
+  const { stateAuth } = useAuth();
+  const [disImg, setImg] = useState(null);
+  const [opts, setOpts] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
+  const [loading, setLoading] = useState(false);
+  const [nextloading, setNextLoading] = useState(false);
+  const [phone, setPhone] = useState(
+    stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber ?? ''
+  );
+  const [contacts, setContacts] = useState({
+    registeredAddress: stateAuth?.user?.startUpProfile?.contactInfo
+      ?.registeredAddress
+      ? stateAuth?.user?.startUpProfile?.contactInfo?.registeredAddress
+      : '',
+    country: stateAuth?.user?.startUpProfile?.contactInfo?.country
+      ? stateAuth?.user?.startUpProfile?.contactInfo?.country
+      : '',
+    state: stateAuth?.user?.startUpProfile?.contactInfo?.state
+      ? stateAuth?.user?.startUpProfile?.contactInfo?.state
+      : '',
+    city: stateAuth?.user?.startUpProfile?.contactInfo?.city
+      ? stateAuth?.user?.startUpProfile?.contactInfo?.city
+      : '',
+    companyEmail: stateAuth?.user?.startUpProfile?.contactInfo?.companyEmail
+      ? stateAuth?.user?.startUpProfile?.contactInfo?.companyEmail
+      : '',
+  });
+  const [socialMedia, setSocialmedia] = useState({
+    profileHandle: stateAuth?.user?.startUpProfile?.socialMedia?.profileHandle
+      ? stateAuth?.user?.startUpProfile?.socialMedia?.profileHandle
+      : '',
+    companyWebsite: stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite
+      ? stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite
+      : '',
+    linkedInHandle: stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle
+      ? stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle
+      : '',
+    twitterHandle: stateAuth?.user?.startUpProfile?.socialMedia
+      ? stateAuth?.user?.startUpProfile?.socialMedia?.twitterHandle
+      : '',
+  });
+
+  const history = useHistory();
 
   const onChangeImage = (e) => {
-    const { files } = e.target
+    const { files } = e.target;
 
     if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]))
+      setImg(URL.createObjectURL(files[0]));
     }
-  }
+  };
 
+  const onChange = (e) => {
+    setContacts({ ...contacts, [e.target.name]: e.target.value });
+  };
+  // console.log(stateAuth?.user?.startUpProfile)
+  const onChangeMedia = (e) => {
+    setSocialmedia({ ...socialMedia, [e.target.name]: e.target.value });
+  };
   const next = () => {
-    changePath(path + 1)
-  }
+    changePath(path + 1);
+  };
 
-  const onSubmit = (value) => {}
+  const onSubmit = async (value) => {
+  
+
+    try {
+      const startupProfile = {
+        type: 'startUpProfile',
+        accType: 'startup',
+        values: {
+          ...value,
+          contactInfo: {
+            ...contacts,
+            phoneNumber: phone,
+          },
+          socialMedia,
+        },
+        userId: stateAuth?.user?.userId,
+      };
+      console.log(startupProfile);
+      if (opts === 'next') {
+        setOpts(true);
+        let result = await updateFounderProfile(startupProfile);
+
+        if (result?.success) {
+          toast.success('Profile' + ' ' + result?.message);
+          setOpts(false);
+          return changePath(path + 1);
+        }
+      }
+      setLoading(true);
+      let result = await updateFounderProfile(startupProfile);
+
+      if (!result?.success) {
+        toast.error(
+          result?.message || 'There was an error in updating profile'
+        );
+        setLoading(false);
+        return;
+      }
+      toast.success('Profile' + ' ' + result?.message);
+      setLoading(false);
+      return;
+    } catch (err) {
+      setLoading(false);
+      toast.error(
+        err?.response?.data?.message || 'There was an error in updating profile'
+      );
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
-      startupname: '',
-      brand: '',
-      elevatorpitch: '',
+      logo: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
+      startupName: stateAuth?.user?.businessname ?? '',
+      elevatorPitch: stateAuth?.user?.startUpProfile?.elevatorPitch ?? '',
+      brand: stateAuth?.user?.startUpProfile?.brand ?? '',
       yearFounded: startDate,
-      regNumber: '',
-      companySize: 'Select-size',
-      sector: 'Select-sector',
-      stage: 'Select-stage',
-      acceleratornames: '',
-      address: '',
-      country: '',
-      state: '',
-      city: '',
-      email: '',
-      phone: phone,
-      profileHandle: '',
-      website: '',
-      linkedin: '',
-      twitter: '',
+      registrationNumber:
+        stateAuth?.user?.startUpProfile?.registrationNumber ?? '',
+      companySize:
+        stateAuth?.user?.startUpProfile?.companySize ?? 'Select-size',
+      businessSector:
+        stateAuth?.user?.startUpProfile?.businessSector ?? 'Select-sector',
+      startupStage:
+        stateAuth?.user?.startUpProfile?.startupStage ?? 'Select-stage',
+      acceleratorName: stateAuth?.user?.startUpProfile?.acceleratorName ?? '',
     },
-    validateOnBlur: true,
+    validationSchema: Yup.object({
+      elevatorPitch: Yup.string().required('Required'),
+      startupName: Yup.string().required('Required'),
+      brand: Yup.string().required('Required'),
+      yearFounded: Yup.string().required('Required'),
+      registrationNumber: Yup.string().required('Required'),
+      companySize: Yup.string().required('Required'),
+      businessSector: Yup.string().required('Required'),
+      startupStage: Yup.string().required('Required'),
+      acceleratorName: Yup.string().required('Required'),
+    }),
     onSubmit: (value) => onSubmit(value),
-  })
+  });
 
   return (
     <>
@@ -82,269 +184,389 @@ export const StartupProfile = () => {
             <UserOutlined />
           ) : (
             <img
-              className=""
+              className=''
               src={disImg}
               style={{ borderRadius: '70px', width: '90px', height: '90px' }}
-              alt=""
+              alt=''
             />
           )}
         </ImageWrapper>
 
-        <InputWrapper for="dp">
-          <input type="file" onChange={onChangeImage} id="dp" hidden />
-          <PlusOutlined style={{color: 'white'}} />
+        <InputWrapper for='dp'>
+          <input type='file' onChange={onChangeImage} id='dp' hidden />
+          <PlusOutlined style={{ color: 'white' }} />
         </InputWrapper>
       </div>
       <form onSubmit={formik.handleSubmit}>
-        <FormWrapper className="pe-5">
-          <div className="div border-bottom pb-3">
-            <span className="">Startup profile</span>
+        <FormWrapper className='pe-5'>
+          <div className='div border-bottom pb-3'>
+            <span className=''>Startup profile</span>
           </div>
 
-          <div className="row">
-            <div className="form-group col-12">
+          <div className='row'>
+            <div className='form-group col-12'>
               <label>Elevator Pitch *</label>
               <textarea
-                name="elevatorpitch"
-                placeholder="One line pitch 150 words maximum"
-                value={formik.values.elevatorpitch}
+                id='elevatorPitch'
+                name='elevatorPitch'
+                placeholder='One line pitch 150 words maximum'
+                value={formik.values.elevatorPitch}
                 onChange={formik.handleChange}
-                rows="7"
-                cols="4"
-                className="form-control"
+                onBlur={formik.handleBlur}
+                rows='4'
+                cols='4'
+                className='form-control'
               ></textarea>
+              {formik.touched.elevatorPitch && formik.errors.elevatorPitch ? (
+                <label className='error'>{formik.errors.elevatorPitch}</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Startup *</label>
               <input
-                type="text"
-                name="startupname"
-                value={formik.values.startupname}
+                id='startupName'
+                type='text'
+                name='startupName'
+                disabled={formik.values.startupName !== ''}
+                placeholder='Entity Name As Per Registration'
+                value={formik.values.startupName}
                 onChange={formik.handleChange}
-                className="form-control"
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.startupName && formik.errors.startupName ? (
+                <label className='error'>{formik.errors.startupName}</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Brand *</label>
               <input
-                type="text"
-                name="brand"
-                placeholder="eg; Knight Ventures"
+                id='brand'
+                type='text'
+                name='brand'
+                placeholder='eg; Knight Ventures'
                 value={formik.values.brand}
                 onChange={formik.handleChange}
-                className="form-control"
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.brand && formik.errors.brand ? (
+                <label className='error'>{formik.errors.brand}</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Year Founded *</label>
               <DatePicker
-                className="date-input col-lg-12"
+                id='yearFounded'
+                name='yearFounded'
+                className='date-input col-lg-12 ps-3 py-2'
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
               />
             </div>
 
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Registration Number *</label>
               <input
-                type="text"
-                name="regNumber"
-                placeholder="1234567890"
-                value={formik.values.regNumber}
+                id='registrationNumber'
+                type='text'
+                name='registrationNumber'
+                placeholder='1234567890'
+                value={formik.values.registrationNumber}
                 onChange={formik.handleChange}
-                className="form-control"
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.registrationNumber &&
+              formik.errors.registrationNumber ? (
+                <label className='error'>
+                  {formik.errors.registrationNumber}
+                </label>
+              ) : null}
             </div>
 
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Company Size *</label>
-              <CustomSelect
-                options={optionsNumb}
-                value={formik.values.companySize}
-                onChange={(value) =>
-                  formik.setFieldValue('companySize', value.value)
-                }
-                className="cust"
-              />
+              <div>
+                <select
+                  id={'companySize'}
+                  name={'companySize'}
+                  value={formik.values.companySize}
+                  onChange={formik.handleChange}
+                  className='sel'
+                >
+                  {optionsNumb.map((item, i) => (
+                    <option key={i} value={item.value}>
+                      {' '}
+                      {item.label}{' '}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
-            <div className="form-group col-lg-6 col-12">
-              <label>Which sector does your business operate in *</label>
-              <CustomSelect
-                options={options}
-                value={formik.values.sector}
-                onChange={(value) =>
-                  formik.setFieldValue('sector', value.value)
-                }
-                className="cust"
-              />
+            <div className='form-group col-lg-6 col-12'>
+              <label>Which sector does your business operate in?*</label>
+              <div>
+                <select
+                  id={'businessSector'}
+                  name={'businessSector'}
+                  value={formik.values.businessSector}
+                  onChange={formik.handleChange}
+                  className='sel'
+                >
+                  {options.map((item, i) => (
+                    <option key={i} value={item.value}>
+                      {' '}
+                      {item.label}{' '}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>What stage is your business in *</label>
-              <CustomSelect
-                options={stage}
-                value={formik.values.stage}
-                onChange={(value) => formik.setFieldValue('stage', value.value)}
-                className="cust"
-              />
+              <select
+                id={'startupStage'}
+                name={'startupStage'}
+                value={formik.values.startupStage}
+                onChange={formik.handleChange}
+                className='sel'
+              >
+                {stage.map((item, i) => (
+                  <option key={i} value={item.value}>
+                    {' '}
+                    {item.label}{' '}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            <div className="form-group col-12">
+            <div className='form-group col-12'>
               <label>
                 Enter the name of Accelerator /incubator in case you've worked
                 with any{' '}
               </label>
               <input
-                type="text"
-                name="acceleratornames"
-                placeholder="Enter Accelerator name"
-                value={formik.values.acceleratornames}
+                id='acceleratorName'
+                type='text'
+                name='acceleratorName'
+                placeholder='Enter Accelerator name'
+                value={formik.values.acceleratorName}
                 onChange={formik.handleChange}
-                className="form-control"
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.acceleratorName &&
+              formik.errors.acceleratorName ? (
+                <label className='error'>{formik.errors.acceleratorName}</label>
+              ) : null}
             </div>
           </div>
         </FormWrapper>
 
-        <FormWrapper height="70%">
-          <div className="div">
+        <FormWrapper height='70%'>
+          <div className='div border-bottom pb-3'>
             <span>Contact info</span>
           </div>
 
-          <div className="row">
-            <div className="form-group col-12">
+          <div className='row mt-4'>
+            <div className='form-group col-12'>
               <label>Registered Address </label>
               <input
-                type="text"
-                name="address"
-                placeholder="Enter your registered address"
-                value={formik.values.address}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='registeredAddress'
+                type='text'
+                name='registeredAddress'
+                placeholder='Enter your registered address'
+                value={contacts.registeredAddress}
+                onChange={onChange}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.registeredAddress &&
+              !contacts.registeredAddress ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-4 col-12">
+            <div className='form-group col-lg-4 col-12'>
               <label>Country *</label>
               <input
-                type="text"
-                name="country"
-                placeholder="Enter your country"
-                value={formik.values.country}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='country'
+                type='text'
+                name='country'
+                placeholder='Enter your country'
+                value={contacts.country}
+                onChange={onChange}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.country && !contacts.country ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-4 col-12">
+            <div className='form-group col-lg-4 col-12'>
               <label>State *</label>
               <input
-                type="text"
-                name="state"
-                placeholder="Enter your state"
-                value={formik.values.state}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='state'
+                type='text'
+                name='state'
+                placeholder='Enter your state'
+                value={contacts.state}
+                onChange={onChange}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.state && !contacts.state ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-4 col-12">
+            <div className='form-group col-lg-4 col-12'>
               <label>City *</label>
               <input
-                type="text"
-                name="city"
-                placeholder="Enter your city"
-                value={formik.values.city}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='city'
+                type='text'
+                name='city'
+                placeholder='Enter your city'
+                value={contacts.city}
+                onChange={onChange}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.city && !contacts.city ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
-            <div className="form-group  col-lg-6 col-12 ">
+            <div className='form-group  col-lg-6 col-12 '>
               <label>Mobile Number *</label>
               <PhoneInput
+                id='phoneNumber'
                 international
-                name="phone"
+                name='phoneNumber'
                 countryCallingCodeEditable={true}
-                className="custs"
+                className='custs ps-3'
                 value={phone}
                 onChange={setPhone}
+                MaxLength={17}
+                onBlur={formik.handleBlur}
               />
+              {formik.touched.phoneNumber && !phone ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Company Email *</label>
               <input
-                type="text"
-                name="email"
-                placeholder="Enter your email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='companyEmail'
+                type='text'
+                name='companyEmail'
+                placeholder='Enter your email'
+                value={contacts.companyEmail}
+                onChange={onChange}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.companyEmail && !contacts.companyEmail ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
           </div>
         </FormWrapper>
 
-        <FormWrapper height="70%">
-          <div className="div">
+        <FormWrapper height='70%'>
+          <div className='div border-bottom pb-3'>
             <span>Web & Social Media</span>
           </div>
 
-          <div className="row">
-            <div className="form-group col-lg-6 col-12">
+          <div className='row mt-4'>
+            <div className='form-group col-lg-6 col-12'>
               <label>What should be your startup profile handle </label>
               <input
-                type="text"
-                name="profileHandle"
-                placeholder="Enter your startup profile handle"
-                value={formik.values.profileHandle}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='profileHandle'
+                type='text'
+                name='profileHandle'
+                placeholder='Enter your startup profile handle'
+                value={socialMedia.profileHandle}
+                onChange={onChangeMedia}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.profileHandle && !socialMedia.profileHandle ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Website *</label>
               <input
-                type="text"
-                name="website"
-                placeholder="Enter your startup website"
-                value={formik.values.website}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='companyWebsite'
+                type='text'
+                name='companyWebsite'
+                placeholder='Enter your startup website'
+                value={socialMedia.companyWebsite}
+                onChange={onChangeMedia}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.companyWebsite && !socialMedia.companyWebsite ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Linkedin *</label>
               <input
-                type="text"
-                name="linkedin"
-                placeholder="Enter your Linkedin profile name"
-                value={formik.values.linkedin}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='linkedInHandle'
+                type='text'
+                name='linkedInHandle'
+                placeholder='Enter your Linkedin profile name'
+                value={socialMedia.linkedInHandle}
+                onChange={onChangeMedia}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.linkedInHandle && !socialMedia.linkedInHandle ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className='form-group col-lg-6 col-12'>
               <label>Twitter *</label>
               <input
-                type="text"
-                name="twitter"
-                placeholder="Enter your Twitter profile name"
-                value={formik.values.twitter}
-                onChange={formik.handleChange}
-                className="form-control"
+                id='twitterHandle'
+                type='text'
+                name='twitterHandle'
+                placeholder='Enter your Twitter profile name'
+                value={socialMedia.twitterHandle}
+                onChange={onChangeMedia}
+                onBlur={formik.handleBlur}
+                className='form-control ps-3'
               />
+              {formik.touched.twitterHandle && !socialMedia.twitterHandle ? (
+                <label className='error'>Required</label>
+              ) : null}
             </div>
           </div>
-          <div className="d-flex my-4 justify-content-end">
+          <div className='d-flex my-4 justify-content-end'>
             <div>
-              <CustomButton background="#06ADEF">Save</CustomButton>
+              <CustomButton
+                type='submit'
+                disabled={loading}
+                background='#06ADEF'
+              >
+                {loading ? <CircularLoader /> : 'Save'}
+              </CustomButton>
             </div>
-            <div className="mx-2">
-              <CustomButton onClick={next} background="#2E3192">
-                Next
+            <div className='mx-2'>
+              <CustomButton
+                type='submit'
+                disabled={nextloading}
+                onClick={() => setOpts('next')}
+                background='#2E3192'
+              >
+                {nextloading ? <CircularLoader /> : 'Next'}
               </CustomButton>
             </div>
           </div>
         </FormWrapper>
       </form>
     </>
-  )
-}
+  );
+};

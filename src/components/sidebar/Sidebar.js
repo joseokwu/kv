@@ -13,6 +13,9 @@ import networking from "../../assets/icons/networkingIcon.svg";
 import helpDesk from "../../assets/icons/helpDesk.svg";
 import briefcase from "../../assets/icons/berifcase.svg";
 import { Link } from "react-router-dom";
+import { useAuth } from '../../hooks/useAuth';
+
+
 
 const investorNavigators = [
   {
@@ -22,17 +25,17 @@ const investorNavigators = [
     icon: dashboard,
   },
   {
-    title: "Investment Opportunities",
+    title: "Opportunities",
     activator: "opportunities",
     path: "/investor/opportunities",
     icon: startup,
   },
-  {
-    title: "Interested",
-    activator: "interested",
-    path: "/investor/interested",
-    icon: interested,
-  },
+  // {
+  //   title: "Interested",
+  //   activator: "interested",
+  //   path: "/investor/interested",
+  //   icon: interested,
+  // },
   // {
   //   title: "Portfolio",
   //   activator: "portfolio",
@@ -52,12 +55,12 @@ const investorNavigators = [
     path: "/investor/schedule",
     icon: schedule,
   },
-  {
-    title: "Evaluation",
-    activator: "evaluation",
-    path: "/investor/evaluation",
-    icon: evaluation,
-  },
+  // {
+  //   title: "Evaluation",
+  //   activator: "evaluation",
+  //   path: "/investor/evaluation",
+  //   icon: evaluation,
+  // },
   {
     title: "Networking",
     activator: "networking",
@@ -93,8 +96,14 @@ export const Sidebar = () => {
     push,
   } = useHistory();
 
+  const { stateAuth } = useAuth();
+
   const activateLink = (path) => {
-    return pathname.includes(path) ? "active-side" : "";
+    if (pathname.includes("interested") && path === "opportunities") {
+      return "active-side";
+    } else {
+      return pathname.includes(path) ? "active-side" : "";
+    }
   };
 
   const [navigator, setNavigator] = useState([]);
@@ -113,17 +122,13 @@ export const Sidebar = () => {
     }
   }, [pathname]);
 
-  console.log(`pathname`, pathname);
-  console.log(`navigator`, navigator);
-  console.log(`state`, state);
-
   return (
     <div className="side-main">
       <section className="side-navigator">
         <div>
           <img src={user} alt="profile" />
         </div>
-        <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
+        <h5 className="mb-0 side-header">Hello { stateAuth?.user?.businessname } </h5>
         <p className="mb-0 side-text">
           {pathname.includes("investor") ? "Investor" : "Partner"}
         </p>
@@ -132,10 +137,10 @@ export const Sidebar = () => {
           {navigator.length > 0 &&
             navigator.map((nav, i) => {
               return (
-                <li>
+                <li key={i}>
                   <Link to={nav.path}>
                     <img src={nav.icon} alt="dash" />
-                    <p className={`${activateLink(nav.activator)} side-text`}>
+                    <p className={`${activateLink(nav.activator)} side_text`}>
                       {nav.title}
                     </p>
                   </Link>

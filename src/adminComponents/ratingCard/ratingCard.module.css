@@ -1,0 +1,39 @@
+.rateType {
+  background: #f8f8fa;
+  border-radius: 4px;
+  padding: 3px 10px;
+  column-gap: 6px;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  margin-bottom: 8px;
+}
+
+.rateType span {
+  color: #00adef;
+}
+
+.rating {
+  background: #f4f9ff;
+  border-radius: 8px;
+  padding: 9px 19px;
+  width: fit-content;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: #323232;
+  margin: 0 auto;
+}
+
+.count {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #828282;
+}

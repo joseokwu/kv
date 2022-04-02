@@ -1,5 +1,6 @@
 .dashboard_main {
   padding: 0px 26px 52px 26px;
+
 }
 
 .dashboard-cards {
@@ -7,8 +8,8 @@
   width: 100%;
   overflow-x: auto;
   padding-bottom: 20px;
-  background: #fefefe;
-  z-index: 900;
+  /* background: #fefefe; */
+  /* z-index: 900; */
 }
 
 .dashboard-cards::-webkit-scrollbar {

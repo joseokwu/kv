@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
 
 export const HeaderStartup = styled.div`
   h5 {
@@ -16,7 +16,7 @@ export const HeaderStartup = styled.div`
     line-height: 20.83px;
     color: #828282;
   }
-`
+`;
 
 export const ImageWrapper = styled.span`
   text-align: center;
@@ -29,25 +29,25 @@ export const ImageWrapper = styled.span`
   align-items: center;
   position: relative;
   background: #fff;
-`
+`;
 export const InputWrapper = styled.label`
-  position: absolute;
+  position: relative;
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  background: #2BB4F0;
+  background: #2bb4f0;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 320px;
-  left: 120px;
+  top: -30px;
+  left: 60px;
 
   input {
     width: inherit;
     height: inherit;
     opacity: 0;
   }
-`
+`;
 
 export const FormWrapper = styled.div`
   width: 100%;
@@ -59,6 +59,10 @@ export const FormWrapper = styled.div`
   border: 0 solid #d3d3d3;
   border-radius: 5px;
   background: #fff;
+
+  .error {
+    color: red;
+  }
 
   .div {
     margin-bottom: 10px;
@@ -84,12 +88,12 @@ export const FormWrapper = styled.div`
   }
 
   input {
-    border: none;
-    background: #fafafc;
-    border-radius: 4px;
-    /* padding: 8px 14px; */
-    margin-left: 15px;
-    margin-bottom: 15px;
+    border: none !important;
+    background: #fafafc !important;
+    /* border-radius: 4px !important; */
+    padding: 8px 14px;
+    /* margin-left: 15px !important; */
+    /* margin-bottom: 15px !important; */
 
     ::placeholder {
       font-family: DM Sans;
@@ -100,12 +104,16 @@ export const FormWrapper = styled.div`
       text-transform: capitalize;
       color: #bdbdbd;
     }
+
+    :focus {
+      outline: none !important;
+    }
   }
 
   textarea {
     border: none;
     margin-left: 15px;
-    background: #fafafc;
+    background: #fafafc !important;
     border-radius: 4px;
 
     ::placeholder {
@@ -119,7 +127,6 @@ export const FormWrapper = styled.div`
   }
   .cust {
     border: none;
-    background: #f4f4fa;
     width: 70%;
     margin-left: 15px;
   }
@@ -137,9 +144,22 @@ export const FormWrapper = styled.div`
     }
   }
 
+  .sel {
+    width: 70%;
+    background: ${(props) => (props.bg ? props.bg : '#fafafc')};
+    color: #4f4f4f;
+    border-radius: 7px;
+    cursor: pointer;
+    text-transform: capitalize;
+    outline: 0;
+    min-height: 2.56rem;
+    margin-left: 15px;
+    border: 0.1rem solid #fefefe;
+  }
+
   .date-input {
     padding: 8px 14px;
     background: #fafafc;
     border-radius: 4px;
   }
-`
+`;

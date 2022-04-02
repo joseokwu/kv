@@ -7,7 +7,8 @@ import Consulting from './components/consulting/consulting'
 import Details from './components/details/details'
 import Interest from './components/interest/interest'
 import WorkExperience from './components/workExperience/workExperience'
-import './personalDetails.css'
+import './personalDetails.css';
+import { useAuth }  from '../../hooks/useAuth';
 
 export const MentorPersonalDetails = () => {
   const wrapRef = useRef()
@@ -21,6 +22,8 @@ export const MentorPersonalDetails = () => {
   const switchForm = (currentHash) => {
     push(currentHash)
   }
+  const { stateAuth } = useAuth();
+  console.log(stateAuth)
 
   useEffect(() => {
     wrapRef.current.scrollTop = 0
@@ -41,21 +44,21 @@ export const MentorPersonalDetails = () => {
         setProgress('20')
         break
       default:
-        setProgress('20')
+        setProgress('0')
         break
     }
   }, [hash])
 
   return (
     <div className="mentor_personal_details_wrap" ref={wrapRef}>
-      <section className="mentor_personal_details_header mb-5">
-        <div className="position-fixed bg-pd-pro pt-3">
-          <span>
+      <section className="mentor_personal_details_header mb-5 tab-wrap">
+        <div className="pt-3">
+          <span className="">
             <section
               className="d-flex align-items-center"
               style={{ columnGap: 12 }}
             >
-              <h4>Hi Daniella</h4>
+              <h4>Hi { stateAuth?.user?.username} </h4>
               <img src={hi} alt={'hi'} />
             </section>
             <p>Let’s customise your experience</p>
@@ -65,8 +68,9 @@ export const MentorPersonalDetails = () => {
       </section>
 
       <section className="mentor_personal_details_grid">
-        <div className="my-5">
-          <ul className="mentor_personal_details_list position-fixed">
+        <div className="d-none d-lg-flex">
+          {/* <div className="tab-wrap"> */}
+          <ul className="mentor_personal_details_list">
             <li
               onClick={() => switchForm('#personal_details')}
               className={
@@ -107,8 +111,9 @@ export const MentorPersonalDetails = () => {
               Assistant Info
             </li>
           </ul>
+          {/* </div> */}
         </div>
-        <div className="mt-5 d-flex justify-content-end pt-5">
+        <div className="mt-0 d-flex justify-content-end">
           {hash === '' || hash === '#personal_details' ? (
             <Details />
           ) : hash === '#work_experience' ? (

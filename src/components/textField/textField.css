@@ -12,7 +12,7 @@
   line-height: 20px;
   color: black;
   border: none;
-  padding: 8px 14px;
+  padding: 8px 14px !important;
 }
 
 .field input::placeholder {
@@ -28,5 +28,22 @@
   line-height: 20px;
   color: #000000;
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+}
+
+.field .ant-form-item-label {
+  display: block;
+}
+
+.field .ant-form-item-label > label {
+  height: fit-content !important;
+}
+
+.field .ant-row {
+  display: block;
+  margin-bottom: 0 !important;
+}
+
+.field .ant-col {
+  text-align: left;
 }

@@ -4,10 +4,10 @@ import { RoadMapTodo } from "./components/RoadMapTodo";
 import { MapPoint } from "./components/MapPoint";
 import "./roadMap.css";
 
-export const RoadMap = () => {
+export const RoadMap = ({data}) => {
   return (
     <div>
-      <h3 className="tab-section-title">Future Road Map</h3>
+      {/* <h3 className="tab-section-title">Future Road Map</h3> */}
 
       <section className="row">
         <div className="col-xl-4 col-lg-5 mb-4">
@@ -96,12 +96,10 @@ export const RoadMap = () => {
             </section>
 
             <section>
-              <RoadMapTodo progress={50} />
-              <RoadMapTodo progress={32} />
-              <RoadMapTodo progress={40} />
-              <RoadMapTodo progress={20} />
-              <RoadMapTodo progress={50} />
-              <RoadMapTodo progress={25} />
+            {data?.length > 0 &&
+                data?.map((item, i) => {
+                  return <RoadMapTodo data={item} progress={item?.progress} />;
+                })}
             </section>
           </article>
         </div>

@@ -78,18 +78,19 @@ export const StartupSideBar = () => {
   } = useActivity()
 
   const activateLink = (pathNum) => {
+    
     return path === pathNum ? 'active-side-start' : 'side-text-start'
   }
 
   return (
-    <div className="start-main">
-      <section className="side-navigator position-fixed">
+    <div className="start-main tab-wrap d-none d-lg-flex">
+      <section className="side-navigator">
         <ul className="side-list-start">
           {startUpRoutes &&
             startUpRoutes.map((nav, i) => {
               return (
                 <li key={i}>
-                  <span onClick={() => changePath(nav.path)}>
+                  <span style={{cursor:'pointer'}} onClick={() => changePath(nav.path)}>
                     <p className={`${activateLink(nav.path)} side-text-start`}>
                       {nav.title}
                     </p>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { WelcomeMessage, RegCard } from './startup.styled'
-import { ProgressBarProps } from 'react-bootstrap'
 import { ProgressBar } from '../../Startupcomponents'
 import { StartupProfile } from './components/startupProfile'
 import { useActivity } from '../../hooks/useBusiness'
@@ -8,19 +7,21 @@ import { PitchDeck } from './components/pitchdeck/Pitchdeck'
 import { TeamProfile } from './components/teams'
 import { Product } from './components/product'
 import { FundRaising } from './components/fundraising'
+import { useAuth } from '../../hooks/useAuth';
 
 export const StartUpRegistration = () => {
   const {
     state: { path },
     changePath,
   } = useActivity()
-
-  const [progressStat, setProgressStat] = useState(25)
+  const  { stateAuth } = useAuth()
+  console.log(stateAuth)
+  const [progressStat, setProgressStat] = useState()
 
   useEffect(() => {
     switch (path) {
       case 1:
-        return setProgressStat(20)
+        return setProgressStat(0)
       case 2:
         return setProgressStat(40)
       case 3:
@@ -38,10 +39,13 @@ export const StartUpRegistration = () => {
     <>
       <div className="mx-5">
         <div className="container">
-          <div className='position-fixed' style={{zIndex: '999', background: '#FFFFFF', width: '68%'}}>
+          <div
+            className=""
+            style={{ zIndex: '', background: '#FFFFFF', width: '100%' }}
+          >
             <WelcomeMessage>
               <h5>
-                Hi Micheal{' '}
+                 Hi {stateAuth?.user?.businessname}
                 <span style={{ color: 'rgb(199, 249, 15)', marginLeft: '9px' }}>
                   {' '}
                   &#128075;
@@ -55,7 +59,7 @@ export const StartUpRegistration = () => {
           </div>
 
           <RegCard>
-            <div className="reg-card py-5 px-5 my-5">
+            <div className="reg-card py-5 px-5">
               {path === 1 && <StartupProfile />}
               {path === 2 && <PitchDeck />}
 
@@ -65,15 +69,6 @@ export const StartUpRegistration = () => {
               {path === 5 && <FundRaising />}
             </div>
           </RegCard>
-          {/* <div style={{ marginTop: '15px' }} className="reg-card">
-          {path === 1 && <StartupProfile />}
-          {path === 2 && <PitchDeck />}
-
-          {path === 3 && <TeamProfile />}
-
-          {path === 4 && <Product />}
-          {path === 5 && <FundRaising />}
-        </div> */}
         </div>
       </div>
     </>

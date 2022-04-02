@@ -1,28 +1,54 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
-  AuthSide,
   AuthButton,
   AuthTextField,
   AuthPasswordField,
+  SignInAuthSide,
 } from '../../mentorComponents/index'
-
+import { useHistory } from 'react-router-dom'
 import './signIn.css'
 import { Form } from 'antd'
+import { useAuth } from '../../hooks'
+import { getLocationHistory , getRole } from '../../utils/helpers'
+import toast from 'react-hot-toast'
 
-export const MentorSignIn = ({ history }) => {
+export const SignIn = () => {
   const [loader, setLoader] = useState(false)
+  const {
+    stateAuth: { authenticated, loading, roles , user },
+    newLogin,
+  } = useAuth()
 
-  const onFinish = (values) => {
-    alert('hello world')
-    console.log(values)
+  const history = useHistory()
+  const onFinish = async (values) => {
+    try {
+      console.log('eegggggggg')
+      console.log(values)
+      const res = await newLogin(values)
+      const loca = getLocationHistory()
+     
+      if (res?.status) {
+        if (loca !== null) {
+          history.push(loca)
+         return sessionStorage.removeItem('user:redirect:location')
+        }
+        
+        history.push(`/${res?.data?.user?.type[0]}/registration`)
+        
+      }
+    } catch (err) {
+      console.log('hhddjdkd')
+      console.log(err)
+      toast.error(err?.response?.data?.message)
+    }
   }
 
   return (
     <div className="row mx-0 auth-wrap">
       <section className="col-md-6">
-        <AuthSide />
+        <SignInAuthSide />
       </section>
-      <section className="col-md-6 d-flex align-items-center">
+      <section className="col-md-6 px-5 d-flex align-items-center">
         <div className="gray_signIn">
           <Form
             name="login"
@@ -33,11 +59,11 @@ export const MentorSignIn = ({ history }) => {
             layout="vertical"
             onFinish={onFinish}
           >
-            <div className="mb-4">
+            <div className="">
               <AuthTextField
                 name="email"
                 label="Email"
-                placeholder="Michealsmith@gmail.com"
+                placeholder="Enter your email address"
                 className="mentor_gray_card_input"
               />
             </div>
@@ -47,19 +73,21 @@ export const MentorSignIn = ({ history }) => {
                 className="mentor_gray_card_input"
                 numb={8}
                 message="Password must not be less than 8"
+                placeholder={'Password must be at least 8 characters'}
               />
             </div>
             <a
-              href="/forgot_password"
-              className="d-block text-right forgot_text mb-4 mt-3"
+              href="/forgot/password"
+              className="d-block text-right forgot_text mb-2 mt-3"
             >
               Forgot password?
             </a>
             <Form.Item>
-              <div className="mb-4">
+              <div className="mb-2">
                 <AuthButton
                   label="Sign In"
-                  loading={loader}
+                  loading={loading}
+                  disabled={loading}
                   onClick={() => setLoader()}
                 />
               </div>
@@ -70,7 +98,17 @@ export const MentorSignIn = ({ history }) => {
             className="d-flex align-items-center mentor_switch_auth"
             style={{ columnGap: 6 }}
           >
-            <p>Don’t have an account?</p> <a href="/mentor/signup">Sign Up</a>
+            <p>Don’t have an account?</p>{' '}
+            <span
+              style={{
+                color: '#00adef',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+              }}
+              onClick={() => history.push('/signup')}
+            >
+              Sign Up
+            </span>
           </section>
         </div>
       </section>

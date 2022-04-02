@@ -5,7 +5,7 @@ import del from '../../../../assets/icons/del.svg'
 import { Form } from 'antd'
 import './consulting.css'
 
-const Consulting = () => {
+const Consulting = ({data}) => {
   return (
     <section className="profile-offering mb-3">
       <span className="text-right d-block">
@@ -32,12 +32,11 @@ const Consulting = () => {
             className="d-flex align-items-center flex-wrap"
             style={{ columnGap: 10, rowGap: 10 }}
           >
-            <Tag name="Technology" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Career" color="#E31937" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Tech" />
-            <Tag name="Cyber Security" color="#40439A" />
+            {
+              data?.offerings.map((item, i) =>(
+              <Tag key={i} name={item} color={item === 'Engineering' || item === 'Cyber Security' ? '#40439A' : item === 'Career' ? '#E31937' : '#ACACAC' }  /> 
+              ))
+            }
           </span>
         </section>
       </div>

@@ -5,7 +5,7 @@
   height: 36px;
   width: 100%;
   max-width: 529px;
-  background: transparent;
+  background: transparent!important;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
 }
@@ -21,8 +21,12 @@
 .input-phone {
   height: inherit;
   width: 100%;
-  background-color: transparent;
+  background-color: transparent!important;
   border: 0;
+}
+
+.input-phone:focus {
+  outline: none;
 }
 
 .phoneNumber label {
@@ -31,7 +35,7 @@
   font-weight: normal;
   font-size: 1rem;
   line-height: 20px;
-  color: #d5d6f4;
+  color: #d5d6f4!important;
   margin-bottom: 1rem;
 }
 
@@ -41,7 +45,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
-  color: #bdbdbd;
+  color: #bdbdbd!important;
   margin-left: 5px;
 }
 

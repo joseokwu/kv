@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
 
 export const BodyWrapper = styled.div`
   margin-bottom: 10px;
@@ -64,6 +64,10 @@ export const BodyWrapper = styled.div`
     }
   }
 
+  .error {
+    color: red;
+  }
+
   textarea {
     border: none;
     background: #f4f4f4;
@@ -93,7 +97,7 @@ export const BodyWrapper = styled.div`
       outline: 0;
     }
   }
-`
+`;
 
 export const BntWrap = styled.div`
   button {
@@ -102,10 +106,10 @@ export const BntWrap = styled.div`
     border-radius: 5px;
     margin-top: 10px;
   }
-`
+`;
 
 export const DownloadableButton = styled.a`
-  width: 50%;
+  width: 65%;
   display: flex;
   background: #f9f9fc;
   flex-direction: row;
@@ -117,13 +121,15 @@ export const DownloadableButton = styled.a`
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  padding: 0.6rem;
   border-radius: 20px;
+  text-decoration: none;
+  padding: 20px 25px;
+  border-radius: 10px;
 
   @media (max-width: 768px) {
     width: 125%;
   }
-`
+`;
 export const FileWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
@@ -141,7 +147,7 @@ export const FileWrapper = styled.div`
   @media (max-width: 768px) {
     width: 130%;
   }
-`
+`;
 export const FileText = styled.p`
   font-family: DM Sans;
   font-style: normal;
@@ -151,7 +157,7 @@ export const FileText = styled.p`
   text-align: center;
 
   color: rgba(24, 24, 25, 0.9);
-`
+`;
 export const FileSize = styled.p`
   font-family: DM Sans;
   font-style: normal;
@@ -162,7 +168,7 @@ export const FileSize = styled.p`
   text-align: center;
 
   color: rgba(10, 4, 170) !important;
-`
+`;
 export const LabelButton = styled.label`
   align-items: center;
   padding: 11px 12px;
@@ -170,7 +176,7 @@ export const LabelButton = styled.label`
   border-radius: 8px;
   color: rgba(10, 4, 170) !important;
   margin-top: 5px;
-`
+`;
 
 export const VideoWrapper = styled.div`
   padding: 3rem;
@@ -217,4 +223,20 @@ export const VideoWrapper = styled.div`
       }
     }
   }
-`
+`;
+export const Terms = styled.div`
+  width: 85%;
+  p {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #828282;
+
+    span {
+      color: #121298;
+      font-weight: 600;
+    }
+  }
+`;

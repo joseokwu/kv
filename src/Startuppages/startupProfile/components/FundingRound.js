@@ -2,9 +2,12 @@ import { Tag } from '../../../Startupcomponents'
 import { FundRounding, Btn } from './styled'
 import clock from '../../../assets/icons/clock.svg'
 
-export const FundingRound = () => {
+export const FundingRound = ({data}) => {
+
+  const date = new Date(data && data?.lastFunding);
+
   return (
-    <div className="mt-3">
+    <div className="">
       <FundRounding className="">
         <h6>Startup Details</h6>
 
@@ -40,7 +43,7 @@ export const FundingRound = () => {
             bg="#DEF6FF"
             color="#058DC1"
           >
-            $50,000
+          { data?.totalFunding }
           </Btn>
         </div>
 
@@ -50,7 +53,7 @@ export const FundingRound = () => {
             bg="#F1F2FE"
             color="#212463"
           >
-            Angel (9 oct 2021)
+            Angel { date.toISOString().substring(0,10) }
           </Btn>
         </div>
 
@@ -61,7 +64,7 @@ export const FundingRound = () => {
             color="#212463"
             className="mr-3"
           >
-            Mope Abudu
+           { data?.investor }
           </Btn>{' '}
           <Btn
             bg="#F1F2FE"
@@ -78,7 +81,7 @@ export const FundingRound = () => {
             color="#212463"
             // w="80%"
           >
-            $50 million (9 oct 2021)
+            { data?.valuation }
           </Btn>
         </div>
       </FundRounding>

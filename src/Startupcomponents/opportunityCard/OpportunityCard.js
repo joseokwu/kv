@@ -1,14 +1,14 @@
-import React from "react";
-import "./opportunity.css";
-import logo from "../../assets/images/yeLogo.svg";
-import { Tag } from "..";
+import React from 'react'
+import './opportunity.css'
+import logo from '../../assets/images/yeLogo.svg'
+import { Tag } from '..'
 
 export const OpportunityCard = ({ onClick }) => {
   return (
     <div className="opp-card" onClick={onClick}>
       <section className="d-flex align-items-center justify-content-between mb-2">
         <img src={logo} alt="logo" />
-        <span class="opp-tag">Idea Stage</span>
+        <span className="opp-tag">Idea Stage</span>
       </section>
 
       <section className="mb-2 d-flex align-items-center justify-content-between">
@@ -40,5 +40,5 @@ export const OpportunityCard = ({ onClick }) => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}

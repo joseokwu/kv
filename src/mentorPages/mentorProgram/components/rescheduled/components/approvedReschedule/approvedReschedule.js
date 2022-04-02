@@ -1,7 +1,7 @@
-import React from 'react'
-import bigClock from '../../../../../../assets/icons/bigclock.svg'
-import { ReadMore } from '../../../../../../mentorComponents'
-import './approvedReschedule.css'
+import React from "react";
+import bigClock from "../../../../../../assets/icons/bigclock.svg";
+import { ReadMore } from "../../../../../../mentorComponents";
+import "./approvedReschedule.css";
 
 export const ApprovedReschedule = () => {
   return (
@@ -10,7 +10,7 @@ export const ApprovedReschedule = () => {
         <section className="pending_program_card p-4">
           <div className="d-flex justify-content-between">
             <p className="pending_program_title">Corporate Training</p>
-            <span class="accepted_tag">Rescheduled</span>
+            <span className="accepted_tag">Rescheduled</span>
           </div>
 
           <section
@@ -49,5 +49,5 @@ export const ApprovedReschedule = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};

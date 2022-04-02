@@ -1,17 +1,17 @@
 import React from "react";
 import { ExpenseChart, Select, Table } from "../../../../../components";
 
-const FundUtilization = () => {
+const FundUtilization = ({data}) => {
   return (
     <div>
       <section>
-        <UtilizationTable />
+        <UtilizationTable data={data} />
       </section>
     </div>
   );
 };
 
-const UtilizationTable = () => {
+const UtilizationTable = ({ data }) => {
   const columns = React.useMemo(
     () => [
       {
@@ -45,99 +45,51 @@ const UtilizationTable = () => {
     ],
     []
   );
+    console.log(data.length)
+  // const data = [
+  //   {
+  //     fundingRequirement: "$1000,000",
+  //     dealType: "Common Equity",
+  //     fundingRound: "Seed",
+  //     dilution: "10%",
+  //     preMoney: "$20,000",
+  //     postMoney: "$30,000",
+  //     fundingClosingDate: "20 November, 2021",
+  //   },
+  // ];
 
-  const data = [
-    {
-      fundingRequirement: "$1000,000",
-      dealType: "Common Equity",
-      fundingRound: "Seed",
-      dilution: "10%",
-      preMoney: "$20,000",
-      postMoney: "$30,000",
-      fundingClosingDate: "20 November, 2021",
-    },
-  ];
   return (
     <section className="mb-4">
-      <h4 className="mb-5 fundraisingSubTitle">Fund Utilization</h4>
+      {/* <h4 className="mb-5 fundraisingSubTitle">Fund Utilization</h4> */}
       <section style={{ overflow: "auto" }}>
         <table className="util-table">
           <thead>
             <tr>
               <th></th>
-              <th>Month 1</th>
-              <th>Month 2</th>
-              <th>Month 3</th>
-              <th>Month 4</th>
-              <th>Month 5</th>
-              <th>Month 6</th>
+                {
+                 data.map((item , i) =>(
+                  <th>Month {i + 1} </th>
+                 )) 
+                }
+            
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <td className="title">Revenue</td>
-              <td>$200,000</td>
-              <td>$300,000</td>
-              <td>$120,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-            </tr>
-            <tr>
-              <td>Growth %</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td className="title">Burn rate</td>
-              <td>$200,000</td>
-              <td>$300,000</td>
-              <td>$120,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-            </tr>
-            <tr>
-              <td className="title">Runway Months</td>
-              <td>$200,000</td>
-              <td>$300,000</td>
-              <td>$120,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-              <td>$150,000</td>
-            </tr>
-            <tr>
-              <td className="title">No. of customers</td>
-              <td>50</td>
-              <td>10</td>
-              <td>20</td>
-              <td>30</td>
-              <td>100</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>Growth %</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td className="title">No. of customers</td>
-              <td>50</td>
-              <td>10</td>
-              <td>20</td>
-              <td>30</td>
-              <td>100</td>
-              <td>100</td>
-            </tr>
+                {
+                data?.map((item, i) =>(
+                  <tr key={i} >
+                  <td className="title" > { item?.head} </td>
+                  <td> { item?.month1 } </td>
+                  <td> { item?.month2 } </td>
+                  <td> { item?.month3 } </td>
+                  <td> { item?.month4 } </td>
+                  <td> { item?.month5 } </td>
+                  <td> { item?.month6 } </td>
+                  </tr>
+                ))  
+                }
+            
           </tbody>
         </table>
       </section>

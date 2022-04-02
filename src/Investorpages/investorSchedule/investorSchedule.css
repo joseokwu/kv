@@ -216,3 +216,22 @@
   right: 18px;
   top: 10px;
 }
+
+.create-text-field {
+  max-width: 100% !important;
+}
+
+.availability {
+  background: #f9f9fc;
+  padding: 11px 1.8rem;
+  border-radius: 10px;
+}
+
+.availability p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 140%;
+  color: #2e3192;
+}

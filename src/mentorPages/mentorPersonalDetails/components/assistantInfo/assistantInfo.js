@@ -95,12 +95,10 @@ const AssistantInfo = () => {
         </button>
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
-          <Button label="Save" variant="secondary" />
+         
           <Button
             label="Submit"
-            onClick={() => {
-              push('#')
-            }}
+            onClick={() => push('/mentor/dashboard')}
           />
         </div>
       </section>

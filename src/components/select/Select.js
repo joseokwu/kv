@@ -11,6 +11,7 @@ export const Select = ({
   onChange = () => {},
   displayOption = [],
   placeholder = "Choose option",
+  ...rest
 }) => {
   return (
     <div className="select-field">
@@ -25,13 +26,15 @@ export const Select = ({
         disabled={disabled}
         required={required}
         className={className}
+        onChange={onChange}
+        {...rest}
       >
         <option disabled selected hidden value="">
           {placeholder}
         </option>
         {options.length > 0 &&
           options.map((option, i) => {
-            return <option value={option}>{displayOption[i] ?? option}</option>;
+            return <option key={i} value={option}>{displayOption[i] ?? option}</option>;
           })}
       </select>
     </div>

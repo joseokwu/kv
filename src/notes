@@ -963,6 +963,14 @@ import {
 } from '../mentorPages';
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
 
+======================================================================
+=================================================================
+Date formats
+
+const d = new Date();
+let hours = d.getHours()
+minute = d.getMinutes();
+hours = (hours % 12) || 12;
 
 
 
@@ -983,4 +991,56 @@ import { MentorViewAssignment } from "../mentorPages/mentorAssignments/component
 
 
 
+user:
+assignment: []
+businessname: "Bisi business"
+event:
+data: (3) [{…}, {…}, {…}]
+results: {next: {…}}
+total: 22
+[[Prototype]]: Object
+partner: []
+role: ['startup']
+startUpProfile: {logo: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current', elevatorPitch: 'sdggsfhhhhh', brand: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current', startupName: 'Bisi business', yearFounded: '2022-03-29T10:42:44.870Z', …}
+userId: "62401b6c823102167a32a885"
 
+
+addLocation: "adeneka"
+attendees: (2) [{…}, {…}]
+endDate: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+endTime: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+eventDescription: "Come and play"
+eventPicture: "http://zoom.com"
+joinWith: "meet.com/google"
+notifyMe: "Yes"
+startDate: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+startTime: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+titleOfEvent: "Meeting with client"
+visibility: "Yes"
+__v: 0
+_id: "624226224757e7be6520c364"
+
+
+
+
+
+
+
+
+const fetchData = async () => {
+  setLoading(true);
+  const res = await getEvents();
+  setEvents(res?.data);
+  setSelectionEvents(() =>
+    res?.data?.filter((x) => x.eventType === "selectionDay")
+  );
+  setDemoEvents(() => res?.data?.filter((x) => x.eventType === "demoDay"));
+  setPitchEvents(() =>
+    res?.data?.filter((x) => x.eventType === "pitchSession")
+  );
+  setLoading(false);
+};
+
+useEffect(() => {
+  fetchData();
+}, []);

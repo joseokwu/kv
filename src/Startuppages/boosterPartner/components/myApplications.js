@@ -2,11 +2,11 @@ import React from 'react'
 import { AllApplication } from './allApplication'
 
 
-export const MyApplications = () => {
+export const MyApplications = ({data}) => {
   return (
     <div>
       <div className="mb-4">
-        <AllApplication />
+        <AllApplication data={data} />
       </div>
     </div>
   )

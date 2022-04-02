@@ -1,0 +1,56 @@
+.feed-start {
+  background: #dcebff;
+  cursor: pointer;
+  border: none;
+  /* width: 92vw; */
+  width: 100%;
+}
+
+.feed-align {
+  align-items: center;
+  display: flex;
+  min-height: 10px;
+  text-align: left;
+}
+
+.feed-align h4 {
+  margin-left: 8px;
+}
+
+.feed-style {
+  /* font-size: 17px;
+  width: 100%; */
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.feed-icon {
+  background: none;
+  border: none;
+  color: #000000;
+  cursor: pointer;
+  font-size: 30px;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* .answer-divider {
+  border-top: 1px solid lightgray;
+} */
+
+.answer {
+  margin-left: 8px;
+  margin-right: 8px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+  text-align: left;
+}

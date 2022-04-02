@@ -1,9 +1,39 @@
-import React from 'react'
-import { Button, Modal, Select, TextArea } from '../../mentorComponents'
+import React , {useEffect, useState} from 'react'
+import {
+  Button,
+  Calender,
+  Modal,
+  Select,
+  TextArea,
+} from '../../mentorComponents'
 import down from '../../assets/icons/downArrow.svg'
 import './schedule.css'
+import { getAllSchedule } from './../../services/schedule';
 
 export const MentorSchedule = () => {
+
+const [schedules, setSchedule] = useState(null);
+
+  const fetchData = async() =>{
+    const res = await getAllSchedule();
+  
+    setSchedule(res?.dataSource);
+  }
+
+
+useEffect(() =>{
+
+  fetchData();
+
+  return () =>{
+    setSchedule()
+  }
+
+},[])
+
+
+
+
   return (
     <div className="px-4 pb-5 mx-3 my-4">
       <Modal id="addAvailabilityModal" title="Add Availability">
@@ -14,32 +44,35 @@ export const MentorSchedule = () => {
         <CreateCallSchedule />
       </Modal>
 
-      <div className="row schedule d-flex justify-content-between">
-        <div>
-          <h3>My Schedule</h3>
-        </div>
+      <div className="row schedule  mb-4">
+        <div className="d-flex justify-content-between">
+          <div>
+            <h3>My Schedule</h3>
+          </div>
+          <div className="d-flex">
+            <section className="mt-2 mr-3 my_add_ava">
+              <span
+                data-toggle="modal"
+                data-target="#addAvailabilityModal"
+              >
+                Add to Availability
+              </span>
+            </section>
 
-        <div className="d-flex">
-          <section className="mt-2 mr-3 my_schedule_create">
-            <a
-              data-toggle="modal"
-              href="#!"
-              data-target="#addAvailabilityModal"
-            >
-              Add to Availability
-            </a>
-          </section>
-
-          <section className="mt-2 my_schedule_create">
-            <a
-              data-toggle="modal"
-              data-target="#createCallScheduleModal"
-              href="#!"
-            >
-              Create Schedule
-            </a>
-          </section>
+            <section className="mt-2 my_schedule_create">
+              <span
+                data-toggle="modal"
+                data-target="#createCallScheduleModal"
+              >
+                Create Schedule
+              </span>
+            </section>
+          </div>
         </div>
+      </div>
+
+      <div>
+        <Calender data={ schedules && schedules} />
       </div>
     </div>
   )
@@ -115,33 +148,33 @@ const CreateCallSchedule = () => {
       <section className="create_call_visibility mt-4">
         <p>
           Visibility :{' '}
-          <a href="#!">
+          <span>
             Personal <img className="pl-1" src={down} alt="" />
-          </a>
+          </span>
         </p>
       </section>
 
       <section className="create_call_visibility mt-4">
         <p>
           Join with :{' '}
-          <a href="#!">
+          <span>
             Google meet <img className="pl-1" src={down} alt="" />
-          </a>
+          </span>
         </p>
       </section>
 
       <section className="create_call_visibility mt-4">
-        <a href="#!">
+        <span>
           Add Location <img className="pl-1" src={down} alt="" />
-        </a>
+        </span>
       </section>
 
       <section className="create_call_visibility mt-4">
         <p>
           Notify me :{' '}
-          <a href="#!">
+          <span>
             30 minutes before <img className="pl-1" src={down} alt="" />
-          </a>
+          </span>
         </p>
       </section>
 

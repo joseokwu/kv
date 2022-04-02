@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
 
 export const BodyWrapper = styled.div`
   margin-bottom: 10px;
@@ -72,7 +72,7 @@ export const BodyWrapper = styled.div`
       outline: 0;
     }
   }
-`
+`;
 
 export const BntWrap = styled.div`
   button {
@@ -81,24 +81,21 @@ export const BntWrap = styled.div`
     border-radius: 5px;
     margin-top: 10px;
   }
-`
+`;
 
 export const DownloadableButton = styled.a`
-  width: 50%;
-  display: flex;
+  width: 65%;
   background: #f9f9fc;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   color: #2e3192;
   font-family: DM Sans;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  padding: 0.6rem;
-  border-radius: 20px;
-`
+  padding: 20px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+`;
 export const FileWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
@@ -112,7 +109,7 @@ export const FileWrapper = styled.div`
   border: 1.5px dashed #e6e7e9;
   box-sizing: border-box;
   border-radius: 6px;
-`
+`;
 export const FileText = styled.p`
   font-family: DM Sans;
   font-style: normal;
@@ -122,7 +119,7 @@ export const FileText = styled.p`
   text-align: center;
 
   color: rgba(24, 24, 25, 0.9);
-`
+`;
 export const FileSize = styled.p`
   font-family: DM Sans;
   font-style: normal;
@@ -133,7 +130,7 @@ export const FileSize = styled.p`
   text-align: center;
 
   color: rgba(10, 4, 170) !important;
-`
+`;
 export const LabelButton = styled.label`
   align-items: center;
   padding: 11px 12px;
@@ -141,7 +138,7 @@ export const LabelButton = styled.label`
   border-radius: 8px;
   color: rgba(10, 4, 170) !important;
   margin-top: 5px;
-`
+`;
 
 export const VideoWrapper = styled.div`
   padding: 3rem;
@@ -152,26 +149,41 @@ export const VideoWrapper = styled.div`
   border-radius: 6px;
 
   .div {
-    width: 30%;
+    width: 50%;
     background: #f9f9fc;
     border: 1px solid #e6e7e9;
     border-radius: 8px;
 
     img {
-      margin-left: 35%;
+      margin-left: 40%;
       margin-top: 16px;
     }
 
     #div {
       margin-top: 39px;
       width: 100%;
-
       background: #fff;
       border-radius: 0 0 8px 8px;
 
-      .p {
+      /* .p {
         margin-left: 30%;
-      }
+      } */
     }
   }
-`
+`;
+export const Terms = styled.div`
+  width: 85%;
+  p {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #828282;
+
+    span {
+      color: #121298;
+      font-weight: 600;
+    }
+  }
+`;

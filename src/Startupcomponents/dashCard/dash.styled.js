@@ -12,7 +12,7 @@ export const CardWrapper = styled.div`
 
   .card_star {
     position: relative;
-    top: -5.4rem;
+    top: -4.4rem;
     left: 159px;
     border-radius: 0 0 18px 0;
   }
@@ -21,7 +21,7 @@ export const CardWrapper = styled.div`
     font-family: Lato;
     font-style: normal;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
     line-height: 48px;
     color: #181819;
   }
@@ -65,7 +65,7 @@ export const CardWrap = styled.div`
 
   span {
     font-size: 0.6rem;
-    line-height: 30%;
+    line-height: 120%;
     margin-top: 0.7rem;
     margin-left: 4px;
   }

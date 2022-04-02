@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "../../components";
 import down from "../../assets/icons/chevronDown.svg";
 import filter from "../../assets/icons/filterFunnel.svg";
 import "./investorOpportunity.css";
 import { Opportunities } from "./components/Opportunities";
+import { Interests } from "../investorInterested/components/Interests";
+import { getInvestorOpportunity } from  '../../services/investor';
+import { PageLoader } from "../../components/pageLoader/PageLoader";
 
 export const InvestorOpportunity = ({ history }) => {
-  console.log(`history`, history);
+
+  const [oppData, setOppData] = useState([])
+  const [loading , setLoading] = useState(false);
+
+  const getOpp = async () => {
+    setLoading(true);
+    const res = await getInvestorOpportunity()
+    setOppData(res);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    getOpp()
+
+    return () => {
+      setOppData([])
+    }
+  }, [])
+  console.log(oppData)
 
   const {
     location: { hash },
@@ -15,27 +36,35 @@ export const InvestorOpportunity = ({ history }) => {
   const renderContent = () => {
     switch (hash) {
       case "#opportunities":
-        return <Opportunities />;
+        return <Opportunities data={oppData?.opportunity} />;
 
       case "#share deals":
-        return <Opportunities />;
+        return <Opportunities data={oppData?.opportunity} />;
+
+      case "#interested":
+        return <Interests data={oppData?.opportunity} />;
 
       default:
-        return <Opportunities />;
+        return <Opportunities data={oppData?.opportunity} />;
     }
   };
 
+
+  if(loading){
+    return <PageLoader dashboard={true} num={[1,2,3,4
+     ]} />
+  }else{
   return (
     <div className="wrapper">
-      <section>
+      {/* <section>
         <h5 className="page-header">Investment Opportunities</h5>
-      </section>
+      </section> */}
 
       <section
-        className="mt-5 d-flex align-items-center justify-content-between flex-wrap"
+        className=" d-flex align-items-center justify-content-between flex-wrap tab-wrap"
         style={{ rowGap: "1rem" }}
       >
-        <Tabs tabItems={["opportunities", "shared deals"]} />
+        <Tabs tabItems={["opportunities", "shared deals", "interested"]} />
 
         <div
           className="d-flex align-items-center"
@@ -45,9 +74,10 @@ export const InvestorOpportunity = ({ history }) => {
           <OpportunityFilter />
         </div>
       </section>
-      <section className="mt-4">{renderContent()}</section>
+      <section className="mt-3">{renderContent()}</section>
     </div>
-  );
+  )
+    }
 };
 
 const OpportunityFilter = () => {
