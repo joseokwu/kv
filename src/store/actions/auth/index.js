@@ -46,8 +46,9 @@ export const loginUser = async(value) => async(dispatch) =>{
         return res;
     
     }catch(err){
-        toast.error('Network Error')
-        console.log('error')
+        console.log(err?.response?.data?.message , 'err')
+        toast.error(err?.response?.data?.message)
+        //console.log('error')
         dispatch({
             type:LOGIN_FAILED
         })

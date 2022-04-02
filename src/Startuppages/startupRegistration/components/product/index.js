@@ -94,10 +94,7 @@ export const Product = () => {
   }
 
   const onSubmit = async (value) => {
-    let lastIndex;
-    let inputs = document.getElementsByTagName('input');
-    lastIndex = inputs.length;
-    console.log(inputs[lastIndex - 1])
+  
     try {
       const product = {
         type: 'product',
@@ -140,7 +137,7 @@ export const Product = () => {
         description: stateAuth?.user?.product?.description ?? '',
         competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
         youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
-        files: stateAuth?.user?.product?.files ?? '',
+        files: stateAuth?.user?.product?.files ?? 'http://google.com',
       },
       validateOnBlur: true,
       onSubmit: (value) => onSubmit(value),
