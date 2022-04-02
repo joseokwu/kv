@@ -14,7 +14,7 @@ import { useAuth } from './../../hooks/useAuth';
 
 export const Header = ({ setOpen, open }) => {
   const { push } = useHistory()
-  const { userLogout } = useAuth();
+  const { userLogout , stateAuth } = useAuth();
   const [openNotice, setOpenNotice] = useState(false)
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
@@ -53,7 +53,7 @@ export const Header = ({ setOpen, open }) => {
             className="d-flex align-items-center header-profile d-none d-lg-flex"
           >
             <img src={sampleUser} alt="profile" className="" />
-            <p className="mb-0 header-text">Micheal Smith</p>
+            <p className="mb-0 header-text"> { stateAuth?.user?.username } </p>
           </span>
           <div>
             <HeaderDropdownMenu />

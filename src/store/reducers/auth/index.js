@@ -47,6 +47,7 @@ import { INIT_STATE } from '../../initialstates';
                   authenticated:true,
                   user:action?.payload,
                   roles:action?.payload?.role,
+                  signUpStatus:action?.payload?.role[0]
                   
                 }
                 case USER_PROFILE_FAIL :
