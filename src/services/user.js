@@ -51,9 +51,11 @@ export const forgorPassword = async (values) => {
 }
 
 
-export const verifyEmail = async() =>{
+export const verifyEmail = async(token) =>{
     try{
-        const res = await request.post('identity_service/getProfile');  
+        const res = await request.post('identity_service/verify-email', {token}); 
+        console.log(res.data)
+        return res.data 
     }catch(err){
         throw err;
     }
