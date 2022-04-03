@@ -230,10 +230,16 @@ export const LabelButton = styled.label`
   font-size: 14px;
   line-height: 140%;
   padding: 8px 12px;
-  background: #f9f9fc;
+  background: transparent;
+  border: 1px solid #2e3192;
   border-radius: 4px;
   color: #2e3192 !important;
   /* margin-top:5px; */
+
+  :hover {
+    background: #2e3292;
+    color: #ffffff!important;
+  }
 `
 
 export const VideoWrapper = styled.div`
