@@ -18,8 +18,8 @@ export const userLogin = async (values) => {
         return res?.data;
   
     } catch (err) {
-        const error = err?.response?.data?.message || err?.message;
-        throw new Error(error)
+        
+        throw err
     }  
 }  
 
@@ -45,7 +45,18 @@ export const forgorPassword = async (values) => {
 
         return res?.data
     } catch (err) {
-        const error = err?.response?.data?.message || err?.message;
-        throw new Error(error)
+        
+        throw err;
+    }
+}
+
+
+export const verifyEmail = async(token) =>{
+    try{
+        const res = await request.post('identity_service/verify-email', {token}); 
+        console.log(res.data)
+        return res.data 
+    }catch(err){
+        throw err;
     }
 }

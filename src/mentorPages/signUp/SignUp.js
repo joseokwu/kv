@@ -27,26 +27,32 @@ export const SignUp = ({ history }) => {
 
   console.log(stateAuth?.signUpStatus)
   const onFinish = (values) => {
-    if (stateAuth?.signUpStatus === 'startup') {
+
+    if(stateAuth?.signUpStatus !== 'startup'){
       console.log({
         ...values,
         type: stateAuth?.signUpStatus,
-        industry: industry,
-        phone: phone,
+        phone: phone?.id,
       })
       register({
         ...values,
         type: stateAuth?.signUpStatus,
+        phone: phone?.id,
+      })
+    }else{
+      register({
+        ...values,
+        type: stateAuth?.signUpStatus,
         industry: industry,
-        phone: phone,
+        phone: phone?.id,
+      })
+      console.log({
+        ...values,
+        type: stateAuth?.signUpStatus,
+        industry: industry,
+        phone: phone?.id,
       })
     }
-
-    register({
-      ...values,
-      type: stateAuth?.signUpStatus,
-      phone: phone,
-    })
     setRole(stateAuth?.signUpStatus)
   }
 
@@ -70,8 +76,8 @@ export const SignUp = ({ history }) => {
               <AuthTextField
                 name={
                   stateAuth?.signUpStatus === 'startup'
-                    ? 'startup name'
-                    : 'first name'
+                    ? 'startupname'
+                    : 'firstname'
                 }
                 label={
                   stateAuth?.signUpStatus === 'startup'
@@ -174,7 +180,7 @@ export const SignUp = ({ history }) => {
 
             <div className="col-12 mb-4">
               <PhoneInput
-                setPhone={setPhone}
+                onChange={setPhone}
               />
             </div>
 

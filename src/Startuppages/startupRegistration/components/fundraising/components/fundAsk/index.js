@@ -55,29 +55,30 @@ export const FundAsk = ({ setFundraising, back }) => {
         fundraisingAmount: formik.getFieldProps('fundraisingAmount').value,
         dilution: formik.getFieldProps('dilution').value,
         preMoneyValuation: formik.getFieldProps('preMoneyValuation').value,
-        // hasLeadInvestor,
+        postMoneyValuation: formik.getFieldProps('postMoneyValuation').value,
         terms: formik.getFieldProps('terms').value,
       },
     });
+    //console.log()
 
     history.push('#Fund Utilization');
   };
+  
 
   const formik = useFormik({
     initialValues: {
       hasPreviousFundraising:
-        stateAuth?.user?.fundraising?.hasPreviousFundraising ?? false,
-      description: stateAuth?.user?.fundraising?.description ?? '',
-      instrumentForRound:
-        stateAuth?.user?.fundraising?.instrumentForRound ?? 'Fund1',
-      numberOfRounds: stateAuth?.user?.fundraising?.numberOfRounds ?? 'Fund1',
-      fundraisingAmount: stateAuth?.user?.fundraising?.fundraisingAmount ?? '',
-      dilution: stateAuth?.user?.fundraising?.dilution ?? '',
-      preMoneyValuation: stateAuth?.user?.fundraising?.preMoneyValuation ?? '',
+        stateAuth?.user?.fundRaising?.fundingAsk?.hasPreviousFundraising ?? false,
+      description: stateAuth?.user?.fundRaising?.fundingAsk?.description ?? '',
+      instrumentForRound: stateAuth?.user?.fundRaising?.fundingAsk?.instrumentForRound ?? 'Fund1',
+      numberOfRounds: stateAuth?.user?.fundRaising?.fundingAsk?.numberOfRounds ?? 'Fund1',
+      fundraisingAmount: stateAuth?.user?.fundRaising?.fundingAsk?.fundraisingAmount ?? '',
+      dilution: stateAuth?.user?.fundRaising?.fundingAsk?.dilution ?? '',
+      preMoneyValuation: stateAuth?.user?.fundRaising?.fundingAsk?.preMoneyValuation ?? '',
       postMoneyValuation:
-        stateAuth?.user?.fundraising?.postMoneyValuation ?? '',
-      hasLeadInvestor: stateAuth?.user?.fundraising?.hasLeadInvestor ?? '',
-      terms: stateAuth?.user?.fundraising?.terms ?? [],
+        stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation ?? '',
+      hasLeadInvestor: stateAuth?.user?.fundRaising?.fundingAsk?.hasLeadInvestor ?? '',
+      terms: stateAuth?.user?.fundRaising?.fundingAsk?.terms ?? [],
     },
     validationSchema: Yup.object({
       fundraisingAmount: Yup.string().required('Required'),
@@ -141,7 +142,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 // options={optionsNumb}
                 className='cust extra'
                 value={
-                  stateAuth?.user?.fundraising?.instrumentForRound ??
+                 
                   formik.values.instrumentForRound
                 }
                 onChange={formik.handleChange}
@@ -159,7 +160,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 // options={optionsNumb}
                 className='cust extra'
                 value={
-                  stateAuth?.user?.fundraising?.numberOfRounds ??
+                  
                   formik.values.numberOfRounds
                 }
                 onChange={formik.handleChange}
@@ -181,7 +182,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 placeholder='Enter amount'
                 onBlur={formik.handleBlur}
                 value={
-                  stateAuth?.user?.fundraising?.fundraisingAmount ??
+                 
                   formik.values.fundraisingAmount
                 }
                 onChange={formik.handleChange}
@@ -203,7 +204,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 placeholder='Enter what your business does'
                 onBlur={formik.handleBlur}
                 value={
-                  stateAuth?.user?.fundraising?.dilution ??
+                 
                   formik.values.dilution
                 }
                 onChange={formik.handleChange}
@@ -222,7 +223,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 placeholder='Enter amount'
                 onBlur={formik.handleBlur}
                 value={
-                  stateAuth?.user?.fundraising?.preMoneyValuation ??
+                  
                   formik.values.preMoneyValuation
                 }
                 onChange={formik.handleChange}
@@ -244,7 +245,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 placeholder='Enter what your business does'
                 onBlur={formik.handleBlur}
                 value={
-                  stateAuth?.user?.fundraising?.postMoneyValuation ??
+                  
                   formik.values.postMoneyValuation
                 }
                 onChange={formik.handleChange}
@@ -312,7 +313,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 className='form-control ps-3'
                 placeholder='Enter Terms for round'
                 value={
-                  stateAuth?.user?.fundraising?.terms ?? formik.values.terms
+                  formik.values.terms
                 }
                 onChange={formik.handleChange}
               />

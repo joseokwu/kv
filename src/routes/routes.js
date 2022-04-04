@@ -33,6 +33,8 @@ import {
   MentorDealRoom,
   // DealFolder,
   MentorEvaluation,
+  NotFound,
+  VerifyUserEmail,
 } from "../mentorPages";
 
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewAssignment/viewAssignment";
@@ -129,7 +131,7 @@ const routes = [
     path: "/startup/dashboard",
     component: WithStartupDashboardLayout(StartupDashboard),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -218,7 +220,7 @@ const routes = [
     path: "/startup/registration",
     component: WithStartupRegistrationLayout(StartUpRegistration),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
 
@@ -494,6 +496,13 @@ const routes = [
     protected: false,
   },
   {
+    name: "Verify",
+    path: "/verify/:token",
+    component: VerifyUserEmail,
+    exact: true,
+    protected: false,
+  },
+  {
     name: "Congrats",
     path: "/mentor/signup/congrats",
     component: WithMentorRegisterLayout(MentorCongrats),
@@ -513,6 +522,13 @@ const routes = [
     path: "/confirm/email",
     component: MentorConfirmEmail,
     exact: true,
+    protected: false,
+  },
+  {
+    name: "Not Found",
+    component: NotFound,
+    exact: true,
+    type: "",
     protected: false,
   },
   {

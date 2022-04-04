@@ -48,9 +48,9 @@ export const CapTable = ({ setFundraising }) => {
 
   const formik = useFormik({
     initialValues: {
-      amountRaised: stateAuth?.user?.fundraising?.amountRaised ?? '',
+      amountRaised: stateAuth?.user?.fundRaising?.capTable?.amountRaised ?? '',
       amountInvestedByFounders:
-        stateAuth?.user?.fundraising?.amountInvestedByFounders ?? '',
+        stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders ?? '',
     },
     validationSchema: Yup.object({
       amountInvestedByFounders: Yup.string().required('Required'),
@@ -78,7 +78,6 @@ export const CapTable = ({ setFundraising }) => {
               className='form-control ps-3'
               placeholder='$100,000'
               value={
-                stateAuth?.user?.fundraising?.amountRaised ??
                 formik.values.amountRaised
               }
               onBlur={formik.handleBlur}
@@ -94,7 +93,6 @@ export const CapTable = ({ setFundraising }) => {
               className='form-control ps-3'
               placeholder='$150,000'
               value={
-                stateAuth?.user?.fundraising?.amountInvestedByFounders ??
                 formik.values.amountInvestedByFounders
               }
               onBlur={formik.handleBlur}
