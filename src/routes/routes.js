@@ -106,6 +106,7 @@ import {
   ViewMentor,
   ViewPartner,
 } from "../adminPages";
+import { ViewKVMember } from "../adminPages/viewKVMember/ViewKVMember";
 
 const routes = [
   // Start-up routes start
@@ -833,6 +834,15 @@ const routes = [
     name: "admin User Management",
     path: "/admin/users/partners/:id",
     component: ViewPartner,
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin User Management",
+    path: "/admin/users/member/:id",
+    component: WithAdminLayout(ViewKVMember),
     exact: true,
     protected: false,
     type: "admin",

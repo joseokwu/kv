@@ -1,0 +1,82 @@
+.card {
+  display: flex;
+  align-items: center;
+  column-gap: 3rem;
+  margin-bottom: 1.75rem;
+}
+
+.card h1 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.875rem;
+  line-height: 2.43rem;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #3e3e3e;
+  margin-bottom: 13px !important;
+}
+
+.card span {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #828282;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.card img {
+  width: 166px;
+  height: 166px;
+  min-width: 166px;
+  border-radius: 50%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.portfolioCard {
+  background-color: #fff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 1.68rem 1.37rem;
+}
+
+.portfolioCard img {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+}
+
+.portDesc {
+  font-family: "Lato" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 24px !important;
+  color: #5d5d5e !important;
+  margin-bottom: 1.18rem !important;
+  padding-bottom: 13px !important;
+  margin-top: 12px !important;
+}
+
+.portfolioCard p {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  color: #6466aa;
+}
