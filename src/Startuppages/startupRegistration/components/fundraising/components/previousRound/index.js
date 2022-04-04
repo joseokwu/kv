@@ -63,16 +63,16 @@ export const PreviousRound = ({ setFundraising }) => {
   const formik = useFormik({
     initialValues: {
       instrumentForRound:
-        stateAuth?.user?.fundraising?.instrumentForRound ?? 'Fund1',
-      numberOfRounds: stateAuth?.user?.fundraising?.numberOfRounds ?? 'Fund1',
-      fundraisingAmount: stateAuth?.user?.fundraising?.fundraisingAmount ?? '',
-      dilution: stateAuth?.user?.fundraising?.dilution ?? '',
-      preMoneyValuation: stateAuth?.user?.fundraising?.preMoneyValuation ?? '',
+        stateAuth?.user?.fundRaising?.previousRound?.instrumentForRound ?? 'Fund1',
+      numberOfRounds: stateAuth?.user?.fundRaising?.previousRound?.numberOfRounds ?? 'Fund1',
+      fundraisingAmount: stateAuth?.user?.fundRaising?.previousRound?.fundraisingAmount ?? '',
+      dilution: stateAuth?.user?.fundRaising?.previousRound?.dilution ?? '',
+      preMoneyValuation: stateAuth?.user?.fundRaising?.previousRound?.preMoneyValuation ?? '',
       postMoneyValuation:
-        stateAuth?.user?.fundraising?.postMoneyValuation ?? '',
-      hasLeadInvestor: stateAuth?.user?.fundraising?.hasLeadInvestor ?? '',
-      terms: stateAuth?.user?.fundraising?.terms ?? [],
-      dateOfFunding: stateAuth?.user?.fundraising?.dateOfFunding ?? '',
+        stateAuth?.user?.fundRaising?.previousRound?.postMoneyValuation ?? '',
+      hasLeadInvestor: stateAuth?.user?.fundRaising?.previousRound?.hasLeadInvestor ?? '',
+      terms: stateAuth?.user?.fundRaising?.previousRound?.terms ?? [],
+      dateOfFunding: stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding ?? '',
     },
     validationSchema: Yup.object({
       fundraisingAmount: Yup.string().required('Required'),
@@ -104,7 +104,7 @@ export const PreviousRound = ({ setFundraising }) => {
               className='cust mx-3 extra'
               // placeholder='Choose your instrument for your round'
               value={
-                stateAuth?.user?.fundraising?.instrumentForRound ??
+                
                 formik.values.instrumentForRound
               }
               onChange={formik.handleChange}
@@ -124,7 +124,7 @@ export const PreviousRound = ({ setFundraising }) => {
               className='cust mx-3 extra'
               // placeholder='Choose round'
               value={
-                stateAuth?.user?.fundraising?.numberOfRounds ??
+                
                 formik.values.numberOfRounds
               }
               onChange={formik.handleChange}
@@ -162,7 +162,7 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter amount raised'
               onBlur={formik.handleBlur}
               value={
-                stateAuth?.user?.fundraising?.fundraisingAmount ??
+                
                 formik.values.fundraisingAmount
               }
               onChange={formik.handleChange}
@@ -182,7 +182,7 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter what your business does'
               onBlur={formik.handleBlur}
               value={
-                stateAuth?.user?.fundraising?.dilution ?? formik.values.dilution
+             formik.values.dilution
               }
               onChange={formik.handleChange}
             />
@@ -200,7 +200,7 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter amount'
               onBlur={formik.handleBlur}
               value={
-                stateAuth?.user?.fundraising?.preMoneyValuation ??
+              
                 formik.values.preMoneyValuation
               }
               onChange={formik.handleChange}
@@ -220,7 +220,7 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter what your business does'
               onBlur={formik.handleBlur}
               value={
-                stateAuth?.user?.fundraising?.postMoneyValuation ??
+               
                 formik.values.postMoneyValuation
               }
               onChange={formik.handleChange}

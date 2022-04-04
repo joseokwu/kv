@@ -21,6 +21,8 @@ import { toast } from 'react-hot-toast'
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
 import { updateFounderProfile } from '../../../../services'
+import axios  from 'axios';
+import { upload }  from '../../../../services/utils';
 
 
 export const PitchDeck = () => {
@@ -28,24 +30,10 @@ export const PitchDeck = () => {
   const [loading, setLoading] = useState(false)
   const [nextloading, setNextLoading] = useState(false);
   const [opts, setOpts] = useState('')
-  const [upload, setUpload] = useState({
-    pitchDeckFile: stateAuth?.user?.pitchDeck?.pitchDeckFile,
-    pitchDeckVideo: stateAuth?.user?.pitchDeck?.pitchDeckVideo,
-  })
-  
 
-  const [fileInfo, setFile] = useState([
-    {
-      file: null,
-      size: null,
-      name: 'infoFile',
-    },
-    {
-      file: null,
-      size: null,
-      name: 'videoFile',
-    },
-  ])
+  
+  const [fileDoc, setFileDoc] = useState(null);
+  const [videoDoc, setVidDoc] = useState(null);
 
   const {
     changePath,
@@ -60,45 +48,55 @@ export const PitchDeck = () => {
     changePath(path - 1)
   }
 
-  const handleChange = (e) => {
-    console.log('hello')
-    const { files, name } = e.target
-    setFile(
-      fileInfo.map((item) => {
-        if (name === item?.name) {
-          item.file = files[0]
-          item.size = formatBytes(files[0].size)
-        }
-        return item
-      }),
-    )
+  const handleChange = async(e) => {
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+
+    try {
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  
+  const handleChangeVid = async(e) => {
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "video");
+    formData.append(0 , files[0])
+
+    try {
+      const response = await upload(formData)
+      console.log(response) 
+      setVidDoc(response?.path)
+      // setFile(
+      //   fileInfo.map((item) => {
+      //     if (name === item?.name) {
+      //       item.file = response?.path
+      //     }
+      //     console.log(item)
+      //     return item
+      //   }))
+    } catch(error) {
+      console.log(error)
+    }
   }
   
   const handleSubmit = (value) => {
-    const newFile = {
-      pitchDeckFile: [
-        {
-          url: fileInfo[0].file?.name,
-        },
-        {
-          url: fileInfo[1].file?.name,
-        },
-      ],
-      profileId: '61d5be4fb801676adafcf4f4',
-    }
     
-    next();
-
-    // pitchDeck(value).then((res) => {
-    //   if (res?.message) {
-    //     console.log(res)
-    //     toast.success(res?.message)  
-    //   }
-    // })
-      console.log(newFile)
   }
 
-  console.log(fileInfo)
+ 
 
   const onSubmit = async(value) => {
     let lastIndex;
@@ -188,27 +186,22 @@ export const PitchDeck = () => {
                   Upload a Pitch deck for your startup
                 </label>
                 <FileWrapper className="d-flex justify-content-center text-center">
-                  <img src={DownloadIcon} alt="#" />
-                  {fileInfo[0].file !== null ? (
-                    <img src={RedFile} alt=".#" />
+                  
+                  {fileDoc !== null ? (
+                    <img style={{width:'150px', height:'150px'}} src={fileDoc} alt=".#" />
                   ) : (
                     <>
+                    <img src={DownloadIcon} alt="#" />
                       <FileText>Drag & Drop</FileText>
                       <FileText>Drag files or click here to upload </FileText>
                     </>
                   )}
-                  <FileSize>
-                    {' '}
-                    {fileInfo[0].file !== null
-                      ? `${fileInfo[0].size}`
-                      : '(Max. File size 5mb)'}{' '}
-                  </FileSize>
+                
                   <input
                     type="file"
                     name="pitchDeckFile"
                     id="pitch-doc"
-                    value={formik.values.pitchDeckFile}
-                    onChange={formik.handleChange}
+                    onChange={handleChange}
                     hidden
                   />
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
@@ -229,20 +222,15 @@ export const PitchDeck = () => {
                 </div>
                 <FileWrapper className="d-flex justify-content-center text-center">
                   <img src={DownloadIcon} alt="#" />
-                  {fileInfo[1].file !== null ? (
-                    <img src={RedFile} alt=".#" />
+                  {videoDoc !== null ? (
+                    <img src={videoDoc} alt=".#" />
                   ) : (
                     <>
                       <FileText>Drag & Drop</FileText>
                       <FileText>Drag files or click here to upload </FileText>
                     </>
                   )}
-                  <FileSize>
-                    {' '}
-                    {fileInfo[1].file !== null
-                      ? `${fileInfo[1].size}`
-                      : '(Max. File size 5mb)'}{' '}
-                  </FileSize>
+                
                   <input
                     type="file"
                     name="pitchDeckVideo"
@@ -253,49 +241,6 @@ export const PitchDeck = () => {
                   />
                   <LabelButton for="pitch-docu">Upload Files</LabelButton>
                 </FileWrapper>
-              </div>
-              <div className="form-group col-12 mt-5">
-                <VideoWrapper>
-                  <label> Pitch deck uploaded</label>
-                  <div className="row">
-                    {fileInfo[0].file !== null ? (
-                      fileInfo.map(
-                        (item, i) =>
-                          item.file !== null && (
-                            <div key={i} className=" col-lg-6 col-12">
-                              <div className="div p-5">
-                                <img src={RedFile} alt=".#" />
-                              </div>
-                              <div id="div" className="p-2">
-                                <div className="d-flex mt-n2">
-                                  <img
-                                    src={BlueFile}
-                                    alt=".#"
-                                    style={{ width: '10%', height: '10%' }}
-                                    className="mt-3"
-                                  />
-                                  <p
-                                    className=""
-                                    style={{
-                                      marginLeft: '0.2rem',
-                                      fontSize: '0.9rem',
-                                    }}
-                                  >
-                                    {item?.file?.name}
-                                  </p>
-                                </div>
-                                <p className="my-n2 p"> {item?.size} </p>
-                              </div>
-                            </div>
-                          ),
-                      )
-                    ) : (
-                      <div className="my-4 d-flex justify-content-center text-center">
-                        <span>No File Uploaded</span>
-                      </div>
-                    )}
-                  </div>
-                </VideoWrapper>
               </div>
             </div>
           </div>

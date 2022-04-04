@@ -15,11 +15,15 @@ const stateAuth = useSelector((state) => state.auth );
 
 const register = async(values) =>{
  
-    const res = await dispatch(registerUser(values));
+    try{
+        const res = await dispatch(registerUser(values));
     console.log(res)
         if(res){
             history.push('/confirm/email')
         }
+    }catch(err){
+        console.log(err)
+    }
 }
 
 const newLogin = async (values) =>{
