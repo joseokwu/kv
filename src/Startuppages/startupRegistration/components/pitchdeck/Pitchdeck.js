@@ -196,7 +196,7 @@ export const PitchDeck = () => {
                       <FileText>Drag files or click here to upload </FileText>
                     </>
                   )}
-                
+                    
                   <input
                     type="file"
                     name="pitchDeckFile"
