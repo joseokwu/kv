@@ -15,6 +15,9 @@ import { getFundraisingData } from "../../services";
 import newApp from "../../assets/icons/Star.svg";
 import { convertToMillion } from "../../utils/helpers";
 import { PageLoader } from "../../components";
+import { useAuth }  from "../../hooks/useAuth";
+
+
 
 export const StartupFundingRaising = () => {
   const history = useHistory();
@@ -22,34 +25,29 @@ export const StartupFundingRaising = () => {
     location: { hash },
   } = history;
 
+  const { stateAuth } = useAuth();
+
   const [fundData, setFundData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const getData = async () => {
-    setLoading(true);
-    const res = await getFundraisingData();
-    setFundData(res);
-    setLoading(false);
-  };
+  
 
-  useEffect(() => {
-    getData();
-  }, []);
+  
 
   const renderContent = () => {
     switch (hash) {
       case "#Funding Ask":
-        return <FundingAsk data={fundData?.fundAsk} />;
+        return <FundingAsk data={stateAuth?.user?.fundRaising?.fundingAsk} />;
       case "#Fund Utilization":
-        return <FundUtilization data={fundData?.fundUtilization} />;
+        return <FundUtilization data={stateAuth?.user?.fundRaising?.fundUtilization} />;
       case "#Cap Table":
-        return <CapTable data={fundData?.capTable} />;
+        return <CapTable data={stateAuth?.user?.fundRaising?.capTable} />;
       case "#Previous Round":
-        return <PreviousRound data={fundData?.previousRound} />;
+        return <PreviousRound data={stateAuth?.user?.fundRaising?.previousRound} />;
       case "#Financial Projection":
         return <FinancialProjection />;
       default:
-        return <FundingAsk data={fundData?.fundAsk} />;
+        return <FundingAsk data={stateAuth?.user?.fundRaising?.fundingAsk} />;
     }
   };
 
