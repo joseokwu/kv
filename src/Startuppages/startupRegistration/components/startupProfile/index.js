@@ -9,7 +9,7 @@ import './style.css';
 import { UserOutlined, PlusOutlined } from '@ant-design/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import DatePicker from 'react-datepicker';
+import DatePicker from 'antd';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomSelect } from '../../../../Startupcomponents/select/customSelect';
 import { stage, optionsNumb, options } from '../../../../constants/domiData';
