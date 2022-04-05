@@ -167,19 +167,52 @@ export const FormWrapper = styled.div`
 
   .custs {
     border: none;
-    background: #f4f4f4;
+    background: #fafafc;
     width: 100%;
     margin-left: 15px;
     border-radius: 7px;
-    outline: 0;
+    outline: none;
+
+    input:focus {
+      outline: none;
+    }
 
     &:focus {
-      outline: 0;
+      outline: none;
     }
 
     @media (max-width: 768px) {
       width: 100%;
     }
+  }
+
+  .ant-select-multiple .ant-select-selection-item {
+    background: #6466aa;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 21px;
+    font-family: 'DM Sans';
+    letter-spacing: 0.01em;
+  }
+
+  .ant-select-multiple .ant-select-selection-item-remove svg {
+    color: #fff;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    background: #fafafc;
+    border-radius: 4px;
+    border: none;
+    padding: 5px 0px 5px 5px;
+  }
+
+  .skiil-select {
+    background: #fafafc !important;
+    border-radius: 4px;
+    border: none !important;
   }
 `
 

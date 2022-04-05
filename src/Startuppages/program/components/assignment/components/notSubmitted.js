@@ -14,7 +14,7 @@ import { months } from '../../../../../utils/helpers'
 export const NotSubmitted = ({ data }) => {
   const assArr = [1, 2, 3, 4]
   const [showModal, setShowModal] = useState(false)
-  // const [openModal, setOpenModal] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
 
   return (
@@ -29,13 +29,13 @@ export const NotSubmitted = ({ data }) => {
             ) : (
               <span></span>
             )}
-            {/* {openModal ? (
+            {openModal ? (
               <SmallModal id={i} title="" closeModal={setOpenModal}>
                 <DownloadAssignmentModal data={info} />
               </SmallModal>
             ) : (
               <span></span>
-            )} */}
+            )}
             <div className="d-flex justify-content-between head">
               <div className="d-flex">
                 <h6 className="mr-3">Assignment</h6>
@@ -61,13 +61,13 @@ export const NotSubmitted = ({ data }) => {
               </p>
             </div>
 
-            <div className="my-4 notSubAssbtn">
+            <div className="my-4 notSubAssbtn justify-content-between d-flex">
               <button data-target={i} onClick={() => setShowModal(true)}>
                 Submit
               </button>
-              {/* <button className="download-ass" data-target={i} onClick={() => setOpenModal(true)}>
+              <button className="download-ass" data-target={i} onClick={() => setOpenModal(true)}>
                 Download
-              </button> */}
+              </button>
             </div>
           </TodoCard>
         ))}
@@ -103,23 +103,23 @@ export const SubmitAssignmentModal = () => {
   )
 }
 
-// export const DownloadAssignmentModal = () => {
-//   return (
-//     <SubmitAssignment>
-//       <div className="mx-4">
-//         <div className="mt-4 pb-4 border-bottom">
-//           <h2>Download Assignment</h2>
-//           <span>Download your complete assignment</span>
-//         </div>
+export const DownloadAssignmentModal = () => {
+  return (
+    <SubmitAssignment>
+      <div className="mx-4">
+        <div className="mt-4 pb-4 border-bottom">
+          <h2>Download Assignment</h2>
+          <span>Download your complete assignment</span>
+        </div>
 
-//         <div className="mt-5">
-//           <FileWrapper className="d-flex justify-content-center text-center col-lg-12">
-//             <FileText>Click the button below to <br/> download your assignment </FileText>
-//             <img className="my-3" src={doc} alt="Download Icon" />
-//             <LabelButton className="download" for="download">Download Files</LabelButton>
-//           </FileWrapper>
-//         </div>
-//       </div>
-//     </SubmitAssignment>
-//   )
-// }
+        <div className="mt-5">
+          <FileWrapper className="d-flex justify-content-center text-center col-lg-12">
+            <FileText>Click the button below to <br/> download your assignment </FileText>
+            <img className="my-3" src={doc} alt="Download Icon" />
+            <LabelButton className="download mt-2" style={{cursor: 'pointer'}} for="download">Download Files</LabelButton>
+          </FileWrapper>
+        </div>
+      </div>
+    </SubmitAssignment>
+  )
+}

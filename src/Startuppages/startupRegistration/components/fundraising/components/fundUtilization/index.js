@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import {
   BodyWrapper,
   DownloadableButton,
@@ -17,13 +18,41 @@ import Download from '../../../../../../assets/icons/downloadoutline.svg';
 import DownloadIcon from '../../../../../../assets/icons/download.svg';
 import RedFile from '../../../../../../assets/icons/redFile.svg';
 import BluFile from '../../../../../../assets/icons/bluFile.svg';
+import { upload } from './../../../../../../services/utils';
+import { useAuth } from './../../../../../../hooks/useAuth';
+
 
 export const FundUtilization = () => {
   const history = useHistory();
+  const { stateAuth } = useAuth();
+  const [fileDoc, setFileDoc] = useState(null);
+  const [videoDoc, setVidDoc] = useState(null);
 
   const {
     location: { hash },
   } = history;
+
+  const handleChange = async(e) => {
+
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+
+    try {
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+
+    } catch(error) {
+      console.log(error)
+    }
+
+  }
+
+
   return (
     <>
       <BodyWrapper>
@@ -42,11 +71,22 @@ export const FundUtilization = () => {
           </div>
           <div className='my-5'>
             <FileWrapper className='d-flex justify-content-center text-center mx-n5 mx-lg-n0'>
-              <img src={DownloadIcon} alt='#' />
+              {
+                fileDoc !== null ? (
+                  <img src={fileDoc} />
+                ):(
+                 <>
+                 <img src={DownloadIcon} alt='#' />
               <FileText>Drag & Drop</FileText>
               <FileText>Drag files or click here to upload </FileText>
               <FileSize> {'(Max. File size 5mb)'} </FileSize>
-              <input type='file' id='utilize' hidden />
+              </>
+                )
+              }
+              <input type='file'
+               id='utilize'
+               onChange={handleChange}
+                hidden />
               <LabelButton for='utilize'>Upload Files</LabelButton>
             </FileWrapper>
           </div>

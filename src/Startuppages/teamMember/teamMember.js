@@ -19,7 +19,7 @@ import { CustomButton } from '../../Startupcomponents/button/button.styled'
 import { toast } from 'react-hot-toast'
 import { useHistory } from 'react-router'
 import { useAuth } from '../../hooks/useAuth'
-import { LargeModal, WorkExperience, Education } from '../../Startupcomponents'
+import { WorkExperience, Education } from '../../Startupcomponents'
 
 const { Option } = Select
 
@@ -29,9 +29,20 @@ export const StartupTeamMember = () => {
   const [show, setShow] = useState(false)
   const [showEducation, setShowEducation] = useState(false)
   const [loading, setLoading] = useState(false)
+  // const [nextLoading, setNextLoading] = useState(false)
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
   const [phone, setPhone] = useState(stateAuth?.user?.teamMember?.mobile_number)
+  const [teamMemberInfo, setTeamMemberInfo] = useState({
+    avatar: stateAuth?.user?.teamMember?.avatar ?? '',
+    briefIntroduction: stateAuth?.user?.teamMember?.briefIntroduction ?? '',
+    firstName: stateAuth?.user?.teamMember?.firstName ?? '',
+    lastName: stateAuth?.user?.teamMember?.lastName ?? '',
+    email: stateAuth?.user?.teamMember?.email ?? '',
+    country: stateAuth?.user?.teamMember?.country ?? '',
+    state: stateAuth?.user?.teamMember?.state ?? '',
+    city: stateAuth?.user?.teamMember?.city ?? '',
+  })
   const [editIndex, setEditIndex] = useState()
   const [isEditing, setIsEditing] = useState(false)
   const {
@@ -40,6 +51,10 @@ export const StartupTeamMember = () => {
     setEducation,
     state: { path, workExperience, education },
   } = useActivity()
+
+  const onChange = (e) => {
+    setTeamMemberInfo({ ...teamMemberInfo, [e.target.name] : e.target.value })
+  }
 
   const onChangeImage = (e) => {
     const { files } = e.target
@@ -81,7 +96,7 @@ export const StartupTeamMember = () => {
           experience: workExperience,
           education: education,
         },
-        userId: stateAuth?.user?.userId,
+        userId: stateAuth?.user?.teamMemberInfo?.userId,
       }
       console.log(teamMember)
     } catch (err) {
@@ -92,17 +107,30 @@ export const StartupTeamMember = () => {
     }
   }
 
+  // const formik = useFormik({
+  //   initialValues: {
+  //     avatar: '',
+  //     briefIntroduction: '',
+  //     firstName: '',
+  //     lastName: '',
+  //     email: '',
+  //     dob: startDate,
+  //     country: '',
+  //     state: '',
+  //     city: '',
+  //     skills: [],
+  //   },
   const formik = useFormik({
     initialValues: {
-      avatar: '',
-      briefIntroduction: '',
-      firstName: '',
-      lastName: '',
-      email: '',
+      avatar: stateAuth?.user?.teamMember?.avatar ?? '',
+      briefIntroduction: stateAuth?.user?.teamMember?.briefIntroduction ?? '',
+      firstName: stateAuth?.user?.teamMember?.firstName ?? '',
+      lastName: stateAuth?.user?.teamMember?.lastName ?? '',
+      email: stateAuth?.user?.teamMember?.email ?? '',
       dob: startDate,
-      country: '',
-      state: '',
-      city: '',
+      country: stateAuth?.user?.teamMember?.country ?? '',
+      state: stateAuth?.user?.teamMember?.state ?? '',
+      city: stateAuth?.user?.teamMember?.city ?? '',
       skills: [],
     },
     validateOnBlur: true,
@@ -181,7 +209,7 @@ export const StartupTeamMember = () => {
             </p>
           </HeaderTeam>
 
-          <form style={{ marginBottom: '4rem' }}>
+          <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
             <FormWrapper height="70%">
               <div
                 style={{
@@ -308,7 +336,7 @@ export const StartupTeamMember = () => {
                     className="form-control ps-3"
                   />
                 </div>
-                <div className="form-group  col-12 ">
+                <div className="form-group  col-6 ">
                   <label>Mobile Number *</label>
                   <PhoneInput
                     international
@@ -419,6 +447,8 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-6 col-12">
                   <label>Linkedin*</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.linkedIn}
                     type="text"
                     name="linkedin"
                     placeholder="Enter Linkdin link"
@@ -428,6 +458,8 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-6 col-12">
                   <label>Twitter*</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.twitter}
                     type="text"
                     name="twitter"
                     placeholder="Enter Twitter link"
@@ -438,6 +470,8 @@ export const StartupTeamMember = () => {
                 <div className="form-group col-lg-6 col-12">
                   <label>Website*</label>
                   <input
+                    onChange={formik.handleChange}
+                    value={formik.values.website}
                     type="text"
                     name="website"
                     placeholder="Enter website"
@@ -458,7 +492,14 @@ export const StartupTeamMember = () => {
                 </CustomButton>
               </div>
               <div className="col-9 d-flex justify-content-end">
-                <CustomButton className="mx-4" background="#00ADEF">
+                <CustomButton
+                  type="submit"
+                  onClick={(e) => {
+                    onSubmit(e)
+                  }}
+                  className="mx-4"
+                  background="#00ADEF"
+                >
                   Save
                 </CustomButton>
               </div>
