@@ -69,7 +69,7 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
       if (action.payload.founder) {
         return {
           ...state,
-          workExperience: [...state.workExperience, action.payload],
+          experience: [...state.experience, action.payload],
         };
       } else {
         return {
