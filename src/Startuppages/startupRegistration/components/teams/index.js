@@ -133,7 +133,7 @@ export const TeamProfile = () => {
   const children = [];
   for (let i = 0; i < skill.length; i++) {
     children.push(<Option key={i}>{skill[i]}</Option>);
-  }
+  }     
 
   function handleChange(value, type) {
     console.log(type)
@@ -154,6 +154,7 @@ export const TeamProfile = () => {
         accType: 'startup',
         values: {
           ...value,
+          skills:skillSet,
           avatar:avatar,
           experience: experience,
           education: education,
