@@ -18,19 +18,46 @@ import DownloadIcon from '../../../../../../assets/icons/download.svg';
 import RedFile from '../../../../../../assets/icons/redFile.svg';
 import BluFile from '../../../../../../assets/icons/bluFile.svg';
 import { useActivity } from '../../../../../../hooks/useBusiness';
+import { updateFounderProfile } from '../../../../../../services';
+import { useAuth } from '../../../../../../hooks/useAuth';
+import toast from 'react-hot-toast';
+
 
 export const FinancialProjection = () => {
   const {
     state: { fundraising },
   } = useActivity();
   const history = useHistory();
-
+  const { stateAuth } = useAuth();
   const {
     location: { hash },
+    push
   } = history;
 
   function btn(e) {
     e.preventDefault();
+  }
+
+  const handleSubmit = async(e) =>{
+    try{
+      e.preventDefault();
+      console.log('sending...')
+      const fund = {
+        type: 'fundRaising',
+          accType: 'startup',
+          values:{
+            ...fundraising
+          },
+        userId: stateAuth?.user?.userId,
+      }
+      let result = await updateFounderProfile(fund);
+      toast.success(result?.message)
+      push('/startup/dashboard')
+    }catch(err){
+      toast.error(err?.response?.data?.message)
+    }
+    
+
   }
 
   return (
@@ -115,10 +142,7 @@ export const FinancialProjection = () => {
             Save
           </CustomButton>
           <OutlineButton
-            onClick={(e) => {
-              e.preventDefault();
-              console.log(fundraising);
-            }}
+            onClick={handleSubmit}
             className='ms-2'
             style={{ marginRight: '5rem' }}
             background='none'

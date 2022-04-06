@@ -28,21 +28,31 @@ export const SignUp = ({ history }) => {
   console.log(stateAuth?.signUpStatus)
   const onFinish = (values) => {
 
+    if(stateAuth?.signUpStatus !== 'startup'){
       console.log({
         ...values,
         type: stateAuth?.signUpStatus,
-        industry: industry,
         phone: phone?.id,
       })
+      register({
+        ...values,
+        type: stateAuth?.signUpStatus,
+        phone: phone?.id,
+      })
+    }else{
       register({
         ...values,
         type: stateAuth?.signUpStatus,
         industry: industry,
         phone: phone?.id,
       })
-    
-
-   
+      console.log({
+        ...values,
+        type: stateAuth?.signUpStatus,
+        industry: industry,
+        phone: phone?.id,
+      })
+    }
     setRole(stateAuth?.signUpStatus)
   }
 
@@ -67,7 +77,7 @@ export const SignUp = ({ history }) => {
                 name={
                   stateAuth?.signUpStatus === 'startup'
                     ? 'startupname'
-                    : 'first name'
+                    : 'firstname'
                 }
                 label={
                   stateAuth?.signUpStatus === 'startup'

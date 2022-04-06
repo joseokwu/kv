@@ -81,9 +81,9 @@ We are inviting startups to help them incubate and accelerate business idea to f
                   Please check your inbox for a confirmation email. Didn’t
                   receive the email?
                 </p>
-                <p  className="resend_email" onClick={() => history.push('/')} >
+                {/* <p  className="resend_email" onClick={() => history.push('/')} >
                   Sign in
-                </p>
+                </p> */}
               </section>
             </div>
           </section>

@@ -27,10 +27,10 @@ export const Product = () => {
   const [nextLoading, setnextLoading] = useState(false);
   const [opts, setOpts] = useState('')
   const [productInfo, setProductInfo] = useState({
-    description: stateAuth?.user?.productService?.description ?? '',
-    competitiveEdge: stateAuth?.user?.productService?.competitiveEdge ?? '',
-    youtubeDemoUrl: stateAuth?.user?.productService?.youtubeDemoUrl ?? '',
-    files: stateAuth?.user?.productService?.files ?? '',
+    description: stateAuth?.user?.product?.description ?? '',
+    competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
+    youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
+    files: stateAuth?.user?.product?.files ?? '',
   })
 
   const onChange = (e) => {

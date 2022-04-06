@@ -17,6 +17,7 @@ export const StartupDashboard = () => {
   const [loading, setLoading] = useState(false);
   const { stateAuth } = useAuth();
 
+  console.log(stateAuth.user)
 
   return (
     <div className="dashboardMain">

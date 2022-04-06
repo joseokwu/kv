@@ -11,6 +11,13 @@ const options = {
     }
 }
 
+const uploadOptions = {
+	baseURL: "http://localhost:9200",
+    headers: { "Content-Type": "multipart/form-data" }
+}
+
+export const uploadRequest = axios.create(uploadOptions);
+
 export const request = axios.create(options)
 
 request.interceptors.request.use(
@@ -25,3 +32,17 @@ request.interceptors.request.use(
 		return Promise.reject(error);
 	}
 );
+
+uploadRequest.interceptors.request.use(
+	(config) => {
+		const token = getToken();
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
+		return config;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
+);
+

@@ -7,7 +7,8 @@ import Consulting from './components/consulting/consulting'
 import Details from './components/details/details'
 import Interest from './components/interest/interest'
 import WorkExperience from './components/workExperience/workExperience'
-import './personalDetails.css'
+import './personalDetails.css';
+import { useAuth }  from '../../hooks/useAuth';
 
 export const MentorPersonalDetails = () => {
   const wrapRef = useRef()
@@ -21,6 +22,8 @@ export const MentorPersonalDetails = () => {
   const switchForm = (currentHash) => {
     push(currentHash)
   }
+  const { stateAuth } = useAuth();
+  console.log(stateAuth)
 
   useEffect(() => {
     wrapRef.current.scrollTop = 0
@@ -55,7 +58,7 @@ export const MentorPersonalDetails = () => {
               className="d-flex align-items-center"
               style={{ columnGap: 12 }}
             >
-              <h4>Hi Daniella</h4>
+              <h4>Hi { stateAuth?.user?.username} </h4>
               <img src={hi} alt={'hi'} />
             </section>
             <p>Let’s customise your experience</p>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import {
   HeaderTeam,
   ImageWrapper,
@@ -32,13 +32,14 @@ import {
 } from '../../../../Startupcomponents';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
+import { upload }  from '../../../../services/utils';
 
 const { Option } = Select;
 
 export const TeamProfile = () => {
   const { stateAuth } = useAuth();
   const [disImg, setImg] = useState(null);
-
+  const [logoUploading , setLogoUploading] = useState(false);
   const [show, setShow] = useState(false);
   const [showEducation, setShowEducation] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -65,10 +66,10 @@ export const TeamProfile = () => {
   // })
 
   const [socialMedia, setSocialMedia] = useState({});
-
+  const [skillSet, setSkill] = useState([]);
   const [editIndex, setEditIndex] = useState();
   const [isEditing, setIsEditing] = useState(false);
-
+  const [avatar, setAvatar] = useState(null);
   const [coFounder, setCoFounder] = useState('');
   const {
     changePath,
@@ -76,18 +77,34 @@ export const TeamProfile = () => {
     setEducation,
     state: {
       path,
-      workExperience,
+      experience,
       workExperienceCoFounder,
       education,
       educationCoFounder,
     },
   } = useActivity();
 
-  const onChangeImage = (e) => {
-    const { files } = e.target;
 
-    if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]));
+
+  const onChangeImage = async(e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+    try {
+      console.log('uploaded')
+      setLogoUploading(true)
+      const response = await upload(formData)
+      console.log(response) 
+      setAvatar(response?.path)
+      setLogoUploading(false)
+
+    } catch(error) {
+      console.log(error)
+      setLogoUploading(false);
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image')
     }
   };
 
@@ -116,11 +133,15 @@ export const TeamProfile = () => {
   const children = [];
   for (let i = 0; i < skill.length; i++) {
     children.push(<Option key={i}>{skill[i]}</Option>);
+  }     
+
+  function handleChange(value, type) {
+    console.log(type)
+    value.map((item) =>{
+      setSkill([skill[parseInt(item)], ...skillSet])
+    })
   }
 
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
 
   function btn(e) {
     e.preventDefault();
@@ -133,7 +154,9 @@ export const TeamProfile = () => {
         accType: 'startup',
         values: {
           ...value,
-          experience: workExperience,
+          skills:skillSet,
+          avatar:avatar,
+          experience: experience,
           education: education,
         },
         userId: stateAuth?.user?.userId,
@@ -187,21 +210,21 @@ export const TeamProfile = () => {
 
   const formik = useFormik({
     initialValues: {
-      avatar: '',
-      briefIntroduction: '',
-      firstName: '',
-      lastName: '',
-      email: '',
+      briefIntroduction:stateAuth?.user?.team?.briefIntroduction  ?? '',
+      firstName:stateAuth?.user?.team?.firstName ?? '',
+      lastName:stateAuth?.user?.team?.lastName ?? '',
+      email:stateAuth?.user?.team?.email ?? '',
       dob: startDate,
-      country: '',
-      state: '',
-      city: '',
+      country:stateAuth?.user?.team?.country ?? '',
+      state: stateAuth?.user?.team?.state ?? '',
+      city: stateAuth?.user?.team?.city ?? '',
       // mobile_number: phone,
-      skills: [],
+      skills:[]
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
   });
+
   const handleWorkDetails = ({
     from,
     title,
@@ -243,6 +266,13 @@ export const TeamProfile = () => {
     }
   };
 
+
+  // useEffect(() =>{
+  //   setWorkExperience(stateAuth?.user?.team?.experience);
+  //   setEducation(stateAuth?.user?.team?.education);
+
+  // },[])
+
   return (
     <>
       {show ? (
@@ -250,7 +280,7 @@ export const TeamProfile = () => {
           handleClose={setShow}
           handleWorkDetails={handleWorkDetails}
           editIndex={editIndex}
-          workExperience={workExperience}
+          workExperience={experience}
           isEditing={isEditing}
           setIsEditing={setIsEditing}
         />
@@ -299,12 +329,12 @@ export const TeamProfile = () => {
 
           <div style={{ marginTop: '10px', marginLeft: '10px' }}>
             <ImageWrapper>
-              {disImg === null ? (
-                <UserOutlined />
+              {avatar === null ? (
+             logoUploading ? <CircularLoader color={'#000'} /> :  <UserOutlined /> 
               ) : (
                 <img
                   className=''
-                  src={disImg}
+                  src={avatar}
                   style={{
                     borderRadius: '70px',
                     width: '90px',
@@ -419,9 +449,7 @@ export const TeamProfile = () => {
                 countryCallingCodeEditable={true}
                 className='custs w-lg-50 ps-3'
                 value={
-                  stateAuth?.user?.team?.contactInfo?.mobile_number
-                    ? stateAuth?.user?.team?.contactInfo?.mobile_number
-                    : phone
+                  stateAuth?.user?.team?.contactInfo?.mobile_number ?? phone
                 }
                 onChange={setPhone}
                 MaxLength={17}
@@ -434,8 +462,8 @@ export const TeamProfile = () => {
             <span>Work Experience</span>
           </div>
           <hr />
-          {workExperience.length > 0 &&
-            workExperience.map((item, index) => {
+          {experience.length > 0 &&
+            experience.map((item, index) => {
               return (
                 <WorkExperience
                   key={index}
@@ -508,8 +536,8 @@ export const TeamProfile = () => {
               allowClear
               style={{ width: '100%', color: 'red' }}
               placeholder='Please click to select'
-              value={formik.skills}
-              onChange={formik.handleChange}
+              value={skillSet}
+              onChange={handleChange}
               className='skiil-select'
             >
               {children}

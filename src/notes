@@ -1044,3 +1044,94 @@ const fetchData = async () => {
 useEffect(() => {
   fetchData();
 }, []);
+
+
+
+===================================================
+console.log('hello')
+const { files, name } = e.target;
+setFile(
+  fileInfo.map((item) => {
+    if (name === item?.name) {
+      item.file = files[0]
+      item.size = formatBytes(files[0].size)
+    }
+    return item
+  }),
+)
+
+<FileSize>
+{' '}
+{fileInfo[1].file !== null
+  ? `${fileInfo[1].size}`
+  : '(Max. File size 5mb)'}{' '}
+</FileSize>
+
+   <div className="form-group col-12 mt-5">
+                <VideoWrapper>
+                  <label> Pitch deck uploaded</label>
+                  <div className="row">
+                      <div className="my-4 d-flex justify-content-center text-center">
+                        <span>No File Uploaded</span>
+                      </div>
+                    
+                  </div>
+                </VideoWrapper>
+              </div>
+
+const [uploadDoc, setUploadDock] = useState({
+  pitchDeckFile: stateAuth?.user?.pitchDeck?.pitchDeckFile,
+  pitchDeckVideo: stateAuth?.user?.pitchDeck?.pitchDeckVideo,
+});
+====================================================================
+=======================================================================
+fundRaising:
+capTable:
+amountInvestedByFounders: "987998"
+amountRaised: "78008"
+_id: "624afa6323b2f89cc25c680e"
+[[Prototype]]: Object
+financialProjection:
+_id: "624afa6323b2f89cc25c6810"
+[[Prototype]]: Object
+fundUtilization:
+_id: "624afa6323b2f89cc25c680d"
+[[Prototype]]: Object
+fundingAsk:
+dilution: "900000"
+fundraisingAmount: "696767"
+hasLeadInvestor: false
+hasPreviousFundraising: false
+instrumentForRound: "Fund 2"
+numberOfRounds: "Fund 2"
+postMoneyValuation: "8666976976"
+preMoneyValuation: "9777977"
+terms: ['uouougugouo']
+_id: "624afa6323b2f89cc25c680c"
+[[Prototype]]: Object
+previousRound:
+dateOfFunding: null
+dilution: "900000"
+fundraisingAmount: "696767"
+hasLeadInvestor: true
+instrumentForRound: "Fund 3"
+numberOfRounds: "Fund 3"
+preMoneyValuation: "9777977"
+_id: "624afa6323b2f89cc25c680f"
+[[Prototype]]: Object
+_id: "624afa6323b2f89cc25c680b"
+[[Prototype]]: Object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
