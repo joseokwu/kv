@@ -7,3 +7,4 @@ export * from "./viewPartner/ViewPartner";
 export * from "./applicationMgt/ApplicationMgt";
 export * from "./pendingApplication/PendingApplication";
 export * from "./acceptedApplication/AcceptedApplication";
+export * from "./events/Events";

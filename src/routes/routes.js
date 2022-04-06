@@ -102,6 +102,7 @@ import {
   AllMentors,
   AllSessions,
   ApplicationMgt,
+  Events,
   PendingApplication,
   UserManagement,
   ViewInvestor,
@@ -879,7 +880,7 @@ const routes = [
   {
     name: "admin Program",
     path: "/admin/events",
-    component: WithAdminLayout(() => <div>Events</div>),
+    component: WithAdminLayout(Events),
     exact: true,
     protected: false,
     type: "admin",
