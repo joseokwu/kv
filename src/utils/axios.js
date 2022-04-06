@@ -12,7 +12,7 @@ const options = {
 }
 
 const uploadOptions = {
-	baseURL: "http://kudibarng-env.eba-ya2pysxp.eu-west-3.elasticbeanstalk.com",
+	baseURL: "http://localhost:9200",
     headers: { "Content-Type": "multipart/form-data" }
 }
 
