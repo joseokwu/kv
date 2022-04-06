@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { HeaderModal, ModalForm } from './teams.styled'
 import { CustomModal } from '../../../../Startupcomponents/modal/Customodal'
 import { ModalCus } from '../../../../Startupcomponents/modal/Modal'
-import DatePicker from 'react-datepicker'
+import { DatePicker } from 'antd'
 import 'react-datepicker/dist/react-datepicker.css'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
 import { useFormik } from 'formik'
@@ -87,7 +87,7 @@ export const TeamModal = ({
                 onChange={formik.handleChange}
               />
               {formik.touched.title && formik.errors.title ? (
-                <label className="error">{formik.errors.title}</label>
+                <article className="error">{formik.errors.title}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -107,7 +107,7 @@ export const TeamModal = ({
                 onChange={formik.handleChange}
               />
               {formik.touched.location && formik.errors.location ? (
-                <label className="error">{formik.errors.location}</label>
+                <article className="error">{formik.errors.location}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -127,7 +127,7 @@ export const TeamModal = ({
                 onChange={formik.handleChange}
               />
               {formik.touched.position && formik.errors.position ? (
-                <label className="error">{formik.errors.position}</label>
+                <article className="error">{formik.errors.position}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -154,7 +154,7 @@ export const TeamModal = ({
                 onChange={formik.handleChange}
               />
               {formik.touched.description && formik.errors.description ? (
-                <label className="error">{formik.errors.description}</label>
+                <article className="error">{formik.errors.description}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -163,14 +163,14 @@ export const TeamModal = ({
                 checked={checked}
                 onChange={() => setChecked(!checked)}
               />
-              <span>I current work in this role</span>
+              <span>I currently work in this role</span>
             </div>
             <div className="col-6 form-group">
               <label>Start Date *</label>
               <DatePicker
                 id="startDate"
                 name="startDate"
-                className="p-2"
+                className="date-input col-lg-12 ps-3 py-2"
                 style={{ padding: '15px' }}
                 selected={
                   isEditing ? workExperience[editIndex]?.startDate : startDate
@@ -184,8 +184,8 @@ export const TeamModal = ({
                 <DatePicker
                   id="endDate"
                   name="endDate"
-                  className="p-2"
-                  style={{ padding: '15px' }}
+                  className="date-input col-lg-12 ps-3 py-2"
+                  // style={{ padding: '15px' }}
                   selected={
                     isEditing ? workExperience[editIndex]?.endDate : endDate
                   }
@@ -257,7 +257,7 @@ export const EducationModal = ({
       eduStartDate: Yup.string().required('Required'),
       eduEndDate: Yup.string().required('Required'),
     }),
-    onSubmit: (values) => console.log('df'),
+    onSubmit: (value) => onSubmit(value),
   })
 
   return (
@@ -291,7 +291,7 @@ export const EducationModal = ({
                 onChange={formik.handleChange}
               />
               {formik.touched.school && formik.errors.school ? (
-                <label className="error">{formik.errors.school}</label>
+                <article className="error">{formik.errors.school}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -311,7 +311,7 @@ export const EducationModal = ({
                 onChange={formik.handleChange}
               />
               {formik.touched.degree && formik.errors.degree ? (
-                <label className="error">{formik.errors.degree}</label>
+                <article className="error">{formik.errors.degree}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -331,7 +331,7 @@ export const EducationModal = ({
                 onChange={formik.handleChange}
               />
               {formik.touched.course && formik.errors.course ? (
-                <label className="error">{formik.errors.course}</label>
+                <article className="error">{formik.errors.course}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -358,7 +358,7 @@ export const EducationModal = ({
                 onChange={formik.handleChange}
               />
               {formik.touched.activities && formik.errors.activities ? (
-                <label className="error">{formik.errors.activities}</label>
+                <article className="error">{formik.errors.activities}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -367,7 +367,7 @@ export const EducationModal = ({
                 checked={checked}
                 onChange={() => setChecked(!checked)}
               />
-              <span>I current school here.</span>
+              <span>I currently school here.</span>
             </div>
 
             <div className="col-6 form-group">
@@ -375,8 +375,8 @@ export const EducationModal = ({
               <DatePicker
                 id="eduStartDate"
                 name="eduStartDate"
-                className="p-2"
-                style={{ padding: '15px' }}
+                className='date-input col-lg-12 ps-3 py-2'
+                // style={{ padding: '15px' }}
                 selected={
                   isEditing ? education[editIndex]?.eduStartDate : eduStartDate
                 }
@@ -390,8 +390,8 @@ export const EducationModal = ({
                 <DatePicker
                   id="eduEndDate"
                   name="eduEndDate"
-                  className="p-2"
-                  style={{ padding: '15px' }}
+                  className='date-input col-lg-12 ps-3 py-2'
+                  // style={{ padding: '15px' }}
                   selected={
                     isEditing ? education[editIndex]?.eduEndDate : eduEndDate
                   }

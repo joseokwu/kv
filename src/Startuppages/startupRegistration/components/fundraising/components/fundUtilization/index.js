@@ -91,7 +91,7 @@ export const FundUtilization = () => {
             </FileWrapper>
           </div>
 
-          <div className='my-5'>
+          {/* <div className='my-5'>
             <VideoWrapper className='mx-n5 mx-lg-n0'>
               <label> Financial Plan Uploaded</label>
               <div className='div'>
@@ -119,7 +119,7 @@ export const FundUtilization = () => {
                 </div>
               </div>
             </VideoWrapper>
-          </div>
+          </div> */}
         </div>
       </BodyWrapper>
       <Terms className=''>

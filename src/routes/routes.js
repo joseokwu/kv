@@ -583,7 +583,7 @@ const routes = [
     path: '/mentor/registration',
     component: WithMentorRegisterLayout(MentorPersonalDetails),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'mentor',
   },
   {

@@ -54,6 +54,7 @@ export const CapTable = ({ setFundraising }) => {
     },
     validationSchema: Yup.object({
       amountInvestedByFounders: Yup.string().required('Required'),
+      // amountRaised: Yup.string().required('Required'),
     }),
     onSubmit: (value) => onSubmit(value),
   });
@@ -83,6 +84,12 @@ export const CapTable = ({ setFundraising }) => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
+            {/* {formik.touched.amountRaised &&
+            formik.errors.amountRaised ? (
+              <label className='error'>
+                {formik.errors.amountRaised}
+              </label>
+            ) : null} */}
           </div>
           <div className='col-lg-6 col-12 form-group mx-n4 mx-lg-n0'>
             <label>Total Capital invested by Founders*</label>
@@ -121,7 +128,7 @@ export const CapTable = ({ setFundraising }) => {
               <LabelButton for='cap'>Upload Files</LabelButton>
             </FileWrapper>
           </div>
-          <div className='col-12'>
+          {/* <div className='col-12'>
             <VideoWrapper className='mx-n4 mx-lg-n0'>
               <label> Cap Table Uploaded</label>
               <div className='div'>
@@ -149,7 +156,7 @@ export const CapTable = ({ setFundraising }) => {
                 </div>
               </div>
             </VideoWrapper>
-          </div>
+          </div> */}
         </div>
       </BodyWrapper>
       <Terms className=''>

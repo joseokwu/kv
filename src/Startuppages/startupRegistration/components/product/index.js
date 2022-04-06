@@ -7,9 +7,9 @@ import BlueFile from '../../../../assets/icons/bluFile.svg'
 import { product } from './../../../../services/startUpReg'
 import { formatBytes } from '../../../../utils/helpers'
 import { toast } from 'react-hot-toast'
-import { useAuth } from '../../../../hooks/useAuth';
-import { updateFounderProfile } from '../../../../services';
-
+import { useAuth } from '../../../../hooks/useAuth'
+import { updateFounderProfile } from '../../../../services'
+import { upload }  from '../../../../services/utils';
 
 import {
   FileWrapper,
@@ -19,31 +19,34 @@ import {
 } from '../pitchdeck/pitch.styled'
 import DownloadIcon from '../../../../assets/icons/download.svg'
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
+import * as Yup from 'yup';
 import { useFormik } from 'formik'
 
 export const Product = () => {
-  const  { stateAuth } = useAuth();
+  const { stateAuth } = useAuth()
   const [loading, setLoading] = useState(false)
-  const [nextLoading, setnextLoading] = useState(false);
+  const [nextLoading, setnextLoading] = useState(false)
   const [opts, setOpts] = useState('')
+  const [logoUploading , setLogoUploading] = useState(false);
   const [productInfo, setProductInfo] = useState({
     description: stateAuth?.user?.product?.description ?? '',
     competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
     youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
-    files: stateAuth?.user?.product?.files ?? '',
+    // files: stateAuth?.user?.product?.files ?? '',
   })
+  const [videoDoc, setVidDoc] = useState(stateAuth?.user?.product?.files ?? null);
 
   const onChange = (e) => {
-    setProductInfo({...productInfo, [e.target.name] : e.target.value})
+    setProductInfo({ ...productInfo, [e.target.name]: e.target.value })
   }
 
-  const [fileInfo, setFile] = useState([
-    {
-      file: null,
-      size: null,
-      name: 'infoFile',
-    },
-  ])
+  // const [fileInfo, setFile] = useState([
+  //   {
+  //     file: null,
+  //     size: null,
+  //     name: 'infoFile',
+  //   },
+  // ])
 
   const {
     changePath,
@@ -58,51 +61,73 @@ export const Product = () => {
     changePath(path - 1)
   }
 
-  const handleChange = (e) => {
-    console.log('hello')
-    const { files, name } = e.target
-    setFile(
-      fileInfo.map((item) => {
-        if (name === item?.name) {
-          item.file = files
-          item.size = formatBytes(files.size)
-        }
-        return item
-      }),
-    )
+  const handleChangeVid = async(e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "video");
+    formData.append(0 , files[0])
+
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData)
+      console.log(response) 
+      setVidDoc(response?.path);
+      setLogoUploading(false)
+     
+    } catch(error) {
+      setLogoUploading(false)
+      console.log(error)
+    }
   }
 
-  const handleSubmit = (value) => {
-    const newFile = {
-      pitchDeckFile: [
-        {
-          url: fileInfo.file?.name,
-        },
-      ],
-      profileId: '61d5be4fb801676adafcf4f4',
-    }
-    // setLoading(true)
-    // product(value).then((res) => {
-    //   if (res?.message) {
-    //     console.log(res)
-    //     toast.success(res?.message)
-    //     setLoading(false)
-    //     next()
-    //   }
-    // })
-    //   console.log(newFile)
-  }
+  // const handleChange = (e) => {
+  //   console.log('hello')
+  //   const { files, name } = e.target
+  //   setFile(
+  //     fileInfo.map((item) => {
+  //       if (name === item?.name) {
+  //         item.file = files
+  //         item.size = formatBytes(files.size)
+  //       }
+  //       return item
+  //     }),
+  //   )
+  // }
+
+  // const handleSubmit = (value) => {
+  //   const newFile = {
+  //     pitchDeckFile: [
+  //       {
+  //         url: fileInfo.file?.name,
+  //       },
+  //     ],
+  //     profileId: '61d5be4fb801676adafcf4f4',
+  //   }
+  //   setLoading(true)
+  //   product(value).then((res) => {
+  //     if (res?.message) {
+  //       console.log(res)
+  //       toast.success(res?.message)
+  //       setLoading(false)
+  //       next()
+  //     }
+  //   })
+  //     console.log(newFile)
+  // }
 
   const onSubmit = async (value) => {
-  
     try {
       const product = {
         type: 'product',
         accType: 'startup',
         values: {
-          ...value
+          ...value,
+          productInfo: productInfo,
+          file: videoDoc
         },
-        userId:stateAuth?.user?.userId
+        userId: stateAuth?.user?.userId,
       }
       console.log(product)
       if (opts === 'next') {
@@ -111,37 +136,42 @@ export const Product = () => {
 
         if (result?.success) {
           toast.success('Product' + '' + result?.message)
-          setOpts(false);
+          setOpts(false)
           return changePath(path + 1)
         }
       }
-      setLoading(true);
+      setLoading(true)
       let result = await updateFounderProfile(product)
 
-      if(!result?.success) {
+      if (!result?.success) {
         toast.error(result?.message || 'There was an error in updating product')
-        setLoading(false);
-        return;
+        setLoading(false)
+        return
       }
       toast.success('Product' + '' + result?.message)
-      setLoading(false);
-      return;
-      } catch (err) {
-        setLoading(false);
-        toast.error(err?.res?.data?.message || 'There was an error updating product')
-      }
+      setLoading(false)
+      return
+    } catch (err) {
+      setLoading(false)
+      toast.error(
+        err?.res?.data?.message || 'There was an error updating product',
+      )
     }
+  }
 
-    const formik = useFormik({
-      initialValues: {
-        description: stateAuth?.user?.product?.description ?? '',
-        competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
-        youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
-        files: stateAuth?.user?.product?.files ?? 'http://google.com',
-      },
-      validateOnBlur: true,
-      onSubmit: (value) => onSubmit(value),
-    })
+  const formik = useFormik({
+    initialValues: {
+      description: stateAuth?.user?.product?.description ?? '',
+      competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
+      youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
+      // files: stateAuth?.user?.product?.files ?? 'http://google.com',
+    },
+    validationSchema: Yup.object({
+      competitiveEdge: Yup.string().required('Required')
+    }),
+    validateOnBlur: true,
+    onSubmit: (value) => onSubmit(value),
+  })
 
   return (
     <>
@@ -170,10 +200,10 @@ export const Product = () => {
                   rows="5"
                   name="description"
                   className="form-control ps-3"
-                  onChange={formik.handleChange}
-                  value={formik.values.description}
+                  onChange={onChange}
+                  value={productInfo.description}
                   placeholder="Enter Brief info about your product"
-                ></textarea>
+                />
               </div>
               <div className="form-group col-12">
                 <div className="d-flex justify-content-between">
@@ -187,11 +217,15 @@ export const Product = () => {
                   cols="5"
                   rows="5"
                   name="competitiveEdge"
-                  onChange={formik.handleChange}
-                  value={formik.values.competitiveEdge}
+                  onChange={onChange}
+                  value={productInfo.competitiveEdge}
+                  onBlur={formik.handleBlur}
                   className="form-control ps-3"
                   placeholder="Enter your uniqueness "
                 />
+                {formik.touched.competitiveEdge && formik.errors.competitiveEdge ? (
+                <label style={{color: 'red'}} className="error">{formik.errors.competitiveEdge}</label>
+              ) : null}
               </div>
             </div>
             <div className="form-group col-12 mt-3">
@@ -200,23 +234,53 @@ export const Product = () => {
                 <input
                   type="text"
                   name="youtubeDemoUrl"
-                  onChange={formik.handleChange}
-                  value={formik.values.youtubeDemoUrl}
+                  onChange={handleChangeVid}
+                  // value={formik.values.youtubeDemoUrl}
                   className="form-control youtube-input ps-3"
                   placeholder="Youtube link"
                 />
                 <button className="button">Upload</button>
               </div>
               <FileWrapper className="d-flex justify-content-center text-center">
-                <img src={DownloadIcon} alt="#" />
-                <FileText>Drag & Drop</FileText>
-                <FileText>Drag files or click here to upload </FileText>
-                <FileSize> {'(Max. File size 5mb)'} </FileSize>
-                <input name="files" onChange={onChange} value={productInfo.files} type="file" id="pitch-doc" hidden />
+              {videoDoc !== null ? (
+                
+                <video 
+                    style={{
+                      borderRadius:"20px",
+                     maxHeight:"150px",
+                      width:"250px"
+                    }}
+                    className='mb-3'
+                   controls>
+                  <source src={videoDoc} id="video_here" />
+                    Your browser does not support HTML5 video.
+                   </video>
+            
+                  
+                ) : (
+                  
+                  logoUploading ? <CircularLoader color={'#000'} /> : 
+                  <>
+                  <img src={DownloadIcon} alt="#" />
+                    <FileText>Drag & Drop</FileText>
+                    <FileText>Drag files or click here to upload </FileText>
+                  </>
+                
+                )}
+                
+                <input
+                  name="files"
+                  onChange={handleChangeVid}
+                  // value={productInfo.files}
+                  type="file"
+                  id="pitch-doc"
+                  accept="video/*"
+                  hidden
+                />
                 <LabelButton for="pitch-doc">Upload Files</LabelButton>
               </FileWrapper>
             </div>
-            <div className="form-group col-12">
+            {/* <div className="form-group col-12">
               <VideoWrapper>
                 <label> Product demo upload</label>
                 <div className="row">
@@ -239,7 +303,7 @@ export const Product = () => {
                   </div>
                 </div>
               </VideoWrapper>
-            </div>
+            </div> */}
           </div>
         </FormWrapper>
         <div className="row mt-4">
@@ -249,11 +313,21 @@ export const Product = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-lg-end">
-            <CustomButton type="submit" disabled={loading} className="mx-2" background="#00ADEF">
-              { loading ? <CircularLoader /> : 'Save'}
+            <CustomButton
+              type="submit"
+              disabled={loading}
+              className="mx-2"
+              background="#00ADEF"
+            >
+              {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
-            <CustomButton type="submit" disabled={nextLoading} onClick={() => setOpts('next')} background="#2E3192">
-              { nextLoading ? <CircularLoader /> : 'Next'}
+            <CustomButton
+              type="submit"
+              disabled={nextLoading}
+              onClick={() => setOpts('next')}
+              background="#2E3192"
+            >
+              {nextLoading ? <CircularLoader /> : 'Next'}
             </CustomButton>
           </div>
         </div>

@@ -89,7 +89,7 @@ export const FinancialProjection = () => {
               <LabelButton for='utilize'>Upload Files</LabelButton>
             </FileWrapper>
           </div>
-          <div className='my-5'>
+          {/* <div className='my-5'>
             <VideoWrapper>
               <label> Financial plan uploaded</label>
               <div className='div'>
@@ -117,7 +117,7 @@ export const FinancialProjection = () => {
                 </div>
               </div>
             </VideoWrapper>
-          </div>
+          </div> */}
         </div>
       </BodyWrapper>
       <Terms className=''>
