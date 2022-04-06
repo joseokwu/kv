@@ -66,7 +66,7 @@ export const TeamProfile = () => {
   // })
 
   const [socialMedia, setSocialMedia] = useState({});
-
+  const [skillSet, setSkill] = useState([]);
   const [editIndex, setEditIndex] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [avatar, setAvatar] = useState(null);
@@ -84,7 +84,7 @@ export const TeamProfile = () => {
     },
   } = useActivity();
 
-  let skills = [];
+
 
   const onChangeImage = async(e) => {
     const { files } = e.target;
@@ -133,13 +133,16 @@ export const TeamProfile = () => {
   const children = [];
   for (let i = 0; i < skill.length; i++) {
     children.push(<Option key={i}>{skill[i]}</Option>);
+  }     
+
+  function handleChange(value, type) {
+    console.log(type)
+    value.map((item) =>{
+      setSkill([skill[parseInt(item)], ...skillSet])
+    })
   }
 
-  function handleChange(value) {
-   skills.push(value);
-  
-  }
-  console.log(skills)
+
   function btn(e) {
     e.preventDefault();
   }
@@ -151,8 +154,8 @@ export const TeamProfile = () => {
         accType: 'startup',
         values: {
           ...value,
+          skills:skillSet,
           avatar:avatar,
-          skills:skills,
           experience: experience,
           education: education,
         },
@@ -216,11 +219,12 @@ export const TeamProfile = () => {
       state: stateAuth?.user?.team?.state ?? '',
       city: stateAuth?.user?.team?.city ?? '',
       // mobile_number: phone,
-      
+      skills:[]
     },
     validateOnBlur: true,
     onSubmit: (value) => onSubmit(value),
   });
+
   const handleWorkDetails = ({
     from,
     title,
@@ -532,7 +536,7 @@ export const TeamProfile = () => {
               allowClear
               style={{ width: '100%', color: 'red' }}
               placeholder='Please click to select'
-              value={skills}
+              value={skillSet}
               onChange={handleChange}
               className='skiil-select'
             >
