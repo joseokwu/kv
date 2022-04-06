@@ -9,7 +9,7 @@ import './style.css';
 import { UserOutlined, PlusOutlined } from '@ant-design/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import DatePicker from 'antd';
+import { DatePicker } from 'antd';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomSelect } from '../../../../Startupcomponents/select/customSelect';
 import { stage, optionsNumb, options } from '../../../../constants/domiData';
@@ -19,9 +19,10 @@ import { CustomButton } from '../../../../Startupcomponents/button/button.styled
 import { useActivity } from '../../../../hooks/useBusiness';
 import { updateFounderProfile } from '../../../../services/startup';
 import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
-import { toast } from 'react-hot-toast';
+import  toast  from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from './../../../../hooks/useAuth';
+import { upload }  from '../../../../services/utils';
 
 export const StartupProfile = () => {
   const {
@@ -30,7 +31,9 @@ export const StartupProfile = () => {
   } = useActivity();
   const { stateAuth } = useAuth();
   const [disImg, setImg] = useState(null);
-  const [opts, setOpts] = useState('');
+  const [logo , setLogo] = useState(stateAuth?.user?.startUpProfile?.logo ?? null );
+  const [logoUploading , setLogoUploading] = useState(false);
+  const [opts, setOpts] = useState(''); 
   const [startDate, setStartDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [nextloading, setNextLoading] = useState(false);
@@ -39,44 +42,48 @@ export const StartupProfile = () => {
   );
   const [contacts, setContacts] = useState({
     registeredAddress: stateAuth?.user?.startUpProfile?.contactInfo
-      ?.registeredAddress
-      ? stateAuth?.user?.startUpProfile?.contactInfo?.registeredAddress
-      : '',
+      ?.registeredAddress ?? '',
     country: stateAuth?.user?.startUpProfile?.contactInfo?.country
-      ? stateAuth?.user?.startUpProfile?.contactInfo?.country
-      : '',
+      ?? '',
     state: stateAuth?.user?.startUpProfile?.contactInfo?.state
-      ? stateAuth?.user?.startUpProfile?.contactInfo?.state
-      : '',
+     ?? '',
     city: stateAuth?.user?.startUpProfile?.contactInfo?.city
-      ? stateAuth?.user?.startUpProfile?.contactInfo?.city
-      : '',
+      ?? '',
     companyEmail: stateAuth?.user?.startUpProfile?.contactInfo?.companyEmail
-      ? stateAuth?.user?.startUpProfile?.contactInfo?.companyEmail
-      : '',
+   ?? '',
   });
   const [socialMedia, setSocialmedia] = useState({
     profileHandle: stateAuth?.user?.startUpProfile?.socialMedia?.profileHandle
-      ? stateAuth?.user?.startUpProfile?.socialMedia?.profileHandle
-      : '',
+      ?? '',
     companyWebsite: stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite
-      ? stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite
-      : '',
+      ?? '',
     linkedInHandle: stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle
-      ? stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle
-      : '',
+      ?? '',
     twitterHandle: stateAuth?.user?.startUpProfile?.socialMedia
-      ? stateAuth?.user?.startUpProfile?.socialMedia?.twitterHandle
-      : '',
+      ?? '',
   });
 
   const history = useHistory();
 
-  const onChangeImage = (e) => {
+  const onChangeImage = async(e) => {
     const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+    try {
+      console.log('uploaded')
+      setLogoUploading(true)
+      const response = await upload(formData)
+      console.log(response) 
+      setLogo(response?.path)
+      setLogoUploading(false)
 
-    if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]));
+    } catch(error) {
+      console.log(error)
+      setLogoUploading(false);
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image')
     }
   };
 
@@ -100,6 +107,7 @@ export const StartupProfile = () => {
         accType: 'startup',
         values: {
           ...value,
+          logo:logo,
           contactInfo: {
             ...contacts,
             phoneNumber: phone,
@@ -131,7 +139,7 @@ export const StartupProfile = () => {
       }
       toast.success('Profile' + ' ' + result?.message);
       setLoading(false);
-      return;
+     
     } catch (err) {
       setLoading(false);
       toast.error(
@@ -142,7 +150,6 @@ export const StartupProfile = () => {
 
   const formik = useFormik({
     initialValues: {
-      logo: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
       startupName: stateAuth?.user?.businessname ?? '',
       elevatorPitch: stateAuth?.user?.startUpProfile?.elevatorPitch ?? '',
       brand: stateAuth?.user?.startUpProfile?.brand ?? '',
@@ -180,16 +187,17 @@ export const StartupProfile = () => {
 
       <div style={{ marginTop: '10px', marginLeft: '10px' }}>
         <ImageWrapper>
-          {disImg === null ? (
-            <UserOutlined />
-          ) : (
+          {logo === null ? (
+            logoUploading ? <CircularLoader color={'#000'} /> :  <UserOutlined /> 
+          ) : ( 
             <img
               className=''
-              src={disImg}
+              src={logo}
               style={{ borderRadius: '70px', width: '90px', height: '90px' }}
               alt=''
             />
-          )}
+          )
+          }
         </ImageWrapper>
 
         <InputWrapper for='dp'>

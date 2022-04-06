@@ -30,10 +30,10 @@ export const PitchDeck = () => {
   const [loading, setLoading] = useState(false)
   const [nextloading, setNextLoading] = useState(false);
   const [opts, setOpts] = useState('')
-
+  const [logoUploading , setLogoUploading] = useState(false);
   
-  const [fileDoc, setFileDoc] = useState(null);
-  const [videoDoc, setVidDoc] = useState(null);
+  const [fileDoc, setFileDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckFile ?? null);
+  const [videoDoc, setVidDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckVideo ?? null);
 
   const {
     changePath,
@@ -49,26 +49,29 @@ export const PitchDeck = () => {
   }
 
   const handleChange = async(e) => {
-    const { files, name } = e.target;
+    const { files } = e.target;
     const formData = new FormData();
     formData.append("dir", "kv");
     formData.append("ref", stateAuth.user?.userId);
-    formData.append("type", "image");
+    formData.append("type", "pdf");
     formData.append(0 , files[0])
 
     try {
+      setLogoUploading(true);
       const response = await upload(formData)
       console.log(response) 
       setFileDoc(response?.path)
+      setLogoUploading(false)
 
     } catch(error) {
+      setLogoUploading(false)
       console.log(error)
     }
   }
 
   
   const handleChangeVid = async(e) => {
-    const { files, name } = e.target;
+    const { files } = e.target;
     const formData = new FormData();
     formData.append("dir", "kv");
     formData.append("ref", stateAuth.user?.userId);
@@ -76,18 +79,14 @@ export const PitchDeck = () => {
     formData.append(0 , files[0])
 
     try {
+      setLogoUploading(true);
       const response = await upload(formData)
       console.log(response) 
-      setVidDoc(response?.path)
-      // setFile(
-      //   fileInfo.map((item) => {
-      //     if (name === item?.name) {
-      //       item.file = response?.path
-      //     }
-      //     console.log(item)
-      //     return item
-      //   }))
+      setVidDoc(response?.path);
+      setLogoUploading(false)
+     
     } catch(error) {
+      setLogoUploading(false)
       console.log(error)
     }
   }
@@ -98,18 +97,16 @@ export const PitchDeck = () => {
 
  
 
-  const onSubmit = async(value) => {
-    let lastIndex;
-    let uploads = document.getElementsByTagName('input');
-    lastIndex = uploads.length;
-    console.log(uploads[lastIndex - 1])
+  const onSubmit = async(e) => {
+    
      try {
-     
+     e.preventDefault();
       const pitchDeck = {
         type: 'pitchDeck',
         accType: 'startup',
-        valuess: {
-          ...value
+        values: {
+          pitchDeckFile:fileDoc,
+          pitchDeckVideo:videoDoc
         },
         userId: stateAuth?.user?.userId
       }
@@ -142,14 +139,7 @@ export const PitchDeck = () => {
      }
   }
 
-  const formik = useFormik({
-    initialValues: {
-      pitchDeckFile: stateAuth?.user?.pitchDeck?.pitchDeckFile,
-      pitchDeckVideo: stateAuth?.user?.pitchDeck?.pitchDeckVideo,
-    },
-    validateOnBlur: true,
-    onSubmit: (value) => onSubmit(value),
-  })
+  
 
   // const onSubmit = (value) => {
   //   setLoading(true)
@@ -169,7 +159,7 @@ export const PitchDeck = () => {
         <h5> Pitch Deck </h5>
         <p>Let's get to know your startup</p>
       </HeaderPitch>
-      <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
+      <form style={{ marginBottom: '4rem' }} onSubmit={onSubmit}>
         <FormWrapper>
           <div className="div">
             <span>Pitch Deck</span>
@@ -188,8 +178,9 @@ export const PitchDeck = () => {
                 <FileWrapper className="d-flex justify-content-center text-center">
                   
                   {fileDoc !== null ? (
-                    <img style={{width:'150px', height:'150px'}} src={fileDoc} alt=".#" />
+                    <img style={{width:'70px', height:'70px'}} src={RedFile} alt=".#" className='mb-2' />
                   ) : (
+                    logoUploading ? <CircularLoader color={'#000'} /> : 
                     <>
                     <img src={DownloadIcon} alt="#" />
                       <FileText>Drag & Drop</FileText>
@@ -213,30 +204,47 @@ export const PitchDeck = () => {
                   <input
                     type="text"
                     name="pitchDeckVideo"
-                    value={formik.values.pitchDeckVideo}
-                    onChange={formik.handleChange}
+                    onChange={handleChangeVid}
                     className="form-control youtube-input ps-3"
                     placeholder="Youtube link"
+                    
                   />
                   <button className="button">Upload</button>
                 </div>
                 <FileWrapper className="d-flex justify-content-center text-center">
-                  <img src={DownloadIcon} alt="#" />
+                 
                   {videoDoc !== null ? (
-                    <img src={videoDoc} alt=".#" />
+                
+                  <video 
+                      style={{
+                        borderRadius:"20px",
+                       maxHeight:"150px",
+                        width:"250px"
+                      }}
+                      className='mb-3'
+                     controls>
+                    <source src={videoDoc} id="video_here" />
+                      Your browser does not support HTML5 video.
+                     </video>
+              
+                    
                   ) : (
+                    
+                    logoUploading ? <CircularLoader color={'#000'} /> : 
                     <>
+                    <img src={DownloadIcon} alt="#" />
                       <FileText>Drag & Drop</FileText>
                       <FileText>Drag files or click here to upload </FileText>
                     </>
+                  
                   )}
                 
                   <input
                     type="file"
                     name="pitchDeckVideo"
                     id="pitch-docu"
-                    value={formik.values.pitchDeckVideo}
-                    onChange={formik.handleChange}
+                    onChange={handleChangeVid}
+                    accept="video/*"
                     hidden
                   />
                   <LabelButton for="pitch-docu">Upload Files</LabelButton>
