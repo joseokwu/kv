@@ -520,13 +520,7 @@ const routes = [
     exact: true,
     protected: false,
   },
-  {
-		name: 'Not Found',
-		component: NotFound,
-		exact: true,
-		type: '',
-		protected: false,
-	},
+ 
   {
     name: 'ForgotPassword',
     path: '/forgot/password',
@@ -888,6 +882,14 @@ const routes = [
   },
 
   //Admin Routes Ends Here
+
+  {
+		name: 'Not Found',
+		component: NotFound,
+		exact: true,
+		type: '',
+		protected: false,
+	},
 ];
 
 export default routes;
