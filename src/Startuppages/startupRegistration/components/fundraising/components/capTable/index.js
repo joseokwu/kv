@@ -26,6 +26,16 @@ export const CapTable = ({ setFundraising }) => {
   const history = useHistory();
   const { stateAuth } = useAuth();
 
+  const onNumberOnlyChange = (e) => {
+    const keyCode = e.keyCode || e.which;
+    const keyValue = String.fromCharCode(keyCode);
+    const isValid = new RegExp("[0-9]").test(keyValue);
+    if (!isValid) {
+       e.preventDefault();
+       return;
+    }
+};
+
   const {
     state: { fundraising },
   } = useActivity();
@@ -78,6 +88,7 @@ export const CapTable = ({ setFundraising }) => {
               type='text'
               className='form-control ps-3'
               placeholder='$100,000'
+              onKeyPress={onNumberOnlyChange}
               value={
                 formik.values.amountRaised
               }
@@ -99,6 +110,7 @@ export const CapTable = ({ setFundraising }) => {
               type='text'
               className='form-control ps-3'
               placeholder='$150,000'
+              onKeyPress={onNumberOnlyChange}
               value={
                 formik.values.amountInvestedByFounders
               }

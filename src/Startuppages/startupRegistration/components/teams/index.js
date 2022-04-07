@@ -119,8 +119,10 @@ export const TeamProfile = () => {
     children.push(<Option key={i}>{skill[i]}</Option>)
   }
 
-  function handleChange(value) {
-    console.log(`selected ${value}`)
+  function handleKeyDown(e) {
+    if (e.keyDown === 32) {
+      console.log('you pressed keydown')
+    }
   }
 
   function btn(e) {
@@ -575,6 +577,7 @@ export const TeamProfile = () => {
                 value={formik.values.skills}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                onKeyDown={handleKeyDown}
               />
               {formik.touched.skills && formik.errors.skills ? (
                 <label className="error">{formik.errors.skills}</label>
