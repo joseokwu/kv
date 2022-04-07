@@ -67,6 +67,7 @@ export const TeamProfile = () => {
 
   const [socialMedia, setSocialMedia] = useState({});
   const [skillSet, setSkill] = useState([]);
+  const [inVal , setVal] = useState('');
   const [editIndex, setEditIndex] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [avatar, setAvatar] = useState(null);
@@ -108,6 +109,19 @@ export const TeamProfile = () => {
     }
   };
 
+  const handleChange = (e) =>{
+   // console.log(e.target.value)
+    setVal(e.target.value);
+  }
+
+  const handleKey = (e) =>{
+    if(e.keyCode === 32){
+      console.log(inVal);
+      setVal('');
+      setSkill(inVal)
+    }
+  }
+
   // const onChange = (e) => {
   //   setContacts({ ...contacts, [e.target.name]: e.target.value })
   // }
@@ -135,19 +149,7 @@ export const TeamProfile = () => {
     children.push(<Option key={i}>{skill[i]}</Option>);
   }     
 
-  function handleChange(value, type) {
-    console.log(type)
-    console.log(type[0].children);
-    console.log(value)
-    value.map((item) =>{
-   
-      setSkill([skill[parseInt(item)], ...skillSet])
-      
-       //setSkill([skill[parseInt(item)], ...skillSet])
-   //!skillSet.includes(type[parseInt(item)].children)
-    
-    })
-  }
+  
 
 
   function btn(e) {

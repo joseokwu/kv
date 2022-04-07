@@ -21,7 +21,7 @@ export const SignIn = () => {
     newLogin,
   } = useAuth()
 
-  const history = useHistory();
+  const history = useHistory(); 
 
   // const handleChange = (e) =>{
   //  // console.log(e.target.value)
