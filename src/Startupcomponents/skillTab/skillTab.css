@@ -1,0 +1,21 @@
+.skill-div {
+  display: inline-block;
+  align-items: center;
+  /* background: blue; */
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  color: white;
+  margin-right: 1rem;
+  /* min-width: 10%; */
+}
+.skill-main {
+  margin-right: 0.5rem;
+}
+
+.skill-icon {
+  /* margin-top: auto; */
+  margin-bottom: 0.1rem;
+}
+/* .skill-icon {
+  height: 100%;
+} */
