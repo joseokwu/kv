@@ -6,6 +6,7 @@ import bigClock from "../../../assets/icons/bigclock.svg";
 import styles from "../events.module.css";
 import { Button, Modal, Tag } from "../../../components";
 import { ViewEventDetails } from "./ViewEventDetails";
+import { EditEvent } from "./EditEvent";
 
 export const EventCard = ({ data = {}, id = 0 }) => {
   const isOngoing =
@@ -36,25 +37,28 @@ export const EventCard = ({ data = {}, id = 0 }) => {
           eventDate={eventDate}
         />
       </Modal>
-      <div
-        className={styles.eventCard}
-        data-toggle="modal"
-        data-target={`#viewEvent${id}`}
-      >
+      <Modal id={`editEvent${id}`} title="Edit Event" width={568}>
+        <EditEvent data={data} />
+      </Modal>
+      <div className={styles.eventCard}>
         <section className="d-flex align-items-center justify-content-between mb-4">
-          <div>
+          <div data-toggle="modal" data-target={`#viewEvent${id}`}>
             <h5>{data?.name}</h5>
             {eventDate}
           </div>
 
           <div className="d-flex flex-column align-items-end">
-            <img src={dots} alt="options" className="d-block mb-3" />
+            <EventDropdown id={`editEvent${id}`} />
             {isOngoing ? <Tag name="Ongoing" /> : eventTime}
           </div>
         </section>
 
         {data?.image && (
-          <section className="mb-45">
+          <section
+            className="mb-45"
+            data-toggle="modal"
+            data-target={`#viewEvent${id}`}
+          >
             <img
               src={data?.image}
               alt="event visual"
@@ -63,7 +67,11 @@ export const EventCard = ({ data = {}, id = 0 }) => {
           </section>
         )}
 
-        <section className="mb-3">
+        <section
+          className="mb-3"
+          data-toggle="modal"
+          data-target={`#viewEvent${id}`}
+        >
           <p className={styles.desc}>{data?.description}</p>
         </section>
 
@@ -78,5 +86,28 @@ export const EventCard = ({ data = {}, id = 0 }) => {
         </section>
       </div>
     </>
+  );
+};
+
+const EventDropdown = ({ id = "" }) => {
+  return (
+    <div className="dropdown mb-2">
+      <div id="dropdownMenu2" data-toggle="dropdown" role="button">
+        <img src={dots} alt="dots" />
+      </div>
+      <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button
+          className="dropdown-item"
+          type="button"
+          data-toggle="modal"
+          data-target={`#${id}`}
+        >
+          Edit
+        </button>
+        <button className="dropdown-item" type="button">
+          Delete
+        </button>
+      </div>
+    </div>
   );
 };
