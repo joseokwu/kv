@@ -12,7 +12,7 @@ const options = {
 }
 
 const uploadOptions = {
-	baseURL: "http://localhost:9200",
+	baseURL: "http://ec2-54-227-69-213.compute-1.amazonaws.com",
     headers: { "Content-Type": "multipart/form-data" }
 }
 

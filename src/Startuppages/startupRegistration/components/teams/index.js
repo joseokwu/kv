@@ -137,8 +137,15 @@ export const TeamProfile = () => {
 
   function handleChange(value, type) {
     console.log(type)
+    console.log(type[0].children);
+    console.log(value)
     value.map((item) =>{
+   
       setSkill([skill[parseInt(item)], ...skillSet])
+      
+       //setSkill([skill[parseInt(item)], ...skillSet])
+   //!skillSet.includes(type[parseInt(item)].children)
+    
     })
   }
 
@@ -539,6 +546,7 @@ export const TeamProfile = () => {
               value={skillSet}
               onChange={handleChange}
               className='skiil-select'
+              allowClear={() =>alert('hello')}
             >
               {children}
             </Select>
