@@ -12,13 +12,21 @@ export const ViewEventDetails = ({
   isOngoing = false,
   eventTime = "",
   eventDate = "",
+  id = "",
 }) => {
   return (
     <div className="px-4 py-4">
       <section className="d-flex align-items-center justify-content-between mb-45">
         <p className={styles.counter}>2 days : 30mins : 05 secs</p>
         <div className="d-flex align-items-center space-out">
-          <img src={editIcon} alt="edit" role="button" />
+          <img
+            src={editIcon}
+            alt="edit"
+            role="button"
+            data-toggle="modal"
+            data-target={`#editEvent${id}`}
+            data-dismiss="modal"
+          />
           <img src={deleteIcon} alt="delete" role="button" />
           <img src={closeIcon} alt="close" role="button" data-dismiss="modal" />
         </div>

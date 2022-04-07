@@ -35,6 +35,7 @@ export const EventCard = ({ data = {}, id = 0 }) => {
           isOngoing={isOngoing}
           eventTime={eventTime}
           eventDate={eventDate}
+          id={id}
         />
       </Modal>
       <Modal id={`editEvent${id}`} title="Edit Event" width={568}>
