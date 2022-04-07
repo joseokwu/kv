@@ -29,11 +29,11 @@ import {
   LargeModal,
   WorkExperience,
   Education,
+  SkillTab,
 } from '../../../../Startupcomponents';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
 import { upload } from '../../../../services/utils';
-import { updateFounderProfile } from '../../../../services';
 
 const { Option } = Select;
 
@@ -76,7 +76,6 @@ export const TeamProfile = () => {
     changePath,
     setWorkExperience,
     setEducation,
-
     state: {
       path,
       experience,
@@ -160,27 +159,27 @@ export const TeamProfile = () => {
         userId: stateAuth?.user?.userId,
       };
       console.log(team);
-      if (opts === 'next') {
-        setOpts(true);
-        let result = await updateFounderProfile(team);
+      // if (opts === 'next') {
+      //   setOpts(true)
+      //   let result = await updateFounderProfile(team)
 
-        if (result?.success) {
-          toast.success('Team' + '' + result?.message);
-          setOpts(false);
-          return changePath(path + 1);
-        }
-      }
-      setLoading(true);
-      let result = await updateFounderProfile(team);
+      //   if (result?.success) {
+      //     toast.success('Team' + '' + result?.message)
+      //     setOpts(false)
+      //     return changePath(path + 1)
+      //   }
+      // }
+      // setLoading(true)
+      // let result = await updateFounderProfile(team)
 
-      if (!result?.success) {
-        toast.error(result?.message || 'There was an error in updating team');
-        setLoading(false);
-        return;
-      }
-      toast.success('Team' + '' + result?.message);
-      setLoading(false);
-      return;
+      // if (!result?.success) {
+      //   toast.error(result?.message || 'There was an error in updating team')
+      //   setLoading(false)
+      //   return
+      // }
+      // toast.success('Team' + '' + result?.message)
+      // setLoading(false)
+      // return
     } catch (err) {
       setLoading(false);
       toast.error(
@@ -532,7 +531,10 @@ export const TeamProfile = () => {
             <div>
               <label>What are your skills*</label>
             </div>
-            <Select
+            <SkillTab skill={'Java'} />
+            <SkillTab skill={'Python'} />
+            <SkillTab skill={'Rust'} />
+            {/* <Select
               mode='multiple'
               allowClear
               style={{ width: '100%', color: 'red' }}
@@ -542,7 +544,7 @@ export const TeamProfile = () => {
               className='skiil-select'
             >
               {children}
-            </Select>
+            </Select> */}
           </div>
         </FormWrapper>
 
