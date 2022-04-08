@@ -2,23 +2,23 @@ import  { request } from '../utils/axios';
 
  export const register = async (values)=>{
     try{
-        const res = await request.post('identity_service/register', values)
+        const res = await request.post('register', values)
         
         return res?.data
     }catch(err){
-        const error = err?.response?.data?.message || err?.message;
-        throw new Error(error)
+      
+        throw err;
     }
 }
 
 export const userLogin = async (values) => {
     try {
-        const res = await request.post('identity_service/login', values);
+        const res = await request.post('login', values);
         
         return res?.data;
   
     } catch (err) {
-        
+        console.log(err?.response?.data?.message)
         throw err
     }  
 }  
@@ -27,7 +27,7 @@ export const profile = async (value) => {
     try {
        // console.log(value)
         console.log('trying to make request')
-        const res = await request.post('identity_service/getProfile', {type:value});
+        const res = await request.post('getProfile', {type:value});
         console.log(res?.data)
        return res?.data;
 
@@ -53,7 +53,7 @@ export const forgorPassword = async (values) => {
 
 export const verifyEmail = async(token) =>{
     try{
-        const res = await request.post('identity_service/verify-email', {token}); 
+        const res = await request.post('verify-email', {token}); 
         console.log(res.data)
         return res.data 
     }catch(err){
