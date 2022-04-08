@@ -34,7 +34,7 @@ import {
   // DealFolder,
   MentorEvaluation,
   NotFound,
-  VerifyUserEmail
+  VerifyUserEmail,
 } from '../mentorPages';
 
 import { MentorViewAssignment } from '../mentorPages/mentorAssignments/components/viewAssignment/viewAssignment';
@@ -216,7 +216,7 @@ const routes = [
     path: '/startup/registration',
     component: WithStartupRegistrationLayout(StartUpRegistration),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
 
@@ -520,13 +520,7 @@ const routes = [
     exact: true,
     protected: false,
   },
-  {
-		name: 'Not Found',
-		component: NotFound,
-		exact: true,
-		type: '',
-		protected: false,
-	},
+
   {
     name: 'ForgotPassword',
     path: '/forgot/password',
@@ -583,7 +577,7 @@ const routes = [
     path: '/mentor/registration',
     component: WithMentorRegisterLayout(MentorPersonalDetails),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'mentor',
   },
   {
@@ -888,6 +882,14 @@ const routes = [
   },
 
   //Admin Routes Ends Here
+
+  {
+    name: 'Not Found',
+    component: NotFound,
+    exact: true,
+    type: '',
+    protected: false,
+  },
 ];
 
 export default routes;

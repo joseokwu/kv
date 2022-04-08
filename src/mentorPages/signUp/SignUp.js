@@ -178,8 +178,9 @@ export const SignUp = ({ history }) => {
               />
             </div>
 
-            <div className="col-12 mb-4">
+            <div className=" numsign col-12 mb-4">
               <PhoneInput
+                label ={'Mobile Number'} 
                 onChange={setPhone}
               />
             </div>

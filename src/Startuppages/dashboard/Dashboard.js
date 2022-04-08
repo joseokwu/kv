@@ -95,7 +95,7 @@ export const StartupDashboard = () => {
 
       <section className="row">
         <div className="col-lg-12">
-          <TodoList data={stateAuth?.user?.assignment?.data ?? []} />
+          <TodoList data={stateAuth?.user?.assignments?.data ?? []} />
         </div>
       </section>
       <section className="my-4">

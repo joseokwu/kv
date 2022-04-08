@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
 
 export const CoInputWrapper = styled.label`
   position: absolute;
@@ -11,7 +11,7 @@ export const CoInputWrapper = styled.label`
   align-items: center;
   top: 310px;
   left: 120px;
-`
+`;
 
 export const HeaderTeam = styled.div`
   width: 224px;
@@ -32,7 +32,7 @@ export const HeaderTeam = styled.div`
     line-height: 20.83px;
     color: #828282;
   }
-`
+`;
 
 export const ImageWrapper = styled.span`
   text-align: center;
@@ -44,7 +44,7 @@ export const ImageWrapper = styled.span`
   justify-content: center;
   align-items: center;
   background: #fff;
-`
+`;
 export const InputWrapper = styled.label`
   position: absolute;
   border-radius: 50%;
@@ -55,7 +55,7 @@ export const InputWrapper = styled.label`
   justify-content: center;
   align-items: center;
   top: 520px;
-  left: 240px;
+  left: 250px;
 
   input {
     width: inherit;
@@ -67,7 +67,7 @@ export const InputWrapper = styled.label`
     top: 418px;
     left: 136px;
   }
-`
+`;
 
 export const FormWrapper = styled.div`
   width: 100%;
@@ -79,6 +79,11 @@ export const FormWrapper = styled.div`
   border: 0 solid #d3d3d3;
   border-radius: 5px;
   background: #fff;
+
+  .select-search {
+    width: 100%;
+    border: 1px solid red;
+  }
 
   span {
     cursor: pointer;
@@ -147,7 +152,7 @@ export const FormWrapper = styled.div`
     background: #fafafc !important;
     border-radius: 4px;
     /* margin-left: 15px; */
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
 
     ::placeholder {
       font-style: normal;
@@ -174,7 +179,7 @@ export const FormWrapper = styled.div`
     border: none;
     background: #fafafc;
     width: 100%;
-    margin-left: 15px;
+    /* margin-left: 15px; */
     border-radius: 7px;
     outline: none;
 
@@ -189,6 +194,10 @@ export const FormWrapper = styled.div`
     @media (max-width: 768px) {
       width: 100%;
     }
+  }
+
+  .ant-picker {
+    padding: 8px 20px 8px 20px !important;
   }
 
   .ant-select-multiple .ant-select-selection-item {
@@ -219,14 +228,14 @@ export const FormWrapper = styled.div`
     border-radius: 4px;
     border: none !important;
   }
-`
+`;
 
 export const HeaderModal = styled.h4`
   font-size: 1.6rem;
   color: #030298;
   font-weight: 600;
   margin-top: 10px;
-`
+`;
 export const ModalForm = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
@@ -248,12 +257,24 @@ export const ModalForm = styled.div`
     margin-top: 10px;
   }
 
+  article {
+    color: red;
+  }
+
   textarea {
     background: #fafafc !important;
     border: none;
   }
   span {
     margin-left: 10px;
+  }
+
+  .date-input {
+    padding: 8px 14px;
+    background: #fafafc;
+    border-radius: 4px;
+    border: none;
+    outline: none;
   }
 `
 // export const BntWrap = styled.div`
@@ -280,7 +301,7 @@ export const BntWrap = styled.div`
       color: #2e3192;
     }
   }
-`
+`;
 
 // export const Education = styled.div`
 //   .addEducation {
@@ -289,7 +310,7 @@ export const BntWrap = styled.div`
 
 export const Spacer = styled.div`
   flex: 1;
-`
+`;
 export const Education = styled.div`
   .addEducation {
     column-gap: 20px;
@@ -342,4 +363,4 @@ export const Education = styled.div`
     letter-spacing: 0.01em;
     color: #828282;
   }
-`
+`;

@@ -20,14 +20,17 @@ import RedFile from '../../../../../../assets/icons/redFile.svg';
 import BluFile from '../../../../../../assets/icons/bluFile.svg';
 import { upload } from './../../../../../../services/utils';
 import { useAuth } from './../../../../../../hooks/useAuth';
+import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import toast from 'react-hot-toast';
 
 
-export const FundUtilization = () => {
+
+export const FundUtilization = ({setFundraising}) => {
   const history = useHistory();
   const { stateAuth } = useAuth();
-  const [fileDoc, setFileDoc] = useState(null);
+  const [fileDoc, setFileDoc] = useState(stateAuth?.user?.fundRaising?.fundUtilization?.files ?? null);
   const [videoDoc, setVidDoc] = useState(null);
-
+  const [logoUploading , setLogoUploading] = useState(false);
   const {
     location: { hash },
   } = history;
@@ -42,15 +45,28 @@ export const FundUtilization = () => {
     formData.append(0 , files[0])
 
     try {
+      setLogoUploading(true);
       const response = await upload(formData)
       console.log(response) 
       setFileDoc(response?.path)
+      setLogoUploading(false)
 
     } catch(error) {
       console.log(error)
+      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
     }
 
   }
+
+
+ const onSubmit = () =>{
+   console.log(fileDoc)
+   setFundraising({
+    fundUtilization :{
+      files:fileDoc
+    }
+   })
+ }
 
 
   return (
@@ -73,8 +89,11 @@ export const FundUtilization = () => {
             <FileWrapper className='d-flex justify-content-center text-center mx-n5 mx-lg-n0'>
               {
                 fileDoc !== null ? (
-                  <img src={fileDoc} />
+                  <img src={RedFile} alt='.' 
+                  style={{width:'70px', height:'70px'}}
+                   />
                 ):(
+                  logoUploading ? <CircularLoader color={'#000'} /> : 
                  <>
                  <img src={DownloadIcon} alt='#' />
               <FileText>Drag & Drop</FileText>
@@ -91,35 +110,6 @@ export const FundUtilization = () => {
             </FileWrapper>
           </div>
 
-          <div className='my-5'>
-            <VideoWrapper className='mx-n5 mx-lg-n0'>
-              <label> Financial Plan Uploaded</label>
-              <div className='div'>
-                <img src={RedFile} alt='.#' />
-                <div id='div' className=''>
-                  <div className='d-flex' style={{ marginLeft: '-1.2rem' }}>
-                    <img
-                      src={BluFile}
-                      alt='.#'
-                      style={{
-                        marginLeft: '2rem',
-                        width: '10%',
-                        height: '10%',
-                      }}
-                      className=''
-                    />
-                    <p
-                      className=''
-                      style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-                    >
-                      Product Demo
-                    </p>
-                  </div>
-                  <p className='my-n2 p'>2.5 mb</p>
-                </div>
-              </div>
-            </VideoWrapper>
-          </div>
         </div>
       </BodyWrapper>
       <Terms className=''>
@@ -145,10 +135,12 @@ export const FundUtilization = () => {
             onClick={(e) => {
               e.preventDefault();
               history.push('#Cap Table');
+              onSubmit();
             }}
             className='ms-2'
             style={{ marginRight: '5rem' }}
             background='none'
+            
           >
             Next
           </OutlineButton>

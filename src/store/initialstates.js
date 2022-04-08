@@ -12,7 +12,7 @@ export const INIT_STATE_BUSINESS = {
   loading: false,
   showPage: 'Overview',
   dash_view: null,
-  workExperience: [],
+  experience: [],
   workExperienceCoFounder: [],
   education: [],
   educationCoFounder: [],
