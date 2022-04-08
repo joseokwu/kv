@@ -69,7 +69,7 @@ export const getStartupFounderProfile = async () => {
 
 export const updateFounderProfile = async (values) => {
   try {
-    const res = await request.post("identity_service/updateProfile", values);
+    const res = await request.post("updateProfile", values);
     console.log(res?.data)
     return res?.data;
   } catch (err) {

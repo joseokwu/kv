@@ -84,7 +84,7 @@ export const FinancialProjection = () => {
       console.log(fund)
       let result = await updateFounderProfile(fund);
       toast.success(result?.message)
-      // push('/startup/dashboard')
+      push('/startup/dashboard')
     }catch(err){
       toast.error(err?.response?.data?.message)
     }
