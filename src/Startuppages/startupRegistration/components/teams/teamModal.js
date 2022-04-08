@@ -25,12 +25,12 @@ export const TeamModal = ({
     e.preventDefault()
     handleWorkDetails({
       from,
-      title: formik.getFieldProps('title').value,
+      companyName: formik.getFieldProps('companyName').value,
       location: formik.getFieldProps('location').value,
       position: formik.getFieldProps('position').value,
-      description: formik.getFieldProps('description').value,
-      startDate: startDate,
-      endDate: checked ? 'present' : endDate,
+      responsibility: formik.getFieldProps('responsibility').value,
+      startDate: startDate.toISOString(),
+      endDate: checked ? 'present' : endDate.toISOString(),
       founder: true,
     })
     handleClose(false)
@@ -38,18 +38,18 @@ export const TeamModal = ({
 
   const formik = useFormik({
     initialValues: {
-      title: '',
+      companyName: '',
       location: '',
       position: '',
-      description: '',
+      responsibility: '',
       startDate: '',
       endDate: '',
     },
     validationSchema: Yup.object({
-      title: Yup.string().required('Required'),
+      companyName: Yup.string().required('Required'),
       location: Yup.string().required('Required'),
       position: Yup.string().required('Required'),
-      description: Yup.string().required('Required'),
+      responsibility: Yup.string().required('Required'),
       startDate: Yup.string().required('Required'),
       endDate: Yup.string().required('Required'),
     }),
@@ -74,14 +74,14 @@ export const TeamModal = ({
               <label>Title *</label>
               <input
                 id="title"
-                name="title"
+                name="companyName"
                 type="text"
                 className="form-control ps-3"
                 placeholder="CEO and Founder"
                 value={
                   isEditing
-                    ? workExperience[editIndex]?.title
-                    : formik.values.title
+                    ? workExperience[editIndex]?.companyName
+                    : formik.values.companyName
                 }
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -140,15 +140,15 @@ export const TeamModal = ({
 
               <textarea
                 id="description"
-                name="description"
+                name="responsibility"
                 cols="5"
                 rows="5"
                 className="form-control ps-3"
                 placeholder="Tell us about your role"
                 value={
                   isEditing
-                    ? workExperience[editIndex]?.description
-                    : formik.values.description
+                    ? workExperience[editIndex]?.responsibility
+                    : formik.values.responsibility
                 }
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -229,12 +229,12 @@ export const EducationModal = ({
     e.preventDefault()
     handleWorkDetails({
       from,
-      school: formik.getFieldProps('school').value,
+      schoolName: formik.getFieldProps('schoolName').value,
       course: formik.getFieldProps('course').value,
       degree: formik.getFieldProps('degree').value,
       activities: formik.getFieldProps('activities').value,
-      eduStartDate: eduStartDate,
-      eduEndDate: checked ? 'present' : eduEndDate,
+      eduStartDate: eduStartDate.toISOString(),
+      eduEndDate: checked ? 'present' : eduEndDate.toISOString(),
       founder: true,
     })
     handleClose(false)
@@ -242,7 +242,7 @@ export const EducationModal = ({
 
   const formik = useFormik({
     initialValues: {
-      school: '',
+      schoolName: '',
       course: '',
       degree: '',
       activities: '',
@@ -250,7 +250,7 @@ export const EducationModal = ({
       eduEndDate: '',
     },
     validationSchema: Yup.object({
-      school: Yup.string().required('Required'),
+      schoolName: Yup.string().required('Required'),
       course: Yup.string().required('Required'),
       degree: Yup.string().required('Required'),
       activities: Yup.string().required('Required'),
@@ -278,14 +278,14 @@ export const EducationModal = ({
               <label>School*</label>
               <input
                 id="school"
-                name="school"
+                name="schoolName"
                 type="text"
                 className="form-control ps-3"
                 placeholder="Enter School name"
                 value={
                   isEditing
-                    ? education[editIndex]?.school
-                    : formik.values.school
+                    ? education[editIndex]?.schoolName
+                    : formik.values.schoolName
                 }
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}

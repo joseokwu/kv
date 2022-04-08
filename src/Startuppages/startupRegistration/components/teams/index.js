@@ -1,48 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
   HeaderTeam,
   ImageWrapper,
   InputWrapper,
   FormWrapper,
   BntWrap,
-} from './teams.styled'
-
-import { UserOutlined, PlusOutlined } from '@ant-design/icons'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { DatePicker } from 'antd'
-import 'react-datepicker/dist/react-datepicker.css'
-import { CustomSelect } from '../../../../Startupcomponents/select/customSelect'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
-import { useActivity } from '../../../../hooks/useBusiness'
-import { TeamModal, EducationModal } from './teamModal'
-import { Select } from 'antd'
-import { Tag } from '../../../../Startupcomponents/tag/Tag'
-import 'antd/dist/antd.css'
-import { team } from './../../../../services/startUpReg'
-import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
-import { toast } from 'react-hot-toast'
-import { CoFounder } from './coFounder'
+} from './teams.styled';
+import { updateFounderProfile } from '../../../../services/startup';
+import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { DatePicker } from 'antd';
+import 'react-datepicker/dist/react-datepicker.css';
+import { CustomSelect } from '../../../../Startupcomponents/select/customSelect';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
+import { useActivity } from '../../../../hooks/useBusiness';
+import { TeamModal, EducationModal } from './teamModal';
+import { Select } from 'antd';
+import { Tag } from '../../../../Startupcomponents/tag/Tag';
+import 'antd/dist/antd.css';
+import { team } from './../../../../services/startUpReg';
+import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { toast } from 'react-hot-toast';
+import { CoFounder } from './coFounder';
 import {
   LargeModal,
   WorkExperience,
   Education,
-} from '../../../../Startupcomponents'
-import { useHistory } from 'react-router-dom'
-import { useAuth } from '../../../../hooks/useAuth'
-import CountryDropdown from 'country-dropdown-with-flags-for-react'
+  SkillTab,
+} from '../../../../Startupcomponents';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../../../hooks/useAuth';
+import { upload } from '../../../../services/utils';
+import CountryDropdown from 'country-dropdown-with-flags-for-react';
 
 const { Option } = Select
 
 export const TeamProfile = () => {
-  const { stateAuth } = useAuth()
-  const [disImg, setImg] = useState(null)
-
-  const [show, setShow] = useState(false)
-  const [showEducation, setShowEducation] = useState(false)
-  const [showModal, setShowModal] = useState(false)
+  const { stateAuth } = useAuth();
+  const [disImg, setImg] = useState(null);
+  const [logoUploading, setLogoUploading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [showEducation, setShowEducation] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
@@ -51,45 +53,77 @@ export const TeamProfile = () => {
   const [nextLoading, setNextLoading] = useState(false)
   const [opts, setOpts] = useState('')
   const [phone, setPhone] = useState(
-    stateAuth?.user?.team?.founderInfo?.mobile_number,
-  )
-  // const [contacts, setContacts] = useState({
-  //   email: stateAuth?.user?.team?.founderInfo?.email,
-  //   country: stateAuth?.user?.team?.founderInfo?.country,
-  //   state: stateAuth?.user?.team?.founderInfo?.state,
-  //   city: stateAuth?.user?.team?.founderInfo?.city,
-  // })
-  // const [socialMedia, setSocialMedia] = useState({
-  //   linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
-  //   twitter: stateAuth?.user?.team?.socialMedia?.twitter,
-  //   website: stateAuth?.user?.team?.socialMedia?.website,
-  // })
+    stateAuth?.user?.team?.mobile_number ?? ''
+  );
+  const [socialMedia, setSocialmedia] = useState({
+  
+    website: stateAuth?.user?.team?.socialMedia?.website
+      ?? '',
+    linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn
+      ?? '',
+    twitter: stateAuth?.user?.team?.socialMedia?.twitter
+      ?? '',
+  });
 
-  const [socialMedia, setSocialMedia] = useState({})
 
-  const [editIndex, setEditIndex] = useState()
-  const [isEditing, setIsEditing] = useState(false)
-
-  const [coFounder, setCoFounder] = useState('')
+  const [inVal , setVal] = useState('');
+  const [editIndex, setEditIndex] = useState();
+  const [isEditing, setIsEditing] = useState(false);
+  const [avatar, setAvatar] = useState(stateAuth?.user?.team?.avatar ?? null);
+  const [coFounder, setCoFounder] = useState('');
   const {
     changePath,
     setWorkExperience,
     setEducation,
     state: {
       path,
-      workExperience,
+      experience,
       workExperienceCoFounder,
       education,
       educationCoFounder,
     },
-  } = useActivity()
-
-  const onChangeImage = (e) => {
-    const { files } = e.target
-
-    if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]))
+  } = useActivity();
+  const [skillSet, setSkill] = useState(stateAuth?.user?.team?.skills ?? []);
+  const onChangeImage = async (e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append('dir', 'kv');
+    formData.append('ref', stateAuth.user?.userId);
+    formData.append('type', 'image');
+    formData.append(0, files[0]);
+    try {
+      console.log('uploaded');
+      setLogoUploading(true);
+      const response = await upload(formData);
+      console.log(response);
+      setAvatar(response?.path);
+      setLogoUploading(false);
+    } catch (error) {
+      console.log(error);
+      setLogoUploading(false);
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image');
     }
+  }
+
+  const onChangeMedia = (e) => {
+    setSocialmedia({ ...socialMedia, [e.target.name]: e.target.value });
+  };
+
+  const handleChange = (e) =>{
+   // console.log(e.target.value)
+    setVal(e.target.value);
+  }
+
+  const handleKey = (e) =>{
+    if(e.keyCode === 32){
+      console.log(inVal);
+      setVal('');
+      setSkill([...skillSet, inVal])
+    }
+  }
+
+  const onDelete = (value) =>{
+    setSkill(skillSet.filter(item => item !== value))
   }
 
   // const onChange = (e) => {
@@ -119,11 +153,7 @@ export const TeamProfile = () => {
     children.push(<Option key={i}>{skill[i]}</Option>)
   }
 
-  function handleKeyDown(e) {
-    if (e.keyDown === 32) {
-      console.log('you pressed keydown')
-    }
-  }
+ 
 
   function btn(e) {
     e.preventDefault()
@@ -136,72 +166,57 @@ export const TeamProfile = () => {
         accType: 'startup',
         values: {
           ...value,
-          experience: workExperience,
+          skills: skillSet,
+          avatar: avatar,
+          experience: experience,
           education: education,
+          socialMedia,
+          mobile_number:phone
         },
         userId: stateAuth?.user?.userId,
+      };
+      console.log(team);
+      if (opts === 'next') {
+        setOpts(true)
+        let result = await updateFounderProfile(team)
+
+        if (result?.success) {
+          toast.success('Team' + '    ' + result?.message)
+          setOpts(false)
+          return changePath(path + 1)
+        }
       }
-      console.log(team)
-      // if (opts === 'next') {
-      //   setOpts(true)
-      //   let result = await updateFounderProfile(team)
+      setLoading(true)
+      let result = await updateFounderProfile(team)
 
-      //   if (result?.success) {
-      //     toast.success('Team' + '' + result?.message)
-      //     setOpts(false)
-      //     return changePath(path + 1)
-      //   }
-      // }
-      // setLoading(true)
-      // let result = await updateFounderProfile(team)
-
-      // if (!result?.success) {
-      //   toast.error(result?.message || 'There was an error in updating team')
-      //   setLoading(false)
-      //   return
-      // }
-      // toast.success('Team' + '' + result?.message)
-      // setLoading(false)
-      // return
+      if (!result?.success) {
+        toast.error(result?.message || 'There was an error in updating team')
+        setLoading(false)
+        return
+      }
+      toast.success('Team' + '' + result?.message)
+      setLoading(false)
+      return
     } catch (err) {
       setLoading(false)
       toast.error(err?.res?.data?.message || 'There was an error updating team')
     }
-    // setLoading(true)
-    // team(value).then((res) => {
-    //   if (res?.message) {
-    //     console.log(res)
-    //     toast.success(res?.message)
-    //     setLoading(false)
-    //     next()
-    //   }
-    // })
-  }
+    
+  };
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     avatar:
-  //       'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
-  //     briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
-  //     firstName: stateAuth?.user?.team?.firstName,
-  //     lastName: stateAuth?.user?.team?.lastName,
-
+ 
   const formik = useFormik({
     initialValues: {
-      avatar: '',
-      briefIntroduction: '',
-      firstName: '',
-      lastName: '',
-      email: '',
+      briefIntroduction: stateAuth?.user?.team?.briefIntroduction ?? '',
+      firstName: stateAuth?.user?.team?.firstName ?? '',
+      lastName: stateAuth?.user?.team?.lastName ?? '',
+      email: stateAuth?.user?.team?.email ?? '',
       dob: startDate,
-      country: '',
-      state: '',
-      city: '',
-      linkedIn: '',
-      twitter: '',
-      website: '',
+      country: stateAuth?.user?.team?.country ?? '',
+      state: stateAuth?.user?.team?.state ?? '',
+      city: stateAuth?.user?.team?.city ?? '',
       // mobile_number: phone,
-      skills: '',
+      isCofounder:true
     },
     validationSchema: Yup.object({
       briefIntroduction: Yup.string().required('Required'),
@@ -217,16 +232,17 @@ export const TeamProfile = () => {
       website: Yup.string().required('Required'),
     }),
     onSubmit: (value) => onSubmit(value),
-  })
+  });
+
   const handleWorkDetails = ({
     from,
-    title,
+    companyName,
     location,
     position,
-    description,
+    responsibility,
     startDate,
     endDate,
-    school,
+    schoolName,
     course,
     degree,
     activities,
@@ -236,28 +252,37 @@ export const TeamProfile = () => {
   }) => {
     if (from === 'workExperience') {
       setWorkExperience({
-        title,
+        companyName,
         location,
         position,
-        description,
+        responsibility,
         startDate,
         endDate,
-        founder,
-      })
-      setIsEditing(false)
+        isPresentWorking:false
+      });
+      setIsEditing(false);
     } else if (from === 'education') {
       setEducation({
-        school,
+        schoolName,
         course,
-        degree,
+        degreeType:degree,
         activities,
-        eduStartDate,
-        eduEndDate,
-        founder,
-      })
-      setIsEditing(false)
+        startDate:eduStartDate,
+        endDate:eduEndDate,
+        isPresent:false
+      });
+      setIsEditing(false);
     }
   }
+
+  useEffect(() =>{
+    if(stateAuth?.user?.team){
+      setWorkExperience(stateAuth?.user?.team?.experience, 'server');
+      setEducation(stateAuth?.user?.team?.education, 'server');
+    }
+   
+
+  },[])
 
   return (
     <>
@@ -266,7 +291,7 @@ export const TeamProfile = () => {
           handleClose={setShow}
           handleWorkDetails={handleWorkDetails}
           editIndex={editIndex}
-          workExperience={workExperience}
+          workExperience={experience}
           isEditing={isEditing}
           setIsEditing={setIsEditing}
         />
@@ -315,12 +340,16 @@ export const TeamProfile = () => {
 
           <div style={{ marginTop: '10px', marginLeft: '10px' }}>
             <ImageWrapper>
-              {disImg === null ? (
-                <UserOutlined />
+              {avatar === null ? (
+                logoUploading ? (
+                  <CircularLoader color={'#000'} />
+                ) : (
+                  <UserOutlined />
+                )
               ) : (
                 <img
-                  className=""
-                  src={disImg}
+                  className=''
+                  src={avatar}
                   style={{
                     borderRadius: '70px',
                     width: '90px',
@@ -480,9 +509,7 @@ export const TeamProfile = () => {
                 countryCallingCodeEditable={true}
                 className="custs w-lg-50 ps-3 py-2"
                 value={
-                  stateAuth?.user?.team?.contactInfo?.mobile_number
-                    ? stateAuth?.user?.team?.contactInfo?.mobile_number
-                    : phone
+                  stateAuth?.user?.team?.contactInfo?.mobile_number ?? phone
                 }
                 onBlur={formik.handleBlur}
                 onChange={setPhone}
@@ -499,8 +526,8 @@ export const TeamProfile = () => {
             <span>Work Experience</span>
           </div>
           <hr />
-          {workExperience.length > 0 &&
-            workExperience.map((item, index) => {
+          {experience.length > 0 &&
+            experience.map((item, index) => {
               return (
                 <WorkExperience
                   key={index}
@@ -567,33 +594,28 @@ export const TeamProfile = () => {
           <div className="form-group">
             <div>
               <label>What are your skills*</label>
-              <input
-                type="text"
-                id={'skills'}
-                name={'skills'}
+            </div>
+            <input
+                onChange={handleChange}
                 style={{ width: '100%', outline: 'none', color: 'purple' }}
+                value={inVal}
+                type='text'
+                placeholder='Enter your skills'
                 className="py-2 px-3"
-                placeholder="Please enter your skills"
-                value={formik.values.skills}
-                onChange={formik.handleChange}
+                // className='form-control ps-3'
                 onBlur={formik.handleBlur}
-                onKeyDown={handleKeyDown}
+                onKeyDown={handleKey}
               />
               {formik.touched.skills && formik.errors.skills ? (
                 <label className="error">{formik.errors.skills}</label>
               ) : null}
-            </div>
-            {/* <Select
-              mode='multiple'
-              allowClear
-              style={{ width: '100%', color: 'red' }}
-              placeholder='Please click to select'
-              value={formik.skills}
-              onChange={formik.handleChange}
-              className='skiil-select'
-            >
-              {children}
-            </Select> */}
+            {
+              skillSet.length > 0 && skillSet.map((item, i) =>(
+                <SkillTab key={i} skill={item}
+                  onClick={() => onDelete(item)}
+                 />
+              ))
+            }
           </div>
         </FormWrapper>
 
@@ -605,13 +627,13 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Linkedin*</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.linkedIn}
+                onChange={onChangeMedia}
+                value={socialMedia?.linkedIn}
                 onBlur={formik.handleBlur}
-                type="text"
-                name="linkedIn"
-                placeholder="Enter LinkedIn link"
-                className="form-control ps-3"
+                type='text'
+                name='linkedIn'
+                placeholder='Enter Linkdin link'
+                className='form-control ps-3'
               />
               {formik.touched.linkedIn && formik.errors.linkedIn ? (
                 <label className="error">{formik.errors.linkedIn}</label>
@@ -620,13 +642,13 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Twitter*</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.twitter}
+                onChange={onChangeMedia}
+                value={socialMedia?.twitter}
                 onBlur={formik.handleBlur}
-                type="text"
-                name="twitter"
-                placeholder="Enter Twitter link"
-                className="form-control ps-3"
+                type='text'
+                name='twitter'
+                placeholder='Enter Twitter link'
+                className='form-control ps-3'
               />
               {formik.touched.twitter && formik.errors.twitter ? (
                 <label className="error">{formik.errors.twitter}</label>
@@ -636,13 +658,13 @@ export const TeamProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Website*</label>
               <input
-                onChange={formik.handleChange}
-                value={formik.values.website}
+                onChange={onChangeMedia}
+                value={socialMedia?.website}
                 onBlur={formik.handleBlur}
-                type="text"
-                name="website"
-                placeholder="Enter website"
-                className="form-control ps-3"
+                type='text'
+                name='website'
+                placeholder='Enter website'
+                className='form-control ps-3'
               />
               {formik.touched.website && formik.errors.website ? (
                 <label className="error">{formik.errors.website}</label>
@@ -651,7 +673,7 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-        <FormWrapper height="70%">
+        {/* <FormWrapper height="70%">
           <div className="div border-bottom pb-2">
             <span>Co-Founders</span>
             <p className="pt-3">Create a profile for your Co-Founders</p>
@@ -700,7 +722,7 @@ export const TeamProfile = () => {
               </div>
             </div>
           </div>
-        </FormWrapper>
+        </FormWrapper> */}
 
         <FormWrapper height="70%">
           <div className="div border-bottom pb-3">
@@ -757,5 +779,5 @@ export const TeamProfile = () => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};

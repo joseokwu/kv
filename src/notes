@@ -1122,6 +1122,339 @@ _id: "624afa6323b2f89cc25c680f"
 _id: "624afa6323b2f89cc25c680b"
 [[Prototype]]: Object
 
+=======================================================
+======================================================
+ // const [contacts, setContacts] = useState({
+  //   email: stateAuth?.user?.team?.founderInfo?.email,
+  //   country: stateAuth?.user?.team?.founderInfo?.country,
+  //   state: stateAuth?.user?.team?.founderInfo?.state,
+  //   city: stateAuth?.user?.team?.founderInfo?.city,
+  // })
+  // const [socialMedia, setSocialMedia] = useState({
+  //   linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
+  //   twitter: stateAuth?.user?.team?.socialMedia?.twitter,
+  //   website: stateAuth?.user?.team?.socialMedia?.website,
+  // })
+
+  ====================================================
+  ======================================================
+   // const formik = useFormik({
+  //   initialValues: {
+  //     avatar:
+  //       'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
+  //     briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
+  //     firstName: stateAuth?.user?.team?.firstName,
+  //     lastName: stateAuth?.user?.team?.lastName,
+======================================================
+===========================================================
+<FormWrapper height='70%'>
+          <div className='div border-bottom pb-2'>
+            <span>Co-Founders</span>
+            <p className='pt-3'>Create a profile for your Co-Founders</p>
+          </div>
+
+          <div className='mt-4'>
+            <label>Do you have Co-Founders?*</label>
+
+            <div className='d-flex'>
+              <BntWrap>
+                <button
+                  className={`me-3 ${coFounder === 'yes' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCoFounder('yes');
+                  }}
+                >
+                  Yes
+                </button>
+                <button
+                  className={`me-3 ${coFounder === 'no' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCoFounder('no');
+                  }}
+                >
+                  No
+                </button>
+              </BntWrap>
+            </div>
+
+            <div className='sold'>
+              <div className='d-flex justify-content-center'>
+                <div
+                  className=''
+                  data-target='#cofounder'
+                  onClick={() => setShowModal(true)}
+                >
+                  <Tag
+                    name='+ Add Co-founder'
+                    color='#4F4F4F'
+                    bg='rgba(183, 218, 231, 0.5'
+                    padding='8px 14px'
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </FormWrapper>
+===================================================================
+=================================================================
+<VideoWrapper>
+<label> Product demo upload</label>
+<div className="row">
+  <div className=" col-lg-8 col-12">
+    <div className="div p-5">
+      <img src={RedFile} alt=".#" />
+    </div>
+    <div id="div" className="p-2">
+      <div className="d-flex mt-n2">
+        <img
+          src={BlueFile}
+          alt=".#"
+          style={{ width: '10%', height: '10%' }}
+          className="mt-3"
+        />
+        <p className="px-4">Product Demo</p>
+      </div>
+      <p className="my-n2 px-5 p">2.5 mb</p>
+    </div>
+  </div>
+</div>
+</VideoWrapper>
+===========================================================
+=====================================================
+<iframe
+key={i}
+        src={item}
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        title="video"
+        style={{
+        borderRadius:"20px",
+        maxHeight:"150px",
+        width:"250px"
+      }}
+      />
+      onClick={deleteVid}
+
+
+   <video 
+                      style={{
+                        borderRadius:"20px",
+                       maxHeight:"150px",
+                        width:"250px"
+                      }}
+                      key={i}
+                      className='mb-3'
+                     controls>
+                    <source src={item} id="video_here" />
+                      Your browser does not support HTML5 video.
+                     </video> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

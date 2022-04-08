@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BodyWrapper, BntWrap, BoxBorder, Terms } from './previous.styled';
 import { useHistory } from 'react-router-dom';
 import {
@@ -31,19 +31,29 @@ export const PreviousRound = ({ setFundraising }) => {
     { value: 'Fund 3', label: 'Fund 3' },
   ];
 
-  const [startDate, setStartDate] = useState(
-    stateAuth?.user?.fundraising?.startDate ?? ''
-  );
+
+  const [startDate, setStartDate] = useState(new Date());
 
   const [hasLeadInvestor, setHasLeadInvestor] = useState(
-    stateAuth?.user?.fundraising?.hasLeadInvestor ?? 'no'
+    stateAuth?.user?.fundRaising?.previousRound?.hasLeadInvestor ?? false
   );
 
   // function btn(e) {
-  //   e.preventDefault();
+  //  stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding
   // }
 
-  const onSubmit = (value) => {
+  const onSubmit = () => {
+    console.log({
+      instrumentForRound: formik.getFieldProps('instrumentForRound').value,
+      numberOfRounds: formik.getFieldProps('numberOfRounds').value,
+      fundraisingAmount: formik.getFieldProps('fundraisingAmount').value,
+      dilution: formik.getFieldProps('dilution').value,
+      preMoneyValuation: formik.getFieldProps('preMoneyValuation').value,
+      postMoneyValuation:formik.getFieldProps('postMoneyValuation').value,
+      hasLeadInvestor,
+      terms: formik.getFieldProps('terms').value,
+      dateOfFunding:startDate.toISOString(),
+    })
     setFundraising({
       previousRound: {
         instrumentForRound: formik.getFieldProps('instrumentForRound').value,
@@ -51,9 +61,10 @@ export const PreviousRound = ({ setFundraising }) => {
         fundraisingAmount: formik.getFieldProps('fundraisingAmount').value,
         dilution: formik.getFieldProps('dilution').value,
         preMoneyValuation: formik.getFieldProps('preMoneyValuation').value,
+        postMoneyValuation:formik.getFieldProps('postMoneyValuation').value,
         hasLeadInvestor,
-        terms: formik.getFieldProps('terms').value,
-        dateOfFunding: formik.getFieldProps('dateOfFunding').value,
+        dateOfFunding:startDate.toISOString(),
+       
       },
     });
 
@@ -70,9 +81,7 @@ export const PreviousRound = ({ setFundraising }) => {
       preMoneyValuation: stateAuth?.user?.fundRaising?.previousRound?.preMoneyValuation ?? '',
       postMoneyValuation:
         stateAuth?.user?.fundRaising?.previousRound?.postMoneyValuation ?? '',
-      hasLeadInvestor: stateAuth?.user?.fundRaising?.previousRound?.hasLeadInvestor ?? '',
-      terms: stateAuth?.user?.fundRaising?.previousRound?.terms ?? [],
-      dateOfFunding: stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding ?? '',
+     
     },
     validationSchema: Yup.object({
       fundraisingAmount: Yup.string().required('Required'),
@@ -83,6 +92,8 @@ export const PreviousRound = ({ setFundraising }) => {
     }),
     onSubmit: (value) => onSubmit(value),
   });
+
+  
 
   return (
     <>
@@ -141,7 +152,7 @@ export const PreviousRound = ({ setFundraising }) => {
                 id='dateOfFunding'
                 name='dateOfFunding'
                 style={{ background: '#FAFAFC', border: 'none' }}
-                value={startDate}
+                selected={startDate}
                 className='form-control w-lg-50 w-100 datePick mx-3'
                 onBlur={formik.handleBlur}
                 onChange={(date) => setStartDate(date)}
@@ -236,19 +247,19 @@ export const PreviousRound = ({ setFundraising }) => {
             <label>Did you have a lead investor for last round?*</label>
             <BntWrap>
               <button
-                className={`me-3 ${hasLeadInvestor === 'yes' ? 'active' : ''}`}
+                className={`me-3 ${hasLeadInvestor === true ? 'active' : ''}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  setHasLeadInvestor('yes');
+                  setHasLeadInvestor(true);
                 }}
               >
                 Yes
               </button>
               <button
-                className={hasLeadInvestor === 'no' ? 'active' : ''}
+                className={hasLeadInvestor === false ? 'active' : ''}
                 onClick={(e) => {
                   e.preventDefault();
-                  setHasLeadInvestor('no');
+                  setHasLeadInvestor(false);
                 }}
               >
                 No

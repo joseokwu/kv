@@ -21,6 +21,9 @@ import { useActivity } from '../../../../../../hooks/useBusiness';
 import { updateFounderProfile } from '../../../../../../services';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { upload } from './../../../../../../services/utils';
+import { useState } from 'react';
 
 
 export const FinancialProjection = () => {
@@ -29,6 +32,8 @@ export const FinancialProjection = () => {
   } = useActivity();
   const history = useHistory();
   const { stateAuth } = useAuth();
+  const [logoUploading , setLogoUploading] = useState(false);
+  const [fileDoc, setFileDoc] = useState(stateAuth?.user?.fundRaising?.financialProjection?.files ?? null);
   const {
     location: { hash },
     push
@@ -36,6 +41,29 @@ export const FinancialProjection = () => {
 
   function btn(e) {
     e.preventDefault();
+  }
+
+  const handleChange = async(e) => {
+
+    const { files} = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+
+    } catch(error) {
+      console.log(error)
+      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
+    }
+
   }
 
   const handleSubmit = async(e) =>{
@@ -46,13 +74,17 @@ export const FinancialProjection = () => {
         type: 'fundRaising',
           accType: 'startup',
           values:{
-            ...fundraising
+            ...fundraising,
+            financialProjection:{
+              files:fileDoc
+            }
           },
         userId: stateAuth?.user?.userId,
       }
+      console.log(fund)
       let result = await updateFounderProfile(fund);
       toast.success(result?.message)
-      push('/startup/dashboard')
+      // push('/startup/dashboard')
     }catch(err){
       toast.error(err?.response?.data?.message)
     }
@@ -81,43 +113,28 @@ export const FinancialProjection = () => {
           </div>
           <div className='col-12 my-5'>
             <FileWrapper className='d-flex justify-content-center text-center'>
-              <img src={DownloadIcon} alt='#' />
+            {
+                fileDoc !== null ? (
+                  <img src={RedFile} alt='.' 
+                  style={{width:'70px', height:'70px'}}
+                   />
+                ):(
+                  logoUploading ? <CircularLoader color={'#000'} /> : 
+                 <>
+                 <img src={DownloadIcon} alt='#' />
               <FileText>Drag & Drop</FileText>
               <FileText>Drag files or click here to upload </FileText>
               <FileSize> {'(Max. File size 5mb)'} </FileSize>
-              <input type='file' id='utilize' hidden />
+              </>
+                )
+              }
+              <input type='file'
+              onChange={handleChange} 
+              id='utilize' hidden />
               <LabelButton for='utilize'>Upload Files</LabelButton>
             </FileWrapper>
           </div>
-          {/* <div className='my-5'>
-            <VideoWrapper>
-              <label> Financial plan uploaded</label>
-              <div className='div'>
-                <img src={RedFile} alt='.#' />
-                <div id='div' className=''>
-                  <div className='d-flex' style={{ marginLeft: '-1.2rem' }}>
-                    <img
-                      src={BluFile}
-                      alt='.#'
-                      style={{
-                        marginLeft: '2rem',
-                        width: '10%',
-                        height: '10%',
-                      }}
-                      className=''
-                    />
-                    <p
-                      className=''
-                      style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-                    >
-                      Fund Utilization Summary
-                    </p>
-                  </div>
-                  <p className='my-n2 px-5 p'>2.5 mb</p>
-                </div>
-              </div>
-            </VideoWrapper>
-          </div> */}
+        
         </div>
       </BodyWrapper>
       <Terms className=''>

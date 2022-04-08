@@ -17,10 +17,10 @@ export const WorkExperience = ({
   id,
   setIsEditing,
 }) => {
-  const endDateYear = endDate === 'present' ? 'present' : endDate.getFullYear();
-  const endDateMonth = endDate === 'present' ? 'present' : endDate.getMonth();
-  const startDateYear = startDate.getFullYear();
-  const startDateMonth = startDate.getMonth();
+  const endDateYear = endDate === 'present' ? 'present' : new Date(endDate).getFullYear();
+  const endDateMonth = endDate === 'present' ? 'present' :  new Date(endDate).getMonth();
+  const startDateYear = new Date(startDate).getFullYear();
+  const startDateMonth = new Date(startDate).getMonth();
 
   const handleEdit = (e) => {
     e.preventDefault();

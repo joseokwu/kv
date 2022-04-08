@@ -11,6 +11,8 @@ import {
   SET_WORK_EXPERIENCE,
   SET_EDUCATION,
   SET_FUNDRAISING,
+  SET_WORK_EXPERIENCE_DATABASE,
+  SET_EDUCATION_DATABASE
 } from '../../actions/actions.types';
 
 import { INIT_STATE_BUSINESS } from '../../initialstates';
@@ -65,34 +67,31 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         dash_view: action.payload,
       };
 
+      case SET_WORK_EXPERIENCE_DATABASE :
+        return {
+          ...state,
+          experience:action.payload,
+        };
+
     case SET_WORK_EXPERIENCE:
-      if (action.payload.founder) {
+   
         return {
           ...state,
-          workExperience: [...state.workExperience, action.payload],
+          experience: [...state.experience, action.payload],
         };
-      } else {
-        return {
-          ...state,
-          workExperienceCoFounder: [
-            ...state.workExperienceCoFounder,
-            action.payload,
-          ],
-        };
-      }
+     case SET_EDUCATION_DATABASE :
+      return {
+        ...state,
+        education:action.payload
+      };
 
     case SET_EDUCATION:
-      if (action.payload.founder) {
+ 
         return {
           ...state,
           education: [...state.education, action.payload],
         };
-      } else {
-        return {
-          ...state,
-          educationCoFounder: [...state.educationCoFounder, action.payload],
-        };
-      }
+     
 
     case SET_FUNDRAISING:
       return {

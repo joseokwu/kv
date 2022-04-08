@@ -22,25 +22,20 @@ import * as Yup from 'yup'
 import { useActivity } from '../../../../../../hooks/useBusiness'
 import { useAuth } from '../../../../../../hooks/useAuth'
 import CurrencyInput from 'react-currency-input-field'
+import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { upload } from './../../../../../../services/utils';
 
 export const CapTable = ({ setFundraising }) => {
-  const history = useHistory()
-  const { stateAuth } = useAuth()
-
-  const onNumberOnlyChange = (e) => {
-    const keyCode = e.keyCode || e.which
-    const keyValue = String.fromCharCode(keyCode)
-    const isValid = new RegExp('[0-9]').test(keyValue)
-    if (!isValid) {
-      e.preventDefault()
-      return
-    }
-  }
+  const history = useHistory();
+  const { stateAuth } = useAuth();
+  const [logoUploading , setLogoUploading] = useState(false);
 
   const {
     state: { fundraising },
-  } = useActivity()
-
+  } = useActivity();
+  const [fileDoc, setFileDoc] = useState(stateAuth?.user?.fundRaising?.capTable?.files ?? null);
   const {
     location: { hash },
   } = history
@@ -52,9 +47,43 @@ export const CapTable = ({ setFundraising }) => {
         amountInvestedByFounders: formik.getFieldProps(
           'amountInvestedByFounders',
         ).value,
+        files:fileDoc
       },
     })
     history.push('#Previous Round')
+  }
+
+  // const onNumberOnlyChange = (e) => {
+  //   const keyCode = e.keyCode || e.which
+  //   const keyValue = String.fromCharCode(keyCode)
+  //   const isValid = new RegExp('[0-9]').test(keyValue)
+  //   if (!isValid) {
+  //     e.preventDefault()
+  //     return
+  //   }
+  // }
+
+  const handleChange = async(e) => {
+
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+
+    } catch(error) {
+      console.log(error)
+      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
+    }
+
   }
 
   const formik = useFormik({
@@ -131,45 +160,27 @@ export const CapTable = ({ setFundraising }) => {
               Download Capital Table sample here
             </DownloadableButton>
           </div>
-          <div className="col-12 my-4">
-            <FileWrapper className="d-flex justify-content-center text-center mx-n4 mx-lg-n0">
-              <img src={DownloadIcon} alt="#" />
+          <div className='col-12 my-4'>
+            <FileWrapper className='d-flex justify-content-center text-center mx-n4 mx-lg-n0'>
+            {
+                fileDoc !== null ? (
+                  <img src={RedFile} alt='.' 
+                  style={{width:'70px', height:'70px'}}
+                   />
+                ):(
+                  logoUploading ? <CircularLoader color={'#000'} /> : 
+                 <>
+                 <img src={DownloadIcon} alt='#' />
               <FileText>Drag & Drop</FileText>
               <FileText>Drag files or click here to upload </FileText>
               <FileSize> {'(Max. File size 5mb)'} </FileSize>
-              <input type="file" id="cap" hidden />
-              <LabelButton for="cap">Upload Files</LabelButton>
+              </>
+                )  
+              }
+              <input type='file' id='cap' onChange={handleChange} hidden />
+              <LabelButton for='cap'>Upload Files</LabelButton>
             </FileWrapper>
           </div>
-          {/* <div className='col-12'>
-            <VideoWrapper className='mx-n4 mx-lg-n0'>
-              <label> Cap Table Uploaded</label>
-              <div className='div'>
-                <img src={RedFile} alt='.#' />
-                <div id='div' className=''>
-                  <div className='d-flex' style={{ marginLeft: '-1.2rem' }}>
-                    <img
-                      src={BluFile}
-                      alt='.#'
-                      style={{
-                        marginLeft: '2rem',
-                        width: '10%',
-                        height: '10%',
-                      }}
-                      className=''
-                    />
-                    <p
-                      className=''
-                      style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-                    >
-                      Cap Table Docum...
-                    </p>
-                  </div>
-                  <p className='my-n2 p'>2.5 mb</p>
-                </div>
-              </div>
-            </VideoWrapper>
-          </div> */}
         </div>
       </BodyWrapper>
       <Terms className="">

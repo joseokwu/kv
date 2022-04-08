@@ -13,13 +13,28 @@ import { getLocationHistory , getRole } from '../../utils/helpers'
 import toast from 'react-hot-toast'
 
 export const SignIn = () => {
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
+  const [inVal , setVal] = useState('');
+  const skills = [];
   const {
     stateAuth: { authenticated, loading, roles , user },
     newLogin,
-  } = useAuth()
+  } = useAuth() 
 
-  const history = useHistory()
+  const history = useHistory(); 
+
+  // const handleChange = (e) =>{
+  //  // console.log(e.target.value)
+  //   setVal(e.target.value);
+  // }
+
+  // const handleKey = (e) =>{
+  //   if(e.keyCode === 32){
+  //     console.log(inVal);
+  //     setVal('');
+  //   }
+  // }
+
   const onFinish = async (values) => {
     try {
       console.log('eegggggggg')
@@ -45,7 +60,9 @@ export const SignIn = () => {
 
   return (
     <div className="row mx-0 auth-wrap">
+    
       <section className="col-md-6">
+      {/* <input type='text' value={inVal} onChange={handleChange} onKeyDown={handleKey}  /> */}
         <SignInAuthSide />
       </section>
       <section className="col-md-6 px-5 d-flex align-items-center">
@@ -109,6 +126,7 @@ export const SignIn = () => {
             >
               Sign Up
             </span>
+            
           </section>
         </div>
       </section>
