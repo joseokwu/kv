@@ -34,7 +34,7 @@ import {
   // DealFolder,
   MentorEvaluation,
   NotFound,
-  VerifyUserEmail
+  VerifyUserEmail,
 } from '../mentorPages';
 
 import { MentorViewAssignment } from '../mentorPages/mentorAssignments/components/viewAssignment/viewAssignment';
@@ -520,7 +520,7 @@ const routes = [
     exact: true,
     protected: false,
   },
- 
+
   {
     name: 'ForgotPassword',
     path: '/forgot/password',
@@ -884,12 +884,12 @@ const routes = [
   //Admin Routes Ends Here
 
   {
-		name: 'Not Found',
-		component: NotFound,
-		exact: true,
-		type: '',
-		protected: false,
-	},
+    name: 'Not Found',
+    component: NotFound,
+    exact: true,
+    type: '',
+    protected: false,
+  },
 ];
 
 export default routes;

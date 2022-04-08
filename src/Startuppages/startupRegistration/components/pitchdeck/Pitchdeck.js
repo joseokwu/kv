@@ -16,7 +16,7 @@ import { useActivity } from '../../../../hooks/useBusiness'
 import { pitchDeck } from './../../../../services/startUpReg'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
 import { formatBytes } from '../../../../utils/helpers'
-import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import { toast } from 'react-hot-toast'
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
@@ -130,7 +130,7 @@ export const PitchDeck = () => {
         setLoading(false);
         return;
       }
-      toast.success('Pitch Deck' + '' + result?.message)
+      toast.success('Pitch Deck' + ' ' + result?.message)
       setLoading(false);
       return;
      } catch (err) {
@@ -140,18 +140,6 @@ export const PitchDeck = () => {
   }
 
   
-
-  // const onSubmit = (value) => {
-  //   setLoading(true)
-  //   pitchDeck(value).then((res) => {
-  //     if (res?.message) {
-  //       console.log(res)
-  //       toast.success(res?.message)
-  //       setLoading(false)
-  //       next()
-  //     }
-  //   })
-  // }
 
   return (
     <>

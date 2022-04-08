@@ -35,7 +35,7 @@ export const FundAsk = ({ setFundraising, back }) => {
   ];
   const [showModal, setShowModal] = useState(false);
   const [hasPreviousFundraising, setHasPreviousFundraising] = useState(
-    stateAuth?.user?.fundraising?.hasPreviousFundraising ?? 'no'
+    stateAuth?.user?.fundraising?.hasPreviousFundraising ?? false
   );
   // const [hasLeadInvestor, setHasLeadInvestor] = useState(
   //   stateAuth?.user?.fundraising?.hasPreviousFundraising ?? 'no'
@@ -111,20 +111,20 @@ export const FundAsk = ({ setFundraising, back }) => {
               <BntWrap>
                 <button
                   className={`me-3 ${
-                    hasPreviousFundraising === 'yes' ? 'active' : ''
+                    hasPreviousFundraising === true ? 'active' : ''
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
-                    setHasPreviousFundraising('yes');
+                    setHasPreviousFundraising(true);
                   }}
                 >
                   Yes
                 </button>
                 <button
-                  className={hasPreviousFundraising === 'no' && 'active'}
+                  className={hasPreviousFundraising === false && 'active'}
                   onClick={(e) => {
                     e.preventDefault();
-                    setHasPreviousFundraising('no');
+                    setHasPreviousFundraising(false);
                   }}
                 >
                   No

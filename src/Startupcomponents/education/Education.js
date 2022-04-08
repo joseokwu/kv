@@ -5,20 +5,22 @@ import editIcon from '../../assets/icons/editIcon.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 
 export const Education = ({
-  school,
+  schoolName,
   course,
   degree,
-  eduStartDate,
-  eduEndDate,
+  startDate,
+  endDate,
   showEducationModal,
   setEditIndex,
   id,
   setIsEditing,
 }) => {
+ 
   const endDateYear =
-    eduEndDate === 'present' ? 'present' : eduEndDate.getFullYear();
+  endDate &&  endDate === 'present' ? 'present' : new Date(endDate).getFullYear();
   // const endDateMonth = endDate === 'present' ? 'present' : endDate.getMonth();
-  const startDateYear = eduStartDate.getFullYear();
+  const startDateYear = new Date(startDate).getFullYear();
+ 
   // const startDateMonth = startDate.getMonth();
 
   const handleEdit = (e) => {
@@ -35,22 +37,11 @@ export const Education = ({
           <img src={blue} alt='apple' />
         </div>
         <div className='info'>
-          <h5 className='school'>{school}</h5>
+          <h5 className='school'>{schoolName}</h5>
           <h6 className='course'>{course}</h6>
           <h6 className='degree'>{degree}</h6>
           <h6 className='year'>
-            {/* {startDateYear} - {endDate === 'present' ? 'present' : endDateYear}{' '}
-            {endDate !== 'present' && endDateYear - startDateYear > 0
-              ? `${endDateYear - startDateYear} years`
-              : endDate !== 'present' && endDateYear - startDateYear < 1
-              ? `${endDateMonth - startDateMonth} months`
-              : endDate === 'present' &&
-                new Date().getFullYear() - startDateYear > 0
-              ? `${new Date().getFullYear() - startDateYear} years`
-              : endDate === 'present' &&
-                new Date().getFullYear() - startDateYear < 1
-              ? `${new Date().getMonth() - startDateMonth} months`
-              : null} */}
+         
             {startDateYear} - {endDateYear}
           </h6>
         </div>

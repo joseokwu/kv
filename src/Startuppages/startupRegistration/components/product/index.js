@@ -6,7 +6,7 @@ import { CustomButton } from '../../../../Startupcomponents/button/button.styled
 import BlueFile from '../../../../assets/icons/bluFile.svg'
 import { product } from './../../../../services/startUpReg'
 import { formatBytes } from '../../../../utils/helpers'
-import { toast } from 'react-hot-toast'
+import  toast  from 'react-hot-toast'
 import { useAuth } from '../../../../hooks/useAuth';
 import { updateFounderProfile } from '../../../../services';
 
@@ -20,30 +20,29 @@ import {
 import DownloadIcon from '../../../../assets/icons/download.svg'
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
 import { useFormik } from 'formik'
+import { upload } from '../../../../services/utils';
+
 
 export const Product = () => {
   const  { stateAuth } = useAuth();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [logoUploading, setLogoUploading] = useState(false);
   const [nextLoading, setnextLoading] = useState(false);
   const [opts, setOpts] = useState('')
-  const [productInfo, setProductInfo] = useState({
-    description: stateAuth?.user?.product?.description ?? '',
-    competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
-    youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
-    files: stateAuth?.user?.product?.files ?? '',
-  })
+  const [urls, setUrls] = useState(stateAuth?.user?.product?.youtubeDemoUrl  ?? []);
+  const [youtube , setYoutube] = useState('');
+  const [fileInfo, setFile] = useState(stateAuth?.user?.product?.files ?? null)
 
-  const onChange = (e) => {
-    setProductInfo({...productInfo, [e.target.name] : e.target.value})
+  const handleeChangeVids = (e) =>{
+    setYoutube(e.target.value);
   }
 
-  const [fileInfo, setFile] = useState([
-    {
-      file: null,
-      size: null,
-      name: 'infoFile',
-    },
-  ])
+  const addVid = () =>{
+    const newVal = youtube.replace('https://youtu.be/', '');
+   
+    setUrls([...urls, newVal]);
+    setYoutube('');
+  }
 
   const {
     changePath,
@@ -58,41 +57,34 @@ export const Product = () => {
     changePath(path - 1)
   }
 
-  const handleChange = (e) => {
+  const handleChange = async(e) => {
     console.log('hello')
-    const { files, name } = e.target
-    setFile(
-      fileInfo.map((item) => {
-        if (name === item?.name) {
-          item.file = files
-          item.size = formatBytes(files.size)
-        }
-        return item
-      }),
-    )
-  }
-
-  const handleSubmit = (value) => {
-    const newFile = {
-      pitchDeckFile: [
-        {
-          url: fileInfo.file?.name,
-        },
-      ],
-      profileId: '61d5be4fb801676adafcf4f4',
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append('dir', 'kv');
+    formData.append('ref', stateAuth.user?.userId);
+    formData.append('type', 'image');
+    formData.append(0, files[0]);
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData);
+      console.log(response);
+      console.log('uploaded');
+      setFile(response?.path);
+      setLogoUploading(false);
+    } catch (error) {
+      console.log(error);
+      setLogoUploading(false);
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image');
     }
-    // setLoading(true)
-    // product(value).then((res) => {
-    //   if (res?.message) {
-    //     console.log(res)
-    //     toast.success(res?.message)
-    //     setLoading(false)
-    //     next()
-    //   }
-    // })
-    //   console.log(newFile)
   }
 
+ const deleteVid = () =>{
+ 
+   
+  setUrls([]);
+ }
+   
   const onSubmit = async (value) => {
   
     try {
@@ -100,7 +92,9 @@ export const Product = () => {
         type: 'product',
         accType: 'startup',
         values: {
-          ...value
+          ...value,
+          files:fileInfo,
+          youtubeDemoUrl:urls
         },
         userId:stateAuth?.user?.userId
       }
@@ -110,7 +104,7 @@ export const Product = () => {
         let result = await updateFounderProfile(product)
 
         if (result?.success) {
-          toast.success('Product' + '' + result?.message)
+          toast.success('Product' + '   ' + result?.message)
           setOpts(false);
           return changePath(path + 1)
         }
@@ -136,8 +130,8 @@ export const Product = () => {
       initialValues: {
         description: stateAuth?.user?.product?.description ?? '',
         competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
-        youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
-        files: stateAuth?.user?.product?.files ?? 'http://google.com',
+        
+        files: stateAuth?.user?.product?.files ?? '',
       },
       validateOnBlur: true,
       onSubmit: (value) => onSubmit(value),
@@ -200,45 +194,51 @@ export const Product = () => {
                 <input
                   type="text"
                   name="youtubeDemoUrl"
-                  onChange={formik.handleChange}
-                  value={formik.values.youtubeDemoUrl}
+                  onChange={handleeChangeVids}
+                  value={youtube}
                   className="form-control youtube-input ps-3"
                   placeholder="Youtube link"
                 />
-                <button className="button">Upload</button>
+                <button type='button' className="button" onClick={addVid} >Upload</button>
               </div>
               <FileWrapper className="d-flex justify-content-center text-center">
-                <img src={DownloadIcon} alt="#" />
-                <FileText>Drag & Drop</FileText>
-                <FileText>Drag files or click here to upload </FileText>
-                <FileSize> {'(Max. File size 5mb)'} </FileSize>
-                <input name="files" onChange={onChange} value={productInfo.files} type="file" id="pitch-doc" hidden />
+              
+              {fileInfo !== null ? (
+                    <img style={{width:'70px', height:'70px'}} src={RedFile} alt=".#" className='mb-2' />
+                  ) : (
+                    logoUploading ? <CircularLoader color={'#000'} /> : 
+                    <>
+                    <img src={DownloadIcon} alt="#" />
+                      <FileText>Drag & Drop</FileText>
+                      <FileText>Drag files or click here to upload </FileText>
+                    </>
+                  )}
+               
+                <input name="files" onChange={handleChange} type="file" id="pitch-doc" hidden />
                 <LabelButton for="pitch-doc">Upload Files</LabelButton>
               </FileWrapper>
             </div>
             <div className="form-group col-12">
-              <VideoWrapper>
-                <label> Product demo upload</label>
-                <div className="row">
-                  <div className=" col-lg-8 col-12">
-                    <div className="div p-5">
-                      <img src={RedFile} alt=".#" />
-                    </div>
-                    <div id="div" className="p-2">
-                      <div className="d-flex mt-n2">
-                        <img
-                          src={BlueFile}
-                          alt=".#"
-                          style={{ width: '10%', height: '10%' }}
-                          className="mt-3"
-                        />
-                        <p className="px-4">Product Demo</p>
-                      </div>
-                      <p className="my-n2 px-5 p">2.5 mb</p>
-                    </div>
-                  </div>
-                </div>
-              </VideoWrapper>
+            <VideoWrapper> 
+            <label  > Product demo upload</label>
+                 {
+               urls.length > 0 && urls.map((item, i) =>(
+                <iframe
+        key={i}
+        src={`https://www.youtube.com/embed/${item}`}
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; execution-while-not-rendered 'none'"
+        allowfullscreen
+        title="video"
+        style={{
+        borderRadius:"20px",
+        maxHeight:"150px",
+        width:"250px"
+      }}
+      />
+               ))       
+                    }
+            </VideoWrapper>
             </div>
           </div>
         </FormWrapper>
