@@ -9,7 +9,7 @@ export const SkillTab = ({ skill , onClick }) => {
     <div className='skill-div mb-2' style={{ background: color }}>
       <span className='skill-main'>{skill}</span>
 
-      <GiCancel className='skill-icon' onClick={onClick} />
+      <GiCancel style={{cursor: 'pointer'}} className='skill-icon' onClick={onClick} />
     </div>
   );
 };

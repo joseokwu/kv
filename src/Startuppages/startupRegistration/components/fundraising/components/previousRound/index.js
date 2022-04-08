@@ -267,7 +267,7 @@ export const PreviousRound = ({ setFundraising }) => {
             </BntWrap>
           </div>
 
-          <label>Investors who participated in last funding round*</label>
+          {/* <label>Investors who participated in last funding round*</label>
           <div className='row'>
             <div className='sold my-3 col-lg-12 d-flex justify-content-center'>
               <Tag
@@ -277,7 +277,7 @@ export const PreviousRound = ({ setFundraising }) => {
                 padding='10px 32px'
               />
             </div>
-          </div>
+          </div> */}
 
           <div className='col-12 my-5'>
             <span

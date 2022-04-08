@@ -137,7 +137,7 @@ export const FormWrapper = styled.div`
     /* width: 70%; */
     margin-left: 15px;
     border-radius: 7px;
-    outline: 0;
+    outline: none;
 
     &:focus {
       outline: 0;
@@ -145,15 +145,15 @@ export const FormWrapper = styled.div`
   }
 
   .sel {
-    width: 70%;
+    width: 97%;
     background: ${(props) => (props.bg ? props.bg : '#fafafc')};
     color: #4f4f4f;
     border-radius: 7px;
-    cursor: pointer;
+    /* cursor: pointer; */
     text-transform: capitalize;
     outline: 0;
     min-height: 2.56rem;
-    margin-left: 15px;
+    /* margin-left: 15px; */
     border: 0.1rem solid #fefefe;
   }
 
@@ -161,5 +161,14 @@ export const FormWrapper = styled.div`
     padding: 8px 14px;
     background: #fafafc;
     border-radius: 4px;
+    border: none;
+    outline: none;
+  }
+
+  .country-bg {
+    background: #fafafc;
+    border: none;
+    outline: none;
+    }
   }
 `;
