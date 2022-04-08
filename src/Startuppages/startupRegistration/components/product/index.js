@@ -19,6 +19,7 @@ import {
 } from '../pitchdeck/pitch.styled'
 import DownloadIcon from '../../../../assets/icons/download.svg'
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
+import * as Yup from 'yup';
 import { useFormik } from 'formik'
 import { upload } from '../../../../services/utils';
 
@@ -33,7 +34,7 @@ export const Product = () => {
   const [youtube , setYoutube] = useState('');
   const [fileInfo, setFile] = useState(stateAuth?.user?.product?.files ?? null)
 
-  const handleeChangeVids = (e) =>{
+  const handleChangeVids = (e) =>{
     setYoutube(e.target.value);
   }
 
@@ -79,14 +80,11 @@ export const Product = () => {
     }
   }
 
- const deleteVid = () =>{
- 
-   
+ const deleteVid = () =>{  
   setUrls([]);
  }
    
   const onSubmit = async (value) => {
-  
     try {
       const product = {
         type: 'product',
@@ -96,7 +94,7 @@ export const Product = () => {
           files:fileInfo,
           youtubeDemoUrl:urls
         },
-        userId:stateAuth?.user?.userId
+        userId: stateAuth?.user?.userId,
       }
       console.log(product)
       if (opts === 'next') {
@@ -109,33 +107,38 @@ export const Product = () => {
           return changePath(path + 1)
         }
       }
-      setLoading(true);
+      setLoading(true)
       let result = await updateFounderProfile(product)
 
-      if(!result?.success) {
+      if (!result?.success) {
         toast.error(result?.message || 'There was an error in updating product')
-        setLoading(false);
-        return;
+        setLoading(false)
+        return
       }
       toast.success('Product' + '' + result?.message)
-      setLoading(false);
-      return;
-      } catch (err) {
-        setLoading(false);
-        toast.error(err?.res?.data?.message || 'There was an error updating product')
-      }
+      setLoading(false)
+      return
+    } catch (err) {
+      setLoading(false)
+      toast.error(
+        err?.res?.data?.message || 'There was an error updating product',
+      )
     }
+  }
 
-    const formik = useFormik({
-      initialValues: {
-        description: stateAuth?.user?.product?.description ?? '',
-        competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
-        
-        files: stateAuth?.user?.product?.files ?? '',
-      },
-      validateOnBlur: true,
-      onSubmit: (value) => onSubmit(value),
-    })
+  const formik = useFormik({
+    initialValues: {
+      description: stateAuth?.user?.product?.description ?? '',
+      competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
+      youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
+      files: stateAuth?.user?.product?.files ?? '',
+    },
+    validationSchema: Yup.object({
+      competitiveEdge: Yup.string().required('Required')
+    }),
+    validateOnBlur: true,
+    onSubmit: (value) => onSubmit(value),
+  })
 
   return (
     <>
@@ -167,7 +170,7 @@ export const Product = () => {
                   onChange={formik.handleChange}
                   value={formik.values.description}
                   placeholder="Enter Brief info about your product"
-                ></textarea>
+                />
               </div>
               <div className="form-group col-12">
                 <div className="d-flex justify-content-between">
@@ -183,9 +186,13 @@ export const Product = () => {
                   name="competitiveEdge"
                   onChange={formik.handleChange}
                   value={formik.values.competitiveEdge}
+                  onBlur={formik.handleBlur}
                   className="form-control ps-3"
                   placeholder="Enter your uniqueness "
                 />
+                {formik.touched.competitiveEdge && formik.errors.competitiveEdge ? (
+                <label style={{color: 'red'}} className="error">{formik.errors.competitiveEdge}</label>
+              ) : null}
               </div>
             </div>
             <div className="form-group col-12 mt-3">
@@ -194,7 +201,7 @@ export const Product = () => {
                 <input
                   type="text"
                   name="youtubeDemoUrl"
-                  onChange={handleeChangeVids}
+                  onChange={handleChangeVids}
                   value={youtube}
                   className="form-control youtube-input ps-3"
                   placeholder="Youtube link"
@@ -249,11 +256,21 @@ export const Product = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-lg-end">
-            <CustomButton type="submit" disabled={loading} className="mx-2" background="#00ADEF">
-              { loading ? <CircularLoader /> : 'Save'}
+            <CustomButton
+              type="submit"
+              disabled={loading}
+              className="mx-2"
+              background="#00ADEF"
+            >
+              {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
-            <CustomButton type="submit" disabled={nextLoading} onClick={() => setOpts('next')} background="#2E3192">
-              { nextLoading ? <CircularLoader /> : 'Next'}
+            <CustomButton
+              type="submit"
+              disabled={nextLoading}
+              onClick={() => setOpts('next')}
+              background="#2E3192"
+            >
+              {nextLoading ? <CircularLoader /> : 'Next'}
             </CustomButton>
           </div>
         </div>
