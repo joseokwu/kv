@@ -12,6 +12,8 @@ import { BusinessCanavas } from "./components/businessCanvas";
 import { RoadMap } from "./components/roadMap/RoadMap";
 import { Milestone } from "./components/milestone/Milestone";
 import { getStartupProfile } from "../../services";
+import { useAuth } from '../../hooks/useAuth';
+
 
 export const StartupProfile = ({ history }) => {
   const {
@@ -27,20 +29,21 @@ export const StartupProfile = ({ history }) => {
     "milestone/timeline",
     "product road map",
   ];
+  const { stateAuth } = useAuth();
   const [prof, setProf] = useState(null);
   const fetchData = async () => {
     const res = await getStartupProfile();
     setProf(res);
   };
 
-  console.log(`pathname`, pathname);
+  console.log(`pathname`, stateAuth);
 
   const renderContent = () => {
     switch (hash.replaceAll("%20", " ")) {
       case "#product":
         return <Product />;
       case "#pitch deck":
-        return <PitchDeck data={prof?.pitchDeck} />;
+        return <PitchDeck data={stateAuth?.user?.pitchDeck} />;
       case "#business canvas":
         return <BusinessCanavas />;
       case "#product road map":
@@ -54,24 +57,18 @@ export const StartupProfile = ({ history }) => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
 
-    return () => {
-      setProf(null);
-    };
-  }, []);
 
   return (
     <div>
       <article className="wrapper pt-3" style={{ background: "#F9F9FC" }}>
         <div className="row mt-5">
           <div className="col-lg-7 col-12">
-            <OppCompanyInfo data={prof} />
-            <FinancialDetails data={prof} />
+            <OppCompanyInfo data={stateAuth?.user} />
+            <FinancialDetails data={stateAuth?.user} />
           </div>
           <div className="col-lg-5 col-12 ">
-            <FundingRound data={prof && prof?.financialDetails} />
+            <FundingRound data={stateAuth?.user} />
           </div>
         </div>
       </article>

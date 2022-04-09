@@ -21,8 +21,8 @@ export const OppCompanyInfo = ({data}) => {
         style={{ rowGap: 10 }}
       >
         <div>
-          <img src={logo} alt="logo" className="mb-3" />
-          <h3 className="opp-page-card-title"> { data?.name } </h3>
+          <img src={data?.startUpProfile?.logo} alt="logo" className="mb-3" />
+          <h3 className="opp-page-card-title"> { data?.startUpProfile?.acceleratorName } </h3>
         </div>
 
         <div className="d-flex align-items-center">
@@ -40,11 +40,11 @@ export const OppCompanyInfo = ({data}) => {
         </div>
       </section>
       <section className="mt-3">
-        <h6 className="mb-3">Tech Industry</h6>
+        <h6 className="mb-3"> { data?.industry } </h6>
         <p className="">
          {
            data?.description
-         }
+         } 
         </p>
       </section>
     </section>

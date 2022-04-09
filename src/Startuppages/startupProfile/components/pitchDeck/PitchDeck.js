@@ -27,8 +27,44 @@ export const PitchDeck = ({data}) => {
         <span></span>
       )}
       <section className="row pt-3">
+ 
+        {
+          data && Object.values(data).map((item, i) =>{
+            if(item.includes('.pdf')){
+              return (
+                <div key={i} className="col-xl-3 col-lg-4 mb-4">
+            <article className="deck-card">
+            <div className="deck-card-img">
+              <img src={doc} alt="document" />
+            </div>
+  
+          </article>
+        </div>
+              ) 
+            } if(item.includes('.mp4')){
+              return (
+                <div key={i} className="col-xl-3 col-lg-4 mb-4">
+                <article className="">
+                <video 
+                      style={{
+                        borderRadius:"20px",
+                       maxHeight:"150px",
+                        width:"250px"
+                      }}
+                      className='mb-3'
+                     controls>
+                    <source src={item} id="video_here" />
+                      Your browser does not support HTML5 video.
+                     </video>
+                     </article>
+                     </div>
+              )
+            }
+          }
+          )
+        }
 
-            {
+            {/* {
               data && data.map((item, i) =>(
                 <div className="col-xl-3 col-lg-4 mb-4">
             <article className="deck-card">
@@ -45,7 +81,7 @@ export const PitchDeck = ({data}) => {
           </article>
         </div>
               ))
-            }
+            } */}
 
         <div className="col-lg-4 create_pitch my-5 ms-5">
           <img
