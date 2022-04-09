@@ -43,11 +43,12 @@ import { INIT_STATE } from '../../initialstates';
               case USER_PROFILE :
                 return {
                   ...state,
-                  loading:false ,
+                  loading:false,
                   authenticated:true,
                   user:action?.payload,
                   roles:action?.payload?.role,
-                  signUpStatus:action?.payload?.role[0]
+                  signUpStatus:action?.payload?.role[0],
+                  completedRegistration: action?.payload?.fundRaising ? true : false 
                   
                 }
                 case USER_PROFILE_FAIL :
@@ -68,6 +69,7 @@ import { INIT_STATE } from '../../initialstates';
                    return {
                      ...state,
                      authenticated:false,
+                     completedRegistration:false,
                      roles:[]
                    }  
 

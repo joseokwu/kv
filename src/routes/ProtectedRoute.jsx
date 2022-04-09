@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Route, useHistory} from 'react-router-dom';
+import { Route, useHistory , Redirect} from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useActivity } from '../hooks/useBusiness';
 import { setLocationHistory } from '../utils/helpers';
@@ -22,6 +22,11 @@ export  const ProtectedRoute = ({ ...props})=>{
             setLocationHistory(history.location.pathname)
             history.push('/')
 
+        }
+        if(stateAuth.completedRegistration){
+        history.push(`/${stateAuth.roles[0]}/dashboard`)  
+        }else{
+            history.push(`/${stateAuth.roles[0]}/registration`) 
         }
         // if(!stateAuth.roles.includes(props.type)){
 
