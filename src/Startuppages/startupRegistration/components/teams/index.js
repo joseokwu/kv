@@ -64,6 +64,13 @@ export const TeamProfile = () => {
     twitter: stateAuth?.user?.team?.socialMedia?.twitter
       ?? '',
   });
+  const [contacts, setContacts] = useState({
+    country: stateAuth?.user?.team?.contactInfo?.country ?? ''
+  })
+
+  const onChange = (e) => {
+    setContacts({ ...contacts, [e.target.name]: e.target.value })
+  }
 
 
   const [inVal , setVal] = useState('');
@@ -171,7 +178,10 @@ export const TeamProfile = () => {
           experience: experience,
           education: education,
           socialMedia,
-          mobile_number:phone
+          mobile_number:phone,
+          contactInfo: {
+            ...contacts,
+          }
         },
         userId: stateAuth?.user?.userId,
       };
@@ -212,25 +222,25 @@ export const TeamProfile = () => {
       lastName: stateAuth?.user?.team?.lastName ?? '',
       email: stateAuth?.user?.team?.email ?? '',
       dob: startDate,
-      country: stateAuth?.user?.team?.country ?? '',
+      // country: stateAuth?.user?.team?.country ?? '',
       state: stateAuth?.user?.team?.state ?? '',
       city: stateAuth?.user?.team?.city ?? '',
       // mobile_number: phone,
       isCofounder:true
     },
-    validationSchema: Yup.object({
-      briefIntroduction: Yup.string().required('Required'),
-      firstName: Yup.string().required('Required'),
-      lastName: Yup.string().required('Required'),
-      email: Yup.string().required('Required'),
-      state: Yup.string().required('Required'),
-      city: Yup.string().required('Required'),
-      dob: Yup.string().required('Required'),
-      skills: Yup.string().required('Required'),
-      linkedIn: Yup.string().required('Required'),
-      twitter: Yup.string().required('Required'),
-      website: Yup.string().required('Required'),
-    }),
+    // validationSchema: Yup.object({
+    //   briefIntroduction: Yup.string().required('Required'),
+    //   firstName: Yup.string().required('Required'),
+    //   lastName: Yup.string().required('Required'),
+    //   email: Yup.string().required('Required'),
+    //   state: Yup.string().required('Required'),
+    //   city: Yup.string().required('Required'),
+    //   dob: Yup.string().required('Required'),
+    //   skills: Yup.string().required('Required'),
+    //   linkedIn: Yup.string().required('Required'),
+    //   twitter: Yup.string().required('Required'),
+    //   website: Yup.string().required('Required'),
+    // }),
     onSubmit: (value) => onSubmit(value),
   });
 
@@ -375,7 +385,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.briefIntroduction}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="briefIntroduction"
                 placeholder="Enter a brief bio about yourself"
@@ -393,7 +403,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.firstName}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="firstName"
                 placeholder="Enter first name"
@@ -408,7 +418,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.lastName}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="lastName"
                 placeholder="Enter last name"
@@ -423,7 +433,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.email}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="email"
                 placeholder="Enter email address"
@@ -441,7 +451,7 @@ export const TeamProfile = () => {
                 className="custs p-2 py-4"
                 style={{ padding: '15px' }}
                 value={startDate}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 onChange={(date) => setStartDate(date)}
               />
               {formik.touched.dob && !startDate ? (
@@ -461,14 +471,15 @@ export const TeamProfile = () => {
               /> */}
               <CountryDropdown
                 id="country"
+                type="text"
+                name="country"
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={['ng']}
-                value={formik.values.country}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                value={contacts.country}
+                handleChange={(e) => setContacts({...contacts, country:e.target.value})}
               ></CountryDropdown>
-              {formik.touched.country && formik.errors.country ? (
-                <label className="error">{formik.errors.country}</label>
+              {formik.touched.country && !contacts.country ? (
+                <label className="error">Required</label>
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -476,7 +487,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.state}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="state"
                 placeholder="Enter your state"
@@ -491,7 +502,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.city}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="city"
                 placeholder="Enter your city"
@@ -511,7 +522,7 @@ export const TeamProfile = () => {
                 value={
                   stateAuth?.user?.team?.contactInfo?.mobile_number ?? phone
                 }
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 onChange={setPhone}
                 MaxLength={17}
               />
@@ -603,7 +614,7 @@ export const TeamProfile = () => {
                 placeholder='Enter your skills'
                 className="py-2 px-3"
                 // className='form-control ps-3'
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 onKeyDown={handleKey}
               />
               {formik.touched.skills && formik.errors.skills ? (
@@ -629,7 +640,7 @@ export const TeamProfile = () => {
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.linkedIn}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type='text'
                 name='linkedIn'
                 placeholder='Enter Linkdin link'
@@ -644,7 +655,7 @@ export const TeamProfile = () => {
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.twitter}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type='text'
                 name='twitter'
                 placeholder='Enter Twitter link'
@@ -660,7 +671,7 @@ export const TeamProfile = () => {
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.website}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type='text'
                 name='website'
                 placeholder='Enter website'
