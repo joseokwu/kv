@@ -50,7 +50,7 @@ export const StartupDashboard = () => {
           className="col-lg-3 col-md-6 col-12"
           icon={newApp}
           name={"Partners"}
-          count={stateAuth?.user?.partners ?? 0}
+          count={stateAuth?.user?.partners?.length ?? 0}
           color={"#FAD7DC"}
         />
       </section>
@@ -61,7 +61,7 @@ export const StartupDashboard = () => {
           header={"Total Fund"}
           color={"#2E3192"}
           img={""}
-          amount={dashInfo?.totalFund?.amount}
+          amount={stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders}
           time={""}
           className="col-3 col-6-md "
         />
@@ -69,7 +69,7 @@ export const StartupDashboard = () => {
           header={"Last Funding Round"}
           color={"#00ADEF"}
           img={""}
-          amount={dashInfo?.lastFund?.amount}
+          amount={stateAuth?.user?.fundRaising?.capTable?.amountRaised}
           time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
         />
@@ -84,10 +84,10 @@ export const StartupDashboard = () => {
           color={"#2E3192"}
           img={""}
           amount={
-            typeof dashInfo?.valuation?.amount !== undefined &&
-            convertToMillion(dashInfo?.valuation?.amount)
+            typeof stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation !== undefined &&
+            convertToMillion(stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation)
           }
-          time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
+          time={dateFormat(stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding, "fullDate")}
           className="col-3 col-6-md "
         />
 

@@ -12,9 +12,9 @@ const options = {
 }
 
 const uploadOptions = {
-	baseURL: "http://ec2-54-227-69-213.compute-1.amazonaws.com",
+	baseURL: "https://kv-file.yebox.net",
     headers: { "Content-Type": "multipart/form-data" }
-}
+}  
 
 export const uploadRequest = axios.create(uploadOptions);
 

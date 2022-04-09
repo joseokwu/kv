@@ -91,9 +91,6 @@ export const PitchDeck = () => {
     }
   }
   
-  const handleSubmit = (value) => {
-    
-  }
 
  
 
@@ -117,7 +114,7 @@ export const PitchDeck = () => {
         let result = await updateFounderProfile(pitchDeck)
 
         if (result?.success) {
-          toast.success('Pitch Deck' + '' + result?.message)
+          toast.success('Pitch Deck' + '     ' + result?.message)
           setOpts(false);
           return changePath(path + 1)
         }
@@ -267,3 +264,4 @@ export const PitchDeck = () => {
     </>
   )
 }
+

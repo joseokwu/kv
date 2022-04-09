@@ -94,7 +94,7 @@ const HeaderDropdownMenu = () => {
         <button
           className="dropdown-item text-center py-2"
           style={{ color: '#D62828' }}
-          onClick={() => userLogout()}
+          onClick={() => {userLogout()}}
         > <img className="pe-1" src={logout} alt=""/> Log Out</button>
       </div>
     </div>

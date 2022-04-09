@@ -6,7 +6,8 @@ import {
   AuthTextField,
   AuthPasswordField,
   PhoneInput,
-} from '../../mentorComponents/index'
+} from '../../mentorComponents/index';
+import { useLocation }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
@@ -20,11 +21,11 @@ export const SignUp = ({ history }) => {
   const { stateAuth, register } = useAuth()
   const [industry, setIndustry] = useState('')
   const [phone, setPhone] = useState('')
-
+  const location = useLocation();
   function handleChange(value) {
     setIndustry(value)
   }
-
+  console.log(window.location.origin)
   console.log(stateAuth?.signUpStatus)
   const onFinish = (values) => {
 
@@ -38,6 +39,7 @@ export const SignUp = ({ history }) => {
         ...values,
         type: stateAuth?.signUpStatus,
         phone: phone?.id,
+        origin:window.location.origin
       })
     }else{
       register({
@@ -45,6 +47,7 @@ export const SignUp = ({ history }) => {
         type: stateAuth?.signUpStatus,
         industry: industry,
         phone: phone?.id,
+        origin:window.location.origin
       })
       console.log({
         ...values,

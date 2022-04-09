@@ -84,7 +84,7 @@ export const FinancialProjection = () => {
       console.log(fund)
       let result = await updateFounderProfile(fund);
       toast.success(result?.message)
-      push('/startup/dashboard')
+      window.open('/startup/dashboard', '_self')
     }catch(err){
       toast.error(err?.response?.data?.message)
     }
@@ -155,9 +155,7 @@ export const FinancialProjection = () => {
           </CustomButton>
         </div>
         <div className='col-9 d-flex justify-content-lg-end'>
-          <CustomButton className='' background='#00ADEF'>
-            Save
-          </CustomButton>
+          
           <OutlineButton
             onClick={handleSubmit}
             className='ms-2'
