@@ -24,12 +24,17 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from './../../../../hooks/useAuth'
 import { upload } from '../../../../services/utils'
 import CountryDropdown from 'country-dropdown-with-flags-for-react'
+import moment from 'moment';
+
+
+
 
 export const StartupProfile = () => {
   const {
     changePath,
     state: { path },
   } = useActivity()
+  const dateFormat = 'YYYY/MM/DD';
   const { stateAuth } = useAuth()
   const [disImg, setImg] = useState(null)
   const [logo, setLogo] = useState(
@@ -37,9 +42,8 @@ export const StartupProfile = () => {
   )
   const [logoUploading, setLogoUploading] = useState(false)
   const [opts, setOpts] = useState('')
-  const [startDate, setStartDate] = useState(
-    stateAuth?.user?.startUpProfile?.startDate ?? '',
-  )
+ // const dte = new Date(stateAuth?.user?.startUpProfile?.yearFounded);
+  const [startDate, setStartDate] = useState(new Date())
   const [loading, setLoading] = useState(false)
   const [nextloading, setNextLoading] = useState(false)
   const [phone, setPhone] = useState(
@@ -106,6 +110,7 @@ export const StartupProfile = () => {
         values: {
           ...value,
           logo: logo,
+          yearFounded:startDate,
           contactInfo: {
             ...contacts,
             phoneNumber: phone,
@@ -149,7 +154,6 @@ export const StartupProfile = () => {
       startupName: stateAuth?.user?.businessname ?? '',
       elevatorPitch: stateAuth?.user?.startUpProfile?.elevatorPitch ?? '',
       brand: stateAuth?.user?.startUpProfile?.brand ?? '',
-      yearFounded: stateAuth?.user?.startUpProfile?.yearFounded ?? '',
       registrationNumber:
         stateAuth?.user?.startUpProfile?.registrationNumber ?? '',
       companySize: stateAuth?.user?.startUpProfile?.companySize ?? '',
@@ -157,17 +161,7 @@ export const StartupProfile = () => {
       startupStage: stateAuth?.user?.startUpProfile?.startupStage ?? '',
       acceleratorName: stateAuth?.user?.startUpProfile?.acceleratorName ?? '',
     },
-    validationSchema: Yup.object({
-      elevatorPitch: Yup.string().required('Required'),
-      startupName: Yup.string().required('Required'),
-      brand: Yup.string().required('Required'),
-      yearFounded: Yup.string().required('Required'),
-      registrationNumber: Yup.string().required('Required'),
-      companySize: Yup.string().required('Required'),
-      businessSector: Yup.string().required('Required'),
-      startupStage: Yup.string().required('Required'),
-      // acceleratorName: Yup.string().required('Required'),
-    }),
+ 
     onSubmit: (value) => onSubmit(value),
   })
 
@@ -216,7 +210,7 @@ export const StartupProfile = () => {
                 placeholder="One line pitch 150 words maximum"
                 value={formik.values.elevatorPitch}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+
                 rows="4"
                 cols="4"
                 className="form-control"
@@ -235,7 +229,7 @@ export const StartupProfile = () => {
                 placeholder="Entity Name As Per Registration"
                 value={formik.values.startupName}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+             
                 className="form-control ps-3"
               />
               {formik.touched.startupName && formik.errors.startupName ? (
@@ -251,7 +245,7 @@ export const StartupProfile = () => {
                 placeholder="eg; Knight Ventures"
                 value={formik.values.brand}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+               
                 className="form-control ps-3"
               />
               {formik.touched.brand && formik.errors.brand ? (
@@ -263,9 +257,8 @@ export const StartupProfile = () => {
               <DatePicker
                 id="yearFounded"
                 name="yearFounded"
+                defaultValue={moment(stateAuth?.user?.startUpProfile?.yearFounded, dateFormat)}
                 className="date-input col-lg-12 ps-3 py-2"
-                value={startDate}
-                onBlur={formik.handleBlur}
                 onChange={(date) => setStartDate(date)}
               />
               {formik.touched.yearFounded && !startDate ? (
@@ -282,7 +275,7 @@ export const StartupProfile = () => {
                 placeholder="1234567890"
                 value={formik.values.registrationNumber}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+ 
                 className="form-control ps-3"
               />
               {formik.touched.registrationNumber &&
@@ -301,7 +294,7 @@ export const StartupProfile = () => {
                   name={'companySize'}
                   value={formik.values.companySize}
                   onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
+                
                   className="sel ps-3 pe-3"
                   placeholder="Enter company size"
                 />
@@ -326,7 +319,7 @@ export const StartupProfile = () => {
                   name={'businessSector'}
                   value={formik.values.businessSector}
                   onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
+               
                   className="sel ps-3 pe-3"
                   placeholder="Enter Business Sector"
                 />
@@ -353,7 +346,7 @@ export const StartupProfile = () => {
                 name={'startupStage'}
                 value={formik.values.startupStage}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+              
                 className="sel ps-3 pe-3"
                 placeholder="Enter Business Stage"
               />
@@ -381,7 +374,7 @@ export const StartupProfile = () => {
                 placeholder="Enter Accelerator name"
                 value={formik.values.acceleratorName}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+              
                 className="form-control ps-3"
               />
               {/* {formik.touched.acceleratorName &&
@@ -407,7 +400,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your registered address"
                 value={contacts.registeredAddress}
                 onChange={onChange}
-                onBlur={formik.handleBlur}
+               
                 className="form-control ps-3"
               />
               {formik.touched.registeredAddress &&
@@ -435,8 +428,8 @@ export const StartupProfile = () => {
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={['ng']}
                 value={contacts.country}
-                onChange={onChange}
-                onBlur={formik.handleBlur}
+                handleChange={(e) => setContacts({...contacts, country:e.target.value})}
+             
               ></CountryDropdown>
               {formik.touched.country && !contacts.country ? (
                 <label className="error">Required</label>
@@ -451,7 +444,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your state"
                 value={contacts.state}
                 onChange={onChange}
-                onBlur={formik.handleBlur}
+         
                 className="form-control ps-3"
               />
               {formik.touched.state && !contacts.state ? (
@@ -467,7 +460,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your city"
                 value={contacts.city}
                 onChange={onChange}
-                onBlur={formik.handleBlur}
+           
                 className="form-control ps-3"
               />
               {formik.touched.city && !contacts.city ? (
@@ -485,7 +478,7 @@ export const StartupProfile = () => {
                 value={phone}
                 onChange={setPhone}
                 MaxLength={17}
-                onBlur={formik.handleBlur}
+                
               />
               {formik.touched.phoneNumber && !phone ? (
                 <label className="error">Required</label>
@@ -500,7 +493,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your email"
                 value={contacts.companyEmail}
                 onChange={onChange}
-                onBlur={formik.handleBlur}
+              
                 className="form-control ps-3"
               />
               {formik.touched.companyEmail && !contacts.companyEmail ? (
@@ -541,7 +534,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your startup website"
                 value={socialMedia.companyWebsite}
                 onChange={onChangeMedia}
-                onBlur={formik.handleBlur}
+            
                 className="form-control ps-3"
               />
               {formik.touched.companyWebsite && !socialMedia.companyWebsite ? (
@@ -557,7 +550,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your Linkedin profile name"
                 value={socialMedia.linkedInHandle}
                 onChange={onChangeMedia}
-                onBlur={formik.handleBlur}
+                
                 className="form-control ps-3"
               />
               {formik.touched.linkedInHandle && !socialMedia.linkedInHandle ? (
@@ -573,7 +566,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your Twitter profile name"
                 value={socialMedia.twitterHandle}
                 onChange={onChangeMedia}
-                onBlur={formik.handleBlur}
+            
                 className="form-control ps-3"
               />
               {formik.touched.twitterHandle && !socialMedia.twitterHandle ? (
@@ -595,7 +588,7 @@ export const StartupProfile = () => {
               <CustomButton
                 type="submit"
                 disabled={nextloading}
-                onClick={() => setOpts('next')}
+                onClick={() => {setOpts('next')}}
                 background="#2E3192"
               >
                 {nextloading ? <CircularLoader /> : 'Next'}

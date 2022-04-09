@@ -155,9 +155,7 @@ export const FinancialProjection = () => {
           </CustomButton>
         </div>
         <div className='col-9 d-flex justify-content-lg-end'>
-          <CustomButton className='' background='#00ADEF'>
-            Save
-          </CustomButton>
+          
           <OutlineButton
             onClick={handleSubmit}
             className='ms-2'
