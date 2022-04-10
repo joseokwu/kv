@@ -73,8 +73,8 @@ export const Header = ({ setOpen, open}) => {
 }
 
 const HeaderDropdownMenu = () => {
-  const { push } = useHistory()
-  const { userLogout } = useAuth();
+  const { push, replace } = useHistory()
+  const { userLogout , editUser } = useAuth();
   return (
     <div className="dropdown">
       <button
@@ -90,7 +90,9 @@ const HeaderDropdownMenu = () => {
       </button>
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button className="dropdown-item text-center py-2" onClick={() => push('/startup/profile')}> <img className="pe-1" src={view} alt=""/> View Profile</button>
-        <button className="dropdown-item text-center py-2 my-2"> <img className="pe-1" src={edit} alt=""/> Edit Profile</button>
+        <button className="dropdown-item text-center py-2 my-2"  
+        onClick={() => {push('/startup/registration'); editUser()}}
+         > <img className="pe-1" src={edit} alt=""/> Edit Profile</button>
         <button
           className="dropdown-item text-center py-2"
           style={{ color: '#D62828' }}

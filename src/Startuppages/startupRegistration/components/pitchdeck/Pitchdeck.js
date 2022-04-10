@@ -34,7 +34,7 @@ export const PitchDeck = () => {
   
   const [fileDoc, setFileDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckFile ?? null);
   const [videoDoc, setVidDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckVideo ?? null);
-
+  const history = useHistory();
   const {
     changePath,
     state: { path },
@@ -119,6 +119,17 @@ export const PitchDeck = () => {
           return changePath(path + 1)
         }
       }
+      if (opts === 'save') {
+        setOpts(true)
+        let result = await updateFounderProfile(pitchDeck)
+
+        if (result?.success) {
+          toast.success('Pitch Deck' + '     ' + result?.message)
+          setOpts(false);
+          history.push('/startup/dashboard')
+        }
+      }
+
       setLoading(true);
       let result = await updateFounderProfile(pitchDeck)
 
@@ -245,7 +256,9 @@ export const PitchDeck = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-end">
-            <CustomButton type="submit" disabled={loading} className="mx-2" background="#00ADEF">
+            <CustomButton type="submit"
+            onClick={() => setOpts('save')}
+             disabled={loading} className="mx-2" background="#00ADEF">
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
             <div className="">
