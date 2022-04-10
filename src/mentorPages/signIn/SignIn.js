@@ -17,7 +17,7 @@ export const SignIn = () => {
   const [inVal , setVal] = useState('');
   const skills = [];
   const {
-    stateAuth: { authenticated, loading, roles , user },
+    stateAuth: { completedRegistration, loading, roles , user },
     newLogin,
   } = useAuth() 
 
@@ -47,7 +47,11 @@ export const SignIn = () => {
           history.push(loca)
          return sessionStorage.removeItem('user:redirect:location')
         }
-        
+        //    if(completedRegistration){
+        // history.push(`/${roles[0]}/dashboard`)  
+        // }else{
+        //     history.push(`/${roles[0]}/registration`) 
+        // }
         history.push(`/${res?.data?.user?.type[0]}/registration`)
         
       }
