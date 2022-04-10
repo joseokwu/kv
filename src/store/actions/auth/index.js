@@ -68,6 +68,7 @@ export const getProfile = async (value) => async(dispatch) =>{
                     type:USER_PROFILE,
                     payload:res?.data
                 })
+                
             }
     
     }catch(err){
