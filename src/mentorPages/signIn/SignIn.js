@@ -52,7 +52,7 @@ export const SignIn = () => {
         // }else{
         //     history.push(`/${roles[0]}/registration`) 
         // }
-        history.push(`/${res?.data?.user?.type[0]}/registration`)
+        history.push(`/${res?.data?.user?.type[0]}/dashboard`)
         
       }
     } catch (err) {
