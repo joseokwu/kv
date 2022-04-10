@@ -14,8 +14,8 @@ export const DashSidebar = () => {
     push,
   } = useHistory()
 
-  const { stateAuth } = useAuth();
-
+  const { stateAuth , editUser } = useAuth();
+// editUser()
   const activateLink = (path) => {
     return pathname.includes(path) ? 'activeSide' : ''
   }
@@ -35,7 +35,7 @@ export const DashSidebar = () => {
             dashboardRoutes.map((nav, i) => {
               return (
                 <li key={i} >
-                  <span className="sidebar_link" onClick={() => push(nav.path)}>
+                  <span className="sidebar_link" onClick={() => {push(nav.path)}}>
                     <img src={nav.icon} alt="dash" />
                     <span className={`${activateLink(nav.activator)} sideText`}>
                       {nav.title}
