@@ -80,7 +80,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3 "
             name="Founder's Capital"
-            count={`$${convertToMillion(fundData?.foundersCapitial)}`}
+            count={`${convertToMillion(stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders)}`}
             color="#E5FFE4"
           />
         </>
@@ -89,7 +89,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Total Fund Raised"
-            count={`$${convertToMillion(fundData?.totalFund)}`}
+            count={`${convertToMillion(stateAuth?.user?.fundRaising?.capTable?.amountRaised)}`}
             color="#FAD7DC"
           />
         </>
@@ -98,7 +98,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Pre-Money Valuation"
-            count={`$${convertToMillion(fundData?.preMoney)}`}
+            count={`$${convertToMillion(stateAuth?.user?.fundRaising?.previousRound?.preMoneyValuation)}`}
             color="#E5FFE4"
           />
         </>
@@ -107,7 +107,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Post-Money Valuation"
-            count={`$${convertToMillion(fundData?.postMoney)}`}
+            count={`$${convertToMillion(stateAuth?.user?.fundRaising?.previousRound?.postMoneyValuation)}`}
             color="#FAD7DC"
           />
         </>
@@ -119,3 +119,8 @@ export const StartupFundingRaising = () => {
     </div>
   );
 };
+
+// financialProjection: {files: 'https://cdn.shoutng.com/kvbucrt8rztygvnbtuiuqb.pdf', _id: '62521d84e0eaea14a99083ef'}
+// fundUtilization:
+// files: "https://cdn.shoutng.com/kvu6t59yz90snuhtzaozkuapplication/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+// _id: "6
