@@ -17,21 +17,21 @@ export const FinancialDetails = ({data}) => {
         <div className="d-flex align-items-center">
           <img src={web} alt="web" />
           <a
-            href="https://www.applaneinsteen.com"
+            href={data?.startUpProfile?.socialMedia?.companyWebsite}
             className="ml-2 extra-info"
             style={{ textDecoration: "underline", color: "#2E3192" }}
           >
-            { data?.url }
+            { data?.startUpProfile?.socialMedia?.companyWebsite }
           </a>
         </div>
         <div className="d-flex align-items-center">
           <img src={clock} alt="web" width="20" height="20" />
-          <p className="ml-2 extra-info">Incorporated 2/09/19</p>
+          <p className="ml-2 extra-info">Incorporated { new Date(data?.startUpProfile?.yearFounded).toUTCString() }</p>
         </div>
 
         <div className="d-flex align-items-center">
           <img src={office} alt="web" />
-          <p className="ml-2 extra-info"> { data?.location } </p>
+          <p className="ml-2 extra-info"> { `${data?.startUpProfile?.contactInfo?.registeredAddress} , ${data?.startUpProfile?.contactInfo?.state} , ${data?.startUpProfile?.contactInfo?.country}` } </p>
         </div>
       </section>
     </div>

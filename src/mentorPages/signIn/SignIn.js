@@ -13,39 +13,61 @@ import { getLocationHistory , getRole } from '../../utils/helpers'
 import toast from 'react-hot-toast'
 
 export const SignIn = () => {
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
+  const [inVal , setVal] = useState('');
+  const skills = [];
   const {
-    stateAuth: { authenticated, loading, roles , user },
+    stateAuth: { completedRegistration, loading, roles , user },
     newLogin,
-  } = useAuth()
+  } = useAuth() 
 
-  const history = useHistory()
+  const history = useHistory(); 
+
+  // const handleChange = (e) =>{
+  //  // console.log(e.target.value)
+  //   setVal(e.target.value);
+  // }
+
+  // const handleKey = (e) =>{
+  //   if(e.keyCode === 32){
+  //     console.log(inVal);
+  //     setVal('');
+  //   }
+  // }
+
   const onFinish = async (values) => {
     try {
       console.log('eegggggggg')
       console.log(values)
       const res = await newLogin(values)
       const loca = getLocationHistory()
-     
+      console.log(res)
       if (res?.status) {
         if (loca !== null) {
           history.push(loca)
          return sessionStorage.removeItem('user:redirect:location')
         }
+        if(res?.data?.user?.isRegCompleted){
+          history.push(`/${res?.data?.user?.type[0]}/dashboard`)
+        }else{
+          history.push(`/${res?.data?.user?.type[0]}/registration`)
+        }
+ 
         
-        history.push(`/${res?.data?.user?.type[0]}/registration`)
         
       }
     } catch (err) {
       console.log('hhddjdkd')
       console.log(err)
-      toast.error(err?.response?.data?.message ?? 'Network Error')
+     // toast.error(err?.response?.data?.message ?? 'Network Error')
     }
   }
 
   return (
     <div className="row mx-0 auth-wrap">
+    
       <section className="col-md-6">
+      {/* <input type='text' value={inVal} onChange={handleChange} onKeyDown={handleKey}  /> */}
         <SignInAuthSide />
       </section>
       <section className="col-md-6 px-5 d-flex align-items-center">
@@ -109,6 +131,7 @@ export const SignIn = () => {
             >
               Sign Up
             </span>
+            
           </section>
         </div>
       </section>

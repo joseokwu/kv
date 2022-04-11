@@ -23,11 +23,11 @@ export const StartUpRegistration = () => {
       case 1:
         return setProgressStat(0)
       case 2:
-        return setProgressStat(40)
+        return setProgressStat(20)
       case 3:
-        return setProgressStat(60)
+        return setProgressStat(40)
       case 4:
-        return setProgressStat(80)
+        return setProgressStat(60)
       case 5:
         return setProgressStat(100)
       default:

@@ -143,7 +143,7 @@ const routes = [
     path: "/startup/program",
     component: WithStartupDashboardLayout(StartupProgram),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
 
@@ -152,7 +152,7 @@ const routes = [
     path: "/startup/fundraising",
     component: WithStartupDashboardLayout(StartupFundingRaising),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -160,7 +160,7 @@ const routes = [
     path: "/startup/boosterpartner",
     component: WithStartupDashboardLayout(StartupBoosterPartner),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -168,7 +168,7 @@ const routes = [
     path: "/startup/e-academy",
     component: WithStartupDashboardLayout(StartupEAcademy),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -176,7 +176,7 @@ const routes = [
     path: "/startup/todolist",
     component: WithStartupDashboardLayout(StartupTodoList),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -184,7 +184,7 @@ const routes = [
     path: "/startup/networking",
     component: WithStartupDashboardLayout(StartupNetworking),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -192,7 +192,7 @@ const routes = [
     path: "/startup/dealroom",
     component: WithStartupDashboardLayout(StartupDealRoom),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -200,7 +200,7 @@ const routes = [
     path: "/startup/team/member",
     component: WithStartupRegisterLayout(StartupTeamMember),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -208,7 +208,7 @@ const routes = [
     path: "/startup/events",
     component: WithStartupDashboardLayout(StartupEvents),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -216,7 +216,7 @@ const routes = [
     path: "/startup/support",
     component: WithStartupDashboardLayout(StartupContactUs),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
   {
@@ -224,7 +224,7 @@ const routes = [
     path: "/startup/registration",
     component: WithStartupRegistrationLayout(StartUpRegistration),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
 
@@ -233,7 +233,7 @@ const routes = [
     path: "/startup/profile",
     component: WithStartupDashboardLayout(StartupProfile),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
 
@@ -242,7 +242,7 @@ const routes = [
     path: "/startup/notification",
     component: WithStartupDashboardLayout(StartupNotification),
     exact: true,
-    protected: false,
+    protected: true,
     type: "startup",
   },
 
@@ -585,7 +585,7 @@ const routes = [
     path: "/mentor/registration",
     component: WithMentorRegisterLayout(MentorPersonalDetails),
     exact: true,
-    protected: true,
+    protected: false,
     type: "mentor",
   },
   {

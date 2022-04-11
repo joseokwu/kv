@@ -12,9 +12,9 @@ const options = {
 }
 
 const uploadOptions = {
-	baseURL: "http://localhost:9200",
+	baseURL: "https://kv-file.yebox.net",
     headers: { "Content-Type": "multipart/form-data" }
-}
+}  
 
 export const uploadRequest = axios.create(uploadOptions);
 

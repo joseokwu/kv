@@ -22,12 +22,12 @@ export const useActivity = () => {
     dispatch(showDEventAction());
   };
 
-  const setWorkExperience = (values) => {
-    dispatch(setDWorkExperience(values));
+  const setWorkExperience = (values, type) => {
+    dispatch(setDWorkExperience(values, type));
   };
 
-  const setEducation = (values) => {
-    dispatch(setDEducation(values));
+  const setEducation = (values, type) => {
+    dispatch(setDEducation(values, type));
   };
 
   const setFundraising = (values) => {

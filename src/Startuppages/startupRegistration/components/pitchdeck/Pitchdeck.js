@@ -16,7 +16,7 @@ import { useActivity } from '../../../../hooks/useBusiness'
 import { pitchDeck } from './../../../../services/startUpReg'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
 import { formatBytes } from '../../../../utils/helpers'
-import { CircularLoader } from './../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import { toast } from 'react-hot-toast'
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
@@ -34,7 +34,7 @@ export const PitchDeck = () => {
   
   const [fileDoc, setFileDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckFile ?? null);
   const [videoDoc, setVidDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckVideo ?? null);
-
+  const history = useHistory();
   const {
     changePath,
     state: { path },
@@ -91,9 +91,6 @@ export const PitchDeck = () => {
     }
   }
   
-  const handleSubmit = (value) => {
-    
-  }
 
  
 
@@ -117,11 +114,22 @@ export const PitchDeck = () => {
         let result = await updateFounderProfile(pitchDeck)
 
         if (result?.success) {
-          toast.success('Pitch Deck' + '' + result?.message)
+          toast.success('Pitch Deck' + '     ' + result?.message)
           setOpts(false);
           return changePath(path + 1)
         }
       }
+      if (opts === 'save') {
+        setOpts(true)
+        let result = await updateFounderProfile(pitchDeck)
+
+        if (result?.success) {
+          toast.success('Pitch Deck' + '     ' + result?.message)
+          setOpts(false);
+          history.push('/startup/dashboard')
+        }
+      }
+
       setLoading(true);
       let result = await updateFounderProfile(pitchDeck)
 
@@ -130,7 +138,7 @@ export const PitchDeck = () => {
         setLoading(false);
         return;
       }
-      toast.success('Pitch Deck' + '' + result?.message)
+      toast.success('Pitch Deck' + ' ' + result?.message)
       setLoading(false);
       return;
      } catch (err) {
@@ -140,18 +148,6 @@ export const PitchDeck = () => {
   }
 
   
-
-  // const onSubmit = (value) => {
-  //   setLoading(true)
-  //   pitchDeck(value).then((res) => {
-  //     if (res?.message) {
-  //       console.log(res)
-  //       toast.success(res?.message)
-  //       setLoading(false)
-  //       next()
-  //     }
-  //   })
-  // }
 
   return (
     <>
@@ -260,7 +256,9 @@ export const PitchDeck = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-end">
-            <CustomButton type="submit" disabled={loading} className="mx-2" background="#00ADEF">
+            <CustomButton type="submit"
+            onClick={() => setOpts('save')}
+             disabled={loading} className="mx-2" background="#00ADEF">
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
             <div className="">
@@ -279,3 +277,4 @@ export const PitchDeck = () => {
     </>
   )
 }
+

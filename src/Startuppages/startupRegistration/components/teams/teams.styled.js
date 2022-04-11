@@ -55,7 +55,7 @@ export const InputWrapper = styled.label`
   justify-content: center;
   align-items: center;
   top: 520px;
-  left: 240px;
+  left: 250px;
 
   input {
     width: inherit;
@@ -152,7 +152,7 @@ export const FormWrapper = styled.div`
     background: #fafafc !important;
     border-radius: 4px;
     /* margin-left: 15px; */
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
 
     ::placeholder {
       font-style: normal;
@@ -179,7 +179,7 @@ export const FormWrapper = styled.div`
     border: none;
     background: #fafafc;
     width: 100%;
-    margin-left: 15px;
+    /* margin-left: 15px; */
     border-radius: 7px;
     outline: none;
 
@@ -194,6 +194,10 @@ export const FormWrapper = styled.div`
     @media (max-width: 768px) {
       width: 100%;
     }
+  }
+
+  .ant-picker {
+    padding: 8px 20px 8px 20px !important;
   }
 
   .ant-select-multiple .ant-select-selection-item {
@@ -253,6 +257,10 @@ export const ModalForm = styled.div`
     margin-top: 10px;
   }
 
+  article {
+    color: red;
+  }
+
   textarea {
     background: #fafafc !important;
     border: none;
@@ -260,7 +268,15 @@ export const ModalForm = styled.div`
   span {
     margin-left: 10px;
   }
-`;
+
+  .date-input {
+    padding: 8px 14px;
+    background: #fafafc;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+  }
+`
 // export const BntWrap = styled.div`
 //   button {
 //     width: 6%;

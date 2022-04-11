@@ -6,6 +6,7 @@ export const INIT_STATE = {
   roles: [],
   signUpStatus: 'startup',
   username: '',
+  completedRegistration:false
 };
 
 export const INIT_STATE_BUSINESS = {

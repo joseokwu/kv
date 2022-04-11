@@ -4,7 +4,7 @@ import clock from '../../../assets/icons/clock.svg'
 
 export const FundingRound = ({data}) => {
 
-  const date = new Date(data && data?.lastFunding);
+
 
   return (
     <div className="">
@@ -18,7 +18,7 @@ export const FundingRound = ({data}) => {
             color="#058DC1"
             // w="23%"
           >
-            Tech
+            {data?.industry }
           </Btn>
         </div>
 
@@ -29,7 +29,7 @@ export const FundingRound = ({data}) => {
             color="#212463"
             // w="50%"
           >
-            Proof of concept
+            { data?.startUpProfile?.startupStage }
           </Btn>
         </div>
       </FundRounding>
@@ -43,7 +43,7 @@ export const FundingRound = ({data}) => {
             bg="#DEF6FF"
             color="#058DC1"
           >
-          { data?.totalFunding }
+          { data?.fundRaising?.capTable?.amountInvestedByFounders }
           </Btn>
         </div>
 
@@ -53,7 +53,7 @@ export const FundingRound = ({data}) => {
             bg="#F1F2FE"
             color="#212463"
           >
-            Angel { date.toISOString().substring(0,10) }
+            { data?.fundRaising?.capTable?.amountRaised } {  }
           </Btn>
         </div>
 
@@ -64,7 +64,7 @@ export const FundingRound = ({data}) => {
             color="#212463"
             className="mr-3"
           >
-           { data?.investor }
+           { data?.investor ?? 0 }
           </Btn>{' '}
           <Btn
             bg="#F1F2FE"
@@ -78,13 +78,16 @@ export const FundingRound = ({data}) => {
           <article className="mr-3">Valuation </article>
           <Btn
             bg="#F1F2FE"
-            color="#212463"
+            color="#212463"  
             // w="80%"
           >
-            { data?.valuation }
+            { data?.fundRaising?.fundingAsk?.postMoneyValuation }
           </Btn>
         </div>
       </FundRounding>
     </div>
+
   )
 }
+
+

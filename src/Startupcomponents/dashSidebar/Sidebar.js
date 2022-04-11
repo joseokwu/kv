@@ -14,8 +14,8 @@ export const DashSidebar = () => {
     push,
   } = useHistory()
 
-  const { stateAuth } = useAuth();
-
+  const { stateAuth , editUser } = useAuth();
+// editUser()
   const activateLink = (path) => {
     return pathname.includes(path) ? 'activeSide' : ''
   }
@@ -23,9 +23,9 @@ export const DashSidebar = () => {
   return (
     <div className="sideMain">
       <section className="sideNavigator">
-        <div>
-        <img src={ stateAuth?.user?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.user?.businessname}`
-             } alt="profile" className="rounded-circle" />
+        <div  style={{width:'70px', height:'70px', borderRadius:'60px', marginLeft:'28px'}} >
+        <img src={ stateAuth?.user?.startUpProfile?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.user?.businessname}`
+             } alt="profile" className="rounded-circle " style={{maxWidth:'80px', height:'80px'}} />
         </div>
         <h5 className="mb-0 sideHeader">Hello </h5>
         <p className="mb-0 sideText"> { stateAuth?.user?.businessname } </p>
@@ -35,7 +35,7 @@ export const DashSidebar = () => {
             dashboardRoutes.map((nav, i) => {
               return (
                 <li key={i} >
-                  <span className="sidebar_link" onClick={() => push(nav.path)}>
+                  <span className="sidebar_link" onClick={() => {push(nav.path)}}>
                     <img src={nav.icon} alt="dash" />
                     <span className={`${activateLink(nav.activator)} sideText`}>
                       {nav.title}
@@ -55,3 +55,4 @@ export const DashSidebar = () => {
     </div>
   )
 }
+

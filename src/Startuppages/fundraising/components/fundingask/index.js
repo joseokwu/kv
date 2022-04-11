@@ -1,7 +1,7 @@
 import { Header, Table, Section } from "./ask.styled";
 import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
 
-export const FundingAsk = ({ data = {} }) => {
+export const FundingAsk = ({ data  }) => {
   return (
     <div>
       <Header className="d-flex justify-content-end">
@@ -29,12 +29,29 @@ export const FundingAsk = ({ data = {} }) => {
           </thead>
           <tbody>
             <tr>
-              {data?.requirement?.length > 0 &&
-                data?.requirement?.map((i) => (
-                  <td style={{ borderBottom: "1px solid #E6E7E9" }} key={i}>
-                    {i}
+             
+                  <td style={{ borderBottom: "1px solid #E6E7E9" }} >
+                    { data?.instrumentForRound }
                   </td>
-                ))}
+                  <td style={{ borderBottom: "1px solid #E6E7E9" }} >
+                    { }
+                  </td>
+                  <td style={{ borderBottom: "1px solid #E6E7E9" }} >
+                    { data?.numberOfRounds }
+                  </td>
+                  <td style={{ borderBottom: "1px solid #E6E7E9" }} >
+                    { data?.dilution }
+                  </td>
+                  <td style={{ borderBottom: "1px solid #E6E7E9" }} >
+                    { data?.preMoneyValuation }
+                  </td>
+                  <td style={{ borderBottom: "1px solid #E6E7E9" }} >
+                    { data?.postMoneyValuation }
+                  </td>
+                  <td style={{ borderBottom: "1px solid #E6E7E9" }} >
+                    { }
+                  </td>
+              
             </tr>
           </tbody>
         </Table>

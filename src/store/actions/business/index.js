@@ -12,6 +12,8 @@ import {
   SET_WORK_EXPERIENCE,
   SET_EDUCATION,
   SET_FUNDRAISING,
+  SET_WORK_EXPERIENCE_DATABASE,
+  SET_EDUCATION_DATABASE
 } from '../actions.types';
 
 import { getEvents } from '../../../services/events';
@@ -59,18 +61,35 @@ export const showDEventAction = () => (dispatch) => {
   });
 };
 
-export const setDWorkExperience = (values) => (dispatch) => {
-  dispatch({
-    type: SET_WORK_EXPERIENCE,
-    payload: values,
-  });
+export const setDWorkExperience = (values, type='internal') => (dispatch) => {
+  if(type === 'server'){
+    dispatch({
+      type: SET_WORK_EXPERIENCE_DATABASE,
+      payload: values,
+    });
+  }else{
+    dispatch({
+      type: SET_WORK_EXPERIENCE,
+      payload: values,
+    });
+  }
+
 };
 
-export const setDEducation = (values) => (dispatch) => {
-  dispatch({
-    type: SET_EDUCATION,
-    payload: values,
-  });
+export const setDEducation = (values, type='internal') => (dispatch) => {
+  if(type === 'server'){
+    console.log(type)
+    dispatch({
+      type: SET_EDUCATION_DATABASE,
+      payload: values,
+    });
+  }else{
+    dispatch({
+      type: SET_EDUCATION,
+      payload: values,
+    });
+  }
+ 
 
 };
 

@@ -8,24 +8,27 @@ import { LoadingIcon } from './../components/Loading/Loading';
 import { useActivity } from '../hooks/useBusiness';
 
 export  function AppRouter(props){
-    const { userProfile, stateAuth : { loading , authenticated }} = useAuth();
+    const { userProfile, stateAuth : { loading , authenticated , completedRegistration, roles }} = useAuth();
     const  { state } = useActivity();
     const history = useHistory();
     useEffect(()=>{
-        console.log(loading)
+      
         const getP = async () => {
 			if (getToken()) {
                 const userRole = getRole();
                // console.log(userRole)
-			await userProfile(userRole && userRole);
-				if (getLocationHistory()) {
+              await userProfile(userRole && userRole);
+               
+            console.log(roles)
+				if (getLocationHistory()){
+                    console.log('problem')
                     history.push(getLocationHistory());
 					sessionStorage.removeItem('user:redirect:location')
 				}
 			}       
 		};
 		getP();    
-    },[userProfile, authenticated, history , state.path])  
+    },[userProfile, authenticated, history ])  
 
     if(loading){
         return <LoadingIcon fullscreen />
