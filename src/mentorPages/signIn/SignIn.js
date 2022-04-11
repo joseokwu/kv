@@ -41,18 +41,19 @@ export const SignIn = () => {
       console.log(values)
       const res = await newLogin(values)
       const loca = getLocationHistory()
-     
+      console.log(res)
       if (res?.status) {
         if (loca !== null) {
           history.push(loca)
          return sessionStorage.removeItem('user:redirect:location')
         }
-        //    if(completedRegistration){
-        // history.push(`/${roles[0]}/dashboard`)  
-        // }else{
-        //     history.push(`/${roles[0]}/registration`) 
-        // }
-        history.push(`/${res?.data?.user?.type[0]}/dashboard`)
+        if(res?.data?.user?.isRegCompleted){
+          history.push(`/${res?.data?.user?.type[0]}/dashboard`)
+        }else{
+          history.push(`/${res?.data?.user?.type[0]}/registration`)
+        }
+ 
+        
         
       }
     } catch (err) {

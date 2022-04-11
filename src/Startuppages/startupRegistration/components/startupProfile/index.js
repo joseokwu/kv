@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
   HeaderStartup,
   ImageWrapper,
@@ -27,14 +27,13 @@ import CountryDropdown from 'country-dropdown-with-flags-for-react'
 import moment from 'moment';
 
 
-
-
 export const StartupProfile = () => {
   const {
     changePath,
     state: { path },
   } = useActivity()
-  const dateFormat = 'YYYY/MM/DD';
+  //const initialDate = useMemo(() => moment().format("YYYY-DD-YY"), []);
+  const dateFormat = 'YYYY-MM-DD';
   const { stateAuth } = useAuth()
   const [disImg, setImg] = useState(null)
   const [logo, setLogo] = useState(
@@ -43,7 +42,7 @@ export const StartupProfile = () => {
   const [logoUploading, setLogoUploading] = useState(false)
   const [opts, setOpts] = useState('')
  // const dte = new Date(stateAuth?.user?.startUpProfile?.yearFounded);
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(moment(stateAuth?.user?.startUpProfile?.yearFounded) ?? '')
   const [loading, setLoading] = useState(false)
   const [nextloading, setNextLoading] = useState(false)
   const [phone, setPhone] = useState(
@@ -65,7 +64,7 @@ export const StartupProfile = () => {
       stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite ?? '',
     linkedInHandle:
       stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle ?? '',
-    twitterHandle: stateAuth?.user?.startUpProfile?.socialMedia ?? '',
+    twitterHandle: stateAuth?.user?.startUpProfile?.socialMedia?.twitterHandle ?? '',
   })
 
   const history = useHistory()
@@ -257,13 +256,12 @@ export const StartupProfile = () => {
               <DatePicker
                 id="yearFounded"
                 name="yearFounded"
-                defaultValue={moment(stateAuth?.user?.startUpProfile?.yearFounded, dateFormat)}
-                className="date-input col-lg-12 ps-3 py-2"
-                onChange={(date) => setStartDate(date)}
+                defaultValue={moment(stateAuth?.user?.startUpProfile?.yearFounded) ?? moment()}
+              format={dateFormat}
+              onChange={(date,dateString) => setStartDate(dateString)}
+              
               />
-              {formik.touched.yearFounded && !startDate ? (
-                <label className="error">{formik.errors.yearFounded}</label>
-              ) : null}
+
             </div>
 
             <div className="form-group col-lg-6 col-12">
