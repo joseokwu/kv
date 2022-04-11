@@ -684,56 +684,6 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-        {/* <FormWrapper height="70%">
-          <div className="div border-bottom pb-2">
-            <span>Co-Founders</span>
-            <p className="pt-3">Create a profile for your Co-Founders</p>
-          </div>
-
-          <div className="mt-4">
-            <label>Do you have Co-Founders?*</label>
-
-            <div className="d-flex">
-              <BntWrap>
-                <button
-                  className={`me-3 ${coFounder === 'yes' && 'active'}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setCoFounder('yes')
-                  }}
-                >
-                  Yes
-                </button>
-                <button
-                  className={`me-3 ${coFounder === 'no' && 'active'}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setCoFounder('no')
-                  }}
-                >
-                  No
-                </button>
-              </BntWrap>
-            </div>
-
-            <div className="sold">
-              <div className="d-flex justify-content-center">
-                <div
-                  className=""
-                  data-target="#cofounder"
-                  onClick={() => setShowModal(true)}
-                >
-                  <Tag
-                    name="+ Add Co-founder"
-                    color="#4F4F4F"
-                    bg="rgba(183, 218, 231, 0.5"
-                    padding="8px 14px"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </FormWrapper> */}
 
         <FormWrapper height="70%">
           <div className="div border-bottom pb-3">

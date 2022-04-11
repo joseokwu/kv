@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Route, useHistory , Redirect} from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useActivity } from '../hooks/useBusiness';
-import { setLocationHistory } from '../utils/helpers';
+import { setLocationHistory , getRole } from '../utils/helpers';
 
 import { LoadingIcon } from '../components/Loading';
 
@@ -23,10 +23,10 @@ export  const ProtectedRoute = ({ ...props})=>{
             history.push('/')
 
         }
-        if(!stateAuth.completedRegistration){
-            console.log(history.location.pathname)
-        history.push(`/${stateAuth.roles[0]}/registration`)  
-        }
+        // if(!stateAuth.completedRegistration){
+        //     console.log(history.location.pathname)
+        // history.push(`/${getRole()}/registration`)  
+        // }
         // if(!stateAuth.roles.includes(props.type)){
 
         //     history.push('/') 

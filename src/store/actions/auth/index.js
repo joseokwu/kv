@@ -4,7 +4,7 @@ import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
 } from '../actions.types';
 import { register, userLogin , profile, forgorPassword } from '../../../services';
 import toast from 'react-hot-toast';
-import { setAuthToken } from '../../../utils/helpers';
+import { setAuthToken , setRole } from '../../../utils/helpers';
 
 
 export const registerUser = async(value) => async(dispatch) =>{
@@ -38,13 +38,14 @@ export const loginUser = async(value) => async(dispatch) =>{
         })
         const res = await userLogin(value);
         setAuthToken(res?.data?.token);
+        setRole(res?.data?.user?.type[0])
         console.log(res)
         dispatch({
             type:LOGIN_SUCCESS,
             payload: res?.data?.user
         })
        
-        return res;
+         return res;
     
     }catch(err){
         console.log(err?.response?.data?.message , 'err')
