@@ -8,3 +8,6 @@ export * from "./applicationMgt/ApplicationMgt";
 export * from "./pendingApplication/PendingApplication";
 export * from "./acceptedApplication/AcceptedApplication";
 export * from "./events/Events";
+export * from "./programs/Programs";
+export * from "./assignments/Assignments";
+export * from "./createProgram/CreateProgram";

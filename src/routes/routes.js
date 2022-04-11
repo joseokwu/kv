@@ -102,8 +102,11 @@ import {
   AllMentors,
   AllSessions,
   ApplicationMgt,
+  Assignments,
+  CreateProgram,
   Events,
   PendingApplication,
+  Programs,
   UserManagement,
   ViewInvestor,
   ViewMentor,
@@ -790,7 +793,25 @@ const routes = [
   {
     name: "admin Program",
     path: "/admin/program",
-    component: WithAdminLayout(() => <div>Program</div>),
+    component: WithAdminLayout(Programs),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/create",
+    component: WithAdminLayout(CreateProgram),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/assignments",
+    component: WithAdminLayout(Assignments),
     exact: true,
     protected: false,
     type: "admin",
