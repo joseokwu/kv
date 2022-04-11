@@ -1,0 +1,39 @@
+.createProgram {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 3rem 4rem;
+  width: 100%;
+  max-width: 858px;
+  margin: 0 auto;
+}
+
+.createProgram h3 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 2rem !important;
+}
+
+.copyLink {
+  background: #fafafc;
+  border-radius: 4px;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 8px 14px;
+  color: #d1d1d1;
+}
+
+.btnWrapper {
+  width: 100%;
+  max-width: 858px;
+  margin: 0 auto;
+  text-align: right;
+  padding: 2rem 0;
+}
