@@ -170,5 +170,4 @@ export const FormWrapper = styled.div`
     border: none;
     outline: none;
     }
-  }
 `;
