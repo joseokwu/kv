@@ -4,7 +4,7 @@ export const INIT_STATE = {
   error: false,
   loading: false,
   roles: [],
-  signUpStatus: 'mentor',
+  signUpStatus: 'startup',
   username: '',
   completedRegistration:false
 };

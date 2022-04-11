@@ -2,7 +2,7 @@ import { LOGIN_FAILED, AUTH_START,
   REGISTER_FAILED, LOGIN_SUCCESS,
   REGISTER_SUCCESS , USER_PROFILE,
   USER_PROFILE_FAIL, SET_SIGNUP_STATUS,
-  LOG_OUT
+  LOG_OUT, EDIT
 
 } from '../../actions/actions.types';
 import { INIT_STATE } from '../../initialstates';
@@ -72,6 +72,11 @@ import { INIT_STATE } from '../../initialstates';
                      completedRegistration:false,
                      roles:[]
                    }  
+                case EDIT :
+                  return {
+                    ...state,
+                    completedRegistration:false
+                  }
 
         default:
             return state;

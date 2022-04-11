@@ -80,3 +80,5 @@ export const StartupProfile = ({ history }) => {
     </div>
   );
 };
+
+

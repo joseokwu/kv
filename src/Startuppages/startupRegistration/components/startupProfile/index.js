@@ -65,7 +65,7 @@ export const StartupProfile = () => {
       stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite ?? '',
     linkedInHandle:
       stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle ?? '',
-    twitterHandle: stateAuth?.user?.startUpProfile?.socialMedia ?? '',
+    twitterHandle: stateAuth?.user?.startUpProfile?.socialMedia?.twitterHandle ?? '',
   })
 
   const history = useHistory()
@@ -89,7 +89,7 @@ export const StartupProfile = () => {
       setLogoUploading(false)
       toast.error(error?.response?.data?.message ?? 'Unable to upload image')
     }
-  }
+  }         
 
   const onChange = (e) => {
     setContacts({ ...contacts, [e.target.name]: e.target.value })
@@ -400,7 +400,6 @@ export const StartupProfile = () => {
                 placeholder="Enter your registered address"
                 value={contacts.registeredAddress}
                 onChange={onChange}
-               
                 className="form-control ps-3"
               />
               {formik.touched.registeredAddress &&
@@ -566,7 +565,6 @@ export const StartupProfile = () => {
                 placeholder="Enter your Twitter profile name"
                 value={socialMedia.twitterHandle}
                 onChange={onChangeMedia}
-            
                 className="form-control ps-3"
               />
               {formik.touched.twitterHandle && !socialMedia.twitterHandle ? (

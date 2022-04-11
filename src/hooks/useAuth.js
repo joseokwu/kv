@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { registerUser, loginUser, getProfile  as profile , changeStatus , 
-logout
+logout, edit
 } from '../store/actions/auth';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -37,6 +37,10 @@ const userProfile = useCallback(async (value) =>{
         dispatch(await profile(value));  
 
     }, [])
+ 
+    const editUser = () =>{
+        dispatch(edit())
+    }
 
    const changeSignup = (value) =>{
        dispatch(changeStatus(value))
@@ -56,5 +60,6 @@ const userProfile = useCallback(async (value) =>{
         userProfile , 
         changeSignup,
         userLogout,
+        editUser
     };
 }

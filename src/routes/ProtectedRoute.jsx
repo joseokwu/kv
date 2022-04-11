@@ -23,10 +23,9 @@ export  const ProtectedRoute = ({ ...props})=>{
             history.push('/')
 
         }
-        if(stateAuth.completedRegistration){
-        history.push(`/${stateAuth.roles[0]}/dashboard`)  
-        }else{
-            history.push(`/${stateAuth.roles[0]}/registration`) 
+        if(!stateAuth.completedRegistration){
+            console.log(history.location.pathname)
+        history.push(`/${stateAuth.roles[0]}/registration`)  
         }
         // if(!stateAuth.roles.includes(props.type)){
 

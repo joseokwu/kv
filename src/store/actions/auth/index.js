@@ -1,6 +1,6 @@
 import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
     LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL , 
-    SET_SIGNUP_STATUS, GET_SIGNUP_STATUS , LOG_OUT 
+    SET_SIGNUP_STATUS, EDIT , LOG_OUT 
 } from '../actions.types';
 import { register, userLogin , profile, forgorPassword } from '../../../services';
 import toast from 'react-hot-toast';
@@ -68,6 +68,7 @@ export const getProfile = async (value) => async(dispatch) =>{
                     type:USER_PROFILE,
                     payload:res?.data
                 })
+                
             }
     
     }catch(err){
@@ -91,4 +92,10 @@ export const logout = () => dispatch =>{
     })
     localStorage.removeItem("user:token")
     
+}
+
+export const edit = () => (dispatch) =>{
+    dispatch({
+        type:EDIT
+    })
 }
