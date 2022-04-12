@@ -259,7 +259,7 @@ export const Product = () => {
           </div>
           <div className="col-9 d-flex justify-content-lg-end">
             <CustomButton
-              type="submit"
+              type="button"
               disabled={loading}
               className="mx-2"
               background="#00ADEF"
