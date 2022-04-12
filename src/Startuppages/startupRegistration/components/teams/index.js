@@ -35,6 +35,10 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
 import { upload } from '../../../../services/utils';
 import CountryDropdown from 'country-dropdown-with-flags-for-react';
+import moment from 'moment';
+
+
+
 
 const { Option } = Select
 
@@ -48,7 +52,7 @@ export const TeamProfile = () => {
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
-  const [startDate, setStartDate] = useState()
+  const [dob, setDob] = useState(moment(stateAuth?.user?.team?.dob) ?? '')
   const [loading, setLoading] = useState(false)
   const [nextLoading, setNextLoading] = useState(false)
   const [opts, setOpts] = useState('')
@@ -64,15 +68,13 @@ export const TeamProfile = () => {
     twitter: stateAuth?.user?.team?.socialMedia?.twitter
       ?? '',
   });
-  const [contacts, setContacts] = useState({
-    country: stateAuth?.user?.team?.contactInfo?.country ?? ''
-  })
+  const [country, setCountry] = useState(stateAuth?.user?.team?.country ?? '');
 
   const onChange = (e) => {
-    setContacts({ ...contacts, [e.target.name]: e.target.value })
+    setCountry(e.target.value)
   }
 
-
+  const dateFormat = 'YYYY-MM-DD';
   const [inVal , setVal] = useState('');
   const [editIndex, setEditIndex] = useState();
   const [isEditing, setIsEditing] = useState(false);
@@ -117,7 +119,7 @@ export const TeamProfile = () => {
   };
 
   const handleChange = (e) =>{
-   // console.log(e.target.value)
+   
     setVal(e.target.value);
   }
 
@@ -178,10 +180,9 @@ export const TeamProfile = () => {
           experience: experience,
           education: education,
           socialMedia,
+          dob:dob,
           mobile_number:phone,
-          contactInfo: {
-            ...contacts,
-          }
+          country:country
         },
         userId: stateAuth?.user?.userId,
       };
@@ -221,7 +222,6 @@ export const TeamProfile = () => {
       firstName: stateAuth?.user?.team?.firstName ?? '',
       lastName: stateAuth?.user?.team?.lastName ?? '',
       email: stateAuth?.user?.team?.email ?? '',
-      dob: startDate,
       // country: stateAuth?.user?.team?.country ?? '',
       state: stateAuth?.user?.team?.state ?? '',
       city: stateAuth?.user?.team?.city ?? '',
@@ -450,13 +450,11 @@ export const TeamProfile = () => {
                 name="dob"
                 className="custs p-2 py-4"
                 style={{ padding: '15px' }}
-                value={startDate}
-                // onBlur={formik.handleBlur}
-                onChange={(date) => setStartDate(date)}
+                defaultValue={moment(stateAuth?.user?.team?.dob) ?? moment()}
+              format={dateFormat}
+              onChange={(date,dateString) => setDob(dateString)}  
               />
-              {formik.touched.dob && !startDate ? (
-                <label className="error">{formik.errors.dob}</label>
-              ) : null}
+             
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>Country *</label>
@@ -475,12 +473,10 @@ export const TeamProfile = () => {
                 name="country"
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={['ng']}
-                value={contacts.country}
-                handleChange={(e) => setContacts({...contacts, country:e.target.value})}
+                value={country}
+                handleChange={(e) => setCountry(e.target.value)}
               ></CountryDropdown>
-              {formik.touched.country && !contacts.country ? (
-                <label className="error">Required</label>
-              ) : null}
+             
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>State *</label>

@@ -11,11 +11,10 @@ import { FundUtilization } from "./components/fundutilization";
 import { CapTable } from "./components/captable";
 import { PreviousRound } from "./components/prevRound";
 import { FinancialProjection } from "./components/financialProjection";
-import { getFundraisingData } from "../../services";
-import newApp from "../../assets/icons/Star.svg";
 import { convertToMillion } from "../../utils/helpers";
 import { PageLoader } from "../../components";
 import { useAuth }  from "../../hooks/useAuth";
+import { getRole } from './../../utils/helpers';
 
 
 
@@ -25,27 +24,28 @@ export const StartupFundingRaising = () => {
     location: { hash },
   } = history;
 
-  const { stateAuth } = useAuth();
-
-  const [fundData, setFundData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { stateAuth , getDashboardProfile } = useAuth();
 
   
+  useEffect(() =>{
+    getDashboardProfile(getRole())
+},[getDashboardProfile])
 
-  
+
+  console.log(stateAuth)
 
   const renderContent = () => {
     switch (hash) {
       case "#Funding Ask":
         return <FundingAsk data={stateAuth?.user?.fundRaising?.fundingAsk} />;
       case "#Fund Utilization":
-        return <FundUtilization data={stateAuth?.user?.fundRaising?.fundUtilization} />;
+        return <FundUtilization data={stateAuth?.user?.fundRaising?.fundUtilization?.files} />;
       case "#Cap Table":
-        return <CapTable data={stateAuth?.user?.fundRaising?.capTable} />;
+        return <CapTable data={stateAuth?.user?.fundRaising?.capTable?.files} />;
       case "#Previous Round":
         return <PreviousRound data={stateAuth?.user?.fundRaising?.previousRound} />;
       case "#Financial Projection":
-        return <FinancialProjection />;
+        return <FinancialProjection data={stateAuth?.user?.fundRaising?.financialProjection?.files}  />;
       default:
         return <FundingAsk data={stateAuth?.user?.fundRaising?.fundingAsk} />;
     }
@@ -59,18 +59,8 @@ export const StartupFundingRaising = () => {
     "Financial Projection",
   ];
 
-  if (loading) {
-    return (
-      <PageLoader
-        dashboard={true}
-        num={[
-          fundData?.fundAsk,
-          fundData?.fundUtilization,
-          fundData?.capTable,
-          fundData?.previousRound,
-        ]}
-      />
-    );
+  if(stateAuth.dashboardLoad){
+    return <PageLoader num={[1, 2 , 3, 4]} />
   }
 
   return (

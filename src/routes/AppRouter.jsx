@@ -5,21 +5,21 @@ import { ProtectedRoute }  from './ProtectedRoute'
 import { useAuth } from '../hooks/useAuth';
 import { getToken , getLocationHistory , getRole } from '../utils/helpers.js';
 import { LoadingIcon } from './../components/Loading/Loading';
-import { useActivity } from '../hooks/useBusiness';
+
 
 export  function AppRouter(props){
-    const { userProfile, stateAuth : { loading , authenticated , completedRegistration, roles }} = useAuth();
-    const  { state } = useActivity();
+    const { userProfile, stateAuth : { loading , authenticated ,  roles }} = useAuth();
+
     const history = useHistory();
     useEffect(()=>{
       
-        const getP = async () => {
+      const getP = async () => {
 			if (getToken()) {
                 const userRole = getRole();
                // console.log(userRole)
               await userProfile(userRole && userRole);
                
-            console.log(roles)
+          
 				if (getLocationHistory()){
                     console.log('problem')
                     history.push(getLocationHistory());
@@ -37,6 +37,7 @@ export  function AppRouter(props){
             <Switch>
     
                    {
+                       
                     routes.map((route)=>{  
                         return route.protected ? (
                             <ProtectedRoute

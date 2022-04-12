@@ -3,7 +3,7 @@ import {
   WALLET,
   TRANSACTIONS,
   DATA_BANK,
-  CHART_SUPPORT,
+  DASHBOARD_LOAD,
   SETTINGS,
   CHANGE_PAGE,
   SHOW_EVENT,
@@ -13,7 +13,9 @@ import {
   SET_EDUCATION,
   SET_FUNDRAISING,
   SET_WORK_EXPERIENCE_DATABASE,
-  SET_EDUCATION_DATABASE
+  SET_EDUCATION_DATABASE,
+  DASHBOARD_USER_PROFILE,
+
 } from '../actions.types';
 
 import { getEvents } from '../../../services/events';
@@ -42,18 +44,7 @@ export const events = (id) => async (dispatch) => {
 };
 
 
-// export const addwork = (value) => (dispatch) =>{
 
-//   dispatch({
-//     type:ADD_WORK_EXPERIENCE,
-//     payload:value
-//   })
-// }
-
-
-// const setAlert = ()=>{
-
-// }
 
 export const showDEventAction = () => (dispatch) => {
   dispatch({

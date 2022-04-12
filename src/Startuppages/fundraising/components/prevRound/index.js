@@ -1,8 +1,11 @@
 import { Header, Table, Section } from "./prevRpund.styled";
 import html2pdf from "html2pdf.js";
 import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
+import moment from "moment";
 
-export const PreviousRound = ({ data = [] }) => {
+
+
+export const PreviousRound = ({ data  }) => {
   const downloadStatement = () => {
     const element = document.querySelector("#fndRound");
 
@@ -17,7 +20,7 @@ export const PreviousRound = ({ data = [] }) => {
     return html2pdf().from(element).set(opt).save();
   };
 
-  const preRoundArr = [...data];
+  console.log()
 
   return (
     <div id="fndRound">
@@ -46,16 +49,16 @@ export const PreviousRound = ({ data = [] }) => {
           </tr>
         </thead>
         <tbody>
-          {preRoundArr?.length > 0 &&
-            preRoundArr.map((data) => (
-              <tr key={data}>
+           { data &&
+            (
+              <tr >
                 <td style={{ fontWeight: "600", lineHeight: "130%" }}>
                   {" "}
-                  {data?.invest}{" "}
+                  {data?.invest ?? ''}{" "}
                 </td>
                 <td style={{ fontWeight: "600", lineHeight: "130%" }}>
                   {" "}
-                  {data?.fundDate}{" "}
+                  { moment(data?.dateOfFunding).format('YYYY-MM-DD') }{" "}
                 </td>
                 <td style={{ fontWeight: "600", lineHeight: "130%" }}>
                   {" "}
@@ -63,26 +66,26 @@ export const PreviousRound = ({ data = [] }) => {
                 </td>
                 <td style={{ fontWeight: "600", lineHeight: "130%" }}>
                   {" "}
-                  {data?.fundRound}{" "}
+                  {data?.numberOfRounds}{" "}
                 </td>
                 <td style={{ fontWeight: "600", lineHeight: "130%" }}>
                   {" "}
-                  {data?.investAmnt}{" "}
+                  {data?.instrumentForRound}{" "}
                 </td>
                 <td style={{ fontWeight: "600", lineHeight: "130%" }}>
                   {" "}
-                  {data?.dulition}{" "}
+                  {data?.dilution}{" "}
                 </td>
                 <td style={{ fontWeight: "600", lineHeight: "130%" }}>
                   {" "}
-                  {data?.preMoney}{" "}
+                  {data?.preMoneyValuation}{" "}
                 </td>
                 <td style={{ fontWeight: "600", lineHeight: "130%" }}>
                   {" "}
-                  {data?.pstMoney}{" "}
+                  {data?.postMoneyValuation}{" "}
                 </td>
               </tr>
-            ))}
+            )} 
         </tbody>
       </Table>
     </div>

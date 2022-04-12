@@ -55,6 +55,15 @@ export const convertToMillion = (num = "0") => {
   }
 };
 
+ export const parseFile = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (e) => reject(e);
+    reader.readAsBinaryString(file);
+  });
+};
+
 export const months = [
   "January",
   "February",
