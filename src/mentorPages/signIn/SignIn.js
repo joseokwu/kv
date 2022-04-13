@@ -42,11 +42,12 @@ export const SignIn = () => {
       const res = await newLogin(values)
       const loca = getLocationHistory()
       console.log(res)
-      if (res?.status) {
+      if (res?.success) {
         if (loca !== null) {
           history.push(loca)
          return sessionStorage.removeItem('user:redirect:location')
         }
+        console.log(res)
         if(res?.data?.user?.isRegCompleted){
           history.push(`/${res?.data?.user?.type[0]}/dashboard`)
         }else{

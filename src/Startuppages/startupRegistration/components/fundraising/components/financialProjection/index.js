@@ -81,8 +81,9 @@ export const FinancialProjection = () => {
           },
         userId: stateAuth?.user?.userId,
       }
-      console.log(fund)
+      console.log(fund) 
       let result = await updateFounderProfile(fund);
+      console.log(result)
       toast.success(result?.message)
       window.open('/startup/dashboard', '_self')
     }catch(err){
