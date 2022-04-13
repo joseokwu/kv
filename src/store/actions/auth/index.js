@@ -1,10 +1,11 @@
 import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
     LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL , 
-    SET_SIGNUP_STATUS, EDIT , LOG_OUT 
+    SET_SIGNUP_STATUS, EDIT , LOG_OUT ,  DASHBOARD_USER_PROFILE,
+    DASHBOARD_USER_PROFILE_FAILED ,  DASHBOARD_LOAD
 } from '../actions.types';
 import { register, userLogin , profile, forgorPassword } from '../../../services';
 import toast from 'react-hot-toast';
-import { setAuthToken } from '../../../utils/helpers';
+import { setAuthToken , setRole } from '../../../utils/helpers';
 
 
 export const registerUser = async(value) => async(dispatch) =>{
@@ -38,13 +39,14 @@ export const loginUser = async(value) => async(dispatch) =>{
         })
         const res = await userLogin(value);
         setAuthToken(res?.data?.token);
+        setRole(res?.data?.user?.type[0])
         console.log(res)
         dispatch({
             type:LOGIN_SUCCESS,
             payload: res?.data?.user
         })
        
-        return res;
+         return res;
     
     }catch(err){
         console.log(err?.response?.data?.message , 'err')
@@ -55,6 +57,29 @@ export const loginUser = async(value) => async(dispatch) =>{
         })
     }
 }
+
+export const dashboardProfile = async(value) => async(dispatch) =>{
+
+    try{
+      dispatch({
+        type: DASHBOARD_LOAD
+      })
+      const res = await profile(value);
+      if(res){
+          dispatch({
+              type:DASHBOARD_USER_PROFILE,
+              payload:res?.data
+          })
+          
+      }
+    }catch(err){
+        dispatch({
+            type:USER_PROFILE_FAIL
+        })
+    }
+  
+  }
+
 
 export const getProfile = async (value) => async(dispatch) =>{
 

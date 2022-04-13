@@ -4,7 +4,7 @@ import {
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-  BntWrap,
+
 } from './teams.styled';
 import { updateFounderProfile } from '../../../../services/startup';
 import { UserOutlined, PlusOutlined } from '@ant-design/icons';
@@ -19,7 +19,7 @@ import { CustomButton } from '../../../../Startupcomponents/button/button.styled
 import { useActivity } from '../../../../hooks/useBusiness';
 import { TeamModal, EducationModal } from './teamModal';
 import { Select } from 'antd';
-import { Tag } from '../../../../Startupcomponents/tag/Tag';
+
 import 'antd/dist/antd.css';
 import { team } from './../../../../services/startUpReg';
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
@@ -35,6 +35,8 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
 import { upload } from '../../../../services/utils';
 import CountryDropdown from 'country-dropdown-with-flags-for-react';
+import moment from 'moment';
+
 
 const { Option } = Select
 
@@ -45,10 +47,9 @@ export const TeamProfile = () => {
   const [show, setShow] = useState(false);
   const [showEducation, setShowEducation] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  const history = useHistory();
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
-  const [startDate, setStartDate] = useState()
+  const [dob, setDob] = useState(moment(stateAuth?.user?.team?.dob) ?? '')
   const [loading, setLoading] = useState(false)
   const [nextLoading, setNextLoading] = useState(false)
   const [opts, setOpts] = useState('')
@@ -64,13 +65,14 @@ export const TeamProfile = () => {
     twitter: stateAuth?.user?.team?.socialMedia?.twitter
       ?? '',
   });
+  const [country, setCountry] = useState(stateAuth?.user?.team?.country ?? '');
 
-
+  const dateFormat = 'YYYY-MM-DD';
   const [inVal , setVal] = useState('');
   const [editIndex, setEditIndex] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [avatar, setAvatar] = useState(stateAuth?.user?.team?.avatar ?? null);
-  const [coFounder, setCoFounder] = useState('');
+
   const {
     changePath,
     setWorkExperience,
@@ -110,25 +112,21 @@ export const TeamProfile = () => {
   };
 
   const handleChange = (e) =>{
-   // console.log(e.target.value)
+   
     setVal(e.target.value);
-  }
+  }  
 
   const handleKey = (e) =>{
-    if(e.keyCode === 32){
+    if(e.keyCode === 32 && e.target.value !== ''){
       console.log(inVal);
       setVal('');
-      setSkill([...skillSet, inVal])
+      setSkill([...skillSet, inVal]);
     }
   }
 
   const onDelete = (value) =>{
     setSkill(skillSet.filter(item => item !== value))
   }
-
-  // const onChange = (e) => {
-  //   setContacts({ ...contacts, [e.target.name]: e.target.value })
-  // }
 
   let colors = []
 
@@ -144,20 +142,13 @@ export const TeamProfile = () => {
     changePath(path - 1)
   }
 
-  const next = () => {
-    changePath(path + 1)
-  }
 
   const children = []
   for (let i = 0; i < skill.length; i++) {
     children.push(<Option key={i}>{skill[i]}</Option>)
   }
 
- 
 
-  function btn(e) {
-    e.preventDefault()
-  }
 
   const onSubmit = async (value) => {
     try {
@@ -171,7 +162,9 @@ export const TeamProfile = () => {
           experience: experience,
           education: education,
           socialMedia,
-          mobile_number:phone
+          dob:dob,
+          mobile_number:phone,
+          country:country
         },
         userId: stateAuth?.user?.userId,
       };
@@ -195,7 +188,8 @@ export const TeamProfile = () => {
         return
       }
       toast.success('Team' + '' + result?.message)
-      setLoading(false)
+      setLoading(false);
+      history.push('/startup/dashboard');
       return
     } catch (err) {
       setLoading(false)
@@ -211,26 +205,24 @@ export const TeamProfile = () => {
       firstName: stateAuth?.user?.team?.firstName ?? '',
       lastName: stateAuth?.user?.team?.lastName ?? '',
       email: stateAuth?.user?.team?.email ?? '',
-      dob: startDate,
-      country: stateAuth?.user?.team?.country ?? '',
       state: stateAuth?.user?.team?.state ?? '',
       city: stateAuth?.user?.team?.city ?? '',
-      // mobile_number: phone,
+     
       isCofounder:true
     },
-    validationSchema: Yup.object({
-      briefIntroduction: Yup.string().required('Required'),
-      firstName: Yup.string().required('Required'),
-      lastName: Yup.string().required('Required'),
-      email: Yup.string().required('Required'),
-      state: Yup.string().required('Required'),
-      city: Yup.string().required('Required'),
-      dob: Yup.string().required('Required'),
-      skills: Yup.string().required('Required'),
-      linkedIn: Yup.string().required('Required'),
-      twitter: Yup.string().required('Required'),
-      website: Yup.string().required('Required'),
-    }),
+    // validationSchema: Yup.object({
+    //   briefIntroduction: Yup.string().required('Required'),
+    //   firstName: Yup.string().required('Required'),
+    //   lastName: Yup.string().required('Required'),
+    //   email: Yup.string().required('Required'),
+    //   state: Yup.string().required('Required'),
+    //   city: Yup.string().required('Required'),
+    //   dob: Yup.string().required('Required'),
+    //   skills: Yup.string().required('Required'),
+    //   linkedIn: Yup.string().required('Required'),
+    //   twitter: Yup.string().required('Required'),
+    //   website: Yup.string().required('Required'),
+    // }),
     onSubmit: (value) => onSubmit(value),
   });
 
@@ -375,7 +367,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.briefIntroduction}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="briefIntroduction"
                 placeholder="Enter a brief bio about yourself"
@@ -393,7 +385,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.firstName}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="firstName"
                 placeholder="Enter first name"
@@ -408,7 +400,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.lastName}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="lastName"
                 placeholder="Enter last name"
@@ -423,7 +415,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.email}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="email"
                 placeholder="Enter email address"
@@ -440,13 +432,11 @@ export const TeamProfile = () => {
                 name="dob"
                 className="custs p-2 py-4"
                 style={{ padding: '15px' }}
-                value={startDate}
-                onBlur={formik.handleBlur}
-                onChange={(date) => setStartDate(date)}
+                defaultValue={moment(stateAuth?.user?.team?.dob) ?? moment()}
+              format={dateFormat}
+              onChange={(date,dateString) => setDob(dateString)}  
               />
-              {formik.touched.dob && !startDate ? (
-                <label className="error">{formik.errors.dob}</label>
-              ) : null}
+             
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>Country *</label>
@@ -461,22 +451,21 @@ export const TeamProfile = () => {
               /> */}
               <CountryDropdown
                 id="country"
+                type="text"
+                name="country"
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={['ng']}
-                value={formik.values.country}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                value={country}
+                handleChange={(e) => setCountry(e.target.value)}
               ></CountryDropdown>
-              {formik.touched.country && formik.errors.country ? (
-                <label className="error">{formik.errors.country}</label>
-              ) : null}
+             
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>State *</label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.state}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="state"
                 placeholder="Enter your state"
@@ -491,7 +480,7 @@ export const TeamProfile = () => {
               <input
                 onChange={formik.handleChange}
                 value={formik.values.city}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type="text"
                 name="city"
                 placeholder="Enter your city"
@@ -511,7 +500,7 @@ export const TeamProfile = () => {
                 value={
                   stateAuth?.user?.team?.contactInfo?.mobile_number ?? phone
                 }
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 onChange={setPhone}
                 MaxLength={17}
               />
@@ -603,7 +592,7 @@ export const TeamProfile = () => {
                 placeholder='Enter your skills'
                 className="py-2 px-3"
                 // className='form-control ps-3'
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 onKeyDown={handleKey}
               />
               {formik.touched.skills && formik.errors.skills ? (
@@ -629,7 +618,7 @@ export const TeamProfile = () => {
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.linkedIn}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type='text'
                 name='linkedIn'
                 placeholder='Enter Linkdin link'
@@ -644,7 +633,7 @@ export const TeamProfile = () => {
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.twitter}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type='text'
                 name='twitter'
                 placeholder='Enter Twitter link'
@@ -660,7 +649,7 @@ export const TeamProfile = () => {
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.website}
-                onBlur={formik.handleBlur}
+                // onBlur={formik.handleBlur}
                 type='text'
                 name='website'
                 placeholder='Enter website'
@@ -673,56 +662,6 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-        {/* <FormWrapper height="70%">
-          <div className="div border-bottom pb-2">
-            <span>Co-Founders</span>
-            <p className="pt-3">Create a profile for your Co-Founders</p>
-          </div>
-
-          <div className="mt-4">
-            <label>Do you have Co-Founders?*</label>
-
-            <div className="d-flex">
-              <BntWrap>
-                <button
-                  className={`me-3 ${coFounder === 'yes' && 'active'}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setCoFounder('yes')
-                  }}
-                >
-                  Yes
-                </button>
-                <button
-                  className={`me-3 ${coFounder === 'no' && 'active'}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setCoFounder('no')
-                  }}
-                >
-                  No
-                </button>
-              </BntWrap>
-            </div>
-
-            <div className="sold">
-              <div className="d-flex justify-content-center">
-                <div
-                  className=""
-                  data-target="#cofounder"
-                  onClick={() => setShowModal(true)}
-                >
-                  <Tag
-                    name="+ Add Co-founder"
-                    color="#4F4F4F"
-                    bg="rgba(183, 218, 231, 0.5"
-                    padding="8px 14px"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </FormWrapper> */}
 
         <FormWrapper height="70%">
           <div className="div border-bottom pb-3">
@@ -753,10 +692,11 @@ export const TeamProfile = () => {
           </div>
           <div className="col-9 d-flex justify-content-end">
             <CustomButton
-              type="submit"
+              type="button"
               disabled={loading}
               className="mx-2"
               background="#00ADEF"
+              onClick={() => formik.handleSubmit()}
             >
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>

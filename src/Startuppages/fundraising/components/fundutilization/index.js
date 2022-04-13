@@ -1,14 +1,10 @@
-import { useEffect } from 'react';
 import { Header, Table, Section } from "./utilization";
 import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
 import ApplicationChart from "./applicationChart/ApplicationChart";
 import html2pdf from "html2pdf.js";
 import { Select } from "../../../../Startupcomponents";
-import * as Papa from 'papaparse';
-import axios from 'axios';
 
-export const FundUtilization = ({ data  }) => {
-
+export const FundUtilization = ({ data }) => {
   const downloadStatement = () => {
     const element = document.querySelector("#utilization");
 
@@ -23,21 +19,7 @@ export const FundUtilization = ({ data  }) => {
     return html2pdf().from(element).set(opt).save();
   };
 
-  const fetchFile = async() =>{
-    try{
-      const res = await axios.get(data?.files)
-      console.log(res?.data)
-    }catch(err){
-      console.log(err)
-    }
-  }
-
-  //iles: "https://cdn.shoutng.com/kvu6t59yz90snuhtzaozkuapplication/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-
-  useEffect(() =>{
-    fetchFile();
-    
-  },[])
+  console.log(data)
 
   return (
     <div>
@@ -67,7 +49,18 @@ export const FundUtilization = ({ data  }) => {
           </thead>
 
           <tbody>
-           
+          { data?.length > 0 &&
+              data.map((data , i) => (
+                <tr key={i}>
+                  <td style={{ fontWeight: "bolder" }}> {data?.__EMPTY} </td>
+                  <td> {data?.Month1} </td>
+                  <td> {data?.Month2} </td>
+                  <td> {data?.Month3} </td>
+                  <td> {data?.Month4} </td>
+                  <td> {data?.Month5} </td>
+                  <td> {data?.Month6} </td>
+                </tr>
+              ))} 
           </tbody>
         </Table>
       </Section>
@@ -105,16 +98,3 @@ export const FundUtilization = ({ data  }) => {
     </div>
   );
 };
-
-// {uitlizations?.length > 0 &&
-//   uitlizations.map((data) => (
-//     <tr key={data}>
-//       <td style={{ fontWeight: "bolder" }}> {data?.head} </td>
-//       <td> {data?.month1} </td>
-//       <td> {data?.month2} </td>
-//       <td> {data?.month3} </td>
-//       <td> {data?.month4} </td>
-//       <td> {data?.month5} </td>
-//       <td> {data?.month6} </td>
-//     </tr>
-//   ))}

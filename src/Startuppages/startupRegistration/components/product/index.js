@@ -14,7 +14,6 @@ import { updateFounderProfile } from '../../../../services';
 import {
   FileWrapper,
   FileText,
-  FileSize,
   LabelButton,
 } from '../pitchdeck/pitch.styled'
 import DownloadIcon from '../../../../assets/icons/download.svg'
@@ -22,6 +21,8 @@ import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/Cir
 import * as Yup from 'yup';
 import { useFormik } from 'formik'
 import { upload } from '../../../../services/utils';
+import { useHistory } from 'react-router-dom';
+
 
 
 export const Product = () => {
@@ -33,7 +34,7 @@ export const Product = () => {
   const [urls, setUrls] = useState(stateAuth?.user?.product?.youtubeDemoUrl  ?? []);
   const [youtube , setYoutube] = useState('');
   const [fileInfo, setFile] = useState(stateAuth?.user?.product?.files ?? null)
-
+  const history = useHistory();
   const handleChangeVids = (e) =>{
     setYoutube(e.target.value);
   }
@@ -116,7 +117,8 @@ export const Product = () => {
         return
       }
       toast.success('Product' + '' + result?.message)
-      setLoading(false)
+      setLoading(false);
+      history.push('/startup/dashboard');
       return
     } catch (err) {
       setLoading(false)
@@ -221,7 +223,7 @@ export const Product = () => {
                     </>
                   )}
                
-                <input name="files" onChange={handleChange} type="file" id="pitch-doc" hidden />
+                <input name="files" onChange={handleChange} type="file" id="pitch-doc" hidden accept='video/*' />
                 <LabelButton for="pitch-doc">Upload Files</LabelButton>
               </FileWrapper>
             </div>
@@ -257,17 +259,18 @@ export const Product = () => {
           </div>
           <div className="col-9 d-flex justify-content-lg-end">
             <CustomButton
-              type="submit"
+              type="button"
               disabled={loading}
               className="mx-2"
               background="#00ADEF"
+              onClick={() => formik.handleSubmit()}
             >
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
             <CustomButton
               type="submit"
               disabled={nextLoading}
-              onClick={() => setOpts('next')}
+              onClick={() =>{ setOpts('next')}}
               background="#2E3192"
             >
               {nextLoading ? <CircularLoader /> : 'Next'}

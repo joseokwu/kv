@@ -41,7 +41,7 @@ export const MentorPersonalDetails = () => {
         setProgress('30')
         break
       case '#personal_details':
-        setProgress('20')
+        setProgress('0')
         break
       default:
         setProgress('0')

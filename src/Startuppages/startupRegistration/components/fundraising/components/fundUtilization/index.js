@@ -22,6 +22,8 @@ import { upload } from './../../../../../../services/utils';
 import { useAuth } from './../../../../../../hooks/useAuth';
 import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import toast from 'react-hot-toast';
+import * as XLSX from 'xlsx';
+import { parseFile } from '../../../../../../utils/helpers';
 
 
 
@@ -35,27 +37,29 @@ export const FundUtilization = ({setFundraising}) => {
     location: { hash },
   } = history;
 
-  const handleChange = async(e) => {
+ 
 
-    const { files, name } = e.target;
-    const formData = new FormData();
-    formData.append("dir", "kv");
-    formData.append("ref", stateAuth.user?.userId);
-    formData.append("type", "image");
-    formData.append(0 , files[0])
 
-    try {
-      setLogoUploading(true);
-      const response = await upload(formData)
-      console.log(response) 
-      setFileDoc(response?.path)
-      setLogoUploading(false)
 
-    } catch(error) {
-      console.log(error)
-      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
+  const handleCsv = async(e) =>{
+    const file = e.target.files[0];
+    
+    const fileData = await parseFile(file);
+    const workbook = XLSX.read(fileData, { type: 'binary' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    console.log(file.type === 'text/csv')
+    if (file.type === 'text/csv') {
+      const data = XLSX.utils.sheet_to_json(worksheet, {
+        raw: false,
+      });
+      console.log(data)
+      if (Array.isArray(data)) {
+        setFileDoc(data)
+        console.log(data)
+      }
     }
-
+    
   }
 
 
@@ -104,7 +108,7 @@ export const FundUtilization = ({setFundraising}) => {
               }
               <input type='file'
                id='utilize'
-               onChange={handleChange}
+               onChange={handleCsv}
                 hidden />
               <LabelButton for='utilize'>Upload Files</LabelButton>
             </FileWrapper>

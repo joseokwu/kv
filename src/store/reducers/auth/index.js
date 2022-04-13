@@ -2,7 +2,8 @@ import { LOGIN_FAILED, AUTH_START,
   REGISTER_FAILED, LOGIN_SUCCESS,
   REGISTER_SUCCESS , USER_PROFILE,
   USER_PROFILE_FAIL, SET_SIGNUP_STATUS,
-  LOG_OUT, EDIT
+  LOG_OUT, EDIT , DASHBOARD_USER_PROFILE , 
+  DASHBOARD_LOAD
 
 } from '../../actions/actions.types';
 import { INIT_STATE } from '../../initialstates';
@@ -17,6 +18,11 @@ import { INIT_STATE } from '../../initialstates';
           ...state,
           loading:true
         }
+        case DASHBOARD_LOAD :
+          return {
+            ...state,
+            dashboardLoad:true
+          }
         case REGISTER_SUCCESS :
           return {
             ...state,
@@ -28,6 +34,7 @@ import { INIT_STATE } from '../../initialstates';
               loading:false, error:action.payload
             }
             case LOGIN_SUCCESS :
+
               return {
                 ...state,
                   loading:false,
@@ -41,6 +48,8 @@ import { INIT_STATE } from '../../initialstates';
                   loading:false, error:action.payload
                 }
               case USER_PROFILE :
+                
+              
                 return {
                   ...state,
                   loading:false,
@@ -48,8 +57,16 @@ import { INIT_STATE } from '../../initialstates';
                   user:action?.payload,
                   roles:action?.payload?.role,
                   signUpStatus:action?.payload?.role[0],
-                  completedRegistration: action?.payload?.fundRaising ? true : false 
-                  
+
+                }
+
+                case DASHBOARD_USER_PROFILE : 
+                return {
+                  ...state,
+                  dashboardLoad:false,
+                  user:action?.payload,
+                  roles:action?.payload?.role,
+                  signUpStatus:action?.payload?.role[0],
                 }
                 case USER_PROFILE_FAIL :
                   return {
