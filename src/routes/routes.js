@@ -135,7 +135,7 @@ const routes = [
     path: '/startup/program',
     component: WithStartupDashboardLayout(StartupProgram),
     exact: true,
-    protected: false,
+    protected: true,
     type: 'startup',
   },
 
@@ -144,7 +144,7 @@ const routes = [
     path: '/startup/fundraising',
     component: WithStartupDashboardLayout(StartupFundingRaising),
     exact: true,
-    protected: false,
+    protected:true,
     type: 'startup',
   },
   {
