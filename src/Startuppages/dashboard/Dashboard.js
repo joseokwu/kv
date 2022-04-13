@@ -7,7 +7,7 @@ import { UpComing } from "./components/upComing";
 import { getDashboardInfo } from "../../services";
 import newApp from "../../assets/icons/Star.svg";
 import dateFormat from "dateformat";
-import { convertToMillion } from "../../utils/helpers";
+import { convertToMillion , getRole } from "../../utils/helpers";
 import { PageLoader } from "../../components";
 import { useAuth} from '../../hooks/useAuth';
 
@@ -15,9 +15,18 @@ import { useAuth} from '../../hooks/useAuth';
 export const StartupDashboard = () => {
   const [dashInfo, setDashInfo] = useState({});
   const [loading, setLoading] = useState(false);
-  const { stateAuth } = useAuth();
+  const { stateAuth , getDashboardProfile } = useAuth();
+  
 
-  console.log(stateAuth.user)
+useEffect(() =>{
+    getDashboardProfile(getRole())
+},[getDashboardProfile])
+
+
+
+  if(stateAuth.dashboardLoad){
+    return <PageLoader num={[1, 2 , 3, 4]} />
+  }
 
   return (
     <div className="dashboardMain">

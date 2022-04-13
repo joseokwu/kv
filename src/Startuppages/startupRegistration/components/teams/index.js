@@ -4,7 +4,7 @@ import {
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-  BntWrap,
+
 } from './teams.styled';
 import { updateFounderProfile } from '../../../../services/startup';
 import { UserOutlined, PlusOutlined } from '@ant-design/icons';
@@ -19,7 +19,7 @@ import { CustomButton } from '../../../../Startupcomponents/button/button.styled
 import { useActivity } from '../../../../hooks/useBusiness';
 import { TeamModal, EducationModal } from './teamModal';
 import { Select } from 'antd';
-import { Tag } from '../../../../Startupcomponents/tag/Tag';
+
 import 'antd/dist/antd.css';
 import { team } from './../../../../services/startUpReg';
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
@@ -35,6 +35,8 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
 import { upload } from '../../../../services/utils';
 import CountryDropdown from 'country-dropdown-with-flags-for-react';
+import moment from 'moment';
+
 
 const { Option } = Select
 
@@ -45,10 +47,9 @@ export const TeamProfile = () => {
   const [show, setShow] = useState(false);
   const [showEducation, setShowEducation] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  const history = useHistory();
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
-  const [startDate, setStartDate] = useState()
+  const [dob, setDob] = useState(moment(stateAuth?.user?.team?.dob) ?? '')
   const [loading, setLoading] = useState(false)
   const [nextLoading, setNextLoading] = useState(false)
   const [opts, setOpts] = useState('')
@@ -64,20 +65,14 @@ export const TeamProfile = () => {
     twitter: stateAuth?.user?.team?.socialMedia?.twitter
       ?? '',
   });
-  const [contacts, setContacts] = useState({
-    country: stateAuth?.user?.team?.contactInfo?.country ?? ''
-  })
+  const [country, setCountry] = useState(stateAuth?.user?.team?.country ?? '');
 
-  const onChange = (e) => {
-    setContacts({ ...contacts, [e.target.name]: e.target.value })
-  }
-
-
+  const dateFormat = 'YYYY-MM-DD';
   const [inVal , setVal] = useState('');
   const [editIndex, setEditIndex] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [avatar, setAvatar] = useState(stateAuth?.user?.team?.avatar ?? null);
-  const [coFounder, setCoFounder] = useState('');
+
   const {
     changePath,
     setWorkExperience,
@@ -117,25 +112,21 @@ export const TeamProfile = () => {
   };
 
   const handleChange = (e) =>{
-   // console.log(e.target.value)
+   
     setVal(e.target.value);
-  }
+  }  
 
   const handleKey = (e) =>{
-    if(e.keyCode === 32){
+    if(e.keyCode === 32 && e.target.value !== ''){
       console.log(inVal);
       setVal('');
-      setSkill([...skillSet, inVal])
+      setSkill([...skillSet, inVal]);
     }
   }
 
   const onDelete = (value) =>{
     setSkill(skillSet.filter(item => item !== value))
   }
-
-  // const onChange = (e) => {
-  //   setContacts({ ...contacts, [e.target.name]: e.target.value })
-  // }
 
   let colors = []
 
@@ -151,20 +142,13 @@ export const TeamProfile = () => {
     changePath(path - 1)
   }
 
-  const next = () => {
-    changePath(path + 1)
-  }
 
   const children = []
   for (let i = 0; i < skill.length; i++) {
     children.push(<Option key={i}>{skill[i]}</Option>)
   }
 
- 
 
-  function btn(e) {
-    e.preventDefault()
-  }
 
   const onSubmit = async (value) => {
     try {
@@ -178,10 +162,9 @@ export const TeamProfile = () => {
           experience: experience,
           education: education,
           socialMedia,
+          dob:dob,
           mobile_number:phone,
-          contactInfo: {
-            ...contacts,
-          }
+          country:country
         },
         userId: stateAuth?.user?.userId,
       };
@@ -205,7 +188,8 @@ export const TeamProfile = () => {
         return
       }
       toast.success('Team' + '' + result?.message)
-      setLoading(false)
+      setLoading(false);
+      history.push('/startup/dashboard');
       return
     } catch (err) {
       setLoading(false)
@@ -221,11 +205,9 @@ export const TeamProfile = () => {
       firstName: stateAuth?.user?.team?.firstName ?? '',
       lastName: stateAuth?.user?.team?.lastName ?? '',
       email: stateAuth?.user?.team?.email ?? '',
-      dob: startDate,
-      // country: stateAuth?.user?.team?.country ?? '',
       state: stateAuth?.user?.team?.state ?? '',
       city: stateAuth?.user?.team?.city ?? '',
-      // mobile_number: phone,
+     
       isCofounder:true
     },
     // validationSchema: Yup.object({
@@ -450,13 +432,11 @@ export const TeamProfile = () => {
                 name="dob"
                 className="custs p-2 py-4"
                 style={{ padding: '15px' }}
-                value={startDate}
-                // onBlur={formik.handleBlur}
-                onChange={(date) => setStartDate(date)}
+                defaultValue={moment(stateAuth?.user?.team?.dob) ?? moment()}
+              format={dateFormat}
+              onChange={(date,dateString) => setDob(dateString)}  
               />
-              {formik.touched.dob && !startDate ? (
-                <label className="error">{formik.errors.dob}</label>
-              ) : null}
+             
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>Country *</label>
@@ -475,12 +455,10 @@ export const TeamProfile = () => {
                 name="country"
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={['ng']}
-                value={contacts.country}
-                handleChange={(e) => setContacts({...contacts, country:e.target.value})}
+                value={country}
+                handleChange={(e) => setCountry(e.target.value)}
               ></CountryDropdown>
-              {formik.touched.country && !contacts.country ? (
-                <label className="error">Required</label>
-              ) : null}
+             
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>State *</label>
@@ -714,10 +692,11 @@ export const TeamProfile = () => {
           </div>
           <div className="col-9 d-flex justify-content-end">
             <CustomButton
-              type="submit"
+              type="button"
               disabled={loading}
               className="mx-2"
               background="#00ADEF"
+              onClick={() => formik.handleSubmit()}
             >
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>

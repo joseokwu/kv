@@ -135,7 +135,7 @@ const routes = [
     path: '/startup/program',
     component: WithStartupDashboardLayout(StartupProgram),
     exact: true,
-    protected:true,
+    protected: true,
     type: 'startup',
   },
 

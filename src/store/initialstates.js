@@ -3,6 +3,7 @@ export const INIT_STATE = {
   user: null,
   error: false,
   loading: false,
+  dashboardLoad:false,
   roles: [],
   signUpStatus: 'startup',
   username: '',

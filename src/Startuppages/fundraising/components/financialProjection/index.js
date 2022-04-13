@@ -2,7 +2,9 @@ import { Header, Section, VideoWrapper } from './financial.styled'
 import RedFile from '../../../../assets/icons/greenFile.svg'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
 
-export const FinancialProjection = () => {
+export const FinancialProjection = (data) => {
+
+
   return (
     <div>
       <Header className="d-flex justify-content-end">
@@ -13,7 +15,9 @@ export const FinancialProjection = () => {
       </Header>
 
       <Section>
-        <VideoWrapper>
+       {
+         data?.data && (
+          <VideoWrapper>
           <div className="">
             <div className="d-flex div  justify-content-center align-items-center">
               <img src={RedFile} alt=".#" className="" />
@@ -37,6 +41,8 @@ export const FinancialProjection = () => {
             </div>
           </div>
         </VideoWrapper>
+         )
+       }
       </Section>
     </div>
   )

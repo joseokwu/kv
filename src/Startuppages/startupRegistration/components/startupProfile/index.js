@@ -88,7 +88,7 @@ export const StartupProfile = () => {
       setLogoUploading(false)
       toast.error(error?.response?.data?.message ?? 'Unable to upload image')
     }
-  }         
+  }
 
   const onChange = (e) => {
     setContacts({ ...contacts, [e.target.name]: e.target.value })
@@ -109,7 +109,7 @@ export const StartupProfile = () => {
         values: {
           ...value,
           logo: logo,
-          yearFounded:startDate,
+          yearFounded: startDate,
           contactInfo: {
             ...contacts,
             phoneNumber: phone,
@@ -139,6 +139,7 @@ export const StartupProfile = () => {
       }
       toast.success('Profile' + ' ' + result?.message)
       setLoading(false)
+      history.push('/startup/dashboard')
     } catch (err) {
       setLoading(false)
       toast.error(
@@ -398,6 +399,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your registered address"
                 value={contacts.registeredAddress}
                 onChange={onChange}
+               
                 className="form-control ps-3"
               />
               {formik.touched.registeredAddress &&
@@ -563,6 +565,7 @@ export const StartupProfile = () => {
                 placeholder="Enter your Twitter profile name"
                 value={socialMedia.twitterHandle}
                 onChange={onChangeMedia}
+            
                 className="form-control ps-3"
               />
               {formik.touched.twitterHandle && !socialMedia.twitterHandle ? (
@@ -573,9 +576,10 @@ export const StartupProfile = () => {
           <div className="d-flex my-4 justify-content-end">
             <div>
               <CustomButton
-                type="submit"
+                type="button"
                 disabled={loading}
                 background="#06ADEF"
+                onClick={() => {formik.handleSubmit()}}
               >
                 {loading ? <CircularLoader /> : 'Save'}
               </CustomButton>

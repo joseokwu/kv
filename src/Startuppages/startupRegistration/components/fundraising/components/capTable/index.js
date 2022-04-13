@@ -24,80 +24,58 @@ import { useAuth } from '../../../../../../hooks/useAuth'
 import CurrencyInput from 'react-currency-input-field'
 import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { upload } from './../../../../../../services/utils';
+import * as XLSX from 'xlsx';
+import { parseFile } from '../../../../../../utils/helpers';
+
+
+
 
 export const CapTable = ({ setFundraising }) => {
   const history = useHistory();
   const { stateAuth } = useAuth();
   const [logoUploading , setLogoUploading] = useState(false);
+  const [amnt, setAmnt] = useState(stateAuth?.user?.fundRaising?.capTable?.amountRaised ?? '');
+  const [amntInvested , setAmntInvested] = useState(stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders ?? '');
 
   const {
-    state: { fundraising },
+  state: { fundraising },
   } = useActivity();
   const [fileDoc, setFileDoc] = useState(stateAuth?.user?.fundRaising?.capTable?.files ?? null);
-  const {
-    location: { hash },
-  } = history
+  const { location  } = history;
 
   const onSubmit = (value) => {
     setFundraising({
       capTable: {
-        amountRaised: formik.getFieldProps('amountRaised').value,
-        amountInvestedByFounders: formik.getFieldProps(
-          'amountInvestedByFounders',
-        ).value,
+        amountRaised: amnt,
+        amountInvestedByFounders:amntInvested ,
         files:fileDoc
       },
     })
     history.push('#Previous Round')
   }
 
-  // const onNumberOnlyChange = (e) => {
-  //   const keyCode = e.keyCode || e.which
-  //   const keyValue = String.fromCharCode(keyCode)
-  //   const isValid = new RegExp('[0-9]').test(keyValue)
-  //   if (!isValid) {
-  //     e.preventDefault()
-  //     return
-  //   }
-  // }
+  const handleCsv = async(e) =>{
 
-  const handleChange = async(e) => {
-
-    const { files, name } = e.target;
-    const formData = new FormData();
-    formData.append("dir", "kv");
-    formData.append("ref", stateAuth.user?.userId);
-    formData.append("type", "image");
-    formData.append(0 , files[0])
-
-    try {
-      setLogoUploading(true);
-      const response = await upload(formData)
-      console.log(response) 
-      setFileDoc(response?.path)
-      setLogoUploading(false)
-
-    } catch(error) {
-      console.log(error)
-      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
+    const file = e.target.files[0];
+    const fileData = await parseFile(file);
+    const workbook = XLSX.read(fileData, { type: 'binary' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    console.log(file.type === 'text/csv')
+    if (file.type === 'text/csv') {
+      const data = XLSX.utils.sheet_to_json(worksheet, {
+        raw: false,
+      });
+      console.log(data)
+      if (Array.isArray(data)) {
+        setFileDoc(data)
+        console.log(data)
+      }
+    }
+    
     }
 
-  }
 
-  const formik = useFormik({
-    initialValues: {
-      amountRaised: stateAuth?.user?.fundRaising?.capTable?.amountRaised ?? '',
-      amountInvestedByFounders:
-        stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders ?? '',
-    },
-    validationSchema: Yup.object({
-      amountInvestedByFounders: Yup.string().required('Required'),
-      // amountRaised: Yup.string().required('Required'),
-    }),
-    onSubmit: (value) => onSubmit(value),
-  })
 
   return (
     <>
@@ -116,21 +94,14 @@ export const CapTable = ({ setFundraising }) => {
               id='amountRaised'
               name='amountRaised'
               type='text'
+              value={amnt}
               className='form-control ps-3'
               placeholder='$100,000'
               intlConfig={{ locale: 'en-US', currency: 'USD', }}
-              // onKeyPress={onNumberOnlyChange}
-              // value={formik.values.amountRaised}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
+              onValueChange={(value) => setAmnt(value) }  
             />
 
-            {/* {formik.touched.amountRaised &&
-            formik.errors.amountRaised ? (
-              <label className='error'>
-                {formik.errors.amountRaised}
-              </label>
-            ) : null} */}
+           
           </div>
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
             <label>Total Capital invested by Founders*</label>
@@ -138,21 +109,14 @@ export const CapTable = ({ setFundraising }) => {
               id="amountInvestedByFounders"
               name="amountInvestedByFounders"
               type="text"
+              value={amntInvested}
               className="form-control ps-3"
               placeholder="$150,000"
               intlConfig={{ locale: 'en-US', currency: 'USD', }}
-              // onKeyPress={onNumberOnlyChange}
-              // value={formik.values.amountInvestedByFounders}
               required
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
+              onValueChange={(value) => setAmntInvested(value)}
             />
-            {formik.touched.amountInvestedByFounders &&
-            formik.errors.amountInvestedByFounders ? (
-              <label className="error">
-                {formik.errors.amountInvestedByFounders}
-              </label>
-            ) : null}
+         
           </div>
           <div className="col-12 my-3">
             <DownloadableButton href="." className="mx-n4 mx-lg-n0">
@@ -177,7 +141,7 @@ export const CapTable = ({ setFundraising }) => {
               </>
                 )  
               }
-              <input type='file' id='cap' onChange={handleChange} hidden />
+              <input type='file' id='cap' onChange={handleCsv} hidden />
               <LabelButton for='cap'>Upload Files</LabelButton>
             </FileWrapper>
           </div>

@@ -1279,10 +1279,60 @@ onClick={() => history.push('/startup/dashboard')}
 
 
 
+ // const onNumberOnlyChange = (e) => {
+  //   const keyCode = e.keyCode || e.which
+  //   const keyValue = String.fromCharCode(keyCode)
+  //   const isValid = new RegExp('[0-9]').test(keyValue)
+  //   if (!isValid) {
+  //     e.preventDefault()
+  //     return
+  //   }
+  // }
 
+  const handleChange = async(e) => {
 
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
 
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+      setLogoUploading(false)
 
+    } catch(error) {
+      console.log(error)
+      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
+    }
+
+  }
+  const handleChange = async(e) => {
+
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+
+    } catch(error) {
+      console.log(error)
+      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
+    }
+
+  }
 
 
 
