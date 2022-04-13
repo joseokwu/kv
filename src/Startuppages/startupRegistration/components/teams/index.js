@@ -636,7 +636,7 @@ export const TeamProfile = () => {
           </div>
           <div className="row">
             <div className="form-group col-lg-6 col-12">
-              <label>Linkedin*</label>
+              <label>LinkedIn*</label>
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.linkedIn}

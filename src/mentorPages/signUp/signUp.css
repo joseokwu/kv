@@ -115,3 +115,13 @@
   border-radius: 4px;
   color: #f9f9fc;
 }
+
+@media (max-width: 1024px) {
+  .mentor_gray_card {
+    margin-top: 0px;
+  }
+  
+  .auth-side {
+    
+  }
+}

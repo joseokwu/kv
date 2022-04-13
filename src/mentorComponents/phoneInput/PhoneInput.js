@@ -6,6 +6,8 @@ import down from "../../assets/icons/down.svg";
 export const PhoneInput = ({
   id = "",
   label = "",
+  value,
+  name,
   disabled = false,
   required = false,
   onChange = () => {},
@@ -76,6 +78,8 @@ export const PhoneInput = ({
           <input
             type="text"
             id={id}
+            value={value}
+            name={name}
             className="input-phone phone-text"
             onChange={handleChange}
             onKeyPress={onNumberOnlyChange}

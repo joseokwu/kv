@@ -61,7 +61,7 @@ export const SignUp = ({ history }) => {
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
-      <section className="col-md-6">
+      <section className="col-md-6 auth-side">
         <AuthSide />
       </section>
       <section className="col-md-6">
