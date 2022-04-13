@@ -44,7 +44,7 @@ export const CapTable = (data) => {
             </tr>
           </thead>  
           <tbody>
-            {data?.data?.length > 0 &&
+            { Array.isArray(data?.data)  &&
               data?.data.map((data) => (
                 <tr key={data}>
                   <td> {data?.Shareholders} </td>
