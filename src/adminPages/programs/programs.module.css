@@ -95,3 +95,75 @@
   line-height: 140%;
   color: #000000;
 }
+
+.person {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.person img,
+.person span {
+  display: block;
+  width: 54px;
+  min-width: 54px;
+  height: 54px;
+  background-color: lightgray;
+  border-radius: 50%;
+}
+
+.person section p:first-child {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #323232;
+}
+
+.person section p:last-child {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.box {
+  background: #f9f9fc;
+  padding: 1rem 1.5rem;
+}
+
+.box h4 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.box .desc {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #525151;
+}
+
+.rateStrip {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: #000000;
+  background: #f8f8fa;
+  border-radius: 4px;
+  display: inline-flex;
+  padding: 3px 11px;
+}

@@ -11,3 +11,4 @@ export * from "./events/Events";
 export * from "./programs/Programs";
 export * from "./assignments/Assignments";
 export * from "./createProgram/CreateProgram";
+export * from "./createAssignment/CreateAssignment";

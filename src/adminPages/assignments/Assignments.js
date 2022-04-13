@@ -33,8 +33,8 @@ export const Assignments = () => {
         {data?.length > 0 &&
           data?.map((item, i) => {
             return (
-              <div className="col-lg-6 mb-3">
-                <AssignmentCard />
+              <div className="col-lg-6 mb-3" key={`assignment-${i}`}>
+                <AssignmentCard id={i} />
               </div>
             );
           })}

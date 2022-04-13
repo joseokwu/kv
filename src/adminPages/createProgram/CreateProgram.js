@@ -137,7 +137,7 @@ export const CreateProgram = () => {
           <article className="d-flex align-items-center space-out">
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="occurrence"
                 id="Once"
                 className="mr-1"
@@ -146,7 +146,7 @@ export const CreateProgram = () => {
             </label>
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="occurrence"
                 id="Weekly"
                 className="mr-1"
@@ -156,7 +156,7 @@ export const CreateProgram = () => {
 
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="occurrence"
                 id="Monthly"
                 className="mr-1"

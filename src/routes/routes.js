@@ -103,6 +103,7 @@ import {
   AllSessions,
   ApplicationMgt,
   Assignments,
+  CreateAssignment,
   CreateProgram,
   Events,
   PendingApplication,
@@ -812,6 +813,15 @@ const routes = [
     name: "admin Program",
     path: "/admin/program/assignments",
     component: WithAdminLayout(Assignments),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/create_assignment",
+    component: WithAdminLayout(CreateAssignment),
     exact: true,
     protected: false,
     type: "admin",

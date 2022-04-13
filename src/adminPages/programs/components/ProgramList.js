@@ -8,7 +8,7 @@ export const ProgramList = ({ data = [] }) => {
         data?.map((info, i) => {
           return (
             <section className="col-lg-6 mb-3">
-              <ProgramCard data={info} />
+              <ProgramCard data={info} id={i} />
             </section>
           );
         })}

@@ -89,7 +89,11 @@ export const Programs = () => {
           variant="trans"
           onClick={() => push("/admin/program/assignments")}
         />
-        <Button label="Create Assignment" variant="secondary" />
+        <Button
+          label="Create Assignment"
+          variant="secondary"
+          onClick={() => push("/admin/program/create_assignment")}
+        />
       </section>
 
       <section className="mb-45" style={{ maxWidth: 2000 }}>

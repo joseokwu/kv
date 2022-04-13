@@ -1,19 +1,29 @@
 import React from "react";
 import dots from "../../../assets/icons/dot.svg";
-import { Tag } from "../../../components";
+import { Modal, Tag } from "../../../components";
 import { months, formatTime } from "../../../utils/helpers";
 import doc from "../../../assets/images/doc.svg";
 import styles from "../assignment.module.css";
+import { ViewAssignment } from "./ViewAssignment";
 
-export const AssignmentCard = ({ data = {} }) => {
+export const AssignmentCard = ({ data = {}, id = 0 }) => {
   return (
     <div className={styles.programCard}>
+      <Modal id={`assignment-${id}`}>
+        <ViewAssignment />
+      </Modal>
       <section className="d-flex align-items-center justify-content-between mb-3">
-        <h4>Create a business plan</h4>
+        <h4 data-target={`#assignment-${id}`} data-toggle="modal">
+          Create a business plan
+        </h4>
         <AssignDropdown />
       </section>
 
-      <section className="border-bottom mb-4 pb-3">
+      <section
+        className="border-bottom mb-4 pb-3"
+        data-target={`#assignment-${id}`}
+        data-toggle="modal"
+      >
         <p className={styles.desc}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
           morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -21,7 +31,11 @@ export const AssignmentCard = ({ data = {} }) => {
         </p>
       </section>
 
-      <section className="d-flex align-items-center justify-content-between mb-4">
+      <section
+        className="d-flex align-items-center justify-content-between mb-4"
+        data-target={`#assignment-${id}`}
+        data-toggle="modal"
+      >
         <div className={`d-flex align-items-center ${styles?.date}`}>
           <h5 className="mb-0">{new Date(2022, 3, 5).getDate()}</h5>
           <p>{months[new Date(2022, 3, 5).getMonth()]}</p>
