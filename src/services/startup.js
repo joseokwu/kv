@@ -84,7 +84,7 @@ export const updateFounderProfile = async (values) => {
     console.log(res?.data)
     return res?.data;
   } catch (err) {
-    console.log('heeeee')
+    console.log(err?.response)
     throw err;
   }
 };
