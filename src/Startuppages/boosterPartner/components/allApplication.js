@@ -238,7 +238,7 @@ const DeclinedModal = () => {
 
 
 export const YetToApplyModal = (data) => {
-  console.log(data?.data)
+
   return (
     <div className="applyModal px-4">
       <section className="pt-2">

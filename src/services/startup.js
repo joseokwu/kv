@@ -51,7 +51,8 @@ export const getStartupRequest = async (value) => {
 export const applyToPartners = async(value) =>{
   try{
     const res = await request.post("apply" , value);
-    console.log(res?.data)
+    
+    return res?.data;
   }catch(err){
     throw err;
   }

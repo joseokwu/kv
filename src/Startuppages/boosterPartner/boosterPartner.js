@@ -9,11 +9,12 @@ import { getBoosterData , getStartupRequest } from '../../services'
 import newApp from '../../assets/icons/Star.svg'
 import { useAuth } from '../../hooks/useAuth';
 import { PageLoader } from "../../components";
-
+import { useActivity  } from '../../hooks/useBusiness';
 
 export const StartupBoosterPartner = () => {
 
-  const { stateAuth } = useAuth();
+  const { getApp } = useActivity();
+  const { stateAuth} = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [boosterData, setBoosterData] = useState([])
@@ -68,7 +69,7 @@ export const StartupBoosterPartner = () => {
     const getData = async () => {
       setLoading(true)
       const res = await getBoosterData()
-      setBoosterData(res?.data?.data)
+      getApp(res?.data?.data)
      const allReq = await getStartupRequest(stateAuth?.user?.userId)
        setRequests(allReq)
        setLoading(false)
@@ -76,9 +77,6 @@ export const StartupBoosterPartner = () => {
 
     getData()
 
-    return () => {
-      setBoosterData()
-    }
   }, [setBoosterData, setRequests, stateAuth?.user?.userId ])
 
   console.log()
@@ -101,15 +99,15 @@ export const StartupBoosterPartner = () => {
   const renderContent = () => {
     switch (hash) {
       case '#All Offerings':
-        return <AllOfferings data={boosterData} userId={stateAuth?.user?.userId} />
+        return <AllOfferings  />
         // return <AllOfferings data={boosterData?.offerings} />
      // case '#My Applications':
        // return <MyApplications data={} />
       default:
-        return <AllOfferings data={boosterData} />
+        return <AllOfferings  />
     }
   }
-
+  
   const tabList = ['All Offerings', 'My Applications']
 
   if(loading){

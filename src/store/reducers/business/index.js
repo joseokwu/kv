@@ -12,7 +12,9 @@ import {
   SET_EDUCATION,
   SET_FUNDRAISING,
   SET_WORK_EXPERIENCE_DATABASE,
-  SET_EDUCATION_DATABASE
+  SET_EDUCATION_DATABASE,
+  GET_APPLICATIONS,
+  SEND_APPLICATION
 } from '../../actions/actions.types';
 
 import { INIT_STATE_BUSINESS } from '../../initialstates';
@@ -98,6 +100,18 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         ...state,
         fundraising: { ...state.fundraising, ...action.payload },
       };
+
+     case GET_APPLICATIONS:
+       return {
+         ...state,
+         applications:action.payload
+       } 
+
+       case SEND_APPLICATION: 
+       return {
+         ...state,
+        applications:state.applications.filter(item  => item?.userId !== action.payload)
+       }
 
     default:
       return state;

@@ -14,7 +14,8 @@ import {
   SET_FUNDRAISING,
   SET_WORK_EXPERIENCE_DATABASE,
   SET_EDUCATION_DATABASE,
-  DASHBOARD_USER_PROFILE,
+  GET_APPLICATIONS,
+  SEND_APPLICATION
 
 } from '../actions.types';
 
@@ -90,4 +91,25 @@ export const setDFundraising = (values) => (dispatch) => {
     payload: values,
   });
 };
+
+export const getApplication = (values) =>(dispatch) =>{
+
+  dispatch({
+    type:GET_APPLICATIONS,
+    payload:values
+  })
+
+}
+
+export const sendApplication = (value) =>(dispatch) =>{
+  dispatch({
+    type:SEND_APPLICATION,
+    payload:value
+  })
+}
+
+
+
+
+
 

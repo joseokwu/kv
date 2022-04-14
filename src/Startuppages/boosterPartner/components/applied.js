@@ -5,18 +5,21 @@ import { Modal, Tag } from '../../../Startupcomponents'
 import { AppliedModal , YetToApplyModal } from './allApplication'
 import { applyToPartners } from '../../../services/startup';
 import { useAuth } from '../../../hooks/useAuth';
+import { useActivity } from '../../../hooks/useBusiness';
 import toast from 'react-hot-toast';
 import { CircularLoader } from '../../../Startupcomponents/CircluarLoader/CircularLoader';
 
-export const Applied = ({ data , userId  }) => {
+export const Applied = () => {
   
+ 
+  const { state , sendApp } = useActivity();
   const { stateAuth } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [show , setShow] = useState(false)
  const notInteracted = useMemo(() =>{
-  return data && data.filter((item) => !item?.pendingRequests.find(i => i.startupId === userId) && !item?.approvedRequests.find(i => i.startupId === userId) )
- }, [data, userId])
+  return state.applications.length > 0 && state.applications.filter((item) => !item?.pendingRequests.find(i => i.startupId === stateAuth?.user?.userId) && !item?.approvedRequests.find(i => i.startupId === stateAuth?.user?.userId) )
+ }, [state.applications , stateAuth?.user?.userId ])
 
 
 const sendApplication = async(value) =>{
@@ -31,9 +34,10 @@ const sendApplication = async(value) =>{
   }
 
   const response = await applyToPartners(newApplication);
+ // console.log(response)  
   toast.success(response?.message)
   setLoading(false);
-  
+  sendApp(value?.userId)
  }catch(err){
    console.log(err)
   toast.error(err?.response?.data?.message ?? 'There was an error sending this application')
@@ -82,10 +86,11 @@ const sendApplication = async(value) =>{
               className={
                'applyBtn mt-2'
               }
+              disabled={loading}
               onClick={()=> sendApplication(item)}
             >
               {' '}
-              { loading ? <CircularLoader /> : 'Apply'   }
+              { 'Apply' }
             </button>
           </ApplicationCard>
         ))}
