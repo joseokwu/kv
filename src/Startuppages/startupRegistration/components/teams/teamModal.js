@@ -117,7 +117,7 @@ export const TeamModal = ({
                 name="position"
                 type="text"
                 className="form-control ps-3"
-                placeholder="gane@gmail.com"
+                placeholder="Enter company title"
                 value={
                   isEditing
                     ? workExperience[editIndex]?.position
