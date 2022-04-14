@@ -184,7 +184,7 @@ export const PitchDeck = () => {
                 </FileWrapper>
               </div>
               <div className="form-group col-12 mt-3">
-                <label> Paste Youtube Link of pitch video </label>
+                {/* <label> Paste Youtube Link of pitch video </label>
                 <div className="d-flex my-2">
                   <input
                     type="text"
@@ -195,7 +195,7 @@ export const PitchDeck = () => {
                     
                   />
                   <button className="button">Upload</button>
-                </div>
+                </div> */}
                 <FileWrapper className="d-flex justify-content-center text-center">
                  
                   {videoDoc !== null ? (

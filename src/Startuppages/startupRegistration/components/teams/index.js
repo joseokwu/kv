@@ -117,10 +117,12 @@ export const TeamProfile = () => {
   }  
 
   const handleKey = (e) =>{
-    if(e.keyCode === 32 && e.target.value !== ''){
+   
+    if(e.keyCode === 13){
       console.log(inVal);
       setVal('');
       setSkill([...skillSet, inVal]);
+      e.preventDefault();
     }
   }
 
@@ -583,13 +585,14 @@ export const TeamProfile = () => {
           <div className="form-group">
             <div>
               <label>What are your skills*</label>
+              <p>Please press the space button to add your skill</p>
             </div>
             <input
                 onChange={handleChange}
                 style={{ width: '100%', outline: 'none', color: 'purple' }}
                 value={inVal}
                 type='text'
-                placeholder='Enter your skills'
+                placeholder='Enter your skills and press the space button to add '
                 className="py-2 px-3"
                 // className='form-control ps-3'
                 // onBlur={formik.handleBlur}
@@ -662,7 +665,7 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-
+{/* 
         <FormWrapper height="70%">
           <div className="div border-bottom pb-3">
             <span>Invite Team Members</span>
@@ -682,7 +685,7 @@ export const TeamProfile = () => {
           <div className="my-3 mx-3">
             <CustomButton background="#031298"> Invite </CustomButton>
           </div>
-        </FormWrapper>
+        </FormWrapper> */}
 
         <div className="row ">
           <div className="col-3">
