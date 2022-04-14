@@ -53,7 +53,7 @@ export const forgorPassword = async (values) => {
 
 export const verifyEmail = async(token) =>{
     try{
-        const res = await request.post('verify-email', {token}); 
+        const res = await request.post('verifyEmail', {token}); 
         console.log(res.data)
         return res.data 
     }catch(err){
