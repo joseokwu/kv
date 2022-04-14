@@ -189,7 +189,7 @@ const routes = [
   },
   {
     name: 'StartupTeamMember',
-    path: '/startup/team/member',
+    path: '/startup/team-member',
     component: WithStartupRegisterLayout(StartupTeamMember),
     exact: true,
     protected:true,
@@ -216,7 +216,7 @@ const routes = [
     path: '/startup/registration',
     component: WithStartupRegistrationLayout(StartUpRegistration),
     exact: true,
-    protected:true,
+    protected: true,
     type: 'startup',
   },
 
