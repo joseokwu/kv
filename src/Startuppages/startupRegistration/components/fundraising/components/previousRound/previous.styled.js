@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const BodyWrapper = styled.div`
   margin-bottom: 10px;
   margin-top: 30px;
-  margin-left: 15px;
+  margin-left: 0px;
 
   .sold {
     flex-direction: column;

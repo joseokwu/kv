@@ -22,13 +22,13 @@ export const MentorForgotPassword = ({ history }) => {
     }
   }, [input])
   return (
-    <div className="row mx-0 auth-wrap px-5">
+    <div className="row mx-0 mentor_auth_wrap">
       <section className="layout-header">
-        <div className="col-lg-6 mt-5">
+        <div className="col-lg-6 mt-5 px-5">
           <img src={logo} alt={'logo'} />
         </div>
 
-        <div className="row">
+        <div className="row forgot-p">
           <section className="col-lg-5 mx-3 forgot_illustration mt-4">
             <div className="">
               <h2>Forgot Password?</h2>
@@ -38,8 +38,8 @@ export const MentorForgotPassword = ({ history }) => {
             </div>
           </section>
           
-          <section className="col-lg-6 forgot_form mx-3 mt-4">
-            <div className="gray_signIn">
+          <section className="col-lg-6 forgot_form mt-4">
+            <div className="gray_signIn mx-3">
               <section className="mb-4 ">
                 <label className="e-label pb-2">Email</label>
                 <AuthTextField
@@ -49,7 +49,7 @@ export const MentorForgotPassword = ({ history }) => {
                   onChange={handleChange}
                 />
               </section>
-              <section>
+              <section className="mb-5">
                 <AuthButton
                   label="Submit"
                   onClick={() => history.push(nextPath)}

@@ -257,7 +257,7 @@ export const Product = () => {
               Back
             </CustomButton>
           </div>
-          <div className="col-9 d-flex justify-content-lg-end">
+          <div className="col-9 d-flex justify-content-end">
             <CustomButton
               type="button"
               disabled={loading}

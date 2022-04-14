@@ -9,6 +9,9 @@ export const CardWrapper = styled.div`
   padding: 25px;
   box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
   border-radius: 20px;
+  @media (max-width: 1024px) {
+    width: 82vw;
+  }
 
   .card_star {
     position: relative;
@@ -46,6 +49,12 @@ export const CardWrap = styled.div`
   margin-left: 20px;
   color: #fff;
   margin-top: 10px;
+  @media (max-width: 1024px) {
+    width: 100vw;
+    text-align: center;
+    padding: 30px;
+    margin-left: 10px;
+  }
 
   h5 {
     display: flex;

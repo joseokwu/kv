@@ -65,24 +65,24 @@ export const SignIn = () => {
   }
 
   return (
-    <div className="row mx-0 auth-wrap">
+    <div className="row mx-0 mentor_auth_wrap">
     
       <section className="col-md-6">
       {/* <input type='text' value={inVal} onChange={handleChange} onKeyDown={handleKey}  /> */}
         <SignInAuthSide />
       </section>
-      <section className="col-md-6 px-5 d-flex align-items-center">
-        <div className="gray_signIn">
+      <section className="col-md-6">
+        <div className="mentor_gray_card">
           <Form
             name="login"
-            className=""
+            className="row"
             initialValues={{
               remember: true,
             }}
             layout="vertical"
             onFinish={onFinish}
           >
-            <div className="">
+            <div className="col-12 mb-2">
               <AuthTextField
                 name="email"
                 label="Email"
@@ -91,7 +91,7 @@ export const SignIn = () => {
               />
             </div>
 
-            <div className="">
+            <div className="col-12 mb-1">
               <AuthPasswordField
                 className="mentor_gray_card_input"
                 numb={8}
@@ -99,24 +99,27 @@ export const SignIn = () => {
                 placeholder={'Password must be at least 8 characters'}
               />
             </div>
-            <a
-              href="/forgot/password"
-              className="d-block text-right forgot_text mb-2 mt-3"
+            <span
+              onClick={() => history.push('/forgot/password')}
+              // href="/forgot/password"
+              className="d-block text-right forgot_text mb-2 mt-0"
             >
               Forgot password?
-            </a>
-            <Form.Item>
-              <div className="mb-2">
+            </span>
+            {/* <Form.Item> */}
+              <div className="col-12 mb-2">
                 <AuthButton
+                  className="px-5"
                   label="Sign In"
                   loading={loading}
                   disabled={loading}
                   onClick={() => setLoader()}
                 />
               </div>
-            </Form.Item>
-          </Form>
+            {/* </Form.Item> */}
+          
 
+          <div className="col-12 mb-3 mt-2">
           <section
             className="d-flex align-items-center mentor_switch_auth"
             style={{ columnGap: 6 }}
@@ -134,6 +137,8 @@ export const SignIn = () => {
             </span>
             
           </section>
+          </div>
+          </Form>
         </div>
       </section>
     </div>
