@@ -4,9 +4,15 @@
   padding: 7px 13px;
   height: 36px;
   width: 100%;
-  max-width: 329px;
+  /* max-width: 329px; */
   background: #fafafc;
   border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+  .phone-input {
+    max-width: none;
+  }
 }
 
 .country-codes {

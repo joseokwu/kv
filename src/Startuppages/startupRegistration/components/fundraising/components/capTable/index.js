@@ -164,7 +164,7 @@ export const CapTable = ({ setFundraising }) => {
             Back
           </CustomButton>
         </div>
-        <div className="col-9 d-flex justify-content-lg-end">
+        <div className="col-9 d-flex justify-content-end">
           <OutlineButton
             type="button"
             onClick={(e) => {
@@ -172,7 +172,7 @@ export const CapTable = ({ setFundraising }) => {
               onSubmit()
             }}
             className="ms-2"
-            style={{ marginRight: '5rem' }}
+            style={{ marginRight: '0rem' }}
             background="none"
           >
             Next

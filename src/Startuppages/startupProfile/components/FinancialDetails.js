@@ -7,7 +7,7 @@ import office from "../../../assets/icons/building.svg";
 
 export const FinancialDetails = ({data}) => {
   return (
-    <div className="mt-3 opp-page-card py-4">
+    <div className="mt-3 mb-3 opp-page-card py-4">
       <h3 className="sub-card-title">Contact Details</h3>
 
       <section

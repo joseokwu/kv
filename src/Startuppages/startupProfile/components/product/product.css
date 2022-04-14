@@ -49,6 +49,12 @@
   width: 90%;
 }
 
+@media (max-width: 1024px) {
+  .product-desc {
+    width: 100%;
+  }
+}
+
 .product-demo {
   width: 100%;
   max-width: 451px;

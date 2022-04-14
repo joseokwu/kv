@@ -23,10 +23,10 @@ export const StartupNotification = () => {
         </div>
       </section>
 
-      <section className="notice-board">
+      <section className="notice-board ">
         <Tabs tabItems={tabItems} />
 
-        <div className="mt-5">
+        <div className="mt-5 tab-wrap">
           {noticeItems.length > 0 &&
             noticeItems.map((notice, i) => {
               return (
