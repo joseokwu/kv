@@ -101,7 +101,6 @@ export const CapTable = ({ setFundraising }) => {
               onValueChange={(value) => setAmnt(value) }  
             />
 
-           
           </div>
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
             <label>Total Capital invested by Founders*</label>
@@ -141,7 +140,10 @@ export const CapTable = ({ setFundraising }) => {
               </>
                 )  
               }
-              <input type='file' id='cap' onChange={handleCsv} hidden />
+              <input type='file' id='cap'
+               onChange={handleCsv}
+               accept=".csv"
+               hidden />
               <LabelButton for='cap'>Upload Files</LabelButton>
             </FileWrapper>
           </div>
@@ -164,7 +166,7 @@ export const CapTable = ({ setFundraising }) => {
             Back
           </CustomButton>
         </div>
-        <div className="col-9 d-flex justify-content-lg-end">
+        <div className="col-9 d-flex justify-content-end">
           <OutlineButton
             type="button"
             onClick={(e) => {
@@ -172,7 +174,7 @@ export const CapTable = ({ setFundraising }) => {
               onSubmit()
             }}
             className="ms-2"
-            style={{ marginRight: '5rem' }}
+            style={{ marginRight: '0rem' }}
             background="none"
           >
             Next

@@ -109,6 +109,7 @@ export const FundUtilization = ({setFundraising}) => {
               <input type='file'
                id='utilize'
                onChange={handleCsv}
+               accept=".csv"
                 hidden />
               <LabelButton for='utilize'>Upload Files</LabelButton>
             </FileWrapper>
@@ -133,7 +134,7 @@ export const FundUtilization = ({setFundraising}) => {
             Back
           </CustomButton>
         </div>
-        <div className='col-9 d-flex justify-content-lg-end'>
+        <div className='col-9 d-flex justify-content-end'>
           <OutlineButton
             type='button'
             onClick={(e) => {
@@ -142,7 +143,7 @@ export const FundUtilization = ({setFundraising}) => {
               onSubmit();
             }}
             className='ms-2'
-            style={{ marginRight: '5rem' }}
+            style={{ marginRight: '0rem' }}
             background='none'
             
           >

@@ -5,6 +5,8 @@ import {
   setDWorkExperience,
   setDEducation,
   setDFundraising,
+  getApplication,
+  sendApplication
 } from '../store/actions/business';
 import { useAuth } from './useAuth';
 
@@ -34,6 +36,14 @@ export const useActivity = () => {
     dispatch(setDFundraising(values));
   };
 
+  const getApp = (values) =>{
+    dispatch(getApplication(values))
+  }
+
+  const sendApp = (value) =>{
+    dispatch(sendApplication(value))
+  }
+
   return {
     state,
     changePath,
@@ -41,6 +51,8 @@ export const useActivity = () => {
     setWorkExperience,
     setEducation,
     setFundraising,
+    getApp,
+    sendApp
   };
 };
 

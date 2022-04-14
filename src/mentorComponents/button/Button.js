@@ -8,10 +8,15 @@ export const Button = ({
   variant = "primary",
   className = "",
   loading,
+  disabled,
+  background,
+  type,
   ...rest
 }) => {
   return (
     <button
+      background={background}
+      type={type}
       onClick={onClick}
       disabled={loading}
       className={`btn_main btn_${variant} ${className}`}

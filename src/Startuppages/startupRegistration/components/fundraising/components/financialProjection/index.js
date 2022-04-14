@@ -81,8 +81,9 @@ export const FinancialProjection = () => {
           },
         userId: stateAuth?.user?.userId,
       }
-      console.log(fund)
+      console.log(fund) 
       let result = await updateFounderProfile(fund);
+      console.log(result)
       toast.success(result?.message)
       window.open('/startup/dashboard', '_self')
     }catch(err){
@@ -105,8 +106,8 @@ export const FinancialProjection = () => {
         <hr />
 
         <div className='my-5'>
-          <div>
-            <DownloadableButton href='.'>
+          <div className="col-12 my-3">
+            <DownloadableButton href='.' className="mx-n4 mx-lg-n0">
               <img className='pr-2' src={Download} alt='' />
               Download fund utilization template here
             </DownloadableButton>
@@ -154,12 +155,12 @@ export const FinancialProjection = () => {
             Back
           </CustomButton>
         </div>
-        <div className='col-9 d-flex justify-content-lg-end'>
+        <div className='col-9 d-flex justify-content-end'>
           
           <OutlineButton
             onClick={handleSubmit}
             className='ms-2'
-            style={{ marginRight: '5rem' }}
+            style={{ marginRight: '0rem' }}
             background='none'
           >
             Submit

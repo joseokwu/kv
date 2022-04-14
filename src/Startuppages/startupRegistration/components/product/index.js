@@ -212,7 +212,7 @@ export const Product = () => {
               </div>
               <FileWrapper className="d-flex justify-content-center text-center">
               
-              {fileInfo !== null ? (
+              { fileInfo !== null ? (
                     <img style={{width:'70px', height:'70px'}} src={RedFile} alt=".#" className='mb-2' />
                   ) : (
                     logoUploading ? <CircularLoader color={'#000'} /> : 
@@ -257,7 +257,7 @@ export const Product = () => {
               Back
             </CustomButton>
           </div>
-          <div className="col-9 d-flex justify-content-lg-end">
+          <div className="col-9 d-flex justify-content-end">
             <CustomButton
               type="button"
               disabled={loading}

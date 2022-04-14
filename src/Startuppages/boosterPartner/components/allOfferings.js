@@ -2,12 +2,12 @@ import React from 'react'
 import { Apply } from './apply'
 import { Applied } from './applied'
 
-export const AllOfferings = ({data}) => {
+export const AllOfferings = () => {
   
   return (
     <div>
       <div className="my-4">
-        <Applied data={data} />
+        <Applied  />
         {/* <Apply data={data} /> */}
       </div>
   

@@ -7,8 +7,14 @@
 }
 
 .mentor_auth_wrap {
-  height: 100%;
+  min-height: 100vh;
   background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+}
+
+@media (max-width: 1024px) {
+  .mentor_auth_wrap {
+    height: 100%;
+  }
 }
 
 .mentor_auth_wrap > section {
@@ -114,4 +120,15 @@
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   color: #f9f9fc;
+}
+
+@media (max-width: 1024px) {
+  .mentor_gray_card {
+    margin-top: 0px;
+    padding: 0px 0%;
+    margin-bottom: 30px;
+  }
+  .email {
+    padding-top: 25px;
+  }
 }

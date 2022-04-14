@@ -30,22 +30,33 @@ export const getProgramInfo = async () => {
 
 export const getBoosterData = async () => {
   try {
-    const res = await request.post("startup/boosterpartner");
+    const res = await request.post("partners");
+    console.log(res?.data)
     return res?.data;
   } catch (err) {
     throw err;
   }
 };
 
-export const getFundraisingData = async () => {
+export const getStartupRequest = async (value) => {
   try {
-    const res = await request.post("startup/fundraising");
-
+    const res = await request.post("allRequest" , {startupId:value});
+    console.log(res?.data)
     return res?.data;
   } catch (err) {
     throw err;
   }
 };
+
+export const applyToPartners = async(value) =>{
+  try{
+    const res = await request.post("apply" , value);
+    
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
 
 export const getStartupProfile = async () => {
   try {

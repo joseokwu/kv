@@ -62,6 +62,10 @@ export const FormWrapper = styled.div`
   border: 0 solid #d3d3d3;
   border-radius: 5px;
   background: #fff;
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 3rem 0rem; 
+  }
 
   hr {
     background: #636363;

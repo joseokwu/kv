@@ -208,7 +208,7 @@ const routes = [
     path: '/startup/support',
     component: WithStartupDashboardLayout(StartupContactUs),
     exact: true,
-    protected:true,
+    protected:false,
     type: 'startup',
   },
   {
@@ -216,7 +216,7 @@ const routes = [
     path: '/startup/registration',
     component: WithStartupRegistrationLayout(StartUpRegistration),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
 
@@ -225,7 +225,7 @@ const routes = [
     path: '/startup/profile',
     component: WithStartupDashboardLayout(StartupProfile),
     exact: true,
-    protected:true,
+    protected:false,
     type: 'startup',
   },
 
@@ -234,7 +234,7 @@ const routes = [
     path: '/startup/notification',
     component: WithStartupDashboardLayout(StartupNotification),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'startup',
   },
 

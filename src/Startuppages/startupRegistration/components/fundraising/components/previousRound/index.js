@@ -98,7 +98,7 @@ export const PreviousRound = ({ setFundraising }) => {
   return (
     <>
       <BodyWrapper>
-        <div className='mx-2 border-bottom pb-3'>
+        <div className='mx-1 border-bottom pb-3'>
           <p>A brief description of your previous round</p>
         </div>
         {/* <hr /> */}
@@ -310,7 +310,7 @@ export const PreviousRound = ({ setFundraising }) => {
             Back
           </CustomButton>
         </div>
-        <div className='col-9 d-flex justify-content-lg-end'>
+        <div className='col-9 d-flex justify-content-end'>
           <OutlineButton
             type='button'
             onClick={(e) => {
@@ -318,7 +318,7 @@ export const PreviousRound = ({ setFundraising }) => {
               onSubmit();
             }}
             className='ms-2'
-            style={{ marginRight: '5rem' }}
+            style={{ marginRight: '0rem' }}
             background='none'
           >
             Next

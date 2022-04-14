@@ -18,6 +18,7 @@ export const INIT_STATE_BUSINESS = {
   workExperienceCoFounder: [],
   education: [],
   educationCoFounder: [],
+  applications:[],
   fundraising: {
     fundingAsk: {},
     fundUtilization: {},

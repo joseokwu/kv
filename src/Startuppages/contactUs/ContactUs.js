@@ -28,12 +28,12 @@ export const StartupContactUs = () => {
 
           <div className="d-flex align-items-center contact-us-info">
             <img src={phone} alt="phone" />
-            <p>+234 789 504 345</p>
+            <p>+234 913 4444 859</p>
           </div>
 
           <div className="d-flex align-items-center contact-us-info">
             <img src={web} alt="web" />
-            <p>www.michealsmith.com</p>
+            <p>info@knight.ventures</p>
           </div>
 
           <div className="d-flex align-items-center social-links">

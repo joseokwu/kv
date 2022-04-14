@@ -20,6 +20,7 @@
   .authContent h4 {
     font-size: 32px;
     line-height: 41px;
+    max-width: 100%;
   }
 
   .authContent p {
