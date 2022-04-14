@@ -101,7 +101,6 @@ export const CapTable = ({ setFundraising }) => {
               onValueChange={(value) => setAmnt(value) }  
             />
 
-           
           </div>
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
             <label>Total Capital invested by Founders*</label>
