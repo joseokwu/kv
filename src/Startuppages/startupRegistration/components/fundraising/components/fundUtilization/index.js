@@ -109,6 +109,7 @@ export const FundUtilization = ({setFundraising}) => {
               <input type='file'
                id='utilize'
                onChange={handleCsv}
+               accept=".csv"
                 hidden />
               <LabelButton for='utilize'>Upload Files</LabelButton>
             </FileWrapper>

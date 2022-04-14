@@ -141,7 +141,10 @@ export const CapTable = ({ setFundraising }) => {
               </>
                 )  
               }
-              <input type='file' id='cap' onChange={handleCsv} hidden />
+              <input type='file' id='cap'
+               onChange={handleCsv}
+               accept=".csv"
+               hidden />
               <LabelButton for='cap'>Upload Files</LabelButton>
             </FileWrapper>
           </div>

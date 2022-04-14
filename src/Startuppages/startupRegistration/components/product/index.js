@@ -212,7 +212,7 @@ export const Product = () => {
               </div>
               <FileWrapper className="d-flex justify-content-center text-center">
               
-              {fileInfo !== null ? (
+              { fileInfo !== null ? (
                     <img style={{width:'70px', height:'70px'}} src={RedFile} alt=".#" className='mb-2' />
                   ) : (
                     logoUploading ? <CircularLoader color={'#000'} /> : 
