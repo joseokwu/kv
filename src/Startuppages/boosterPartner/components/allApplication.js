@@ -81,7 +81,7 @@ export const AllApplication = ({ data }) => {
 };
 
 //Applied Modal
-export const AppliedModal = () => {
+export const AppliedModal = (data) => {
   return (
     <div className="applyModal px-4">
       <section className="pt-2">
@@ -233,6 +233,69 @@ const DeclinedModal = () => {
     </div>
   );
 };
+
+
+
+
+export const YetToApplyModal = (data) => {
+  console.log(data?.data)
+  return (
+    <div className="applyModal px-4">
+      <section className="pt-2">
+        <button
+          type="button"
+          className="close close-founder-modal px-4"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </section>
+
+      <div className="mt-5">
+      
+      <img className="rounded-circle"  src={data?.data?.companyLogo} alt="company logo" />
+        
+      </div>
+      <div className="mt-3 d-flex justify-content-between">
+      
+          <div>
+            <h3 >{data?.data?.companyName}</h3>  
+          </div>
+        
+        <h6 className="mt-2"> { data?.data?.coordinatorName} </h6>
+      </div>
+      <div className="mb-4">
+        <Tag name={data?.data?.categories} bg="#EDDEFF" color="#1405C1" fz="12px" />
+      </div>
+      <div className="">
+       
+          <div>
+            <p >{data?.data?.companyDescription}</p>
+          </div>
+       
+      </div>
+     
+      <div></div>
+      <div className="border-bottom pb-4">
+        
+          <div>
+            <h4 className="mt-5 mb-3">{data?.data?.designation}</h4>
+            <p >{data?.data?.categories}</p>
+          </div>
+     
+      </div>
+
+      <div className="d-flex justify-content-between my-5">
+        <button className="applyModalback">Back</button>
+        
+      </div>
+    </div>
+  );
+};
+
+
+
 
 //Expired Modal
 const ExpiredModal = () => {

@@ -1249,8 +1249,44 @@ onClick={() => history.push('/startup/dashboard')}
                 className="cust"
               />
 
+ssignments: {data: Array(0), results: {…}}
+businessname: "Winner Airlines"
+event: {data: Array(0), results: {…}}
+fundRaising: {fundingAsk: {…}, fundUtilization: {…}, capTable: {…}, previousRound: {…}, financialProjection: {…}, …}
+industry: "Agriculture, food and beverages"
+partner: []
+pitchDeck: {pitchDeckFile: 'https://cdn.shoutng.com/kvbwocvo7jglftace6ywn9.pdf', pitchDeckVideo: 'https://cdn.shoutng.com/kvmsavkgxsxmxtbhxmiwsm.mp4', _id: '6257502352859a2f60e570c2'}
+product: {description: 'ewwreredsdEdssf', competitiveEdge: 'sarrewrrerrrrr', youtubeDemoUrl: Array(2), files: null, _id: '6257557752859a2f60e57164'}
+role: ['startup']
+startUpProfile:
+acceleratorName: "zee world"
+brand: "wqwqqwerrr"
+businessSector: "sdffsff"
+companySize: "325535"
+contactInfo: {registeredAddress: 'Adeneyi', country: 'Nigeria', state: 'Lagos', city: 'Lagos', phoneNumber: '+2348165796896', …}
+elevatorPitch: "qwerrrwrrrr"
+logo: "https://cdn.shoutng.com/kvkhwym84u5gzhccppfste.jpg"
+registrationNumber: "6889990088"
+socialMedia: {profileHandle: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current', companyWebsite: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current', linkedInHandle: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current', twitterHandle: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current', _id: '62574ffc52859a2f60e570bc'}
+startupName: "Winner Airlines"
+startupStage: "sfFFff"
+yearFounded: "2011-04-10"
+_id: "62574ffc52859a2f60e570ba"
+[[Prototype]]: Object
+team: {avatar: 'https://cdn.shoutng.com/kvtpldo4iqzoa0ebnlhtfd.png', briefIntroduction: 'Hellooooo', firstName: 'Enerst', lastName: 'Owunbuzia', email: 'brightbrain@gmail.com', …}
+userId: "62574f45fae1602d2abaf0c8"
+__v: 0
 
 
+
+
+"value":{
+  "startupId":"62401b6c823102897a328985",
+  "startupName":"Bisi business card",
+  "description":"we sell rice",
+  "logo":"www.logo.com"
+},
+  "userId":"6246bcb64d65461c8b2756cf"
 
 
 
