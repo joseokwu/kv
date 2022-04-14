@@ -223,7 +223,11 @@ export const Product = () => {
                     </>
                   )}
                
-                <input name="files" onChange={handleChange} type="file" id="pitch-doc" hidden accept='video/*' />
+                <input name="files"
+                 onChange={handleChange}
+                  type="file"
+                  disabled={urls.length > 0}
+                 id="pitch-doc" hidden accept='video/*' />
                 <LabelButton for="pitch-doc">Upload Files</LabelButton>
               </FileWrapper>
             </div>
