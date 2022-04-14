@@ -127,7 +127,7 @@ const routes = [
     path: '/startup/dashboard',
     component: WithStartupDashboardLayout(StartupDashboard),
     exact: true,
-    protected: false,
+    protected: true,
     type: 'startup',
   },
   {
@@ -135,7 +135,7 @@ const routes = [
     path: '/startup/program',
     component: WithStartupDashboardLayout(StartupProgram),
     exact: true,
-    protected: false,
+    protected: true,
     type: 'startup',
   },
 
@@ -144,7 +144,7 @@ const routes = [
     path: '/startup/fundraising',
     component: WithStartupDashboardLayout(StartupFundingRaising),
     exact: true,
-    protected:false,
+    protected:true,
     type: 'startup',
   },
   {
@@ -152,7 +152,7 @@ const routes = [
     path: '/startup/boosterpartner',
     component: WithStartupDashboardLayout(StartupBoosterPartner),
     exact: true,
-    protected:false,
+    protected:true,
     type: 'startup',
   },
   {
@@ -160,7 +160,7 @@ const routes = [
     path: '/startup/e-academy',
     component: WithStartupDashboardLayout(StartupEAcademy),
     exact: true,
-    protected:false,
+    protected:true,
     type: 'startup',
   },
   {
@@ -168,7 +168,7 @@ const routes = [
     path: '/startup/todolist',
     component: WithStartupDashboardLayout(StartupTodoList),
     exact: true,
-    protected:false,
+    protected:true,
     type: 'startup',
   },
   {
@@ -176,7 +176,7 @@ const routes = [
     path: '/startup/networking',
     component: WithStartupDashboardLayout(StartupNetworking),
     exact: true,
-    protected:false,
+    protected:true,
     type: 'startup',
   },
   {
@@ -184,7 +184,7 @@ const routes = [
     path: '/startup/dealroom',
     component: WithStartupDashboardLayout(StartupDealRoom),
     exact: true,
-    protected:false,
+    protected:true,
     type: 'startup',
   },
   {
@@ -192,7 +192,7 @@ const routes = [
     path: '/startup/team/member',
     component: WithStartupRegisterLayout(StartupTeamMember),
     exact: true,
-    protected:false,
+    protected:true,
     type: 'startup',
   },
   {
@@ -200,7 +200,7 @@ const routes = [
     path: '/startup/events',
     component: WithStartupDashboardLayout(StartupEvents),
     exact: true,
-    protected:false,
+    protected:true,
     type: 'startup',
   },
   {

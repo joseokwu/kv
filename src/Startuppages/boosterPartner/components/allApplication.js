@@ -13,45 +13,52 @@ import expired from "../../../assets/icons/ex.svg";
 import cancel from "../../../assets/icons/cancel.svg";
 import "../boosterPartner.css";
 
-export const AllApplication = ({ data }) => {
-  const appliedArr = [1, 2];
-  const approvedArr = [1];
-  const expiredArr = [1];
-  const declinedArr = [1, 2];
 
-  const [selectedData, setSelectedData] = useState({});
+
+export const AllApplication = ({ data }) => {
+
+const approvedReq = data && data.filter(item => item.approvedRequests.length > 0)
+const pending = data && data.filter(item => item.pendingRequests.length > 0)  
+const declined = data && data.filter(item => item.declinedRequests.length > 0)
+
+console.log(pending)
+console.log(approvedReq)
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
-      <Modal id="approved" withHeader={false}>
-        <ApprovedModal data={selectedData} />
-      </Modal>
-      {data &&
-        data.map((item, i) => (
+      
+
+      {
+        approvedReq.length > 0 && (
+          
+          approvedReq.map((item, i) => (
           <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
+          <Modal id={`approved${i}`} withHeader={false}>
+        <ApprovedModal data={item} />
+           </Modal>
             <div>
-              {compImage.map((comp, i) => (
-                <img className="" key={i} src={comp.logo} alt="company logo" />
-              ))}
+             
+            <img className=""  src={item.companyLogo} alt="company logo" />
+              
             </div>
             <div className="my-2">
-              <h3> {item?.name} </h3>
+              <h3> {item?.companyName} </h3>
             </div>
             <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
             <div className="my-3">
               <p>
-                {data?.description}
+                {data?.companyDescription}
                 <span
-                  data-target="#approved"
+                  data-target={`#approved${i}`}
                   data-toggle="modal"
-                  onClick={() => setSelectedData(item)}
+                  
                 >
                   Read More
                 </span>
               </p>
             </div>
             <div>
-              {item?.status === "approved" ? (
+              
                 <button className="approvedBtn mt-2">
                   <img
                     className="mr-2 mb-1"
@@ -60,24 +67,94 @@ export const AllApplication = ({ data }) => {
                   />
                   Approved
                 </button>
-              ) : item?.status === "declined" ? (
-                <button className="declinedBtn mt-2">
-                  <img className="mr-2 mb-1" src={cancel} alt="declined icon" />
-                  Declined
-                </button>
-              ) : item?.status === "applied" ? (
-                <button className="expiredBtn mt-2">
-                  <img className="mr-2 mb-1" src={expired} alt="expired icon" />
-                  Expired
-                </button>
-              ) : (
-                <span />
-              )}
             </div>
           </ApplicationCard>
-        ))}
+        
+        )))
+      }
+
+      {
+        declined.length > 0 && (
+          
+          declined.map((item, i) => (
+          <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
+          <Modal id={`approved${i}`} withHeader={false}>
+        <ApprovedModal data={item} />
+      </Modal>
+            <div>
+             
+            <img className=""  src={item.companyLogo} alt="company logo" />
+              
+            </div>
+            <div className="my-2">
+              <h3> {item?.companyName} </h3>
+            </div>
+            <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
+            <div className="my-3">
+              <p>
+                {data?.companyDescription}
+                <span
+                  data-target={`#approved${i}`}
+                  data-toggle="modal"
+                  
+                >
+                  Read More
+                </span>
+              </p>
+            </div>
+            <div>
+            <button className="declinedBtn mt-2">
+            <img className="mr-2 mb-1" src={cancel} alt="declined icon" />
+            Declined
+          </button>
+            </div>
+          </ApplicationCard>
+        
+        )))
+      }
+
+      {
+        pending.length > 0 && ( 
+
+          pending.map((item, i) => (
+          <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
+          <Modal id={`approved${i}`} withHeader={false}>
+        <ApprovedModal data={item} />
+      </Modal>
+            <div>
+             
+            <img className=""  src={item.companyLogo} alt="company logo" />
+              
+            </div>
+            <div className="my-2">
+              <h3> {item?.companyName} </h3>
+            </div>
+            <Tag name="Analytics" bg="#F5FFDE" color="#05C118" fz="12px" />
+            <div className="my-3">
+              <p>
+                {data?.companyDescription}
+                <span
+                  data-target={`#approved${i}`}
+                  data-toggle="modal"
+                  
+                >
+                  Read More
+                </span>
+              </p>
+            </div>
+            <div>
+            <button className="declinedBtn mt-2">
+            <img className="mr-2 mb-1" src={cancel} alt="declined icon" />
+            Declined
+          </button>
+            </div>
+          </ApplicationCard>
+        
+        )))
+      }
+
     </div>
-  );
+  )
 };
 
 //Applied Modal

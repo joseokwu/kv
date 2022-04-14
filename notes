@@ -1311,9 +1311,36 @@ userId: "6246bcb64d65461c8b2756cf"
 website: "http://web.com"
 
 
+approvedRequests: []
+categories: "Tech"
+city: "exxi"
+companyDescription: "WE sell bread"
+companyEmail: "dhhdjd.gmail.com"
+companyLogo: "http://google.com"
+companyName: "bulee"
+coordinatorName: "ziikoo"
+country: "Nigeria"
+declinedRequests: []
+designation: "hdhdjfkf"
+industry: "Tech"
+linkedin: "www.link.com"
+offerings: {eligibilityCriteria: 'Eligibility', importantNote: 'hddjjfkkd', process: 'dhhdjjsjhd', partnershipValidity: 'gdhhfdhf', turnAroundTime: 'gdhhfyeyyr', …}
+pendingRequests: [{…}]
+phoneNumber: "hhjdkdd"
+state: "imo"
+twitter: "www.twitt.com"
+userId: "6246bc
 
-
-
+) : item?.status === "declined" ? (
+  <button className="declinedBtn mt-2">
+    <img className="mr-2 mb-1" src={cancel} alt="declined icon" />
+    Declined
+  </button>
+) : item?.status === "applied" ? (
+  <button className="expiredBtn mt-2">
+    <img className="mr-2 mb-1" src={expired} alt="expired icon" />
+    Expired
+  </button>
 
 
 

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useCallback } from 'react'
 import {} from './boosterPartner.styled'
 import { DashCard, Select, Tabs } from '../../Startupcomponents/index'
 import { boosterData } from '../../constants/domiData'
 import { useHistory } from 'react-router-dom'
 import { AllOfferings } from './components/allOfferings'
 import { MyApplications } from './components/myApplications'
-import { getBoosterData , getStartupRequest } from '../../services'
+import { getBoosterData , getStartupRequest } from '../../services';
 import newApp from '../../assets/icons/Star.svg'
 import { useAuth } from '../../hooks/useAuth';
 import { PageLoader } from "../../components";
@@ -18,7 +18,7 @@ export const StartupBoosterPartner = () => {
 
   const [loading, setLoading] = useState(false);
   const [boosterData, setBoosterData] = useState([])
-  const [requests , setRequests] = useState([])
+
 
 
 
@@ -62,22 +62,20 @@ export const StartupBoosterPartner = () => {
     'Virtual Assistant',
   ]
 
+   const getData = useCallback(async () => {
+    setLoading(true)
+    const res = await getBoosterData()
+    getApp(res?.data?.data)
+    setLoading(false);
+
+  },[ getApp])
 
 
   useEffect(() => {
     
-    const getData = async () => {
-      setLoading(true)
-      const res = await getBoosterData()
-      getApp(res?.data?.data)
-     const allReq = await getStartupRequest(stateAuth?.user?.userId)
-       setRequests(allReq)
-       setLoading(false)
-    }
-
     getData()
 
-  }, [setBoosterData, setRequests, stateAuth?.user?.userId ])
+  }, [setBoosterData , stateAuth?.applications ])
 
   console.log()
 
@@ -101,8 +99,8 @@ export const StartupBoosterPartner = () => {
       case '#All Offerings':
         return <AllOfferings  />
         // return <AllOfferings data={boosterData?.offerings} />
-     // case '#My Applications':
-       // return <MyApplications data={} />
+      case '#My Applications':
+        return <MyApplications  />
       default:
         return <AllOfferings  />
     }
