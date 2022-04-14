@@ -337,7 +337,7 @@ export const FundAsk = ({ setFundraising, back }) => {
               Back
             </CustomButton>
           </div>
-          <div className='col-9 d-flex justify-content-lg-end'>
+          <div className='col-9 d-flex justify-content-end'>
             <OutlineButton
               type='submit'
               // onClick={(e) => {
@@ -349,7 +349,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 onSubmit();
               }}
               className='ms-2'
-              style={{ marginRight: '5rem' }}
+              style={{ marginRight: '0rem' }}
               background='none'
             >
               Next

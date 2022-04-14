@@ -61,7 +61,7 @@ export const SignUp = ({ history }) => {
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
-      <section className="col-md-6 auth-side">
+      <section className="col-md-6">
         <AuthSide />
       </section>
       <section className="col-md-6">
@@ -161,7 +161,7 @@ export const SignUp = ({ history }) => {
               )}
             </div>
 
-            <div className="col-12 mb-2">
+            <div className="col-12 mb-2 email">
               <AuthTextField
                 name="email"
                 label="Email"
@@ -181,7 +181,7 @@ export const SignUp = ({ history }) => {
               />
             </div>
 
-            <div className=" numsign col-12 mb-4">
+            <div className="numsign col-12 mb-4">
               <PhoneInput
                 label ={'Mobile Number'} 
                 onChange={setPhone}

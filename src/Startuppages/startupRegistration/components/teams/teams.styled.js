@@ -43,10 +43,11 @@ export const ImageWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   background: #fff;
 `;
 export const InputWrapper = styled.label`
-  position: absolute;
+  position: relative;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -54,8 +55,8 @@ export const InputWrapper = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 520px;
-  left: 250px;
+  top: -30px;
+  left: 60px;
 
   input {
     width: inherit;
@@ -63,10 +64,10 @@ export const InputWrapper = styled.label`
     opacity: 0;
   }
 
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     top: 418px;
     left: 136px;
-  }
+  } */
 `;
 
 export const FormWrapper = styled.div`
@@ -79,6 +80,9 @@ export const FormWrapper = styled.div`
   border: 0 solid #d3d3d3;
   border-radius: 5px;
   background: #fff;
+  @media (max-width: 1024px) {
+    padding: 3rem 1rem;
+  }
 
   .select-search {
     width: 100%;

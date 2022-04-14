@@ -62,6 +62,9 @@ export const FormWrapper = styled.div`
   border: 0 solid #d3d3d3;
   border-radius: 5px;
   background: #fff;
+  @media (max-width: 1024px) {
+    padding: 2rem 0rem;
+  }
 
   .button {
     border: none;
@@ -81,7 +84,12 @@ export const FormWrapper = styled.div`
   .div {
     margin-bottom: 10px;
     margin-top: 15px;
-    margin-left: 15px;
+    margin-right: 15px;
+    @media (max-width: 1024px) {
+      margin-right: 0px;
+      margin-left: 10px;
+
+    }
     span {
       font-family: DM Sans;
       font-weight: 500;

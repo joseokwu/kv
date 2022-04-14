@@ -167,13 +167,14 @@ export const StartupProfile = () => {
 
   return (
     <>
-      <HeaderStartup>
+      <HeaderStartup className="mb-3">
         <h5> Startup Profile</h5>
         <p>Let's get to know your startup</p>
       </HeaderStartup>
 
-      <div style={{ marginTop: '10px', marginLeft: '10px' }}>
+      
         <ImageWrapper>
+        <div className="start-img-p" style={{ marginTop: '10px', marginLeft: '10px' }}>
           {logo === null ? (
             logoUploading ? (
               <CircularLoader color={'#000'} />
@@ -188,13 +189,14 @@ export const StartupProfile = () => {
               alt=""
             />
           )}
+          </div>
         </ImageWrapper>
 
         <InputWrapper for="dp">
           <input type="file" onChange={onChangeImage} id="dp" hidden />
           <PlusOutlined style={{ color: 'white' }} />
         </InputWrapper>
-      </div>
+      
       <form onSubmit={formik.handleSubmit}>
         <FormWrapper className="pe-5">
           <div className="div border-bottom pb-3">
@@ -255,6 +257,7 @@ export const StartupProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>Year Founded *</label>
               <DatePicker
+                className="col-md-12 py-2 px-2"
                 id="yearFounded"
                 name="yearFounded"
                 defaultValue={moment(stateAuth?.user?.startUpProfile?.yearFounded) ?? moment()}
