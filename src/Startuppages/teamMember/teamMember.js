@@ -12,7 +12,7 @@ import {
   FormWrapper,
   TeamMemberWrapper,
 } from './teamMember.styled'
-import DatePicker from 'react-datepicker'
+import { DatePicker } from 'antd'
 import PhoneInput from 'react-phone-number-input'
 import { Tag } from '../../Startupcomponents'
 import { CustomButton } from '../../Startupcomponents/button/button.styled'

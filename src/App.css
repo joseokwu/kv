@@ -39,6 +39,14 @@ h6 {
   z-index: 8;
   padding: 10px;
 }
+@media (max-width: 1024px) {
+  .tab-wrap {
+    position: unset;
+    top: 0;
+    background: #ffffff;
+    padding: 10px;
+  }
+}
 
 .white-strip {
   background-color: white;
