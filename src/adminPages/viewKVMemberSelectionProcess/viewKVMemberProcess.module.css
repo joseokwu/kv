@@ -1,0 +1,15 @@
+.pageSubtitle {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: rgba(189, 189, 198, 0.9);
+}
+
+.userPic {
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  border-radius: 50%;
+}

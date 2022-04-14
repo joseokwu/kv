@@ -108,8 +108,10 @@ import {
   Events,
   PendingApplication,
   Programs,
+  SelectionProcess,
   UserManagement,
   ViewInvestor,
+  ViewKVMemberSelectionProcess,
   ViewMentor,
   ViewPartner,
 } from "../adminPages";
@@ -785,7 +787,16 @@ const routes = [
   {
     name: "admin Selection Process",
     path: "/admin/selection_process",
-    component: WithAdminLayout(() => <div>Selection Process</div>),
+    component: WithAdminLayout(SelectionProcess),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/kv/:id",
+    component: WithAdminLayout(ViewKVMemberSelectionProcess),
     exact: true,
     protected: false,
     type: "admin",

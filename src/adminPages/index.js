@@ -12,3 +12,5 @@ export * from "./programs/Programs";
 export * from "./assignments/Assignments";
 export * from "./createProgram/CreateProgram";
 export * from "./createAssignment/CreateAssignment";
+export * from "./selectionProcess/SelectionProcess";
+export * from "./viewKVMemberSelectionProcess/ViewKVMemberSelectionProcess";
