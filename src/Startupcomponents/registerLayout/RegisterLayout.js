@@ -9,7 +9,7 @@ import { StartupSideBar } from "../sidebar/Sidebar";
         <Header />
       </section>
       <section className="">
-        <div className="layout-child">{children}</div>
+        <div className="layoutChild">{children}</div>
       </section>
     </div>
   );
