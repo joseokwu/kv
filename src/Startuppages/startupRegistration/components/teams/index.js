@@ -73,6 +73,7 @@ export const TeamProfile = () => {
     changePath,
     setWorkExperience,
     removeWorkExperience,
+    editWorkExperience,
     setEducation,
     state: {
       path,
@@ -221,6 +222,7 @@ export const TeamProfile = () => {
   });
 
   const handleWorkDetails = ({
+    index,
     from,
     companyName,
     location,
@@ -256,6 +258,20 @@ export const TeamProfile = () => {
         startDate: eduStartDate,
         endDate: eduEndDate,
         isPresent: false,
+      });
+      setIsEditing(false);
+    } else if (from === "workExperienceEdit") {
+      editWorkExperience({
+        data: {
+          companyName,
+          location,
+          position,
+          responsibility,
+          startDate,
+          endDate,
+          isPresentWorking: false,
+        },
+        index,
       });
       setIsEditing(false);
     }

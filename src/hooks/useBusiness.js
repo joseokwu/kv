@@ -8,6 +8,7 @@ import {
   getApplication,
   sendApplication,
   removeWorkExperienceAction,
+  editWorkExperienceAction,
 } from "../store/actions/business";
 import { useAuth } from './useAuth';
 
@@ -30,7 +31,10 @@ export const useActivity = () => {
   };
    const removeWorkExperience = (id) => {
      dispatch(removeWorkExperienceAction(id));
-   };
+  };
+  const editWorkExperience = (value) => {
+    dispatch(editWorkExperienceAction(value));
+  };
 
   const setEducation = (values, type) => {
     dispatch(setDEducation(values, type));
@@ -58,6 +62,7 @@ export const useActivity = () => {
     getApp,
     sendApp,
     removeWorkExperience,
+    editWorkExperience,
   };
 };
 

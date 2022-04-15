@@ -16,9 +16,10 @@ import {
   GET_APPLICATIONS,
   SEND_APPLICATION,
   REMOVE_WORK_EXPERIENCE,
+  EDIT_WORK_EXPERIENCE,
 } from "../../actions/actions.types";
 
-import { INIT_STATE_BUSINESS } from '../../initialstates';
+import { INIT_STATE_BUSINESS } from "../../initialstates";
 
 const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
   switch (action.type) {
@@ -70,37 +71,45 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         dash_view: action.payload,
       };
 
-      case SET_WORK_EXPERIENCE_DATABASE :
-        return {
-          ...state,
-          experience:action.payload,
-        };
+    case SET_WORK_EXPERIENCE_DATABASE:
+      return {
+        ...state,
+        experience: action.payload,
+      };
 
     case SET_WORK_EXPERIENCE:
-   
-        return {
-          ...state,
-          experience: [...state.experience, action.payload],
+      return {
+        ...state,
+        experience: [...state.experience, action.payload],
       };
     case REMOVE_WORK_EXPERIENCE:
-      console.log(action.payload, "Work Experience index");
       return {
         ...state,
-        experience: [...state.experience.slice(0, action.payload), ...state.experience.slice(action.payload + 1)],
+        experience: [
+          ...state.experience.slice(0, action.payload),
+          ...state.experience.slice(action.payload + 1),
+        ],
       };
-     case SET_EDUCATION_DATABASE :
+    case EDIT_WORK_EXPERIENCE:
+      const newExperience = state.experience.filter(
+        (index) => index !== action.payload.index
+      );
+      newExperience[action.payload.index] = action.payload.data;
       return {
         ...state,
-        education:action.payload
+        experience: [...newExperience],
+      };
+    case SET_EDUCATION_DATABASE:
+      return {
+        ...state,
+        education: action.payload,
       };
 
     case SET_EDUCATION:
- 
-        return {
-          ...state,
-          education: [...state.education, action.payload],
-        };
-     
+      return {
+        ...state,
+        education: [...state.education, action.payload],
+      };
 
     case SET_FUNDRAISING:
       return {
@@ -108,17 +117,19 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         fundraising: { ...state.fundraising, ...action.payload },
       };
 
-     case GET_APPLICATIONS:
-       return {
-         ...state,
-         applications:action.payload
-       } 
+    case GET_APPLICATIONS:
+      return {
+        ...state,
+        applications: action.payload,
+      };
 
-       case SEND_APPLICATION: 
-       return {
-         ...state,
-        applications:state.applications.filter(item  => item?.userId !== action.payload)
-       }
+    case SEND_APPLICATION:
+      return {
+        ...state,
+        applications: state.applications.filter(
+          (item) => item?.userId !== action.payload
+        ),
+      };
 
     default:
       return state;

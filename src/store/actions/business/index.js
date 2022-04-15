@@ -17,6 +17,7 @@ import {
   SET_EDUCATION_DATABASE,
   GET_APPLICATIONS,
   SEND_APPLICATION,
+  EDIT_WORK_EXPERIENCE,
 } from "../actions.types";
 
 import { getEvents } from "../../../services/events";
@@ -72,6 +73,12 @@ export const removeWorkExperienceAction = (id) => (dispatch) => {
   });
 };
 
+export const editWorkExperienceAction = (value) => (dispatch) => {  
+  dispatch({
+    type: EDIT_WORK_EXPERIENCE,
+    payload: value,
+  });
+};
 export const setDEducation =
   (values, type = "internal") =>
   (dispatch) => {
