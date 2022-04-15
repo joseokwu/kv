@@ -30,7 +30,9 @@ export const PitchDeck = () => {
   const [loading, setLoading] = useState(false)
   const [nextloading, setNextLoading] = useState(false);
   const [opts, setOpts] = useState('')
-  const [logoUploading , setLogoUploading] = useState(false);
+  const [logoUploading, setLogoUploading] = useState(false);
+  const [videoUploading, setVideoUploading] = useState(false);
+  
   const history = useHistory();
   const [fileDoc, setFileDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckFile ?? null);
   const [videoDoc, setVidDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckVideo ?? null);
@@ -79,14 +81,14 @@ export const PitchDeck = () => {
     formData.append(0 , files[0])
 
     try {
-      setLogoUploading(true);
+      setVideoUploading(true);
       const response = await upload(formData)
       console.log(response) 
       setVidDoc(response?.path);
-      setLogoUploading(false)
+      setVideoUploading(false);
      
     } catch(error) {
-      setLogoUploading(false)
+      setVideoUploading(false);
       console.log(error)
     }
   }
@@ -144,7 +146,7 @@ export const PitchDeck = () => {
         <h5 style={{color: "#2E3192"}}>Pitch Deck</h5>
         <p>Let's get to know your startup</p>
       </HeaderPitch>
-      <form style={{ marginBottom: '4rem' }} onSubmit={onSubmit}>
+      <form style={{ marginBottom: "4rem" }} onSubmit={onSubmit}>
         <FormWrapper>
           <div className="div">
             <span>Pitch Deck</span>
@@ -161,18 +163,25 @@ export const PitchDeck = () => {
                   Upload a Pitch deck for your startup
                 </label>
                 <FileWrapper className="d-flex justify-content-center text-center">
-                  
                   {fileDoc !== null ? (
-                    <img style={{width:'70px', height:'70px'}} src={RedFile} alt=".#" className='mb-2' />
+                    <img
+                      style={{ width: "70px", height: "70px" }}
+                      src={RedFile}
+                      alt=".#"
+                      className="mb-2"
+                    />
+                  ) : logoUploading ? (
+                    <CircularLoader color={"#000"} />
                   ) : (
-                    logoUploading ? <CircularLoader color={'#000'} /> : 
                     <>
-                    <img src={DownloadIcon} alt="#" />
+                      <img src={DownloadIcon} alt="#" />
                       <FileText>Drag & Drop</FileText>
-                      <FileText>Drag files or click here to upload </FileText>
+                      <FileText>
+                        Drag files or click here to upload document{" "}
+                      </FileText>
                     </>
                   )}
-                    
+
                   <input
                     type="file"
                     name="pitchDeckFile"
@@ -197,33 +206,31 @@ export const PitchDeck = () => {
                   <button className="button">Upload</button>
                 </div> */}
                 <FileWrapper className="d-flex justify-content-center text-center">
-                 
                   {videoDoc !== null ? (
-                
-                  <video 
+                    <video
                       style={{
-                        borderRadius:"20px",
-                       maxHeight:"150px",
-                        width:"250px"
+                        borderRadius: "20px",
+                        maxHeight: "150px",
+                        width: "250px",
                       }}
-                      className='mb-3'
-                     controls>
-                    <source src={videoDoc} id="video_here" />
+                      className="mb-3"
+                      controls
+                    >
+                      <source src={videoDoc} id="video_here" />
                       Your browser does not support HTML5 video.
-                     </video>
-              
-                    
+                    </video>
+                  ) : videoUploading ? (
+                    <CircularLoader color={"#000"} />
                   ) : (
-                    
-                    logoUploading ? <CircularLoader color={'#000'} /> : 
                     <>
-                    <img src={DownloadIcon} alt="#" />
+                      <img src={DownloadIcon} alt="#" />
                       <FileText>Drag & Drop</FileText>
-                      <FileText>Drag files or click here to upload </FileText>
+                      <FileText>
+                        Drag files or click here to upload pitch video{" "}
+                      </FileText>
                     </>
-                  
                   )}
-                
+
                   <input
                     type="file"
                     name="pitchDeckVideo"
@@ -245,25 +252,28 @@ export const PitchDeck = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-end">
-            <CustomButton type="button"
-             disabled={loading}
-             onClick={(e) => onSubmit(e)} 
-             className="mx-2" background="#00ADEF">
-              {loading ? <CircularLoader /> : 'Save'}
+            <CustomButton
+              type="button"
+              disabled={loading}
+              onClick={(e) => onSubmit(e)}
+              className="mx-2"
+              background="#00ADEF"
+            >
+              {loading ? <CircularLoader /> : "Save"}
             </CustomButton>
             <div className="">
               <CustomButton
-                onClick={() => setOpts('next')}
+                onClick={() => setOpts("next")}
                 type="submit"
                 disabled={nextloading}
                 background="#2E3192"
               >
-                { nextloading ? <CircularLoader /> : 'Next'}
+                {nextloading ? <CircularLoader /> : "Next"}
               </CustomButton>
             </div>
           </div>
         </div>
       </form>
     </>
-  )
+  );
 }

@@ -110,26 +110,7 @@ export const TeamModal = ({
                 <article className="error">{formik.errors.location}</article>
               ) : null}
             </div>
-            <div className="col-12 form-group">
-              <label>Company Title *</label>
-              <input
-                id="position"
-                name="position"
-                type="text"
-                className="form-control ps-3"
-                placeholder="Enter company title"
-                value={
-                  isEditing
-                    ? workExperience[editIndex]?.position
-                    : formik.values.position
-                }
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.position && formik.errors.position ? (
-                <article className="error">{formik.errors.position}</article>
-              ) : null}
-            </div>
+           
             <div className="col-12 form-group">
               <div className="d-flex justify-content-between">
                 <label>Description *</label>

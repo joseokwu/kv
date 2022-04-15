@@ -9,11 +9,13 @@ export const Education = ({
   course,
   degree,
   startDate,
+  activities,
   endDate,
   showEducationModal,
   setEditIndex,
   id,
   setIsEditing,
+  removeEducation,
 }) => {
  
   const endDateYear =
@@ -30,6 +32,10 @@ export const Education = ({
     showEducationModal();
   };
 
+  const handleDelete = () => {
+    removeEducation(id);
+  };
+
   return (
     <>
       <div className='main'>
@@ -40,6 +46,7 @@ export const Education = ({
           <h5 className='school'>{schoolName}</h5>
           <h6 className='course'>{course}</h6>
           <h6 className='degree'>{degree}</h6>
+          <p className='course'> { activities } </p>
           <h6 className='year'>
          
             {startDateYear} - {endDateYear}
@@ -47,7 +54,7 @@ export const Education = ({
         </div>
         <div className='buttons'>
           <img className='img' src={editIcon} alt='edit' onClick={handleEdit} />{' '}
-          <img className='img' src={deleteIcon} alt='delete' />
+          <img className='img' src={deleteIcon} onClick={handleDelete} alt='delete' />
         </div>
       </div>
       <hr />

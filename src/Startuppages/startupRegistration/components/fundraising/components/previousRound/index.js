@@ -26,11 +26,13 @@ export const PreviousRound = ({ setFundraising }) => {
     location: { hash },
   } = history;
   const optionsNumb = [
-    { value: 'Fund 1', label: 'Fund 1' },
-    { value: 'Fund 2', label: 'Fund 2' },
-    { value: 'Fund 3', label: 'Fund 3' },
+    { value: 'Seed round', label: 'Seed round' },
+    { value: 'Angel round', label: 'Angel round'},
+    { value: 'Series A', label: 'Series A' },
+    { value: 'Series B', label: 'Series B' },
+    { value: 'Series C', label: 'Series C' },
   ];
-
+  const fundNum = [1, 2, 3, 4, 5];
 
   const [startDate, setStartDate] = useState(new Date());
 
@@ -140,8 +142,8 @@ export const PreviousRound = ({ setFundraising }) => {
               }
               onChange={formik.handleChange}
             >
-              {optionsNumb.map((item, index) => {
-                return <option key={index}>{item.label}</option>;
+              {fundNum.map((item, index) => {
+                return <option key={index}>{item}</option>;
               })}
             </select>
           </div>
