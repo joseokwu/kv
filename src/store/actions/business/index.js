@@ -18,6 +18,8 @@ import {
   REMOVE_EDUCATION,
   GET_APPLICATIONS,
   SEND_APPLICATION,
+  EDIT_WORK_EXPERIENCE,
+  EDIT_EDUCATION,
 } from "../actions.types";
 
 import { getEvents } from "../../../services/events";
@@ -74,6 +76,12 @@ export const removeWorkExperienceAction = (id) => (dispatch) => {
   });
 };
 
+export const editWorkExperienceAction = (value) => (dispatch) => {  
+  dispatch({
+    type: EDIT_WORK_EXPERIENCE,
+    payload: value,
+  });
+};
 export const setDEducation =
   (values, type = "internal") =>
   (dispatch) => {
@@ -95,6 +103,13 @@ export const setDEducation =
     dispatch({
       type: REMOVE_EDUCATION,
       payload: id,
+    });
+  };
+
+  export const editEducationAction = (value) => (dispatch) => {  
+    dispatch({
+      type: EDIT_EDUCATION,
+      payload: value,
     });
   };
 

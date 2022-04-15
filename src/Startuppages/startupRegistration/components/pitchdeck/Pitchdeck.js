@@ -23,6 +23,7 @@ import { useAuth } from '../../../../hooks/useAuth';
 import { updateFounderProfile } from '../../../../services'
 import axios  from 'axios';
 import { upload }  from '../../../../services/utils';
+import { UploadFile } from '../../../../components/uploadFile'
 
 
 export const PitchDeck = () => {
@@ -156,6 +157,15 @@ export const PitchDeck = () => {
             </p>
 
             <hr />
+
+            <UploadFile
+            data={{
+              maxFiles: 1,
+              supportedMimeTypes: ['application/pdf'],
+              maxFileSize: 5,
+              extension: 'MB',
+            }}
+          />
 
             <div className="row">
               <div className="form-group col-12">

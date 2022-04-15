@@ -74,7 +74,9 @@ export const TeamProfile = () => {
     setWorkExperience,
     removeWorkExperience,
     removeEducation,
+    editWorkExperience,
     setEducation,
+    editEducation,
     state: {
       path,
       experience,
@@ -222,6 +224,7 @@ export const TeamProfile = () => {
   });
 
   const handleWorkDetails = ({
+    index,
     from,
     companyName,
     location,
@@ -252,13 +255,40 @@ export const TeamProfile = () => {
       setEducation({
         schoolName,
         course,
-        degreeType: degree,
+        degree,
         activities,
         startDate: eduStartDate,
         endDate: eduEndDate,
         isPresent: false,
       });
       setIsEditing(false);
+    } else if (from === "workExperienceEdit") {
+      editWorkExperience({
+        data: {
+          companyName,
+          location,
+          position,
+          responsibility,
+          startDate,
+          endDate,
+          isPresentWorking: false,
+        },
+        index,
+      });
+      setIsEditing(false);
+    } else if (from === 'educationEdit') {
+      editEducation({
+        data: {
+        schoolName,
+        course,
+        degreeType: degree,
+        activities,
+        startDate: eduStartDate,
+        endDate: eduEndDate,
+        isPresent: false,
+        },
+        index,
+      })
     }
   };
 
