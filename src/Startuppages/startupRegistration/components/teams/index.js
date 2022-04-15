@@ -65,7 +65,7 @@ export const TeamProfile = () => {
     twitter: stateAuth?.user?.team?.socialMedia?.twitter
       ?? '',
   });
-  const [country, setCountry] = useState(stateAuth?.user?.team?.country ?? '');
+  const [country, setCountry] = useState(stateAuth?.user?.team?.country ?? 'Nigeria');
 
   const dateFormat = 'YYYY-MM-DD';
   const [inVal , setVal] = useState('');

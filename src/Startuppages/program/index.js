@@ -13,29 +13,18 @@ import { useHistory } from "react-router-dom";
 import { Assignment } from "./components/assignment";
 import { Rating } from "./components/rating";
 import { CalenderComponent } from "./components/calender";
-import { getProgramInfo } from "../../services";
-import { PageLoader } from "../../components";
+import { getPrograms } from "../../services";
+
 
 export const StartupProgram = () => {
   const tabList = ["Calender", "Session", "Assignment", "Rating"];
 
   const [programInfo, setProgramInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+ 
 
-  const getData = async () => {
-    setLoading(true);
-    const res = await getProgramInfo();
-    setProgramInfo(res);
-    setLoading(false);
-  };
 
-  useEffect(() => {
-    getData();
 
-    return () => {
-      setProgramInfo({});
-    };
-  }, []);
 
   const {
     location: { hash },
@@ -48,7 +37,7 @@ export const StartupProgram = () => {
       case "#Calender":
         return <CalenderComponent  data={ programInfo !== undefined && programInfo?.calendar} />;
       case "#Session":
-        return <Session data={programInfo?.sessions} />;
+        return <Session />;
       case "#Assignment":
         return <Assignment data={programInfo?.assignment} />;
       case "#Rating":
@@ -58,11 +47,7 @@ export const StartupProgram = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <PageLoader num={[programInfo?.sessions, programInfo?.assignment]} />
-    );
-  }
+
 
   return (
     <div className="container">

@@ -9,6 +9,7 @@ export const Education = ({
   course,
   degree,
   startDate,
+  activities,
   endDate,
   showEducationModal,
   setEditIndex,
@@ -40,6 +41,7 @@ export const Education = ({
           <h5 className='school'>{schoolName}</h5>
           <h6 className='course'>{course}</h6>
           <h6 className='degree'>{degree}</h6>
+          <p className='course'> { activities } </p>
           <h6 className='year'>
          
             {startDateYear} - {endDateYear}

@@ -6,12 +6,12 @@ import deleteIcon from '../../assets/icons/delete.svg';
 
 
 export const WorkExperience = ({
-  title,
+  companyName,
   position,
   location,
   startDate,
   endDate,
-  description,
+  responsibility,
   showTeamModal,
   setEditIndex,
   id,
@@ -36,7 +36,7 @@ export const WorkExperience = ({
           <img src={appleSmall} alt='apple' />
         </div>
         <div className='info'>
-          <h5 className='title'>{title}</h5>
+          <h5 className='title'>{ companyName }</h5>
           <h6 className='position'>{position}</h6>
           <h6 className='country'>{location}</h6>
           <h6 className='date'>
@@ -53,7 +53,7 @@ export const WorkExperience = ({
               ? `${new Date().getMonth() - startDateMonth} months`
               : null}
           </h6>
-          <p>{description}</p>
+          <p>{responsibility}</p>
         </div>
         <div className='buttons'>
           <img className='img' src={editIcon} alt='edit' onClick={handleEdit} />{' '}

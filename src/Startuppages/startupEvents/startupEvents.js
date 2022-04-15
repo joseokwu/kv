@@ -77,7 +77,6 @@ export const StartupEvents = ({ history }) => {
    
 	const movePage =(id)=>{
 		setCurrentPage(id)
-
 	}
 
   

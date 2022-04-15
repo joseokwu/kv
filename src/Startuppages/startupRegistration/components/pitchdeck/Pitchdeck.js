@@ -169,7 +169,7 @@ export const PitchDeck = () => {
                     <>
                     <img src={DownloadIcon} alt="#" />
                       <FileText>Drag & Drop</FileText>
-                      <FileText>Drag files or click here to upload </FileText>
+                      <FileText>Drag files or click here to upload document </FileText>
                     </>
                   )}
                     
@@ -219,7 +219,7 @@ export const PitchDeck = () => {
                     <>
                     <img src={DownloadIcon} alt="#" />
                       <FileText>Drag & Drop</FileText>
-                      <FileText>Drag files or click here to upload </FileText>
+                      <FileText>Drag files or click here to upload pitch video </FileText>
                     </>
                   
                   )}
