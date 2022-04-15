@@ -5,15 +5,24 @@ import sampleUser from "../../assets/images/sampleNoticePic.png";
 import "./notification.css";
 
 export const StartupNotification = () => {
-  const tabItems = ["all", "program", "mentors", "investors", "startup team", "others", "event / workshop"];
-
-  const noticeItems = [
-    { noticeImage: noticeImg },
-    { noticeImage: "" },
-    { noticeImage: "" },
-    { noticeImage: noticeImg },
-    { noticeImage: noticeImg },
+  const tabItems = [
+    "all",
+    "program",
+    "mentors",
+    "investors",
+    "startup team",
+    "others",
+    "event / workshop",
   ];
+
+  // const noticeItems = [
+  //   { noticeImage: noticeImg },
+  //   { noticeImage: "" },
+  //   { noticeImage: "" },
+  //   { noticeImage: noticeImg },
+  //   { noticeImage: noticeImg },
+  // ];
+  const noticeItems = [];
   return (
     <div className="wrapper">
       <section className="mb-4">
