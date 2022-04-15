@@ -128,10 +128,18 @@ export const NotSubmitted = () => {
 export const SubmitAssignmentModal = ({data}) => {
 
 const { stateAuth } = useAuth();
-
+  console.log(stateAuth)
   const [logoUploading, setLogoUploading] = useState(false);
   const [fileDoc, setFileDoc] = useState('');
 
+  const handleSubmit = async(e) =>{
+
+    const assignment = {
+      name:stateAuth?.user?.startupname,
+      email:stateAuth?.email,
+      assignmentDoc:fileDoc
+    }
+  }
 
   const handleChange = async(e) => {
     const { files } = e.target;
@@ -153,6 +161,8 @@ const { stateAuth } = useAuth();
       console.log(error)
     }
   }
+
+
 
 
   return (

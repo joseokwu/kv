@@ -1278,6 +1278,26 @@ userId: "62574f45fae1602d2abaf0c8"
 __v: 0
 
 
+assignments: {data: Array(1), results: {…}}
+businessname: "Winner Airlines"
+email: "isaackelvin256@gmail.com"
+event: {data: Array(0), results: {…}}
+fundRaising: {fundingAsk: {…}, fundUtilization: {…}, capTable: {…}, previousRound: {…}, financialProjection: {…}, …}
+industry: "Agriculture, food and beverages"
+isRegCompleted: true
+partner: []
+permissions: []
+phone: "+2340987768998"
+pitchDeck: {pitchDeckFile: 'https://cdn.shoutng.com/kvdptg0en56hzuo5tti0lu.pdf', pitchDeckVideo: 'https://cdn.shoutng.com/kvm2q4ifvxn1ikr7qb7hc6.mp4', _id: '625930305af52b0b6724f975'}
+product: {description: 'In publishing and graphic design, Lorem ipsum is a…a placeholder before the final copy is available.', competitiveEdge: 'In publishing and graphic design, Lorem ipsum is a…a placeholder before the final copy is available.', youtubeDemoUrl: Array(1), files: null, _id: '62594027b36d0dd3b5e2e3ac'}
+role: ['startup']
+startUpProfile: {logo: 'https://cdn.shoutng.com/kv304nexraqfgbwbnfuxpe.jpg', elevatorPitch: 'In publishing and graphic design, Lorem ipsum is a…a placeholder before the final copy is available.', brand: 'Brand', startupName: 'Winner Airlines', yearFounded: '2017-04-09', …}
+startupname: "Winner Airlines"
+team: {avatar: 'https://cdn.shoutng.com/kvlyknlq810h4lxzagidxw.png', briefIntroduction: 'Hellooooo', firstName: 'Enerst', lastName: 'Owunbuzia', email: 'isaackelvin256@gmail.com', …}
+type: ['startup']
+userId: "62585391a5101dc3e84a7c72"
+verified: tru 
+
 
 
 "value":{
