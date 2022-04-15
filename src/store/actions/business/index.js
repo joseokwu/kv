@@ -1,10 +1,10 @@
 import {
-  DASHBOARD,
-  WALLET,
-  TRANSACTIONS,
-  DATA_BANK,
-  DASHBOARD_LOAD,
-  SETTINGS,
+  // DASHBOARD,
+  // WALLET,
+  // TRANSACTIONS,
+  // DATA_BANK,
+  // DASHBOARD_LOAD,
+  // SETTINGS,
   CHANGE_PAGE,
   SHOW_EVENT,
   GET_EVENTS_FAILED,
@@ -13,13 +13,13 @@ import {
   SET_EDUCATION,
   SET_FUNDRAISING,
   SET_WORK_EXPERIENCE_DATABASE,
+  REMOVE_WORK_EXPERIENCE,
   SET_EDUCATION_DATABASE,
   GET_APPLICATIONS,
-  SEND_APPLICATION
+  SEND_APPLICATION,
+} from "../actions.types";
 
-} from '../actions.types';
-
-import { getEvents } from '../../../services/events';
+import { getEvents } from "../../../services/events";
 
 export const changeDPath = (value) => (dispatch) => {
   console.log(value);
@@ -44,46 +44,50 @@ export const events = (id) => async (dispatch) => {
   }
 };
 
-
-
-
 export const showDEventAction = () => (dispatch) => {
   dispatch({
     type: SHOW_EVENT,
   });
 };
 
-export const setDWorkExperience = (values, type='internal') => (dispatch) => {
-  if(type === 'server'){
-    dispatch({
-      type: SET_WORK_EXPERIENCE_DATABASE,
-      payload: values,
-    });
-  }else{
-    dispatch({
-      type: SET_WORK_EXPERIENCE,
-      payload: values,
-    });
-  }
-
+export const setDWorkExperience =
+  (values, type = "internal") =>
+  (dispatch) => {
+    if (type === "server") {
+      dispatch({
+        type: SET_WORK_EXPERIENCE_DATABASE,
+        payload: values,
+      });
+    } else {
+      dispatch({
+        type: SET_WORK_EXPERIENCE,
+        payload: values,
+      });
+    }
+  };
+export const removeWorkExperienceAction = (id) => (dispatch) => {
+  dispatch({
+    type: REMOVE_WORK_EXPERIENCE,
+    payload: id,
+  });
 };
 
-export const setDEducation = (values, type='internal') => (dispatch) => {
-  if(type === 'server'){
-    console.log(type)
-    dispatch({
-      type: SET_EDUCATION_DATABASE,
-      payload: values,
-    });
-  }else{
-    dispatch({
-      type: SET_EDUCATION,
-      payload: values,
-    });
-  }
- 
-
-};
+export const setDEducation =
+  (values, type = "internal") =>
+  (dispatch) => {
+    if (type === "server") {
+      console.log(type);
+      dispatch({
+        type: SET_EDUCATION_DATABASE,
+        payload: values,
+      });
+    } else {
+      dispatch({
+        type: SET_EDUCATION,
+        payload: values,
+      });
+    }
+  };
 
 export const setDFundraising = (values) => (dispatch) => {
   dispatch({
@@ -92,24 +96,16 @@ export const setDFundraising = (values) => (dispatch) => {
   });
 };
 
-export const getApplication = (values) =>(dispatch) =>{
-
+export const getApplication = (values) => (dispatch) => {
   dispatch({
-    type:GET_APPLICATIONS,
-    payload:values
-  })
+    type: GET_APPLICATIONS,
+    payload: values,
+  });
+};
 
-}
-
-export const sendApplication = (value) =>(dispatch) =>{
+export const sendApplication = (value) => (dispatch) => {
   dispatch({
-    type:SEND_APPLICATION,
-    payload:value
-  })
-}
-
-
-
-
-
-
+    type: SEND_APPLICATION,
+    payload: value,
+  });
+};

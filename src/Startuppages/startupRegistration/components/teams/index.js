@@ -72,6 +72,7 @@ export const TeamProfile = () => {
   const {
     changePath,
     setWorkExperience,
+    removeWorkExperience,
     setEducation,
     state: {
       path,
@@ -510,6 +511,7 @@ export const TeamProfile = () => {
                 <WorkExperience
                   key={index}
                   {...item}
+                  removeWorkExperience={removeWorkExperience}
                   showTeamModal={() => setShow(true)}
                   setEditIndex={setEditIndex}
                   setIsEditing={setIsEditing}

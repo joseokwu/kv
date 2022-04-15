@@ -6,8 +6,9 @@ import {
   setDEducation,
   setDFundraising,
   getApplication,
-  sendApplication
-} from '../store/actions/business';
+  sendApplication,
+  removeWorkExperienceAction,
+} from "../store/actions/business";
 import { useAuth } from './useAuth';
 
 export const useActivity = () => {
@@ -27,6 +28,9 @@ export const useActivity = () => {
   const setWorkExperience = (values, type) => {
     dispatch(setDWorkExperience(values, type));
   };
+   const removeWorkExperience = (id) => {
+     dispatch(removeWorkExperienceAction(id));
+   };
 
   const setEducation = (values, type) => {
     dispatch(setDEducation(values, type));
@@ -52,7 +56,8 @@ export const useActivity = () => {
     setEducation,
     setFundraising,
     getApp,
-    sendApp
+    sendApp,
+    removeWorkExperience,
   };
 };
 

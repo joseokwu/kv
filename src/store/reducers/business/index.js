@@ -14,8 +14,9 @@ import {
   SET_WORK_EXPERIENCE_DATABASE,
   SET_EDUCATION_DATABASE,
   GET_APPLICATIONS,
-  SEND_APPLICATION
-} from '../../actions/actions.types';
+  SEND_APPLICATION,
+  REMOVE_WORK_EXPERIENCE,
+} from "../../actions/actions.types";
 
 import { INIT_STATE_BUSINESS } from '../../initialstates';
 
@@ -80,7 +81,13 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
         return {
           ...state,
           experience: [...state.experience, action.payload],
-        };
+      };
+    case REMOVE_WORK_EXPERIENCE:
+      console.log(action.payload, "Work Experience index");
+      return {
+        ...state,
+        experience: [...state.experience.slice(0, action.payload), ...state.experience.slice(action.payload + 1)],
+      };
      case SET_EDUCATION_DATABASE :
       return {
         ...state,
