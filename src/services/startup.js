@@ -102,6 +102,26 @@ export const assignment = async(value) =>{
   }
 }
 
+export const getSubmittedAssignment = async(value) =>{
+  try{
+    const res = await request.post("submittedAssignment", value);
+    console.log(res?.data)
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
+
+export const submitAssignment = async(value) =>{
+  try{
+    const res = await request.post("submitAssignment", value);
+    console.log(res?.data)
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
+
 // description: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available."
 // duration: "5"
 // endTime: "Fri May 13 2022 15:00:00 GMT+0100 (West Africa Standard Time)"

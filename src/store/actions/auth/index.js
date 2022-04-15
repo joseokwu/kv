@@ -38,6 +38,7 @@ export const loginUser = async(value) => async(dispatch) =>{
             type:AUTH_START
         })
         const res = await userLogin(value);
+        console.log(res?.data?.user)
      if(!res?.success){
      toast.error(res?.message);
      dispatch({
