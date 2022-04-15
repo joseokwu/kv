@@ -160,7 +160,7 @@ export const CapTable = ({ setFundraising }) => {
         <div className="col-3">
           <CustomButton
             className=""
-            background="#D0D0D1"
+            background="#808080"
             onClick={() => history.push('#Fund Utilization')}
           >
             Back

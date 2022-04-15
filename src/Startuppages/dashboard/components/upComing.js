@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { months } from "../../../utils/helpers";
 
 export const UpComing = ({ data = [] }) => {
-  const todoArr = [1, 2, 3];
+  // const todoArr = [1, 2, 3];
   const history = useHistory();
 
   return (

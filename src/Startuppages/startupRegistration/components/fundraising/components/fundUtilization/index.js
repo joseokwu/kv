@@ -82,7 +82,7 @@ export const FundUtilization = ({setFundraising}) => {
         </p>
         <hr className='mx-n5 mx-lg-n0' />
 
-        <div className=' my-5'>
+        <div className='my-5'>
           <div className=''>
             <DownloadableButton href='.' className='mx-n5 mx-lg-n0'>
               <img className='pr-2' src={Download} alt='' />
@@ -128,7 +128,7 @@ export const FundUtilization = ({setFundraising}) => {
         <div className='col-3'>
           <CustomButton
             className=''
-            background='#D0D0D1'
+            background='#808080'
             onClick={() => history.push('#Funding Ask')}
           >
             Back

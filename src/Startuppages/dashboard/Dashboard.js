@@ -103,9 +103,9 @@ useEffect(() =>{
       </section>
 
       <section className="row">
-        <div className="col-lg-12">
+        {/* <div className="col-lg-12">
           <TodoList data={stateAuth?.user?.assignments?.data ?? []} />
-        </div>
+        </div> */}
       </section>
       <section className="my-4">
         <UpComing data={stateAuth?.user?.event?.data} />

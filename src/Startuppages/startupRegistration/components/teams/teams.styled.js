@@ -249,6 +249,11 @@ export const ModalForm = styled.div`
   input {
     background: #fafafc !important;
     border: none;
+
+    ::placeholder {
+      color: #BDBDBD;
+      font-size: 0.875rem;
+    }
   }
 
   label {
@@ -268,6 +273,11 @@ export const ModalForm = styled.div`
   textarea {
     background: #fafafc !important;
     border: none;
+
+    ::placeholder {
+      color: #BDBDBD;
+      font-size: 0.875rem;
+    }
   }
   span {
     margin-left: 10px;

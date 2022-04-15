@@ -107,7 +107,7 @@ export const FundAsk = ({ setFundraising, back }) => {
           <hr />
           <div className='row mt-4'>
             <div className='form-group col-12'>
-              <label>Have you fundraised before?*</label>
+              <label>Have you fundraised before?<span style={{color: "red"}}>*</span></label>
               <BntWrap>
                 <button
                   className={`me-3 ${
@@ -134,7 +134,7 @@ export const FundAsk = ({ setFundraising, back }) => {
             <div className='form-group my-3 col-12'>
               <label>
                 Which instrument would you prefer to use for your current
-                round?*
+                round?<span style={{color: "red"}}>*</span>
               </label>
               <select
                 id='instrumentForRound'
@@ -153,7 +153,7 @@ export const FundAsk = ({ setFundraising, back }) => {
               </select>
             </div>
             <div className='form-group my-2 col-lg-6 col-12'>
-              <label>Select your round?*</label>
+              <label>Select your round?<span style={{color: "red"}}>*</span></label>
               <select
                 id={'numberOfRounds'}
                 name={'numberOfRounds'}
@@ -172,7 +172,7 @@ export const FundAsk = ({ setFundraising, back }) => {
             </div>
             <div className='form-group my-2 col-12'>
               <label>
-                How much investment is your company looking to raise?*
+                How much investment is your company looking to raise?<span style={{color: "red"}}>*</span>
               </label>
               <input
                 id='fundraisingAmount'
@@ -195,7 +195,7 @@ export const FundAsk = ({ setFundraising, back }) => {
               ) : null}
             </div>
             <div className='form-group my-2 col-12'>
-              <label>Dilution (%)*</label>
+              <label>Dilution (%)<span style={{color: "red"}}>*</span></label>
               <input
                 id='dilution'
                 name='dilution'
@@ -214,7 +214,7 @@ export const FundAsk = ({ setFundraising, back }) => {
               ) : null}
             </div>
             <div className='form-group my-2 col-12'>
-              <label>What is your pre-money valuation?*</label>
+              <label>What is your pre-money valuation?<span style={{color: "red"}}>*</span></label>
               <input
                 id='preMoneyValuation'
                 name='preMoneyValuation'
@@ -236,7 +236,7 @@ export const FundAsk = ({ setFundraising, back }) => {
               ) : null}
             </div>
             <div className='form-group my-2 col-12'>
-              <label>Post-Money valuation*</label>
+              <label>Post-Money valuation<span style={{color: "red"}}>*</span></label>
               <input
                 id='postMoneyValuation'
                 name='postMoneyValuation'
@@ -331,7 +331,7 @@ export const FundAsk = ({ setFundraising, back }) => {
           <div className='col-3'>
             <CustomButton
               className=''
-              background='#D0D0D1'
+              background='#808080'
               onClick={() => back()}
             >
               Back

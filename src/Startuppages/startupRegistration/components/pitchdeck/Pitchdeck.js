@@ -141,7 +141,7 @@ export const PitchDeck = () => {
   return (
     <>
       <HeaderPitch>
-        <h5> Pitch Deck </h5>
+        <h5 style={{color: "#2E3192"}}>Pitch Deck</h5>
         <p>Let's get to know your startup</p>
       </HeaderPitch>
       <form style={{ marginBottom: '4rem' }} onSubmit={onSubmit}>
@@ -240,7 +240,7 @@ export const PitchDeck = () => {
         </FormWrapper>
         <div className="row ">
           <div className="col-3">
-            <CustomButton className="" background="#D0D0D1" onClick={back}>
+            <CustomButton className="" background="#808080" onClick={back}>
               Back
             </CustomButton>
           </div>

@@ -107,7 +107,7 @@ export const FinancialProjection = () => {
 
         <div className='my-5'>
           <div className="col-12 my-3">
-            <DownloadableButton href='.' className="mx-n4 mx-lg-n0">
+            <DownloadableButton href='.' className="mx-n5 mx-lg-n0">
               <img className='pr-2' src={Download} alt='' />
               Download fund utilization template here
             </DownloadableButton>
@@ -149,7 +149,7 @@ export const FinancialProjection = () => {
         <div className='col-3'>
           <CustomButton
             className=''
-            background='#D0D0D1'
+            background='#808080'
             onClick={() => history.push('#Previous Round')}
           >
             Back

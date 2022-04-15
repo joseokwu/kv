@@ -321,8 +321,8 @@ export const TeamProfile = () => {
         <span></span>
       )}
       <HeaderTeam>
-        <h5> Team</h5>
-        <p className="text-nowrap">Let’s you introduce your Co-Founder(s)</p>
+        <h5 style={{color: "#2E3192"}}>Team</h5>
+        <p className="text-nowrap">Let’s you introduce your Founder(s)</p>
       </HeaderTeam>
 
       <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
@@ -363,7 +363,7 @@ export const TeamProfile = () => {
           <div className="row my-5">
             <div className="form-group col-12">
               <div className="d-flex justify-content-between">
-                <label>Brief Introduction *</label>
+                <label>Brief Introduction<span style={{color: "red"}}>*</span></label>
                 <label style={{ color: '#828282' }}>10 words at most</label>
               </div>
               <input
@@ -383,7 +383,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>First Name *</label>
+              <label>First Name<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.firstName}
@@ -398,7 +398,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Last Name *</label>
+              <label>Last Name<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.lastName}
@@ -413,7 +413,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Email *</label>
+              <label>Email<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.email}
@@ -428,7 +428,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12">
-              <label>Date of Birth *</label>
+              <label>Date of Birth<span style={{color: "red"}}>*</span></label>
               <DatePicker
                 id="dob"
                 name="dob"
@@ -441,7 +441,7 @@ export const TeamProfile = () => {
              
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>Country *</label>
+              <label>Country<span style={{color: "red"}}>*</span></label>
               {/* <input
                 onChange={formik.handleChange}
                 value={formik.values.country}
@@ -463,7 +463,7 @@ export const TeamProfile = () => {
              
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>State *</label>
+              <label>State<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.state}
@@ -478,7 +478,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>City *</label>
+              <label>City<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.city}
@@ -493,7 +493,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12">
-              <label>Mobile Number *</label>
+              <label>Mobile Number<span style={{color: "red"}}>*</span></label>
               <PhoneInput
                 international
                 name="mobile_number"
@@ -584,8 +584,8 @@ export const TeamProfile = () => {
 
           <div className="form-group">
             <div>
-              <label>What are your skills*</label>
-              <p>Please press the space button to add your skill</p>
+              <label>What are your skills<span style={{color: "red"}}>*</span></label>
+              <p className="py-2">Please press the space button to add your skill</p>
             </div>
             <input
                 onChange={handleChange}
@@ -593,7 +593,7 @@ export const TeamProfile = () => {
                 value={inVal}
                 type='text'
                 placeholder='Enter your skills and press the space button to add '
-                className="py-2 px-3"
+                className="py-2 px-3 mb-2"
                 // className='form-control ps-3'
                 // onBlur={formik.handleBlur}
                 onKeyDown={handleKey}
@@ -617,7 +617,7 @@ export const TeamProfile = () => {
           </div>
           <div className="row">
             <div className="form-group col-lg-6 col-12">
-              <label>LinkedIn*</label>
+              <label>LinkedIn<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.linkedIn}
@@ -632,7 +632,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Twitter*</label>
+              <label>Twitter<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.twitter}
@@ -648,7 +648,7 @@ export const TeamProfile = () => {
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Website*</label>
+              <label>Website<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.website}
@@ -689,7 +689,7 @@ export const TeamProfile = () => {
 
         <div className="row ">
           <div className="col-3">
-            <CustomButton className="" background="#D0D0D1" onClick={back}>
+            <CustomButton className="" background="#808080" onClick={back}>
               Back
             </CustomButton>
           </div>

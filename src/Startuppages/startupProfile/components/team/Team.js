@@ -33,8 +33,8 @@ export const Team = ({data}) => {
         <button className="teamBtn" onClick={() => push('/startup/team/member')}>Add team member</button>
       </section> */}
       <section>
-        <h4 className="team-group-title">Founder & Co-Founders</h4>
-
+        {/* <h4 className="team-group-title">Founder & Co-Founders</h4> */}
+        <h4 className="team-group-title">Founder</h4>
         <div className="row">
           {data && data.slice(0, 3).map((c, i) => {
             return (
