@@ -1,14 +1,6 @@
 import { request } from "../utils/axios";
 
-export const getDashboardInfo = async () => {
-  try {
-    const res = await request.post("startup/dashboard");
 
-    return res?.data;
-  } catch (err) {
-    throw err;
-  }
-};
 
 export const getEventInfo = async () => {
   try {
@@ -93,6 +85,16 @@ export const updateFounderProfile = async (values) => {
 export const getPrograms = async(value) =>{
   try{
     const res = await request.post("programs", value);
+    console.log(res?.data)
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
+
+export const assignment = async(value) =>{
+  try{
+    const res = await request.post("assignments", value);
     console.log(res?.data)
     return res?.data;
   }catch(err){

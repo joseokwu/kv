@@ -17,7 +17,7 @@ import { getPrograms } from "../../services";
 
 
 export const StartupProgram = () => {
-  const tabList = ["Calender", "Session", "Assignment", "Rating"];
+  const tabList = ["Calender", "Session", "Assignment"];
 
   const [programInfo, setProgramInfo] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ export const StartupProgram = () => {
     location: { hash },
   } = useHistory();
 
-   console.log(programInfo  && programInfo?.calendar)
+  
 
   const renderComponent = () => {
     switch (hash) {
@@ -39,9 +39,9 @@ export const StartupProgram = () => {
       case "#Session":
         return <Session />;
       case "#Assignment":
-        return <Assignment data={programInfo?.assignment} />;
-      case "#Rating":
-        return <Rating />;
+        return <Assignment  />;
+      // case "#Rating":
+      //   return <Rating />;
       default:
         return <CalenderComponent data={ programInfo !== undefined && programInfo?.calendar} />
     }

@@ -2,6 +2,7 @@ import  { request } from '../utils/axios';
 
  export const register = async (values)=>{
     try{
+        
         const res = await request.post('register', values)
         
         return res?.data
