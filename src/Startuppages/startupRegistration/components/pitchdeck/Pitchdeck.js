@@ -103,7 +103,7 @@ export const PitchDeck = () => {
       const pitchDeck = {
         type: 'pitchDeck',
         accType: 'startup',
-        values: {
+        values:{
           pitchDeckFile:fileDoc,
           pitchDeckVideo:videoDoc
         },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { SmallModal, Tag } from '../../../../../Startupcomponents'
 import { SubmitAssignment, TodoCard } from '../styled'
 import {
@@ -10,17 +10,64 @@ import {
 import downloadIcon from '../../../../../assets/icons/download.svg'
 import doc from '../../../../../assets/icons/assdoc.svg'
 import { months } from '../../../../../utils/helpers'
+import { assignment ,submitAssignment  } from '../../../../../services';
+import { PageLoader } from '../../../../../components'
+import Pagination from 'react-bootstrap/Pagination';
+import { upload } from './../../../../../services/utils';
+import { useAuth } from '../../../../../hooks/useAuth';
 
-export const NotSubmitted = ({ data }) => {
-  const assArr = [1, 2, 3, 4]
-  const [showModal, setShowModal] = useState(false)
+export const NotSubmitted = () => {
+  
+
   const [openModal, setOpenModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [NotsubmittedAssignment , setNotSubmittedAssignment] = useState(null);
+  const [loading, setLoading] = useState(false);
 
+
+  const nextPage = ()=>{
+    setCurrentPage(currentPage+1)
+ 
+   }
+ 
+   const prevPage = ()=>{
+     setCurrentPage(currentPage-1)
+ 
+   }
+   
+	const movePage =(id)=>{
+		setCurrentPage(id)
+	}
+
+
+  useEffect(() =>{
+
+    const getData = async () => {
+      setLoading(true);
+      const res = await assignment({
+        page:currentPage,
+        limit:5
+      });
+      console.log(res?.data)
+      setNotSubmittedAssignment(res?.data);
+      setLoading(false);
+    };
+    
+    getData();
+  
+  }, [currentPage])
+
+  if (loading) {
+    return (
+      <PageLoader num={[1, 2, 3, 4, 5]} />
+    );
+  }
 
   return (
     <div>
       <div className="row mt-3">
-        {data && data.map((info, i) => (
+        {NotsubmittedAssignment && NotsubmittedAssignment?.data.map((info, i) => (
           <TodoCard key={i} className="col-lg-6 col-md-6 col-12 mx-3 px-4 mt-3">
             {showModal ? (
               <SmallModal id={i} title="" closeModal={setShowModal}>
@@ -38,14 +85,14 @@ export const NotSubmitted = ({ data }) => {
             )}
             <div className="d-flex justify-content-between head">
               <div className="d-flex">
-                <h6 className="mr-3">Assignment</h6>
+                <h6 className="mr-3"> { info?.topic} </h6>
               </div>
             </div>
 
             <div className="d-flex justify-content-between my-2 date">
               <h6>
-                {new Date(info?.date).getDate()} |{' '}
-                {months[new Date(info?.date).getMonth()]}
+                {new Date(info?.deadlineDay).getDate()} |{' '}
+                {months[new Date(info?.deadlineTime).getMonth()]}
               </h6>
               <Tag
                 name="Not Submitted"
@@ -65,7 +112,9 @@ export const NotSubmitted = ({ data }) => {
               <button data-target={i} onClick={() => setShowModal(true)}>
                 Submit
               </button>
-              <button className="download-ass" data-target={i} onClick={() => setOpenModal(true)}>
+              <button className="download-ass" data-target={i}
+               onClick={() => setOpenModal(true)}
+               >
                 Download
               </button>
             </div>
@@ -76,7 +125,36 @@ export const NotSubmitted = ({ data }) => {
   )
 }
 
-export const SubmitAssignmentModal = () => {
+export const SubmitAssignmentModal = ({data}) => {
+
+const { stateAuth } = useAuth();
+
+  const [logoUploading, setLogoUploading] = useState(false);
+  const [fileDoc, setFileDoc] = useState('');
+
+
+  const handleChange = async(e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", data?.topic);
+    formData.append("type", "pdf");
+    formData.append(0 , files[0])
+
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+
+    } catch(error) {
+      setLogoUploading(false)
+      console.log(error)
+    }
+  }
+
+
   return (
     <SubmitAssignment>
       <div className="mx-4">
@@ -91,7 +169,10 @@ export const SubmitAssignmentModal = () => {
             <FileText className="my-3 font-weight-bold">Drag & Drop</FileText>
             <FileText>Drag files or click here to upload </FileText>
             <FileSize className="my-3">{'(Max. File size 5mb)'}</FileSize>
-            <input type="file" id="pitch-doc" hidden />
+            <input type="file"
+             id="pitch-doc"
+             onChange={handleChange}
+              hidden />
             <LabelButton for="pitch-doc">Upload Files</LabelButton>
           </FileWrapper>
         </div>
@@ -103,7 +184,7 @@ export const SubmitAssignmentModal = () => {
   )
 }
 
-export const DownloadAssignmentModal = () => {
+export const DownloadAssignmentModal = ({data}) => {
   return (
     <SubmitAssignment>
       <div className="mx-4">
@@ -116,7 +197,11 @@ export const DownloadAssignmentModal = () => {
           <FileWrapper className="d-flex justify-content-center text-center col-lg-12">
             <FileText>Click the button below to <br/> download your assignment </FileText>
             <img className="my-3" src={doc} alt="Download Icon" />
-            <LabelButton className="download mt-2" style={{cursor: 'pointer'}} for="download">Download Files</LabelButton>
+            <LabelButton className="download mt-2" style={{cursor: 'pointer'}} for="download"> <a  
+            style={{textDecoration:'none'}}
+            href={`${data?.assignmentFile}`}
+            download
+             > Download Files</a> </LabelButton>
           </FileWrapper>
         </div>
       </div>

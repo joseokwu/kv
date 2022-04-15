@@ -22,7 +22,7 @@ useEffect(() =>{
     getDashboardProfile(getRole())
 },[getDashboardProfile])
 
-
+//console.log(stateAuth)
 
   if(stateAuth.dashboardLoad){
     return <PageLoader num={[1, 2 , 3, 4]} />

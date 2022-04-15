@@ -214,3 +214,12 @@ export const StartupEvents = ({ history }) => {
     </div>
   );
 };
+
+
+// assignmentFile: "https://cdn.shoutng.com/kvnmri9zykq3doplnqtxfi.pdf"
+// created_at: "2022-04-15T18:14:25.413Z"
+// deadlineDay: "2022-05-13T11:00:00.000Z"
+// deadlineTime: "2022-05-13T13:00:00.000Z"
+// description: "We teach how to make garri for a living"
+// isTrash: false
+// programs: "Meeting"

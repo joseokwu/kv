@@ -40,7 +40,8 @@ import { INIT_STATE } from '../../initialstates';
                   loading:false,
                  roles: action.payload?.type,
                  username:action.payload?.startupname ? action.payload?.startupname : action.payload?.firstname , 
-                authenticated:true
+                authenticated:true,
+                email:action.payload?.email
               }
               case LOGIN_FAILED:
                 return {
@@ -57,7 +58,7 @@ import { INIT_STATE } from '../../initialstates';
                   user:action?.payload,
                   roles:action?.payload?.role,
                   signUpStatus:action?.payload?.role[0],
-
+                  email:action?.payload?.email
                 }
 
                 case DASHBOARD_USER_PROFILE : 
@@ -67,6 +68,8 @@ import { INIT_STATE } from '../../initialstates';
                   user:action?.payload,
                   roles:action?.payload?.role,
                   signUpStatus:action?.payload?.role[0],
+                  email:action?.payload?.email
+               
                 }
                 case USER_PROFILE_FAIL :
                   return {

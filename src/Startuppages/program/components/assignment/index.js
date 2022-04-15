@@ -9,30 +9,7 @@ import { assignment } from '../../../../services/startup';
 export const Assignment = () => {
   const tabItems = ['Not Submitted', 'Submitted']
   const [currentTab, setCurrentTab] = useState(tabItems[0])
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-
-
-
-
- 
-
-
-  useEffect(() => {
- 
-    const getData = async () => {
-      setLoading(true);
-      const res = await assignment({
-        page:currentPage,
-        limit:5
-      });
-      assignment(res?.data);
-      setLoading(false);
-    };
-    
-    getData();
-
-  }, [currentPage]);
+  
 
 
 
