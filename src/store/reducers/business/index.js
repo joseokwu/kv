@@ -140,10 +140,11 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
       }
 
     case GET_APPLICATIONS:
+      console.log(action.payload , 'applications')
       return {
         ...state,
         applications: action.payload,
-      };
+      }; 
 
     case SEND_APPLICATION:
       return {

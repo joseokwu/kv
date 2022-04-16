@@ -21,6 +21,7 @@ export const Applied = () => {
   return state.applications.length > 0 && state.applications.filter((item) => !item?.pendingRequests.find(i => i.startupId === stateAuth?.user?.userId) && !item?.approvedRequests.find(i => i.startupId === stateAuth?.user?.userId) )
  }, [state.applications , stateAuth?.user?.userId ])
 
+ console.log(notInteracted)
 
 const sendApplication = async(value) =>{
  try{
