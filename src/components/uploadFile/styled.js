@@ -1,18 +1,16 @@
 import styled, { css } from "styled-components";
 import { font, theme } from "./config";
 
-
-
 export const BaseFlex = styled.div`
   display: flex;
-  justify-content: ${(props) => props.justify || 'flex-start'};
-  align-items: ${(props) => props.align || 'flex-start'};
-  width: ${(props) => props.width || '100%'};
-  height: ${(props) => props.height || 'unset'};
+  justify-content: ${(props) => props.justify || "flex-start"};
+  align-items: ${(props) => props.align || "flex-start"};
+  width: ${(props) => props.width || "100%"};
+  height: ${(props) => props.height || "unset"};
   box-sizing: border-box;
-  gap: ${(props) => props.gap || '0'}rem;
-  padding: ${(props) => props.padding || '0rem'};
-  margin: ${(props) => props.margin || '0rem'};
+  gap: ${(props) => props.gap || "0"}rem;
+  padding: ${(props) => props.padding || "0rem"};
+  margin: ${(props) => props.margin || "0rem"};
   flex: ${(props) => props.flex || 1};
 `;
 
@@ -25,6 +23,7 @@ export const Column = styled(BaseFlex)`
 `;
 
 export const FileUploadBase = styled(Column)`
+  position: relative;
   border-radius: 0.25rem;
   border: 0.3rem dashed #e6e7e9;
   padding: 1.5rem;
@@ -37,7 +36,7 @@ export const ToFull = styled(Row)`
 
 export const FilesContainer = styled(Row)`
   gap: 1.5rem;
-  position: relative;
+
   min-height: 20rem;
   max-height: 21rem;
   flex-wrap: wrap;
@@ -46,10 +45,11 @@ export const FilesContainer = styled(Row)`
 `;
 
 export const FileHolder = styled.div`
- img{
-  object-fit: contain;
-  width: 100%;
- };
+  position: relative;
+  img {
+    object-fit: contain;
+    width: 100%;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,34 +62,32 @@ export const FileHolder = styled.div`
 `;
 
 export const Text = styled.span`
-  font-size: ${(props) => font.sizes[props.size ?? 'base']};
-  color: ${(props) => props.color || theme.grey[100]};
+  font-size: ${(props) => font.sizes[props.size ?? "base"]};
+  color: black;
   font-weight: ${(props) => props.weight || font.weights.normal};
-  text-align: ${(props) => props.align || 'left'};
-  margin: ${(props) => props.margin || '0.5rem 0'};
+  text-align: ${(props) => props.align || "left"};
+  margin: ${(props) => props.margin || "0.5rem 0"};
 `;
 
 export const Paragraph = styled.p`
-  font-size: ${(props) => font.sizes[props.size ?? 'base'] || font.sizes.base};
+  font-size: ${(props) => font.sizes[props.size ?? "base"] || font.sizes.base};
   color: ${(props) => props.color || theme.black[100]};
   font-weight: ${(props) =>
-    font.weights[props.weight ?? 'normal'] || font.weights.normal};
-  text-align: ${(props) => props.align || 'left'};
-  margin: ${props => props.margin || '0.5rem 0'};
+    font.weights[props.weight ?? "normal"] || font.weights.normal};
+  text-align: ${(props) => props.align || "left"};
+  margin: ${(props) => props.margin || "0.5rem 0"};
   max-width: 100%;
 `;
 
 export const Button = styled.button`
-  ${({ variant, background = 'blue', color = 'white' }) => {
+  ${({ variant, background = "blue", color = "white" }) => {
     const bg = Object.keys(theme).includes(background)
       ? theme[background][500]
       : background;
-    const col = Object.keys(theme).includes(color)
-      ? theme[color][100]
-      : color;
+    const col = Object.keys(theme).includes(color) ? theme[color][100] : color;
 
     switch (variant) {
-      case 'solid':
+      case "solid":
         return css`
           border: none;
           background-color: ${bg};
@@ -101,7 +99,7 @@ export const Button = styled.button`
             color: ${col};
           }
         `;
-      case 'outlined':
+      case "outlined":
         return css`
           background-color: transparent;
           color: ${bg};
@@ -113,7 +111,7 @@ export const Button = styled.button`
             stroke: ${bg};
           }
         `;
-      case 'text':
+      case "text":
         return css`
           background-color: transparent;
           border: none;
@@ -158,14 +156,83 @@ export const Button = styled.button`
 
 export const UploadButton = styled(Button)`
   position: absolute;
-  top: 0.5rem;
+  bottom: 0.5rem;
   right: 0.5rem;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 3rem;
+  width: 3rem;
   padding: 0;
   border-radius: 50%;
   background-color: #f5f5f5;
   border: 0.1rem solid #f5f5f5;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  z-index: 20;
+  :hover {
+    transform: scale(1.1);
+    transition: all 0.5s;
+  }
+  :active {
+    transform: scale(0.97);
+    transition: all 0.5s;
+  }
+`;
+
+export const RemoveButton = styled(Button)`
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  height: 3rem;
+  width: 3rem;
+  padding: 0;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  border: 0.1rem solid #f5f5f5;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 20;
+  :hover {
+    transform: scale(1.1);
+    transition: all 0.5s;
+  }
+  :active {
+    transform: scale(0.97);
+    transition: all 0.5s;
+  }
+`;
+
+export const MainPitchContainer = styled(Column)`
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+`;
+
+export const UploadedPitchDeck = styled(Column)`
+  background-color: ${theme.grey[100]};
+  padding: 1rem;
+  flex-wrap: wrap;
+`;
+export const ToColumn = styled(Row)`
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+`;
+
+export const PitchDeckCardContainer = styled.div`
+  cursor: pointer;
+  border: 1px solid #e6e7e9;
+  height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.75rem;
+  border-radius: 0.5rem;
+`;
+
+export const PitchDeckCardDetails = styled(Row)`
+  background: white;
+  height: 100%;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 1rem;
 `;

@@ -9,17 +9,56 @@ import {
   Text,
   Paragraph,
   Button,
+  RemoveButton,
+  PitchDeckCardContainer,
+  PitchDeckCardDetails,
 } from "./styled";
 import toast from "react-hot-toast";
+import { CircularLoader } from "../CircluarLoader/CircularLoader";
 import UploadIcon from "../../assets/icons/upload.svg";
+import CancelIcon from "../../assets/icons/cancel.svg";
+import SmallDocumentIcon from "../../assets/icons/small_document.svg";
+import DocumentIcon from "../../assets/icons/document_upload.svg";
 import { bytesToSize, theme } from "./config";
 
-const renderItem = (item, index, removeItem) => {
+const Document = ({ url }) => {
+  return (
+    <PitchDeckCardContainer
+      onClick={() => {
+        if (typeof url !== "string") return;
+        window.open(url, "_blank");
+      }}
+    >
+      <Column flex={2} align="center" justify="center">
+        <img src={DocumentIcon} alt="" />
+      </Column>
+      <PitchDeckCardDetails gap={1} align="center" justify="center">
+        <img src={SmallDocumentIcon} alt="" />
+        <Column justify="center">
+          <Paragraph weight="normal" margin="0">
+            Pitch Deck
+          </Paragraph>
+          <Paragraph size="sm" color="rgba(24, 24, 25, 0.42)" margin="0">
+            {"  "}
+          </Paragraph>
+        </Column>
+      </PitchDeckCardDetails>
+    </PitchDeckCardContainer>
+  );
+};
+
+const renderItem = (item, index, removeItem, filesUploaded) => {
   const { name, size, type, file } = item;
   switch (type.split("/")[0]) {
     case "image":
       return (
-        <FileHolder key={index} onClick={() => removeItem(index)}>
+        <FileHolder key={index}>
+          {!filesUploaded && (
+            <RemoveButton type="button" onClick={() => removeItem(index)}>
+              <img src={CancelIcon} alt="" />
+            </RemoveButton>
+          )}
+
           <img src={URL.createObjectURL(file)} alt="file" />
           <Column padding="0rem 1rem">
             <Text color="black">{name}</Text>
@@ -30,9 +69,12 @@ const renderItem = (item, index, removeItem) => {
     case "video":
       return (
         <FileHolder key={index} onClick={() => removeItem(index)}>
-          <video>
-            <track kind="captions" src={URL.createObjectURL(file)} />
-          </video>
+          {!filesUploaded && (
+            <RemoveButton type="button" onClick={() => removeItem(index)}>
+              <img src={CancelIcon} alt="" />
+            </RemoveButton>
+          )}
+          <video src={URL.createObjectURL(file)}></video>
           <Column padding="0rem 1rem">
             <Text color="black">{name}</Text>
             <Text color="black">{size}</Text>
@@ -42,6 +84,11 @@ const renderItem = (item, index, removeItem) => {
     case "application":
       return (
         <FileHolder key={index} onClick={() => removeItem(index)}>
+          {!filesUploaded && (
+            <RemoveButton type="button" onClick={() => removeItem(index)}>
+              <img src={CancelIcon} alt="" />
+            </RemoveButton>
+          )}
           <embed
             type={type}
             src={URL.createObjectURL(file)}
@@ -57,6 +104,11 @@ const renderItem = (item, index, removeItem) => {
     default:
       return (
         <FileHolder key={index} onClick={() => removeItem(index)}>
+          {!filesUploaded && (
+            <RemoveButton type="button" onClick={() => removeItem(index)}>
+              <img src={CancelIcon} alt="" />
+            </RemoveButton>
+          )}
           <Text color="black">{name}</Text>
           <Text color="black">{size}</Text>
           <Text color="black">{type.split("/")[0]}</Text>
@@ -65,8 +117,9 @@ const renderItem = (item, index, removeItem) => {
   }
 };
 
-export const UploadFile = ({ data, onUpload, initialData = [] }) => {
+export const UploadFile = ({ data, onUpload, initData = [] }) => {
   const [filesInfo, setFilesInfo] = useState([]);
+  const [initialData, setInitialData] = useState(initData);
   const [loading, setLoading] = useState(false);
   const [filesUploaded, setFilesUploaded] = useState(false);
   const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
@@ -81,7 +134,8 @@ export const UploadFile = ({ data, onUpload, initialData = [] }) => {
 
   const handleFiles = () => {
     if (!data) return toast.error("File config not found");
-
+    console.log(initData);
+    setFilesUploaded(false);
     const fileInput = document.createElement("input");
     fileInput.setAttribute("type", "file");
     if (data.maxFiles > 1) {
@@ -126,36 +180,63 @@ export const UploadFile = ({ data, onUpload, initialData = [] }) => {
     };
   };
   const removeItem = (index) => {
-    const newFilesInfo = filesInfo.filter((item, i) => i !== index);
+    const newFilesInfo = filesInfo.filter((_, i) => i !== index);
     setFilesInfo(newFilesInfo);
   };
 
   return (
     <FileUploadBase align="center" justify="center" width="100%" gap={0.5}>
+      {!filesUploaded && filesInfo.length > 0 && (
+        <UploadButton
+          type="button"
+          onClick={async () => {
+            try {
+              setLoading(true);
+              await onUpload(filesInfo);
+              setLoading(false);
+              toast.success(
+                `${data.maxFiles > 1 ? "Files" : "File"} uploaded successfully`
+              );
+              setFilesUploaded(true);
+              setFilesInfo([]);
+              setInitialData([...Array(data.maxFiles).fill(1)]);
+            } catch (e) {
+              toast.error(`${e?.message}`);
+            }
+          }}
+        >
+          {loading ? (
+            <CircularLoader color="#2E3192" />
+          ) : (
+            <img src={UploadIcon} alt="" />
+          )}
+        </UploadButton>
+      )}
       {filesInfo.length > 0 ? (
         <FilesContainer gap={1} align="center" justify="flex-end">
-          {!filesUploaded && (
-            <UploadButton
-              type="button"
-              onClick={async () => {
-                try {
-                  setLoading(true);
-                  await onUpload(filesInfo);
-                  setLoading(false);
-                  toast.success("Files uploaded successfully");
-                  setFilesUploaded(true);
-                } catch (e) {
-                  toast.error(`${e?.message}`);
-                }
-              }}
-            >
-              <img src={UploadIcon} alt="" />
-            </UploadButton>
+          {filesInfo.map((item, i) =>
+            renderItem(item, i, removeItem, filesUploaded)
           )}
-          {filesInfo.map((item, i) => renderItem(item, i, removeItem))}
         </FilesContainer>
       ) : initialData.length > 0 ? (
-        <></>
+        <Column gap={1} align="center" justify="center">
+          {initialData.map((url, i) => {
+            return <Document key={i} url={url} />;
+          })}
+          <ToFull padding="1rem" width="40%">
+            <Button
+              type="button"
+              background={theme.grey[100]}
+              onClick={handleFiles}
+            >
+              <Text weight="bold" color={theme.blue[500]}>
+                {data && data.maxFiles > 1
+                  ? "Upload new files"
+                  : "Upload new file"}
+              </Text>
+            </Button>
+          </ToFull>
+        </Column>
       ) : (
         <>
           <>
@@ -172,7 +253,7 @@ export const UploadFile = ({ data, onUpload, initialData = [] }) => {
               ({"   "}
               {`  Max.File size ${maxFileSize}${extension}`} {"   "})
             </Paragraph>
-            <ToFull padding="1rem" width="50%">
+            <ToFull padding="1rem" width="40%">
               <Button
                 type="button"
                 background={theme.grey[100]}
