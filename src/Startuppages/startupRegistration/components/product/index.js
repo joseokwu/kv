@@ -145,7 +145,7 @@ export const Product = () => {
   return (
     <>
       <HeaderProduct>
-        <h5 className="text-nowrap"> Product / Services </h5>
+        <h5 className="text-nowrap" style={{color: "#2E3192"}}> Product / Services </h5>
         <p className="text-nowrap">Let's help you explain your product</p>
       </HeaderProduct>
       <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
@@ -177,7 +177,7 @@ export const Product = () => {
               <div className="form-group col-12">
                 <div className="d-flex justify-content-between">
                   <label>
-                    What makes your solution unique from others in the market? *
+                    What makes your solution unique from others in the market?<span style={{color: "red"}}>*</span>
                   </label>
                   <label style={{ color: '#828282' }}>250 words</label>
                 </div>
@@ -260,7 +260,7 @@ export const Product = () => {
         </FormWrapper>
         <div className="row mt-4">
           <div className="col-3">
-            <CustomButton className="" background="#D0D0D1" onClick={back}>
+            <CustomButton className="" background="#808080" onClick={back}>
               Back
             </CustomButton>
           </div>

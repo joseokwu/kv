@@ -98,12 +98,14 @@ export const SignUp = ({ history }) => {
             <div className="col-md-6 col-12 mb-2">
               {stateAuth?.signUpStatus === 'startup' ? (
                 <div className="inputContainer">
-                  <label>Industry</label>
+                  <label><span>*</span> Industry</label>
                   <div className="select">
                     <Select
                       onChange={handleChange}
                       id="industry1"
                       name="industry"
+                      // className="w-100"
+                      style={{width: "fit-content"}}
                       placeholder="Select your industry"
                     >
                       <Option disabled selected>
@@ -148,6 +150,26 @@ export const SignUp = ({ history }) => {
                         Sustainability and circular economy
                       </Option>
                       <Option value="Transportation">Transportation</Option>
+                      <Option value="Others">Others</Option>
+                      <Option value="Financial Services">Financial Services</Option>
+                      <Option value="Education">Education</Option>
+                      <Option value="Health">Health</Option>
+                      <Option value="Agriculture">Agriculture</Option>
+                      <Option value="Insurance">Insurance</Option>
+                      <Option value="Clean Energy">Clean Energy</Option>
+                      <Option value="Construction">Construction</Option>
+                      <Option value="Mobility/Logistics">Mobility/Logistics</Option>
+                      <Option value="Social Impact">Social Impact</Option>
+                      <Option value="Artificial Intelligence">Artificial Intelligence</Option>
+                      <Option value="Blockchain">Blockchain</Option>
+                      <Option value="Internet of Things">Internet of Things</Option>
+                      <Option value="Mobile">Mobile</Option>
+                      <Option value="Software as a Service">Software as a Service</Option>
+                      <Option value="Sports">Sports</Option>
+                      <Option value="B2B">B2B</Option>
+                      <Option value="B2C">B2C</Option>
+                      <Option value="D2C">D2C</Option>
+                      <Option value="Marketplace">Marketplace</Option>
                     </Select>
                   </div>
                 </div>
@@ -183,8 +205,9 @@ export const SignUp = ({ history }) => {
 
             <div className="numsign col-12 mb-4">
               <PhoneInput
-                label ={'Mobile Number'} 
+                label={'* Mobile Number'} 
                 onChange={setPhone}
+                
               />
             </div>
 

@@ -22,13 +22,13 @@ export const StartupNotification = () => {
   //   { noticeImage: noticeImg },
   //   { noticeImage: noticeImg },
   // ];
-  const noticeItems = [];
+  const noticeItems = [{noticeImage: ""}];
   return (
     <div className="wrapper">
       <section className="mb-4">
         <div className="d-flex align-items-center">
           <p className="notice-header">Notification</p>
-          <span className="unread-notice">1 Unread</span>
+          <span className="unread-notice">0 Unread</span>
         </div>
       </section>
 

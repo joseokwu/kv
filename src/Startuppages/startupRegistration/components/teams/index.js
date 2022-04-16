@@ -8,10 +8,10 @@ import {
 import { updateFounderProfile } from "../../../../services/startup";
 import { UserOutlined, PlusOutlined } from "@ant-design/icons";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import { DatePicker } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
-import { CustomSelect } from "../../../../Startupcomponents/select/customSelect";
+// import { CustomSelect } from "../../../../Startupcomponents/select/customSelect";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
@@ -20,7 +20,7 @@ import { TeamModal, EducationModal } from "./teamModal";
 import { Select } from "antd";
 
 import "antd/dist/antd.css";
-import { team } from "./../../../../services/startUpReg";
+// import { team } from "./../../../../services/startUpReg";
 import { CircularLoader } from "../../../../Startupcomponents/CircluarLoader/CircularLoader";
 import { toast } from "react-hot-toast";
 import { CoFounder } from "./coFounder";
@@ -40,7 +40,7 @@ const { Option } = Select;
 
 export const TeamProfile = () => {
   const { stateAuth } = useAuth();
-  const [disImg, setImg] = useState(null);
+  // const [disImg, setImg] = useState(null);
   const [logoUploading, setLogoUploading] = useState(false);
   const [show, setShow] = useState(false);
   const [showEducation, setShowEducation] = useState(false);
@@ -73,8 +73,10 @@ export const TeamProfile = () => {
     changePath,
     setWorkExperience,
     removeWorkExperience,
+    removeEducation,
     editWorkExperience,
     setEducation,
+    editEducation,
     state: {
       path,
       experience,
@@ -253,7 +255,7 @@ export const TeamProfile = () => {
       setEducation({
         schoolName,
         course,
-        degreeType: degree,
+        degree,
         activities,
         startDate: eduStartDate,
         endDate: eduEndDate,
@@ -274,6 +276,19 @@ export const TeamProfile = () => {
         index,
       });
       setIsEditing(false);
+    } else if (from === 'educationEdit') {
+      editEducation({
+        data: {
+        schoolName,
+        course,
+        degreeType: degree,
+        activities,
+        startDate: eduStartDate,
+        endDate: eduEndDate,
+        isPresent: false,
+        },
+        index,
+      })
     }
   };
 
@@ -327,8 +342,8 @@ export const TeamProfile = () => {
         <span></span>
       )}
       <HeaderTeam>
-        <h5> Team</h5>
-        <p className="text-nowrap">Let’s you introduce your Co-Founder(s)</p>
+        <h5 style={{color: "#2E3192"}}>Team</h5>
+        <p className="text-nowrap">Let’s you introduce your Founder(s)</p>
       </HeaderTeam>
 
       <form style={{ marginBottom: "4rem" }} onSubmit={formik.handleSubmit}>
@@ -369,8 +384,8 @@ export const TeamProfile = () => {
           <div className="row my-5">
             <div className="form-group col-12">
               <div className="d-flex justify-content-between">
-                <label>Brief Introduction *</label>
-                <label style={{ color: "#828282" }}>10 words at most</label>
+                <label>Brief Introduction<span style={{color: "red"}}>*</span></label>
+                <label style={{ color: '#828282' }}>10 words at most</label>
               </div>
               <input
                 onChange={formik.handleChange}
@@ -389,7 +404,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>First Name *</label>
+              <label>First Name<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.firstName}
@@ -404,7 +419,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Last Name *</label>
+              <label>Last Name<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.lastName}
@@ -419,7 +434,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Email *</label>
+              <label>Email<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.email}
@@ -434,7 +449,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12">
-              <label>Date of Birth *</label>
+              <label>Date of Birth<span style={{color: "red"}}>*</span></label>
               <DatePicker
                 id="dob"
                 name="dob"
@@ -446,7 +461,7 @@ export const TeamProfile = () => {
               />
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>Country *</label>
+              <label>Country<span style={{color: "red"}}>*</span></label>
               {/* <input
                 onChange={formik.handleChange}
                 value={formik.values.country}
@@ -467,7 +482,7 @@ export const TeamProfile = () => {
               ></CountryDropdown>
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>State *</label>
+              <label>State<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.state}
@@ -482,7 +497,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>City *</label>
+              <label>City<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.city}
@@ -497,7 +512,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12">
-              <label>Mobile Number *</label>
+              <label>Mobile Number<span style={{color: "red"}}>*</span></label>
               <PhoneInput
                 international
                 name="mobile_number"
@@ -562,6 +577,7 @@ export const TeamProfile = () => {
                 <Education
                   key={index}
                   {...item}
+                  removeEducation={removeEducation}
                   showEducationModal={() => setShowEducation(true)}
                   setEditIndex={setEditIndex}
                   setIsEditing={setIsEditing}
@@ -589,8 +605,8 @@ export const TeamProfile = () => {
 
           <div className="form-group">
             <div>
-              <label>What are your skills*</label>
-              <p>Please press the space button to add your skill</p>
+              <label>What are your skills<span style={{color: "red"}}>*</span></label>
+              <p className="py-2">Please press the space button to add your skill</p>
             </div>
             <input
               onChange={handleChange}
@@ -619,7 +635,7 @@ export const TeamProfile = () => {
           </div>
           <div className="row">
             <div className="form-group col-lg-6 col-12">
-              <label>LinkedIn*</label>
+              <label>LinkedIn<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.linkedIn}
@@ -634,7 +650,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Twitter*</label>
+              <label>Twitter<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.twitter}
@@ -650,7 +666,7 @@ export const TeamProfile = () => {
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Website*</label>
+              <label>Website<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={onChangeMedia}
                 value={socialMedia?.website}
@@ -691,7 +707,7 @@ export const TeamProfile = () => {
 
         <div className="row ">
           <div className="col-3">
-            <CustomButton className="" background="#D0D0D1" onClick={back}>
+            <CustomButton className="" background="#808080" onClick={back}>
               Back
             </CustomButton>
           </div>

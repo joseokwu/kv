@@ -65,7 +65,7 @@ export const TeamModal = ({
         handleClose();
       }}
     >
-      <div className="mx-5">
+      <div className="mx-2">
         <HeaderModal>
           {isEditing ? "Edit Work Experience" : "Add Work Experience"}
         </HeaderModal>
@@ -77,7 +77,7 @@ export const TeamModal = ({
         >
           <ModalForm className="row">
             <div className="col-12 form-group">
-              <label>Title *</label>
+              <label>Title<span style={{color: "red"}}>*</span></label>
               <input
                 id="title"
                 name="companyName"
@@ -94,7 +94,7 @@ export const TeamModal = ({
               ) : null}
             </div>
             <div className="col-12 form-group">
-              <label>Location *</label>
+              <label>Location<span style={{color: "red"}}>*</span></label>
               <input
                 id="location"
                 name="location"
@@ -113,7 +113,7 @@ export const TeamModal = ({
 
             <div className="col-12 form-group">
               <div className="d-flex justify-content-between">
-                <label>Description *</label>
+                <label>Description<span style={{color: "red"}}>*</span></label>
                 <label style={{ color: "#828282" }}>
                   50 characters at most
                 </label>
@@ -144,7 +144,7 @@ export const TeamModal = ({
               <span>I currently work in this role</span>
             </div>
             <div className="col-6 form-group">
-              <label>Start Date *</label>
+              <label>Start Date<span style={{color: "red"}}>*</span></label>
               <DatePicker
                 id="startDate"
                 name="startDate"
@@ -157,7 +157,7 @@ export const TeamModal = ({
             </div>
             {!checked && (
               <div className="col-6 form-group">
-                <label>End Date*</label>
+                <label>End Date<span style={{color: "red"}}>*</span></label>
                 <DatePicker
                   id="endDate"
                   name="endDate"
@@ -201,8 +201,10 @@ export const EducationModal = ({
   const [checked, setChecked] = useState(false);
 
   const onSubmit = (e, from) => {
+    console.log(education, 'prev education');
     e.preventDefault();
     handleWorkDetails({
+      index: editIndex,
       from,
       schoolName: formik.getFieldProps("schoolName").value,
       course: formik.getFieldProps("course").value,
@@ -217,10 +219,10 @@ export const EducationModal = ({
 
   const formik = useFormik({
     initialValues: {
-      schoolName: "",
-      course: "",
-      degree: "",
-      activities: "",
+      schoolName: isEditing ? education[editIndex]?.schoolName : "",
+      course: isEditing ? education[editIndex]?.course : "",
+      degree: isEditing ? education[editIndex]?.degree : "",
+      activities: isEditing ? education[editIndex]?.activities : "",
       eduStartDate: "",
       eduEndDate: "",
     },
@@ -232,7 +234,7 @@ export const EducationModal = ({
       eduStartDate: Yup.string().required("Required"),
       eduEndDate: Yup.string().required("Required"),
     }),
-    onSubmit: (value) => onSubmit(value),
+    onSubmit: (value) => console.log(value),
   });
 
   return (
@@ -242,26 +244,22 @@ export const EducationModal = ({
         handleClose();
       }}
     >
-      <div className="mx-5">
+      <div className="mx-2">
         <HeaderModal>
           {isEditing ? "Edit Education" : "Add Education"}
         </HeaderModal>
         <hr style={{ background: "#323232" }} />
-        <form onSubmit={(e) => onSubmit(e, "education")}>
+        <form onSubmit={(e) => onSubmit(e, isEditing ? "educationEdit" : "education")}>
           <ModalForm className="row">
             <div className="col-12 form-group">
-              <label>School*</label>
+              <label>School<span style={{color: "red"}}>*</span></label>
               <input
                 id="school"
                 name="schoolName"
                 type="text"
                 className="form-control ps-3"
                 placeholder="Enter School name"
-                value={
-                  isEditing
-                    ? education[editIndex]?.schoolName
-                    : formik.values.schoolName
-                }
+                value={formik.values.schoolName}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
@@ -270,18 +268,14 @@ export const EducationModal = ({
               ) : null}
             </div>
             <div className="col-12 form-group">
-              <label>Degree*</label>
+              <label>Degree<span style={{color: "red"}}>*</span></label>
               <input
                 id="degree"
                 name="degree"
                 type="text"
                 className="form-control ps-3"
                 placeholder="Enter Degree "
-                value={
-                  isEditing
-                    ? education[editIndex]?.degree
-                    : formik.values.degree
-                }
+                value={ formik.values.degree}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
@@ -290,18 +284,14 @@ export const EducationModal = ({
               ) : null}
             </div>
             <div className="col-12 form-group">
-              <label>Field of study*</label>
+              <label>Field of study<span style={{color: "red"}}>*</span></label>
               <input
                 id="course"
                 name="course"
                 type="text"
                 className="form-control ps-3"
                 placeholder="Enter filed of study"
-                value={
-                  isEditing
-                    ? education[editIndex]?.course
-                    : formik.values.course
-                }
+                value={formik.values.course}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
@@ -311,7 +301,7 @@ export const EducationModal = ({
             </div>
             <div className="col-12 form-group">
               <div className="d-flex justify-content-between">
-                <label>Activities and societies*</label>
+                <label>Activities and societies<span style={{color: "red"}}>*</span></label>
                 <label style={{ color: "#828282" }}>
                   50 characters at most
                 </label>
@@ -324,11 +314,7 @@ export const EducationModal = ({
                 rows="6"
                 className="form-control ps-3"
                 placeholder="Enter Activities and Societies"
-                value={
-                  isEditing
-                    ? education[editIndex]?.activities
-                    : formik.values.activities
-                }
+                value={formik.values.activities}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
@@ -346,30 +332,26 @@ export const EducationModal = ({
             </div>
 
             <div className="col-6 form-group">
-              <label>Entry Date*</label>
+              <label>Entry Date<span style={{color: "red"}}>*</span></label>
               <DatePicker
                 id="eduStartDate"
                 name="eduStartDate"
                 className="date-input col-lg-12 ps-3 py-2"
                 // style={{ padding: '15px' }}
-                selected={
-                  isEditing ? education[editIndex]?.eduStartDate : eduStartDate
-                }
+                selected={eduStartDate}
                 onChange={(date) => setEduStartDate(date)}
               />
             </div>
 
             {!checked && (
               <div className="col-6 form-group">
-                <label>Graduation Date*</label>
+                <label>Graduation Date<span style={{color: "red"}}>*</span></label>
                 <DatePicker
                   id="eduEndDate"
                   name="eduEndDate"
                   className="date-input col-lg-12 ps-3 py-2"
                   // style={{ padding: '15px' }}
-                  selected={
-                    isEditing ? education[editIndex]?.eduEndDate : eduEndDate
-                  }
+                  selected={eduEndDate}
                   onChange={(date) => setEduEndDate(date)}
                 />
               </div>

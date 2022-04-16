@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./workExperience.css";
 import appleSmall from "../../assets/icons/appleSmall.svg";
 import editIcon from "../../assets/icons/editIcon.svg";

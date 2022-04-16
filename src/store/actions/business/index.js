@@ -15,9 +15,11 @@ import {
   SET_WORK_EXPERIENCE_DATABASE,
   REMOVE_WORK_EXPERIENCE,
   SET_EDUCATION_DATABASE,
+  REMOVE_EDUCATION,
   GET_APPLICATIONS,
   SEND_APPLICATION,
   EDIT_WORK_EXPERIENCE,
+  EDIT_EDUCATION,
 } from "../actions.types";
 
 import { getEvents } from "../../../services/events";
@@ -66,6 +68,7 @@ export const setDWorkExperience =
       });
     }
   };
+
 export const removeWorkExperienceAction = (id) => (dispatch) => {
   dispatch({
     type: REMOVE_WORK_EXPERIENCE,
@@ -94,6 +97,20 @@ export const setDEducation =
         payload: values,
       });
     }
+  };
+
+  export const removeEducationAction = (id) => (dispatch) => {
+    dispatch({
+      type: REMOVE_EDUCATION,
+      payload: id,
+    });
+  };
+
+  export const editEducationAction = (value) => (dispatch) => {  
+    dispatch({
+      type: EDIT_EDUCATION,
+      payload: value,
+    });
   };
 
 export const setDFundraising = (values) => (dispatch) => {

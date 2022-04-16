@@ -90,9 +90,10 @@ export const BodyWrapper = styled.div`
   }
   .cust {
     border: none;
-    background: #f4f4f4;
+    background: #fafafc;
     width: 70%;
     margin-left: 15px;
+    border-radius: 7px;
 
     @media (max-width: 768px) {
       width: 100%;
