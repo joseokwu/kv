@@ -26,6 +26,8 @@ import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoad
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
 import { parseFile } from '../../../../../../utils/helpers';
+import { upload } from '../../../../../../services/utils'
+import { UploadFile } from '../../../../../../components/uploadFile'
 
 
 
@@ -124,7 +126,30 @@ export const CapTable = ({ setFundraising }) => {
             </DownloadableButton>
           </div>
           <div className='col-12 my-4'>
-            <FileWrapper className='d-flex justify-content-center text-center mx-n4 mx-lg-n0'>
+          <UploadFile
+                  data={{
+                    maxFiles: 1,
+                    supportedMimeTypes: ['application/pdf'],
+                    maxFileSize: 5,
+                    extension: 'MB',
+                  }}
+                  onUpload={async (filesInfo) => {
+                    const formData = new FormData()
+                    formData.append('dir', 'kv')
+                    formData.append('ref', stateAuth.user?.userId)
+                    formData.append('type', 'pdf')
+                    formData.append(0, filesInfo[0]?.file)
+
+                    try {
+                      const response = await upload(formData)
+                      console.log(response)
+                      setFileDoc(response?.path)
+                    } catch (error) {
+                      console.log(error)
+                    }
+                  }}
+                />
+            {/* <FileWrapper className='d-flex justify-content-center text-center mx-n4 mx-lg-n0'>
             {
                 fileDoc !== null ? (
                   <img src={RedFile} alt='.' 
@@ -145,7 +170,7 @@ export const CapTable = ({ setFundraising }) => {
                accept=".csv"
                hidden />
               <LabelButton for='cap'>Upload Files</LabelButton>
-            </FileWrapper>
+            </FileWrapper> */}
           </div>
         </div>
       </BodyWrapper>
