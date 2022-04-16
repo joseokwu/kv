@@ -48,8 +48,8 @@ const sendApplication = async(value) =>{
   return (
     <div className="row" style={{ columnGap: 10 }}>
     
-      {   notInteracted &&
-        notInteracted.map((item, i) => (
+      {   notInteracted && notInteracted.length > 0 ?
+       ( notInteracted.map((item, i) => (
           <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6">
            
        <Modal id={`applied${i}`} withHeader={false}>
@@ -93,7 +93,9 @@ const sendApplication = async(value) =>{
               { 'Apply' }
             </button>
           </ApplicationCard>
-        ))}
+        ))) : (<span />)
+        
+        }
     </div>
   )
 }
