@@ -65,6 +65,8 @@ export const StartupBoosterPartner = () => {
    const getData = useCallback(async () => {
     setLoading(true)
     const res = await getBoosterData()
+    const resData = await getStartupRequest(stateAuth?.user?.userId);
+    console.log(resData?.data)
     getApp(res?.data?.data)
     setLoading(false);
 
@@ -77,7 +79,7 @@ export const StartupBoosterPartner = () => {
 
   }, [setBoosterData , stateAuth?.applications ])
 
-  console.log()
+  console.log(boosterData)
 
   const history = useHistory()
 

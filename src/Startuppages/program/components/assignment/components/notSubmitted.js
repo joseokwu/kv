@@ -7,14 +7,18 @@ import {
   FileWrapper,
   LabelButton,
 } from '../../../../startupRegistration/components/pitchdeck/pitch.styled'
-import downloadIcon from '../../../../../assets/icons/download.svg'
+import downloadIcon from '../../../../../assets/icons/download.svg';
+import redIcon from '../../../../../assets/icons/redFile.svg';
 import doc from '../../../../../assets/icons/assdoc.svg'
-import { months } from '../../../../../utils/helpers'
+import { months } from '../../../../../utils/helpers';
+import { useHistory } from 'react-router-dom';
 import { assignment ,submitAssignment  } from '../../../../../services';
 import { PageLoader } from '../../../../../components'
 import Pagination from 'react-bootstrap/Pagination';
 import { upload } from './../../../../../services/utils';
 import { useAuth } from '../../../../../hooks/useAuth';
+import { CircularLoader } from './../../../../../Startupcomponents/CircluarLoader/CircularLoader';
+import toast from 'react-hot-toast';
 
 export const NotSubmitted = () => {
   
@@ -24,7 +28,7 @@ export const NotSubmitted = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [NotsubmittedAssignment , setNotSubmittedAssignment] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [sub , setSub] = useState('');
 
   const nextPage = ()=>{
     setCurrentPage(currentPage+1)
@@ -56,7 +60,7 @@ export const NotSubmitted = () => {
     
     getData();
   
-  }, [currentPage])
+  }, [currentPage ])
 
   if (loading) {
     return (
@@ -71,7 +75,7 @@ export const NotSubmitted = () => {
           <TodoCard key={i} className="col-lg-6 col-md-6 col-12 mx-3 px-4 mt-3">
             {showModal ? (
               <SmallModal id={i} title="" closeModal={setShowModal}>
-                <SubmitAssignmentModal data={info} />
+                <SubmitAssignmentModal data={info}  />
               </SmallModal>
             ) : (
               <span></span>
@@ -120,24 +124,62 @@ export const NotSubmitted = () => {
             </div>
           </TodoCard>
         ))}
+        { 
+          NotsubmittedAssignment && NotsubmittedAssignment?.data.length > 0 ? (
+
+            <div className='d-flex justify-content-center text-center' >
+              <span>  </span>
+            </div>
+            
+        ):(<span />)
+         }
       </div>
     </div>
   )
 }
 
-export const SubmitAssignmentModal = ({data}) => {
+export const SubmitAssignmentModal = ({data }) => {
 
 const { stateAuth } = useAuth();
   console.log(stateAuth)
   const [logoUploading, setLogoUploading] = useState(false);
   const [fileDoc, setFileDoc] = useState('');
+  const [loading , setLoading] = useState(false);
+  const history = useHistory();
+
+
+
+ // console.log()
 
   const handleSubmit = async(e) =>{
 
-    const assignment = {
-      name:stateAuth?.user?.startupname,
-      email:stateAuth?.email,
-      assignmentDoc:fileDoc
+    try{
+      const assignment = {
+        name:stateAuth?.user?.startupname,
+        email:stateAuth?.email,
+        assignmentDoc:fileDoc,
+        assignmentId:data?._id
+      }
+      
+      setLoading(true);
+      const response = await submitAssignment(assignment)
+      
+      if(!response?.success){
+        console.log(response?.message)
+        setLoading(false);
+       return toast.error(response?.message);
+      }
+
+        toast.success(response?.message);
+        history.push(history.location.pathname)
+        setLoading(false);
+        return ;
+      
+     
+    }catch(err){
+      console.log(err?.response);
+      setLoading(false);
+     return toast.error(err?.response?.data?.message)
     }
   }
 
@@ -174,20 +216,41 @@ const { stateAuth } = useAuth();
         </div>
 
         <div className="mt-5">
-          <FileWrapper className="d-flex justify-content-center text-center col-lg-12">
-            <img src={downloadIcon} alt="Download Icon" />
+        
+         <FileWrapper className="d-flex justify-content-center text-center col-lg-12">
+  {        logoUploading ?( <CircularLoader color={"#000"} />) :  
+  (
+        <>
+          {
+            fileDoc ? 
+            ( <img src={redIcon}
+
+            style={{ width: "70px", height: "70px" }}
+             alt="Download Icon" /> )
+              :(
+              <>
+              <img src={downloadIcon} alt="Download Icon" />
             <FileText className="my-3 font-weight-bold">Drag & Drop</FileText>
             <FileText>Drag files or click here to upload </FileText>
             <FileSize className="my-3">{'(Max. File size 5mb)'}</FileSize>
+              </>
+            )
+          }
             <input type="file"
              id="pitch-doc"
              onChange={handleChange}
               hidden />
             <LabelButton for="pitch-doc">Upload Files</LabelButton>
+          </>
+  )
+  }
           </FileWrapper>
+        
         </div>
         <div className="mt-5">
-          <button>Submit</button>
+          <button type='button' 
+          onClick={handleSubmit}
+           > { loading ? <CircularLoader /> : 'Submit' }  </button>
         </div>
       </div>
     </SubmitAssignment>
