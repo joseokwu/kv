@@ -336,7 +336,7 @@ export const CoFounder = ({
               <form>
                 <ModalForm className='row'>
                   <div className='col-12 form-group'>
-                    <label>Title *</label>
+                    <label>Title<span style={{color: "red"}}>*</span></label>
                     <input
                       id='title'
                       name='title'
@@ -355,7 +355,7 @@ export const CoFounder = ({
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
-                    <label>Location *</label>
+                    <label>Location<span style={{color: "red"}}>*</span></label>
                     <input
                       id='location'
                       name='location'
@@ -374,7 +374,7 @@ export const CoFounder = ({
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
-                    <label>Company Title *</label>
+                    <label>Company Title<span style={{color: "red"}}>*</span></label>
                     <input
                       id='position'
                       name='position'
@@ -394,7 +394,7 @@ export const CoFounder = ({
                   </div>
                   <div className='col-12 form-group'>
                     <div className='d-flex justify-content-between'>
-                      <label>Description *</label>
+                      <label>Description<span style={{color: "red"}}>*</span></label>
                       <label style={{ color: '#828282' }}>
                         50 characters at most
                       </label>
@@ -429,7 +429,7 @@ export const CoFounder = ({
                     <span>I current work in this role</span>
                   </div>
                   <div className='col-6 form-group'>
-                    <label>Start Date *</label>
+                    <label>Start Date<span style={{color: "red"}}>*</span></label>
                     <DatePicker
                       id='startDate'
                       name='startDate'
@@ -444,7 +444,7 @@ export const CoFounder = ({
                   </div>
                   {!checked && (
                     <div className='col-6 form-group'>
-                      <label>End Date*</label>
+                      <label>End Date<span style={{color: "red"}}>*</span></label>
                       <DatePicker
                         id='endDate'
                         name='endDate'
@@ -532,7 +532,7 @@ export const CoFounder = ({
               <form>
                 <ModalForm className='row'>
                   <div className='col-12 form-group'>
-                    <label>School*</label>
+                    <label>School<span style={{color: "red"}}>*</span></label>
                     <input
                       id='school'
                       name='school'
@@ -551,7 +551,7 @@ export const CoFounder = ({
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
-                    <label>Degree*</label>
+                    <label>Degree<span style={{color: "red"}}>*</span></label>
                     <input
                       id='degree'
                       name='degree'
@@ -570,7 +570,7 @@ export const CoFounder = ({
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
-                    <label>Filed of study*</label>
+                    <label>Filed of study<span style={{color: "red"}}>*</span></label>
                     <input
                       id='course'
                       name='course'
@@ -590,7 +590,7 @@ export const CoFounder = ({
                   </div>
                   <div className='col-12 form-group'>
                     <div className='d-flex justify-content-between'>
-                      <label>Activities and societies*</label>
+                      <label>Activities and societies<span style={{color: "red"}}>*</span></label>
                       <label style={{ color: '#828282' }}>
                         50 characters at most
                       </label>
@@ -618,7 +618,7 @@ export const CoFounder = ({
                   </div>
 
                   <div className='col-6 form-group'>
-                    <label>Entry Date*</label>
+                    <label>Entry Date<span style={{color: "red"}}>*</span></label>
                     <DatePicker
                       id='eduStartDate'
                       name='eduStartDate'
@@ -632,7 +632,7 @@ export const CoFounder = ({
                     />
                   </div>
                   <div className='col-6 form-group'>
-                    <label>Graduation Date*</label>
+                    <label>Graduation Date<span style={{color: "red"}}>*</span></label>
                     <DatePicker
                       id='eduEndDate'
                       name='eduEndDate'
@@ -715,7 +715,7 @@ export const CoFounder = ({
 
           <div className='form-group'>
             <div>
-              <label>What are your skills*</label>
+              <label>What are your skills<span style={{color: "red"}}>*</span></label>
             </div>
             <Select
               mode='multiple'

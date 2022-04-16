@@ -15,6 +15,7 @@ export const Education = ({
   setEditIndex,
   id,
   setIsEditing,
+  removeEducation,
 }) => {
  
   const endDateYear =
@@ -29,6 +30,10 @@ export const Education = ({
     setEditIndex(id);
     setIsEditing(true);
     showEducationModal();
+  };
+
+  const handleDelete = () => {
+    removeEducation(id);
   };
 
   return (
@@ -49,7 +54,7 @@ export const Education = ({
         </div>
         <div className='buttons'>
           <img className='img' src={editIcon} alt='edit' onClick={handleEdit} />{' '}
-          <img className='img' src={deleteIcon} alt='delete' />
+          <img className='img' src={deleteIcon} onClick={handleDelete} alt='delete' />
         </div>
       </div>
       <hr />

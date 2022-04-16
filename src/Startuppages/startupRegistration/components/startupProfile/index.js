@@ -168,7 +168,7 @@ export const StartupProfile = () => {
   return (
     <>
       <HeaderStartup className="mb-3">
-        <h5> Startup Profile</h5>
+        <h5 style={{color: "#2E3192"}}>Startup Profile</h5>
         <p>Let's get to know your startup</p>
       </HeaderStartup>
 
@@ -205,7 +205,7 @@ export const StartupProfile = () => {
 
           <div className="row">
             <div className="form-group col-12">
-              <label>Elevator Pitch *</label>
+              <label>Elevator Pitch<span style={{color: "red"}}>*</span></label>
               <textarea
                 id="elevatorPitch"
                 name="elevatorPitch"
@@ -222,7 +222,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Startup *</label>
+              <label>Startup<span style={{color: "red"}}>*</span></label>
               <input
                 id="startupName"
                 type="text"
@@ -239,7 +239,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Brand *</label>
+              <label>Brand<span style={{color: "red"}}>*</span></label>
               <input
                 id="brand"
                 type="text"
@@ -255,7 +255,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Year Founded *</label>
+              <label>Year Founded<span style={{color: "red"}}>*</span></label>
               <DatePicker
                 className="col-md-12 py-2 px-2"
                 id="yearFounded"
@@ -269,7 +269,7 @@ export const StartupProfile = () => {
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Registration Number *</label>
+              <label>Registration Number<span style={{color: "red"}}>*</span></label>
               <input
                 id="registrationNumber"
                 type="text"
@@ -289,7 +289,7 @@ export const StartupProfile = () => {
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Company Size *</label>
+              <label>Company Size<span style={{color: "red"}}>*</span></label>
               <div>
                 <input
                   id={'companySize'}
@@ -314,7 +314,7 @@ export const StartupProfile = () => {
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Which sector does your business operate in?*</label>
+              <label>Which sector does your business operate in?<span style={{color: "red"}}>*</span></label>
               <div>
                 <input
                   id={'businessSector'}
@@ -342,7 +342,7 @@ export const StartupProfile = () => {
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>What stage is your business in *</label>
+              <label>What stage is your business in<span style={{color: "red"}}>*</span></label>
               <input
                 id={'startupStage'}
                 name={'startupStage'}
@@ -394,7 +394,7 @@ export const StartupProfile = () => {
 
           <div className="row mt-4">
             <div className="form-group col-12">
-              <label>Registered Address * </label>
+              <label>Registered Address<span style={{color: "red"}}>*</span></label>
               <input
                 id="registeredAddress"
                 type="text"
@@ -411,7 +411,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>Country *</label>
+              <label>Country<span style={{color: "red"}}>*</span></label>
               {/* <input
                 id='country'
                 type='text'
@@ -438,7 +438,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>State *</label>
+              <label>State<span style={{color: "red"}}>*</span></label>
               <input
                 id="state"
                 type="text"
@@ -454,7 +454,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>City *</label>
+              <label>City<span style={{color: "red"}}>*</span></label>
               <input
                 id="city"
                 type="text"
@@ -470,7 +470,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12 ">
-              <label>Mobile Number *</label>
+              <label>Mobile Number<span style={{color: "red"}}>*</span></label>
               <PhoneInput
                 id="phoneNumber"
                 international
@@ -487,7 +487,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Company Email *</label>
+              <label>Company Email<span style={{color: "red"}}>*</span></label>
               <input
                 id="companyEmail"
                 type="text"
@@ -512,7 +512,7 @@ export const StartupProfile = () => {
 
           <div className="row mt-4">
             <div className="form-group col-lg-6 col-12">
-              <label>What should be your startup profile handle </label>
+              <label>What should be your startup profile handle</label>
               <input
                 id="profileHandle"
                 type="text"
@@ -528,7 +528,7 @@ export const StartupProfile = () => {
               ) : null} */}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Website *</label>
+              <label>Website<span style={{color: "red"}}>*</span></label>
               <input
                 id="companyWebsite"
                 type="text"
@@ -544,7 +544,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Linkedin *</label>
+              <label>Linkedin<span style={{color: "red"}}>*</span></label>
               <input
                 id="linkedInHandle"
                 type="text"
@@ -560,7 +560,7 @@ export const StartupProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Twitter *</label>
+              <label>Twitter<span style={{color: "red"}}>*</span></label>
               <input
                 id="twitterHandle"
                 type="text"

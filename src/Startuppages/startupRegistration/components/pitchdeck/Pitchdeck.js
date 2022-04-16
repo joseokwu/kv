@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   HeaderPitch,
   FormWrapper,
@@ -7,143 +7,99 @@ import {
   FileSize,
   LabelButton,
   VideoWrapper,
-} from './pitch.styled'
-import DownloadIcon from '../../../../assets/icons/download.svg'
-import { useFormik } from 'formik'
-import RedFile from '../../../../assets/icons/redFile.svg'
-import BlueFile from '../../../../assets/icons/bluFile.svg'
-import { useActivity } from '../../../../hooks/useBusiness'
-import { pitchDeck } from './../../../../services/startUpReg'
-import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
-import { formatBytes } from '../../../../utils/helpers'
-import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
-import { toast } from 'react-hot-toast'
-import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../../../hooks/useAuth';
-import { updateFounderProfile } from '../../../../services'
-import axios  from 'axios';
-import { upload }  from '../../../../services/utils';
-
+} from "./pitch.styled";
+import DownloadIcon from "../../../../assets/icons/download.svg";
+import { useFormik } from "formik";
+import RedFile from "../../../../assets/icons/redFile.svg";
+import BlueFile from "../../../../assets/icons/bluFile.svg";
+import { useActivity } from "../../../../hooks/useBusiness";
+import { pitchDeck } from "./../../../../services/startUpReg";
+import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
+import { formatBytes } from "../../../../utils/helpers";
+import { CircularLoader } from "../../../../Startupcomponents/CircluarLoader/CircularLoader";
+import { toast } from "react-hot-toast";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../../../hooks/useAuth";
+import { updateFounderProfile } from "../../../../services";
+import { upload } from "../../../../services/utils";
+import { UploadFile } from "../../../../components/uploadFile";
 
 export const PitchDeck = () => {
   const { stateAuth } = useAuth();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [nextloading, setNextLoading] = useState(false);
-  const [opts, setOpts] = useState('')
-  const [logoUploading, setLogoUploading] = useState(false);
-  const [videoUploading, setVideoUploading] = useState(false);
-  
+  const [opts, setOpts] = useState("");
+
   const history = useHistory();
-  const [fileDoc, setFileDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckFile ?? null);
-  const [videoDoc, setVidDoc] = useState(stateAuth?.user?.pitchDeck?.pitchDeckVideo ?? null);
+  const [fileDoc, setFileDoc] = useState(
+    stateAuth?.user?.pitchDeck?.pitchDeckFile ?? null
+  );
+  const [videoDoc, setVidDoc] = useState(
+    stateAuth?.user?.pitchDeck?.pitchDeckVideo ?? null
+  );
 
   const {
     changePath,
     state: { path },
-  } = useActivity()
+  } = useActivity();
 
-  const next = () => {
-    changePath(path + 1)
-  }
+  // const next = () => {
+  //   changePath(path + 1);
+  // };
 
   const back = () => {
-    changePath(path - 1)
-  }
+    changePath(path - 1);
+  };
 
-  const handleChange = async(e) => {
-    const { files } = e.target;
-    const formData = new FormData();
-    formData.append("dir", "kv");
-    formData.append("ref", stateAuth.user?.userId);
-    formData.append("type", "pdf");
-    formData.append(0 , files[0])
-
+  const onSubmit = async (e) => {
     try {
-      setLogoUploading(true);
-      const response = await upload(formData)
-      console.log(response) 
-      setFileDoc(response?.path)
-      setLogoUploading(false)
-
-    } catch(error) {
-      setLogoUploading(false)
-      console.log(error)
-    }
-  }
-
-  
-  const handleChangeVid = async(e) => {
-    const { files } = e.target;
-    const formData = new FormData();
-    formData.append("dir", "kv");
-    formData.append("ref", stateAuth.user?.userId);
-    formData.append("type", "video");
-    formData.append(0 , files[0])
-
-    try {
-      setVideoUploading(true);
-      const response = await upload(formData)
-      console.log(response) 
-      setVidDoc(response?.path);
-      setVideoUploading(false);
-     
-    } catch(error) {
-      setVideoUploading(false);
-      console.log(error)
-    }
-  }
-  
-
- 
-
-  const onSubmit = async(e) => {
-    
-     try {
-     e.preventDefault();
+      e.preventDefault();
       const pitchDeck = {
-        type: 'pitchDeck',
-        accType: 'startup',
-        values:{
-          pitchDeckFile:fileDoc,
-          pitchDeckVideo:videoDoc
+        type: "pitchDeck",
+        accType: "startup",
+        values: {
+          pitchDeckFile: fileDoc,
+          pitchDeckVideo: videoDoc,
         },
-        userId: stateAuth?.user?.userId
-      }
-      console.log(pitchDeck)
+        userId: stateAuth?.user?.userId,
+      };
+      console.log(pitchDeck);
 
-      if (opts === 'next') {
-        setOpts(true)
-        let result = await updateFounderProfile(pitchDeck)
+      if (opts === "next") {
+        setOpts(true);
+        let result = await updateFounderProfile(pitchDeck);
 
         if (result?.success) {
-          toast.success('Pitch Deck' + '     ' + result?.message)
+          toast.success("Pitch Deck" + "     " + result?.message);
           setOpts(false);
-          return changePath(path + 1)
+          return changePath(path + 1);
         }
       }
       setLoading(true);
-      let result = await updateFounderProfile(pitchDeck)
+      let result = await updateFounderProfile(pitchDeck);
 
       if (!result?.success) {
-        toast.error(result?.message || 'There was an error updating the pitchDeck')
+        toast.error(
+          result?.message || "There was an error updating the pitchDeck"
+        );
         setLoading(false);
         return;
       }
-      toast.success('Pitch Deck' + ' ' + result?.message)
+      toast.success("Pitch Deck" + " " + result?.message);
       setLoading(false);
-      history.push('/startup/dashboard');
-     } catch (err) {
-       setLoading(false);
-       toast.error(err?.res?.data?.message || 'The was an error updating pitch deck')
-     }
-  }
-
-  
+      history.push("/startup/dashboard");
+    } catch (err) {
+      setLoading(false);
+      toast.error(
+        err?.res?.data?.message || "The was an error updating pitch deck"
+      );
+    }
+  };
 
   return (
     <>
       <HeaderPitch>
-        <h5> Pitch Deck </h5>
+        <h5 style={{ color: "#2E3192" }}>Pitch Deck</h5>
         <p>Let's get to know your startup</p>
       </HeaderPitch>
       <form style={{ marginBottom: "4rem" }} onSubmit={onSubmit}>
@@ -162,7 +118,27 @@ export const PitchDeck = () => {
                 <label className="pt-4 pb-3">
                   Upload a Pitch deck for your startup
                 </label>
-                <FileWrapper className="d-flex justify-content-center text-center">
+                <UploadFile
+                  data={{
+                    maxFiles: 1,
+                    supportedMimeTypes: ["application/pdf"],
+                    maxFileSize: 5,
+                    extension: "MB",
+                  }}
+                  initData={fileDoc ? [fileDoc] : []}
+                  onUpload={async (filesInfo) => {
+                    const formData = new FormData();
+                    formData.append("dir", "kv");
+                    formData.append("ref", stateAuth.user?.userId);
+                    formData.append("type", "pdf");
+                    formData.append(0, filesInfo[0]?.file);
+
+                    const response = await upload(formData);
+                    console.log(response);
+                    setFileDoc(response?.path);
+                  }}
+                />
+                {/* <FileWrapper className="d-flex justify-content-center text-center">
                   {fileDoc !== null ? (
                     <img
                       style={{ width: "70px", height: "70px" }}
@@ -190,7 +166,7 @@ export const PitchDeck = () => {
                     hidden
                   />
                   <LabelButton for="pitch-doc">Upload Files</LabelButton>
-                </FileWrapper>
+                </FileWrapper> */}
               </div>
               <div className="form-group col-12 mt-3">
                 {/* <label> Paste Youtube Link of pitch video </label>
@@ -205,13 +181,31 @@ export const PitchDeck = () => {
                   />
                   <button className="button">Upload</button>
                 </div> */}
-                <FileWrapper className="d-flex justify-content-center text-center">
+                <UploadFile
+                  data={{
+                    maxFiles: 1,
+                    supportedMimeTypes: ["video/mp4"],
+                    maxFileSize: 10,
+                    extension: "MB",
+                  }}
+                  initData={videoDoc ? [videoDoc] : []}
+                  onUpload={async (filesInfo) => {
+                    const formData = new FormData();
+                    formData.append("dir", "kv");
+                    formData.append("ref", stateAuth.user?.userId);
+                    formData.append("type", "video");
+                    formData.append(0, filesInfo[0]?.file);
+                    const response = await upload(formData);
+                    setVidDoc(response?.path);
+                  }}
+                />
+                {/* <FileWrapper className="d-flex justify-content-center text-center">
                   {videoDoc !== null ? (
                     <video
                       style={{
-                        borderRadius: "20px",
-                        maxHeight: "150px",
-                        width: "250px",
+                        borderRadius: '20px',
+                        maxHeight: '150px',
+                        width: '250px',
                       }}
                       className="mb-3"
                       controls
@@ -220,13 +214,13 @@ export const PitchDeck = () => {
                       Your browser does not support HTML5 video.
                     </video>
                   ) : videoUploading ? (
-                    <CircularLoader color={"#000"} />
+                    <CircularLoader color={'#000'} />
                   ) : (
                     <>
                       <img src={DownloadIcon} alt="#" />
                       <FileText>Drag & Drop</FileText>
                       <FileText>
-                        Drag files or click here to upload pitch video{" "}
+                        Drag files or click here to upload pitch video{' '}
                       </FileText>
                     </>
                   )}
@@ -240,14 +234,14 @@ export const PitchDeck = () => {
                     hidden
                   />
                   <LabelButton for="pitch-docu">Upload Files</LabelButton>
-                </FileWrapper>
+                </FileWrapper> */}
               </div>
             </div>
           </div>
         </FormWrapper>
         <div className="row ">
           <div className="col-3">
-            <CustomButton className="" background="#D0D0D1" onClick={back}>
+            <CustomButton className="" background="#808080" onClick={back}>
               Back
             </CustomButton>
           </div>
@@ -276,4 +270,4 @@ export const PitchDeck = () => {
       </form>
     </>
   );
-}
+};

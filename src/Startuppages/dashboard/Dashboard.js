@@ -15,7 +15,7 @@ import { useAuth} from '../../hooks/useAuth';
 export const StartupDashboard = () => {
   const [dashInfo, setDashInfo] = useState({});
   const [loading, setLoading] = useState(false);
-  const { stateAuth , getDashboardProfile } = useAuth();
+  const { stateAuth , getDashboardProfile, upcomingEvent } = useAuth();
   
 
 useEffect(() =>{
@@ -70,7 +70,7 @@ useEffect(() =>{
           header={"Total Fund"}
           color={"#2E3192"}
           img={""}
-          amount={stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders}
+          amount={`$${stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders !== undefined ? stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders : 0}`}
           time={""}
           className="col-3 col-6-md "
         />
@@ -78,7 +78,7 @@ useEffect(() =>{
           header={"Last Funding Round"}
           color={"#00ADEF"}
           img={""}
-          amount={stateAuth?.user?.fundRaising?.capTable?.amountRaised}
+          amount={`$${stateAuth?.user?.fundRaising?.capTable?.amountRaised !== undefined ? stateAuth?.user?.fundRaising?.capTable?.amountRaised : 0}`}
           time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
         />
@@ -86,16 +86,17 @@ useEffect(() =>{
           header={"Investors"}
           color={"#00ADEF"}
           img={""}
+          amount={"0"}
           className="col-3 col-6-md "
         />
         <CardFill
           header={"Valuation"}
           color={"#2E3192"}
           img={""}
-          amount={
+          amount={`$${
             typeof stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation !== undefined &&
             convertToMillion(stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation)
-          }
+          }`}
           time={dateFormat(stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding, "fullDate")}
           className="col-3 col-6-md "
         />
@@ -103,11 +104,20 @@ useEffect(() =>{
       </section>
 
       <section className="row">
-        <div className="col-lg-12">
+        {/* <div className="col-lg-12">
           <TodoList data={stateAuth?.user?.assignments?.data ?? []} />
-        </div>
+        </div> */}
       </section>
       <section className="my-4">
+        {/* {
+          upcomingEvent && upcomingEvent.length > 0 ? (
+            <UpComing data={stateAuth?.user?.event?.data} />
+          ) : (
+            <div>
+              <p>No Upcoming Events</p>
+            </div>
+          )
+        } */}
         <UpComing data={stateAuth?.user?.event?.data} />
       </section>
     </div>
