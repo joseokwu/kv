@@ -98,7 +98,7 @@ export const PitchDeck = ({data}) => {
 
 export const AddPickDeckModal = () => {
   return (
-    <div className="mx-4 addPitchDeck">
+    <div className="mx-0 addPitchDeck">
       <div className="mt-4 pb-3 border-bottom">
         <h2>Pitch Deck</h2>
         <span>Upload your pitch deck and document</span>
