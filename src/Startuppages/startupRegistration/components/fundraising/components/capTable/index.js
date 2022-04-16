@@ -7,77 +7,56 @@ import {
   LabelButton,
   VideoWrapper,
   Terms,
-} from './cap.styled.js'
-import { useHistory } from 'react-router-dom'
+} from "./cap.styled.js";
+import { useHistory } from "react-router-dom";
 import {
   CustomButton,
   OutlineButton,
-} from '../../../../../../Startupcomponents/button/button.styled'
-import Download from '../../../../../../assets/icons/downloadoutline.svg'
-import DownloadIcon from '../../../../../../assets/icons/download.svg'
-import RedFile from '../../../../../../assets/icons/redFile.svg'
-import BluFile from '../../../../../../assets/icons/bluFile.svg'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { useActivity } from '../../../../../../hooks/useBusiness'
-import { useAuth } from '../../../../../../hooks/useAuth'
-import CurrencyInput from 'react-currency-input-field'
-import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoader/CircularLoader';
-import { useState } from 'react';
-import * as XLSX from 'xlsx';
-import { parseFile } from '../../../../../../utils/helpers';
-import { upload } from '../../../../../../services/utils'
-import { UploadFile } from '../../../../../../components/uploadFile'
-
-
-
+} from "../../../../../../Startupcomponents/button/button.styled";
+import Download from "../../../../../../assets/icons/downloadoutline.svg";
+import DownloadIcon from "../../../../../../assets/icons/download.svg";
+import RedFile from "../../../../../../assets/icons/redFile.svg";
+import BluFile from "../../../../../../assets/icons/bluFile.svg";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useActivity } from "../../../../../../hooks/useBusiness";
+import { useAuth } from "../../../../../../hooks/useAuth";
+import CurrencyInput from "react-currency-input-field";
+import { CircularLoader } from "../../../../../../Startupcomponents/CircluarLoader/CircularLoader";
+import { useState } from "react";
+import * as XLSX from "xlsx";
+import { parseFile } from "../../../../../../utils/helpers";
+import { upload } from "../../../../../../services/utils";
+import { UploadFile } from "../../../../../../components/uploadFile";
 
 export const CapTable = ({ setFundraising }) => {
   const history = useHistory();
   const { stateAuth } = useAuth();
-  const [logoUploading , setLogoUploading] = useState(false);
-  const [amnt, setAmnt] = useState(stateAuth?.user?.fundRaising?.capTable?.amountRaised ?? '');
-  const [amntInvested , setAmntInvested] = useState(stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders ?? '');
+  const [amnt, setAmnt] = useState(
+    stateAuth?.user?.fundRaising?.capTable?.amountRaised ?? ""
+  );
+  const [amntInvested, setAmntInvested] = useState(
+    stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders ?? ""
+  );
 
   const {
-  state: { fundraising },
+    state: { fundraising },
   } = useActivity();
-  const [fileDoc, setFileDoc] = useState(stateAuth?.user?.fundRaising?.capTable?.files ?? null);
-  const { location  } = history;
+  const [fileDoc, setFileDoc] = useState(
+    stateAuth?.user?.fundRaising?.capTable?.files ?? null
+  );
+  // const { location  } = history;
 
   const onSubmit = (value) => {
     setFundraising({
       capTable: {
         amountRaised: amnt,
-        amountInvestedByFounders:amntInvested ,
-        files:fileDoc
+        amountInvestedByFounders: amntInvested,
+        files: fileDoc,
       },
-    })
-    history.push('#Previous Round')
-  }
-
-  const handleCsv = async(e) =>{
-
-    const file = e.target.files[0];
-    const fileData = await parseFile(file);
-    const workbook = XLSX.read(fileData, { type: 'binary' });
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
-    console.log(file.type === 'text/csv')
-    if (file.type === 'text/csv') {
-      const data = XLSX.utils.sheet_to_json(worksheet, {
-        raw: false,
-      });
-      console.log(data)
-      if (Array.isArray(data)) {
-        setFileDoc(data)
-        console.log(data)
-      }
-    }
-    
-    }
-
-
+    });
+    history.push("#Previous Round");
+  };
 
   return (
     <>
@@ -93,16 +72,15 @@ export const CapTable = ({ setFundraising }) => {
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
             <label>Total fund raised till date (if any)</label>
             <CurrencyInput
-              id='amountRaised'
-              name='amountRaised'
-              type='text'
+              id="amountRaised"
+              name="amountRaised"
+              type="text"
               value={amnt}
-              className='form-control ps-3'
-              placeholder='$100,000'
-              intlConfig={{ locale: 'en-US', currency: 'USD', }}
-              onValueChange={(value) => setAmnt(value) }  
+              className="form-control ps-3"
+              placeholder="$100,000"
+              intlConfig={{ locale: "en-US", currency: "USD" }}
+              onValueChange={(value) => setAmnt(value)}
             />
-
           </div>
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
             <label>Total Capital invested by Founders*</label>
@@ -113,11 +91,10 @@ export const CapTable = ({ setFundraising }) => {
               value={amntInvested}
               className="form-control ps-3"
               placeholder="$150,000"
-              intlConfig={{ locale: 'en-US', currency: 'USD', }}
+              intlConfig={{ locale: "en-US", currency: "USD" }}
               required
               onValueChange={(value) => setAmntInvested(value)}
             />
-         
           </div>
           <div className="col-12 my-3">
             <DownloadableButton href="." className="mx-n4 mx-lg-n0">
@@ -125,30 +102,29 @@ export const CapTable = ({ setFundraising }) => {
               Download Capital Table sample here
             </DownloadableButton>
           </div>
-          <div className='col-12 my-4'>
-          <UploadFile
-                  data={{
-                    maxFiles: 1,
-                    supportedMimeTypes: ['application/pdf'],
-                    maxFileSize: 5,
-                    extension: 'MB',
-                  }}
-                  onUpload={async (filesInfo) => {
-                    const formData = new FormData()
-                    formData.append('dir', 'kv')
-                    formData.append('ref', stateAuth.user?.userId)
-                    formData.append('type', 'pdf')
-                    formData.append(0, filesInfo[0]?.file)
-
-                    try {
-                      const response = await upload(formData)
-                      console.log(response)
-                      setFileDoc(response?.path)
-                    } catch (error) {
-                      console.log(error)
-                    }
-                  }}
-                />
+          <div className="col-12 my-4">
+            <UploadFile
+              data={{
+                maxFiles: 1,
+                supportedMimeTypes: ["text/csv"],
+                maxFileSize: 5,
+                extension: "MB",
+              }}
+              initData={fileDoc ? [fileDoc] : []}
+              onUpload={async (filesInfo) => {
+                const file = filesInfo[0].file;
+                const fileData = await parseFile(file);
+                const workbook = XLSX.read(fileData, { type: "binary" });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const data = XLSX.utils.sheet_to_json(worksheet, {
+                  raw: false,
+                });
+                if (Array.isArray(data)) {
+                  setFileDoc(data);
+                }
+              }}
+            />
             {/* <FileWrapper className='d-flex justify-content-center text-center mx-n4 mx-lg-n0'>
             {
                 fileDoc !== null ? (
@@ -176,7 +152,7 @@ export const CapTable = ({ setFundraising }) => {
       </BodyWrapper>
       <Terms className="">
         <p>
-          By clicking submit, you are agreeing to our <span>Terms of Use</span>{' '}
+          By clicking submit, you are agreeing to our <span>Terms of Use</span>{" "}
           and <span>Privacy Policy</span>. If you have questions, please reach
           out to privacy@knightventures.com
         </p>
@@ -186,7 +162,7 @@ export const CapTable = ({ setFundraising }) => {
           <CustomButton
             className=""
             background="#808080"
-            onClick={() => history.push('#Fund Utilization')}
+            onClick={() => history.push("#Fund Utilization")}
           >
             Back
           </CustomButton>
@@ -195,11 +171,11 @@ export const CapTable = ({ setFundraising }) => {
           <OutlineButton
             type="button"
             onClick={(e) => {
-              e.preventDefault()
-              onSubmit()
+              e.preventDefault();
+              onSubmit();
             }}
             className="ms-2"
-            style={{ marginRight: '0rem' }}
+            style={{ marginRight: "0rem" }}
             background="none"
           >
             Next
@@ -207,5 +183,5 @@ export const CapTable = ({ setFundraising }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
