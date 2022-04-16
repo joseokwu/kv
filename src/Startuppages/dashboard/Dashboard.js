@@ -70,7 +70,7 @@ useEffect(() =>{
           header={"Total Fund"}
           color={"#2E3192"}
           img={""}
-          amount={`$${stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders}`}
+          amount={`$${stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders !== undefined ? stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders : 0}`}
           time={""}
           className="col-3 col-6-md "
         />
@@ -78,7 +78,7 @@ useEffect(() =>{
           header={"Last Funding Round"}
           color={"#00ADEF"}
           img={""}
-          amount={`$${stateAuth?.user?.fundRaising?.capTable?.amountRaised}`}
+          amount={`$${stateAuth?.user?.fundRaising?.capTable?.amountRaised !== undefined ? stateAuth?.user?.fundRaising?.capTable?.amountRaised : 0}`}
           time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
         />

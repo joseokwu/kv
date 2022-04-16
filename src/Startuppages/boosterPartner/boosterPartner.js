@@ -62,22 +62,25 @@ export const StartupBoosterPartner = () => {
     'Virtual Assistant',
   ]
 
-   const getData = useCallback(async () => {
-    setLoading(true)
-    const res = await getBoosterData()
-    const resData = await getStartupRequest(stateAuth?.user?.userId);
-    console.log(resData?.data)
-    getApp(res?.data?.data)
-    setLoading(false);
-
-  },[ getApp])
+  
 
 
   useEffect(() => {
     
+    const getData = async () => {
+      setLoading(true)
+      const res = await getBoosterData()
+      const resData = await getStartupRequest(stateAuth?.user?.userId);
+      if(resData?.data?.data){
+        console.log(resData?.data?.data , 'boosterpartner data')
+        getApp(res?.data?.data)
+      }
+      setLoading(false);
+  
+    }
     getData()
 
-  }, [setBoosterData , stateAuth?.applications ])
+  }, [])
 
   console.log(boosterData)
 
