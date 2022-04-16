@@ -8,8 +8,8 @@ import {
 import './style.css'
 import { UserOutlined, PlusOutlined } from '@ant-design/icons'
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { DatePicker } from 'antd'
+import * as Yup from 'yup';
+import { DatePicker } from 'antd';
 import 'react-datepicker/dist/react-datepicker.css'
 import { CustomSelect } from '../../../../Startupcomponents/select/customSelect'
 import { stage, optionsNumb, options } from '../../../../constants/domiData'
@@ -31,10 +31,13 @@ export const StartupProfile = () => {
   const {
     changePath,
     state: { path },
-  } = useActivity()
-  //const initialDate = useMemo(() => moment().format("YYYY-DD-YY"), []);
+  } = useActivity();
+
+
+
+  //const startupData = useMemo(() => moment().format("YYYY-DD-YY"), []);
   const dateFormat = 'YYYY-MM-DD';
-  const { stateAuth } = useAuth()
+  const {updateProfile, stateAuth } = useAuth()
   const [disImg, setImg] = useState(null)
   const [logo, setLogo] = useState(
     stateAuth?.user?.startUpProfile?.logo ?? null,
@@ -45,29 +48,64 @@ export const StartupProfile = () => {
   const [startDate, setStartDate] = useState(moment(stateAuth?.user?.startUpProfile?.yearFounded) ?? '')
   const [loading, setLoading] = useState(false)
   const [nextloading, setNextLoading] = useState(false)
-  const [phone, setPhone] = useState(
-    stateAuth?.user?.startUpProfile?.contactInfo?.phoneNumber ?? '',
-  )
-  const [contacts, setContacts] = useState({
-    registeredAddress:
-      stateAuth?.user?.startUpProfile?.contactInfo?.registeredAddress ?? '',
-    country: stateAuth?.user?.startUpProfile?.contactInfo?.country ?? '',
-    state: stateAuth?.user?.startUpProfile?.contactInfo?.state ?? '',
-    city: stateAuth?.user?.startUpProfile?.contactInfo?.city ?? '',
-    companyEmail:
-      stateAuth?.user?.startUpProfile?.contactInfo?.companyEmail ?? '',
-  })
-  const [socialMedia, setSocialmedia] = useState({
-    profileHandle:
-      stateAuth?.user?.startUpProfile?.socialMedia?.profileHandle ?? '',
-    companyWebsite:
-      stateAuth?.user?.startUpProfile?.socialMedia?.companyWebsite ?? '',
-    linkedInHandle:
-      stateAuth?.user?.startUpProfile?.socialMedia?.linkedInHandle ?? '',
-    twitterHandle: stateAuth?.user?.startUpProfile?.socialMedia?.twitterHandle ?? '',
+  
+ const handlePhoneInput = (value) =>{
+  updateProfile({...stateAuth?.startupData?.startupProfile , phoneNumber:value});
+ }
+
+  const formik = useFormik({
+    initialValues: {
+      startupName: stateAuth?.user?.businessname ?? '',
+      elevatorPitch: stateAuth?.startupData?.startUpProfile?.elevatorPitch ?? '',
+    brand: stateAuth?.startupData?.startUpProfile?.brand ?? '',
+    registrationNumber: stateAuth?.startupData?.startUpProfile?.registrationNumber ?? '',
+    companySize: stateAuth?.startupData?.startUpProfile?.companySize ?? '',
+    businessSector: stateAuth?.startupData?.startUpProfile?.businessSector ?? '',
+    startupStage: stateAuth?.startupData?.startUpProfile?.startupStage ?? '',
+    acceleratorName: stateAuth?.startupData?.startUpProfile?.acceleratorName ?? '',
+    registeredAddress:stateAuth?.startupData?.startUpProfile?.contactInfo?.registeredAddress ?? '',
+    country: stateAuth?.startupData?.startUpProfile?.contactInfo?.country ?? '',
+    state: stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? '',
+    city: stateAuth?.startupData?.startUpProfile?.contactInfo?.city ?? '',
+    companyEmail: stateAuth?.startupData?.startUpProfile?.contactInfo?.companyEmail ?? '',
+    profileHandle: stateAuth?.startupData?.startUpProfile?.socialMedia?.profileHandle ?? '',
+    companyWebsite: stateAuth?.startupData?.startUpProfile?.socialMedia?.companyWebsite ?? '',
+    linkedInHandle:stateAuth?.startupData?.startUpProfile?.socialMedia?.linkedInHandle ?? '',
+    twitterHandle: stateAuth?.startupData?.startUpProfile?.socialMedia?.twitterHandle ?? ''
+    
+    },
+    validationSchema:Yup.object({
+      elevatorPitch:Yup.string().min(3).required('This field is required'),
+      brand:Yup.string().min(3 , 'This field must be greater than 3').required('This field is required'),
+      registrationNumber:Yup.number().min(3).required('This field is required'),
+      companySize:Yup.number().required('This field is required'),
+      businessSector:Yup.string().required('This field is required'),
+      startupStage:Yup.string().required('This field is require'),
+      acceleratorName:Yup.string().required('This field is require'),
+      registeredAddress:Yup.string().required('This field is require'),
+      country:Yup.string().required('This field is require'),
+      state:Yup.string().required('This field is require'),
+      city:Yup.string().required('This field is require'),
+      companyEmail:Yup.string().email('Invalid email').required('Email Required'),
+      profileHandle:Yup.string().required('This field is required'),
+      companyWebsite:Yup.string().url().required('This field is required'),
+      linkedInHandle:Yup.string().required('This field is required'),
+      twitterHandle:Yup.string().required('This field is required')
+
+    }),
+    onSubmit: (value) => onSubmit(value),
   })
 
-  const history = useHistory()
+  const history = useHistory();
+
+
+  const handleChange = (e) =>{
+    const { name , value } = e.target;
+    console.log(value)
+  updateProfile({...stateAuth?.startupData?.startupProfile , [name]:value});
+    
+   formik.handleChange(e);
+  }
 
   const onChangeImage = async (e) => {
     const { files } = e.target
@@ -90,56 +128,31 @@ export const StartupProfile = () => {
     }
   }
 
-  const onChange = (e) => {
-    setContacts({ ...contacts, [e.target.name]: e.target.value })
-  }
-  // console.log(stateAuth?.user?.startUpProfile)
-  const onChangeMedia = (e) => {
-    setSocialmedia({ ...socialMedia, [e.target.name]: e.target.value })
-  }
+  // const onChange = (e) => {
+  //   setContacts({ ...contacts, [e.target.name]: e.target.value })
+  // }
+  // // console.log(stateAuth?.user?.startUpProfile)
+  // const onChangeMedia = (e) => {
+  //   setSocialmedia({ ...socialMedia, [e.target.name]: e.target.value })
+  // }
   const next = () => {
     changePath(path + 1)
   }
 
   const onSubmit = async (value) => {
     try {
+
       const startupProfile = {
         type: 'startUpProfile',
         accType: 'startup',
         values: {
           ...value,
           logo: logo,
-          yearFounded: startDate,
-          contactInfo: {
-            ...contacts,
-            phoneNumber: phone,
-          },
-          socialMedia,
         },
         userId: stateAuth?.user?.userId,
       }
-      console.log(startupProfile)
-      if (opts === 'next') {
-        setOpts(true)
-        let result = await updateFounderProfile(startupProfile)
-
-        if (result?.success) {
-          toast.success('Profile' + ' ' + result?.message)
-          setOpts(false)
-          return changePath(path + 1)
-        }
-      }
-      setLoading(true)
-      let result = await updateFounderProfile(startupProfile)
-
-      if (!result?.success) {
-        toast.error(result?.message || 'There was an error in updating profile')
-        setLoading(false)
-        return
-      }
-      toast.success('Profile' + ' ' + result?.message)
-      setLoading(false)
-      history.push('/startup/dashboard')
+      console.log(stateAuth?.startupData)
+      
     } catch (err) {
       setLoading(false)
       toast.error(
@@ -149,21 +162,7 @@ export const StartupProfile = () => {
     }
   }
 
-  const formik = useFormik({
-    initialValues: {
-      startupName: stateAuth?.user?.businessname ?? '',
-      elevatorPitch: stateAuth?.user?.startUpProfile?.elevatorPitch ?? '',
-      brand: stateAuth?.user?.startUpProfile?.brand ?? '',
-      registrationNumber:
-        stateAuth?.user?.startUpProfile?.registrationNumber ?? '',
-      companySize: stateAuth?.user?.startUpProfile?.companySize ?? '',
-      businessSector: stateAuth?.user?.startUpProfile?.businessSector ?? '',
-      startupStage: stateAuth?.user?.startUpProfile?.startupStage ?? '',
-      acceleratorName: stateAuth?.user?.startUpProfile?.acceleratorName ?? '',
-    },
- 
-    onSubmit: (value) => onSubmit(value),
-  })
+
 
   return (
     <>
@@ -210,9 +209,9 @@ export const StartupProfile = () => {
                 id="elevatorPitch"
                 name="elevatorPitch"
                 placeholder="One line pitch 150 words maximum"
-                value={formik.values.elevatorPitch}
-                onChange={formik.handleChange}
-
+          
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 rows="4"
                 cols="4"
                 className="form-control"
@@ -230,8 +229,8 @@ export const StartupProfile = () => {
                 disabled={formik.values.startupName !== ''}
                 placeholder="Entity Name As Per Registration"
                 value={formik.values.startupName}
-                onChange={formik.handleChange}
-             
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
               {formik.touched.startupName && formik.errors.startupName ? (
@@ -246,8 +245,8 @@ export const StartupProfile = () => {
                 name="brand"
                 placeholder="eg; Knight Ventures"
                 value={formik.values.brand}
-                onChange={formik.handleChange}
-               
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
               {formik.touched.brand && formik.errors.brand ? (
@@ -263,13 +262,13 @@ export const StartupProfile = () => {
                 defaultValue={moment(stateAuth?.user?.startUpProfile?.yearFounded) ?? moment()}
               format={dateFormat}
               onChange={(date,dateString) => setStartDate(dateString)}
-              
+              onBlur={formik.handleBlur}
               />
 
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Registration Number<span style={{color: "red"}}>*</span></label>
+              <label>Businesss Registration Number<span style={{color: "red"}}>*</span></label>
               <input
                 id="registrationNumber"
                 type="text"
@@ -277,7 +276,7 @@ export const StartupProfile = () => {
                 placeholder="1234567890"
                 value={formik.values.registrationNumber}
                 onChange={formik.handleChange}
- 
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
               {formik.touched.registrationNumber &&
@@ -296,7 +295,7 @@ export const StartupProfile = () => {
                   name={'companySize'}
                   value={formik.values.companySize}
                   onChange={formik.handleChange}
-                
+                  onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
                   placeholder="Enter company size"
                 />
@@ -321,7 +320,7 @@ export const StartupProfile = () => {
                   name={'businessSector'}
                   value={formik.values.businessSector}
                   onChange={formik.handleChange}
-               
+                  onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
                   placeholder="Enter Business Sector"
                 />
@@ -348,7 +347,7 @@ export const StartupProfile = () => {
                 name={'startupStage'}
                 value={formik.values.startupStage}
                 onChange={formik.handleChange}
-              
+                onBlur={formik.handleBlur}
                 className="sel ps-3 pe-3"
                 placeholder="Enter Business Stage"
               />
@@ -375,14 +374,14 @@ export const StartupProfile = () => {
                 name="acceleratorName"
                 placeholder="Enter Accelerator name"
                 value={formik.values.acceleratorName}
-                onChange={formik.handleChange}
-              
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {/* {formik.touched.acceleratorName &&
+              {formik.touched.acceleratorName &&
               formik.errors.acceleratorName ? (
                 <label className='error'>{formik.errors.acceleratorName}</label>
-              ) : null} */}
+              ) : null}
             </div>
           </div>
         </FormWrapper>
@@ -400,14 +399,13 @@ export const StartupProfile = () => {
                 type="text"
                 name="registeredAddress"
                 placeholder="Enter your registered address"
-                value={contacts.registeredAddress}
-                onChange={onChange}
-               
+                value={formik.values.registeredAddress}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {formik.touched.registeredAddress &&
-              !contacts.registeredAddress ? (
-                <label className="error">Required</label>
+                {formik.touched.registeredAddress && formik.errors.registeredAddress ? (
+                <label className="error">{formik.errors.registeredAddress}</label>
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -429,12 +427,12 @@ export const StartupProfile = () => {
                 name="country"
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={['ng']}
-                value={contacts.country}
-                handleChange={(e) => setContacts({...contacts, country:e.target.value})}
-             
+                value={formik.values.country}
+                handleChange={handleChange}
+                onBlur={formik.handleBlur}
               ></CountryDropdown>
-              {formik.touched.country && !contacts.country ? (
-                <label className="error">Required</label>
+              {formik.touched.country && formik.errors.country ? (
+                <label className="error">{formik.errors.country}</label>
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -444,13 +442,13 @@ export const StartupProfile = () => {
                 type="text"
                 name="state"
                 placeholder="Enter your state"
-                value={contacts.state}
-                onChange={onChange}
-         
+                value={formik.values.state}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {formik.touched.state && !contacts.state ? (
-                <label className="error">Required</label>
+         {formik.touched.state && formik.errors.state ? (
+                <label className="error">{formik.errors.state}</label>
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
@@ -460,13 +458,13 @@ export const StartupProfile = () => {
                 type="text"
                 name="city"
                 placeholder="Enter your city"
-                value={contacts.city}
-                onChange={onChange}
-           
+                value={formik.values.city}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {formik.touched.city && !contacts.city ? (
-                <label className="error">Required</label>
+              {formik.touched.city && formik.errors.city ? (
+                <label className="error">{formik.errors.city}</label>
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12 ">
@@ -477,14 +475,12 @@ export const StartupProfile = () => {
                 name="phoneNumber"
                 countryCallingCodeEditable={true}
                 className="custs ps-3 py-2"
-                value={phone}
-                onChange={setPhone}
-                MaxLength={17}
+                value={stateAuth?.startupData?.startUpProfile?.contactInfo?.phoneNumber}
+                onChange={handlePhoneInput}
                 
+                MaxLength={17}
               />
-              {formik.touched.phoneNumber && !phone ? (
-                <label className="error">Required</label>
-              ) : null}
+            
             </div>
             <div className="form-group col-lg-6 col-12">
               <label>Company Email<span style={{color: "red"}}>*</span></label>
@@ -493,13 +489,13 @@ export const StartupProfile = () => {
                 type="text"
                 name="companyEmail"
                 placeholder="Enter your email"
-                value={contacts.companyEmail}
-                onChange={onChange}
-              
+                value={formik.values.companyEmail}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {formik.touched.companyEmail && !contacts.companyEmail ? (
-                <label className="error">Required</label>
+    {formik.touched.companyEmail && formik.errors.companyEmail ? (
+                <label className="error">{formik.errors.companyEmail}</label>
               ) : null}
             </div>
           </div>
@@ -518,14 +514,14 @@ export const StartupProfile = () => {
                 type="text"
                 name="profileHandle"
                 placeholder="Enter your startup profile handle"
-                value={socialMedia.profileHandle}
-                onChange={onChangeMedia}
-                // onBlur={formik.handleBlur}
+                value={formik.values.profileHandle}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {/* {formik.touched.profileHandle && !socialMedia.profileHandle ? (
-                <label className='error'>Required</label>
-              ) : null} */}
+             {formik.touched.profileHandle && formik.errors.profileHandle ? (
+                <label className="error">{formik.errors.profileHandle}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
               <label>Website<span style={{color: "red"}}>*</span></label>
@@ -534,13 +530,13 @@ export const StartupProfile = () => {
                 type="text"
                 name="companyWebsite"
                 placeholder="Enter your startup website"
-                value={socialMedia.companyWebsite}
-                onChange={onChangeMedia}
-            
+                value={formik.values.companyWebsite}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {formik.touched.companyWebsite && !socialMedia.companyWebsite ? (
-                <label className="error">Required</label>
+             {formik.touched.companyWebsite && formik.errors.companyWebsite ? (
+                <label className="error">{formik.errors.companyWebsite}</label>
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -550,13 +546,13 @@ export const StartupProfile = () => {
                 type="text"
                 name="linkedInHandle"
                 placeholder="Enter your Linkedin profile name"
-                value={socialMedia.linkedInHandle}
-                onChange={onChangeMedia}
-                
+                value={formik.values.linkedInHandle}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {formik.touched.linkedInHandle && !socialMedia.linkedInHandle ? (
-                <label className="error">Required</label>
+                  { formik.touched.linkedInHandle && formik.errors.linkedInHandle ? (
+                <label className="error">{formik.errors.linkedInHandle}</label>
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
@@ -566,13 +562,13 @@ export const StartupProfile = () => {
                 type="text"
                 name="twitterHandle"
                 placeholder="Enter your Twitter profile name"
-                value={socialMedia.twitterHandle}
-                onChange={onChangeMedia}
-            
+                value={formik.values.twitterHandle}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="form-control ps-3"
               />
-              {formik.touched.twitterHandle && !socialMedia.twitterHandle ? (
-                <label className="error">Required</label>
+      { formik.touched.twitterHandle && formik.errors.twitterHandle ? (
+                <label className="error">{formik.errors.twitterHandle}</label>
               ) : null}
             </div>
           </div>

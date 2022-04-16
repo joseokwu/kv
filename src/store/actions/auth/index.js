@@ -1,7 +1,7 @@
 import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
     LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL , 
     SET_SIGNUP_STATUS, EDIT , LOG_OUT ,  DASHBOARD_USER_PROFILE,
-    DASHBOARD_USER_PROFILE_FAILED ,  DASHBOARD_LOAD
+    UPDATE_STARTUP_PROFILE ,  DASHBOARD_LOAD , UPDATE_STARTUP_DATA
 } from '../actions.types';
 import { register, userLogin , profile, forgorPassword } from '../../../services';
 import toast from 'react-hot-toast';
@@ -89,6 +89,32 @@ export const dashboardProfile = async(value) => async(dispatch) =>{
   
   }
 
+ export const updateStartupProfile = async(value) => async(dispatch) =>{
+
+    dispatch({
+        type:UPDATE_STARTUP_PROFILE,
+        payload:value
+    })
+}
+
+
+export const updateStartupData = async(value) => async(dispatch) =>{
+    try{
+        const res = await profile(value);
+        if(res){
+         console.log(res?.data?.startupData)
+            dispatch({
+                type:UPDATE_STARTUP_DATA,
+                payload:res?.data?.startupData
+            })
+            
+        }
+    }catch(err){
+        dispatch({
+            type:USER_PROFILE_FAIL
+        })
+    }
+}
 
 export const getProfile = async (value) => async(dispatch) =>{
 
@@ -110,7 +136,7 @@ export const getProfile = async (value) => async(dispatch) =>{
             type:USER_PROFILE_FAIL
         })
     }
-}
+} 
 
 export const changeStatus =  (value) => async(dispatch) =>{
     dispatch({

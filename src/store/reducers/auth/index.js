@@ -3,7 +3,7 @@ import { LOGIN_FAILED, AUTH_START,
   REGISTER_SUCCESS , USER_PROFILE,
   USER_PROFILE_FAIL, SET_SIGNUP_STATUS,
   LOG_OUT, EDIT , DASHBOARD_USER_PROFILE , 
-  DASHBOARD_LOAD
+  DASHBOARD_LOAD , UPDATE_STARTUP_DATA , UPDATE_STARTUP_PROFILE
 
 } from '../../actions/actions.types';
 import { INIT_STATE } from '../../initialstates';
@@ -97,6 +97,20 @@ import { INIT_STATE } from '../../initialstates';
                     ...state,
                     completedRegistration:false
                   }
+               case UPDATE_STARTUP_DATA:
+                 return {
+                   ...state,
+                   startupData:action.payload
+                 }   
+              case UPDATE_STARTUP_PROFILE:
+                console.log(action.payload)
+                return {
+                ...state,
+                startupData:{
+                  startUpProfile:action.payload , 
+                  ...state.startupData
+                  }
+                }   
 
         default:
             return state;

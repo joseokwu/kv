@@ -8,7 +8,7 @@ import { LoadingIcon } from './../components/Loading/Loading';
 
 
 export  function AppRouter(props){
-    const { userProfile, stateAuth : { loading , authenticated ,  roles }} = useAuth();
+    const { userProfile, callUpdateStartupData , stateAuth : { loading , authenticated ,  roles }} = useAuth();
 
     const history = useHistory();
     useEffect(()=>{
@@ -18,7 +18,7 @@ export  function AppRouter(props){
                 const userRole = getRole();
                // console.log(userRole)
               await userProfile(userRole && userRole);
-               
+             await callUpdateStartupData(userRole && userRole);
           
 				if (getLocationHistory()){
                     console.log('problem')

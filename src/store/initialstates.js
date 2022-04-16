@@ -8,7 +8,33 @@ export const INIT_STATE = {
   roles: [],
   signUpStatus: 'startup',
   username: '',
-  completedRegistration:false
+  completedRegistration:false,
+  startupData:{
+    startUpProfile:{
+      elevatorPitch:'',
+      brand:'' ,
+      registrationNumber:'',
+      companySize:'',
+      businessSector:'',
+      startupStage:'',
+      acceleratorName:'',
+      contactInfo:{
+       registeredAddress: '',
+       country:'',
+       state:'',
+       city:'',
+       phoneNumber:'',
+       companyEmail:''
+      },
+      socialMedia:{
+        profileHandle:'',
+        companyWebsite:'',
+        linkedInHandle:'',
+        twitterHandle:''  
+      }
+    }
+  }
+
 };
 
 export const INIT_STATE_BUSINESS = {
