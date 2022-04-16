@@ -3,12 +3,14 @@ import { Tag } from "../../components";
 import apple from "../../assets/images/apple.svg";
 import office from "../../assets/icons/office.svg";
 import styles from "./selectionStartup.module.css";
+import { useHistory } from "react-router-dom";
 
 export const SelectionStartup = ({ data = {} }) => {
   const colors = {
     evaluated: "#0A6CF4",
     pending: "#D42323",
   };
+  const { push } = useHistory();
   return (
     <div className={styles?.card}>
       <section className="d-flex align-items-center justify-content-between">
@@ -40,6 +42,10 @@ export const SelectionStartup = ({ data = {} }) => {
         <p
           className="view-link"
           style={{ color: data?.status === "pending" ? "#DADADA" : "" }}
+          onClick={() => {
+            push("/admin/selection_process/kv_answer/1");
+          }}
+          role={data?.status === "evaluated" ? "button" : ""}
         >
           View answer
         </p>

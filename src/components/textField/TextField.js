@@ -15,7 +15,7 @@ export const TextField = ({
   ...rest
 }) => {
   return (
-    <div className="field">
+    <div className="field w-100">
       <Form.Item
         name={name}
         style={{ color: "#fe0003" }}

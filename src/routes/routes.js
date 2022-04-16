@@ -114,8 +114,10 @@ import {
   ViewKVMemberSelectionProcess,
   ViewMentor,
   ViewPartner,
+  ViewKVMember,
+  ViewSelectionAnswer,
+  AddKVMemberForSelectionProcess,
 } from "../adminPages";
-import { ViewKVMember } from "../adminPages/viewKVMember/ViewKVMember";
 
 const routes = [
   // Start-up routes start
@@ -797,6 +799,24 @@ const routes = [
     name: "admin Selection Process",
     path: "/admin/selection_process/kv/:id",
     component: WithAdminLayout(ViewKVMemberSelectionProcess),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/kv_add_member/:id",
+    component: WithAdminLayout(AddKVMemberForSelectionProcess),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/kv_answer/:id",
+    component: WithAdminLayout(ViewSelectionAnswer),
     exact: true,
     protected: false,
     type: "admin",

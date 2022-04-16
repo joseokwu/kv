@@ -15,6 +15,7 @@ export const FullTab = ({
               <li
                 className={currentTab === i ? styles.list_active : ""}
                 onClick={() => setCurrentTab(i)}
+                role="button"
               >
                 {tab}
               </li>

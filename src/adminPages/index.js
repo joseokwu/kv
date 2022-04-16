@@ -14,3 +14,6 @@ export * from "./createProgram/CreateProgram";
 export * from "./createAssignment/CreateAssignment";
 export * from "./selectionProcess/SelectionProcess";
 export * from "./viewKVMemberSelectionProcess/ViewKVMemberSelectionProcess";
+export * from "./viewKVMember/ViewKVMember";
+export * from "./viewSelectionAnswer/ViewSelectionAnswer";
+export * from "./addKVMemberForSelectionProcess/AddKVMemberForSelectionProcess";
