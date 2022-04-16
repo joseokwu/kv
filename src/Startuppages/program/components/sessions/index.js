@@ -281,7 +281,7 @@ export const InProgressModal = ({data}) => {
         </div>
 
         <div className="mb-5">
-          <button>Join Session</button>
+          <button type='button' > <a href={data?.joinWith} style={{textDecoration:'none', color:'#fff'}} > Join Session </a> </button>
         </div>
       </div>
     </InProgress>

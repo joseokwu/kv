@@ -87,6 +87,7 @@ export const StartupEvents = ({ history }) => {
       page:currentPage,
       limit:5
     });
+    console.log(res?.data)
     setEvents(res?.data)
     setTotal(res?.data?.total)
 
@@ -184,7 +185,7 @@ export const StartupEvents = ({ history }) => {
 						{
 			
 					
-					<Pagination.Item  className='mx-1' >{ `${currentPage} of  ${events?.results?.limit}` }</Pagination.Item>
+					<Pagination.Item  className='mx-1' >{ `${currentPage} of  ${events?.results?.limit ?? 1}` }</Pagination.Item>
 						
 
 				}
