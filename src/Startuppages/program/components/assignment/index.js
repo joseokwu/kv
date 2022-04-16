@@ -1,28 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { Tabs } from '../../../../Startupcomponents'
 import { NotSubmitted } from './components/notSubmitted'
 import { Submitted } from './components/submitted'
+import { assignment } from '../../../../services/startup';
 
-export const Assignment = ({ data }) => {
+
+
+export const Assignment = () => {
   const tabItems = ['Not Submitted', 'Submitted']
   const [currentTab, setCurrentTab] = useState(tabItems[0])
+  
 
-  const sub = data?.filter((item) => item?.status === 'submitted')
-  console.log(sub)
 
-  const notSub = data?.filter((item) => item?.status === 'not-submitted')
-  console.log(notSub)
+
 
   const renderContent = () => {
     switch (currentTab) {
       case 'Not Submitted':
-        return <NotSubmitted data={notSub} />
+        return <NotSubmitted  />
       case 'Submitted':
-        return <Submitted data={sub} />
+        return <Submitted  />
       default:
-        return <NotSubmitted data={notSub} />
+        return <NotSubmitted  />
     }
   }
+
 
   return (
     <div className="mt-5 container">

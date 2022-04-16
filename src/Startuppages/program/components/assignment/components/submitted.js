@@ -1,19 +1,65 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { SmallModal, LargeModal, Tag } from '../../../../../Startupcomponents'
 import { Feedback, TodoCard } from '../styled'
 import doc from '../../../../../assets/icons/assdoc.svg'
 import docIcon from '../../../../../assets/icons/docIcon.svg'
 import lady from '../../../../../assets/images/smileLady.svg'
 import { months } from '../../../../../utils/helpers'
+import { getSubmittedAssignment } from '../../../../../services'
+import { PageLoader } from '../../../../../components'
+import Pagination from 'react-bootstrap/Pagination';
+import moment from 'moment';
 
-export const Submitted = ({ data }) => {
-  const buscomArr = [1, 2, 3, 4]
+
+export const Submitted = () => {
+
   const [showModal, setShowModal] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [submittedAssignment , setSubmittedAssignment] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+
+  const nextPage = ()=>{
+    setCurrentPage(currentPage+1)
+ 
+   }
+ 
+   const prevPage = ()=>{
+     setCurrentPage(currentPage-1)
+ 
+   }
+   
+	const movePage =(id)=>{
+		setCurrentPage(id)
+	}
+
+useEffect(() =>{
+
+  const getData = async () => {
+    setLoading(true);
+    const res = await getSubmittedAssignment({
+      page:currentPage,
+      limit:5
+    });
+    //console.log(res?.data)
+    setSubmittedAssignment(res?.data);
+    setLoading(false);
+  };
+  
+  getData();
+
+}, [currentPage])
+
+if (loading) {
+  return (
+    <PageLoader num={[1, 2, 3, 4, 5]} />
+  );
+}
 
   return (
     <div>
       <div className="row mt-3">
-        {data.map((info, i) => (
+        { submittedAssignment &&  submittedAssignment?.data.map((info, i) => (
           <TodoCard key={i} className="col-lg-6 col-md-6 col-12 mx-3 px-4 mt-3">
             {showModal ? (
               <LargeModal id={i} title="" closeModal={setShowModal}>
@@ -30,8 +76,8 @@ export const Submitted = ({ data }) => {
 
             <div className="d-flex justify-content-between my-2 date">
               <h6>
-                {new Date(info?.date).getDate()} |{' '}
-                {months[new Date(info?.date).getMonth()]}
+                {new Date(info?.deadlineDay).getDate()} |{' '}
+                {months[new Date(info?.deadlineTime).getMonth()]}
               </h6>
               <Tag name="Complete" bg="#D1FFD3" color="#337808" fz="12px" />
             </div>
@@ -48,11 +94,52 @@ export const Submitted = ({ data }) => {
           </TodoCard>
         ))}
       </div>
+      <div className="d-flex justify-content-end">
+				<Pagination>
+
+				{
+          submittedAssignment &&	submittedAssignment?.results?.currentPage > 1 ? (
+						 <>
+				  <Pagination.Prev onClick={prevPage} className='mx-1' />
+						{
+			
+					
+					<Pagination.Item  className='mx-1' >{ `${currentPage} of  ${submittedAssignment?.results?.limit}` }</Pagination.Item>
+						
+
+				}
+				 			{
+                submittedAssignment?.results?.currentPage === submittedAssignment?.results?.limit ? <span />:<Pagination.Next onClick={nextPage} className='mx-1' /> 
+							 }
+						 </>
+
+					):(
+						<>
+            {
+
+      <Pagination.Item onClick={()=> movePage(currentPage + 1)} className='mx-1' >{ `${currentPage} of  ${submittedAssignment?.results?.limit ?? 1}` }</Pagination.Item>
+        
+    }
+
+                        {
+                          submittedAssignment &&  submittedAssignment?.results?.currentPage === submittedAssignment?.results?.limit ? <span /> : <Pagination.Next onClick={nextPage} className='mx-1' />
+							     }
+
+						</>
+					)
+				}
+
+				</Pagination>
+			</div>
+
     </div>
   )
 }
 
 export const AssignmentFeedBackModal = ({ data }) => {
+
+
+
   return (
     <Feedback className="mx-4 mb-5">
       <div className="row mx-5">
@@ -75,11 +162,11 @@ export const AssignmentFeedBackModal = ({ data }) => {
         </div>
         <div className="col-lg-7 mx-2 my-5">
           <h4 className="pt-5 pb-2">{data?.topic}</h4>
-          <span style={{ color: '#525151' }}>{data?.status} On</span>
+          <span style={{ color: '#525151' }}>Submitted On</span>
           <div className="my-4 ">
             <h3>
-              {new Date(data?.date).getDate()} |{' '}
-              {months[new Date(data?.date).getMonth()]}
+              {new Date(data?.deadlineDay).getDate()} |{' '}
+              {months[new Date(data?.deadlineTime).getMonth()]}
             </h3>
           </div>
         </div>
@@ -92,7 +179,7 @@ export const AssignmentFeedBackModal = ({ data }) => {
               <span>{data?.host?.position}</span>
             </div>
             <div className="ms-5 mt-4">
-              <Tag name="2 Days Ago" bg="none" fz="12px" color="#2E3192" />
+              <Tag name={`${moment(data?.deadlineTime).fromNow()}`} bg="none" fz="12px" color="#2E3192" />
             </div>
           </div>
           <p>{data?.description}</p>

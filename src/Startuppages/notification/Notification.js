@@ -5,21 +5,30 @@ import sampleUser from "../../assets/images/sampleNoticePic.png";
 import "./notification.css";
 
 export const StartupNotification = () => {
-  const tabItems = ["all", "program", "mentors", "investors", "startup team", "others", "event / workshop"];
-
-  const noticeItems = [
-    { noticeImage: noticeImg },
-    { noticeImage: "" },
-    { noticeImage: "" },
-    { noticeImage: noticeImg },
-    { noticeImage: noticeImg },
+  const tabItems = [
+    "all",
+    "program",
+    "mentors",
+    "investors",
+    "startup team",
+    "others",
+    "event / workshop",
   ];
+
+  // const noticeItems = [
+  //   { noticeImage: noticeImg },
+  //   { noticeImage: "" },
+  //   { noticeImage: "" },
+  //   { noticeImage: noticeImg },
+  //   { noticeImage: noticeImg },
+  // ];
+  const noticeItems = [{noticeImage: ""}];
   return (
     <div className="wrapper">
       <section className="mb-4">
         <div className="d-flex align-items-center">
           <p className="notice-header">Notification</p>
-          <span className="unread-notice">1 Unread</span>
+          <span className="unread-notice">0 Unread</span>
         </div>
       </section>
 

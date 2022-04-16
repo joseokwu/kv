@@ -38,6 +38,13 @@ export const loginUser = async(value) => async(dispatch) =>{
             type:AUTH_START
         })
         const res = await userLogin(value);
+        console.log(res?.data?.user)
+     if(!res?.success){
+     toast.error(res?.message);
+     dispatch({
+        type:LOGIN_FAILED
+    })
+        }else{
         setAuthToken(res?.data?.token);
         setRole(res?.data?.user?.type[0])
         console.log(res)
@@ -47,6 +54,8 @@ export const loginUser = async(value) => async(dispatch) =>{
         })
        
          return res;
+        }
+
     
     }catch(err){
         console.log(err?.response?.data?.message , 'err')

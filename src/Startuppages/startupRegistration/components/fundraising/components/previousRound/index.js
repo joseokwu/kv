@@ -26,11 +26,13 @@ export const PreviousRound = ({ setFundraising }) => {
     location: { hash },
   } = history;
   const optionsNumb = [
-    { value: 'Fund 1', label: 'Fund 1' },
-    { value: 'Fund 2', label: 'Fund 2' },
-    { value: 'Fund 3', label: 'Fund 3' },
+    { value: 'Seed round', label: 'Seed round' },
+    { value: 'Angel round', label: 'Angel round'},
+    { value: 'Series A', label: 'Series A' },
+    { value: 'Series B', label: 'Series B' },
+    { value: 'Series C', label: 'Series C' },
   ];
-
+  const fundNum = [1, 2, 3, 4, 5];
 
   const [startDate, setStartDate] = useState(new Date());
 
@@ -106,13 +108,13 @@ export const PreviousRound = ({ setFundraising }) => {
         <div className='row my-4'>
           <div className='form-group col-12'>
             <label>
-              Which instrument did you use for your previous round?*
+              Which instrument did you use for your previous round?<span style={{color: "red"}}>*</span>
             </label>
             <select
               id='instrumentForRound'
               name='instrumentForRound'
               // options={optionsNumb}
-              className='cust mx-3 extra'
+              className='cust mx-3 px-2 extra'
               // placeholder='Choose your instrument for your round'
               value={
                 
@@ -127,12 +129,12 @@ export const PreviousRound = ({ setFundraising }) => {
           </div>
 
           <div className='form-group my-2 col-lg-6 col-12'>
-            <label>Select your previous round*</label>
+            <label>Select your previous round<span style={{color: "red"}}>*</span></label>
             <select
               id={'numberOfRounds'}
               name={'numberOfRounds'}
               // options={optionsNumb}
-              className='cust mx-3 extra'
+              className='cust mx-3 px-2 extra'
               // placeholder='Choose round'
               value={
                 
@@ -140,13 +142,13 @@ export const PreviousRound = ({ setFundraising }) => {
               }
               onChange={formik.handleChange}
             >
-              {optionsNumb.map((item, index) => {
-                return <option key={index}>{item.label}</option>;
+              {fundNum.map((item, index) => {
+                return <option key={index}>{item}</option>;
               })}
             </select>
           </div>
           <div className='form-group my-2 col-12'>
-            <label>In which month/year did you get funding?*</label>
+            <label>In which month/year did you get funding?<span style={{color: "red"}}>*</span></label>
             <div>
               <DatePicker
                 id='dateOfFunding'
@@ -164,7 +166,7 @@ export const PreviousRound = ({ setFundraising }) => {
           </div>
 
           <div className='form-group my-2 col-12'>
-            <label> How much did you raise in last funding round?* </label>
+            <label> How much did you raise in last funding round?<span style={{color: "red"}}>*</span></label>
             <input
               id='fundraisingAmount'
               name='fundraisingAmount'
@@ -184,7 +186,7 @@ export const PreviousRound = ({ setFundraising }) => {
             ) : null}
           </div>
           <div className='form-group my-2 col-12'>
-            <label>Dilution (%)*</label>
+            <label>Dilution (%)<span style={{color: "red"}}>*</span></label>
             <input
               id='dilution'
               name='dilution'
@@ -202,7 +204,7 @@ export const PreviousRound = ({ setFundraising }) => {
             ) : null}
           </div>
           <div className='form-group my-2 col-12'>
-            <label>What was your pre-money valuation in last round?*</label>
+            <label>What was your pre-money valuation in last round?<span style={{color: "red"}}>*</span></label>
             <input
               id='preMoneyValuation'
               name='preMoneyValuation'
@@ -222,7 +224,7 @@ export const PreviousRound = ({ setFundraising }) => {
             ) : null}
           </div>
           <div className='form-group my-2 col-12'>
-            <label>Post-Money valuation for last round*</label>
+            <label>Post-Money valuation for last round<span style={{color: "red"}}>*</span></label>
             <input
               id='postMoneyValuation'
               name='postMoneyValuation'
@@ -244,7 +246,7 @@ export const PreviousRound = ({ setFundraising }) => {
             ) : null}
           </div>
           <div className='form-group col-12'>
-            <label>Did you have a lead investor for last round?*</label>
+            <label>Did you have a lead investor for last round?<span style={{color: "red"}}>*</span></label>
             <BntWrap>
               <button
                 className={`me-3 ${hasLeadInvestor === true ? 'active' : ''}`}
@@ -304,7 +306,7 @@ export const PreviousRound = ({ setFundraising }) => {
         <div className='col-3'>
           <CustomButton
             className=''
-            background='#D0D0D1'
+            background='#808080'
             onClick={() => history.push('#Cap Table')}
           >
             Back

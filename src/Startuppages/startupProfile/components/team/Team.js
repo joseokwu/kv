@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import twitter from '../../../../assets/icons/twtsm.svg'
-import linkedIn from '../../../../assets/icons/lnkdsm.svg'
-import whatsApp from '../../../../assets/icons/whtsm.svg'
-import member from '../../../../assets/images/sampleTeamMember.png'
-import apple from '../../../../assets/images/apple.svg'
-import mail from '../../../../assets/icons/mail.svg'
-import globe from '../../../../assets/icons/globe.svg'
-import split from '../../../../assets/icons/split.svg'
-import blue from '../../../../assets/images/edublue.svg'
-import navy from '../../../../assets/images/navy.svg'
-import './team.css'
-import { LargeModal, Tag } from '../../../../Startupcomponents'
-import founder from '../../../../assets/images/femaleFounder.svg'
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import twitter from "../../../../assets/icons/twtsm.svg";
+import linkedIn from "../../../../assets/icons/lnkdsm.svg";
+import whatsApp from "../../../../assets/icons/whtsm.svg";
+import member from "../../../../assets/images/sampleTeamMember.png";
+import apple from "../../../../assets/images/apple.svg";
+import mail from "../../../../assets/icons/mail.svg";
+import globe from "../../../../assets/icons/globe.svg";
+import split from "../../../../assets/icons/split.svg";
+import blue from "../../../../assets/images/edublue.svg";
+import navy from "../../../../assets/images/navy.svg";
+import "./team.css";
+import { LargeModal, Tag } from "../../../../Startupcomponents";
+import founder from "../../../../assets/images/femaleFounder.svg";
 
-export const Team = ({data}) => {
-  const count = [1, 2, 3, 4, 5, 6]
-  const {push} = useHistory();
+export const Team = ({ data }) => {
+  // const count = [1, 2, 3, 4, 5, 6]
+  // const {push} = useHistory();
 
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   return (
     <div>
       {showModal ? (
@@ -33,51 +33,54 @@ export const Team = ({data}) => {
         <button className="teamBtn" onClick={() => push('/startup/team/member')}>Add team member</button>
       </section> */}
       <section>
-        <h4 className="team-group-title">Founder & Co-Founders</h4>
-
+        {/* <h4 className="team-group-title">Founder & Co-Founders</h4> */}
+        <h4 className="team-group-title">Founder</h4>
         <div className="row">
-          {data && data.slice(0, 3).map((c, i) => {
-            return (
-              <article
-                data-target="#founderModal"
-                onClick={() => setShowModal(true)}
-                className="col-lg-4 mb-4"
-                // data-toggle={'modal'}
-                // data-target="#founderModal"
-              >
-                {/* <Modal id="founderModal" withHeader={false}>
+          {data &&
+            data.slice(0, 3).map((c, i) => {
+              return (
+                <article
+                  data-target="#founderModal"
+                  onClick={() => setShowModal(true)}
+                  className="col-lg-4 mb-4"
+                  key={`founder-member-${i}`}
+                  // data-toggle={'modal'}
+                  // data-target="#founderModal"
+                >
+                  {/* <Modal id="founderModal" withHeader={false}>
                   <FounderModal />
                 </Modal> */}
-                <TeamMember data={c} key={`founder-member-${i}`} />
-              </article>
-            )
-          })}
+                  <TeamMember data={c} />
+                </article>
+              );
+            })}
         </div>
       </section>
 
       <section>
         <h4 className="team-group-title mt-5">Team Members</h4>
         <div className="row">
-          {data && data.map((c, i) => {
-            return (
-              <article className="col-lg-4 mb-4">
-                <TeamMember data={c} key={`member-${i}`} />
-              </article>
-            )
-          })}
+          {data &&
+            data.map((c, i) => {
+              return (
+                <article className="col-lg-4 mb-4" key={`member-${i}`}>
+                  <TeamMember data={c} />
+                </article>
+              );
+            })}
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-const TeamMember = ({data}) => {
+const TeamMember = ({ data }) => {
   return (
     <div className="d-flex align-items-center flex-wrap member-card">
       <img src={member} alt="team member" className="mr-4" />
       <section>
-        <p> { data?.name } </p>
-        <p className="small"> { data?.position} </p>
+        <p> {data?.name} </p>
+        <p className="small"> {data?.position} </p>
         <span className="d-flex">
           <img src={linkedIn} alt="linkedIn" width="24" height="24" />
           <img
@@ -91,8 +94,8 @@ const TeamMember = ({data}) => {
         </span>
       </section>
     </div>
-  )
-}
+  );
+};
 
 const FounderModal = () => {
   return (
@@ -160,7 +163,7 @@ const FounderModal = () => {
                 <h3>Experience</h3>
                 <div className="mt-4 mb-4 d-flex">
                   <div>
-                    <img src={apple} alt="apple"  />
+                    <img src={apple} alt="apple" />
                   </div>
                   <div className="founder_experience ml-4">
                     <h3 className="">Applane Insteen</h3>
@@ -224,5 +227,5 @@ const FounderModal = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

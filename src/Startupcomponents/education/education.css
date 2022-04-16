@@ -21,9 +21,8 @@ h6 {
 .img {
   cursor: pointer;
 }
-
 @media (max-width: 1024px) {
   .info {
-    margin-left: 100px;
+    margin-left: 10px;
   }
 }

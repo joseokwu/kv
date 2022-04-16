@@ -24,6 +24,7 @@ import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoad
 import toast from 'react-hot-toast';
 import * as XLSX from 'xlsx';
 import { parseFile } from '../../../../../../utils/helpers';
+import { UploadFile } from '../../../../../../components/uploadFile';
 
 
 
@@ -82,7 +83,7 @@ export const FundUtilization = ({setFundraising}) => {
         </p>
         <hr className='mx-n5 mx-lg-n0' />
 
-        <div className=' my-5'>
+        <div className='my-5'>
           <div className=''>
             <DownloadableButton href='.' className='mx-n5 mx-lg-n0'>
               <img className='pr-2' src={Download} alt='' />
@@ -90,7 +91,30 @@ export const FundUtilization = ({setFundraising}) => {
             </DownloadableButton>
           </div>
           <div className='my-5'>
-            <FileWrapper className='d-flex justify-content-center text-center mx-n5 mx-lg-n0'>
+          <UploadFile
+                  data={{
+                    maxFiles: 1,
+                    supportedMimeTypes: ['application/pdf'],
+                    maxFileSize: 5,
+                    extension: 'MB',
+                  }}
+                  onUpload={async (filesInfo) => {
+                    const formData = new FormData()
+                    formData.append('dir', 'kv')
+                    formData.append('ref', stateAuth.user?.userId)
+                    formData.append('type', 'pdf')
+                    formData.append(0, filesInfo[0]?.file)
+
+                    try {
+                      const response = await upload(formData)
+                      console.log(response)
+                      setFileDoc(response?.path)
+                    } catch (error) {
+                      console.log(error)
+                    }
+                  }}
+                />
+            {/* <FileWrapper className='d-flex justify-content-center text-center mx-n5 mx-lg-n0'>
               {
                 fileDoc !== null ? (
                   <img src={RedFile} alt='.' 
@@ -112,7 +136,7 @@ export const FundUtilization = ({setFundraising}) => {
                accept=".csv"
                 hidden />
               <LabelButton for='utilize'>Upload Files</LabelButton>
-            </FileWrapper>
+            </FileWrapper> */}
           </div>
 
         </div>
@@ -128,7 +152,7 @@ export const FundUtilization = ({setFundraising}) => {
         <div className='col-3'>
           <CustomButton
             className=''
-            background='#D0D0D1'
+            background='#808080'
             onClick={() => history.push('#Funding Ask')}
           >
             Back

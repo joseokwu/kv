@@ -7,13 +7,14 @@ import noticeImg from '../../assets/images/sampleNoticeImg.png'
 import { NoticeItem } from '..'
 
 export const Notification = ({ closeNotice, openNotice }) => {
-  const noticeItems = [
-    { noticeImage: noticeImg },
-    { noticeImage: '' },
-    { noticeImage: '' },
-    { noticeImage: noticeImg },
-    { noticeImage: noticeImg },
-  ]
+  // const noticeItems = [
+  //   { noticeImage: noticeImg },
+  //   { noticeImage: '' },
+  //   { noticeImage: '' },
+  //   { noticeImage: noticeImg },
+  //   { noticeImage: noticeImg },
+  // ]
+  const noticeItems = [{noticeImage: ""}]
   const {push} = useHistory();
 
   return (
@@ -32,7 +33,7 @@ export const Notification = ({ closeNotice, openNotice }) => {
         />
         <div className="d-flex align-items-center">
           <p className="notice-header">Notification</p>
-          <span className="unread-notice">1 Unread</span>
+          <span className="unread-notice">0 Unread</span>
         </div>
       </section>
 

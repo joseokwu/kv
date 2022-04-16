@@ -77,7 +77,6 @@ export const StartupEvents = ({ history }) => {
    
 	const movePage =(id)=>{
 		setCurrentPage(id)
-
 	}
 
   
@@ -88,6 +87,7 @@ export const StartupEvents = ({ history }) => {
       page:currentPage,
       limit:5
     });
+    console.log(res?.data)
     setEvents(res?.data)
     setTotal(res?.data?.total)
 
@@ -185,7 +185,7 @@ export const StartupEvents = ({ history }) => {
 						{
 			
 					
-					<Pagination.Item  className='mx-1' >{ `${currentPage} of  ${events?.results?.limit}` }</Pagination.Item>
+					<Pagination.Item  className='mx-1' >{ `${currentPage} of  ${events?.results?.limit ?? 1}` }</Pagination.Item>
 						
 
 				}
@@ -215,3 +215,12 @@ export const StartupEvents = ({ history }) => {
     </div>
   );
 };
+
+
+// assignmentFile: "https://cdn.shoutng.com/kvnmri9zykq3doplnqtxfi.pdf"
+// created_at: "2022-04-15T18:14:25.413Z"
+// deadlineDay: "2022-05-13T11:00:00.000Z"
+// deadlineTime: "2022-05-13T13:00:00.000Z"
+// description: "We teach how to make garri for a living"
+// isTrash: false
+// programs: "Meeting"

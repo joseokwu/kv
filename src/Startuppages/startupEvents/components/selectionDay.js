@@ -2,20 +2,22 @@ import React from "react";
 import bigClock from "../../../assets/icons/bigclock.svg";
 import demo from "../../../assets/images/vidDemo.svg";
 import doc from "../../../assets/images/doc.svg";
-import { Modal, Select, TextField } from "../../../Startupcomponents";
-import { formatTime, months } from "../../../utils/helpers";
+import { Modal, Select, TextField , Button } from "../../../Startupcomponents";
+import { formatTime, months, formatAMPM } from "../../../utils/helpers";
 import down from "../../../assets/icons/downArrow.svg";
 import location from "../../../assets/icons/locationSm.svg";
 import name from "../../../assets/icons/initial.svg";
+import moment from 'moment';
 
 export const SelectionDay = ({ data = [] }) => {
   return (
     <div className="row" style={{ columnGap: 10 }}>
-      <Modal id="eventScheduleModal" withHeader={false}>
-        <EventScheduleModal />
-      </Modal>
+     
       {data?.length > 0 && (
         <div className="col-lg-5 col-12 events_card_bg py-4 mt-4 ml-lg-4 px-4">
+        <Modal id={`dem${data[0]?._id}`} withHeader={false}>
+        <EventScheduleModal data={data[0]} />
+      </Modal>
           <section className="events_card d-flex justify-content-between">
             <h3>{data[0]?.titleOfEvent}</h3>
             {/* <img src={dots} alt="" /> */}
@@ -40,7 +42,7 @@ export const SelectionDay = ({ data = [] }) => {
 
           <section className="mt-4">
             <img
-              src={demo}
+              src={data[0]?.eventPicture}
               alt="demo"
               style={{ width: "100%", height: "100%" }}
             />
@@ -67,20 +69,23 @@ export const SelectionDay = ({ data = [] }) => {
                   // <button className="se_join">Join Event</button>
                 )
               )}
-              <button className="se_view">View details</button>
+              <button
+               data-target={`#dem${data[0]?._id}`} 
+                  data-toggle='modal'
+               className="se_view">View details</button>
               {/* <Button label="View details" variant="secondary" /> */}
-              {/* <Button
+              <Button
               label="Add to schedule"
               data-toggle={'modal'}
-              data-target="#eventScheduleModal"
-            /> */}
+              data-target={`#${data[0]?._id}`}
+            />
             </div>
 
-            <section className="event_people">
+            {/* <section className="event_people">
               <img src={doc} alt="doc" />
               <img src={doc} alt="doc" />
               <img src={doc} alt="doc" />
-            </section>
+            </section> */}
           </section>
         </div>
       )}
@@ -88,6 +93,9 @@ export const SelectionDay = ({ data = [] }) => {
       <div className="col-lg-6 col-12">
         {data?.length > 1 && (
           <div className=" events_card_bg py-4 px-4 mt-4">
+          <Modal id={data[1]?._id} withHeader={false}>
+        <EventScheduleModal data={data[1]} />
+      </Modal>
             <section className="events_card d-flex justify-content-between">
               <h3>{data[1]?.titleOfEvent}</h3>
               {/* <img src={dots} alt="" /> */}
@@ -132,20 +140,26 @@ export const SelectionDay = ({ data = [] }) => {
                     <button className="se_join">Add Schedule</button>
                   )
                 )}
-                <button className="se_view">View details</button>
+                <button
+                  data-target={`#${data[1]?._id}`} 
+                  data-toggle='modal'
+                 className="se_view">View details</button>
               </div>
-
+{/* 
               <section className="event_people">
                 <img src={doc} alt="doc" />
                 <img src={doc} alt="doc" />
                 <img src={doc} alt="doc" />
-              </section>
+              </section> */}
             </section>
           </div>
         )}
 
         {data?.length > 2 && (
           <div className="events_card_bg py-4 px-4 mt-4">
+          <Modal id={data[2]?._id} withHeader={false}>
+        <EventScheduleModal data={data[2]} />
+      </Modal>
             <section className="events_card d-flex justify-content-between">
               <h3>{data[2]?.titleOfEvent}</h3>
               {/* <img src={dots} alt="" /> */}
@@ -194,11 +208,11 @@ export const SelectionDay = ({ data = [] }) => {
                 <button className="se_view">View details</button>
               </div>
 
-              <section className="event_people">
+              {/* <section className="event_people">
                 <img src={doc} alt="doc" />
                 <img src={doc} alt="doc" />
                 <img src={doc} alt="doc" />
-              </section>
+              </section> */}
             </section>
           </div>
         )}
@@ -208,6 +222,9 @@ export const SelectionDay = ({ data = [] }) => {
           data?.slice(3, data?.length - 1).map((d, i) => {
             return (
               <section className="col-lg-6">
+              <Modal id="eventScheduleModal" withHeader={false}>
+        <EventScheduleModal data={d} />
+      </Modal>
                 <div className=" events_card_bg py-4 px-4 mt-4">
                   <section className="events_card d-flex justify-content-between">
                     <h3>{d?.titleOfEvent}</h3>
@@ -254,11 +271,11 @@ export const SelectionDay = ({ data = [] }) => {
                       <button className="se_view">View details</button>
                     </div>
 
-                    <section className="event_people">
+                    {/* <section className="event_people">
                       <img src={doc} alt="doc" />
                       <img src={doc} alt="doc" />
                       <img src={doc} alt="doc" />
-                    </section>
+                    </section> */}
                   </section>
                 </div>
               </section>
@@ -269,7 +286,7 @@ export const SelectionDay = ({ data = [] }) => {
   );
 };
 
-const EventScheduleModal = () => {
+const EventScheduleModal = ({data}) => {
   return (
     <div className="px-4 pb-5">
       <section className="pt-2">
@@ -287,32 +304,29 @@ const EventScheduleModal = () => {
 
       <section className="mt-2">
         <p className="" style={{ color: "#E21919" }}>
-          2 days : 30mins : 05 secs
+        { `${formatAMPM(new Date(data?.startTime))} - ${formatAMPM(new Date(data?.endTime))}`  }
         </p>
 
         <section className="d-flex program_modal_head mt-4">
-          <h3 className="pr-3">Appleiine House Demo</h3>
-          <p className="pt-2">Host: Applean Industry</p>
+          <h3 className="pr-3"> { data?.titleOfEvent } </h3>
+          
         </section>
 
         <section className="d-flex mt-3">
-          <p className="pending_date pr-5">
-            <span>50</span> | September
-          </p>
+        <p className="pending_date pr-4">
+              <span>{new Date(data?.startDate).getDate()}</span>{" "}
+              {months[new Date(data?.startDate).getMonth()]}
+            </p>
 
           <p className="pending_time pt-1">
-            <img src={bigClock} alt="clock" /> 10:00pm - 12pm
+            <img src={bigClock} alt="clock" /> { `${formatAMPM(new Date(data?.startTime))} - ${formatAMPM(new Date(data?.endTime))}`  }
           </p>
         </section>
 
         <section className="event_schedule_modal_desc mt-5 p-4">
           <h4 className="pb-3">Description</h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-            morbi elementum eu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.{" "}
+            { data?.eventDescription }
           </p>
         </section>
 
@@ -327,31 +341,31 @@ const EventScheduleModal = () => {
         </section>
 
         <section className="event_link">
-          <a href="https://www.yebox.io/" target="_blank">
+          <a href={data?.joinWith} target="_blank">
             <img className="pr-3" src={location} alt="location" />{" "}
-            meet.google.com/jce-wata-fux
+            { data?.joinWith }
           </a>
         </section>
 
         <section className="mt-5">
           <p>Attendees</p>
           <div className="d-flex mt-4">
-            <p className="pr-5">
-              <img className="pr-3" src={name} alt="initial" /> Micheal Smith
+          {
+            data?.attendees.map((item , i) => (
+              <p className="col-lg-6 col-6"
+               key={i}
+               style={{width:'100%'}}
+               >
+              <img className="pr-3 rounded-circle" 
+              style={{width:'60px', height:'60px', borderRadius:'60px'}}
+               src={`https://ui-avatars.com/api/?name=${item?.name}`} alt="initial" /> { item?.name}
             </p>
-            <p className="pl-5">
-              <img className="pr-3" src={name} alt="initial" /> Micheal Smith
-            </p>
+            ))
+          }
+           
           </div>
 
-          <div className="d-flex mt-4">
-            <p className="pr-5">
-              <img className="pr-3" src={name} alt="initial" /> Micheal Smith
-            </p>
-            <p className="pl-5">
-              <img className="pr-3" src={name} alt="initial" /> Micheal Smith
-            </p>
-          </div>
+          
         </section>
 
         <section className="event_schedule_availability mt-5">
@@ -368,15 +382,15 @@ const EventScheduleModal = () => {
         </section>
 
         <section className="mt-5">
-          <TextField label={"Day"} placeholder={"Thursday 17th Oct 2021"} />
+          <TextField label={"Day"} placeholder={moment(data?.endTime).format("MMM Do YY")} />
         </section>
 
         <section className="row mt-5">
           <div className="col-lg-5">
-            <Select label={"Start time"} placeholder={"Time"} />
+            <Select label={"Start time"} placeholder={moment(data?.startTime).format("MMM Do YY")} />
           </div>
           <div className="col-lg-5">
-            <Select label={"End time"} placeholder={"Time"} />
+            <Select label={"End time"} placeholder={moment(data?.endTime).format("MMM Do YY")} />
           </div>
         </section>
 
@@ -391,3 +405,28 @@ const EventScheduleModal = () => {
     </div>
   );
 };
+
+
+
+
+// addLocation: "adeneka"
+// attendees: Array(2)
+// 0:
+// name: "Winner Airlines"
+// profileId: "62585391a5101dc3e84a7c72"
+// typeAcc: "startup"
+// _id: "625a0e88dea2b329e70d9eb6"
+// [[Prototype]]: Object
+// 1: {profileId: '62401b6c823102167a32a885', name: 'zoeee', typeAcc: 'startup', _id: '625a0e88dea2b329e70d9eb7'}
+// length: 2
+// [[Prototype]]: Array(0)
+// endDate: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+// endTime: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+// eventDescription: "Come and play"
+// eventPicture: "https://ik.imagekit.io/er9sori5c2z/avatar_qhUBGX8bp?ik-sdk-version=javascript-1.4.3&updatedAt=1648773916584"
+// joinWith: "https://meet.google.com/mer-thuh-cqr?pli=1&authuser=1"
+// notifyMe: "Yes"
+// startDate: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+// startTime: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+// titleOfEvent: "Meeting with client"
+// visibility: "Yes"
