@@ -127,7 +127,7 @@ export const AddNewGoalModal = () => {
   const actArr = [1, 2];
   return (
     <NewGoalModal>
-      <div className="mx-4">
+      <div className="mx-3">
         <div className="border-bottom pb-4">
           <h4>Add new goal</h4>
           <span>In Idea stage</span>
