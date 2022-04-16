@@ -79,7 +79,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Total Fund Raised"
-            count={`${convertToMillion(stateAuth?.user?.fundRaising?.capTable?.amountRaised)}`}
+            count={`${convertToMillion(stateAuth?.user?.fundRaising?.capTable?.amountRaised && stateAuth?.user?.fundRaising?.capTable?.amountRaised )}`}
             color="#FAD7DC"
           />
         </>
@@ -88,7 +88,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Pre-Money Valuation"
-            count={`$${convertToMillion(stateAuth?.user?.fundRaising?.previousRound?.preMoneyValuation)}`}
+            count={`$${convertToMillion(stateAuth?.user?.fundRaising?.previousRound?.preMoneyValuation && stateAuth?.user?.fundRaising?.previousRound?.preMoneyValuation)}`}
             color="#E5FFE4"
           />
         </>
@@ -97,7 +97,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Post-Money Valuation"
-            count={`$${convertToMillion(stateAuth?.user?.fundRaising?.previousRound?.postMoneyValuation)}`}
+            count={`$${convertToMillion(stateAuth?.user?.fundRaising?.previousRound?.postMoneyValuation && stateAuth?.user?.fundRaising?.previousRound?.postMoneyValuation )}`}
             color="#FAD7DC"
           />
         </>
