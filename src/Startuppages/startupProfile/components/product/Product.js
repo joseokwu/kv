@@ -73,7 +73,7 @@ export const Product = () => {
 
 const EditProductModal = () => {
   return (
-    <div className="mx-5 my-4">
+    <div className="mx-0 my-4">
       <div className="product-desc border-bottom">
         <h1>Product / Service Description</h1>
         <p className="py-4">A brief description of your product</p>
