@@ -245,6 +245,7 @@ export const ModalForm = styled.div`
   overflow-y: auto;
   text-align: justify;
   /* height: 70vh; */
+  
 
   input {
     background: #fafafc !important;

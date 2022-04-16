@@ -57,7 +57,7 @@ export const CardFill = ({ header, color, amount, time }) => {
       <CardWrap bg={color}>
         <p className="pb-3"> {header} </p>
         <h5>
-          ${amount}
+          {amount}
           <span className=""> {time} </span>
         </h5>
       </CardWrap>

@@ -3,10 +3,13 @@ import { images } from "../../../constants/domiData";
 import clock from "../../../assets/images/clock.svg";
 import { useHistory } from "react-router-dom";
 import { months } from "../../../utils/helpers";
+import { useAuth } from "../../../hooks/useAuth";
+
 
 export const UpComing = ({ data = [] }) => {
   // const todoArr = [1, 2, 3];
   const history = useHistory();
+  const { upcomingEvent } = useAuth();
 
   return (
     <div className="container">
@@ -20,7 +23,9 @@ export const UpComing = ({ data = [] }) => {
         </span>
       </HeadWrapper>
 
-      <div className="row ml-1" style={{ columnGap: 10 }}>
+    {
+      upcomingEvent && upcomingEvent.length > 0 ? (
+        <div className="row ml-1" style={{ columnGap: 10 }}>
         {data.map((d, i) => (
           <UpcomingCard key={i} className="col-lg-4 col-12 col-md-6">
             <div className="d-flex justify-content-between head">
@@ -54,6 +59,13 @@ export const UpComing = ({ data = [] }) => {
           </UpcomingCard>
         ))}
       </div>
+      ) : (
+        <div className="text-center font-weight-bold my-5">
+          <p className="py-5">No Upcoming Events</p>
+        </div>
+      )
+    }
+      
     </div>
   );
 };

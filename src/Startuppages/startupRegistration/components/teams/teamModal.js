@@ -65,7 +65,7 @@ export const TeamModal = ({
         handleClose();
       }}
     >
-      <div className="mx-5">
+      <div className="mx-2">
         <HeaderModal>
           {isEditing ? "Edit Work Experience" : "Add Work Experience"}
         </HeaderModal>
@@ -77,7 +77,7 @@ export const TeamModal = ({
         >
           <ModalForm className="row">
             <div className="col-12 form-group">
-              <label>Title *</label>
+              <label>Title<span style={{color: "red"}}>*</span></label>
               <input
                 id="title"
                 name="companyName"
@@ -94,7 +94,7 @@ export const TeamModal = ({
               ) : null}
             </div>
             <div className="col-12 form-group">
-              <label>Location *</label>
+              <label>Location<span style={{color: "red"}}>*</span></label>
               <input
                 id="location"
                 name="location"
@@ -113,7 +113,7 @@ export const TeamModal = ({
 
             <div className="col-12 form-group">
               <div className="d-flex justify-content-between">
-                <label>Description *</label>
+                <label>Description<span style={{color: "red"}}>*</span></label>
                 <label style={{ color: "#828282" }}>
                   50 characters at most
                 </label>
@@ -144,7 +144,7 @@ export const TeamModal = ({
               <span>I currently work in this role</span>
             </div>
             <div className="col-6 form-group">
-              <label>Start Date *</label>
+              <label>Start Date<span style={{color: "red"}}>*</span></label>
               <DatePicker
                 id="startDate"
                 name="startDate"
@@ -157,7 +157,7 @@ export const TeamModal = ({
             </div>
             {!checked && (
               <div className="col-6 form-group">
-                <label>End Date*</label>
+                <label>End Date<span style={{color: "red"}}>*</span></label>
                 <DatePicker
                   id="endDate"
                   name="endDate"
@@ -244,7 +244,7 @@ export const EducationModal = ({
         handleClose();
       }}
     >
-      <div className="mx-5">
+      <div className="mx-2">
         <HeaderModal>
           {isEditing ? "Edit Education" : "Add Education"}
         </HeaderModal>
@@ -252,7 +252,7 @@ export const EducationModal = ({
         <form onSubmit={(e) => onSubmit(e, isEditing ? "educationEdit" : "education")}>
           <ModalForm className="row">
             <div className="col-12 form-group">
-              <label>School*</label>
+              <label>School<span style={{color: "red"}}>*</span></label>
               <input
                 id="school"
                 name="schoolName"
@@ -268,7 +268,7 @@ export const EducationModal = ({
               ) : null}
             </div>
             <div className="col-12 form-group">
-              <label>Degree*</label>
+              <label>Degree<span style={{color: "red"}}>*</span></label>
               <input
                 id="degree"
                 name="degree"
@@ -284,7 +284,7 @@ export const EducationModal = ({
               ) : null}
             </div>
             <div className="col-12 form-group">
-              <label>Field of study*</label>
+              <label>Field of study<span style={{color: "red"}}>*</span></label>
               <input
                 id="course"
                 name="course"
@@ -301,7 +301,7 @@ export const EducationModal = ({
             </div>
             <div className="col-12 form-group">
               <div className="d-flex justify-content-between">
-                <label>Activities and societies*</label>
+                <label>Activities and societies<span style={{color: "red"}}>*</span></label>
                 <label style={{ color: "#828282" }}>
                   50 characters at most
                 </label>
@@ -332,7 +332,7 @@ export const EducationModal = ({
             </div>
 
             <div className="col-6 form-group">
-              <label>Entry Date*</label>
+              <label>Entry Date<span style={{color: "red"}}>*</span></label>
               <DatePicker
                 id="eduStartDate"
                 name="eduStartDate"
@@ -345,7 +345,7 @@ export const EducationModal = ({
 
             {!checked && (
               <div className="col-6 form-group">
-                <label>Graduation Date*</label>
+                <label>Graduation Date<span style={{color: "red"}}>*</span></label>
                 <DatePicker
                   id="eduEndDate"
                   name="eduEndDate"
