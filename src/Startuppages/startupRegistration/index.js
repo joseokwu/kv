@@ -12,10 +12,8 @@ import { useAuth } from "../../hooks/useAuth";
 export const StartUpRegistration = () => {
   const {
     state: { path },
-    changePath,
   } = useActivity();
   const { stateAuth } = useAuth();
-  console.log(stateAuth);
   const [progressStat, setProgressStat] = useState();
 
   useEffect(() => {
@@ -33,7 +31,7 @@ export const StartUpRegistration = () => {
       default:
         return progressStat;
     }
-  }, [path]);
+  }, [path, progressStat]);
 
   return (
     <>
