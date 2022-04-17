@@ -2,25 +2,54 @@ import React, { useEffect, useState } from 'react'
 import './forgotPassword.css'
 import logo from '../../assets/icons/kvlogo.svg'
 import { AuthTextField, AuthButton } from '../../mentorComponents'
-import { emailRegex } from '../../utils/utils'
+import { emailRegex } from '../../utils/utils';
+import { setAuthToken } from '../../utils/helpers';
+import { forgotPassword } from '../../services/user';
+import { CircularLoader } from '../../Startupcomponents/CircluarLoader/CircularLoader';
+import toast from 'react-hot-toast';
+import { useHistory } from 'react-router-dom'
+import { Form } from 'antd';
 
-export const MentorForgotPassword = ({ history }) => {
+
+export const MentorForgotPassword = () => {
   const [input, setInput] = useState('')
   const [nextPath, setNextPath] = useState('')
+  const [loading , setLoading] = useState(false);
+  const history = useHistory();
 
   const handleChange = (e) => {
     setInput(e.target.value)
   }
 
-  useEffect(() => {
-    if (Number(input) && input.length > 6) {
-      setNextPath('/verify/otp')
-    } else if (emailRegex.test(input)) {
-      setNextPath('/check/mail')
-    } else {
-      setNextPath('')
+  const sendForgotPassword = async(value) =>{
+    try{
+      setLoading(true)
+      console.log(value)
+      const res = await forgotPassword(value);
+     
+     console.log(res?.data?.token)
+      setAuthToken(res?.data?.token);
+      toast.success(res?.message);
+      history.push('/reset/password')
+     return setLoading(false)
+  
+    }catch(err){
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
     }
-  }, [input])
+
+  }
+
+  // useEffect(() => {
+  //   if (Number(input) && input.length > 6) {
+  //     setNextPath('/verify/otp')
+  //   } else if (emailRegex.test(input)) {
+  //     setNextPath('/check/mail')
+  //   } else {
+  //     setNextPath('')
+  //   }
+  // }, [input])
+
   return (
     <div className="row mx-0 mentor_auth_wrap">
       <section className="layout-header">
@@ -41,20 +70,35 @@ export const MentorForgotPassword = ({ history }) => {
           <section className="col-lg-6 forgot_form mt-4">
             <div className="gray_signIn mx-3">
               <section className="mb-4 ">
-                <label className="e-label pb-2">Email</label>
-                <AuthTextField
-                  placeholder="Enter your email address"
-                  className="mentor_gray_card_input"
-                  type="text"
-                  onChange={handleChange}
+              <div>
+              <Form
+            name="login"
+            className="row"
+            initialValues={{
+              remember: true,
+            }}
+            layout="vertical"
+            onFinish={sendForgotPassword}
+          >
+<div className="col-12 mb-2">
+              <AuthTextField
+                name="email"
+                label="Email"
+                placeholder="Enter your email address"
+                className="mentor_gray_card_input"
+              />
+            </div>
+            <section className="mb-5">
+                <AuthButton
+                  label={"Submit"}
+                  onClick={sendForgotPassword}
+                  loading={loading}
                 />
               </section>
-              <section className="mb-5">
-                <AuthButton
-                  label="Submit"
-                  onClick={() => history.push(nextPath)}
-                  // disabled={nextPath.length === 0}
-                />
+          </Form>
+              
+              </div>
+                
               </section>
             </div>
           </section>

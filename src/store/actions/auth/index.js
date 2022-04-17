@@ -16,6 +16,7 @@ export const registerUser = async(value) => async(dispatch) =>{
         })
         const res = await register(value);
         console.log(res);
+        setAuthToken(res?.data?.token);
         toast.success('A confirmation mail has been sent to your email');
         dispatch({
             type:REGISTER_SUCCESS  

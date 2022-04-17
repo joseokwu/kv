@@ -2,7 +2,7 @@ import  { request } from '../utils/axios';
 
  export const register = async (values)=>{
     try{
-        
+
         const res = await request.post('register', values)
         
         return res?.data
@@ -40,10 +40,10 @@ export const profile = async (value) => {
     }  
 }  
 
-export const forgorPassword = async (values) => {
+export const forgotPassword = async (values) => {
     try {
-        const res = await request.post('', values)
-
+        const res = await request.post('forgot', values)
+        console.log(res?.data)
         return res?.data
     } catch (err) {
         
@@ -51,6 +51,15 @@ export const forgorPassword = async (values) => {
     }
 }
 
+export const resendEmail = async(value) =>{
+    try{
+        const res = await request.post('resendEmail', value)
+       console.log(res?.data)
+        return res?.data
+    }catch(err){
+        throw err ;
+    }
+}
 
 export const verifyEmail = async(token) =>{
     try{

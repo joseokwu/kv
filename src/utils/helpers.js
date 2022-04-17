@@ -28,6 +28,7 @@ export const setRole = (role) => {
 
 export const getRole = () => {
   let role = localStorage.getItem("kv:user:role");
+  console.log(role)
   return role;
 };
 
