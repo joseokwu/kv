@@ -45,6 +45,7 @@ export const StartupProfile = () => {
       registrationNumber:
         stateAuth?.startupData?.startUpProfile?.registrationNumber ?? "",
       companySize: stateAuth?.startupData?.startUpProfile?.companySize ?? "",
+      phoneNumber: stateAuth?.startupData?.startUpProfile?.phoneNumber ?? "",
       businessSector:
         stateAuth?.startupData?.startUpProfile?.businessSector ?? "",
       startupStage: stateAuth?.startupData?.startUpProfile?.startupStage ?? "",
@@ -484,10 +485,7 @@ export const StartupProfile = () => {
                 name="phoneNumber"
                 countryCallingCodeEditable={true}
                 className="custs ps-3 py-2"
-                defaultValue={
-                  stateAuth?.startupData?.startUpProfile?.contactInfo
-                    ?.phoneNumber
-                }
+                defaultValue={formik.values.phoneNumber}
                 onChange={handlePhoneInput}
                 MaxLength={17}
               />
