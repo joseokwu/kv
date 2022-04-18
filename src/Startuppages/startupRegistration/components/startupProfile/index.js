@@ -323,7 +323,7 @@ export const StartupProfile = () => {
                   className="sel ps-3 pe-3"
                   placeholder="Enter company size"
                 >{companySize.map((item, i) => {
-                  return <option key={i}>{item.label}</option>
+                  return <option value={item.value} key={i}>{item.label}</option>
                 })}
                 </select>
                 {formik.touched.companySize && formik.errors.companySize ? (
@@ -371,7 +371,7 @@ export const StartupProfile = () => {
                 placeholder="Enter Business Stage"
               >
                 {startupStage.map((i, index) => {
-                  return <option key={index}>{i.label}</option>
+                  return <option value={i.value} key={index}>{i.label}</option>
                 })}
               </select>
               {formik.touched.startupStage && formik.errors.startupStage ? (
@@ -536,7 +536,7 @@ export const StartupProfile = () => {
                 name="profileHandle"
                 disabled={true}
                 placeholder="Enter your startup profile handle"
-                defaultValue={`@knight-venture/${stateAuth?.user?.businessname}`}
+                defaultValue={`knight.venture/${stateAuth?.user?.businessname}`}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3 text-secondary"
