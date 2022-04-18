@@ -27,6 +27,20 @@ import moment from "moment";
 export const StartupProfile = () => {
 
   const { changePath  } = useActivity();
+  const startupStage = [
+    {value: 'Pre-seed Stage', label: 'Pre-seed Stage'},
+    {value: 'Seed Stage', label: 'Seed Stage'},
+    {value: 'Early Stage', label: 'Early Stage'},
+    {value: 'Growth Stage', label: 'Growth Stage'},
+    {value: 'Expansion Phase', label: 'Expansion Phase'},
+    {value: 'Exit Phase', label: 'Exit Phase'},
+  ];
+  const companySize = [
+    {value: '5-10', label: '5-10'},
+    {value: '11-20', label: '11-20'},
+    {value: '21-30', label: '21-30'},
+    {value: 'Larger than 30', label: 'Larger than 30'},
+  ]
 
 
   const dateFormat = "YYYY-MM-DD";
@@ -298,15 +312,18 @@ export const StartupProfile = () => {
                 Company Size<span style={{ color: "red" }}>*</span>
               </label>
               <div>
-                <input
+                <select
                   id={"companySize"}
                   name={"companySize"}
-                  defaultValue={formik.values.companySize}
+                  value={formik.values.companySize}
                   onChange={(e) => handleChange(e)}
                   onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
                   placeholder="Enter company size"
-                />
+                >{companySize.map((item, i) => {
+                  return <option key={i}>{item.label}</option>
+                })}
+                </select>
                 {formik.touched.companySize && formik.errors.companySize ? (
                   <label className="error">{formik.errors.companySize}</label>
                 ) : null}
@@ -342,15 +359,19 @@ export const StartupProfile = () => {
                 What stage is your business in
                 <span style={{ color: "red" }}>*</span>
               </label>
-              <input
+              <select
                 id={"startupStage"}
                 name={"startupStage"}
-                defaultValue={formik.values.startupStage}
-                onChange={(e) => handleChange(e)}
-                onBlur={formik.handleBlur}
+                value={formik.values.startupStage}
+                onChange={formik.handleChange}
+                // onBlur={formik.handleBlur}
                 className="sel ps-3 pe-3"
                 placeholder="Enter Business Stage"
-              />
+              >
+                {startupStage.map((i, index) => {
+                  return <option key={index}>{i.label}</option>
+                })}
+              </select>
               {formik.touched.startupStage && formik.errors.startupStage ? (
                 <label className="error">{formik.errors.startupStage}</label>
               ) : null}
