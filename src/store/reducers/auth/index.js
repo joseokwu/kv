@@ -13,6 +13,8 @@ import {
   DASHBOARD_LOAD,
   UPDATE_STARTUP_DATA,
   UPDATE_STARTUP_INFO,
+  UPDATE_MENTOR_DATA,
+  UPDATE_MENTOR_INFO,
 } from "../../actions/actions.types";
 import { INIT_STATE } from "../../initialstates";
 
@@ -107,13 +109,30 @@ const authReducer = (state = INIT_STATE, action) => {
         startupData: action.payload,
       };
     case UPDATE_STARTUP_INFO:
-    //  alert(JSON.stringify(action.payload));
+      //  alert(JSON.stringify(action.payload));
       return {
         ...state,
         startupData: {
           ...state.startupData,
           [action.payload.property]: {
             ...state.startupData[action.payload.property],
+            ...action.payload.value,
+          },
+        },
+      };
+    case UPDATE_MENTOR_DATA:
+      return {
+        ...state,
+        mentorData: action.payload,
+      };
+    case UPDATE_MENTOR_INFO:
+      //  alert(JSON.stringify(action.payload));
+      return {
+        ...state,
+        mentorData: {
+          ...state.mentorData,
+          [action.payload.property]: {
+            ...state.mentorData[action.payload.property],
             ...action.payload.value,
           },
         },
