@@ -537,7 +537,7 @@ const routes = [
   },
   {
     name: 'ResetPassword',
-    path: '/reset/password',
+    path: '/reset/password/:token',
     component: MentorResetPassword,
     exact: true,
     protected: false,

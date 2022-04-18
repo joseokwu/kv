@@ -15,7 +15,7 @@ import  { request } from '../utils/axios';
 export const userLogin = async (values) => {
     try {
         const res = await request.post('login', values);
-        
+        console.log(res.data)
         return res?.data;
   
     } catch (err) {
@@ -44,9 +44,9 @@ export const forgotPassword = async (values) => {
     try {
         const res = await request.post('forgot', values)
         console.log(res?.data)
-        return res?.data
+        return res?.data;
     } catch (err) {
-        
+        console.log(err?.response)
         throw err;
     }
 }
@@ -70,3 +70,22 @@ export const verifyEmail = async(token) =>{
         throw err;
     }
 }
+
+
+export const resetPassword = async(value) =>{
+    try{
+        const res = await request.post('reset', value)
+       console.log(res?.data)
+        return res?.data
+    }catch(err){
+        throw err ;
+    }
+}
+
+
+
+
+
+
+
+

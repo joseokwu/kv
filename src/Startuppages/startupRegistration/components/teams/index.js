@@ -636,7 +636,7 @@ export const TeamProfile = () => {
             <div className='d-flex'>
               <BntWrap>
                 <button
-                  className={`me-3 ${coFounder === 'yes' && 'active'}`}
+                  className={`me-3 ${coFounder === 'yes' ? 'active' : '' }`}
                   onClick={(e) => {
                     e.preventDefault();
                     setCoFounder('yes');
@@ -645,7 +645,7 @@ export const TeamProfile = () => {
                   Yes
                 </button>
                 <button
-                  className={`me-3 ${coFounder === 'no' && 'active'}`}
+                  className={`me-3 ${coFounder === 'no' ? 'active' : ''}`}
                   onClick={(e) => {
                     e.preventDefault();
                     setCoFounder('no');
@@ -656,22 +656,43 @@ export const TeamProfile = () => {
               </BntWrap>
             </div>
 
-            <div className='sold'>
+          {
+        coFounder === 'no' ? (
+          <span />
+        ) : (
+          <div className='sold'>
               <div className='d-flex justify-content-center'>
                 <div
                   className=''
                   data-target='#cofounder'
                   onClick={() => setShowModal(true)}
                 >
-                  <Tag
+                {
+               stateAuth?.startupData?.team?.coFounder && stateAuth?.startupData?.team?.coFounder.length > 0 ?  
+               stateAuth?.startupData?.team?.coFounder.map((item , i) =>(
+           
+                <Tag
+                  key={i}
+                    name={`${item.firstName} Co-founder`}
+                    color='#4F4F4F'
+                    bg='rgba(183, 218, 231, 0.5'
+                    padding='8px 14px'
+                  />
+               )):(
+                <Tag
                     name='+ Add Co-founder'
                     color='#4F4F4F'
                     bg='rgba(183, 218, 231, 0.5'
                     padding='8px 14px'
                   />
+               )
+                }
+            
                 </div>
               </div>
             </div>
+        )    
+          }
           </div>
         </FormWrapper>
 
