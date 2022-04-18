@@ -5,8 +5,10 @@ import {
   AuthButton,
   AuthTextField,
   AuthPasswordField,
-  PhoneInput,
+  // PhoneInput,
 } from '../../mentorComponents/index';
+import PhoneInput from "react-phone-number-input";
+import 'react-phone-number-input/style.css'
 import { useLocation }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
@@ -58,6 +60,8 @@ export const SignUp = ({ history }) => {
     }
     setType(stateAuth?.signUpStatus)
   }
+
+  const [value, setValue] = useState()
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
@@ -204,10 +208,24 @@ export const SignUp = ({ history }) => {
             </div>
 
             <div className="numsign col-12 mb-4">
-              <PhoneInput
+              <label style={{color: '#D5D6F4'}}>
+              <span style={{ color: "red" }}>* </span>Mobile Number
+              </label>
+              {/* <PhoneInput
                 label={'* Mobile Number'} 
                 onChange={setPhone}
-                
+              /> */}
+              <PhoneInput
+                id="phoneNumber"
+                placeholder={"000 0000 000"}
+                name="phoneNumber"
+                initialValueFormat="national"
+                countryCallingCodeEditable={true}
+                defaultCountry=""
+                className="signup_num ps-3 py-2"
+                value={value}
+                onChange={setValue}
+                MaxLength={17}
               />
             </div>
 
