@@ -529,16 +529,17 @@ export const StartupProfile = () => {
 
           <div className="row mt-4">
             <div className="form-group col-lg-6 col-12">
-              <label>What should be your startup profile handle</label>
+              <label>Startup profile handle</label>
               <input
                 id="profileHandle"
                 type="text"
                 name="profileHandle"
+                disabled={true}
                 placeholder="Enter your startup profile handle"
-                defaultValue={formik.values.profileHandle}
+                defaultValue={`@knight-venture/${stateAuth?.user?.businessname}`}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
-                className="form-control ps-3"
+                className="form-control ps-3 text-secondary"
               />
               {formik.touched.profileHandle && formik.errors.profileHandle ? (
                 <label className="error">{formik.errors.profileHandle}</label>
@@ -547,7 +548,7 @@ export const StartupProfile = () => {
             <div className="form-group col-lg-6 col-12">
               <label>
                 Website<span style={{ color: "red" }}>*</span>
-              </label>
+              </label> 
               <input
                 id="companyWebsite"
                 type="text"

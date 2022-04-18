@@ -201,6 +201,7 @@ export const SignUp = ({ history }) => {
                 numb={8}
                 message="Password must be 8 digits"
                 label="Password"
+                id={'password'}
                 placeholder="Password must be at least 8 characters"
                 type="password"
                 className="mentor_gray_card_input"

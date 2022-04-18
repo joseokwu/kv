@@ -1,79 +1,84 @@
-import React, { useState, useEffect } from 'react'
+
+import React, { useState, useEffect } from "react";
 import {
   HeaderTeam,
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-  BntWrap,
-} from './teams.styled'
-import { updateFounderProfile } from '../../../../services/startup'
-import { UserOutlined, PlusOutlined } from '@ant-design/icons'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { DatePicker } from 'antd'
-import 'react-datepicker/dist/react-datepicker.css'
+  BntWrap
+} from "./teams.styled";
+import { updateFounderProfile } from "../../../../services/startup";
+import { UserOutlined, PlusOutlined } from "@ant-design/icons";
+import { useFormik } from "formik";
+ import * as Yup from "yup";
+import { DatePicker } from "antd";
+import "react-datepicker/dist/react-datepicker.css";
 // import { CustomSelect } from "../../../../Startupcomponents/select/customSelect";
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
-import { useActivity } from '../../../../hooks/useBusiness'
-import { TeamModal, EducationModal } from './teamModal'
-import { Select } from 'antd'
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { CustomButton  } from "../../../../Startupcomponents/button/button.styled";
+import { useActivity } from "../../../../hooks/useBusiness";
+import { TeamModal, EducationModal } from "./teamModal";
+import { Select } from "antd";
 
-import 'antd/dist/antd.css'
+import "antd/dist/antd.css";
 // import { team } from "./../../../../services/startUpReg";
-import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
-import { toast } from 'react-hot-toast'
-import { CoFounder } from './coFounder'
+import { CircularLoader } from "../../../../Startupcomponents/CircluarLoader/CircularLoader";
+import { toast } from "react-hot-toast";
+import { CoFounder } from "./coFounder";
 import {
   LargeModal,
   WorkExperience,
   Education,
   SkillTab,
   Tag,
-  RandomCard,
-} from '../../../../Startupcomponents'
-import { useHistory } from 'react-router-dom'
-import { useAuth } from '../../../../hooks/useAuth'
-import { upload } from '../../../../services/utils'
-import CountryDropdown from 'country-dropdown-with-flags-for-react'
-import moment from 'moment'
+  RandomCard
+} from "../../../../Startupcomponents";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../../../hooks/useAuth";
+import { upload } from "../../../../services/utils";
+import CountryDropdown from "country-dropdown-with-flags-for-react";
+import moment from "moment";
 
-const { Option } = Select
+const { Option } = Select;
 
 export const TeamProfile = () => {
-  const { updateProfile, stateAuth, updateStartupInfo } = useAuth()
+  const { updateProfile, stateAuth , updateStartupInfo } = useAuth();
   // const [disImg, setImg] = useState(null);
-  const [logoUploading, setLogoUploading] = useState(false)
-  const [show, setShow] = useState(false)
-  const [showEducation, setShowEducation] = useState(false)
-  const [showModal, setShowModal] = useState(false)
-  const history = useHistory()
-  const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
-  const [dob, setDob] = useState(moment(stateAuth?.user?.team?.dob) ?? '')
-  const [loading, setLoading] = useState(false)
-  const [coFounder, setCoFounder] = useState('no')
-  const [phone, setPhone] = useState(stateAuth?.user?.team?.mobile_number ?? '')
+  const [logoUploading, setLogoUploading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [showEducation, setShowEducation] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const history = useHistory();
+  const skill = ["Java", "C++", "Ruby", "Javascript", "HTML", "CSS", "Express"];
+  const [dob, setDob] = useState(moment(stateAuth?.user?.team?.dob) ?? "");
+  const [loading, setLoading] = useState(false);
+  const [coFounder ,  setCoFounder] = useState('no')
+  const [phone, setPhone] = useState(
+    stateAuth?.user?.team?.mobile_number ?? ""
+  );
   const [socialMedia, setSocialmedia] = useState({
-    website: stateAuth?.user?.team?.socialMedia?.website ?? '',
-    linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn ?? '',
-    twitter: stateAuth?.user?.team?.socialMedia?.twitter ?? '',
-  })
+    website: stateAuth?.user?.team?.socialMedia?.website ?? "",
+    linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn ?? "",
+    twitter: stateAuth?.user?.team?.socialMedia?.twitter ?? "",
+  });
   // const [country, setCountry] = useState(
   //   stateAuth?.user?.team?.country ?? "Nigeria"
   // );
 
-  const gender = [
-    { label: '--Select-gender--', value: '' },
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' },
-  ]
+ const gender = [
 
-  const dateFormat = 'YYYY-MM-DD'
-  const [inVal, setVal] = useState('')
-  const [editIndex, setEditIndex] = useState()
-  const [isEditing, setIsEditing] = useState(false)
-  const [avatar, setAvatar] = useState(stateAuth?.user?.team?.avatar ?? null)
+  { label:'--Select-gender--', value:'' },
+   { label:'Male', value:'male' },
+   { label:'Female', value:'female' }
+
+ ]
+
+  const dateFormat = "YYYY-MM-DD";
+  const [inVal, setVal] = useState("");
+  const [editIndex, setEditIndex] = useState();
+  const [isEditing, setIsEditing] = useState(false);
+  const [avatar, setAvatar] = useState(stateAuth?.user?.team?.avatar ?? null);
 
   const {
     changePath,
@@ -90,43 +95,44 @@ export const TeamProfile = () => {
       education,
       educationCoFounder,
     },
-  } = useActivity()
+  } = useActivity();
   //const [skillSet, setSkill] = useState(stateAuth?.user?.team?.skills ?? []);
   const onChangeImage = async (e) => {
-    const { files } = e.target
-    const formData = new FormData()
-    formData.append('dir', 'kv')
-    formData.append('ref', stateAuth.user?.userId)
-    formData.append('type', 'image')
-    formData.append(0, files[0])
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0, files[0]);
     try {
-      console.log('uploaded')
-      setLogoUploading(true)
-      const response = await upload(formData)
-      console.log(response)
-      setAvatar(response?.path)
-      setLogoUploading(false)
+      console.log("uploaded");
+      setLogoUploading(true);
+      const response = await upload(formData);
+      console.log(response);
+      setAvatar(response?.path);
+      setLogoUploading(false);
     } catch (error) {
-      console.log(error)
-      setLogoUploading(false)
-      toast.error(error?.response?.data?.message ?? 'Unable to upload image')
+      console.log(error);
+      setLogoUploading(false);
+      toast.error(error?.response?.data?.message ?? "Unable to upload image");
     }
   }
 
+  
   const formik = useFormik({
     initialValues: {
-      briefIntroduction: stateAuth?.startupData?.team?.briefIntroduction ?? '',
-      firstName: stateAuth?.startupData?.team?.firstName ?? '',
-      lastName: stateAuth?.startupData?.team?.lastName ?? '',
-      email: stateAuth?.startupData?.team?.email ?? '',
-      state: stateAuth?.startupData?.team?.state ?? '',
-      city: stateAuth?.startupData?.team?.city ?? '',
-      mobile_number: stateAuth?.user?.team?.mobile_number,
-      country: stateAuth?.startupData?.team?.country,
-      gender: stateAuth?.startupData?.team?.gender ?? '',
-      website: stateAuth?.startupData?.team?.socialMedia?.website,
-      linkedIn: stateAuth?.startupData?.team?.socialMedia?.linkedIn ?? '',
-      twitter: stateAuth?.startupData?.team?.socialMedia?.twitter ?? '',
+      briefIntroduction: stateAuth?.startupData?.team?.briefIntroduction ?? "",
+      firstName:stateAuth?.startupData?.team?.firstName ?? "",
+      lastName: stateAuth?.startupData?.team?.lastName ?? "",
+      email: stateAuth?.startupData?.team?.email ?? "",
+      state: stateAuth?.startupData?.team?.state ?? "",
+      city:stateAuth?.startupData?.team?.city ?? "",
+      mobile_number: stateAuth?.user?.team?.mobile_number ?? phone,
+      country:stateAuth?.startupData?.team?.country,
+      gender:stateAuth?.startupData?.team?.gender ?? "" ,
+      website:stateAuth?.startupData?.team?.socialMedia?.website,
+      linkedIn: stateAuth?.startupData?.team?.socialMedia?.linkedIn ?? "",
+      twitter: stateAuth?.startupData?.team?.socialMedia?.twitter ?? "",
       isCofounder: true,
     },
     validationSchema: Yup.object({
@@ -137,109 +143,100 @@ export const TeamProfile = () => {
       state: Yup.string().required('Required'),
       city: Yup.string().required('Required'),
       dob: Yup.string().required('Required'),
-      mobile_number: Yup.number()
-        .min(11, 'Number should be not be below 11 digit')
-        .required('Required'),
-      country: Yup.number().required('Required'),
-      gender: Yup.number().required('Required'),
+      mobile_number:Yup.number().min(11 , 'Number should be not be below 11 digit').required('Required'),
+      country:Yup.string().required('Required'),
+      gender:Yup.string().required('Required'),
       linkedIn: Yup.string().required('Required'),
       twitter: Yup.string().required('Required'),
       website: Yup.string().required('Required'),
     }),
     onSubmit: (value) => onSubmit(value),
-  })
+  });
 
-  const handleChange = (e, prefix = '') => {
-    const { name, value } = e.target
-    if (prefix !== '') {
-      updateProfile('team', {
+  const handleChange = (e, prefix = "") => {
+    const { name, value } = e.target;
+    if (prefix !== "") {
+      updateProfile("team",{
         [prefix]: {
           ...stateAuth?.startupData?.team[prefix],
           [name]: value,
         },
-      })
-      formik.handleChange(e)
-      return
+      });
+      formik.handleChange(e);
+      return;
     }
-    updateProfile('team', { [name]: value })
-    formik.handleChange(e)
+    updateProfile("team", {[name]: value });
+    formik.handleChange(e);
   }
 
-  const handleChangeCountry = (value) => {
-    updateProfile('team', { country: value })
-  }
+ const handleChangeCountry = (value) =>{
+
+  updateProfile("team", {country: value });
+ }
 
   const handlePhoneInput = (value) => {
-    updateProfile('team', {
-      mobile_number: value,
-    })
-  }
+    updateProfile("team",{
+      mobile_number: value
+    });
+    formik.setFieldValue('mobile_number', value.value)
+  };
   const handleChangeVal = (e) => {
-    setVal(e.target.value)
-  }
+    setVal(e.target.value);
+  };
   const handleDateInput = (value) => {
-    updateProfile('team', {
+    updateProfile("team" ,{
       dob: value,
-    })
-  }
+    });
+  };
 
-  const onChangeMedia = (e) => {
-    setSocialmedia({ ...socialMedia, [e.target.name]: e.target.value })
-  }
+
+  
 
   const handleKey = (e) => {
     if (e.keyCode === 13 || e.keyCode === 32) {
-      e.preventDefault()
-      if (
-        inVal.trim() === '' ||
-        stateAuth.startupData.team.skills.indexOf(inVal.trim()) !== -1
-      )
-        return
-      setVal('')
-      updateProfile('team', {
-        skills: [...stateAuth.startupData.team.skills, inVal],
-      })
+      e.preventDefault();
+      if (inVal.trim() === "" || stateAuth.startupData.team.skills.indexOf(inVal.trim()) !== -1) return;
+      setVal(""); 
+      updateProfile("team", { skills:[ ...stateAuth.startupData.team.skills, inVal]});
     }
-  }
+  };
 
   const onDelete = (value) => {
-    updateProfile('team', {
-      skills: stateAuth.startupData.team.skills.filter(
-        (item) => item !== value,
-      ),
-    })
-  }
+    updateProfile("team", {skills:stateAuth.startupData.team.skills.filter((item) => item !== value)});
+  };
 
-  let colors = []
+  let colors = [];
 
   for (let i = 0; i < 20; i++) {
-    let value2 = Math.floor(Math.random() * 237897).toString()
+    let value2 = Math.floor(Math.random() * 237897).toString();
 
     if (value2.length === 6) {
-      colors.push(value2)
+      colors.push(value2);
     }
   }
 
   const back = () => {
-    changePath(path - 1)
-  }
+    changePath(path - 1);
+  };
 
-  const children = []
+  const children = [];
   for (let i = 0; i < skill.length; i++) {
-    children.push(<Option key={i}>{skill[i]}</Option>)
+    children.push(<Option key={i}>{skill[i]}</Option>);
   }
 
-  const onSubmit = async () => {
-    if (
-      stateAuth?.startupData?.team.experience.length < 0 &&
-      stateAuth?.startupData?.team.education.length < 0 &&
-      stateAuth?.startupData?.team.coFounder.length < 0
-    ) {
-      toast.error('All fields are required')
-      return
-    }
-    updateStartupInfo()
-  }
+  const onSubmit = async (value) => {
+    
+      // if(stateAuth?.startupData?.team?.experience.length < 0 &&
+      //   stateAuth?.startupData?.team?.education.length < 0 && stateAuth?.startupData?.team?.coFounder.length < 0
+      //   ){
+      //     toast.error('All fields are required');
+      //     console.log('heyyy')
+      //     return ;
+      //   }
+      console.log('heyyy', value)
+        updateStartupInfo()
+  };
+
 
   const handleWorkDetails = ({
     index,
@@ -258,7 +255,7 @@ export const TeamProfile = () => {
     eduEndDate,
     founder,
   }) => {
-    if (from === 'workExperience') {
+    if (from === "workExperience") {
       setWorkExperience({
         companyName,
         location,
@@ -267,9 +264,9 @@ export const TeamProfile = () => {
         startDate,
         endDate,
         isPresentWorking: false,
-      })
-      setIsEditing(false)
-    } else if (from === 'education') {
+      });
+      setIsEditing(false);
+    } else if (from === "education") {
       setEducation({
         schoolName,
         course,
@@ -278,9 +275,9 @@ export const TeamProfile = () => {
         startDate: eduStartDate,
         endDate: eduEndDate,
         isPresent: false,
-      })
-      setIsEditing(false)
-    } else if (from === 'workExperienceEdit') {
+      });
+      setIsEditing(false);
+    } else if (from === "workExperienceEdit") {
       editWorkExperience({
         data: {
           companyName,
@@ -292,23 +289,31 @@ export const TeamProfile = () => {
           isPresentWorking: false,
         },
         index,
-      })
-      setIsEditing(false)
+      });
+      setIsEditing(false);
     } else if (from === 'educationEdit') {
       editEducation({
         data: {
-          schoolName,
-          course,
-          degreeType: degree,
-          activities,
-          startDate: eduStartDate,
-          endDate: eduEndDate,
-          isPresent: false,
+        schoolName,
+        course,
+        degreeType: degree,
+        activities,
+        startDate: eduStartDate,
+        endDate: eduEndDate,
+        isPresent: false,
         },
         index,
       })
     }
-  }
+  };
+
+
+  useEffect(() =>{
+    if(stateAuth?.startupData?.team?.coFounder.length > 0){
+      setCoFounder('yes')
+    }
+  },[])
+ 
 
   return (
     <>
@@ -353,22 +358,22 @@ export const TeamProfile = () => {
         <span></span>
       )}
       <HeaderTeam>
-        <h5 style={{ color: '#2E3192' }}>Team</h5>
+        <h5 style={{color: "#2E3192"}}>Team</h5>
         <p className="text-nowrap">Let’s you introduce your Founder(s)</p>
       </HeaderTeam>
 
-      <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
+      <form style={{ marginBottom: "4rem" }} onSubmit={formik.handleSubmit}>
         <FormWrapper height="70%">
           <div className="div">
             <span>Founder</span>
             <p>A brief profile of founders</p>
           </div>
 
-          <div style={{ marginTop: '10px', marginLeft: '10px' }}>
+          <div style={{ marginTop: "10px", marginLeft: "10px" }}>
             <ImageWrapper>
               {avatar === null ? (
                 logoUploading ? (
-                  <CircularLoader color={'#000'} />
+                  <CircularLoader color={"#000"} />
                 ) : (
                   <UserOutlined />
                 )
@@ -377,9 +382,9 @@ export const TeamProfile = () => {
                   className=""
                   src={avatar}
                   style={{
-                    borderRadius: '70px',
-                    width: '90px',
-                    height: '90px',
+                    borderRadius: "70px",
+                    width: "90px",
+                    height: "90px",
                   }}
                   alt=""
                 />
@@ -388,16 +393,14 @@ export const TeamProfile = () => {
 
             <InputWrapper for="found">
               <input type="file" onChange={onChangeImage} id="found" hidden />
-              <PlusOutlined style={{ color: '#ffffff' }} />
+              <PlusOutlined style={{ color: "#ffffff" }} />
             </InputWrapper>
           </div>
 
           <div className="row my-5">
             <div className="form-group col-12">
               <div className="d-flex justify-content-between">
-                <label>
-                  Brief Introduction<span style={{ color: 'red' }}>*</span>
-                </label>
+                <label>Brief Introduction<span style={{color: "red"}}>*</span></label>
                 <label style={{ color: '#828282' }}>10 words at most</label>
               </div>
               <input
@@ -417,9 +420,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>
-                First Name<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>First Name<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={handleChange}
                 value={formik.values.firstName}
@@ -434,13 +435,11 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>
-                Last Name<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>Last Name<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={handleChange}
                 value={formik.values.lastName}
-                onBlur={formik.handleBlur}
+               onBlur={formik.handleBlur}
                 type="text"
                 name="lastName"
                 placeholder="Enter last name"
@@ -451,9 +450,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>
-                Email<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>Email<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={handleChange}
                 value={formik.values.email}
@@ -468,44 +465,36 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12">
-              <label>
-                Date of Birth<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>Date of Birth<span style={{color: "red"}}>*</span></label>
               <DatePicker
                 id="dob"
                 name="dob"
                 className="custs p-2 py-4"
-                style={{ padding: '15px' }}
-                defaultValue={
-                  moment(stateAuth?.startupData?.team?.dob) ?? moment()
-                }
+                style={{ padding: "15px" }}
+                defaultValue={moment(stateAuth?.startupData?.team?.dob) ?? moment()}
                 format={dateFormat}
                 onChange={handleDateInput}
               />
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>
-                Country<span style={{ color: 'red' }}>*</span>
-              </label>
-
+              <label>Country<span style={{color: "red"}}>*</span></label>
+            
               <CountryDropdown
                 id="country"
                 type="text"
                 name="country"
                 className="form-control px-5 py-1 country-bg"
-                preferredCountries={['ng']}
+                preferredCountries={["ng"]}
                 defaultValue={formik.values.country}
                 handleChange={handleChangeCountry}
               ></CountryDropdown>
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>
-                State<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>State<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.state}
-                onBlur={formik.handleBlur}
+                 onBlur={formik.handleBlur}
                 type="text"
                 name="state"
                 placeholder="Enter your state"
@@ -516,9 +505,7 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>
-                City<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>City<span style={{color: "red"}}>*</span></label>
               <input
                 onChange={formik.handleChange}
                 value={formik.values.city}
@@ -533,49 +520,47 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12">
-              <label>
-                Mobile Number<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>Mobile Number<span style={{color: "red"}}>*</span></label>
               <PhoneInput
                 international
                 name="mobile_number"
                 countryCallingCodeEditable={true}
                 className="custs w-lg-50 ps-3 py-2"
-                value={stateAuth?.startupData?.team?.mobile_number ?? ''}
-                onBlur={formik.handleBlur}
-                onChange={handlePhoneInput}
+                value={
+                  stateAuth?.startupData?.team?.mobile_number ?? ''
+                }
+                 onBlur={formik.handleBlur}
+                 onChange={handlePhoneInput}
                 MaxLength={17}
               />
-              {formik.touched.mobile_number && !phone ? (
-                <label className="error">Required</label>
+             {formik.touched.mobile_number && formik.errors.mobile_number ? (
+                <label className="error">{formik.errors.mobile_number}</label>
               ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
-              <label>
-                Gender<span style={{ color: 'red' }}>*</span>
-              </label>
-                <select
-                  id="gender"
-                  name="gender"
-                  // options={optionsNumb}
-                  className="cust mx-0 px-2 py-2"
-                  // placeholder='Choose your instrument for your round'
-                  value={formik.values.gender}
-                  onChange={formik.handleChange}
-                >
-                  {gender.map((item, index) => {
-                    return (
-                      <option value={item.value} key={index}>
-                        {item.label}
-                      </option>
-                    )
-                  })}
-                </select>
-
-              {formik.touched.gender && formik.errors.gender ? (
+            <div className="form-group  col-lg-6 col-12" >
+            <label>Gender<span style={{color: "red"}}>*</span></label>
+            <select
+              
+              className='cust mx-3 px-2 extra'
+                id='gender'
+                name='gender'
+              value={
+                
+                formik.values.gender
+              }
+              onChange={handleChange}
+            >
+              {gender.map((item, index) => {
+                return <option
+                value={item.value}
+                 key={index}>{item.label}</option>;
+              })}
+            </select>
+            {formik.touched.gender && formik.errors.gender ? (
                 <label className="error">{formik.errors.gender}</label>
               ) : null}
             </div>
+
           </div>
         </FormWrapper>
         <FormWrapper height="80%">
@@ -583,8 +568,8 @@ export const TeamProfile = () => {
             <span>Work Experience</span>
           </div>
           <hr />
-          {stateAuth?.startupData?.team?.experience &&
-            stateAuth?.startupData?.team?.experience.map((item, index) => {
+    { stateAuth?.startupData?.team?.experience && 
+      stateAuth?.startupData?.team?.experience.map((item, index) => {
               return (
                 <WorkExperience
                   key={index}
@@ -595,20 +580,20 @@ export const TeamProfile = () => {
                   setIsEditing={setIsEditing}
                   id={index}
                 />
-              )
+              );
             })}
 
           <div>
             <span
               onClick={() => setShow(true)}
               style={{
-                color: '#120297',
-                borderBottom: '1px solid #120297',
-                fontWeight: '600',
-                cursor: ' pointer',
+                color: "#120297",
+                borderBottom: "1px solid #120297",
+                fontWeight: "600",
+                cursor: " pointer",
               }}
             >
-              Add work experience +{' '}
+              Add work experience +{" "}
             </span>
           </div>
         </FormWrapper>
@@ -618,9 +603,8 @@ export const TeamProfile = () => {
             <span>Education</span>
           </div>
           <hr />
-          {stateAuth?.startupData?.team?.education &&
-            stateAuth?.startupData?.team?.education.length > 0 &&
-            stateAuth?.startupData?.team?.education.map((item, index) => {
+      {stateAuth?.startupData?.team?.education &&  stateAuth?.startupData?.team?.education.length > 0 &&
+        stateAuth?.startupData?.team?.education.map((item, index) => {
               return (
                 <Education
                   key={index}
@@ -631,17 +615,17 @@ export const TeamProfile = () => {
                   setIsEditing={setIsEditing}
                   id={index}
                 />
-              )
+              );
             })}
           <span
             onClick={() => setShowEducation(true)}
             style={{
-              color: '#120297',
-              borderBottom: '1px solid #120297',
-              fontWeight: '600',
+              color: "#120297",
+              borderBottom: "1px solid #120297",
+              fontWeight: "600",
             }}
           >
-            Add Education +{' '}
+            Add Education +{" "}
           </span>
         </FormWrapper>
 
@@ -653,16 +637,12 @@ export const TeamProfile = () => {
 
           <div className="form-group">
             <div>
-              <label>
-                What are your skills<span style={{ color: 'red' }}>*</span>
-              </label>
-              <p className="py-2">
-                Please press the space button to add your skill
-              </p>
+              <label>What are your skills<span style={{color: "red"}}>*</span></label>
+              <p className="py-2">Please press the space button to add your skill</p>
             </div>
             <input
               onChange={handleChangeVal}
-              style={{ width: '100%', outline: 'none', color: 'purple' }}
+              style={{ width: "100%", outline: "none", color: "purple" }}
               value={inVal}
               type="text"
               placeholder="Enter your skills and press the space button to add "
@@ -670,38 +650,41 @@ export const TeamProfile = () => {
               // className='form-control ps-3'
               onKeyDown={handleKey}
             />
-
-            {stateAuth?.startupData?.team?.skills &&
-              stateAuth?.startupData?.team?.skills.map((item, i) => (
+            
+      {   stateAuth?.startupData?.team?.skills &&
+        stateAuth?.startupData?.team?.skills.map((item, i) => (
                 <SkillTab key={i} skill={item} onClick={() => onDelete(item)} />
               ))}
           </div>
         </FormWrapper>
-        <FormWrapper height="70%">
-          <div className="div border-bottom pb-2">
+        <FormWrapper height='70%'>
+          <div className='div border-bottom pb-2'>
             <span>Co-Founders</span>
-            <p className="pt-3">Create a profile for your Co-Founders</p>
+            <p className='pt-3'>Create a profile for your Co-Founders</p>
           </div>
 
-          <div className="mt-4">
+          <div className='mt-4'>
             <label>Do you have Co-Founders?*</label>
 
-            <div className="d-flex">
+            <div className='d-flex'>
               <BntWrap>
                 <button
-                  className={`me-3 ${coFounder === 'yes' ? 'active' : ''}`}
+
+                  type="button"
+                  className={`me-3 ${coFounder.normalize() === 'yes' ? 'active' : '' }`}
                   onClick={(e) => {
-                    e.preventDefault()
-                    setCoFounder('yes')
+                    e.preventDefault();
+                    setCoFounder('yes');
                   }}
                 >
                   Yes
                 </button>
                 <button
-                  className={`me-3 ${coFounder === 'no' ? 'active' : ''}`}
+                type="button"
+                  className={`me-3 ${coFounder.normalize() === 'no' ? 'active' : ''}`}
                   onClick={(e) => {
-                    e.preventDefault()
-                    setCoFounder('no')
+                    e.preventDefault();
+                    setCoFounder('no');
                   }}
                 >
                   No
@@ -709,44 +692,46 @@ export const TeamProfile = () => {
               </BntWrap>
             </div>
 
-            {coFounder === 'no' ? (
-              <span />
-            ) : (
-              <div className="sold">
-                <div className="d-flex justify-content-center">
-                  <div className="">
-                    <div className="row">
-                      {stateAuth?.startupData?.team?.coFounder &&
-                      stateAuth?.startupData?.team?.coFounder.length > 0 ? (
-                        stateAuth?.startupData?.team?.coFounder.map(
-                          (item, i) => (
-                            <div className="col-6" key={i}>
-                              <RandomCard
-                                img={item.avatar}
-                                name={item.firstName}
-                              />
-                            </div>
-                          ),
-                        )
-                      ) : (
-                        <span />
-                      )}
-                    </div>
-
-                    <div className="mt-2">
-                      <Tag
-                        name="+ Add Co-founder"
-                        color="#4F4F4F"
-                        bg="rgba(183, 218, 231, 0.5"
-                        padding="8px 14px"
-                        data-target="#cofounder"
-                        onClick={() => setShowModal(true)}
-                      />
-                    </div>
+          {
+        coFounder === 'no' ? (
+          <span />
+        ) : (
+          <div className='sold'>
+              <div className='d-flex justify-content-center'>
+                <div
+                  className=''
+                >
+                <div className="row">
+                {
+               stateAuth?.startupData?.team?.coFounder && stateAuth?.startupData?.team?.coFounder.length > 0 ?  
+               stateAuth?.startupData?.team?.coFounder.map((item , i) =>(
+                  <div className="col-6" key={i} >
+                  <RandomCard img={item.avatar} name={item.firstName}  />
                   </div>
+               
+               )):(
+                <span
+                  />
+               )
+                }
+                </div>
+
+                <div className="mt-2" >
+                <Tag
+                    name='+ Add Co-founder'
+                    color='#4F4F4F'
+                    bg='rgba(183, 218, 231, 0.5'
+                    padding='8px 14px'
+                    data-target='#cofounder'
+                  onClick={() => setShowModal(true)}
+                  />
+                </div>
+            
                 </div>
               </div>
-            )}
+            </div>
+        )    
+          }
           </div>
         </FormWrapper>
 
@@ -756,12 +741,10 @@ export const TeamProfile = () => {
           </div>
           <div className="row">
             <div className="form-group col-lg-6 col-12">
-              <label>
-                LinkedIn<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>LinkedIn<span style={{color: "red"}}>*</span></label>
               <input
-                onChange={(e) => handleChange(e, 'socialMedia')}
-                value={formik.values.linkedIn}
+                onChange={(e)=>handleChange(e, "socialMedia")}
+                value={ formik.values.linkedIn }
                 // onBlur={formik.handleBlur}
                 type="text"
                 name="linkedIn"
@@ -773,30 +756,26 @@ export const TeamProfile = () => {
               ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>
-                Twitter<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>Twitter<span style={{color: "red"}}>*</span></label>
               <input
-                onChange={(e) => handleChange(e, 'socialMedia')}
-                value={formik.values.twitter}
+                onChange={(e)=> handleChange(e, "socialMedia")}
+                value={ formik.values.twitter }
                 // onBlur={formik.handleBlur}
                 type="text"
                 name="twitter"
                 placeholder="Enter Twitter link"
                 className="form-control ps-3"
               />
-              {formik.touched.twitter && formik.errors.twitter ? (
+            {formik.touched.twitter && formik.errors.twitter ? (
                 <label className="error">{formik.errors.twitter}</label>
-              ) : null}
+              ) : null }
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>
-                Website<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>Website<span style={{color: "red"}}>*</span></label>
               <input
-                onChange={(e) => handleChange(e, 'socialMedia')}
-                value={formik.values.website}
+               onChange={(e)=> handleChange(e, "socialMedia")}
+                value={ formik.values.website }
                 type="text"
                 name="website"
                 placeholder="Enter website"
@@ -817,20 +796,19 @@ export const TeamProfile = () => {
           </div>
           <div className="col-9 d-flex justify-content-end">
             <CustomButton
-              type="button"
-              disabled={loading}
+              type="submit"
               className="mx-2"
               background="#00ADEF"
-              onClick={() => formik.handleSubmit()}
+             
             >
-              {loading ? <CircularLoader /> : 'Save'}
+              {loading ? <CircularLoader /> : "Save"}
             </CustomButton>
             <CustomButton
               type="button"
-              onClick={() => changePath(path + 1)}
+              onClick={()=> changePath(path + 1)}
               background="#2E3192"
             >
-              Next
+                Next
             </CustomButton>
 
             {/* <CustomButton className='mx-2' background='#00ADEF'>
@@ -843,5 +821,6 @@ export const TeamProfile = () => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};
+
