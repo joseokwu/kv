@@ -11,7 +11,7 @@ import { useLocation }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
-import { setRole } from '../../utils/helpers'
+import { setType } from '../../utils/helpers'
 // import { PhoneInput } from '../../components'
 
 const { Option } = Select
@@ -56,7 +56,7 @@ export const SignUp = ({ history }) => {
         phone: phone?.id,
       })
     }
-    setRole(stateAuth?.signUpStatus)
+    setType(stateAuth?.signUpStatus)
   }
 
   return (
@@ -197,6 +197,7 @@ export const SignUp = ({ history }) => {
                 numb={8}
                 message="Password must be 8 digits"
                 label="Password"
+                id={'password'}
                 placeholder="Password must be at least 8 characters"
                 type="password"
                 className="mentor_gray_card_input"

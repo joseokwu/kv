@@ -79,3 +79,18 @@ export const CardWrap = styled.div`
     margin-left: 4px;
   }
 `
+
+ export const Wrapper = styled.div`
+  display: inline-flex;
+  align-items: center;
+  background: whitesmoke;
+  border-radius: 8px;
+  padding: 0.5rem;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+`;

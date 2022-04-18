@@ -7,15 +7,15 @@ import {
   ModalForm,
 } from './teams.styled';
 import {
-  LargeModal,
+  SkillTab,
   WorkExperience,
   Education,
 } from '../../../../Startupcomponents';
 import { UserOutlined, PlusOutlined } from '@ant-design/icons';
 import { useActivity } from '../../../../hooks/useBusiness';
-import DatePicker from 'react-datepicker';
-import PhoneInput from 'react-phone-number-input';
-import { Select } from 'antd';
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { Select , DatePicker } from 'antd';
 import { TeamModal, EducationModal } from './teamModal';
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
@@ -23,6 +23,11 @@ import { toast } from 'react-hot-toast';
 import { team } from './../../../../services/startUpReg';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { upload } from "../../../../services/utils";
+import CountryDropdown from "country-dropdown-with-flags-for-react";
+import moment from "moment";
+import { useAuth } from "../../../../hooks/useAuth";
+
 
 const { Option } = Select;
 
@@ -37,9 +42,10 @@ export const CoFounder = ({
   setIsEditing,
 }) => {
   const [disImg, setImg] = useState(null);
-  const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express'];
+  const [skills , setSkills] = useState([])
   const [phone, setPhone] = useState();
   const [show, setShow] = useState(false);
+  const [avatar, setAvatar] = useState(null);
   const [showEducation, setShowEducation] = useState(false);
   const [loading, setLoading] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -49,23 +55,53 @@ export const CoFounder = ({
   const [checked, setChecked] = useState(false);
   const [displayWorkExperience, setDisplayWorkExperience] = useState();
   const [displayEducation, setDisplayEducation] = useState();
+  const { updateProfile, stateAuth , updateStartupInfo } = useAuth();
+  const [localEducation, setLocalEducation] = useState([]);
+  const [localExperience, setLocalExperience] = useState([]);
+  const [dob , setDob] = useState(moment())
+  const [inVal, setVal] = useState("");
 
-  const onChangeImage = (e) => {
-    const { files } = e.target;
 
-    if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]));
+  const handleChangeVal = (e) => {
+    setVal(e.target.value);
+  };
+  const handleKey = (e) => {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      e.preventDefault();
+      if (inVal.trim() === "" || stateAuth.startupData.team.skills.indexOf(inVal.trim()) !== -1) return;
+      setVal(""); 
+      setSkills([...skills, inVal]);
     }
   };
 
-  const children = [];
-  for (let i = 0; i < skill.length; i++) {
-    children.push(<Option key={i}>{skill[i]}</Option>);
-  }
+  const onDelete = (value) => {
+    setSkills(skills.filter((item) => item !== value));
+  };
 
-  function handleChange(value) {
-    // console.log(`selected ${value}`);
-  }
+  const onChangeImage = async(e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0, files[0]);
+    try {
+      console.log("uploaded");
+      setLoading(true);
+      const response = await upload(formData);
+      console.log(response);
+      setAvatar(response?.path);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error(error?.response?.data?.message ?? "Unable to upload image");
+    }
+  };
+
+
+
+
 
   const {
     changePath,
@@ -76,49 +112,106 @@ export const CoFounder = ({
     changePath(path - 1);
   };
 
-  const save = () => {
-    changePath(path + 0);
-  };
+  
 
-  const onSubmit = (e, from) => {
-    e.preventDefault();
-    handleWorkDetails({
-      from,
-      title: formik.getFieldProps('title').value,
-      location: formik.getFieldProps('location').value,
-      position: formik.getFieldProps('position').value,
-      description: formik.getFieldProps('description').value,
-      startDate: startDate,
-      endDate: checked ? 'present' : endDate,
-      school: formik.getFieldProps('school').value,
-      course: formik.getFieldProps('course').value,
-      degree: formik.getFieldProps('degree').value,
-      activities: formik.getFieldProps('activities').value,
-      eduStartDate: eduStartDate,
-      eduEndDate: checked ? 'present' : eduEndDate,
-      founder: false,
+ 
+
+  const onSubmit = () => {
+
+    updateProfile("team", {
+
+       coFounder:[...stateAuth?.startupData?.team.coFounder, {
+      avatar:avatar,
+      briefIntroduction: formik.getFieldProps('briefIntroduction').value,
+      firstName: formik.getFieldProps('firstName').value,
+      lastName: formik.getFieldProps('lastName').value,
+      email: formik.getFieldProps('email').value,
+      dob: dob,
+      linkedIn: formik.getFieldProps('linkedIn').value,
+      twitter: formik.getFieldProps('twitter').value,
+      website: formik.getFieldProps('website').value,
+      country: formik.getFieldProps('country').value,
+      state: formik.getFieldProps('state').value,
+      city: formik.getFieldProps('city').value,
+      skills:skills,
+      mobile_number: phone,
+      education:localEducation,
+      experience:localExperience,
+
+        }]
+      
     });
-    formik.resetForm({
-      values: {
-        title: '',
-        location: '',
-        position: '',
-        description: '',
-        startDate: '',
-        endDate: '',
-        school: '',
-        course: '',
-        degree: '',
-        activities: '',
-        eduStartDate: '',
-        eduEndDate: '',
-      },
-    });
-  };
+
+      handleClose(false)
+  }
+
+
+
+  const handleEduSubmit = () =>{
+    setLocalEducation([...localEducation , {
+      schoolName: eduFormik.getFieldProps('school').value,
+        course: eduFormik.getFieldProps('course').value,
+        degree: eduFormik.getFieldProps('degree').value,
+        activities: eduFormik.getFieldProps('activities').value,
+        startDate: eduStartDate,
+        endDate: checked ? 'present' : eduEndDate
+    }])
+    
+  }
+
+  const eduFormik = useFormik({
+    initialValues:{
+      school: '',
+      course: '',
+      degree: '',
+      activities: '',
+    },
+  
+    
+  })
+
+
+
+  const workFormik = useFormik({
+    initialValues:{
+      title: '',
+      location: '',
+      position: '',
+      description: '',
+      startDate: '',
+      endDate: '',
+    },
+    
+  })
+
+  const handleExpeSubmit = () =>{
+   
+    setLocalExperience([...localExperience , {
+      title: workFormik.getFieldProps('title').value,
+      location: workFormik.getFieldProps('location').value,
+      position: workFormik.getFieldProps('position').value,
+      description: workFormik.getFieldProps('description').value,
+      startDate:startDate,
+      endDate:checked ? 'present' : endDate
+
+    }])
+    
+    workFormik.resetForm({
+  values:{
+    title: '',
+    location: '',
+    position: '',
+    description: '',
+    startDate: '',
+    endDate: '',
+  }
+    })
+    
+  }
 
   const formik = useFormik({
     initialValues: {
-      briefIntroduction: '',
+      briefIntroduction:'',
       firstName: '',
       lastName: '',
       email: '',
@@ -126,53 +219,26 @@ export const CoFounder = ({
       country: '',
       state: '',
       city: '',
-      mobile_number: phone,
+      mobile_number:'',
       skills: [],
-      experience: [],
-      education: [],
       linkedIn: '',
       twitter: '',
       website: '',
-      title: '',
-      location: '',
-      position: '',
-      description: '',
-      startDate: '',
-      endDate: '',
-      school: '',
-      course: '',
-      degree: '',
-      activities: '',
-      eduStartDate: '',
-      eduEndDate: '',
+  
     },
-    validationSchema: Yup.object({
-      title: Yup.string().required('Required'),
-      location: Yup.string().required('Required'),
-      position: Yup.string().required('Required'),
-      description: Yup.string().required('Required'),
-      startDate: Yup.string().required('Required'),
-      endDate: Yup.string().required('Required'),
-      school: Yup.string().required('Required'),
-      course: Yup.string().required('Required'),
-      degree: Yup.string().required('Required'),
-      activities: Yup.string().required('Required'),
-      eduStartDate: Yup.string().required('Required'),
-      eduEndDate: Yup.string().required('Required'),
-    }),
-    onSubmit: (value) => onSubmit(value),
+       
   });
 
   return (
     <div className='px-3'>
       {show ? <TeamModal handleClose={setShow} /> : <span></span>}
       {showEducation ? (
-        <EducationModal handleClose={setShowEducation} />
+        <EducationModal isLocal={true} handleClose={setShowEducation} />
       ) : (
         <span></span>
       )}
 
-      <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
+      <form style={{ marginBottom: '4rem' }} >
         <FormWrapper height='70%'>
           <div className='div'>
             <span>Co-Founder</span>
@@ -180,19 +246,23 @@ export const CoFounder = ({
           </div>
 
           <div style={{ marginTop: '10px', marginLeft: '10px' }}>
-            <ImageWrapper>
-              {disImg === null ? (
-                <UserOutlined />
+          <ImageWrapper>
+              {avatar === null ? (
+                loading ? (
+                  <CircularLoader color={"#000"} />
+                ) : (
+                  <UserOutlined />
+                )
               ) : (
                 <img
-                  className=''
-                  src={disImg}
+                  className=""
+                  src={avatar}
                   style={{
-                    borderRadius: '70px',
-                    width: '90px',
-                    height: '90px',
+                    borderRadius: "70px",
+                    width: "90px",
+                    height: "90px",
                   }}
-                  alt=''
+                  alt=""
                 />
               )}
             </ImageWrapper>
@@ -256,9 +326,9 @@ export const CoFounder = ({
               <DatePicker
                 className='custs p-2'
                 style={{ padding: '15px' }}
-                selected={startDate}
+                selected={dob}
                 placeholderText='yyyy-mm-dd'
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) => setDob(date , "dob")}
               />
             </div>
             <div className='form-group col-lg-4 col-12'>
@@ -302,30 +372,15 @@ export const CoFounder = ({
                 countryCallingCodeEditable={true}
                 className='custs w-lg-50 ps-1'
                 value={phone}
-                onChange={setPhone}
+                onChange={(value) => setPhone(value)}
                 placeholder='0000 00000 0000'
+                MaxLength={13}
               />
             </div>
           </div>
         </FormWrapper>
         <FormWrapper height='80%'>
-          {/* <div className="div">
-            <span>Work Experience</span>
-          </div>
-          <hr />
-          <div>
-            <span
-              onClick={() => setShow(true)}
-              style={{
-                color: '#120297',
-                borderBottom: '1px solid #120297',
-                fontWeight: '600',
-                cursor: ' pointer',
-              }}
-            >
-              Add work experience +{' '}
-            </span>
-          </div> */}
+        
           {!displayWorkExperience ? (
             <div className='mx-5'>
               <HeaderModal>
@@ -344,14 +399,13 @@ export const CoFounder = ({
                       className='form-control ps-3'
                       placeholder='CEO and Founder'
                       value={
-                        workExperienceCoFounder[editIndex]?.title ||
-                        formik.values.title
+                        workFormik.values.title
                       }
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      onBlur={workFormik.handleBlur}
+                      onChange={workFormik.handleChange}
                     />
-                    {formik.touched.title && formik.errors.title ? (
-                      <label className='error'>{formik.errors.title}</label>
+                    {workFormik.touched.title && workFormik.errors.title ? (
+                      <label className='error'>{workFormik.errors.title}</label>
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
@@ -363,35 +417,35 @@ export const CoFounder = ({
                       className='form-control ps-3'
                       placeholder='United state of America'
                       value={
-                        workExperienceCoFounder[editIndex]?.location ||
-                        formik.values.location
+                     
+                        workFormik.values.location
                       }
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      onBlur={workFormik.handleBlur}
+                      onChange={workFormik.handleChange}
                     />
-                    {formik.touched.location && formik.errors.location ? (
-                      <label className='error'>{formik.errors.location}</label>
+                    {workFormik.touched.location && workFormik.errors.location ? (
+                      <label className='error'>{workFormik.errors.location}</label>
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
-                    <label>Company Title<span style={{color: "red"}}>*</span></label>
+                    <label>Position<span style={{color: "red"}}>*</span></label>
                     <input
                       id='position'
                       name='position'
                       type='text'
                       className='form-control ps-3'
-                      placeholder='gane@gmail.com'
+                      placeholder='United state of America'
                       value={
-                        workExperienceCoFounder[editIndex]?.position ||
-                        formik.values.position
+                        workFormik.values.position
                       }
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      onBlur={workFormik.handleBlur}
+                      onChange={workFormik.handleChange}
                     />
-                    {formik.touched.position && formik.errors.position ? (
-                      <label className='error'>{formik.errors.position}</label>
+                    {workFormik.touched.position && workFormik.errors.position ? (
+                      <label className='error'>{workFormik.errors.position}</label>
                     ) : null}
                   </div>
+        
                   <div className='col-12 form-group'>
                     <div className='d-flex justify-content-between'>
                       <label>Description<span style={{color: "red"}}>*</span></label>
@@ -408,15 +462,15 @@ export const CoFounder = ({
                       className='form-control ps-3'
                       placeholder='Tell us about your role'
                       value={
-                        workExperienceCoFounder[editIndex]?.description ||
-                        formik.values.description
+
+                        workFormik.values.description
                       }
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      onBlur={workFormik.handleBlur}
+                      onChange={workFormik.handleChange}
                     />
-                    {formik.touched.description && formik.errors.description ? (
+                    {workFormik.touched.description && workFormik.errors.description ? (
                       <label className='error'>
-                        {formik.errors.description}
+                        {workFormik.errors.description}
                       </label>
                     ) : null}
                   </div>
@@ -436,7 +490,7 @@ export const CoFounder = ({
                       className='p-2'
                       style={{ padding: '15px' }}
                       selected={
-                        workExperienceCoFounder[editIndex]?.startDate ||
+                        
                         startDate
                       }
                       onChange={(date) => setStartDate(date)}
@@ -451,7 +505,7 @@ export const CoFounder = ({
                         className='p-2'
                         style={{ padding: '15px' }}
                         selected={
-                          workExperienceCoFounder[editIndex]?.endDate || endDate
+                          endDate
                         }
                         onChange={(date) => setEndDate(date)}
                       />
@@ -473,11 +527,11 @@ export const CoFounder = ({
 
                     <CustomButton
                       type='button'
-                      onClick={(e) => {
-                        onSubmit(e, 'workExperience');
-                        setDisplayWorkExperience(true);
-                      }}
                       background='#021098'
+                      onClick={() => {
+                        handleExpeSubmit()
+                        setDisplayWorkExperience(true)
+                      }}
                       style={{
                         marginLeft: displayWorkExperience ? '7rem' : '0rem',
                       }}
@@ -492,8 +546,8 @@ export const CoFounder = ({
             <div className='mx-5'>
               <HeaderModal>Work Experience</HeaderModal>
               <hr style={{ background: '#323232' }} />
-              {workExperienceCoFounder.length > 0 &&
-                workExperienceCoFounder.map((item, index) => {
+              {localExperience.length > 0 &&
+                localExperience.map((item, index) => {
                   return (
                     <WorkExperience
                       key={index}
@@ -529,7 +583,7 @@ export const CoFounder = ({
                 {isEditing ? 'Edit Education' : 'Add Education'}
               </HeaderModal>
               <hr style={{ background: '#323232' }} />
-              <form>
+              <form  >
                 <ModalForm className='row'>
                   <div className='col-12 form-group'>
                     <label>School<span style={{color: "red"}}>*</span></label>
@@ -540,14 +594,14 @@ export const CoFounder = ({
                       className='form-control ps-3'
                       placeholder='Enter School name'
                       value={
-                        educationCoFounder[editIndex]?.school ||
-                        formik.values.school
+                      
+                        eduFormik.values.school
                       }
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      onBlur={eduFormik.handleBlur}
+                      onChange={eduFormik.handleChange}
                     />
-                    {formik.touched.school && formik.errors.school ? (
-                      <label className='error'>{formik.errors.school}</label>
+                    {eduFormik.touched.school && eduFormik.errors.school ? (
+                      <label className='error'>{eduFormik.errors.school}</label>
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
@@ -559,14 +613,14 @@ export const CoFounder = ({
                       className='form-control ps-3'
                       placeholder='Enter Degree '
                       value={
-                        educationCoFounder[editIndex]?.degree ||
-                        formik.values.degree
+                        
+                        eduFormik.values.degree
                       }
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      onBlur={eduFormik.handleBlur}
+                      onChange={eduFormik.handleChange}
                     />
-                    {formik.touched.degree && formik.errors.degree ? (
-                      <label className='error'>{formik.errors.degree}</label>
+                    {eduFormik.touched.degree && eduFormik.errors.degree ? (
+                      <label className='error'>{eduFormik.errors.degree}</label>
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
@@ -578,14 +632,14 @@ export const CoFounder = ({
                       className='form-control ps-3'
                       placeholder='Enter filed of study'
                       value={
-                        educationCoFounder[editIndex]?.course ||
-                        formik.values.course
+                        
+                        eduFormik.values.course
                       }
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      onBlur={eduFormik.handleBlur}
+                      onChange={eduFormik.handleChange}
                     />
-                    {formik.touched.course && formik.errors.course ? (
-                      <label className='error'>{formik.errors.course}</label>
+                    {eduFormik.touched.course && eduFormik.errors.course ? (
+                      <label className='error'>{eduFormik.errors.course}</label>
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
@@ -604,15 +658,15 @@ export const CoFounder = ({
                       className='form-control ps-3'
                       placeholder='Enter Activities and Societies'
                       value={
-                        educationCoFounder[editIndex]?.activities ||
-                        formik.values.activities
+                      
+                        eduFormik.values.activities
                       }
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      onBlur={eduFormik.handleBlur}
+                      onChange={eduFormik.handleChange}
                     />
-                    {formik.touched.activities && formik.errors.activities ? (
+                    {eduFormik.touched.activities && eduFormik.errors.activities ? (
                       <label className='error'>
-                        {formik.errors.activities}
+                        {eduFormik.errors.activities}
                       </label>
                     ) : null}
                   </div>
@@ -625,7 +679,6 @@ export const CoFounder = ({
                       className='p-2'
                       style={{ padding: '15px' }}
                       selected={
-                        educationCoFounder[editIndex]?.eduStartDate ||
                         eduStartDate
                       }
                       onChange={(date) => setEduStartDate(date)}
@@ -639,7 +692,7 @@ export const CoFounder = ({
                       className='p-2'
                       style={{ padding: '15px' }}
                       selected={
-                        educationCoFounder[editIndex]?.eduEndDate || eduEndDate
+                         eduEndDate
                       }
                       onChange={(date) => setEduEndDate(date)}
                     />
@@ -658,9 +711,10 @@ export const CoFounder = ({
                       </CustomButton>
                     )}
                     <CustomButton
-                      onClick={(e) => {
-                        onSubmit(e, 'education');
-                        setDisplayEducation(true);
+                      type='button'
+                      onClick={() =>{
+                        handleEduSubmit();
+                        setDisplayEducation(true)
                       }}
                       background='#021098'
                       style={{
@@ -677,8 +731,8 @@ export const CoFounder = ({
             <div className='mx-5'>
               <HeaderModal>Education</HeaderModal>
               <hr style={{ background: '#323232' }} />
-              {educationCoFounder.length > 0 &&
-                educationCoFounder.map((item, index) => {
+              { localEducation  &&
+                localEducation.map((item, index) => {
                   return (
                     <Education
                       key={index}
@@ -717,15 +771,20 @@ export const CoFounder = ({
             <div>
               <label>What are your skills<span style={{color: "red"}}>*</span></label>
             </div>
-            <Select
-              mode='multiple'
-              allowClear
-              style={{ width: '60%', color: 'red' }}
-              placeholder='Please select'
-              onChange={handleChange}
-            >
-              {children}
-            </Select>
+            <input
+              onChange={handleChangeVal}
+              style={{ width: "100%", outline: "none", color: "purple" }}
+              value={inVal}
+              type="text"
+              placeholder="Enter your skills and press the space button to add "
+              className="py-2 px-3"
+              // className='form-control ps-3'
+              onKeyDown={handleKey}
+            />
+              { skills &&
+          skills.map((item, i) => (
+                <SkillTab key={i} skill={item} onClick={() => onDelete(item)} />
+              ))}
           </div>
         </FormWrapper>
 
@@ -781,8 +840,10 @@ export const CoFounder = ({
             {/* <CustomButton className="mx-2" background="#00ADEF">
               Save
             </CustomButton> */}
-            <CustomButton type='submit' disabled={loading} background='#00ADEF'>
-              {loading ? <CircularLoader /> : 'Save'}
+            <CustomButton type='button'
+            onClick={onSubmit}
+              background='#00ADEF'>
+              {'Save'}
             </CustomButton>
           </div>
         </div>

@@ -1,18 +1,32 @@
-import React from 'react'
+import React , { useEffect } from 'react'
 import './confirmEmail.css'
 import { useHistory } from 'react-router-dom'
 import logo from '../../assets/icons/kvlogo.svg'
 import sentMail from '../../assets/images/mentorSentEmail.svg'
 import { useAuth } from '../../hooks'
-import { getRole } from '../../utils/helpers'
+import { getType , getToken } from '../../utils/helpers';
+import { resendEmail } from '../../services/user';
+import toast from 'react-hot-toast';
+
+
 
 export const MentorConfirmEmail = () => {
-  const history = useHistory()
+  const history = useHistory();
+  console.log(getType())
+ 
+  
+  const handleResend = async() =>{
+    try{
+      const res = await resendEmail({origin: window.location.origin , token: getToken() , type:getType() });
+      toast.success(res?.message);
+    }catch(err){
+      toast.error(err?.response?.data?.message ?? 'Email could not be sent')
+    }
+  }
 
-  const { stateAuth } = useAuth()
 
   const renderPage = () => {
-    switch (getRole()) {
+    switch (getType()) {
       case 'startup':
         return (
           <div>
@@ -54,7 +68,10 @@ export const MentorConfirmEmail = () => {
           </div>
         )
       default:
-        return <h1>hello world</h1>
+        return <h1>
+             We are onboarding Booster Partners to our startup eco system for
+              mutual benefits
+        </h1>
     }
   }
 
@@ -82,9 +99,9 @@ export const MentorConfirmEmail = () => {
                   Please check your inbox for a confirmation email. Didn’t
                   receive the email?
                 </p>
-                {/* <p  className="resend_email" onClick={() => history.push('/')} >
-                  Sign in
-                </p> */}
+                <p  className="resend_email" onClick={handleResend} >
+                  Resend Email
+                </p>
               </section>
             </div>
           </section>

@@ -24,76 +24,53 @@ import { updateFounderProfile } from "../../../../services";
 import { upload } from "../../../../services/utils";
 import { UploadFile } from "../../../../components/uploadFile";
 
+
+
 export const PitchDeck = () => {
-  const { stateAuth } = useAuth();
+  const {  updateProfile, stateAuth , updateStartupInfo } = useAuth();
   const [loading, setLoading] = useState(false);
   const [nextloading, setNextLoading] = useState(false);
   const [opts, setOpts] = useState("");
 
   const history = useHistory();
-  const [fileDoc, setFileDoc] = useState(
-    stateAuth?.user?.pitchDeck?.pitchDeckFile ?? null
-  );
-  const [videoDoc, setVidDoc] = useState(
-    stateAuth?.user?.pitchDeck?.pitchDeckVideo ?? null
-  );
+
 
   const {
     changePath,
     state: { path },
   } = useActivity();
 
-  // const next = () => {
-  //   changePath(path + 1);
-  // };
+  
+
+
 
   const back = () => {
     changePath(path - 1);
   };
 
+
+const onNext = () =>{
+ 
+  if(stateAuth.startupData?.pitchDeck?.pitchDeckFile !== null ||
+     stateAuth.startupData?.pitchDeck?.pitchDeckVideo !== null
+     ){
+      changePath(path + 1);
+    return ;
+  }
+  toast.error("Please provide a pitch deck document");
+}
+
   const onSubmit = async (e) => {
-    try {
+    
       e.preventDefault();
-      const pitchDeck = {
-        type: "pitchDeck",
-        accType: "startup",
-        values: {
-          pitchDeckFile: fileDoc,
-          pitchDeckVideo: videoDoc,
-        },
-        userId: stateAuth?.user?.userId,
-      };
-      console.log(pitchDeck);
-
-      if (opts === "next") {
-        setOpts(true);
-        let result = await updateFounderProfile(pitchDeck);
-
-        if (result?.success) {
-          toast.success("Pitch Deck" + "     " + result?.message);
-          setOpts(false);
-          return changePath(path + 1);
-        }
+      if(stateAuth.startupData?.pitchDeck?.pitchDeckFile !== null ||
+         stateAuth.startupData?.pitchDeck?.pitchDeckVideo !== null
+         ){
+        updateStartupInfo();
+        return ;
       }
-      setLoading(true);
-      let result = await updateFounderProfile(pitchDeck);
-
-      if (!result?.success) {
-        toast.error(
-          result?.message || "There was an error updating the pitchDeck"
-        );
-        setLoading(false);
-        return;
-      }
-      toast.success("Pitch Deck" + " " + result?.message);
-      setLoading(false);
-      history.push("/startup/dashboard");
-    } catch (err) {
-      setLoading(false);
-      toast.error(
-        err?.res?.data?.message || "The was an error updating pitch deck"
-      );
-    }
+      toast.error("Please provide a pitch deck document")
+   
   };
 
   return (
@@ -125,7 +102,7 @@ export const PitchDeck = () => {
                     maxFileSize: 5,
                     extension: "MB",
                   }}
-                  initData={fileDoc ? [fileDoc] : []}
+                  initData={stateAuth.startupData?.pitchDeck?.pitchDeckFile ? [stateAuth.startupData?.pitchDeck?.pitchDeckFile] : []}
                   onUpload={async (filesInfo) => {
                     const formData = new FormData();
                     formData.append("dir", "kv");
@@ -135,52 +112,16 @@ export const PitchDeck = () => {
 
                     const response = await upload(formData);
                     console.log(response);
-                    setFileDoc(response?.path);
+                    updateProfile("pitchDeck", {
+                    pitchDeckFile:response?.path
+                  })
+                   
                   }}
                 />
-                {/* <FileWrapper className="d-flex justify-content-center text-center">
-                  {fileDoc !== null ? (
-                    <img
-                      style={{ width: "70px", height: "70px" }}
-                      src={RedFile}
-                      alt=".#"
-                      className="mb-2"
-                    />
-                  ) : logoUploading ? (
-                    <CircularLoader color={"#000"} />
-                  ) : (
-                    <>
-                      <img src={DownloadIcon} alt="#" />
-                      <FileText>Drag & Drop</FileText>
-                      <FileText>
-                        Drag files or click here to upload document{" "}
-                      </FileText>
-                    </>
-                  )}
-
-                  <input
-                    type="file"
-                    name="pitchDeckFile"
-                    id="pitch-doc"
-                    onChange={handleChange}
-                    hidden
-                  />
-                  <LabelButton for="pitch-doc">Upload Files</LabelButton>
-                </FileWrapper> */}
+                
               </div>
               <div className="form-group col-12 mt-3">
-                {/* <label> Paste Youtube Link of pitch video </label>
-                <div className="d-flex my-2">
-                  <input
-                    type="text"
-                    name="pitchDeckVideo"
-                    onChange={handleChangeVid}
-                    className="form-control youtube-input ps-3"
-                    placeholder="Youtube link"
-                    
-                  />
-                  <button className="button">Upload</button>
-                </div> */}
+               
                 <UploadFile
                   data={{
                     maxFiles: 1,
@@ -188,7 +129,7 @@ export const PitchDeck = () => {
                     maxFileSize: 10,
                     extension: "MB",
                   }}
-                  initData={videoDoc ? [videoDoc] : []}
+                  initData={stateAuth.startupData?.pitchDeck?.pitchDeckVideo ? [stateAuth.startupData?.pitchDeck?.pitchDeckVideo] : []}
                   onUpload={async (filesInfo) => {
                     const formData = new FormData();
                     formData.append("dir", "kv");
@@ -196,45 +137,13 @@ export const PitchDeck = () => {
                     formData.append("type", "video");
                     formData.append(0, filesInfo[0]?.file);
                     const response = await upload(formData);
-                    setVidDoc(response?.path);
+                   // setVidDoc(response?.path);
+                    updateProfile("pitchDeck", {
+                    pitchDeckVideo:response?.path
+                  })
                   }}
                 />
-                {/* <FileWrapper className="d-flex justify-content-center text-center">
-                  {videoDoc !== null ? (
-                    <video
-                      style={{
-                        borderRadius: '20px',
-                        maxHeight: '150px',
-                        width: '250px',
-                      }}
-                      className="mb-3"
-                      controls
-                    >
-                      <source src={videoDoc} id="video_here" />
-                      Your browser does not support HTML5 video.
-                    </video>
-                  ) : videoUploading ? (
-                    <CircularLoader color={'#000'} />
-                  ) : (
-                    <>
-                      <img src={DownloadIcon} alt="#" />
-                      <FileText>Drag & Drop</FileText>
-                      <FileText>
-                        Drag files or click here to upload pitch video{' '}
-                      </FileText>
-                    </>
-                  )}
-
-                  <input
-                    type="file"
-                    name="pitchDeckVideo"
-                    id="pitch-docu"
-                    onChange={handleChangeVid}
-                    accept="video/*"
-                    hidden
-                  />
-                  <LabelButton for="pitch-docu">Upload Files</LabelButton>
-                </FileWrapper> */}
+          
               </div>
             </div>
           </div>
@@ -257,12 +166,11 @@ export const PitchDeck = () => {
             </CustomButton>
             <div className="">
               <CustomButton
-                onClick={() => setOpts("next")}
-                type="submit"
-                disabled={nextloading}
+                onClick={onNext}
+                type="button"
                 background="#2E3192"
               >
-                {nextloading ? <CircularLoader /> : "Next"}
+               Next
               </CustomButton>
             </div>
           </div>

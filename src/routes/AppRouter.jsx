@@ -3,22 +3,22 @@ import {Route, Switch , useHistory} from 'react-router-dom';
 import routes from './routes';
 import { ProtectedRoute }  from './ProtectedRoute'
 import { useAuth } from '../hooks/useAuth';
-import { getToken , getLocationHistory , getRole } from '../utils/helpers.js';
+import { getToken , getLocationHistory , getType } from '../utils/helpers.js';
 import { LoadingIcon } from './../components/Loading/Loading';
 
 
 export  function AppRouter(props){
-    const { userProfile, stateAuth : { loading , authenticated ,  roles }} = useAuth();
+    const { userProfile, callUpdateStartupData , stateAuth : { loading , authenticated }} = useAuth();
 
     const history = useHistory();
     useEffect(()=>{
       
       const getP = async () => {
 			if (getToken()) {
-                const userRole = getRole();
+                const userType = getType();
                // console.log(userRole)
-              await userProfile(userRole && userRole);
-               
+              await userProfile(userType  && userType );
+             await callUpdateStartupData(userType  && userType);
           
 				if (getLocationHistory()){
                     console.log('problem')

@@ -38,11 +38,11 @@ export const AuthTextField = ({
   )
 }
 
-export const AuthPasswordField = ({ className, numb, message, placeholder, label }) => {
+export const AuthPasswordField = ({ className, numb, message, placeholder, label='Password', id }) => {
   return (
     <div className="mentor_field">
       <Form.Item
-        name="password"
+        name={id}
         style={{ color: '#fe0003' }}
         rules={[
           {
@@ -54,11 +54,11 @@ export const AuthPasswordField = ({ className, numb, message, placeholder, label
             message: message,
           },
         ]}
-        label="Password"
+        label={label}
       >
         <Input
           type="password"
-          id="password"
+          id={id}
           className={`${className}`}
           placeholder={placeholder}
           label={label}

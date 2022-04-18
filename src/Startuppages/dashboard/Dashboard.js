@@ -7,7 +7,7 @@ import { UpComing } from "./components/upComing";
 import { getDashboardInfo } from "../../services";
 import newApp from "../../assets/icons/Star.svg";
 import dateFormat from "dateformat";
-import { convertToMillion , getRole } from "../../utils/helpers";
+import { convertToMillion , getType } from "../../utils/helpers";
 import { PageLoader } from "../../components";
 import { useAuth} from '../../hooks/useAuth';
 
@@ -19,7 +19,7 @@ export const StartupDashboard = () => {
   
 
 useEffect(() =>{
-    getDashboardProfile(getRole())
+    getDashboardProfile(getType())
 },[getDashboardProfile])
 
 //console.log(stateAuth)

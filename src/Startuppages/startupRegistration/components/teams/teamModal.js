@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { HeaderModal, ModalForm } from "./teams.styled";
-import { CustomModal } from "../../../../Startupcomponents/modal/Customodal";
 import { ModalCus } from "../../../../Startupcomponents/modal/Modal";
 import { DatePicker } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
 import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useActivity } from "../../../../hooks/useBusiness";
+import { useAuth } from "../../../../hooks/useAuth";
+
 
 export const TeamModal = ({
   handleClose,
@@ -20,21 +20,30 @@ export const TeamModal = ({
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [checked, setChecked] = useState(false);
+  const { updateProfile, stateAuth  } = useAuth();
+
 
   const onSubmit = (e, from) => {
     console.log(workExperience, "Old Experiences");
     e.preventDefault();
-    handleWorkDetails({
-      index: editIndex,
-      from,
-      companyName: formik.getFieldProps("companyName").value,
-      location: formik.getFieldProps("location").value,
-      position: formik.getFieldProps("position").value,
-      responsibility: formik.getFieldProps("responsibility").value,
-      startDate: startDate.toISOString(),
-      endDate: checked ? "present" : endDate.toISOString(),
-      founder: true,
+   
+    updateProfile("team",{ experience: [
+    
+      ...stateAuth?.startupData?.team.experience,
+        {
+          index: editIndex,
+          from,
+          companyName: formik.getFieldProps("companyName").value,
+          location: formik.getFieldProps("location").value,
+          position: formik.getFieldProps("position").value,
+          responsibility: formik.getFieldProps("responsibility").value,
+          startDate: startDate.toISOString(),
+          endDate: checked ? "present" : endDate.toISOString(),
+          founder: true,
+        }
+      ],
     });
+    
     handleClose(false);
   };
 
@@ -192,6 +201,7 @@ export const EducationModal = ({
   handleClose,
   handleWorkDetails,
   editIndex,
+  isLocal = false,
   education,
   isEditing,
   setIsEditing,
@@ -199,20 +209,27 @@ export const EducationModal = ({
   const [eduStartDate, setEduStartDate] = useState(new Date());
   const [eduEndDate, setEduEndDate] = useState(new Date());
   const [checked, setChecked] = useState(false);
-
+  const { updateProfile, stateAuth  } = useAuth();
+  
   const onSubmit = (e, from) => {
     console.log(education, 'prev education');
     e.preventDefault();
-    handleWorkDetails({
-      index: editIndex,
-      from,
-      schoolName: formik.getFieldProps("schoolName").value,
-      course: formik.getFieldProps("course").value,
-      degree: formik.getFieldProps("degree").value,
-      activities: formik.getFieldProps("activities").value,
-      eduStartDate: eduStartDate.toISOString(),
-      eduEndDate: checked ? "present" : eduEndDate.toISOString(),
-      founder: true,
+  
+       updateProfile("team",{ education: [
+    
+      ...stateAuth?.startupData?.team.education,
+        {
+          index: editIndex,
+          from,
+          schoolName: formik.getFieldProps("schoolName").value,
+          course: formik.getFieldProps("course").value,
+          degree: formik.getFieldProps("degree").value,
+          activities: formik.getFieldProps("activities").value,
+          eduStartDate: eduStartDate.toISOString(),
+          eduEndDate: checked ? "present" : eduEndDate.toISOString(),
+          founder: true,
+        }
+      ],
     });
     handleClose(false);
   };
@@ -362,8 +379,9 @@ export const EducationModal = ({
               style={{ marginTop: "2rem" }}
             >
               <CustomButton
-                type="submit"
+                type="button"
                 background="#021098"
+                onClick={() => alert('alert...')}
                 // style={{ marginLeft: '7rem' }}
               >
                 Save

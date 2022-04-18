@@ -95,6 +95,7 @@ export const SignIn = () => {
               <AuthPasswordField
                 className="mentor_gray_card_input"
                 numb={8}
+                id={'password'}
                 message="Password must not be less than 8"
                 placeholder={'Password must be at least 8 characters'}
               />

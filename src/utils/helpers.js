@@ -22,13 +22,14 @@ export const getLocationHistory = () => {
 //     localStorage.removeItem('user:redirect:location')
 // }
 
-export const setRole = (role) => {
-  localStorage.setItem("kv:user:role", role);
+export const setType = (type) => {
+  localStorage.setItem("kv:user:role", type);
 };
 
-export const getRole = () => {
-  let role = localStorage.getItem("kv:user:role");
-  return role;
+export const getType = () => {
+  let type = localStorage.getItem("kv:user:role");
+  console.log(type)
+  return type;
 };
 
 export const formatBytes = (bytes, decimals = 2) => {

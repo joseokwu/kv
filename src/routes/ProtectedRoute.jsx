@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Route, useHistory , Redirect} from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useActivity } from '../hooks/useBusiness';
-import { setLocationHistory , getRole } from '../utils/helpers';
+import { setLocationHistory , userType  } from '../utils/helpers';
 
 import { LoadingIcon } from '../components/Loading';
 
@@ -15,9 +15,9 @@ export  const ProtectedRoute = ({ ...props})=>{
     const [loading, setLoading] = useState(true);
     //user:token
     useEffect(()=>{ 
-        setLoading(false);
+       
         console.log(stateAuth.authenticated)
-        if(!stateAuth.authenticated && !stateAuth.roles.includes(props.type)){
+        if(!stateAuth.authenticated && !stateAuth.type.includes(props.type)){
             // console.log(history.location.pathname)
             setLocationHistory(history.location.pathname)
             history.push('/')
@@ -35,7 +35,7 @@ export  const ProtectedRoute = ({ ...props})=>{
         //     console.log(!stateAuth.roles.includes(props.type))
         // }
 
-         setLoading(false);
+         
 
     }, [history, stateAuth.roles, stateAuth.authenticated, props.type]);
 
