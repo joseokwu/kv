@@ -127,7 +127,7 @@ export const TeamProfile = () => {
       email: stateAuth?.startupData?.team?.email ?? "",
       state: stateAuth?.startupData?.team?.state ?? "",
       city:stateAuth?.startupData?.team?.city ?? "",
-      mobile_number: stateAuth?.user?.team?.mobile_number ,
+      mobile_number: stateAuth?.user?.team?.mobile_number ?? phone,
       country:stateAuth?.startupData?.team?.country,
       gender:stateAuth?.startupData?.team?.gender ?? "" ,
       website:stateAuth?.startupData?.team?.socialMedia?.website,
@@ -144,8 +144,8 @@ export const TeamProfile = () => {
       city: Yup.string().required('Required'),
       dob: Yup.string().required('Required'),
       mobile_number:Yup.number().min(11 , 'Number should be not be below 11 digit').required('Required'),
-      country:Yup.number().required('Required'),
-      gender:Yup.number().required('Required'),
+      country:Yup.string().required('Required'),
+      gender:Yup.string().required('Required'),
       linkedIn: Yup.string().required('Required'),
       twitter: Yup.string().required('Required'),
       website: Yup.string().required('Required'),
@@ -178,6 +178,7 @@ export const TeamProfile = () => {
     updateProfile("team",{
       mobile_number: value
     });
+    formik.setFieldValue('mobile_number', value.value)
   };
   const handleChangeVal = (e) => {
     setVal(e.target.value);
@@ -188,9 +189,6 @@ export const TeamProfile = () => {
     });
   };
 
-  const onChangeMedia = (e) => {
-    setSocialmedia({ ...socialMedia, [e.target.name]: e.target.value });
-  };
 
   
 
@@ -226,14 +224,16 @@ export const TeamProfile = () => {
     children.push(<Option key={i}>{skill[i]}</Option>);
   }
 
-  const onSubmit = async () => {
+  const onSubmit = async (value) => {
     
-      if(stateAuth?.startupData?.team.experience.length < 0 &&
-        stateAuth?.startupData?.team.education.length < 0 && stateAuth?.startupData?.team.coFounder.length < 0
-        ){
-          toast.error('All fields are required');
-          return ;
-        }
+      // if(stateAuth?.startupData?.team?.experience.length < 0 &&
+      //   stateAuth?.startupData?.team?.education.length < 0 && stateAuth?.startupData?.team?.coFounder.length < 0
+      //   ){
+      //     toast.error('All fields are required');
+      //     console.log('heyyy')
+      //     return ;
+      //   }
+      console.log('heyyy', value)
         updateStartupInfo()
   };
 
@@ -307,6 +307,12 @@ export const TeamProfile = () => {
     }
   };
 
+
+  useEffect(() =>{
+    if(stateAuth?.startupData?.team?.coFounder.length > 0){
+      setCoFounder('yes')
+    }
+  },[])
  
 
   return (
@@ -527,23 +533,22 @@ export const TeamProfile = () => {
                  onChange={handlePhoneInput}
                 MaxLength={17}
               />
-              {formik.touched.mobile_number && !phone ? (
-                <label className="error">Required</label>
+             {formik.touched.mobile_number && formik.errors.mobile_number ? (
+                <label className="error">{formik.errors.mobile_number}</label>
               ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12" >
             <label>Gender<span style={{color: "red"}}>*</span></label>
             <select
-              id='instrumentForRound'
-              name='instrumentForRound'
-              // options={optionsNumb}
+              
               className='cust mx-3 px-2 extra'
-              // placeholder='Choose your instrument for your round'
+                id='gender'
+                name='gender'
               value={
                 
                 formik.values.gender
               }
-              onChange={formik.handleChange}
+              onChange={handleChange}
             >
               {gender.map((item, index) => {
                 return <option
@@ -664,7 +669,9 @@ export const TeamProfile = () => {
             <div className='d-flex'>
               <BntWrap>
                 <button
-                  className={`me-3 ${coFounder === 'yes' ? 'active' : '' }`}
+
+                  type="button"
+                  className={`me-3 ${coFounder.normalize() === 'yes' ? 'active' : '' }`}
                   onClick={(e) => {
                     e.preventDefault();
                     setCoFounder('yes');
@@ -673,7 +680,8 @@ export const TeamProfile = () => {
                   Yes
                 </button>
                 <button
-                  className={`me-3 ${coFounder === 'no' ? 'active' : ''}`}
+                type="button"
+                  className={`me-3 ${coFounder.normalize() === 'no' ? 'active' : ''}`}
                   onClick={(e) => {
                     e.preventDefault();
                     setCoFounder('no');
@@ -788,11 +796,10 @@ export const TeamProfile = () => {
           </div>
           <div className="col-9 d-flex justify-content-end">
             <CustomButton
-              type="button"
-              disabled={loading}
+              type="submit"
               className="mx-2"
               background="#00ADEF"
-              onClick={() => formik.handleSubmit()}
+             
             >
               {loading ? <CircularLoader /> : "Save"}
             </CustomButton>
