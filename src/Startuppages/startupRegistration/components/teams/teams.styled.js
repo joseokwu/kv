@@ -174,9 +174,11 @@ export const FormWrapper = styled.div`
   }
   .cust {
     border: none;
-    background: #f4f4f4;
-    width: 70%;
-    margin-left: 15px;
+    background: #fafafc;
+    width: 100%;
+    border-radius: 4px;
+    /* margin-left: 15px; */
+    outline: none;
   }
 
   .custs {
@@ -245,7 +247,7 @@ export const ModalForm = styled.div`
   overflow-y: auto;
   text-align: justify;
   /* height: 70vh; */
-  
+
 
   input {
     background: #fafafc !important;
@@ -379,3 +381,4 @@ export const Education = styled.div`
     color: #828282;
   }
 `;
+

@@ -1573,6 +1573,15 @@ history.push('/startup/dashboard')
         formik.handleChange(e);
       }
 
+      const handleKey = (e) =>{
+        if(e.keyCode === 13){
+        if(inputCompetitiveEdge.trim() === "") return;
+        setValueChecker([...valueChecker , setInputCompetitiveEdge]);
+        setInputCompetitiveEdge("");
+        }
+      }
+
+
       validationSchema: Yup.object({
         briefIntroduction: Yup.string().required('Required'),
         firstName: Yup.string().required('Required'),
@@ -1587,6 +1596,230 @@ history.push('/startup/dashboard')
         city: Yup.string().required('Required'),
         mobile_number: Yup.number().min(13, 'Number must not be less than 13 digit').required('Required'),
       }),
+
+
+      const handleChange = (e, prefix = "") => {
+        const { name, value } = e.target;
+        if (prefix !== "") {
+          updateProfile("team",{
+            coFounder: {
+              ...stateAuth?.startupData?.team.coFounder,
+              [prefix]:{...stateAuth?.startupData?.team.coFounder[prefix], [name]: value}
+            }
+          });
+          formik.handleChange(e);
+          return;
+        }
+        updateProfile("team",{
+          coFounder: {
+            ...stateAuth?.startupData?.team.coFounder,
+            [name]: value,
+          },
+        });
+        formik.handleChange(e);
+      }
+
+===========================================================
+===============================================================
+
+const handleDateInput = (value , prefix) => {
+  updateProfile("team" ,{
+    coFounder: {
+      ...stateAuth?.startupData?.team.coFounder,
+      [prefix]: value,
+    },
+  });
+};
+
+const handlePhoneInput = (value) => {
+  updateProfile("team",{
+    coFounder: {
+      ...stateAuth?.startupData?.team.coFounder,
+      mobile_number: value,
+    },
+  });
+};
+
+{/* 
+  <FormWrapper height="70%">
+    <div className="div border-bottom pb-3">
+      <span>Invite Team Members</span>
+      <p className="pt-3">Key team members</p>
+    </div>
+
+    <div className="form-group mt-5 mb-4">
+      <label>
+        Invite a team member that can benefit from knight venture
+      </label>
+      <input
+        type="text"
+        className="form-control my-2 ps-3"
+        placeholder="Enter email address"
+      />
+    </div>
+    <div className="my-3 mx-3">
+      <CustomButton background="#031298"> Invite </CustomButton>
+    </div>
+  </FormWrapper> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

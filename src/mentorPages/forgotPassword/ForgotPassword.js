@@ -24,31 +24,27 @@ export const MentorForgotPassword = () => {
   const sendForgotPassword = async(value) =>{
     try{
       setLoading(true)
-      console.log(value)
-      const res = await forgotPassword(value);
+      const res = await forgotPassword({
+        ...value,
+        origin:window.location.origin
+      });
+      if(res?.success){
+        console.log(res)
+        setAuthToken(res?.data?.token);
+        toast.success(res?.message);
+        setLoading(false);
+        return ;
+      }
      
-     console.log(res?.data?.token)
-      setAuthToken(res?.data?.token);
-      toast.success(res?.message);
-      history.push('/reset/password')
-     return setLoading(false)
-  
     }catch(err){
       setLoading(false);
+      console.log(err?.response)
       toast.error(err?.response?.data?.message);
     }
 
   }
 
-  // useEffect(() => {
-  //   if (Number(input) && input.length > 6) {
-  //     setNextPath('/verify/otp')
-  //   } else if (emailRegex.test(input)) {
-  //     setNextPath('/check/mail')
-  //   } else {
-  //     setNextPath('')
-  //   }
-  // }, [input])
+  
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
@@ -90,8 +86,8 @@ export const MentorForgotPassword = () => {
             </div>
             <section className="mb-5">
                 <AuthButton
+                type='submit'
                   label={"Submit"}
-                  onClick={sendForgotPassword}
                   loading={loading}
                 />
               </section>
