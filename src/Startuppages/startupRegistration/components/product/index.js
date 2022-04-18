@@ -83,50 +83,13 @@ export const Product = () => {
     setUrls([]);
   };
 
-  const onSubmit = async (value) => {
-    try {
-      const product = {
-        type: 'product',
-        accType: 'startup',
-        values: {
-          ...value,
-          files: fileInfo,
-          youtubeDemoUrl: urls,
-        },
-        userId: stateAuth?.user?.userId,
-      };
-      console.log(product);
-      if (opts === 'next') {
-        setOpts(true);
-        let result = await updateFounderProfile(product);
-
-        if (result?.success) {
-          toast.success('Product' + '   ' + result?.message);
-          setOpts(false);
-          return changePath(path + 1);
-        }
-      }
-      setLoading(true);
-      let result = await updateFounderProfile(product);
-
-      if (!result?.success) {
-        toast.error(
-          result?.message || 'There was an error in updating product'
-        );
-        setLoading(false);
-        return;
-      }
-      toast.success('Product' + '' + result?.message);
-      setLoading(false);
-      history.push('/startup/dashboard');
-      return;
-    } catch (err) {
-      setLoading(false);
-      toast.error(
-        err?.res?.data?.message || 'There was an error updating product'
-      );
-    }
-  };
+  const onSubmit = async () => {
+    setLoading(true)
+    updateStartupInfo();
+    setLoading(false)
+  }
+     
+   
 
   const formik = useFormik({
     initialValues: {
@@ -349,11 +312,8 @@ export const Product = () => {
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
             <CustomButton
-              type='submit'
-              disabled={nextLoading}
-              onClick={() => {
-                setOpts('next');
-              }}
+              type='button'
+              onClick={()=> changePath(path + 1)}
               background='#2E3192'
             >
               {nextLoading ? <CircularLoader /> : 'Next'}

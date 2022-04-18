@@ -379,3 +379,4 @@ export const Education = styled.div`
     color: #828282;
   }
 `;
+

@@ -7,7 +7,7 @@ import {
   ModalForm,
 } from './teams.styled';
 import {
-  LargeModal,
+  SkillTab,
   WorkExperience,
   Education,
 } from '../../../../Startupcomponents';
@@ -42,9 +42,10 @@ export const CoFounder = ({
   setIsEditing,
 }) => {
   const [disImg, setImg] = useState(null);
-  const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express'];
+  const [skills , setSkills] = useState([])
   const [phone, setPhone] = useState();
   const [show, setShow] = useState(false);
+  const [avatar, setAvatar] = useState(null);
   const [showEducation, setShowEducation] = useState(false);
   const [loading, setLoading] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -58,40 +59,47 @@ export const CoFounder = ({
   const [localEducation, setLocalEducation] = useState([]);
   const [localExperience, setLocalExperience] = useState([]);
   const [dob , setDob] = useState(moment())
+  const [inVal, setVal] = useState("");
 
-  const onChangeImage = (e) => {
-    const { files } = e.target;
 
-    if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]));
+  const handleChangeVal = (e) => {
+    setVal(e.target.value);
+  };
+  const handleKey = (e) => {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      e.preventDefault();
+      if (inVal.trim() === "" || stateAuth.startupData.team.skills.indexOf(inVal.trim()) !== -1) return;
+      setVal(""); 
+      setSkills([...skills, inVal]);
     }
   };
 
-  const children = [];
-  for (let i = 0; i < skill.length; i++) {
-    children.push(<Option key={i}>{skill[i]}</Option>);
-  }
+  const onDelete = (value) => {
+    setSkills(skills.filter((item) => item !== value));
+  };
 
-  const handleChange = (e, prefix = "") => {
-    const { name, value } = e.target;
-    if (prefix !== "") {
-      updateProfile("team",{
-        coFounder: {
-          ...stateAuth?.startupData?.team.coFounder,
-          [prefix]:{...stateAuth?.startupData?.team.coFounder[prefix], [name]: value}
-        }
-      });
-      formik.handleChange(e);
-      return;
+  const onChangeImage = async(e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0, files[0]);
+    try {
+      console.log("uploaded");
+      setLoading(true);
+      const response = await upload(formData);
+      console.log(response);
+      setAvatar(response?.path);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error(error?.response?.data?.message ?? "Unable to upload image");
     }
-    updateProfile("team",{
-      coFounder: {
-        ...stateAuth?.startupData?.team.coFounder,
-        [name]: value,
-      },
-    });
-    formik.handleChange(e);
-  }
+  };
+
+
 
 
 
@@ -109,7 +117,11 @@ export const CoFounder = ({
  
 
   const onSubmit = () => {
-    console.log({
+
+    updateProfile("team", {
+
+       coFounder:[...stateAuth?.startupData?.team.coFounder, {
+      avatar:avatar,
       briefIntroduction: formik.getFieldProps('briefIntroduction').value,
       firstName: formik.getFieldProps('firstName').value,
       lastName: formik.getFieldProps('lastName').value,
@@ -121,36 +133,19 @@ export const CoFounder = ({
       country: formik.getFieldProps('country').value,
       state: formik.getFieldProps('state').value,
       city: formik.getFieldProps('city').value,
+      skills:skills,
       mobile_number: phone,
-   })
-    console.log(localEducation)
-    console.log( startDate , eduStartDate)
- 
-  };
+      education:localEducation,
+      experience:localExperience,
 
-  const getEducation = (value) =>{
-    
-    console.log(value);
+        }]
+      
+    });
+
+      handleClose(false)
   }
 
 
-  const handleDateInput = (value , prefix) => {
-    updateProfile("team" ,{
-      coFounder: {
-        ...stateAuth?.startupData?.team.coFounder,
-        [prefix]: value,
-      },
-    });
-  };
-  
-  const handlePhoneInput = (value) => {
-    updateProfile("team",{
-      coFounder: {
-        ...stateAuth?.startupData?.team.coFounder,
-        mobile_number: value,
-      },
-    });
-  };
 
   const handleEduSubmit = () =>{
     setLocalEducation([...localEducation , {
@@ -201,7 +196,6 @@ export const CoFounder = ({
 
     }])
     
-    console.log(localExperience)
     workFormik.resetForm({
   values:{
     title: '',
@@ -252,19 +246,23 @@ export const CoFounder = ({
           </div>
 
           <div style={{ marginTop: '10px', marginLeft: '10px' }}>
-            <ImageWrapper>
-              {disImg === null ? (
-                <UserOutlined />
+          <ImageWrapper>
+              {avatar === null ? (
+                loading ? (
+                  <CircularLoader color={"#000"} />
+                ) : (
+                  <UserOutlined />
+                )
               ) : (
                 <img
-                  className=''
-                  src={disImg}
+                  className=""
+                  src={avatar}
                   style={{
-                    borderRadius: '70px',
-                    width: '90px',
-                    height: '90px',
+                    borderRadius: "70px",
+                    width: "90px",
+                    height: "90px",
                   }}
-                  alt=''
+                  alt=""
                 />
               )}
             </ImageWrapper>
@@ -773,15 +771,20 @@ export const CoFounder = ({
             <div>
               <label>What are your skills<span style={{color: "red"}}>*</span></label>
             </div>
-            <Select
-              mode='multiple'
-              allowClear
-              style={{ width: '60%', color: 'red' }}
-              placeholder='Please select'
-             
-            >
-              {children}
-            </Select>
+            <input
+              onChange={handleChangeVal}
+              style={{ width: "100%", outline: "none", color: "purple" }}
+              value={inVal}
+              type="text"
+              placeholder="Enter your skills and press the space button to add "
+              className="py-2 px-3"
+              // className='form-control ps-3'
+              onKeyDown={handleKey}
+            />
+              { skills &&
+          skills.map((item, i) => (
+                <SkillTab key={i} skill={item} onClick={() => onDelete(item)} />
+              ))}
           </div>
         </FormWrapper>
 
