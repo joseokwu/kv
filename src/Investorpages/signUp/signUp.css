@@ -1,4 +1,4 @@
-.gray-card {
+/* .gray-card {
   width: 100%;
   max-width: 585px;
   background: #f9f9fc;
@@ -8,12 +8,18 @@
 }
 
 .auth-wrap {
-  height: 100vh;
+  height: 100vh!important;
   background-color: white;
 }
 
 .auth-wrap > section {
   height: inherit;
+}
+
+@media (max-width: 1024px) {
+  .auth-wrap > section {
+    height: auto;
+  }
 }
 
 .auth-vector img {
@@ -125,4 +131,4 @@
 
 .checkbox-input input:checked + div {
   background: #5355a3;
-}
+} */

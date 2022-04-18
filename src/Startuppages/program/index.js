@@ -1,40 +1,53 @@
+import React, { useEffect, useState } from "react";
 import {
   ProgramCardWrapper,
   TabFilterWrapper,
   TodoCard,
-} from './program.sttyled'
-import woman from '../../assets/icons/woman.svg'
-import down from '../../assets/icons/downArrow.svg'
-import DownloadIcon from '../../assets/icons/downloadIcon.svg'
-import { Tabs } from '../../Startupcomponents/tabs/Tabs'
-import { Session } from './components/sessions'
-import { useHistory } from 'react-router-dom'
-import { Assignment } from './components/assignment'
-import { Rating } from './components/rating'
-import { CalenderComponent } from './components/calender'
+} from "./program.sttyled";
+import woman from "../../assets/icons/woman.svg";
+import down from "../../assets/icons/downArrow.svg";
+import DownloadIcon from "../../assets/icons/downloadIcon.svg";
+import { Tabs } from "../../Startupcomponents/tabs/Tabs";
+import { Session } from "./components/sessions";
+import { useHistory } from "react-router-dom";
+import { Assignment } from "./components/assignment";
+import { Rating } from "./components/rating";
+import { CalenderComponent } from "./components/calender";
+import { getPrograms } from "../../services";
 
 
 export const StartupProgram = () => {
-  const tabList = ['Calender', 'Session', 'Assignment', 'Rating']
+  const tabList = ["Calender", "Session", "Assignment"];
+
+  const [programInfo, setProgramInfo] = useState(null);
+  const [loading, setLoading] = useState(false);
+ 
+
+
+
 
   const {
     location: { hash },
-  } = useHistory()
+  } = useHistory();
+
+  
 
   const renderComponent = () => {
     switch (hash) {
-      case '#Calender':
-        return <CalenderComponent />
-      case '#Session':
-        return <Session />
-      case '#Assignment':
-        return <Assignment />
-      case '#Rating':
-        return <div></div>
+      case "#Calender":
+        return <CalenderComponent  data={ programInfo !== undefined && programInfo?.calendar} />;
+      case "#Session":
+        return <Session />;
+      case "#Assignment":
+        return <Assignment  />;
+      // case "#Rating":
+      //   return <Rating />;
       default:
-        return <span></span>
+        return <CalenderComponent data={ programInfo !== undefined && programInfo?.calendar} />
     }
-  }
+  };
+
+
 
   return (
     <div className="container">
@@ -45,15 +58,13 @@ export const StartupProgram = () => {
         <div className="div col-lg-6">
           <h5> Welcome to Knight Ventures Program</h5>
           <p className="my-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et amet,
-            facilisi sodales cursus tellus nam ut. Enim, at imperdiet praesent
-            velit. Eget consequat, sollicitudin molestie curabitur lobortis
-            imperdiet. Vulputate malesuada tortor sit mi laoreet. Iaculis quis
-            pretium urna.
+           {
+            programInfo?.description
+           }
           </p>
           <div className="my-5">
             <button>
-              Program Info Pack{' '}
+              Program Info Pack{" "}
               <img className="ps-2" src={DownloadIcon} alt="download Icon" />
             </button>
           </div>
@@ -63,23 +74,10 @@ export const StartupProgram = () => {
       <TabFilterWrapper className="pt-3">
         <section className="my-3 mx-3 container d-flex justify-content-between">
           <Tabs tabItems={tabList} />
-
-          <div className="me-3">
-            <button
-              className="d-flex align-items-center sort-btn"
-              style={{ columnGap: 7 }}
-              data-toggle="dropdown"
-            >
-              <span>
-                <span>Sort by: </span> Industry
-              </span>
-              <img src={down} alt="down" />
-            </button>
-          </div>
         </section>
       </TabFilterWrapper>
 
       <section className="mb-5 container ">{renderComponent()}</section>
     </div>
-  )
-}
+  );
+};

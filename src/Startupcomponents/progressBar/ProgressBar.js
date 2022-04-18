@@ -12,7 +12,6 @@ export const ProgressBar = ({ progress = 0, isMeasured = false, ...props }) => {
     }
   };
 
-  console.log(`isMeasured`, isMeasured, getProgressColor(), progress);
   return (
     <div>
       {!isMeasured && <label className="progress-label">{progress}%</label>}

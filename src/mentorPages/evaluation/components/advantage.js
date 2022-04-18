@@ -19,11 +19,12 @@ export const Advantage = () => {
         </section>
 
         <section className="evaluation_grade row mt-4 mb-4">
-          <button className="col-lg-2 col-12 mt-2">1</button>
-          <button className="col-lg-2 col-12 mt-2">2</button>
-          <button className="col-lg-2 col-12 mt-2">3</button>
-          <button className="col-lg-2 col-12 mt-2">4</button>
-          <button className="col-lg-2 col-12 mt-2">5</button>
+        <button className="col-lg-1 col-12 mt-2">0</button>
+        <button className="col-lg-1 col-12 mt-2">1</button>
+          <button className="col-lg-1 col-12 mt-2">2</button>
+          <button className="col-lg-1  col-12 mt-2">3</button>
+          <button className="col-lg-1 col-12 mt-2">4</button>
+          <button className="col-lg-1 col-12 mt-2">5</button>
         </section>
 
         <section className="evaluation_questions">
@@ -34,11 +35,12 @@ export const Advantage = () => {
         </section>
 
         <section className="evaluation_grade mt-4 mb-4">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+        <button className="col-lg-1 col-12 mt-2">0</button>
+        <button className="col-lg-1 col-12 mt-2">1</button>
+          <button className="col-lg-1 col-12 mt-2">2</button>
+          <button className="col-lg-1  col-12 mt-2">3</button>
+          <button className="col-lg-1 col-12 mt-2">4</button>
+          <button className="col-lg-1 col-12 mt-2">5</button>
         </section>
 
         <section className="evaluation_questions">
@@ -53,11 +55,12 @@ export const Advantage = () => {
         </section>
 
         <section className="evaluation_grade mt-4 mb-4">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+        <button className="col-lg-1 col-12 mt-2">0</button>
+        <button className="col-lg-1 col-12 mt-2">1</button>
+          <button className="col-lg-1 col-12 mt-2">2</button>
+          <button className="col-lg-1  col-12 mt-2">3</button>
+          <button className="col-lg-1 col-12 mt-2">4</button>
+          <button className="col-lg-1 col-12 mt-2">5</button>
         </section>
 
         <section className="evaluation_questions">
@@ -71,11 +74,12 @@ export const Advantage = () => {
         </section>
 
         <section className="evaluation_grade mt-4 mb-4">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+        <button className="col-lg-1 col-12 mt-2">0</button>
+        <button className="col-lg-1 col-12 mt-2">1</button>
+          <button className="col-lg-1 col-12 mt-2">2</button>
+          <button className="col-lg-1  col-12 mt-2">3</button>
+          <button className="col-lg-1 col-12 mt-2">4</button>
+          <button className="col-lg-1 col-12 mt-2">5</button>
         </section>
 
         <section className="evaluation_questions">
@@ -86,11 +90,12 @@ export const Advantage = () => {
         </section>
 
         <section className="evaluation_grade mt-4 mb-4">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+        <button className="col-lg-1 col-12 mt-2">0</button>
+        <button className="col-lg-1 col-12 mt-2">1</button>
+          <button className="col-lg-1 col-12 mt-2">2</button>
+          <button className="col-lg-1  col-12 mt-2">3</button>
+          <button className="col-lg-1 col-12 mt-2">4</button>
+          <button className="col-lg-1 col-12 mt-2">5</button>
         </section>
 
         <section className="evaluation_questions">
@@ -104,11 +109,12 @@ export const Advantage = () => {
         </section>
 
         <section className="evaluation_grade mt-4 mb-4">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+        <button className="col-lg-1 col-12 mt-2">0</button>
+        <button className="col-lg-1 col-12 mt-2">1</button>
+          <button className="col-lg-1 col-12 mt-2">2</button>
+          <button className="col-lg-1  col-12 mt-2">3</button>
+          <button className="col-lg-1 col-12 mt-2">4</button>
+          <button className="col-lg-1 col-12 mt-2">5</button>
         </section>
 
         <section className="evaluation_questions">
@@ -119,11 +125,12 @@ export const Advantage = () => {
         </section>
 
         <section className="evaluation_grade mt-3 mb-3">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+        <button className="col-lg-1 col-12 mt-2">0</button>
+        <button className="col-lg-1 col-12 mt-2">1</button>
+          <button className="col-lg-1 col-12 mt-2">2</button>
+          <button className="col-lg-1  col-12 mt-2">3</button>
+          <button className="col-lg-1 col-12 mt-2">4</button>
+          <button className="col-lg-1 col-12 mt-2">5</button>
         </section>
 
         <section className="evaluation_questions">
@@ -138,11 +145,12 @@ export const Advantage = () => {
         </section>
 
         <section className="evaluation_grade mt-3 mb-3">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+        <button className="col-lg-1 col-12 mt-2">0</button>
+        <button className="col-lg-1 col-12 mt-2">1</button>
+          <button className="col-lg-1 col-12 mt-2">2</button>
+          <button className="col-lg-1  col-12 mt-2">3</button>
+          <button className="col-lg-1 col-12 mt-2">4</button>
+          <button className="col-lg-1 col-12 mt-2">5</button>
         </section>
 
         <section className="evaluation_comment mt-5 mb-3">

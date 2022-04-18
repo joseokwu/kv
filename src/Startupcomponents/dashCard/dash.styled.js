@@ -9,10 +9,13 @@ export const CardWrapper = styled.div`
   padding: 25px;
   box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
   border-radius: 20px;
+  @media (max-width: 1024px) {
+    width: 82vw;
+  }
 
   .card_star {
     position: relative;
-    top: -5.4rem;
+    top: -4.4rem;
     left: 159px;
     border-radius: 0 0 18px 0;
   }
@@ -21,7 +24,7 @@ export const CardWrapper = styled.div`
     font-family: Lato;
     font-style: normal;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
     line-height: 48px;
     color: #181819;
   }
@@ -46,6 +49,12 @@ export const CardWrap = styled.div`
   margin-left: 20px;
   color: #fff;
   margin-top: 10px;
+  @media (max-width: 1024px) {
+    width: 100vw;
+    text-align: center;
+    padding: 30px;
+    margin-left: 10px;
+  }
 
   h5 {
     display: flex;
@@ -65,7 +74,7 @@ export const CardWrap = styled.div`
 
   span {
     font-size: 0.6rem;
-    line-height: 30%;
+    line-height: 120%;
     margin-top: 0.7rem;
     margin-left: 4px;
   }

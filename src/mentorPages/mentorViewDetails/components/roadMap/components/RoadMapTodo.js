@@ -1,23 +1,28 @@
-import { ProgressBar } from '../../../../../mentorComponents'
-import contributor from '../../../../../assets/images/contrib.svg'
+import { ProgressBar } from "../../../../../mentorComponents";
+import contributor from "../../../../../assets/images/contrib.svg";
+import { formatDate } from "../../../../../utils/helpers";
 
-export const RoadMapTodo = ({ progress = 0 }) => {
+export const RoadMapTodo = ({ progress = 0, data = {} }) => {
   return (
     <div className="road-map-todo">
-      <p className="todo-task">Drafting of business structure</p>
+      <p className="todo-task" style={{ flexBasis: "37%" }}>
+        {data?.tabName}
+      </p>
       <span>
         <p className="todo-info-header">Due Data</p>
-        <p className="todo-date">21 October, 2021</p>
+        <p className="todo-date">{formatDate(data?.dueDate)}</p>
       </span>
 
       <span>
         <p className="todo-info-header">Contributors</p>
         <div className="todo-contributor">
-          <img src={contributor} alt="contributor" />
-          <img src={contributor} alt="contributor" />
+          {data?.contributors?.length > 0 &&
+            data?.contributors?.map((d, i) => {
+              return <img src={d} alt="contributor" />;
+            })}
         </div>
       </span>
-      <span style={{ flexBasis: '22%' }}>
+      <span style={{ flexBasis: "22%" }}>
         <p className="todo-info-header">Progress</p>
         <ProgressBar
           isMeasured={true}
@@ -26,5 +31,5 @@ export const RoadMapTodo = ({ progress = 0 }) => {
         />
       </span>
     </div>
-  )
-}
+  );
+};

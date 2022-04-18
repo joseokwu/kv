@@ -9,9 +9,12 @@ export const PhoneInput = ({
   disabled = false,
   required = false,
   onChange = () => {},
+  setPhone ,
+  
 }) => {
   const [prefix, setPrefix] = useState("+234");
   const [countryAbv, setCountryAbv] = useState("NG");
+ 
 
   const getFlag = (abv) => {
     return `http://purecatamphetamine.github.io/country-flag-icons/3x2/${abv}.svg`;
@@ -19,6 +22,7 @@ export const PhoneInput = ({
 
   const handleChange = (e) => {
     onChange({ id: `${prefix}${e.target.value}` });
+    setPhone(e.target.value)
   };
   return (
     <div className="phoneNumber">
@@ -64,6 +68,7 @@ export const PhoneInput = ({
         </div>
         <div className="w-100">
           <input
+            maxLength={10}
             type="text"
             id={id}
             className="input-phone phone-text"

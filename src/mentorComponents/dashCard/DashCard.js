@@ -2,16 +2,15 @@ import React from 'react'
 import './dashCard.css'
 
 export const MentorDashCard = ({
-  icon = '',
   count = '100',
   name = 'name',
   color = '#E5FFE4',
-  className = '',
+  ...rest
 }) => {
   return (
-    <div className="dashCard_main">
+    <div className={`dashCard_main ${rest?.className ?? ""}`}>
       <section className="d-flex flex-column justify-content-between">
-        <p>{name}</p>
+        <p className="pb-4">{name}</p>
         <span>{count}</span>
         <Star color={color} />
       </section>

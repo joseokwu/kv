@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom'
 
 export const MentorViewAssignment = ({ history }) => {
   const { goBack } = history
-
   const { push } = useHistory()
 
   const com = [1, 2, 3, 4]
@@ -26,12 +25,7 @@ export const MentorViewAssignment = ({ history }) => {
         </section>
 
         <section className="">
-          <button
-            className="pending_evaluation"
-            onClick={() => push('/mentor/assignments/create/details')}
-          >
-            Give Feedback
-          </button>
+          <button className="pending_evaluation" onClick={() => push("/mentor/assignments/view/feedback")}>View Feedbacks</button>
         </section>
       </div>
 
@@ -85,13 +79,13 @@ export const MentorViewAssignment = ({ history }) => {
             </thead>
             <tbody>
               {/* <div className="text-left"> */}
-                {com.map((c, i) => {
-                  return (
-                    <section className="">
-                      <AssignmentStatus />
-                    </section>
-                  )
-                })}
+              {com.map((c, i) => {
+                return (
+                  <section key={i} className="">
+                    <AssignmentStatus />
+                  </section>
+                )
+              })}
               {/* </div> */}
             </tbody>
           </table>
@@ -112,6 +106,8 @@ export const MentorViewAssignment = ({ history }) => {
 }
 
 const AssignmentStatus = () => {
+  const { push } = useHistory();
+
   return (
     // <div className="assignment_table_body d-flex justify-content-between pb-3">
     //   <div className="assignment_startup mt-2">
@@ -135,7 +131,7 @@ const AssignmentStatus = () => {
         <span>Not submitted</span>
       </td>
       <td className="assignment_action mt-4">
-        <a href="#!">View</a>
+        <span onClick={() => push("/mentor/assignments/create/details")}>View</span>
       </td>
     </tr>
   )

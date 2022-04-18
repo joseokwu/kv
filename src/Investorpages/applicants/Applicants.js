@@ -1,12 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
 import search from "../../assets/icons/search.svg";
-import { ApplicationCard, Tabs } from "../../components";
+import { PageLoader, Tabs } from "../../components";
 import filter from "../../assets/icons/filterFunnel.svg";
 import down from "../../assets/icons/chevronDown.svg";
-import logo from "../../assets/images/sampleApplicantsLogo.png";
 import searchSm from "../../assets/icons/searchSm.svg";
 import "./applicants.css";
 import { Tab } from "react-bootstrap";
+import { getApplicant } from "../../services/partners";
+import {
+  AllComponent,
+  ApproveComponent,
+  ReapplyComponent,
+  DeclineComponent,
+  PendingComponent,
+  ExpireComponent,
+} from "../containers";
 
 export const BoosterApplicants = ({ history }) => {
   const {
@@ -14,32 +22,48 @@ export const BoosterApplicants = ({ history }) => {
     location: { hash },
   } = history;
 
-  const data = useMemo(() => {
-    return [
-      { status: "pending" },
-      { status: "approved" },
-      { status: "declined" },
-      { status: "expired" },
-      { status: "re-applied" },
-      { status: "pending" },
-      { status: "approved" },
-      { status: "declined" },
-      { status: "expired" },
-      { status: "re-applied" },
-      { status: "pending" },
-      { status: "approved" },
-      { status: "declined" },
-      { status: "expired" },
-      { status: "re-applied" },
-      { status: "pending" },
-      { status: "approved" },
-      { status: "declined" },
-      { status: "expired" },
-      { status: "re-applied" },
-    ];
-  }, []);
+  const [applicants, setApplicatnts] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const [dataToRender, setDataToRender] = useState([]);
+  const getFetchData = async () => {
+    setLoading(true);
+    const res = await getApplicant();
+    setApplicatnts(res?.all);
+    setLoading(false);
+  };
+
+  const pendin =
+    applicants && applicants?.filter((item) => item?.status === "pending");
+  const approve =
+    applicants && applicants?.filter((item) => item?.status === "approved");
+  const decline =
+    applicants && applicants?.filter((item) => item?.status === "declined");
+  const expire =
+    applicants && applicants?.filter((item) => item?.status === "expired");
+  const reApply =
+    applicants && applicants?.filter((item) => item?.status === "re-applied");
+
+  const renderContent = () => {
+    switch (hash.replaceAll("%20", " ")) {
+      case "#all":
+        return <AllComponent data={applicants} />;
+      case "#pending":
+        return <PendingComponent data={pendin} />;
+      case "#approved":
+        return <ApproveComponent data={approve} />;
+
+      case "#declined":
+        return <DeclineComponent data={decline} />;
+
+      case "#expired":
+        return <ExpireComponent data={expire} />;
+
+      case "#re-applied":
+        return <ReapplyComponent data={reApply} />;
+      default:
+        return <AllComponent data={applicants} />;
+    }
+  };
 
   const tabItems = [
     "all",
@@ -51,22 +75,29 @@ export const BoosterApplicants = ({ history }) => {
   ];
 
   useEffect(() => {
-    setDataToRender(
-      data.filter((d, i) => {
-        if (hash === "#all" || hash === "") {
-          return d;
-        } else {
-          return `#${d.status}` === hash;
-        }
-      })
+    getFetchData();
+
+    return () => {
+      setApplicatnts(null);
+    };
+  }, [hash]);
+
+  console.log(applicants);
+
+  if (loading) {
+    return (
+      <PageLoader
+        dashboard={true}
+        num={[applicants, pendin, approve, decline, expire, reApply]}
+      />
     );
-  }, [data, hash]);
+  }
 
   return (
     <div className="wrapper">
       <section className="d-flex justify-content-between align-items-center applicant-header">
         <h1>Startup Application</h1>
-        <img src={search} alt="search" />
+        {/* <img src={search} alt="search" /> */}
       </section>
 
       <section className="d-flex align-items-center justify-content-between mb-4">
@@ -160,15 +191,7 @@ export const BoosterApplicants = ({ history }) => {
         </div>
       </section>
 
-      <section className="row application-card-list">
-        {dataToRender.map((d, i) => {
-          return (
-            <div className="col-lg-6 mb-4" key={`applicants-${i}`}>
-              <ApplicationCard logo={logo} status={d.status} index={i} />
-            </div>
-          );
-        })}
-      </section>
+      <section className="row application-card-list">{renderContent()}</section>
     </div>
   );
 };

@@ -178,7 +178,7 @@ const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
     <div
       className="modal fade"
       id={id}
-      tabindex="-1"
+      tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"

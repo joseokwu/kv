@@ -1,49 +1,50 @@
-
 .form-dp {
-    width: 143px;
-    height: 143px;
-    border-radius: 50%;
-    border: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-  
+  width: 143px;
+  height: 143px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
 .image-placeholder {
-    display: block;
-    text-align: center;
-  }
-  
-  .image-placeholder p {
-    font-family: DM Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 20px;
-    color: #bdbdbd;
-  }
+  display: block;
+  text-align: center;
+}
 
+.image-placeholder p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #bdbdbd;
+}
 
 .add-dp {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 45px;
-    height: 45px;
-    background: #f2f3ff;
-    border-radius: 60px;
-  }
-  
-  .add-dp input {
-    position: absolute;
-    top: 0;
-    width: inherit;
-    height: inherit;
-    opacity: 0;
-  }
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+  background: #f2f3ff;
+  border-radius: 60px;
+}
 
-  .edit_input {
-    min-width: 100%;
-  }
+.add-dp input {
+  position: absolute;
+  top: 0;
+  width: inherit;
+  height: inherit;
+  opacity: 0;
+}
+
+.edit_input {
+  min-width: 100%;
+}
+
+input {
+  padding: 0 !important;
+}

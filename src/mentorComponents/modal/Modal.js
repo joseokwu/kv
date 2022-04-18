@@ -10,7 +10,7 @@ export const Modal = ({
   withHeader = true,
 }) => {
   return (
-    <div className="modal fade" tabindex="-1" role="dialog" id={id}>
+    <div className="modal fade" tabIndex="-1" role="dialog" id={id}>
       <div
         className={`modal-dialog ${
           position === "center" && "modal-dialog-centered"
@@ -24,7 +24,7 @@ export const Modal = ({
               <div className="w-100">
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >

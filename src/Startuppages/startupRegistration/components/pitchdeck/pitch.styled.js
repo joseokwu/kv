@@ -57,7 +57,7 @@ export const FormWrapper = styled.div`
   height: ${(props) => (props.height ? props.height : '80%')};
   padding: 2rem;
   order: 2;
-  margin: 3rem 0;
+  margin: 2rem 0;
   flex: none;
   border: 0 solid #d3d3d3;
   border-radius: 5px;
@@ -97,7 +97,7 @@ export const FormWrapper = styled.div`
 
     input {
       width: 50%;
-      background: #fafafc;
+      background: #fafafc!important;
       border-radius: 4px;
 
       ::placeholder {
@@ -189,6 +189,13 @@ export const FileWrapper = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
 
+  /* .download {
+    color: #ffffff!important ;
+    background: #2e3192;
+    cursor: pointer;
+  } */
+
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -223,10 +230,16 @@ export const LabelButton = styled.label`
   font-size: 14px;
   line-height: 140%;
   padding: 8px 12px;
-  background: #f9f9fc;
+  background: transparent;
+  border: 1px solid #2e3192;
   border-radius: 4px;
   color: #2e3192 !important;
   /* margin-top:5px; */
+
+  :hover {
+    background: #2e3292;
+    color: #ffffff!important;
+  }
 `
 
 export const VideoWrapper = styled.div`

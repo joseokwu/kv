@@ -8,3 +8,8 @@
   padding-right: 2rem !important;
   cursor: pointer;
 }
+
+select {
+  padding: 0 !important;
+}
+

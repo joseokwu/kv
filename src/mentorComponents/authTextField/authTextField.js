@@ -38,7 +38,7 @@ export const AuthTextField = ({
   )
 }
 
-export const AuthPasswordField = ({ className, numb, message }) => {
+export const AuthPasswordField = ({ className, numb, message, placeholder, label }) => {
   return (
     <div className="mentor_field">
       <Form.Item
@@ -60,7 +60,8 @@ export const AuthPasswordField = ({ className, numb, message }) => {
           type="password"
           id="password"
           className={`${className}`}
-          placeholder="Password"
+          placeholder={placeholder}
+          label={label}
         />
       </Form.Item>
     </div>

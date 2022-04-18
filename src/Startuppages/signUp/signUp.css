@@ -1,4 +1,4 @@
-.gray-card {
+/* .gray-card {
   width: 100%;
   max-width: 585px;
   background: #f9f9fc;
@@ -8,7 +8,7 @@
 }
 
 .auth-wrap {
-  height: 100vh;
+  height: 100vh!important;
   background-color: white;
 }
 
@@ -125,4 +125,4 @@
 
 .checkbox-input input:checked + div {
   background: #5355a3;
-}
+} */

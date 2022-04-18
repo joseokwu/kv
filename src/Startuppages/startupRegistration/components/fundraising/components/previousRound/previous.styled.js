@@ -1,22 +1,20 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
 
 export const BodyWrapper = styled.div`
   margin-bottom: 10px;
   margin-top: 30px;
-  margin-left: 15px;
+  margin-left: 0px;
 
   .sold {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 3rem;
-    width: 50%;
-
+    padding: 4rem;
+    width: 100%;
     background: #fff;
     margin: 10px;
-    border: 1.5px solid #e6e7e9;
-    box-sizing: border-box;
-    border-radius: 6px;
+    border: 1px solid #f2f2f2;
+    border-radius: 5px;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -59,12 +57,12 @@ export const BodyWrapper = styled.div`
   }
 
   .datePick {
-    background: #f4f4f4;
+    background: #fafafc !important;
   }
 
   input {
     border: none;
-    background: #fafafc;
+    background: #fafafc !important;
     border-radius: 4px;
     width: 75%;
     margin-left: 8px;
@@ -86,19 +84,28 @@ export const BodyWrapper = styled.div`
 
   textarea {
     border: none;
-    background: #f4f4f4;
+    background: #fafafc !important;
     width: 70%;
     margin-left: 8px;
   }
   .cust {
     border: none;
-    background: #f4f4f4;
+    background: #fafafc;
     width: 70%;
     margin-left: 15px;
+    border-radius: 7px;
 
     @media (max-width: 768px) {
       width: 100%;
     }
+  }
+
+  .extra {
+    height: 2.4rem;
+  }
+
+  .error {
+    color: red;
   }
 
   .custs {
@@ -109,11 +116,15 @@ export const BodyWrapper = styled.div`
     border-radius: 7px;
     outline: 0;
 
-    &:focus {
+    /* &:focus {
       outline: 0;
-    }
+    } */
   }
-`
+  .active {
+    background: #dcebff;
+    color: #2e3192;
+  }
+`;
 
 export const BntWrap = styled.div`
   button {
@@ -130,7 +141,7 @@ export const BntWrap = styled.div`
       color: #2e3192;
     }
   }
-`
+`;
 
 export const BoxBorder = styled.div`
   flex-direction: column;
@@ -148,4 +159,20 @@ export const BoxBorder = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
+export const Terms = styled.div`
+  width: 85%;
+  p {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #828282;
+
+    span {
+      color: #121298;
+      font-weight: 600;
+    }
+  }
+`;

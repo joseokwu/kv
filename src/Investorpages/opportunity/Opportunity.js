@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import left from "../../assets/icons/chervonLeft.svg";
 import "./opportunity.css";
 import { Tabs, Tag } from "../../components";
@@ -12,8 +12,28 @@ import { BusinessCanvas } from "./components/businessCanvas/BusinessCanvas";
 import { Fundraising } from "./components/fundraising/Fundraising";
 import { Milestone } from "./components/milestone/Milestone";
 import { RoadMap } from "./components/roadMap/RoadMap";
+import { getStartupInvesrtorProfile } from '../../services/investor';
+import { PageLoader } from "../../components/pageLoader/PageLoader";
 
 export const Opportunity = ({ history }) => {
+  const [profileData, setProfileData] = useState({});
+  const [loading , setLoading] = useState(false);
+  const getData = async () => {
+    setLoading(true);
+    const res = await getStartupInvesrtorProfile();
+    setProfileData(res);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getData();
+    return () => {
+      setProfileData({});
+    };
+  }, []);
+  console.log(profileData)
+
+
   const {
     location: { hash, pathname },
     push,
@@ -28,32 +48,35 @@ export const Opportunity = ({ history }) => {
     "product road map",
   ];
 
-  console.log(`pathname`, pathname);
-
   const renderContent = () => {
     switch (hash.replaceAll("%20", " ")) {
       case "#product":
-        return <Product />;
+        return <Product data={profileData?.product} />;
       case "#pitch deck":
-        return <PitchDeck />;
+        return <PitchDeck data={profileData?.pitchDeck} />;
       case "#team":
-        return <Team />;
+        return <Team data={profileData?.team} />;
       case "#business canvas":
-        return <BusinessCanvas />;
+        return <BusinessCanvas data={profileData?.businessCanvas} />;
 
       case "#fundraising":
-        return <Fundraising />;
+        return <Fundraising data={profileData?.fundRaising} />;
 
       case "#Milestone/Timeline":
-        return <Milestone />;
+        return <Milestone data={profileData?.mileStone} />;
 
       case "#product road map":
-        return <RoadMap />;
+        return <RoadMap data={profileData?.productRoadMap} />;
 
       default:
-        return <Product />;
+        return <Product data={profileData?.product} />;
     }
   };
+
+  if(loading){
+    return <PageLoader dashboard={true} num={[1,2,3,4
+     ]} big={false} />
+  }else{
   return (
     <div>
       <article className="wrapper pt-3" style={{ background: "#F9F9FC" }}>
@@ -79,11 +102,11 @@ export const Opportunity = ({ history }) => {
 
         <div className="row mt-5">
           <div className="col-lg-7">
-            <OppCompanyInfo />
-            <FinancialDetails />
+            <OppCompanyInfo name={profileData?.name} />
+            <FinancialDetails data={profileData?.financialDetails} />
           </div>
           <div className="col-lg-5">
-            <FundingRound />
+            <FundingRound  data={profileData?.fundingRound}/>
           </div>
         </div>
       </article>
@@ -94,5 +117,6 @@ export const Opportunity = ({ history }) => {
         <div className="py-4">{renderContent()}</div>
       </article>
     </div>
-  );
+  )
+          }
 };

@@ -1,37 +1,10 @@
-import React, { useState } from "react";
+import React, { useState , useEffect, useCallback } from "react";
 import { Header, Sidebar , DashSidebar } from "../index";
 import "./mainLayout.css";
 
-// const MainLayout = ({ children }) => {
-//   const [open, setOpen] = useState(false);
-//   return (
-//     <div>
-//       <section className="layout-header">
-//         <Header setOpen={setOpen} open={open} />
-//       </section>
-//       <section className="layout-main">
-//         <div className={`${open ? "sm-side" : "sm-side-close"}`}>
-//           <Sidebar />
-//         </div>
-//         <div className="layout-child">{children}</div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export const WithStartupMainLayout = (Component) => {
-//   return (props) => {
-//     return (
-//       <>
-//         <MainLayout>
-//           <Component {...props} />
-//         </MainLayout>
-//       </>
-//     );
-//   };
-// };
-
 export const DashboardLayout = ({children}) =>{
+
+
   const [open, setOpen] = useState(false);
   return (
     <div>
@@ -42,13 +15,16 @@ export const DashboardLayout = ({children}) =>{
         <div className={`${open ? "sm-side" : "sm-side-close"}`}>
           <DashSidebar />
         </div>
-        <div className="layout-child">{children}</div>
+        <div className="layoutChild">{children}</div>
       </section>
     </div>
   );
 }
 
 export const WithStartupDashboardLayout = (Component) => {
+
+ 
+
   return (props) => {
     return (
       <>
@@ -59,3 +35,4 @@ export const WithStartupDashboardLayout = (Component) => {
     );
   };
 };
+

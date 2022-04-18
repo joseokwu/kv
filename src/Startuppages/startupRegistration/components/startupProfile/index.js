@@ -1,100 +1,194 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   HeaderStartup,
   ImageWrapper,
   InputWrapper,
   FormWrapper,
-} from './startup.styled'
-import { UserOutlined, PlusOutlined } from '@ant-design/icons'
-import { useFormik } from 'formik'
-import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import { CustomSelect } from '../../../../Startupcomponents/select/customSelect'
-import { stage, optionsNumb, options } from '../../../../constants/domiData'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
-import { useActivity } from '../../../../hooks/useBusiness'
+} from "./startup.styled";
+import "./style.css";
+import { UserOutlined, PlusOutlined } from "@ant-design/icons";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { DatePicker } from "antd";
+import "react-datepicker/dist/react-datepicker.css";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
+import { useActivity } from "../../../../hooks/useBusiness";
+import { updateFounderProfile } from "../../../../services/startup";
+import { CircularLoader } from "./../../../../Startupcomponents/CircluarLoader/CircularLoader";
+import toast from "react-hot-toast";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "./../../../../hooks/useAuth";
+import { upload } from "../../../../services/utils";
+import CountryDropdown from "country-dropdown-with-flags-for-react";
+import moment from "moment";
 
 export const StartupProfile = () => {
-  const [disImg, setImg] = useState(null)
 
-  const [startDate, setStartDate] = useState(new Date())
+  const { changePath  } = useActivity();
 
-  const [phone, setPhone] = useState()
 
-  const {
-    changePath,
-    state: { path },
-  } = useActivity()
+  const dateFormat = "YYYY-MM-DD";
+  const { updateProfile, stateAuth , updateStartupInfo } = useAuth();
+  const [logo, setLogo] = useState(
+    stateAuth?.startupData?.startUpProfile?.logo ?? null
+  );
+  const [logoUploading, setLogoUploading] = useState(false);
 
-  const onChangeImage = (e) => {
-    const { files } = e.target
-
-    if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]))
-    }
-  }
-
-  const next = () => {
-    changePath(path + 1)
-  }
-
-  const onSubmit = (value) => {}
-
+  const [loading] = useState(false);
+ 
   const formik = useFormik({
     initialValues: {
-      startupname: '',
-      brand: '',
-      elevatorpitch: '',
-      yearFounded: startDate,
-      regNumber: '',
-      companySize: 'Select-size',
-      sector: 'Select-sector',
-      stage: 'Select-stage',
-      acceleratornames: '',
-      address: '',
-      country: '',
-      state: '',
-      city: '',
-      email: '',
-      phone: phone,
-      profileHandle: '',
-      website: '',
-      linkedin: '',
-      twitter: '',
+      startupName: stateAuth?.user?.businessname ?? "",
+      elevatorPitch:
+        stateAuth?.startupData?.startUpProfile?.elevatorPitch ?? "",
+      brand: stateAuth?.startupData?.startUpProfile?.brand ?? "",
+      registrationNumber:
+        stateAuth?.startupData?.startUpProfile?.registrationNumber ?? "",
+      companySize: stateAuth?.startupData?.startUpProfile?.companySize ?? "",
+      businessSector:
+        stateAuth?.startupData?.startUpProfile?.businessSector ?? "",
+      startupStage: stateAuth?.startupData?.startUpProfile?.startupStage ?? "",
+      acceleratorName:
+        stateAuth?.startupData?.startUpProfile?.acceleratorName ?? "",
+      registeredAddress:
+        stateAuth?.startupData?.startUpProfile?.contactInfo
+          ?.registeredAddress ?? "",
+      country:
+        stateAuth?.startupData?.startUpProfile?.contactInfo?.country ?? "",
+      state: stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? "",
+      city: stateAuth?.startupData?.startUpProfile?.contactInfo?.city ?? "",
+      companyEmail:
+        stateAuth?.startupData?.startUpProfile?.contactInfo?.companyEmail ?? "",
+      profileHandle:
+        stateAuth?.startupData?.startUpProfile?.socialMedia?.profileHandle ??
+        "",
+      companyWebsite:
+        stateAuth?.startupData?.startUpProfile?.socialMedia?.companyWebsite ??
+        "",
+      linkedInHandle:
+        stateAuth?.startupData?.startUpProfile?.socialMedia?.linkedInHandle ??
+        "",
+      twitterHandle:
+        stateAuth?.startupData?.startUpProfile?.socialMedia?.twitterHandle ??
+        "",
     },
-    validateOnBlur: true,
+    validationSchema: Yup.object({
+      elevatorPitch: Yup.string().min(3).required("This field is required"),
+      brand: Yup.string()
+        .min(3, "This field must be greater than 3")
+        .required("This field is required"),
+      registrationNumber: Yup.number()
+        .min(3)
+        .required("This field is required"),
+      companySize: Yup.number().required("This field is required"),
+      businessSector: Yup.string().required("This field is required"),
+      startupStage: Yup.string().required("This field is require"),
+      acceleratorName: Yup.string().required("This field is required"),
+      registeredAddress: Yup.string().required("This field is required"),
+      country: Yup.string().required("This field is required"),
+      state: Yup.string().required("This field is required"),
+      city: Yup.string().required("This field is required"),
+      companyEmail: Yup.string()
+        .email("Invalid email")
+        .required("Email Required"),
+      profileHandle: Yup.string().required("This field is required"),
+      companyWebsite: Yup.string().url().required("This field is required"),
+      linkedInHandle: Yup.string().required("This field is required"),
+      twitterHandle: Yup.string().required("This field is required"),
+      startupName: Yup.string().required("This field is required"),
+    }),
     onSubmit: (value) => onSubmit(value),
-  })
+  });
+
+  const handleChange = (e, prefix = "") => {
+    const { name, value } = e.target;
+    if (prefix !== "") {
+      updateProfile("startupProfile",{
+        [prefix]: {
+          ...stateAuth?.startupData?.startUpProfile[prefix],
+          [name]: value,
+        },
+      });
+      formik.handleChange(e);
+      return;
+    }
+    updateProfile("startupProfile", {[name]: value });
+    formik.handleChange(e);
+  };
+  const handlePhoneInput = (value) => {
+    updateProfile("startupProfile",{
+      contactInfo: {
+        ...stateAuth?.startupData?.startUpProfile?.contactInfo,
+        phoneNumber: value,
+      },
+    });
+  };
+  const handleDateInput = (value) => {
+    updateProfile("startupProfile" ,{
+      yearFounded: value,
+    });
+  };
+  const onChangeImage = async (e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0, files[0]);
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData);
+      setLogo(response?.path);
+      updateProfile("startupProfile",{
+        logo: response?.path,
+      });
+      setLogoUploading(false);
+    } catch (error) {
+      setLogoUploading(false);
+      toast.error(error?.response?.data?.message ?? "Unable to upload image");
+    }
+  };
+
+  const onSubmit = async () => {
+    updateStartupInfo()
+  };
 
   return (
     <>
-      <HeaderStartup>
-        <h5> Startup Profile</h5>
+      <HeaderStartup className="mb-3">
+        <h5 style={{ color: "#2E3192" }}>Startup Profile</h5>
         <p>Let's get to know your startup</p>
       </HeaderStartup>
 
-      <div style={{ marginTop: '10px', marginLeft: '10px' }}>
-        <ImageWrapper>
-          {disImg === null ? (
-            <UserOutlined />
+      <ImageWrapper>
+        <div
+          className="start-img-p"
+          style={{ marginTop: "10px", marginLeft: "10px" }}
+        >
+          {logo === null ? (
+            logoUploading ? (
+              <CircularLoader color={"#000"} />
+            ) : (
+              <UserOutlined />
+            )
           ) : (
             <img
               className=""
-              src={disImg}
-              style={{ borderRadius: '70px', width: '90px', height: '90px' }}
+              src={logo}
+              style={{ borderRadius: "70px", width: "90px", height: "90px" }}
               alt=""
             />
           )}
-        </ImageWrapper>
+        </div>
+      </ImageWrapper>
 
-        <InputWrapper for="dp">
-          <input type="file" onChange={onChangeImage} id="dp" hidden />
-          <PlusOutlined style={{color: 'white'}} />
-        </InputWrapper>
-      </div>
+      <InputWrapper for="dp">
+        <input type="file" onChange={onChangeImage} id="dp" hidden />
+        <PlusOutlined style={{ color: "white" }} />
+      </InputWrapper>
+
       <form onSubmit={formik.handleSubmit}>
         <FormWrapper className="pe-5">
           <div className="div border-bottom pb-3">
@@ -103,248 +197,410 @@ export const StartupProfile = () => {
 
           <div className="row">
             <div className="form-group col-12">
-              <label>Elevator Pitch *</label>
+              <label>
+                Elevator Pitch<span style={{ color: "red" }}>*</span>
+              </label>
               <textarea
-                name="elevatorpitch"
+                id="elevatorPitch"
+                name="elevatorPitch"
                 placeholder="One line pitch 150 words maximum"
-                value={formik.values.elevatorpitch}
-                onChange={formik.handleChange}
-                rows="7"
+                onChange={(e) => handleChange(e)}
+                defaultValue={formik.values.elevatorPitch}
+                onBlur={formik.handleBlur}
+                rows="4"
                 cols="4"
                 className="form-control"
               ></textarea>
+              {formik.touched.elevatorPitch && formik.errors.elevatorPitch ? (
+                <label className="error">{formik.errors.elevatorPitch}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Startup *</label>
+              <label>
+                Startup<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="startupName"
                 type="text"
-                name="startupname"
-                value={formik.values.startupname}
-                onChange={formik.handleChange}
-                className="form-control"
+                name="startupName"
+                defaultValue={formik.values.startupName}
+                disabled={formik.values.startupName !== ""}
+                placeholder="Entity Name As Per Registration"
+                onChange={(e) => handleChange(e)}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.startupName && formik.errors.startupName ? (
+                <label className="error">{formik.errors.startupName}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Brand *</label>
+              <label>
+                Brand<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="brand"
                 type="text"
                 name="brand"
                 placeholder="eg; Knight Ventures"
-                value={formik.values.brand}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.brand}
+                onChange={(e) => handleChange(e)}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.brand && formik.errors.brand ? (
+                <label className="error">{formik.errors.brand}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Year Founded *</label>
+              <label>
+                Year Founded<span style={{ color: "red" }}>*</span>
+              </label>
               <DatePicker
-                className="date-input col-lg-12"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                className="col-md-12 py-2 px-2"
+                id="yearFounded"
+                name="yearFounded"
+                defaultValue={
+                  moment(stateAuth?.startupData?.startUpProfile?.yearFounded) ??
+                  moment()
+                }
+                format={dateFormat}
+                onChange={(_, dateString) => handleDateInput(dateString)}
+                onBlur={formik.handleBlur}
               />
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Registration Number *</label>
+              <label>
+                Businesss Registration Number
+                <span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="registrationNumber"
                 type="text"
-                name="regNumber"
+                name="registrationNumber"
                 placeholder="1234567890"
-                value={formik.values.regNumber}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.registrationNumber}
+                onChange={(e) => handleChange(e)}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.registrationNumber &&
+              formik.errors.registrationNumber ? (
+                <label className="error">
+                  {formik.errors.registrationNumber}
+                </label>
+              ) : null}
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Company Size *</label>
-              <CustomSelect
-                options={optionsNumb}
-                value={formik.values.companySize}
-                onChange={(value) =>
-                  formik.setFieldValue('companySize', value.value)
-                }
-                className="cust"
-              />
+              <label>
+                Company Size<span style={{ color: "red" }}>*</span>
+              </label>
+              <div>
+                <input
+                  id={"companySize"}
+                  name={"companySize"}
+                  defaultValue={formik.values.companySize}
+                  onChange={(e) => handleChange(e)}
+                  onBlur={formik.handleBlur}
+                  className="sel ps-3 pe-3"
+                  placeholder="Enter company size"
+                />
+                {formik.touched.companySize && formik.errors.companySize ? (
+                  <label className="error">{formik.errors.companySize}</label>
+                ) : null}
+              </div>
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>Which sector does your business operate in *</label>
-              <CustomSelect
-                options={options}
-                value={formik.values.sector}
-                onChange={(value) =>
-                  formik.setFieldValue('sector', value.value)
-                }
-                className="cust"
-              />
+              <label>
+                Which sector does your business operate in?
+                <span style={{ color: "red" }}>*</span>
+              </label>
+              <div>
+                <input
+                  id={"businessSector"}
+                  name={"businessSector"}
+                  defaultValue={formik.values.businessSector}
+                  onChange={(e) => handleChange(e)}
+                  onBlur={formik.handleBlur}
+                  className="sel ps-3 pe-3"
+                  placeholder="Enter Business Sector"
+                />
+                {formik.touched.businessSector &&
+                formik.errors.businessSector ? (
+                  <label className="error">
+                    {formik.errors.businessSector}
+                  </label>
+                ) : null}
+              </div>
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>What stage is your business in *</label>
-              <CustomSelect
-                options={stage}
-                value={formik.values.stage}
-                onChange={(value) => formik.setFieldValue('stage', value.value)}
-                className="cust"
+              <label>
+                What stage is your business in
+                <span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                id={"startupStage"}
+                name={"startupStage"}
+                defaultValue={formik.values.startupStage}
+                onChange={(e) => handleChange(e)}
+                onBlur={formik.handleBlur}
+                className="sel ps-3 pe-3"
+                placeholder="Enter Business Stage"
               />
+              {formik.touched.startupStage && formik.errors.startupStage ? (
+                <label className="error">{formik.errors.startupStage}</label>
+              ) : null}
             </div>
 
             <div className="form-group col-12">
               <label>
                 Enter the name of Accelerator /incubator in case you've worked
-                with any{' '}
+                with any{" "}
               </label>
               <input
+                id="acceleratorName"
                 type="text"
-                name="acceleratornames"
+                name="acceleratorName"
                 placeholder="Enter Accelerator name"
-                value={formik.values.acceleratornames}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.acceleratorName}
+                onChange={(e) => handleChange(e)}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.acceleratorName &&
+              formik.errors.acceleratorName ? (
+                <label className="error">{formik.errors.acceleratorName}</label>
+              ) : null}
             </div>
           </div>
         </FormWrapper>
 
         <FormWrapper height="70%">
-          <div className="div">
+          <div className="div border-bottom pb-3">
             <span>Contact info</span>
           </div>
 
-          <div className="row">
+          <div className="row mt-4">
             <div className="form-group col-12">
-              <label>Registered Address </label>
+              <label>
+                Registered Address<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="registeredAddress"
                 type="text"
-                name="address"
+                name="registeredAddress"
                 placeholder="Enter your registered address"
-                value={formik.values.address}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.registeredAddress}
+                onChange={(e) => handleChange(e, "contactInfo")}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.registeredAddress &&
+              formik.errors.registeredAddress ? (
+                <label className="error">
+                  {formik.errors.registeredAddress}
+                </label>
+              ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>Country *</label>
-              <input
+              <label>
+                Country<span style={{ color: "red" }}>*</span>
+              </label>
+              <CountryDropdown
+                id="country"
                 type="text"
                 name="country"
-                placeholder="Enter your country"
-                value={formik.values.country}
-                onChange={formik.handleChange}
-                className="form-control"
-              />
+                className="form-control px-5 py-1 country-bg"
+                preferredCountries={["ng"]}
+                defaultValue={formik.values.country}
+                onChange={(e) => handleChange(e, "contactInfo")}
+                onBlur={formik.handleBlur}
+              ></CountryDropdown>
+              {formik.touched.country && formik.errors.country ? (
+                <label className="error">{formik.errors.country}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>State *</label>
+              <label>
+                State<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="state"
                 type="text"
                 name="state"
                 placeholder="Enter your state"
-                value={formik.values.state}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.state}
+                onChange={(e) => handleChange(e, "contactInfo")}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.state && formik.errors.state ? (
+                <label className="error">{formik.errors.state}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>City *</label>
+              <label>
+                City<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="city"
                 type="text"
                 name="city"
                 placeholder="Enter your city"
-                value={formik.values.city}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.city}
+                onChange={(e) => handleChange(e, "contactInfo")}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.city && formik.errors.city ? (
+                <label className="error">{formik.errors.city}</label>
+              ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12 ">
-              <label>Mobile Number *</label>
+              <label>
+                Mobile Number<span style={{ color: "red" }}>*</span>
+              </label>
               <PhoneInput
+                id="phoneNumber"
                 international
-                name="phone"
+                name="phoneNumber"
                 countryCallingCodeEditable={true}
-                className="custs"
-                value={phone}
-                onChange={setPhone}
+                className="custs ps-3 py-2"
+                value={
+                  stateAuth?.startupData?.startUpProfile?.contactInfo
+                    .phoneNumber ?? ""
+                }
+                onChange={handlePhoneInput}
+                MaxLength={17}
               />
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Company Email *</label>
+              <label>
+                Company Email<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="companyEmail"
                 type="text"
-                name="email"
+                name="companyEmail"
                 placeholder="Enter your email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.companyEmail}
+                onChange={(e) => handleChange(e, "contactInfo")}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.companyEmail && formik.errors.companyEmail ? (
+                <label className="error">{formik.errors.companyEmail}</label>
+              ) : null}
             </div>
           </div>
         </FormWrapper>
 
         <FormWrapper height="70%">
-          <div className="div">
+          <div className="div border-bottom pb-3">
             <span>Web & Social Media</span>
           </div>
 
-          <div className="row">
+          <div className="row mt-4">
             <div className="form-group col-lg-6 col-12">
-              <label>What should be your startup profile handle </label>
+              <label>What should be your startup profile handle</label>
               <input
+                id="profileHandle"
                 type="text"
                 name="profileHandle"
                 placeholder="Enter your startup profile handle"
-                value={formik.values.profileHandle}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.profileHandle}
+                onChange={(e) => handleChange(e, "socialMedia")}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.profileHandle && formik.errors.profileHandle ? (
+                <label className="error">{formik.errors.profileHandle}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Website *</label>
+              <label>
+                Website<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="companyWebsite"
                 type="text"
-                name="website"
+                name="companyWebsite"
                 placeholder="Enter your startup website"
-                value={formik.values.website}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.companyWebsite}
+                onChange={(e) => handleChange(e, "socialMedia")}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.companyWebsite && formik.errors.companyWebsite ? (
+                <label className="error">{formik.errors.companyWebsite}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Linkedin *</label>
+              <label>
+                Linkedin<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="linkedInHandle"
                 type="text"
-                name="linkedin"
+                name="linkedInHandle"
                 placeholder="Enter your Linkedin profile name"
-                value={formik.values.linkedin}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.linkedInHandle}
+                onChange={(e) => handleChange(e, "socialMedia")}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.linkedInHandle && formik.errors.linkedInHandle ? (
+                <label className="error">{formik.errors.linkedInHandle}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>Twitter *</label>
+              <label>
+                Twitter<span style={{ color: "red" }}>*</span>
+              </label>
               <input
+                id="twitterHandle"
                 type="text"
-                name="twitter"
+                name="twitterHandle"
                 placeholder="Enter your Twitter profile name"
-                value={formik.values.twitter}
-                onChange={formik.handleChange}
-                className="form-control"
+                defaultValue={formik.values.twitterHandle}
+                onChange={(e) => handleChange(e, "socialMedia")}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
               />
+              {formik.touched.twitterHandle && formik.errors.twitterHandle ? (
+                <label className="error">{formik.errors.twitterHandle}</label>
+              ) : null}
             </div>
           </div>
           <div className="d-flex my-4 justify-content-end">
             <div>
-              <CustomButton background="#06ADEF">Save</CustomButton>
+              <CustomButton
+                type="button"
+                disabled={loading}
+                background="#06ADEF"
+                onClick={() => {
+                  formik.handleSubmit();
+                }}
+              >
+                {loading ? <CircularLoader /> : "Save"}
+              </CustomButton>
             </div>
             <div className="mx-2">
-              <CustomButton onClick={next} background="#2E3192">
-                Next
+              <CustomButton
+                type="button"
+                onClick={()=> changePath(2)}
+                background="#2E3192"
+              >
+               Next
               </CustomButton>
             </div>
           </div>
         </FormWrapper>
       </form>
     </>
-  )
-}
+  );
+};

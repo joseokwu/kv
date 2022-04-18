@@ -8,11 +8,12 @@ export const Modal = ({
   id = "",
   subTitle = "",
   withHeader = true,
+  width = 847,
 }) => {
   return (
     <div
       className="modal fade"
-      tabindex="-1"
+      tabIndex="-1"
       role="dialog"
       id={id}
       style={{ overflowY: "auto" }}
@@ -22,7 +23,7 @@ export const Modal = ({
           position === "center" && "modal-dialog-centered"
         }`}
         role="document"
-        style={{ maxWidth: 847, marginTop: 200 }}
+        style={{ maxWidth: width, marginTop: 200 }}
       >
         <div className="modal-content kv-modal-content">
           {withHeader && (
@@ -30,7 +31,7 @@ export const Modal = ({
               <div className="w-100">
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >

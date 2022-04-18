@@ -1,21 +1,21 @@
-import React from 'react'
-import { AddReschedule } from './components/addReschedule/addReschedule'
-import { ApprovedReschedule } from './components/approvedReschedule/approvedReschedule'
-import { PendingReschedule } from './components/pendingReschedule/pendingReschedule'
-import './rescheduled.css'
+import React from "react";
+import { AddReschedule } from "./components/addReschedule/addReschedule";
+import { ApprovedReschedule } from "./components/approvedReschedule/approvedReschedule";
+import { PendingReschedule } from "./components/pendingReschedule/pendingReschedule";
+import "./rescheduled.css";
 
-export const Rescheduled = () => {
+export const Rescheduled = ({ data = {} }) => {
   return (
     <div>
-      <div className="mt-3">
+      {/* <div className="mt-3">
         <ApprovedReschedule />
-      </div>
+      </div> */}
       <div className="mt-3">
-        <AddReschedule />
+        <AddReschedule data={data} />
       </div>
-      <div className="mt-3">
+      {/* <div className="mt-3">
         <PendingReschedule />
-      </div>
+      </div> */}
     </div>
-  )
-}
+  );
+};

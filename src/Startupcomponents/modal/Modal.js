@@ -1,21 +1,21 @@
-import React from "react";
-import "./modal.css";
-import Close from "../../assets/icons/close.svg";
+import React from 'react'
+import './modal.css'
+import Close from '../../assets/icons/close.svg'
 
 export const Modal = ({
-  title = "",
+  title = '',
   children,
-  position = "",
-  id = "",
+  position = '',
+  id = '',
   bold = false,
-  subTitle = "",
+  subTitle = '',
   withHeader = true,
 }) => {
   return (
-    <div className="modal fade" tabindex="-1" role="dialog" id={id}>
+    <div className="modal fade" tabIndex="-1" role="dialog" id={id}>
       <div
         className={`modal-dialog ${
-          position === "center" && "modal-dialog-centered"
+          position === 'center' && 'modal-dialog-centered'
         }`}
         role="document"
         style={{ maxWidth: 723, marginTop: 200 }}
@@ -26,14 +26,14 @@ export const Modal = ({
               <div className="w-100">
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <p className={bold ? "text-dark" : "kv-modal-title"}>{title}</p>
+              <p className={bold ? 'text-dark' : 'kv-modal-title'}>{title}</p>
               {subTitle.length > 0 && <p className="mt-3">{subTitle}</p>}
             </header>
           )}
@@ -41,8 +41,8 @@ export const Modal = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const ModalCus = ({ children, closeModal, title }) => {
   return (
@@ -50,21 +50,43 @@ export const ModalCus = ({ children, closeModal, title }) => {
       <div className="backDrop" onClick={() => closeModal(false)}></div>
 
       <div className="app_modal">
-        <div className="m-5 d-flex justify-content-between">
+        <div className="m-0 d-flex justify-content-between">
+          <p className="kv-modal-title px-5">{title}</p>
+          <img
+            className="modalCloseImg"
+            onClick={() => closeModal(false)}
+            src={Close}
+            alt={''}
+          />
+        </div>
+
+        {children || 'Enter element here'}
+      </div>
+    </>
+  )
+}
+
+export const SmallModal = ({ children, closeModal, title }) => {
+  return (
+    <>
+      <div className="backDrop" onClick={() => closeModal(false)}></div>
+
+      <div className="small-modal">
+        <div className="m-0 d-flex justify-content-between">
           <p className="kv-modal-title">{title}</p>
           <img
             className="modalCloseImg"
             onClick={() => closeModal(false)}
             src={Close}
-            alt={""}
+            alt={''}
           />
         </div>
 
-        {children || "Enter element here"}
+        {children || 'Enter element here'}
       </div>
     </>
-  );
-};
+  )
+}
 
 export const LargeModal = ({ children, closeModal, title }) => {
   return (
@@ -79,12 +101,12 @@ export const LargeModal = ({ children, closeModal, title }) => {
             className="modalCloseImg mx-4 my-4"
             onClick={() => closeModal(false)}
             src={Close}
-            alt={""}
+            alt={''}
           />
         </div>
 
-        {children || "Enter element here"}
+        {children || 'Enter element here'}
       </div>
     </>
-  );
-};
+  )
+}

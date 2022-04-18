@@ -10,18 +10,11 @@ import {
 } from '../../../../mentorComponents'
 import { Form } from 'antd'
 
-const Experience = () => {
-  const data = [
-    { name: 'Experience', header: 'CEO', subheader: 'Wales Digital Agency' },
-    {
-      name: '',
-      header: 'IT Specialist',
-      subheader: 'Wales Digital Agency',
-      date: 'Nov 2018 - April 2019',
-    },
-  ]
+const Experience = ({data}) => {
+ 
   return (
     <div className="profile-offering">
+      <h2>Experience</h2>
       <section className="text-right pb-0">
         <img
           src={edit}
@@ -35,13 +28,14 @@ const Experience = () => {
         </Modal>
       </section>
 
-      {data.map((d, i) => {
+      {data?.experience.map((d, i) => {
         return (
           <ExperienceContent
-            title={d.name}
-            head={d.header}
-            sub={d.subheader}
-            date={d.date}
+            title={d.position}
+            sub={d.companyName}
+            date={`${new Date(d.start).getFullYear()} - ${new Date(d.end).getFullYear()}`}
+            activity={d.activity}
+            industry={d.industry}
             i={i}
             key={i}
             length={data.length}
@@ -54,7 +48,7 @@ const Experience = () => {
 
 export default Experience
 
-const ExperienceContent = ({ title, i, length, head, sub, date }) => {
+const ExperienceContent = ({ title, i, length, head, sub, date , activity , industry }) => {
   return (
     <section
       className={`profile-offer-content ${
@@ -66,20 +60,16 @@ const ExperienceContent = ({ title, i, length, head, sub, date }) => {
       <p className="mentor_experience_sub mt-2">{sub}</p>
       <p className="mentor_experience_date mt-2">{date}</p>
       <ul>
-        <li className="mt-3">
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
+        {
+          activity.map((item, i) =>(
+          <li key={i} className="mt-3">
+            { item }
         </li>
-        <li className="mt-3">
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-        </li>
-        <li className="mt-3">
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-        </li>
-        <button>Technology</button>
-        <button>Technology</button>
-        <button>Technology</button>
+          ))
+        }
+        
+        <button type='button' > { industry} </button>
+        
       </ul>
     </section>
   )

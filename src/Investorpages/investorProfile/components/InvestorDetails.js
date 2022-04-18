@@ -15,7 +15,10 @@ export const InvestorDetails = () => {
     <section className="profile-info">
       <div
         className="profile-banner"
-        style={{ backgroundImage: `url(${banner})` }}
+        style={{
+          background: "#00ADEF",
+          borderRadius: "20px 20px 0px 0px",
+        }}
       >
         {/* <span className="edit-banner">
           <img src={edit} alt="edit" />
@@ -45,7 +48,7 @@ export const InvestorDetails = () => {
           <div className="d-flex align-items-center justify-content-between mb-3">
             <a
               href="mailto:Michealsmith@gmail.com"
-              style={{ color: "#3E3E3E" }}
+              style={{ color: "#3E3E3E", textDecoration: "none" }}
             >
               Michealsmith@gmail.com
             </a>

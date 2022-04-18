@@ -24,7 +24,7 @@ export const BoosterPartnerRegistration = () => {
     if (hash === "#offerings") {
       setProgress("90");
     } else {
-      setProgress("50");
+      setProgress("0");
     }
   }, [hash]);
 
@@ -47,7 +47,7 @@ export const BoosterPartnerRegistration = () => {
       </section>
       <section className="register-grid">
         <div>
-          <ul className="register-list">
+          <ul className="register-list tab-wrap">
             <li
               onClick={() => switchForm("#details")}
               className={(hash === "#details" || hash === "") && "active-li"}

@@ -3,6 +3,7 @@ import { TextField, TextArea, Button } from "../../Startupcomponents/index";
 import map from "../../assets/images/mapBlue.svg";
 import phone from "../../assets/icons/phoneBlue.svg";
 import web from "../../assets/icons/webBlue.svg";
+import mail from "../../assets/icons/mailIcon.svg"
 import twitter from "../../assets/icons/twitterLogo.svg";
 import facebook from "../../assets/icons/facebookLogo.svg";
 import linkedIn from "../../assets/icons/linkedInLogo.svg";
@@ -28,12 +29,12 @@ export const StartupContactUs = () => {
 
           <div className="d-flex align-items-center contact-us-info">
             <img src={phone} alt="phone" />
-            <p>+234 789 504 345</p>
+            <p><a style={{textDecoration: 'none', color: '#2e3192'}} href="tel:+234 913 4444 859">+234 913 4444 859</a></p>
           </div>
 
           <div className="d-flex align-items-center contact-us-info">
-            <img src={web} alt="web" />
-            <p>www.michealsmith.com</p>
+            <img src={mail} alt="web" />
+            <p><a style={{textDecoration: 'none', color: '#2e3192'}} href="mailto:info@knight.ventures">info@knight.ventures</a> </p>
           </div>
 
           <div className="d-flex align-items-center social-links">

@@ -2,11 +2,14 @@ import styled from 'styled-components/macro';
 
 export const FundRounding = styled.div`
 
-width:80%;
+width:100%;
 padding:1.2rem;
 background:#fff;
 border-radius: 1.25rem;
 margin-bottom:10px;
+@media (max-width: 1024px) {
+    overflow-y: hidden;
+}
 
 h6 {
     font-size:1rem;

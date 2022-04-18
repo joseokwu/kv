@@ -6,12 +6,24 @@ import down from "../../assets/icons/down.svg";
 export const PhoneInput = ({
   id = "",
   label = "",
+  value,
+  name,
   disabled = false,
   required = false,
   onChange = () => {},
 }) => {
   const [prefix, setPrefix] = useState("+234");
   const [countryAbv, setCountryAbv] = useState("NG");
+  
+  const onNumberOnlyChange = (e) => {
+    const keyCode = e.keyCode || e.which;
+    const keyValue = String.fromCharCode(keyCode);
+    const isValid = new RegExp("[0-9]").test(keyValue);
+    if (!isValid) {
+       e.preventDefault();
+       return;
+    }
+};
 
   const getFlag = (abv) => {
     return `http://purecatamphetamine.github.io/country-flag-icons/3x2/${abv}.svg`;
@@ -26,7 +38,7 @@ export const PhoneInput = ({
       <section className="phone-input">
         <div
           className="country-codes"
-          style={{ flexBasis: prefix.length > 4 && "61%" }}
+          style={{ flexBasis: prefix.length > 4 && "100%" }}
         >
           <img src={getFlag(countryAbv)} width="29" height="13" alt="flag" />
 
@@ -66,9 +78,13 @@ export const PhoneInput = ({
           <input
             type="text"
             id={id}
+            value={value}
+            name={name}
             className="input-phone phone-text"
             onChange={handleChange}
-            placeholder="0000 0000 0000"
+            onKeyPress={onNumberOnlyChange}
+            maxLength={10}
+            placeholder="000 000 0000"
           />
         </div>
       </section>

@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState } from "react";
 import "./applicationCard.css";
 import comment from "../../assets/icons/comment.svg";
 import approvedIcon from "../../assets/icons/greenCircleCheck.svg";
@@ -6,13 +6,20 @@ import declinedIcon from "../../assets/icons/declinedIcon.svg";
 import expiredIcon from "../../assets/icons/expired.svg";
 import sampleCommenter from "../../assets/images/sampleCommenter.png";
 import { Button, Tag, Badge } from "../index";
+import { ReadMore } from './../../mentorComponents/readMore/readMore';
+
 export const ApplicationCard = ({
   logo = "",
   status = "pending",
   index = 0,
+  data
 }) => {
+
+  const date = new Date(data?.applied)
+  const [numVal, setNum] = useState(120);
+
   const statusRender = () => {
-    switch (status) {
+    switch (data?.status) {
       case "pending":
         return (
           <div className="d-flex align-items-center appCard-btn-group mb-3">
@@ -65,6 +72,7 @@ export const ApplicationCard = ({
         logo={logo}
         status={status}
         id={`applicantModal${index}`}
+        data={data}
       />
       <section
         className="appCard-title"
@@ -75,16 +83,20 @@ export const ApplicationCard = ({
           <section className="d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center mb-2">
               <img src={logo} alt="applicant logo" />
-              <h3 className="ml-2">Applane Insteen.</h3>
+              <h3 className="ml-2"> { data?.name} </h3>
             </div>
             <div>
               <Badge name="Acceleration" />
             </div>
           </section>
           <section className="d-flex flex-wrap appCard-tag-group">
-            <Tag name="Tech" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Career" color="#E31937" />
+            {
+              data?.industry?.map((item, i) =>{
+                  return (
+                    <Tag name={item} color={item === 'Engineering' ? '#40439A' : item === 'Career' ? '#E31937' : '#ACACAC' }  />
+                   )
+              })
+            }
           </section>
         </article>
       </section>
@@ -94,9 +106,10 @@ export const ApplicationCard = ({
         data-target={`#applicantModal${index}`}
       >
         <p className="appCard-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-          morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit...
+          <ReadMore>{
+            data?.description ?? ""
+          }</ReadMore>
+          
         </p>
       </section>
       <section
@@ -105,12 +118,12 @@ export const ApplicationCard = ({
         data-target={`#applicantModal${index}`}
       >
         <div>
-          <p>Applied 12/Oct/21</p>
-          <p>Contact Person: Ada Ify</p>
+          <p>Applied : { date.toISOString().substring(0,10) } </p>
+          <p>Contact Person: { data?.contact } </p>
         </div>
         <div className="text-right">
-          <p>Adaify@gmail.com</p>
-          <p>Contact No: 08092936789</p>
+          <p> { data?.contact + '@gmail.com' } </p>
+          <p>Contact No: { data?.contactNo } </p>
         </div>
       </section>
 
@@ -129,9 +142,12 @@ export const ApplicationCard = ({
   );
 };
 
-const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
+const ApplicantModal = ({ logo = "", status = "", id = "" , data }) => {
+  
+  const date = new Date(data?.applied)
+  
   const statusRender = () => {
-    switch (status) {
+    switch (data?.status) {
       case "pending":
         return (
           <div className="d-flex align-items-center appCard-btn-group mb-3">
@@ -182,7 +198,7 @@ const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
     <div
       className="modal fade"
       id={id}
-      tabindex="-1"
+      tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -210,12 +226,16 @@ const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
                 <section className="applicant-logo">
                   <img src={logo} alt="logo" className="" />
                 </section>
-                <h1 className="applicant-modal-header">Applane Insteen.</h1>
+                <h1 className="applicant-modal-header"> { data?.name} </h1>
                 <div>
                   <span className="d-flex flex-wrap appCard-tag-group">
-                    <Tag name="Tech" />
-                    <Tag name="Engineering" color="#40439A" />
-                    <Tag name="Career" color="#E31937" />
+                  {
+              data?.industry?.map((item, i) =>{
+                  return (
+                    <Tag name={item} color={item === 'Engineering' ? '#40439A' : item === 'Career' ? '#E31937' : '#ACACAC' }  />
+                   )
+              })
+            }
                   </span>
                 </div>
               </div>
@@ -234,20 +254,20 @@ const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
                   style={{ color: "#6466AA" }}
                 >
                   <div>
-                    <p>Applied 12/Oct/21</p>
-                    <p>Contact Person: Ada Ify</p>
+                    <p>Applied : { date.toISOString().substring(0,10) } </p>
+                    <p>Contact Person:  { data?.contact }</p>
                   </div>
                   <div className="text-right">
-                    <p>Applied 12/Oct/21</p>
-                    <p>Contact Person: Ada Ify</p>
+                    <p>Applied { date.toISOString().substring(0,10) }</p>
+                    <p>Contact Person: { data?.contact }</p>
                   </div>
                 </section>
 
                 <section className="appCard-desc border-0">
                   <p className="appCard-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit...
+                  {
+                      data?.description
+                    }
                   </p>
                 </section>
                 <section className="d-flex align-items-center justify-content-between flex-wrap">
@@ -285,16 +305,16 @@ const ApplicantModal = ({ logo = "", status = "", id = "" }) => {
                   </div>
                   <div className="commenter-comment">
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Enim lectus morbelemen tum eu.Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit...{" "}
+                    {
+                        data?.comment
+                      }
                     </p>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <span role="button" className="replay-cbt">
-                      Replay
+                      Reply
                     </span>
-                    <p className="comment-time">2 days ago</p>
+                    <p className="comment-time">  { date.toISOString().substring(0,10) } </p>
                   </div>
                 </section>
               </div>

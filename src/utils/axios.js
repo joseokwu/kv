@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from './helpers';
 
-import { BASE_URL } from 'config/constants';
+import { BASE_URL } from '../config/env';
 
 const options = {
     baseURL: BASE_URL,
@@ -10,6 +10,13 @@ const options = {
 		    'Content-Type': 'application/json',
     }
 }
+
+const uploadOptions = {
+	baseURL: "https://kv-file.yebox.net",
+    headers: { "Content-Type": "multipart/form-data" }
+}  
+
+export const uploadRequest = axios.create(uploadOptions);
 
 export const request = axios.create(options)
 
@@ -25,3 +32,17 @@ request.interceptors.request.use(
 		return Promise.reject(error);
 	}
 );
+
+uploadRequest.interceptors.request.use(
+	(config) => {
+		const token = getToken();
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
+		return config;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
+);
+

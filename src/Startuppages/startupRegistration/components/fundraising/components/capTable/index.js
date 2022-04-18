@@ -6,21 +6,64 @@ import {
   FileSize,
   LabelButton,
   VideoWrapper,
-} from './cap.styled.js'
+  Terms,
+} from "./cap.styled.js";
+import { useHistory } from "react-router-dom";
+import {
+  CustomButton,
+  OutlineButton,
+} from "../../../../../../Startupcomponents/button/button.styled";
+import Download from "../../../../../../assets/icons/downloadoutline.svg";
+import DownloadIcon from "../../../../../../assets/icons/download.svg";
+import RedFile from "../../../../../../assets/icons/redFile.svg";
+import BluFile from "../../../../../../assets/icons/bluFile.svg";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useActivity } from "../../../../../../hooks/useBusiness";
+import { useAuth } from "../../../../../../hooks/useAuth";
+import CurrencyInput from "react-currency-input-field";
+import { CircularLoader } from "../../../../../../Startupcomponents/CircluarLoader/CircularLoader";
+import { useState } from "react";
+import * as XLSX from "xlsx";
+import { parseFile } from "../../../../../../utils/helpers";
+import { upload } from "../../../../../../services/utils";
+import { UploadFile } from "../../../../../../components/uploadFile";
 
-import { CloudUploadOutlined } from '@ant-design/icons'
-import DownloadIcon from '../../../../../../assets/icons/download.svg'
-import RedFile from '../../../../../../assets/icons/redFile.svg'
-import BluFile from '../../../../../../assets/icons/bluFile.svg'
+export const CapTable = ({ setFundraising }) => {
+  const history = useHistory();
+  const { stateAuth } = useAuth();
+  const [amnt, setAmnt] = useState(
+    stateAuth?.user?.fundRaising?.capTable?.amountRaised ?? ""
+  );
+  const [amntInvested, setAmntInvested] = useState(
+    stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders ?? ""
+  );
 
-export const CapTable = () => {
+  const {
+    state: { fundraising },
+  } = useActivity();
+  const [fileDoc, setFileDoc] = useState(
+    stateAuth?.user?.fundRaising?.capTable?.files ?? null
+  );
+  // const { location  } = history;
+
+  const onSubmit = (value) => {
+    setFundraising({
+      capTable: {
+        amountRaised: amnt,
+        amountInvestedByFounders: amntInvested,
+        files: fileDoc,
+      },
+    });
+    history.push("#Previous Round");
+  };
+
   return (
     <>
       <BodyWrapper>
-        {/* <span className='span mx-n4 mx-lg-n0' > Cap Table </span> */}
         <p className="mx-n4 mx-lg-n0">
           A document containing all your Cap Table and statements for your
-          business.{' '}
+          business.
         </p>
 
         <hr className="mx-n4 mx-lg-n0" />
@@ -28,67 +71,117 @@ export const CapTable = () => {
         <div className=" row my-5">
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
             <label>Total fund raised till date (if any)</label>
-            <input
+            <CurrencyInput
+              id="amountRaised"
+              name="amountRaised"
               type="text"
-              className="form-control"
-              placeholder="Enter Amount raised"
+              value={amnt}
+              className="form-control ps-3"
+              placeholder="$100,000"
+              intlConfig={{ locale: "en-US", currency: "USD" }}
+              onValueChange={(value) => setAmnt(value)}
             />
           </div>
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
-            <label>Total capital raised by founders *</label>
-            <input
+            <label>Total Capital invested by Founders*</label>
+            <CurrencyInput
+              id="amountInvestedByFounders"
+              name="amountInvestedByFounders"
               type="text"
-              className="form-control"
-              placeholder="Enter Amount raised by founders"
+              value={amntInvested}
+              className="form-control ps-3"
+              placeholder="$150,000"
+              intlConfig={{ locale: "en-US", currency: "USD" }}
+              required
+              onValueChange={(value) => setAmntInvested(value)}
             />
           </div>
           <div className="col-12 my-3">
             <DownloadableButton href="." className="mx-n4 mx-lg-n0">
-              <CloudUploadOutlined className="mx-2" /> Download Capital Table
-              sample here
+              <img className="pr-2" src={Download} alt="" />
+              Download Capital Table sample here
             </DownloadableButton>
           </div>
-          <div className="col-12 my-5">
-            <FileWrapper className="d-flex justify-content-center text-center mx-n4 mx-lg-n0">
-              <img src={DownloadIcon} alt="#" />
+          <div className="col-12 my-4">
+            <UploadFile
+              data={{
+                maxFiles: 1,
+                supportedMimeTypes: ["text/csv"],
+                maxFileSize: 5,
+                extension: "MB",
+              }}
+              initData={fileDoc ? [fileDoc] : []}
+              onUpload={async (filesInfo) => {
+                const file = filesInfo[0].file;
+                const fileData = await parseFile(file);
+                const workbook = XLSX.read(fileData, { type: "binary" });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const data = XLSX.utils.sheet_to_json(worksheet, {
+                  raw: false,
+                });
+                if (Array.isArray(data)) {
+                  setFileDoc(data);
+                }
+              }}
+            />
+            {/* <FileWrapper className='d-flex justify-content-center text-center mx-n4 mx-lg-n0'>
+            {
+                fileDoc !== null ? (
+                  <img src={RedFile} alt='.' 
+                  style={{width:'70px', height:'70px'}}
+                   />
+                ):(
+                  logoUploading ? <CircularLoader color={'#000'} /> : 
+                 <>
+                 <img src={DownloadIcon} alt='#' />
               <FileText>Drag & Drop</FileText>
               <FileText>Drag files or click here to upload </FileText>
               <FileSize> {'(Max. File size 5mb)'} </FileSize>
-              <input type="file" id="cap" hidden />
-              <LabelButton for="cap">Upload Files</LabelButton>
-            </FileWrapper>
-          </div>
-          <div className="col-12 my-1">
-            <VideoWrapper className="mx-n4 mx-lg-n0">
-              <label> Cap table uploaded</label>
-              <div className="div">
-                <img src={RedFile} alt=".#" />
-                <div id="div" className="">
-                  <div className="d-flex" style={{ marginLeft: '-1.2rem' }}>
-                    <img
-                      src={BluFile}
-                      alt=".#"
-                      style={{
-                        marginLeft: '2rem',
-                        width: '10%',
-                        height: '10%',
-                      }}
-                      className=""
-                    />
-                    <p
-                      className=""
-                      style={{ marginLeft: '0.2rem', fontSize: '0.9rem' }}
-                    >
-                      Product Demo
-                    </p>
-                  </div>
-                  <p className="my-n2 p">2.5 mb</p>
-                </div>
-              </div>
-            </VideoWrapper>
+              </>
+                )  
+              }
+              <input type='file' id='cap'
+               onChange={handleCsv}
+               accept=".csv"
+               hidden />
+              <LabelButton for='cap'>Upload Files</LabelButton>
+            </FileWrapper> */}
           </div>
         </div>
       </BodyWrapper>
+      <Terms className="">
+        <p>
+          By clicking submit, you are agreeing to our <span>Terms of Use</span>{" "}
+          and <span>Privacy Policy</span>. If you have questions, please reach
+          out to privacy@knightventures.com
+        </p>
+      </Terms>
+      <div className="row mt-4">
+        <div className="col-3">
+          <CustomButton
+            className=""
+            background="#808080"
+            onClick={() => history.push("#Fund Utilization")}
+          >
+            Back
+          </CustomButton>
+        </div>
+        <div className="col-9 d-flex justify-content-end">
+          <OutlineButton
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              onSubmit();
+            }}
+            className="ms-2"
+            style={{ marginRight: "0rem" }}
+            background="none"
+          >
+            Next
+          </OutlineButton>
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};

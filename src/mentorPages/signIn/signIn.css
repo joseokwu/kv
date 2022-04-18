@@ -3,7 +3,7 @@
   max-width: 585px;
   background: transparent;
   border-radius: 10px;
-  padding: 80px 6%;
+  /* padding: 80px 6%; */
 }
 
 .forgot_text {
@@ -12,6 +12,8 @@
   font-size: 1rem;
   line-height: 20px;
   color: #f9f9fc;
+  text-decoration: none!important;
+  cursor: pointer;
 }
 
 .forgot_text:hover {
@@ -99,12 +101,12 @@
   box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
 }
 
-.mentor_active_signUp {
+/* .mentor_active_signUp {
   background-color: #00adef !important;
   border: none !important;
   color: white !important;
   box-shadow: 0px 4px 1rem rgba(50, 171, 226, 0.32) !important;
-}
+} */
 
 .mentor_switch_signUp button:focus {
   outline: none !important;

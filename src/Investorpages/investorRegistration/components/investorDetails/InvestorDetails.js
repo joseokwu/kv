@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { RowOption, Select, TextField, Button } from "../../../../components";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
+import { addInvestorProfile } from "../../../../services/investor";
+import { useFormik } from "formik";
 import { useHistory } from "react-router";
 
 export const InvestorDetails = () => {
@@ -18,9 +20,41 @@ export const InvestorDetails = () => {
     "accelerator/incubator",
   ];
 
+  const [taxOutsideEligible, setTaxOutsideEligible] = useState("");
+  const [selectedInvestorType, setSelectedInvestorType] = useState("");
+
+  const taxOutside = (input) => {
+    switch (input) {
+      case "yes":
+        return true;
+      case "no":
+        return false;
+      default:
+        return "";
+    }
+  };
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      nationality: "",
+      taxResidentOutsideNigeria: taxOutside(taxOutsideEligible),
+      individualHaving: "",
+      bankName: "",
+      bankBranch: "",
+      bankAccountNumber: "",
+      bankAccountType: "",
+      InvestorType: selectedInvestorType,
+    },
+
+    onSubmit: (values) => addInvestorProfile(values),
+  });
+
+  console.log("formik.values", formik.values);
+
   const { push } = useHistory();
   return (
-    <div className="register-form-wrap">
+    <form className="register-form-wrap" onSubmit={formik.handleSubmit}>
       <h3>Investor Details</h3>
       <p>Create a profile for your investment</p>
 
@@ -32,13 +66,24 @@ export const InvestorDetails = () => {
               required={true}
               placeholder="Enter your nationality"
               className="edit_input"
+              name="nationality"
+              onChange={formik.handleChange}
             />
           </section>
           <section className="col-12 mb-4">
-            <p className="mb-3">
+            <p
+              className="mb-2"
+              style={{ color: "black", fontSize: 12, lineHeight: "13px" }}
+            >
               Are you a Tax resident any other country other than Nigeria
             </p>
-            <RowOption options={["yes", "no"]} />
+            <RowOption
+              options={["yes", "no"]}
+              getSelected={(e) => {
+                console.log("e", e);
+                setTaxOutsideEligible(e);
+              }}
+            />
           </section>
 
           <section className="col-12 mb-4">
@@ -47,6 +92,9 @@ export const InvestorDetails = () => {
               required={true}
               placeholder="Enter Tax Number"
               className="edit_input"
+              name="taxNumber"
+              type="number"
+              onChange={formik.handleChange}
             />
           </section>
 
@@ -55,26 +103,32 @@ export const InvestorDetails = () => {
               placeholder="Choose option"
               label="I am an individual having"
               className="edit_input"
+              name="individualHaving"
+              onChange={formik.handleChange}
             />
           </section>
         </div>
       </FormCard>
 
-      <FormCard title="Bant Details">
+      <FormCard title="Bank Details">
         <div className="row">
           <section className="col-lg-6 mb-4">
-            <Select
+            <TextField
               placeholder="Choose bank"
               label="Bank Name"
               className="edit_input"
+              name="bankName"
+              onChange={formik.handleChange}
             />
           </section>
 
           <section className="col-lg-6 mb-4">
-            <Select
+            <TextField
               placeholder="Choose bank branch"
               label="Bank Branch"
               className="edit_input"
+              name="bankBranch"
+              onChange={formik.handleChange}
             />
           </section>
 
@@ -84,6 +138,8 @@ export const InvestorDetails = () => {
               required={true}
               placeholder="Enter your account"
               className="edit_input"
+              name="bankAccountNumber"
+              onChange={formik.handleChange}
             />
           </section>
 
@@ -93,6 +149,8 @@ export const InvestorDetails = () => {
               required={true}
               placeholder="Enter your account type"
               className="edit_input"
+              name="bankAccountType"
+              onChange={formik.handleChange}
             />
           </section>
         </div>
@@ -100,14 +158,25 @@ export const InvestorDetails = () => {
 
       <FormCard>
         <div className="row">
-          <p className="mb-3">Investor Type*</p>
-          <RowOption options={investorTypes} />
+          <p
+            className="mb-3"
+            style={{ color: "black", fontSize: 12, lineHeight: "13px" }}
+          >
+            Investor Type*
+          </p>
+          <RowOption
+            options={investorTypes}
+            getSelected={(e) => {
+              setSelectedInvestorType(e);
+            }}
+          />
         </div>
       </FormCard>
 
       <section className="d-flex align-items-center justify-content-between">
         <button
           className="back-btn"
+          type="button"
           onClick={() => {
             push("#details");
           }}
@@ -116,15 +185,16 @@ export const InvestorDetails = () => {
         </button>
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
-          <Button label="Save" variant="secondary" />
+          <Button label="Save" variant="secondary" type="submit" />
           <Button
             label="Next"
+            type="button"
             onClick={() => {
               push("#investor2");
             }}
           />
         </div>
       </section>
-    </div>
+    </form>
   );
 };

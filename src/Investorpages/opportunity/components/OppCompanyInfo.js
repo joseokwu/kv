@@ -11,7 +11,7 @@ import interestedCheck from "../../../assets/icons/interestedCheck.svg";
 import { useParams } from "react-router";
 import { useHistory } from "react-router";
 
-export const OppCompanyInfo = () => {
+export const OppCompanyInfo = ({name}) => {
   const { id } = useParams();
   const {
     push,
@@ -26,7 +26,7 @@ export const OppCompanyInfo = () => {
       >
         <div>
           <img src={logo} alt="logo" className="mb-3" />
-          <h3 className="opp-page-card-title">Yebox Tech.</h3>
+          <h3 className="opp-page-card-title">{name}</h3>
         </div>
 
         <div className="d-flex align-items-end flex-column">
@@ -71,9 +71,18 @@ export const OppCompanyInfo = () => {
         style={{ rowGap: 10 }}
       >
         {pathname.includes("interested") ? (
-          <div className="flex-align interest-indicator">
-            <img src={interestedCheck} alt="interested" />
-            <p>Interested</p>
+          <div
+            style={{ columnGap: "1rem" }}
+            className="d-flex align-items-center"
+          >
+            <Button
+              label="Commit"
+              onClick={() => push(`/investor/opportunities/${id}/commitment`)}
+            />
+            <div className="flex-align interest-indicator">
+              <img src={interestedCheck} alt="interested" />
+              <p>Interested</p>
+            </div>
           </div>
         ) : (
           <div

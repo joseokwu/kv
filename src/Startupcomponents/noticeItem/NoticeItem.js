@@ -8,10 +8,10 @@ export const NoticeItem = ({
   const { push } = useHistory();
   return (
     <>
-      {container !== "page" ? (
+      {/* {container !== "page" ? (
         <article
           className="d-flex align-items-start notice-item"
-          onClick={() => push("/notification#all")}
+          onClick={() => push("/startup/notification#all")}
         >
           <img src={userImage} alt="user" className="notice-from-img" />
           <section className="notice-text">
@@ -28,7 +28,7 @@ export const NoticeItem = ({
       ) : (
         <article
           className="d-flex align-items-start justify-content-between notice-item w-100"
-          onClick={() => push("/notification#all")}
+          onClick={() => push("/startup/notification#all")}
         >
           <div className="d-flex align-items-center">
             <img src={userImage} alt="user" className="notice-from-img" />
@@ -50,7 +50,10 @@ export const NoticeItem = ({
             <img src={noticeImage} alt="notice" className="notice-img" />
           )}
         </article>
-      )}
+      )} */}
+      <div className="text-center font-weight-bold py-3">
+        <p style={{fontSize: '22px'}}>No notifications</p>
+      </div>
     </>
   );
 };

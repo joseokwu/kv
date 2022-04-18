@@ -8,9 +8,9 @@ import linkedIn from '../../../assets/icons/linkedInLogo.svg'
 import whatsApp from '../../../assets/icons/whatsapp.svg'
 import share from '../../../assets/icons/share.svg'
 
-export const OppCompanyInfo = () => {
+export const OppCompanyInfo = ({data}) => {
   return (
-    <section className="opp-page-card py-5 mt-3">
+    <section className="opp-page-card py-4">
       <div
         className="d-flex align-items-center justify-content-between flex-wrap"
         style={{ rowGap: 10 }}
@@ -21,8 +21,8 @@ export const OppCompanyInfo = () => {
         style={{ rowGap: 10 }}
       >
         <div>
-          <img src={logo} alt="logo" className="mb-3" />
-          <h3 className="opp-page-card-title">Yebox Tech.</h3>
+          <img src={data?.startUpProfile?.logo} alt="logo" className="mb-3" width="50px" style={{objectFit: "cover", objectPosition: "100% 0"}} />
+          <h3 className="opp-page-card-title"> { data?.startUpProfile?.acceleratorName } </h3>
         </div>
 
         <div className="d-flex align-items-center">
@@ -40,13 +40,11 @@ export const OppCompanyInfo = () => {
         </div>
       </section>
       <section className="mt-3">
-        <h6 className="mb-3">Tech Industry</h6>
+        <h6 className="mb-3"> { data?.industry } </h6>
         <p className="">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et amet,
-          facilisi sodales cursus tellus nam ut. Enim, at imperdiet praesent
-          velit. Eget consequat, sollicitudin molestie curabitur lobortis
-          imperdiet. Vulputate malesuada tortor sit mi laoreet. Iaculis quis
-          pretium urna.
+         {
+           data?.description
+         } 
         </p>
       </section>
     </section>

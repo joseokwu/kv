@@ -6,11 +6,11 @@ import {
   Select,
   AuthButton,
 } from '../../../../mentorComponents'
+import { TimePickerComponent } from '@syncfusion/ej2-react-calendars'
 import compLogo from '../../../../assets/images/compLogo.svg'
 import Upload from '../../../../mentorComponents/upload'
 import left from '../../../../assets/icons/chervonLeft.svg'
 import { useHistory } from 'react-router-dom'
-
 
 export const MentorCreateAssignment = ({ history }) => {
   const { goBack } = history
@@ -36,7 +36,11 @@ export const MentorCreateAssignment = ({ history }) => {
         </section>
 
         <section className="col-lg-12 mb-4 mt-4">
-          <Select label={'Programs'} placeholder={'Select'} />
+          <Select
+            label={'Programs'}
+            placeholder={'Select'}
+            options={['Technology']}
+          />
         </section>
 
         <section className="col-lg-12 mb-4">
@@ -51,20 +55,20 @@ export const MentorCreateAssignment = ({ history }) => {
           <Upload onFileChange={(files) => onFileChange(files)} />
         </section>
 
-        <section className="col-lg-12 mb-4">
+        <div className="row col-lg-12">
+        <section className="col-lg-6 mb-4">
           <TextField
+            type={'date'}
             label={'Deadline (day)'}
             placeholder={'Thursday 17th Oct 2021'}
           />
         </section>
 
-        <div className="row col-lg-12">
           <section className="col-lg-6 mb-4">
-            <Select label={'Start time'} placeholder={'Time'} />
-          </section>
-
-          <section className="col-lg-6 mb-4">
-            <Select label={'End time'} placeholder={'Time'} />
+            <label htmlFor="">Deadline Time</label>
+            <TimePickerComponent className="mt-1 py-1 px-3"
+              placeholder={'00 : 00 : 00'}
+            ></TimePickerComponent>
           </section>
         </div>
 
@@ -94,7 +98,7 @@ export const MentorCreateAssignment = ({ history }) => {
         </section>
       </div>
       <div className="text-right">
-        <AuthButton label="Save" onClick={() => push('/mentor/assignments/view')} />
+        <AuthButton label="Create" onClick={() => push()} />
       </div>
     </div>
   )

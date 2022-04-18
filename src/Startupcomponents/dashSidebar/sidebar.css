@@ -28,11 +28,12 @@
   padding-top: 30px;
 }
 
-.sideList a {
+.sidebar_link {
   display: flex;
   align-items: center;
   column-gap: 20px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .sideList li {
@@ -46,7 +47,7 @@
   object-fit: contain;
 }
 
-.sideList a span {
+.sidebar_link span {
   color: #ffffff;
 }
 
@@ -60,7 +61,7 @@
 .sideText {
   font-style: normal;
   font-weight: normal;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 140%;
   color: #ffffff;
 }

@@ -1,7 +1,7 @@
-import React from 'react'
-import bigClock from '../../../../../../assets/icons/bigclock.svg'
-import { ReadMore } from '../../../../../../mentorComponents'
-import './pendingReschedule.css'
+import React from "react";
+import bigClock from "../../../../../../assets/icons/bigclock.svg";
+import { ReadMore } from "../../../../../../mentorComponents";
+import "./pendingReschedule.css";
 
 export const PendingReschedule = () => {
   return (
@@ -10,7 +10,7 @@ export const PendingReschedule = () => {
         <section className="pending_program_card p-4">
           <div className="d-flex justify-content-between">
             <p className="pending_program_title">Corporate Training</p>
-            <span class="accepted_tag">Rescheduled</span>
+            <span className="accepted_tag">Rescheduled</span>
           </div>
 
           <section
@@ -47,5 +47,5 @@ export const PendingReschedule = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};

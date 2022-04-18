@@ -1,6 +1,10 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
 
 export const HeaderStartup = styled.div`
+@media (max-width: 1024px) {
+  padding-left: 10px;
+}
+
   h5 {
     font-family: DM Sans;
     font-weight: 700;
@@ -16,7 +20,7 @@ export const HeaderStartup = styled.div`
     line-height: 20.83px;
     color: #828282;
   }
-`
+`;
 
 export const ImageWrapper = styled.span`
   text-align: center;
@@ -29,36 +33,57 @@ export const ImageWrapper = styled.span`
   align-items: center;
   position: relative;
   background: #fff;
-`
+`;
 export const InputWrapper = styled.label`
-  position: absolute;
+  position: relative;
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  background: #2BB4F0;
+  background: #2bb4f0;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 320px;
-  left: 120px;
+  top: -30px;
+  left: 60px;
 
   input {
     width: inherit;
     height: inherit;
     opacity: 0;
   }
-`
+`;
 
 export const FormWrapper = styled.div`
   width: 100%;
   height: ${(props) => (props.height ? props.height : '70%')};
   padding: 2rem;
   order: 2;
-  margin: 3rem 0;
+  margin: 0rem 0rem;
   flex: none;
   border: 0 solid #d3d3d3;
   border-radius: 5px;
   background: #fff;
+  @media (max-width: 1024px) {
+    padding: 2rem 1rem;
+  }
+
+  /* .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background: #fafafc;
+  border-radius: 4px;
+  border: none;
+  padding: 5px 0px 5px 5px;
+} */
+
+.ant-picker {
+  background: #fafafc;
+  border-radius: 4px;
+  border: none;
+  padding: 5px 0px 5px 5px;
+}
+
+  .error {
+    color: red;
+  }
 
   .div {
     margin-bottom: 10px;
@@ -84,12 +109,12 @@ export const FormWrapper = styled.div`
   }
 
   input {
-    border: none;
-    background: #fafafc;
-    border-radius: 4px;
-    /* padding: 8px 14px; */
-    margin-left: 15px;
-    margin-bottom: 15px;
+    border: none !important;
+    background: #fafafc !important;
+    /* border-radius: 4px !important; */
+    padding: 8px 14px;
+    /* margin-left: 15px !important; */
+    /* margin-bottom: 15px !important; */
 
     ::placeholder {
       font-family: DM Sans;
@@ -100,12 +125,16 @@ export const FormWrapper = styled.div`
       text-transform: capitalize;
       color: #bdbdbd;
     }
+
+    :focus {
+      outline: none !important;
+    }
   }
 
   textarea {
     border: none;
     margin-left: 15px;
-    background: #fafafc;
+    background: #fafafc !important;
     border-radius: 4px;
 
     ::placeholder {
@@ -119,7 +148,6 @@ export const FormWrapper = styled.div`
   }
   .cust {
     border: none;
-    background: #f4f4fa;
     width: 70%;
     margin-left: 15px;
   }
@@ -130,16 +158,37 @@ export const FormWrapper = styled.div`
     /* width: 70%; */
     margin-left: 15px;
     border-radius: 7px;
-    outline: 0;
+    outline: none;
 
     &:focus {
       outline: 0;
     }
   }
 
+  .sel {
+    width: 97%;
+    background: ${(props) => (props.bg ? props.bg : '#fafafc')};
+    color: #4f4f4f;
+    border-radius: 7px;
+    /* cursor: pointer; */
+    text-transform: capitalize;
+    outline: 0;
+    min-height: 2.56rem;
+    /* margin-left: 15px; */
+    border: 0.1rem solid #fefefe;
+  }
+
   .date-input {
     padding: 8px 14px;
     background: #fafafc;
     border-radius: 4px;
+    border: none;
+    outline: none;
   }
-`
+
+  .country-bg {
+    background: #fafafc;
+    border: none;
+    outline: none;
+    }
+`;

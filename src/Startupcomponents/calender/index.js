@@ -5,27 +5,12 @@ Day, WorkWeek, Month
 } from '@syncfusion/ej2-react-schedule';
 
 
-export const Calender = ()=>{
+export const Calender = ({ data })=>{
 
+    console.log(data)
    const localData = {
 
-    dataSource: [
-        {   Id: 1,
-            End: new Date(2019, 0 , 11 , 6, 30),
-            Start: new Date(2019, 0, 11, 4, 0),
-            Summary: ''
-        },
-        {   Id: 2,
-            End: new Date(2019, 0 , 10 , 7, 30),
-            Start: new Date(2019, 0, 10, 5, 0),
-            Summary: 'Developers Meetings'
-        },
-        {   Id: 3,
-            End: new Date(2019, 0 , 7, 9, 30),
-            Start: new Date(2019, 0, 7, 8, 0),
-            Summary: 'Senior Staff meetings'
-        }
-    ],
+    dataSource:data,
     fields : {
 
         endTime : { name : 'End'},
@@ -37,7 +22,7 @@ export const Calender = ()=>{
     return (
         <ScheduleComponent currentView='Week'
         height='570px' 
-        selectedDate={new Date(2019, 0, 11)}
+        selectedDate={new Date()}
           eventSettings={localData} >
           <ViewsDirective>
               <ViewDirective option='Week' ></ViewDirective>

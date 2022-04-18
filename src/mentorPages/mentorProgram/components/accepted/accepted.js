@@ -1,20 +1,21 @@
-import React from 'react'
-import bigClock from '../../../../assets/icons/bigclock.svg'
-import { Modal, ReadMore } from '../../../../mentorComponents'
-import './accepted.css'
-import { ViewScheduleModal } from './viewScheduleModal'
+import React from "react";
+import bigClock from "../../../../assets/icons/bigclock.svg";
+import { Modal, ReadMore } from "../../../../mentorComponents";
+import { formatTime, months } from "../../../../utils/helpers";
+import "./accepted.css";
+import { ViewScheduleModal } from "./viewScheduleModal";
 
-export const Accepted = () => {
+export const Accepted = ({ data = {} }) => {
   return (
     <div>
       <Modal id="viewScheduleModal" withHeader={false}>
-        <ViewScheduleModal />
+        <ViewScheduleModal data={data} />
       </Modal>
       <div className="program_card">
         <section className="pending_program_card p-4">
           <div className="d-flex justify-content-between">
-            <p className="pending_program_title">Corporate Training</p>
-            <span class="accepted_tag">Accepted</span>
+            <p className="pending_program_title">{data?.name}</p>
+            <span className="accepted_tag">Accepted</span>
           </div>
 
           <section
@@ -22,22 +23,18 @@ export const Accepted = () => {
             style={{ columnGap: 10 }}
           >
             <p className="pending_date">
-              <span>50</span> September
+              <span>{new Date(data?.date).getDate()}</span>{" "}
+              {months[new Date(data?.date).getMonth()]}
             </p>
             <p className="pending_time">
-              <img src={bigClock} alt="clock" /> 10:00pm - 12pm
+              <img src={bigClock} alt="clock" /> {formatTime(data?.startTime)} -{" "}
+              {formatTime(data?.endTime)}
             </p>
           </section>
 
           <section className="mt-3">
             <p>
-              <ReadMore>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim
-                lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Enim lectus morbi elementum
-                eu.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </ReadMore>
+              <ReadMore>{data?.description}</ReadMore>
             </p>
           </section>
 
@@ -51,5 +48,5 @@ export const Accepted = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};

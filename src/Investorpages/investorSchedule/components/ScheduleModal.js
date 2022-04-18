@@ -22,7 +22,7 @@ export const ScheduleModal = ({ image = "", id = 0 }) => {
     <div
       className="modal fade"
       id={`scheduleModal-${id}`}
-      tabindex="-1"
+      tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"

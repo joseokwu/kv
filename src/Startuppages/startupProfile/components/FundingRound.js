@@ -2,9 +2,12 @@ import { Tag } from '../../../Startupcomponents'
 import { FundRounding, Btn } from './styled'
 import clock from '../../../assets/icons/clock.svg'
 
-export const FundingRound = () => {
+export const FundingRound = ({data}) => {
+
+
+
   return (
-    <div className="mt-3">
+    <div className="">
       <FundRounding className="">
         <h6>Startup Details</h6>
 
@@ -15,7 +18,7 @@ export const FundingRound = () => {
             color="#058DC1"
             // w="23%"
           >
-            Tech
+            {data?.industry }
           </Btn>
         </div>
 
@@ -26,7 +29,7 @@ export const FundingRound = () => {
             color="#212463"
             // w="50%"
           >
-            Proof of concept
+            { data?.startUpProfile?.startupStage }
           </Btn>
         </div>
       </FundRounding>
@@ -40,7 +43,7 @@ export const FundingRound = () => {
             bg="#DEF6FF"
             color="#058DC1"
           >
-            $50,000
+          { data?.fundRaising?.capTable?.amountInvestedByFounders }
           </Btn>
         </div>
 
@@ -50,7 +53,7 @@ export const FundingRound = () => {
             bg="#F1F2FE"
             color="#212463"
           >
-            Angel (9 oct 2021)
+            { data?.fundRaising?.capTable?.amountRaised } {  }
           </Btn>
         </div>
 
@@ -61,7 +64,7 @@ export const FundingRound = () => {
             color="#212463"
             className="mr-3"
           >
-            Mope Abudu
+           { data?.investor ?? 0 }
           </Btn>{' '}
           <Btn
             bg="#F1F2FE"
@@ -75,13 +78,16 @@ export const FundingRound = () => {
           <article className="mr-3">Valuation </article>
           <Btn
             bg="#F1F2FE"
-            color="#212463"
+            color="#212463"  
             // w="80%"
           >
-            $50 million (9 oct 2021)
+            { data?.fundRaising?.fundingAsk?.postMoneyValuation }
           </Btn>
         </div>
       </FundRounding>
     </div>
+
   )
 }
+
+

@@ -1,4 +1,17 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components/macro';
+
+export const CoInputWrapper = styled.label`
+  position: absolute;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: #2bb4f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 310px;
+  left: 120px;
+`;
 
 export const HeaderTeam = styled.div`
   width: 224px;
@@ -19,7 +32,7 @@ export const HeaderTeam = styled.div`
     line-height: 20.83px;
     color: #828282;
   }
-`
+`;
 
 export const ImageWrapper = styled.span`
   text-align: center;
@@ -30,19 +43,20 @@ export const ImageWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   background: #fff;
-`
+`;
 export const InputWrapper = styled.label`
-  position: absolute;
+  position: relative;
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  background: #d2d2d2;
+  background: #2bb4f0;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 400px;
-  left: 134px;
+  top: -30px;
+  left: 60px;
 
   input {
     width: inherit;
@@ -50,11 +64,11 @@ export const InputWrapper = styled.label`
     opacity: 0;
   }
 
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     top: 418px;
     left: 136px;
-  }
-`
+  } */
+`;
 
 export const FormWrapper = styled.div`
   width: 100%;
@@ -66,6 +80,14 @@ export const FormWrapper = styled.div`
   border: 0 solid #d3d3d3;
   border-radius: 5px;
   background: #fff;
+  @media (max-width: 1024px) {
+    padding: 3rem 1rem;
+  }
+
+  .select-search {
+    width: 100%;
+    border: 1px solid red;
+  }
 
   span {
     cursor: pointer;
@@ -73,7 +95,11 @@ export const FormWrapper = styled.div`
 
   hr {
     background: #636363;
-    width: 95%;
+    width: 100%;
+  }
+
+  .error {
+    color: red;
   }
 
   .div {
@@ -122,15 +148,15 @@ export const FormWrapper = styled.div`
     font-size: 16px;
     line-height: 20.02px;
     color: #000000;
-    margin-left: 15px;
+    /* margin-left: 15px; */
   }
 
   input {
     border: none;
-    background: #fafafc;
+    background: #fafafc !important;
     border-radius: 4px;
-    margin-left: 15px;
-    margin-bottom: 15px;
+    /* margin-left: 15px; */
+    /* margin-bottom: 15px; */
 
     ::placeholder {
       font-style: normal;
@@ -143,9 +169,8 @@ export const FormWrapper = styled.div`
 
   textarea {
     border: none;
-    background: #f4f4f4;
-
-    margin-left: 15px;
+    background: #fafafc;
+    /* margin-left: 15px; */
   }
   .cust {
     border: none;
@@ -156,45 +181,115 @@ export const FormWrapper = styled.div`
 
   .custs {
     border: none;
-    background: #f4f4f4;
+    background: #fafafc;
     width: 100%;
-    margin-left: 15px;
+    /* margin-left: 15px; */
     border-radius: 7px;
-    outline: 0;
+    outline: none;
+
+    input:focus {
+      outline: none;
+    }
 
     &:focus {
-      outline: 0;
+      outline: none;
     }
 
     @media (max-width: 768px) {
       width: 100%;
     }
   }
-`
+
+  .ant-picker {
+    padding: 8px 20px 8px 20px !important;
+  }
+
+  .ant-select-multiple .ant-select-selection-item {
+    background: #6466aa;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 21px;
+    font-family: 'DM Sans';
+    letter-spacing: 0.01em;
+  }
+
+  .ant-select-multiple .ant-select-selection-item-remove svg {
+    color: #fff;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    background: #fafafc;
+    border-radius: 4px;
+    border: none;
+    padding: 5px 0px 5px 5px;
+  }
+
+  .skiil-select {
+    background: #fafafc !important;
+    border-radius: 4px;
+    border: none !important;
+  }
+`;
 
 export const HeaderModal = styled.h4`
   font-size: 1.6rem;
   color: #030298;
   font-weight: 600;
   margin-top: 10px;
-`
+`;
 export const ModalForm = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
-  height: 70vh;
+  /* height: 70vh; */
+  
 
   input {
-    background: #f7f9f9;
+    background: #fafafc !important;
     border: none;
+
+    ::placeholder {
+      color: #BDBDBD;
+      font-size: 0.875rem;
+    }
+  }
+
+  label {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    margin-top: 10px;
+  }
+
+  article {
+    color: red;
   }
 
   textarea {
-    background: #f7f9f9;
+    background: #fafafc !important;
     border: none;
+
+    ::placeholder {
+      color: #BDBDBD;
+      font-size: 0.875rem;
+    }
   }
   span {
     margin-left: 10px;
+  }
+
+  .date-input {
+    padding: 8px 14px;
+    background: #fafafc;
+    border-radius: 4px;
+    border: none;
+    outline: none;
   }
 `
 // export const BntWrap = styled.div`
@@ -221,4 +316,66 @@ export const BntWrap = styled.div`
       color: #2e3192;
     }
   }
-`
+`;
+
+// export const Education = styled.div`
+//   .addEducation {
+//     column-gap: 20px;
+//   }
+
+export const Spacer = styled.div`
+  flex: 1;
+`;
+export const Education = styled.div`
+  .addEducation {
+    column-gap: 20px;
+  }
+
+  h4 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    color: #323232;
+  }
+
+  //   h4 {
+  //     font-family: 'Lato';
+  //     font-style: normal;
+  //     font-weight: 700;
+  //     font-size: 20px;
+  //     line-height: 140%;
+  //     color: #323232;
+  //   }
+
+  //   h2 {
+  //     font-family: 'DM Sans';
+  //     font-style: normal;
+  //     font-weight: 400;
+  //     font-size: 18px;
+  //     line-height: 23px;
+  //     letter-spacing: 0.01em;
+  //     color: #525151;
+  //   }
+
+  //   p {
+  //     font-family: 'DM Sans';
+  //     font-style: normal;
+  //     font-weight: 400;
+  //     font-size: 16px;
+  //     line-height: 21px;
+  //     letter-spacing: 0.01em;
+  //     color: #828282;
+  //   }
+
+  p {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    color: #828282;
+  }
+`;

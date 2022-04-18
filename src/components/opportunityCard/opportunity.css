@@ -38,7 +38,7 @@
 }
 
 .opp-tag {
-  background: #e8f6fc;
+  background: #e8f6fc!important;
   border-radius: 5px;
   padding: 4px 10px;
   font-family: DM Sans;
@@ -47,7 +47,7 @@
   font-size: 0.625rem;
   line-height: 0.81rem;
   letter-spacing: 0.01em;
-  color: #5d5d5e;
+  color: #5d5d5e!important;
 }
 
 .active-dot {

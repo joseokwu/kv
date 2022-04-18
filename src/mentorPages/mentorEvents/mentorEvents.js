@@ -1,44 +1,116 @@
-import React from 'react'
-import { Tabs } from '../../mentorComponents'
-import './mentorEvents.css'
-import down from '../../assets/icons/downArrow.svg'
-import searchIcon from '../../assets/icons/searchIcon.svg'
-import { AllEvents } from './components/allEvents'
+import React, { useEffect, useState } from "react";
+// import { Tabs } from "../../Startupcomponents";
+import { Tabs, Select } from '../../mentorComponents'
+import "./mentorEvents.css";
+import down from "../../assets/icons/downArrow.svg";
+import { SelectionDay } from "./components/selectionDay";
+import { getEvents } from "../../services/events";
+import { PageLoader } from "../../components";
 
 export const MentorEvents = ({ history }) => {
   const {
     location: { hash },
-  } = history
+  } = history;
+
+  const industry = [
+    "Category: All",
+    'Accounting',
+    'Analytics',
+    'Bike Rentals',
+    'Cloud Computing',
+    'Cloud Telephony',
+    'Content Services',
+    'CRM',
+    'Customer Engagement',
+    'Customer Support',
+    'E-Learning',
+    'Email Marketing',
+    'Employee Benefit',
+    'Finance',
+    'Fitness',
+    'Food and Beverages',
+    'Garage Services',
+    'Gifts and Confectionery',
+    'Health and Wellness',
+    'Home and Furnishing',
+    'Hospitality',
+    'Human Resources',
+    'Insurance',
+    'Investments',
+    'IT Rentals',
+    'Legal',
+    'Loans',
+    'Marketing',
+    'Merchandise',
+    'Messaging',
+    'Personal Finance',
+    'Printing',
+    'Sales Support',
+    'Salons and Spas',
+    'Signing Solutions',
+    'Travel',
+    'Virtual Assistant',
+  ]
+
+  const [events, setEvents] = useState([]);
+  const [selectionEvents, setSelectionEvents] = useState([]);
+  const [demoEvents, setDemoEvents] = useState([]);
+  const [pitchEvents, setPitchEvents] = useState([]);
+  const [otherEvents, setOtherEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchData = async () => {
+    setLoading(true);
+    const res = await getEvents();
+    setEvents(res?.data);
+    setSelectionEvents(() =>
+      res?.data?.filter((x) => x.eventType === "selectionDay")
+    );
+    setDemoEvents(() => res?.data?.filter((x) => x.eventType === "demoDay"));
+    setPitchEvents(() =>
+      res?.data?.filter((x) => x.eventType === "pitchSession")
+    );
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const renderContent = () => {
     switch (hash) {
-      // case '#All Events':
-      //   return <AllEvents />
+      case "#Selection Day":
+        return <SelectionDay data={selectionEvents} />;
 
-      case '#Selection Day':
-        return <AllEvents />
+      case "#Demo Day":
+        return <SelectionDay data={demoEvents} />;
 
-      case '#Demo Day':
-        return <AllEvents />
+      case "#Pitching Events":
+        return <SelectionDay data={pitchEvents} />;
 
-      case '#Pitching Session':
-        return <AllEvents />
-
-      case '#Others':
-        return <AllEvents />
+      case "#Other Events":
+        return <SelectionDay data={events} />;
 
       default:
-        return <AllEvents />
+        return <SelectionDay data={selectionEvents} />;
     }
-  }
+  };
 
   const tabItems = [
-    // 'All Events',
-    'Selection Day',
-    'Demo Day',
-    'Pitching Session',
-    'Others',
-  ]
+    "Selection Day",
+    "Demo Day",
+    "Pitching Events",
+    "Other Events",
+  ];
+
+  if (loading) {
+    return (
+      <PageLoader
+        dashboard={true}
+        num={[selectionEvents, demoEvents, pitchEvents, events]}
+      />
+    );
+  }
   return (
     <div className="mb-5">
       <div className="col-lg-12">
@@ -53,16 +125,17 @@ export const MentorEvents = ({ history }) => {
           <Tabs tabItems={tabItems} />
 
           <div className="mx-4">
-            <button
+            {/* <button
               className="d-flex align-items-center sort-btn"
               style={{ columnGap: 7 }}
               data-toggle="dropdown"
-            >
-              <span>
+            > */}
+            <Select placeholder={"Sort by: Industry"} options={industry} />
+              {/* <span>
                 <span>Sort by: </span> Industry
               </span>
-              <img src={down} alt="down" />
-            </button>
+              <img src={down} alt="down" /> */}
+            {/* </button> */}
           </div>
         </div>
       </div>
@@ -71,5 +144,5 @@ export const MentorEvents = ({ history }) => {
         <section className="mt-1">{renderContent()}</section>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -10,7 +10,7 @@ import {
 import { Form } from 'antd'
 import './interest.css'
 
-const MentorInterest = () => {
+const MentorInterest = ({data}) => {
   return (
     <section className="profile-offering mb-3">
       <span className="text-right d-block">
@@ -32,10 +32,12 @@ const MentorInterest = () => {
           <p className="mentor_availability_question mb-3">
             What kind of time commitment are you willing to make as a mentor?
           </p>
-          <button className="interest_btn mt-1 mr-2">Career</button>
-          <button className="interest_btn mt-1 mr-2">Tech</button>
-          <button className="interest_btn mt-1 mr-2">Engineering</button>
-          <button className="interest_btn mt-1">Career</button>
+          {
+            data?.araeaOfInterest.map((item, i) =>(
+              <button key={i} className="interest_btn mt-1 mr-2"> { item } </button>
+            ))
+          }
+        
           <p className="mentor_service mt-4">Area of expertise</p>
         </section>
 
@@ -44,12 +46,12 @@ const MentorInterest = () => {
             className="d-flex align-items-center flex-wrap"
             style={{ columnGap: 10, rowGap: 10 }}
           >
-            <Tag name="Technology" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Career" color="#E31937" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Tech" />
-            <Tag name="Cyber Security" color="#40439A" />
+          {
+            data?.areaOfExpertise.map((item, i) =>(
+              <Tag key={i} name={item} color={item === 'Engineering' || item === 'Cyber Security' ? '#40439A' : item === 'Career' ? '#E31937' : '#ACACAC' }  />
+            ))
+          }
+           
           </span>
         </section>
       </div>

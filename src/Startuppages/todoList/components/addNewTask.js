@@ -6,7 +6,7 @@ import close from '../../../assets/icons/closesm.svg'
 
 export const AddNewTask = () => {
   return (
-    <div className="px-5">
+    <div className="px-5 my-5">
       <section>
         <TextArea label="Title" rows={1} />
       </section>

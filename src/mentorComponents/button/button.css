@@ -1,9 +1,9 @@
 .btn_primary {
-  background: #2e3192;
+  background: #2e3192 !important;
 }
 
 .btn_secondary {
-  background: #00adef;
+  background: #00adef !important;
 }
 
 .btn_primary:focus,

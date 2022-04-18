@@ -35,4 +35,6 @@ export * from './mentorNetworking/networking'
 export * from './dealRoom/DealRoom'
 export * from './dealFolder/DealFolder'
 export * from './notification/Notification'
-export * from './evaluation/evaluation'
+export * from './evaluation/evaluation';
+export * from './Notfound';
+export * from './verifyEmail';

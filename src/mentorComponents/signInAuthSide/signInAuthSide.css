@@ -1,0 +1,17 @@
+.mentor_auth_side h1 {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 62px;
+    line-height: 75px;
+    color: #f9f9fc;
+  }
+  
+  .mentor_auth_side p {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    color: #ffffff;
+  }
