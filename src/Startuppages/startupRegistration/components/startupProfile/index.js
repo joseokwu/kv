@@ -36,6 +36,8 @@ export const StartupProfile = () => {
     {value: 'Exit Phase', label: 'Exit Phase'},
   ];
   const companySize = [
+    {value: '1-2', label: '1-2'},
+    {value: '2-5', label: '2-5'},
     {value: '5-10', label: '5-10'},
     {value: '11-20', label: '11-20'},
     {value: '21-30', label: '21-30'},
