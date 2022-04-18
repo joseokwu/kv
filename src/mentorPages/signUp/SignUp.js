@@ -7,14 +7,14 @@ import {
   AuthPasswordField,
   // PhoneInput,
 } from '../../mentorComponents/index';
-import PhoneInput from "react-phone-number-input";
+// import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css'
 import { useLocation }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
 import { setType } from '../../utils/helpers'
-// import { PhoneInput } from '../../components'
+import { PhoneInput } from '../../components'
 
 const { Option } = Select
 
@@ -212,11 +212,11 @@ export const SignUp = ({ history }) => {
               <label style={{color: '#D5D6F4'}}>
               <span style={{ color: "red" }}>* </span>Mobile Number
               </label>
-              {/* <PhoneInput
+              <PhoneInput
                 label={'* Mobile Number'} 
                 onChange={setPhone}
-              /> */}
-              <PhoneInput
+              />
+              {/* <PhoneInput
                 id="phoneNumber"
                 placeholder={"000 0000 000"}
                 name="phoneNumber"
@@ -227,7 +227,7 @@ export const SignUp = ({ history }) => {
                 value={value}
                 onChange={setValue}
                 MaxLength={17}
-              />
+              /> */}
             </div>
 
             <div className="col-12 mb-4">
