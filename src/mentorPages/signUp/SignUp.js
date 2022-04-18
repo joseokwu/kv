@@ -11,7 +11,7 @@ import { useLocation }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
-import { setRole } from '../../utils/helpers'
+import { setType } from '../../utils/helpers'
 // import { PhoneInput } from '../../components'
 
 const { Option } = Select
@@ -56,7 +56,7 @@ export const SignUp = ({ history }) => {
         phone: phone?.id,
       })
     }
-    setRole(stateAuth?.signUpStatus)
+    setType(stateAuth?.signUpStatus)
   }
 
   return (

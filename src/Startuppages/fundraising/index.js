@@ -14,7 +14,7 @@ import { FinancialProjection } from "./components/financialProjection";
 import { convertToMillion } from "../../utils/helpers";
 import { PageLoader } from "../../components";
 import { useAuth }  from "../../hooks/useAuth";
-import { getRole } from './../../utils/helpers';
+import { getType } from './../../utils/helpers';
 
 
 
@@ -28,7 +28,7 @@ export const StartupFundingRaising = () => {
 
   
   useEffect(() =>{
-    getDashboardProfile(getRole())
+    getDashboardProfile(getType())
 },[getDashboardProfile])
 
 

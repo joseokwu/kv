@@ -11,8 +11,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { DatePicker } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
-import { CustomSelect } from "../../../../Startupcomponents/select/customSelect";
-import { stage, optionsNumb, options } from "../../../../constants/domiData";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
@@ -27,15 +25,19 @@ import CountryDropdown from "country-dropdown-with-flags-for-react";
 import moment from "moment";
 
 export const StartupProfile = () => {
+
+  const { changePath  } = useActivity();
+
+
   const dateFormat = "YYYY-MM-DD";
-  const { updateProfile, stateAuth } = useAuth();
+  const { updateProfile, stateAuth , updateStartupInfo } = useAuth();
   const [logo, setLogo] = useState(
     stateAuth?.startupData?.startUpProfile?.logo ?? null
   );
   const [logoUploading, setLogoUploading] = useState(false);
-  const [, setOpts] = useState("");
+
   const [loading] = useState(false);
-  const [nextloading] = useState(false);
+ 
   const formik = useFormik({
     initialValues: {
       startupName: stateAuth?.user?.businessname ?? "",
@@ -103,7 +105,7 @@ export const StartupProfile = () => {
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
     if (prefix !== "") {
-      updateProfile({
+      updateProfile("startupProfile",{
         [prefix]: {
           ...stateAuth?.startupData?.startUpProfile[prefix],
           [name]: value,
@@ -112,11 +114,11 @@ export const StartupProfile = () => {
       formik.handleChange(e);
       return;
     }
-    updateProfile({ [name]: value });
+    updateProfile("startupProfile", {[name]: value });
     formik.handleChange(e);
   };
   const handlePhoneInput = (value) => {
-    updateProfile({
+    updateProfile("startupProfile",{
       contactInfo: {
         ...stateAuth?.startupData?.startUpProfile?.contactInfo,
         phoneNumber: value,
@@ -124,7 +126,7 @@ export const StartupProfile = () => {
     });
   };
   const handleDateInput = (value) => {
-    updateProfile({
+    updateProfile("startupProfile" ,{
       yearFounded: value,
     });
   };
@@ -139,7 +141,7 @@ export const StartupProfile = () => {
       setLogoUploading(true);
       const response = await upload(formData);
       setLogo(response?.path);
-      updateProfile({
+      updateProfile("startupProfile",{
         logo: response?.path,
       });
       setLogoUploading(false);
@@ -149,24 +151,8 @@ export const StartupProfile = () => {
     }
   };
 
-  const onSubmit = async (value) => {
-    // try {
-    //   const startupProfile = {
-    //     type: "startUpProfile",
-    //     accType: "startup",
-    //     values: {
-    //       ...value,
-    //       logo: logo,
-    //     },
-    //     userId: stateAuth?.user?.userId,
-    //   };
-    //   console.log(stateAuth?.startupData);
-    // } catch (err) {
-    //   setLoading(false);
-    //   toast.error(
-    //     err?.response?.data?.message || "There was an error in updating profile"
-    //   );
-    // }
+  const onSubmit = async () => {
+    updateStartupInfo()
   };
 
   return (
@@ -605,14 +591,11 @@ export const StartupProfile = () => {
             </div>
             <div className="mx-2">
               <CustomButton
-                type="submit"
-                disabled={nextloading}
-                onClick={() => {
-                  setOpts("next");
-                }}
+                type="button"
+                onClick={()=> changePath(2)}
                 background="#2E3192"
               >
-                {nextloading ? <CircularLoader /> : "Next"}
+               Next
               </CustomButton>
             </div>
           </div>

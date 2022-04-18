@@ -1252,6 +1252,84 @@ key={i}
                       Your browser does not support HTML5 video.
                      </video> 
 
+=======================================================================
+=====================================================================
+
+ const pitchDeck = {
+        type: "pitchDeck",
+        accType: "startup",
+        values: {
+          pitchDeckFile: fileDoc,
+          pitchDeckVideo: videoDoc,
+        },
+        userId: stateAuth?.user?.userId,
+      };
+      console.log(pitchDeck);
+
+      if (opts === "next") {
+        setOpts(true);
+        let result = await updateFounderProfile(pitchDeck);
+
+        if (result?.success) {
+          toast.success("Pitch Deck" + "     " + result?.message);
+          setOpts(false);
+          return changePath(path + 1);
+        }
+      }
+      setLoading(true);
+      let result = await updateFounderProfile(pitchDeck);
+
+      if (!result?.success) {
+        toast.error(
+          result?.message || "There was an error updating the pitchDeck"
+        );
+        setLoading(false);
+        return;
+      }
+      toast.success("Pitch Deck" + " " + result?.message);
+      setLoading(false);
+      history.push("/startup/dashboard");
+=====================================================================
+=======================================================================
+      {/* <FileWrapper className="d-flex justify-content-center text-center">
+                  {videoDoc !== null ? (
+                    <video
+                      style={{
+                        borderRadius: '20px',
+                        maxHeight: '150px',
+                        width: '250px',
+                      }}
+                      className="mb-3"
+                      controls
+                    >
+                      <source src={videoDoc} id="video_here" />
+                      Your browser does not support HTML5 video.
+                    </video>
+                  ) : videoUploading ? (
+                    <CircularLoader color={'#000'} />
+                  ) : (
+                    <>
+                      <img src={DownloadIcon} alt="#" />
+                      <FileText>Drag & Drop</FileText>
+                      <FileText>
+                        Drag files or click here to upload pitch video{' '}
+                      </FileText>
+                    </>
+                  )}
+
+                  <input
+                    type="file"
+                    name="pitchDeckVideo"
+                    id="pitch-docu"
+                    onChange={handleChangeVid}
+                    accept="video/*"
+                    hidden
+                  />
+                  <LabelButton for="pitch-docu">Upload Files</LabelButton>
+                </FileWrapper> */}
+
+=====================================================================
+==================================================================
 
 
 

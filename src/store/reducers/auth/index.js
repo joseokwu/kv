@@ -12,7 +12,7 @@ import {
   DASHBOARD_USER_PROFILE,
   DASHBOARD_LOAD,
   UPDATE_STARTUP_DATA,
-  UPDATE_STARTUP_PROFILE,
+  UPDATE_STARTUP_INFO,
 } from "../../actions/actions.types";
 import { INIT_STATE } from "../../initialstates";
 
@@ -43,7 +43,7 @@ const authReducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         loading: false,
-        roles: action.payload?.type,
+        type: action.payload?.type,
         username: action.payload?.startupname
           ? action.payload?.startupname
           : action.payload?.firstname,
@@ -62,8 +62,8 @@ const authReducer = (state = INIT_STATE, action) => {
         loading: false,
         authenticated: true,
         user: action?.payload,
-        roles: action?.payload?.role,
-        signUpStatus: action?.payload?.role[0],
+        type: action?.payload?.type,
+        signUpStatus: action?.payload?.type[0],
         email: action?.payload?.email,
       };
 
@@ -72,8 +72,8 @@ const authReducer = (state = INIT_STATE, action) => {
         ...state,
         dashboardLoad: false,
         user: action?.payload,
-        roles: action?.payload?.role,
-        signUpStatus: action?.payload?.role[0],
+        type: action?.payload?.type,
+        signUpStatus: action?.payload?.type[0],
         email: action?.payload?.email,
       };
     case USER_PROFILE_FAIL:
@@ -82,7 +82,7 @@ const authReducer = (state = INIT_STATE, action) => {
         loading: false,
         authenticated: false,
         user: null,
-        roles: [],
+        type: [],
       };
     case SET_SIGNUP_STATUS:
       return {
@@ -94,7 +94,7 @@ const authReducer = (state = INIT_STATE, action) => {
         ...state,
         authenticated: false,
         completedRegistration: false,
-        roles: [],
+        type: [],
       };
     case EDIT:
       return {
@@ -106,15 +106,15 @@ const authReducer = (state = INIT_STATE, action) => {
         ...state,
         startupData: action.payload,
       };
-    case UPDATE_STARTUP_PROFILE:
-      console.log(state.startupData, action.payload);
+    case UPDATE_STARTUP_INFO:
+    //  alert(JSON.stringify(action.payload));
       return {
         ...state,
         startupData: {
           ...state.startupData,
-          startUpProfile: {
-            ...state.startupData.startUpProfile,
-            ...action.payload,
+          [action.payload.property]: {
+            ...state.startupData[action.payload.property],
+            ...action.payload.value,
           },
         },
       };

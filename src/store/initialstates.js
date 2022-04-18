@@ -5,7 +5,7 @@ export const INIT_STATE = {
   loading: false,
   email:null,
   dashboardLoad:false,
-  roles: [],
+  type: [],
   signUpStatus: 'startup',
   username: '',
   completedRegistration:false,

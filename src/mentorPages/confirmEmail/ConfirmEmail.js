@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import logo from '../../assets/icons/kvlogo.svg'
 import sentMail from '../../assets/images/mentorSentEmail.svg'
 import { useAuth } from '../../hooks'
-import { getRole , getToken } from '../../utils/helpers';
+import { getType , getToken } from '../../utils/helpers';
 import { resendEmail } from '../../services/user';
 import toast from 'react-hot-toast';
 
@@ -12,12 +12,12 @@ import toast from 'react-hot-toast';
 
 export const MentorConfirmEmail = () => {
   const history = useHistory();
-  console.log(getRole())
-  const { stateAuth } = useAuth();
+  console.log(getType())
+ 
   
   const handleResend = async() =>{
     try{
-      const res = await resendEmail({origin: window.location.origin , token: getToken() , type:getRole() });
+      const res = await resendEmail({origin: window.location.origin , token: getToken() , type:getType() });
       toast.success(res?.message);
     }catch(err){
       toast.error(err?.response?.data?.message ?? 'Email could not be sent')
@@ -26,7 +26,7 @@ export const MentorConfirmEmail = () => {
 
 
   const renderPage = () => {
-    switch (getRole()) {
+    switch (getType()) {
       case 'startup':
         return (
           <div>

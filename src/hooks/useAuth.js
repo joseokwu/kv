@@ -5,6 +5,11 @@ updateStartupProfile
 } from '../store/actions/auth';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { updateStartup } from '../services';
+import toast from 'react-hot-toast';
+
+
+
 
 export const useAuth = () => {
 
@@ -59,15 +64,32 @@ const callUpdateStartupData = async(value) =>{
        dispatch(changeStatus(value))
    } 
   
-   const updateProfile = (value) =>{
-       dispatch(updateStartupProfile(value));
+   const updateProfile = (prop, value) =>{
+       dispatch(updateStartupProfile(prop ,value));
    }
   
+
    const userLogout = () =>{
      dispatch(logout())
 
      history.push('/')
+   }
 
+   const updateStartupInfo = async(lastPage = false) =>{
+    try{
+    const payload = {
+    accType:stateAuth.type[0],
+    values:stateAuth.startupData,
+    lastPage
+    }
+
+    const res = await updateStartup(payload);
+    toast.success(res?.message)
+
+    }catch(err){
+    console.log(err?.response)
+    toast.error(err?.response?.data?.message ?? err?.response?.message)
+    }
    }
 
     return {
@@ -80,6 +102,7 @@ const callUpdateStartupData = async(value) =>{
         editUser,
         getDashboardProfile,
         callUpdateStartupData,
-        updateProfile
+        updateProfile,
+        updateStartupInfo
     };
 }

@@ -1,11 +1,11 @@
 import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
     LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL , 
     SET_SIGNUP_STATUS, EDIT , LOG_OUT ,  DASHBOARD_USER_PROFILE,
-    UPDATE_STARTUP_PROFILE ,  DASHBOARD_LOAD , UPDATE_STARTUP_DATA
+    UPDATE_STARTUP_INFO ,  DASHBOARD_LOAD , UPDATE_STARTUP_DATA
 } from '../actions.types';
-import { register, userLogin , profile, forgorPassword } from '../../../services';
+import { register, userLogin , profile, forgorPassword} from '../../../services';
 import toast from 'react-hot-toast';
-import { setAuthToken , setRole } from '../../../utils/helpers';
+import { setAuthToken , setType } from '../../../utils/helpers';
 
 
 export const registerUser = async(value) => async(dispatch) =>{
@@ -47,7 +47,7 @@ export const loginUser = async(value) => async(dispatch) =>{
     })
         }else{
         setAuthToken(res?.data?.token);
-        setRole(res?.data?.user?.type[0])
+        setType(res?.data?.user?.type[0])
         console.log(res)
         dispatch({
             type:LOGIN_SUCCESS,
@@ -67,6 +67,8 @@ export const loginUser = async(value) => async(dispatch) =>{
         })
     }
 }
+
+
 
 export const dashboardProfile = async(value) => async(dispatch) =>{
 
@@ -90,11 +92,14 @@ export const dashboardProfile = async(value) => async(dispatch) =>{
   
   }
 
- export const updateStartupProfile = async(value) => async(dispatch) =>{
+ export const updateStartupProfile = async( property ,value) => async(dispatch) =>{
 
     dispatch({
-        type:UPDATE_STARTUP_PROFILE,
-        payload:value
+        type:UPDATE_STARTUP_INFO,
+        payload:{ 
+            value,
+            property
+         }
     })
 }
 
