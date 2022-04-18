@@ -316,8 +316,8 @@ export const StartupProfile = () => {
                   id={"companySize"}
                   name={"companySize"}
                   value={formik.values.companySize}
-                  onChange={(e) => handleChange(e)}
-                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  // onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
                   placeholder="Enter company size"
                 >{companySize.map((item, i) => {
