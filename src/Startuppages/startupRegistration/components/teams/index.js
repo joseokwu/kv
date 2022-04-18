@@ -31,7 +31,8 @@ import {
   WorkExperience,
   Education,
   SkillTab,
-  Tag
+  Tag,
+  RandomCard
 } from "../../../../Startupcomponents";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../../../hooks/useAuth";
@@ -65,7 +66,13 @@ export const TeamProfile = () => {
   //   stateAuth?.user?.team?.country ?? "Nigeria"
   // );
 
- 
+ const gender = [
+
+  { label:'--Select-gender--', value:'' },
+   { label:'Male', value:'male' },
+   { label:'Female', value:'female' }
+
+ ]
 
   const dateFormat = "YYYY-MM-DD";
   const [inVal, setVal] = useState("");
@@ -122,6 +129,7 @@ export const TeamProfile = () => {
       city:stateAuth?.startupData?.team?.city ?? "",
       mobile_number: stateAuth?.user?.team?.mobile_number ,
       country:stateAuth?.startupData?.team?.country,
+      gender:stateAuth?.startupData?.team?.gender ?? "" ,
       website:stateAuth?.startupData?.team?.socialMedia?.website,
       linkedIn: stateAuth?.startupData?.team?.socialMedia?.linkedIn ?? "",
       twitter: stateAuth?.startupData?.team?.socialMedia?.twitter ?? "",
@@ -137,7 +145,7 @@ export const TeamProfile = () => {
       dob: Yup.string().required('Required'),
       mobile_number:Yup.number().min(11 , 'Number should be not be below 11 digit').required('Required'),
       country:Yup.number().required('Required'),
-      
+      gender:Yup.number().required('Required'),
       linkedIn: Yup.string().required('Required'),
       twitter: Yup.string().required('Required'),
       website: Yup.string().required('Required'),
@@ -299,12 +307,7 @@ export const TeamProfile = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (stateAuth?.user?.team) {
-  //     setWorkExperience(stateAuth?.user?.team?.experience, "server");
-  //     setEducation(stateAuth?.user?.team?.education, "server");
-  //   }
-  // }, []);
+ 
 
   return (
     <>
@@ -528,6 +531,31 @@ export const TeamProfile = () => {
                 <label className="error">Required</label>
               ) : null}
             </div>
+            <div className="form-group  col-lg-6 col-12" >
+            <label>Gender<span style={{color: "red"}}>*</span></label>
+            <select
+              id='instrumentForRound'
+              name='instrumentForRound'
+              // options={optionsNumb}
+              className='cust mx-3 px-2 extra'
+              // placeholder='Choose your instrument for your round'
+              value={
+                
+                formik.values.gender
+              }
+              onChange={formik.handleChange}
+            >
+              {gender.map((item, index) => {
+                return <option
+                value={item.value}
+                 key={index}>{item.label}</option>;
+              })}
+            </select>
+            {formik.touched.gender && formik.errors.gender ? (
+                <label className="error">{formik.errors.gender}</label>
+              ) : null}
+            </div>
+
           </div>
         </FormWrapper>
         <FormWrapper height="80%">
@@ -664,29 +692,32 @@ export const TeamProfile = () => {
               <div className='d-flex justify-content-center'>
                 <div
                   className=''
-                  data-target='#cofounder'
-                  onClick={() => setShowModal(true)}
                 >
+                <div className="row">
                 {
                stateAuth?.startupData?.team?.coFounder && stateAuth?.startupData?.team?.coFounder.length > 0 ?  
                stateAuth?.startupData?.team?.coFounder.map((item , i) =>(
-           
-                <Tag
-                  key={i}
-                    name={`${item.firstName} Co-founder`}
-                    color='#4F4F4F'
-                    bg='rgba(183, 218, 231, 0.5'
-                    padding='8px 14px'
-                  />
+                  <div className="col-6" key={i} >
+                  <RandomCard img={item.avatar} name={item.firstName}  />
+                  </div>
+               
                )):(
+                <span
+                  />
+               )
+                }
+                </div>
+
+                <div className="mt-2" >
                 <Tag
                     name='+ Add Co-founder'
                     color='#4F4F4F'
                     bg='rgba(183, 218, 231, 0.5'
                     padding='8px 14px'
+                    data-target='#cofounder'
+                  onClick={() => setShowModal(true)}
                   />
-               )
-                }
+                </div>
             
                 </div>
               </div>
@@ -748,28 +779,6 @@ export const TeamProfile = () => {
             </div>
           </div>
         </FormWrapper>
-
-        {/* 
-        <FormWrapper height="70%">
-          <div className="div border-bottom pb-3">
-            <span>Invite Team Members</span>
-            <p className="pt-3">Key team members</p>
-          </div>
-
-          <div className="form-group mt-5 mb-4">
-            <label>
-              Invite a team member that can benefit from knight venture
-            </label>
-            <input
-              type="text"
-              className="form-control my-2 ps-3"
-              placeholder="Enter email address"
-            />
-          </div>
-          <div className="my-3 mx-3">
-            <CustomButton background="#031298"> Invite </CustomButton>
-          </div>
-        </FormWrapper> */}
 
         <div className="row ">
           <div className="col-3">

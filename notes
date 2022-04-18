@@ -1640,7 +1640,27 @@ const handlePhoneInput = (value) => {
   });
 };
 
+{/* 
+  <FormWrapper height="70%">
+    <div className="div border-bottom pb-3">
+      <span>Invite Team Members</span>
+      <p className="pt-3">Key team members</p>
+    </div>
 
+    <div className="form-group mt-5 mb-4">
+      <label>
+        Invite a team member that can benefit from knight venture
+      </label>
+      <input
+        type="text"
+        className="form-control my-2 ps-3"
+        placeholder="Enter email address"
+      />
+    </div>
+    <div className="my-3 mx-3">
+      <CustomButton background="#031298"> Invite </CustomButton>
+    </div>
+  </FormWrapper> */}
 
 
 

@@ -142,15 +142,8 @@ export const CoFounder = ({
       
     });
 
-   // console.log(stateAuth?.startupData)
-
-  };
-
-  const getEducation = (value) =>{
-    
-    console.log(value);
+      handleClose(false)
   }
-  console.log(stateAuth?.startupData)
 
 
 
@@ -203,7 +196,6 @@ export const CoFounder = ({
 
     }])
     
-    console.log(localExperience)
     workFormik.resetForm({
   values:{
     title: '',
