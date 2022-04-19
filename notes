@@ -1803,10 +1803,49 @@ const renderCard =(num) =>{
             </div>
           </div> */}
 
+=========================================================
+====================================================================
+
+{/* <div className='form-group col-12'>
+<label>Did you have a lead investor for last round?<span style={{color: "red"}}>*</span></label>
+<BntWrap>
+  <button
+    className={`me-3 ${hasLeadInvestor === true ? 'active' : ''}`}
+    onClick={(e) => {
+      e.preventDefault();
+      setHasLeadInvestor(true);
+    }}
+  >
+    Yes
+  </button>
+  <button
+    className={hasLeadInvestor === false ? 'active' : ''}
+    onClick={(e) => {
+      e.preventDefault();
+      setHasLeadInvestor(false);
+    }}
+  >
+    No
+  </button>
+</BntWrap>
+</div> */}
 
 
+{/* <div className='col-12 my-5'>
+<span
+  style={{
+    color: '#120297',
+    borderBottom: '1px solid #120297',
+    fontWeight: '600',
+    cursor: 'pointer',
+  }}
+>
+  Add previous founding round +
+</span>
+</div> */}
 
 
+<section className="side-footer " onClick={() => history.push('/startup/support')}>
 
 
 

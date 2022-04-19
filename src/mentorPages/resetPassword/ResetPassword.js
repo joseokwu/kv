@@ -73,6 +73,7 @@ const sendForgotPassword = async(value) =>{
                   placeholder="Password must be at least 8 characters"
                   className="mentor_gray_card_input"
                   id='password'
+                  numb={8}
                   label={'New Password'}
                 />
               </section>
@@ -83,6 +84,7 @@ const sendForgotPassword = async(value) =>{
                   placeholder="Password must be at least 8 characters"
                   className="mentor_gray_card_input"
                   id='confirm_password'
+                  numb={8}
                   label={'Confirm New Password'}
                 />
               </section>

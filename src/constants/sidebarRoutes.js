@@ -68,30 +68,7 @@ export const dashboardRoutes = [
     path: "/startup/events",
     icon: event,
   },
-  {
-    title: "E-academy",
-    activator: "e-academy",
-    path: "/startup/e-academy",
-    icon: schedule,
-  },
-  {
-    title: "Todolist",
-    activator: "todolist",
-    path: "/startup/todolist",
-    icon: evaluation,
-  },
-  {
-    title: "Networking",
-    activator: "networking",
-    path: "/startup/networking",
-    icon: networking,
-  },
-  {
-    title: "Dealroom",
-    activator: "dealroom",
-    path: "/startup/dealroom",
-    icon: dealroom,
-  },
+
 ];
 
 export const boosterNavigators = [

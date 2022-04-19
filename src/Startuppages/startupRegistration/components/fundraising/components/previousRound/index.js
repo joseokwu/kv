@@ -63,8 +63,8 @@ export const PreviousRound = ({ setFundraising }) => {
     initialValues: {
       dateOfFunding:stateAuth?.startupData?.fundRaising?.previousRound?.dateOfFunding ?? startDate ,
       instrumentForRound:
-        stateAuth?.startupData?.fundRaising?.previousRound?.instrumentForRound ?? 'Fund1',
-      numberOfRounds: stateAuth?.startupData?.fundRaising?.previousRound?.numberOfRounds ?? 'Fund1',
+        stateAuth?.startupData?.fundRaising?.previousRound?.instrumentForRound ?? '',
+      numberOfRounds: stateAuth?.startupData?.fundRaising?.previousRound?.numberOfRounds ?? '',
       fundraisingAmount: stateAuth?.startupData?.fundRaising?.previousRound?.fundraisingAmount ?? '',
       dilution: stateAuth?.startupData?.fundRaising?.previousRound?.dilution ?? '',
       preMoneyValuation: stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation ?? '',
@@ -72,7 +72,7 @@ export const PreviousRound = ({ setFundraising }) => {
         stateAuth?.startupData?.fundRaising?.previousRound?.postMoneyValuation ?? '',
     },
     validationSchema: Yup.object({
-
+      instrumentForRound: Yup.string().required('Required'),
       numberOfRounds: Yup.string().required('Required'),
       fundraisingAmount: Yup.string().required('Required'),
       dilution: Yup.string().required('Required'),
@@ -209,7 +209,6 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter amount'
               onBlur={formik.handleBlur}
               value={
-              
                 formik.values.preMoneyValuation
               }
               onChange={formik.handleChange}
@@ -240,43 +239,7 @@ export const PreviousRound = ({ setFundraising }) => {
               </label>
             ) : null }
           </div>
-          <div className='form-group col-12'>
-            <label>Did you have a lead investor for last round?<span style={{color: "red"}}>*</span></label>
-            <BntWrap>
-              <button
-                className={`me-3 ${hasLeadInvestor === true ? 'active' : ''}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setHasLeadInvestor(true);
-                }}
-              >
-                Yes
-              </button>
-              <button
-                className={hasLeadInvestor === false ? 'active' : ''}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setHasLeadInvestor(false);
-                }}
-              >
-                No
-              </button>
-            </BntWrap>
-          </div>
-
-       
-          <div className='col-12 my-5'>
-            <span
-              style={{
-                color: '#120297',
-                borderBottom: '1px solid #120297',
-                fontWeight: '600',
-                cursor: 'pointer',
-              }}
-            >
-              Add previous founding round +
-            </span>
-          </div>
+      
         </div>
       </BodyWrapper>
       <Terms className=''>
@@ -300,6 +263,7 @@ export const PreviousRound = ({ setFundraising }) => {
           <OutlineButton
             type='submit'
             onClick={(e) => {
+              e.preventDefault();
               onSubmit(e);
             }}
             className='ms-2'
