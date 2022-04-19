@@ -1332,12 +1332,35 @@ key={i}
 ==================================================================
 
 
+// import { CircularLoader } from "../../../../../../Startupcomponents/CircluarLoader/CircularLoader";
+// import toast from "react-hot-toast";
 
 
+  // const [fileDoc, setFileDoc] = useState(
+  //   stateAuth?.user?.fundRaising?.fundUtilization?.files ?? null
+  // );
 
+  const handleChange = async (e) => {
+    const { files } = e.target
+    const formData = new FormData()
+    formData.append('dir', 'kv')
+    formData.append('ref', stateAuth.user?.userId)
+    formData.append('type', 'image')
+    formData.append(0, files[0])
 
-
-
+    try {
+      setLogoUploading(true)
+      const response = await upload(formData)
+      console.log(response)
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+    } catch (error) {
+      console.log(error)
+      toast.error(
+        error?.res?.data?.message || 'The was an error updating pitch deck',
+      )
+    }
+  }
 
 
 

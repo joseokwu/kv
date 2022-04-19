@@ -118,11 +118,11 @@ export const StartupProfile = () => {
     }),
     onSubmit: (value) => onSubmit(value),
   });
-
+     
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
     if (prefix !== "") {
-      updateProfile("startupProfile",{
+      updateProfile("startUpProfile",{
         [prefix]: {
           ...stateAuth?.startupData?.startUpProfile[prefix],
           [name]: value,
@@ -131,19 +131,38 @@ export const StartupProfile = () => {
       formik.handleChange(e);
       return;
     }
-    updateProfile("startupProfile", {[name]: value });
+    updateProfile("startUpProfile", {[name]: value });
     formik.handleChange(e);
   };
+
+
+  // fundRaising:
+  // capTable: {amountRaised: '5000', amountInvestedByFounders: '1000', files: Array(4), _id: '6259419ab36d0dd3b5e2e3c9'}
+  // financialProjection: {files: 'https://cdn.shoutng.com/kvnmri9zykq3doplnqtxfi.pdf', _id: '6259419ab36d0dd3b5e2e3cb'}
+  // fundUtilization: {files: Array(10), _id: '6259419ab36d0dd3b5e2e3c8'}
+  // fundingAsk: {hasPreviousFundraising: true, instrumentForRound: 'Series B', numberOfRounds: '5', fundraisingAmount: '800000', dilution: '', …}
+  // previousRound:
+
+
   const handlePhoneInput = (value) => {
-    updateProfile("startupProfile",{
+    updateProfile("startUpProfile",{
       contactInfo: {
         ...stateAuth?.startupData?.startUpProfile?.contactInfo,
         phoneNumber: value,
       },
     });
   };
+
+  const selectChange = (e) =>{
+    const { value , name } = e.target;
+    updateProfile("startUpProfile" ,{
+      [name]: value,
+    });
+    formik.handleChange(e)
+  }  
+
   const handleDateInput = (value) => {
-    updateProfile("startupProfile" ,{
+    updateProfile("startUpProfile" ,{
       yearFounded: value,
     });
   };
@@ -319,7 +338,7 @@ export const StartupProfile = () => {
                   id={"companySize"}
                   name={"companySize"}
                   value={formik.values.companySize}
-                  onChange={handleChange}
+                  onChange={(e) => selectChange(e)}
                   // onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
                   placeholder="Enter company size"
@@ -366,8 +385,8 @@ export const StartupProfile = () => {
                 id={"startupStage"}
                 name={"startupStage"}
                 value={formik.values.startupStage}
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
+                onChange={(e) => selectChange(e)}
+                // onBlur={formik.handleBlur}
                 className="sel ps-3 pe-3"
                 placeholder="Enter Business Stage"
               >
@@ -537,7 +556,7 @@ export const StartupProfile = () => {
                 name="profileHandle"
                 disabled={true}
                 placeholder="Enter your startup profile handle"
-                defaultValue={`@knight-venture/${stateAuth?.user?.businessname}`}
+                defaultValue={`knight.venture/${stateAuth?.user?.businessname}`}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3 text-secondary"
@@ -604,12 +623,10 @@ export const StartupProfile = () => {
           <div className="d-flex my-4 justify-content-end">
             <div>
               <CustomButton
-                type="button"
+                type="submit"
                 disabled={loading}
                 background="#06ADEF"
-                onClick={() => {
-                  formik.handleSubmit();
-                }}
+               
               >
                 {loading ? <CircularLoader /> : "Save"}
               </CustomButton>

@@ -97,8 +97,9 @@ export const dashboardProfile = async(value) => async(dispatch) =>{
     dispatch({
         type:UPDATE_STARTUP_INFO,
         payload:{ 
-            value,
-            property
+            property,
+            value
+            
          }
     })
 }

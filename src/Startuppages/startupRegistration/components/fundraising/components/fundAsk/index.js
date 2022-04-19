@@ -18,11 +18,9 @@ import { useAuth } from '../../../../../../hooks/useAuth';
 
 export const FundAsk = ({ setFundraising, back }) => {
   const history = useHistory();
-  const { stateAuth } = useAuth();
+  const { stateAuth ,  updateProfile } = useAuth();
 
-  const {
-    state: { fundraising },
-  } = useActivity();
+ 
 
   const {
     location: { hash },
@@ -50,8 +48,11 @@ export const FundAsk = ({ setFundraising, back }) => {
   //   setHasPreviousFundraising(e.target.dataset.id);
   // }
 
-  const onSubmit = () => {
-    setFundraising({
+  const onSubmit = (e) => {
+
+    e.preventDefault();
+
+    updateProfile( "fundRaising", {
       fundingAsk: {
         hasPreviousFundraising,
         instrumentForRound: formik.getFieldProps('instrumentForRound').value,
@@ -63,34 +64,45 @@ export const FundAsk = ({ setFundraising, back }) => {
         terms: formik.getFieldProps('terms').value,
       },
     });
-    //console.log()
+   
+    console.log({hasPreviousFundraising,
+      instrumentForRound: formik.getFieldProps('instrumentForRound').value,
+      numberOfRounds: formik.getFieldProps('numberOfRounds').value,
+      fundraisingAmount: formik.getFieldProps('fundraisingAmount').value,
+      dilution: formik.getFieldProps('dilution').value,
+      preMoneyValuation: formik.getFieldProps('preMoneyValuation').value,
+      postMoneyValuation: formik.getFieldProps('postMoneyValuation').value,
+      terms: formik.getFieldProps('terms').value,})
 
-    history.push('#Fund Utilization');
+   // history.push('#Fund Utilization');
   };
   
 
   const formik = useFormik({
     initialValues: {
       hasPreviousFundraising:
-        stateAuth?.user?.fundRaising?.fundingAsk?.hasPreviousFundraising ?? false,
-      description: stateAuth?.user?.fundRaising?.fundingAsk?.description ?? '',
-      instrumentForRound: stateAuth?.user?.fundRaising?.fundingAsk?.instrumentForRound ?? 'Fund1',
-      numberOfRounds: stateAuth?.user?.fundRaising?.fundingAsk?.numberOfRounds ?? 'Fund1',
-      fundraisingAmount: stateAuth?.user?.fundRaising?.fundingAsk?.fundraisingAmount ?? '',
-      dilution: stateAuth?.user?.fundRaising?.fundingAsk?.dilution ?? '',
-      preMoneyValuation: stateAuth?.user?.fundRaising?.fundingAsk?.preMoneyValuation ?? '',
+        stateAuth?.startupData?.fundRaising?.fundingAsk?.hasPreviousFundraising ?? false,
+      description: stateAuth?.startupData?.fundRaising?.fundingAsk?.description ?? '',
+      instrumentForRound: stateAuth?.startupData?.fundRaising?.fundingAsk?.instrumentForRound ?? 'Fund1',
+      numberOfRounds: stateAuth?.startupData?.fundRaising?.fundingAsk?.numberOfRounds ?? 'Fund1',
+      fundraisingAmount: stateAuth?.startupData?.fundRaising?.fundingAsk?.fundraisingAmount ?? '',
+      dilution: stateAuth?.startupData?.fundRaising?.fundingAsk?.dilution ?? '',
+      preMoneyValuation: stateAuth?.startupData?.fundRaising?.fundingAsk?.preMoneyValuation ?? '',
       postMoneyValuation:
-        stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation ?? '',
-      hasLeadInvestor: stateAuth?.user?.fundRaising?.fundingAsk?.hasLeadInvestor ?? '',
-      terms: stateAuth?.user?.fundRaising?.fundingAsk?.terms ?? [],
+        stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation ?? '',
+      hasLeadInvestor: stateAuth?.startupData?.fundRaising?.fundingAsk?.hasLeadInvestor ?? '',
+      terms: stateAuth?.startupData?.fundRaising?.fundingAsk?.terms ?? [],
     },
     validationSchema: Yup.object({
+      instrumentForRound: Yup.string().required('Required'),
       fundraisingAmount: Yup.string().required('Required'),
       dilution: Yup.string().required('Required'),
       preMoneyValuation: Yup.string().required('Required'),
       postMoneyValuation: Yup.string().required('Required'),
+      description: Yup.string().required('Required'),
+      
     }),
-    onSubmit: (value) => onSubmit(value),
+   // onSubmit: (value) => onSubmit(value),
   });
 
   return (
@@ -105,7 +117,7 @@ export const FundAsk = ({ setFundraising, back }) => {
       ) : (
         <span></span>
       )}
-      <form>
+      <form >
         <BodyWrapper className=''>
           <p>A brief description of funding ask</p>
           <hr />
@@ -125,7 +137,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                   Yes
                 </button>
                 <button
-                  className={hasPreviousFundraising === false && 'active'}
+                  className={hasPreviousFundraising === false ? 'active' : '' }
                   onClick={(e) => {
                     e.preventDefault();
                     setHasPreviousFundraising(false);
@@ -137,8 +149,8 @@ export const FundAsk = ({ setFundraising, back }) => {
             </div>
             <div className='form-group my-3 col-12'>
               <label>
-                Which instrument would you prefer to use for your current
-                round?<span style={{color: "red"}}>*</span>
+              { hasPreviousFundraising ? 'What was the instrument for your previous round' : 'Which instrument would you prefer to use for your current round?' }
+             <span style={{color: "red"}}>*</span>
               </label>
               <select
                 id='instrumentForRound'
@@ -155,6 +167,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                   return <option key={index}>{item.label}</option>;
                 })}
               </select>
+              {formik.touched.instrumentForRound && formik.errors.instrumentForRound ? (
+                <label className="error">{formik.errors.instrumentForRound}</label>
+              ) : null}
             </div>
             <div className='form-group my-2 col-lg-6 col-12'>
               <label>Select your round?<span style={{color: "red"}}>*</span></label>
@@ -186,8 +201,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 placeholder='Enter amount'
                 onBlur={formik.handleBlur}
                 value={
-                 
-                  formik.values.fundraisingAmount
+                 formik.values.fundraisingAmount
                 }
                 onChange={formik.handleChange}
               />
@@ -261,43 +275,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 </label>
               ) : null}
             </div>
-            {/* <div className='form-group col-12'>
-              <label> Do you have a lead investor for this round?* </label>
-              <BntWrap>
-                <button
-                  className={`me-3 ${hasLeadInvestor === 'yes' && 'active'}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setHasLeadInvestor('yes');
-                  }}
-                >
-                  Yes
-                </button>
-                <button
-                  className={hasLeadInvestor === 'no' && 'active'}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setHasLeadInvestor('no');
-                  }}
-                >
-                  No
-                </button>
-              </BntWrap>
-            </div> */}
-            {/* <div className='sold my-3'>
-              <div
-                className='d-flex justify-content-center'
-                data-target='#cofounder'
-                onClick={() => setShowModal(true)}
-              >
-                <Tag
-                  name='+ Add Lead Investor'
-                  color='#4F4F4F'
-                  bg='rgba(183, 218, 231, 0.5)'
-                  padding='9px 30px'
-                />
-              </div>
-            </div> */}
+       
             <div className='form-group col-12 mt-3'>
               <div className='d-flex justify-content-between'>
                 <label>
@@ -350,7 +328,7 @@ export const FundAsk = ({ setFundraising, back }) => {
               // }}
               onClick={(e) => {
                 e.preventDefault();
-                onSubmit();
+                onSubmit(e)
               }}
               className='ms-2'
               style={{ marginRight: '0rem' }}

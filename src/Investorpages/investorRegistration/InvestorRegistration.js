@@ -66,7 +66,7 @@ export const InvestorRegistration = () => {
       </section>
 
       <section className="register-grid" style={{ maxWidth: 1440 }}>
-        <div>
+        <div className="d-none d-lg-flex">
           <ul
             className="register-list"
             style={{ position: "sticky", top: "2rem" }}

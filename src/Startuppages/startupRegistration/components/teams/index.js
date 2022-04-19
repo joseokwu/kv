@@ -127,6 +127,7 @@ export const TeamProfile = () => {
       email: stateAuth?.startupData?.team?.email ?? "",
       state: stateAuth?.startupData?.team?.state ?? "",
       city:stateAuth?.startupData?.team?.city ?? "",
+      dob:stateAuth?.startupData?.team?.dob ?? moment(),
       mobile_number: stateAuth?.user?.team?.mobile_number ?? phone,
       country:stateAuth?.startupData?.team?.country,
       gender:stateAuth?.startupData?.team?.gender ?? "" ,
@@ -140,11 +141,9 @@ export const TeamProfile = () => {
       firstName: Yup.string().required('Required'),
       lastName: Yup.string().required('Required'),
       email: Yup.string().required('Required'),
-      state: Yup.string().required('Required'),
+       state: Yup.string().required('Required'),
       city: Yup.string().required('Required'),
-      dob: Yup.string().required('Required'),
-      mobile_number:Yup.number().min(11 , 'Number should be not be below 11 digit').required('Required'),
-      country:Yup.string().required('Required'),
+       dob: Yup.string().required('Required'),
       gender:Yup.string().required('Required'),
       linkedIn: Yup.string().required('Required'),
       twitter: Yup.string().required('Required'),
@@ -187,6 +186,7 @@ export const TeamProfile = () => {
     updateProfile("team" ,{
       dob: value,
     });
+    formik.setFieldValue("dob", value.value)
   };
 
 
@@ -475,6 +475,9 @@ export const TeamProfile = () => {
                 format={dateFormat}
                 onChange={handleDateInput}
               />
+                {formik.touched.dob && formik.errors.dob ? (
+                <label className="error">{formik.errors.dob}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>Country<span style={{color: "red"}}>*</span></label>
