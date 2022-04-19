@@ -16,15 +16,9 @@ import { useAuth } from '../../../../../../hooks/useAuth';
 
 export const PreviousRound = ({ setFundraising }) => {
   const history = useHistory();
-  const { stateAuth } = useAuth();
+  const { stateAuth , updateProfile } = useAuth();
 
-  const {
-    state: { fundraising },
-  } = useActivity();
 
-  const {
-    location: { hash },
-  } = history;
   const optionsNumb = [
     { value: 'Seed round', label: 'Seed round' },
     { value: 'Angel round', label: 'Angel round'},
@@ -44,19 +38,11 @@ export const PreviousRound = ({ setFundraising }) => {
   //  stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding
   // }
 
-  const onSubmit = () => {
-    console.log({
-      instrumentForRound: formik.getFieldProps('instrumentForRound').value,
-      numberOfRounds: formik.getFieldProps('numberOfRounds').value,
-      fundraisingAmount: formik.getFieldProps('fundraisingAmount').value,
-      dilution: formik.getFieldProps('dilution').value,
-      preMoneyValuation: formik.getFieldProps('preMoneyValuation').value,
-      postMoneyValuation:formik.getFieldProps('postMoneyValuation').value,
-      hasLeadInvestor,
-      terms: formik.getFieldProps('terms').value,
-      dateOfFunding:startDate.toISOString(),
-    })
-    setFundraising({
+  const onSubmit = (e) => {
+    
+    e.preventDefault();
+    console.log('hello')
+    updateProfile("fundRaising", {
       previousRound: {
         instrumentForRound: formik.getFieldProps('instrumentForRound').value,
         numberOfRounds: formik.getFieldProps('numberOfRounds').value,
@@ -75,30 +61,34 @@ export const PreviousRound = ({ setFundraising }) => {
 
   const formik = useFormik({
     initialValues: {
+      dateOfFunding:stateAuth?.startupData?.fundRaising?.previousRound?.dateOfFunding ?? startDate ,
       instrumentForRound:
-        stateAuth?.user?.fundRaising?.previousRound?.instrumentForRound ?? 'Fund1',
-      numberOfRounds: stateAuth?.user?.fundRaising?.previousRound?.numberOfRounds ?? 'Fund1',
-      fundraisingAmount: stateAuth?.user?.fundRaising?.previousRound?.fundraisingAmount ?? '',
-      dilution: stateAuth?.user?.fundRaising?.previousRound?.dilution ?? '',
-      preMoneyValuation: stateAuth?.user?.fundRaising?.previousRound?.preMoneyValuation ?? '',
+        stateAuth?.startupData?.fundRaising?.previousRound?.instrumentForRound ?? 'Fund1',
+      numberOfRounds: stateAuth?.startupData?.fundRaising?.previousRound?.numberOfRounds ?? 'Fund1',
+      fundraisingAmount: stateAuth?.startupData?.fundRaising?.previousRound?.fundraisingAmount ?? '',
+      dilution: stateAuth?.startupData?.fundRaising?.previousRound?.dilution ?? '',
+      preMoneyValuation: stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation ?? '',
       postMoneyValuation:
-        stateAuth?.user?.fundRaising?.previousRound?.postMoneyValuation ?? '',
-     
+        stateAuth?.startupData?.fundRaising?.previousRound?.postMoneyValuation ?? '',
     },
     validationSchema: Yup.object({
+
+      numberOfRounds: Yup.string().required('Required'),
       fundraisingAmount: Yup.string().required('Required'),
       dilution: Yup.string().required('Required'),
       preMoneyValuation: Yup.string().required('Required'),
       postMoneyValuation: Yup.string().required('Required'),
       dateOfFunding: Yup.string().required('Required'),
+   
     }),
-    onSubmit: (value) => onSubmit(value),
+  
   });
 
   
 
   return (
     <>
+       <form >
       <BodyWrapper>
         <div className='mx-1 border-bottom pb-3'>
           <p>A brief description of your previous round</p>
@@ -106,6 +96,7 @@ export const PreviousRound = ({ setFundraising }) => {
         {/* <hr /> */}
 
         <div className='row my-4'>
+        
           <div className='form-group col-12'>
             <label>
               Which instrument did you use for your previous round?<span style={{color: "red"}}>*</span>
@@ -146,6 +137,11 @@ export const PreviousRound = ({ setFundraising }) => {
                 return <option key={index}>{item}</option>;
               })}
             </select>
+
+            {formik.touched.numberOfRounds && formik.errors.numberOfRounds ? (
+                <label className="error">{formik.errors.numberOfRounds}</label>
+              ) : null}  
+
           </div>
           <div className='form-group my-2 col-12'>
             <label>In which month/year did you get funding?<span style={{color: "red"}}>*</span></label>
@@ -233,7 +229,6 @@ export const PreviousRound = ({ setFundraising }) => {
               placeholder='Enter what your business does'
               onBlur={formik.handleBlur}
               value={
-               
                 formik.values.postMoneyValuation
               }
               onChange={formik.handleChange}
@@ -243,7 +238,7 @@ export const PreviousRound = ({ setFundraising }) => {
               <label className='error'>
                 {formik.errors.postMoneyValuation}
               </label>
-            ) : null}
+            ) : null }
           </div>
           <div className='form-group col-12'>
             <label>Did you have a lead investor for last round?<span style={{color: "red"}}>*</span></label>
@@ -269,18 +264,7 @@ export const PreviousRound = ({ setFundraising }) => {
             </BntWrap>
           </div>
 
-          {/* <label>Investors who participated in last funding round*</label>
-          <div className='row'>
-            <div className='sold my-3 col-lg-12 d-flex justify-content-center'>
-              <Tag
-                name='+ Add Lead Investor'
-                color='#4F4F4F'
-                bg='rgba(183, 218, 231, 0.5)'
-                padding='10px 32px'
-              />
-            </div>
-          </div> */}
-
+       
           <div className='col-12 my-5'>
             <span
               style={{
@@ -314,10 +298,9 @@ export const PreviousRound = ({ setFundraising }) => {
         </div>
         <div className='col-9 d-flex justify-content-end'>
           <OutlineButton
-            type='button'
+            type='submit'
             onClick={(e) => {
-              e.preventDefault();
-              onSubmit();
+              onSubmit(e);
             }}
             className='ms-2'
             style={{ marginRight: '0rem' }}
@@ -326,7 +309,9 @@ export const PreviousRound = ({ setFundraising }) => {
             Next
           </OutlineButton>
         </div>
+      
       </div>
+      </form>
     </>
   );
 };

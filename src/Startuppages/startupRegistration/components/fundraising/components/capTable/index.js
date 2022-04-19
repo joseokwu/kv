@@ -31,12 +31,12 @@ import { UploadFile } from "../../../../../../components/uploadFile";
 
 export const CapTable = ({ setFundraising }) => {
   const history = useHistory();
-  const { stateAuth } = useAuth();
+  const { updateProfile, stateAuth } = useAuth();
   const [amnt, setAmnt] = useState(
-    stateAuth?.user?.fundRaising?.capTable?.amountRaised ?? ""
+    stateAuth?.startupData?.fundRaising?.capTable?.amountRaised ?? ""
   );
   const [amntInvested, setAmntInvested] = useState(
-    stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders ?? ""
+    stateAuth?.startupData?.fundRaising?.capTable?.amountInvestedByFounders ?? ""
   );
 
   const {
@@ -47,8 +47,8 @@ export const CapTable = ({ setFundraising }) => {
   );
   // const { location  } = history;
 
-  const onSubmit = (value) => {
-    setFundraising({
+  const onSubmit = () => {
+    updateProfile("fundRaising", {
       capTable: {
         amountRaised: amnt,
         amountInvestedByFounders: amntInvested,

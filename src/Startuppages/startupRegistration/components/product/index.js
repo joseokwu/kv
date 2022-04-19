@@ -100,12 +100,12 @@ export const Product = () => {
     },
     validationSchema: Yup.object({
       competitiveEdge: Yup.string()
-        .min(200, 'Field must not be less than 200 characters')
-        .max(250, 'Field must not be above 250 characters')
+        .min(1200, 'Field must not be less than 200 characters')
+        .max(1506, 'Field must not be above 250 characters')
         .required('Required'),
       description: Yup.string()
-        .min(200, 'Field must not be less than 200 characters')
-        .max(250, 'Field must not be above 250 characters')
+        .min(1200, 'Field must not be less than 200 characters')
+        .max(1506, 'Field must not be above 250 characters')
         .required('Required'),
     }),
     validateOnBlur: true,
@@ -114,6 +114,7 @@ export const Product = () => {
 
   const onCountdown = (e) => {
     const { value } = e.target;
+    console.log(descriptionCount)
     setWordCount(parseInt(value.trim().split(' ').length));
     formik.handleChange(e);
   };
@@ -126,7 +127,7 @@ export const Product = () => {
 
   const handleFullChange = (e, prefix = '') => {
     const { name, value } = e.target;
-
+    console.log(descriptionCount)
     if (prefix !== '') {
       updateProfile('product', {
         [prefix]: {
@@ -141,7 +142,7 @@ export const Product = () => {
     formik.handleChange(e);
   };
 
-  console.log(stateAuth);
+
   return (
     <>
       <HeaderProduct>
@@ -167,13 +168,14 @@ export const Product = () => {
                   </label>
                   <label style={{ color: '#828282' }}>250 words</label>
                   <label
-                    style={{ color: `${descriptionCount >= 250 ? 'red' : ''}` }}
+                    style={{ color: `${(250 - descriptionCount) === 0 ? '#896869' : 'red'}` }}
                   >
                     {descriptionCount > 0 &&
-                      `${250 - descriptionCount} remaining`}
+                      `${(250 - descriptionCount) === 0 ? '' : 250 - descriptionCount} ${(250 - descriptionCount) === 0 ? '' : 'remaining'}`}
                   </label>
                 </div>
                 <textarea
+                  maxLength={1506}
                   cols='5'
                   rows='5'
                   name='description'
@@ -198,15 +200,17 @@ export const Product = () => {
                     What makes your solution unique from others in the market?
                     <span style={{ color: 'red' }}>*</span>
                   </label>
+                 
                   <label style={{ color: '#828282' }}>250 words</label>
-                  <label style={{ color: `${wordCount >= 250 ? 'red' : ''}` }}>
-                    {wordCount > 0 && `${250 - wordCount} remaining`}
+                  <label style={{ color: `${ (250 - wordCount ) === 0 ? '#896869' : 'red'}` }}>
+                    {wordCount > 0 && `${(250 - wordCount) === 0 ? '' : 250 - wordCount } ${(250 - wordCount) === 0 ? '' : 'remaining'}`}
                   </label>
                 </div>
 
                 <textarea
                   cols='5'
                   rows='5'
+                  maxLength={1506}
                   name='competitiveEdge'
                   onChange={(e) => {
                     onCountdown(e);
