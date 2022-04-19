@@ -53,7 +53,7 @@ export const StartupProfile = () => {
   const [logoUploading, setLogoUploading] = useState(false);
 
   const [loading] = useState(false);
- 
+   // console.log(stateAuth)
   const formik = useFormik({
     initialValues: {
       startupName: stateAuth?.user?.businessname ?? "",
@@ -91,10 +91,8 @@ export const StartupProfile = () => {
         "",
     },
     validationSchema: Yup.object({
-      elevatorPitch: Yup.string().min(3).required("This field is required"),
-      brand: Yup.string()
-        .min(3, "This field must be greater than 3")
-        .required("This field is required"),
+      elevatorPitch: Yup.string().required("This field is required"),
+      brand: Yup.string().required("This field is required"),
       registrationNumber: Yup.number()
         .min(3)
         .required("This field is required"),
@@ -106,9 +104,7 @@ export const StartupProfile = () => {
       country: Yup.string().required("This field is required"),
       state: Yup.string().required("This field is required"),
       city: Yup.string().required("This field is required"),
-      companyEmail: Yup.string()
-        .email("Invalid email")
-        .required("Email Required"),
+      companyEmail: Yup.string().email("Invalid email").required("Email Required"),
       companyWebsite: Yup.string().url().required("This field is required"),
       linkedInHandle: Yup.string().required("This field is required"),
       twitterHandle: Yup.string().required("This field is required"),
@@ -143,6 +139,7 @@ export const StartupProfile = () => {
 
 
   const handlePhoneInput = (value) => {
+   // console.log(value)
     updateProfile("startUpProfile",{
       contactInfo: {
         ...stateAuth?.startupData?.startUpProfile?.contactInfo,
@@ -512,8 +509,7 @@ export const StartupProfile = () => {
                 countryCallingCodeEditable={true}
                 className="custs ps-3 py-2"
                 value={
-                  stateAuth?.startupData?.startUpProfile?.contactInfo
-                    .phoneNumber ?? ""
+                  stateAuth?.startupData?.startUpProfile?.contactInfo?.phoneNumber 
                 }
                 onChange={handlePhoneInput}
                 MaxLength={17}
