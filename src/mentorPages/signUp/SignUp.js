@@ -5,16 +5,16 @@ import {
   AuthButton,
   AuthTextField,
   AuthPasswordField,
-  // PhoneInput,
+  PhoneInput,
 } from '../../mentorComponents/index';
 // import PhoneInput from "react-phone-number-input";
-import 'react-phone-number-input/style.css'
+// import 'react-phone-number-input/style.css'
 import { useLocation }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
 import { setType } from '../../utils/helpers'
-import { PhoneInput } from '../../components'
+// import { PhoneInput } from '../../components'
 
 const { Option } = Select
 
@@ -102,7 +102,7 @@ export const SignUp = ({ history }) => {
             <div className="col-md-6 col-12 mb-2">
               {stateAuth?.signUpStatus === 'startup' ? (
                 <div className="inputContainer">
-                  <label><span>*</span> Industry</label>
+                  <label><span style={{ color: "#ff4d4f" }}>*</span> Industry</label>
                   <div className="select">
                     <Select
                       onChange={handleChange}
@@ -209,24 +209,24 @@ export const SignUp = ({ history }) => {
             </div>
 
             <div className="numsign col-12 mb-4">
-              <label style={{color: '#D5D6F4'}}>
-              <span style={{ color: "red" }}>* </span>Mobile Number
-              </label>
+              {/* <label style={{color: '#D5D6F4'}}>
+                <span style={{ color: "red" }}>* </span>Mobile Number
+              </label> */}
               <PhoneInput
-                label={'* Mobile Number'} 
+                label={'* Mobile Number'}     
                 onChange={setPhone}
               />
               {/* <PhoneInput
-                id="phoneNumber"
+                id="phone"
                 placeholder={"000 0000 000"}
-                name="phoneNumber"
+                name="phone"
                 initialValueFormat="national"
                 countryCallingCodeEditable={true}
                 defaultCountry=""
                 className="signup_num ps-3 py-2"
                 value={value}
                 onChange={setValue}
-                MaxLength={17}
+                maxLength={17}
               /> */}
             </div>
 

@@ -24,6 +24,7 @@ import { upload } from "../../../../services/utils";
 import CountryDropdown from "country-dropdown-with-flags-for-react";
 import moment from "moment";
 
+
 export const StartupProfile = () => {
 
   const { changePath  } = useActivity();
@@ -98,7 +99,7 @@ export const StartupProfile = () => {
       registrationNumber: Yup.number()
         .min(3)
         .required("This field is required"),
-      companySize: Yup.number().required("This field is required"),
+      companySize: Yup.string().required("This field is required"),
       businessSector: Yup.string().required("This field is required"),
       startupStage: Yup.string().required("This field is require"),
       acceleratorName: Yup.string().required("This field is required"),
@@ -318,12 +319,12 @@ export const StartupProfile = () => {
                   id={"companySize"}
                   name={"companySize"}
                   value={formik.values.companySize}
-                  onChange={formik.handleChange}
+                  onChange={handleChange}
                   // onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
                   placeholder="Enter company size"
                 >{companySize.map((item, i) => {
-                  return <option key={i}>{item.label}</option>
+                  return <option value={item.value} key={i}>{item.label}</option>
                 })}
                 </select>
                 {formik.touched.companySize && formik.errors.companySize ? (
@@ -365,13 +366,13 @@ export const StartupProfile = () => {
                 id={"startupStage"}
                 name={"startupStage"}
                 value={formik.values.startupStage}
-                onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
+                onChange={handleChange}
+                onBlur={formik.handleBlur}
                 className="sel ps-3 pe-3"
                 placeholder="Enter Business Stage"
               >
                 {startupStage.map((i, index) => {
-                  return <option key={index}>{i.label}</option>
+                  return <option value={i.value} key={index}>{i.label}</option>
                 })}
               </select>
               {formik.touched.startupStage && formik.errors.startupStage ? (
