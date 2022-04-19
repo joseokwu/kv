@@ -126,7 +126,6 @@ const authReducer = (state = INIT_STATE, action) => {
         mentorData: action.payload,
       };
     case UPDATE_MENTOR_INFO:
-      //  alert(JSON.stringify(action.payload));
       return {
         ...state,
         mentorData: {

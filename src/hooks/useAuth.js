@@ -1,108 +1,114 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { registerUser, loginUser, getProfile  as profile , changeStatus , 
-logout, edit , dashboardProfile , updateStartupData ,
-updateStartupProfile
-} from '../store/actions/auth';
-import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
-import { updateStartup } from '../services';
-import toast from 'react-hot-toast';
-
-
-
+import { useSelector, useDispatch } from "react-redux";
+import {
+  registerUser,
+  loginUser,
+  getProfile as profile,
+  changeStatus,
+  logout,
+  edit,
+  dashboardProfile,
+  updateStartupData,
+  updateStartupProfile,
+  updateMentorProfile,
+} from "../store/actions/auth";
+import { useCallback } from "react";
+import { useHistory } from "react-router-dom";
+import { updateStartup } from "../services";
+import toast from "react-hot-toast";
 
 export const useAuth = () => {
+  const history = useHistory();
 
-const history = useHistory() 
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch();
+  const stateAuth = useSelector((state) => state.auth);
 
-const stateAuth = useSelector((state) => state.auth );
-
-const register = async(values) =>{
- 
-    try{
-        const res = await dispatch(registerUser(values));
-    console.log(res)
-        if(res){
-            history.push('/confirm/email')
-        }
-    }catch(err){
-        console.log(err)
+  const register = async (values) => {
+    try {
+      const res = await dispatch(registerUser(values));
+      console.log(res);
+      if (res) {
+        history.push("/confirm/email");
+      }
+    } catch (err) {
+      console.log(err);
     }
-}
+  };
 
-const newLogin = async (values) =>{
+  const newLogin = async (values) => {
+    const res = await dispatch(loginUser(values));
 
-    const res = await  dispatch(loginUser(values));
-    
-        return res;
-}
+    return res;
+  };
 
-const userProfile = useCallback(async (value) =>{
-    
-        dispatch(await profile(value));  
+  const userProfile = useCallback(
+    async (value) => {
+      dispatch(await profile(value));
+    },
+    [dispatch]
+  );
 
-    }, [dispatch])
+  const callUpdateStartupData = async (value) => {
+    dispatch(await updateStartupData(value));
+  };
 
-const callUpdateStartupData = async(value) =>{
+  const getDashboardProfile = useCallback(
+    async (value) => {
+      dispatch(await dashboardProfile(value));
+    },
+    [dispatch]
+  );
 
-    dispatch(await updateStartupData(value))
-}    
+  const editUser = () => {
+    dispatch(edit());
+  };
 
- const getDashboardProfile = useCallback(async (value) =>{
-    
-        dispatch(await dashboardProfile(value));  
+  const changeSignup = (value) => {
+    dispatch(changeStatus(value));
+  };
 
-    }, [dispatch])
- 
-    const editUser = () =>{
-        dispatch(edit())
+  const updateProfile = (prop, value) => {
+    dispatch(updateStartupProfile(prop, value));
+  };
+  const updateMentorReg = (prop, value) => {
+    console.log("value", value);
+    dispatch(updateMentorProfile(prop, value));
+  };
+
+  const userLogout = () => {
+    dispatch(logout());
+
+    history.push("/");
+  };
+
+  const updateStartupInfo = async (lastPage = false) => {
+    try {
+      const payload = {
+        accType: stateAuth.type[0],
+        values: stateAuth.startupData,
+        lastPage,
+      };
+
+      const res = await updateStartup(payload);
+      toast.success(res?.message);
+    } catch (err) {
+      console.log(err?.response);
+      toast.error(err?.response?.data?.message ?? err?.response?.message);
     }
+  };
 
-   const changeSignup = (value) =>{
-       dispatch(changeStatus(value))
-   } 
-  
-   const updateProfile = (prop, value) =>{
-       dispatch(updateStartupProfile(prop ,value));
-   }
-  
-
-   const userLogout = () =>{
-     dispatch(logout())
-
-     history.push('/')
-   }
-
-   const updateStartupInfo = async(lastPage = false) =>{
-    try{
-    const payload = {
-    accType:stateAuth.type[0],
-    values:stateAuth.startupData,
-    lastPage
-    }
-
-    const res = await updateStartup(payload);
-    toast.success(res?.message)
-
-    }catch(err){
-    console.log(err?.response)
-    toast.error(err?.response?.data?.message ?? err?.response?.message)
-    }
-   }
-
-    return {
-        stateAuth,
-        register,
-        newLogin ,
-        userProfile , 
-        changeSignup,
-        userLogout,
-        editUser,
-        getDashboardProfile,
-        callUpdateStartupData,
-        updateProfile,
-        updateStartupInfo
-    };
-}
+  return {
+    stateAuth,
+    register,
+    newLogin,
+    userProfile,
+    changeSignup,
+    userLogout,
+    editUser,
+    getDashboardProfile,
+    callUpdateStartupData,
+    updateProfile,
+    updateStartupInfo,
+    updateMentorReg,
+  };
+};

@@ -3,49 +3,72 @@ export const INIT_STATE = {
   user: null,
   error: false,
   loading: false,
-  email:null,
-  dashboardLoad:false,
+  email: null,
+  dashboardLoad: false,
   type: [],
-  signUpStatus: 'startup',
-  username: '',
-  completedRegistration:false,
-  startupData:{
-    startUpProfile:{
-      elevatorPitch:'',
-      brand:'' ,
-      registrationNumber:'',
-      companySize:'',
-      businessSector:'',
-      startupStage:'',
-      acceleratorName:'',
-      contactInfo:{
-       registeredAddress: '',
-       country:'',
-       state:'',
-       city:'',
-       phoneNumber:'',
-       companyEmail:''
+  signUpStatus: "startup",
+  username: "",
+  completedRegistration: false,
+  startupData: {
+    startUpProfile: {
+      elevatorPitch: "",
+      brand: "",
+      registrationNumber: "",
+      companySize: "",
+      businessSector: "",
+      startupStage: "",
+      acceleratorName: "",
+      contactInfo: {
+        registeredAddress: "",
+        country: "",
+        state: "",
+        city: "",
+        phoneNumber: "",
+        companyEmail: "",
       },
-      socialMedia:{
-        profileHandle:'',
-        companyWebsite:'',
-        linkedInHandle:'',
-        twitterHandle:''  
-      }
-    }
-  }
-
+      socialMedia: {
+        profileHandle: "",
+        companyWebsite: "",
+        linkedInHandle: "",
+        twitterHandle: "",
+      },
+    },
+  },
+  mentorData: {
+    personalDetail: {
+      firstname: "",
+      lastname: "",
+      gender: "",
+      designation: "",
+      email: "",
+      linkedIn: "",
+      twitter: "",
+      angelist: "",
+      crunchbase: "",
+      whatsapp: "",
+      website: "",
+      skypeid: "",
+      googlemeet: "",
+      country: "",
+      state: "",
+      city: "",
+      permanentaddress: "",
+      mobilenumber: "",
+      referral: "",
+      from: "",
+    },
+  },
 };
 
 export const INIT_STATE_BUSINESS = {
   loading: false,
-  showPage: 'Overview',
+  showPage: "Overview",
   dash_view: null,
   experience: [],
   workExperienceCoFounder: [],
   education: [],
   educationCoFounder: [],
-  applications:[],
+  applications: [],
   fundraising: {
     fundingAsk: {},
     fundUtilization: {},
