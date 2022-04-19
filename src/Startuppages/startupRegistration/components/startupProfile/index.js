@@ -109,7 +109,6 @@ export const StartupProfile = () => {
       companyEmail: Yup.string()
         .email("Invalid email")
         .required("Email Required"),
-      profileHandle: Yup.string().required("This field is required"),
       companyWebsite: Yup.string().url().required("This field is required"),
       linkedInHandle: Yup.string().required("This field is required"),
       twitterHandle: Yup.string().required("This field is required"),
@@ -556,13 +555,11 @@ export const StartupProfile = () => {
                 disabled={true}
                 placeholder="Enter your startup profile handle"
                 defaultValue={`knight.venture/${stateAuth?.user?.businessname}`}
-                onChange={(e) => handleChange(e, "socialMedia")}
+         
                 onBlur={formik.handleBlur}
                 className="form-control ps-3 text-secondary"
               />
-              {formik.touched.profileHandle && formik.errors.profileHandle ? (
-                <label className="error">{formik.errors.profileHandle}</label>
-              ) : null}
+              
             </div>
             <div className="form-group col-lg-6 col-12">
               <label>
