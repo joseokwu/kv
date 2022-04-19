@@ -268,6 +268,19 @@ export const VideoWrapper = styled.div`
       width: 100%;
     }
   }
+  button {
+    border-radius:8px;
+    padding:6px 10px;
+    background:#984243;
+    border:none;
+    color:#fff;
+
+    &:hover{
+      background:#f4f4f4;
+      color:#984243;
+    }
+    
+  }
 
   #div {
     width: 70%;

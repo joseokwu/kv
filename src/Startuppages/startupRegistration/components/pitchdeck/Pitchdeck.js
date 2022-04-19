@@ -40,14 +40,33 @@ export const PitchDeck = () => {
     state: { path },
   } = useActivity();
 
+  const [youtube, setYoutube] = useState('');
   
+  const [urls, setUrls] = useState(
+    stateAuth.startupData?.pitchDeck?.pitchDeckVideo ?? ''
+  );
 
+  const handleChangeVids = (e) => {
+    setYoutube(e.target.value);
+  };
 
+  const removeVideo = () =>{
+    setUrls('')
+  }
 
   const back = () => {
     changePath(path - 1);
   };
 
+  const addVid = () => {
+    //const newVal = youtube.replace('https://youtu.be/', '');
+
+    setUrls(youtube);
+    setYoutube('');
+    updateProfile("pitchDeck", {
+      pitchDeckVideo:youtube
+    })
+  };
 
 const onNext = () =>{
  
@@ -69,7 +88,7 @@ const onNext = () =>{
         updateStartupInfo();
         return ;
       }
-      toast.error("Please provide a pitch deck document")
+      toast.error("Please provide a pitch deck document or video")
    
   };
 
@@ -120,31 +139,81 @@ const onNext = () =>{
                 />
                 
               </div>
-              <div className="form-group col-12 mt-3">
-               
-                <UploadFile
-                  data={{
-                    maxFiles: 1,
-                    supportedMimeTypes: ["video/mp4"],
-                    maxFileSize: 10,
-                    extension: "MB",
-                  }}
-                  initData={stateAuth.startupData?.pitchDeck?.pitchDeckVideo ? [stateAuth.startupData?.pitchDeck?.pitchDeckVideo] : []}
-                  onUpload={async (filesInfo) => {
-                    const formData = new FormData();
-                    formData.append("dir", "kv");
-                    formData.append("ref", stateAuth.user?.userId);
-                    formData.append("type", "video");
-                    formData.append(0, filesInfo[0]?.file);
-                    const response = await upload(formData);
-                   // setVidDoc(response?.path);
-                    updateProfile("pitchDeck", {
-                    pitchDeckVideo:response?.path
-                  })
-                  }}
+              <label> Paste Youtube Link of product Demo </label>
+              <div className='d-flex my-2'>
+                <input
+                  type='text'
+                  name='youtubeDemoUrl'
+                  onChange={handleChangeVids}
+                  value={youtube}
+                  className='form-control youtube-input ps-3'
+                  placeholder='Youtube link'
                 />
-          
+                <button type='button' className='button' onClick={addVid}>
+                  Upload
+                </button>
               </div>
+
+                  {
+                    !urls.includes('https://youtu.be/')  ? (
+                      
+                <div className="form-group col-12 mt-3">
+               
+               <UploadFile
+                 data={{
+                   maxFiles: 1,
+                   supportedMimeTypes: ["video/mp4"],
+                   maxFileSize: 10,
+                   extension: "MB",
+                 }}
+                 initData={stateAuth.startupData?.pitchDeck?.pitchDeckVideo ? [stateAuth.startupData?.pitchDeck?.pitchDeckVideo] : []}
+                 onUpload={async (filesInfo) => {
+                   const formData = new FormData();
+                   formData.append("dir", "kv");
+                   formData.append("ref", stateAuth.user?.userId);
+                   formData.append("type", "video");
+                   formData.append(0, filesInfo[0]?.file);
+                   const response = await upload(formData);
+                  // setVidDoc(response?.path);
+                   updateProfile("pitchDeck", {
+                   pitchDeckVideo:response?.path
+                 })
+                 }}
+               />
+
+               </div>
+                    ):(
+
+                <div className='form-group col-12'>
+              <VideoWrapper>
+              <div className='mb-2 d-flex justify-content-end'>
+                    <button 
+                    type="button"
+                    onClick={removeVideo}
+                    >
+                    Delete
+                    </button>
+              </div>
+
+      <iframe
+       
+        src={`https://www.youtube.com/embed/${urls.replace('https://youtu.be/', '')}`}
+        frameborder='0'
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; execution-while-not-rendered 'none'"
+        allowfullscreen
+        title='video'
+        style={{
+          borderRadius: '20px',
+          maxHeight: '150px',
+          width: '250px',
+        }}
+      />
+
+</VideoWrapper>
+</div>
+                    )
+                  }
+
             </div>
           </div>
         </FormWrapper>
