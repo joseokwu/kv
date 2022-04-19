@@ -93,10 +93,10 @@ export const Product = () => {
 
   const formik = useFormik({
     initialValues: {
-      description: stateAuth?.user?.product?.description ?? '',
-      competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
-      youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
-      files: stateAuth?.user?.product?.files ?? '',
+      description: stateAuth?.startupData?.product?.description ?? '',
+      competitiveEdge: stateAuth?.startupData?.product?.competitiveEdge ?? '',
+      youtubeDemoUrl: stateAuth?.startupData?.product?.youtubeDemoUrl ?? '',
+      files: stateAuth?.startupData?.product?.files ?? '',
     },
     validationSchema: Yup.object({
       competitiveEdge: Yup.string()
@@ -278,7 +278,9 @@ export const Product = () => {
             </div>
             <div className='form-group col-12'>
               <VideoWrapper>
-                <label> Product demo upload</label>
+               <div className='mb-2'>
+               <label> Product demo upload</label>
+               </div>
                 {urls.length > 0 &&
                   urls.map((item, i) => (
                     <iframe
@@ -328,3 +330,32 @@ export const Product = () => {
     </>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
