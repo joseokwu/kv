@@ -113,8 +113,8 @@ export const PreviousRound = ({ setFundraising }) => {
               }
               onChange={formik.handleChange}
             >
-              {optionsNumb.map((item, index) => {
-                return <option key={index}>{item.label}</option>;
+              {fundNum.map((item, index) => {
+                return <option key={index}>{item}</option>;
               })}
             </select>
           </div>
@@ -133,8 +133,8 @@ export const PreviousRound = ({ setFundraising }) => {
               }
               onChange={formik.handleChange}
             >
-              {fundNum.map((item, index) => {
-                return <option key={index}>{item}</option>;
+              {optionsNumb.map((item, index) => {
+                return <option value={item.value} key={index}>{item.label}</option>;
               })}
             </select>
 

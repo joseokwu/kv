@@ -74,7 +74,7 @@ export const FundAsk = ({ setFundraising, back }) => {
       postMoneyValuation: formik.getFieldProps('postMoneyValuation').value,
       terms: formik.getFieldProps('terms').value,})
 
-   // history.push('#Fund Utilization');
+    history.push('#Fund Utilization');
   };
   
 
@@ -321,7 +321,7 @@ export const FundAsk = ({ setFundraising, back }) => {
           </div>
           <div className='col-9 d-flex justify-content-end'>
             <OutlineButton
-              type='submit'
+              type='button'
               // onClick={(e) => {
               //   e.preventDefault();
               //   history.push(forwardHash());

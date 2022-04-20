@@ -49,10 +49,10 @@ export const StartupProfile = () => {
   const dateFormat = "YYYY-MM-DD";
   const { updateProfile, stateAuth , updateStartupInfo } = useAuth();
   const [logo, setLogo] = useState(
-    stateAuth?.startupData?.startUpProfile?.logo ?? null
+    stateAuth?.startupData?.startUpProfile?.logo 
   );
   const [logoUploading, setLogoUploading] = useState(false);
-
+  
   const [loading] = useState(false);
  
   const formik = useFormik({
@@ -67,7 +67,7 @@ export const StartupProfile = () => {
       businessSector:
         stateAuth?.startupData?.startUpProfile?.businessSector ?? "",
       startupStage: stateAuth?.startupData?.startUpProfile?.startupStage ?? "",
-      acceleratorName:
+      acceleratorName:  
         stateAuth?.startupData?.startUpProfile?.acceleratorName ?? "",
       registeredAddress:
         stateAuth?.startupData?.startUpProfile?.contactInfo
@@ -92,10 +92,8 @@ export const StartupProfile = () => {
         "",
     },
     validationSchema: Yup.object({
-      elevatorPitch: Yup.string().min(3).required("This field is required"),
-      brand: Yup.string()
-        .min(3, "This field must be greater than 3")
-        .required("This field is required"),
+      elevatorPitch: Yup.string().required("This field is required"),
+      brand: Yup.string().required("This field is required"),
       registrationNumber: Yup.number()
         .min(3)
         .required("This field is required"),
@@ -104,13 +102,9 @@ export const StartupProfile = () => {
       startupStage: Yup.string().required("This field is require"),
       acceleratorName: Yup.string().required("This field is required"),
       registeredAddress: Yup.string().required("This field is required"),
-      country: Yup.string().required("This field is required"),
       state: Yup.string().required("This field is required"),
       city: Yup.string().required("This field is required"),
-      companyEmail: Yup.string()
-        .email("Invalid email")
-        .required("Email Required"),
-      profileHandle: Yup.string().required("This field is required"),
+      companyEmail: Yup.string().email("Invalid email").required("Email Required"),
       companyWebsite: Yup.string().url().required("This field is required"),
       linkedInHandle: Yup.string().required("This field is required"),
       twitterHandle: Yup.string().required("This field is required"),
@@ -145,6 +139,7 @@ export const StartupProfile = () => {
 
 
   const handlePhoneInput = (value) => {
+   
     updateProfile("startUpProfile",{
       contactInfo: {
         ...stateAuth?.startupData?.startUpProfile?.contactInfo,
@@ -153,6 +148,16 @@ export const StartupProfile = () => {
     });
   };
 
+  const handleCountry = (value)=>{
+    updateProfile("startUpProfile",{
+      contactInfo: {
+        ...stateAuth?.startupData?.startUpProfile?.country,
+        country: value,
+      },
+    });
+    formik.setFieldValue("country", value.value)
+  }
+  
   const selectChange = (e) =>{
     const { value , name } = e.target;
     updateProfile("startUpProfile" ,{
@@ -177,7 +182,7 @@ export const StartupProfile = () => {
       setLogoUploading(true);
       const response = await upload(formData);
       setLogo(response?.path);
-      updateProfile("startupProfile",{
+      updateProfile("startUpProfile",{
         logo: response?.path,
       });
       setLogoUploading(false);
@@ -203,7 +208,7 @@ export const StartupProfile = () => {
           className="start-img-p"
           style={{ marginTop: "10px", marginLeft: "10px" }}
         >
-          {logo === null ? (
+          {logo === null  ? (
             logoUploading ? (
               <CircularLoader color={"#000"} />
             ) : (
@@ -297,7 +302,7 @@ export const StartupProfile = () => {
                 id="yearFounded"
                 name="yearFounded"
                 defaultValue={
-                  moment(stateAuth?.startupData?.startUpProfile?.yearFounded) ??
+                  stateAuth?.startupData?.startUpProfile?.yearFounded !== null ? moment(stateAuth?.startupData?.startUpProfile?.yearFounded) :
                   moment()
                 }
                 format={dateFormat}
@@ -460,7 +465,7 @@ export const StartupProfile = () => {
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={["ng"]}
                 defaultValue={formik.values.country}
-                onChange={(e) => handleChange(e, "contactInfo")}
+                onChange={(value) => handleCountry(value)}
                 onBlur={formik.handleBlur}
               ></CountryDropdown>
               {formik.touched.country && formik.errors.country ? (
@@ -514,8 +519,7 @@ export const StartupProfile = () => {
                 countryCallingCodeEditable={true}
                 className="custs ps-3 py-2"
                 value={
-                  stateAuth?.startupData?.startUpProfile?.contactInfo
-                    .phoneNumber ?? ""
+                  stateAuth?.startupData?.startUpProfile?.contactInfo?.phoneNumber 
                 }
                 onChange={handlePhoneInput}
                 MaxLength={17}
@@ -557,13 +561,11 @@ export const StartupProfile = () => {
                 disabled={true}
                 placeholder="Enter your startup profile handle"
                 defaultValue={`knight.venture/${stateAuth?.user?.businessname}`}
-                onChange={(e) => handleChange(e, "socialMedia")}
+         
                 onBlur={formik.handleBlur}
                 className="form-control ps-3 text-secondary"
               />
-              {formik.touched.profileHandle && formik.errors.profileHandle ? (
-                <label className="error">{formik.errors.profileHandle}</label>
-              ) : null}
+              
             </div>
             <div className="form-group col-lg-6 col-12">
               <label>

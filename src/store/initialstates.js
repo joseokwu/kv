@@ -32,6 +32,11 @@ export const INIT_STATE = {
         linkedInHandle:'',
         twitterHandle:''  
       }
+    },
+    team:{
+      experience:[],
+      education:[],
+      skills:[]
     }
   }
 
