@@ -41,7 +41,7 @@ export const CoFounder = ({
   isEditing,
   setIsEditing,
 }) => {
-  const [disImg, setImg] = useState(null);
+  const [country, setCountry] = useState('India');
   const [skills , setSkills] = useState([])
   const [phone, setPhone] = useState();
   const [show, setShow] = useState(false);
@@ -100,6 +100,10 @@ export const CoFounder = ({
   };
 
 
+  const handleChangeCountry = (value) =>{
+
+    setCountry(value);
+   }
 
 
 
@@ -130,7 +134,7 @@ export const CoFounder = ({
       linkedIn: formik.getFieldProps('linkedIn').value,
       twitter: formik.getFieldProps('twitter').value,
       website: formik.getFieldProps('website').value,
-      country: formik.getFieldProps('country').value,
+      country: country,
       state: formik.getFieldProps('state').value,
       city: formik.getFieldProps('city').value,
       skills:skills,
@@ -333,14 +337,15 @@ export const CoFounder = ({
             </div>
             <div className='form-group col-lg-4 col-12'>
               <label>Country *</label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.country}
-                type='text'
-                name='country'
-                placeholder='Enter your country'
-                className='form-control ps-3'
-              />
+              <CountryDropdown
+                id="country"
+                type="text"
+                name="country"
+                className="form-control px-5 py-1 country-bg"
+                preferredCountries={["ng"]}
+                defaultValue={country}
+                handleChange={handleChangeCountry}
+              ></CountryDropdown>
             </div>
             <div className='form-group col-lg-4 col-12'>
               <label>State *</label>

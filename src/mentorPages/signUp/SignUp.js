@@ -14,6 +14,7 @@ import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
 import { setType } from '../../utils/helpers'
+import { ServerStyleSheet } from 'styled-components';
 // import { PhoneInput } from '../../components'
 
 const { Option } = Select
@@ -61,7 +62,8 @@ export const SignUp = ({ history }) => {
     setType(stateAuth?.signUpStatus)
   }
 
-  const [value, setValue] = useState()
+  const [value, setValue] = useState();
+
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
@@ -196,21 +198,21 @@ export const SignUp = ({ history }) => {
               />
             </div>
 
-            <div className="col-12 mb-2">
+            <div className="col-12 mb-2 position-relative">
               <AuthPasswordField
                 numb={8}
+                name="password"
                 message="Password must be 8 digits"
                 label="Password"
                 id={'password'}
                 placeholder="Password must be at least 8 characters"
-                type="password"
                 className="mentor_gray_card_input"
               />
             </div>
 
             <div className="numsign col-12 mb-4">
               {/* <label style={{color: '#D5D6F4'}}>
-                <span style={{ color: "red" }}>* </span>Mobile Number
+                <span style={{ color: "#ff4d4f" }}>* </span>Mobile Number
               </label> */}
               <PhoneInput
                 label={'* Mobile Number'}     
@@ -223,7 +225,7 @@ export const SignUp = ({ history }) => {
                 initialValueFormat="national"
                 countryCallingCodeEditable={true}
                 defaultCountry=""
-                className="signup_num ps-3 py-2"
+                className="signup_num ps-3"
                 value={value}
                 onChange={setValue}
                 maxLength={17}
