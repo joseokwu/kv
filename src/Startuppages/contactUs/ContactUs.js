@@ -5,7 +5,7 @@ import phone from "../../assets/icons/phoneBlue.svg";
 import web from "../../assets/icons/webBlue.svg";
 import mail from "../../assets/icons/mailIcon.svg"
 import twitter from "../../assets/icons/twitterLogo.svg";
-import facebook from "../../assets/icons/facebookLogo.svg";
+import instagram from "../../assets/icons/instagram.svg"
 import linkedIn from "../../assets/icons/linkedInLogo.svg";
 import "./contactUs.css";
 
@@ -24,7 +24,12 @@ export const StartupContactUs = () => {
         <article className="col-lg-6 mt-2">
           <div className="d-flex align-items-center contact-us-info">
             <img src={map} alt="location" />
-            <p>San francisco United State</p>
+            <p>274, Ikorodu Road, Anthony, Lagos State, Nigeria.</p>
+          </div>
+
+          <div className="d-flex align-items-center contact-us-info">
+            <img src={map} alt="location" />
+            <p>4652 Ripley Manor Terr, Olney MD 20832 USA</p> 
           </div>
 
           <div className="d-flex align-items-center contact-us-info">
@@ -39,8 +44,10 @@ export const StartupContactUs = () => {
 
           <div className="d-flex align-items-center social-links">
             <img src={twitter} alt="twitter" />
-            <img src={facebook} alt="facebook" />
-            <img src={linkedIn} alt="linkedIn" />
+
+            <a href="https://www.instagram.com/knightventures/" target="_blank" rel="noopener noreferrer"><img src={instagram} alt="instagram" /></a>
+            
+            <a href="https://www.linkedin.com/company/knightnbishopventures/" target="_blank" rel="noopener noreferrer"><img src={linkedIn} alt="linkedIn" /></a>
           </div>
         </article>
 

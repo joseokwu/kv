@@ -41,15 +41,8 @@ export const AuthTextField = ({
 
 export const AuthPasswordField = ({ className, numb, message, placeholder, label='Password', id, name, type }) => {
 
-  const[eye, setEye] = useState(false);
-
-
-  
-
   return (
     <div className="mentor_field">
-              <i onClick={()=> setEye(!eye)} className={`pass-eye fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i>
-
       <Form.Item
         name={id}
         style={{ color: '#fe0003' }}
@@ -66,8 +59,7 @@ export const AuthPasswordField = ({ className, numb, message, placeholder, label
         label={label}
       >
         <Input
-          // type={type}
-          type={eye? "text" : "password"}
+          type={type}
           id={id}
           className={`${className}`}
           placeholder={placeholder}
