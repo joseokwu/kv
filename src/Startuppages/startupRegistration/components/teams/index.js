@@ -121,7 +121,8 @@ export const TeamProfile = () => {
       email: stateAuth?.startupData?.team?.email ?? '',
       state: stateAuth?.startupData?.team?.state ?? '',
       city: stateAuth?.startupData?.team?.city ?? '',
-      mobile_number: stateAuth?.user?.team?.mobile_number,
+      dob: stateAuth?.startupData?.team?.dob ?? moment(),
+      mobile_number: stateAuth?.user?.team?.mobile_number ?? phone,
       country: stateAuth?.startupData?.team?.country,
       gender: stateAuth?.startupData?.team?.gender ?? '',
       website: stateAuth?.startupData?.team?.socialMedia?.website,
@@ -137,17 +138,15 @@ export const TeamProfile = () => {
       state: Yup.string().required('Required'),
       city: Yup.string().required('Required'),
       dob: Yup.string().required('Required'),
-      mobile_number: Yup.number()
-        .min(11, 'Number should be not be below 11 digit')
-        .required('Required'),
-      country: Yup.number().required('Required'),
-      gender: Yup.number().required('Required'),
+      gender: Yup.string().required('Required'),
       linkedIn: Yup.string().required('Required'),
       twitter: Yup.string().required('Required'),
       website: Yup.string().required('Required'),
     }),
     onSubmit: (value) => onSubmit(value),
   })
+
+  console.log(stateAuth)
 
   const handleChange = (e, prefix = '') => {
     const { name, value } = e.target
@@ -173,6 +172,7 @@ export const TeamProfile = () => {
     updateProfile('team', {
       mobile_number: value,
     })
+    formik.setFieldValue('mobile_number', value.value)
   }
   const handleChangeVal = (e) => {
     setVal(e.target.value)
@@ -181,10 +181,7 @@ export const TeamProfile = () => {
     updateProfile('team', {
       dob: value,
     })
-  }
-
-  const onChangeMedia = (e) => {
-    setSocialmedia({ ...socialMedia, [e.target.name]: e.target.value })
+    formik.setFieldValue('dob', value.value)
   }
 
   const handleKey = (e) => {
@@ -229,15 +226,15 @@ export const TeamProfile = () => {
     children.push(<Option key={i}>{skill[i]}</Option>)
   }
 
-  const onSubmit = async () => {
-    if (
-      stateAuth?.startupData?.team.experience.length < 0 &&
-      stateAuth?.startupData?.team.education.length < 0 &&
-      stateAuth?.startupData?.team.coFounder.length < 0
-    ) {
-      toast.error('All fields are required')
-      return
-    }
+  const onSubmit = async (value) => {
+    // if(stateAuth?.startupData?.team?.experience.length < 0 &&
+    //   stateAuth?.startupData?.team?.education.length < 0 && stateAuth?.startupData?.team?.coFounder.length < 0
+    //   ){
+    //     toast.error('All fields are required');
+    //     console.log('heyyy')
+    //     return ;
+    //   }
+    console.log('heyyy', value)
     updateStartupInfo()
   }
 
@@ -309,6 +306,14 @@ export const TeamProfile = () => {
       })
     }
   }
+
+  useEffect(() => {
+    if (stateAuth?.startupData?.team?.coFounder.length > 0) {
+      setCoFounder('yes')
+    }
+  }, [])
+
+
 
   return (
     <>
@@ -482,6 +487,9 @@ export const TeamProfile = () => {
                 format={dateFormat}
                 onChange={handleDateInput}
               />
+              {formik.touched.dob && formik.errors.dob ? (
+                <label className="error">{formik.errors.dob}</label>
+              ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>
@@ -546,32 +554,29 @@ export const TeamProfile = () => {
                 onChange={handlePhoneInput}
                 MaxLength={17}
               />
-              {formik.touched.mobile_number && !phone ? (
-                <label className="error">Required</label>
+              {formik.touched.mobile_number && formik.errors.mobile_number ? (
+                <label className="error">{formik.errors.mobile_number}</label>
               ) : null}
             </div>
-            <div className="form-group col-lg-6 col-12">
+            <div className="form-group  col-lg-6 col-12">
               <label>
                 Gender<span style={{ color: 'red' }}>*</span>
               </label>
-                <select
-                  id="gender"
-                  name="gender"
-                  // options={optionsNumb}
-                  className="cust mx-0 px-2 py-2"
-                  // placeholder='Choose your instrument for your round'
-                  value={formik.values.gender}
-                  onChange={formik.handleChange}
-                >
-                  {gender.map((item, index) => {
-                    return (
-                      <option value={item.value} key={index}>
-                        {item.label}
-                      </option>
-                    )
-                  })}
-                </select>
-
+              <select
+                className="cust mx-3 px-2 extra"
+                id="gender"
+                name="gender"
+                value={formik.values.gender}
+                onChange={handleChange}
+              >
+                {gender.map((item, index) => {
+                  return (
+                    <option value={item.value} key={index}>
+                      {item.label}
+                    </option>
+                  )
+                })}
+              </select>
               {formik.touched.gender && formik.errors.gender ? (
                 <label className="error">{formik.errors.gender}</label>
               ) : null}
@@ -689,7 +694,10 @@ export const TeamProfile = () => {
             <div className="d-flex">
               <BntWrap>
                 <button
-                  className={`me-3 ${coFounder === 'yes' ? 'active' : ''}`}
+                  type="button"
+                  className={`me-3 ${
+                    coFounder.normalize() === 'yes' ? 'active' : ''
+                  }`}
                   onClick={(e) => {
                     e.preventDefault()
                     setCoFounder('yes')
@@ -698,7 +706,10 @@ export const TeamProfile = () => {
                   Yes
                 </button>
                 <button
-                  className={`me-3 ${coFounder === 'no' ? 'active' : ''}`}
+                  type="button"
+                  className={`me-3 ${
+                    coFounder.normalize() === 'no' ? 'active' : ''
+                  }`}
                   onClick={(e) => {
                     e.preventDefault()
                     setCoFounder('no')
@@ -816,13 +827,7 @@ export const TeamProfile = () => {
             </CustomButton>
           </div>
           <div className="col-9 d-flex justify-content-end">
-            <CustomButton
-              type="button"
-              disabled={loading}
-              className="mx-2"
-              background="#00ADEF"
-              onClick={() => formik.handleSubmit()}
-            >
+            <CustomButton type="submit" className="mx-2" background="#00ADEF">
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
             <CustomButton

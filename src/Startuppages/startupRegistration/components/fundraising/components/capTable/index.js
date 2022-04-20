@@ -31,24 +31,22 @@ import { UploadFile } from "../../../../../../components/uploadFile";
 
 export const CapTable = ({ setFundraising }) => {
   const history = useHistory();
-  const { stateAuth } = useAuth();
+  const { updateProfile, stateAuth } = useAuth();
   const [amnt, setAmnt] = useState(
-    stateAuth?.user?.fundRaising?.capTable?.amountRaised ?? ""
+    stateAuth?.startupData?.fundRaising?.capTable?.amountRaised ?? ""
   );
   const [amntInvested, setAmntInvested] = useState(
-    stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders ?? ""
+    stateAuth?.startupData?.fundRaising?.capTable?.amountInvestedByFounders ?? ""
   );
 
   const {
     state: { fundraising },
   } = useActivity();
-  const [fileDoc, setFileDoc] = useState(
-    stateAuth?.user?.fundRaising?.capTable?.files ?? null
-  );
+  const [fileDoc, setFileDoc] = useState(stateAuth?.startupData?.fundRaising?.capTable?.files ?? []);
   // const { location  } = history;
 
-  const onSubmit = (value) => {
-    setFundraising({
+  const onSubmit = () => {
+    updateProfile("fundRaising", {
       capTable: {
         amountRaised: amnt,
         amountInvestedByFounders: amntInvested,
@@ -110,7 +108,7 @@ export const CapTable = ({ setFundraising }) => {
                 maxFileSize: 5,
                 extension: "MB",
               }}
-              initData={fileDoc ? [fileDoc] : []}
+              initData={stateAuth?.startupData?.fundRaising?.capTable?.files.length > 0 ? [stateAuth?.startupData?.fundRaising?.capTable?.files] : []}
               onUpload={async (filesInfo) => {
                 const file = filesInfo[0].file;
                 const fileData = await parseFile(file);

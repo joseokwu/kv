@@ -41,7 +41,7 @@ export const CoFounder = ({
   isEditing,
   setIsEditing,
 }) => {
-  const [disImg, setImg] = useState(null);
+  const [country, setCountry] = useState('India');
   const [skills , setSkills] = useState([])
   const [phone, setPhone] = useState();
   const [show, setShow] = useState(false);
@@ -100,6 +100,10 @@ export const CoFounder = ({
   };
 
 
+  const handleChangeCountry = (value) =>{
+
+    setCountry(value);
+   }
 
 
 
@@ -130,7 +134,8 @@ export const CoFounder = ({
       linkedIn: formik.getFieldProps('linkedIn').value,
       twitter: formik.getFieldProps('twitter').value,
       website: formik.getFieldProps('website').value,
-      country: formik.getFieldProps('country').value,
+      country: country,
+      position:formik.getFieldProps('position').value,
       state: formik.getFieldProps('state').value,
       city: formik.getFieldProps('city').value,
       skills:skills,
@@ -217,6 +222,7 @@ export const CoFounder = ({
       email: '',
       dob: startDate,
       country: '',
+      position:'',
       state: '',
       city: '',
       mobile_number:'',
@@ -333,14 +339,15 @@ export const CoFounder = ({
             </div>
             <div className='form-group col-lg-4 col-12'>
               <label>Country *</label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.country}
-                type='text'
-                name='country'
-                placeholder='Enter your country'
-                className='form-control ps-3'
-              />
+              <CountryDropdown
+                id="country"
+                type="text"
+                name="country"
+                className="form-control px-5 py-1 country-bg"
+                preferredCountries={["ng"]}
+                defaultValue={country}
+                handleChange={handleChangeCountry}
+              ></CountryDropdown>
             </div>
             <div className='form-group col-lg-4 col-12'>
               <label>State *</label>
@@ -374,7 +381,19 @@ export const CoFounder = ({
                 value={phone}
                 onChange={(value) => setPhone(value)}
                 placeholder='0000 00000 0000'
-                MaxLength={13}
+                MaxLength={17}
+              />
+            </div>
+
+            <div className='form-group col-lg-4 col-12'>
+              <label>Position at <em>{ stateAuth?.user?.businessname }</em>*</label>
+              <input
+                onChange={formik.handleChange}
+                value={formik.values.position}
+                type='text'
+                name='position'
+                placeholder='Enter your position'
+                className='form-control ps-3'
               />
             </div>
           </div>
@@ -427,24 +446,7 @@ export const CoFounder = ({
                       <label className='error'>{workFormik.errors.location}</label>
                     ) : null}
                   </div>
-                  <div className='col-12 form-group'>
-                    <label>Position<span style={{color: "red"}}>*</span></label>
-                    <input
-                      id='position'
-                      name='position'
-                      type='text'
-                      className='form-control ps-3'
-                      placeholder='United state of America'
-                      value={
-                        workFormik.values.position
-                      }
-                      onBlur={workFormik.handleBlur}
-                      onChange={workFormik.handleChange}
-                    />
-                    {workFormik.touched.position && workFormik.errors.position ? (
-                      <label className='error'>{workFormik.errors.position}</label>
-                    ) : null}
-                  </div>
+               
         
                   <div className='col-12 form-group'>
                     <div className='d-flex justify-content-between'>

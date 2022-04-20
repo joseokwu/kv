@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import imageRep from "../../../../assets/icons/avatar.svg";
 import add from "../../../../assets/icons/addFile.svg";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
 import {
   Badge,
-  PhoneInput,
+  // PhoneInput,
   RowOption,
   TextField,
   Button,
 } from "../../../../components";
 import { useHistory } from "react-router";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import './PersonalDetails.css'
+
 
 export const PersonalDetails = () => {
   const hearOption = [
@@ -21,6 +25,7 @@ export const PersonalDetails = () => {
   ];
 
   const { push } = useHistory();
+  const [value, setValue] = useState()
 
   return (
     <div className="register-form-wrap">
@@ -127,7 +132,19 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-lg-6 mb-4">
-            <PhoneInput />
+            <label>
+              Mobile Number
+            </label>
+            <PhoneInput 
+              id="mobileNumber"
+              international
+              name="mobileNumber"
+              className="in-reg-no py-1"
+              countryCallingCodeEditable={true}
+              maxLength={17}
+              value={value}
+              onChange={setValue}
+            />
           </section>
           <section className="col-lg-6 mb-4">
             <TextField

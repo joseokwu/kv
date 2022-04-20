@@ -13,6 +13,8 @@ import {
   UPDATE_STARTUP_INFO,
   DASHBOARD_LOAD,
   UPDATE_STARTUP_DATA,
+  UPDATE_INVESTOR_DATA,
+  UPDATE_INVESTOR_INFO,
   UPDATE_MENTOR_INFO,
 } from "../actions.types";
 import {
@@ -103,24 +105,39 @@ export const updateStartupProfile =
     dispatch({
       type: UPDATE_STARTUP_INFO,
       payload: {
-        value,
         property,
+        value,
       },
     });
   };
 
-export const updateMentorProfile =
+export const updateInvestorProfile =
   async (property, value) => async (dispatch) => {
-    console.log("value", value);
-    console.log("property", property);
     dispatch({
-      type: UPDATE_MENTOR_INFO,
+      type: UPDATE_INVESTOR_INFO,
       payload: {
         value,
         property,
       },
     });
   };
+
+export const updateInvestorData = async (value) => async (dispatch) => {
+  try {
+    const res = await profile(value);
+    if (res) {
+      console.log(res?.data?.investorData);
+      dispatch({
+        type: UPDATE_INVESTOR_DATA,
+        payload: res?.data?.investorData,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: USER_PROFILE_FAIL,
+    });
+  }
+};
 
 export const updateStartupData = async (value) => async (dispatch) => {
   try {
@@ -177,3 +194,16 @@ export const edit = () => (dispatch) => {
     type: EDIT,
   });
 };
+
+export const updateMentorProfile =
+  async (property, value) => async (dispatch) => {
+    console.log("value", value);
+    console.log("property", property);
+    dispatch({
+      type: UPDATE_MENTOR_INFO,
+      payload: {
+        value,
+        property,
+      },
+    });
+  };

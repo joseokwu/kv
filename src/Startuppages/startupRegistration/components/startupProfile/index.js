@@ -24,6 +24,7 @@ import { upload } from "../../../../services/utils";
 import CountryDropdown from "country-dropdown-with-flags-for-react";
 import moment from "moment";
 
+
 export const StartupProfile = () => {
 
   const { changePath  } = useActivity();
@@ -48,10 +49,10 @@ export const StartupProfile = () => {
   const dateFormat = "YYYY-MM-DD";
   const { updateProfile, stateAuth , updateStartupInfo } = useAuth();
   const [logo, setLogo] = useState(
-    stateAuth?.startupData?.startUpProfile?.logo ?? null
+    stateAuth?.startupData?.startUpProfile?.logo 
   );
   const [logoUploading, setLogoUploading] = useState(false);
-
+  
   const [loading] = useState(false);
  
   const formik = useFormik({
@@ -66,7 +67,7 @@ export const StartupProfile = () => {
       businessSector:
         stateAuth?.startupData?.startUpProfile?.businessSector ?? "",
       startupStage: stateAuth?.startupData?.startUpProfile?.startupStage ?? "",
-      acceleratorName:
+      acceleratorName:  
         stateAuth?.startupData?.startUpProfile?.acceleratorName ?? "",
       registeredAddress:
         stateAuth?.startupData?.startUpProfile?.contactInfo
@@ -91,25 +92,19 @@ export const StartupProfile = () => {
         "",
     },
     validationSchema: Yup.object({
-      elevatorPitch: Yup.string().min(3).required("This field is required"),
-      brand: Yup.string()
-        .min(3, "This field must be greater than 3")
-        .required("This field is required"),
+      elevatorPitch: Yup.string().required("This field is required"),
+      brand: Yup.string().required("This field is required"),
       registrationNumber: Yup.number()
         .min(3)
         .required("This field is required"),
-      companySize: Yup.number().required("This field is required"),
+      companySize: Yup.string().required("This field is required"),
       businessSector: Yup.string().required("This field is required"),
       startupStage: Yup.string().required("This field is require"),
       acceleratorName: Yup.string().required("This field is required"),
       registeredAddress: Yup.string().required("This field is required"),
-      country: Yup.string().required("This field is required"),
       state: Yup.string().required("This field is required"),
       city: Yup.string().required("This field is required"),
-      companyEmail: Yup.string()
-        .email("Invalid email")
-        .required("Email Required"),
-      profileHandle: Yup.string().required("This field is required"),
+      companyEmail: Yup.string().email("Invalid email").required("Email Required"),
       companyWebsite: Yup.string().url().required("This field is required"),
       linkedInHandle: Yup.string().required("This field is required"),
       twitterHandle: Yup.string().required("This field is required"),
@@ -117,11 +112,11 @@ export const StartupProfile = () => {
     }),
     onSubmit: (value) => onSubmit(value),
   });
-
+     
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
     if (prefix !== "") {
-      updateProfile("startupProfile",{
+      updateProfile("startUpProfile",{
         [prefix]: {
           ...stateAuth?.startupData?.startUpProfile[prefix],
           [name]: value,
@@ -130,19 +125,49 @@ export const StartupProfile = () => {
       formik.handleChange(e);
       return;
     }
-    updateProfile("startupProfile", {[name]: value });
+    updateProfile("startUpProfile", {[name]: value });
     formik.handleChange(e);
   };
+
+
+  // fundRaising:
+  // capTable: {amountRaised: '5000', amountInvestedByFounders: '1000', files: Array(4), _id: '6259419ab36d0dd3b5e2e3c9'}
+  // financialProjection: {files: 'https://cdn.shoutng.com/kvnmri9zykq3doplnqtxfi.pdf', _id: '6259419ab36d0dd3b5e2e3cb'}
+  // fundUtilization: {files: Array(10), _id: '6259419ab36d0dd3b5e2e3c8'}
+  // fundingAsk: {hasPreviousFundraising: true, instrumentForRound: 'Series B', numberOfRounds: '5', fundraisingAmount: '800000', dilution: '', …}
+  // previousRound:
+
+
   const handlePhoneInput = (value) => {
-    updateProfile("startupProfile",{
+   
+    updateProfile("startUpProfile",{
       contactInfo: {
         ...stateAuth?.startupData?.startUpProfile?.contactInfo,
         phoneNumber: value,
       },
     });
   };
+
+  const handleCountry = (value)=>{
+    updateProfile("startUpProfile",{
+      contactInfo: {
+        ...stateAuth?.startupData?.startUpProfile?.country,
+        country: value,
+      },
+    });
+    formik.setFieldValue("country", value.value)
+  }
+  
+  const selectChange = (e) =>{
+    const { value , name } = e.target;
+    updateProfile("startUpProfile" ,{
+      [name]: value,
+    });
+    formik.handleChange(e)
+  }  
+
   const handleDateInput = (value) => {
-    updateProfile("startupProfile" ,{
+    updateProfile("startUpProfile" ,{
       yearFounded: value,
     });
   };
@@ -157,7 +182,7 @@ export const StartupProfile = () => {
       setLogoUploading(true);
       const response = await upload(formData);
       setLogo(response?.path);
-      updateProfile("startupProfile",{
+      updateProfile("startUpProfile",{
         logo: response?.path,
       });
       setLogoUploading(false);
@@ -183,7 +208,7 @@ export const StartupProfile = () => {
           className="start-img-p"
           style={{ marginTop: "10px", marginLeft: "10px" }}
         >
-          {logo === null ? (
+          { stateAuth?.startupData?.startUpProfile?.logo  === null  ? (
             logoUploading ? (
               <CircularLoader color={"#000"} />
             ) : (
@@ -192,7 +217,7 @@ export const StartupProfile = () => {
           ) : (
             <img
               className=""
-              src={logo}
+              src={stateAuth?.startupData?.startUpProfile?.logo }
               style={{ borderRadius: "70px", width: "90px", height: "90px" }}
               alt=""
             />
@@ -221,7 +246,7 @@ export const StartupProfile = () => {
                 name="elevatorPitch"
                 placeholder="One line pitch 150 words maximum"
                 onChange={(e) => handleChange(e)}
-                defaultValue={formik.values.elevatorPitch}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.elevatorPitch}
                 onBlur={formik.handleBlur}
                 rows="4"
                 cols="4"
@@ -259,7 +284,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="brand"
                 placeholder="eg; Knight Ventures"
-                defaultValue={formik.values.brand}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.brand}
                 onChange={(e) => handleChange(e)}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -277,7 +302,7 @@ export const StartupProfile = () => {
                 id="yearFounded"
                 name="yearFounded"
                 defaultValue={
-                  moment(stateAuth?.startupData?.startUpProfile?.yearFounded) ??
+                  stateAuth?.startupData?.startUpProfile?.yearFounded !== null ? moment(stateAuth?.startupData?.startUpProfile?.yearFounded) :
                   moment()
                 }
                 format={dateFormat}
@@ -296,7 +321,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="registrationNumber"
                 placeholder="1234567890"
-                defaultValue={formik.values.registrationNumber}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.registrationNumber}
                 onChange={(e) => handleChange(e)}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -317,13 +342,13 @@ export const StartupProfile = () => {
                 <select
                   id={"companySize"}
                   name={"companySize"}
-                  value={formik.values.companySize}
-                  onChange={formik.handleChange}
+                  value={stateAuth?.startupData?.startUpProfile?.companySize}
+                  onChange={(e) => selectChange(e)}
                   // onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
                   placeholder="Enter company size"
                 >{companySize.map((item, i) => {
-                  return <option key={i}>{item.label}</option>
+                  return <option value={item.value} key={i}>{item.label}</option>
                 })}
                 </select>
                 {formik.touched.companySize && formik.errors.companySize ? (
@@ -341,7 +366,7 @@ export const StartupProfile = () => {
                 <input
                   id={"businessSector"}
                   name={"businessSector"}
-                  defaultValue={formik.values.businessSector}
+                  defaultValue={stateAuth?.startupData?.startUpProfile?.businessSector}
                   onChange={(e) => handleChange(e)}
                   onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
@@ -364,14 +389,14 @@ export const StartupProfile = () => {
               <select
                 id={"startupStage"}
                 name={"startupStage"}
-                value={formik.values.startupStage}
-                onChange={formik.handleChange}
+                value={stateAuth?.startupData?.startUpProfile?.startupStage}
+                onChange={(e) => selectChange(e)}
                 // onBlur={formik.handleBlur}
                 className="sel ps-3 pe-3"
                 placeholder="Enter Business Stage"
               >
                 {startupStage.map((i, index) => {
-                  return <option key={index}>{i.label}</option>
+                  return <option value={i.value} key={index}>{i.label}</option>
                 })}
               </select>
               {formik.touched.startupStage && formik.errors.startupStage ? (
@@ -389,7 +414,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="acceleratorName"
                 placeholder="Enter Accelerator name"
-                defaultValue={formik.values.acceleratorName}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.acceleratorName}
                 onChange={(e) => handleChange(e)}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -417,7 +442,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="registeredAddress"
                 placeholder="Enter your registered address"
-                defaultValue={formik.values.registeredAddress}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.registeredAddress}
                 onChange={(e) => handleChange(e, "contactInfo")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -439,8 +464,8 @@ export const StartupProfile = () => {
                 name="country"
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={["ng"]}
-                defaultValue={formik.values.country}
-                onChange={(e) => handleChange(e, "contactInfo")}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.country}
+                onChange={(value) => handleCountry(value)}
                 onBlur={formik.handleBlur}
               ></CountryDropdown>
               {formik.touched.country && formik.errors.country ? (
@@ -456,7 +481,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="state"
                 placeholder="Enter your state"
-                defaultValue={formik.values.state}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.state}
                 onChange={(e) => handleChange(e, "contactInfo")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -474,7 +499,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="city"
                 placeholder="Enter your city"
-                defaultValue={formik.values.city}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.city}
                 onChange={(e) => handleChange(e, "contactInfo")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -494,8 +519,7 @@ export const StartupProfile = () => {
                 countryCallingCodeEditable={true}
                 className="custs ps-3 py-2"
                 value={
-                  stateAuth?.startupData?.startUpProfile?.contactInfo
-                    .phoneNumber ?? ""
+                  stateAuth?.startupData?.startUpProfile?.contactInfo?.phoneNumber 
                 }
                 onChange={handlePhoneInput}
                 MaxLength={17}
@@ -510,7 +534,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="companyEmail"
                 placeholder="Enter your email"
-                defaultValue={formik.values.companyEmail}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.companyEmail}
                 onChange={(e) => handleChange(e, "contactInfo")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -529,31 +553,30 @@ export const StartupProfile = () => {
 
           <div className="row mt-4">
             <div className="form-group col-lg-6 col-12">
-              <label>What should be your startup profile handle</label>
+              <label>Startup profile handle</label>
               <input
                 id="profileHandle"
                 type="text"
                 name="profileHandle"
+                disabled={true}
                 placeholder="Enter your startup profile handle"
-                defaultValue={formik.values.profileHandle}
-                onChange={(e) => handleChange(e, "socialMedia")}
+                defaultValue={`knight.venture/${stateAuth?.user?.businessname}`}
+         
                 onBlur={formik.handleBlur}
-                className="form-control ps-3"
+                className="form-control ps-3 text-secondary"
               />
-              {formik.touched.profileHandle && formik.errors.profileHandle ? (
-                <label className="error">{formik.errors.profileHandle}</label>
-              ) : null}
+              
             </div>
             <div className="form-group col-lg-6 col-12">
               <label>
                 Website<span style={{ color: "red" }}>*</span>
-              </label>
+              </label> 
               <input
                 id="companyWebsite"
                 type="text"
                 name="companyWebsite"
                 placeholder="Enter your startup website"
-                defaultValue={formik.values.companyWebsite}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.socialMedia?.companyWebsite}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -571,7 +594,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="linkedInHandle"
                 placeholder="Enter your Linkedin profile name"
-                defaultValue={formik.values.linkedInHandle}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.socialMedia?.linkedInHandle}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -589,7 +612,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="twitterHandle"
                 placeholder="Enter your Twitter profile name"
-                defaultValue={formik.values.twitterHandle}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.socialMedia?.twitterHandle}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -602,12 +625,10 @@ export const StartupProfile = () => {
           <div className="d-flex my-4 justify-content-end">
             <div>
               <CustomButton
-                type="button"
+                type="submit"
                 disabled={loading}
                 background="#06ADEF"
-                onClick={() => {
-                  formik.handleSubmit();
-                }}
+               
               >
                 {loading ? <CircularLoader /> : "Save"}
               </CustomButton>

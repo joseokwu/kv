@@ -31,65 +31,21 @@ export const FinancialProjection = () => {
     state: { fundraising },
   } = useActivity()
   const history = useHistory()
-  const { stateAuth } = useAuth()
+  const {  updateProfile, stateAuth , updateStartupInfo } = useAuth()
   const [logoUploading, setLogoUploading] = useState(false)
   const [fileDoc, setFileDoc] = useState(
-    stateAuth?.user?.fundRaising?.financialProjection?.files ?? null,
-  )
-  const {
-    location: { hash },
-    push,
-  } = history
+    stateAuth?.startupData?.fundRaising?.financialProjection?.files ?? null,
+  ) 
 
-  function btn(e) {
-    e.preventDefault()
-  }
 
-  const handleChange = async (e) => {
-    const { files } = e.target
-    const formData = new FormData()
-    formData.append('dir', 'kv')
-    formData.append('ref', stateAuth.user?.userId)
-    formData.append('type', 'image')
-    formData.append(0, files[0])
-
-    try {
-      setLogoUploading(true)
-      const response = await upload(formData)
-      console.log(response)
-      setFileDoc(response?.path)
-      setLogoUploading(false)
-    } catch (error) {
-      console.log(error)
-      toast.error(
-        error?.res?.data?.message || 'The was an error updating pitch deck',
-      )
-    }
-  }
+ 
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault()
-      console.log('sending...')
-      const fund = {
-        type: 'fundRaising',
-        accType: 'startup',
-        values: {
-          ...fundraising,
-          financialProjection: {
-            files: fileDoc,
-          },
-        },
-        userId: stateAuth?.user?.userId,
-      }
-      console.log(fund)
-      let result = await updateFounderProfile(fund)
-      console.log(result)
-      toast.success(result?.message)
-      window.open('/startup/dashboard', '_self')
-    } catch (err) {
-      toast.error(err?.response?.data?.message)
-    }
+    
+      e.preventDefault();
+      updateStartupInfo();
+      window.open('/startup/dashboard', '_self');
+    
   }
 
   return (
@@ -129,33 +85,17 @@ export const FinancialProjection = () => {
                 try {
                   const response = await upload(formData)
                   console.log(response)
-                  setFileDoc(response?.path)
+                  updateProfile("fundRaising",{
+                    financialProjection:{
+                      files:response.path
+                    }
+                  })
                 } catch (error) {
                   console.log(error)
                 }
               }}
             />
-            {/* <FileWrapper className='d-flex justify-content-center text-center'>
-            {
-                fileDoc !== null ? (
-                  <img src={RedFile} alt='.' 
-                  style={{width:'70px', height:'70px'}}
-                   />
-                ):(
-                  logoUploading ? <CircularLoader color={'#000'} /> : 
-                 <>
-                 <img src={DownloadIcon} alt='#' />
-              <FileText>Drag & Drop</FileText>
-              <FileText>Drag files or click here to upload </FileText>
-              <FileSize> {'(Max. File size 5mb)'} </FileSize>
-              </>
-                )
-              }
-              <input type='file'
-              onChange={handleChange} 
-              id='utilize' hidden />
-              <LabelButton for='utilize'>Upload Files</LabelButton>
-            </FileWrapper> */}
+         
           </div>
         </div>
       </BodyWrapper>
@@ -178,7 +118,8 @@ export const FinancialProjection = () => {
         </div>
         <div className="col-9 d-flex justify-content-end">
           <OutlineButton
-            onClick={handleSubmit}
+            type='submit'
+            onClick={(e) => handleSubmit(e)}
             className="ms-2"
             style={{ marginRight: '0rem' }}
             background="none"

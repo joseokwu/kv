@@ -15,34 +15,25 @@ import {
   OutlineButton,
 } from "../../../../../../Startupcomponents/button/button.styled";
 import Download from "../../../../../../assets/icons/downloadoutline.svg";
-import DownloadIcon from "../../../../../../assets/icons/download.svg";
-import RedFile from "../../../../../../assets/icons/redFile.svg";
-import BluFile from "../../../../../../assets/icons/bluFile.svg";
-import { upload } from "./../../../../../../services/utils";
+
 import { useAuth } from "./../../../../../../hooks/useAuth";
-import { CircularLoader } from "../../../../../../Startupcomponents/CircluarLoader/CircularLoader";
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast';
 import * as XLSX from "xlsx";
 import { parseFile } from "../../../../../../utils/helpers";
 import { UploadFile } from "../../../../../../components/uploadFile";
 
-export const FundUtilization = ({ setFundraising }) => {
+export const FundUtilization = () => {
   const history = useHistory();
-  const { stateAuth } = useAuth();
-  const [fileDoc, setFileDoc] = useState(
-    stateAuth?.user?.fundRaising?.fundUtilization?.files ?? null
-  );
-  const {
-    location: { hash },
-  } = history;
+  const { stateAuth , updateProfile  } = useAuth();
+
+ 
 
   const onSubmit = () => {
-    console.log(fileDoc);
-    setFundraising({
-      fundUtilization: {
-        files: fileDoc,
-      },
-    });
+    if(stateAuth?.startupData?.fundRaising?.fundUtilization?.files === null || stateAuth?.startupData?.fundRaising?.fundUtilization?.files === ''){
+      toast.error('Please upload a document');
+      return;
+    }
+    history.push("#Cap Table");
   };
 
   return (
@@ -69,7 +60,7 @@ export const FundUtilization = ({ setFundraising }) => {
                 maxFileSize: 5,
                 extension: "MB",
               }}
-              initData={fileDoc ? [fileDoc] : []}
+              initData={stateAuth?.startupData?.fundRaising?.fundUtilization?.files.length > 0 ? [stateAuth?.startupData?.fundRaising?.fundUtilization?.files] : []}
               onUpload={async (filesInfo) => {
                 const file = filesInfo[0].file;
                 const fileData = await parseFile(file);
@@ -80,7 +71,11 @@ export const FundUtilization = ({ setFundraising }) => {
                   raw: false,
                 });
                 if (Array.isArray(data)) {
-                  setFileDoc(data);
+                  updateProfile("fundRaising",{
+                    fundUtilization:{
+                      files:data
+                    }
+                  });
                 }
               }}
             />
@@ -109,7 +104,6 @@ export const FundUtilization = ({ setFundraising }) => {
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              history.push("#Cap Table");
               onSubmit();
             }}
             className="ms-2"

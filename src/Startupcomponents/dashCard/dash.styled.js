@@ -87,6 +87,12 @@ export const CardWrap = styled.div`
   border-radius: 8px;
   padding: 0.5rem;
 
+h5 {
+  color:#09302;
+  font-size:1rem;
+
+}
+
   img {
     width: 50px;
     height: 50px;

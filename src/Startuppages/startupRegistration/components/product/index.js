@@ -9,7 +9,7 @@ import { formatBytes } from '../../../../utils/helpers';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../../../hooks/useAuth';
 import { updateFounderProfile } from '../../../../services';
-
+import { UploadFile } from "../../../../components/uploadFile";
 import { FileWrapper, FileText, LabelButton } from '../pitchdeck/pitch.styled';
 import DownloadIcon from '../../../../assets/icons/download.svg';
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
@@ -28,21 +28,27 @@ export const Product = () => {
   const [nextLoading, setnextLoading] = useState(false);
   const [opts, setOpts] = useState('');
   const [urls, setUrls] = useState(
-    stateAuth?.user?.product?.youtubeDemoUrl ?? []
+    stateAuth?.startupData?.product?.youtubeDemoUrl ?? ''
   );
   const [youtube, setYoutube] = useState('');
-  const [fileInfo, setFile] = useState(stateAuth?.user?.product?.files ?? null);
+
   const history = useHistory();
   const handleChangeVids = (e) => {
     setYoutube(e.target.value);
   };
 
   const addVid = () => {
-    const newVal = youtube.replace('https://youtu.be/', '');
 
-    setUrls([...urls, newVal]);
+    setUrls(youtube);
     setYoutube('');
+    updateProfile("product", {
+      youtubeDemoUrl:youtube
+    })
   };
+
+  const removeVideo = () =>{
+    setUrls('')
+  }
 
   const {
     changePath,
@@ -57,31 +63,7 @@ export const Product = () => {
     changePath(path - 1);
   };
 
-  const handleChange = async (e) => {
-    console.log('hello');
-    const { files, name } = e.target;
-    const formData = new FormData();
-    formData.append('dir', 'kv');
-    formData.append('ref', stateAuth.user?.userId);
-    formData.append('type', 'image');
-    formData.append(0, files[0]);
-    try {
-      setLogoUploading(true);
-      const response = await upload(formData);
-      console.log(response);
-      console.log('uploaded');
-      setFile(response?.path);
-      setLogoUploading(false);
-    } catch (error) {
-      console.log(error);
-      setLogoUploading(false);
-      toast.error(error?.response?.data?.message ?? 'Unable to upload image');
-    }
-  };
 
-  const deleteVid = () => {
-    setUrls([]);
-  };
 
   const onSubmit = async () => {
     setLoading(true)
@@ -93,40 +75,41 @@ export const Product = () => {
 
   const formik = useFormik({
     initialValues: {
-      description: stateAuth?.user?.product?.description ?? '',
-      competitiveEdge: stateAuth?.user?.product?.competitiveEdge ?? '',
-      youtubeDemoUrl: stateAuth?.user?.product?.youtubeDemoUrl ?? '',
-      files: stateAuth?.user?.product?.files ?? '',
+      description: stateAuth?.startupData?.product?.description ?? '',
+      competitiveEdge: stateAuth?.startupData?.product?.competitiveEdge ?? '',
+      youtubeDemoUrl: stateAuth?.startupData?.product?.youtubeDemoUrl ?? '',
+      files: stateAuth?.startupData?.product?.files ?? '',
     },
     validationSchema: Yup.object({
       competitiveEdge: Yup.string()
-        .min(200, 'Field must not be less than 200 characters')
-        .max(250, 'Field must not be above 250 characters')
+        .min(500, 'Field must not be less than 200 characters')
+        .max(1506, 'Field must not be above 250 characters')
         .required('Required'),
       description: Yup.string()
-        .min(200, 'Field must not be less than 200 characters')
-        .max(250, 'Field must not be above 250 characters')
+        .min(500, 'Field must not be less than 200 characters')
+        .max(1506, 'Field must not be above 250 characters')
         .required('Required'),
     }),
     validateOnBlur: true,
-    onSubmit: (value) => onSubmit(value),
+    
   });
 
   const onCountdown = (e) => {
     const { value } = e.target;
-    setWordCount(parseInt(value.trim().split(' ').length));
+    
+    setWordCount(parseInt(value.length));
     formik.handleChange(e);
   };
 
   const onDescriptionCountdown = (e) => {
     const { value } = e.target;
-    setDescriptionCount(parseInt(value.trim().split(' ').length));
+    setDescriptionCount(parseInt(value.length));
     formik.handleChange(e);
   };
 
   const handleFullChange = (e, prefix = '') => {
     const { name, value } = e.target;
-
+   
     if (prefix !== '') {
       updateProfile('product', {
         [prefix]: {
@@ -141,7 +124,7 @@ export const Product = () => {
     formik.handleChange(e);
   };
 
-  console.log(stateAuth);
+
   return (
     <>
       <HeaderProduct>
@@ -151,7 +134,7 @@ export const Product = () => {
         </h5>
         <p className='text-nowrap'>Let's help you explain your product</p>
       </HeaderProduct>
-      <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
+      <form style={{ marginBottom: '4rem' }}>
         <FormWrapper>
           <div className='div'>
             <span>Product / Service Description</span>
@@ -167,13 +150,14 @@ export const Product = () => {
                   </label>
                   <label style={{ color: '#828282' }}>250 words</label>
                   <label
-                    style={{ color: `${descriptionCount >= 250 ? 'red' : ''}` }}
+                    style={{ color: `${(250 - descriptionCount) === 0 ? '#896869' : 'red'}` }}
                   >
                     {descriptionCount > 0 &&
-                      `${250 - descriptionCount} remaining`}
+                      `${(250 - descriptionCount) === 0 ? '' : 250 - descriptionCount} ${(250 - descriptionCount) === 0 ? '' : 'remaining'}`}
                   </label>
                 </div>
                 <textarea
+                  maxLength={250}
                   cols='5'
                   rows='5'
                   name='description'
@@ -198,15 +182,17 @@ export const Product = () => {
                     What makes your solution unique from others in the market?
                     <span style={{ color: 'red' }}>*</span>
                   </label>
+                 
                   <label style={{ color: '#828282' }}>250 words</label>
-                  <label style={{ color: `${wordCount >= 250 ? 'red' : ''}` }}>
-                    {wordCount > 0 && `${250 - wordCount} remaining`}
+                  <label style={{ color: `${ (250 - wordCount ) === 0 ? '#896869' : 'red'}` }}>
+                    {wordCount > 0 && `${(250 - wordCount) === 0 ? '' : 250 - wordCount } ${(250 - wordCount) === 0 ? '' : 'remaining'}`}
                   </label>
                 </div>
 
                 <textarea
                   cols='5'
                   rows='5'
+                  maxLength={250}
                   name='competitiveEdge'
                   onChange={(e) => {
                     onCountdown(e);
@@ -240,59 +226,67 @@ export const Product = () => {
                   Upload
                 </button>
               </div>
-              <FileWrapper className='d-flex justify-content-center text-center'>
-                {fileInfo !== null ? (
-                  <img
-                    style={{ width: '70px', height: '70px' }}
-                    src={RedFile}
-                    alt='.#'
-                    className='mb-2'
-                  />
-                ) : logoUploading ? (
-                  <CircularLoader color={'#000'} />
-                ) : (
-                  <>
-                    <img src={DownloadIcon} alt='#' />
-                    <FileText>Drag & Drop</FileText>
-                    <FileText>Drag files or click here to upload </FileText>
-                  </>
-                )}
+              {
+                    !urls.includes('https://youtu.be/')  ? (
+                      
+                <div className="form-group col-12 mt-3">
+               
+               <UploadFile
+                 data={{
+                   maxFiles: 1,
+                   supportedMimeTypes: ["video/mp4"],
+                   maxFileSize: 10,
+                   extension: "MB",
+                 }}
+                 initData={stateAuth?.startupData?.product?.files ? [stateAuth.startupData?.product?.files] : []}
+                 onUpload={async (filesInfo) => {
+                   const formData = new FormData();
+                   formData.append("dir", "kv");
+                   formData.append("ref", stateAuth.user?.userId);
+                   formData.append("type", "video");
+                   formData.append(0, filesInfo[0]?.file);
+                   const response = await upload(formData);
+                  // setVidDoc(response?.path);
+                   updateProfile("product", {
+                    files:response?.path
+                 })
+                 }}
+               />
 
-                <input
-                  name='files'
-                  onChange={handleChange}
-                  type='file'
-                  disabled={urls.length > 0}
-                  id='pitch-doc'
-                  hidden
-                  accept='video/*'
-                />
-                <LabelButton for='pitch-doc' disabled={urls.length > 0}>
-                  Upload Files
-                </LabelButton>
-              </FileWrapper>
-            </div>
-            <div className='form-group col-12'>
+               </div>
+                    ):(
+
+                <div className='form-group col-12'>
               <VideoWrapper>
-                <label> Product demo upload</label>
-                {urls.length > 0 &&
-                  urls.map((item, i) => (
-                    <iframe
-                      key={i}
-                      src={`https://www.youtube.com/embed/${item}`}
-                      frameborder='0'
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; execution-while-not-rendered 'none'"
-                      allowfullscreen
-                      title='video'
-                      style={{
-                        borderRadius: '20px',
-                        maxHeight: '150px',
-                        width: '250px',
-                      }}
-                    />
-                  ))}
-              </VideoWrapper>
+              <div className='mb-2 d-flex justify-content-end'>
+                    <button 
+                    type="button"
+                    onClick={removeVideo}
+                    >
+                    Delete
+                    </button>
+              </div>
+
+      <iframe
+       
+        src={`https://www.youtube.com/embed/${urls.replace('https://youtu.be/', '')}`}
+        frameborder='0'
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; execution-while-not-rendered 'none'"
+        allowfullscreen
+        title='video'
+        style={{
+          borderRadius: '20px',
+          maxHeight: '150px',
+          width: '250px',
+        }}
+      />
+
+</VideoWrapper>
+</div>
+                    )
+                  }
             </div>
+          
           </div>
         </FormWrapper>
         <div className='row mt-4'>
@@ -307,7 +301,7 @@ export const Product = () => {
               disabled={loading}
               className='mx-2'
               background='#00ADEF'
-              onClick={() => formik.handleSubmit()}
+              onClick={() =>  onSubmit()}
             >
               {loading ? <CircularLoader /> : 'Save'}
             </CustomButton>
@@ -316,7 +310,7 @@ export const Product = () => {
               onClick={()=> changePath(path + 1)}
               background='#2E3192'
             >
-              {nextLoading ? <CircularLoader /> : 'Next'}
+              Next
             </CustomButton>
           </div>
         </div>
@@ -324,3 +318,32 @@ export const Product = () => {
     </>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

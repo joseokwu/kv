@@ -10,7 +10,7 @@ import { Portfolio } from "./components/portfolio/Portfolio";
 
 export const InvestorRegistration = () => {
   const wrapRef = useRef();
-  const [progress, setProgress] = useState("25");
+  const [progress, setProgress] = useState();
 
   const {
     location: { hash },
@@ -25,21 +25,21 @@ export const InvestorRegistration = () => {
     wrapRef.current.scrollTop = 0;
     switch (hash) {
       case "#details":
-        setProgress("25");
+        setProgress("0");
         break;
       case "#investor":
-        setProgress("50");
+        setProgress("25");
         break;
 
       case "#investor2":
-        setProgress("55");
+        setProgress("50");
         break;
       case "#approach":
         setProgress("75");
         break;
 
       case "#portfolio":
-        setProgress("95");
+        setProgress("100");
         break;
       default:
         setProgress("25");
@@ -66,7 +66,7 @@ export const InvestorRegistration = () => {
       </section>
 
       <section className="register-grid" style={{ maxWidth: 1440 }}>
-        <div>
+        <div className="d-none d-lg-flex">
           <ul
             className="register-list"
             style={{ position: "sticky", top: "2rem" }}

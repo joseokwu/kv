@@ -83,6 +83,7 @@ const authReducer = (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         authenticated: false,
+        dashboardLoad: false,
         user: null,
         type: [],
       };
@@ -109,7 +110,6 @@ const authReducer = (state = INIT_STATE, action) => {
         startupData: action.payload,
       };
     case UPDATE_STARTUP_INFO:
-      //  alert(JSON.stringify(action.payload));
       return {
         ...state,
         startupData: {
