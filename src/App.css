@@ -108,3 +108,7 @@ h6 {
 .mb-45 {
   margin-bottom: 2.5rem;
 }
+
+.error {
+  color: #e31937;
+}
