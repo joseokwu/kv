@@ -36,6 +36,9 @@ const sendForgotPassword = async(value) =>{
   }
 }
 
+const[eye, setEye] = useState(false);
+const[deye, setDEye] = useState(false);
+
 
 
   return (
@@ -68,24 +71,28 @@ const sendForgotPassword = async(value) =>{
             onFinish={sendForgotPassword}
           >
               <section className="mb-4 mt-5"> 
-            
+                <i onClick={()=> setEye(!eye)} className={`re-eye fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i>
                 <AuthPasswordField
                   placeholder="Password must be at least 8 characters"
                   className="mentor_gray_card_input"
                   id='password'
                   numb={8}
+                  name="password"
                   label={'New Password'}
+                  type={eye ? "text" : "password"}
                 />
               </section>
 
               <section className="mb-5">
-             
+              <i onClick={() => setDEye(!deye)} className={`cre-eye fa ${deye ? "fa-eye-slash" : "fa-eye"}`}></i>
                 <AuthPasswordField
                   placeholder="Password must be at least 8 characters"
                   className="mentor_gray_card_input"
                   id='confirm_password'
                   numb={8}
+                  name="password"
                   label={'Confirm New Password'}
+                  type={deye ? "text" : "password"}
                 />
               </section>
 

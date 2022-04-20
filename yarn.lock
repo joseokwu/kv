@@ -10889,6 +10889,11 @@ react-clock@^3.0.0:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
 
+react-country-region-selector@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/react-country-region-selector/-/react-country-region-selector-3.4.0.tgz#e7df48c3e3e8c01d6c135fbe692679604b616ab3"
+  integrity sha512-3zUC0Uhsr6gV8Wxj/BBVJxdTl7pETHPnpDU72OT1n6WrhKVlSYcITEjV0iSyqyk+EmTPM1Fca9JmHRJ+efA2UA==
+
 react-currency-input-field@^3.6.4:
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.6.4.tgz#8063f9a445ba246063f0254ced4015210c90593a"

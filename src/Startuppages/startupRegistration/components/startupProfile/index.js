@@ -21,7 +21,7 @@ import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "./../../../../hooks/useAuth";
 import { upload } from "../../../../services/utils";
-import CountryDropdown from "country-dropdown-with-flags-for-react";
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import moment from "moment";
 
 
@@ -48,13 +48,24 @@ export const StartupProfile = () => {
 
   const dateFormat = "YYYY-MM-DD";
   const { updateProfile, stateAuth , updateStartupInfo } = useAuth();
+  const [country, setCountry] = useState(stateAuth?.startupData?.startUpProfile?.contactInfo?.country ?? '');
+  const [region , setRegion] = useState(stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? '');
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [logo, setLogo] = useState(
     stateAuth?.startupData?.startUpProfile?.logo 
   );
-  const [logoUploading, setLogoUploading] = useState(false);
+
   
-  const [loading] = useState(false);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [logoUploading, setLogoUploading] = useState(false);
+
+  
+
+  
  
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const formik = useFormik({
     initialValues: {
       startupName: stateAuth?.user?.businessname ?? "",
@@ -72,9 +83,7 @@ export const StartupProfile = () => {
       registeredAddress:
         stateAuth?.startupData?.startUpProfile?.contactInfo
           ?.registeredAddress ?? "",
-      country:
-        stateAuth?.startupData?.startUpProfile?.contactInfo?.country ?? "",
-      state: stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? "",
+     
       city: stateAuth?.startupData?.startUpProfile?.contactInfo?.city ?? "",
       companyEmail:
         stateAuth?.startupData?.startUpProfile?.contactInfo?.companyEmail ?? "",
@@ -102,17 +111,17 @@ export const StartupProfile = () => {
       startupStage: Yup.string().required("This field is require"),
       acceleratorName: Yup.string().required("This field is required"),
       registeredAddress: Yup.string().required("This field is required"),
-      state: Yup.string().required("This field is required"),
       city: Yup.string().required("This field is required"),
       companyEmail: Yup.string().email("Invalid email").required("Email Required"),
       companyWebsite: Yup.string().url().required("This field is required"),
       linkedInHandle: Yup.string().required("This field is required"),
       twitterHandle: Yup.string().required("This field is required"),
       startupName: Yup.string().required("This field is required"),
-    }),
-    onSubmit: (value) => onSubmit(value),
+    })
   });
      
+  
+
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
     if (prefix !== "") {
@@ -129,6 +138,7 @@ export const StartupProfile = () => {
     formik.handleChange(e);
   };
 
+ 
 
   // fundRaising:
   // capTable: {amountRaised: '5000', amountInvestedByFounders: '1000', files: Array(4), _id: '6259419ab36d0dd3b5e2e3c9'}
@@ -155,7 +165,20 @@ export const StartupProfile = () => {
         country: value,
       },
     });
-    formik.setFieldValue("country", value.value)
+    setCountry(value)
+    console.log(value)
+  }
+
+  const handleChangeState = (value) => {
+
+    updateProfile("startUpProfile",{
+      contactInfo: {
+        ...stateAuth?.startupData?.startUpProfile?.state,
+        state: value,
+      },
+    });
+    setRegion(value)
+    console.log(value)
   }
   
   const selectChange = (e) =>{
@@ -192,7 +215,9 @@ export const StartupProfile = () => {
     }
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    
+    e.preventDefault();
     updateStartupInfo()
   };
 
@@ -230,7 +255,7 @@ export const StartupProfile = () => {
         <PlusOutlined style={{ color: "white" }} />
       </InputWrapper>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form >
         <FormWrapper className="pe-5">
           <div className="div border-bottom pb-3">
             <span className="">Startup profile</span>
@@ -459,36 +484,26 @@ export const StartupProfile = () => {
                 Country<span style={{ color: "red" }}>*</span>
               </label>
               <CountryDropdown
-                id="country"
-                type="text"
-                name="country"
-                className="form-control px-5 py-1 country-bg"
-                preferredCountries={["ng"]}
-                defaultValue={stateAuth?.startupData?.startUpProfile?.country}
-                onChange={(value) => handleCountry(value)}
-                onBlur={formik.handleBlur}
-              ></CountryDropdown>
-              {formik.touched.country && formik.errors.country ? (
-                <label className="error">{formik.errors.country}</label>
-              ) : null}
+              
+              className="form-control px-5 py-1 country-bg"
+              value={country}
+              onChange={(value) => handleCountry(value)}
+
+            ></CountryDropdown>
+           
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>
                 State<span style={{ color: "red" }}>*</span>
               </label>
-              <input
-                id="state"
-                type="text"
-                name="state"
-                placeholder="Enter your state"
-                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.state}
-                onChange={(e) => handleChange(e, "contactInfo")}
-                onBlur={formik.handleBlur}
+              <RegionDropdown
+                 name="state"
+                country={country}
+                value={region}
+                onChange={(value) => handleChangeState(value)}
                 className="form-control ps-3"
-              />
-              {formik.touched.state && formik.errors.state ? (
-                <label className="error">{formik.errors.state}</label>
-              ) : null}
+                 /> 
+       
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>
@@ -625,12 +640,12 @@ export const StartupProfile = () => {
           <div className="d-flex my-4 justify-content-end">
             <div>
               <CustomButton
-                type="submit"
-                disabled={loading}
+                type="button"
+                onClick={(e)=> onSubmit(e)}
                 background="#06ADEF"
                
               >
-                {loading ? <CircularLoader /> : "Save"}
+             Save
               </CustomButton>
             </div>
             <div className="mx-2">
