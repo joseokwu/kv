@@ -18,6 +18,7 @@ import { useFormik } from "formik";
 // import { updateMentorProfile } from "../../../../services/mentor";
 import { useActivity } from "../../../../hooks/useBusiness";
 import { toast } from "react-toastify";
+import * as Yup from "yup";
 
 const Details = () => {
   const { updateMentorReg } = useAuth();
@@ -39,82 +40,12 @@ const Details = () => {
     stateAuth?.user?.personalDetail?.contactInfo?.mobilenumber ?? ""
   );
   const [contacts, setContacts] = useState({
-    // skypeid: stateAuth?.user?.personalDetail?.contactInfo?.skypeid ?? '',
-    // googlemeet: stateAuth?.user?.personalDetail?.contactInfo?.googlemeet ?? '',
-    country: stateAuth?.user?.personalDetail?.contactInfo?.country ?? "",
-    // state: stateAuth?.user?.personalDetail?.contactInfo?.state ?? '',
-    // city: stateAuth?.user?.personalDetail?.contactInfo?.city ?? '',
-    // permanentAddress: stateAuth?.user?.personalDetail?.contactInfo?.permanentAddress ?? '',
+    country: stateAuth?.mentorData?.personalDetail?.country ?? "",
   });
-
-  // const [socialMedia, setSocialMedia] = useState({
-  //   linkedin: stateAuth?.user?.personalDetail?.socialMedia?.linkedin ?? '',
-  //   crunchbase: stateAuth?.user?.personalDetail?.socialMedia?.crunchbase ?? '',
-  //   angelist: stateAuth?.user?.personalDetail?.socialMedia?.angelist ?? '',
-  //   twitter: stateAuth?.user?.personalDetail?.socialMedia?.twitter ?? '',
-  //   website: stateAuth?.user?.personalDetail?.socialMedia?.website ?? '',
-  //   whatsapp: stateAuth?.user?.personalDetail?.socialMedia?.whatsapp ?? '',
-  // })
-
-  // const onChange = (e) => {
-  //   setContacts({ ...contacts, [e.target.name]: e.target.value })
-  // }
-
-  // const onChangeMedia = (e) => {
-  //   setSocialMedia({ ...socialMedia, [e.target.name]: e.target.value })
-  // }
 
   const next = () => {
     changePath(path + 1);
   };
-
-  // const onSubmit = async (value) => {
-  //   try {
-  //     const personaldetail = {
-  //       type: "personalDetail",
-  //       accType: "mentor",
-  //       values: {
-  //         ...value,
-  //         logo: logo,
-  //         contactInfo: {
-  //           ...contacts,
-  //         },
-  //         mobilenumber: phone,
-  //         // socialMedia,
-  //       },
-  //       userId: stateAuth?.user?.userId,
-  //     };
-  //     console.log(personaldetail);
-  //     if (opts === "next") {
-  //       setOpts(true);
-  //       let result = await updateMentorProfile(personaldetail);
-
-  //       if (result?.success) {
-  //         toast.success("Personal details" + "" + result?.message);
-  //         setOpts(false);
-  //         return changePath(path + 1);
-  //       }
-  //     }
-  //     setLoading(true);
-  //     let result = await updateMentorProfile(personaldetail);
-
-  //     if (!result?.success) {
-  //       toast.error(
-  //         result?.message || "There was an error in personal details"
-  //       );
-  //       setLoading(false);
-  //       return;
-  //     }
-  //     toast.success("Personal details" + " " + result?.message);
-  //     setLoading(false);
-  //   } catch (err) {
-  //     setLoading(false);
-  //     toast.error(
-  //       err?.response?.data?.message ||
-  //         "There was an error in updating personal details"
-  //     );
-  //   }
-  // };
 
   const formik = useFormik({
     initialValues: {
@@ -138,6 +69,41 @@ const Details = () => {
       permanentAddress:
         stateAuth?.mentorData?.personalDetail?.permanentAddress ?? "",
     },
+    validationSchema: Yup.object({
+      firstname: Yup.string().required("This field is required"),
+      lastname: Yup.string().required("This field is required"),
+      email: Yup.string()
+        .email("Invalid email")
+        .required("This field is required"),
+      designation: Yup.string().required("This field is required"),
+      gender: Yup.string().required("This field is required"),
+      linkedin: Yup.string()
+        .url("Invalid url")
+        .required("This field is required"),
+      whatsapp: Yup.string().required("This field is required"),
+      twitter: Yup.string().required("This field is required"),
+      country: Yup.string().required("This field is required"),
+      state: Yup.string().required("This field is required"),
+      city: Yup.string().required("This field is required"),
+      mobilenumber: Yup.string()
+        .min(10)
+        .max(14)
+        .required("This is a required field"),
+      skypeid: Yup.string().required("This field is required"),
+      googlemeet: Yup.string()
+        .url("Invalid link")
+        .required("This field is required"),
+      permanentaddress: Yup.string().required("This field is required"),
+      referral: Yup.string().required("This field is required"),
+      from: Yup.string().required("This field is required"),
+      crunchbase: Yup.string()
+        .url("Invalid link")
+        .required("This field is required"),
+      website: Yup.string()
+        .url("Invalid url")
+        .required("This field is required"),
+      angelist: Yup.string().required("This field is required"),
+    }),
     onSubmit: (value) => console.log("value", value),
   });
 
@@ -183,8 +149,6 @@ const Details = () => {
     }
   };
 
-  console.log("stateAuth", stateAuth);
-
   return (
     <div className="mentor_details_form_wrap">
       <h3>Personal Details</h3>
@@ -196,7 +160,7 @@ const Details = () => {
               {logoUploading ? (
                 <CircularLoader color={"#000"} />
               ) : (
-                <span className="image-placeholder">
+                <span className={logo === imageRep ? "" : "image-placeholder"}>
                   <img src={logo} alt="placeholder" />
                 </span>
               )}
@@ -227,6 +191,9 @@ const Details = () => {
                 placeholder={"Micheal"}
                 // required={true}
               />
+              {formik.touched.firstname && formik.errors.firstname ? (
+                <label className="error">{formik.errors.firstname}</label>
+              ) : null}
             </section>
             <section className="col-md-6 mb-4">
               <label>Last Name*</label>
@@ -240,6 +207,9 @@ const Details = () => {
                 placeholder={"Smith"}
                 // required={true}
               />
+              {formik.touched.lastname && formik.errors.lastname ? (
+                <label className="error">{formik.errors.lastname}</label>
+              ) : null}
             </section>
 
             <section className="col-md-6 mb-4">
@@ -280,6 +250,9 @@ const Details = () => {
                   Female
                 </button>
               </section>
+              {formik.touched.gender && formik.errors.gender ? (
+                <label className="error">{formik.errors.gender}</label>
+              ) : null}
             </section>
 
             <section className="col-md-6 mb-4">
@@ -292,11 +265,14 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Ex. Engr"}
               />
+              {formik.touched.designation && formik.errors.designation ? (
+                <label className="error">{formik.errors.designation}</label>
+              ) : null}
             </section>
 
             <section className="col-md-12 mb-4">
               <TextArea
-                type="text"
+                type="email"
                 name="email"
                 value={formik.values.email}
                 onChange={(e) => handleChange(e)}
@@ -305,6 +281,9 @@ const Details = () => {
                 // required={true}
                 rows={"1"}
               />
+              {formik.touched.email && formik.errors.email ? (
+                <label className="error">{formik.errors.email}</label>
+              ) : null}
             </section>
           </div>
         </FormCard>
@@ -326,6 +305,9 @@ const Details = () => {
                 placeholder={"Enter LinkdIn link"}
                 // required={true}
               />
+              {formik.touched.linkedin && formik.errors.linkedin ? (
+                <label className="error">{formik.errors.linkedin}</label>
+              ) : null}
             </section>
             <section className="col-md-6 mb-4">
               <label>Twitter</label>
@@ -337,6 +319,9 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter Twitter link"}
               />
+              {formik.touched.twitter && formik.errors.twitter ? (
+                <label className="error">{formik.errors.twitter}</label>
+              ) : null}
             </section>
 
             <section className="col-md-6 mb-4">
@@ -349,6 +334,9 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter Angelist link"}
               />
+              {formik.touched.angelist && formik.errors.angelist ? (
+                <label className="error">{formik.errors.angelist}</label>
+              ) : null}
             </section>
             <section className="col-md-6 mb-4">
               <label>Crunchbase</label>
@@ -360,6 +348,9 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter Crunchbase link"}
               />
+              {formik.touched.crunchbase && formik.errors.crunchbase ? (
+                <label className="error">{formik.errors.crunchbase}</label>
+              ) : null}
             </section>
 
             <section className="col-md-6 mb-4">
@@ -372,6 +363,9 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter Whatsapp number"}
               />
+              {formik.touched.whatsapp && formik.errors.whatsapp ? (
+                <label className="error">{formik.errors.whatsapp}</label>
+              ) : null}
             </section>
             <section className="col-md-6 mb-4">
               <label>Website</label>
@@ -384,6 +378,9 @@ const Details = () => {
                 placeholder={"Enter Webiste link"}
                 wid
               />
+              {formik.touched.website && formik.errors.website ? (
+                <label className="error">{formik.errors.website}</label>
+              ) : null}
             </section>
           </div>
         </FormCard>
@@ -406,6 +403,9 @@ const Details = () => {
                 placeholder={"www.knightventure/michealsmith"}
                 required={true}
               />
+              {formik.touched.skypeid && formik.errors.skypeid ? (
+                <label className="error">{formik.errors.skypeid}</label>
+              ) : null}
             </section>
             <section className="col-md-6 mb-4">
               <label>Google Meet*</label>
@@ -419,6 +419,9 @@ const Details = () => {
                 placeholder={"Enter Google Meet Link"}
                 required={true}
               />
+              {formik.touched.googlemeet && formik.errors.googlemeet ? (
+                <label className="error">{formik.errors.googlemeet}</label>
+              ) : null}
             </section>
             <section className="col-md-4 mb-4">
               <label>Country</label>
@@ -434,11 +437,16 @@ const Details = () => {
                 preferredCountries={["ng"]}
                 value={contacts.country}
                 // value={formik.values.country}
-                onChange={(e) => {
+                handleChange={(e) => {
                   setContacts({ ...contacts, country: e.target.value });
-                  handleChange(e);
+                  handleChange({
+                    target: { name: "country", value: e.target.value },
+                  });
                 }}
               ></CountryDropdown>
+              {formik.touched.country && formik.errors.country ? (
+                <label className="error">{formik.errors.country}</label>
+              ) : null}
             </section>
             <section className="col-md-4 mb-4">
               <label>State</label>
@@ -451,6 +459,9 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter your state"}
               />
+              {formik.touched.state && formik.errors.state ? (
+                <label className="error">{formik.errors.state}</label>
+              ) : null}
             </section>
             <section className="col-md-4 mb-4">
               <label>City</label>
@@ -463,6 +474,9 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter your city"}
               />
+              {formik.touched.city && formik.errors.city ? (
+                <label className="error">{formik.errors.city}</label>
+              ) : null}
             </section>
 
             <section className="col-md-12 mb-4">
@@ -470,11 +484,17 @@ const Details = () => {
                 label={"Permanent Address"}
                 type="text"
                 name="permanentaddress"
-                value={formik.values.permanentAddress}
+                value={formik.values.permanentaddress}
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter your permanent address"}
                 rows={"1"}
               />
+              {formik.touched.permanentaddress &&
+              formik.errors.permanentaddress ? (
+                <label className="error">
+                  {formik.errors.permanentaddress}
+                </label>
+              ) : null}
             </section>
 
             <section className="col-md-12 mb-4">
@@ -489,6 +509,9 @@ const Details = () => {
                 }
                 // value={phone}
               />
+              {formik.touched.mobilenumber && formik.errors.mobilenumber ? (
+                <label className="error">{formik.errors.mobilenumber}</label>
+              ) : null}
             </section>
           </div>
         </FormCard>
@@ -510,6 +533,9 @@ const Details = () => {
                 placeholder={"Select a user in knight ventures"}
                 rows={"1"}
               />
+              {formik.touched.referral && formik.errors.referral ? (
+                <label className="error">{formik.errors.referral}</label>
+              ) : null}
             </section>
 
             <div className="col-md-12 mb-4">
@@ -525,17 +551,10 @@ const Details = () => {
                 placeholder={"Ex. From an advert in the streets"}
                 rows={"1"}
               />
-              {/* <section className="gender_choice">
-                <button className="col-md-3 male_btn">News</button>
-                <button className="col-md-3 female_btn">Social Media</button>
-                <button className="col-md-3 female_btn">Internet Search</button>
-                <button className="col-md-3 female_btn">Social Media</button>
-              </section> */}
+              {formik.touched.from && formik.errors.from ? (
+                <label className="error">{formik.errors.from}</label>
+              ) : null}
             </div>
-            {/* <div className="col-md-10 gender_choice">
-              <button className="male_btn">Referral from Startup</button>
-              <button className="female_btn">Referral from Investor</button>
-            </div> */}
           </div>
         </FormCard>
 
@@ -562,10 +581,11 @@ const Details = () => {
 
             <Button
               label="Next"
-              type="submit"
+              type="button"
               disabled={nextloading}
               onClick={() => {
-                setOpts("next");
+                // setOpts("next");
+                next();
               }}
             >
               {nextloading ? <CircularLoader /> : "Next"}
