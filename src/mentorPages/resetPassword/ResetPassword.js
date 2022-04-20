@@ -36,6 +36,40 @@ const sendForgotPassword = async(value) =>{
   }
 }
 
+const[eye, setEye] = useState(true);
+const [showPassword, setShowPassword] = useState();
+const[pass, setPass] = useState(false);
+
+const Eye = () => {
+  if(showPassword === "password") {
+    setShowPassword("text");
+    setEye(false);
+    setPass(true);
+  } else {
+    setShowPassword("password");
+    setEye(true);
+    setPass(false);
+  }
+  console.log(pass)
+}
+
+const[deye, setDEye] = useState(true);
+const [showD, setShowDPassword] = useState();
+const[dpass, setDPass] = useState(false);
+
+const DEye = () => {
+  if(showD === "password") {
+    setShowDPassword("text");
+    setDEye(false);
+    setDPass(true);
+  } else {
+    setShowDPassword("password");
+    setDEye(true);
+    setDPass(false);
+  }
+  console.log(dpass)
+}
+
 
 
   return (
@@ -68,24 +102,28 @@ const sendForgotPassword = async(value) =>{
             onFinish={sendForgotPassword}
           >
               <section className="mb-4 mt-5"> 
-            
+                <i onClick={Eye} className={`re-eye fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i>
                 <AuthPasswordField
                   placeholder="Password must be at least 8 characters"
                   className="mentor_gray_card_input"
                   id='password'
                   numb={8}
+                  name="password"
                   label={'New Password'}
+                  type={showPassword ? "text" : "password"}
                 />
               </section>
 
               <section className="mb-5">
-             
+              <i onClick={DEye} className={`cre-eye fa ${deye ? "fa-eye-slash" : "fa-eye"}`}></i>
                 <AuthPasswordField
                   placeholder="Password must be at least 8 characters"
                   className="mentor_gray_card_input"
                   id='confirm_password'
                   numb={8}
+                  name="password"
                   label={'Confirm New Password'}
+                  type={showD ? "text" : "password"}
                 />
               </section>
 

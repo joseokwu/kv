@@ -64,6 +64,23 @@ export const SignIn = () => {
     }
   }
 
+  const[eye, setEye] = useState(true);
+  const [showPassword, setShowPassword] = useState();
+  const[pass, setPass] = useState(false);
+  const Eye = () => {
+    if(showPassword === "password") {
+      setShowPassword("text");
+      setEye(false);
+      setPass(true);
+    } else {
+      setShowPassword("password");
+      setEye(true);
+      setPass(false);
+    }
+    console.log(pass)
+  }
+
+
   return (
     <div className="row mx-0 mentor_auth_wrap">
     
@@ -92,12 +109,14 @@ export const SignIn = () => {
             </div>
 
             <div className="col-12 mb-1">
+            <i onClick={Eye} className={`pass-eye fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i>
               <AuthPasswordField
                 className="mentor_gray_card_input"
                 numb={8}
                 id={'password'}
                 message="Password must not be less than 8"
                 placeholder={'Password must be at least 8 characters'}
+                type={showPassword ? "text" : "password"}
               />
             </div>
             <span

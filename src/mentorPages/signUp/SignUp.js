@@ -68,6 +68,23 @@ export const SignUp = ({ history }) => {
     setType(stateAuth?.signUpStatus)
   }
 
+const[eye, setEye] = useState(true);
+const [showPassword, setShowPassword] = useState();
+const[pass, setPass] = useState(false);
+
+const Eye = () => {
+  if(showPassword === "password") {
+    setShowPassword("text");
+    setEye(false);
+    setPass(true);
+  } else {
+    setShowPassword("password");
+    setEye(true);
+    setPass(false);
+  }
+  console.log(pass)
+}
+
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
@@ -203,6 +220,7 @@ export const SignUp = ({ history }) => {
             </div>
 
             <div className="col-12 mb-2 position-relative">
+              <i onClick={Eye} className={`pass-eye fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i>
               <AuthPasswordField
                 numb={8}
                 name="password"
@@ -211,6 +229,7 @@ export const SignUp = ({ history }) => {
                 id={'password'}
                 placeholder="Password must be at least 8 characters"
                 className="mentor_gray_card_input"
+                type={showPassword ? "text" : "password"}
               />
             </div>
 
@@ -221,7 +240,7 @@ export const SignUp = ({ history }) => {
             
               <PhoneInput
                 id="phoneNumber"
-                placeholder={"000 0000 000"}
+                placeholder={"+234 000 0000 000"}
                 name="phone"
                 international
                 countryCallingCodeEditable={true}

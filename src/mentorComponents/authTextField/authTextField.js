@@ -41,25 +41,26 @@ export const AuthTextField = ({
 
 export const AuthPasswordField = ({ className, numb, message, placeholder, label='Password', id, name, type }) => {
 
-  const[eye, setEye] = useState(true);
-  const [showPassword, setShowPassword] = useState();
-  const[pass, setPass] = useState(false);
+  // const[eye, setEye] = useState(true);
+  // const [showPassword, setShowPassword] = useState();
+  // const[pass, setPass] = useState(false);
 
-  const Eye = () => {
-    if(showPassword === "password") {
-      setShowPassword("text");
-      setEye(false);
-      setPass(true);
-    } else {
-      setShowPassword("password");
-      setEye(true);
-      setPass(false);
-    }
-    console.log(pass)
-  }
+  // const Eye = () => {
+  //   if(showPassword === "password") {
+  //     setShowPassword("text");
+  //     setEye(false);
+  //     setPass(true);
+  //   } else {
+  //     setShowPassword("password");
+  //     setEye(true);
+  //     setPass(false);
+  //   }
+  //   console.log(pass)
+  // }
+
   return (
     <div className="mentor_field">
-              <i onClick={Eye} className={`pass-eye fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i>
+              {/* <i onClick={Eye} className={`pass-eye fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i> */}
 
       <Form.Item
         name={id}
@@ -77,8 +78,8 @@ export const AuthPasswordField = ({ className, numb, message, placeholder, label
         label={label}
       >
         <Input
-          // type={type}
-          type={showPassword ? "text" : "password"}
+          type={type}
+          // type={showPassword ? "text" : "password"}
           id={id}
           className={`${className}`}
           placeholder={placeholder}
