@@ -23,9 +23,13 @@ export const StartupContactUs = () => {
       <section className="row mt-5">
         <article className="col-lg-6 mt-2">
           <div className="d-flex align-items-center contact-us-info">
-            {/* <img src={map} alt="location" /> */}
-            <p><img className="pr-2" src={map} alt="location" />274, Ikorodu Road, Anthony, Lagos State, Nigeria. <br /><br /> <img className="pr-2" src={map} alt="location" />4652 Ripley Manor Terr, Olney MD 20832 USA</p>
-            
+            <img src={map} alt="location" />
+            <p>274, Ikorodu Road, Anthony, Lagos State, Nigeria.</p>
+          </div>
+
+          <div className="d-flex align-items-center contact-us-info">
+            <img src={map} alt="location" />
+            <p>4652 Ripley Manor Terr, Olney MD 20832 USA</p> 
           </div>
 
           <div className="d-flex align-items-center contact-us-info">
