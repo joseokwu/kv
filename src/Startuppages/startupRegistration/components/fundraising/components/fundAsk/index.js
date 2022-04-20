@@ -290,7 +290,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 value={preMoney}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
-                placeholder="Enter amount"
+                placeholder="Pre money = Post money - investment amount."
                 intlConfig={{ locale: 'en-US', currency: 'USD' }}
                 required
                 onChange={formik.handleChange}
@@ -324,7 +324,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 value={postMoney}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
-                placeholder="Enter amount"
+                placeholder="Post-money valuation = Investment dollar amount ÷ percent investor receives."
                 intlConfig={{ locale: 'en-US', currency: 'USD' }}
                 required
                 onChange={formik.handleChange}
