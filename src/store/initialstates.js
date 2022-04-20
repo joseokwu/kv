@@ -41,7 +41,7 @@ export const INIT_STATE = {
       gender: "",
       designation: "",
       email: "",
-      linkedIn: "",
+      linkedin: "",
       twitter: "",
       angelist: "",
       crunchbase: "",
