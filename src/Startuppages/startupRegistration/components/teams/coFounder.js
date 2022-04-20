@@ -24,7 +24,7 @@ import { team } from './../../../../services/startUpReg';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { upload } from "../../../../services/utils";
-import CountryDropdown from "country-dropdown-with-flags-for-react";
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import moment from "moment";
 import { useAuth } from "../../../../hooks/useAuth";
 
@@ -41,7 +41,7 @@ export const CoFounder = ({
   isEditing,
   setIsEditing,
 }) => {
-  const [country, setCountry] = useState('India');
+  const [country, setCountry] = useState('');
   const [skills , setSkills] = useState([])
   const [phone, setPhone] = useState();
   const [show, setShow] = useState(false);
@@ -60,7 +60,7 @@ export const CoFounder = ({
   const [localExperience, setLocalExperience] = useState([]);
   const [dob , setDob] = useState(moment())
   const [inVal, setVal] = useState("");
-
+  const [region , setRegion] = useState('');
 
   const handleChangeVal = (e) => {
     setVal(e.target.value);
@@ -107,6 +107,14 @@ export const CoFounder = ({
 
 
 
+
+  const handleChangeState = (value) => {
+  
+    setRegion(value)
+  
+  }
+
+
   const {
     changePath,
     state: { path },
@@ -136,7 +144,7 @@ export const CoFounder = ({
       website: formik.getFieldProps('website').value,
       country: country,
       position:formik.getFieldProps('position').value,
-      state: formik.getFieldProps('state').value,
+      state: region,
       city: formik.getFieldProps('city').value,
       skills:skills,
       mobile_number: phone,
@@ -223,7 +231,6 @@ export const CoFounder = ({
       dob: startDate,
       country: '',
       position:'',
-      state: '',
       city: '',
       mobile_number:'',
       skills: [],
@@ -340,25 +347,21 @@ export const CoFounder = ({
             <div className='form-group col-lg-4 col-12'>
               <label>Country *</label>
               <CountryDropdown
-                id="country"
-                type="text"
-                name="country"
+            
                 className="form-control px-5 py-1 country-bg"
-                preferredCountries={["ng"]}
-                defaultValue={country}
-                handleChange={handleChangeCountry}
+                value={country}
+                onChange={(value) => handleChangeCountry(value)}
               ></CountryDropdown>
             </div>
             <div className='form-group col-lg-4 col-12'>
               <label>State *</label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.state}
-                type='text'
-                name='state'
-                placeholder='Enter your state'
-                className='form-control ps-3'
-              />
+              <RegionDropdown
+                 name="state"
+                country={country}
+                value={region}
+                onChange={(value) => handleChangeState(value)}
+                className="form-control ps-3"
+                 /> 
             </div>
             <div className='form-group col-lg-4 col-12'>
               <label>City *</label>

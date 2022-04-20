@@ -36,8 +36,9 @@ import {
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../../hooks/useAuth'
 import { upload } from '../../../../services/utils'
-import CountryDropdown from 'country-dropdown-with-flags-for-react'
+// import CountryDropdown from 'country-dropdown-with-flags-for-react'
 import moment from 'moment'
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 
 const { Option } = Select
 
@@ -59,9 +60,8 @@ export const TeamProfile = () => {
     linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn ?? '',
     twitter: stateAuth?.user?.team?.socialMedia?.twitter ?? '',
   })
-  // const [country, setCountry] = useState(
-  //   stateAuth?.user?.team?.country ?? "Nigeria"
-  // );
+  const [country, setCountry] = useState(stateAuth?.startupData?.team?.country ?? '');
+  const [region , setRegion] = useState(stateAuth?.startupData?.team?.state ?? '');
 
   const gender = [
     { label: '--Select-gender--', value: '' },
@@ -135,7 +135,6 @@ export const TeamProfile = () => {
       firstName: Yup.string().required('Required'),
       lastName: Yup.string().required('Required'),
       email: Yup.string().required('Required'),
-      state: Yup.string().required('Required'),
       city: Yup.string().required('Required'),
       dob: Yup.string().required('Required'),
       gender: Yup.string().required('Required'),
@@ -166,6 +165,14 @@ export const TeamProfile = () => {
 
   const handleChangeCountry = (value) => {
     updateProfile('team', { country: value })
+    setCountry(value)
+    console.log(value)
+  }
+
+  const handleChangeState = (value) => {
+    updateProfile('team', { state: value })
+    setRegion(value)
+    console.log(value)
   }
 
   const handlePhoneInput = (value) => {
@@ -360,7 +367,7 @@ export const TeamProfile = () => {
       <HeaderTeam>
         <h5 style={{ color: '#2E3192' }}>Team</h5>
         <p className="text-nowrap">Let’s you introduce your Founder(s)</p>
-      </HeaderTeam>
+      </HeaderTeam>   
 
       <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
         <FormWrapper height="70%">
@@ -497,28 +504,27 @@ export const TeamProfile = () => {
               </label>
 
               <CountryDropdown
-                id="country"
-                type="text"
-                name="country"
+              
                 className="form-control px-5 py-1 country-bg"
-                preferredCountries={['ng']}
-                defaultValue={formik.values.country}
-                handleChange={handleChangeCountry}
+                value={country}
+                onChange={(value) => handleChangeCountry(value)}
+
               ></CountryDropdown>
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>
                 State<span style={{ color: 'red' }}>*</span>
               </label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.state}
-                onBlur={formik.handleBlur}
-                type="text"
-                name="state"
-                placeholder="Enter your state"
+    
+                <RegionDropdown
+                 name="state"
+                country={country}
+                value={region}
+                onChange={(value) => handleChangeState(value)}
                 className="form-control ps-3"
-              />
+                 /> 
+
+
               {formik.touched.state && formik.errors.state ? (
                 <label className="error">{formik.errors.state}</label>
               ) : null}
@@ -563,7 +569,7 @@ export const TeamProfile = () => {
                 Gender<span style={{ color: 'red' }}>*</span>
               </label>
               <select
-                className="cust mx-3 px-2 extra"
+                className="cust mx-3 px-2 py-2 extra"
                 id="gender"
                 name="gender"
                 value={formik.values.gender}
