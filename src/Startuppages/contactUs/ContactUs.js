@@ -21,7 +21,7 @@ export const StartupContactUs = () => {
       </section>
 
       <section className="row mt-5">
-        <article className="col-lg-6 mt-2">
+        <article className="col-lg-6 mt-2 mb-4">
           <div className="d-flex align-items-center contact-us-info">
             <img src={map} alt="location" />
             <p>274, Ikorodu Road, Anthony, Lagos State, Nigeria.</p>
