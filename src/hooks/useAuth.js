@@ -13,7 +13,7 @@ import {
 } from "../store/actions/auth";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { updateStartup } from "../services";
+import { postMentorProfile, updateStartup } from "../services";
 import toast from "react-hot-toast";
 
 export const useAuth = () => {
@@ -70,9 +70,26 @@ export const useAuth = () => {
   const updateProfile = (prop, value) => {
     dispatch(updateStartupProfile(prop, value));
   };
-  const updateMentorReg = (prop, value) => {
-    console.log("value", value);
+  const updateMentorProfileState = (prop, value) => {
     dispatch(updateMentorProfile(prop, value));
+  };
+
+  //hooks to pass data for mentor profile to the mentor profile service
+  const updateMentorInfo = async (lastPage = false) => {
+    try {
+      const dataToPost = {
+        accType: "mentor",
+        values: stateAuth.mentorData,
+        lastPage,
+      };
+
+      const res = await postMentorProfile(dataToPost);
+      console.log("res", res);
+      return res?.success;
+    } catch (error) {
+      console.error(error?.response?.data?.message ?? error?.response?.message);
+      return false;
+    }
   };
 
   const userLogout = () => {
@@ -109,6 +126,7 @@ export const useAuth = () => {
     callUpdateStartupData,
     updateProfile,
     updateStartupInfo,
-    updateMentorReg,
+    updateMentorProfileState,
+    updateMentorInfo,
   };
 };
