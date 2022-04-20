@@ -42,9 +42,7 @@ export const CapTable = ({ setFundraising }) => {
   const {
     state: { fundraising },
   } = useActivity();
-  const [fileDoc, setFileDoc] = useState(
-    stateAuth?.user?.fundRaising?.capTable?.files ?? null
-  );
+  const [fileDoc, setFileDoc] = useState(stateAuth?.startupData?.fundRaising?.capTable?.files ?? []);
   // const { location  } = history;
 
   const onSubmit = () => {
@@ -110,7 +108,7 @@ export const CapTable = ({ setFundraising }) => {
                 maxFileSize: 5,
                 extension: "MB",
               }}
-              initData={fileDoc ? [fileDoc] : []}
+              initData={stateAuth?.startupData?.fundRaising?.capTable?.files.length > 0 ? [stateAuth?.startupData?.fundRaising?.capTable?.files] : []}
               onUpload={async (filesInfo) => {
                 const file = filesInfo[0].file;
                 const fileData = await parseFile(file);

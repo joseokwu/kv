@@ -24,15 +24,14 @@ export const TeamModal = ({
 
 
   const onSubmit = (e, from) => {
-    console.log(workExperience, "Old Experiences");
-    e.preventDefault();
+    console.log("Old Experiences");
    
-    updateProfile("team",{ experience: [
+   
+    updateProfile("team",  { experience: [
     
-      ...stateAuth?.startupData?.team.experience,
+      ...stateAuth?.startupData?.team?.experience,
         {
           index: editIndex,
-          from,
           companyName: formik.getFieldProps("companyName").value,
           location: formik.getFieldProps("location").value,
           position: formik.getFieldProps("position").value,
@@ -61,10 +60,9 @@ export const TeamModal = ({
       location: Yup.string().required("Required"),
       position: Yup.string().required("Required"),
       responsibility: Yup.string().required("Required"),
-      startDate: Yup.string().required("Required"),
-      endDate: Yup.string().required("Required"),
+
     }),
-    onSubmit: (values) => console.log("df"),
+   
   });
 
   return (
@@ -80,9 +78,7 @@ export const TeamModal = ({
         </HeaderModal>
         <hr style={{ background: "#323232" }} />
         <form
-          onSubmit={(e) =>
-            onSubmit(e, isEditing ? "workExperienceEdit" : "workExperience")
-          }
+         
         >
           <ModalForm className="row">
             <div className="col-12 form-group">
@@ -98,8 +94,8 @@ export const TeamModal = ({
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
-              {formik.touched.title && formik.errors.title ? (
-                <article className="error">{formik.errors.title}</article>
+              {formik.touched.companyName && formik.errors.companyName ? (
+                <article className="error">{formik.errors.companyName}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -140,8 +136,8 @@ export const TeamModal = ({
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
-              {formik.touched.description && formik.errors.description ? (
-                <article className="error">{formik.errors.description}</article>
+              {formik.touched.responsibility && formik.errors.responsibility ? (
+                <article className="error">{formik.errors.responsibility}</article>
               ) : null}
             </div>
             <div className="col-12 form-group">
@@ -183,8 +179,9 @@ export const TeamModal = ({
               style={{ marginTop: "4rem" }}
             >
               <CustomButton
-                type="submit"
+                type="button"
                 background="#021098"
+                onClick={()=> onSubmit()}
                 // style={{ marginLeft: '7rem' }}
               >
                 Save
@@ -211,7 +208,7 @@ export const EducationModal = ({
   const [checked, setChecked] = useState(false);
   const { updateProfile, stateAuth  } = useAuth();
   
-  const onSubmit = (e, from) => {
+  const onSubmit = (e) => {
     console.log(education, 'prev education');
     e.preventDefault();
   
@@ -220,13 +217,12 @@ export const EducationModal = ({
       ...stateAuth?.startupData?.team.education,
         {
           index: editIndex,
-          from,
           schoolName: formik.getFieldProps("schoolName").value,
           course: formik.getFieldProps("course").value,
           degree: formik.getFieldProps("degree").value,
           activities: formik.getFieldProps("activities").value,
-          eduStartDate: eduStartDate.toISOString(),
-          eduEndDate: checked ? "present" : eduEndDate.toISOString(),
+          startDate: eduStartDate.toISOString(),
+          endDate: checked ? "present" : eduEndDate.toISOString(),
           founder: true,
         }
       ],
@@ -381,7 +377,7 @@ export const EducationModal = ({
               <CustomButton
                 type="button"
                 background="#021098"
-                onClick={() => alert('alert...')}
+                onClick={(e) => onSubmit(e)}
                 // style={{ marginLeft: '7rem' }}
               >
                 Save

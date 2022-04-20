@@ -60,7 +60,7 @@ export const FundUtilization = () => {
                 maxFileSize: 5,
                 extension: "MB",
               }}
-              initData={stateAuth?.startupData?.fundRaising?.fundUtilization?.files ? [stateAuth?.startupData?.fundRaising?.fundUtilization?.files] : []}
+              initData={stateAuth?.startupData?.fundRaising?.fundUtilization?.files.length > 0 ? [stateAuth?.startupData?.fundRaising?.fundUtilization?.files] : []}
               onUpload={async (filesInfo) => {
                 const file = filesInfo[0].file;
                 const fileData = await parseFile(file);

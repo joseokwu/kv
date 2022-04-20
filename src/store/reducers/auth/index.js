@@ -81,6 +81,7 @@ const authReducer = (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         authenticated: false,
+        dashboardLoad: false,
         user: null,
         type: [],
       };
@@ -107,17 +108,7 @@ const authReducer = (state = INIT_STATE, action) => {
         startupData: action.payload,
       };
     case UPDATE_STARTUP_INFO:
-      console.log(action.payload)
-      console.log({
-        ...state,
-        startupData: {
-          ...state.startupData,
-          [action.payload.property]: {
-            ...state.startupData[action.payload.property],
-            ...action.payload.value,
-          },
-        },
-      });
+    
       return {
         ...state,
         startupData: {

@@ -379,7 +379,7 @@ export const CoFounder = ({
                 value={phone}
                 onChange={(value) => setPhone(value)}
                 placeholder='0000 00000 0000'
-                MaxLength={13}
+                MaxLength={17}
               />
             </div>
           </div>
@@ -432,24 +432,7 @@ export const CoFounder = ({
                       <label className='error'>{workFormik.errors.location}</label>
                     ) : null}
                   </div>
-                  <div className='col-12 form-group'>
-                    <label>Position<span style={{color: "red"}}>*</span></label>
-                    <input
-                      id='position'
-                      name='position'
-                      type='text'
-                      className='form-control ps-3'
-                      placeholder='United state of America'
-                      value={
-                        workFormik.values.position
-                      }
-                      onBlur={workFormik.handleBlur}
-                      onChange={workFormik.handleChange}
-                    />
-                    {workFormik.touched.position && workFormik.errors.position ? (
-                      <label className='error'>{workFormik.errors.position}</label>
-                    ) : null}
-                  </div>
+               
         
                   <div className='col-12 form-group'>
                     <div className='d-flex justify-content-between'>
