@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import CountryDropdown from "country-dropdown-with-flags-for-react";
+import { useFormik } from "formik";
+import toast from "react-hot-toast";
+import * as Yup from "yup";
 import imageRep from "../../../../assets/icons/mentorDetails.svg";
 import add from "../../../../assets/icons/addFile.svg";
 import {
@@ -9,19 +13,20 @@ import {
   TextArea,
 } from "../../../../mentorComponents/index";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
-import "./details.css";
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
 import { useAuth } from "../../../../hooks/useAuth";
 import { upload } from "../../../../services/utils";
-import CountryDropdown from "country-dropdown-with-flags-for-react";
-import { useFormik } from "formik";
+
+import "./details.css";
+
 // import { updateMentorProfile } from "../../../../services/mentor";
 import { useActivity } from "../../../../hooks/useBusiness";
-import { toast } from "react-toastify";
-import * as Yup from "yup";
+import { updateMentorProfile } from "../../../../services/mentor";
+
+// import { toast } from "react-toastify";
 
 const Details = () => {
-  const { updateMentorReg } = useAuth();
+  const { updateMentorProfileState, updateMentorInfo } = useAuth();
   const {
     changePath,
     state: { path },
@@ -47,7 +52,27 @@ const Details = () => {
     changePath(path + 1);
   };
 
+  const handleSubmit = async (next = false) => {
+    next ? setNextLoading(true) : setLoading(true);
+
+    const uploaded = await updateMentorInfo();
+
+    if (uploaded) {
+      toast.success("Saved Successfully");
+    } else {
+      toast.error("Something went wrong");
+    }
+    if (uploaded && next) {
+      push("#work_experience");
+    }
+    setLoading(false);
+    setNextLoading(false);
+  };
+
+  console.log("loading", loading);
+
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       firstname: stateAuth?.mentorData?.personalDetail?.firstname ?? "",
       lastname: stateAuth?.mentorData?.personalDetail?.lastname ?? "",
@@ -66,8 +91,10 @@ const Details = () => {
       country: stateAuth?.mentorData?.personalDetail?.country ?? "",
       state: stateAuth?.mentorData?.personalDetail?.state ?? "",
       city: stateAuth?.mentorData?.personalDetail?.city ?? "",
-      permanentAddress:
-        stateAuth?.mentorData?.personalDetail?.permanentAddress ?? "",
+      permanentaddress:
+        stateAuth?.mentorData?.personalDetail?.permanentaddress ?? "",
+      gender: stateAuth?.mentorData?.personalDetail?.gender ?? "",
+      mobilenumber: stateAuth?.mentorData?.personalDetail?.mobilenumber ?? "",
     },
     validationSchema: Yup.object({
       firstname: Yup.string().required("This field is required"),
@@ -104,15 +131,13 @@ const Details = () => {
         .required("This field is required"),
       angelist: Yup.string().required("This field is required"),
     }),
-    onSubmit: (value) => console.log("value", value),
+    onSubmit: (value) => handleSubmit(),
   });
-
-  const { update } = useAuth();
 
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
     if (prefix !== "") {
-      updateMentorReg("personalDetail", {
+      updateMentorProfileState("personalDetail", {
         [prefix]: {
           ...stateAuth?.mentorData?.personalDetail[prefix],
           [name]: value,
@@ -122,7 +147,7 @@ const Details = () => {
       return;
     }
 
-    updateMentorReg("personalDetail", {
+    updateMentorProfileState("personalDetail", {
       [name]: value,
     });
     formik.handleChange(e);
@@ -139,7 +164,7 @@ const Details = () => {
       setLogoUploading(true);
       const response = await upload(formData);
       setLogo(response?.path);
-      updateMentorReg("personalDetail", {
+      updateMentorProfileState("personalDetail", {
         logo: response?.path,
       });
       setLogoUploading(false);
@@ -250,7 +275,7 @@ const Details = () => {
                   Female
                 </button>
               </section>
-              {formik.touched.gender && formik.errors.gender ? (
+              {formik.errors.gender ? (
                 <label className="error">{formik.errors.gender}</label>
               ) : null}
             </section>
@@ -502,6 +527,7 @@ const Details = () => {
                 id="mobilenumber"
                 name="mobilenumber"
                 label="Mobile Number"
+                value={formik.values.mobilenumber}
                 onChange={(e) =>
                   handleChange({
                     target: { name: "mobilenumber", value: e.id },
@@ -571,25 +597,19 @@ const Details = () => {
           <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
             <Button
               type="submit"
-              // onClick={() => push('/mentor/dashboard')}
-              label="Save"
+              label={loading ? <CircularLoader /> : "Save"}
               disabled={loading}
               variant="secondary"
-            >
-              {loading ? <CircularLoader /> : "Save"}
-            </Button>
+            />
 
             <Button
-              label="Next"
+              label={nextloading ? <CircularLoader /> : "Next"}
               type="button"
               disabled={nextloading}
               onClick={() => {
-                // setOpts("next");
-                next();
+                handleSubmit(true);
               }}
-            >
-              {nextloading ? <CircularLoader /> : "Next"}
-            </Button>
+            />
           </div>
         </section>
       </form>

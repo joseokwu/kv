@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import toast from "react-hot-toast";
+import * as Yup from "yup";
 import {
   Button,
   TextField,
@@ -10,8 +12,7 @@ import FormCard from "../../../../mentorComponents/formCard/FormCard";
 import imageRep from "../../../../assets/icons/plus.svg";
 import "./workExperience.css";
 import { useActivity } from "../../../../hooks/useBusiness";
-import { toast } from "react-toastify";
-import { updateMentorProfile } from "../../../../services/mentor";
+import { postMentorProfile } from "../../../../services/mentor";
 import { useFormik } from "formik";
 import { useAuth } from "../../../../hooks/useAuth";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
@@ -19,13 +20,15 @@ import { sectors } from "../../../../utils/utils";
 
 const WorkExperience = () => {
   const { goBack, push } = useHistory();
-  const { stateAuth, updateMentorReg } = useAuth();
+  const { stateAuth, updateMentorProfileState, updateMentorInfo } = useAuth();
   const {
     changePath,
     state: { path },
   } = useActivity();
 
   const back = () => {
+    console.log("path", path);
+    console.log("path - 1", path - 1);
     changePath(path - 1);
   };
 
@@ -38,44 +41,21 @@ const WorkExperience = () => {
   const [nextloading, setNextLoading] = useState(false);
   const [startDate, setStartDate] = useState();
 
-  const onSubmit = async (value) => {
-    try {
-      const workexperience = {
-        type: "workExperience",
-        accType: "mentor",
-        values: {
-          ...value,
-        },
-        userId: stateAuth?.user?.userId,
-      };
-      console.log(workexperience);
-      if (opts === "next") {
-        setOpts(true);
-        let result = await updateMentorProfile(workexperience);
+  const onSubmit = async (next = false) => {
+    console.log("next", next);
+    next ? setNextLoading(true) : setLoading(true);
+    const uploaded = await updateMentorInfo();
 
-        if (result?.success) {
-          toast.success("Work experience" + "" + result?.message);
-          setOpts(false);
-          return changePath(path + 1);
-        }
-      }
-      setLoading(true);
-      let result = await updateMentorProfile(workexperience);
-
-      if (!result?.success) {
-        toast.error(result?.message || "There was an error in work experience");
-        setLoading(false);
-        return;
-      }
-      toast.success("Work experience" + " " + result?.message);
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      toast.error(
-        err?.response?.data?.message ||
-          "There was an error in updating work experience"
-      );
+    if (uploaded) {
+      toast.success("Saved Successfully");
+    } else {
+      toast.error("Something went wrong");
     }
+    if (uploaded && next) {
+      push("#area_of_interest");
+    }
+    setLoading(false);
+    setNextLoading(false);
   };
 
   const formik = useFormik({
@@ -86,19 +66,28 @@ const WorkExperience = () => {
       industry: stateAuth?.mentorData?.workExperience?.industry ?? "",
       companyName: stateAuth?.mentorData?.workExperience?.industry ?? "",
       achievements: stateAuth?.mentorData?.workExperience?.achievements ?? "",
-      position: stateAuth?.mentorData?.workExperience?.position ?? "N/A",
-      start: stateAuth?.mentorData?.workExperience?.start ?? "N/A",
-      end: stateAuth?.mentorData?.workExperience?.end ?? "N/A",
-      amountRaised:
-        stateAuth?.mentorData?.workExperience?.amountRaised ?? "N/A",
+      position: stateAuth?.mentorData?.workExperience?.position ?? "",
+      start: stateAuth?.mentorData?.workExperience?.start ?? "",
+      end: stateAuth?.mentorData?.workExperience?.end ?? "",
+      amountRaised: stateAuth?.mentorData?.workExperience?.amountRaised ?? "",
     },
-    onSubmit: (value) => onSubmit(value),
+    validationSchema: Yup.object({
+      currentFounder: Yup.string().required("This is required"),
+      industry: Yup.string().required("This field is required"),
+      companyName: Yup.string().required("This field is required"),
+      achievements: Yup.string().required("This field is required"),
+      position: Yup.string().required("This field is required"),
+      start: Yup.string().required("This field is required"),
+      end: Yup.string().required("This field is required"),
+      amountRaised: Yup.string().required("This field is required"),
+    }),
+    onSubmit: (value) => onSubmit(),
   });
 
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
     if (prefix !== "") {
-      updateMentorReg("workExperience", {
+      updateMentorProfileState("workExperience", {
         [prefix]: {
           ...stateAuth?.mentorData?.workExperience[prefix],
           [name]: value,
@@ -108,7 +97,7 @@ const WorkExperience = () => {
       return;
     }
 
-    updateMentorReg("workExperience", {
+    updateMentorProfileState("workExperience", {
       [name]: value,
     });
     formik.handleChange(e);
@@ -119,6 +108,13 @@ const WorkExperience = () => {
     handleChange({ target: { name: "start", value: "N/A" } });
     handleChange({ target: { name: "end", value: "N/A" } });
     handleChange({ target: { name: "amountRaised", value: "N/A" } });
+  };
+
+  const onCurrent = () => {
+    handleChange({ target: { name: "position", value: "" } });
+    handleChange({ target: { name: "start", value: "" } });
+    handleChange({ target: { name: "end", value: "" } });
+    handleChange({ target: { name: "amountRaised", value: "" } });
   };
 
   return (
@@ -144,6 +140,7 @@ const WorkExperience = () => {
                     : {}
                 }
                 onClick={() => {
+                  onCurrent();
                   handleChange({
                     target: { name: "currentFounder", value: "Yes" },
                   });
@@ -171,6 +168,9 @@ const WorkExperience = () => {
                 No
               </button>
             </section>
+            {formik.errors.currentFounder ? (
+              <label className="error">{formik.errors.currentFounder}</label>
+            ) : null}
           </div>
 
           <div className="row">
@@ -181,6 +181,9 @@ const WorkExperience = () => {
                 name="industry"
                 onChange={handleChange}
               />
+              {formik.touched.industry && formik.errors.industry ? (
+                <label className="error">{formik.errors.industry}</label>
+              ) : null}
             </section>
 
             {stateAuth?.mentorData?.workExperience?.currentFounder ===
@@ -195,6 +198,9 @@ const WorkExperience = () => {
                     name="position"
                     onChange={handleChange}
                   />
+                  {formik.touched.position && formik.errors.position ? (
+                    <label className="error">{formik.errors.position}</label>
+                  ) : null}
                 </section>
                 <section className="col-md-6 mb-4">
                   <label>Start Date*</label>
@@ -206,6 +212,9 @@ const WorkExperience = () => {
                     name="start"
                     onChange={handleChange}
                   />
+                  {formik.touched.start && formik.errors.start ? (
+                    <label className="error">{formik.errors.start}</label>
+                  ) : null}
                 </section>
                 <section className="col-md-6 mb-4">
                   <label>End Date*</label>
@@ -217,6 +226,9 @@ const WorkExperience = () => {
                     name="end"
                     onChange={handleChange}
                   />
+                  {formik.touched.end && formik.errors.end ? (
+                    <label className="error">{formik.errors.end}</label>
+                  ) : null}
                 </section>
               </>
             )}
@@ -230,6 +242,9 @@ const WorkExperience = () => {
                 name="companyName"
                 onChange={handleChange}
               />
+              {formik.touched.companyName && formik.errors.companyName ? (
+                <label className="error">{formik.errors.companyName}</label>
+              ) : null}
             </section>
 
             <section className="col-md-12 mb-4">
@@ -240,6 +255,9 @@ const WorkExperience = () => {
                 name="achievements"
                 onChange={handleChange}
               />
+              {formik.touched.achievements && formik.errors.achievements ? (
+                <label className="error">{formik.errors.achievements}</label>
+              ) : null}
             </section>
 
             {stateAuth?.mentorData?.workExperience?.currentFounder ===
@@ -287,6 +305,9 @@ const WorkExperience = () => {
                     No
                   </button>
                 </section>
+                {formik.errors.amountRaised ? (
+                  <label className="error">{formik.errors.amountRaised}</label>
+                ) : null}
               </div>
             )}
           </div>
@@ -303,7 +324,7 @@ const WorkExperience = () => {
           <button
             style={{ background: "#c4c4c4" }}
             className="back-btn"
-            onClick={back}
+            onClick={() => push("#personal_details")}
           >
             Go Back
           </button>
@@ -311,25 +332,20 @@ const WorkExperience = () => {
           <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
             <Button
               type="submit"
-              // onClick={() => push('/mentor/dashboard')}
-              label="Save"
+              label={loading ? <CircularLoader /> : "Save"}
               disabled={loading}
               variant="secondary"
-            >
-              {loading ? <CircularLoader /> : "Save"}
-            </Button>
+            />
 
             <Button
-              label="Next"
+              label={nextloading ? <CircularLoader /> : "Next"}
               background="#2E3192"
-              type="submit"
+              type="button"
               disabled={nextloading}
               onClick={() => {
-                setOpts("next");
+                onSubmit(true);
               }}
-            >
-              {nextloading ? <CircularLoader /> : "Next"}
-            </Button>
+            />
           </div>
         </section>
       </form>
