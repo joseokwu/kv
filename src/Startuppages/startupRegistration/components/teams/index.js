@@ -151,6 +151,8 @@ export const TeamProfile = () => {
     }),
     onSubmit: (value) => onSubmit(value),
   });
+       
+  console.log(stateAuth)
 
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
