@@ -5,13 +5,15 @@ import {
   AuthButton,
   AuthTextField,
   AuthPasswordField,
-  PhoneInput,
+ 
 } from '../../mentorComponents/index';
 import { useLocation }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
-import { setType } from '../../utils/helpers'
+import { setType } from '../../utils/helpers';
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 // import { PhoneInput } from '../../components'
 
 const { Option } = Select
@@ -25,20 +27,27 @@ export const SignUp = ({ history }) => {
   function handleChange(value) {
     setIndustry(value)
   }
-  console.log(window.location.origin)
-  console.log(stateAuth?.signUpStatus)
+  //console.log(window.location.origin)
+ // console.log(stateAuth?.signUpStatus)
+
+ const changePhone = (value) =>{
+   setPhone(value);
+   console.log(value)
+ }
+
   const onFinish = (values) => {
 
     if(stateAuth?.signUpStatus !== 'startup'){
       console.log({
         ...values,
         type: stateAuth?.signUpStatus,
-        phone: phone?.id,
+        phone: phone,
       })
+      //console.log(phone)
       register({
         ...values,
         type: stateAuth?.signUpStatus,
-        phone: phone?.id,
+        phone: phone,
         origin:window.location.origin
       })
     }else{
@@ -46,14 +55,14 @@ export const SignUp = ({ history }) => {
         ...values,
         type: stateAuth?.signUpStatus,
         industry: industry,
-        phone: phone?.id,
+        phone: phone,
         origin:window.location.origin
       })
       console.log({
         ...values,
         type: stateAuth?.signUpStatus,
         industry: industry,
-        phone: phone?.id,
+        phone: phone,
       })
     }
     setType(stateAuth?.signUpStatus)
@@ -205,11 +214,19 @@ export const SignUp = ({ history }) => {
             </div>
 
             <div className="numsign col-12 mb-4">
-              <PhoneInput
-                label={'* Mobile Number'} 
-                onChange={setPhone}
-                
+            <PhoneInput
+                id="phoneNumber"
+                international
+                name="phone"
+                countryCallingCodeEditable={true}
+                className="mentor_gray_card_input"
+                value={
+                  phone
+                }
+                onChange={(value) => changePhone(value)}
+                MaxLength={17}
               />
+             
             </div>
 
             <div className="col-12 mb-4">

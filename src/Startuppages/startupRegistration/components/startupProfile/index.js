@@ -207,7 +207,7 @@ export const StartupProfile = () => {
           className="start-img-p"
           style={{ marginTop: "10px", marginLeft: "10px" }}
         >
-          {logo === null  ? (
+          { stateAuth?.startupData?.startUpProfile?.logo  === null  ? (
             logoUploading ? (
               <CircularLoader color={"#000"} />
             ) : (
@@ -216,7 +216,7 @@ export const StartupProfile = () => {
           ) : (
             <img
               className=""
-              src={logo}
+              src={stateAuth?.startupData?.startUpProfile?.logo }
               style={{ borderRadius: "70px", width: "90px", height: "90px" }}
               alt=""
             />
@@ -245,7 +245,7 @@ export const StartupProfile = () => {
                 name="elevatorPitch"
                 placeholder="One line pitch 150 words maximum"
                 onChange={(e) => handleChange(e)}
-                defaultValue={formik.values.elevatorPitch}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.elevatorPitch}
                 onBlur={formik.handleBlur}
                 rows="4"
                 cols="4"
@@ -283,7 +283,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="brand"
                 placeholder="eg; Knight Ventures"
-                defaultValue={formik.values.brand}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.brand}
                 onChange={(e) => handleChange(e)}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -320,7 +320,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="registrationNumber"
                 placeholder="1234567890"
-                defaultValue={formik.values.registrationNumber}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.registrationNumber}
                 onChange={(e) => handleChange(e)}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -341,7 +341,7 @@ export const StartupProfile = () => {
                 <select
                   id={"companySize"}
                   name={"companySize"}
-                  value={formik.values.companySize}
+                  value={stateAuth?.startupData?.startUpProfile?.companySize}
                   onChange={(e) => selectChange(e)}
                   // onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
@@ -365,7 +365,7 @@ export const StartupProfile = () => {
                 <input
                   id={"businessSector"}
                   name={"businessSector"}
-                  defaultValue={formik.values.businessSector}
+                  defaultValue={stateAuth?.startupData?.startUpProfile?.businessSector}
                   onChange={(e) => handleChange(e)}
                   onBlur={formik.handleBlur}
                   className="sel ps-3 pe-3"
@@ -388,7 +388,7 @@ export const StartupProfile = () => {
               <select
                 id={"startupStage"}
                 name={"startupStage"}
-                value={formik.values.startupStage}
+                value={stateAuth?.startupData?.startUpProfile?.startupStage}
                 onChange={(e) => selectChange(e)}
                 // onBlur={formik.handleBlur}
                 className="sel ps-3 pe-3"
@@ -413,7 +413,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="acceleratorName"
                 placeholder="Enter Accelerator name"
-                defaultValue={formik.values.acceleratorName}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.acceleratorName}
                 onChange={(e) => handleChange(e)}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -441,7 +441,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="registeredAddress"
                 placeholder="Enter your registered address"
-                defaultValue={formik.values.registeredAddress}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.registeredAddress}
                 onChange={(e) => handleChange(e, "contactInfo")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -463,7 +463,7 @@ export const StartupProfile = () => {
                 name="country"
                 className="form-control px-5 py-1 country-bg"
                 preferredCountries={["ng"]}
-                defaultValue={formik.values.country}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.country}
                 onChange={(value) => handleCountry(value)}
                 onBlur={formik.handleBlur}
               ></CountryDropdown>
@@ -480,7 +480,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="state"
                 placeholder="Enter your state"
-                defaultValue={formik.values.state}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.state}
                 onChange={(e) => handleChange(e, "contactInfo")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -498,7 +498,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="city"
                 placeholder="Enter your city"
-                defaultValue={formik.values.city}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.city}
                 onChange={(e) => handleChange(e, "contactInfo")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -533,7 +533,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="companyEmail"
                 placeholder="Enter your email"
-                defaultValue={formik.values.companyEmail}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.contactInfo?.companyEmail}
                 onChange={(e) => handleChange(e, "contactInfo")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -575,7 +575,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="companyWebsite"
                 placeholder="Enter your startup website"
-                defaultValue={formik.values.companyWebsite}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.socialMedia?.companyWebsite}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -593,7 +593,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="linkedInHandle"
                 placeholder="Enter your Linkedin profile name"
-                defaultValue={formik.values.linkedInHandle}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.socialMedia?.linkedInHandle}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
@@ -611,7 +611,7 @@ export const StartupProfile = () => {
                 type="text"
                 name="twitterHandle"
                 placeholder="Enter your Twitter profile name"
-                defaultValue={formik.values.twitterHandle}
+                defaultValue={stateAuth?.startupData?.startUpProfile?.socialMedia?.twitterHandle}
                 onChange={(e) => handleChange(e, "socialMedia")}
                 onBlur={formik.handleBlur}
                 className="form-control ps-3"
