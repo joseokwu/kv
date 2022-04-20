@@ -135,6 +135,7 @@ export const CoFounder = ({
       twitter: formik.getFieldProps('twitter').value,
       website: formik.getFieldProps('website').value,
       country: country,
+      position:formik.getFieldProps('position').value,
       state: formik.getFieldProps('state').value,
       city: formik.getFieldProps('city').value,
       skills:skills,
@@ -221,6 +222,7 @@ export const CoFounder = ({
       email: '',
       dob: startDate,
       country: '',
+      position:'',
       state: '',
       city: '',
       mobile_number:'',
@@ -380,6 +382,18 @@ export const CoFounder = ({
                 onChange={(value) => setPhone(value)}
                 placeholder='0000 00000 0000'
                 MaxLength={17}
+              />
+            </div>
+
+            <div className='form-group col-lg-4 col-12'>
+              <label>Position at <em>{ stateAuth?.user?.businessname }</em>*</label>
+              <input
+                onChange={formik.handleChange}
+                value={formik.values.position}
+                type='text'
+                name='position'
+                placeholder='Enter your position'
+                className='form-control ps-3'
               />
             </div>
           </div>

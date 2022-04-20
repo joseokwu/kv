@@ -231,7 +231,7 @@ export const PreviousRound = ({ setFundraising }) => {
               name='preMoneyValuation'
               type='text'
               className='form-control ps-3'
-              placeholder='Enter amount'
+              placeholder='Pre money = Post money - investment amount.'
               onBlur={formik.handleBlur}
               value={
                 formik.values.preMoneyValuation
@@ -263,7 +263,7 @@ export const PreviousRound = ({ setFundraising }) => {
               name='postMoneyValuation'
               type='text'
               className='form-control ps-3'
-              placeholder='Enter what your business does'
+              placeholder='Post-money valuation = Investment dollar amount ÷ percent investor receives.'
               onBlur={formik.handleBlur}
               value={
                 formik.values.postMoneyValuation
