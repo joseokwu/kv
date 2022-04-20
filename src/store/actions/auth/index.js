@@ -197,8 +197,6 @@ export const edit = () => (dispatch) => {
 
 export const updateMentorProfile =
   async (property, value) => async (dispatch) => {
-    console.log("value", value);
-    console.log("property", property);
     dispatch({
       type: UPDATE_MENTOR_INFO,
       payload: {
