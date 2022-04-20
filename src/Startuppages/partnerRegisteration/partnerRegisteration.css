@@ -17,22 +17,22 @@
   color: #828282;
 }
 
-.register-wrap {
+/* .register-wrap {
   padding: 48px 9%;
   background-color: #fdfdfd;
   height: calc(100vh - 60px);
   overflow-y: auto;
   scroll-behavior: smooth;
-}
-.register-header {
+} */
+/* .register-header {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 18px;
-}
-.register-header div {
+} */
+/* .register-header div {
   width: 100%;
   max-width: 931px;
-}
+} */
 
 .register-header span {
   display: block;
@@ -65,10 +65,10 @@
   padding: 16px 14px !important;
 }
 
-.register-grid {
+/* .register-grid {
   display: grid;
   grid-template-columns: minmax(220px, 250px) auto;
-}
+} */
 
 .register-main-content {
   height: calc(100vh - 60px - 69px);

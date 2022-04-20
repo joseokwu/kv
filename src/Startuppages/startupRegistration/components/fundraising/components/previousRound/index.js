@@ -13,6 +13,8 @@ import 'antd/dist/antd.css';
 import { Tag } from '../../../../../../Startupcomponents/tag/Tag';
 import { useActivity } from '../../../../../../hooks/useBusiness';
 import { useAuth } from '../../../../../../hooks/useAuth';
+import CurrencyInput from 'react-currency-input-field'
+
 
 export const PreviousRound = ({ setFundraising }) => {
   const history = useHistory();
@@ -33,6 +35,16 @@ export const PreviousRound = ({ setFundraising }) => {
   const [hasLeadInvestor, setHasLeadInvestor] = useState(
     stateAuth?.user?.fundRaising?.previousRound?.hasLeadInvestor ?? false
   );
+
+  const [amount, setAmount] = useState(
+    stateAuth?.startupData?.fundRaising?.previousRound?.fundraisingAmount ?? '',
+  )
+  const [preMoney, setPreMoney] = useState(
+    stateAuth?.startupData?.fundRaising?.fundingAsk?.preMoneyValuation ?? '',
+  )
+  const [postMoney, setPostMoney] = useState(
+    stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation ?? '',
+  )
 
   // function btn(e) {
   //  stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding
@@ -163,7 +175,7 @@ export const PreviousRound = ({ setFundraising }) => {
 
           <div className='form-group my-2 col-12'>
             <label> How much did you raise in last funding round?<span style={{color: "red"}}>*</span></label>
-            <input
+            {/* <input
               id='fundraisingAmount'
               name='fundraisingAmount'
               type='text'
@@ -175,6 +187,19 @@ export const PreviousRound = ({ setFundraising }) => {
                 formik.values.fundraisingAmount
               }
               onChange={formik.handleChange}
+            /> */}
+            <CurrencyInput
+              id="fundraisingAmount"
+              name="fundraisingAmount"
+              type="text"
+              value={amount}
+              onBlur={formik.handleBlur}
+              className="form-control ps-3"
+              placeholder="Enter amount"
+              intlConfig={{ locale: 'en-US', currency: 'USD' }}
+              required
+              onChange={formik.handleChange}
+              onValueChange={(value) => setAmount(value)}
             />
             {formik.touched.fundraisingAmount &&
             formik.errors.fundraisingAmount ? (
@@ -201,7 +226,7 @@ export const PreviousRound = ({ setFundraising }) => {
           </div>
           <div className='form-group my-2 col-12'>
             <label>What was your pre-money valuation in last round?<span style={{color: "red"}}>*</span></label>
-            <input
+            {/* <input
               id='preMoneyValuation'
               name='preMoneyValuation'
               type='text'
@@ -212,7 +237,20 @@ export const PreviousRound = ({ setFundraising }) => {
                 formik.values.preMoneyValuation
               }
               onChange={formik.handleChange}
-            />
+            /> */}
+            <CurrencyInput
+                id="preMoneyValuation"
+                name="preMoneyValuation"
+                type="text"
+                value={preMoney}
+                onBlur={formik.handleBlur}
+                className="form-control ps-3"
+                placeholder="Enter amount"
+                intlConfig={{ locale: 'en-US', currency: 'USD' }}
+                required
+                onChange={formik.handleChange}
+                onValueChange={(value) => setPreMoney(value)}
+              />
             {formik.touched.preMoneyValuation &&
             formik.errors.preMoneyValuation ? (
               <label className='error'>{formik.errors.preMoneyValuation}</label>
@@ -220,7 +258,7 @@ export const PreviousRound = ({ setFundraising }) => {
           </div>
           <div className='form-group my-2 col-12'>
             <label>Post-Money valuation for last round<span style={{color: "red"}}>*</span></label>
-            <input
+            {/* <input
               id='postMoneyValuation'
               name='postMoneyValuation'
               type='text'
@@ -231,6 +269,19 @@ export const PreviousRound = ({ setFundraising }) => {
                 formik.values.postMoneyValuation
               }
               onChange={formik.handleChange}
+            /> */}
+            <CurrencyInput
+              id="postMoneyValuation"
+              name="postMoneyValuation"
+              type="text"
+              value={postMoney}
+              onBlur={formik.handleBlur}
+              className="form-control ps-3"
+              placeholder="Enter amount"
+              intlConfig={{ locale: 'en-US', currency: 'USD' }}
+              required
+              onChange={formik.handleChange}
+              onValueChange={(value) => setPostMoney(value)}
             />
             {formik.touched.postMoneyValuation &&
             formik.errors.postMoneyValuation ? (

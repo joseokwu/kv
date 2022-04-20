@@ -1,7 +1,7 @@
 export default  [
     [
       {
-        title: 'Grow your business idea with our incubator, accelerator and investor platform',
+        title: 'Grow your business ideas with our incubator, accelerator and investor platform',
         body: 'We are inviting startups to help them incubate and accelerate business idea to funding',
       }
     ],

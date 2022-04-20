@@ -1,7 +1,7 @@
 import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
     LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL , 
     SET_SIGNUP_STATUS, EDIT , LOG_OUT ,  DASHBOARD_USER_PROFILE,
-    UPDATE_STARTUP_INFO ,  DASHBOARD_LOAD , UPDATE_STARTUP_DATA
+    UPDATE_STARTUP_INFO ,  DASHBOARD_LOAD , UPDATE_STARTUP_DATA, UPDATE_INVESTOR_DATA, UPDATE_INVESTOR_INFO
 } from '../actions.types';
 import { register, userLogin , profile, forgorPassword} from '../../../services';
 import toast from 'react-hot-toast';
@@ -102,6 +102,35 @@ export const dashboardProfile = async(value) => async(dispatch) =>{
             
          }
     })
+}
+
+export const updateInvestorProfile = async( property ,value) => async(dispatch) =>{
+
+    dispatch({
+        type:UPDATE_INVESTOR_INFO,
+        payload:{ 
+            value,
+            property
+         }
+    })
+}
+
+export const updateInvestorData = async(value) => async(dispatch) =>{
+    try{
+        const res = await profile(value);
+        if(res){
+         console.log(res?.data?.investorData)
+            dispatch({
+                type:UPDATE_INVESTOR_DATA,
+                payload:res?.data?.investorData
+            })
+            
+        }
+    }catch(err){
+        dispatch({
+            type:USER_PROFILE_FAIL
+        })
+    }
 }
 
 

@@ -24,6 +24,13 @@
   overflow-y: auto;
   scroll-behavior: smooth;
 }
+
+@media (max-width: 1024px) {
+  .register-wrap {
+    padding: 0;
+  }
+}
+
 .register-header {
   display: flex;
   justify-content: flex-end;
@@ -32,6 +39,12 @@
 .register-header div {
   width: 100%;
   max-width: 931px;
+}
+
+@media (max-width: 1024px) {
+  .register-header div {
+    width: 97%;
+  }
 }
 
 .register-header span {
@@ -68,6 +81,13 @@
 .register-grid {
   display: grid;
   grid-template-columns: minmax(220px, 250px) auto;
+}
+
+@media (max-width: 1024px) {
+  .register-grid {
+    display: grid;
+    grid-template-columns: none;
+  }
 }
 
 .register-main-content {
