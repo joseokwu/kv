@@ -132,3 +132,32 @@
     padding-top: 25px;
   }
 }
+
+.signup_num {
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 4px;
+  padding: 5px 0px 5px 10px!important;
+  color: #e0e0e0;
+}
+
+.signup_num input::placeholder {
+  color: #BDBDBD!important;
+}
+
+.signup_num input {
+  outline: none;
+  background: none!important;
+}
+
+/* .pass-field {
+  position: relative;
+} */
+
+.pass-eye {
+  color: #d5d6f4;
+  position: absolute;
+  top: 40px;
+  right: 25px;
+  cursor: pointer!important;
+  z-index: 1;
+}
