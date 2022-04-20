@@ -57,6 +57,17 @@ export const INIT_STATE = {
       referral: "",
       from: "",
     },
+    workExperience: {
+      achievements: "",
+      amountRaised: "N/A",
+      companyName: "",
+      currentFounder: "No",
+      end: "N/A",
+      start: "N/A",
+      companyName: "",
+      industry: "",
+      position: "N/A",
+    },
   },
 };
 

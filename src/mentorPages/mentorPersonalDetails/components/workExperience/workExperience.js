@@ -33,7 +33,6 @@ const WorkExperience = () => {
     changePath(path + 1);
   };
 
-  const [currentFounder, setCurrentFounder] = useState();
   const [loading, setLoading] = useState(false);
   const [opts, setOpts] = useState("");
   const [nextloading, setNextLoading] = useState(false);
@@ -80,23 +79,24 @@ const WorkExperience = () => {
   };
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       currentFounder:
-        stateAuth?.mentorData?.workExperience?.curentFounder ?? "",
+        stateAuth?.mentorData?.workExperience?.currentFounder ?? "No",
       industry: stateAuth?.mentorData?.workExperience?.industry ?? "",
       companyName: stateAuth?.mentorData?.workExperience?.industry ?? "",
       achievements: stateAuth?.mentorData?.workExperience?.achievements ?? "",
-      position: stateAuth?.mentorData?.workExperience?.position ?? "",
-      start: stateAuth?.mentorData?.workExperience?.start ?? "",
-      end: stateAuth?.mentorData?.workExperience?.end ?? "",
-      amountRaised: stateAuth?.mentorData?.workExperience?.amountRaised ?? "",
+      position: stateAuth?.mentorData?.workExperience?.position ?? "N/A",
+      start: stateAuth?.mentorData?.workExperience?.start ?? "N/A",
+      end: stateAuth?.mentorData?.workExperience?.end ?? "N/A",
+      amountRaised:
+        stateAuth?.mentorData?.workExperience?.amountRaised ?? "N/A",
     },
     onSubmit: (value) => onSubmit(value),
   });
 
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
-    console.log("value", value);
     if (prefix !== "") {
       updateMentorReg("workExperience", {
         [prefix]: {
@@ -114,6 +114,13 @@ const WorkExperience = () => {
     formik.handleChange(e);
   };
 
+  const onNotCurrent = () => {
+    handleChange({ target: { name: "position", value: "N/A" } });
+    handleChange({ target: { name: "start", value: "N/A" } });
+    handleChange({ target: { name: "end", value: "N/A" } });
+    handleChange({ target: { name: "amountRaised", value: "N/A" } });
+  };
+
   return (
     <div className="mentor_details_form_wrap">
       <h3>Work Experience</h3>
@@ -128,6 +135,14 @@ const WorkExperience = () => {
             <section className="free-choice">
               <button
                 className="yes-btn"
+                style={
+                  formik.values.currentFounder === "Yes"
+                    ? {
+                        color: "#2e3192",
+                        background: "#dcebff",
+                      }
+                    : {}
+                }
                 onClick={() => {
                   handleChange({
                     target: { name: "currentFounder", value: "Yes" },
@@ -138,7 +153,16 @@ const WorkExperience = () => {
               </button>
               <button
                 className="no-btn"
+                style={
+                  formik.values.currentFounder === "No"
+                    ? {
+                        color: "#2e3192",
+                        background: "#dcebff",
+                      }
+                    : {}
+                }
                 onClick={() => {
+                  onNotCurrent();
                   handleChange({
                     target: { name: "currentFounder", value: "No" },
                   });
@@ -158,6 +182,44 @@ const WorkExperience = () => {
                 onChange={handleChange}
               />
             </section>
+
+            {stateAuth?.mentorData?.workExperience?.currentFounder ===
+              "Yes" && (
+              <>
+                <section className="col-md-12 mb-4">
+                  <TextArea
+                    label={"Position*"}
+                    placeholder={"Ex. Managing Director"}
+                    required={true}
+                    rows={"1"}
+                    name="position"
+                    onChange={handleChange}
+                  />
+                </section>
+                <section className="col-md-6 mb-4">
+                  <label>Start Date*</label>
+                  <TextField
+                    // label={'Start Date*'}
+                    type={"date"}
+                    placeholder={"dd/mm/yy"}
+                    required={true}
+                    name="start"
+                    onChange={handleChange}
+                  />
+                </section>
+                <section className="col-md-6 mb-4">
+                  <label>End Date*</label>
+                  <TextField
+                    // label={'End Date*'}
+                    type="date"
+                    placeholder={"dd/mm/yy"}
+                    required={true}
+                    name="end"
+                    onChange={handleChange}
+                  />
+                </section>
+              </>
+            )}
 
             <section className="col-md-12 mb-4">
               <TextArea
@@ -179,88 +241,63 @@ const WorkExperience = () => {
                 onChange={handleChange}
               />
             </section>
+
+            {stateAuth?.mentorData?.workExperience?.currentFounder ===
+              "Yes" && (
+              <div className="mb-4">
+                <p className="offer-text pt-2 pb-2">
+                  Have you ever been among the first set of employees in a
+                  company that was valued or exited at $5M?
+                </p>
+                <section className="free-choice">
+                  <button
+                    className="yes-btn"
+                    style={
+                      formik.values.amountRaised === "Yes"
+                        ? {
+                            color: "#2e3192",
+                            background: "#dcebff",
+                          }
+                        : {}
+                    }
+                    onClick={() => {
+                      handleChange({
+                        target: { name: "amountRaised", value: "Yes" },
+                      });
+                    }}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="no-btn"
+                    style={
+                      formik.values.amountRaised === "No"
+                        ? {
+                            color: "#2e3192",
+                            background: "#dcebff",
+                          }
+                        : {}
+                    }
+                    onClick={() => {
+                      handleChange({
+                        target: { name: "amountRaised", value: "No" },
+                      });
+                    }}
+                  >
+                    No
+                  </button>
+                </section>
+              </div>
+            )}
           </div>
         </FormCard>
 
-        <FormCard>
-          <div className="mb-4 mt-5">
-            <p className="offer-text pt-2">
-              Are you a past or current founder of a company?
-            </p>
-            <section className="free-choice">
-              <button className="yes-btn">Yes</button>
-              <button className="no-btn">No</button>
-            </section>
-          </div>
-
-          <div className="row">
-            <section className="col-md-12 mb-4">
-              <Select label={"Industry"} />
-            </section>
-
-            <section className="col-md-12 mb-4">
-              <TextArea
-                label={"Position*"}
-                placeholder={"Ex. Managing Director"}
-                required={true}
-                rows={"1"}
-              />
-            </section>
-
-            <section className="col-md-6 mb-4">
-              <label>Start Date*</label>
-              <TextField
-                // label={'Start Date*'}
-                type={"date"}
-                placeholder={"dd/mm/yy"}
-                required={true}
-              />
-            </section>
-            <section className="col-md-6 mb-4">
-              <label>End Date*</label>
-              <TextField
-                // label={'End Date*'}
-                placeholder={"dd/mm/yy"}
-                required={true}
-              />
-            </section>
-
-            <section className="col-md-12 mb-4">
-              <TextArea
-                label={"Company Name*"}
-                placeholder={"Enter company name"}
-                rows={"1"}
-                required={true}
-              />
-            </section>
-
-            <section className="col-md-12 mb-4">
-              <TextArea
-                label={"What are your top  professional achievements?"}
-                placeholder={"e.g I was made a managing director...."}
-                rows={"6"}
-              />
-            </section>
-
-            <div className="mb-4">
-              <p className="offer-text pt-2 pb-2">
-                Have you ever been among the first set of employees in a company
-                that was valued or exited at $5M?
-              </p>
-              <section className="free-choice">
-                <button className="yes-btn">Yes</button>
-                <button className="no-btn">No</button>
-              </section>
-            </div>
-          </div>
-        </FormCard>
-
-        <section className="col-md-12 mb-4">
+        {/* <section className="col-md-12 mb-4">
           <p className="add_another_experience">
             <img className="mr-2" src={imageRep} alt="plus" />
             Add Another Experience
           </p>
-        </section>
+        </section> */}
 
         <section className="d-flex align-items-center justify-content-between mt-5">
           <button
