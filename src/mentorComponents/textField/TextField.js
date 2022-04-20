@@ -44,6 +44,7 @@ export const TextField = ({
           name={name}
           className={`${className}`}
           placeholder={placeholder}
+          defaultValue={value}
           {...rest}
         />
       </Form.Item>
