@@ -34,12 +34,12 @@ export const StartupContactUs = () => {
 
           <div className="d-flex align-items-center contact-us-info">
             <img src={phone} alt="phone" />
-            <p><a style={{textDecoration: 'none', color: '#2e3192'}} href="tel:+234 913 4444 859">+234 913 4444 859</a></p>
+            <p><a style={{textDecoration: 'none', color: '#ffffff'}} href="tel:+234 913 4444 859">+234 913 4444 859</a></p>
           </div>
 
           <div className="d-flex align-items-center contact-us-info">
             <img src={mail} alt="web" />
-            <p><a style={{textDecoration: 'none', color: '#2e3192'}} href="mailto:info@knight.ventures">info@knight.ventures</a> </p>
+            <p><a style={{textDecoration: 'none', color: '#ffffff'}} href="mailto:info@knight.ventures">info@knight.ventures</a> </p>
           </div>
 
           <div className="d-flex align-items-center social-links">
@@ -55,16 +55,16 @@ export const StartupContactUs = () => {
           <section className="message-card">
             <header className="message-header">Send a message</header>
             <div className="mb-4">
+              <label style={{color: '#ffffff'}}>Full Name</label>
               <TextField
-                label="Full Name"
                 placeholder=""
                 className="message-input"
               />
             </div>
 
             <div className="mb-4">
+            <label style={{color: '#ffffff'}}>Email Address</label>
               <TextField
-                label="Email Address"
                 placeholder=""
                 type="email"
                 className="message-input"
@@ -72,11 +72,12 @@ export const StartupContactUs = () => {
             </div>
 
             <div className="mb-4">
-              <TextArea label="Message" placeholder="Enter Message" rows="5" />
+              <label style={{color: '#ffffff'}}>Message</label>
+              <TextArea placeholder="Enter Message" rows="5" />
             </div>
 
             <div className="text-right">
-              <Button label="Send" />
+              <Button variant="secondary" label="Send" />
             </div>
           </section>
         </article>
