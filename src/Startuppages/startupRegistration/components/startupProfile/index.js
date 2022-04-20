@@ -24,6 +24,7 @@ import { upload } from "../../../../services/utils";
 import CountryDropdown from "country-dropdown-with-flags-for-react";
 import moment from "moment";
 
+
 export const StartupProfile = () => {
 
   const { changePath  } = useActivity();

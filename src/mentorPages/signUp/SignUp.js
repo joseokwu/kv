@@ -68,6 +68,7 @@ export const SignUp = ({ history }) => {
     setType(stateAuth?.signUpStatus)
   }
 
+
   return (
     <div className="row mx-0 mentor_auth_wrap">
       <section className="col-md-6">
@@ -107,7 +108,7 @@ export const SignUp = ({ history }) => {
             <div className="col-md-6 col-12 mb-2">
               {stateAuth?.signUpStatus === 'startup' ? (
                 <div className="inputContainer">
-                  <label><span>*</span> Industry</label>
+                  <label><span style={{ color: "#ff4d4f" }}>*</span> Industry</label>
                   <div className="select">
                     <Select
                       onChange={handleChange}
@@ -201,32 +202,34 @@ export const SignUp = ({ history }) => {
               />
             </div>
 
-            <div className="col-12 mb-2">
+            <div className="col-12 mb-2 position-relative">
               <AuthPasswordField
                 numb={8}
+                name="password"
                 message="Password must be 8 digits"
                 label="Password"
                 id={'password'}
                 placeholder="Password must be at least 8 characters"
-                type="password"
                 className="mentor_gray_card_input"
               />
             </div>
 
             <div className="numsign col-12 mb-4">
-            <PhoneInput
+              <label style={{color: '#D5D6F4'}}>
+                <span style={{ color: "#ff4d4f" }}>* </span>Mobile Number
+              </label>
+            
+              <PhoneInput
                 id="phoneNumber"
-                international
+                placeholder={"000 0000 000"}
                 name="phone"
+                international
                 countryCallingCodeEditable={true}
-                className="mentor_gray_card_input"
-                value={
-                  phone
-                }
+                className="signup_num ps-3"
+                value={phone}
                 onChange={(value) => changePhone(value)}
-                MaxLength={17}
+                maxLength={17}
               />
-             
             </div>
 
             <div className="col-12 mb-4">
