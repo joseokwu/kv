@@ -41,3 +41,21 @@ export const sectors = [
   "D2C",
   "Marketplace",
 ];
+
+export const kvRoles = [
+  "Mentor",
+  "Angel Investor",
+  "Institutional Investor",
+  "Strategic Investor",
+  "Acquirer",
+  "Customer",
+  "Innovator",
+  "Industry Analyst",
+  "Startup Referrer",
+  "Members of Press",
+  "Service Provider / Partner",
+  "Lecturer / Speaker",
+  "Consultant / Freelancer",
+];
+
+export const founderType = ["Business Leaning Role", "Technical Leaning Role"];
