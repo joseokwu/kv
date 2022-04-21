@@ -12,6 +12,7 @@ import {
 import "./assistantInfo.css";
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
 import { useAuth } from "../../../../hooks";
+import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
 
 const AssistantInfo = () => {
   const { goBack, push } = useHistory();
@@ -230,7 +231,10 @@ const AssistantInfo = () => {
         </button>
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
-          <Button label="Submit" type="submit" />
+          <Button
+            label={loading ? <CircularLoader /> : "Submit"}
+            type="submit"
+          />
         </div>
       </section>
     </form>
