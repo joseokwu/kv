@@ -44,7 +44,6 @@ export const AuthPasswordField = ({ className, numb, message, placeholder, label
   const[eye, setEye] = useState(false);
 
 
-  
 
   return (
     <div className="mentor_field">
