@@ -41,9 +41,8 @@ const WorkExperience = () => {
   const [nextloading, setNextLoading] = useState(false);
   const [startDate, setStartDate] = useState();
 
-  const onSubmit = async (next = false) => {
-    console.log("next", next);
-    next ? setNextLoading(true) : setLoading(true);
+  const onSubmit = async () => {
+    setLoading(true);
     const uploaded = await updateMentorInfo();
 
     if (uploaded) {
@@ -55,7 +54,6 @@ const WorkExperience = () => {
       push("#area_of_interest");
     }
     setLoading(false);
-    setNextLoading(false);
   };
 
   const formik = useFormik({
@@ -338,12 +336,12 @@ const WorkExperience = () => {
             />
 
             <Button
-              label={nextloading ? <CircularLoader /> : "Next"}
+              label={"Next"}
               background="#2E3192"
               type="button"
               disabled={nextloading}
               onClick={() => {
-                onSubmit(true);
+                push("#area_of_interest");
               }}
             />
           </div>

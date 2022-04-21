@@ -52,8 +52,8 @@ const Details = () => {
     changePath(path + 1);
   };
 
-  const handleSubmit = async (next = false) => {
-    next ? setNextLoading(true) : setLoading(true);
+  const handleSubmit = async () => {
+    setLoading(true);
 
     const uploaded = await updateMentorInfo();
 
@@ -66,7 +66,6 @@ const Details = () => {
       push("#work_experience");
     }
     setLoading(false);
-    setNextLoading(false);
   };
 
   const formik = useFormik({
@@ -601,11 +600,11 @@ const Details = () => {
             />
 
             <Button
-              label={nextloading ? <CircularLoader /> : "Next"}
+              label={"Next"}
               type="button"
               disabled={nextloading}
               onClick={() => {
-                handleSubmit(true);
+                push("#work_experience");
               }}
             />
           </div>
