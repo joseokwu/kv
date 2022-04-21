@@ -90,6 +90,11 @@ export const INIT_STATE = {
       assistantState: "",
       assistantCity: "",
     },
+    consultantOffering: {
+      areaofService: [],
+      serviceDescription: "",
+      promotion: "",
+    },
   },
 };
 
