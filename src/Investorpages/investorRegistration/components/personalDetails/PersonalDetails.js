@@ -439,20 +439,38 @@ export const PersonalDetails = () => {
           <label>LinkedIn<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="LinkedIn*"
+              id={"linkedIn"}
+              name={"linkedIn"}
+              type={"text"}
               required={true}
-              placeholder="Enter linkedin link"
-              className="edit_input"
+              placeholder={"Enter linkedin link"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              value={stateAuth?.investorData?.personalDetail?.linkedIn}
             />
+            {formik.touched.linkedIn && formik.errors.linkedIn ? (
+                <label className="error">{formik.errors.linkedIn}</label>
+              ) : null}
           </section>
 
           <section className="col-lg-6 mb-4">
           <label>Twitter<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Twitter*"
+              id={"twitter"}
+              name={"twitter"}
+              type={"text"}
               required={true}
-              placeholder="Enter twitter link"
-              className="edit_input"
+              placeholder={"Enter twitter link"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              value={stateAuth?.investorData?.personalDetail?.twitter}
             />
+            {formik.touched.twitter && formik.errors.twitter ? (
+                <label className="error">{formik.errors.twitter}</label>
+              ) : null}
           </section>
         </div>
       </FormCard>
@@ -463,10 +481,19 @@ export const PersonalDetails = () => {
           <label>Referral<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Referral"
+              id={"referral"}
+              name={"referral"}
+              type={"text"}
               required={true}
               placeholder="Enter a user in knight ventures"
               className="edit_input"
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              value={stateAuth?.investorData?.personalDetail?.referral}
             />
+            {formik.touched.referral && formik.errors.referral ? (
+                <label className="error">{formik.errors.referral}</label>
+              ) : null}
           </section>
 
           <section className="col-12 mb-4">
