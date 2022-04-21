@@ -69,8 +69,6 @@ const Details = () => {
     setNextLoading(false);
   };
 
-  console.log("loading", loading);
-
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
