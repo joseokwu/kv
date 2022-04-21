@@ -15,7 +15,7 @@ import  { request } from '../utils/axios';
 export const userLogin = async (values) => {
     try {
         const res = await request.post('login', values);
-        console.log(res.data)
+        
         return res?.data;
   
     } catch (err) {

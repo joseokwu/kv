@@ -206,7 +206,7 @@ const routes = [
   {
     name: 'StartupContactus',
     path: '/startup/support',
-    component:StartupContactUs,
+    component:WithStartupRegisterLayout(StartupContactUs),
     exact: true,
     protected: true,
     type: 'startup',

@@ -10,34 +10,10 @@ export const INIT_STATE = {
   username: '',
   completedRegistration:false,
   startupData:{
-    startUpProfile:{
-      elevatorPitch:'',
-      brand:'' ,
-      registrationNumber:'',
-      companySize:'',
-      businessSector:'',
-      startupStage:'',
-      acceleratorName:'',
-      contactInfo:{
-       registeredAddress: '',
-       country:'',
-       state:'',
-       city:'',
-       phoneNumber:'',
-       companyEmail:''
-      },
-      socialMedia:{
-        profileHandle:'',
-        companyWebsite:'',
-        linkedInHandle:'',
-        twitterHandle:''  
-      }
     },
-    team:{
-      experience:[],
-      education:[],
-      skills:[]
-    }
+   
+  partnerData:{
+
   }
 
 };

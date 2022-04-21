@@ -569,7 +569,7 @@ export const TeamProfile = () => {
                 Gender<span style={{ color: 'red' }}>*</span>
               </label>
               <select
-                className="cust mx-3 px-2 extra"
+                className="cust mx-3 px-2 py-2 extra"
                 id="gender"
                 name="gender"
                 value={formik.values.gender}

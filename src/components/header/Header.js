@@ -27,7 +27,9 @@ export const Header = ({ setOpen, open }) => {
     }
   }
 
+const { stateAuth } = useAuth();
 
+console.log(stateAuth)
 
   const [openNotice, setOpenNotice] = useState(false)
   return (
