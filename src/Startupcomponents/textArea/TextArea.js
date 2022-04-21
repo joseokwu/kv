@@ -6,6 +6,7 @@ export const TextArea = ({
   className = "",
   rows = "8",
   cols = "",
+  name,
   placeholder = "",
   onChange = () => {},
   ...rest
@@ -17,6 +18,7 @@ export const TextArea = ({
       </label>
       <textarea
         id={id}
+        name={name}
         rows={rows}
         cols={cols}
         className={`w-100 form-textarea ${className}`}

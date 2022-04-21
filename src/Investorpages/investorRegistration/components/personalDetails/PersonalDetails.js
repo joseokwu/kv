@@ -45,8 +45,8 @@ export const PersonalDetails = () => {
 
   const next = () => { changePath(path + 1) };
 
-  const handleSubmit = async (next = false) => {
-    next ? setNextLoading(true) : setLoading(true);
+  const handleSubmit = async () => {
+    setLoading(true);
 
     const updated = await updateInvestorInfo();
 
@@ -56,11 +56,10 @@ export const PersonalDetails = () => {
       toast.error("Something went wrong");
     }
     if (updated && next) {
-      // push("#investor");
-      changePath(2);
+      push("#investor");
+      // changePath(2);
     }
     setLoading(false);
-    setNextLoading(false);
   };
 
   // const onSubmit = async (e) => {
@@ -186,24 +185,32 @@ export const PersonalDetails = () => {
             <label>Brief Introduction<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Brief Introduction*"
-              id="briefIntroduction"
+              id={"briefIntroduction"}
               name={"briefIntroduction"}
               required={true}
-              placeholder="Enter brief bio about you"
-              className="edit_input"
+              placeholder={"Enter brief bio about you"}
+              className={"edit_input"}
               onChange={(e) => handleChange(e)}
-              value={ stateAuth?.investorData?.personalDetail?.briefIntroduction}
+              defaultValue={stateAuth?.investorData?.personalDetail?.briefIntroduction}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.briefIntroduction && formik.errors.briefIntroduction ? (
+                <label className="error">{formik.errors.briefIntroduction}</label>
+              ) : null}
           </section>
           <section className="col-md-6 mb-4">
           <label>First Name<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="First Name*"
+              id={"firstName"}
+              name={"firstName"}
               required={true}
-              placeholder="Enter first name"
-              className="edit_input"
+              placeholder={"Enter first name"}
+              className={"edit_input"}
             />
+            {formik.touched.firstName && formik.errors.firstName ? (
+                <label className="error">{formik.errors.firstName}</label>
+              ) : null}
           </section>
 
           <section className="col-md-6 mb-4">

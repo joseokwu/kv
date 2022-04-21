@@ -18,7 +18,7 @@ export  function AppRouter(props){
                 const userType = getType();
                // console.log(userRole)
               await userProfile(userType  && userType );
-             await callUpdateStartupData(userType  && userType);
+
           
 				if (getLocationHistory()){
                     console.log('problem')

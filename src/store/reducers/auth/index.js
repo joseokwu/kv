@@ -59,17 +59,45 @@ const authReducer = (state = INIT_STATE, action) => {
         error: action.payload,
       };
     case USER_PROFILE:
+      if(action?.payload?.type[0] === 'boosterpartner'){
+        return {
+          ...state,
+          loading: false,
+          authenticated: true,
+          dashboardLoad: false,
+          partnerData:action?.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+        };
+      }
+      if(action?.payload?.type[0] === 'startup'){
+        return {
+          ...state,
+          loading: false,
+          dashboardLoad: false,
+          authenticated: true,
+          user: action?.payload,
+          startupData: action.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+        };
+      }
+      break ;
+    case DASHBOARD_USER_PROFILE:
+      console.log(action?.payload)
+    if(action?.payload?.type[0] === 'boosterpartner'){
       return {
         ...state,
-        loading: false,
-        authenticated: true,
-        user: action?.payload,
+        dashboardLoad: false,
+        partnerData:action?.payload,
         type: action?.payload?.type,
         signUpStatus: action?.payload?.type[0],
         email: action?.payload?.email,
       };
-
-    case DASHBOARD_USER_PROFILE:
+    }
+    if(action?.payload?.type[0] === 'startup'){
       return {
         ...state,
         dashboardLoad: false,
@@ -77,7 +105,11 @@ const authReducer = (state = INIT_STATE, action) => {
         type: action?.payload?.type,
         signUpStatus: action?.payload?.type[0],
         email: action?.payload?.email,
+        startupData: action.payload
       };
+    }
+
+     break;
     case USER_PROFILE_FAIL:
       return {
         ...state,

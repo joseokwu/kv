@@ -159,6 +159,7 @@ export const getProfile = async (value) => async(dispatch) =>{
         })
         const res = await profile(value);
             if(res){
+              
                 dispatch({
                     type:USER_PROFILE,
                     payload:res?.data
