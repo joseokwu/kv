@@ -68,6 +68,17 @@ export const INIT_STATE = {
       industry: "",
       position: "N/A",
     },
+    areaOfInterest: {},
+    assistantInfo: {
+      assistantFirstname: "",
+      assistantLastname: "",
+      assistantEmail: "",
+      assistantPhone: "",
+      assistantAddress: "",
+      assistantCountry: "",
+      assistantState: "",
+      assistantCity: "",
+    },
   },
 };
 
