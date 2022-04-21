@@ -21,6 +21,7 @@ import { CircularLoader } from "../../../../components/CircluarLoader/CircularLo
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import moment from "moment";
 import './PersonalDetails.css';
 
 
@@ -106,6 +107,16 @@ export const PersonalDetails = () => {
     }
   };
 
+  const handleMobileInput = (value) => {
+   
+    updateInvestorProfileData("personalDetail",{
+      contactInfo: {
+        ...stateAuth?.investorData?.personalDetail,
+        mobileNumber: value,
+      },
+    });
+  };
+
   const [country, setCountry] = useState( stateAuth?.investorData?.personalDetail?.country ?? "" );
   const [region , setRegion] = useState( stateAuth?.investorData?.personalDetail?.state ?? "" );
 
@@ -144,17 +155,17 @@ export const PersonalDetails = () => {
       referral: stateAuth?.investorData?.personalDetail?.referral ?? "",
     },
     validationSchema: yup.object({
-      briefIntroduction: yup.string().required("Brief Introduction is required"),
+      briefIntroduction: yup.string().required("Brief introduction is required"),
       firstName: yup.string().required("First Name is required"),
       lastName: yup.string().required("Last Name is required"),
       email: yup.string().required("Email is required"),
       city: yup.string().required("City is required"),
       companyEmail: yup.string().required("Company Email is required"),
-      address: yup.string().required("Address is required"),
+      address: yup.string().required("Registered address is required"),
       linkedIn: yup.string().required("LinkedIn is required"),
       twitter: yup.string().required("Twitter is required"),
       website: yup.string().required("Website is required"),
-      profileLink: yup.string().required("Profile Link is required"),
+      profileLink: yup.string().required("Profile link is required"),
       referral: yup.string().required("Referral is required"),
     }),
     onSubmit: (values) => handleSubmit(values),
@@ -187,6 +198,7 @@ export const PersonalDetails = () => {
               // label="Brief Introduction*"
               id={"briefIntroduction"}
               name={"briefIntroduction"}
+              type={"text"}
               required={true}
               placeholder={"Enter brief bio about you"}
               className={"edit_input"}
@@ -204,9 +216,13 @@ export const PersonalDetails = () => {
               // label="First Name*"
               id={"firstName"}
               name={"firstName"}
+              type={"text"}
               required={true}
               placeholder={"Enter first name"}
               className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              defaultValue={stateAuth?.investorData?.personalDetail?.firstName}
             />
             {formik.touched.firstName && formik.errors.firstName ? (
                 <label className="error">{formik.errors.firstName}</label>
@@ -217,32 +233,58 @@ export const PersonalDetails = () => {
           <label>Last Name<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Last Name*"
+              id={"lastName"}
+              name={"lastName"}
+              type={"text"}
               required={true}
-              placeholder="Enter last name"
-              className="edit_input"
+              placeholder={"Enter last name"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              defaultValue={stateAuth?.investorData?.personalDetail?.lastName}
             />
+            {formik.touched.lastName && formik.errors.lastName ? (
+                <label className="error">{formik.errors.lastName}</label>
+              ) : null}
           </section>
 
           <section className="col-md-6 mb-4">
           <label>Email<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Email*"
+              id={"email"}
+              name={"email"}
               required={true}
-              placeholder="Enter email"
-              type="email"
-              className="edit_input"
+              placeholder={"Enter email"}
+              type={"email"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              defaultValue={stateAuth?.investorData?.personalDetail?.email}
             />
+            {formik.touched.email && formik.errors.email ? (
+                <label className="error">{formik.errors.email}</label>
+              ) : null}
           </section>
 
           <section className="col-md-6 mb-4">
           <label>Date of Birth<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Date of Birth*"
+              id={"dob"}
+              name={"dob"}
               required={true}
-              placeholder="Enter email"
-              type="date"
-              className="edit_input"
+              placeholder=""
+              type={"date"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              defaultValue={ stateAuth?.investorData?.personalDetail?.dob !== null ? moment(stateAuth?.investorData?.personalDetail?.dob) :
+                moment()}
             />
+            {formik.touched.dob && formik.errors.dob ? (
+                <label className="error">{formik.errors.dob}</label>
+              ) : null}
           </section>
         </div>
       </FormCard>
@@ -253,10 +295,19 @@ export const PersonalDetails = () => {
           <label>Registered Address<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Registered Address"
+              id={"address"}
+              name={"address"}
+              type={"text"}
               required={true}
-              placeholder="Enter your registered address"
-              className="edit_input"
+              placeholder={"Enter your registered address"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              defaultValue={stateAuth?.investorData?.personalDetail?.address}
             />
+            {formik.touched.address && formik.errors.address ? (
+                <label className="error">{formik.errors.address}</label>
+              ) : null}
           </section>
 
           <section className="col-lg-4 mb-4">
@@ -295,34 +346,51 @@ export const PersonalDetails = () => {
           <label>City<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="City"
+              id={"city"}
+              name={"city"}
+              type={"text"}
               required={true}
-              placeholder="Enter your city"
-              className="edit_input"
+              placeholder={"Enter your city"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              value={stateAuth?.investorData?.personalDetail?.city}
             />
+            {formik.touched.city && formik.errors.city ? (
+                <label className="error">{formik.errors.city}</label>
+              ) : null}
           </section>
 
           <section className="col-lg-6 mb-4">
           <label>Mobile Number<span style={{ color: "red" }}>*</span></label>
             <PhoneInput 
-              id="mobileNumber"
+              id={"mobileNumber"}
               international
-              name="mobileNumber"
-              className="in-reg-no py-1"
+              name={"mobileNumber"}
+              className={"in-reg-no py-1"}
               countryCallingCodeEditable={true}
-              maxLength={17}
-              value={value}
-              onChange={setValue}
+              MaxLength={17}
+              defaultValue={stateAuth?.investorData?.personalDetail?.mobileNumber}
+              onChange={handleMobileInput}
             />
           </section>
           <section className="col-lg-6 mb-4">
           <label>Company Email<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Company Email*"
+              id={"companyEmail"}
+              name={"companyEmail"}
               required={true}
-              placeholder="E.g. info@knight.ventures"
-              className="edit_input"
-              type="email"
+              placeholder={"E.g. info@knight.ventures"}
+              className={"edit_input"}
+              type={"email"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              value={stateAuth?.investorData?.personalDetail?.companyEmail}
             />
+            {formik.touched.companyEmail && formik.errors.companyEmail ? (
+                <label className="error">{formik.errors.companyEmail}</label>
+              ) : null}
           </section>
         </div>
       </FormCard>
@@ -333,20 +401,38 @@ export const PersonalDetails = () => {
           <label>Profile Link<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Profile Link*"
+              id={"profileLink"}
+              name={"profileLink"}
+              type={"text"}
               required={true}
-              placeholder="Enter linkedin link"
-              className="edit_input"
+              placeholder={"Enter linkedin link"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              value={stateAuth?.investorData?.personalDetail?.profileLink}
             />
+            {formik.touched.profileLink && formik.errors.profileLink ? (
+                <label className="error">{formik.errors.profileLink}</label>
+              ) : null}
           </section>
 
           <section className="col-lg-6 mb-4">
           <label>Website<span style={{ color: "red" }}>*</span></label>
             <TextField
               // label="Website*"
+              id={"website"}
+              name={"website"}
+              type={"text"}
               required={true}
-              placeholder="Enter website"
-              className="edit_input"
+              placeholder={"Enter website"}
+              className={"edit_input"}
+              onChange={(e) => handleChange(e)}
+              onBlur={formik.handleBlur}
+              value={stateAuth?.investorData?.personalDetail?.website}
             />
+            {formik.touched.website && formik.errors.website ? (
+                <label className="error">{formik.errors.website}</label>
+              ) : null}
           </section>
 
           <section className="col-lg-6 mb-4">
