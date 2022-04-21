@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { registerUser, loginUser, getProfile  as profile , changeStatus , 
-logout, edit , dashboardProfile , updateStartupData ,
-updateStartupProfile
+logout, edit , dashboardProfile ,updateStartupProfile , updatePartnerProfile,
+
 } from '../store/actions/auth';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -45,10 +45,6 @@ const userProfile = useCallback(async (value) =>{
 
     }, [dispatch])
 
-const callUpdateStartupData = async(value) =>{
-
-    dispatch(await updateStartupData(value))
-}    
 
  const getDashboardProfile = useCallback(async (value) =>{
     
@@ -68,6 +64,10 @@ const callUpdateStartupData = async(value) =>{
        dispatch(updateStartupProfile(prop ,value));
    }
   
+   const updatePartnerLocalData = async(prop, value , send) =>{
+       
+       dispatch(updatePartnerProfile(prop , value))
+   }
 
    const userLogout = () =>{
      dispatch(logout())
@@ -92,6 +92,24 @@ const callUpdateStartupData = async(value) =>{
     }
    }
 
+
+   const updatePartnerInfo = async(lastPage = false) =>{
+    try{
+    const payload = {
+    accType:stateAuth.type[0],
+    values:stateAuth.partnerData,
+    lastPage
+    }
+
+    const res = await updateStartup(payload);
+    toast.success(res?.message)
+
+    }catch(err){
+    console.log(err?.response)
+    toast.error(err?.response?.data?.message ?? err?.response?.message)
+    }
+   }
+
     return {
         stateAuth,
         register,
@@ -100,8 +118,9 @@ const callUpdateStartupData = async(value) =>{
         changeSignup,
         userLogout,
         editUser,
+        updatePartnerInfo,
+        updatePartnerLocalData,
         getDashboardProfile,
-        callUpdateStartupData,
         updateProfile,
         updateStartupInfo
     };

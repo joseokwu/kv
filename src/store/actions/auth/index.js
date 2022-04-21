@@ -1,7 +1,10 @@
 import {AUTH_START, REGISTER_FAILED, REGISTER_SUCCESS,
     LOGIN_FAILED, LOGIN_SUCCESS, USER_PROFILE, USER_PROFILE_FAIL , 
     SET_SIGNUP_STATUS, EDIT , LOG_OUT ,  DASHBOARD_USER_PROFILE,
-    UPDATE_STARTUP_INFO ,  DASHBOARD_LOAD , UPDATE_STARTUP_DATA, UPDATE_INVESTOR_DATA, UPDATE_INVESTOR_INFO
+    UPDATE_STARTUP_INFO ,  DASHBOARD_LOAD , UPDATE_STARTUP_DATA,
+     UPDATE_INVESTOR_DATA, UPDATE_INVESTOR_INFO , UPDATE_PARTNER_INFO,
+SAVE_PARTNER_INFO , UPDATE_PROFILE_FAIL
+
 } from '../actions.types';
 import { register, userLogin , profile, forgorPassword} from '../../../services';
 import toast from 'react-hot-toast';
@@ -104,6 +107,17 @@ export const dashboardProfile = async(value) => async(dispatch) =>{
     })
 }
 
+export const updatePartnerProfile = async( property ,value ) => async(dispatch) =>{
+
+    dispatch({
+        type:UPDATE_PARTNER_INFO,
+        payload:{ 
+            property,
+            value,
+         }
+    })
+}
+
 export const updateInvestorProfile = async( property ,value) => async(dispatch) =>{
 
     dispatch({
@@ -128,29 +142,14 @@ export const updateInvestorData = async(value) => async(dispatch) =>{
         }
     }catch(err){
         dispatch({
-            type:USER_PROFILE_FAIL
+            type:UPDATE_PROFILE_FAIL
         })
     }
 }
 
 
-export const updateStartupData = async(value) => async(dispatch) =>{
-    try{
-        const res = await profile(value);
-        if(res){
-         console.log(res?.data?.startupData)
-            dispatch({
-                type:UPDATE_STARTUP_DATA,
-                payload:res?.data?.startupData
-            })
-            
-        }
-    }catch(err){
-        dispatch({
-            type:USER_PROFILE_FAIL
-        })
-    }
-}
+
+
 
 export const getProfile = async (value) => async(dispatch) =>{
 
