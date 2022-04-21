@@ -160,7 +160,7 @@ const handleChangeState = (value) => {
               onChange={(e)=>  updatePartnerLocalData("",{
                 companyDescription: e.target.value})}
               label="Company Description"
-              
+              defaultValue={ stateAuth?.partnerData?.companyDescription}
               placeholder="250 characters at most"
             />
             </Form.Item>
@@ -198,14 +198,15 @@ const handleChangeState = (value) => {
         name="industry"
         label="Industry"
         rules={[{ required: true, message: 'Please select a industry!' }]}
-        onChange={(e)=>  updatePartnerLocalData("",{
-          industry: e.target.value})}
+
       >
         <Select
          id="industry"
          style={{width: "fit-content"}}
          placeholder="select your categories"
-    
+         onChange={(value)=>  {updatePartnerLocalData("",{
+          industry:value});}}
+          defaultValue={ stateAuth?.partnerData?.industry}
          >
         <Option disabled selected>
                         Select your industry
@@ -277,14 +278,15 @@ const handleChangeState = (value) => {
           <Form.Item
         name="categories"
         label="Categories"
-        onChange={(e)=> updatePartnerLocalData("",{
-          categories: e.target.value})}
+       
         rules={[{ required: true, message: 'Please select a category!' }]}
       >
         <Select
           style={{width: "fit-content"}}
          placeholder="select your categories"
-         
+         onChange={(value)=> updatePartnerLocalData("",{
+          categories: value})}
+        defaultValue={ stateAuth?.partnerData?.categories}
          >
         <Option disabled selected>
                         Select your industry
@@ -357,12 +359,14 @@ const handleChangeState = (value) => {
             name={'twitter'}
             onChange={(e)=> updatePartnerLocalData("",{
               twitter: e.target.value})}
+              defaultValue={ stateAuth?.partnerData?.twitter}
              placeholder="Enter twitter URL" />
           </section>
 
           <section className="col-md-6 mb-4">
             <TextField label="Linkedin"
               name={'linkedin'}
+              defaultValue={ stateAuth?.partnerData?.linkedin}
               onChange={(e)=> updatePartnerLocalData("",{
                 linkedin: e.target.value})}
              placeholder="Enter Linkedin URL" />
@@ -378,7 +382,10 @@ const handleChangeState = (value) => {
         <div className="row">
           <section className="col-md-6 mb-4">
             <TextField
+                defaultValue={ stateAuth?.partnerData?.coordinatorName}
             name={'coordinatorName'}
+            onChange={(e)=> updatePartnerLocalData("",{
+              coordinatorName: e.target.value})}
               label="Coordinator Name"
               placeholder="Enter contact person"
             />
@@ -388,8 +395,9 @@ const handleChangeState = (value) => {
             <TextField
             name={'designation'}
               label="Designation"
-              placeholder="Enter contact person"
-              onChange={(e)=> updatePartnerLocalData("",{
+            defaultValue={ stateAuth?.partnerData?.designation}
+          placeholder="Enter contact person"
+           onChange={(e)=> updatePartnerLocalData("",{
                 designation: e.target.value})}
             />
           </section>
@@ -416,6 +424,7 @@ const handleChangeState = (value) => {
               label="Email"
               placeholder="Enter email address"
               type="email"
+              defaultValue={ stateAuth?.partnerData?.email}
               name={'email'}
               onChange={(e)=> updatePartnerLocalData("",{
                 email: e.target.value})}
@@ -451,6 +460,7 @@ const handleChangeState = (value) => {
             <TextField
               onChange={(e)=> updatePartnerLocalData("",{
                 city: e.target.value})}
+                defaultValue={ stateAuth?.partnerData?.city}
               name={'city'}
              label="City"
              placeholder="Enter partner city" />
