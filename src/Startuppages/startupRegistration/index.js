@@ -16,6 +16,8 @@ export const StartUpRegistration = () => {
   const { stateAuth } = useAuth();
   const [progressStat, setProgressStat] = useState();
 
+  console.log(stateAuth)
+
   useEffect(() => {
     switch (path) {
       case 1:

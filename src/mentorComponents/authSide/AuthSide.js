@@ -4,10 +4,13 @@ import { AuthContent } from "../authContent/authContent";
 import AuthData from '../../constants/AuthData'
 import "./authSide.css";
 import { useAuth } from './../../hooks/useAuth';
+import { setType, getType } from '../../utils/helpers';
+
 
 export const AuthSide = ({ history }) => {
   const [ active, setActive ] = useState('startup')
   const { changeSignup } = useAuth();
+  const userType = getType();
 
   return (
     <div className="py-5">
@@ -16,19 +19,19 @@ export const AuthSide = ({ history }) => {
             <img src={logo} alt={"logo"}/>
           </div>
         <section className="mentor_switch_signUp mb-4">
-          <button onClick={() => {setActive('startup'); changeSignup('startup')}} className={active === 'startup' ? 'activ' : ''} >Startup</button>
-          <button onClick={() => {setActive('investor'); changeSignup('investor')}}  className={active === 'investor' ? 'activ' : ''} >Investor</button>
-          <button onClick={() => {setActive('mentor'); changeSignup('mentor')}} className={active === 'mentor' ? 'activ' : ''}>Mentor</button>
-          <button onClick={() => {setActive('boosterpartner'); changeSignup('boosterpartner')}} className={active === 'boosterpartner' ? 'activ' : ''} >Booster Partner</button>
+          <button onClick={() => {setType('startup'); changeSignup('startup')}} className={ userType === 'startup' ? 'activ' : ''} >Startup</button>
+          <button onClick={() => {setType('investor'); changeSignup('investor')}}  className={ userType === 'investor' ? 'activ' : ''} >Investor</button>
+          <button onClick={() => {setType('mentor'); changeSignup('mentor')}} className={ userType === 'mentor' ? 'activ' : ''}>Mentor</button>
+          <button onClick={() => {setType('boosterpartner'); changeSignup('boosterpartner')}} className={ userType === 'boosterpartner' ? 'activ' : ''} >Booster Partner</button>
         </section>
 
-        { active === 'startup' && <AuthContent authData={AuthData} authDataIndex={0} /> }
+        { userType === 'startup' && <AuthContent authData={AuthData} authDataIndex={0} /> }
         
-        { active === 'investor' && <AuthContent authData={AuthData} authDataIndex={1} /> }
+        { userType === 'investor' && <AuthContent authData={AuthData} authDataIndex={1} /> }
         
-        { active === 'mentor' && <AuthContent authData={AuthData} authDataIndex={2} /> }
+        { userType === 'mentor' && <AuthContent authData={AuthData} authDataIndex={2} /> }
         
-        { active === 'boosterpartner' && <AuthContent authData={AuthData} authDataIndex={3}  /> }
+        { userType === 'boosterpartner' && <AuthContent authData={AuthData} authDataIndex={3}  /> }
       </div>
     </div>
   )
