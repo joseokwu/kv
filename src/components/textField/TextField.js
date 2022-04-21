@@ -6,7 +6,8 @@ export const TextField = ({
   label,
   id = "",
   name,
-
+  value,
+  onBlur,
   type,
   disabled = false,
   className,
@@ -37,6 +38,7 @@ export const TextField = ({
           className={`${className}`}
           placeholder={placeholder}
           type={type}
+          value={value}
           {...rest}
         />
       </Form.Item>

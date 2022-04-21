@@ -75,7 +75,7 @@ export const InvestorRegistration = () => {
               onClick={() => switchForm("#details")}
               className={(hash === "#details" || hash === "") && "active-li"}
             >
-              Partner Details
+              Personal Details
             </li>
             <li
               onClick={() => switchForm("#investor")}

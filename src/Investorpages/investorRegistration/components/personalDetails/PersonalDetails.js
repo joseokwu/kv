@@ -9,10 +9,19 @@ import {
   TextField,
   Button,
 } from "../../../../components";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
+import { Formik, useFormik } from "formik";
+import toast from "react-hot-toast";
+import * as yup from "yup";
+import { useAuth } from "../../../../hooks/useAuth";
+import { upload } from "../../../../services/utils";
+import { useActivity } from "../../../../hooks/useBusiness";
+import { updateInvestor } from "../../../../services/investor";
+import { CircularLoader } from "../../../../components/CircluarLoader/CircularLoader";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import './PersonalDetails.css'
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import './PersonalDetails.css';
 
 
 export const PersonalDetails = () => {
@@ -24,21 +33,149 @@ export const PersonalDetails = () => {
     "referral from investor",
   ];
 
+  const { updateInvestorProfileData, stateAuth, updateInvestorInfo } = useAuth();
   const { push } = useHistory();
   const [value, setValue] = useState()
+  const { changePath, state: { path }, } = useActivity();
+  const [opts, setOpts] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [logoUploading, setLogoUploading] = useState(false);
+  const [nextLoading, setNextLoading] = useState(false);
+  const [avatar, setAvatar] = useState( stateAuth?.investorData?.personalDetail?.avatar ?? imageRep );
+
+  const next = () => { changePath(path + 1) };
+
+  const handleSubmit = async (next = false) => {
+    next ? setNextLoading(true) : setLoading(true);
+
+    const updated = await updateInvestorInfo();
+
+    if (updated) {
+      toast.success("Updated");
+    } else {
+      toast.error("Something went wrong");
+    }
+    if (updated && next) {
+      // push("#investor");
+      changePath(2);
+    }
+    setLoading(false);
+    setNextLoading(false);
+  };
+
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   updateInvestorInfo()
+  // };
+
+  const handleChange = (e, prefix = "") => {
+    const { name, value } = e.target;
+    if (prefix !== "") {
+      updateInvestorProfileData("personalDetail", {
+        [prefix]: {
+          ...stateAuth?.invesstorData?.personalDetail[prefix],
+          [name]: value,
+        },
+      });
+      formik.handleChange(e);
+      return;
+    }
+    updateInvestorProfileData("personalDetail", {
+      [name]: value,
+    });
+    formik.handleChange(e);
+  };
+
+  const onChangeImage = async (e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0, files[0]);
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData);
+      setAvatar(response?.path);
+      updateInvestorProfileData("personalDetail",{
+        logo: response?.path,
+      });
+      setLogoUploading(false);
+    } catch (error) {
+      setLogoUploading(false);
+      toast.error(error?.response?.data?.message ?? "Unable to upload image");
+    }
+  };
+
+  const [country, setCountry] = useState( stateAuth?.investorData?.personalDetail?.country ?? "" );
+  const [region , setRegion] = useState( stateAuth?.investorData?.personalDetail?.state ?? "" );
+
+  const handleCountry = (value)=>{
+    updateInvestorProfileData("personalDetail",{ ...stateAuth?.investorData?.personalDetail?.country,
+      country: value,
+    });
+    setCountry(value)
+    console.log(value)
+  }
+
+  const handleChangeState = (value) => {
+    updateInvestorProfileData("startUpProfile",{
+      contactInfo: {
+        ...stateAuth?.startupData?.startUpProfile?.state,
+        state: value,
+      },
+    });
+    setRegion(value)
+    console.log(value)
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      briefIntroduction: stateAuth?.investorData?.personalDetail?.briefIntroduction ?? "",
+      firstName: stateAuth?.investorData?.personalDetail?.firstName ?? "",
+      lastName: stateAuth?.investorData?.personalDetail?.lastName ?? "",
+      email: stateAuth?.investorData?.personalDetail?.email ?? "",
+      city: stateAuth?.investorData?.personalDetail?.city ?? "",
+      companyEmail: stateAuth?.investorData?.personalDetail?.companyEmail ?? "",
+      address: stateAuth?.investorData?.personalDetail?.address ?? "",
+      linkedIn: stateAuth?.investorData?.personalDetail?.socialMedia?.linkedIn ?? "",
+      twitter: stateAuth?.investorData?.personalDetail?.socialMedia?.twitter ?? "",
+      website: stateAuth?.investorData?.personalDetail?.socialMedia?.website ?? "",
+      profileLink: stateAuth?.investorData?.personalDetail?.socialMedia?.profileLink ?? "",
+      referral: stateAuth?.investorData?.personalDetail?.referral ?? "",
+    },
+    validationSchema: yup.object({
+      briefIntroduction: yup.string().required("Brief Introduction is required"),
+      firstName: yup.string().required("First Name is required"),
+      lastName: yup.string().required("Last Name is required"),
+      email: yup.string().required("Email is required"),
+      city: yup.string().required("City is required"),
+      companyEmail: yup.string().required("Company Email is required"),
+      address: yup.string().required("Address is required"),
+      linkedIn: yup.string().required("LinkedIn is required"),
+      twitter: yup.string().required("Twitter is required"),
+      website: yup.string().required("Website is required"),
+      profileLink: yup.string().required("Profile Link is required"),
+      referral: yup.string().required("Referral is required"),
+    }),
+    onSubmit: (values) => handleSubmit(values),
+  });
 
   return (
     <div className="register-form-wrap">
       <h3>Personal Details</h3>
       <p>Let’s get to know you</p>
-
+    <form onSubmit={formik.handleSubmit}>
       <div className="form-dp mb-4 bg-white">
-        <span className="image-placeholder">
-          <img src={imageRep} alt="placeholder" />
-        </span>
-
+        {  logoUploading ? (
+          <CircularLoader color={"#000"} />
+        ) : ( 
+          <span className={ avatar === imageRep ? "" : "image-placeholder" }>
+            <img src={avatar} alt="placeholder" />
+          </span>
+        )}
         <span className="add-dp">
-          <input type="file" id="dp" />
+          <input type="file" id="dp" onChange={onChangeImage} />
           <img src={add} alt="add" />
         </span>
       </div>
@@ -46,16 +183,23 @@ export const PersonalDetails = () => {
       <FormCard title="Personal Information">
         <div className="row">
           <section className="col-12 mb-4">
+            <label>Brief Introduction<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Brief Introduction*"
+              // label="Brief Introduction*"
+              id="briefIntroduction"
+              name={"briefIntroduction"}
               required={true}
               placeholder="Enter brief bio about you"
               className="edit_input"
+              onChange={(e) => handleChange(e)}
+              value={ stateAuth?.investorData?.personalDetail?.briefIntroduction}
+              onBlur={formik.handleBlur}
             />
           </section>
           <section className="col-md-6 mb-4">
+          <label>First Name<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="First Name*"
+              // label="First Name*"
               required={true}
               placeholder="Enter first name"
               className="edit_input"
@@ -63,8 +207,9 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-md-6 mb-4">
+          <label>Last Name<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Last Name*"
+              // label="Last Name*"
               required={true}
               placeholder="Enter last name"
               className="edit_input"
@@ -72,8 +217,9 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-md-6 mb-4">
+          <label>Email<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Email*"
+              // label="Email*"
               required={true}
               placeholder="Enter email"
               type="email"
@@ -82,8 +228,9 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-md-6 mb-4">
+          <label>Date of Birth<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Date of Birth*"
+              // label="Date of Birth*"
               required={true}
               placeholder="Enter email"
               type="date"
@@ -96,8 +243,9 @@ export const PersonalDetails = () => {
       <FormCard title="Contact Info">
         <div className="row mb-4">
           <section className="col-12 mb-4">
+          <label>Registered Address<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Registered Address"
+              // label="Registered Address"
               required={true}
               placeholder="Enter your registered address"
               className="edit_input"
@@ -105,26 +253,41 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-lg-4 mb-4">
-            <TextField
+          <label>Country<span style={{ color: "red" }}>*</span></label>
+            {/* <TextField
               label="Country"
               required={true}
               placeholder="Enter your country"
               className="edit_input"
+            /> */}
+             <CountryDropdown
+              className="form-control ps-3 py-1 investor-country"
+              value={country}
+              onChange={(value) => handleCountry(value)}
             />
           </section>
 
           <section className="col-lg-4 mb-4">
-            <TextField
+          <label>State<span style={{ color: "red" }}>*</span></label>
+            {/* <TextField
               label="State"
               required={true}
               placeholder="Enter your state"
               className="edit_input"
-            />
+            /> */}
+            <RegionDropdown
+              name="state"
+              country={country}
+              value={region}
+              onChange={(value) => handleChangeState(value)}
+              className="form-control ps-3"
+            /> 
           </section>
 
           <section className="col-lg-4 mb-4">
+          <label>City<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="City"
+              // label="City"
               required={true}
               placeholder="Enter your city"
               className="edit_input"
@@ -132,9 +295,7 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-lg-6 mb-4">
-            <label>
-              Mobile Number
-            </label>
+          <label>Mobile Number<span style={{ color: "red" }}>*</span></label>
             <PhoneInput 
               id="mobileNumber"
               international
@@ -147,8 +308,9 @@ export const PersonalDetails = () => {
             />
           </section>
           <section className="col-lg-6 mb-4">
+          <label>Company Email<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Company Email*"
+              // label="Company Email*"
               required={true}
               placeholder="E.g. info@knight.ventures"
               className="edit_input"
@@ -161,8 +323,9 @@ export const PersonalDetails = () => {
       <FormCard title="Web & Social Media">
         <div className="row mb-4">
           <section className="col-lg-6 mb-4">
+          <label>Profile Link<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Profile Link*"
+              // label="Profile Link*"
               required={true}
               placeholder="Enter linkedin link"
               className="edit_input"
@@ -170,8 +333,9 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-lg-6 mb-4">
+          <label>Website<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Website*"
+              // label="Website*"
               required={true}
               placeholder="Enter website"
               className="edit_input"
@@ -179,8 +343,9 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-lg-6 mb-4">
+          <label>LinkedIn<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="LinkedIn*"
+              // label="LinkedIn*"
               required={true}
               placeholder="Enter linkedin link"
               className="edit_input"
@@ -188,8 +353,9 @@ export const PersonalDetails = () => {
           </section>
 
           <section className="col-lg-6 mb-4">
+          <label>Twitter<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Twitter*"
+              // label="Twitter*"
               required={true}
               placeholder="Enter twitter link"
               className="edit_input"
@@ -201,10 +367,11 @@ export const PersonalDetails = () => {
       <FormCard title="Referral">
         <div className="row mb-4">
           <section className="col-12 mb-4">
+          <label>Referral<span style={{ color: "red" }}>*</span></label>
             <TextField
-              label="Referral"
+              // label="Referral"
               required={true}
-              placeholder="Select a user in knight ventures"
+              placeholder="Enter a user in knight ventures"
               className="edit_input"
             />
           </section>
@@ -223,17 +390,33 @@ export const PersonalDetails = () => {
         style={{ columnGap: 9 }}
       >
         <Button
-        onClick={() => {
-            push("/investor/dashboard");
-          }}
-         label="Save" variant="secondary" />
+          type={"submit"}
+          disabled={loading}
+          label={loading ? <CircularLoader /> : "Save"} 
+          variant="secondary" 
+          // onClick={(e) =>onSubmit(e)}
+          // onClick={() => {
+          //   handleSubmit(true)
+          // }}
+        />
         <Button
-          label="Next"
+          type="submit"
+          label={nextLoading ? <CircularLoader /> : "Next"} 
+          variant="primary"
+          disabled={nextLoading}
           onClick={() => {
-            push("#investor");
+           handleSubmit(true);
           }}
         />
+         {/* <Button
+          label={nextLoading ? <CircularLoader /> : "Next"} 
+          variant="primary"
+          disabled={nextLoading}
+          onClick={() => changePath(2)}
+          type="button"
+        /> */}
       </section>
+      </form>
     </div>
   );
 };

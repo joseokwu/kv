@@ -484,11 +484,9 @@ export const StartupProfile = () => {
                 Country<span style={{ color: "red" }}>*</span>
               </label>
               <CountryDropdown
-              
               className="form-control px-5 py-1 country-bg"
               value={country}
               onChange={(value) => handleCountry(value)}
-
             ></CountryDropdown>
            
             </div>

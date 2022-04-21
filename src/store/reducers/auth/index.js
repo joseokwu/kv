@@ -13,6 +13,8 @@ import {
   DASHBOARD_LOAD,
   UPDATE_STARTUP_DATA,
   UPDATE_STARTUP_INFO,
+  UPDATE_INVESTOR_DATA,
+  UPDATE_INVESTOR_INFO,
 } from "../../actions/actions.types";
 import { INIT_STATE } from "../../initialstates";
 
@@ -119,6 +121,23 @@ const authReducer = (state = INIT_STATE, action) => {
           },
         },
       };
+      case UPDATE_INVESTOR_DATA:
+        return {
+          ...state,
+          investorData: action.payload,
+        };
+      case UPDATE_INVESTOR_INFO:
+      
+        return {
+          ...state,
+          investorData: {
+            ...state.investorData,
+            [action.payload.property]: {
+              ...state.investorData[action.payload.property],
+              ...action.payload.value,
+            },
+          },
+        };
     default:
       return state;
   }

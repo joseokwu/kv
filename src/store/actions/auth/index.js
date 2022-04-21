@@ -104,6 +104,24 @@ export const dashboardProfile = async(value) => async(dispatch) =>{
     })
 }
 
+export const updateStartupData = async(value) => async(dispatch) =>{
+    try{
+        const res = await profile(value);
+        if(res){
+         console.log(res?.data?.startupData)
+            dispatch({
+                type:UPDATE_STARTUP_DATA,
+                payload:res?.data?.startupData
+            })
+            
+        }
+    }catch(err){
+        dispatch({
+            type:USER_PROFILE_FAIL
+        })
+    }
+}
+
 export const updateInvestorProfile = async( property ,value) => async(dispatch) =>{
 
     dispatch({
@@ -123,25 +141,6 @@ export const updateInvestorData = async(value) => async(dispatch) =>{
             dispatch({
                 type:UPDATE_INVESTOR_DATA,
                 payload:res?.data?.investorData
-            })
-            
-        }
-    }catch(err){
-        dispatch({
-            type:USER_PROFILE_FAIL
-        })
-    }
-}
-
-
-export const updateStartupData = async(value) => async(dispatch) =>{
-    try{
-        const res = await profile(value);
-        if(res){
-         console.log(res?.data?.startupData)
-            dispatch({
-                type:UPDATE_STARTUP_DATA,
-                payload:res?.data?.startupData
             })
             
         }
