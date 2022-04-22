@@ -83,7 +83,7 @@ export const useAuth = () => {
         lastPage,
       };
 
-      const res = await postMentorProfile(dataToPost);
+      const res = await updateStartup(dataToPost);
       console.log("res", res);
       return res?.success;
     } catch (error) {
