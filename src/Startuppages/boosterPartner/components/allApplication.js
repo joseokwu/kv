@@ -38,7 +38,7 @@ console.log(approvedReq)
            </Modal>
             <div>
              
-            <img className=""  src={item.companyLogo} alt="company logo" />
+            <img className=""  src={item.logo} alt="company logo" />
               
             </div>
             <div className="my-2">
@@ -83,7 +83,7 @@ console.log(approvedReq)
       </Modal>
             <div>
              
-            <img className=""  src={item.companyLogo} alt="company logo" />
+            <img className=""  src={item.logo} alt="company logo" />
               
             </div>
             <div className="my-2">
@@ -123,7 +123,7 @@ console.log(approvedReq)
       </Modal>
             <div>
              
-            <img className=""  src={item.companyLogo} alt="company logo" />
+            <img className=""  src={item.logo} alt="company logo" />
               
             </div>
             <div className="my-2">
@@ -331,7 +331,7 @@ export const YetToApplyModal = (data) => {
 
       <div className="mt-5">
       
-      <img className="rounded-circle"  src={data?.data?.companyLogo} alt="company logo" />
+      <img className="rounded-circle"  src={data?.data?.logo} alt="company logo" />
         
       </div>
       <div className="mt-3 d-flex justify-content-between">

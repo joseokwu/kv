@@ -100,7 +100,7 @@ const userProfile = useCallback(async (value) =>{
     values:stateAuth.partnerData,
     lastPage
     }
-
+    console.log(payload)
     const res = await updateStartup(payload);
     toast.success(res?.message)
 

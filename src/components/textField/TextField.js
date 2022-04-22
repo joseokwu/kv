@@ -31,6 +31,7 @@ export const TextField = ({
           },
         ]}
         type={type}
+        initialValue={value}
         label={label}
       >
         <Input
@@ -38,7 +39,6 @@ export const TextField = ({
           className={`${className}`}
           placeholder={placeholder}
           type={type}
-          defaultValue={value}
           {...rest}
         />
       </Form.Item>

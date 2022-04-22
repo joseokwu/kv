@@ -435,7 +435,7 @@ const routes = [
 
   {
     name: 'Booster Dashboard',
-    path: '/booster/dashboard',
+    path: '/boosterpartner/dashboard',
     component: WithMainInvestorLayout(BoosterDashboard),
     exact: true,
     protected: false,

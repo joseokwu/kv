@@ -66,7 +66,7 @@ const authReducer = (state = INIT_STATE, action) => {
           authenticated: true,
           dashboardLoad: false,
           logo:action.payload?.logo,
-          username:`${action.payload?.firstname} ${action.payload?.lastname}`,
+          username:action?.payload.username,
           ...action?.payload,
           type: action?.payload?.type,
           signUpStatus: action?.payload?.type[0],
@@ -154,9 +154,11 @@ const authReducer = (state = INIT_STATE, action) => {
       };
       case UPDATE_PARTNER_INFO: 
       if(action.payload.property.trim() !== ""){
+      
         return {
           ...state,
           partnerData :{
+            ...state.partnerData,
             [action.payload.property] :{
           ...state.partnerData[action.payload.property],
           ...action.payload.value

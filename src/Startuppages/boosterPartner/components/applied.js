@@ -1,4 +1,4 @@
-import React , { useMemo , useState} from 'react'
+import React , { useMemo , useState , useEffect} from 'react'
 import { ApplicationCard } from '../boosterPartner.styled'
 import { compImage, applicationCardData } from '../../../constants/domiData'
 import { Modal, Tag } from '../../../Startupcomponents'
@@ -9,11 +9,14 @@ import { useActivity } from '../../../hooks/useBusiness';
 import toast from 'react-hot-toast';
 import { CircularLoader } from '../../../Startupcomponents/CircluarLoader/CircularLoader';
 
+
+
 export const Applied = () => {
   
  
   const { state , sendApp } = useActivity();
   const { stateAuth } = useAuth();
+  const [partners , setPartners] = useState([])
 
   const [loading, setLoading] = useState(false);
   const [show , setShow] = useState(false)
@@ -46,6 +49,10 @@ const sendApplication = async(value) =>{
 }
 
 
+
+
+
+
   return (
     <div className="row" style={{ columnGap: 10 }}>
     
@@ -62,7 +69,7 @@ const sendApplication = async(value) =>{
              
               <img  
                className="rounded-circle" 
-                src={item?.companyLogo}
+                src={item?.logo}
                 style={{width:'40%', height:'50%'}}
                 alt="company logo" />
               
