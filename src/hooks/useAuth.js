@@ -11,7 +11,7 @@ import {
   updateStartupProfile,
   updatePartnerProfile,
   updateMentorProfile,
-  updatePartnerLocalData,
+  updateMentorData,
 } from "../store/actions/auth";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
@@ -72,6 +72,7 @@ export const useAuth = () => {
   const updateProfile = (prop, value) => {
     dispatch(updateStartupProfile(prop, value));
   };
+
   const updateMentorProfileState = (prop, value) => {
     dispatch(updateMentorProfile(prop, value));
   };
@@ -136,6 +137,10 @@ export const useAuth = () => {
     }
   };
 
+  const getSavedMentorData = async (value) => {
+    dispatch(await updateMentorData(value));
+  };
+
   return {
     stateAuth,
     register,
@@ -149,5 +154,8 @@ export const useAuth = () => {
     getDashboardProfile,
     updateProfile,
     updateStartupInfo,
+    updateMentorProfileState,
+    getSavedMentorData,
+    updateMentorInfo,
   };
 };

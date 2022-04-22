@@ -19,6 +19,7 @@ import {
   SAVE_PARTNER_INFO,
   UPDATE_PROFILE_FAIL,
   UPDATE_MENTOR_INFO,
+  UPDATE_MENTOR_DATA,
 } from "../actions.types";
 import {
   register,
@@ -161,6 +162,23 @@ export const updateStartupData = async (value) => async (dispatch) => {
       dispatch({
         type: UPDATE_STARTUP_DATA,
         payload: res?.data?.startupData,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: USER_PROFILE_FAIL,
+    });
+  }
+};
+
+export const updateMentorData = async (value) => async (dispatch) => {
+  try {
+    const res = await profile(value);
+    if (res) {
+      console.log(res?.data?.mentorData);
+      dispatch({
+        type: UPDATE_MENTOR_DATA,
+        payload: res?.data?.mentorData,
       });
     }
   } catch (err) {

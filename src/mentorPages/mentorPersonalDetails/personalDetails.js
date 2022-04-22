@@ -14,6 +14,12 @@ export const MentorPersonalDetails = () => {
   const wrapRef = useRef();
   const [progress, setProgress] = useState("");
 
+  const { getSavedMentorData } = useAuth();
+
+  useEffect(() => {
+    getSavedMentorData("mentor");
+  }, []);
+
   const {
     location: { hash },
     push,
