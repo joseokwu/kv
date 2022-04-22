@@ -71,8 +71,8 @@ export const StartupBoosterPartner = () => {
       setLoading(true)
       const res = await getBoosterData()
       const resData = await getStartupRequest(stateAuth?.user?.userId);
-      if(resData?.data?.data){
-        console.log(resData?.data?.data , 'boosterpartner data')
+      if(resData?.data){
+        console.log(resData?.data , 'boosterpartner data')
         getApp(res?.data?.data)
       }
       setLoading(false);
@@ -82,7 +82,6 @@ export const StartupBoosterPartner = () => {
 
   }, [])
 
-  console.log(boosterData)
 
   const history = useHistory()
 

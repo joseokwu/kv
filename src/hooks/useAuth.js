@@ -9,75 +9,73 @@ import {
   dashboardProfile,
   updateStartupData,
   updateStartupProfile,
+  updateInvestorProfile,
   updatePartnerProfile,
+  updateInvestorData,
   updateMentorProfile,
   updateMentorData,
-} from "../store/actions/auth";
-import { useCallback } from "react";
-import { useHistory } from "react-router-dom";
-import { postMentorProfile, updateStartup } from "../services";
-import toast from "react-hot-toast";
+} from '../store/actions/auth'
+import { useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
+import { updateStartup, postMentorProfile } from '../services'
+import toast from 'react-hot-toast'
 
 export const useAuth = () => {
-  const history = useHistory();
+  const history = useHistory()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const stateAuth = useSelector((state) => state.auth);
+  const stateAuth = useSelector((state) => state.auth)
 
   const register = async (values) => {
     try {
-      const res = await dispatch(registerUser(values));
-      console.log(res);
+      const res = await dispatch(registerUser(values))
+      console.log(res)
       if (res) {
-        history.push("/confirm/email");
+        history.push('/confirm/email')
       }
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   const newLogin = async (values) => {
-    const res = await dispatch(loginUser(values));
+    const res = await dispatch(loginUser(values))
 
-    return res;
-  };
+    return res
+  }
 
-  const userProfile = useCallback(
-    async (value) => {
-      dispatch(await profile(value));
-    },
-    [dispatch]
-  );
+  const userProfile = useCallback(async (value) =>{
+    dispatch(await profile(value));  
+}, [dispatch])
 
-  const callUpdateStartupData = async (value) => {
-    dispatch(await updateStartupData(value));
-  };
+const callUpdateStartupData = async (value) => {
+  dispatch(await updateStartupData(value));
+};
 
   const getDashboardProfile = useCallback(
     async (value) => {
-      dispatch(await dashboardProfile(value));
+      dispatch(await dashboardProfile(value))
     },
-    [dispatch]
-  );
+    [dispatch],
+  )
 
   const editUser = () => {
-    dispatch(edit());
-  };
+    dispatch(edit())
+  }
 
   const changeSignup = (value) => {
-    dispatch(changeStatus(value));
-  };
+    dispatch(changeStatus(value))
+  }
 
   const updateProfile = (prop, value) => {
-    dispatch(updateStartupProfile(prop, value));
-  };
+    dispatch(updateStartupProfile(prop, value))
+  }
 
   const updateMentorProfileState = (prop, value) => {
     dispatch(updateMentorProfile(prop, value));
   };
 
-  //hooks to pass data for mentor profile to the mentor profile service
   const updateMentorInfo = async (lastPage = false) => {
     try {
       const dataToPost = {
@@ -95,15 +93,15 @@ export const useAuth = () => {
     }
   };
 
+  const updatePartnerLocalData = async(prop, value , send) =>{
+    dispatch(updatePartnerProfile(prop , value))
+}
+
   const userLogout = () => {
-    dispatch(logout());
+    dispatch(logout())
 
-    history.push("/");
-  };
-
-  const updatePartnerLocalData = async (prop, value, send) => {
-    dispatch(updatePartnerProfile(prop, value));
-  };
+    history.push('/')
+  }
 
   const updateStartupInfo = async (lastPage = false) => {
     try {
@@ -111,35 +109,60 @@ export const useAuth = () => {
         accType: stateAuth.type[0],
         values: stateAuth.startupData,
         lastPage,
-      };
+      }
 
-      const res = await updateStartup(payload);
-      toast.success(res?.message);
+      const res = await updateStartup(payload)
+      toast.success(res?.message)
     } catch (err) {
-      console.log(err?.response);
-      toast.error(err?.response?.data?.message ?? err?.response?.message);
+      console.log(err?.response)
+      toast.error(err?.response?.data?.message ?? err?.response?.message)
     }
+  }
+
+  const updateInvestorProfileData = (prop, value) => {
+    dispatch(updateInvestorProfile(prop, value))
+  }
+
+  const getInvestorData = async (value) => {
+    dispatch(await updateInvestorData(value));
   };
 
-  const updatePartnerInfo = async (lastPage = false) => {
+  const updateInvestorInfo = async (lastPage = false) => {
     try {
       const payload = {
         accType: stateAuth.type[0],
-        values: stateAuth.partnerData,
+        values: stateAuth.investorData,
         lastPage,
       };
 
-      const res = await updateStartup(payload);
-      toast.success(res?.message);
+      const res = await updateStartup(payload)
+      toast.success(res?.message)
     } catch (err) {
-      console.log(err?.response);
-      toast.error(err?.response?.data?.message ?? err?.response?.message);
+      console.log(err?.response)
+      toast.error(err?.response?.data?.message ?? err?.response?.message)
     }
-  };
+  }
 
   const getSavedMentorData = async (value) => {
     dispatch(await updateMentorData(value));
   };
+
+  const updatePartnerInfo = async(lastPage = false) =>{
+    try{
+    const payload = {
+    accType:stateAuth.type[0],
+    values:stateAuth.partnerData,
+    lastPage
+    }
+    console.log(payload)
+    const res = await updateStartup(payload);
+    toast.success(res?.message)
+
+    }catch(err){
+    console.log(err?.response)
+    toast.error(err?.response?.data?.message ?? err?.response?.message)
+    }
+   }
 
   return {
     stateAuth,
@@ -149,13 +172,20 @@ export const useAuth = () => {
     changeSignup,
     userLogout,
     editUser,
+    callUpdateStartupData,
     updatePartnerInfo,
     updatePartnerLocalData,
     getDashboardProfile,
     updateProfile,
     updateStartupInfo,
+    updateInvestorProfileData,
+    updateInvestorInfo,
+    getInvestorData,
     updateMentorProfileState,
     getSavedMentorData,
     updateMentorInfo,
   };
-};
+}
+ 
+
+  

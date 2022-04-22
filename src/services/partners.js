@@ -3,7 +3,8 @@ import { request } from '../utils/axios';
 
  export const getPartners = async() =>{
     try{
-    const res = await request.post('booster-partner');
+    const res = await request.post('getStartupPartners');
+        console.log(res?.data)
     return res?.data
     }catch(err){
         throw err;

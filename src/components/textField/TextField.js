@@ -6,13 +6,16 @@ export const TextField = ({
   label,
   id = "",
   name,
-
+  defaultValue,
+  value,
+  onBlur,
   type,
   disabled = false,
   className,
   required = false,
   placeholder,
-  value,
+  onChange,
+  onFocus,
   ...rest
 }) => {
   return (
@@ -31,13 +34,18 @@ export const TextField = ({
           },
         ]}
         type={type}
+        initialValue={value}
         label={label}
       >
         <Input
           id={name}
+          onBlur={onBlur}
+          onFocus={onFocus}
           className={`${className}`}
           placeholder={placeholder}
           type={type}
+          value={value}
+          onChange={onChange}
           defaultValue={value}
           {...rest}
         />

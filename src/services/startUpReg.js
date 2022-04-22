@@ -49,9 +49,3 @@ export const fundraising = async (values) => {
         throw err
     }
 }
-
-
-
-
-
-

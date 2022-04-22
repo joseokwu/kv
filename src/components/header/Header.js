@@ -12,6 +12,7 @@ import edit from '../../assets/icons/ep.svg'
 import logout from '../../assets/icons/logout.svg'
 import './header.css'
 import { useAuth } from '../../hooks';
+import { getType } from './../../utils/helpers';
 
 export const Header = ({ setOpen, open }) => {
   const {
@@ -90,6 +91,8 @@ const HeaderDropdownMenu = () => {
     location: { pathname },
   } = useHistory()
   const { userLogout } = useAuth();
+  const type = getType();
+
 
   const getCurrentProfile = () => {
     if (pathname.includes('investor')) {
@@ -116,13 +119,13 @@ const HeaderDropdownMenu = () => {
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button
           className="dropdown-item text-center py-2"
-          onClick={getCurrentProfile()}
+          onClick={()=> push(`${type}/registration`)}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile
         </button>
         <button
-         onClick={() => userLogout()}
+          onClick={()=> push(`/${type}/registration`)}
          className="dropdown-item text-center py-2 my-2">
           {' '}
           <img className="pe-1" src={edit} alt="" /> Edit Profile
