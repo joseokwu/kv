@@ -40,10 +40,9 @@ export const MentorConfirmEmail = () => {
       case 'investor':
         return (
           <div>
-            <h2> Partner with startups. Become a Booster Partner</h2>
+            <h2>Invest in startups today. Become an investor</h2>
             <span>
-              We are onboarding Booster Partners to our startup eco system for
-              mutual benefits
+              We are onboarding Investors to our startup eco system for mutual benefits
             </span>
           </div>
         )

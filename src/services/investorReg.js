@@ -1,8 +1,8 @@
 import { request } from '../utils/axios'
 
-export const partnerRegDetails = async (values) => {
+export const personalRegDetails = async (values) => {
   try {
-    const res = await request.post('investor/add-partner-details', values)
+    const res = await request.post('investor/add-personal-details', values)
     console.log(res?.data)
     return res?.data
   } catch (err) {

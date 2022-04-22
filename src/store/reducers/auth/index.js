@@ -15,6 +15,8 @@ import {
   UPDATE_STARTUP_INFO,
   UPDATE_INVESTOR_DATA,
   UPDATE_INVESTOR_INFO,
+   UPDATE_PROFILE_FAIL,
+  UPDATE_PARTNER_INFO
 } from "../../actions/actions.types";
 import { INIT_STATE } from "../../initialstates";
 
@@ -65,7 +67,9 @@ const authReducer = (state = INIT_STATE, action) => {
           loading: false,
           authenticated: true,
           dashboardLoad: false,
-          partnerData:action?.payload,
+          logo:action.payload?.logo,
+          username:`${action.payload?.firstname} ${action.payload?.lastname}`,
+          ...action?.payload,
           type: action?.payload?.type,
           signUpStatus: action?.payload?.type[0],
           email: action?.payload?.email,
@@ -79,6 +83,19 @@ const authReducer = (state = INIT_STATE, action) => {
           authenticated: true,
           user: action?.payload,
           startupData: action.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+        };
+      }
+      if(action?.payload?.type[0] === 'investor'){
+        return {
+          ...state,
+          loading: false,
+          dashboardLoad: false,
+          authenticated: true,
+          user: action?.payload,
+          investorData: action.payload,
           type: action?.payload?.type,
           signUpStatus: action?.payload?.type[0],
           email: action?.payload?.email,
@@ -108,6 +125,17 @@ const authReducer = (state = INIT_STATE, action) => {
         startupData: action.payload
       };
     }
+    if(action?.payload?.type[0] === 'investor'){
+      return {
+        ...state,
+        dashboardLoad: false,
+        user: action?.payload,
+        type: action?.payload?.type,
+        signUpStatus: action?.payload?.type[0],
+        email: action?.payload?.email,
+        investorData: action.payload
+      };
+    }
 
      break;
     case USER_PROFILE_FAIL:
@@ -126,10 +154,7 @@ const authReducer = (state = INIT_STATE, action) => {
       };
     case LOG_OUT:
       return {
-        ...state,
-        authenticated: false,
-        completedRegistration: false,
-        type: [],
+        state:{}
       };
     case EDIT:
       return {
@@ -153,13 +178,14 @@ const authReducer = (state = INIT_STATE, action) => {
           },
         },
       };
+
       case UPDATE_INVESTOR_DATA:
         return {
           ...state,
           investorData: action.payload,
         };
+
       case UPDATE_INVESTOR_INFO:
-      
         return {
           ...state,
           investorData: {
@@ -170,6 +196,31 @@ const authReducer = (state = INIT_STATE, action) => {
             },
           },
         };
+
+      case UPDATE_PARTNER_INFO: 
+      if(action.payload.property.trim() !== ""){
+        return {
+          ...state,
+          partnerData :{
+            [action.payload.property] :{
+          ...state.partnerData[action.payload.property],
+          ...action.payload.value
+            }
+          }
+        }
+      } 
+      return {
+        ...state,
+        partnerData:{...state.partnerData, ...action?.payload.value}
+          
+        } 
+      
+      case UPDATE_PROFILE_FAIL :
+        return {
+          ...state,
+          loading: false,
+        }
+
     default:
       return state;
   }

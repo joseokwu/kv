@@ -52,7 +52,7 @@ export const getInvestorEvaluation = async (values) => {
 
 export const updateInvestor = async(values) =>{
   try{
-    const result = await request.post("updateOnce", values);
+    const result = await request.post("updateInvestorOnce", values);
     console.log(result?.data)
     return result?.data;
   }catch (err) {

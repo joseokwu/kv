@@ -23,6 +23,16 @@
   color: #bdbdbd;
 }
 
+.custs {
+  border: none;
+  background: #fafafc;
+  /* width: 70%; */
+  margin-left: 15px;
+  border-radius: 7px;
+  outline: none;
+
+}
+
 .add-dp {
   position: absolute;
   bottom: 0;

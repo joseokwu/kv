@@ -10,6 +10,7 @@ import {
   updateStartupData,
   updateStartupProfile,
   updateInvestorProfile,
+  updatePartnerProfile,
   updateInvestorData,
 } from '../store/actions/auth'
 import { useCallback } from 'react'
@@ -42,16 +43,9 @@ export const useAuth = () => {
     return res
   }
 
-  const userProfile = useCallback(
-    async (value) => {
-      dispatch(await profile(value))
-    },
-    [dispatch],
-  )
-
-  const callUpdateStartupData = async (value) => {
-    dispatch(await updateStartupData(value))
-  }
+  const userProfile = useCallback(async (value) =>{
+    dispatch(await profile(value));  
+}, [dispatch])
 
   const getDashboardProfile = useCallback(
     async (value) => {
@@ -71,6 +65,11 @@ export const useAuth = () => {
   const updateProfile = (prop, value) => {
     dispatch(updateStartupProfile(prop, value))
   }
+
+  const updatePartnerLocalData = async(prop, value , send) =>{
+       
+    dispatch(updatePartnerProfile(prop , value))
+}
 
   const userLogout = () => {
     dispatch(logout())
@@ -94,10 +93,6 @@ export const useAuth = () => {
     }
   }
 
-  const callUpdateInvestorData = async (value) => {
-    dispatch(await updateInvestorData(value))
-  }
-
   const updateInvestorProfileData = (prop, value) => {
     dispatch(updateInvestorProfile(prop, value))
   }
@@ -105,18 +100,35 @@ export const useAuth = () => {
   const updateInvestorInfo = async (lastPage = false) => {
     try {
       const payload = {
-        accType: "investor",
+        accType: stateAuth.type[0],
         values: stateAuth.investorData,
         lastPage,
       }
 
-      const res = await updateInvestor(payload)
+      const res = await updateStartup(payload)
       toast.success(res?.message)
     } catch (err) {
       console.log(err?.response)
       toast.error(err?.response?.data?.message ?? err?.response?.message)
     }
   }
+
+  const updatePartnerInfo = async(lastPage = false) =>{
+    try{
+    const payload = {
+    accType:stateAuth.type[0],
+    values:stateAuth.partnerData,
+    lastPage
+    }
+
+    const res = await updateStartup(payload);
+    toast.success(res?.message)
+
+    }catch(err){
+    console.log(err?.response)
+    toast.error(err?.response?.data?.message ?? err?.response?.message)
+    }
+   }
 
   return {
     stateAuth,
@@ -126,11 +138,11 @@ export const useAuth = () => {
     changeSignup,
     userLogout,
     editUser,
+    updatePartnerInfo,
+    updatePartnerLocalData,
     getDashboardProfile,
-    callUpdateStartupData,
     updateProfile,
     updateStartupInfo,
-    callUpdateInvestorData,
     updateInvestorProfileData,
     updateInvestorInfo,
   }
