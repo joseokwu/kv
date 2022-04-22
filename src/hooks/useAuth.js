@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import {
   registerUser,
   loginUser,
@@ -12,10 +12,12 @@ import {
   updateInvestorProfile,
   updatePartnerProfile,
   updateInvestorData,
+  updateMentorProfile,
+  updateMentorData,
 } from '../store/actions/auth'
 import { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { updateInvestor, updateStartup } from '../services'
+import { updateStartup, postMentorProfile } from '../services'
 import toast from 'react-hot-toast'
 
 export const useAuth = () => {
@@ -47,6 +49,10 @@ export const useAuth = () => {
     dispatch(await profile(value));  
 }, [dispatch])
 
+const callUpdateStartupData = async (value) => {
+  dispatch(await updateStartupData(value));
+};
+
   const getDashboardProfile = useCallback(
     async (value) => {
       dispatch(await dashboardProfile(value))
@@ -66,8 +72,28 @@ export const useAuth = () => {
     dispatch(updateStartupProfile(prop, value))
   }
 
+  const updateMentorProfileState = (prop, value) => {
+    dispatch(updateMentorProfile(prop, value));
+  };
+
+  const updateMentorInfo = async (lastPage = false) => {
+    try {
+      const dataToPost = {
+        accType: "mentor",
+        values: stateAuth.mentorData,
+        lastPage,
+      };
+
+      const res = await updateStartup(dataToPost);
+      console.log("res", res);
+      return res?.success;
+    } catch (error) {
+      console.error(error?.response?.data?.message ?? error?.response?.message);
+      return false;
+    }
+  };
+
   const updatePartnerLocalData = async(prop, value , send) =>{
-       
     dispatch(updatePartnerProfile(prop , value))
 }
 
@@ -97,13 +123,17 @@ export const useAuth = () => {
     dispatch(updateInvestorProfile(prop, value))
   }
 
+  const getInvestorData = async (value) => {
+    dispatch(await updateInvestorData(value));
+  };
+
   const updateInvestorInfo = async (lastPage = false) => {
     try {
       const payload = {
         accType: stateAuth.type[0],
         values: stateAuth.investorData,
         lastPage,
-      }
+      };
 
       const res = await updateStartup(payload)
       toast.success(res?.message)
@@ -113,6 +143,10 @@ export const useAuth = () => {
     }
   }
 
+  const getSavedMentorData = async (value) => {
+    dispatch(await updateMentorData(value));
+  };
+
   const updatePartnerInfo = async(lastPage = false) =>{
     try{
     const payload = {
@@ -120,7 +154,7 @@ export const useAuth = () => {
     values:stateAuth.partnerData,
     lastPage
     }
-
+    console.log(payload)
     const res = await updateStartup(payload);
     toast.success(res?.message)
 
@@ -138,6 +172,7 @@ export const useAuth = () => {
     changeSignup,
     userLogout,
     editUser,
+    callUpdateStartupData,
     updatePartnerInfo,
     updatePartnerLocalData,
     getDashboardProfile,
@@ -145,5 +180,12 @@ export const useAuth = () => {
     updateStartupInfo,
     updateInvestorProfileData,
     updateInvestorInfo,
-  }
+    getInvestorData,
+    updateMentorProfileState,
+    getSavedMentorData,
+    updateMentorInfo,
+  };
 }
+ 
+
+  

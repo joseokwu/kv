@@ -34,6 +34,7 @@ export const TextField = ({
           },
         ]}
         type={type}
+        initialValue={value}
         label={label}
       >
         <Input

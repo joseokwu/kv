@@ -16,8 +16,8 @@ import toast from "react-hot-toast";
 import { Input , Form , Select } from 'antd';
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-import { updateStartup } from '../../../../services';
+import { CountryDropdown, RegionDropdown} from 'react-country-region-selector';
+import { industry , category } from "../../../../constants/domiData";
 
 
 
@@ -150,7 +150,7 @@ const handleChangeState = (value) => {
           <Form.Item
         name="companyDescription"
         label="Company Description"
-       
+       initialValue={ stateAuth?.partnerData?.companyDescription}
         rules={[{ required: true, message: 'Please input Intro' }]}
       >
             <TextArea
@@ -160,7 +160,7 @@ const handleChangeState = (value) => {
               onChange={(e)=>  updatePartnerLocalData("",{
                 companyDescription: e.target.value})}
               label="Company Description"
-              
+
               placeholder="250 characters at most"
             />
             </Form.Item>
@@ -188,6 +188,7 @@ const handleChangeState = (value) => {
               label="Website"
               name={'website'}
               required={true}
+              value={stateAuth?.partnerData?.website}
               placeholder="Enter website URL"
             />
           </section>
@@ -197,78 +198,26 @@ const handleChangeState = (value) => {
           <Form.Item
         name="industry"
         label="Industry"
+        initialValue={stateAuth?.partnerData?.industry}
         rules={[{ required: true, message: 'Please select a industry!' }]}
-        onChange={(e)=>  updatePartnerLocalData("",{
-          industry: e.target.value})}
+
       >
         <Select
          id="industry"
-         style={{width: "fit-content"}}
+         style={{width: 200 , backgroundColor:'#959596'}}
+          
          placeholder="select your categories"
-    
+      
+         onChange={(value)=>  {updatePartnerLocalData("",{
+          industry:value});}}
+          
          >
-        <Option disabled selected>
-                        Select your industry
-                      </Option>
-                      <Option value="Advanced manufacturing and materials">
-                        Advanced manufacturing and materials
-                      </Option>
-                      <Option value="Agriculture, food and beverages">
-                        Agriculture, food and beverages
-                      </Option>
-                      <Option value="Energy">Energy</Option>
-                      <Option value="Engineering and Technology">
-                        Engineering and Technology
-                      </Option>
-                      <Option value="Finance">Finance</Option>
-                      <Option value="Health: Pharmaceuticals and Biotechnology">
-                        Health: Pharmaceuticals and Biotechnology
-                      </Option>
-                      <Option value="Healthcare: Devices and Supplies">
-                        Healthcare Devices and Supplies
-                      </Option>
-                      <Option value="Healthcare: Other services and Technologies">
-                        Healthcare: Other services and Technologies
-                      </Option>
-                      <Option value="Information and Communication Technology(ICT)">
-                        Information and Communication Technology(ICT)
-                      </Option>
-                      <Option value="Life-science Technologies">
-                        Life-science Technologies
-                      </Option>
-                      <Option value="Micro/name-electronic and photonics">
-                        Micro/name-electronic and photonics
-                      </Option>
-                      <Option value="Security and Connectivity">
-                        Security and Connectivity
-                      </Option>
-                      <Option value="Space and Aerospace">
-                        Space and Aerospace
-                      </Option>
-                      <Option value="Sustainability and circular economy">
-                        Sustainability and circular economy
-                      </Option>
-                      <Option value="Transportation">Transportation</Option>
-                      <Option value="Others">Others</Option>
-                      <Option value="Financial Services">Financial Services</Option>
-                      <Option value="Education">Education</Option>
-                      <Option value="Health">Health</Option>
-                      <Option value="Agriculture">Agriculture</Option>
-                      <Option value="Insurance">Insurance</Option>
-                      <Option value="Clean Energy">Clean Energy</Option>
-                      <Option value="Construction">Construction</Option>
-                      <Option value="Mobility/Logistics">Mobility/Logistics</Option>
-                      <Option value="Social Impact">Social Impact</Option>
-                      <Option value="Artificial Intelligence">Artificial Intelligence</Option>
-                      <Option value="Blockchain">Blockchain</Option>
-                      <Option value="Internet of Things">Internet of Things</Option>
-                      <Option value="Mobile">Mobile</Option>
-                      <Option value="Software as a Service">Software as a Service</Option>
-                      <Option value="Sports">Sports</Option>
-                      <Option value="B2B">B2B</Option>
-                      <Option value="B2C">B2C</Option>
-                      <Option value="D2C">D2C</Option>
-                      <Option value="Marketplace">Marketplace</Option>
+         {
+           industry.map((item , i) =>(
+         <Option value={item} key={i} > {item} </Option>
+           ))
+         }
+       
         </Select>
       </Form.Item>
 
@@ -277,77 +226,21 @@ const handleChangeState = (value) => {
           <Form.Item
         name="categories"
         label="Categories"
-        onChange={(e)=> updatePartnerLocalData("",{
-          categories: e.target.value})}
+       initialValue={stateAuth?.partnerData?.categories}
         rules={[{ required: true, message: 'Please select a category!' }]}
       >
         <Select
-          style={{width: "fit-content"}}
+          style={{ width: 200, backgroundColor:'#959596' }}
          placeholder="select your categories"
-         
+         onChange={(value)=> updatePartnerLocalData("",{
+          categories: value})}
+       
          >
-        <Option disabled selected>
-                        Select your industry
-                      </Option>
-                      <Option value="Advanced manufacturing and materials">
-                        Advanced manufacturing and materials
-                      </Option>
-                      <Option value="Agriculture, food and beverages">
-                        Agriculture, food and beverages
-                      </Option>
-                      <Option value="Energy">Energy</Option>
-                      <Option value="Engineering and Technology">
-                        Engineering and Technology
-                      </Option>
-                      <Option value="Finance">Finance</Option>
-                      <Option value="Health: Pharmaceuticals and Biotechnology">
-                        Health: Pharmaceuticals and Biotechnology
-                      </Option>
-                      <Option value="Healthcare: Devices and Supplies">
-                        Healthcare Devices and Supplies
-                      </Option>
-                      <Option value="Healthcare: Other services and Technologies">
-                        Healthcare: Other services and Technologies
-                      </Option>
-                      <Option value="Information and Communication Technology(ICT)">
-                        Information and Communication Technology(ICT)
-                      </Option>
-                      <Option value="Life-science Technologies">
-                        Life-science Technologies
-                      </Option>
-                      <Option value="Micro/name-electronic and photonics">
-                        Micro/name-electronic and photonics
-                      </Option>
-                      <Option value="Security and Connectivity">
-                        Security and Connectivity
-                      </Option>
-                      <Option value="Space and Aerospace">
-                        Space and Aerospace
-                      </Option>
-                      <Option value="Sustainability and circular economy">
-                        Sustainability and circular economy
-                      </Option>
-                      <Option value="Transportation">Transportation</Option>
-                      <Option value="Others">Others</Option>
-                      <Option value="Financial Services">Financial Services</Option>
-                      <Option value="Education">Education</Option>
-                      <Option value="Health">Health</Option>
-                      <Option value="Agriculture">Agriculture</Option>
-                      <Option value="Insurance">Insurance</Option>
-                      <Option value="Clean Energy">Clean Energy</Option>
-                      <Option value="Construction">Construction</Option>
-                      <Option value="Mobility/Logistics">Mobility/Logistics</Option>
-                      <Option value="Social Impact">Social Impact</Option>
-                      <Option value="Artificial Intelligence">Artificial Intelligence</Option>
-                      <Option value="Blockchain">Blockchain</Option>
-                      <Option value="Internet of Things">Internet of Things</Option>
-                      <Option value="Mobile">Mobile</Option>
-                      <Option value="Software as a Service">Software as a Service</Option>
-                      <Option value="Sports">Sports</Option>
-                      <Option value="B2B">B2B</Option>
-                      <Option value="B2C">B2C</Option>
-                      <Option value="D2C">D2C</Option>
-                      <Option value="Marketplace">Marketplace</Option>
+        {
+          category.map((item, i) =>(
+          <Option value={item} > { item } </Option>
+          ))
+        }
         </Select>
       </Form.Item>
 
@@ -357,12 +250,14 @@ const handleChangeState = (value) => {
             name={'twitter'}
             onChange={(e)=> updatePartnerLocalData("",{
               twitter: e.target.value})}
+              value={ stateAuth?.partnerData?.twitter}
              placeholder="Enter twitter URL" />
           </section>
 
           <section className="col-md-6 mb-4">
             <TextField label="Linkedin"
               name={'linkedin'}
+              value={ stateAuth?.partnerData?.linkedin}
               onChange={(e)=> updatePartnerLocalData("",{
                 linkedin: e.target.value})}
              placeholder="Enter Linkedin URL" />
@@ -378,7 +273,10 @@ const handleChangeState = (value) => {
         <div className="row">
           <section className="col-md-6 mb-4">
             <TextField
+                value={ stateAuth?.partnerData?.coordinatorName}
             name={'coordinatorName'}
+            onChange={(e)=> updatePartnerLocalData("",{
+              coordinatorName: e.target.value})}
               label="Coordinator Name"
               placeholder="Enter contact person"
             />
@@ -388,8 +286,9 @@ const handleChangeState = (value) => {
             <TextField
             name={'designation'}
               label="Designation"
-              placeholder="Enter contact person"
-              onChange={(e)=> updatePartnerLocalData("",{
+            value={ stateAuth?.partnerData?.designation}
+          placeholder="Enter contact person"
+           onChange={(e)=> updatePartnerLocalData("",{
                 designation: e.target.value})}
             />
           </section>
@@ -416,9 +315,10 @@ const handleChangeState = (value) => {
               label="Email"
               placeholder="Enter email address"
               type="email"
-              name={'email'}
+              value={ stateAuth?.partnerData?.companyEmail}
+              name={'companyEmail'}
               onChange={(e)=> updatePartnerLocalData("",{
-                email: e.target.value})}
+                companyEmail: e.target.value})}
               required={true}
             />
           </section>
@@ -451,6 +351,7 @@ const handleChangeState = (value) => {
             <TextField
               onChange={(e)=> updatePartnerLocalData("",{
                 city: e.target.value})}
+                value={ stateAuth?.partnerData?.city}
               name={'city'}
              label="City"
              placeholder="Enter partner city" />
@@ -467,6 +368,7 @@ const handleChangeState = (value) => {
          label="Save" 
          variant="secondary" />
         <Button
+          type='button'
           label="Next"
           onClick={() => {
             push("#offerings");
@@ -479,3 +381,7 @@ const handleChangeState = (value) => {
 };
 
 export default CompanyOverview;
+
+
+
+

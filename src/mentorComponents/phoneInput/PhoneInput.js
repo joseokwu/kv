@@ -14,16 +14,16 @@ export const PhoneInput = ({
 }) => {
   const [prefix, setPrefix] = useState("+234");
   const [countryAbv, setCountryAbv] = useState("NG");
-  
+
   const onNumberOnlyChange = (e) => {
     const keyCode = e.keyCode || e.which;
     const keyValue = String.fromCharCode(keyCode);
     const isValid = new RegExp("[0-9]").test(keyValue);
     if (!isValid) {
-       e.preventDefault();
-       return;
+      e.preventDefault();
+      return;
     }
-};
+  };
 
   const getFlag = (abv) => {
     return `http://purecatamphetamine.github.io/country-flag-icons/3x2/${abv}.svg`;
@@ -78,7 +78,7 @@ export const PhoneInput = ({
           <input
             type="text"
             id={id}
-            value={value}
+            defaultValue={value}
             name={name}
             className="input-phone phone-text"
             onChange={handleChange}

@@ -149,6 +149,15 @@
   text-align: center;
 }
 
+.image-placeholder img {
+  width: 143px;
+  height: 143px;
+  min-width: 143px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 50%;
+}
+
 .image-placeholder p {
   font-family: DM Sans;
   font-style: normal;
