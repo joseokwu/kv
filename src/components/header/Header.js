@@ -29,7 +29,7 @@ export const Header = ({ setOpen, open }) => {
 
 const { stateAuth } = useAuth();
 
-console.log(stateAuth)
+//console.log(stateAuth)
 
   const [openNotice, setOpenNotice] = useState(false)
   return (
@@ -66,8 +66,9 @@ console.log(stateAuth)
 
         <div className="d-flex align-items-center h-100">
           <span className="d-flex align-items-center header-profile d-none d-lg-flex">
-            <img src={sampleUser} alt="profile" className="" />
-            <p className="mb-0 header-text">Micheal Smith</p>
+          <img src={ stateAuth?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
+             } alt="profile" className="" />
+            <p className="mb-0 header-text"> { stateAuth.username } </p>
           </span>
           <div>
             <HeaderDropdownMenu />

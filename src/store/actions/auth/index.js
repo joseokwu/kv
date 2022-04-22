@@ -15,6 +15,9 @@ import {
   UPDATE_STARTUP_DATA,
   UPDATE_INVESTOR_DATA,
   UPDATE_INVESTOR_INFO,
+  UPDATE_PARTNER_INFO,
+  SAVE_PARTNER_INFO,
+  UPDATE_PROFILE_FAIL,
   UPDATE_MENTOR_INFO,
 } from "../actions.types";
 import {
@@ -111,6 +114,17 @@ export const updateStartupProfile =
     });
   };
 
+export const updatePartnerProfile =
+  async (property, value) => async (dispatch) => {
+    dispatch({
+      type: UPDATE_PARTNER_INFO,
+      payload: {
+        property,
+        value,
+      },
+    });
+  };
+
 export const updateInvestorProfile =
   async (property, value) => async (dispatch) => {
     dispatch({
@@ -134,7 +148,7 @@ export const updateInvestorData = async (value) => async (dispatch) => {
     }
   } catch (err) {
     dispatch({
-      type: USER_PROFILE_FAIL,
+      type: UPDATE_PROFILE_FAIL,
     });
   }
 };

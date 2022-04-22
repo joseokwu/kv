@@ -4,6 +4,7 @@ export const INIT_STATE = {
   error: false,
   loading: false,
   email: null,
+  logo: null,
   dashboardLoad: true,
   type: [],
   signUpStatus: "startup",

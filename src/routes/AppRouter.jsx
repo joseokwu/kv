@@ -8,7 +8,7 @@ import { LoadingIcon } from './../components/Loading/Loading';
 
 
 export  function AppRouter(props){
-    const { userProfile, callUpdateStartupData , stateAuth : { loading , authenticated }} = useAuth();
+    const { userProfile, stateAuth : { loading , authenticated }} = useAuth();
 
     const history = useHistory();
     useEffect(()=>{

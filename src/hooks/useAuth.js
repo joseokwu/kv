@@ -9,7 +9,9 @@ import {
   dashboardProfile,
   updateStartupData,
   updateStartupProfile,
+  updatePartnerProfile,
   updateMentorProfile,
+  updatePartnerLocalData,
 } from "../store/actions/auth";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
@@ -98,11 +100,31 @@ export const useAuth = () => {
     history.push("/");
   };
 
+  const updatePartnerLocalData = async (prop, value, send) => {
+    dispatch(updatePartnerProfile(prop, value));
+  };
+
   const updateStartupInfo = async (lastPage = false) => {
     try {
       const payload = {
         accType: stateAuth.type[0],
         values: stateAuth.startupData,
+        lastPage,
+      };
+
+      const res = await updateStartup(payload);
+      toast.success(res?.message);
+    } catch (err) {
+      console.log(err?.response);
+      toast.error(err?.response?.data?.message ?? err?.response?.message);
+    }
+  };
+
+  const updatePartnerInfo = async (lastPage = false) => {
+    try {
+      const payload = {
+        accType: stateAuth.type[0],
+        values: stateAuth.partnerData,
         lastPage,
       };
 
@@ -122,11 +144,10 @@ export const useAuth = () => {
     changeSignup,
     userLogout,
     editUser,
+    updatePartnerInfo,
+    updatePartnerLocalData,
     getDashboardProfile,
-    callUpdateStartupData,
     updateProfile,
     updateStartupInfo,
-    updateMentorProfileState,
-    updateMentorInfo,
   };
 };
