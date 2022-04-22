@@ -24,7 +24,7 @@ const AssistantInfo = () => {
   const handleSubmit = async () => {
     setLoading(true);
 
-    const uploaded = await updateMentorInfo();
+    const uploaded = await updateMentorInfo(true);
 
     if (uploaded) {
       toast.success("Submitted Successfully");

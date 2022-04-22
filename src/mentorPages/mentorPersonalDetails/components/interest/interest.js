@@ -58,7 +58,7 @@ const Interest = () => {
       toast.error("Something went wrong");
     }
     if (uploaded) {
-      push("#work_experience");
+      push("#consulting");
     }
     setLoading(false);
   };

@@ -27,8 +27,6 @@ const WorkExperience = () => {
   } = useActivity();
 
   const back = () => {
-    console.log("path", path);
-    console.log("path - 1", path - 1);
     changePath(path - 1);
   };
 
