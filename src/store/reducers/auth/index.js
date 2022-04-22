@@ -61,6 +61,7 @@ const authReducer = (state = INIT_STATE, action) => {
         error: action.payload,
       };
     case USER_PROFILE:
+      console.log("action.payload", action.payload);
       if (action?.payload?.type[0] === "boosterpartner") {
         return {
           ...state,
