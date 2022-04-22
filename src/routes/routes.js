@@ -438,7 +438,7 @@ const routes = [
     path: '/boosterpartner/dashboard',
     component: WithMainInvestorLayout(BoosterDashboard),
     exact: true,
-    protected: false,
+    protected:TextTrackCueList,
     type: 'booster',
   },
   {
@@ -446,7 +446,7 @@ const routes = [
     path: '/booster/applicants',
     component: WithMainInvestorLayout(BoosterApplicants),
     exact: true,
-    protected: false,
+    protected: true,
     type: 'booster',
   },
   {
@@ -462,7 +462,7 @@ const routes = [
     path: '/booster/profile',
     component: WithInvestorRegisterLayout(BoosterProfile),
     exact: true,
-    protected: false,
+    protected:true,
     type: 'booster',
   },
 
@@ -471,7 +471,7 @@ const routes = [
     path: '/boosterpartner/registration',
     component: WithInvestorRegisterLayout(BoosterPartnerRegistration),
     exact: true,
-    protected: false,
+    protected:true,
     type: 'booster',
   },
   //Investor Routes End

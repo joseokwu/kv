@@ -50,13 +50,13 @@ export const mentorProfile = async () => {
   }
 };
 
-export const updateMentorProfile = async (values) => {
+export const postMentorProfile = async (values) => {
   try {
     const res = await request.post("updateMentorProfile", values);
-    console.log(res?.data)
+    console.log(res?.data);
     return res?.data;
   } catch (err) {
-    console.log('mentor')
+    console.log("mentor");
     throw err;
   }
 };

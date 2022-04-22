@@ -109,3 +109,6 @@ h6 {
   margin-bottom: 2.5rem;
 }
 
+.error {
+  color: #e31937;
+}

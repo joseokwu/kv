@@ -13,8 +13,10 @@ import {
   DASHBOARD_LOAD,
   UPDATE_STARTUP_DATA,
   UPDATE_STARTUP_INFO,
+  UPDATE_MENTOR_DATA,
+  UPDATE_MENTOR_INFO,
   UPDATE_PROFILE_FAIL,
-  UPDATE_PARTNER_INFO
+  UPDATE_PARTNER_INFO,
 } from "../../actions/actions.types";
 import { INIT_STATE } from "../../initialstates";
 
@@ -59,7 +61,7 @@ const authReducer = (state = INIT_STATE, action) => {
         error: action.payload,
       };
     case USER_PROFILE:
-      if(action?.payload?.type[0] === 'boosterpartner'){
+      if (action?.payload?.type[0] === "boosterpartner") {
         return {
           ...state,
           loading: false,
@@ -73,7 +75,7 @@ const authReducer = (state = INIT_STATE, action) => {
           email: action?.payload?.email,
         };
       }
-      if(action?.payload?.type[0] === 'startup'){
+      if (action?.payload?.type[0] === "startup") {
         return {
           ...state,
           loading: false,
@@ -86,32 +88,32 @@ const authReducer = (state = INIT_STATE, action) => {
           email: action?.payload?.email,
         };
       }
-      break ;
+      break;
     case DASHBOARD_USER_PROFILE:
-      console.log(action?.payload)
-    if(action?.payload?.type[0] === 'boosterpartner'){
-      return {
-        ...state,
-        dashboardLoad: false,
-        partnerData:action?.payload,
-        type: action?.payload?.type,
-        signUpStatus: action?.payload?.type[0],
-        email: action?.payload?.email,
-      };
-    }
-    if(action?.payload?.type[0] === 'startup'){
-      return {
-        ...state,
-        dashboardLoad: false,
-        user: action?.payload,
-        type: action?.payload?.type,
-        signUpStatus: action?.payload?.type[0],
-        email: action?.payload?.email,
-        startupData: action.payload
-      };
-    }
+      console.log(action?.payload);
+      if (action?.payload?.type[0] === "boosterpartner") {
+        return {
+          ...state,
+          dashboardLoad: false,
+          partnerData: action?.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+        };
+      }
+      if (action?.payload?.type[0] === "startup") {
+        return {
+          ...state,
+          dashboardLoad: false,
+          user: action?.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+          startupData: action.payload,
+        };
+      }
 
-     break;
+      break;
     case USER_PROFILE_FAIL:
       return {
         ...state,
@@ -128,7 +130,7 @@ const authReducer = (state = INIT_STATE, action) => {
       };
     case LOG_OUT:
       return {
-        state:{}
+        state: {},
       };
     case EDIT:
       return {
@@ -141,7 +143,6 @@ const authReducer = (state = INIT_STATE, action) => {
         startupData: action.payload,
       };
     case UPDATE_STARTUP_INFO:
-    
       return {
         ...state,
         startupData: {
@@ -166,17 +167,26 @@ const authReducer = (state = INIT_STATE, action) => {
           }
         }
       } 
+      break;
+   
+    case UPDATE_MENTOR_INFO:
       return {
         ...state,
-        partnerData:{...state.partnerData, ...action?.payload.value}
-          
-        } 
-      
-      case UPDATE_PROFILE_FAIL :
-        return {
-          ...state,
-          loading: false,
-        }
+        mentorData: {
+          ...state.mentorData,
+          [action.payload.property]: {
+            ...state.mentorData[action.payload.property],
+            ...action.payload.value,
+          },
+        },
+      }
+    
+  
+    case UPDATE_PROFILE_FAIL:
+      return {
+        ...state,
+        loading: false,
+      };
 
     default:
       return state;
