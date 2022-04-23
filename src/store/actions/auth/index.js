@@ -159,7 +159,7 @@ export const updateStartupData = async (value) => async (dispatch) => {
   try {
     const res = await profile(value);
     if (res) {
-      console.log(res?.data?.startupData);
+     // console.log(res?.data?.startupData);
       dispatch({
         type: UPDATE_STARTUP_DATA,
         payload: res?.data?.startupData,
@@ -176,7 +176,7 @@ export const updateMentorData = async (value) => async (dispatch) => {
   try {
     const res = await profile(value);
     if (res) {
-      console.log(res?.data?.mentorData);
+    //  console.log(res?.data?.mentorData);
       dispatch({
         type: UPDATE_MENTOR_DATA,
         payload: res?.data?.mentorData,

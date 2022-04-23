@@ -13,18 +13,18 @@ export function AppRouter(props) {
   } = useAuth();
 
   const history = useHistory();
-  console.log("In app router");
+ // console.log("In app router");
   useEffect(() => {
     const getP = async () => {
-      console.log("In here jiggy");
+  
       if (getToken()) {
         const userType = getType();
-        console.log("userType", userType);
+       // console.log("userType", userType);
         // console.log(userRole)
         await userProfile(userType && userType);
 
         if (getLocationHistory()) {
-          console.log("problem");
+         // console.log("problem");
           history.push(getLocationHistory());
           sessionStorage.removeItem("user:redirect:location");
         }

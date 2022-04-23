@@ -77,10 +77,4 @@ export const resetPassword = async (value) => {
   }
 };
 
-// eligibilityCriteria: "sgsdgsgsg"
-// freeCreditValue: true
-// importantNote: "ssgsggss"
-// offerings: "adsfdssgdgsg"
-// partnershipValidity: "Animation"
-// process: "sgdggdsggsgsgsds"
-// turnAroundTime: "February"
+
