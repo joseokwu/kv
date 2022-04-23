@@ -37,6 +37,7 @@ export const Portfolio = () => {
 
       <section className="d-flex align-items-center justify-content-between mt-5">
         <button
+          style={{color: "white", background: "#808080"}}
           className="back-btn"
           onClick={() => {
             push("#approach");
