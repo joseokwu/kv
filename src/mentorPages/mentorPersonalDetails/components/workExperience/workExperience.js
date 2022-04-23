@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
@@ -40,6 +40,13 @@ const WorkExperience = () => {
   const [opts, setOpts] = useState("");
   const [nextloading, setNextLoading] = useState(false);
   const [startDate, setStartDate] = useState();
+  const [data, setData] = useState(
+    stateAuth?.mentorData?.workExperience[0] ?? ""
+  );
+
+  useEffect(() => {
+    setData(stateAuth?.mentorData?.workExperience[0]);
+  }, []);
 
   const onSubmit = async () => {
     setLoading(true);
@@ -59,15 +66,14 @@ const WorkExperience = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      currentFounder:
-        stateAuth?.mentorData?.workExperience?.currentFounder ?? "No",
-      industry: stateAuth?.mentorData?.workExperience?.industry ?? "",
-      companyName: stateAuth?.mentorData?.workExperience?.industry ?? "",
-      achievements: stateAuth?.mentorData?.workExperience?.achievements ?? "",
-      position: stateAuth?.mentorData?.workExperience?.position ?? "",
-      start: stateAuth?.mentorData?.workExperience?.start ?? "",
-      end: stateAuth?.mentorData?.workExperience?.end ?? "",
-      amountRaised: stateAuth?.mentorData?.workExperience?.amountRaised ?? "",
+      currentFounder: data?.currentFounder ?? "No",
+      industry: data?.industry ?? "",
+      companyName: data?.industry ?? "",
+      achievements: data?.achievements ?? "",
+      position: data?.position ?? "",
+      start: data?.start ?? "",
+      end: data?.end ?? "",
+      amountRaised: data?.amountRaised ?? "",
     },
     validationSchema: Yup.object({
       currentFounder: Yup.string().required("This is required"),
@@ -84,16 +90,6 @@ const WorkExperience = () => {
 
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
-    if (prefix !== "") {
-      updateMentorProfileState("workExperience", {
-        [prefix]: {
-          ...stateAuth?.mentorData?.workExperience[prefix],
-          [name]: value,
-        },
-      });
-      formik.handleChange(e);
-      return;
-    }
 
     updateMentorProfileState("workExperience", {
       [name]: value,
@@ -109,10 +105,30 @@ const WorkExperience = () => {
   };
 
   const onCurrent = () => {
-    handleChange({ target: { name: "position", value: "" } });
-    handleChange({ target: { name: "start", value: "" } });
-    handleChange({ target: { name: "end", value: "" } });
-    handleChange({ target: { name: "amountRaised", value: "" } });
+    handleChange({
+      target: {
+        name: "position",
+        value: data?.position ?? "",
+      },
+    });
+    handleChange({
+      target: {
+        name: "start",
+        value: data?.start ?? "",
+      },
+    });
+    handleChange({
+      target: {
+        name: "end",
+        value: data?.end ?? "",
+      },
+    });
+    handleChange({
+      target: {
+        name: "amountRaised",
+        value: data?.amountRaised ?? "",
+      },
+    });
   };
 
   return (
@@ -129,6 +145,7 @@ const WorkExperience = () => {
             <section className="free-choice">
               <button
                 className="yes-btn"
+                type="button"
                 style={
                   formik.values.currentFounder === "Yes"
                     ? {
@@ -148,6 +165,7 @@ const WorkExperience = () => {
               </button>
               <button
                 className="no-btn"
+                type="button"
                 style={
                   formik.values.currentFounder === "No"
                     ? {
@@ -178,14 +196,14 @@ const WorkExperience = () => {
                 options={sectors}
                 name="industry"
                 onChange={handleChange}
+                value={formik.values.industry}
               />
               {formik.touched.industry && formik.errors.industry ? (
                 <label className="error">{formik.errors.industry}</label>
               ) : null}
             </section>
 
-            {stateAuth?.mentorData?.workExperience?.currentFounder ===
-              "Yes" && (
+            {formik.values.currentFounder === "Yes" && (
               <>
                 <section className="col-md-12 mb-4">
                   <TextArea
@@ -194,6 +212,7 @@ const WorkExperience = () => {
                     required={true}
                     rows={"1"}
                     name="position"
+                    value={formik.values.position}
                     onChange={handleChange}
                   />
                   {formik.touched.position && formik.errors.position ? (
@@ -208,6 +227,7 @@ const WorkExperience = () => {
                     placeholder={"dd/mm/yy"}
                     required={true}
                     name="start"
+                    value={formik.values.start}
                     onChange={handleChange}
                   />
                   {formik.touched.start && formik.errors.start ? (
@@ -222,6 +242,7 @@ const WorkExperience = () => {
                     placeholder={"dd/mm/yy"}
                     required={true}
                     name="end"
+                    value={formik.values.end}
                     onChange={handleChange}
                   />
                   {formik.touched.end && formik.errors.end ? (
@@ -238,6 +259,7 @@ const WorkExperience = () => {
                 rows={"1"}
                 required={true}
                 name="companyName"
+                value={formik.values.companyName}
                 onChange={handleChange}
               />
               {formik.touched.companyName && formik.errors.companyName ? (
@@ -252,14 +274,14 @@ const WorkExperience = () => {
                 rows={"6"}
                 name="achievements"
                 onChange={handleChange}
+                value={formik.values.achievements}
               />
               {formik.touched.achievements && formik.errors.achievements ? (
                 <label className="error">{formik.errors.achievements}</label>
               ) : null}
             </section>
 
-            {stateAuth?.mentorData?.workExperience?.currentFounder ===
-              "Yes" && (
+            {formik.values.currentFounder === "Yes" && (
               <div className="mb-4">
                 <p className="offer-text pt-2 pb-2">
                   Have you ever been among the first set of employees in a
@@ -268,6 +290,7 @@ const WorkExperience = () => {
                 <section className="free-choice">
                   <button
                     className="yes-btn"
+                    type="button"
                     style={
                       formik.values.amountRaised === "Yes"
                         ? {
@@ -286,6 +309,7 @@ const WorkExperience = () => {
                   </button>
                   <button
                     className="no-btn"
+                    type="button"
                     style={
                       formik.values.amountRaised === "No"
                         ? {

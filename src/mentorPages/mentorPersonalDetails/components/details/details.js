@@ -39,10 +39,10 @@ const Details = () => {
 
   const [nextloading, setNextLoading] = useState(false);
   const [logo, setLogo] = useState(
-    stateAuth?.user?.personalDetail?.logo ?? imageRep
+    stateAuth?.mentorData?.personalDetail?.logo ?? imageRep
   );
   const [phone, setPhone] = useState(
-    stateAuth?.user?.personalDetail?.contactInfo?.mobilenumber ?? ""
+    stateAuth?.mentorData?.personalDetail?.contactInfo?.mobilenumber ?? ""
   );
   const [contacts, setContacts] = useState({
     country: stateAuth?.mentorData?.personalDetail?.country ?? "",
