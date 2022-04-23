@@ -140,6 +140,7 @@ export const InvestorDetails2 = () => {
 
       <section className="d-flex align-items-center justify-content-between">
         <button
+          style={{color: "white", background: "#808080"}}
           className="back-btn"
           onClick={() => {
             push("#investor");

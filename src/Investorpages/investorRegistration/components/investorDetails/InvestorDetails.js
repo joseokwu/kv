@@ -168,6 +168,7 @@ export const InvestorDetails = () => {
 
       <section className="d-flex align-items-center justify-content-between">
         <button
+          style={{color: "white", background: "#808080"}}
           className="back-btn"
           type="button"
           onClick={() => {
