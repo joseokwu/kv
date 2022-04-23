@@ -89,19 +89,19 @@ const authReducer = (state = INIT_STATE, action) => {
           email: action?.payload?.email,
         };
       }
-      // if(action?.payload?.type[0] === 'investor'){
-      //   return {
-      //     ...state,
-      //     loading: false,
-      //     dashboardLoad: false,
-      //     authenticated: true,
-      //     user: action?.payload,
-      //     investorData: action.payload,
-      //     type: action?.payload?.type,
-      //     signUpStatus: action?.payload?.type[0],
-      //     email: action?.payload?.email,
-      //   };
-      // }
+      if(action?.payload?.type[0] === 'investor'){
+        return {
+          ...state,
+          loading: false,
+          dashboardLoad: false,
+          authenticated: true,
+          user: action?.payload,
+          ...action.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+        };
+      }
       break ;
     case DASHBOARD_USER_PROFILE:
       console.log(action?.payload)

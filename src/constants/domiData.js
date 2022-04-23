@@ -293,3 +293,49 @@ export const industry = [
   "Travel", 
   "Virtual Assistant",
 ]
+
+
+export const investmentStages = [
+  "Pre-Seed",
+  "Seed",
+  "angel",
+  "accelerator",
+  "MVP",
+  "pre series A",
+  "series A",
+];
+
+export const expBetter = [
+  "You have invested in startups before",
+  "You come from an entrepreneurial family or have been a founder/co-founder of a business venture family",
+  "You have at least 10 years of work experience",
+  "I have not made any investments before, but I'm excited to get started",
+  "I have invested in one or two businesses and would like to find more opportunities",
+  "I am an angel investor / high net worth individual making regular investments",
+  "I am an institutional investor, working in Venture Capital / Private Equity",
+  "None of the above",
+];
+
+export const region = [
+  "Africa - the whole continent",
+  "North Africa",
+  "East Africa",
+  "West Africa",
+  "Central Africa",
+  "Southern Africa",
+];
+
+export const funding = [
+  "Less than $1,000",
+  "$1,000 - $5,000",
+  "$5,000 - $10,000",
+  "$10,000 - $25,000",
+  "$25,000 - $50,000",
+  "$50,000 - $100,000",
+  "More than $100,000",
+  "Less than $10,000",
+  "$10,000 - $40,000",
+  "$40,000 - $100,000",
+  "$100,000 - $300,000",
+  "More than $300,000",
+];

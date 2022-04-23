@@ -4,6 +4,8 @@ import FormCard from "../../../partnerRegisteration/components/formCard/FormCard
 import { addInvestorProfile } from "../../../../services/investor";
 import { useFormik } from "formik";
 import { useHistory } from "react-router";
+import { Form } from "antd";
+import { useAuth } from "../../../../hooks/useAuth";
 
 export const InvestorDetails = () => {
   const investorTypes = [
@@ -34,40 +36,30 @@ export const InvestorDetails = () => {
     }
   };
 
-  const formik = useFormik({
-    enableReinitialize: true,
-    initialValues: {
-      nationality: "",
-      taxResidentOutsideNigeria: taxOutside(taxOutsideEligible),
-      individualHaving: "",
-      bankName: "",
-      bankBranch: "",
-      bankAccountNumber: "",
-      bankAccountType: "",
-      InvestorType: selectedInvestorType,
-    },
-
-    onSubmit: (values) => addInvestorProfile(values),
-  });
-
-  console.log("formik.values", formik.values);
-
+  const { updateInvestorProfileData, stateAuth, updateInvestorInfo } = useAuth()
   const { push } = useHistory();
+  const onFinish = async (values) => {
+    updateInvestorInfo()
+    console.log(values)
+  }
+  console.log(stateAuth);
+
+
   return (
-    <form className="register-form-wrap" onSubmit={formik.handleSubmit}>
+      <div className="register-form-wrap">
       <h3>Investor Details</h3>
       <p>Create a profile for your investment</p>
-
+      <Form  onFinish={onFinish} initialValues={{ remember: true }}>
       <FormCard>
         <div className="row">
           <section className="col-12 mb-4">
             <TextField
-              label="Nationality*"
+              label="Nationality"
               required={true}
               placeholder="Enter your nationality"
               className="edit_input"
               name="nationality"
-              onChange={formik.handleChange}
+              onChange={(e) => updateInvestorProfileData("personalDetail", { nationality: e.target.value})}
             />
           </section>
           <section className="col-12 mb-4">
@@ -88,13 +80,13 @@ export const InvestorDetails = () => {
 
           <section className="col-12 mb-4">
             <TextField
-              label="Taxation Number*"
+              label="Taxation Number"
               required={true}
               placeholder="Enter Tax Number"
               className="edit_input"
               name="taxNumber"
               type="number"
-              onChange={formik.handleChange}
+              onChange={(e) => updateInvestorProfileData("personalDetail", {})}
             />
           </section>
 
@@ -104,7 +96,7 @@ export const InvestorDetails = () => {
               label="I am an individual having"
               className="edit_input"
               name="individualHaving"
-              onChange={formik.handleChange}
+              onChange={(e) => updateInvestorProfileData("personalDetail", { individualHaving: e.target.value })}
             />
           </section>
         </div>
@@ -114,21 +106,21 @@ export const InvestorDetails = () => {
         <div className="row">
           <section className="col-lg-6 mb-4">
             <TextField
-              placeholder="Choose bank"
+              placeholder="Enter bank"
               label="Bank Name"
               className="edit_input"
               name="bankName"
-              onChange={formik.handleChange}
+              onChange={(e) => updateInvestorProfileData("personalDetail", { bankName: e.target.value })}
             />
           </section>
 
           <section className="col-lg-6 mb-4">
             <TextField
-              placeholder="Choose bank branch"
+              placeholder="Enter bank branch"
               label="Bank Branch"
               className="edit_input"
               name="bankBranch"
-              onChange={formik.handleChange}
+              onChange={(e) => updateInvestorProfileData("personalDetail", { bankBranch: e.target.value })}
             />
           </section>
 
@@ -139,7 +131,8 @@ export const InvestorDetails = () => {
               placeholder="Enter your account"
               className="edit_input"
               name="bankAccountNumber"
-              onChange={formik.handleChange}
+              type={"number"}
+              onChange={(e) => updateInvestorProfileData("personalDetail", { bankAccountNumber: e.target.value })}
             />
           </section>
 
@@ -150,7 +143,7 @@ export const InvestorDetails = () => {
               placeholder="Enter your account type"
               className="edit_input"
               name="bankAccountType"
-              onChange={formik.handleChange}
+              onChange={(e) => updateInvestorProfileData("personalDetail", { bankAccountType: e.target.value })}
             />
           </section>
         </div>
@@ -160,9 +153,9 @@ export const InvestorDetails = () => {
         <div className="row">
           <p
             className="mb-3"
-            style={{ color: "black", fontSize: 12, lineHeight: "13px" }}
+            style={{ color: "black", fontSize: 16, lineHeight: "13px" }}
           >
-            Investor Type*
+            <span style={{ color: 'red' }}>*</span> Investor Type
           </p>
           <RowOption
             options={investorTypes}
@@ -195,6 +188,7 @@ export const InvestorDetails = () => {
           />
         </div>
       </section>
-    </form>
+    </Form>
+    </div>
   );
 };

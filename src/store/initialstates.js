@@ -65,7 +65,6 @@ export const INIT_STATE = {
       currentFounder: "No",
       end: "N/A",
       start: "N/A",
-      companyName: "",
       industry: "",
       position: "N/A",
     },
