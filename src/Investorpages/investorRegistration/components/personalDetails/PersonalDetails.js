@@ -30,8 +30,7 @@ export const PersonalDetails = () => {
 
   const { updateInvestorProfileData, stateAuth, updateInvestorInfo } = useAuth()
   const { push } = useHistory()
-  // const { changePath, state: { path }, } = useActivity();
-  // const [loading, setLoading] = useState(false);
+
   const [logoUploading, setLogoUploading] = useState(false)
   // const [nextLoading, setNextLoading] = useState(false);
   const [avatar, setAvatar] = useState(
@@ -40,7 +39,7 @@ export const PersonalDetails = () => {
 
   const onFinish = async (values) => {
     updateInvestorInfo()
-   // console.log(values)
+  
   }
 
   console.log(stateAuth)
