@@ -19,6 +19,7 @@ export const Portfolio = () => {
   const [close , setClose] = useState(false)
 
   const submit = () =>{
+   // console.log(stateAuth)
     updateInvestorInfo(true)
   }
 
@@ -78,7 +79,9 @@ export const Portfolio = () => {
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
          
-          <Button label="Done" onClick={() => {
+          <Button 
+          type='button'
+           label="Done" onClick={() => {
             submit();
           }} />
         </div>

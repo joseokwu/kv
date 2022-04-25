@@ -136,9 +136,11 @@ const callUpdateStartupData = async (value) => {
       };
       if(lastPage){
         const res = await updateStartup(payload)
-        toast.success(res?.message)
-        history.push('/investor/dashboard');
-        return ;
+        if(res.status){
+            toast.success(res?.message)
+            history.push('/investor/dashboard');
+            return ;
+        }
       }
       console.log(payload)
       const res = await updateStartup(payload)
