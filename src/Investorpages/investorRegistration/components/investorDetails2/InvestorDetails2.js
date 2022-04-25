@@ -3,9 +3,18 @@ import { RowOption, Select, TextField, Button } from "../../../../components";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
 import { useHistory } from "react-router";
 import { sectors } from "../../../../utils/utils";
+import { Form } from "antd";
+import { useAuth } from "../../../../hooks/useAuth";
 
 export const InvestorDetails2 = () => {
   const { push } = useHistory();
+  const { updateInvestorProfileData, stateAuth, updateInvestorInfo } = useAuth()
+  const onFinish = async (values) => {
+    updateInvestorInfo()
+    console.log(values)
+  }
+  console.log(stateAuth);
+
 
   return (
     <div className="register-form-wrap">
@@ -13,7 +22,7 @@ export const InvestorDetails2 = () => {
       <p>
         This will help us provide startups personalised for your preferences
       </p>
-
+      <Form onFinish={onFinish} initialValues={{ remember: true }}>
       <FormCard>
         <div className="row">
           <section className="col-12 mb-4">
@@ -100,6 +109,8 @@ export const InvestorDetails2 = () => {
               label="Typical number of investment per year"
               placeholder="Enter number of start-ups invested in"
               className="edit_input"
+              name={"numberOfInvestmentPerYear"}
+              onChange={(e) => updateInvestorProfileData("personalDetail", { numberOfInvestmentPerYear: e.target.value })}
             />
           </section>
 
@@ -108,6 +119,7 @@ export const InvestorDetails2 = () => {
               label="Typical investment amount per year"
               placeholder="$"
               className="edit_input"
+              onChange={(e) => updateInvestorProfileData("personalDetail", {})}
             />
           </section>
           <section className="col-lg-6">
@@ -128,6 +140,7 @@ export const InvestorDetails2 = () => {
 
       <section className="d-flex align-items-center justify-content-between">
         <button
+          style={{color: "white", background: "#808080"}}
           className="back-btn"
           onClick={() => {
             push("#investor");
@@ -146,6 +159,7 @@ export const InvestorDetails2 = () => {
           />
         </div>
       </section>
+      </Form>
     </div>
   );
 };

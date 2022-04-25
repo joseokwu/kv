@@ -3,21 +3,15 @@ import imageRep from '../../../../assets/icons/avatar.svg'
 import add from '../../../../assets/icons/addFile.svg'
 import FormCard from '../../../partnerRegisteration/components/formCard/FormCard'
 import {
-  Badge,
-  // PhoneInput,
   RowOption,
   TextField,
   Button,
 } from '../../../../components'
 import { useHistory } from 'react-router-dom'
 import { Input, Form, Select } from 'antd'
-import { Formik, useFormik } from 'formik'
 import toast from 'react-hot-toast'
-import * as yup from 'yup'
 import { useAuth } from '../../../../hooks/useAuth'
 import { upload } from '../../../../services/utils'
-import { useActivity } from '../../../../hooks/useBusiness'
-import { updateInvestor } from '../../../../services/investor'
 import { CircularLoader } from '../../../../components/CircluarLoader/CircularLoader'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
@@ -41,7 +35,7 @@ export const PersonalDetails = () => {
   const [logoUploading, setLogoUploading] = useState(false)
   // const [nextLoading, setNextLoading] = useState(false);
   const [avatar, setAvatar] = useState(
-    stateAuth?.investorData?.personalDetail?.avatar ?? imageRep,
+    stateAuth?.investorData?.profile?.avatar ?? imageRep,
   )
 
   const onFinish = async (values) => {
@@ -49,47 +43,6 @@ export const PersonalDetails = () => {
     console.log(values)
   }
 
-  // const next = () => { changePath(path + 1) };
-
-  // const handleSubmit = async () => {
-  //   setLoading(true);
-
-  //   const updated = await updateInvestorInfo();
-
-  //   if (updated) {
-  //     toast.success("Updated");
-  //   } else {
-  //     toast.error("Something went wrong");
-  //   }
-  //   if (updated && next) {
-  //     push("#investor");
-  //     // changePath(2);
-  //   }
-  //   setLoading(false);
-  // };
-
-  // const onSubmit = async (e) => {
-  //   e.preventDefault();
-  //   updateInvestorInfo()
-  // };
-
-  // const handleChange = (e, prefix = "") => {
-  //   const { name, value } = e.target;
-  //   if (prefix !== "") {
-  //     updateInvestorProfileData("personalDetail", {
-  //       [prefix]: {
-  //         ...stateAuth?.investorData?.personalDetail[prefix],
-  //         [name]: value,
-  //       },
-  //     });
-  //     formik.handleChange(e);
-  //     return;
-  //   }
-  //   updateInvestorProfileData("personalDetail", {
-  //     [name]: value,
-  //   });
-  //   formik.handleChange(e);
-  // };
 
   const onChangeImage = async (e) => {
     const { files } = e.target
@@ -102,7 +55,7 @@ export const PersonalDetails = () => {
       setLogoUploading(true)
       const response = await upload(formData)
       setAvatar(response?.path)
-      updateInvestorProfileData('personalDetail', {
+      updateInvestorProfileData('profile', {
         logo: response?.path,
       })
       setLogoUploading(false)
@@ -113,22 +66,22 @@ export const PersonalDetails = () => {
   }
 
   const handleMobileInput = (value) => {
-    updateInvestorProfileData('personalDetail', {
-      ...stateAuth?.investorData?.personalDetail,
+    updateInvestorProfileData('profile', {
+      ...stateAuth?.investorData?.profile,
       mobileNumber: value,
     })
   }
 
   const [country, setCountry] = useState(
-    stateAuth?.investorData?.personalDetail?.country ?? '',
+    stateAuth?.investorData?.profile?.country ?? '',
   )
   const [region, setRegion] = useState(
-    stateAuth?.investorData?.personalDetail?.state ?? '',
+    stateAuth?.investorData?.profile?.state ?? '',
   )
 
   const handleCountry = (value) => {
-    updateInvestorProfileData('personalDetail', {
-      ...stateAuth?.investorData?.personalDetail?.country,
+    updateInvestorProfileData('profile', {
+      ...stateAuth?.investorData?.profile?.country,
       country: value,
     })
     setCountry(value)
@@ -136,45 +89,16 @@ export const PersonalDetails = () => {
   }
 
   const handleChangeState = (value) => {
-    updateInvestorProfileData('personalDetail', {
-      ...stateAuth?.investorData?.personalDetail?.state,
+    updateInvestorProfileData('profile', {
+      ...stateAuth?.investorData?.profile?.state,
       state: value,
     })
     setRegion(value)
     console.log(value)
   }
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     briefIntroduction: stateAuth?.investorData?.personalDetail?.briefIntroduction ?? "",
-  //     firstName: stateAuth?.investorData?.personalDetail?.firstName ?? "",
-  //     lastName: stateAuth?.investorData?.personalDetail?.lastName ?? "",
-  //     email: stateAuth?.investorData?.personalDetail?.email ?? "",
-  //     city: stateAuth?.investorData?.personalDetail?.city ?? "",
-  //     companyEmail: stateAuth?.investorData?.personalDetail?.companyEmail ?? "",
-  //     address: stateAuth?.investorData?.personalDetail?.address ?? "",
-  //     linkedIn: stateAuth?.investorData?.personalDetail?.socialMedia?.linkedIn ?? "",
-  //     twitter: stateAuth?.investorData?.personalDetail?.socialMedia?.twitter ?? "",
-  //     website: stateAuth?.investorData?.personalDetail?.socialMedia?.website ?? "",
-  //     profileLink: stateAuth?.investorData?.personalDetail?.socialMedia?.profileLink ?? "",
-  //     referral: stateAuth?.investorData?.personalDetail?.referral ?? "",
-  //   },
-  //   validationSchema: yup.object({
-  //     briefIntroduction: yup.string().required("Brief introduction is required"),
-  //     firstName: yup.string().required("First Name is required"),
-  //     lastName: yup.string().required("Last Name is required"),
-  //     email: yup.string().required("Email is required"),
-  //     city: yup.string().required("City is required"),
-  //     companyEmail: yup.string().required("Company Email is required"),
-  //     address: yup.string().required("Registered address is required"),
-  //     linkedIn: yup.string().required("LinkedIn is required"),
-  //     twitter: yup.string().required("Twitter is required"),
-  //     website: yup.string().required("Website is required"),
-  //     profileLink: yup.string().required("Profile link is required"),
-  //     referral: yup.string().required("Referral is required"),
-  //   }),
-  //   onSubmit: (values) => handleSubmit(values),
-  // });
+  console.log(stateAuth);
+
 
   return (
     <div className="register-form-wrap">
@@ -198,11 +122,11 @@ export const PersonalDetails = () => {
         <FormCard title="Personal Information">
           <div className="row">
             <section className="col-12 mb-4">
-              <label>
+              {/* <label>
                 Brief Introduction<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Brief Introduction*"
+                label="Brief Introduction"
                 id={'briefIntroduction'}
                 name={'briefIntroduction'}
                 type={'text'}
@@ -210,23 +134,18 @@ export const PersonalDetails = () => {
                 placeholder={'Enter brief bio about you'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     briefIntroduction: e.target.value,
                   })
                 }
-                // defaultValue={stateAuth?.investorData?.personalDetail?.briefIntroduction}
-                // onBlur={formik.handleBlur}
               />
-              {/* {formik.touched.briefIntroduction && formik.errors.briefIntroduction ? (
-                <label className="error">{formik.errors.briefIntroduction}</label>
-              ) : null} */}
             </section>
             <section className="col-md-6 mb-4">
-              <label>
+              {/* <label>
                 First Name<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="First Name*"
+                label="First Name"
                 id={'firstName'}
                 name={'firstName'}
                 type={'text'}
@@ -234,24 +153,19 @@ export const PersonalDetails = () => {
                 placeholder={'Enter first name'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     firstName: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // defaultValue={stateAuth?.investorData?.personalDetail?.firstName}
               />
-              {/* {formik.touched.firstName && formik.errors.firstName ? (
-                <label className="error">{formik.errors.firstName}</label>
-              ) : null} */}
             </section>
 
             <section className="col-md-6 mb-4">
-              <label>
+              {/* <label>
                 Last Name<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Last Name*"
+                label="Last Name"
                 id={'lastName'}
                 name={'lastName'}
                 type={'text'}
@@ -259,24 +173,19 @@ export const PersonalDetails = () => {
                 placeholder={'Enter last name'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     lastName: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // defaultValue={stateAuth?.investorData?.personalDetail?.lastName}
               />
-              {/* {formik.touched.lastName && formik.errors.lastName ? (
-                <label className="error">{formik.errors.lastName}</label>
-              ) : null} */}
             </section>
 
             <section className="col-md-6 mb-4">
-              <label>
+              {/* <label>
                 Email<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Email*"
+                label="Email"
                 id={'email'}
                 name={'email'}
                 required={true}
@@ -284,24 +193,19 @@ export const PersonalDetails = () => {
                 type={'email'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     email: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // defaultValue={stateAuth?.investorData?.personalDetail?.email}
               />
-              {/* {formik.touched.email && formik.errors.email ? (
-                <label className="error">{formik.errors.email}</label>
-              ) : null} */}
             </section>
 
             <section className="col-md-6 mb-4">
-              <label>
+              {/* <label>
                 Date of Birth<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Date of Birth*"
+                label="Date of Birth"
                 id={'dob'}
                 name={'dob'}
                 required={true}
@@ -309,20 +213,16 @@ export const PersonalDetails = () => {
                 type={'date'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     dob: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
                 defaultValue={
-                  stateAuth?.investorData?.personalDetail?.dob !== null
-                    ? moment(stateAuth?.investorData?.personalDetail?.dob)
+                  stateAuth?.investorData?.profile?.dob !== null
+                    ? moment(stateAuth?.investorData?.profile?.dob)
                     : moment()
                 }
               />
-              {/* {formik.touched.dob && formik.errors.dob ? (
-                <label className="error">{formik.errors.dob}</label>
-              ) : null} */}
             </section>
           </div>
         </FormCard>
@@ -330,11 +230,11 @@ export const PersonalDetails = () => {
         <FormCard title="Contact Info">
           <div className="row mb-4">
             <section className="col-12 mb-4">
-              <label>
+              {/* <label>
                 Registered Address<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Registered Address"
+                label="Registered Address"
                 id={'address'}
                 name={'address'}
                 type={'text'}
@@ -342,21 +242,17 @@ export const PersonalDetails = () => {
                 placeholder={'Enter your registered address'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     address: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                defaultValue={stateAuth?.investorData?.personalDetail?.address}
+                defaultValue={stateAuth?.investorData?.profile?.address}
               />
-              {/* {formik.touched.address && formik.errors.address ? (
-                <label className="error">{formik.errors.address}</label>
-              ) : null} */}
             </section>
 
             <section className="col-lg-4 mb-4">
-              <label>
-                Country<span style={{ color: 'red' }}>*</span>
+              <label style={{fontSize: '16px'}}>
+              <span style={{ color: 'red' }}>* </span>Country
               </label>
               {/* <TextField
               label="Country"
@@ -365,6 +261,8 @@ export const PersonalDetails = () => {
               className="edit_input"
             /> */}
               <CountryDropdown
+                id={'country'}
+                name={'country'}
                 className="form-control ps-3 py-1 investor-country"
                 value={country}
                 onChange={(value) => handleCountry(value)}
@@ -372,8 +270,8 @@ export const PersonalDetails = () => {
             </section>
 
             <section className="col-lg-4 mb-4">
-              <label>
-                State<span style={{ color: 'red' }}>*</span>
+              <label style={{fontSize: '16px'}}>
+              <span style={{ color: 'red' }}>* </span>State
               </label>
               {/* <TextField
               label="State"
@@ -382,7 +280,8 @@ export const PersonalDetails = () => {
               className="edit_input"
             /> */}
               <RegionDropdown
-                name="state"
+                id={"state"}
+                name={"state"}
                 country={country}
                 value={region}
                 onChange={(value) => handleChangeState(value)}
@@ -391,11 +290,11 @@ export const PersonalDetails = () => {
             </section>
 
             <section className="col-lg-4 mb-4">
-              <label>
+              {/* <label>
                 City<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="City"
+                label="City"
                 id={'city'}
                 name={'city'}
                 type={'text'}
@@ -403,21 +302,16 @@ export const PersonalDetails = () => {
                 placeholder={'Enter your city'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     city: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // value={stateAuth?.investorData?.personalDetail?.city}
               />
-              {/* {formik.touched.city && formik.errors.city ? (
-                <label className="error">{formik.errors.city}</label>
-              ) : null} */}
             </section>
 
             <section className="col-lg-6 mb-4">
-              <label>
-                Mobile Number<span style={{ color: 'red' }}>*</span>
+              <label style={{fontSize: '16px'}}>
+              <span style={{ color: 'red' }}>* </span>Mobile Number
               </label>
               <PhoneInput
                 id={'mobileNumber'}
@@ -427,17 +321,17 @@ export const PersonalDetails = () => {
                 countryCallingCodeEditable={true}
                 MaxLength={17}
                 defaultValue={
-                  stateAuth?.investorData?.personalDetail?.mobileNumber
+                  stateAuth?.investorData?.profile?.mobileNumber
                 }
                 onChange={handleMobileInput}
               />
             </section>
             <section className="col-lg-6 mb-4">
-              <label>
+              {/* <label>
                 Company Email<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Company Email*"
+                label="Company Email"
                 id={'companyEmail'}
                 name={'companyEmail'}
                 required={true}
@@ -445,16 +339,11 @@ export const PersonalDetails = () => {
                 className={'edit_input'}
                 type={'email'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     companyEmail: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // value={stateAuth?.investorData?.personalDetail?.companyEmail}
               />
-              {/* {formik.touched.companyEmail && formik.errors.companyEmail ? (
-                <label className="error">{formik.errors.companyEmail}</label>
-              ) : null} */}
             </section>
           </div>
         </FormCard>
@@ -462,11 +351,11 @@ export const PersonalDetails = () => {
         <FormCard title="Web & Social Media">
           <div className="row mb-4">
             <section className="col-lg-6 mb-4">
-              <label>
+              {/* <label>
                 Profile Link<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Profile Link*"
+                label="Profile Link"
                 id={'profileLink'}
                 name={'profileLink'}
                 type={'text'}
@@ -474,24 +363,19 @@ export const PersonalDetails = () => {
                 placeholder={'Enter linkedin link'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     profileLink: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // value={stateAuth?.investorData?.personalDetail?.profileLink}
               />
-              {/* {formik.touched.profileLink && formik.errors.profileLink ? (
-                <label className="error">{formik.errors.profileLink}</label>
-              ) : null} */}
             </section>
 
             <section className="col-lg-6 mb-4">
-              <label>
+              {/* <label>
                 Website<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Website*"
+                label="Website"
                 id={'website'}
                 name={'website'}
                 type={'text'}
@@ -499,24 +383,19 @@ export const PersonalDetails = () => {
                 placeholder={'Enter website'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     website: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // value={stateAuth?.investorData?.personalDetail?.website}
               />
-              {/* {formik.touched.website && formik.errors.website ? (
-                <label className="error">{formik.errors.website}</label>
-              ) : null} */}
             </section>
 
             <section className="col-lg-6 mb-4">
-              <label>
+              {/* <label>
                 LinkedIn<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="LinkedIn*"
+                label="LinkedIn"
                 id={'linkedIn'}
                 name={'linkedIn'}
                 type={'text'}
@@ -526,20 +405,15 @@ export const PersonalDetails = () => {
                 onChange={(e) =>
                   updateInvestorProfileData('', { linkedIn: e.target.value })
                 }
-                // onBlur={formik.handleBlur}
-                // value={stateAuth?.investorData?.personalDetail?.linkedIn}
               />
-              {/* {formik.touched.linkedIn && formik.errors.linkedIn ? (
-                <label className="error">{formik.errors.linkedIn}</label>
-              ) : null} */}
             </section>
 
             <section className="col-lg-6 mb-4">
-              <label>
+              {/* <label>
                 Twitter<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Twitter*"
+                label="Twitter"
                 id={'twitter'}
                 name={'twitter'}
                 type={'text'}
@@ -547,16 +421,11 @@ export const PersonalDetails = () => {
                 placeholder={'Enter twitter link'}
                 className={'edit_input'}
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     twitter: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // value={stateAuth?.investorData?.personalDetail?.twitter}
               />
-              {/* {formik.touched.twitter && formik.errors.twitter ? (
-                <label className="error">{formik.errors.twitter}</label>
-              ) : null} */}
             </section>
           </div>
         </FormCard>
@@ -564,11 +433,11 @@ export const PersonalDetails = () => {
         <FormCard title="Referral">
           <div className="row mb-4">
             <section className="col-12 mb-4">
-              <label>
+              {/* <label>
                 Referral<span style={{ color: 'red' }}>*</span>
-              </label>
+              </label> */}
               <TextField
-                // label="Referral"
+                label="Referral"
                 id={'referral'}
                 name={'referral'}
                 type={'text'}
@@ -576,16 +445,11 @@ export const PersonalDetails = () => {
                 placeholder="Enter a user in knight ventures"
                 className="edit_input"
                 onChange={(e) =>
-                  updateInvestorProfileData('personalDetail', {
+                  updateInvestorProfileData('profile', {
                     referral: e.target.value,
                   })
                 }
-                // onBlur={formik.handleBlur}
-                // value={stateAuth?.investorData?.personalDetail?.referral}
               />
-              {/* {formik.touched.referral && formik.errors.referral ? (
-                <label className="error">{formik.errors.referral}</label>
-              ) : null} */}
             </section>
 
             <section className="col-12 mb-4">
@@ -603,7 +467,7 @@ export const PersonalDetails = () => {
         >
           <Button type={'submit'} label={'Save'} variant="secondary" />
           <Button
-            // type="submit"
+            type={"submit"}
             label={'Next'}
             variant="primary"
             // disabled={nextLoading}

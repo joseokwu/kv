@@ -3,7 +3,6 @@ import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/images/kvLogo.png'
 import notification from '../../assets/icons/notification.svg'
-import chat from '../../assets/icons/chat.svg'
 import angleDown from '../../assets/icons/angleDown.svg'
 import sampleUser from '../../assets/images/sampleUser.png'
 import { Notification } from '../index'
@@ -67,9 +66,9 @@ const { stateAuth } = useAuth();
 
         <div className="d-flex align-items-center h-100">
           <span className="d-flex align-items-center header-profile d-none d-lg-flex">
-          <img src={ stateAuth?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
+          <img src={ stateAuth?.username?.avatar ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
              } alt="profile" className="" />
-            <p className="mb-0 header-text"> { stateAuth.username } </p>
+            <p className="mb-0 header-text"> { stateAuth?.username } </p>
           </span>
           <div>
             <HeaderDropdownMenu />

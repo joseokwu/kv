@@ -130,6 +130,7 @@ export const InvestmentApproach = () => {
 
       <section className="d-flex align-items-center justify-content-between">
         <button
+          style={{color: "white", background: "#808080"}}
           className="back-btn"
           onClick={() => {
             push("#investor");
@@ -151,3 +152,205 @@ export const InvestmentApproach = () => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from "react";
+// import { RowOption, Button } from "../../../../components";
+// import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
+// import { useHistory } from "react-router";
+// import { Input , Form , Select } from 'antd';
+// import { sectors } from "../../../../utils/utils";
+// import { useAuth } from "../../../../hooks/useAuth";
+// import { investmentStages, expBetter, region, funding } from "../../../../constants/domiData";
+// import { TextareaCustom } from "../../../../components/textArea/cutstomTextarea";
+
+
+// const { Option } = Select;
+// const { TextArea } = Input;
+
+// export const InvestmentApproach = () => {
+//   const { push } = useHistory();
+//   const { updateInvestorProfileData, stateAuth, updateInvestorInfo } = useAuth()
+//   const onFinish = async (values) => {
+//     updateInvestorInfo()
+//     console.log(values)
+//   }
+//   console.log(stateAuth);
+
+
+//   return (
+//     <div className="register-form-wrap">
+//       <h3>Investment Approach</h3>
+//       <p>Let’s help you provide startups personalised for your preferences</p>
+
+//       <Form onFinish={onFinish} initialValues={{ remember: true }}>
+//       <FormCard>
+//         <div className="row">
+//           <section className="col-12 mb-4">
+//             <Form.Item
+//               label="Are you interested in any sectors or technologies in particular?"
+//               name={"techSector"}
+//               initialValue={ stateAuth?.investorData?.techSector}
+//               rules={[{required: true, message: 'Please select any sector!'}]}
+//             >
+//             <Select
+//               placeholder="Choose sectors you are interested in"
+//               className="edit_input"
+//               onChange={(e) => updateInvestorProfileData("investorApproach", {techSector: e.target.value})}
+//             >
+//               {
+//                 sectors.map((item, i) => (
+//                   <Option key={i} value={item}>{item}</Option>
+//                 ))
+//               }
+//             </Select>
+//             </Form.Item>
+//           </section>
+
+//           <section className="col-12 mb-4">
+//             <Form.Item
+//               label="Help us understand your experience better"
+//               name={"investmentExperience"}
+//               initialValue={ stateAuth?.investorData?.averageInvestment}
+//               rules={[{required: true, message: 'Please select investment experience!'}]}
+//             >
+//             <Select
+//               placeholder="Choose option"
+//               className="edit_input"
+//               onChange={(e) => updateInvestorProfileData("investorApproach", {investmentExperience: e.target.value})}
+//             >
+//               {
+//                 expBetter.map((item, i) => (
+//                   <Option key={i} value={item}>{item}</Option>
+//                 ))
+//               }
+//             </Select>
+//             </Form.Item>
+//           </section>
+
+//           {/* <section className="col-12 mb-4">
+//             <p className="mb-3">I Prefer to invest in</p>
+//             <RowOption options={["B2B", "B2C", "Marketplace"]} />
+//           </section> */}
+
+//           <section className="col-12 mb-4">
+//             <TextareaCustom 
+//               name={"investmentThesis"}
+//               label="Investment Thesis"
+//               placeholder="e.g i want to invest in start-ups which have global potential and have validated traction"
+//               value={stateAuth?.investorData?.investmentThesis}
+//               onChange={(e)=>  updateInvestorProfileData("investorApproach",{ investmentThesis: e.target.value })}
+//             />
+//           </section>
+//         </div>
+//       </FormCard>
+
+//       <FormCard>
+//         <div className="row">
+//           {/* <section className="col-12 mb-4">
+//             <p className="mb-3">What is your Preferred Stage</p>
+//             <RowOption options={investmentStages} />
+//           </section> */}
+
+//           {/* <section className="col-12 mb-4">
+//             <Form.Item
+//               label="What region are you interested in investing in?"
+//               name={"investmentThesis"}
+//               initialValue={ stateAuth?.investorData?.investmentThesis}
+//               rules={[{required: true, message: 'Please select investment region!'}]}
+//             >
+//             <Select
+//               placeholder="Choose regions you are interested in investing in"
+//               className="edit_input"
+//             >
+//                {
+//                 region.map((item, i) => (
+//                   <Option key={i} value={item}>{item}</Option>
+//                 ))
+//               }
+//             </Select>
+//             </Form.Item>
+//           </section> */}
+
+//           {/* <section className="col-12 mb-4">
+//             <p className="mb-3">What is your Preferred Stage</p>
+//             <RowOption
+//               options={[
+//                 "Top College Graduates",
+//                 "Prior Start-up experience",
+//                 "Doesn't matter",
+//               ]}
+//             />
+//           </section> */}
+
+//           <section className="col-12 mb-4">
+//             <Form.Item 
+//               label="On average, how much would you like to invest in each business you choose to fund (in USD)?"
+//               name={"averageInvestment"}
+//               initialValue={ stateAuth?.investorData?.averageInvestment}
+//               rules={[{required: true, message: 'Please select average investment!'}]}
+//             >
+//             <Select
+//               placeholder="Choose an option"
+//               className="edit_input"
+//               onChange={(e) => updateInvestorProfileData("investorApproach", {averageInvestment: e.target.value})}
+//             >
+//               {
+//                 funding.map((item, i) => (
+//                   <Option key={i} value={item}>{item}</Option>
+//                 ))
+//               }
+//             </Select>
+//             </Form.Item>
+//           </section>
+//         </div>
+//       </FormCard>
+
+//       <section className="d-flex align-items-center justify-content-between">
+//         <button
+//           className="back-btn"
+//           onClick={() => {
+//             push("#investor");
+//           }}
+//         >
+//           Go Back
+//         </button>
+
+//         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
+//           <Button label="Save" variant="secondary" />
+//           <Button
+//             label="Next"
+//             onClick={() => {
+//               push("#portfolio");
+//             }}
+//           />
+//         </div>
+//       </section>
+//       </Form>
+//     </div>
+//   );
+// };
