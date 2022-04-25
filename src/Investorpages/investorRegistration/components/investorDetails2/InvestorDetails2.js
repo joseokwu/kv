@@ -20,7 +20,7 @@ export const InvestorDetails2 = () => {
 
   return (
     <div className="register-form-wrap">
-      <h3>Investor Details</h3>
+      <h3 style={{color: "#2e3192"}}>Investor Details</h3>
       <p>
         This will help us provide startups personalised for your preferences
       </p>
