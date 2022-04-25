@@ -9,7 +9,7 @@ export default  [
     [
       {
         title: 'Invest in startups today. Become an investor',
-        body: 'We are onboarding Booster Partners to our startup eco system for mutual benefits'
+        body: 'We are onboarding Investors to our startup eco system for mutual benefits'
       }
     ],
     

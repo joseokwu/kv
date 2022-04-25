@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { ProgressBar } from "../../components";
 import hi from "../../assets/icons/hiEmoji.png";
@@ -7,8 +7,10 @@ import { InvestorDetails } from "./components/investorDetails/InvestorDetails";
 import { InvestorDetails2 } from "./components/investorDetails2/InvestorDetails2";
 import { InvestmentApproach } from "./components/investmentApproach/InvestmentApproach";
 import { Portfolio } from "./components/portfolio/Portfolio";
+import { useAuth } from "../../hooks/useAuth";
 
 export const InvestorRegistration = () => {
+
   const wrapRef = useRef();
   const [progress, setProgress] = useState();
 
@@ -16,6 +18,8 @@ export const InvestorRegistration = () => {
     location: { hash },
     push,
   } = useHistory();
+
+  const { stateAuth } = useAuth();
 
   const switchForm = (currentHash) => {
     push(currentHash);
@@ -42,7 +46,7 @@ export const InvestorRegistration = () => {
         setProgress("100");
         break;
       default:
-        setProgress("25");
+        setProgress("0");
         break;
     }
   }, [hash]);
@@ -56,7 +60,7 @@ export const InvestorRegistration = () => {
               className="d-flex align-items-center"
               style={{ columnGap: 12 }}
             >
-              <h4>Hi Micheal</h4>
+              <h4>Hi {stateAuth?.username}</h4>
               <img src={hi} alt="hi" />
             </section>
             <p>Let’s customise your experience</p>
@@ -75,7 +79,7 @@ export const InvestorRegistration = () => {
               onClick={() => switchForm("#details")}
               className={(hash === "#details" || hash === "") && "active-li"}
             >
-              Partner Details
+              Personal Details
             </li>
             <li
               onClick={() => switchForm("#investor")}

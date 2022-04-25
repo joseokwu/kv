@@ -28,7 +28,7 @@ export const setType = (type) => {
 
 export const getType = () => {
   let type = localStorage.getItem("kv:user:role");
-  console.log(type)
+ // console.log(type)
   return type;
 };
 
