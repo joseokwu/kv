@@ -134,7 +134,13 @@ const callUpdateStartupData = async (value) => {
         values: stateAuth.investorData,
         lastPage,
       };
-
+      if(lastPage){
+        const res = await updateStartup(payload)
+        toast.success(res?.message)
+        history.push('/investor/dashboard');
+        return ;
+      }
+      console.log(payload)
       const res = await updateStartup(payload)
       toast.success(res?.message)
     } catch (err) {
@@ -187,12 +193,3 @@ const callUpdateStartupData = async (value) => {
   };
 }
  
-
-// date: "2022-04-23T13:22:50.522Z"
-// description: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n\nTop answer: \nThe issue was with using Antd's Form & Form.item along wi"
-// email: "isaackelvin378@gmail.com"
-// industry: "Agriculture, food and beverages"
-// logo: "https://cdn.shoutng.com/kvmppa8o6zvz0ibmmd6rx9.png"
-// phone: "+2348163394719"
-// startupId: "6263c596ed0b02cccd2c9696"
-// startupName: "Winner Airlines"

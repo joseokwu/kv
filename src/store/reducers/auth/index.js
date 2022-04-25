@@ -80,6 +80,7 @@ const authReducer = (state = INIT_STATE, action) => {
       if (action?.payload?.type[0] === "startup") {
      
         return {
+
           ...state,
           loading: false,
           dashboardLoad: false,
@@ -91,9 +92,19 @@ const authReducer = (state = INIT_STATE, action) => {
           email: action?.payload?.email,
         };
       }
-   
-
-
+      if(action?.payload?.type[0] === 'investor'){
+        return {
+          ...state,
+          loading: false,
+          dashboardLoad: false,
+          authenticated: true,
+          user: action?.payload,
+          ...action.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+        };
+      }
       break ;
     case DASHBOARD_USER_PROFILE:
       console.log(action?.payload)
@@ -181,7 +192,21 @@ const authReducer = (state = INIT_STATE, action) => {
         };
 
       case UPDATE_INVESTOR_INFO:
-        return {
+       // console.log(action.payload.value)
+        if(action.payload.property === 'portfolio'){
+  
+          return {
+            ...state,
+          investorData:{
+            ...state.investorData , 
+          portfolio : [
+        ...state.investorData.portfolio,
+        {...action.payload.value } 
+          ]
+          }
+          }
+        }
+    return {
           ...state,
           investorData: {
             ...state.investorData,
@@ -191,7 +216,6 @@ const authReducer = (state = INIT_STATE, action) => {
             },
           },
         };
-
       case UPDATE_PARTNER_INFO: 
       if(action.payload.property.trim() !== ""){
       

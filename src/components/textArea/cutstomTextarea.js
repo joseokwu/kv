@@ -10,6 +10,7 @@ export const TextareaCustom = ({ name , value , label , onChange , placeholder }
   <Form.Item
         name={name}
         label={label}
+        
        initialValue={value}
         rules={[{ required: true, message: `This field is required` }]}
       >

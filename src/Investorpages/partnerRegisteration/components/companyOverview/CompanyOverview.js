@@ -202,7 +202,6 @@ const handleChangeState = (value) => {
         label="Industry"
         initialValue={stateAuth?.partnerData?.industry}
         rules={[{ required: true, message: 'Please select a industry!' }]}
-
       >
         <Select
          id="industry"

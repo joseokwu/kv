@@ -1,11 +1,20 @@
 import React from "react";
-import { RowOption, Select, TextArea, Button } from "../../../../components";
+import { RowOption, TextField, Button } from "../../../../components";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
 import { useHistory } from "react-router";
 import { sectors } from "../../../../utils/utils";
+import { Form , Select } from "antd";
+import { useAuth } from "../../../../hooks/useAuth";
+import { TextareaCustom } from "../../../../components/textArea/cutstomTextarea";
+import { CountryDropdown } from 'react-country-region-selector';
+
+const { Option } = Select;
+
 
 export const InvestmentApproach = () => {
   const { push } = useHistory();
+
+  const { updateInvestorProfileData, stateAuth, updateInvestorInfo } = useAuth()
 
   const investmentStages = [
     "Pre-Seed",
@@ -27,6 +36,11 @@ export const InvestmentApproach = () => {
     "I am an institutional investor, working in Venture Capital / Private Equity",
     "None of the above",
   ];
+
+  const onFinish = async (values) => {
+    updateInvestorInfo()
+   // console.log(values)
+  }
 
   const region = [
     "Africa - the whole continent",
@@ -55,38 +69,84 @@ export const InvestmentApproach = () => {
     <div className="register-form-wrap">
       <h3>Investment Approach</h3>
       <p>Let’s help you provide startups personalised for your preferences</p>
-
+      <Form onFinish={onFinish} initialValues={{ remember: true }}>
       <FormCard>
         <div className="row">
           <section className="col-12 mb-4">
+          
+          <Form.Item
+          name="techSector"
+          label="Choose the sectors you have expertise in?"
+          initialValue={stateAuth?.investorData?.investorApproach?.techSector}
+          rules={[{ required: true, message: 'Please select a sector' }]}
+        >
+
             <Select
               placeholder="Choose sectors you are interested in"
               label="Are you interested in any sectors or technologies in particular?"
               className="edit_input"
-              options={sectors}
-            />
+              style={{width: 200 , backgroundColor:'#959596'}}
+              onChange={(e) => updateInvestorProfileData("investorApproach", { techSector: e})}
+            >
+             {
+        sectors.map((item , i) =>(
+         <Option value={item} key={i} > { item} </Option>
+        ))
+       
+      }
+            </Select>
+            </Form.Item>
           </section>
 
           <section className="col-12 mb-4">
+          <Form.Item
+          name="investmentExperience"
+          label="Choose the sectors you have expertise in?"
+          initialValue={stateAuth?.investorData?.investorApproach?.investmentExperience}
+          rules={[{ required: true, message: 'Please select a sector' }]}
+        >
             <Select
               placeholder="Choose option"
               label="Help us understand your experience better:"
               className="edit_input"
-              options={expBetter}
-            />
+              style={{width: 200 , backgroundColor:'#959596'}}
+              onChange={(e) => updateInvestorProfileData("investorApproach", { investmentExperience: e})}
+            >
+           {
+            expBetter.map((item , i) =>(
+         <Option value={item} key={i} > { item} </Option>
+        ))
+       
+      }
+              </Select>
+            </Form.Item>
           </section>
 
           <section className="col-12 mb-4">
             <p className="mb-3">I Prefer to invest in</p>
-            <RowOption options={["B2B", "B2C", "Marketplace"]} />
+            <RowOption 
+            currentSelected={stateAuth?.investorData?.investorApproach?.investmentPreference }
+            getSelected={(value) => {
+            updateInvestorProfileData('investorApproach', {
+             investmentPreference: value  ,
+            }) 
+          }}
+             options={["B2B", "B2C", "Marketplace"]} />
           </section>
 
           <section className="col-12 mb-4">
-            <TextArea
-              label="Investment Thesis"
-              placeholder="e.g i want to invest in start-ups which have global potential and have validated traction"
-            />
-          </section>
+          
+       <TextareaCustom 
+       name={"investmentThesis"}
+    
+       value={stateAuth?.investorData?.investorApproach?.investmentThesis}
+       onChange={(e)=>  updateInvestorProfileData("investorApproach",{
+        investmentThesis: e.target.value})}
+        label="Investment Thesis"
+       placeholder="e.g i want to invest in start-ups which have global potential and have validated traction"
+        />  
+      
+         </section>
         </div>
       </FormCard>
 
@@ -94,21 +154,37 @@ export const InvestmentApproach = () => {
         <div className="row">
           <section className="col-12 mb-4">
             <p className="mb-3">What is your Preferred Stage</p>
-            <RowOption options={investmentStages} />
+            <RowOption 
+             currentSelected={stateAuth?.investorData?.investorApproach?.stage }
+            getSelected={(value) => {
+            updateInvestorProfileData('investorApproach', {
+              stage: value ,
+            }) 
+          }}
+             options={investmentStages} />
           </section>
 
           <section className="col-12 mb-4">
-            <Select
-              label="What regions are you interested in investing in?"
-              placeholder="Choose regions you are interested in investing in"
-              className="edit_input"
-              options={region}
-            />
+          <CountryDropdown
+                id={'region'}
+                name={'region'}
+                className="form-control ps-3 py-1 "
+                value={stateAuth?.investorData?.investorApproach?.region}
+                onChange={(value) => updateInvestorProfileData('investorApproach', {
+                  region: value ,
+            })}
+              />
           </section>
 
           <section className="col-12 mb-4">
             <p className="mb-3">What is your Preferred Stage</p>
             <RowOption
+             currentSelected={stateAuth?.investorData?.investorApproach?.preferredStage }
+            getSelected={(value) => {
+            updateInvestorProfileData('investorApproach', {
+              preferredStage: value ,
+            }) 
+          }}
               options={[
                 "Top College Graduates",
                 "Prior Start-up experience",
@@ -118,18 +194,39 @@ export const InvestmentApproach = () => {
           </section>
 
           <section className="col-12 mb-4">
+       
+              <Form.Item
+          name="averageInvestment"
+          label="Choose the sectors you have expertise in?"
+          initialValue={stateAuth?.investorData?.investorApproach?.averageInvestment}
+          rules={[{ required: true, message: 'Please select a sector' }]}
+        >
             <Select
+              placeholder="Choose option"
               label="On average, how much would you like to invest in each business you choose to fund (in USD)?"
-              placeholder="Choose an option"
               className="edit_input"
-              options={funding}
-            />
+              onChange={(e) =>
+                  updateInvestorProfileData('investorApproach', {
+                    averageInvestment: e,
+                  })
+                }
+            >
+           {
+            funding.map((item , i) =>(
+         <Option value={item} key={i} > { item} </Option>
+        ))
+       
+      }
+              </Select>
+            </Form.Item>
+
           </section>
         </div>
       </FormCard>
 
       <section className="d-flex align-items-center justify-content-between">
         <button
+          style={{color: "white", background: "#808080"}}
           className="back-btn"
           onClick={() => {
             push("#investor");
@@ -148,6 +245,9 @@ export const InvestmentApproach = () => {
           />
         </div>
       </section>
+      </Form>
     </div>
   );
 };
+
+

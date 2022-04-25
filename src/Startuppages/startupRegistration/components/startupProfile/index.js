@@ -141,14 +141,6 @@ export const StartupProfile = () => {
 
  
 
-  // fundRaising:
-  // capTable: {amountRaised: '5000', amountInvestedByFounders: '1000', files: Array(4), _id: '6259419ab36d0dd3b5e2e3c9'}
-  // financialProjection: {files: 'https://cdn.shoutng.com/kvnmri9zykq3doplnqtxfi.pdf', _id: '6259419ab36d0dd3b5e2e3cb'}
-  // fundUtilization: {files: Array(10), _id: '6259419ab36d0dd3b5e2e3c8'}
-  // fundingAsk: {hasPreviousFundraising: true, instrumentForRound: 'Series B', numberOfRounds: '5', fundraisingAmount: '800000', dilution: '', …}
-  // previousRound:
-
-
   const handlePhoneInput = (value) => {
    
     updateProfile("startUpProfile",{
