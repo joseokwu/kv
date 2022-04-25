@@ -205,7 +205,7 @@ const authReducer = (state = INIT_STATE, action) => {
       };
 
       case UPDATE_INVESTOR_INFO:
-       // console.log(action.payload.value)
+      
         if(action.payload.property === 'portfolio'){
   
           return {
@@ -219,12 +219,13 @@ const authReducer = (state = INIT_STATE, action) => {
           }
           }
         }
+        console.log(action.payload.value)
     return {
           ...state,
-          partnerData: {
-            ...state.partnerData,
+          investorData: {
+            ...state.investorData,
             [action.payload.property]: {
-              ...state.partnerData[action.payload.property],
+              ...state.investorData[action.payload.property],
               ...action.payload.value,
             },
           },

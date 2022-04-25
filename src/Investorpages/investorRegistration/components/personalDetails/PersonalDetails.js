@@ -43,6 +43,7 @@ export const PersonalDetails = () => {
    // console.log(values)
   }
 
+  console.log(stateAuth)
 
   const onChangeImage = async (e) => {
     const { files } = e.target
@@ -56,7 +57,7 @@ export const PersonalDetails = () => {
       const response = await upload(formData)
       setAvatar(response?.path)
       updateInvestorProfileData('profile', {
-        logo: response?.path,
+        avatar: response?.path,
       })
       setLogoUploading(false)
     } catch (error) {
