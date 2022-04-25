@@ -102,58 +102,55 @@ export const dashboardProfile = async (value) => async (dispatch) => {
   }
 };
 
- export const updateStartupProfile = async( property ,value) => async(dispatch) =>{
-
+export const updateStartupProfile =
+  async (property, value) => async (dispatch) => {
     dispatch({
-        type:UPDATE_STARTUP_INFO,
-        payload:{ 
-            property,
-            value
-            
-         }
-    })
-}
+      type: UPDATE_STARTUP_INFO,
+      payload: {
+        property,
+        value,
+      },
+    });
+  };
 
-export const updatePartnerProfile = async( property ,value ) => async(dispatch) =>{
-
+export const updatePartnerProfile =
+  async (property, value) => async (dispatch) => {
     dispatch({
-        type:UPDATE_PARTNER_INFO,
-        payload:{ 
-            property,
-            value,
-         }
-    })
-}
+      type: UPDATE_PARTNER_INFO,
+      payload: {
+        property,
+        value,
+      },
+    });
+  };
 
-export const updateInvestorProfile = async( property ,value) => async(dispatch) =>{
-
+export const updateInvestorProfile =
+  async (property, value) => async (dispatch) => {
     dispatch({
-        type: UPDATE_INVESTOR_INFO,
-        payload:{ 
-            value,
-            property
-         }
-    })
-}
+      type: UPDATE_INVESTOR_INFO,
+      payload: {
+        value,
+        property,
+      },
+    });
+  };
 
-export const updateInvestorData = async(value) => async(dispatch) =>{
-    try{
-        const res = await profile(value);
-        if(res){
-         console.log(res?.data?.investorData)
-            dispatch({
-                type: UPDATE_INVESTOR_DATA,
-                payload: res?.data?.investorData
-            })
-            
-        }
-    }catch(err){
-        dispatch({
-            type:USER_PROFILE_FAIL
-        })
+export const updateInvestorData = async (value) => async (dispatch) => {
+  try {
+    const res = await profile(value);
+    if (res) {
+      console.log(res?.data?.investorData);
+      dispatch({
+        type: UPDATE_INVESTOR_DATA,
+        payload: res?.data?.investorData,
+      });
     }
-}
-    
+  } catch (err) {
+    dispatch({
+      type: USER_PROFILE_FAIL,
+    });
+  }
+};
 
 export const updateStartupData = async (value) => async (dispatch) => {
   try {
@@ -176,7 +173,6 @@ export const updateMentorData = async (value) => async (dispatch) => {
   try {
     const res = await profile(value);
     if (res) {
-      console.log(res?.data?.mentorData);
       dispatch({
         type: UPDATE_MENTOR_DATA,
         payload: res?.data?.mentorData,
@@ -238,8 +234,3 @@ export const updateMentorProfile =
       },
     });
   };
-
-
-
-
-

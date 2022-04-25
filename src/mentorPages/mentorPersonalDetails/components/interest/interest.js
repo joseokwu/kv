@@ -58,7 +58,7 @@ const Interest = () => {
       toast.error("Something went wrong");
     }
     if (uploaded) {
-      push("#work_experience");
+      push("#consulting");
     }
     setLoading(false);
   };
@@ -188,6 +188,7 @@ const Interest = () => {
           <section className="gender_choice">
             <button
               className="col-md-6 male_btn"
+              type="button"
               style={
                 formik.values.mentorType === "Regular mentor"
                   ? {
@@ -206,6 +207,7 @@ const Interest = () => {
             </button>
             <button
               className="col-md-5 pl-2 female_btn"
+              type="button"
               style={
                 formik.values.mentorType === "Directory listing"
                   ? {
@@ -260,6 +262,7 @@ const Interest = () => {
           </p>
           <section className="free-choice">
             <button
+              type="button"
               className="yes-btn"
               style={
                 formik.values.growthInStartup === "Yes"
@@ -278,6 +281,7 @@ const Interest = () => {
               Yes
             </button>
             <button
+              type="button"
               className="no-btn"
               style={
                 formik.values.growthInStartup === "No"
@@ -347,7 +351,7 @@ const Interest = () => {
 
       <FormCard>
         <section className="upload_resume text-center mb-4">
-          <button>
+          <button type="button">
             <img className="mr-2" src={imageRep} alt={"upload_resume"} /> Upload
             Resume
           </button>
@@ -365,6 +369,7 @@ const Interest = () => {
       <section className="d-flex align-items-center justify-content-between mt-5">
         <button
           className="back-btn"
+          type="button"
           onClick={() => {
             push("#work_experience");
           }}
