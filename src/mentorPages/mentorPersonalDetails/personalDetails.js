@@ -29,7 +29,6 @@ export const MentorPersonalDetails = () => {
     push(currentHash);
   };
   const { stateAuth } = useAuth();
-  console.log(stateAuth);
 
   useEffect(() => {
     wrapRef.current.scrollTop = 0;

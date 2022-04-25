@@ -27,8 +27,6 @@ const WorkExperience = () => {
   } = useActivity();
 
   const back = () => {
-    console.log("path", path);
-    console.log("path - 1", path - 1);
     changePath(path - 1);
   };
 
@@ -46,9 +44,10 @@ const WorkExperience = () => {
 
   useEffect(() => {
     setData(stateAuth?.mentorData?.workExperience[0]);
-  }, []);
+  }, [stateAuth?.mentorData?.workExperience[0]]);
 
   const onSubmit = async () => {
+    updateMentorProfileState("workExperience", [data]);
     setLoading(true);
     const uploaded = await updateMentorInfo();
 
@@ -68,7 +67,7 @@ const WorkExperience = () => {
     initialValues: {
       currentFounder: data?.currentFounder ?? "No",
       industry: data?.industry ?? "",
-      companyName: data?.industry ?? "",
+      companyName: data?.companyName ?? "",
       achievements: data?.achievements ?? "",
       position: data?.position ?? "",
       start: data?.start ?? "",
@@ -91,9 +90,8 @@ const WorkExperience = () => {
   const handleChange = (e, prefix = "") => {
     const { name, value } = e.target;
 
-    updateMentorProfileState("workExperience", {
-      [name]: value,
-    });
+    setData({ ...data, [name]: value });
+
     formik.handleChange(e);
   };
 
@@ -346,7 +344,10 @@ const WorkExperience = () => {
           <button
             style={{ background: "#c4c4c4" }}
             className="back-btn"
-            onClick={() => push("#personal_details")}
+            onClick={() => {
+              updateMentorProfileState("workExperience", [data]);
+              push("#personal_details");
+            }}
           >
             Go Back
           </button>
