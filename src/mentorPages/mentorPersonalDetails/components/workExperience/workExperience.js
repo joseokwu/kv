@@ -46,13 +46,6 @@ const WorkExperience = () => {
     setData(stateAuth?.mentorData?.workExperience[0]);
   }, [stateAuth?.mentorData?.workExperience[0]]);
 
-  console.log("data", data);
-
-  console.log(
-    "stateAuth?.mentorData?.workExperience",
-    stateAuth?.mentorData?.workExperience
-  );
-
   const onSubmit = async () => {
     updateMentorProfileState("workExperience", [data]);
     setLoading(true);

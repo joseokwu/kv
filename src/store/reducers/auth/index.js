@@ -63,7 +63,6 @@ const authReducer = (state = INIT_STATE, action) => {
         error: action.payload,
       };
     case USER_PROFILE:
-      console.log("action.payload", action.payload);
       if (action?.payload?.type[0] === "boosterpartner") {
         return {
           ...state,
@@ -92,6 +91,19 @@ const authReducer = (state = INIT_STATE, action) => {
         };
       }
       if (action?.payload?.type[0] === "investor") {
+        return {
+          ...state,
+          loading: false,
+          dashboardLoad: false,
+          authenticated: true,
+          user: action?.payload,
+          ...action.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+        };
+      }
+      if (action?.payload?.type[0] === "mentor") {
         return {
           ...state,
           loading: false,
