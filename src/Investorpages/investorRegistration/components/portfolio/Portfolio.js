@@ -155,7 +155,7 @@ const [loading , setLoading] = useState(false);
 
         <Button 
           type='submit'
-         label="click to send"
+         label="Send Invitation"
           loading={loading}
           />
       </section>
