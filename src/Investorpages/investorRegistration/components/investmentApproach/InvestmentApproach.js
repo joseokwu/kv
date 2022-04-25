@@ -67,7 +67,7 @@ export const InvestmentApproach = () => {
   ];
   return (
     <div className="register-form-wrap">
-      <h3>Investment Approach</h3>
+      <h3 style={{color: "#2e3192"}}>Investment Approach</h3>
       <p>Let’s help you provide startups personalised for your preferences</p>
       <Form onFinish={onFinish} initialValues={{ remember: true }}>
       <FormCard>
