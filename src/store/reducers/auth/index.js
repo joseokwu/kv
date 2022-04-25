@@ -216,13 +216,22 @@ const authReducer = (state = INIT_STATE, action) => {
     case UPDATE_MENTOR_INFO:
       return {
         ...state,
-        mentorData: {
-          ...state.mentorData,
-          [action.payload.property]: {
-            ...state.mentorData[action.payload.property],
-            ...action.payload.value,
-          },
-        },
+        mentorData:
+          action.payload.property === "workExperience"
+            ? {
+                ...state.mentorData,
+                [action.payload.property]: [
+                  // ...state.mentorData[action.payload.property],
+                  ...action.payload.value,
+                ],
+              }
+            : {
+                ...state.mentorData,
+                [action.payload.property]: {
+                  ...state.mentorData[action.payload.property],
+                  ...action.payload.value,
+                },
+              },
       };
 
     case UPDATE_PROFILE_FAIL:
