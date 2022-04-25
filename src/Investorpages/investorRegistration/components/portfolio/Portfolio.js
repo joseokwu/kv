@@ -39,7 +39,7 @@ export const Portfolio = () => {
       </LargeModal>
       ): (<span />)
     }
-      <h3>Start-up portfolio</h3>
+      <h3 style={{color: "#2e3192"}}>Start-up portfolio</h3>
       <p>
         This will help us provide startups personalised for your preferences
       </p>

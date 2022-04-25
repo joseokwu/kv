@@ -49,7 +49,7 @@ export const InvestorDetails = () => {
 
   return (
       <div className="register-form-wrap">
-      <h3>Investor Details</h3>
+      <h3 style={{color: "#2e3192"}}>Investor Details</h3>
       <p>Create a profile for your investment</p>
       <Form  onFinish={onFinish} initialValues={{ remember: true }}>
       <FormCard>

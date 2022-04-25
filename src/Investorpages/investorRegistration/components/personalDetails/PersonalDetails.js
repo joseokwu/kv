@@ -9,6 +9,8 @@ import {
 } from '../../../../components'
 import { useHistory } from 'react-router-dom'
 import { Input, Form, Select } from 'antd'
+import { DatePicker } from "antd";
+import "react-datepicker/dist/react-datepicker.css";
 import toast from 'react-hot-toast'
 import { useAuth } from '../../../../hooks/useAuth'
 import { upload } from '../../../../services/utils'
@@ -109,12 +111,20 @@ export const PersonalDetails = () => {
     console.log(value)
   }
 
+  const handleDateInput = (value) => {
+    updateInvestorProfileData('profile', {
+      dob: value,
+    })
+  };
+
+  const dateFormat = "YYYY-MM-DD";
+
   //console.log(stateAuth);
 
 
   return (
     <div className="register-form-wrap">
-      <h3>Personal Details</h3>
+      <h3 style={{color: "#2e3192"}}>Personal Details</h3>
       <p>Let’s get to know you</p>
       {/* <form onSubmit={formik.handleSubmit}> */}
       <Form onFinish={onFinish} initialValues={{ remember: true }}>
@@ -220,24 +230,20 @@ export const PersonalDetails = () => {
               {/* <label>
                 Date of Birth<span style={{ color: 'red' }}>*</span>
               </label> */}
-              <TextField
+              <DatePicker
                 label="Date of Birth"
                 id={'dob'}
                 name={'dob'}
                 required={true}
-                value={
-                  stateAuth?.investorData?.profile?.dob !== null
+                defaultValue={
+                    stateAuth?.investorData?.profile?.dob !== null
                     ? moment(stateAuth?.investorData?.profile?.dob)
                     : moment()
                 }
-                placeholder=""
-                type={'date'}
+                placeholder="yyyy-mm-dd"
                 className={'edit_input'}
-                onChange={(e) =>
-                  updateInvestorProfileData('profile', {
-                    dob: e.target.value,
-                  })
-                }
+                format={dateFormat}
+                onChange={(_, dateString) => handleDateInput(dateString)}
        
               />
             </section>
@@ -338,7 +344,7 @@ export const PersonalDetails = () => {
                 className={'in-reg-no py-1'}
                 countryCallingCodeEditable={true}
                 MaxLength={17}
-                defaultValue={
+                value={
                   stateAuth?.investorData?.profile?.mobile_number
                 }
                 onChange={(e) => handleMobileInput(e)}
