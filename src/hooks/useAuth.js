@@ -111,10 +111,10 @@ export const useAuth = () => {
         accType: stateAuth.type[0],
         values: stateAuth.startupData,
         lastPage,
-      };
-
-      const res = await updateStartup(payload);
-      toast.success(res?.message);
+      }
+      console.log(payload)
+      const res = await updateStartup(payload)
+      toast.success(res?.message)
     } catch (err) {
       console.log(err?.response);
       toast.error(err?.response?.data?.message ?? err?.response?.message);
@@ -136,9 +136,17 @@ export const useAuth = () => {
         values: stateAuth.investorData,
         lastPage,
       };
-
-      const res = await updateStartup(payload);
-      toast.success(res?.message);
+      if(lastPage){
+        const res = await updateStartup(payload)
+        if(res.status){
+            toast.success(res?.message)
+            history.push('/investor/dashboard');
+            return ;
+        }
+      }
+      console.log(payload)
+      const res = await updateStartup(payload)
+      toast.success(res?.message)
     } catch (err) {
       console.log(err?.response);
       toast.error(err?.response?.data?.message ?? err?.response?.message);
@@ -186,4 +194,5 @@ export const useAuth = () => {
     getSavedMentorData,
     updateMentorInfo,
   };
-};
+}
+ 

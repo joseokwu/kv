@@ -78,13 +78,15 @@ const authReducer = (state = INIT_STATE, action) => {
         };
       }
       if (action?.payload?.type[0] === "startup") {
+     
         return {
+
           ...state,
           loading: false,
           dashboardLoad: false,
           authenticated: true,
           user: action?.payload,
-          startupData: action.payload,
+          startupData: action.payload.startupData,
           type: action?.payload?.type,
           signUpStatus: action?.payload?.type[0],
           email: action?.payload?.email,
@@ -118,38 +120,41 @@ const authReducer = (state = INIT_STATE, action) => {
       }
       break;
     case DASHBOARD_USER_PROFILE:
-      if (action?.payload?.type[0] === "boosterpartner") {
-        return {
-          ...state,
-          dashboardLoad: false,
-          partnerData: action?.payload,
-          type: action?.payload?.type,
-          signUpStatus: action?.payload?.type[0],
-          email: action?.payload?.email,
-        };
-      }
-      if (action?.payload?.type[0] === "startup") {
-        return {
-          ...state,
-          dashboardLoad: false,
-          user: action?.payload,
-          type: action?.payload?.type,
-          signUpStatus: action?.payload?.type[0],
-          email: action?.payload?.email,
-          startupData: action.payload,
-        };
-      }
-      // if(action?.payload?.type[0] === 'investor'){
-      //   return {
-      //     ...state,
-      //     dashboardLoad: false,
-      //     user: action?.payload,
-      //     type: action?.payload?.type,
-      //     signUpStatus: action?.payload?.type[0],
-      //     email: action?.payload?.email,
-      //     investorData: action.payload
-      //   };
-      // }
+      console.log(action?.payload)
+    if(action?.payload?.type[0] === 'boosterpartner'){
+      return {
+        ...state,
+        loading: false,
+        dashboardLoad: false,
+        partnerData:action?.payload,
+        type: action?.payload?.type,
+        signUpStatus: action?.payload?.type[0],
+        email: action?.payload?.email,
+      };
+    }
+    if(action?.payload?.type[0] === 'startup'){
+      return {
+        ...state,
+        loading: false,
+        dashboardLoad: false,
+        user: action?.payload,
+        type: action?.payload?.type,
+        signUpStatus: action?.payload?.type[0],
+        email: action?.payload?.email,
+        startupData: action.payload.startupData
+      };
+    }
+    // if(action?.payload?.type[0] === 'investor'){
+    //   return {
+    //     ...state,
+    //     dashboardLoad: false,
+    //     user: action?.payload,
+    //     type: action?.payload?.type,
+    //     signUpStatus: action?.payload?.type[0],
+    //     email: action?.payload?.email,
+    //     investorData: action.payload
+    //   };
+    // }
 
       break;
     case USER_PROFILE_FAIL:
@@ -181,6 +186,7 @@ const authReducer = (state = INIT_STATE, action) => {
         startupData: action.payload,
       };
     case UPDATE_STARTUP_INFO:
+     
       return {
         ...state,
         startupData: {
@@ -198,33 +204,53 @@ const authReducer = (state = INIT_STATE, action) => {
         investorData: action.payload,
       };
 
-    case UPDATE_INVESTOR_INFO:
-      return {
-        ...state,
-        investorData: {
-          ...state.investorData,
-          [action.payload.property]: {
-            ...state.investorData[action.payload.property],
-            ...action.payload.value,
-          },
-        },
-      };
-
-    case UPDATE_PARTNER_INFO:
-      if (action.payload.property.trim() !== "") {
-        return {
+      case UPDATE_INVESTOR_INFO:
+      
+        if(action.payload.property === 'portfolio'){
+  
+          return {
+            ...state,
+          investorData:{
+            ...state.investorData , 
+          portfolio : [
+        ...state.investorData.portfolio,
+        {...action.payload.value } 
+          ]
+          }
+          }
+        }
+        console.log(action.payload.value)
+    return {
           ...state,
-          partnerData: {
-            ...state.partnerData,
+          investorData: {
+            ...state.investorData,
             [action.payload.property]: {
-              ...state.partnerData[action.payload.property],
+              ...state.investorData[action.payload.property],
               ...action.payload.value,
             },
           },
         };
-      }
-      break;
-
+      case UPDATE_PARTNER_INFO: 
+      if(action.payload.property.trim() !== ""){
+      
+        return {
+          ...state,
+          partnerData :{
+            ...state.partnerData,
+            [action.payload.property] :{
+          ...state.partnerData[action.payload.property],
+          ...action.payload.value
+            }
+          }
+        }
+      } 
+   
+   return {
+     ...state,
+     partnerData: {
+       ...state.partnerData,...action.payload.value
+     }
+   }
     case UPDATE_MENTOR_INFO:
       return {
         ...state,

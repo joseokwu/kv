@@ -12,6 +12,7 @@ export const RowOption = ({
   const handleClick = (selectedOption) => {
     setSelected(selectedOption);
     getSelected(selectedOption);
+ 
   };
 
   return (

@@ -23,6 +23,7 @@ import { useAuth } from "./../../../../hooks/useAuth";
 import { upload } from "../../../../services/utils";
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import moment from "moment";
+import { getStatusClassNames } from "antd/lib/_util/statusUtils";
 
 
 export const StartupProfile = () => {
@@ -62,7 +63,7 @@ export const StartupProfile = () => {
   const [logoUploading, setLogoUploading] = useState(false);
 
   
-
+//console.log(stateAuth)
   
  
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -140,14 +141,6 @@ export const StartupProfile = () => {
 
  
 
-  // fundRaising:
-  // capTable: {amountRaised: '5000', amountInvestedByFounders: '1000', files: Array(4), _id: '6259419ab36d0dd3b5e2e3c9'}
-  // financialProjection: {files: 'https://cdn.shoutng.com/kvnmri9zykq3doplnqtxfi.pdf', _id: '6259419ab36d0dd3b5e2e3cb'}
-  // fundUtilization: {files: Array(10), _id: '6259419ab36d0dd3b5e2e3c8'}
-  // fundingAsk: {hasPreviousFundraising: true, instrumentForRound: 'Series B', numberOfRounds: '5', fundraisingAmount: '800000', dilution: '', …}
-  // previousRound:
-
-
   const handlePhoneInput = (value) => {
    
     updateProfile("startUpProfile",{
@@ -161,7 +154,7 @@ export const StartupProfile = () => {
   const handleCountry = (value)=>{
     updateProfile("startUpProfile",{
       contactInfo: {
-        ...stateAuth?.startupData?.startUpProfile?.country,
+        ...stateAuth?.startupData?.startUpProfile?.contactInfo,
         country: value,
       },
     });
@@ -169,11 +162,13 @@ export const StartupProfile = () => {
     console.log(value)
   }
 
+  //console.log(stateAuth)
+
   const handleChangeState = (value) => {
 
     updateProfile("startUpProfile",{
       contactInfo: {
-        ...stateAuth?.startupData?.startUpProfile?.state,
+        ...stateAuth?.startupData?.startUpProfile?.contactInfo,
         state: value,
       },
     });
@@ -216,7 +211,7 @@ export const StartupProfile = () => {
   };
 
   const onSubmit = async (e) => {
-    
+
     e.preventDefault();
     updateStartupInfo()
   };
@@ -484,6 +479,7 @@ export const StartupProfile = () => {
                 Country<span style={{ color: "red" }}>*</span>
               </label>
               <CountryDropdown
+              name="country"
               className="form-control px-5 py-1 country-bg"
               value={country}
               onChange={(value) => handleCountry(value)}
@@ -497,7 +493,7 @@ export const StartupProfile = () => {
               <RegionDropdown
                  name="state"
                 country={country}
-                value={region}
+                value={stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? ''}
                 onChange={(value) => handleChangeState(value)}
                 className="form-control ps-3"
                  /> 

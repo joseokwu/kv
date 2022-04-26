@@ -1,31 +1,62 @@
-import React from "react";
+import React , { useState } from "react";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
 import add from "../../../../assets/icons/add.svg";
 import { Button, Modal, TextArea, TextField } from "../../../../components";
 import { useHistory } from "react-router";
 import "./portfolio.css";
+import { TextareaCustom } from "../../../../components/textArea/cutstomTextarea";
+import { useAuth } from "../../../../hooks/useAuth";
+import { Form  } from "antd";
+import { LargeModal } from './../../../../Startupcomponents/modal/Modal';
+import { sendInvitation } from "../../../../services";
+import toast from 'react-hot-toast';
+
 
 export const Portfolio = () => {
   const { push } = useHistory();
+
+  const { updateInvestorInfo, stateAuth } = useAuth()
+  const [close , setClose] = useState(false)
+
+  const submit = () =>{
+   // console.log(stateAuth)
+    updateInvestorInfo(true)
+  }
+
+  console.log(stateAuth)
+
   return (
     <div className="register-form-wrap">
-      <Modal
+    {
+      close ? (
+        <LargeModal
+        closeModal={setClose}
         title="Invite Start-ups"
         id="portfolio"
         subTitle="Invite your startups by additing their email address below. Startups will receive personalised email notification to register their details at knight ventures platform"
       >
-        <InviteStartUps />
-      </Modal>
-      <h3>Start-up portfolio</h3>
+        <InviteStartUps handleClose={setClose}  />
+      </LargeModal>
+      ): (<span />)
+    }
+      <h3 style={{color: "#2e3192"}}>Start-up portfolio</h3>
       <p>
         This will help us provide startups personalised for your preferences
       </p>
 
-      <FormCard className="mb-0 card-for-invite d-flex align-items-center justify-content-center">
+      <FormCard className="mb-0 card-for-invite d-flex flex-column align-items-center justify-content-center">
+        {
+          stateAuth?.investorData?.portfolio.length > 0  ? stateAuth?.investorData?.portfolio.map((item , i) =>(
+            <div key={i} className="" >
+            {i}
+            </div>
+          )):(
+            <span />
+               )
+        }
         <section
           className="d-flex align-items-center invite-strip"
-          data-toggle="modal"
-          data-target="#portfolio"
+            onClick={()=> setClose(true)}
         >
           <img src={add} alt="add" />
           <p>Invite your portfolio startups</p>
@@ -48,8 +79,10 @@ export const Portfolio = () => {
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
          
-          <Button label="Done" onClick={() => {
-            push("/investor/dashboard");
+          <Button 
+          type='button'
+           label="Done" onClick={() => {
+            submit();
           }} />
         </div>
       </section>
@@ -57,12 +90,41 @@ export const Portfolio = () => {
   );
 };
 
-const InviteStartUps = () => {
+const InviteStartUps = ({handleClose}) => {
+
+const [loading , setLoading] = useState(false);
+
+  const {  stateAuth } = useAuth()
+
+  const onFinish = async (values) => {
+    try{
+      setLoading(true)
+      const newInvitation = {
+        email:values.email,
+        sender: `${stateAuth.firstname} ${stateAuth.lastname}`,
+        name:values.name,
+        message:values.message
+      }
+      console.log(values)
+      const res = await sendInvitation(newInvitation);
+      toast.success(res?.message)
+      setLoading(false)
+      handleClose(false)
+    }catch(err){
+      setLoading(false)
+      toast.error(err?.response?.data?.message ?? 'There was an error in sending invitation')
+    }
+
+  }
+
+
   return (
     <div className="px-5 pb-5">
+    <Form onFinish={onFinish} initialValues={{ remember: true }}>
       <section className="mb-5">
         <TextField
           type="email"
+          name={'email'}
           label="Email"
           placeholder="jamil@gmail.com"
           className="edit_input"
@@ -70,20 +132,34 @@ const InviteStartUps = () => {
       </section>
 
       <section className="mb-5">
-        <TextField label="Subject" className="edit_input" />
+        <TextField 
+         label="Name"
+         name={'name'}
+          className="edit_input" />
       </section>
 
       <section className="mb-5">
-        <TextArea label="Message (recommended)" placeholder="Send a message" />
+      <TextareaCustom 
+        
+        name={"message"}
+        label="Message (recommended)"
+        placeholder="Send a message"
+        />  
+        
       </section>
 
       <section className="d-flex justify-content-between mt-5 pt-4">
-        <button className="back-btn" data-dismiss="modal">
+        <button className="back-btn"  data-dismiss="modal">
           Cancel
         </button>
 
-        <Button label="Send Invitation" />
+        <Button 
+          type='submit'
+         label="Send Invitation"
+          loading={loading}
+          />
       </section>
+      </Form>
     </div>
   );
 };

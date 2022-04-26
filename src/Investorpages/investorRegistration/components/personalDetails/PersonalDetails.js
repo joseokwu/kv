@@ -9,13 +9,15 @@ import {
 } from '../../../../components'
 import { useHistory } from 'react-router-dom'
 import { Input, Form, Select } from 'antd'
+import { DatePicker } from "antd";
+import "react-datepicker/dist/react-datepicker.css";
 import toast from 'react-hot-toast'
 import { useAuth } from '../../../../hooks/useAuth'
 import { upload } from '../../../../services/utils'
 import { CircularLoader } from '../../../../components/CircluarLoader/CircularLoader'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import moment from 'moment'
 import './PersonalDetails.css'
 
@@ -40,9 +42,10 @@ export const PersonalDetails = () => {
 
   const onFinish = async (values) => {
     updateInvestorInfo()
-    console.log(values)
+   // console.log(values)
   }
 
+  console.log(stateAuth)
 
   const onChangeImage = async (e) => {
     const { files } = e.target
@@ -56,7 +59,7 @@ export const PersonalDetails = () => {
       const response = await upload(formData)
       setAvatar(response?.path)
       updateInvestorProfileData('profile', {
-        logo: response?.path,
+        avatar: response?.path,
       })
       setLogoUploading(false)
     } catch (error) {
@@ -65,10 +68,21 @@ export const PersonalDetails = () => {
     }
   }
 
+  const handleSocialInput = (e , name) =>{
+
+    const {  value } = e.target;
+    console.log(name, value)
+    updateInvestorProfileData('profile', {
+      socialMedia :{
+        ...stateAuth?.investorData?.profile.socialMedia,
+        [name]:value
+      }
+    })
+  }
+
   const handleMobileInput = (value) => {
     updateInvestorProfileData('profile', {
-      ...stateAuth?.investorData?.profile,
-      mobileNumber: value,
+      mobile_number: value,
     })
   }
 
@@ -97,12 +111,20 @@ export const PersonalDetails = () => {
     console.log(value)
   }
 
-  console.log(stateAuth);
+  const handleDateInput = (value) => {
+    updateInvestorProfileData('profile', {
+      dob: value,
+    })
+  };
+
+  const dateFormat = "YYYY-MM-DD";
+
+  //console.log(stateAuth);
 
 
   return (
     <div className="register-form-wrap">
-      <h3>Personal Details</h3>
+      <h3 style={{color: "#2e3192"}}>Personal Details</h3>
       <p>Let’s get to know you</p>
       {/* <form onSubmit={formik.handleSubmit}> */}
       <Form onFinish={onFinish} initialValues={{ remember: true }}>
@@ -130,6 +152,7 @@ export const PersonalDetails = () => {
                 id={'briefIntroduction'}
                 name={'briefIntroduction'}
                 type={'text'}
+                value={stateAuth?.investorData?.profile?.briefIntroduction}
                 required={true}
                 placeholder={'Enter brief bio about you'}
                 className={'edit_input'}
@@ -149,6 +172,7 @@ export const PersonalDetails = () => {
                 id={'firstName'}
                 name={'firstName'}
                 type={'text'}
+                value={stateAuth?.investorData?.profile?.firstName}
                 required={true}
                 placeholder={'Enter first name'}
                 className={'edit_input'}
@@ -169,6 +193,7 @@ export const PersonalDetails = () => {
                 id={'lastName'}
                 name={'lastName'}
                 type={'text'}
+                value={stateAuth?.investorData?.profile?.lastName}
                 required={true}
                 placeholder={'Enter last name'}
                 className={'edit_input'}
@@ -188,6 +213,7 @@ export const PersonalDetails = () => {
                 label="Email"
                 id={'email'}
                 name={'email'}
+                value={stateAuth?.investorData?.profile?.email}
                 required={true}
                 placeholder={'Enter email'}
                 type={'email'}
@@ -204,24 +230,21 @@ export const PersonalDetails = () => {
               {/* <label>
                 Date of Birth<span style={{ color: 'red' }}>*</span>
               </label> */}
-              <TextField
+              <DatePicker
                 label="Date of Birth"
                 id={'dob'}
                 name={'dob'}
                 required={true}
-                placeholder=""
-                type={'date'}
-                className={'edit_input'}
-                onChange={(e) =>
-                  updateInvestorProfileData('profile', {
-                    dob: e.target.value,
-                  })
-                }
                 defaultValue={
-                  stateAuth?.investorData?.profile?.dob !== null
+                    stateAuth?.investorData?.profile?.dob !== null
                     ? moment(stateAuth?.investorData?.profile?.dob)
                     : moment()
                 }
+                placeholder="yyyy-mm-dd"
+                className={'edit_input'}
+                format={dateFormat}
+                onChange={(_, dateString) => handleDateInput(dateString)}
+       
               />
             </section>
           </div>
@@ -246,7 +269,7 @@ export const PersonalDetails = () => {
                     address: e.target.value,
                   })
                 }
-                defaultValue={stateAuth?.investorData?.profile?.address}
+                value={stateAuth?.investorData?.profile?.address}
               />
             </section>
 
@@ -299,6 +322,7 @@ export const PersonalDetails = () => {
                 name={'city'}
                 type={'text'}
                 required={true}
+                value={stateAuth?.investorData?.profile?.city}
                 placeholder={'Enter your city'}
                 className={'edit_input'}
                 onChange={(e) =>
@@ -320,10 +344,10 @@ export const PersonalDetails = () => {
                 className={'in-reg-no py-1'}
                 countryCallingCodeEditable={true}
                 MaxLength={17}
-                defaultValue={
-                  stateAuth?.investorData?.profile?.mobileNumber
+                value={
+                  stateAuth?.investorData?.profile?.mobile_number
                 }
-                onChange={handleMobileInput}
+                onChange={(e) => handleMobileInput(e)}
               />
             </section>
             <section className="col-lg-6 mb-4">
@@ -334,6 +358,7 @@ export const PersonalDetails = () => {
                 label="Company Email"
                 id={'companyEmail'}
                 name={'companyEmail'}
+                value={stateAuth?.investorData?.profile?.companyEmail}
                 required={true}
                 placeholder={'E.g. info@knight.ventures'}
                 className={'edit_input'}
@@ -359,14 +384,11 @@ export const PersonalDetails = () => {
                 id={'profileLink'}
                 name={'profileLink'}
                 type={'text'}
+                value={stateAuth?.investorData?.profile.socialMedia?.profileLink}
                 required={true}
                 placeholder={'Enter linkedin link'}
                 className={'edit_input'}
-                onChange={(e) =>
-                  updateInvestorProfileData('profile', {
-                    profileLink: e.target.value,
-                  })
-                }
+                onChange={(e) =>  handleSocialInput(e , 'profileLink')}
               />
             </section>
 
@@ -381,12 +403,9 @@ export const PersonalDetails = () => {
                 type={'text'}
                 required={true}
                 placeholder={'Enter website'}
+                value={stateAuth?.investorData?.profile.socialMedia?.website}
                 className={'edit_input'}
-                onChange={(e) =>
-                  updateInvestorProfileData('profile', {
-                    website: e.target.value,
-                  })
-                }
+                onChange={(e) =>  handleSocialInput(e , 'website')}
               />
             </section>
 
@@ -399,12 +418,12 @@ export const PersonalDetails = () => {
                 id={'linkedIn'}
                 name={'linkedIn'}
                 type={'text'}
+                value={stateAuth?.investorData?.profile.socialMedia?.linkedIn}
                 required={true}
-                placeholder={'Enter linkedin link'}
+                placeholder={'Enter linkedin link'} 
                 className={'edit_input'}
-                onChange={(e) =>
-                  updateInvestorProfileData('', { linkedIn: e.target.value })
-                }
+                onChange={(e) =>  handleSocialInput(e , 'linkedIn')}
+                
               />
             </section>
 
@@ -417,14 +436,11 @@ export const PersonalDetails = () => {
                 id={'twitter'}
                 name={'twitter'}
                 type={'text'}
+                value={stateAuth?.investorData?.profile.socialMedia?.twitter}
                 required={true}
                 placeholder={'Enter twitter link'}
                 className={'edit_input'}
-                onChange={(e) =>
-                  updateInvestorProfileData('profile', {
-                    twitter: e.target.value,
-                  })
-                }
+                onChange={(e) =>  handleSocialInput(e , 'twitter')}
               />
             </section>
           </div>
@@ -441,6 +457,7 @@ export const PersonalDetails = () => {
                 id={'referral'}
                 name={'referral'}
                 type={'text'}
+                value={stateAuth?.investorData?.profile.referral}
                 required={true}
                 placeholder="Enter a user in knight ventures"
                 className="edit_input"
@@ -451,11 +468,16 @@ export const PersonalDetails = () => {
                 }
               />
             </section>
-
+  
             <section className="col-12 mb-4">
               <p className="mb-3">How did you hear about Knight Venture?</p>
-              <div>
-                <RowOption options={hearOption} />
+              <div>  
+                <RowOption
+                currentSelected={stateAuth?.investorData?.profile?.howDidYouAboutUs}
+                getSelected={(value) => updateInvestorProfileData('profile', {
+                  howDidYouAboutUs: value,
+                  }) }
+                 options={hearOption} />
               </div>
             </section>
           </div>

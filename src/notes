@@ -1363,12 +1363,35 @@ key={i}
   }
 
 
+  stateAuth?.investorData
+
+  amount: ""
+  amountPerYear: ""
+  angelInvestedBefore: false
+  angelInvestorOrSyndicateInvestor: "solo"
+  bankAccountNumber: ""
+  bankAccountType: ""
+  bankBranch: ""
+  bankName: ""
+  budgetAmount: ""
+  budgetPerYear: ""
+  individualHaving: ""
+  interestedInOnlinePitching: false
+  investingFrom: "personal fund"
+  isLeadInvestor: false
+  isPublic: false
+  mentorsStartups: false
+  nationality: ""
+  numberOfInvestmentPerYear: ""
+  previousAngelInvestingExperience: false
+  sectorOfExpertise: ""
+  taxResidentOutsideNigeria: false
+  yetToInvest: false
 
 
-
-
-
-
+  updateInvestorProfileData('profile', {
+    referral: e.target.value,
+  })
 
 
 

@@ -16,6 +16,9 @@ import {
   ExpireComponent,
 } from "../containers";
 
+
+
+
 export const BoosterApplicants = ({ history }) => {
   const {
     push,
@@ -46,7 +49,7 @@ export const BoosterApplicants = ({ history }) => {
   const renderContent = () => {
     switch (hash.replaceAll("%20", " ")) {
       case "#all":
-        return <AllComponent data={applicants} />;
+        return <AllComponent  />;
       case "#pending":
         return <PendingComponent data={pendin} />;
       case "#approved":
@@ -74,15 +77,9 @@ export const BoosterApplicants = ({ history }) => {
     "re-applied",
   ];
 
-  useEffect(() => {
-    getFetchData();
 
-    return () => {
-      setApplicatnts(null);
-    };
-  }, [hash]);
 
-  console.log(applicants);
+  
 
   if (loading) {
     return (

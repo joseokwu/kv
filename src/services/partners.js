@@ -1,9 +1,9 @@
 import { request } from '../utils/axios';
 
 
- export const getPartners = async() =>{
+ export const getPartnersRequest = async() =>{
     try{
-    const res = await request.post('getStartupPartners');
+    const res = await request.post('allRequest');
         console.log(res?.data)
     return res?.data
     }catch(err){

@@ -38,8 +38,7 @@ const CompanyOverview = () => {
   const onChange = e => {
     console.log('Change:', e.target.value);
   };
-
-  console.log(stateAuth)
+ // console.log(stateAuth)
   const onFinish = async(values) =>{
       
     updatePartnerInfo()
@@ -77,7 +76,7 @@ const handleChangeState = (value) => {
     try {
       setLogoUploading(true);
       const response = await upload(formData);
-    
+      console.log(response?.path)
       updatePartnerLocalData( '' ,{
         logo: response?.path,
       });
@@ -124,7 +123,9 @@ const handleChangeState = (value) => {
                   <CircularLoader color={"#000"} />
                 ):(
                   <>
-                  <img src={imageRep} alt="placeholder" />
+                  <img src={imageRep} 
+                  style={{width:'40px', height:'40px'}}
+                   alt="placeholder" />
                 <p>
                   Company
                   <br />
@@ -201,7 +202,6 @@ const handleChangeState = (value) => {
         label="Industry"
         initialValue={stateAuth?.partnerData?.industry}
         rules={[{ required: true, message: 'Please select a industry!' }]}
-
       >
         <Select
          id="industry"
@@ -258,7 +258,7 @@ const handleChangeState = (value) => {
           <section className="col-md-6 mb-4">
             <TextField label="Linkedin"
               name={'linkedin'}
-              value={ stateAuth?.partnerData?.linkedin}
+              value={ stateAuth?.partnerData?.linkedin ?? ''}
               onChange={(e)=> updatePartnerLocalData("",{
                 linkedin: e.target.value})}
              placeholder="Enter Linkedin URL" />
@@ -274,7 +274,7 @@ const handleChangeState = (value) => {
         <div className="row">
           <section className="col-md-6 mb-4">
             <TextField
-                value={ stateAuth?.partnerData?.coordinatorName}
+                value={ stateAuth?.partnerData?.coordinatorName ?? ''}
             name={'coordinatorName'}
             onChange={(e)=> updatePartnerLocalData("",{
               coordinatorName: e.target.value})}
@@ -287,7 +287,7 @@ const handleChangeState = (value) => {
             <TextField
             name={'designation'}
               label="Designation"
-            value={ stateAuth?.partnerData?.designation}
+            value={ stateAuth?.partnerData?.designation ?? ''}
           placeholder="Enter contact person"
            onChange={(e)=> updatePartnerLocalData("",{
                 designation: e.target.value})}
@@ -304,7 +304,7 @@ const handleChangeState = (value) => {
                 countryCallingCodeEditable={true}
                 className="custs ps-3 py-2"
                 value={
-                  stateAuth?.partnerData?.phoneNumber 
+                  stateAuth?.partnerData?.phoneNumber ?? ''
                 }
                 onChange={handlePhoneInput}
                 MaxLength={17}
@@ -316,7 +316,7 @@ const handleChangeState = (value) => {
               label="Email"
               placeholder="Enter email address"
               type="email"
-              value={ stateAuth?.partnerData?.companyEmail}
+              value={ stateAuth?.partnerData?.companyEmail ?? ''}
               name={'companyEmail'}
               onChange={(e)=> updatePartnerLocalData("",{
                 companyEmail: e.target.value})}
@@ -329,7 +329,7 @@ const handleChangeState = (value) => {
               </label>
           <CountryDropdown
               className="form-control px-5 py-1 country-bg"
-              value={stateAuth.partnerData.country}
+              value={stateAuth.partnerData.country ?? ''}
               onChange={(value) => handleCountry(value)}
 
             ></CountryDropdown>
@@ -341,8 +341,8 @@ const handleChangeState = (value) => {
              </label>
                <RegionDropdown
                  name="state"
-                country={stateAuth.partnerData.country}
-                value={stateAuth.partnerData.state}
+                country={stateAuth.partnerData.country ?? ''}
+                value={stateAuth.partnerData.state ?? ''}
                 onChange={(value) => handleChangeState(value)}
                 className="form-control ps-3"
                  /> 
@@ -352,7 +352,7 @@ const handleChangeState = (value) => {
             <TextField
               onChange={(e)=> updatePartnerLocalData("",{
                 city: e.target.value})}
-                value={ stateAuth?.partnerData?.city}
+                value={ stateAuth?.partnerData?.city ?? ''}
               name={'city'}
              label="City"
              placeholder="Enter partner city" />

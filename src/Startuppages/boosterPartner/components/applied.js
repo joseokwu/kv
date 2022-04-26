@@ -24,17 +24,21 @@ export const Applied = () => {
   return state.applications.length > 0 && state.applications.filter((item) => !item?.pendingRequests.find(i => i.startupId === stateAuth?.user?.userId) && !item?.approvedRequests.find(i => i.startupId === stateAuth?.user?.userId) )
  }, [state.applications , stateAuth?.user?.userId ])
 
- console.log(notInteracted)
+ console.log(stateAuth)
 
 const sendApplication = async(value) =>{
  try{
     setLoading(true)
   const newApplication = {
     userId:value?.userId,
-    startupId:stateAuth?.user?.userId,
-    startupName:stateAuth?.user?.startUpProfile?.startupName,
-    description:stateAuth?.user?.product?.description,
-    logo: stateAuth?.user?.startUpProfile?.logo
+    startupId:stateAuth?.startupData?.userId,
+    startupName:stateAuth?.user?.businessname,
+    email:stateAuth?.email,
+    industry:stateAuth?.user?.industry,
+    phone:stateAuth?.user?.phone,
+    description:stateAuth?.startupData?.product?.description,
+    logo: stateAuth?.startupData?.startUpProfile?.logo,
+    date: new Date()
   }
 
   const response = await applyToPartners(newApplication);
@@ -48,7 +52,22 @@ const sendApplication = async(value) =>{
  }
 }
 
-
+// acceleratorName: "zee world"
+// brand: "Brandd"
+// businessSector: "business"
+// companySize: "21-30"
+// contactInfo:
+// phoneNumber: "+2348165796896"
+// state: "Lagos"
+// [[Prototype]]: Object
+// elevatorPitch: "sdfdssgg"
+// logo: "https://cdn.shoutng.com/kvlcp4wbb4murs5ccrxcvr.png"
+// registrationNumber: "6889990088"
+// socialMedia:
+// companyWebsite: "https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current"
+// linkedInHandle: "linkedin.com/@fonicake"
+// twitterHandle: "@fonicakes"
+// [[Prototype]]: Object
 
 
 

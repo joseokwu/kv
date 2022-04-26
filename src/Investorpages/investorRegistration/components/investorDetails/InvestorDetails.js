@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { RowOption, Select, TextField, Button } from "../../../../components";
+import { RowOption,  TextField, Button } from "../../../../components";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
 import { addInvestorProfile } from "../../../../services/investor";
 import { useFormik } from "formik";
 import { useHistory } from "react-router";
-import { Form } from "antd";
+import { Form , Select } from "antd";
 import { useAuth } from "../../../../hooks/useAuth";
+
+const { Option } = Select;
 
 export const InvestorDetails = () => {
   const investorTypes = [
@@ -47,7 +49,7 @@ export const InvestorDetails = () => {
 
   return (
       <div className="register-form-wrap">
-      <h3>Investor Details</h3>
+      <h3 style={{color: "#2e3192"}}>Investor Details</h3>
       <p>Create a profile for your investment</p>
       <Form  onFinish={onFinish} initialValues={{ remember: true }}>
       <FormCard>
@@ -56,6 +58,7 @@ export const InvestorDetails = () => {
             <TextField
               label="Nationality"
               required={true}
+              value={stateAuth?.investorData?.personalDetail?.nationality}
               placeholder="Enter your nationality"
               className="edit_input"
               name="nationality"
@@ -71,9 +74,11 @@ export const InvestorDetails = () => {
             </p>
             <RowOption
               options={["yes", "no"]}
-              getSelected={(e) => {
-                console.log("e", e);
-                setTaxOutsideEligible(e);
+              currentSelected={stateAuth?.investorData?.personalDetail?.taxResidentOutsideNigeria === true ? 'yes' : 'no'}
+              getSelected={(value) => {
+                updateInvestorProfileData('personalDetail', {
+                  taxResidentOutsideNigeria: value === 'yes' ? true : false ,
+                }) 
               }}
             />
           </section>
@@ -82,22 +87,38 @@ export const InvestorDetails = () => {
             <TextField
               label="Taxation Number"
               required={true}
+              value={stateAuth?.investorData?.personalDetail?.taxNumber}
               placeholder="Enter Tax Number"
               className="edit_input"
               name="taxNumber"
               type="number"
-              onChange={(e) => updateInvestorProfileData("personalDetail", {})}
+              onChange={(e) => updateInvestorProfileData('personalDetail', {
+                taxNumber:e.target.value ,
+                }) }
             />
           </section>
 
           <section className="col-12 mb-4">
+          <Form.Item
+        name="individualHaving"
+        label="I am an individual having"
+        initialValue={stateAuth?.investorData?.personalDetail?.individualHaving}
+        rules={[{ required: true, message: 'Please select a who you are' }]}
+      >
             <Select
               placeholder="Choose option"
               label="I am an individual having"
               className="edit_input"
-              name="individualHaving"
-              onChange={(e) => updateInvestorProfileData("personalDetail", { individualHaving: e.target.value })}
-            />
+              
+              onChange={(e) => updateInvestorProfileData("personalDetail", { individualHaving: e})}
+            >
+            {
+              investorTypes.map((item , i) =>(
+                <Option value={item} key={i} > {item} </Option>  
+              ))
+            }
+            </Select>
+         </Form.Item>
           </section>
         </div>
       </FormCard>
@@ -109,6 +130,7 @@ export const InvestorDetails = () => {
               placeholder="Enter bank"
               label="Bank Name"
               className="edit_input"
+              value={stateAuth?.investorData?.personalDetail?.bankName}
               name="bankName"
               onChange={(e) => updateInvestorProfileData("personalDetail", { bankName: e.target.value })}
             />
@@ -119,6 +141,7 @@ export const InvestorDetails = () => {
               placeholder="Enter bank branch"
               label="Bank Branch"
               className="edit_input"
+              value={stateAuth?.investorData?.personalDetail?.bankBranch}
               name="bankBranch"
               onChange={(e) => updateInvestorProfileData("personalDetail", { bankBranch: e.target.value })}
             />
@@ -130,6 +153,7 @@ export const InvestorDetails = () => {
               required={true}
               placeholder="Enter your account"
               className="edit_input"
+              value={stateAuth?.investorData?.personalDetail?.bankAccountNumber}
               name="bankAccountNumber"
               type={"number"}
               onChange={(e) => updateInvestorProfileData("personalDetail", { bankAccountNumber: e.target.value })}
@@ -142,6 +166,7 @@ export const InvestorDetails = () => {
               required={true}
               placeholder="Enter your account type"
               className="edit_input"
+              value={stateAuth?.investorData?.personalDetail?.bankAccountType}
               name="bankAccountType"
               onChange={(e) => updateInvestorProfileData("personalDetail", { bankAccountType: e.target.value })}
             />
@@ -158,9 +183,10 @@ export const InvestorDetails = () => {
             <span style={{ color: 'red' }}>*</span> Investor Type
           </p>
           <RowOption
+          currentSelected={stateAuth?.investorData?.personalDetail?.investorType}
             options={investorTypes}
             getSelected={(e) => {
-              setSelectedInvestorType(e);
+              updateInvestorProfileData("personalDetail", { investorType: e })
             }}
           />
         </div>
