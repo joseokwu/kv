@@ -55,7 +55,11 @@ export const Header = ({ setOpen, open }) => {
         <div className="d-flex align-items-center h-100">
           <span className="d-flex align-items-center header-profile d-none d-lg-flex">
             <img
-              src={stateAuth?.mentorData?.personalDetail?.logo ?? imageRep}
+              src={
+                stateAuth?.mentorData?.personalDetail?.logo !== ""
+                  ? stateAuth?.mentorData?.personalDetail?.logo
+                  : imageRep
+              }
               alt="profile"
               className=""
             />

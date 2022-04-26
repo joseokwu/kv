@@ -62,7 +62,7 @@ const Consulting = () => {
       toast.error("Something went wrong");
     }
     if (uploaded) {
-      push("#work_experience");
+      push("#assistant_info");
     }
     setLoading(false);
   };

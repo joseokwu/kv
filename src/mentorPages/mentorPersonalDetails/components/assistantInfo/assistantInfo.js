@@ -13,13 +13,17 @@ import "./assistantInfo.css";
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
 import { useAuth } from "../../../../hooks";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
+import CountryDropdown from "country-dropdown-with-flags-for-react";
 
 const AssistantInfo = () => {
   const { goBack, push } = useHistory();
 
   const [loading, setLoading] = useState(false);
-
   const { stateAuth, updateMentorProfileState, updateMentorInfo } = useAuth();
+
+  const [country, setCountry] = useState({
+    country: stateAuth?.mentorData?.assistantInfo?.assistantCountry ?? "",
+  });
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -51,7 +55,7 @@ const AssistantInfo = () => {
       assistantAddress:
         stateAuth?.mentorData?.assistantInfo?.assistantAddress ?? "",
       assistantCountry:
-        stateAuth?.mentorData?.assistantInfo?.assistantCountry ?? "",
+        stateAuth?.mentorData?.assistantInfo?.assistantCountry ?? "Nigeria",
       assistantState:
         stateAuth?.mentorData?.assistantInfo?.assistantState ?? "",
       assistantCity: stateAuth?.mentorData?.assistantInfo?.assistantCity ?? "",
@@ -134,12 +138,21 @@ const AssistantInfo = () => {
 
           <section className="col-md-4 mb-4">
             <label>Country</label>
-            <TextField
-              placeholder={"Enter your country"}
-              name="assistantCountry"
-              onChange={handleChange}
-              value={formik.values.assistantCountry}
-            />
+            <CountryDropdown
+              id="country"
+              type="text"
+              name="country"
+              className="form-control px-5 py-1 country-bg"
+              preferredCountries={["ng"]}
+              value={country.country}
+              // value={formik.values.country}
+              handleChange={(e) => {
+                setCountry({ ...country, country: e.target.value });
+                handleChange({
+                  target: { name: "assistantCountry", value: e.target.value },
+                });
+              }}
+            ></CountryDropdown>
             {formik.touched.assistantCountry &&
             formik.errors.assistantCountry ? (
               <label className="error">{formik.errors.assistantCountry}</label>
