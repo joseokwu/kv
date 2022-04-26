@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
-import { Modal, TextArea, Button, Tag } from '../../../../mentorComponents'
-import edit from '../../../../assets/icons/edit.svg'
-import del from '../../../../assets/icons/del.svg'
-import { Form } from 'antd'
-import './consulting.css'
+import React, { useState } from "react";
+import { Modal, TextArea, Button, Tag } from "../../../../mentorComponents";
+import edit from "../../../../assets/icons/edit.svg";
+import del from "../../../../assets/icons/del.svg";
+import { Form } from "antd";
+import "./consulting.css";
 
-const Consulting = ({data}) => {
+const Consulting = ({ data }) => {
+  console.log("data", data);
   return (
     <section className="profile-offering mb-3">
       <span className="text-right d-block">
         <img
           src={edit}
-          alt={'edit'}
+          alt={"edit"}
           data-toggle="modal"
           data-target="#editConsultingModal"
           role="button"
@@ -32,22 +33,30 @@ const Consulting = ({data}) => {
             className="d-flex align-items-center flex-wrap"
             style={{ columnGap: 10, rowGap: 10 }}
           >
-            {
-              data?.offerings.map((item, i) =>(
-              <Tag key={i} name={item} color={item === 'Engineering' || item === 'Cyber Security' ? '#40439A' : item === 'Career' ? '#E31937' : '#ACACAC' }  /> 
-              ))
-            }
+            {data?.areaofService?.map((item, i) => (
+              <Tag
+                key={i}
+                name={item}
+                color={
+                  item === "Engineering" || item === "Cyber Security"
+                    ? "#40439A"
+                    : item === "Career"
+                    ? "#E31937"
+                    : "#ACACAC"
+                }
+              />
+            ))}
           </span>
         </section>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Consulting
+export default Consulting;
 
 const EditConsulting = () => {
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   return (
     <div className="px-4 pb-4">
@@ -64,19 +73,19 @@ const EditConsulting = () => {
 
       <section className="mb-4">
         <TextArea
-          label={'Write a short description of your service.'}
-          placeholder={'e.g I was made a managing director....'}
-          rows={'6'}
+          label={"Write a short description of your service."}
+          placeholder={"e.g I was made a managing director...."}
+          rows={"6"}
         />
       </section>
 
       <section className="mb-4">
         <TextArea
           label={
-            'If any, what is your offer / promotion for the Alchemist community?'
+            "If any, what is your offer / promotion for the Alchemist community?"
           }
-          placeholder={'e.g I was made a managing director....'}
-          rows={'6'}
+          placeholder={"e.g I was made a managing director...."}
+          rows={"6"}
         />
       </section>
 
@@ -86,5 +95,5 @@ const EditConsulting = () => {
         </div>
       </Form.Item>
     </div>
-  )
-}
+  );
+};

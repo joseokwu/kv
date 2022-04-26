@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   Modal,
   TextArea,
   TextField,
   Select,
   Button,
-} from '../../../../mentorComponents'
-import edit from '../../../../assets/icons/edit.svg'
-import imageRep from '../../../../assets/icons/plus.svg'
-import { Form } from 'antd'
-import './availability.css'
+} from "../../../../mentorComponents";
+import edit from "../../../../assets/icons/edit.svg";
+import imageRep from "../../../../assets/icons/plus.svg";
+import { Form } from "antd";
+import "./availability.css";
 
-const Availability = () => {
+const Availability = ({ data }) => {
   return (
     <section className="profile-offering mb-3">
       <span className="text-right d-block">
         <img
           src={edit}
-          alt={'edit'}
+          alt={"edit"}
           data-toggle="modal"
           data-target="#editAvailabilityModal"
           role="button"
@@ -33,17 +33,17 @@ const Availability = () => {
           <p className="mentor_availability_question mb-3">
             What mentor type would you prefer?
           </p>
-          <button>Directory listing - By approval</button>
+          <button>{data?.mentorType}</button>
         </section>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Availability
+export default Availability;
 
 const EditAvailability = () => {
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   return (
     <div className="px-4 pb-4">
@@ -52,7 +52,7 @@ const EditAvailability = () => {
           What mentor type would you prefer?
         </p>
         <button className="mr-3">
-          Regular mentor - Dedicated office hours{' '}
+          Regular mentor - Dedicated office hours{" "}
         </button>
         <button>Directory listing - By approval </button>
       </section>
@@ -72,46 +72,46 @@ const EditAvailability = () => {
         <section className="col-md-12 mb-4 border-bottom">
           <TextArea
             className="mb-4"
-            label={'Please list here any notes / things you want us to know'}
-            placeholder={'e.g I was made a managing director....'}
-            rows={'6'}
+            label={"Please list here any notes / things you want us to know"}
+            placeholder={"e.g I was made a managing director...."}
+            rows={"6"}
           />
         </section>
 
         <section className="col-md-6 mb-4">
           <TextField
-            label={'Assistant First Name*'}
-            placeholder={'Micheal'}
+            label={"Assistant First Name*"}
+            placeholder={"Micheal"}
             required={true}
           />
         </section>
         <section className="col-md-6 mb-4">
           <TextField
-            label={'Assistant Last Name*'}
-            placeholder={'Smith'}
+            label={"Assistant Last Name*"}
+            placeholder={"Smith"}
             required={true}
           />
         </section>
 
         <section className="col-md-12 mb-4">
           <TextArea
-            label={'Assistant Email*'}
-            placeholder={'Michealsmith@gmail.com'}
-            rows={'1'}
+            label={"Assistant Email*"}
+            placeholder={"Michealsmith@gmail.com"}
+            rows={"1"}
           />
         </section>
 
         <section className="col-md-6 mb-4">
           <TextField
-            label={'Country code*'}
-            placeholder={'Enter country code'}
+            label={"Country code*"}
+            placeholder={"Enter country code"}
             required={true}
           />
         </section>
         <section className="col-md-6 mb-4">
           <TextField
-            label={'Assistant Mobile Number*'}
-            placeholder={'Enter Mobile number'}
+            label={"Assistant Mobile Number*"}
+            placeholder={"Enter Mobile number"}
             required={true}
           />
         </section>
@@ -122,20 +122,20 @@ const EditAvailability = () => {
             placeholder={'Michealsmith@gmail.com'}
             rows={'1'}
           /> */}
-          <label htmlFor={''}>Availability Day*</label>
+          <label htmlFor={""}>Availability Day*</label>
           <input className="col-md-12 ant-input-borderless" type="date" />
         </section>
 
         <section className="col-md-6 mentor_consult_modal mb-4">
           <Select
-            label={'Availability Start Timing*'}
-            placeholder={'Choose option'}
+            label={"Availability Start Timing*"}
+            placeholder={"Choose option"}
           />
         </section>
         <section className="col-md-6 mentor_consult_modal mb-4">
           <Select
-            label={'Availability End Timing*'}
-            placeholder={'Choose option'}
+            label={"Availability End Timing*"}
+            placeholder={"Choose option"}
           />
         </section>
 
@@ -152,5 +152,5 @@ const EditAvailability = () => {
         </div>
       </Form.Item>
     </div>
-  )
-}
+  );
+};

@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
-import './experience.css'
-import edit from '../../../../assets/icons/edit.svg'
+import React, { useState } from "react";
+import "./experience.css";
+import edit from "../../../../assets/icons/edit.svg";
 import {
   Button,
   Modal,
   TextArea,
   TextField,
   Select,
-} from '../../../../mentorComponents'
-import { Form } from 'antd'
+} from "../../../../mentorComponents";
+import { Form } from "antd";
 
-const Experience = ({data}) => {
- 
+const Experience = ({ data }) => {
   return (
     <div className="profile-offering">
       <h2>Experience</h2>
@@ -28,31 +27,43 @@ const Experience = ({data}) => {
         </Modal>
       </section>
 
-      {data?.experience.map((d, i) => {
-        return (
-          <ExperienceContent
-            title={d.position}
-            sub={d.companyName}
-            date={`${new Date(d.start).getFullYear()} - ${new Date(d.end).getFullYear()}`}
-            activity={d.activity}
-            industry={d.industry}
-            i={i}
-            key={i}
-            length={data.length}
-          />
-        )
-      })}
+      {data?.length > 0 &&
+        data?.map((d, i) => {
+          return (
+            <ExperienceContent
+              title={d?.position}
+              sub={d?.companyName}
+              date={`${new Date(d?.start).getFullYear()} - ${new Date(
+                d?.end
+              ).getFullYear()}`}
+              activity={d?.activity}
+              industry={d?.industry}
+              i={i}
+              key={i}
+              length={data?.length}
+            />
+          );
+        })}
     </div>
-  )
-}
+  );
+};
 
-export default Experience
+export default Experience;
 
-const ExperienceContent = ({ title, i, length, head, sub, date , activity , industry }) => {
+const ExperienceContent = ({
+  title,
+  i,
+  length,
+  head,
+  sub,
+  date,
+  activity,
+  industry,
+}) => {
   return (
     <section
       className={`profile-offer-content ${
-        i === length - 1 ? 'pb-0 border-0' : ''
+        i === length - 1 ? "pb-0 border-0" : ""
       }`}
     >
       <h3>{title}</h3>
@@ -60,76 +71,73 @@ const ExperienceContent = ({ title, i, length, head, sub, date , activity , indu
       <p className="mentor_experience_sub mt-2">{sub}</p>
       <p className="mentor_experience_date mt-2">{date}</p>
       <ul>
-        {
-          activity.map((item, i) =>(
+        {/* {activity.map((item, i) => (
           <li key={i} className="mt-3">
-            { item }
-        </li>
-          ))
-        }
-        
-        <button type='button' > { industry} </button>
-        
+            {item}
+          </li>
+        ))} */}
+
+        <button type="button"> {industry} </button>
       </ul>
     </section>
-  )
-}
+  );
+};
 
 const EditExperience = () => {
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   return (
     <div className="px-4 pb-4">
       <section className="mentor_consult_modal mb-4">
-        <Select label={'Industry'} placeholder={'Choose option'} />
+        <Select label={"Industry"} placeholder={"Choose option"} />
       </section>
 
       <div className="row">
         <section className="col-md-12 mb-4">
           <TextArea
-            label={'Position*'}
-            placeholder={'Ex. Managing Director'}
-            rows={'1'}
+            label={"Position*"}
+            placeholder={"Ex. Managing Director"}
+            rows={"1"}
           />
         </section>
 
         <section className="col-md-6 mb-4">
           <TextField
-            label={'Start Date*'}
-            placeholder={'dd/mm/yy'}
+            label={"Start Date*"}
+            placeholder={"dd/mm/yy"}
             required={true}
           />
         </section>
         <section className="col-md-6 mb-4">
           <TextField
-            label={'End Date*'}
-            placeholder={'dd/mm/yy'}
+            label={"End Date*"}
+            placeholder={"dd/mm/yy"}
             required={true}
           />
         </section>
 
         <section className="col-md-12 mb-4">
           <TextArea
-            label={'Company Name*'}
-            placeholder={'Enter company name'}
-            rows={'1'}
+            label={"Company Name*"}
+            placeholder={"Enter company name"}
+            rows={"1"}
             required={true}
           />
         </section>
 
         <section className="col-md-12 mb-4">
           <TextArea
-            label={'What are your top 3-5 professional achievements?'}
-            placeholder={'e.g I was made a managing director....'}
-            rows={'6'}
+            label={"What are your top 3-5 professional achievements?"}
+            placeholder={"e.g I was made a managing director...."}
+            rows={"6"}
             required={true}
           />
         </section>
 
         <section className="col-md-12 mb-4">
           <Select
-            label={'What are your top areas or industries of expertise?'}
-            placeholder={'Choose option'}
+            label={"What are your top areas or industries of expertise?"}
+            placeholder={"Choose option"}
           />
         </section>
 
@@ -151,5 +159,5 @@ const EditExperience = () => {
         </div>
       </Form.Item>
     </div>
-  )
-}
+  );
+};

@@ -8,6 +8,7 @@ import "./profile.css";
 import { mentorProfile } from "./../../services/mentor";
 
 import { PageLoader } from "./../../components/pageLoader/PageLoader";
+import { useAuth } from "../../hooks";
 
 export const MentorProfile = () => {
   const [profile, setProfile] = useState(null);
@@ -28,31 +29,31 @@ export const MentorProfile = () => {
     };
   }, []);
 
-  if (loading) {
-    return <PageLoader />;
-  } else {
+  const { stateAuth } = useAuth();
+
+  {
     return (
       <div className="profile">
         <section className="mb-3">
-          <Details data={profile} />
+          <Details data={stateAuth?.mentorData?.personalDetail} />
         </section>
 
         <section className="row profile-more">
           <div className="col-lg-8 pl-0">
             <div>
-              <Experience data={profile} />
+              <Experience data={stateAuth?.mentorData?.workExperience} />
             </div>
             <div className="mt-3">
-              <Interest data={profile} />
+              <Interest data={stateAuth?.mentorData?.areaOfInterest} />
             </div>
           </div>
 
           <div className="col-lg-4 pr-0">
             <div>
-              <Availability />
+              <Availability data={stateAuth?.mentorData?.areaOfInterest} />
             </div>
             <div>
-              <Consulting data={profile} />
+              <Consulting data={stateAuth?.mentorData?.consultantOffering} />
             </div>
           </div>
         </section>
