@@ -21,7 +21,7 @@ const ProfileCategory = ({data}) => {
       <div>
         <section className="mb-5">
           <p className="partner-cat-header mb-4">Partner Category</p>
-          <span className="cat-tag"> { data?.category } </span> 
+          <span className="cat-tag"> { data?.categories } </span> 
         </section>
 
         <section>
@@ -30,13 +30,9 @@ const ProfileCategory = ({data}) => {
             className="d-flex align-items-center flex-wrap"
             style={{ columnGap: 10, rowGap: 10 }}
           >
-             {
-              data?.industry?.map((item, i) =>{
-                  return (
-                    <Tag name={item} color={item === 'Engineering'  ? '#40439A' : item === 'Career' ? '#E31937' : '#ACACAC' }  />
-                   )
-              })
-            }
+           
+                    <Tag name={data?.industry} color={'#40439A'}  />
+          
            
           </span>
         </section>

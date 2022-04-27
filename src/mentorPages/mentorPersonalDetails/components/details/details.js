@@ -39,7 +39,9 @@ const Details = () => {
 
   const [nextloading, setNextLoading] = useState(false);
   const [logo, setLogo] = useState(
-    stateAuth?.mentorData?.personalDetail?.logo ?? imageRep
+    stateAuth?.mentorData?.personalDetail?.logo !== ""
+      ? stateAuth?.mentorData?.personalDetail?.logo
+      : imageRep
   );
   const [phone, setPhone] = useState(
     stateAuth?.mentorData?.personalDetail?.contactInfo?.mobilenumber ?? ""
@@ -85,7 +87,7 @@ const Details = () => {
       whatsapp: stateAuth?.mentorData?.personalDetail?.whatsapp ?? "",
       skypeid: stateAuth?.mentorData?.personalDetail?.skypeid ?? "",
       googlemeet: stateAuth?.mentorData?.personalDetail?.googlemeet ?? "",
-      country: stateAuth?.mentorData?.personalDetail?.country ?? "",
+      country: stateAuth?.mentorData?.personalDetail?.country ?? "Nigeria",
       state: stateAuth?.mentorData?.personalDetail?.state ?? "",
       city: stateAuth?.mentorData?.personalDetail?.city ?? "",
       permanentaddress:

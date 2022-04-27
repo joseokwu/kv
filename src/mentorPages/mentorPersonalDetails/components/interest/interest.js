@@ -349,7 +349,7 @@ const Interest = () => {
         </section>
       </FormCard>
 
-      <FormCard>
+      {/* <FormCard>
         <section className="upload_resume text-center mb-4">
           <button type="button">
             <img className="mr-2" src={imageRep} alt={"upload_resume"} /> Upload
@@ -364,7 +364,7 @@ const Interest = () => {
         <section className="upload_resume_size text-center mb-4">
           <p>File must be less than 5mb</p>
         </section>
-      </FormCard>
+      </FormCard> */}
 
       <section className="d-flex align-items-center justify-content-between mt-5">
         <button
