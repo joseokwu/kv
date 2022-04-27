@@ -124,7 +124,7 @@ export const PersonalDetails = () => {
   const letterOnly = (e) => {
     const charCode = e.charCode || e.which;
     const keyValue = String.fromCharCode(charCode);
-    const isValid = new RegExp("[a-zA-Z]").test(keyValue);
+    const isValid = new RegExp(/^[a-zA-Z\s]*$/).test(keyValue);
     if (!isValid) {
       e.preventDefault();
       return;

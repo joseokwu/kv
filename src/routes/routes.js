@@ -306,7 +306,7 @@ const routes = [
   {
     name: "Investor Profile",
     path: "/investor/profile",
-    component: WithMainInvestorLayout(InvestorProfile),
+    component: WithInvestorRegisterLayout(InvestorProfile),
     exact: true,
     protected: true,
     type: "investor",

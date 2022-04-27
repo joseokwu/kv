@@ -95,9 +95,9 @@ const HeaderDropdownMenu = () => {
 
   const getCurrentProfile = () => {
     if (pathname.includes('investor')) {
-      return () => push('/investor/profile')
+      return '/investor/profile'
     } else {
-      return () => push('/booster/profile')
+      return '/booster/profile'
     }
   }
 
@@ -118,8 +118,8 @@ const HeaderDropdownMenu = () => {
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button
           className="dropdown-item text-center py-2"
-          // onClick={()=> push(`${type}/profile`)}
-          onClick={()=> push(`${type}/profile`)}
+          // onClick={()=> push(`/${type}/profile`)}
+          onClick={() => push (getCurrentProfile())}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile

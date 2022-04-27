@@ -95,7 +95,7 @@ export const LargeModal = ({ children, closeModal, title }) => {
 
       <div className="large-modal">
         <div className="top-grey"></div>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between mx-4">
           <p className="kv-modal-title p-3">{title}</p>
           <img
             className="modalCloseImg mx-4 my-4"

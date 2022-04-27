@@ -18,11 +18,11 @@ export const InvestmentApproach = () => {
   const investmentStages = [
     'Pre-Seed',
     'Seed',
-    'angel',
-    'accelerator',
+    'Angel',
+    'Accelerator',
     'MVP',
-    'pre series A',
-    'series A',
+    'Pre Series A',
+    'Series A',
   ]
 
   const expBetter = [
@@ -68,7 +68,7 @@ export const InvestmentApproach = () => {
   const letterOnly = (e) => {
     const charCode = e.charCode || e.which
     const keyValue = String.fromCharCode(charCode)
-    const isValid = new RegExp('[a-zA-Z]').test(keyValue)
+    const isValid = new RegExp(/^[a-zA-Z\s]*$/).test(keyValue)
     if (!isValid) {
       e.preventDefault()
       return
@@ -83,20 +83,21 @@ export const InvestmentApproach = () => {
         <FormCard>
           <div className="row">
             <section className="col-12 mb-4">
+              <label className="mb-3">Choose the sectors you have expertise in?</label>
               <Form.Item
                 className=""
                 name="techSector"
-                label="Choose the sectors you have expertise in?"
+                // label="Choose the sectors you have expertise in?"
                 initialValue={
                   stateAuth?.investorData?.investorApproach?.techSector
                 }
-                rules={[{ required: true, message: 'Please select a sector' }]}
+                rules={[{ message: 'Please select a sector' }]}
               >
                 <Select
                   placeholder="Choose sectors you are interested in"
                   label="Are you interested in any sectors or technologies in particular?"
                   className="edit_input"
-                  style={{ width: 200, backgroundColor: '#fafafc' }}
+                  style={{ backgroundColor: '#f8f8f8' }}
                   onChange={(e) =>
                     updateInvestorProfileData('investorApproach', {
                       techSector: e,
@@ -114,9 +115,11 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
+              <label className="mb-3">Choose the sectors you have expertise in?</label>
               <Form.Item
+                style={{ background: '#f8f8f8' }}
                 name="investmentExperience"
-                label="Choose the sectors you have expertise in?"
+                // label="Choose the sectors you have expertise in?"
                 initialValue={
                   stateAuth?.investorData?.investorApproach
                     ?.investmentExperience
@@ -161,6 +164,7 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
+              <label className="mb-3">Investment Thesis</label>
               <TextareaCustom
                 name={'investmentThesis'}
                 onKeyPress={letterOnly}
@@ -172,7 +176,7 @@ export const InvestmentApproach = () => {
                     investmentThesis: e.target.value,
                   })
                 }
-                label="Investment Thesis"
+                // label="Investment Thesis"
                 placeholder="e.g i want to invest in start-ups which have global potential and have validated traction"
               />
             </section>
@@ -230,9 +234,11 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
+              <label className="mb-3">On average, how much would you like to invest in each business you choose to fund (in USD)?"</label>
               <Form.Item
+                style={{ background: '#f8f8f8' }}
                 name="averageInvestment"
-                label="Choose the sectors you have expertise in?"
+                placeholder="Choose the sectors you have expertise in?"
                 initialValue={
                   stateAuth?.investorData?.investorApproach?.averageInvestment
                 }
@@ -240,7 +246,7 @@ export const InvestmentApproach = () => {
               >
                 <Select
                   placeholder="Choose option"
-                  label="On average, how much would you like to invest in each business you choose to fund (in USD)?"
+                  // label="On average, how much would you like to invest in each business you choose to fund (in USD)?"
                   className="edit_input"
                   onChange={(e) =>
                     updateInvestorProfileData('investorApproach', {
