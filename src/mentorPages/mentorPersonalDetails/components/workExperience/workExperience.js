@@ -69,10 +69,10 @@ const WorkExperience = () => {
       industry: data?.industry ?? "",
       companyName: data?.companyName ?? "",
       achievements: data?.achievements ?? "",
-      position: data?.position ?? "",
-      start: data?.start ?? "",
-      end: data?.end ?? "",
-      amountRaised: data?.amountRaised ?? "",
+      position: data?.position ?? "N/A",
+      start: data?.start ?? "N/A",
+      end: data?.end ?? "N/A",
+      amountRaised: data?.amountRaised ?? "N/A",
     },
     validationSchema: Yup.object({
       currentFounder: Yup.string().required("This is required"),
@@ -94,6 +94,8 @@ const WorkExperience = () => {
 
     formik.handleChange(e);
   };
+
+  console.log("formik.values", formik.values);
 
   const onNotCurrent = () => {
     handleChange({ target: { name: "position", value: "N/A" } });
