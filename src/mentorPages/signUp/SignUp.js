@@ -117,7 +117,7 @@ export const SignUp = ({ history }) => {
                       id="industry1"
                       name="industry"
                       // className="w-100"
-                      style={{width: "fit-content"}}
+                      style={{width: "fit-content", color: "#f9f9fc"}}
                       placeholder="Select your industry"
                     >
                       <Option disabled selected>

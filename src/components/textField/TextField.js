@@ -16,6 +16,7 @@ export const TextField = ({
   placeholder,
   onChange,
   onFocus,
+  onKeyPress,
   ...rest
 }) => {
   return (
@@ -47,6 +48,7 @@ export const TextField = ({
           value={value}
           onChange={onChange}
           defaultValue={value}
+          onKeyPress={onKeyPress}
           {...rest}
         />
       </Form.Item>

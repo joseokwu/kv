@@ -16,6 +16,17 @@ export const InvestorDetails2 = () => {
     console.log(values)
   }
   //console.log(stateAuth);
+
+  const onNumberOnlyChange = (e) => {
+    const keyCode = e.keyCode || e.which;
+    const keyValue = String.fromCharCode(keyCode);
+    const isValid = new RegExp("[0-9]").test(keyValue);
+    if (!isValid) {
+      e.preventDefault();
+      return;
+    }
+  };
+
   
 
   return (
@@ -169,6 +180,7 @@ export const InvestorDetails2 = () => {
               placeholder="Enter amount"
               className="edit_input"
               name={'budgetAmount'}
+              onKeyPress={onNumberOnlyChange}
               onChange={(e) => updateInvestorProfileData("personalDetail", { budgetAmount: e.target.value})}
               value={stateAuth?.investorData?.personalDetail?.budgetAmount}
             />
@@ -188,6 +200,7 @@ export const InvestorDetails2 = () => {
               label="Typical number of investment per year"
               placeholder="Enter number of start-ups invested in"
               className="edit_input"
+              onKeyPress={onNumberOnlyChange}
               value={stateAuth?.investorData?.personalDetail?.numberOfInvestmentPerYear}
               name={"numberOfInvestmentPerYear"}
               onChange={(e) => updateInvestorProfileData("personalDetail", { numberOfInvestmentPerYear: e.target.value })}

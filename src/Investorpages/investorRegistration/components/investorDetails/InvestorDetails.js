@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router";
 import { Form , Select } from "antd";
 import { useAuth } from "../../../../hooks/useAuth";
+import { letterOnly } from "../../../../utils/utils";
 
 const { Option } = Select;
 
@@ -46,6 +47,26 @@ export const InvestorDetails = () => {
   }
   console.log(stateAuth);
 
+  const letterOnly = (e) => {
+    const charCode = e.charCode || e.which;
+    const keyValue = String.fromCharCode(charCode);
+    const isValid = new RegExp("[a-zA-Z]").test(keyValue);
+    if (!isValid) {
+      e.preventDefault();
+      return;
+    }
+  }
+
+  const onNumberOnlyChange = (e) => {
+    const keyCode = e.keyCode || e.which;
+    const keyValue = String.fromCharCode(keyCode);
+    const isValid = new RegExp("[0-9]").test(keyValue);
+    if (!isValid) {
+      e.preventDefault();
+      return;
+    }
+  };
+
 
   return (
       <div className="register-form-wrap">
@@ -58,6 +79,7 @@ export const InvestorDetails = () => {
             <TextField
               label="Nationality"
               required={true}
+              onKeyPress={letterOnly}
               value={stateAuth?.investorData?.personalDetail?.nationality}
               placeholder="Enter your nationality"
               className="edit_input"
@@ -91,7 +113,7 @@ export const InvestorDetails = () => {
               placeholder="Enter Tax Number"
               className="edit_input"
               name="taxNumber"
-              type="number"
+              type="text"
               onChange={(e) => updateInvestorProfileData('personalDetail', {
                 taxNumber:e.target.value ,
                 }) }
@@ -109,7 +131,6 @@ export const InvestorDetails = () => {
               placeholder="Choose option"
               label="I am an individual having"
               className="edit_input"
-              
               onChange={(e) => updateInvestorProfileData("personalDetail", { individualHaving: e})}
             >
             {
@@ -129,6 +150,7 @@ export const InvestorDetails = () => {
             <TextField
               placeholder="Enter bank"
               label="Bank Name"
+              onKeyPress={letterOnly}
               className="edit_input"
               value={stateAuth?.investorData?.personalDetail?.bankName}
               name="bankName"
@@ -140,6 +162,7 @@ export const InvestorDetails = () => {
             <TextField
               placeholder="Enter bank branch"
               label="Bank Branch"
+              onKeyPress={letterOnly}
               className="edit_input"
               value={stateAuth?.investorData?.personalDetail?.bankBranch}
               name="bankBranch"
@@ -154,8 +177,9 @@ export const InvestorDetails = () => {
               placeholder="Enter your account"
               className="edit_input"
               value={stateAuth?.investorData?.personalDetail?.bankAccountNumber}
+              onKeyPress={onNumberOnlyChange}
               name="bankAccountNumber"
-              type={"number"}
+              type={"text"}
               onChange={(e) => updateInvestorProfileData("personalDetail", { bankAccountNumber: e.target.value })}
             />
           </section>

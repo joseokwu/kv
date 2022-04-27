@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import "./portfolio.css";
 import { TextareaCustom } from "../../../../components/textArea/cutstomTextarea";
 import { useAuth } from "../../../../hooks/useAuth";
-import { Form  } from "antd";
+import { Form, Input  } from "antd";
 import { LargeModal } from './../../../../Startupcomponents/modal/Modal';
 import { sendInvitation } from "../../../../services";
 import toast from 'react-hot-toast';
@@ -24,6 +24,7 @@ export const Portfolio = () => {
   }
 
   console.log(stateAuth)
+
 
   return (
     <div className="register-form-wrap">
@@ -63,7 +64,7 @@ export const Portfolio = () => {
         </section>
       </FormCard>
       <section className="d-flex justify-content-end mt-3">
-        <p className="do-later">Do this later</p>
+        <p className="do-later" onClick={() => {submit()}} >Do this later</p>
       </section>
 
       <section className="d-flex align-items-center justify-content-between mt-5">
@@ -80,7 +81,7 @@ export const Portfolio = () => {
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
          
           <Button 
-          type='button'
+           type='button'
            label="Done" onClick={() => {
             submit();
           }} />
@@ -114,7 +115,16 @@ const [loading , setLoading] = useState(false);
       setLoading(false)
       toast.error(err?.response?.data?.message ?? 'There was an error in sending invitation')
     }
+  }
 
+  const letterOnly = (e) => {
+    const charCode = e.charCode || e.which;
+    const keyValue = String.fromCharCode(charCode);
+    const isValid = new RegExp("[a-zA-Z]").test(keyValue);
+    if (!isValid) {
+      e.preventDefault();
+      return;
+    }
   }
 
 
@@ -135,13 +145,14 @@ const [loading , setLoading] = useState(false);
         <TextField 
          label="Name"
          name={'name'}
-          className="edit_input" />
+         onKeyPress={letterOnly}
+        className="edit_input" />
       </section>
 
       <section className="mb-5">
       <TextareaCustom 
-        
         name={"message"}
+        onKeyPress={letterOnly}
         label="Message (recommended)"
         placeholder="Send a message"
         />  
@@ -155,7 +166,7 @@ const [loading , setLoading] = useState(false);
 
         <Button 
           type='submit'
-         label="Send Invitation"
+          label="Send Invitation"
           loading={loading}
           />
       </section>
