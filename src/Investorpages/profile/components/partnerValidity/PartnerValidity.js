@@ -24,11 +24,11 @@ const PartnerValidity = ({ data }) => {
       >
         <section className="mb-4">
           <p className="partner-cat-txt mb-3">Partnership Validity</p>
-          <span className="cat-tag"> { data?.validity} </span>
+          <span className="cat-tag"> { data?.partnershipValidity} </span>
         </section>
         <section className="mb-4">
           <p className="partner-cat-txt mb-3">Turnaround Time</p>
-          <span className="cat-tag"> { data?.turnarround } </span>
+          <span className="cat-tag"> { data?.turnAroundTime } </span>
         </section>
       </div>
 

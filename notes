@@ -1923,10 +1923,135 @@ investmentThesis: ""
 stage: "Pre-seed"
 techSector: ""
 preferredStage
-        
+  =================================================================
+  ========================================================================
+  ===============================================================================================
+  Booster partner page dont touch
+  ==============================================================
+
+  <section className="row mt-4 dash-main-content">
+  <div className="col-lg-6">
+    <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
+      <h5>New Applications</h5>
+      <span onClick={() => push("/booster/applicants#all")}>See All</span>
+    </header>
+
+    <section>
+      {bossterRes && bossterRes?.application.map((data, i) => (
+        <div style={{ marginBottom: 21 }}>
+          <ApplicationCard data={data} logo={applicantLogo} key={i} />
+        </div>
+      ))}
+    </section>
+  </div>
+  <div className="col-lg-6 mt-5">
+    <ApplicationChart />
+  </div>
+</section>
+
+      
+========================================================================
 
 
-        
+
+const [cate , setCate] = useState([
+  {
+    name:'test1',
+    id:'21bc',
+    questions:[
+      {
+        quest:'whaoo',
+        ansa:''
+      },
+      {
+        quest:'whaoo are',
+        ansa:''
+      },
+      {
+        quest:'whaoo we',
+        ansa:''
+      },
+      {
+        quest:'whaoo ueue',
+        ansa:''
+      }
+    ]
+  },
+  {
+    name:'test2',
+    id:'298sc',
+    questions:[
+      {
+        quest:'what is r',
+        ansa:''
+      },
+      {
+        quest:'where do u',
+        ansa:''
+      },
+      {
+        quest:'hmmm',
+        ansa:''
+      },
+      {
+        quest:'arrr',
+        ansa:''
+      }
+    ]
+  },
+  {
+    name:'test3',
+    id:'31dq',
+    questions:[
+      {
+        quest:'dhjjss',
+        ansa:''
+      },
+      {
+        quest:'dhjsjs',
+        ansa:''
+      },
+      {
+        quest:'dhjsune',
+        ansa:''
+      },
+      {
+        quest:'whaoo ueue',
+        ansa:''
+      }
+    ]
+  }
+])
+
+
+
+
+
+
+
+const [pageHolder , setPageHolder] = useState(0)
+
+const tabItems = cate.map(item => item.name);
+
+const dashCardColors = ["#E5FFE4", "#FAD7DC", "#DFF1FF"];
+
+const bunts = [1, 2 , 3, 4 , 5]
+console.log(cate)
+
+
+const handleChange =(id , index , value) =>{
+  setCate( cate.map(data =>{
+    if(data.id === id){
+      data.questions.map((item, ind) =>{
+        if(ind === index){
+          item.ansa = value
+        }
+        return item ;
+      })
+    }
+    return data;
+  }) )
+}
 
 
 
@@ -1937,6 +2062,166 @@ preferredStage
 
 
 
+
+
+
+
+
+
+
+
+const renderPage = () =>{
+
+  switch(pageHolder){
+    case 0 : 
+    return (
+      <div>
+        { cate[0].name }
+     <div className="my-3 mb-3" >
+      {
+        cate[0].questions.map((item , i) =>(
+          <>
+            <h6> { item.quest } </h6>
+           <div>
+            { 
+            bunts.map((data) => (
+              <button onClick={() => handleChange(cate[0].id , i , data)} className="btn btn-outline-success mx-2" >  { data } </button>
+            ))  
+            }
+           </div>
+          </>
+        ))
+      }
+     </div>
+<div className="my-3">
+<button className="btn btn-primary"  onClick={() => setPageHolder(pageHolder + 1)} > next { pageHolder} </button>
+</div>
+      </div>
+    )
+    case 1 :
+      return (
+        <div>
+      {
+      cate[1].name  
+      }
+      <div className="my-3 mb-3" >
+      {
+        cate[1].questions.map((item , i) =>(
+          <>
+            <h6> { item.quest } </h6>
+           <div>
+            { 
+            bunts.map((data) => (
+              <button onClick={() => handleChange(cate[1].id , i , data)} className="btn btn-outline-success mx-2" >  { data } </button>
+            ))  
+            }
+           </div>
+          </>
+        ))
+      }
+     </div>
+      <div className="my-3 mb-3" >
+
+</div>
+      <div className="my-3">
+<button className="btn btn-primary"  onClick={() => setPageHolder(pageHolder + 1)} > next { pageHolder } </button>
+</div>
+        </div>
+      )
+
+   case 2 :
+     return (
+      <div>
+      {
+      cate[2].name  
+      }
+      <div className="my-3 mb-3" >
+      {
+        cate[2].questions.map((item , i) =>(
+          <>
+            <h6> { item.quest } </h6>
+           <div>
+            { 
+            bunts.map((data) => (
+              <button onClick={() => handleChange(cate[2].id , i , data)} className="btn btn-outline-success mx-2" >  { data } </button>
+            ))  
+            }
+           </div>
+          </>
+        ))
+      }
+     </div>
+      <div className="my-3 mb-3" >
+     
+      </div>
+      <div className="my-3">
+<button className="btn btn-primary"  onClick={() => setPageHolder(pageHolder + 1)} > next { pageHolder } </button>
+</div>
+        </div> 
+     )   
+    default :
+  return <div> { cate[0].name }  </div>
+  }
+
+  
+}
+====================================================================
+=====================================================================
+categories: "Bike Rentals"
+city: "Lagos"
+companyDescription: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+companyEmail: "brightbrain@gmail.com"
+companyName: "Purplegate Technology"
+coordinatorName: "Enerst Owunbuzia"
+country: "Nigeria"
+declinedRequests: []
+designation: "Enerst Owunbuzia"
+industry: "AI"
+linkedin: "@Enerst"
+logo: "https://cdn.shoutng.com/kve5rz0dhhtxob4wvrvapk.png"
+offerings: {offerings: '4 Apr 2020 — I am trying to add Select All / Unsel…mponent but it is not working. The code is below.', eligibilityCriteria: '4 Apr 2020 — I am trying to add Select All / Unsel…mponent but it is not working. The code is below.', importantNote: '4 Apr 2020 — I am trying to add Select All / Unsel…mponent but it is not working. The code is below.', process: '4 Apr 2020 — I am trying to add Select All / Unsel…mponent but it is not working. The code is below.', partnershipValidity: 'Analytics', …}
+pendingRequests: [{…}]
+phoneNumber: "+2348165796896"
+state: "Lagos"
+twitter: "@twitter"
+userId: "6263fcb3ed0b02cccd2c96a9"
+website: "ww.hdhh.com"
+__v: 0
+
+
+eligibilityCriteria: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+freeCreditValue: true
+importantNote: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+offerings: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+partnershipValidity: "Analytics"
+process: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+turnAroundTime: "April"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>Test out test</h1>
+<div className="d-flex" >
+{
+  cate.map((item , i) =>(
+  <button className="btn btn-gray mx-3 " onClick={() => setPageHolder(i)} > { item.name } </button> 
+  ))
+}
+</div>
+<div>
+{  renderPage()  }
+</div>
 
 
 
