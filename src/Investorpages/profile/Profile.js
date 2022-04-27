@@ -1,4 +1,4 @@
-import React , { useEffect , useState } from "react";
+import React  from "react";
 import ProfileDetails from "./components/profileDetials/ProfileDetails";
 import ProfileOfferings from "./components/profileOfferings/ProfileOfferings";
 import "./profile.css";
