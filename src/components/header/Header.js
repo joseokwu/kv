@@ -89,7 +89,7 @@ const HeaderDropdownMenu = () => {
     push,
     location: { pathname },
   } = useHistory()
-  const { userLogout } = useAuth();
+  const { userLogout, editUser } = useAuth();
   const type = getType();
 
 
@@ -118,13 +118,14 @@ const HeaderDropdownMenu = () => {
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button
           className="dropdown-item text-center py-2"
-          onClick={()=> push(`${type}/registration`)}
+          // onClick={()=> push(`${type}/profile`)}
+          onClick={()=> push(`${type}/profile`)}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile
         </button>
         <button
-          onClick={()=> push(`/${type}/registration`)}
+          onClick={()=> {push(`/${type}/registration`); editUser()}}
          className="dropdown-item text-center py-2 my-2">
           {' '}
           <img className="pe-1" src={edit} alt="" /> Edit Profile

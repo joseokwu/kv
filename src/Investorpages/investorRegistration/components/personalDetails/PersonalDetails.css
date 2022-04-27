@@ -22,3 +22,7 @@
 .span.ant-select-selection-item {
     color: red!important;
 }
+
+.ant-form label {
+    font-size: 16px;
+}

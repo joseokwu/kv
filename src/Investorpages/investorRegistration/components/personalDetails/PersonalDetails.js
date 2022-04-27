@@ -245,6 +245,7 @@ export const PersonalDetails = () => {
               </label>
               <DatePicker
                 // label="Date of Birth"
+                style={{border: 'none', background: '#f8f8f8'}}
                 id={'dob'}
                 name={'dob'}
                 required={true}
@@ -254,7 +255,7 @@ export const PersonalDetails = () => {
                     : moment()
                 }
                 placeholder="yyyy-mm-dd"
-                className={'edit_input'}
+                className={'edit_input py-2'}
                 format={dateFormat}
                 onChange={(_, dateString) => handleDateInput(dateString)}
        
@@ -358,7 +359,7 @@ export const PersonalDetails = () => {
                 className={'in-reg-no py-1'}
                 countryCallingCodeEditable={true}
                 placeholder={"+234 000 0000 000"}
-                MaxLength={17}
+                maxLength={17}
                 value={
                   stateAuth?.investorData?.profile?.mobile_number
                 }
