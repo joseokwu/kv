@@ -56,7 +56,7 @@ const WorkExperience = () => {
     } else {
       toast.error("Something went wrong");
     }
-    if (uploaded && next) {
+    if (uploaded) {
       push("#area_of_interest");
     }
     setLoading(false);
