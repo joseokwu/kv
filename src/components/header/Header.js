@@ -66,7 +66,7 @@ const { stateAuth } = useAuth();
 
         <div className="d-flex align-items-center h-100">
           <span className="d-flex align-items-center header-profile d-none d-lg-flex">
-          <img src={ stateAuth?.username?.avatar ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
+          <img src={ stateAuth?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
              } alt="profile" className="" />
             <p className="mb-0 header-text"> { stateAuth?.username } </p>
           </span>
