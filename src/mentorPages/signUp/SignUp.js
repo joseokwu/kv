@@ -7,7 +7,7 @@ import {
   AuthPasswordField,
  
 } from '../../mentorComponents/index';
-import { useLocation }  from 'react-router-dom';
+import { useLocation  }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
@@ -27,8 +27,7 @@ export const SignUp = ({ history }) => {
   function handleChange(value) {
     setIndustry(value)
   }
-  //console.log(window.location.origin)
- // console.log(stateAuth?.signUpStatus)
+
 
  const changePhone = (value) =>{
    setPhone(value);
@@ -69,6 +68,10 @@ export const SignUp = ({ history }) => {
   }
 
   const[eye, setEye] = useState(false);
+
+
+
+
 
 
   return (
