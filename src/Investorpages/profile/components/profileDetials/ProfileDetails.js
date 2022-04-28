@@ -1,6 +1,5 @@
 import React from "react";
 import edit from "../../../../assets/icons/edit.svg";
-import sample from "../../../../assets/images/sampleCompany.png";
 import twitter from "../../../../assets/images/profileTwitter.svg";
 import linkedIn from "../../../../assets/images/profileLinkedIn.svg";
 import location from "../../../../assets/icons/locationSm.svg";
@@ -41,16 +40,16 @@ const ProfileDetails = ({data}) => {
           />
         </span>
         <span className="profile-image">
-          <img src={sample} alt="sample company" />
+          <img src={data?.logo} alt="sample company" />
         </span>
 
         <article>
-          <h1 className="mb-4 profile-name"> { data?.name } </h1>
+          <h1 className="mb-4 profile-name"> { data?.companyName } </h1>
 
           <div className="d-flex align-items-center justify-content-between mb-3">
             <span className="d-flex align-items-center contact-name">
-              <p>CONTACT : { data?.contactName }  </p>
-              <p> { data?.position } </p>
+              <p>CONTACT : { data?.coordinatorName }  </p>
+              <p> { data?.designation } </p>
             </span>
             <span>
               <img src={twitter} alt="twitter" className="mr-3" />
@@ -60,20 +59,20 @@ const ProfileDetails = ({data}) => {
 
           <div className="d-flex align-items-center web-phone-local mb-3">
             <p>
-              <img src={location} alt="location" /> { data?.location }
+              <img src={location} alt="location" /> { `${data?.city} ${data?.state} ${data?.country}` }
             </p>
             <p>
-              <img src={phone} alt="phone" /> { data?.contactPhone }
+              <img src={phone} alt="phone" /> { data?.phoneNumber }
             </p>
-            <a href="https://www.michealsmith.com">
+            <a href={data?.website}>
               <img src={web} alt="web" />
-             { data?.url }
+             { data?.website }
             </a>
           </div>
 
           <div className="profile-bio pb-5">
             <p>
-             { data?.bio }
+             { data?.companyDescription }
             </p>
           </div>
         </article>

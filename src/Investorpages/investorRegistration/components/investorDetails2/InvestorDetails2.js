@@ -71,6 +71,7 @@ export const InvestorDetails2 = () => {
                 options={['yes', 'no']}
               />
             </section>
+            
             {stateAuth?.investorData?.personalDetail?.angelInvestedBefore ? (
               <section className="col-12 mb-4">
                 <p className="mb-3">
@@ -86,7 +87,7 @@ export const InvestorDetails2 = () => {
                       angelInvestorOrSyndicateInvestor: value,
                     })
                   }}
-                  options={['solo', 'Syndicate', 'Both']}
+                  options={['Solo', 'Syndicate', 'Both']}
                 />
               </section>
             ) : (

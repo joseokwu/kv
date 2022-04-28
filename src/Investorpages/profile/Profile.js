@@ -1,42 +1,23 @@
-import React , { useEffect , useState } from "react";
+import React  from "react";
 import ProfileDetails from "./components/profileDetials/ProfileDetails";
 import ProfileOfferings from "./components/profileOfferings/ProfileOfferings";
 import "./profile.css";
-import ProfileCategory from "./components/profileCategory/ProfileCategory";
-import PartnerValidity from "./components/partnerValidity/PartnerValidity";
+import { useAuth } from "../../hooks";
+import ProfileCategory from './components/profileCategory/ProfileCategory';
+import PartnerValidity from './components/partnerValidity/PartnerValidity';
 
-import { getPartnersProfile } from './../../services/partners';
 
 
 export const BoosterProfile = () => {
 
-const [boosterPartner, setBoosterPartner] = useState(null);
-
-const fetchProfile = async() =>{
-  const res = await getPartnersProfile();
-  setBoosterPartner(res)
-}
-
-
-useEffect(() =>{
-
-  fetchProfile();
-
-  return () =>{
-    setBoosterPartner(null)
-  }
-
-},[])
-
-console.log(boosterPartner)
-
+const { stateAuth } = useAuth();  
 
 
 
   return (
     <div className="profile">
       <section className="mb-3">
-        <ProfileDetails data={boosterPartner && boosterPartner }   />
+         <ProfileDetails data={stateAuth?.partnerData}   /> 
       </section>
 
       <section className="mb-3 profile-tab">
@@ -45,14 +26,14 @@ console.log(boosterPartner)
 
       <section className="row profile-more">
         <div className="col-lg-7 pl-0">
-          <ProfileOfferings data={boosterPartner && boosterPartner?.offerings} />
+          <ProfileOfferings data={stateAuth?.partnerData.offerings} />
         </div>
         <div className="col-lg-5 pr-0">
           <div>
-            <ProfileCategory data={boosterPartner && boosterPartner } />
+            <ProfileCategory data={stateAuth?.partnerData } />
           </div>
           <div>
-            <PartnerValidity data={boosterPartner && boosterPartner }  />
+            <PartnerValidity data={stateAuth?.partnerData.offerings } /> 
           </div>
         </div>
       </section>

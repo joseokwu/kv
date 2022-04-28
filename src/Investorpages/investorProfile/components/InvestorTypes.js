@@ -1,8 +1,11 @@
 import React from "react";
 import edit from "../../../assets/icons/edit.svg";
 import { Button, Modal, RowOption } from "../../../components";
+import { useAuth } from "../../../hooks";
 
 export const InvestorTypes = () => {
+  const { stateAuth } = useAuth();
+
   return (
     <section className="profile-offering">
       <span className="text-right d-block">
@@ -26,11 +29,11 @@ export const InvestorTypes = () => {
           <p className="partner-cat-txt mb-3">Angel Network</p>
           <section className="free-credit-answer d-flex align-items-center">
             <span></span>
-            <p>Yes</p>
+            {/* <p>{stateAuth?.investorData?.personalDetail?.angelInvestedBefore}</p> */}
           </section>
         </div>
         <span className="cat-tag" style={{ width: "fit-content" }}>
-          Solo investor
+          {stateAuth?.investorData?.personalDetail?.angelInvestorOrSyndicateInvestor}
         </span>
       </article>
 
@@ -38,7 +41,7 @@ export const InvestorTypes = () => {
         <p className="partner-cat-txt mb-3">Lead investor</p>
         <section className="free-credit-answer d-flex align-items-center">
           <span></span>
-          <p>Yes</p>
+          <p>{stateAuth?.investorData?.personalDetail?.isLeadInvestor}</p>
         </section>
       </div>
 
@@ -46,7 +49,7 @@ export const InvestorTypes = () => {
         <p className="partner-cat-txt mb-3">Mentor</p>
         <section className="free-credit-answer d-flex align-items-center">
           <span></span>
-          <p>Yes</p>
+          <p>{stateAuth?.investorData?.personalDetail?.mentorsStartups}</p>
         </section>
       </div>
     </section>

@@ -23,7 +23,7 @@ export const Header = ({ setOpen, open }) => {
     if (pathname.includes('investor')) {
       return '/investor/dashboard'
     } else {
-      return '/booster/dashboard'
+      return '/boosterpartner/dashboard'
     }
   }
 
@@ -97,7 +97,7 @@ const HeaderDropdownMenu = () => {
     if (pathname.includes('investor')) {
       return '/investor/profile'
     } else {
-      return '/booster/profile'
+      return '/boosterpartner/profile'
     }
   }
 
@@ -120,6 +120,7 @@ const HeaderDropdownMenu = () => {
           className="dropdown-item text-center py-2"
           // onClick={()=> push(`/${type}/profile`)}
           onClick={() => push (getCurrentProfile())}
+          // onClick={()=> push(`/${type}/profile`)}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile

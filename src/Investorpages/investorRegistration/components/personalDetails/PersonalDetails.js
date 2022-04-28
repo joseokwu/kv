@@ -40,7 +40,7 @@ export const PersonalDetails = () => {
     stateAuth?.investorData?.profile?.avatar ?? imageRep,
   )
 
-  const onFinish = async (values) => {
+  const onFinish = async () => {
     updateInvestorInfo()
    // console.log(values)
   }

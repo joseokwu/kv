@@ -459,7 +459,7 @@ const routes = [
   },
   {
     name: "Booster Profile",
-    path: "/booster/profile",
+    path: "/boosterpartner/profile",
     component: WithInvestorRegisterLayout(BoosterProfile),
     exact: true,
     protected: true,

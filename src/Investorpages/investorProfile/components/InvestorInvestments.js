@@ -38,11 +38,11 @@ export const InvestorInvestments = () => {
 
       <section className="mb-5">
         <h2 className="investor-profile-header">Investment Approach</h2>
-        <p>
+        {/* <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation{" "}
-        </p>
+        </p> */}
       </section>
 
       <section className="mb-5">
