@@ -66,7 +66,7 @@ const { stateAuth } = useAuth();
 
         <div className="d-flex align-items-center h-100">
           <span className="d-flex align-items-center header-profile d-none d-lg-flex">
-          <img src={ stateAuth?.username?.avatar ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
+          <img src={ stateAuth?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
              } alt="profile" className="" />
             <p className="mb-0 header-text"> { stateAuth?.username } </p>
           </span>
@@ -118,7 +118,7 @@ const HeaderDropdownMenu = () => {
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button
           className="dropdown-item text-center py-2"
-          onClick={()=> push(`${type}/registration`)}
+          onClick={()=> push(`/${type}/profile`)}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile

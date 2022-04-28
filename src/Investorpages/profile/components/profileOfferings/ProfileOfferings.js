@@ -25,10 +25,10 @@ const ProfileOfferings = ({data}) => {
            data={data?.offerings} 
           />
             <OfferContent title={'Eligibility Criteria'}  className={'profile-offer-content pb-0 border-0'}
-           data={data?.eligibility} 
+           data={data?.eligibilityCriteria} 
           />
             <OfferContent title={'Important Note'}  className={'profile-offer-content pb-0 border-0'}
-           data={data?.note} 
+           data={data?.importantNote} 
           />
             <OfferContent title={'Process'}  className={'profile-offer-content pb-0 border-0'}
            data={data?.process} 
