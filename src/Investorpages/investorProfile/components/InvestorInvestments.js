@@ -9,11 +9,13 @@ import {
   Select,
   TextArea,
 } from "../../../components";
+import { useAuth } from "../../../hooks";
 
 export const InvestorInvestments = () => {
+  const { stateAuth } = useAuth();
   return (
     <div className="profile-offering mb-3">
-      <section className="flex-align justify-content-between mb-5">
+      <section className="flex-align justify-content-between mb-3">
         <h2 className="investor-profile-header mb-0">Introduction</h2>
         <img
           src={edit}
@@ -28,15 +30,13 @@ export const InvestorInvestments = () => {
         <EditInvestorProfile />
       </Modal>
 
-      <section className="mb-4">
+      <section className="mb-5">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation{" "}
+         {stateAuth?.investorData?.profile?.briefIntroduction}
         </p>
       </section>
 
-      <section className="mb-4">
+      <section className="mb-5">
         <h2 className="investor-profile-header">Investment Approach</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -45,18 +45,18 @@ export const InvestorInvestments = () => {
         </p>
       </section>
 
-      <section className="mb-4">
+      <section className="mb-5">
         <h4 className="investor-profile-subheader">Investor Type</h4>
         <div className="flex-align flex-wrap" style={{ columnGap: 16 }}>
           <span className="cat-tag px-3" style={{ width: "fit-content" }}>
-            Business Owner
+          {stateAuth?.investorData?.personalDetail?.investorType}
           </span>
-          <span className="cat-tag px-3" style={{ width: "fit-content" }}>
+          {/* <span className="cat-tag px-3" style={{ width: "fit-content" }}>
             VC & PE Professional
-          </span>
-          <span className="cat-tag px-3" style={{ width: "fit-content" }}>
+          </span> */}
+          {/* <span className="cat-tag px-3" style={{ width: "fit-content" }}>
             VC & PE Professional
-          </span>
+          </span> */}
         </div>
       </section>
 
@@ -64,17 +64,17 @@ export const InvestorInvestments = () => {
         <h2 className="investor-profile-header">Preferred Stage</h2>
         <div className="row">
           <section className="col-lg-6 mb-3">
-            <PreferredStage icon={sort1} text="Minimum Viable Product" />
+            <PreferredStage icon={sort1} text={`${stateAuth?.investorData?.investorApproach?.stage}`} />
           </section>
-          <section className="col-lg-6 mb-3">
+          {/* <section className="col-lg-6 mb-3">
             <PreferredStage icon={sort2} text="Minimum Viable Product" />
-          </section>
-          <section className="col-lg-6 mb-3">
+          </section> */}
+          {/* <section className="col-lg-6 mb-3">
             <PreferredStage icon={sort1} text="Minimum Viable Product" />
-          </section>
-          <section className="col-lg-6 mb-3">
+          </section> */}
+          {/* <section className="col-lg-6 mb-3">
             <PreferredStage icon={sort2} text="Minimum Viable Product" />
-          </section>
+          </section> */}
         </div>
       </section>
     </div>

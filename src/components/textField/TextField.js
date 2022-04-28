@@ -10,9 +10,9 @@ export const TextField = ({
   value,
   onBlur,
   type,
-  disabled = false,
+  disabled,
   className,
-  required = false,
+  required,
   placeholder,
   onChange,
   onFocus,
@@ -49,6 +49,7 @@ export const TextField = ({
           onChange={onChange}
           defaultValue={value}
           onKeyPress={onKeyPress}
+          disabled={disabled}
           {...rest}
         />
       </Form.Item>

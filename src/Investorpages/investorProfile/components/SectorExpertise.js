@@ -1,8 +1,10 @@
 import React from "react";
 import edit from "../../../assets/icons/edit.svg";
 import { Tag, Modal, Select, RowOption, Button } from "../../../components";
+import { useAuth } from "../../../hooks";
 
 export const SectorExpertise = () => {
+  const { stateAuth } = useAuth();
   return (
     <section className="profile-offering mb-3">
       <span className="text-right d-block">
@@ -27,11 +29,11 @@ export const SectorExpertise = () => {
             className="d-flex align-items-center flex-wrap"
             style={{ columnGap: 10, rowGap: 10 }}
           >
-            <Tag name="Tech" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Career" color="#E31937" />
-            <Tag name="Engineering" color="#40439A" />
-            <Tag name="Career" color="#E31937" />
+            {/* <Tag name="Tech" /> */}
+            {/* <Tag name="Engineering" color="#40439A" /> */}
+            <Tag name={`${stateAuth?.investorData?.investorApproach?.techSector}`} color="#E31937" />
+            {/* <Tag name="Engineering" color="#40439A" /> */}
+            {/* <Tag name="Career" color="#E31937" /> */}
           </span>
         </section>
 
@@ -41,8 +43,8 @@ export const SectorExpertise = () => {
             className="flex-align flex-wrap"
             style={{ columnGap: 16, rowGap: 10 }}
           >
-            <span className="cat-tag">B2B</span>
-            <span className="cat-tag">B2C</span>
+            <span className="cat-tag">{stateAuth?.investorData?.investorApproach?.investmentPreference}</span>
+            {/* <span className="cat-tag">B2C</span> */}
           </div>
         </section>
       </div>

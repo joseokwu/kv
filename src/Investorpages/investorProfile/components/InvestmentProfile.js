@@ -4,7 +4,7 @@ import art from "../../../assets/icons/iprofileArt.svg";
 
 export const InvestmentProfile = () => {
   return (
-    <div className="profile-offering">
+    <div className="profile-offering my-3">
       <span className="text-right d-block">
         <img
           src={edit}
@@ -22,7 +22,7 @@ export const InvestmentProfile = () => {
         <h2 className="investor-profile-header">Investment Profile</h2>
 
         <div className="row">
-          <section className="col-lg-6">
+          <section className="col-lg-6 mt-3">
             <span className="prefer-stage flex-align">
               <i style={{ background: "#1D9D1A" }}>
                 <img src={art} alt="art" />
@@ -31,7 +31,7 @@ export const InvestmentProfile = () => {
             </span>
           </section>
 
-          <section className="col-lg-6">
+          <section className="col-lg-6 mt-3">
             <span className="prefer-stage flex-align">
               <i style={{ background: "#5355A3" }}>
                 <img src={art} alt="art" />

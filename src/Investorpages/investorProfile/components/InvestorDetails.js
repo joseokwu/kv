@@ -9,8 +9,10 @@ import web from "../../../assets/icons/webSm.svg";
 import banner from "../../../assets/images/investorBanner.png";
 import investor from "../../../assets/images/investorProfileImg.png";
 import closedEye from "../../../assets/icons/eye-closed.svg";
+import { useAuth } from "../../../hooks";
 
 export const InvestorDetails = () => {
+  const { stateAuth } = useAuth();
   return (
     <section className="profile-info">
       <div
@@ -39,18 +41,18 @@ export const InvestorDetails = () => {
           />
         </span>
         <span className="profile-image">
-          <img src={investor} alt="sample company" />
+          <img src={stateAuth?.investorData?.profile?.avatar} alt="sample company" />
         </span>
 
         <article>
-          <h1 className="mb-4 profile-name">Micheal Smith</h1>
+          <h1 className="mb-4 profile-name">{stateAuth?.username}</h1>
 
           <div className="d-flex align-items-center justify-content-between mb-3">
             <a
               href="mailto:Michealsmith@gmail.com"
               style={{ color: "#3E3E3E", textDecoration: "none" }}
             >
-              Michealsmith@gmail.com
+              {stateAuth?.investorData?.profile?.email}
             </a>
 
             <span>
@@ -62,18 +64,18 @@ export const InvestorDetails = () => {
           <div className="d-flex align-items-center justify-content-between web-phone-local mb-3">
             <span className="flex-align web-phone-local">
               <p>
-                <img src={location} alt="location" /> San francisco United State
+                <img src={location} alt="location" /> {stateAuth?.investorData?.profile?.address}
               </p>
               {/* <p>
               <img src={phone} alt="phone" /> +234 709 245 2345
             </p> */}
-              <a href="https://www.michealsmith.com">
+              <a href={`${stateAuth?.investorData?.profile?.socialMedia?.website}`} target={"_blank"} rel="noreferrer">
                 <img src={web} alt="web" />
-                www.michealsmith.com
+                {stateAuth?.investorData?.profile?.socialMedia?.website}
               </a>
             </span>
-            <a href="www.Knightventure/michealsmith">
-              https://www.Knightventure/michealsmith
+            <a href={`${stateAuth?.investorData?.profile?.socialMedia?.profile}`} >
+              {`https://www.knight.venture/${stateAuth?.firstname}${stateAuth?.lastname}`}
             </a>
           </div>
 

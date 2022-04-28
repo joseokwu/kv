@@ -83,7 +83,9 @@ export const InvestmentApproach = () => {
         <FormCard>
           <div className="row">
             <section className="col-12 mb-4">
-              <label className="mb-3">Choose the sectors you have expertise in?</label>
+              <label className="mb-3">
+                Are you interested in any sectors or technologies in particular?
+              </label>
               <Form.Item
                 className=""
                 name="techSector"
@@ -115,7 +117,9 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
-              <label className="mb-3">Choose the sectors you have expertise in?</label>
+              <label className="mb-3">
+                Choose the sectors you have expertise in?
+              </label>
               <Form.Item
                 style={{ background: '#f8f8f8' }}
                 name="investmentExperience"
@@ -215,7 +219,9 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
-              <p className="mb-3">What is your Preferred Stage</p>
+              <p className="mb-3">
+                I prefer start-ups founders with the fellowing backgrounds
+              </p>
               <RowOption
                 currentSelected={
                   stateAuth?.investorData?.investorApproach?.preferredStage
@@ -234,7 +240,10 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
-              <label className="mb-3">On average, how much would you like to invest in each business you choose to fund (in USD)?"</label>
+              <label className="mb-3">
+                On average, how much would you like to invest in each business
+                you choose to fund (in USD)?"
+              </label>
               <Form.Item
                 style={{ background: '#f8f8f8' }}
                 name="averageInvestment"

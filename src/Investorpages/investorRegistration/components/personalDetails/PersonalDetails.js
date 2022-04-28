@@ -400,11 +400,12 @@ export const PersonalDetails = () => {
                 id={'profileLink'}
                 name={'profileLink'}
                 type={'text'}
-                value={stateAuth?.investorData?.profile.socialMedia?.profileLink}
-                required={true}
+                // value={stateAuth?.investorData?.profile.socialMedia?.profileLink}
+                value={`https://www.knight.venture/${stateAuth?.firstname}${stateAuth?.lastname}`}
+                disabled
                 placeholder={'Enter linkedin link'}
                 className={'edit_input'}
-                onChange={(e) =>  handleSocialInput(e , 'profileLink')}
+                // onChange={(e) =>  handleSocialInput(e , 'profileLink')}
               />
             </section>
 

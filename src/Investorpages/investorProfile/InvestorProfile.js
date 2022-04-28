@@ -5,6 +5,7 @@ import { InvestorDetails } from "./components/InvestorDetails";
 import { InvestorInvestments } from "./components/InvestorInvestments";
 import { InvestorTypes } from "./components/InvestorTypes";
 import { SectorExpertise } from "./components/SectorExpertise";
+import { useAuth } from "../../hooks";
 import "./investorProfile.css";
 
 export const InvestorProfile = () => {
@@ -12,6 +13,10 @@ export const InvestorProfile = () => {
     location: { hash },
     push,
   } = useHistory();
+
+  const { stateAuth } = useAuth();  
+
+  console.log(stateAuth);
 
   const renderComponent = () => {
     switch (hash) {
@@ -44,7 +49,7 @@ export const InvestorProfile = () => {
     <section style={{ background: "#edf1f4", minHeight: "100vh" }}>
       <div className="wrapper">
         <section className="mb-3">
-          <InvestorDetails />
+          <InvestorDetails data={stateAuth?.investorData} />
         </section>
         <section className="mb-3 profile-tab-investor">
           <h2
@@ -67,7 +72,7 @@ export const InvestorProfile = () => {
           <div className="col-lg-8 pl-0">{renderComponent()}</div>
           <div className="col-lg-4 pr-0">
             <div>
-              <SectorExpertise />
+              <SectorExpertise data={stateAuth?.investorData} />
             </div>
             <div>
               <InvestorTypes />
