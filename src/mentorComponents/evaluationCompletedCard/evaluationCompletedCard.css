@@ -1,0 +1,34 @@
+.opp-content span {
+  color: #00adef !important;
+  font-family: Lato;
+  font-size: 1rem;
+  line-height: 24px;
+  text-decoration: underline;
+}
+
+.completed-tag {
+  font-family: DM Sans;
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0.01em;
+  color: #0f9214;
+  background: #ddffde;
+  border-radius: 5px;
+  padding: 4px 10px;
+}
+
+.completed_evaluation {
+  background: #dadada;
+  border-radius: 5px;
+  color: #ffffff;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  padding: 8px 20px;
+  border: none;
+}
+
+.completed_evaluation:focus {
+  outline: none;
+}

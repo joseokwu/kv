@@ -1,0 +1,52 @@
+.dashCard-main {
+  padding: 14px 15px;
+  max-width: 167px;
+  width: 100%;
+  min-width: 150px;
+  border-radius: 20px;
+  color: white;
+  background-color: white;
+  box-shadow: 0px 4px 18px -2px rgba(86, 87, 88, 0.12);
+  height: 141px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashCard-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dashCard-main h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  color: #828282;
+  text-transform: capitalize;
+}
+
+.dashCard-main p {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 140%;
+  color: #eff3f6;
+  color: #181819;
+}
+
+.card_star {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.dashCard-main > section {
+  height: 100%;
+}

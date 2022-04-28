@@ -1,0 +1,103 @@
+.deck-card {
+  background: #ffffff;
+  border: 1px solid #e6e7e9;
+  border-radius: 8px;
+  width: fit-content;
+  overflow: hidden;
+}
+
+.deck-card-img {
+  width: 100%;
+  max-width: 246px;
+  height: 246px;
+}
+
+.deck-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.deck-card span p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 120%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.deck-card span small {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.42);
+}
+
+.tab-section-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 1.125rem;
+}
+
+.create_pitch img {
+  transform: translate(-50%, -50%);
+  top: 50%;
+  position: absolute;
+  padding: 30px;
+  border: 1.5px dashed #e6e7e9;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addPitchDeck h2 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.addPitchDeck span {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.addPitchDeck p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #525151;
+}
+
+.addPitchDeck button {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  background: #2e3192;
+  border-radius: 5px;
+  border: none;
+  padding: 8px 30px;
+}

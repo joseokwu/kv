@@ -1,0 +1,56 @@
+.phone-input {
+  display: flex;
+  align-items: center;
+  padding: 7px 13px;
+  height: 36px;
+  width: 100%;
+  /* max-width: 329px; */
+  background: #fafafc;
+  border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+  .phone-input {
+    max-width: none;
+  }
+}
+
+.country-codes {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #bdbdbd;
+  padding-right: 12px;
+  margin-right: 12px;
+}
+
+.input-phone {
+  height: inherit;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+}
+
+.phoneNumber label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+.phone-text {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #bdbdbd;
+  margin-left: 5px;
+}
+
+.phone-dropdown {
+  height: 300px;
+  overflow-y: auto;
+}

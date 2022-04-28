@@ -1,0 +1,84 @@
+.btn-primary {
+  background: #2e3192 !important;
+}
+
+.btn-secondary {
+  background: #00adef !important;
+}
+
+.btn-trans {
+  background-color: transparent !important;
+  border: 1px solid #2e3192 !important;
+  color: #2e3192 !important;
+}
+
+.btn-gray {
+  background: #f4f4f4 !important;
+  color: #4f4f4f !important;
+}
+
+.btn-danger {
+  background-color: #cb1313;
+  color: #fff;
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+  outline: none;
+  background: #2e3192 !important;
+}
+.btn-secondary:focus,
+.btn-secondary:active {
+  outline: none;
+  background: #00adef !important;
+}
+.btn-main {
+  border-radius: 10px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-transform: capitalize;
+  padding: 10px 26px;
+  transition: all 0.4s;
+  border: none;
+}
+
+.btn-main:active {
+  outline: none !important;
+  box-shadow: none !important;
+  transform: scale(0.97, 0.97);
+  transition: all 0.4s;
+}
+
+.btn-main:focus {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none;
+}
+
+.btn-main:disabled {
+  background-color: lightgray;
+}
+
+.resend-code {
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+  justify-content: center;
+  max-width: 585px;
+  margin-top: 50px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(50, 52, 56, 0.6);
+}
+
+.resend-code p:last-child {
+  color: #2e3192;
+  font-weight: bold;
+}

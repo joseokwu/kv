@@ -1,0 +1,143 @@
+.side-main {
+  height: calc(100vh - 60px);
+  background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+  color: white;
+  padding: 60px 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 500px;
+  overflow-y: auto;
+}
+
+.start-main {
+  /* height: calc(100vh - 60px); */
+  background: #fff;
+  color: #0e0d0d;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* min-height: 500px; */
+
+}
+
+.side-navigator {
+}
+
+.side-footer {
+  display: flex;
+  align-items: center;
+  
+}
+
+.side-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 30px;
+}
+
+.side-list-start {
+  list-style: none;
+  /* margin: 0; */
+  /* padding: 0; */
+  padding-top: 100px;
+ 
+}
+
+.side-list a {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  text-decoration: none;
+}
+
+.side-list-start span {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  text-decoration: none;
+}
+
+.side-list li {
+  margin-bottom: 16px;
+}
+
+.side-list-start li {
+  margin-bottom: 16px;
+}
+
+.side-list img {
+  flex-basis: 10%;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.side-list a p {
+  color: #ffffff;
+}
+
+.side-list-start span p {
+  font-family: DM Sans;
+  font-weight: 400;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+  color: #525151;
+}
+
+/* .active-side {
+  padding: 10px 17px;
+  background-color: white;
+  color: #2E3192 !important;
+  border-radius: 10px;
+  cursor: pointer;
+} */
+
+.active-side-start {
+  padding: 10px 20px;
+  background: #dcebff;
+  color: #2e3192 !important;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+}
+
+.side-text {
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 15px;
+  color: #2e3192 !important;
+  cursor: pointer;
+}
+
+.side-text-start {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2e2c2c;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.side-header {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+  color: #ffffff;
+  margin-top: 13px;
+}
+
+.side-header + p {
+  opacity: 0.7;
+}

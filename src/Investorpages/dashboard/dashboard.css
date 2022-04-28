@@ -1,0 +1,40 @@
+.dashboard-main {
+  padding: 1.625rem;
+}
+
+.dashboard-cards {
+  column-gap: 19px;
+  width: 100%;
+  padding: 20px 0;
+  overflow-x: auto;
+}
+
+.dashboard-cards::-webkit-scrollbar {
+  height: 0px;
+}
+
+.dashboard-applications-header {
+  margin-bottom: 16px;
+}
+
+.dashboard-applications-header h5 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.dashboard-applications-header span {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+  text-decoration-line: underline;
+  color: #2e3192;
+  cursor: pointer;
+}
+
+.dash-main-content {
+  max-width: 1200px;
+}

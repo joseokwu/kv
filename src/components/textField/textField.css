@@ -1,0 +1,49 @@
+.field input,
+.select-field select {
+  background: #fafafc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 329px;
+  height: 36px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: black;
+  border: none;
+  padding: 8px 14px !important;
+}
+
+.field input::placeholder {
+  color: #bdbdbd;
+}
+
+.field label,
+.select-field label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.field .ant-form-item-label {
+  display: block;
+}
+
+.field .ant-form-item-label > label {
+  height: fit-content !important;
+}
+
+.field .ant-row {
+  display: block;
+  margin-bottom: 0 !important;
+}
+
+.field .ant-col {
+  text-align: left;
+}

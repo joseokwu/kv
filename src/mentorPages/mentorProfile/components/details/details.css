@@ -1,0 +1,36 @@
+.mentor_profile_info {
+    width: 100%;
+    background-color: white;
+    min-height: 400px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .mentor_profile_banner {
+    position: relative;
+    height: 256px;
+    /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); */
+    background: url('../../../../assets/images/bg.svg');
+
+  }
+  
+  .mentor_profile_contact_info {
+    padding: 0 43px;
+    position: relative;
+  }
+  
+  .mentor_profile_site {
+    font-family: DM Sans;
+    font-size: 14px;
+    line-height: 20px;
+    color: #828282;
+  }
+  
+  .mentor_profile_edit_intro {
+    border-top: 1px solid #f4f4f4;
+    padding-top: 20px;
+    padding-bottom: 34.5px;
+    margin: 0 5.6%;
+    margin-top: 29px;
+  }
+  

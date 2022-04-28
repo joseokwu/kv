@@ -1,0 +1,198 @@
+.appCard-main {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 27px 6%;
+  max-width: 600px;
+  width: 100%;
+}
+.appCard-title {
+  margin-bottom: 1.125rem;
+}
+
+.appCard-title img {
+  width: 61px;
+  height: 61px;
+  border-radius: 50%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.appCard-title h3 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.appCard-desc {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 22px;
+  margin-bottom: 25px;
+}
+
+.appCard-info {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 140%;
+  color: #858585;
+  margin-bottom: 30px;
+}
+
+.appCard-comment {
+  column-gap: 6px;
+}
+
+.appCard-text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5d5d5e;
+}
+
+.appCard-btn-group {
+  column-gap: 9px;
+}
+
+.appCard-tag-group {
+  column-gap: 3px;
+}
+
+.approved-txt {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #18a615;
+  margin-left: 8px;
+}
+
+.declined-txt {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  margin-left: 8px;
+  color: #e21919;
+}
+
+.expired-txt {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  margin-left: 8px;
+  color: #3855b3;
+}
+
+.applicant-modal-header {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.modal-applicant-info {
+  border-bottom: 1px solid #d4e3f6;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+
+.applicant-logo {
+  display: block;
+}
+
+.applicant-logo img {
+  width: 123px;
+  height: 123px;
+  border-radius: 30px;
+}
+
+.applicant-modal-content {
+  background: #f7fbff;
+  border-radius: 5px;
+  padding: 30px 36px;
+}
+
+.applicant-modal-comment-section {
+  border-top: 1px solid #d4e3f6;
+  padding-top: 9px;
+  margin-top: 30px;
+}
+
+.comment-textarea {
+  width: 100%;
+  border: none;
+  padding: 14px 5.2%;
+  border-radius: 0px 10px 10px 10px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.comment-textarea::placeholder {
+  color: #828282;
+}
+
+.comment-send {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  text-transform: capitalize;
+  color: #2e3192;
+}
+
+.commenter-name {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1rem;
+  color: #243466;
+}
+
+.commenter-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.commenter-comment {
+  background: #8699d510;
+  border-radius: 0px 10px 10px 10px;
+  padding: 14px 5.2%;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.replay-cbt {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1rem;
+  color: #666666;
+}
+
+.comment-time {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1rem;
+  color: #666666;
+}

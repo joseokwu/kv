@@ -1,0 +1,1594 @@
+import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import hi from '../../assets/icons/hiEmoji.png'
+import { ProgressBar } from '../../mentorComponents/index'
+import AssistantInfo from './mentorComponents/assistantInfo/assistantInfo'
+import Consulting from './mentorComponents/consulting/consulting'
+import Details from './mentorComponents/details/details'
+import Interest from './mentorComponents/interest/interest'
+import WorkExperience from './mentorComponents/workExperience/workExperience'
+import './personalDetails.css'
+
+export const PersonalDetails = () => {
+  const wrapRef = useRef();
+  const [progress, setProgress] = useState('');
+
+  const {
+    location: { hash },
+    push,
+  } = useHistory();
+
+  const switchForm = (currentHash) => {
+    push(currentHash)
+  };
+
+  useEffect(() => {
+    wrapRef.current.scrollTop = 0;
+    switch (hash) {
+      case '#assistant_info':
+        setProgress('100')
+        break;
+      case '#consulting':
+        setProgress('70')
+        break;
+      case '#area_of_interest':
+        setProgress('50')
+        break;
+      case '#work_experience':
+        setProgress('30')
+        break;
+      case '#personal_details':
+        setProgress('20')
+        break;
+      default:
+        setProgress('20')
+        break;
+    }
+  }, [hash]);
+
+  return (
+    <div className="mentor_personal_details_wrap" ref={wrapRef}>
+      <section className="mentor_personal_details_header">
+        <div>
+          <span>
+            <section
+              className="d-flex align-items-center"
+              style={{ columnGap: 12 }}
+            >
+              <h4>Hi Daniella</h4>
+              <img src={hi} alt={'hi'} />
+            </section>
+            <p>Let’s customise your experience</p>
+          </span>
+          <ProgressBar progress={progress} />
+        </div>
+
+        <section className="mentor_personal_details_grid">
+        <div>
+          <ul className="mentor_personal_details_list">
+            <li
+              onClick={() => switchForm('#personal_details')}
+              className={
+                (hash === '#personal_details' || hash === '') && 'active-li'
+              }
+            >
+              Personal Details
+            </li>
+
+            <li
+              onClick={() => switchForm('#work_experience')}
+              className={
+                (hash === '#work_experience' || hash === '#work_experience') && 'active-li'
+              }
+            >
+              Work Experience
+            </li>
+
+            <li
+              onClick={() => switchForm('#area_of_interest')}
+              className={
+                (hash === '#area_of_interest' && 'active-li') 
+              }
+            >
+              Area of interest / skills
+            </li>
+
+            <li
+              onClick={() => switchForm('#consulting')}
+              className={(hash === '#consulting' && 'active-li')}
+            >
+              Consultant Offerings
+            </li>
+
+            <li
+              onClick={() => switchForm('#assistant_info')}
+              className={
+                (hash === '#assistant_info' && 'active-li') 
+              }
+            >
+              Assistant Info
+            </li>
+          </ul>
+        </div>
+        </section>
+      </section>
+
+      <section className="mentor_personal_details_grid">
+        <div>
+          <ul className="mentor_personal_details_list">
+            <li
+              onClick={() => switchForm('#personal_details')}
+              className={
+                (hash === '#personal_details' || hash === '') && 'active-li'
+              }
+            >
+              Personal Details
+            </li>
+
+            <li
+              onClick={() => switchForm('#work_experience')}
+              className={
+                (hash === '#work_experience' || hash === '#work_experience') && 'active-li'
+              }
+            >
+              Work Experience
+            </li>
+
+            <li
+              onClick={() => switchForm('#area_of_interest')}
+              className={
+                (hash === '#area_of_interest' && 'active-li') 
+              }
+            >
+              Area of interest / skills
+            </li>
+
+            <li
+              onClick={() => switchForm('#consulting')}
+              className={(hash === '#consulting' && 'active-li')}
+            >
+              Consultant Offerings
+            </li>
+
+            <li
+              onClick={() => switchForm('#assistant_info')}
+              className={
+                (hash === '#assistant_info' && 'active-li') 
+              }
+            >
+              Assistant Info
+            </li>
+          </ul>
+        </div>
+    
+        <div className="mt-2 d-flex justify-content-end">
+          {hash === "" || hash === '#personal_details' ? (
+            <Details />
+          ) : hash === '#work_experience' ? (
+            <WorkExperience />
+          ) : hash === '#area_of_interest' ? (
+            <Interest />
+          ) : hash === '#consulting' ? (
+            <Consulting />
+          ) : hash === '#assistant_info' ? (
+            <AssistantInfo />
+          ) : (
+            hash === ''
+          )}
+        </div>
+      </section>
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+DashCard
+
+import React from 'react'
+import {
+  AssignedStartupCard,
+  DashCard,
+  UpcomingEventCard,
+} from '../../mentorComponents'
+import './dashboard.css'
+import { useHistory } from 'react-router-dom'
+
+
+export const Dashboard = () => {
+  const { push } = useHistory()
+
+  const cardData = [
+    { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
+    { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },
+    { name: 'Mentors', count: 20, color: '#D5D6F4' },
+    { name: 'Investors', count: 30, color: '#DEF6FF' },
+  ]
+  return (
+    <div className="dashboard-main">
+      <section className="row">
+        <section className="col-lg-12 d-flex align-items-center dashboard-cards">
+          {cardData.map((data, i) => (
+            <DashCard
+              name={data.name}
+              count={data.count}
+              color={data.color}
+              key={i}
+            />
+          ))}
+        </section>
+      </section>
+
+      <section className="row mt-0 dash-main-content">
+        <div className="col-lg-12">
+          <div style={{ marginTop: '2.38rem' }}>
+            <section className="d-flex align-items-center justify-content-between mb-3">
+              <p className="dash-sub-title">Assigned Startups</p>
+              <p className="see-all">See All</p>
+            </section>
+
+            <section className="row">
+              <div className="col-xl-4 mb-4">
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+              </div>
+              <div className="col-xl-4 mb-4">
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+              </div>
+              <div className="col-xl-4 mb-4">
+                <AssignedStartupCard onClick={() => push('/dashboard/view')} />
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div className="col-lg-12">
+          <div style={{ marginTop: '2.38rem' }}>
+            <section className="d-flex align-items-center justify-content-between mb-3">
+              <p className="dash-sub-title">Upcoming Events</p>
+              <p className="see-all"><a className="see-all-event" href="/events">See All</a></p>
+            </section>
+
+            <section className="row">
+              <div className="col-xl-4 mb-4">
+                <UpcomingEventCard />
+              </div>
+              <div className="col-xl-4 mb-4">
+                <UpcomingEventCard />
+              </div>
+              <div className="col-xl-4 mb-4">
+                <UpcomingEventCard />
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+
+DashCard css
+
+
+.dashboard-main {
+  padding: 20px 26px 52px 26px;
+}
+
+.dashboard-cards {
+  column-gap: 19px;
+  width: 100%;
+  overflow-x: auto;
+  /* overflow-y: auto; */
+  padding-bottom: 20px;
+}
+
+.dashboard-cards::-webkit-scrollbar {
+  height: 0px;
+}
+
+.dashboard-applications-header {
+  margin-bottom: 1rem;
+}
+
+.dashboard-applications-header h5 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.dashboard-applications-header span {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.125rem;
+  line-height: 140%;
+  text-decoration-line: underline;
+  color: #2e3192;
+}
+
+.dash-main-content {
+  max-width: 1200px;
+}
+
+.dash-sub-title {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.see-all {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #041b55;
+  cursor: pointer;
+}
+
+.see-all-event {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #041b55;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.see-all-event:hover {
+  text-decoration: none;
+  color: #041b55;
+}
+
+.network-space {
+  background: #f9f9fc70;
+  border-radius: 10px 0px 0px 0px;
+}
+
+.network-space-header {
+  border-bottom: 1px solid #ececff;
+  padding: 1.56rem 2.2rem;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.network-space-header h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.opp-connects {
+  padding: 1rem 2.2rem;
+}
+
+
+
+
+
+import React from 'react'
+import {
+  DashCard,
+  EvaluationCompletedCard,
+  AllEvaluationCard,
+  Tabs,
+  EvaluationPendingCard,
+} from '../../mentorComponents'
+import filter from '../../assets/icons/filterFunnel.svg'
+import down from '../../assets/icons/chevronDown.svg'
+import './evaluation.css'
+
+export const MentorEvaluation = ({ history }) => {
+  const {
+    location: { hash },
+  } = history
+
+  const cardData = [
+    { name: 'Incubation Program', count: 200, color: '#D5D6F4' },
+    { name: 'Acceleration Program', count: 20, color: '#DEF6FF' },
+    { name: 'Total Startup Assigned', count: 300, color: '#D5D6F4' },
+  ]
+
+  const renderContent = () => {
+    switch (hash) {
+      case '#All':
+        return <AllEvaluationCard />
+
+      case '#Pending':
+        return <div className="col-xl-6"><EvaluationPendingCard /></div>
+
+      case '#Completed':
+        return <div className="col-xl-6"><EvaluationCompletedCard /></div> 
+
+      default:
+        return <AllEvaluationCard />
+    }
+  }
+
+  const tabItems = ['All', 'Pending', 'Completed']
+
+  return (
+    <div className="dashboard-main">
+      <section className="d-flex align-items-center dashboard-cards">
+        {cardData.map((data, i) => (
+          <DashCard
+            name={data.name}
+            count={data.count}
+            color={data.color}
+            key={i}
+          />
+        ))}
+      </section>
+
+      <section className="mt-5 d-flex align-items-center justify-content-between">
+        <Tabs tabItems={tabItems} />
+        <div>
+          <button
+            className="d-flex align-items-center filter-btn"
+            style={{ columnGap: 7 }}
+            data-toggle="dropdown"
+          >
+            <img src={filter} alt="filter" />
+            <span>Filter</span>
+            <img className="pl-1" src={down} alt="down" />
+          </button>
+        </div>
+      </section>
+
+      <div className="pt-3">
+        <section className="mt-1">{renderContent()}</section>
+      </div>
+    </div>
+  )
+}
+
+
+
+{
+  name: "Dashboard",
+  path: "/",
+  component: WithDashboardLayout(Dashboard),
+  exact: true,
+  protected: false,
+},
+{
+  name: "RegisterPartner",
+  path: "/RegisterPartner",
+  exact: true,
+  component: WithInvestorRegisterLayout(PartnerRegistration),
+  protected: false,
+},
+{
+  name: "RegisterInvestor",
+  path: "/investor/register",
+  component: WithInvestorRegisterLayout(InvestorRegistration),
+  exact: true,
+  protected: false,
+},
+{
+  name: "InvestorDashboard",
+  path: "/investor/dashboard",
+  component: WithMainInvestorLayout(InvestorDashboard),
+  exact: true,
+  protected: false,
+},
+
+{
+  name: "Pro",
+  path: "/prof",
+  component: WithRegisterLayout(Profile),
+  exact: true,
+  protected: false,
+},
+{
+  name: "ContactUs",
+  path: "/support",
+  component: WithDashboardLayout(ContactUs),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Applicants",
+  path: "/applicants",
+  component: WithMainInvestorLayout(Applicants),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Notification",
+  path: "/notification",
+  component: WithMainInvestorLayout(Notification),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Program",
+  path: "/program",
+  component: WithDashboardLayout(Program),
+  exact: true,
+  protected: false,
+},
+{
+  name: "TodoList",
+  path: "/todolist",
+  component: WithDashboardLayout(StartupTodoList),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Networking",
+  path: "/networking",
+  component: WithDashboardLayout(StartupNetworking),
+},
+{
+  name: "DealRoom",
+  path: "/dealroom",
+  component: WithDashboardLayout(StartupDealRoom),
+},
+{
+  name: "InvestorDashboard",
+  path: "/fundraising",
+  component: WithDashboardLayout(FundingRaising),
+  exact: true,
+  protected: false,
+},
+{
+  name: "InvestorOpportunity",
+  path: "/investor/opportunities",
+  component: WithMainLayout(InvestorOpportunity),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Startup-Profile",
+  path: "/startup-profile",
+  component: WithDashboardLayout(StartupProfile),
+  exact: true,
+  protected: false,
+},
+{
+  name: "StartupRegistration",
+  path: "/startupRegistration",
+  component: WithStartupRegistrationLayout(StartUpRegistration),
+  exact: true,
+  protected: false,
+},
+{
+  name: "E-Academy",
+  path: "/eacademy",
+  component: WithDashboardLayout(EAcademy),
+  exact: true,
+  protected: false,
+},
+{
+  name: "BoosterPartner",
+  path: "/boosterpartner",
+  component: WithDashboardLayout(BoosterPartner),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Opportunity",
+  path: "/investor/opportunities/:id/founder",
+  component: WithMainLayout(FounderProfile),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Opportunity",
+  path: "/investor/opportunities/:id/commitment",
+  component: WithMainLayout(Commitment),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Interested",
+  path: "/investor/interested",
+  component: WithMainLayout(InvestorInterested),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Interested",
+  path: "/investor/interested/:id",
+  component: WithMainLayout(Opportunity),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Portfolio",
+  path: "/investor/portfolio",
+  component: WithMainLayout(InvestorPortfolio),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Events",
+  path: "/investor/events",
+  component: WithMainLayout(InvestorEvents),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Schedule",
+  path: "/investor/schedule",
+  component: WithMainLayout(InvestorSchedule),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Schedule",
+  path: "/investor/schedule-calendar",
+  component: WithMainLayout(ScheduleCalendar),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Evaluation",
+  path: "/investor/evaluation",
+  component: WithMainLayout(InvestorEvaluation),
+  exact: true,
+  protected: false,
+},
+{
+  name: "Networking",
+  path: "/investor/networking",
+  component: WithMainLayout(InvestorNetwork),
+  exact: true,
+  protected: false,
+},
+
+{
+  name: "DealRoom",
+  path: "/investor/deal_room",
+  component: WithMainLayout(InvestorDeal),
+  exact: true,
+  protected: false,
+},
+{
+  name: "DealRoom",
+  path: "/investor/deal_room/:id",
+  component: WithMainLayout(DealRoom),
+  exact: true,
+  protected: false,
+},
+{
+  name: "DealRoom",
+  path: "/investor/deal_room/:id/:folderName",
+  component: WithMainLayout(DealFolder),
+  exact: true,
+  protected: false,
+},
+
+{
+  name: "Investor profile",
+  path: "/investor/profile",
+  component: WithMainLayout(InvestorProfile),
+  exact: true,
+  protected: false,
+},
+{
+  name:'signin',
+  path:'/signin',
+  exact: true,
+  component: SignIn,
+  protected: false,
+},
+{
+  name:'SignUp',
+  path:'/signup',
+  component: SignUp,
+  exact: true,
+  protected: false,
+},
+{
+  name:'ContactUS',
+  path:'/mentor/support',
+  component: WithMentorMainLayout(MentorContactUs),
+  exact: true,
+  protected: false,
+},
+{
+  name:'Notification',
+  path:'/notification',
+  component: WithMainLayout(Notification),
+  exact: true,
+  protected: false,
+},
+{
+  name:'ConfirmEmail',
+  path:'/forgot/password',
+  component: ConfirmEmail,
+  exact: true,
+  protected: false,
+},
+{
+  name: 'ForgotPassword',
+  path: '/forgot-password',
+  component: ForgotPassword,
+  exact: true,
+  protected: false,
+},
+{
+  name:'CheckMail',
+  path:'/confirm/email',
+  component: CheckMail,
+  exact: true,
+  protected: false,
+},
+{
+  name: 'ResetPassword',
+  path: '/reset/password',
+  component: ResetPassword,
+  exact: true,
+  protected: false,
+},
+{
+  name: 'VerifyOtp',
+  path: '/verify/otp',
+  component: VerifyOTP,
+  exact: true,
+  protected: false,
+},
+{
+  name: 'Congrats',
+  path: '/signup/congrats',
+  component:  WithMentorRegisterLayout(Congrats),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'Profile',
+  path: '/prof',
+  component: WithRegisterLayout(Profile),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'InvitePeer',
+  path: '/signup/invite',
+  component:  WithMentorRegisterLayout(InvitePeer),
+  exact: true,
+  protected: false,
+},
+
+// Mentor Routes Starts Here
+{
+  name:'MentorDashboard',
+  path:'/mentor/dashboard',
+  component: WithMentorMainLayout(MentorDashboard),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'PersonalDetails',
+  path: '/mentor/registration',
+  component:  WithMentorRegisterLayout(PersonalDetails),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'ViewDetails',
+  path: '/mentor/dashboard/view',
+  component: WithMainLayout(ViewDetails),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'MentorEvaluation',
+  path: '/mentor/evaluation',
+  component: WithMainLayout(MentorEvaluation),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'Program',
+  path: '/mentor/program',
+  component: WithMainLayout(MentorProgram),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'Assignmrnts',
+  path: '/mentor/assignments',
+  component: WithMentorMainLayout(Assignments),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'Events',
+  path: '/mentor/events',
+  component: WithMentorMainLayout(Events),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'Schedule',
+  path: '/mentor/schedule',
+  component: WithMentorMainLayout(Schedule),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'Networking',
+  path: '/mentor/networking',
+  component:WithMentorMainLayout(MentorNetworking),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'DealRoom',
+  path: '/mentor/dealroom',
+  component: WithMentorMainLayout(MentorDealRoom),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'DealRoom',
+  path: '/mentor/deal_room/:id',
+  component: WithMentorMainLayout(MentorDealRoom),
+  exact: true,
+  protected: false,
+},
+// {
+//   name: ‘DealRoom’,
+//   path: ‘/deal_room/:id/:folderName’,
+//   component: WithMainLayout(DealFolder),
+//   exact: true,
+//   protected: false,
+// },
+{
+  name: 'DashboardProfile',
+  path: '/mentor/dashboard/founder',
+  component: WithMainLayout(MentorDashboardProfile),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'Evaluation',
+  path: '/mentor/evaluation/evaluate',
+  component: WithRegisterLayout(Evaluation),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'EvaluationViewProfile',
+  path: '/mentor/evaluation/view',
+  component: WithMentorMainLayout(MentorEvaluationViewProfile),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'CreateAssignment',
+  path: '/mentor/assignments/create',
+  component: WithMentorMainLayout(MentorCreateAssignment),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'MoreDetails',
+  path: '/mentor/assignments/create/details',
+  component:WithMentorMainLayout(MentorMoreDetails),
+  exact: true,
+  protected: false,
+},
+{
+  name: 'ViewAssignmnet',
+  path: '/mentor/assignments/view',
+  component: WithMainLayout(MentorViewAssignment),
+  exact: true,
+  protected: false,
+},
+
+
+ // Mentor Routes Ends Here
+
+
+
+ import {
+
+  BoosterDashboard,
+  PartnerRegistration,
+  BoosterProfile,
+  Applicants,
+  ContactUs,
+  Notification,
+  InvestorRegistration,
+  InvestorDashboard,
+  InvestorOpportunity,
+  Opportunity,
+  InvestorInterested,
+  InvestorPortfolio,
+  InvestorEvents,
+  InvestorSchedule,
+  InvestorEvaluation,
+  InvestorNetwork,
+  InvestorDeal,
+  FounderProfile,
+  Commitment,
+  DealRoom,
+  DealFolder,
+  ScheduleCalendar,
+  InvestorProfile,
+} from "../Investorpages"; 
+
+import {
+  MentorDashboard,
+  SignUp,
+  MentorSignIn,
+  MentorConfirmEmail,
+  MentorForgotPassword,
+  MentorCheckMail,
+  MentorResetPassword,
+  MentorVerifyOTP,
+  MentorProfile,
+  MentorNotification,
+  MentorCongrats,
+  MentorInvitePeer,
+  MentorPersonalDetails,
+  MentorEvaluate,
+  MentorProgram,
+  Events,
+  Assignments,
+  Schedule,
+  MentorNetworking,
+  MentorEvaluationViewProfile,
+  MentorContactUs,
+  MentorCreateAssignment,
+  MentorMoreDetails,
+  ViewDetails,
+  MentorDashboardProfile,
+  MentorDealRoom,
+  
+  // DealFolder,
+  MentorEvaluation,
+} from '../mentorPages';
+import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewEvaluation/viewAssignment";
+
+======================================================================
+=================================================================
+Date formats
+
+const d = new Date();
+let hours = d.getHours()
+minute = d.getMinutes();
+hours = (hours % 12) || 12;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+user:
+assignment: []
+businessname: "Bisi business"
+event:
+data: (3) [{…}, {…}, {…}]
+results: {next: {…}}
+total: 22
+[[Prototype]]: Object
+partner: []
+role: ['startup']
+startUpProfile: {logo: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current', elevatorPitch: 'sdggsfhhhhh', brand: 'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current', startupName: 'Bisi business', yearFounded: '2022-03-29T10:42:44.870Z', …}
+userId: "62401b6c823102167a32a885"
+
+
+addLocation: "adeneka"
+attendees: (2) [{…}, {…}]
+endDate: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+endTime: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+eventDescription: "Come and play"
+eventPicture: "http://zoom.com"
+joinWith: "meet.com/google"
+notifyMe: "Yes"
+startDate: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+startTime: "Mon Mar 28 2022 21:24:48 GMT+0100 (West Africa Standard Time)"
+titleOfEvent: "Meeting with client"
+visibility: "Yes"
+__v: 0
+_id: "624226224757e7be6520c364"
+
+
+
+
+
+
+
+
+const fetchData = async () => {
+  setLoading(true);
+  const res = await getEvents();
+  setEvents(res?.data);
+  setSelectionEvents(() =>
+    res?.data?.filter((x) => x.eventType === "selectionDay")
+  );
+  setDemoEvents(() => res?.data?.filter((x) => x.eventType === "demoDay"));
+  setPitchEvents(() =>
+    res?.data?.filter((x) => x.eventType === "pitchSession")
+  );
+  setLoading(false);
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+
+
+
+===================================================
+console.log('hello')
+const { files, name } = e.target;
+setFile(
+  fileInfo.map((item) => {
+    if (name === item?.name) {
+      item.file = files[0]
+      item.size = formatBytes(files[0].size)
+    }
+    return item
+  }),
+)
+
+<FileSize>
+{' '}
+{fileInfo[1].file !== null
+  ? `${fileInfo[1].size}`
+  : '(Max. File size 5mb)'}{' '}
+</FileSize>
+
+   <div className="form-group col-12 mt-5">
+                <VideoWrapper>
+                  <label> Pitch deck uploaded</label>
+                  <div className="row">
+                      <div className="my-4 d-flex justify-content-center text-center">
+                        <span>No File Uploaded</span>
+                      </div>
+                    
+                  </div>
+                </VideoWrapper>
+              </div>
+
+const [uploadDoc, setUploadDock] = useState({
+  pitchDeckFile: stateAuth?.user?.pitchDeck?.pitchDeckFile,
+  pitchDeckVideo: stateAuth?.user?.pitchDeck?.pitchDeckVideo,
+});
+====================================================================
+=======================================================================
+fundRaising:
+capTable:
+amountInvestedByFounders: "987998"
+amountRaised: "78008"
+_id: "624afa6323b2f89cc25c680e"
+[[Prototype]]: Object
+financialProjection:
+_id: "624afa6323b2f89cc25c6810"
+[[Prototype]]: Object
+fundUtilization:
+_id: "624afa6323b2f89cc25c680d"
+[[Prototype]]: Object
+fundingAsk:
+dilution: "900000"
+fundraisingAmount: "696767"
+hasLeadInvestor: false
+hasPreviousFundraising: false
+instrumentForRound: "Fund 2"
+numberOfRounds: "Fund 2"
+postMoneyValuation: "8666976976"
+preMoneyValuation: "9777977"
+terms: ['uouougugouo']
+_id: "624afa6323b2f89cc25c680c"
+[[Prototype]]: Object
+previousRound:
+dateOfFunding: null
+dilution: "900000"
+fundraisingAmount: "696767"
+hasLeadInvestor: true
+instrumentForRound: "Fund 3"
+numberOfRounds: "Fund 3"
+preMoneyValuation: "9777977"
+_id: "624afa6323b2f89cc25c680f"
+[[Prototype]]: Object
+_id: "624afa6323b2f89cc25c680b"
+[[Prototype]]: Object
+
+=======================================================
+======================================================
+ // const [contacts, setContacts] = useState({
+  //   email: stateAuth?.user?.team?.founderInfo?.email,
+  //   country: stateAuth?.user?.team?.founderInfo?.country,
+  //   state: stateAuth?.user?.team?.founderInfo?.state,
+  //   city: stateAuth?.user?.team?.founderInfo?.city,
+  // })
+  // const [socialMedia, setSocialMedia] = useState({
+  //   linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn,
+  //   twitter: stateAuth?.user?.team?.socialMedia?.twitter,
+  //   website: stateAuth?.user?.team?.socialMedia?.website,
+  // })
+
+  ====================================================
+  ======================================================
+   // const formik = useFormik({
+  //   initialValues: {
+  //     avatar:
+  //       'https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current',
+  //     briefIntroduction: stateAuth?.user?.team?.briefIntroduction,
+  //     firstName: stateAuth?.user?.team?.firstName,
+  //     lastName: stateAuth?.user?.team?.lastName,
+======================================================
+===========================================================
+<FormWrapper height='70%'>
+          <div className='div border-bottom pb-2'>
+            <span>Co-Founders</span>
+            <p className='pt-3'>Create a profile for your Co-Founders</p>
+          </div>
+
+          <div className='mt-4'>
+            <label>Do you have Co-Founders?*</label>
+
+            <div className='d-flex'>
+              <BntWrap>
+                <button
+                  className={`me-3 ${coFounder === 'yes' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCoFounder('yes');
+                  }}
+                >
+                  Yes
+                </button>
+                <button
+                  className={`me-3 ${coFounder === 'no' && 'active'}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCoFounder('no');
+                  }}
+                >
+                  No
+                </button>
+              </BntWrap>
+            </div>
+
+            <div className='sold'>
+              <div className='d-flex justify-content-center'>
+                <div
+                  className=''
+                  data-target='#cofounder'
+                  onClick={() => setShowModal(true)}
+                >
+                  <Tag
+                    name='+ Add Co-founder'
+                    color='#4F4F4F'
+                    bg='rgba(183, 218, 231, 0.5'
+                    padding='8px 14px'
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </FormWrapper>
+===================================================================
+=================================================================
+<VideoWrapper>
+<label> Product demo upload</label>
+<div className="row">
+  <div className=" col-lg-8 col-12">
+    <div className="div p-5">
+      <img src={RedFile} alt=".#" />
+    </div>
+    <div id="div" className="p-2">
+      <div className="d-flex mt-n2">
+        <img
+          src={BlueFile}
+          alt=".#"
+          style={{ width: '10%', height: '10%' }}
+          className="mt-3"
+        />
+        <p className="px-4">Product Demo</p>
+      </div>
+      <p className="my-n2 px-5 p">2.5 mb</p>
+    </div>
+  </div>
+</div>
+</VideoWrapper>
+===========================================================
+=====================================================
+<iframe
+key={i}
+        src={item}
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        title="video"
+        style={{
+        borderRadius:"20px",
+        maxHeight:"150px",
+        width:"250px"
+      }}
+      />
+      onClick={deleteVid}
+
+
+   <video 
+                      style={{
+                        borderRadius:"20px",
+                       maxHeight:"150px",
+                        width:"250px"
+                      }}
+                      key={i}
+                      className='mb-3'
+                     controls>
+                    <source src={item} id="video_here" />
+                      Your browser does not support HTML5 video.
+                     </video> 
+
+=======================================================================
+=====================================================================
+
+ const pitchDeck = {
+        type: "pitchDeck",
+        accType: "startup",
+        values: {
+          pitchDeckFile: fileDoc,
+          pitchDeckVideo: videoDoc,
+        },
+        userId: stateAuth?.user?.userId,
+      };
+      console.log(pitchDeck);
+
+      if (opts === "next") {
+        setOpts(true);
+        let result = await updateFounderProfile(pitchDeck);
+
+        if (result?.success) {
+          toast.success("Pitch Deck" + "     " + result?.message);
+          setOpts(false);
+          return changePath(path + 1);
+        }
+      }
+      setLoading(true);
+      let result = await updateFounderProfile(pitchDeck);
+
+      if (!result?.success) {
+        toast.error(
+          result?.message || "There was an error updating the pitchDeck"
+        );
+        setLoading(false);
+        return;
+      }
+      toast.success("Pitch Deck" + " " + result?.message);
+      setLoading(false);
+      history.push("/startup/dashboard");
+=====================================================================
+=======================================================================
+      {/* <FileWrapper className="d-flex justify-content-center text-center">
+                  {videoDoc !== null ? (
+                    <video
+                      style={{
+                        borderRadius: '20px',
+                        maxHeight: '150px',
+                        width: '250px',
+                      }}
+                      className="mb-3"
+                      controls
+                    >
+                      <source src={videoDoc} id="video_here" />
+                      Your browser does not support HTML5 video.
+                    </video>
+                  ) : videoUploading ? (
+                    <CircularLoader color={'#000'} />
+                  ) : (
+                    <>
+                      <img src={DownloadIcon} alt="#" />
+                      <FileText>Drag & Drop</FileText>
+                      <FileText>
+                        Drag files or click here to upload pitch video{' '}
+                      </FileText>
+                    </>
+                  )}
+
+                  <input
+                    type="file"
+                    name="pitchDeckVideo"
+                    id="pitch-docu"
+                    onChange={handleChangeVid}
+                    accept="video/*"
+                    hidden
+                  />
+                  <LabelButton for="pitch-docu">Upload Files</LabelButton>
+                </FileWrapper> */}
+
+=====================================================================
+==================================================================
+
+
+// import { CircularLoader } from "../../../../../../Startupcomponents/CircluarLoader/CircularLoader";
+// import toast from "react-hot-toast";
+
+
+  // const [fileDoc, setFileDoc] = useState(
+  //   stateAuth?.user?.fundRaising?.fundUtilization?.files ?? null
+  // );
+
+  const handleChange = async (e) => {
+    const { files } = e.target
+    const formData = new FormData()
+    formData.append('dir', 'kv')
+    formData.append('ref', stateAuth.user?.userId)
+    formData.append('type', 'image')
+    formData.append(0, files[0])
+
+    try {
+      setLogoUploading(true)
+      const response = await upload(formData)
+      console.log(response)
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+    } catch (error) {
+      console.log(error)
+      toast.error(
+        error?.res?.data?.message || 'The was an error updating pitch deck',
+      )
+    }
+  }
+
+
+  stateAuth?.investorData
+
+  amount: ""
+  amountPerYear: ""
+  angelInvestedBefore: false
+  angelInvestorOrSyndicateInvestor: "solo"
+  bankAccountNumber: ""
+  bankAccountType: ""
+  bankBranch: ""
+  bankName: ""
+  budgetAmount: ""
+  budgetPerYear: ""
+  individualHaving: ""
+  interestedInOnlinePitching: false
+  investingFrom: "personal fund"
+  isLeadInvestor: false
+  isPublic: false
+  mentorsStartups: false
+  nationality: ""
+  numberOfInvestmentPerYear: ""
+  previousAngelInvestingExperience: false
+  sectorOfExpertise: ""
+  taxResidentOutsideNigeria: false
+  yetToInvest: false
+
+
+  updateInvestorProfileData('profile', {
+    referral: e.target.value,
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

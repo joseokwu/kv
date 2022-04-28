@@ -1,0 +1,37 @@
+.all {
+  padding: 22px 3rem;
+  padding-bottom: 0.5rem;
+  background: #ffffff;
+  border: 1px solid #d1d1d1;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 30px rgba(42, 63, 157, 0.05);
+  border-radius: 10px;
+}
+
+.rating_table th,
+.rating_table td {
+  border-top: none;
+  border-color: #e7e7e7;
+}
+
+.rating_table thead {
+  border: none;
+}
+
+.rating_table th {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  color: #bdbdbd;
+}
+
+.rating_table td {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #878181;
+}

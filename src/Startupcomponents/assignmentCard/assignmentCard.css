@@ -1,0 +1,119 @@
+.assignment-card {
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  /* padding: 1.75rem 1.38rem; */
+  padding: 1.95rem 1.88rem;
+
+  cursor: pointer;
+}
+
+.assignment_card_header h4 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.pending_date {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #3855b3;
+}
+
+.pending_date span {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 140%;
+  color: #3855b3;
+}
+
+.today_tag {
+  background: #def6ff;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+  color: #058dc1;
+}
+
+.tomorrow_tag {
+  background: #efefef;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+  color: #4f5253;
+}
+
+.assignment_card_body p {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #525151;
+}
+
+.assigned_people {
+  display: flex;
+  align-items: flex-end;
+  /* border-right: 0.8px solid #c0c1d4; */
+}
+
+.assigned_people img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+}
+
+.assigned_people img:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5);
+  z-index: 999;
+}
+
+.assigned_people img:nth-child(2) {
+  position: relative;
+  left: -9px;
+}
+
+.assigned_people img:nth-child(3) {
+  position: relative;
+  left: -16px;
+}
+
+.pending_date span {
+  border-right: 1px solid #3855b3;
+  padding-right: 6px;
+}
+
+.assignmnet_card_footer p {
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  color: #525151;
+}
+
+.completed_tag {
+  background: #DEFFE7;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+  color: #05C123;
+}

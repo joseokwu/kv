@@ -1,0 +1,50 @@
+.create_assignment {
+  background: #2e3192;
+  border-radius: 8px;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  color: #ffffff;
+  padding: 12px 50px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.create_assignment:hover {
+  background: none;
+  border: 1.5px solid #2e3192;
+  color: #2e3192;
+  text-decoration: none !important;
+}
+
+.assignment_card h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+}
+
+.assignment_card p {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 21px;
+  color: #525151;
+}
+
+.assignment_card p > span {
+  color: #00adef !important;
+  text-decoration: underline;
+}
+
+@media (max-width:768px) {
+  .create_assignment {
+    padding: 8px 20px;
+    font-size: 11px;
+    font-weight: 400;
+    
+  }
+}
+

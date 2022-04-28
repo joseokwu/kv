@@ -1,0 +1,14 @@
+.badge-main {
+  background: #f9f9fc;
+  border-radius: 60px;
+  padding: 4px 10px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0.01em;
+  color: #979797;
+  text-transform: none !important;
+  height: fit-content;
+}

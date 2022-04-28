@@ -1,0 +1,28 @@
+.main {
+  display: grid;
+  grid-template-columns: 0.1fr 0.8fr 0.1fr;
+  margin-bottom: 1rem;
+}
+h5 {
+  margin-bottom: 0.85rem;
+}
+h6 {
+  color: #828282;
+}
+.degree {
+  margin-bottom: 0.85rem;
+}
+.course {
+  margin-bottom: 0.85rem;
+}
+.school {
+  margin-bottom: 0.85rem;
+}
+.img {
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  .info {
+    margin-left: 10px;
+  }
+}

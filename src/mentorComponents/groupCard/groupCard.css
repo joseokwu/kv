@@ -1,0 +1,20 @@
+.search-input {
+  position: relative;
+  flex-basis: 60%;
+}
+
+.search-input input {
+  background: #ffffff;
+  border: 1px solid #e6e7e9;
+  border-radius: 8px;
+  height: 45px;
+  width: 100%;
+  padding-left: 40px;
+}
+
+.search-input img {
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  bottom: 20%;
+}

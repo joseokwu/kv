@@ -1,0 +1,28 @@
+
+.in-reg-no input {
+    outline: none;
+    padding: 5px 0px 5px 10px!important;
+    border-radius: 4px;
+    border: none;
+}
+
+.in-reg-no input::placeholder {
+    color: #BDBDBD;
+}
+
+.error {
+    color: red;
+}
+
+.form-control {
+    border: none!important;
+    background: #f8f8f8!important;
+}
+
+.span.ant-select-selection-item {
+    color: red!important;
+}
+
+.ant-form label {
+    font-size: 16px;
+}

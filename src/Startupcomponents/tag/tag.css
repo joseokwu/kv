@@ -1,0 +1,10 @@
+.tag-main {
+  border-radius: 5px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}

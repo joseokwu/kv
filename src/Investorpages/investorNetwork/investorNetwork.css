@@ -1,0 +1,125 @@
+/* .create-button {
+  background-color: transparent;
+  border: 1px solid #2e3192;
+  color: #2e3192;
+  margin-right: 8px;
+}
+
+.page-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: #2e3192;
+}
+
+.network-dash-card {
+  max-width: 248px;
+}
+
+.category-menu {
+  padding: 8px;
+}
+
+.category-menu button {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+  border-radius: 4px;
+}
+
+.chatter-img {
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.chatter-img span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  background: #18a615;
+}
+
+.activate {
+  background: #18a615 !important;
+}
+
+.chatter-img img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.chatter-name {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #2e3192;
+}
+
+.chat-last {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 140%;
+  color: #898989;
+}
+
+.connect-action-alert {
+  background: #def6ff;
+  border-radius: 10px;
+  padding: 1.18rem 1rem;
+}
+
+.connect-action-alert .message {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #4f4f4f;
+}
+
+.connect-action-alert .action {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 21px;
+  color: #2e3192;
+  text-decoration: underline;
+}
+
+.invite-input {
+  min-width: 100%;
+}
+
+.invite-phone-input {
+  min-width: 295px;
+}
+
+.members-in-create .member-img {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+} */

@@ -1,0 +1,53 @@
+.team-group-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #00adef;
+  margin-bottom: 2rem;
+}
+
+.member-card {
+  background-color: white;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 1.6rem 2rem;
+  row-gap: 10px;
+}
+
+.member-card span img {
+  cursor: pointer;
+}
+
+.member-card p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #000000;
+}
+
+.member-card .small {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.625rem;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.tab-section-title {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 1.125rem;
+}
+

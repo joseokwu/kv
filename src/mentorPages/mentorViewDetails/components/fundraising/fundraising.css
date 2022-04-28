@@ -1,0 +1,75 @@
+/* .funding_ask h3 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+} */
+
+.fundraisingSubTitle {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1.94rem;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.chart-card {
+  background: #ffffff;
+  box-shadow: 0px 4px 30px rgba(42, 63, 157, 0.05);
+  border-radius: 10px;
+  padding: 3.5rem;
+}
+
+.prev-table thead tr th {
+  padding: 1.31rem 1rem !important;
+}
+
+.prev-table tbody tr td {
+  padding: 1.31rem 1rem !important;
+}
+
+.util-table thead tr {
+  border-bottom: 1px solid #e6e7e9;
+  border-top: 1px solid #e6e7e9;
+  background: #f8f8fa;
+}
+
+.util-table thead tr th {
+  padding: 12px 2rem;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2e3192;
+}
+
+.util-table tbody tr td {
+  /* text-align: center; */
+  padding: 12px 2rem;
+  border-bottom: 1px solid #e6e7e9;
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.util-table .title {
+  font-weight: bold !important;
+}
+
+.cap-table tbody tr:nth-child(even) {
+  background: rgba(86, 87, 88, 0.04) !important;
+}
+
+/* .card_img {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  left: calc(50% - 32px / 2);
+  top: calc(50% - 32px / 2);
+} */

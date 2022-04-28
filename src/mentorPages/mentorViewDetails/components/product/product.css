@@ -1,0 +1,120 @@
+.product-wrap {
+  background-color: white;
+  padding: 1.5rem 1.75rem;
+  margin-top: 20px;
+}
+
+.product-wrap h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.prod-desc {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #323232;
+  width: 90%;
+}
+
+.product-demo {
+  width: 100%;
+  max-width: 451px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+}
+
+.product-founder img {
+  width: 67px;
+  height: 67px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  margin-right: 1.5rem;
+}
+
+.product-founder p {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #323232;
+}
+
+.product-founder small {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.31rem;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.product-investor img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.product-investor p {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #323232;
+}
+
+.product-investor small {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.125rem;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.product-investor article {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 140%;
+  text-decoration-line: underline;
+  color: #5355a3;
+}
+
+.founder_profile span {
+  background: #2e3192;
+  border-radius: 10px;
+  padding: 3px 30px;
+  color: #ffffff;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.founder_profile a:hover {
+  background: #ffffff;
+  color: #2e3192;
+  text-decoration: none;
+  border: 1.5px solid #2e3192;
+}

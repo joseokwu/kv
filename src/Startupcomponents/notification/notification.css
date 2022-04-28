@@ -1,0 +1,133 @@
+.kv-notification {
+  width: 100%;
+  max-width: 483px;
+  position: fixed;
+  top: 70px;
+  background: #ffffff;
+  z-index: 100000 !important;
+  max-height: 800px;
+}
+
+.open-notice {
+  right: 10px;
+  transition: 0.6s all ease-in-out;
+}
+
+.close-notice {
+  right: -100%;
+  transition: 0.6s all ease-in-out;
+}
+
+.close-notice-icon {
+  position: absolute;
+  top: 16px;
+  right: 10px;
+}
+
+.unread-notice {
+  background: #def6ff;
+  border-radius: 20px;
+  display: inline-block;
+  padding: 10px 16px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #058dc1;
+  margin-left: 20px;
+}
+
+.notice-header {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+  margin-right: 10px;
+}
+
+.notice-head {
+  padding: 1.58rem 1.55rem;
+  border-bottom: 1px solid #f4f4f4;
+  margin-bottom: 11px;
+}
+
+.kv-notice-main {
+  padding: 12px 2rem;
+}
+
+.kv-notice-main select {
+  background: #f4f4f4;
+  border-radius: 5px;
+  height: 39px;
+  width: 100%;
+  max-width: 60px !important;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.122rem;
+  line-height: 140%;
+  border: none;
+}
+
+.noty-all {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  text-decoration: underline;
+  color: #2e3192;
+  cursor: pointer;
+}
+
+.kv-notice-main select:focus {
+  outline: none;
+}
+
+.notice-from-img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.notice-img {
+  width: 70px;
+  height: 47px;
+  object-fit: cover;
+  object-position: center;
+  margin-left: 2.3rem;
+}
+
+.notice-text {
+  margin-left: 1.3rem;
+}
+
+.notice-text p {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000000;
+}
+
+.notice-text small {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 18px;
+  color: #5d5d5d;
+}
+
+.notice-item {
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 1rem;
+  margin-bottom: 1.13rem;
+  cursor: pointer;
+}

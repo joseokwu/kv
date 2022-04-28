@@ -1,0 +1,163 @@
+.mentor_gray_card {
+  display: flex;
+  align-items: center;
+  max-width: 585px;
+  border-radius: 10px;
+  padding: 200px 6%;
+}
+
+.mentor_auth_wrap {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+}
+
+@media (max-width: 1024px) {
+  .mentor_auth_wrap {
+    height: 100%;
+  }
+}
+
+.mentor_auth_wrap > section {
+  height: inherit !important;
+}
+
+.mentor_gray_card_input {
+  background-color: transparent !important;
+  max-width: 100% !important;
+}
+
+.mentor_auth_agree {
+  column-gap: 19px;
+}
+
+.mentor_auth_agree input {
+  background-color: red;
+}
+
+.mentor_auth_agree label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #f9f9fc;
+}
+
+.mentor_switch_auth {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.125rem;
+  letter-spacing: 0.01em;
+  color: #f9f9fc;
+}
+
+.mentor_switch_auth a {
+  color: #00adef;
+  font-weight: 600;
+}
+
+.mentor_checkbox_input {
+  width: 1rem;
+  height: 1rem;
+  position: relative;
+  display: inline-block;
+}
+.mentor_checkbox_input div {
+  background: #ffffff;
+  border-radius: 2px;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  border: 1px solid gray;
+}
+
+.mentor_checkbox_input input {
+  width: inherit;
+  height: inherit;
+  position: relative;
+  z-index: 3;
+  opacity: 0;
+}
+
+.mentor_checkbox_input input:checked + div {
+  background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+}
+
+.inputContainer label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 20px;
+  color: #d5d6f4 !important;
+}
+
+.inputContainer select {
+  background: transparent !important;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 329px;
+  height: 36px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #f9f9fc !important;
+  border: 1px solid #e0e0e0 !important;
+  padding: 8px 14px !important;
+}
+
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: transparent;
+  /* border: 1px solid #e0e0e0; */
+  border-radius: 4px;
+  /* color: #f9f9fc; */
+}
+
+@media (max-width: 1024px) {
+  .mentor_gray_card {
+    margin-top: 0px;
+    padding: 0px 0%;
+    margin-bottom: 30px;
+  }
+  .email {
+    padding-top: 25px;
+  }
+}
+
+.signup_num {
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 4px;
+  padding: 5px 0px 5px 10px!important;
+  color: #e0e0e0;
+}
+
+.signup_num input::placeholder {
+  color: #BDBDBD!important;
+}
+
+.signup_num input {
+  outline: none;
+  background: none!important;
+}
+
+/* .pass-field {
+  position: relative;
+} */
+
+.pass-eye {
+  color: #d5d6f4;
+  position: absolute;
+  top: 40px;
+  right: 25px;
+  cursor: pointer!important;
+  z-index: 1;
+}

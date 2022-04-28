@@ -1,0 +1,22 @@
+.evaluationModal_title h3 {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.evaluationModal_title p {
+  font-family: DM Sans;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #000000;
+}
+
+.evaluationModal_title span {
+  font-family: DM Sans;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-decoration-line: underline;
+  color: #242679;
+}

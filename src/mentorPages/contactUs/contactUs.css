@@ -1,0 +1,83 @@
+.contact-us-info {
+  background-color: white;
+  width: 100%;
+  max-width: 383px;
+  padding: 22px 25px;
+  column-gap: 7px;
+  margin-bottom: 1.125rem;
+}
+
+.contact-us-info span {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 20px;
+  color: #2e3192;
+}
+
+.social-links {
+  column-gap: 1.125rem;
+  margin-top: 32px;
+}
+
+.message-card {
+  background-color: white;
+  width: 100%;
+  max-width: 546px;
+  padding: 41px 13.1%;
+}
+
+.message-card label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.message-header {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 20px;
+  margin-bottom: 32px;
+}
+
+.contact-header {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+  margin-bottom: 21px;
+}
+
+.contact-txt {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 24px;
+  color: #3e3e3e;
+}
+
+.message-input {
+  max-width: 100% !important;
+}
+
+label {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}

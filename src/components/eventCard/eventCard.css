@@ -1,0 +1,71 @@
+.event-card {
+  min-height: 105px;
+  border-radius: 10px;
+  display: flex;
+  width: 100%;
+  max-width: 350px;
+  color: white;
+  padding: 1rem 1.5rem;
+  column-gap: 2rem;
+}
+
+.event-card article {
+  column-gap: 2rem;
+}
+
+.event-icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-name {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #ffffff;
+  margin: 7px 0;
+}
+
+.event-date {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+}
+
+.event-time {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+}
+
+.event-people {
+  display: flex;
+  align-items: flex-end;
+}
+
+.event-people img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.event-people img:nth-child(2) {
+  position: relative;
+  left: -5px;
+}
+
+.event-people img:nth-child(3) {
+  position: relative;
+  left: -10px;
+}

@@ -1,0 +1,177 @@
+.header {
+  color: #020498;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.headBtn {
+  padding: 5px 15px;
+  color: #ffffff;
+  border-radius: 10px;
+  background: #2e3192;
+  font-size: 14px;
+  line-height: 140%;
+  font-family: DM Sans;
+  cursor: pointer;
+}
+
+.product-wrap {
+  background-color: white;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.wrap {
+  background: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+.product-wrap h3 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.prod-desc {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #323232;
+  width: 90%;
+}
+
+@media (max-width: 1024px) {
+  .product-desc {
+    width: 100%;
+  }
+}
+
+.product-demo {
+  width: 100%;
+  max-width: 451px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+}
+
+.product-founder img {
+  width: 67px;
+  height: 67px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  margin-right: 1.5rem;
+}
+
+.product-founder p {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #323232;
+}
+
+.product-founder small {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.31rem;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.product-investor img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.product-investor p {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #323232;
+}
+
+.product-investor small {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.product-investor a {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 140%;
+  text-decoration-line: underline;
+  color: #5355a3;
+}
+
+.product-desc h1 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.product-desc p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.youtube button {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  color: #ffffff;
+  background: #2e3192;
+  border-radius: 10px;
+  border: none;
+  padding: 8px 30px;
+}
+
+.product-update button {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  padding: 8px 30px;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  color: #ffffff;
+  background: #2e3192;
+  border-radius: 10px;
+  border: none;
+}

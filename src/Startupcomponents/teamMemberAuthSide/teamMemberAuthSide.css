@@ -1,0 +1,56 @@
+.auth-vector {
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  height: inherit;
+}
+
+.auth-vector h1 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 49px;
+  color: #2e3192;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.auth-vector p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  color: #858585;
+}
+
+.mentor_auth_side h1 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 65px;
+  line-height: 75px;
+  color: #f9f9fc;
+}
+
+.mentor_auth_side p {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+  .auth-vector h1 {
+    font-size: 32px;
+    line-height: 41px;
+  }
+
+  .auth-vector p {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}

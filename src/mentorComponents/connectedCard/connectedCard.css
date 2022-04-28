@@ -1,0 +1,66 @@
+.connected-card {
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 13px 1.18rem;
+  filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.05));
+}
+
+.connected-card .name {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #1b1b1c;
+}
+
+.connected-card .position {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 140%;
+  color: #898989;
+}
+
+.connected-card .count {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 140%;
+  color: #0a6cf4;
+  cursor: pointer;
+}
+
+.connected-card .rep {
+  min-width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  object-position: center top;
+  object-fit: cover;
+}
+
+.connected-tag {
+  display: inline-block;
+  background: #def6ff;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 10px;
+  text-align: center;
+  letter-spacing: 0.01em;
+
+  color: #0a6cf4;
+}
+
+.connected-card button {
+  font-size: 11px !important;
+}
+
+.chat-btn {
+  border: 1px solid #d5d6f4;
+}

@@ -1,0 +1,154 @@
+.sort-btn {
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  border: none;
+  height: 3.063rem;
+  padding: 0.75rem;
+}
+
+.sort-btn span {
+  font-family: Lato;
+  font-size: 1.125rem;
+  line-height: 140%;
+  color: #656363;
+}
+
+.event_title {
+  font-family: Lato;
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.events_card_bg {
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  height: fit-content;
+}
+
+.events_card h3 {
+  font-family: Lato;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.event_card_body p {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #525151;
+}
+
+.event_card_footer .a {
+  background: #2e3192;
+  border-radius: 10px;
+  padding: 8px 30px;
+  border: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.event_card_footer .vd {
+  background: #00ADEF;
+  border-radius: 10px;
+  padding: 8px 30px;
+  border: none;
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 140%;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.event_card_footer span:hover {
+  background: none;
+  color: #2e3192;
+  border: 1.5px solid #2e3192;
+}
+
+.event_card_footer span:focus {
+  outline: none;
+}
+
+.event_schedule_modal_desc {
+  background: rgba(220, 235, 255, 0.7);
+}
+
+.event_schedule_modal_desc h4 {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.event_schedule_modal_desc p {
+  font-family: DM Sans;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #525151;
+}
+
+.event_schedule_visibility p {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.event_schedule_visibility span {
+  color: #2e3192;
+  text-decoration: underline;
+}
+
+.event_schedule_availability {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.event_schedule_availability button {
+  background: #f4f4f4;
+  border-radius: 5px;
+  padding: 10px 16px;
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #3e3e3e;
+  border: none;
+}
+
+.event_schedule_availability button:focus {
+  background: #e7f1ff;
+  outline: none;
+}
+
+.send_request span {
+  font-family: DM Sans;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration-line: underline;
+  color: #2e3192;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .event_card_footer .a, .vd {
+    /* padding: 8px 20px; */
+    font-size: 11px;
+    font-weight: 400;
+    /* line-height: 90%; */
+  }
+}
