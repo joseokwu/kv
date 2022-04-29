@@ -242,7 +242,7 @@ export const InvestmentApproach = () => {
             <section className="col-12 mb-4">
               <label className="mb-3">
                 On average, how much would you like to invest in each business
-                you choose to fund (in USD) ?
+                you choose to fund (in USD)?
               </label>
               <Form.Item
                 style={{ background: '#f8f8f8' }}
