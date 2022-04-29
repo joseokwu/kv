@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   AssignedStartupCard,
+  EmptyState,
   MentorDashCard,
   UpcomingEventCard,
 } from "../../mentorComponents";
@@ -65,9 +66,9 @@ export const MentorDashboard = () => {
           },
         ];
 
-  if (loading) {
-    return <PageLoader dashboard={true} num={[dashInfo]} />;
-  }
+  // if (loading) {
+  //   return <PageLoader dashboard={true} num={[dashInfo]} />;
+  // }
 
   return (
     <div className="dashboard_main container-fluid">
@@ -94,7 +95,7 @@ export const MentorDashboard = () => {
               <p className="see-all">See All</p>
             </section>
             <section className="row">
-              {assignedStartups?.length > 0 &&
+              {assignedStartups?.length > 0 ? (
                 assignedStartups?.map((assigned, i) => {
                   return (
                     <div key={i} className="col-xl-4 mb-4">
@@ -106,7 +107,10 @@ export const MentorDashboard = () => {
                       />
                     </div>
                   );
-                })}
+                })
+              ) : (
+                <EmptyState message="No Assigned Startup Yet" />
+              )}
             </section>
           </div>
         </div>
@@ -116,22 +120,27 @@ export const MentorDashboard = () => {
             <section className="d-flex align-items-center justify-content-between mb-3">
               <p className="dash-sub-title">Upcoming Events</p>
               <p className="see-all">
-                <span className="see-all-event" onClick={() => push("/mentor/events")}>
+                <span
+                  className="see-all-event"
+                  onClick={() => push("/mentor/events")}
+                >
                   See All
                 </span>
               </p>
             </section>
 
             <section className="row">
-              {upcoming &&
-                upcoming?.length > 0 &&
+              {upcoming && upcoming?.length > 0 ? (
                 upcoming?.map((event, i) => {
                   return (
                     <div key={i} className="col-xl-4 mb-4">
                       <UpcomingEventCard data={event} />
                     </div>
                   );
-                })}
+                })
+              ) : (
+                <EmptyState message="No Upcoming Event Yet" />
+              )}
             </section>
           </div>
         </div>
