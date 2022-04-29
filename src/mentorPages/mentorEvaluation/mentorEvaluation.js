@@ -5,6 +5,7 @@ import {
   AllEvaluationCard,
   Tabs,
   EvaluationPendingCard,
+  EmptyState,
 } from "../../mentorComponents";
 import filter from "../../assets/icons/filterFunnel.svg";
 import down from "../../assets/icons/chevronDown.svg";
@@ -45,13 +46,12 @@ export const MentorEvaluation = ({ history }) => {
   useEffect(() => {
     fetchData();
 
-    return () =>{
+    return () => {
       setCompleted();
       setPending();
-      setAssigned(); 
-      setEvalCardsData();     
-    }
-
+      setAssigned();
+      setEvalCardsData();
+    };
   }, [hash]);
 
   const cardColors = ["#D5D6F4", "#DEF6FF", "#D5D6F4"];
@@ -100,9 +100,10 @@ export const MentorEvaluation = ({ history }) => {
                 );
               })
             ) : (
-              <div className="col-12 my-5 text-center">
-                <span className="pending-tag">No Pending Evaluation</span>
-              </div>
+              // <div className="col-12 my-5 text-center">
+              //   <span className="pending-tag">No Pending Evaluation</span>
+              // </div>
+              <EmptyState message="No Pending Evaluation" />
             )}
           </div>
         );
@@ -119,9 +120,10 @@ export const MentorEvaluation = ({ history }) => {
                 );
               })
             ) : (
-              <div className="col-12 my-5 text-center">
-                <span className="completed-tag">No Completed Evaluation</span>
-              </div>
+              // <div className="col-12 my-5 text-center">
+              //   <span className="completed-tag">No Completed Evaluation</span>
+              // </div>
+              <EmptyState message="No Completed Evaluation" />
             )}
           </div>
         );
@@ -133,11 +135,11 @@ export const MentorEvaluation = ({ history }) => {
 
   const tabItems = ["All", "Pending", "Completed"];
 
-  if (loading) {
-    return (
-      <PageLoader dashboard={true} num={[evalCardsData, pending, completed]} />
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <PageLoader dashboard={true} num={[evalCardsData, pending, completed]} />
+  //   );
+  // }
 
   return (
     <div className="dashboard_main container-fluid">
