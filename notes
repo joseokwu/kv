@@ -1923,6 +1923,12 @@ investmentThesis: ""
 stage: "Pre-seed"
 techSector: ""
 preferredStage
+<<<<<<< HEAD
+        
+
+
+        
+=======
   =================================================================
   ========================================================================
   ===============================================================================================
@@ -2054,6 +2060,7 @@ const handleChange =(id , index , value) =>{
 }
 
 
+>>>>>>> 96bab1e6e3b9075a200e6822d3b5733eacca606b
 
 
 
@@ -2070,6 +2077,8 @@ const handleChange =(id , index , value) =>{
 
 
 
+<<<<<<< HEAD
+=======
 const renderPage = () =>{
 
   switch(pageHolder){
@@ -2228,6 +2237,7 @@ turnAroundTime: "April"
 
 
 
+>>>>>>> 96bab1e6e3b9075a200e6822d3b5733eacca606b
 
 
 

@@ -79,7 +79,7 @@ const boosterNavigators = [
   {
     title: "Dashboard",
     activator: "dashboard",
-    path: "/booster/dashboard",
+    path: "/boosterpartner/dashboard",
     icon: dashboard,
   },
   {
@@ -126,11 +126,12 @@ export const Sidebar = () => {
     <div className="side-main">
       <section className="side-navigator">
         <div>
-          <img src={user} alt="profile" />
+          <img src={ stateAuth?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
+             } alt="profile" className="rounded-circle inv-img" />
         </div>
-        <h5 className="mb-0 side-header">Hello { stateAuth?.user?.businessname } </h5>
-        <p className="mb-0 side-text">
-          {pathname.includes("investor") ? "Investor" : "Partner"}
+        <h5 className="mb-0 side-header">Hello</h5>
+        <p className="mb-0 side-text text-white">
+          { stateAuth?.username }
         </p>
 
         <ul className="side-list">
@@ -163,7 +164,7 @@ export const Sidebar = () => {
         }
       >
         <img src={helpDesk} alt="help" />
-        <p className="mb-0 side-text" role="button">
+        <p className="mb-0 side-text text-white" role="button">
           Need help? Contact us
         </p>
       </section>

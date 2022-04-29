@@ -32,16 +32,17 @@ export const PersonalDetails = () => {
 
   const { updateInvestorProfileData, stateAuth, updateInvestorInfo } = useAuth()
   const { push } = useHistory()
-
+  // const { changePath, state: { path }, } = useActivity();
+  // const [loading, setLoading] = useState(false);
   const [logoUploading, setLogoUploading] = useState(false)
   // const [nextLoading, setNextLoading] = useState(false);
   const [avatar, setAvatar] = useState(
     stateAuth?.investorData?.profile?.avatar ?? imageRep,
   )
 
-  const onFinish = async (values) => {
+  const onFinish = async () => {
     updateInvestorInfo()
-  
+   // console.log(values)
   }
 
   console.log(stateAuth)
@@ -120,6 +121,16 @@ export const PersonalDetails = () => {
 
   //console.log(stateAuth);
 
+  const letterOnly = (e) => {
+    const charCode = e.charCode || e.which;
+    const keyValue = String.fromCharCode(charCode);
+    const isValid = new RegExp(/^[a-zA-Z\s]*$/).test(keyValue);
+    if (!isValid) {
+      e.preventDefault();
+      return;
+    }
+  }
+
 
   return (
     <div className="register-form-wrap">
@@ -150,6 +161,7 @@ export const PersonalDetails = () => {
                 label="Brief Introduction"
                 id={'briefIntroduction'}
                 name={'briefIntroduction'}
+                onKeyPress={letterOnly}
                 type={'text'}
                 value={stateAuth?.investorData?.profile?.briefIntroduction}
                 required={true}
@@ -170,6 +182,7 @@ export const PersonalDetails = () => {
                 label="First Name"
                 id={'firstName'}
                 name={'firstName'}
+                onKeyPress={letterOnly}
                 type={'text'}
                 value={stateAuth?.investorData?.profile?.firstName}
                 required={true}
@@ -191,6 +204,7 @@ export const PersonalDetails = () => {
                 label="Last Name"
                 id={'lastName'}
                 name={'lastName'}
+                onKeyPress={letterOnly}
                 type={'text'}
                 value={stateAuth?.investorData?.profile?.lastName}
                 required={true}
@@ -226,11 +240,12 @@ export const PersonalDetails = () => {
             </section>
 
             <section className="col-md-6 mb-4">
-              {/* <label>
-                Date of Birth<span style={{ color: 'red' }}>*</span>
-              </label> */}
+              <label>
+              <span style={{ color: 'red' }}>*</span>Date of Birth
+              </label>
               <DatePicker
-                label="Date of Birth"
+                // label="Date of Birth"
+                style={{border: 'none', background: '#f8f8f8'}}
                 id={'dob'}
                 name={'dob'}
                 required={true}
@@ -240,7 +255,7 @@ export const PersonalDetails = () => {
                     : moment()
                 }
                 placeholder="yyyy-mm-dd"
-                className={'edit_input'}
+                className={'edit_input py-2'}
                 format={dateFormat}
                 onChange={(_, dateString) => handleDateInput(dateString)}
        
@@ -320,6 +335,7 @@ export const PersonalDetails = () => {
                 id={'city'}
                 name={'city'}
                 type={'text'}
+                onKeyPress={letterOnly}
                 required={true}
                 value={stateAuth?.investorData?.profile?.city}
                 placeholder={'Enter your city'}
@@ -342,7 +358,8 @@ export const PersonalDetails = () => {
                 name={'mobileNumber'}
                 className={'in-reg-no py-1'}
                 countryCallingCodeEditable={true}
-                MaxLength={17}
+                placeholder={"+234 000 0000 000"}
+                maxLength={17}
                 value={
                   stateAuth?.investorData?.profile?.mobile_number
                 }
@@ -383,11 +400,12 @@ export const PersonalDetails = () => {
                 id={'profileLink'}
                 name={'profileLink'}
                 type={'text'}
-                value={stateAuth?.investorData?.profile.socialMedia?.profileLink}
-                required={true}
+                // value={stateAuth?.investorData?.profile.socialMedia?.profileLink}
+                value={`https://www.knight.venture/${stateAuth?.firstname}${stateAuth?.lastname}`}
+                disabled
                 placeholder={'Enter linkedin link'}
                 className={'edit_input'}
-                onChange={(e) =>  handleSocialInput(e , 'profileLink')}
+                // onChange={(e) =>  handleSocialInput(e , 'profileLink')}
               />
             </section>
 
@@ -456,6 +474,7 @@ export const PersonalDetails = () => {
                 id={'referral'}
                 name={'referral'}
                 type={'text'}
+                onKeyPress={letterOnly}
                 value={stateAuth?.investorData?.profile.referral}
                 required={true}
                 placeholder="Enter a user in knight ventures"

@@ -23,7 +23,7 @@ export const Header = ({ setOpen, open }) => {
     if (pathname.includes('investor')) {
       return '/investor/dashboard'
     } else {
-      return '/booster/dashboard'
+      return '/boosterpartner/dashboard'
     }
   }
 
@@ -66,7 +66,7 @@ const { stateAuth } = useAuth();
 
         <div className="d-flex align-items-center h-100">
           <span className="d-flex align-items-center header-profile d-none d-lg-flex">
-          <img src={ stateAuth?.username?.avatar ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
+          <img src={ stateAuth?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
              } alt="profile" className="" />
             <p className="mb-0 header-text"> { stateAuth?.username } </p>
           </span>
@@ -89,15 +89,15 @@ const HeaderDropdownMenu = () => {
     push,
     location: { pathname },
   } = useHistory()
-  const { userLogout } = useAuth();
+  const { userLogout, editUser } = useAuth();
   const type = getType();
 
 
   const getCurrentProfile = () => {
     if (pathname.includes('investor')) {
-      return () => push('/investor/profile')
+      return '/investor/profile'
     } else {
-      return () => push('/booster/profile')
+      return '/boosterpartner/profile'
     }
   }
 
@@ -118,13 +118,15 @@ const HeaderDropdownMenu = () => {
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button
           className="dropdown-item text-center py-2"
-          onClick={()=> push(`/${type}/profile`)}
+          // onClick={()=> push(`/${type}/profile`)}
+          onClick={() => push (getCurrentProfile())}
+          // onClick={()=> push(`/${type}/profile`)}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile
         </button>
         <button
-          onClick={()=> push(`/${type}/registration`)}
+          onClick={()=> {push(`/${type}/registration`); editUser()}}
          className="dropdown-item text-center py-2 my-2">
           {' '}
           <img className="pe-1" src={edit} alt="" /> Edit Profile
