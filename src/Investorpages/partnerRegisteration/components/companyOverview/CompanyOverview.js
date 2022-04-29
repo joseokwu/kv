@@ -307,7 +307,7 @@ const handleChangeState = (value) => {
                   stateAuth?.partnerData?.phoneNumber ?? ''
                 }
                 onChange={handlePhoneInput}
-                MaxLength={17}
+                maxLength={17}
               />
 
           </section>

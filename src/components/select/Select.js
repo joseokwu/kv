@@ -8,6 +8,7 @@ export const Select = ({
   label = "",
   disabled = false,
   required = false,
+  value,
   onChange = () => {},
   displayOption = [],
   placeholder = "Choose option",
@@ -27,6 +28,7 @@ export const Select = ({
         required={required}
         className={className}
         onChange={onChange}
+        initialValue={value}
         {...rest}
       >
         <option disabled selected hidden value="">

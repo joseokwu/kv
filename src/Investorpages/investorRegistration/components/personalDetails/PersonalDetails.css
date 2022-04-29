@@ -6,6 +6,10 @@
     border: none;
 }
 
+.in-reg-no input::placeholder {
+    color: #BDBDBD;
+}
+
 .error {
     color: red;
 }
@@ -13,4 +17,12 @@
 .form-control {
     border: none!important;
     background: #f8f8f8!important;
+}
+
+.span.ant-select-selection-item {
+    color: red!important;
+}
+
+.ant-form label {
+    font-size: 16px;
 }
