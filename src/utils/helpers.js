@@ -28,7 +28,7 @@ export const setType = (type) => {
 
 export const getType = () => {
   let type = localStorage.getItem("kv:user:role");
- // console.log(type)
+  // console.log(type)
   return type;
 };
 
@@ -56,7 +56,7 @@ export const convertToMillion = (num = "0") => {
   }
 };
 
- export const parseFile = (file) => {
+export const parseFile = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
@@ -65,13 +65,13 @@ export const convertToMillion = (num = "0") => {
   });
 };
 
- export const formatAMPM = (date) => {
+export const formatAMPM = (date) => {
   let hours = date.getHours();
-  let minutes = date.getMinutes();    
-  const ampm = hours >= 12 ? 'pm' : 'am';
+  let minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "pm" : "am";
 
   hours %= 12;
-  hours = hours || 12;    
+  hours = hours || 12;
   minutes = minutes < 10 ? `0${minutes}` : minutes;
 
   const strTime = `${hours}:${minutes} ${ampm}`;
@@ -120,3 +120,8 @@ export function formatDate(dateToFormat) {
     months[new Date(dateToFormat).getMonth()]
   }, ${new Date(dateToFormat).getFullYear()}`;
 }
+
+export const deleteProperty = (obj, prop) => {
+  let { [prop]: omit, ...res } = obj;
+  return res;
+};
