@@ -24,10 +24,10 @@ export const InvestorProfile = () => {
         return (
           <div>
             <section className="mb-3">
-              <InvestorInvestments />
+              <InvestorInvestments data={stateAuth?.investorData} />
             </section>
             <section>
-              <InvestmentProfile />
+              <InvestmentProfile data={stateAuth?.investorData} />
             </section>
           </div>
         );
@@ -36,10 +36,10 @@ export const InvestorProfile = () => {
         return (
           <div>
             <section className="mb-3">
-              <InvestorInvestments />
+              <InvestorInvestments data={stateAuth?.investorData} />
             </section>
             <section>
-              <InvestmentProfile />
+              <InvestmentProfile data={stateAuth?.investorData} />
             </section>
           </div>
         );
@@ -75,7 +75,7 @@ export const InvestorProfile = () => {
               <SectorExpertise data={stateAuth?.investorData} />
             </div>
             <div>
-              <InvestorTypes />
+              <InvestorTypes data={stateAuth?.investorData} />
             </div>
           </div>
         </section>

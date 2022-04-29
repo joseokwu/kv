@@ -240,7 +240,7 @@ export const InvestorDetails2 = () => {
                 type="checkbox"
                 onChange={() =>
                   updateInvestorProfileData('personalDetail', {
-                    yetToInvest: true,
+                    yetToInvest: !stateAuth?.investorData?.personalDetail?.yetToInvest,
                   })
                 }
                 checked={stateAuth?.investorData?.personalDetail?.yetToInvest}
@@ -292,7 +292,7 @@ export const InvestorDetails2 = () => {
                 type="checkbox"
                 onChange={() =>
                   updateInvestorProfileData('personalDetail', {
-                    isPublic: true,
+                    isPublic: !stateAuth?.investorData?.personalDetail?.isPublic,
                   })
                 }
                 checked={stateAuth?.investorData?.personalDetail?.isPublic}

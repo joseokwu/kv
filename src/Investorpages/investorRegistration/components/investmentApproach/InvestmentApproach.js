@@ -97,7 +97,6 @@ export const InvestmentApproach = () => {
               >
                 <Select
                   placeholder="Choose sectors you are interested in"
-                  label="Are you interested in any sectors or technologies in particular?"
                   className="edit_input"
                   style={{ backgroundColor: '#f8f8f8' }}
                   onChange={(e) =>
@@ -205,6 +204,7 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
+            <label className="mb-3">What regions are you interested in investing in?</label>
               <CountryDropdown
                 id={'region'}
                 name={'region'}
@@ -242,7 +242,7 @@ export const InvestmentApproach = () => {
             <section className="col-12 mb-4">
               <label className="mb-3">
                 On average, how much would you like to invest in each business
-                you choose to fund (in USD)?"
+                you choose to fund (in USD) ?
               </label>
               <Form.Item
                 style={{ background: '#f8f8f8' }}

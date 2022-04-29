@@ -19,7 +19,7 @@ import { DatePicker } from "antd";
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 
-export const InvestorDetails = () => {
+export const InvestorDetails = ({data}) => {
   const { stateAuth } = useAuth();
 
   return (
@@ -61,29 +61,29 @@ export const InvestorDetails = () => {
               href="mailto:Michealsmith@gmail.com"
               style={{ color: "#3E3E3E", textDecoration: "none" }}
             >
-              {stateAuth?.investorData?.profile?.email}
+              {data?.profile?.email}
             </a>
 
             <span>
-              <a href={`${stateAuth?.investorData?.profile?.socialMedia?.twitter}`} target="_blank" rel="noopener noreferrer"><img src={twitter} alt="twitter" className="mr-3" /></a>
-              <a href={`${stateAuth?.investorData?.profile?.socialMedia?.linkedIn}`} target="_blank" rel="noopener noreferrer"><img src={linkedIn} alt="linkedIn" /></a>
+              <a href={`${data?.profile?.socialMedia?.twitter}`} target="_blank" rel="noopener noreferrer"><img src={twitter} alt="twitter" className="mr-3" /></a>
+              <a href={`${data?.profile?.socialMedia?.linkedIn}`} target="_blank" rel="noopener noreferrer"><img src={linkedIn} alt="linkedIn" /></a>
             </span>
           </div>
 
           <div className="d-flex align-items-center justify-content-between web-phone-local mb-3">
             <span className="flex-align web-phone-local">
               <p>
-                <img src={location} alt="location" /> {stateAuth?.investorData?.profile?.address}
+                <img src={location} alt="location" /> {data?.profile?.address}
               </p>
               {/* <p>
               <img src={phone} alt="phone" /> +234 709 245 2345
             </p> */}
-              <a href={`${stateAuth?.investorData?.profile?.socialMedia?.website}`} target={"_blank"} rel="noreferrer">
+              <a href={`${data?.profile?.socialMedia?.website}`} target={"_blank"} rel="noreferrer">
                 <img src={web} alt="web" />
-                {stateAuth?.investorData?.profile?.socialMedia?.website}
+                {data?.profile?.socialMedia?.website}
               </a>
             </span>
-            <a href={`${stateAuth?.investorData?.profile?.socialMedia?.profile}`} >
+            <a href={`${data?.profile?.socialMedia?.profile}`} >
               {`https://www.knight.venture/${stateAuth?.firstname}${stateAuth?.lastname}`}
             </a>
           </div>
