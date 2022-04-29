@@ -1,6 +1,6 @@
 .contact-us-info {
-  /* background-color: white; */
-  background-color: #2e3192;
+  background-color: white;
+  /* background-color: #2e3192; */
   width: 100%;
   max-width: 383px;
   padding: 22px 25px;
@@ -14,8 +14,8 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 20px;
-  /* color: #2e3192; */
-  color: #ffffff;
+  color: #2e3192;
+  /* color: #ffffff; */
 }
 
 .social-links {
@@ -24,8 +24,8 @@
 }
 
 .message-card {
-  /* background-color: white; */
-  background-color: #2e3192;
+  background-color: white;
+  /* background-color: #2e3192; */
   width: 100%;
   max-width: 546px;
   padding: 41px 13.1%;
@@ -38,7 +38,7 @@
   font-size: 24px;
   line-height: 31px;
   letter-spacing: 0.01em;
-  color: #ffffff;
+  color: #2e3192;
   border-bottom: 1px solid #ffffff;
   padding-bottom: 20px;
   margin-bottom: 32px;

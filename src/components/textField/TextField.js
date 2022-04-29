@@ -10,12 +10,13 @@ export const TextField = ({
   value,
   onBlur,
   type,
-  disabled = false,
+  disabled,
   className,
-  required = false,
+  required,
   placeholder,
   onChange,
   onFocus,
+  onKeyPress,
   ...rest
 }) => {
   return (
@@ -47,6 +48,8 @@ export const TextField = ({
           value={value}
           onChange={onChange}
           defaultValue={value}
+          onKeyPress={onKeyPress}
+          disabled={disabled}
           {...rest}
         />
       </Form.Item>
