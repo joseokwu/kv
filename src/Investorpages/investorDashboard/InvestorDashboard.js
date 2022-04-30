@@ -10,6 +10,9 @@ import { ScheduleCard } from "../investorSchedule/components/Upcoming";
 import "./investDashboard.css";
 import { getInvestorDashboard } from '../../services/investor';
 import { PageLoader } from "../../components/pageLoader/PageLoader";
+import { useAuth } from "../../hooks";
+import { getType } from "../../utils/helpers";
+
 
 export const InvestorDashboard = ({ history }) => {
 
@@ -30,6 +33,8 @@ export const InvestorDashboard = ({ history }) => {
       setDashData([])
     }
   }, [])
+
+
   console.log(dashData)
 
   const { push } = history;
