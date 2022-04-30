@@ -119,7 +119,7 @@ const EditInvestorProfile = () => {
   const preferred_stage = [
     'Minimum Viable Product',
     'Customer Traction',
-    'Pre - Seed',
+    'Pre-Seed',
     'Revenue Traction',
     'Series A',
     'Angel',

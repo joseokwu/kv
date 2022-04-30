@@ -28,7 +28,7 @@ export const InvestorTypes = ({ data }) => {
           <p className="partner-cat-txt mb-3">Angel Network</p>
           <section className="free-credit-answer d-flex align-items-center">
             <span></span>
-            <p>{data?.investorData?.personalDetail?.angelInvestedBefore === true ? 'Yes' : 'No'}</p>
+            <p>{data?.personalDetail?.angelInvestedBefore === true ? 'Yes' : 'No'}</p>
           </section>
         </div>
         <span className="cat-tag" style={{ width: 'fit-content' }}>
@@ -84,7 +84,6 @@ const EditInfo = () => {
 
         <section className="mb-4">
           <label className="mb-3"> Have you angel invested before?</label>
-          {/* <RowOption options={['yes', 'no']} /> */}
           <RowOption
             currentSelected={
               stateAuth?.investorData?.personalDetail?.angelInvestedBefore ===
@@ -103,7 +102,6 @@ const EditInfo = () => {
 
         <section className="mb-4">
           <label className="mb-3"> Have you angel invested before?</label>
-          {/* <RowOption options={['Solo', 'Syndicate', 'Both']} /> */}
           <RowOption
             currentSelected={
               stateAuth?.investorData?.personalDetail

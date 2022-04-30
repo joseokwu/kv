@@ -107,7 +107,6 @@ const EditInvestorDetails = () => {
   const onFinish = async () => {
     updateInvestorInfo()
   };
-  const { push, history } = useHistory();
 
   const handleSocialInput = (e , name) =>{
 
