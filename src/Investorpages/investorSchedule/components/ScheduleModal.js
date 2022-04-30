@@ -1,7 +1,7 @@
 import React from "react";
 import deleteIcon from "../../../assets/icons/delete.svg";
 import editIcon from "../../../assets/icons/editIcon.svg";
-import close from "../../../assets/icons/Close.svg";
+import close from "../../../assets/icons/close.svg";
 import clock from "../../../assets/icons/clock.svg";
 import location from "../../../assets/icons/locationSm.svg";
 import { Button } from "../../../components";

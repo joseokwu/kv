@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, TextField, Select, Button } from "../../../components";
 import copy from "../../../assets/icons/copy.svg";
 import close from "../../../assets/icons/grayClose.svg";
-import { GuestItem } from "./ScheduleModal"; 
+import { GuestItem } from "./ScheduleModal";   
 
 export const CreateSchedule = () => {
   const [meetInput, setMeetInput] = useState(false);
