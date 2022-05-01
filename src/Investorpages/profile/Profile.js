@@ -5,14 +5,16 @@ import "./profile.css";
 import { useAuth } from "../../hooks";
 import ProfileCategory from './components/profileCategory/ProfileCategory';
 import PartnerValidity from './components/partnerValidity/PartnerValidity';
-
+import { EmptyState } from "../../mentorComponents";
 
 
 export const BoosterProfile = () => {
 
 const { stateAuth } = useAuth();  
 
-
+if(!stateAuth?.completedRegistration){
+ return <EmptyState message="No Profile information to display" />
+}
 
   return (
     <div className="profile">
