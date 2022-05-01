@@ -12,12 +12,14 @@ import { months , formatAMPM } from '../../../../utils/helpers'
 import { getPrograms } from "../../../../services";
 import { industry } from '../../../../constants/domiData'
 import { PageLoader } from "../../../../components";
+import { useAuth } from '../../../../hooks/useAuth'
+import { EmptyState } from '../../../../mentorComponents';
+
 
 
 
 
 export const Session = () => {
-
  
   const [programInfo, setProgramInfo] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,13 +33,17 @@ export const Session = () => {
   useEffect(() => {
  
     const getData = async () => {
-      setLoading(true);
+      try {
+        setLoading(true);
       const res = await getPrograms({
         page:currentPage,
         limit:5
       });
       setProgramInfo(res?.data);
       setLoading(false);
+      } catch {
+        setProgramInfo(null)
+      }
     };
     
     getData();
@@ -51,8 +57,10 @@ export const Session = () => {
     );
   }
 
+
   return (
     <div>
+
       {showModal ? (
         <SmallModal id="inProgressModal" title="" closeModal={setShowModal}>
           <InProgressModal />
@@ -111,7 +119,10 @@ export const Session = () => {
         </div>
       </TabFilterWrapper> */}
 
-        { programInfo && programInfo.map((info, i) =>{
+      {
+        programInfo === null && (<EmptyState />)
+      }
+        { programInfo && programInfo.length > 0 ? programInfo.map((info, i) =>{
 
           let date = new Date("Fri May 13 2022 20:00:00 GMT+0100 (West Africa Standard Time)").getHours() % 12;
           let strt = new Date(info?.startTime).getHours() % 12;
@@ -193,6 +204,8 @@ export const Session = () => {
           </>
         )
         }
+        ) : (
+          <EmptyState message={"No Session at the moment"} />
         )
         }
       </div>

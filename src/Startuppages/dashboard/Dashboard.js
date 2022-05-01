@@ -15,7 +15,7 @@ import { useAuth} from '../../hooks/useAuth';
 export const StartupDashboard = () => {
   const [dashInfo, setDashInfo] = useState({});
   const [loading, setLoading] = useState(false);
-  const { stateAuth , getDashboardProfile, upcomingEvent } = useAuth();
+  const { stateAuth , getDashboardProfile } = useAuth();
   
 
 useEffect(() =>{
@@ -109,15 +109,6 @@ useEffect(() =>{
         </div> */}
       </section>
       <section className="my-4">
-        {/* {
-          upcomingEvent && upcomingEvent.length > 0 ? (
-            <UpComing data={stateAuth?.user?.event?.data} />
-          ) : (
-            <div>
-              <p>No Upcoming Events</p>
-            </div>
-          )
-        } */}
         <UpComing data={stateAuth?.user?.event?.data} />
       </section>
     </div>

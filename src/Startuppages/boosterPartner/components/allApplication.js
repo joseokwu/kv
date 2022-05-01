@@ -12,6 +12,7 @@ import approved from "../../../assets/icons/approved.svg";
 import expired from "../../../assets/icons/ex.svg";
 import cancel from "../../../assets/icons/cancel.svg";
 import "../boosterPartner.css";
+import { EmptyState } from "../../../mentorComponents";
 
 
 
@@ -27,9 +28,12 @@ console.log(approvedReq)
   return (
     <div className="row" style={{ columnGap: 10 }}>
       
+      {
+        approvedReq === null && (<EmptyState />)
+      }
 
       {
-        approvedReq.length > 0 && (
+        approvedReq && approvedReq.length > 0 ? (
           
           approvedReq.map((item, i) => (
           <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
@@ -70,7 +74,9 @@ console.log(approvedReq)
             </div>
           </ApplicationCard>
         
-        )))
+        ))) : (
+          <EmptyState message={"No Applications yet"} />
+        )
       }
 
       {

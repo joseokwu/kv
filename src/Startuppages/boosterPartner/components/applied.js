@@ -8,12 +8,14 @@ import { useAuth } from '../../../hooks/useAuth';
 import { useActivity } from '../../../hooks/useBusiness';
 import toast from 'react-hot-toast';
 import { CircularLoader } from '../../../Startupcomponents/CircluarLoader/CircularLoader';
+import { EmptyState } from '../../../mentorComponents'
+import { validate } from '../../../utils/helpers';
 
 
 
 export const Applied = () => {
   
- 
+  const validationSchema = ["eligibilityCriteria", "importantNote", "offerings", "partnershipValidity", "process", "turnAroundTime"]
   const { state , sendApp } = useActivity();
   const { stateAuth } = useAuth();
   const [partners , setPartners] = useState([])
@@ -74,53 +76,63 @@ const sendApplication = async(value) =>{
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
+      {
+        notInteracted === null && (<EmptyState />)
+      }
     
       {   notInteracted && notInteracted.length > 0 ?
-       ( notInteracted.map((item, i) => (
-          <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6">
+       ( notInteracted.map((item, i) => {
+         if (validate(item.offerings, validationSchema)) {
+           return (
+            <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6">
            
-       <Modal id={`applied${i}`} withHeader={false}>
-          <YetToApplyModal data={item} />
-        </Modal>
-
-         
-            <div>
-             
-              <img  
-               className="rounded-circle" 
-                src={item?.logo}
-                style={{width:'40%', height:'50%'}}
-                alt="company logo" />
+            <Modal id={`applied${i}`} withHeader={false}>
+               <YetToApplyModal data={item} />
+             </Modal>
+     
               
-            </div>
-            <div className="my-2">
-              <h3>{item?.companyName}</h3>
-            </div>
-            <Tag name={item?.categories} bg="#EDDEFF" color="#1405C1" fz="12px" />
-            <div className="my-3">
-              <p>
-                {item?.companyDescription}
-                <span  
-                 data-target={`#applied${i}`} 
-                 onClick={() => { setShow(true)}}
-                 data-toggle={show ? "modal" : ''}>
-                  Read More
-                </span>
-              </p>
-            </div>
-            <button
-            type='button'
-              className={
-               'applyBtn mt-2'
-              }
-              disabled={loading}
-              onClick={()=> sendApplication(item)}
-            >
-              {' '}
-              { 'Apply' }
-            </button>
-          </ApplicationCard>
-        ))) : (<span />)
+                 <div>
+                  
+                   <img  
+                    className="rounded-circle" 
+                     src={item?.logo}
+                     style={{width:'40%', height:'50%'}}
+                     alt="company logo" />
+                   
+                 </div>
+                 <div className="my-2">
+                   <h3>{item?.companyName}</h3>
+                 </div>
+                 <Tag name={item?.categories} bg="#EDDEFF" color="#1405C1" fz="12px" />
+                 <div className="my-3">
+                   <p>
+                     {item?.companyDescription}
+                     <span  
+                      data-target={`#applied${i}`} 
+                      onClick={() => { setShow(true)}}
+                      data-toggle={show ? "modal" : ''}>
+                       Read More
+                     </span>
+                   </p>
+                 </div>
+                 <button
+                 type='button'
+                   className={
+                    'applyBtn mt-2'
+                   }
+                   disabled={loading}
+                   onClick={()=> sendApplication(item)}
+                 >
+                   {' '}
+                   { 'Apply' }
+                 </button>
+               </ApplicationCard>
+           )
+         }
+          console.log(item.offerings)
+       })) : (
+          <EmptyState message={"No Offerings yet"} />
+        )
         
         }
     </div>

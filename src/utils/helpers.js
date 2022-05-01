@@ -125,3 +125,6 @@ export const deleteProperty = (obj, prop) => {
   let { [prop]: omit, ...res } = obj;
   return res;
 };
+
+export const validate = (obj, validations) => 
+  validations.every(key => ![undefined, null, ""].includes(key.split('.').reduce((acc, cur) => acc?.[cur], obj)));
