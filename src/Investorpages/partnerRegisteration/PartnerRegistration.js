@@ -5,10 +5,14 @@ import hi from "../../assets/icons/hiEmoji.png";
 import { useHistory } from "react-router-dom";
 import CompanyOverview from "./components/companyOverview/CompanyOverview";
 import OurOffering from "./components/ourOffering/OurOffering";
+import { useAuth } from '../../hooks/useAuth';
+
 
 export const BoosterPartnerRegistration = () => {
   const wrapRef = useRef();
   const [progress, setProgress] = useState("50");
+  const { stateAuth  } = useAuth();
+
 
   const {
     location: { hash },
@@ -37,7 +41,7 @@ export const BoosterPartnerRegistration = () => {
               className="d-flex align-items-center"
               style={{ columnGap: 12 }}
             >
-              <h4>Hi Micheal</h4>
+              <h4>Hi { stateAuth.username }</h4>
               <img src={hi} alt="hi" />
             </section>
             <p>Customise your profile</p>
