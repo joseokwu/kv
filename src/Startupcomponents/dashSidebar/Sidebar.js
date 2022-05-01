@@ -24,7 +24,7 @@ export const DashSidebar = () => {
     <div className="sideMain">
       <section className="sideNavigator">
         <div  style={{width:'70px', height:'70px', borderRadius:'60px', marginLeft:'0px'}} >
-        <img src={ stateAuth?.user?.startUpProfile?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.user?.businessname}`
+        <img src={ stateAuth?.startupData?.startUpProfile?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.user?.businessname}`
              } alt="profile" className="rounded-circle " style={{maxWidth:'80px', height:'80px'}} />
         </div>
         <h5 className="mb-0 sideHeader">Hello </h5>

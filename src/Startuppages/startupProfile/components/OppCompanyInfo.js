@@ -21,7 +21,7 @@ export const OppCompanyInfo = ({data}) => {
         style={{ rowGap: 10 }}
       >
         <div>
-          <img src={data?.startUpProfile?.logo} alt="logo" className="mb-3" width="50px" style={{objectFit: "cover", objectPosition: "100% 0"}} />
+          <img src={data?.startupData?.startUpProfile?.logo} alt="logo" className="mb-3" width="50px" style={{objectFit: "cover", objectPosition: "100% 0"}} />
           <h3 className="opp-page-card-title"> { data?.startUpProfile?.acceleratorName } </h3>
         </div>
 
