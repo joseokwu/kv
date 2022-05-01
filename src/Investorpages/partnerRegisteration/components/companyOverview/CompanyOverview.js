@@ -94,8 +94,6 @@ const handleChangeState = (value) => {
       });
   };
 
-
-
   const { push } = useHistory();
   return (
     <div className="register-form-wrap">
