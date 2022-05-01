@@ -12,6 +12,7 @@ import { getInvestorDashboard } from '../../services/investor';
 import { PageLoader } from "../../components/pageLoader/PageLoader";
 import { useAuth } from "../../hooks";
 import { getType } from "../../utils/helpers";
+import { EmptyState } from "../../mentorComponents/emptyState/EmptyState";
 
 
 export const InvestorDashboard = ({ history }) => {
@@ -20,10 +21,14 @@ export const InvestorDashboard = ({ history }) => {
   const [loading , setLoading] = useState(false);
 
   const fetchDashboard = async () => {
+   try {
     setLoading(true);
     const res = await getInvestorDashboard()
     setDashData(res)
     setLoading(false);
+   } catch {
+    setDashData(null);
+   }
   }
 
   useEffect(() => {
@@ -129,14 +134,20 @@ export const InvestorDashboard = ({ history }) => {
     
                 <section className="row">
                   {
-                    dashData && dashData?.opportunities.map((item, i) =>(
+                    dashData === null && (<EmptyState />)
+                  }
+                  {
+                    dashData && dashData.lenght > 0 ? dashData?.opportunities.map((item, i) => (
                       <div key={i} className="col-xl-6 mb-4">
                     <OpportunityCard
                       data={item}
                       onClick={() => push(`/investor/opportunities/${i}`)}
                     />
                      </div>
-                    )) 
+                    )
+                    ) : (
+                      <EmptyState message={"No "} />
+                    )
                    
                   }
                 </section>

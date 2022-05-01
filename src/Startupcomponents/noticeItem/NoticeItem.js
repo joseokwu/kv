@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import { EmptyState } from "../../mentorComponents";
 
 export const NoticeItem = ({
   noticeImage = "",
@@ -54,6 +55,7 @@ export const NoticeItem = ({
       <div className="text-center font-weight-bold py-3">
         <p style={{fontSize: '22px'}}>No notifications</p>
       </div>
+      {/* <EmptyState message="No notifications at the moment" /> */}
     </>
   );
 };

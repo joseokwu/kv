@@ -9,6 +9,7 @@ import { getSubmittedAssignment } from '../../../../../services'
 import { PageLoader } from '../../../../../components'
 import Pagination from 'react-bootstrap/Pagination';
 import moment from 'moment';
+import { EmptyState } from '../../../../../mentorComponents';
 
 
 export const Submitted = () => {
@@ -36,14 +37,17 @@ export const Submitted = () => {
 useEffect(() =>{
 
   const getData = async () => {
-    setLoading(true);
-    const res = await getSubmittedAssignment({
-      page:currentPage,
-      limit:5
-    });
-    //console.log(res?.data)
-    setSubmittedAssignment(res?.data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const res = await getSubmittedAssignment({
+        page:currentPage,
+        limit:5
+      });
+      setSubmittedAssignment(res?.data);
+      setLoading(false);
+    } catch {
+      setSubmittedAssignment(null)
+    }
   };
   
   getData();
@@ -59,7 +63,10 @@ if (loading) {
   return (
     <div>
       <div className="row mt-3">
-        { submittedAssignment &&  submittedAssignment?.data.map((info, i) => (
+        {
+          submittedAssignment == null && (<EmptyState />)
+        }
+        { submittedAssignment && submittedAssignment.length > 0 ?  submittedAssignment?.data.map((info, i) => (
           <TodoCard key={i} className="col-lg-6 col-md-6 col-12 mx-3 px-4 mt-3">
             {showModal ? (
               <LargeModal id={i} title="" closeModal={setShowModal}>
@@ -92,7 +99,10 @@ if (loading) {
               </button>
             </div>
           </TodoCard>
-        ))}
+        )) : (
+          <EmptyState message={"No Submitted Assignment at the moment"} />
+        )
+      }
       </div>
       <div className="d-flex justify-content-end">
 				<Pagination>
