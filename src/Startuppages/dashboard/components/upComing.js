@@ -61,7 +61,7 @@ export const UpComing = ({ data = [] }) => {
         ))}
       </div>
       ) : (
-        <EmptyState message={"No Upcming Event yet"} /> 
+        <EmptyState message={"No Upcoming Events yet"} /> 
       )
     }
       
