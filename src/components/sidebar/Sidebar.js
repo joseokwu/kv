@@ -61,18 +61,18 @@ const investorNavigators = [
   //   path: "/investor/evaluation",
   //   icon: evaluation,
   // },
-  {
-    title: "Networking",
-    activator: "networking",
-    path: "/investor/networking",
-    icon: networking,
-  },
-  {
-    title: "Deal Room",
-    activator: "deal_room",
-    path: "/investor/deal_room",
-    icon: briefcase,
-  },
+  // {
+  //   title: "Networking",
+  //   activator: "networking",
+  //   path: "/investor/networking",
+  //   icon: networking,
+  // },
+  // {
+  //   title: "Deal Room",
+  //   activator: "deal_room",
+  //   path: "/investor/deal_room",
+  //   icon: briefcase,
+  // },
 ];
 
 const boosterNavigators = [
@@ -130,7 +130,7 @@ export const Sidebar = () => {
              } alt="profile" className="rounded-circle inv-img" />
         </div>
         <h5 className="mb-0 side-header">Hello</h5>
-        <p className="mb-0 side-text text-white">
+        <p className="mb-0 side_text text-white">
           { stateAuth?.username }
         </p>
 
