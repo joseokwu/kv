@@ -14,7 +14,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
 import { industry, category } from '../../../../constants/domiData'
-import { letterOnly, onNumberOnlyChange } from '../../../../utils/helpers'
+import { letterOnly } from '../../../../utils/helpers'
 
 const { Option } = Select
 const { TextArea } = Input
