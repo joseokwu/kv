@@ -30,8 +30,8 @@ export const TextField = ({
             message: `Please input your ${name}!`,
           },
           {
-            type: name === "email" ? name : "",
-            message: name === "email" ? `Please input a correct ${name}` : "",
+            type: name === "email" ? name : type === "url" ? "url" : "",
+            message: name === "email" ? `Please input a correct ${name}` : type === "url" ? `Please enter a valid ${name} url` : "",
           },
         ]}
         type={type}
