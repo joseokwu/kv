@@ -11,6 +11,7 @@ import {
   TextField,
   PhoneInput,
   TextArea,
+  Select,
 } from "../../../../mentorComponents/index";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
@@ -22,6 +23,7 @@ import "./details.css";
 // import { updateMentorProfile } from "../../../../services/mentor";
 import { useActivity } from "../../../../hooks/useBusiness";
 import { updateMentorProfile } from "../../../../services/mentor";
+import { hearOption } from "../../../../utils/utils";
 
 // import { toast } from "react-toastify";
 
@@ -580,14 +582,15 @@ const Details = () => {
               <p className="gender_title mb-3">
                 How did you hear about Knight Ventures?
               </p>
-              <TextArea
+              <Select
                 id="from"
                 type="text"
                 name="from"
                 value={formik.values.from}
                 onChange={(e) => handleChange(e)}
                 placeholder={"Ex. From an advert in the streets"}
-                rows={"1"}
+                options={hearOption}
+                className="w-100"
               />
               {formik.errors.from ? (
                 <label className="error">{formik.errors.from}</label>
