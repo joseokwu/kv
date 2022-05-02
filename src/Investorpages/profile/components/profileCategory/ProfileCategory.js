@@ -7,7 +7,7 @@ import { Input, Form, Select } from 'antd'
 import { editEducationAction } from './../../../../store/actions/business/index';
 const { Option } = Select
 
-const ProfileCategory = ({data}) => {
+const ProfileCategory = ({ data }) => {
   return (
     <section className="profile-offering mb-3">
       <span className="text-right d-block">
@@ -26,7 +26,7 @@ const ProfileCategory = ({data}) => {
       <div>
         <section className="mb-5">
           <p className="partner-cat-header mb-4">Partner Category</p>
-          <span className="cat-tag"> { data?.categories } </span> 
+          <span className="cat-tag"> {data?.categories} </span>
         </section>
 
         <section>
@@ -35,18 +35,15 @@ const ProfileCategory = ({data}) => {
             className="d-flex align-items-center flex-wrap"
             style={{ columnGap: 10, rowGap: 10 }}
           >
-           
-                    <Tag name={data?.industry} color={'#40439A'}  />
-          
-           
+            <Tag name={data?.industry} color={'#40439A'} />
           </span>
         </section>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ProfileCategory;
+export default ProfileCategory
 
 const EditCategory = (data) => {
   const { stateAuth, updatePartnerLocalData, updatePartnerInfo } = useAuth()
@@ -128,5 +125,5 @@ const EditCategory = (data) => {
       </section>
       </Form>
     </div>
-  );
-};
+  )
+}
