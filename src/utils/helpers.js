@@ -128,3 +128,23 @@ export const deleteProperty = (obj, prop) => {
 
 export const validate = (obj, validations) => 
   validations.every(key => ![undefined, null, ""].includes(key.split('.').reduce((acc, cur) => acc?.[cur], obj)));
+
+export const letterOnly = (e) => {
+  const charCode = e.charCode || e.which;
+  const keyValue = String.fromCharCode(charCode);
+  const isValid = new RegExp(/^[a-zA-Z\s]*$/).test(keyValue);
+  if (!isValid) {
+    e.preventDefault();
+    return;
+  }
+}
+
+export const onNumberOnlyChange = (e) => {
+  const keyCode = e.keyCode || e.which
+  const keyValue = String.fromCharCode(keyCode)
+  const isValid = new RegExp('[0-9]').test(keyValue)
+  if (!isValid) {
+    e.preventDefault()
+    return
+  }
+}
