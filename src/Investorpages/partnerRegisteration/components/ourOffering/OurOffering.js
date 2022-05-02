@@ -2,23 +2,23 @@ import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import FormCard from '../formCard/FormCard'
 import { Button } from '../../../../components/index'
-import { useAuth } from '../../../../hooks/useAuth'
+import { useAuth } from '../../../../hooks/useAuth';
 import './outOffering.css'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
 import { Input, Form, Select } from 'antd'
 import { TextareaCustom } from '../../../../components/textArea/cutstomTextarea'
-import { industry } from '../../../../constants/domiData'
-import { letterOnly, months } from '../../../../utils/helpers'
+import { industry } from '../../../../constants/domiData';
+import { letterOnly, months } from '../../../../utils/helpers';
 
-const { Option } = Select
+const { Option } = Select;
 const { TextArea } = Input
 
 const OurOffering = () => {
   const { goBack, push } = useHistory()
 
-  const { stateAuth, updatePartnerLocalData, updatePartnerInfo } = useAuth()
+  const { stateAuth, updatePartnerLocalData, updatePartnerInfo } = useAuth();
   const onFinish = async (values) => {
     // console.log(stateAuth)
 
