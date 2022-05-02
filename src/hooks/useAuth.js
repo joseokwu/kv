@@ -164,7 +164,7 @@ export const useAuth = () => {
       const res = await updateStartup(payload);
       if(lastPage){
         toast.success(res?.message);
-        history.push('boosterpartner/dashboard');
+        history.push('/boosterpartner/dashboard');
         return ;
       }
     } catch (err) {

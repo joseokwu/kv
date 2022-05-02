@@ -12,7 +12,7 @@ export const BoosterProfile = () => {
 
 const { stateAuth } = useAuth();  
 
-if(!stateAuth?.completedRegistration){
+if(!stateAuth?.isRegCompleted){
  return <EmptyState message="No Profile information to display" />
 }
 
