@@ -211,7 +211,7 @@ export const InvestorEvents = ({ history }) => {
           )}
         </Pagination>
           ) : (
-            <EmptyState message={"No Events yet"}  />
+            <EmptyState message={"No Events at the moment"}  />
           )
         }
         
