@@ -107,6 +107,8 @@ export const Product = () => {
     formik.handleChange(e);
   };
 
+
+
   const handleFullChange = (e, prefix = '') => {
     const { name, value } = e.target;
    
