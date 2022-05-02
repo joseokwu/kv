@@ -96,17 +96,25 @@ const Details = () => {
       mobilenumber: stateAuth?.mentorData?.personalDetail?.mobilenumber ?? "",
     },
     validationSchema: Yup.object({
-      firstname: Yup.string().required("This field is required"),
-      lastname: Yup.string().required("This field is required"),
+      firstname: Yup.string()
+        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
+      lastname: Yup.string()
+        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
       email: Yup.string()
         .email("Invalid email")
         .required("This field is required"),
-      designation: Yup.string().required("This field is required"),
+      designation: Yup.string()
+        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
       gender: Yup.string().required("This field is required"),
       linkedin: Yup.string()
         .url("Invalid url")
         .required("This field is required"),
-      whatsapp: Yup.string().required("This field is required"),
+      whatsapp: Yup.string()
+        .url("Invalid link")
+        .required("This field is required"),
       twitter: Yup.string()
         .url("Invalid url")
         .required("This field is required"),
@@ -124,7 +132,9 @@ const Details = () => {
         .url("Invalid link")
         .required("This field is required"),
       permanentaddress: Yup.string().required("This field is required"),
-      referral: Yup.string().required("This field is required"),
+      referral: Yup.string()
+        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
       from: Yup.string().required("This field is required"),
       crunchbase: Yup.string()
         .url("Invalid link")
@@ -241,7 +251,7 @@ const Details = () => {
             </section>
 
             <section className="col-md-6 mb-4">
-              <p className="gender_title mb-3">Gender</p>
+              <p className="gender_title mb-2">Gender</p>
               <section className="gender_choice">
                 <button
                   className="male_btn"
@@ -596,7 +606,10 @@ const Details = () => {
           Go Back
         </button> */}
 
-          <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
+          <div
+            className="w-100 d-flex align-items-center justify-content-end"
+            style={{ columnGap: 9 }}
+          >
             <Button
               type="submit"
               label={loading ? <CircularLoader /> : "Save"}
