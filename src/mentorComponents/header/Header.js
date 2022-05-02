@@ -103,7 +103,10 @@ const HeaderDropdownMenu = () => {
           {" "}
           <img className="pe-1" src={view} alt="" /> View Profile
         </button>
-        <button className="dropdown-item text-center py-2 my-2">
+        <button
+          className="dropdown-item text-center py-2 my-2"
+          onClick={() => push("/mentor/registration")}
+        >
           {" "}
           <img className="pe-1" src={edit} alt="" /> Edit Profile
         </button>
