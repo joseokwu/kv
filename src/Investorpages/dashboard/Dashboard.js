@@ -43,7 +43,6 @@ export const BoosterDashboard = ({ history }) => {
             color={dashCardColors[1]}
           />
 
-          
             <DashCard
             icon={total}
             name={'Approved'}
