@@ -130,7 +130,7 @@ export const Sidebar = () => {
              } alt="profile" className="rounded-circle inv-img" />
         </div>
         <h5 className="mb-0 side-header">Hello</h5>
-        <p className="mb-0 side-text text-white">
+        <p className="mb-0 side_text text-white">
           { stateAuth?.username }
         </p>
 
