@@ -164,7 +164,7 @@ export const Sidebar = () => {
         }
       >
         <img src={helpDesk} alt="help" />
-        <p className="mb-0 side-text text-white" role="button">
+        <p className="mb-0 side_text text-white" role="button">
           Need help? Contact us
         </p>
       </section>
