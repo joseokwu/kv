@@ -24,6 +24,7 @@ import "./details.css";
 import { useActivity } from "../../../../hooks/useBusiness";
 import { updateMentorProfile } from "../../../../services/mentor";
 import { hearOption } from "../../../../utils/utils";
+import { RegionDropdown } from "react-country-region-selector";
 
 // import { toast } from "react-toastify";
 
@@ -489,15 +490,18 @@ const Details = () => {
               ) : null}
             </section>
             <section className="col-md-4 mb-4">
-              <label>State</label>
-              <TextField
-                // label={'State'}
-                name="state"
-                id="state"
-                type="text"
+              <label style={{ fontSize: "16px" }}>State</label>
+              <RegionDropdown
+                id={"state"}
+                name={"state"}
+                country={formik.values.country}
                 value={formik.values.state}
-                onChange={(e) => handleChange(e)}
-                placeholder={"Enter your state"}
+                onChange={(e) =>
+                  handleChange({
+                    target: { name: "state", value: e },
+                  })
+                }
+                className="form-control ps-3"
               />
               {formik.errors.state ? (
                 <label className="error">{formik.errors.state}</label>

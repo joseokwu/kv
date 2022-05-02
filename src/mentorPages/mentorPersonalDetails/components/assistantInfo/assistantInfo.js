@@ -14,6 +14,7 @@ import FormCard from "../../../../mentorComponents/formCard/FormCard";
 import { useAuth } from "../../../../hooks";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
 import CountryDropdown from "country-dropdown-with-flags-for-react";
+import { RegionDropdown } from "react-country-region-selector";
 
 const AssistantInfo = () => {
   const { goBack, push } = useHistory();
@@ -165,14 +166,20 @@ const AssistantInfo = () => {
             ) : null}
           </section>
           <section className="col-md-4 mb-4">
-            <label>State</label>
-            <TextField
-              // label={'State'}
-              placeholder={"Enter your state"}
-              name="assistantState"
-              onChange={handleChange}
+            <label style={{ fontSize: "16px" }}>State</label>
+            <RegionDropdown
+              id={"assistantState"}
+              name={"assistantState"}
+              country={country.country}
               value={formik.values.assistantState}
+              onChange={(e) =>
+                handleChange({
+                  target: { name: "assistantState", value: e },
+                })
+              }
+              className="form-control ps-3"
             />
+
             {formik.touched.assistantState && formik.errors.assistantState ? (
               <label className="error">{formik.errors.assistantState}</label>
             ) : null}
