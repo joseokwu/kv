@@ -78,8 +78,12 @@ const Consulting = () => {
     },
     validationSchema: Yup.object({
       areaofService: Yup.array().min(1).required("This is required"),
-      serviceDescription: Yup.string().required("This field is required"),
-      promotion: Yup.string().required("This field is required"),
+      serviceDescription: Yup.string()
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
+      promotion: Yup.string()
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
     }),
     onSubmit: () => handleSubmit(),
   });

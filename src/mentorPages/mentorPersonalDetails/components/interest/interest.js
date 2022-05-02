@@ -91,9 +91,15 @@ const Interest = () => {
       roleAsFounder: Yup.string().required("This field is required"),
       mentorExperience: Yup.string().required("This field is required"),
       growthInStartup: Yup.string().required("This field is required"),
-      companyInterest: Yup.string().required("This field is required"),
-      criterion: Yup.string().required("This field is required"),
-      additionalInfo: Yup.string().required("This field is required"),
+      companyInterest: Yup.string()
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
+      criterion: Yup.string()
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
+      additionalInfo: Yup.string()
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
     }),
 
     onSubmit: () => handleSubmit(),

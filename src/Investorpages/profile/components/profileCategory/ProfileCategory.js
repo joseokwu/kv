@@ -1,6 +1,11 @@
-import React from 'react'
-import { Tag, Modal, Select, Button } from '../../../../components'
-import edit from '../../../../assets/icons/edit.svg'
+import React from "react";
+import { Tag, Modal, Button } from "../../../../components";
+import edit from "../../../../assets/icons/edit.svg";
+import { useAuth } from '../../../../hooks/useAuth';
+import { category , industry } from '../../../../constants/domiData';
+import { Input, Form, Select } from 'antd'
+import { editEducationAction } from './../../../../store/actions/business/index';
+const { Option } = Select
 
 const ProfileCategory = ({ data }) => {
   return (
@@ -14,7 +19,7 @@ const ProfileCategory = ({ data }) => {
           role="button"
         />
         <Modal title="Edit" id="editCategoryModal">
-          <EditCategory />
+          <EditCategory data={data} />
         </Modal>
       </span>
 
@@ -40,20 +45,85 @@ const ProfileCategory = ({ data }) => {
 
 export default ProfileCategory
 
-const EditCategory = () => {
+const EditCategory = (data) => {
+  const { stateAuth, updatePartnerLocalData, updatePartnerInfo } = useAuth()
+
+  const onFinish = async (values) => {
+    updatePartnerInfo()
+
+    console.log(values)
+  }
   return (
     <div className="px-4 pb-4">
+       <Form
+        name="Category"
+        initialValues={{
+          remember: true,
+        }}
+        layout="vertical"
+        onFinish={onFinish}
+      >
       <section className="d-flex mb-4" style={{ columnGap: 23 }}>
-        <div style={{ flexBasis: '50%' }}>
-          <Select label="Partners Category" className="modal-select" />
-        </div>
-        <div style={{ flexBasis: '50%' }}>
-          <Select label="Industry" className="modal-select" />
-        </div>
+      <section className="col-md-6 mb-4">
+              <Form.Item
+                name="categories"
+                label="Categories"
+                initialValue={stateAuth?.partnerData?.categories}
+                rules={[
+                  { required: true, message: 'Please select a category!' },
+                ]}
+              >
+                <select
+                  style={{ width: 200, backgroundColor: '#959596' }}
+                  placeholder="select your categories"
+                  onChange={(e) =>
+                    updatePartnerLocalData('', {
+                      categories: e.target.value,
+                    })
+                  }
+                >
+                  {category.map((item, i) => (
+                    <option key={i} value={item}>
+                      {' '}
+                      {item}{' '}
+                    </option>
+                  ))}
+                </select>
+              </Form.Item>
+            </section>
+            <section className="col-md-6 mb-4">
+              <Form.Item
+                name="industry"
+                label="Industry"
+                initialValue={stateAuth?.partnerData?.industry}
+                rules={[
+                  { required: true, message: 'Please select a industry!' },
+                ]}
+              >
+                <select
+                  id="industry"
+                  style={{ width: 200, backgroundColor: '#959596' }}
+                  placeholder="select your categories"
+                  onChange={(e) => {
+                    updatePartnerLocalData('', {
+                      industry: e.target.value,
+                    })
+                  }}
+                >
+                  {industry.map((item, i) => (
+                    <option value={item} key={i}>
+                      {' '}
+                      {item}{' '}
+                    </option>
+                  ))}
+                </select>
+              </Form.Item>
+            </section>
       </section>
       <section className="text-right">
-        <Button label="Save" />
+        <Button type="submit" label="Save" />
       </section>
+      </Form>
     </div>
   )
 }
