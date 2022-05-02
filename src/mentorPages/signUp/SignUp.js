@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState  } from 'react'
 import './signUp.css'
 import {
   AuthSide,
@@ -11,7 +11,7 @@ import { useLocation  }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
-import { setType } from '../../utils/helpers';
+import { setType , getType } from '../../utils/helpers';
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 // import { PhoneInput } from '../../components'
@@ -21,12 +21,15 @@ const { Option } = Select
 export const SignUp = ({ history }) => {
   const [checkSat, setCheckSat] = useState(false)
   const { stateAuth, register } = useAuth()
+  const userType = getType();
   const [industry, setIndustry] = useState('')
   const [phone, setPhone] = useState('')
-  const location = useLocation();
+  const search = useLocation().search;
+  const name = new URLSearchParams(search).get('name');
   function handleChange(value) {
     setIndustry(value)
   }
+
 
 
  const changePhone = (value) =>{
@@ -35,40 +38,22 @@ export const SignUp = ({ history }) => {
  }
 
   const onFinish = (values) => {
-
-    if(stateAuth?.signUpStatus !== 'startup'){
-      console.log({
-        ...values,
-        type: stateAuth?.signUpStatus,
-        phone: phone,
-      })
-      //console.log(phone)
-      register({
-        ...values,
-        type: stateAuth?.signUpStatus,
-        phone: phone,
-        origin:window.location.origin
-      })
-    }else{
-      register({
-        ...values,
-        type: stateAuth?.signUpStatus,
-        industry: industry,
-        phone: phone,
-        origin:window.location.origin
-      })
-      console.log({
-        ...values,
-        type: stateAuth?.signUpStatus,
-        industry: industry,
-        phone: phone,
-      })
-    }
-    setType(stateAuth?.signUpStatus)
+    console.log({
+      ...values,
+      type: name ?? userType ,
+      phone: phone,
+    })
+    register({
+      ...values,
+      type: stateAuth?.signUpStatus,
+      phone: phone,
+      origin:window.location.origin
+    })
   }
 
   const[eye, setEye] = useState(false);
 
+// console.log(name)
 
 
 
@@ -93,17 +78,17 @@ export const SignUp = ({ history }) => {
             <div className="col-md-6 col-12 mb-2">
               <AuthTextField
                 name={
-                  stateAuth?.signUpStatus === 'startup'
+                  name === 'startup' ||  userType === 'startup'
                     ? 'startupname'
                     : 'firstname'
                 }
                 label={
-                  stateAuth?.signUpStatus === 'startup'
+                  name === 'startup' ||  userType === 'startup'
                     ? 'Startup Name'
                     : 'First name'
                 }
                 placeholder={
-                  stateAuth?.signUpStatus === 'startup'
+                  name === 'startup' ||  userType === 'startup'
                     ? 'Enter your Startup name'
                     : 'Enter your first name'
                 }
@@ -111,15 +96,18 @@ export const SignUp = ({ history }) => {
               />
             </div>
             <div className="col-md-6 col-12 mb-2">
-              {stateAuth?.signUpStatus === 'startup' ? (
+              {  name === 'startup' ||  userType === 'startup' ? (
                 <div className="inputContainer">
-                  <label><span style={{ color: "#ff4d4f" }}>*</span> Industry</label>
+                  
                   <div className="select">
+                  <Form.Item
+                    name="industry"
+                    label="Industry"
+                    rules={[{ required: true, message: 'Please select a industry!' }]}
+                    >
                     <Select
                       onChange={handleChange}
                       id="industry1"
-                      name="industry"
-                      // className="w-100"
                       style={{width: "fit-content", color: "#f9f9fc"}}
                       placeholder="Select your industry"
                     >
@@ -186,6 +174,7 @@ export const SignUp = ({ history }) => {
                       <Option value="D2C">D2C</Option>
                       <Option value="Marketplace">Marketplace</Option>
                     </Select>
+                    </Form.Item>
                   </div>
                 </div>
               ) : (

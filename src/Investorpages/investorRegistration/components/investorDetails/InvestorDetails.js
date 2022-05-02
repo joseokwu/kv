@@ -97,7 +97,7 @@ export const InvestorDetails = () => {
                 className="mb-2"
                 style={{ color: 'black', fontSize: 12, lineHeight: '13px' }}
               >
-                Are you a Tax resident any other country other than Nigeria
+                Are you a Tax resident of any other country other than Nigeria
               </p>
               <RowOption
                 options={['yes', 'no']}
