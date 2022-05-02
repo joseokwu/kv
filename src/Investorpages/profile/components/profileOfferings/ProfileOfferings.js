@@ -1,10 +1,15 @@
 import React , { useState } from "react";
 import "./profileOffering.css";
 import edit from "../../../../assets/icons/edit.svg";
-import { TextArea, Modal, Button } from "../../../../components";
+import { TextArea, Modal, Button  } from "../../../../components";
+import {useAuth} from '../../../../hooks/useAuth';
+import { TextareaCustom } from '../../../../components/textArea/cutstomTextarea';
+import { Form } from 'antd';
+import { letterOnly, months } from '../../../../utils/helpers';
 
 const ProfileOfferings = ({data}) => {
  
+
 
   return (
     <div className="profile-offering">
@@ -17,7 +22,7 @@ const ProfileOfferings = ({data}) => {
           role="button"
         />
         <Modal title="Edit Offerings" id="editOffering">
-          <EditOfferings  />
+          <EditOfferings data={data}  />
         </Modal>
       </section>
 
@@ -29,7 +34,8 @@ const ProfileOfferings = ({data}) => {
           />
             <OfferContent title={'Important Note'}  className={'profile-offer-content pb-0 border-0'}
            data={data?.importantNote} 
-          />
+          />import { useAuth } from './../../../../hooks/useAuth';
+
             <OfferContent title={'Process'}  className={'profile-offer-content pb-0 border-0'}
            data={data?.process} 
           />
@@ -58,40 +64,76 @@ const OfferContent = ({ title,  className, data }) => {
   );
 };
 
-const EditOfferings = () => {
+const EditOfferings = (data) => {
+  const { stateAuth, updatePartnerLocalData, updatePartnerInfo } = useAuth();
+
+  const onFinish = async (values) => {
+    // console.log(stateAuth)
+
+    updatePartnerInfo()
+  
+  }
+
   return (
     <div className="px-4">
+      <Form
+        name="Edit"
+        initialValues={{
+          remember: true,
+        }}
+        layout="vertical"
+        onFinish={onFinish}
+      >
       <section className="mb-4">
-        <TextArea
-          label="Offerings"
-          placeholder="Enter offering description"
-          rows="6"
-        />
+      <TextareaCustom
+              name={'offerings'}
+              label={'Offerings'}
+              value={stateAuth?.partnerData?.offerings?.offerings}
+              onChange={(e) =>
+                updatePartnerLocalData('offerings', {
+                  offerings: e.target.value,
+                })
+              }
+              onKeyPress={letterOnly}
+              placeholder={'Enter offering description (250 characters at most)'}
+            />
+      </section>
+
+     
+      <section className="mb-4">
+      <TextareaCustom
+              name={'eligibilityCriteria'}
+              label={'Eligibility Criteria '}
+              value={stateAuth?.partnerData?.offerings?.eligibilityCriteria}
+              onChange={(e) =>
+                updatePartnerLocalData('offerings', {
+                  eligibilityCriteria: e.target.value,
+                })
+              }
+              onKeyPress={letterOnly}
+              placeholder={'Enter Eligibility Criteria (250 characters at most)'}
+            />
       </section>
 
       <section className="mb-4">
-        <TextArea
-          label="Eligibility Criteria "
-          placeholder="Eligibility Criteria "
-          rows="6"
-        />
-      </section>
-
-      <section className="mb-4">
-        <TextArea
-          label="Important Note"
-          placeholder="Enter your terms and conditions"
-          rows="6"
-        />
-      </section>
-
-      <section className="mb-4">
-        <TextArea label="Process" placeholder="Enter offer process" rows="6" />
+      <TextareaCustom
+              name={'process'}
+              label={'Process '}
+              value={stateAuth?.partnerData?.offerings?.process}
+              onChange={(e) =>
+                updatePartnerLocalData('offerings', {
+                  process: e.target.value,
+                })
+              }
+              onKeyPress={letterOnly}
+              placeholder={'Enter offer process (250 characters at most)'}
+            />
       </section>
 
       <section className="text-right mb-3">
-        <Button label="Save" />
+        <Button type="submit"  label="Save" />
       </section>
+      </Form>
     </div>
   );
 };
