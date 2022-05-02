@@ -1,14 +1,14 @@
-import React from 'react'
-import './authButton.css'
-import { CircularLoader } from '../CircluarLoader/CircularLoader'
+import React from "react";
+import "./authButton.css";
+import { CircularLoader } from "../CircluarLoader/CircularLoader";
 
 export const AuthButton = ({
   onClick = () => {},
-  type = 'submit',
-  label = 'button',
-  variant = 'primary',
-  className = '',
-  disabled ,
+  type = "submit",
+  label = "button",
+  variant = "secondary",
+  className = "",
+  disabled,
   loading,
 }) => {
   return (
@@ -20,5 +20,5 @@ export const AuthButton = ({
     >
       {loading ? <CircularLoader /> : label}
     </button>
-  )
-}
+  );
+};
