@@ -94,8 +94,8 @@ export const InvestorDetails = () => {
             </section>
             <section className="col-12 mb-4">
               <p
-                className="mb-2"
-                style={{ color: 'black', fontSize: 12, lineHeight: '13px' }}
+                className="mb-3"
+                style={{ color: 'black', fontSize: 16, lineHeight: '13px' }}
               >
                 Are you a Tax resident of any other country other than Nigeria
               </p>
