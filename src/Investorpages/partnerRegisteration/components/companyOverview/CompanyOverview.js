@@ -13,7 +13,7 @@ import { Input, Form, Select } from 'antd'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
-import { industry, category } from '../../../../constants/domiData'
+import { industry, category } from '../../../../constants/domiData';
 import { letterOnly, onNumberOnlyChange } from '../../../../utils/helpers'
 
 const { Option } = Select
@@ -27,7 +27,7 @@ const CompanyOverview = () => {
   const { stateAuth, updatePartnerLocalData, updatePartnerInfo } = useAuth()
   const [logoUploading, setLogoUploading] = useState(false)
 
-  console.log(stateAuth)
+  //console.log(stateAuth)
 
   const onFinish = async (values) => {
     updatePartnerInfo()
