@@ -89,11 +89,9 @@ export const InvestorDetails = ({data}) => {
           </div>
 
           <div className="profile-bio pb-5">
-            {/* <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation{" "}
-            </p> */}
+            <p>
+              {stateAuth?.investorData?.profile?.briefIntroduction}
+            </p>
           </div>
         </article>
       </div>
@@ -216,10 +214,10 @@ const EditInvestorDetails = () => {
                 name={'firstName'}
                 onKeyPress={letterOnly}
                 type={'text'}
-                value={stateAuth?.investorData?.profile?.firstName}
-                required={true}
+                value={stateAuth?.firstname}
+                disabled
                 placeholder={'Enter first name'}
-                className={'edit_input'}
+                className={'edit_input text-black'}
                 onChange={(e) =>
                   updateInvestorProfileData('profile', {
                     firstName: e.target.value,
@@ -239,10 +237,10 @@ const EditInvestorDetails = () => {
                 name={'lastName'}
                 onKeyPress={letterOnly}
                 type={'text'}
-                value={stateAuth?.investorData?.profile?.lastName}
-                required={true}
+                value={stateAuth?.lastname}
+                disabled
                 placeholder={'Enter last name'}
-                className={'edit_input'}
+                className={'edit_input text-black'}
                 onChange={(e) =>
                   updateInvestorProfileData('profile', {
                     lastName: e.target.value,
@@ -261,11 +259,11 @@ const EditInvestorDetails = () => {
                 label="Email"
                 id={'email'}
                 name={'email'}
-                value={stateAuth?.investorData?.profile?.email}
-                required={true}
+                value={stateAuth?.email}
+                disabled
                 placeholder={'Enter email'}
                 type={'email'}
-                className={'edit_input'}
+                className={'edit_input text-black'}
                 onChange={(e) =>
                   updateInvestorProfileData('profile', {
                     email: e.target.value,
@@ -446,7 +444,7 @@ const EditInvestorDetails = () => {
                 label="Twitter"
                 id={'twitter'}
                 name={'twitter'}
-                type={'text'}
+                type={'url'}
                 value={stateAuth?.investorData?.profile.socialMedia?.twitter}
                 required={true}
                 placeholder={'Enter twitter link'}
@@ -465,12 +463,12 @@ const EditInvestorDetails = () => {
                 label="Profile Link"
                 id={'profileLink'}
                 name={'profileLink'}
-                type={'text'}
+                type={'url'}
                 // value={stateAuth?.investorData?.profile.socialMedia?.profileLink}
                 value={`https://www.knight.venture/${stateAuth?.firstname}${stateAuth?.lastname}`}
                 disabled
                 placeholder={'Enter linkedin link'}
-                className={'edit_input'}
+                className={'edit_input text-black'}
                 // onChange={(e) =>  handleSocialInput(e , 'profileLink')}
               />
           </div>
@@ -485,7 +483,7 @@ const EditInvestorDetails = () => {
                 label="Website"
                 id={'website'}
                 name={'website'}
-                type={'text'}
+                type={'url'}
                 required={true}
                 placeholder={'Enter website'}
                 value={stateAuth?.investorData?.profile.socialMedia?.website}

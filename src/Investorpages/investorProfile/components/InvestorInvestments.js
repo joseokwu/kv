@@ -11,7 +11,7 @@ export const InvestorInvestments = ({ data }) => {
   return (
     <div className="profile-offering mb-3">
       <section className="flex-align justify-content-between mb-3">
-        <h2 className="investor-profile-header mb-0">Introduction</h2>
+        <h2 className="investor-profile-header mb-0">Investment Thesis</h2>
         <img
           src={edit}
           alt="edit"
@@ -26,20 +26,20 @@ export const InvestorInvestments = ({ data }) => {
       </Modal>
 
       <section className="mb-5">
-        <p>{data?.profile?.briefIntroduction}</p>
+        <p>{data?.investorApproach?.investmentThesis}</p>
       </section>
 
-      <section className="mb-5">
+      {/* <section className="mb-5">
         <h2 className="investor-profile-header">Investment Approach</h2>
-        {/* <p>
+        <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation{" "}
-        </p> */}
-      </section>
+        </p>
+      </section> */}
 
       <section className="mb-5">
-        <h4 className="investor-profile-subheader">Investor Type</h4>
+        <h4 className="investor-profile-header">Investor Type</h4>
         <div className="flex-align flex-wrap" style={{ columnGap: 16 }}>
           <span className="cat-tag px-3" style={{ width: 'fit-content' }}>
             {data?.personalDetail?.investorType}

@@ -37,7 +37,7 @@ export const Portfolio = () => {
           closeModal={setClose}
           title="Invite Start-ups"
           id="portfolio"
-          subTitle="Invite your startups by additing their email address below. Startups will receive personalised email notification to register their details at knight ventures platform"
+          // subTitle="Invite your startups by additing their email address below. Startups will receive personalised email notification to register their details at knight ventures platform"
         >
           <div className="mx-5 mb-4">
             <p className="modal-startup">
@@ -60,7 +60,7 @@ export const Portfolio = () => {
         {stateAuth?.investorData?.portfolio.length > 0 ? (
           stateAuth?.investorData?.portfolio.map((item, i) => (
             <div key={i} className="">
-              {i}
+              {item}
             </div>
           ))
         ) : (
@@ -130,7 +130,7 @@ const InviteStartUps = ({ handleClose }) => {
   const letterOnly = (e) => {
     const charCode = e.charCode || e.which
     const keyValue = String.fromCharCode(charCode)
-    const isValid = new RegExp('[a-zA-Z]').test(keyValue)
+    const isValid = new RegExp(/^[a-zA-Z\s]*$/).test(keyValue);
     if (!isValid) {
       e.preventDefault()
       return
@@ -141,19 +141,30 @@ const InviteStartUps = ({ handleClose }) => {
     <div className="px-5 pb-5">
       <Form onFinish={onFinish} initialValues={{ remember: true }}>
         <section className="mb-3">
+          <label className="mb-3">Start-up-name</label>
+          <TextField
+            type="text"
+            name={'name'}
+            onKeyPress={letterOnly}
+            className="edit_input"
+          />
+        </section>
+
+        <section className="mb-3">
+          <label className="mb-3">Email</label>
           <TextField
             type="email"
             name={'email'}
-            label="Email"
             placeholder="jamil@gmail.com"
             className="edit_input"
           />
         </section>
 
         <section className="mb-3">
+          <label className="mb-3">Subject</label>
           <TextField
-            label="Name"
-            name={'name'}
+          type={"text"}
+            name={'subject'}
             onKeyPress={letterOnly}
             className="edit_input"
           />
@@ -164,7 +175,6 @@ const InviteStartUps = ({ handleClose }) => {
           <TextareaCustom
             name={'message'}
             onKeyPress={letterOnly}
-            // label="Message (recommended)"
             placeholder="Send a message"
           />
         </section>

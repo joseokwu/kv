@@ -26,7 +26,7 @@ export const TextField = ({
         style={{ color: "#fe0003" }}
         rules={[
           {
-            required: true,
+            required: required,
             message: `Please input your ${name}!`,
           },
           {
@@ -50,6 +50,7 @@ export const TextField = ({
           defaultValue={value}
           onKeyPress={onKeyPress}
           disabled={disabled}
+          required={required}
           {...rest}
         />
       </Form.Item>

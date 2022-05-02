@@ -184,10 +184,10 @@ export const PersonalDetails = () => {
                 name={'firstName'}
                 onKeyPress={letterOnly}
                 type={'text'}
-                value={stateAuth?.investorData?.profile?.firstName}
-                required={true}
+                value={stateAuth?.firstname}
+                disabled
                 placeholder={'Enter first name'}
-                className={'edit_input'}
+                className={'edit_input text-black'}
                 onChange={(e) =>
                   updateInvestorProfileData('profile', {
                     firstName: e.target.value,
@@ -206,10 +206,10 @@ export const PersonalDetails = () => {
                 name={'lastName'}
                 onKeyPress={letterOnly}
                 type={'text'}
-                value={stateAuth?.investorData?.profile?.lastName}
-                required={true}
+                value={stateAuth?.lastname}
+                disabled
                 placeholder={'Enter last name'}
-                className={'edit_input'}
+                className={'edit_input text-black'}
                 onChange={(e) =>
                   updateInvestorProfileData('profile', {
                     lastName: e.target.value,
@@ -226,11 +226,11 @@ export const PersonalDetails = () => {
                 label="Email"
                 id={'email'}
                 name={'email'}
-                value={stateAuth?.investorData?.profile?.email}
-                required={true}
+                value={stateAuth?.email}
+                disabled
                 placeholder={'Enter email'}
                 type={'email'}
-                className={'edit_input'}
+                className={'edit_input text-black'}
                 onChange={(e) =>
                   updateInvestorProfileData('profile', {
                     email: e.target.value,
@@ -373,7 +373,7 @@ export const PersonalDetails = () => {
               <TextField
                 label="Company Email"
                 id={'companyEmail'}
-                name={'companyEmail'}
+                name={"email"}
                 value={stateAuth?.investorData?.profile?.companyEmail}
                 required={true}
                 placeholder={'E.g. info@knight.ventures'}
@@ -399,12 +399,12 @@ export const PersonalDetails = () => {
                 label="Profile Link"
                 id={'profileLink'}
                 name={'profileLink'}
-                type={'text'}
+                type={'url'}
                 // value={stateAuth?.investorData?.profile.socialMedia?.profileLink}
-                value={`https://www.knight.venture/${stateAuth?.firstname}${stateAuth?.lastname}`}
+                value={`https://www.knight.ventures/${stateAuth?.firstname}${stateAuth?.lastname}`}
                 disabled
                 placeholder={'Enter linkedin link'}
-                className={'edit_input'}
+                className={'edit_input text-black'}
                 // onChange={(e) =>  handleSocialInput(e , 'profileLink')}
               />
             </section>
@@ -417,7 +417,7 @@ export const PersonalDetails = () => {
                 label="Website"
                 id={'website'}
                 name={'website'}
-                type={'text'}
+                type={'url'}
                 required={true}
                 placeholder={'Enter website'}
                 value={stateAuth?.investorData?.profile.socialMedia?.website}
@@ -434,7 +434,7 @@ export const PersonalDetails = () => {
                 label="LinkedIn"
                 id={'linkedIn'}
                 name={'linkedIn'}
-                type={'text'}
+                type={'url'}
                 value={stateAuth?.investorData?.profile.socialMedia?.linkedIn}
                 required={true}
                 placeholder={'Enter linkedin link'} 
@@ -452,7 +452,7 @@ export const PersonalDetails = () => {
                 label="Twitter"
                 id={'twitter'}
                 name={'twitter'}
-                type={'text'}
+                type={'url'}
                 value={stateAuth?.investorData?.profile.socialMedia?.twitter}
                 required={true}
                 placeholder={'Enter twitter link'}
@@ -476,7 +476,6 @@ export const PersonalDetails = () => {
                 type={'text'}
                 onKeyPress={letterOnly}
                 value={stateAuth?.investorData?.profile.referral}
-                required={true}
                 placeholder="Enter a user in knight ventures"
                 className="edit_input"
                 onChange={(e) =>
