@@ -136,17 +136,13 @@ export const useAuth = () => {
         values: stateAuth.investorData,
         lastPage,
       };
-      if(lastPage){
-        const res = await updateStartup(payload)
-        if(res.status){
-            toast.success(res?.message)
-            history.push('/investor/dashboard');
-            return ;
-        }
-      }
-      console.log(payload)
       const res = await updateStartup(payload)
       toast.success(res?.message)
+      if(lastPage){
+        history.push('/investor/dashboard');
+      }
+      console.log(payload)
+
     } catch (err) {
       console.log(err?.response);
       toast.error(err?.response?.data?.message ?? err?.response?.message);
@@ -166,7 +162,11 @@ export const useAuth = () => {
       };
       console.log(payload);
       const res = await updateStartup(payload);
-      toast.success(res?.message);
+      if(lastPage){
+        toast.success(res?.message);
+        history.push('boosterpartner/dashboard');
+        return ;
+      }
     } catch (err) {
       console.log(err?.response);
       toast.error(err?.response?.data?.message ?? err?.response?.message);

@@ -4,6 +4,7 @@ import clock from "../../../assets/images/clock.svg";
 import { useHistory } from "react-router-dom";
 import { months } from "../../../utils/helpers";
 import { useAuth } from "../../../hooks/useAuth";
+import { EmptyState } from "../../../mentorComponents";
 
 
 export const UpComing = ({ data = [] }) => {
@@ -60,9 +61,7 @@ export const UpComing = ({ data = [] }) => {
         ))}
       </div>
       ) : (
-        <div className="text-center font-weight-bold my-5">
-          <p className="py-5">No Upcoming Events</p>
-        </div>
+        <EmptyState message={"No Upcming Event yet"} /> 
       )
     }
       

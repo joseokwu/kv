@@ -18,11 +18,17 @@ export const Portfolio = () => {
   const [close, setClose] = useState(false)
 
   const submit = () => {
-    // console.log(stateAuth)
     updateInvestorInfo(true)
   }
 
   console.log(stateAuth)
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   updateInvestorInfo()
+  //   window.open('/investor/dashboard', '_self')
+  // }
+
 
   return (
     <div className="register-form-wrap">
@@ -69,12 +75,7 @@ export const Portfolio = () => {
         </section>
       </FormCard>
       <section className="d-flex justify-content-end mt-3">
-        <p
-          className="do-later"
-          onClick={() => {
-            submit()
-          }}
-        >
+        <p className="do-later" onClick={() => {submit()}} >
           Do this later
         </p>
       </section>
@@ -91,13 +92,7 @@ export const Portfolio = () => {
         </button>
 
         <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
-          <Button
-            type="button"
-            label="Done"
-            onClick={() => {
-              submit()
-            }}
-          />
+          <Button type="button" label="Done" onClick={() => {submit()}} />
         </div>
       </section>
     </div>

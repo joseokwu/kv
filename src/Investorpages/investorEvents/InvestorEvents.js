@@ -4,11 +4,12 @@ import down from '../../assets/icons/downArrow.svg'
 import { SelectionDay } from './components/selectionDay'
 import { getEvents } from '../../services/events'
 import { PageLoader } from '../../components/pageLoader/PageLoader'
+import { EmptyState } from '../../mentorComponents/emptyState/EmptyState'
+import Pagination from 'react-bootstrap/Pagination'
+import { useAuth } from '../../hooks/useAuth'
+
 
 export const InvestorEvents = ({ history }) => {
-  const {
-    location: { hash },
-  } = history
   const industry = [
     'Category: All',
     'Accounting',
@@ -49,43 +50,74 @@ export const InvestorEvents = ({ history }) => {
     'Virtual Assistant',
   ]
 
+  const {
+    location: { hash },
+  } = history
+
+  const { stateAuth } = useAuth()
+  const [events, setEvents] = useState([])
+  const pages = []
+  const [currentPage, setCurrentPage] = useState(1)
   const [selectionEvents, setSelectionEvents] = useState([])
   const [demoEvents, setDemoEvents] = useState([])
   const [pitchEvents, setPitchEvents] = useState([])
   const [loading, setLoading] = useState(false)
+  const [total, setTotal] = useState('')
 
-  const fetchData = async () => {
-    setLoading(true)
-    const res = await getEvents()
-
-    setSelectionEvents(res?.data?.filter((x) => x.eventType === 'selectionDay'))
-    setDemoEvents(() => res?.data?.filter((x) => x.eventType === 'demoDay'))
-    setPitchEvents(() =>
-      res?.data?.filter((x) => x.eventType === 'pitchSession'),
-    )
-    setLoading(false)
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1)
   }
 
-  console.log(selectionEvents)
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1)
+  }
+
+  const movePage = (id) => {
+    setCurrentPage(id)
+  }
+
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const res = await getEvents({
+        userId: stateAuth?.user?.userId,
+        page: currentPage,
+        limit: 5,
+      })
+      console.log(res?.data)
+      setEvents(res?.data)
+      setTotal(res?.data?.total)
+
+      setLoading(false)
+    } catch {
+      setEvents(null)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [currentPage])
+
+  for (let i = 1; i <= events?.total; i++) {
+    pages.push(i)
+  }
 
   const renderContent = () => {
     switch (hash) {
       case '#Selection Day':
-        return (
-          <SelectionDay data={selectionEvents.length > 0 && selectionEvents} />
-        )
+        return <SelectionDay data={events && events?.data} />
 
       case '#Demo Day':
-        return <SelectionDay data={demoEvents.length > 0 && demoEvents} />
+        return <SelectionDay data={events && events?.data} />
 
       case '#Pitching Events':
-        return <SelectionDay data={pitchEvents.length > 0 && pitchEvents} />
+        return <SelectionDay data={events && events?.data} />
 
       case '#Other Events':
-        return <SelectionDay />
+        return <SelectionDay data={events && events?.data} />
 
       default:
-        return <SelectionDay />
+        return <SelectionDay data={events && events?.data} />
     }
   }
 
@@ -96,51 +128,94 @@ export const InvestorEvents = ({ history }) => {
     'Other Events',
   ]
 
-  useEffect(() => {
-    fetchData()
-    return () => {
-      setDemoEvents([])
-      setSelectionEvents([])
-      setPitchEvents([])
-    }
-  }, [])
-
   if (loading) {
-    return <PageLoader dashboard={true} num={[1, 2, 3, 4]} />
-  } else {
     return (
-      <div className="mb-5">
-        <div className="col-lg-12">
-          <section className="container d-flex align-items-center justify-content-end mb-4">
-            {/* <p className="event_title">Events</p> */}
-            {/* <img src={searchIcon} alt="search" /> */}
-          </section>
-        </div>
+      <PageLoader
+        num={[
+          selectionEvents,
+          demoEvents,
+          pitchEvents,
+          events,
+          selectionEvents,
+        ]}
+      />
+    )
+  }
+  return (
+    <div className="mb-5">
+      <div className="col-lg-12">
+        <section className="container d-flex align-items-center justify-content-end mb-4">
+          {/* <p className="event_title">Events</p> */}
+          {/* <img src={searchIcon} alt="search" /> */}
+        </section>
+      </div>
 
-        <div className="container row d-flex justify-content-between">
-          <div className="col d-flex justify-content-between">
-            <Tabs tabItems={tabItems} />
+      <div className="container row d-flex justify-content-between">
+        <div className="col d-flex justify-content-between">
+          <Tabs tabItems={tabItems} />
 
-            <div className="mx-4">
-              {/* <button
+          <div className="mx-4">
+            {/* <button
               className="d-flex align-items-center sort-btn"
               style={{ columnGap: 7 }}
               data-toggle="dropdown"
             > */}
-              <Select placeholder={'Sort by: Industry'} options={industry} />
-              {/* <span>
+            <Select placeholder={'Sort by: Industry'} options={industry} />
+            {/* <span>
                 <span>Sort by: </span> Industry
               </span>
               <img src={down} alt="down" /> */}
-              {/* </button> */}
-            </div>
+            {/* </button> */}
           </div>
         </div>
-
-        <div className="col-lg-12 col-xl-12 pt-3">
-          <section className="mt-1">{renderContent()}</section>
-        </div>
       </div>
-    )
-  }
+
+      <div className="col-lg-12 col-xl-12 pt-3">
+        <section className="mt-1">{renderContent()}</section>
+      </div>
+      <div className="d-flex justify-content-center">
+        {events === null && <EmptyState />}
+        {
+          events && events.length > 0 ? (
+            <Pagination>
+          {events && events?.results?.currentPage > 1 ? (
+            <>
+              <Pagination.Prev onClick={prevPage} className="mx-1" />
+              {
+                <Pagination.Item className="mx-1">{`${currentPage} of  ${
+                  events?.results?.limit ?? 1
+                }`}</Pagination.Item>
+              }
+              {events?.results?.currentPage === events?.results?.limit ? (
+                <span />
+              ) : (
+                <Pagination.Next onClick={nextPage} className="mx-1" />
+              )}
+            </>
+          ) : (
+            <>
+              {
+                <Pagination.Item
+                  onClick={() => movePage(currentPage + 1)}
+                  className="mx-1"
+                >{`${currentPage} of  ${events?.results?.limit}`}</Pagination.Item>
+              }
+
+              {events &&
+              events?.results?.currentPage === events?.results?.limit ? (
+                <span />
+              ) : (
+                <Pagination.Next onClick={nextPage} className="mx-1" />
+              )}
+            </>
+          )}
+        </Pagination>
+          ) : (
+            <EmptyState message={"No Events yet"}  />
+          )
+        }
+        
+      </div>
+    </div>
+  )
 }

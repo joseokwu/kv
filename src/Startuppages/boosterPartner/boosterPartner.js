@@ -11,6 +11,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { PageLoader } from "../../components";
 import { useActivity  } from '../../hooks/useBusiness';
 
+
 export const StartupBoosterPartner = () => {
 
   const { getApp } = useActivity();

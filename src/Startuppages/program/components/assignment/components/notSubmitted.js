@@ -19,6 +19,8 @@ import { upload } from './../../../../../services/utils';
 import { useAuth } from '../../../../../hooks/useAuth';
 import { CircularLoader } from './../../../../../Startupcomponents/CircluarLoader/CircularLoader';
 import toast from 'react-hot-toast';
+import { EmptyState } from '../../../../../mentorComponents';
+
 
 export const NotSubmitted = () => {
   
@@ -48,6 +50,7 @@ export const NotSubmitted = () => {
   useEffect(() =>{
 
     const getData = async () => {
+     try {
       setLoading(true);
       const res = await assignment({
         page:currentPage,
@@ -56,6 +59,9 @@ export const NotSubmitted = () => {
       console.log(res?.data)
       setNotSubmittedAssignment(res?.data);
       setLoading(false);
+     } catch {
+      setNotSubmittedAssignment(null)
+     }
     };
     
     getData();
@@ -71,7 +77,10 @@ export const NotSubmitted = () => {
   return (
     <div>
       <div className="row mt-3">
-        {NotsubmittedAssignment && NotsubmittedAssignment?.data.map((info, i) => (
+        {
+          NotsubmittedAssignment === null && (<EmptyState />)
+        }
+        {NotsubmittedAssignment && NotsubmittedAssignment.length > 0 ? NotsubmittedAssignment?.data.map((info, i) => (
           <TodoCard key={i} className="col-lg-6 col-md-6 col-12 mx-3 px-4 mt-3">
             {showModal ? (
               <SmallModal id={i} title="" closeModal={setShowModal}>
@@ -123,7 +132,10 @@ export const NotSubmitted = () => {
               </button>
             </div>
           </TodoCard>
-        ))}
+        )) : (
+          <EmptyState message={"No Submitted Assignment at the moment"} />
+        )
+      }
         { 
           NotsubmittedAssignment && NotsubmittedAssignment?.data.length > 0 ? (
 
