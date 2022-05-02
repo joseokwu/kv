@@ -96,18 +96,28 @@ const Details = () => {
       mobilenumber: stateAuth?.mentorData?.personalDetail?.mobilenumber ?? "",
     },
     validationSchema: Yup.object({
-      firstname: Yup.string().required("This field is required"),
-      lastname: Yup.string().required("This field is required"),
+      firstname: Yup.string()
+        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
+      lastname: Yup.string()
+        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
       email: Yup.string()
         .email("Invalid email")
         .required("This field is required"),
-      designation: Yup.string().required("This field is required"),
+      designation: Yup.string()
+        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
       gender: Yup.string().required("This field is required"),
       linkedin: Yup.string()
         .url("Invalid url")
         .required("This field is required"),
-      whatsapp: Yup.string().required("This field is required"),
-      twitter: Yup.string().required("This field is required"),
+      whatsapp: Yup.string()
+        .url("Invalid link")
+        .required("This field is required"),
+      twitter: Yup.string()
+        .url("Invalid url")
+        .required("This field is required"),
       country: Yup.string().required("This field is required"),
       state: Yup.string().required("This field is required"),
       city: Yup.string().required("This field is required"),
@@ -115,12 +125,16 @@ const Details = () => {
         .min(10)
         .max(14)
         .required("This is a required field"),
-      skypeid: Yup.string().required("This field is required"),
+      skypeid: Yup.string()
+        .url("Invalid url")
+        .required("This field is required"),
       googlemeet: Yup.string()
         .url("Invalid link")
         .required("This field is required"),
       permanentaddress: Yup.string().required("This field is required"),
-      referral: Yup.string().required("This field is required"),
+      referral: Yup.string()
+        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .required("This field is required"),
       from: Yup.string().required("This field is required"),
       crunchbase: Yup.string()
         .url("Invalid link")
@@ -215,7 +229,7 @@ const Details = () => {
                 placeholder={"Micheal"}
                 // required={true}
               />
-              {formik.touched.firstname && formik.errors.firstname ? (
+              {formik.errors.firstname ? (
                 <label className="error">{formik.errors.firstname}</label>
               ) : null}
             </section>
@@ -231,13 +245,13 @@ const Details = () => {
                 placeholder={"Smith"}
                 // required={true}
               />
-              {formik.touched.lastname && formik.errors.lastname ? (
+              {formik.errors.lastname ? (
                 <label className="error">{formik.errors.lastname}</label>
               ) : null}
             </section>
 
             <section className="col-md-6 mb-4">
-              <p className="gender_title mb-3">Gender</p>
+              <p className="gender_title mb-2">Gender</p>
               <section className="gender_choice">
                 <button
                   className="male_btn"
@@ -289,7 +303,7 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Ex. Engr"}
               />
-              {formik.touched.designation && formik.errors.designation ? (
+              {formik.errors.designation ? (
                 <label className="error">{formik.errors.designation}</label>
               ) : null}
             </section>
@@ -305,7 +319,7 @@ const Details = () => {
                 // required={true}
                 rows={"1"}
               />
-              {formik.touched.email && formik.errors.email ? (
+              {formik.errors.email ? (
                 <label className="error">{formik.errors.email}</label>
               ) : null}
             </section>
@@ -329,7 +343,7 @@ const Details = () => {
                 placeholder={"Enter LinkdIn link"}
                 // required={true}
               />
-              {formik.touched.linkedin && formik.errors.linkedin ? (
+              {formik.errors.linkedin ? (
                 <label className="error">{formik.errors.linkedin}</label>
               ) : null}
             </section>
@@ -372,7 +386,7 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter Crunchbase link"}
               />
-              {formik.touched.crunchbase && formik.errors.crunchbase ? (
+              {formik.errors.crunchbase ? (
                 <label className="error">{formik.errors.crunchbase}</label>
               ) : null}
             </section>
@@ -387,7 +401,7 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter Whatsapp number"}
               />
-              {formik.touched.whatsapp && formik.errors.whatsapp ? (
+              {formik.errors.whatsapp ? (
                 <label className="error">{formik.errors.whatsapp}</label>
               ) : null}
             </section>
@@ -402,7 +416,7 @@ const Details = () => {
                 placeholder={"Enter Webiste link"}
                 wid
               />
-              {formik.touched.website && formik.errors.website ? (
+              {formik.errors.website ? (
                 <label className="error">{formik.errors.website}</label>
               ) : null}
             </section>
@@ -427,7 +441,7 @@ const Details = () => {
                 placeholder={"www.knightventure/michealsmith"}
                 required={true}
               />
-              {formik.touched.skypeid && formik.errors.skypeid ? (
+              {formik.errors.skypeid ? (
                 <label className="error">{formik.errors.skypeid}</label>
               ) : null}
             </section>
@@ -443,7 +457,7 @@ const Details = () => {
                 placeholder={"Enter Google Meet Link"}
                 required={true}
               />
-              {formik.touched.googlemeet && formik.errors.googlemeet ? (
+              {formik.errors.googlemeet ? (
                 <label className="error">{formik.errors.googlemeet}</label>
               ) : null}
             </section>
@@ -468,7 +482,7 @@ const Details = () => {
                   });
                 }}
               ></CountryDropdown>
-              {formik.touched.country && formik.errors.country ? (
+              {formik.errors.country ? (
                 <label className="error">{formik.errors.country}</label>
               ) : null}
             </section>
@@ -483,7 +497,7 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter your state"}
               />
-              {formik.touched.state && formik.errors.state ? (
+              {formik.errors.state ? (
                 <label className="error">{formik.errors.state}</label>
               ) : null}
             </section>
@@ -498,7 +512,7 @@ const Details = () => {
                 onChange={(e) => handleChange(e)}
                 placeholder={"Enter your city"}
               />
-              {formik.touched.city && formik.errors.city ? (
+              {formik.errors.city ? (
                 <label className="error">{formik.errors.city}</label>
               ) : null}
             </section>
@@ -513,8 +527,7 @@ const Details = () => {
                 placeholder={"Enter your permanent address"}
                 rows={"1"}
               />
-              {formik.touched.permanentaddress &&
-              formik.errors.permanentaddress ? (
+              {formik.errors.permanentaddress ? (
                 <label className="error">
                   {formik.errors.permanentaddress}
                 </label>
@@ -534,7 +547,7 @@ const Details = () => {
                 }
                 // value={phone}
               />
-              {formik.touched.mobilenumber && formik.errors.mobilenumber ? (
+              {formik.errors.mobilenumber ? (
                 <label className="error">{formik.errors.mobilenumber}</label>
               ) : null}
             </section>
@@ -558,7 +571,7 @@ const Details = () => {
                 placeholder={"Select a user in knight ventures"}
                 rows={"1"}
               />
-              {formik.touched.referral && formik.errors.referral ? (
+              {formik.errors.referral ? (
                 <label className="error">{formik.errors.referral}</label>
               ) : null}
             </section>
@@ -576,7 +589,7 @@ const Details = () => {
                 placeholder={"Ex. From an advert in the streets"}
                 rows={"1"}
               />
-              {formik.touched.from && formik.errors.from ? (
+              {formik.errors.from ? (
                 <label className="error">{formik.errors.from}</label>
               ) : null}
             </div>
@@ -593,7 +606,10 @@ const Details = () => {
           Go Back
         </button> */}
 
-          <div className="d-flex align-items-center" style={{ columnGap: 9 }}>
+          <div
+            className="w-100 d-flex align-items-center justify-content-end"
+            style={{ columnGap: 9 }}
+          >
             <Button
               type="submit"
               label={loading ? <CircularLoader /> : "Save"}
@@ -604,6 +620,7 @@ const Details = () => {
             <Button
               label={"Next"}
               type="button"
+              variant="primary"
               disabled={nextloading}
               onClick={() => {
                 push("#work_experience");
