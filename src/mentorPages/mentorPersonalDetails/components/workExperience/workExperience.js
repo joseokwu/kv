@@ -78,11 +78,11 @@ const WorkExperience = () => {
       currentFounder: Yup.string().required("This is required"),
       industry: Yup.string().required("This field is required"),
       companyName: Yup.string()
-        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
         .required("This field is required"),
       achievements: Yup.string().required("This field is required"),
       position: Yup.string()
-        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
         .required("This field is required"),
       start: Yup.string().required("This field is required"),
       end: Yup.string().required("This field is required"),

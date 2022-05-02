@@ -97,16 +97,16 @@ const Details = () => {
     },
     validationSchema: Yup.object({
       firstname: Yup.string()
-        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
         .required("This field is required"),
       lastname: Yup.string()
-        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
         .required("This field is required"),
       email: Yup.string()
         .email("Invalid email")
         .required("This field is required"),
       designation: Yup.string()
-        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
         .required("This field is required"),
       gender: Yup.string().required("This field is required"),
       linkedin: Yup.string()
@@ -133,7 +133,7 @@ const Details = () => {
         .required("This field is required"),
       permanentaddress: Yup.string().required("This field is required"),
       referral: Yup.string()
-        .matches(/^[A-Za-z]+$/, "Numbers or special characters not allowed")
+        .matches(/^[A-Za-z ]+$/, "Numbers or special characters not allowed")
         .required("This field is required"),
       from: Yup.string().required("This field is required"),
       crunchbase: Yup.string()
