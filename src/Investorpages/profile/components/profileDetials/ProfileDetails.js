@@ -52,6 +52,7 @@ const ProfileDetails = ({data}) => {
               <p> { data?.designation } </p>
             </span>
             <span>
+              {/* <a href={`${data?.twitter}`} target="_blank" rel="noopener noreferrer"></a> */}
               <img src={twitter} alt="twitter" className="mr-3" />
               <img src={linkedIn} alt="linked in" />
             </span>

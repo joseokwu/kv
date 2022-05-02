@@ -162,8 +162,8 @@ export const useAuth = () => {
       };
       console.log(payload);
       const res = await updateStartup(payload);
+      toast.success(res?.message);
       if(lastPage){
-        toast.success(res?.message);
         history.push('/boosterpartner/dashboard');
         return ;
       }

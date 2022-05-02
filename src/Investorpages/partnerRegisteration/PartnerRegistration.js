@@ -54,13 +54,13 @@ export const BoosterPartnerRegistration = () => {
           <ul className="register-list tab-wrap">
             <li
               onClick={() => switchForm("#details")}
-              className={(hash === "#details" || hash === "") && "active-li"}
+              className={hash === "#details" || hash === "" ? "active-li" : ""}
             >
               Partner Details
             </li>
             <li
               onClick={() => switchForm("#offerings")}
-              className={hash === "#offerings" && "active-li"}
+              className={hash === "#offerings" ? "active-li" : ""}
             >
               Our Offerings
             </li>
