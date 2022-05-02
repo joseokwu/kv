@@ -99,8 +99,6 @@ const WorkExperience = () => {
     formik.handleChange(e);
   };
 
-  console.log("formik.values", formik.values);
-
   const onNotCurrent = () => {
     handleChange({ target: { name: "position", value: "N/A" } });
     handleChange({ target: { name: "start", value: "N/A" } });
