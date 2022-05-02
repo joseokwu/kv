@@ -61,18 +61,18 @@ const investorNavigators = [
   //   path: "/investor/evaluation",
   //   icon: evaluation,
   // },
-  {
-    title: "Networking",
-    activator: "networking",
-    path: "/investor/networking",
-    icon: networking,
-  },
-  {
-    title: "Deal Room",
-    activator: "deal_room",
-    path: "/investor/deal_room",
-    icon: briefcase,
-  },
+  // {
+  //   title: "Networking",
+  //   activator: "networking",
+  //   path: "/investor/networking",
+  //   icon: networking,
+  // },
+  // {
+  //   title: "Deal Room",
+  //   activator: "deal_room",
+  //   path: "/investor/deal_room",
+  //   icon: briefcase,
+  // },
 ];
 
 const boosterNavigators = [
