@@ -130,7 +130,7 @@ const InviteStartUps = ({ handleClose }) => {
   const letterOnly = (e) => {
     const charCode = e.charCode || e.which
     const keyValue = String.fromCharCode(charCode)
-    const isValid = new RegExp(/^[a-zA-Z\s]*$/).test(keyValue);
+    const isValid = new RegExp(/^[a-zA-Z,.\s]*$/).test(keyValue);
     if (!isValid) {
       e.preventDefault()
       return
@@ -144,6 +144,7 @@ const InviteStartUps = ({ handleClose }) => {
           <label className="mb-3">Start-up-name</label>
           <TextField
             type="text"
+            required={true}
             name={'name'}
             onKeyPress={letterOnly}
             className="edit_input"
@@ -154,6 +155,7 @@ const InviteStartUps = ({ handleClose }) => {
           <label className="mb-3">Email</label>
           <TextField
             type="email"
+            required={true}
             name={'email'}
             placeholder="jamil@gmail.com"
             className="edit_input"
@@ -163,7 +165,8 @@ const InviteStartUps = ({ handleClose }) => {
         <section className="mb-3">
           <label className="mb-3">Subject</label>
           <TextField
-          type={"text"}
+            type={"text"}
+            required={true}
             name={'subject'}
             onKeyPress={letterOnly}
             className="edit_input"
