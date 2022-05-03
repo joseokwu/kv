@@ -151,7 +151,7 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
-              <p className="mb-3">I Prefer to invest in</p>
+              <label className="mb-3">I Prefer to invest in</label>
               <RowOption
                 currentSelected={
                   stateAuth?.investorData?.investorApproach
@@ -189,7 +189,7 @@ export const InvestmentApproach = () => {
         <FormCard>
           <div className="row">
             <section className="col-12 mb-4">
-              <p className="mb-3">What is your Preferred Stage</p>
+              <label className="mb-3">What is your Preferred Stage</label>
               <RowOption
                 currentSelected={
                   stateAuth?.investorData?.investorApproach?.stage
@@ -219,9 +219,9 @@ export const InvestmentApproach = () => {
             </section>
 
             <section className="col-12 mb-4">
-              <p className="mb-3">
+              <label className="mb-3">
                 I prefer start-ups founders with the fellowing backgrounds
-              </p>
+              </label>
               <RowOption
                 currentSelected={
                   stateAuth?.investorData?.investorApproach?.preferredStage
