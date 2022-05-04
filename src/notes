@@ -1394,7 +1394,13 @@ key={i}
   })
 
 
-
+businessCanvas:
+brand: {valueProposition: '', competitiveAdvantage: '', productRoadMap: '', brandBuilding: '', brandValue: '', …}
+businessModel: {channels: '', customerRelationship: '', revenueStreams: '', keyActivities: '', keyResource: '', …}
+market: {problemStatement: '', product: '', targetMarket: '', marketSize: '', keyCompetitors: '', …}
+plan: {marketStrategy: '', salesStrategy: '', _id: '6270fdfaad958f6a70f90b83'}
+_id: "6270fdfaad958f6a70f90b84"
+[[Prototype]]: Objec
 
 
 

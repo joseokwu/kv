@@ -34,7 +34,7 @@ import {
   RandomCard,
 } from '../../../../Startupcomponents'
 import { useHistory } from 'react-router-dom'
-import { useAuth } from '../../../../hooks/useAuth'
+import { useAuth } from '../../../../hooks/useAuth';
 import { upload } from '../../../../services/utils'
 // import CountryDropdown from 'country-dropdown-with-flags-for-react'
 import moment from 'moment'
@@ -55,11 +55,7 @@ export const TeamProfile = () => {
   const [loading, setLoading] = useState(false)
   const [coFounder, setCoFounder] = useState('no')
   const [phone, setPhone] = useState(stateAuth?.user?.team?.mobile_number ?? '')
-  const [socialMedia, setSocialmedia] = useState({
-    website: stateAuth?.user?.team?.socialMedia?.website ?? '',
-    linkedIn: stateAuth?.user?.team?.socialMedia?.linkedIn ?? '',
-    twitter: stateAuth?.user?.team?.socialMedia?.twitter ?? '',
-  })
+ 
   const [country, setCountry] = useState(stateAuth?.startupData?.team?.country ?? '');
   const [region , setRegion] = useState(stateAuth?.startupData?.team?.state ?? '');
 
@@ -73,8 +69,8 @@ export const TeamProfile = () => {
   const [inVal, setVal] = useState('')
   const [editIndex, setEditIndex] = useState()
   const [isEditing, setIsEditing] = useState(false)
-  const [avatar, setAvatar] = useState(stateAuth?.user?.team?.avatar ?? null)
-
+  const [avatar, setAvatar] = useState(stateAuth?.startupData?.team?.avatar ?? null)
+ // console.log(stateAuth?.startupData?.team?.city)
   const {
     changePath,
     setWorkExperience,
@@ -104,6 +100,7 @@ export const TeamProfile = () => {
       setLogoUploading(true)
       const response = await upload(formData)
       console.log(response)
+      updateProfile('team', { avatar:response?.path })
       setAvatar(response?.path)
       setLogoUploading(false)
     } catch (error) {
@@ -122,7 +119,7 @@ export const TeamProfile = () => {
       state: stateAuth?.startupData?.team?.state ?? '',
       city: stateAuth?.startupData?.team?.city ?? '',
       dob: stateAuth?.startupData?.team?.dob ?? moment(),
-      mobile_number: stateAuth?.user?.team?.mobile_number ?? phone,
+      mobile_number: stateAuth?.startupData?.team?.mobile_number ?? phone,
       country: stateAuth?.startupData?.team?.country,
       gender: stateAuth?.startupData?.team?.gender ?? '',
       website: stateAuth?.startupData?.team?.socialMedia?.website,
@@ -130,22 +127,11 @@ export const TeamProfile = () => {
       twitter: stateAuth?.startupData?.team?.socialMedia?.twitter ?? '',
       isCofounder: true,
     },
-    validationSchema: Yup.object({
-      briefIntroduction: Yup.string().required('Required'),
-      firstName: Yup.string().required('Required'),
-      lastName: Yup.string().required('Required'),
-      email: Yup.string().required('Required'),
-      city: Yup.string().required('Required'),
-      dob: Yup.string().required('Required'),
-      gender: Yup.string().required('Required'),
-      linkedIn: Yup.string().required('Required'),
-      twitter: Yup.string().required('Required'),
-      website: Yup.string().required('Required'),
-    }),
+
     onSubmit: (value) => onSubmit(value),
   })
 
-  console.log(stateAuth)
+  //console.log(stateAuth)
 
   const handleChange = (e, prefix = '') => {
     const { name, value } = e.target
@@ -534,7 +520,7 @@ export const TeamProfile = () => {
                 City<span style={{ color: 'red' }}>*</span>
               </label>
               <input
-                onChange={formik.handleChange}
+                onChange={handleChange}
                 value={formik.values.city}
                 onBlur={formik.handleBlur}
                 type="text"

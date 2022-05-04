@@ -13,9 +13,9 @@ export const Market = ({data, handleChange = ()=>{} }) =>{
                 <label>Problem Statement</label>
                 <input 
                 type='text'
-                name='problem'
-                value={data?.problem}
-                onChange={handleChange}
+                name='problemStatement'
+                value={data?.problemStatement}
+                onChange={(e) =>handleChange(e, 'market')}
             className='form-control '
                  />
             </div>
@@ -24,9 +24,9 @@ export const Market = ({data, handleChange = ()=>{} }) =>{
                 <label>Product/Solution</label>
                 <input 
                 type='text'
-                name='solution'
-                onChange={handleChange}
-                value={data?.solution}
+                name='product'
+                onChange={(e) =>handleChange(e, 'market')}
+                value={data?.product}
             className='form-control'
                  />
             </div>
@@ -34,9 +34,9 @@ export const Market = ({data, handleChange = ()=>{} }) =>{
                 <label>Target Customer Market</label>
                 <input 
                 type='text'
-                name='target'
-                onChange={handleChange}
-                value={data?.target}
+                name='targetMarket'
+                onChange={(e) =>handleChange(e, 'market')}
+                value={data?.targetMarket}
             className='form-control'
                  />
             </div>
@@ -44,9 +44,9 @@ export const Market = ({data, handleChange = ()=>{} }) =>{
                 <label>Market Size</label>
                 <input 
                 type='text'
-                name='size'
-                onChange={handleChange}
-                value={data?.size}
+                name='marketSize'
+                onChange={(e) =>handleChange(e, 'market')}
+                value={data?.marketSize}
             className='form-control'
                  />
             </div>
@@ -54,9 +54,9 @@ export const Market = ({data, handleChange = ()=>{} }) =>{
                 <label>Key competitor</label>
                 <input 
                 type='text'
-                name='competitor'
-                onChange={handleChange}
-                value={data?.competitor}
+                name='keyCompetitors'
+                onChange={(e) =>handleChange(e, 'market')}
+                value={data?.keyCompetitors}
             className='form-control'
                  />
             </div>

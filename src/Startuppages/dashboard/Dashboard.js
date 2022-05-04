@@ -17,6 +17,7 @@ export const StartupDashboard = () => {
   const [loading, setLoading] = useState(false);
   const { stateAuth , getDashboardProfile } = useAuth();
   
+  console.log()
 
 useEffect(() =>{
     getDashboardProfile(getType())
@@ -70,7 +71,7 @@ useEffect(() =>{
           header={"Total Fund"}
           color={"#2E3192"}
           img={""}
-          amount={`$${stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders !== undefined ? stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders : 0}`}
+          amount={`$${stateAuth?.startupData?.fundRaising?.capTable?.amountInvestedByFounders ?? 0}`}
           time={""}
           className="col-3 col-6-md "
         />
@@ -78,7 +79,7 @@ useEffect(() =>{
           header={"Last Funding Round"}
           color={"#00ADEF"}
           img={""}
-          amount={`$${stateAuth?.user?.fundRaising?.capTable?.amountRaised !== undefined ? stateAuth?.user?.fundRaising?.capTable?.amountRaised : 0}`}
+          amount={`$${stateAuth?.startupData?.fundRaising?.capTable?.amountRaised ?? 0}`}
           time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
         />
@@ -94,10 +95,10 @@ useEffect(() =>{
           color={"#2E3192"}
           img={""}
           amount={`$${
-            typeof stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation !== undefined &&
-            convertToMillion(stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation)
+            typeof stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation !== undefined &&
+            convertToMillion(stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation)
           }`}
-          time={dateFormat(stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding, "fullDate")}
+          time={dateFormat(stateAuth?.startupData?.fundRaising?.previousRound?.dateOfFunding, "fullDate")}
           className="col-3 col-6-md "
         />
 

@@ -4,11 +4,14 @@ import Plus from '../../../../assets/icons/add.svg'
 import { Modal, ModalTabs, Button } from '../../../../Startupcomponents'
 import { useState } from 'react'
 import { Market, Brand, BrandModeling, Plan } from './container'
+import { useAuth } from '../../../../hooks/useAuth';
+
 
 export const BusinessCanavas = () => {
   const items = ['Market', 'Brand', 'Business Modeling', 'Planning']
   const [state, setState] = useState(0)
-
+  const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
+  console.log(stateAuth)
   const [info, setInfo] = useState({})
   const [close, setClose] = useState(false)
 
@@ -33,9 +36,16 @@ export const BusinessCanavas = () => {
     sstrategy: '',
   })
 
-  const handleChange = (e) => {
+  const handleChange = (e , prefix = '') => {
     const { value, name } = e.target
-    setData({ ...data, [name]: value })
+   // setData({ ...data, [name]: value })
+    
+   updateProfile('businessCanvas', {
+        [prefix]: {
+          ...stateAuth?.startupData?.businessCanvas[prefix],
+          [name]: value,
+        },
+      })
   }
 
   const handleFunc = () => {
@@ -45,6 +55,8 @@ export const BusinessCanavas = () => {
 
   const genSubmit = () => {
     setClose(true)
+    updateStartupInfo();
+    
   }
 
   return (
@@ -64,12 +76,13 @@ export const BusinessCanavas = () => {
       >
         <ModalTabs tabItems={items} state={state} setState={setState} />
 
-        {state === 0 && <Market data={data} handleChange={handleChange} />}
-        {state === 1 && <Brand data={data} handleChange={handleChange} />}
+        {state === 0 && <Market data={stateAuth?.startupData?.businessCanvas?.market}
+         handleChange={handleChange} />}
+        {state === 1 && <Brand data={stateAuth?.startupData?.businessCanvas?.brand} handleChange={handleChange} />}
         {state === 2 && (
-          <BrandModeling data={data} handleChange={handleChange} />
+          <BrandModeling data={stateAuth?.startupData?.businessCanvas?.businessModel} handleChange={handleChange} />
         )}
-        {state === 3 && <Plan data={data} handleChange={handleChange} />}
+        {state === 3 && <Plan data={stateAuth?.startupData?.businessCanvas?.plan} handleChange={handleChange} />}
 
         <BusCanButton>
           <div className="my-3 d-flex justify-content-between">
