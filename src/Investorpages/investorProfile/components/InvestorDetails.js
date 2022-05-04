@@ -30,9 +30,6 @@ export const InvestorDetails = ({ data }) => {
           borderRadius: '20px 20px 0px 0px',
         }}
       >
-        {/* <span className="edit-banner">
-          <img src={edit} alt="edit" />
-        </span> */}
       </div>
 
       <div className="profile-contact-info">
