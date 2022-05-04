@@ -12,9 +12,9 @@ export const Plan = ({data, handleChange = ()=>{} }) =>{
                 cols='4'
                 rows='6'
                 className='form-control'
-                name='mstrategy'
-                value={data?.mstrategy}
-                onChange={handleChange}
+                name='marketStrategy'
+                value={data?.marketStrategy}
+                onChange={(e) =>handleChange(e, 'plan')}
               ></textarea>
             </div>
             <div className='form-group mb-3' >
@@ -23,9 +23,9 @@ export const Plan = ({data, handleChange = ()=>{} }) =>{
                 cols='4'
                 rows='6'
                 className='form-control'
-                name='sstrategy'
-                value={data?.sstrategy}
-                onChange={handleChange}
+                name='salesStrategy'
+                value={data?.salesStrategy}
+                onChange={(e) =>handleChange(e, 'plan')}
               ></textarea>
             </div>
         </div>
