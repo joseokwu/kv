@@ -12,7 +12,7 @@ const ProfileOfferings = ({data}) => {
 
 
   return (
-    <div className="profile-offering">
+    <div className="profile-offering mb-3">
       <section className="text-right pb-0">
         <img
           src={edit}
@@ -29,14 +29,16 @@ const ProfileOfferings = ({data}) => {
           <OfferContent title={'Offerings'}  className={'profile-offer-content pb-0 border-0'}
            data={data?.offerings} 
           />
-            <OfferContent title={'Eligibility Criteria'}  className={'profile-offer-content pb-0 border-0'}
+          
+          <OfferContent title={'Eligibility Criteria'}  className={'profile-offer-content pb-0 border-0'}
            data={data?.eligibilityCriteria} 
           />
-            <OfferContent title={'Important Note'}  className={'profile-offer-content pb-0 border-0'}
+          
+          <OfferContent title={'Important Note'}  className={'profile-offer-content pb-0 border-0'}
            data={data?.importantNote} 
-          />import { useAuth } from './../../../../hooks/useAuth';
-
-            <OfferContent title={'Process'}  className={'profile-offer-content pb-0 border-0'}
+          />
+            
+          <OfferContent title={'Process'}  className={'profile-offer-content pb-0 border-0'}
            data={data?.process} 
           />
    

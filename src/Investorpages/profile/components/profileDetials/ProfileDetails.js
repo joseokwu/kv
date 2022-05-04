@@ -55,7 +55,7 @@ const ProfileDetails = ({ data }) => {
           <img src={data?.logo} alt="sample company" />
         </span>
 
-        <article>
+        <article className='row'>
           <h1 className="mb-4 profile-name"> {data?.companyName} </h1>
 
           <div className="d-flex align-items-center justify-content-between mb-3">
@@ -96,7 +96,7 @@ const ProfileDetails = ({ data }) => {
           </div>
 
           <div className="profile-bio pb-5">
-            <p>{data?.companyDescription}</p>
+            <p className='w-50'>{data?.companyDescription}</p>
           </div>
         </article>
       </div>

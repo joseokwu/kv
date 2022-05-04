@@ -50,7 +50,7 @@ export const BoosterPartnerRegistration = () => {
         </div>
       </section>
       <section className="register-grid">
-        <div>
+        <div className="d-none d-lg-flex">
           <ul className="register-list tab-wrap">
             <li
               onClick={() => switchForm("#details")}
