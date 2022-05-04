@@ -127,6 +127,23 @@ const EditOfferings = (data) => {
 
         <section className="mb-4">
           <TextareaCustom
+            name={'importantNote'}
+            label={'Important Note '}
+            value={stateAuth?.partnerData?.offerings?.importantNote}
+            onChange={(e) =>
+              updatePartnerLocalData('offerings', {
+                importantNote: e.target.value,
+              })
+            }
+            onKeyPress={letterOnly}
+            placeholder={
+              'Enter your terms and conditions (250 characters at most)'
+            }
+          />
+        </section>
+
+        <section className="mb-4">
+          <TextareaCustom
             name={'process'}
             label={'Process '}
             value={stateAuth?.partnerData?.offerings?.process}

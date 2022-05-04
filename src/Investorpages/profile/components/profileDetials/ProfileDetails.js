@@ -55,47 +55,56 @@ const ProfileDetails = ({ data }) => {
           </div>
 
           <div className="col-lg-12 d-flex justify-content-between mb-3">
-            <div className="d-flex col-lg-6" style={{color: "#2E3192" }} >
+            <div className="d-flex" style={{ color: '#2E3192' }}>
               <div>
-                <p>CONTACT : {data?.coordinatorName} </p>
+                <span>CONTACT: {data?.coordinatorName}</span>
               </div>
-              <div>
+              <div className="mx-5">
                 <p> {data?.designation} </p>
-              </div>        
+              </div>
             </div>
 
-            <div className="col-lg-6 d-flex justify-content-end">
-                <a
-                  href={`${data?.twitter}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={twitter} alt="twitter" className="mr-2" />
-                </a>
-                <a
-                  href={`${data?.linkedin}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={linkedIn} alt="linkedIn" className="" />
-                </a>
+            <div className=" d-flex ">
+              <a
+                href={`${data?.twitter}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={twitter} alt="twitter" className="" />
+              </a>
+              <a
+                href={`${data?.linkedin}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ps-2"
+              >
+                <img src={linkedIn} alt="linkedIn" />
+              </a>
             </div>
           </div>
 
-          <div className="row mb-3">
-            <div className="col-lg-6 mb-2 d-flex" style={{ columnGap: 30, color: "#828282" }}>
+          {/* <div className="row mb-3"> */}
+          <div
+            className="row mb-3 d-flex"
+            style={{ color: '#828282' }}
+          >
+            <div className="col-lg-3">
               <p className="text-decoration-none">
                 <img className="pe-1" src={location} alt="location" />{' '}
                 {`${data?.city} ${data?.state} ${data?.country}`}
               </p>
+            </div>
 
+            <div className="col-lg-3">
               <p className="text-decoration-none">
                 <img src={phone} alt="phone" /> {data?.phoneNumber}
               </p>
+            </div>
 
+            <div className="col-lg-3">
               <a
                 className="text-decoration-none"
-                style={{ color: "#828282"}}
+                style={{ color: '#828282' }}
                 href={data?.website}
               >
                 <img className="pe-1" src={web} alt="web" />
@@ -103,6 +112,7 @@ const ProfileDetails = ({ data }) => {
               </a>
             </div>
           </div>
+          {/* </div> */}
 
           <div className="profile-bio pb-5">
             <p>{data?.companyDescription}</p>
