@@ -8,7 +8,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
 import { Input, Form, Select } from 'antd'
-import { TextareaCustom } from '../../../../components/textArea/cutstomTextarea'
+import { TextareaCustom } from '../../../../components/textArea/cutstomTextarea';
 import { industry } from '../../../../constants/domiData';
 import { letterOnly, months } from '../../../../utils/helpers';
 

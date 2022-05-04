@@ -63,7 +63,7 @@ export const StartupProfile = () => {
   const [logoUploading, setLogoUploading] = useState(false);
 
   
-//console.log(stateAuth)
+  console.log(stateAuth)
   
  
   // eslint-disable-next-line react-hooks/rules-of-hooks

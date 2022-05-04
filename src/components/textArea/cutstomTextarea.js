@@ -16,8 +16,9 @@ export const TextareaCustom = ({
       <Form.Item
         name={name}
         label={label}
+        
         initialValue={value}
-        rules={[{ required: true, message: `This field is required` }, { min: 200 }]}
+        rules={[{ required: true, message: `This field is required` }, { min: 200 , message:'Characters should not be less than 200 words' }]}
       >
         <TextArea
           rows={4}
