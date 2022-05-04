@@ -4,16 +4,12 @@ import edit from '../../../assets/icons/edit.svg'
 import twitter from '../../../assets/images/profileTwitter.svg'
 import linkedIn from '../../../assets/images/profileLinkedIn.svg'
 import location from '../../../assets/icons/locationSm.svg'
-import phone from '../../../assets/icons/phoneSm.svg'
 import web from '../../../assets/icons/webSm.svg'
-import banner from '../../../assets/images/investorBanner.png'
-import investor from '../../../assets/images/investorProfileImg.png'
 import closedEye from '../../../assets/icons/eye-closed.svg'
 import { useAuth } from '../../../hooks'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { Form } from 'antd'
-import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 import { DatePicker } from 'antd'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
@@ -58,14 +54,14 @@ export const InvestorDetails = ({ data }) => {
           </div>
 
           <div className="col-lg-12 d-flex justify-content-between mb-3">
-            <div className="">
+            <div className="profile-bio">
               <p style={{ color: '#3E3E3E', textDecoration: 'none' }}>
                 {data?.profile?.email}
               </p>
             </div>
 
             <div>
-              <span>
+              <span className='d-flex'>
                 <a
                   href={`${data?.profile?.socialMedia?.twitter}`}
                   target="_blank"
@@ -84,8 +80,7 @@ export const InvestorDetails = ({ data }) => {
             </div>
           </div>
 
-          {/* <div className="mb-3 d-flex justify-content-between"> */}
-          <div className="row mb-3">
+          <div className="row mb-3" style={{color: "#828282"}}>
             <div className="col-lg-4 mb-2">
               <p>
                 <img className="pe-1" src={location} alt="location" />{' '}
@@ -95,24 +90,23 @@ export const InvestorDetails = ({ data }) => {
 
             <div className="col-lg-4 mb-2">
               <a
-                className="text-decoration-none text-black"
+                className="text-decoration-none"
                 href={`${data?.profile?.socialMedia?.website}`}
                 target={'_blank'}
                 rel="noreferrer"
+                style={{color: "#828282"}}
               >
                 <img className="pe-1" src={web} alt="web" />
                 {data?.profile?.socialMedia?.website}
               </a>
             </div>
 
-            <div className="col-lg-4 text-right  mb-2">
-              <a className="text-decoration-none text-black" href={`${data?.profile?.socialMedia?.profile}`}>
+            <div className="col-lg-4 text-right mb-2">
+              <a className="text-decoration-none" style={{color: "#828282"}} href={`${data?.profile?.socialMedia?.profile}`}>
                 {`https://www.knight.venture/${stateAuth?.firstname}${stateAuth?.lastname}`}
               </a>
             </div>
           </div>
-
-          {/* </div> */}
 
           <div className="profile-bio pb-5">
             <p>{stateAuth?.investorData?.profile?.briefIntroduction}</p>

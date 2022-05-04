@@ -4,7 +4,7 @@ import './style.css';
 export const BrandModeling = ({data, handleChange = ()=>{} }) =>{
 
     return (
-        <div className='my-5' >
+        <div className='my-5 mx-3' >
 
             <div className='form-group mb-3' >
                 <label>Channels</label>
