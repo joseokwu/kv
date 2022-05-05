@@ -34,3 +34,4 @@ export * from './longPhoneInput/longPhoneInput';
 export * from './workExperience/WorkExperience';
 export * from './education/Education';
 export * from './skillTab/SkillTab';
+export * from './businessCanvas/businessCanvas';
