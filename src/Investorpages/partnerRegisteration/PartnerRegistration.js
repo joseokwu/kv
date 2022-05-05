@@ -5,10 +5,14 @@ import hi from "../../assets/icons/hiEmoji.png";
 import { useHistory } from "react-router-dom";
 import CompanyOverview from "./components/companyOverview/CompanyOverview";
 import OurOffering from "./components/ourOffering/OurOffering";
+import { useAuth } from '../../hooks/useAuth';
+
 
 export const BoosterPartnerRegistration = () => {
   const wrapRef = useRef();
   const [progress, setProgress] = useState("50");
+  const { stateAuth  } = useAuth();
+
 
   const {
     location: { hash },
@@ -37,7 +41,7 @@ export const BoosterPartnerRegistration = () => {
               className="d-flex align-items-center"
               style={{ columnGap: 12 }}
             >
-              <h4>Hi Micheal</h4>
+              <h4>Hi { stateAuth.username }</h4>
               <img src={hi} alt="hi" />
             </section>
             <p>Customise your profile</p>
@@ -46,17 +50,17 @@ export const BoosterPartnerRegistration = () => {
         </div>
       </section>
       <section className="register-grid">
-        <div>
+        <div className="d-none d-lg-flex">
           <ul className="register-list tab-wrap">
             <li
               onClick={() => switchForm("#details")}
-              className={(hash === "#details" || hash === "") && "active-li"}
+              className={hash === "#details" || hash === "" ? "active-li" : ""}
             >
               Partner Details
             </li>
             <li
               onClick={() => switchForm("#offerings")}
-              className={hash === "#offerings" && "active-li"}
+              className={hash === "#offerings" ? "active-li" : ""}
             >
               Our Offerings
             </li>

@@ -5,7 +5,13 @@ import {
   setDWorkExperience,
   setDEducation,
   setDFundraising,
-} from '../store/actions/business';
+  getApplication,
+  sendApplication,
+  removeWorkExperienceAction,
+  removeEducationAction,
+  editWorkExperienceAction,
+  editEducationAction,
+} from "../store/actions/business";
 import { useAuth } from './useAuth';
 
 export const useActivity = () => {
@@ -26,13 +32,35 @@ export const useActivity = () => {
     dispatch(setDWorkExperience(values, type));
   };
 
+   const removeWorkExperience = (id) => {
+     dispatch(removeWorkExperienceAction(id));
+  };
+  const editWorkExperience = (value) => {
+    dispatch(editWorkExperienceAction(value));
+  };
+
   const setEducation = (values, type) => {
     dispatch(setDEducation(values, type));
+  };
+
+  const removeEducation = (id) => {
+    dispatch(removeEducationAction(id));
+  };
+  const editEducation = (value) => {
+    dispatch(editEducationAction(value));
   };
 
   const setFundraising = (values) => {
     dispatch(setDFundraising(values));
   };
+
+  const getApp = (values) =>{
+    dispatch(getApplication(values))
+  }
+
+  const sendApp = (value) =>{
+    dispatch(sendApplication(value))
+  }
 
   return {
     state,
@@ -41,6 +69,12 @@ export const useActivity = () => {
     setWorkExperience,
     setEducation,
     setFundraising,
+    getApp,
+    sendApp,
+    removeWorkExperience,
+    removeEducation,
+    editWorkExperience,
+    editEducation,
   };
 };
 

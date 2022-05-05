@@ -7,27 +7,36 @@ import { Opportunities } from "./components/Opportunities";
 import { Interests } from "../investorInterested/components/Interests";
 import { getInvestorOpportunity } from  '../../services/investor';
 import { PageLoader } from "../../components/pageLoader/PageLoader";
+import { useAuth } from '../../hooks';
+
 
 export const InvestorOpportunity = ({ history }) => {
 
   const [oppData, setOppData] = useState([])
   const [loading , setLoading] = useState(false);
+  const { stateAuth } = useAuth();
 
-  const getOpp = async () => {
-    setLoading(true);
-    const res = await getInvestorOpportunity()
-    setOppData(res);
-    setLoading(false);
-  }
+  // const getOpp = async () => {
+  //  try {
+  //   setLoading(true);
+  //   const res = await getInvestorOpportunity({
+  //   });
+  //   setOppData(res);
+  //   setLoading(false);
+  //  } catch {
+  //   setOppData(null)
+  //  }
+  // }
 
-  useEffect(() => {
-    getOpp()
+  // useEffect(() => {
+  //   getOpp()
 
-    return () => {
-      setOppData([])
-    }
-  }, [])
-  console.log(oppData)
+  //   return () => {
+  //     setOppData([])
+  //   }
+  // }, [])
+
+  console.log(stateAuth)
 
   const {
     location: { hash },
@@ -36,23 +45,22 @@ export const InvestorOpportunity = ({ history }) => {
   const renderContent = () => {
     switch (hash) {
       case "#opportunities":
-        return <Opportunities data={oppData?.opportunity} />;
+        return <Opportunities data={stateAuth?.opportunity} />;
 
       case "#share deals":
-        return <Opportunities data={oppData?.opportunity} />;
+        return <Opportunities data={stateAuth?.opportunity} />;
 
       case "#interested":
-        return <Interests data={oppData?.opportunity} />;
+        return <Interests data={stateAuth?.opportunity} />;
 
       default:
-        return <Opportunities data={oppData?.opportunity} />;
+        return <Opportunities data={stateAuth?.opportunity} />;
     }
   };
 
 
   if(loading){
-    return <PageLoader dashboard={true} num={[1,2,3,4
-     ]} />
+    return <PageLoader num={[1,2,3,4]} />
   }else{
   return (
     <div className="wrapper">

@@ -1,7 +1,7 @@
 export default  [
     [
       {
-        title: 'Grow your business today with our accelerator program',
+        title: 'Grow your business ideas with our incubator, accelerator and investor platform',
         body: 'We are inviting startups to help them incubate and accelerate business idea to funding',
       }
     ],
@@ -9,7 +9,7 @@ export default  [
     [
       {
         title: 'Invest in startups today. Become an investor',
-        body: 'We are onboarding Booster Partners to our startup eco system for mutual benefits'
+        body: 'We are onboarding Investors to our startup eco system for mutual benefits'
       }
     ],
     

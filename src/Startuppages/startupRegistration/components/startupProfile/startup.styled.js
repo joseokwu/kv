@@ -1,6 +1,10 @@
 import styled from 'styled-components/macro';
 
 export const HeaderStartup = styled.div`
+@media (max-width: 1024px) {
+  padding-left: 10px;
+}
+
   h5 {
     font-family: DM Sans;
     font-weight: 700;
@@ -54,11 +58,28 @@ export const FormWrapper = styled.div`
   height: ${(props) => (props.height ? props.height : '70%')};
   padding: 2rem;
   order: 2;
-  margin: 3rem 0;
+  margin: 0rem 0rem;
   flex: none;
   border: 0 solid #d3d3d3;
   border-radius: 5px;
   background: #fff;
+  @media (max-width: 1024px) {
+    padding: 2rem 1rem;
+  }
+
+  /* .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background: #fafafc;
+  border-radius: 4px;
+  border: none;
+  padding: 5px 0px 5px 5px;
+} */
+
+.ant-picker {
+  background: #fafafc;
+  border-radius: 4px;
+  border: none;
+  padding: 5px 0px 5px 5px;
+}
 
   .error {
     color: red;

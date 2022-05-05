@@ -15,7 +15,7 @@ export const NoticeItem = ({
   }
   return (
     <>
-      {container !== "page" ? (
+      {/* {container !== "page" ? (
         <article
           className="d-flex align-items-start notice-item"
           onClick={() => push(getCurrentNotification())}
@@ -57,7 +57,10 @@ export const NoticeItem = ({
             <img src={noticeImage} alt="notice" className="notice-img" />
           )}
         </article>
-      )}
+      )} */}
+      <div className="text-center font-weight-bold py-3">
+        <p style={{fontSize: '22px'}}>No notifications</p>
+      </div>
     </>
   );
 };

@@ -77,7 +77,7 @@ export const FormWrapper = styled.div`
   flex: none;
   border: 0 solid #d3d3d3;
   border-radius: 5px;
-  background: #fff;
+  background: #f9f9fc;
 
   span {
     cursor: pointer;
@@ -139,7 +139,7 @@ export const FormWrapper = styled.div`
 
   input {
     border: none;
-    background: #fafafc !important;
+    background: #fff !important;
     border-radius: 4px;
     margin-left: 15px;
     margin-bottom: 15px;

@@ -5,7 +5,7 @@ import user from '../../assets/images/sampleUserSide.png'
 import dashboard from '../../assets/icons/dashboard.svg'
 import startup from '../../assets/icons/startupApplicants.svg'
 import event from '../../assets/icons/eventIcon.svg'
-import helpDesk from '../../assets/icons/helpDesk.svg'
+import helpDesk from '../../assets/icons/helpDesk.svg';
 import { startUpRoutes, dashboardRoutes } from '../../constants/sidebarRoutes'
 import { useActivity } from '../../hooks/useBusiness';
 
@@ -14,68 +14,15 @@ import { useActivity } from '../../hooks/useBusiness';
 
 
 
-// export const Sidebar = () => {
-//   const {
-//     location: { pathname },
-//     push,
-//   } = useHistory()
-
-//   const activateLink = (path) => {
-//     return pathname.includes(path) ? 'active-side' : ''
-//   }
-
-//   const [navigator, setNavigator] = useState([])
-
-//   useEffect(() => {
-//     if (pathname.includes('Startup')) {
-//       setNavigator(dashboardRoutes)
-//     }
-//   }, [pathname])
-
- 
-
-//   return (
-//     <div className="side-main">
-//       <section className="side-navigator">
-//         <div>
-//           <img src={user} alt="profile" />
-//         </div>
-//         <h5 className="mb-0 side-header">Hello Micheal Smith</h5>
-//         <p className="mb-0 side-text">
-//           {pathname.includes('investor') ? 'Investor' : 'Partner'}
-//         </p>
-
-//         <ul className="side-list">
-//           {navigator.length > 0 &&
-//             navigator.map((nav, i) => {
-//               return (
-//                 <li>
-//                   <a href={nav.path}>
-//                     <img src={nav.icon} alt="dash" />
-//                     <p className={`${activateLink(nav.activator)} side-text`}>
-//                       {nav.title}
-//                     </p>
-//                   </a>
-//                 </li>
-//               )
-//             })}
-//         </ul>
-//       </section>
-//       <section className="side-footer mt-5" onClick={() => push('/support')}>
-//         <img src={helpDesk} alt="help" />
-//         <p className="mb-0 side-text" role="button">
-//           Need help? Contact us
-//         </p>
-//       </section>
-//     </div>
-//   )
-// }
 
 export const StartupSideBar = () => {
   const {
     state: { path },
     changePath,
   } = useActivity()
+
+  const history = useHistory();
+
 
   const activateLink = (pathNum) => {
     
@@ -92,14 +39,25 @@ export const StartupSideBar = () => {
                 <li key={i}>
                   <span style={{cursor:'pointer'}} onClick={() => changePath(nav.path)}>
                     <p className={`${activateLink(nav.path)} side-text-start`}>
-                      {nav.title}
+                      {nav.title} 
                     </p>
                   </span>
+                
                 </li>
               )
             })}
-        </ul>
+
+            
+       <section className="side-footer  " onClick={() => history.push('/startup/support')}>
+        
+        <p className=" side-text" role="button">
+          Need help? Contact us
+        </p>
       </section>
+        </ul>
+    
+      </section>
+      
     </div>
   )
 }

@@ -11,11 +11,10 @@ import { FundUtilization } from "./components/fundutilization";
 import { CapTable } from "./components/captable";
 import { PreviousRound } from "./components/prevRound";
 import { FinancialProjection } from "./components/financialProjection";
-import { getFundraisingData } from "../../services";
-import newApp from "../../assets/icons/Star.svg";
 import { convertToMillion } from "../../utils/helpers";
 import { PageLoader } from "../../components";
 import { useAuth }  from "../../hooks/useAuth";
+import { getType } from './../../utils/helpers';
 
 
 
@@ -25,29 +24,30 @@ export const StartupFundingRaising = () => {
     location: { hash },
   } = history;
 
-  const { stateAuth } = useAuth();
-
-  const [fundData, setFundData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { stateAuth , getDashboardProfile } = useAuth();
 
   
+  useEffect(() =>{
+    getDashboardProfile(getType())
+},[getDashboardProfile])
 
-  
+
+  console.log(stateAuth)
 
   const renderContent = () => {
     switch (hash) {
       case "#Funding Ask":
-        return <FundingAsk data={stateAuth?.user?.fundRaising?.fundingAsk} />;
+        return <FundingAsk data={stateAuth?.startupData?.fundRaising?.fundingAsk} />;
       case "#Fund Utilization":
-        return <FundUtilization data={stateAuth?.user?.fundRaising?.fundUtilization} />;
+        return <FundUtilization data={stateAuth?.startupData?.fundRaising?.fundUtilization?.files} />;
       case "#Cap Table":
-        return <CapTable data={stateAuth?.user?.fundRaising?.capTable} />;
+        return <CapTable data={stateAuth?.startupData?.fundRaising?.capTable?.files} />;
       case "#Previous Round":
-        return <PreviousRound data={stateAuth?.user?.fundRaising?.previousRound} />;
+        return <PreviousRound data={stateAuth?.startupData?.fundRaising?.previousRound} />;
       case "#Financial Projection":
-        return <FinancialProjection />;
+        return <FinancialProjection data={stateAuth?.startupData?.fundRaising?.financialProjection?.files}  />;
       default:
-        return <FundingAsk data={stateAuth?.user?.fundRaising?.fundingAsk} />;
+        return <FundingAsk data={stateAuth?.startupData?.fundRaising?.fundingAsk} />;
     }
   };
 
@@ -59,18 +59,8 @@ export const StartupFundingRaising = () => {
     "Financial Projection",
   ];
 
-  if (loading) {
-    return (
-      <PageLoader
-        dashboard={true}
-        num={[
-          fundData?.fundAsk,
-          fundData?.fundUtilization,
-          fundData?.capTable,
-          fundData?.previousRound,
-        ]}
-      />
-    );
+  if(stateAuth.dashboardLoad){
+    return <PageLoader num={[1, 2 , 3, 4]} />
   }
 
   return (
@@ -80,7 +70,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3 "
             name="Founder's Capital"
-            count={`${convertToMillion(stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders)}`}
+            count={`${convertToMillion(stateAuth?.startupData?.fundRaising?.capTable?.amountInvestedByFounders)}`}
             color="#E5FFE4"
           />
         </>
@@ -89,7 +79,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Total Fund Raised"
-            count={`${convertToMillion(stateAuth?.user?.fundRaising?.capTable?.amountRaised)}`}
+            count={`${convertToMillion(stateAuth?.startupData?.fundRaising?.capTable?.amountRaised && stateAuth?.startupData?.fundRaising?.capTable?.amountRaised )}`}
             color="#FAD7DC"
           />
         </>
@@ -98,7 +88,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Pre-Money Valuation"
-            count={`$${convertToMillion(stateAuth?.user?.fundRaising?.previousRound?.preMoneyValuation)}`}
+            count={`${convertToMillion(stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation && stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation)}`}
             color="#E5FFE4"
           />
         </>
@@ -107,7 +97,7 @@ export const StartupFundingRaising = () => {
           <DashCard
             className="col-3"
             name="Post-Money Valuation"
-            count={`$${convertToMillion(stateAuth?.user?.fundRaising?.previousRound?.postMoneyValuation)}`}
+            count={`${convertToMillion(stateAuth?.startupData?.fundRaising?.previousRound?.postMoneyValuation && stateAuth?.startupData?.fundRaising?.previousRound?.postMoneyValuation )}`}
             color="#FAD7DC"
           />
         </>

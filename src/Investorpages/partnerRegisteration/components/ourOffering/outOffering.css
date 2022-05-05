@@ -22,7 +22,12 @@
   line-height: 20px;
 }
 
-.yes-btn {
+/* .yes-btn {
+  color: #2e3192;
+  background: #dcebff;
+} */
+
+.active {
   color: #2e3192;
   background: #dcebff;
 }

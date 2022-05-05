@@ -4,15 +4,15 @@ import './style.css';
 export const BrandModeling = ({data, handleChange = ()=>{} }) =>{
 
     return (
-        <div className='my-5' >
+        <div className='my-5 mx-3' >
 
             <div className='form-group mb-3' >
                 <label>Channels</label>
                 <input 
                 type='text'
-                name='channel'
-                value={data?.channel}
-                onChange={handleChange}
+                name='channels'
+                value={data?.channels}
+                onChange={(e) =>handleChange(e, 'businessModel')}
             className='form-control '
                  />
             </div>
@@ -21,19 +21,19 @@ export const BrandModeling = ({data, handleChange = ()=>{} }) =>{
                 <label>Customer Relationship</label>
                 <input 
                 type='text'
-                name='relationship'
+                name='customerRelationship'
                 className='form-control'
-                value={data?.relationship}
-                onChange={handleChange}
+                value={data?.customerRelationship}
+                onChange={(e) =>handleChange(e, 'businessModel')}
                  />
             </div>
             <div className='form-group mb-3' >
                 <label>Revenue Streams</label>
                 <input 
                 type='text'
-                name='streams'
-                value={data?.streams}
-                onChange={handleChange}
+                name='revenueStreams'
+                value={data?.revenueStreams}
+                onChange={(e) =>handleChange(e, 'businessModel')}
             className='form-control'
                  />
             </div>
@@ -41,9 +41,9 @@ export const BrandModeling = ({data, handleChange = ()=>{} }) =>{
                 <label>Key Activities</label>
                 <input 
                 type='text'
-                name='activities'
-                value={data?.activities}
-                onChange={handleChange}
+                name='keyActivities'
+                value={data?.keyActivities}
+                onChange={(e) =>handleChange(e, 'businessModel')}
             className='form-control'
                  />
             </div>
@@ -51,9 +51,9 @@ export const BrandModeling = ({data, handleChange = ()=>{} }) =>{
                 <label>Key Resources</label>
                 <input 
                 type='text'
-                name='resources'
-                value={data?.resources}
-                onChange={handleChange}
+                name='keyResource'
+                value={data?.keyResource}
+                onChange={(e) =>handleChange(e, 'businessModel')}
             className='form-control'
                  />
             </div>
@@ -61,9 +61,9 @@ export const BrandModeling = ({data, handleChange = ()=>{} }) =>{
                 <label>Key Partners</label>
                 <input 
                 type='text'
-                name='partners'
-                value={data?.partners}
-                onChange={handleChange}
+                name='keyPartners'
+                value={data?.keyPartners}
+                onChange={(e) =>handleChange(e, 'businessModel')}
             className='form-control'
                  />
             </div>

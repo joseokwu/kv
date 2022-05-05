@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Select, Tabs } from "../../Startupcomponents";
-import "./startupEvents.css";
-import down from "../../assets/icons/downArrow.svg";
-import { SelectionDay } from "./components/selectionDay";
-import { getEvents } from "../../services/events";
-import { PageLoader } from "../../components";
-import { useAuth} from '../../hooks/useAuth';
+import React, { useEffect, useState } from 'react'
+import { Select, Tabs } from '../../Startupcomponents'
+import './startupEvents.css'
+import down from '../../assets/icons/downArrow.svg'
+import { SelectionDay } from './components/selectionDay'
+import { getEvents } from '../../services/events'
+import { PageLoader } from '../../components'
+import { useAuth } from '../../hooks/useAuth'
 import Pagination from 'react-bootstrap/Pagination'
-
+import { EmptyState } from '../../mentorComponents/emptyState/EmptyState'
 
 export const StartupEvents = ({ history }) => {
-
   const industry = [
-    "Category: All",
+    'Category: All',
     'Accounting',
     'Analytics',
     'Bike Rentals',
@@ -53,82 +52,81 @@ export const StartupEvents = ({ history }) => {
 
   const {
     location: { hash },
-  } = history;
+  } = history
 
-  const { stateAuth } = useAuth();
-  const [events, setEvents] = useState([]);
+  const { stateAuth } = useAuth()
+  const [events, setEvents] = useState([])
   const pages = []
-	const [currentPage, setCurrentPage] = useState(1)
-  const [selectionEvents, setSelectionEvents] = useState([]);
-  const [demoEvents, setDemoEvents] = useState([]);
-  const [pitchEvents, setPitchEvents] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [total, setTotal] = useState('');
+  const [currentPage, setCurrentPage] = useState(1)
+  const [selectionEvents, setSelectionEvents] = useState([])
+  const [demoEvents, setDemoEvents] = useState([])
+  const [pitchEvents, setPitchEvents] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [total, setTotal] = useState('')
 
-	const nextPage = ()=>{
-    setCurrentPage(currentPage+1)
- 
-   }
- 
-   const prevPage = ()=>{
-     setCurrentPage(currentPage-1)
- 
-   }
-   
-	const movePage =(id)=>{
-		setCurrentPage(id)
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1)
+  }
 
-	}
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1)
+  }
 
-  
+  const movePage = (id) => {
+    setCurrentPage(id)
+  }
+
   const fetchData = async () => {
-    setLoading(true);
-    const res = await getEvents({ 
-      userId:stateAuth?.user?.userId,
-      page:currentPage,
-      limit:5
-    });
-    setEvents(res?.data)
-    setTotal(res?.data?.total)
+    try {
+      setLoading(true)
+      const res = await getEvents({
+        userId: stateAuth?.user?.userId,
+        page: currentPage,
+        limit: 5,
+      })
+      console.log(res?.data)
+      setEvents(res?.data)
+      setTotal(res?.data?.total)
 
-    setLoading(false)
-  };
-  
+      setLoading(false)
+    } catch {
+      setEvents(null)
+    }
+  }
+
   useEffect(() => {
-    fetchData();
-  }, [currentPage]);
+    fetchData()
+  }, [currentPage])
 
-  
-  for(let i = 1; i <= events?.total; i++){
-		pages.push(i)
-	}
-
+  for (let i = 1; i <= events?.total; i++) {
+    pages.push(i)
+  }
 
   const renderContent = () => {
     switch (hash) {
-      case "#Selection Day":
-        return <SelectionDay data={events && events?.data} />;
+      case '#Selection Day':
+        return <SelectionDay data={events && events?.data} />
 
-      case "#Demo Day":
-        return <SelectionDay data={events && events?.data} />;
+      case '#Demo Day':
+        return <SelectionDay data={events && events?.data} />
 
-      case "#Pitching Events":
-        return <SelectionDay data={events && events?.data} />;
+      case '#Pitching Events':
+        return <SelectionDay data={events && events?.data} />
 
-      case "#Other Events":
-        return <SelectionDay data={events && events?.data} />;
+      case '#Other Events':
+        return <SelectionDay data={events && events?.data} />
 
       default:
-        return <SelectionDay data={events && events?.data} />;
+        return <SelectionDay data={events && events?.data} />
     }
-  };
+  }
 
   const tabItems = [
-    "Selection Day",
-    "Demo Day",
-    "Pitching Events",
-    "Other Events",
-  ];
+    'Selection Day',
+    'Demo Day',
+    'Pitching Events',
+    'Other Events',
+  ]
 
   if (loading) {
     return (
@@ -141,7 +139,7 @@ export const StartupEvents = ({ history }) => {
           selectionEvents,
         ]}
       />
-    );
+    )
   }
   return (
     <div className="mb-5">
@@ -162,8 +160,8 @@ export const StartupEvents = ({ history }) => {
               style={{ columnGap: 7 }}
               data-toggle="dropdown"
             > */}
-            <Select placeholder={"Sort by: Industry"} options={industry} />
-              {/* <span>
+            <Select placeholder={'Sort by: Industry'} options={industry} />
+            {/* <span>
                 <span>Sort by: </span> Industry
               </span>
               <img src={down} alt="down" /> */}
@@ -175,43 +173,57 @@ export const StartupEvents = ({ history }) => {
       <div className="col-lg-12 col-xl-12 pt-3">
         <section className="mt-1">{renderContent()}</section>
       </div>
-      <div className="d-flex justify-content-end">
-				<Pagination>
+      <div className="d-flex justify-content-center">
+        {events === null && <EmptyState />}
+        {
+          events && events.length > 0 ? (
+            <Pagination>
+          {events && events?.results?.currentPage > 1 ? (
+            <>
+              <Pagination.Prev onClick={prevPage} className="mx-1" />
+              {
+                <Pagination.Item className="mx-1">{`${currentPage} of  ${
+                  events?.results?.limit ?? 1
+                }`}</Pagination.Item>
+              }
+              {events?.results?.currentPage === events?.results?.limit ? (
+                <span />
+              ) : (
+                <Pagination.Next onClick={nextPage} className="mx-1" />
+              )}
+            </>
+          ) : (
+            <>
+              {
+                <Pagination.Item
+                  onClick={() => movePage(currentPage + 1)}
+                  className="mx-1"
+                >{`${currentPage} of  ${events?.results?.limit}`}</Pagination.Item>
+              }
 
-				{
-				events &&	events?.results?.currentPage > 1 ? (
-						 <>
-				  <Pagination.Prev onClick={prevPage} className='mx-1' />
-						{
-			
-					
-					<Pagination.Item  className='mx-1' >{ `${currentPage} of  ${events?.results?.limit}` }</Pagination.Item>
-						
-
-				}
-				 			{
-              	events?.results?.currentPage === events?.results?.limit ? <span />:<Pagination.Next onClick={nextPage} className='mx-1' /> 
-							 }
-						 </>
-
-					):(
-						<>
-            {
-
-      <Pagination.Item onClick={()=> movePage(currentPage + 1)} className='mx-1' >{ `${currentPage} of  ${events?.results?.limit}` }</Pagination.Item>
+              {events &&
+              events?.results?.currentPage === events?.results?.limit ? (
+                <span />
+              ) : (
+                <Pagination.Next onClick={nextPage} className="mx-1" />
+              )}
+            </>
+          )}
+        </Pagination>
+          ) : (
+            <EmptyState message={"No Events yet"}  />
+          )
+        }
         
-    }
-
-                        {
-                   events &&  events?.results?.currentPage === events?.results?.limit ? <span /> : <Pagination.Next onClick={nextPage} className='mx-1' />
-							     }
-
-						</>
-					)
-				}
-
-				</Pagination>
-			</div>
+      </div>
     </div>
-  );
-};
+  )
+}
+
+// assignmentFile: "https://cdn.shoutng.com/kvnmri9zykq3doplnqtxfi.pdf"
+// created_at: "2022-04-15T18:14:25.413Z"
+// deadlineDay: "2022-05-13T11:00:00.000Z"
+// deadlineTime: "2022-05-13T13:00:00.000Z"
+// description: "We teach how to make garri for a living"
+// isTrash: false
+// programs: "Meeting"

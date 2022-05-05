@@ -39,6 +39,14 @@ h6 {
   z-index: 8;
   padding: 10px;
 }
+@media (max-width: 1024px) {
+  .tab-wrap {
+    position: unset;
+    top: 0;
+    background: #ffffff;
+    padding: 10px;
+  }
+}
 
 .white-strip {
   background-color: white;
@@ -99,4 +107,8 @@ h6 {
 
 .mb-45 {
   margin-bottom: 2.5rem;
+}
+
+.error {
+  color: #e31937;
 }

@@ -30,7 +30,7 @@ export const PitchDeck = ({data}) => {
  
         {
           data && Object.values(data).map((item, i) =>{
-            if(item.includes('.pdf')){
+            if(item && item.includes('.pdf')){
               return (
                 <div key={i} className="col-xl-3 col-lg-4 mb-4">
             <article className="deck-card">
@@ -41,7 +41,7 @@ export const PitchDeck = ({data}) => {
           </article>
         </div>
               ) 
-            } if(item.includes('.mp4')){
+            } if(item && item.includes('.mp4')){
               return (
                 <div key={i} className="col-xl-3 col-lg-4 mb-4">
                 <article className="">
@@ -98,7 +98,7 @@ export const PitchDeck = ({data}) => {
 
 export const AddPickDeckModal = () => {
   return (
-    <div className="mx-4 addPitchDeck">
+    <div className="mx-0 addPitchDeck">
       <div className="mt-4 pb-3 border-bottom">
         <h2>Pitch Deck</h2>
         <span>Upload your pitch deck and document</span>

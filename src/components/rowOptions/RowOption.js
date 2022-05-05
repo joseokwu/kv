@@ -12,6 +12,7 @@ export const RowOption = ({
   const handleClick = (selectedOption) => {
     setSelected(selectedOption);
     getSelected(selectedOption);
+ 
   };
 
   return (
@@ -20,6 +21,7 @@ export const RowOption = ({
         options.map((option, i) => {
           return (
             <Option
+              key={i}
               bg={selected === option || selectAll ? "#DCEBFF" : ""}
               onClick={() => handleClick(option)}
             >

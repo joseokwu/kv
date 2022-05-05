@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import { EmptyState } from "../../mentorComponents";
 
 export const NoticeItem = ({
   noticeImage = "",
@@ -8,7 +9,7 @@ export const NoticeItem = ({
   const { push } = useHistory();
   return (
     <>
-      {container !== "page" ? (
+      {/* {container !== "page" ? (
         <article
           className="d-flex align-items-start notice-item"
           onClick={() => push("/startup/notification#all")}
@@ -50,7 +51,11 @@ export const NoticeItem = ({
             <img src={noticeImage} alt="notice" className="notice-img" />
           )}
         </article>
-      )}
+      )} */}
+      <div className="text-center font-weight-bold py-3">
+        <p style={{fontSize: '22px'}}>No notifications</p>
+      </div>
+      {/* <EmptyState message="No notifications at the moment" /> */}
     </>
   );
 };

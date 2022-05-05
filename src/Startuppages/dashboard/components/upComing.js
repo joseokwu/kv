@@ -3,9 +3,11 @@ import { images } from "../../../constants/domiData";
 import clock from "../../../assets/images/clock.svg";
 import { useHistory } from "react-router-dom";
 import { months } from "../../../utils/helpers";
+import { EmptyState } from "../../../mentorComponents";
+
 
 export const UpComing = ({ data = [] }) => {
-  const todoArr = [1, 2, 3];
+  // const todoArr = [1, 2, 3];
   const history = useHistory();
 
   return (
@@ -20,8 +22,11 @@ export const UpComing = ({ data = [] }) => {
         </span>
       </HeadWrapper>
 
-      <div className="row ml-1" style={{ columnGap: 10 }}>
-        {data.map((d, i) => (
+      {
+        data == null && (<EmptyState />)
+      }
+        <div className="row ml-1" style={{ columnGap: 10 }}>
+        {data && data.length > 0 ? data.map((d, i) => (
           <UpcomingCard key={i} className="col-lg-4 col-12 col-md-6">
             <div className="d-flex justify-content-between head">
               <h6>{d?.titleOfEvent}</h6>
@@ -47,12 +52,16 @@ export const UpComing = ({ data = [] }) => {
               <button onClick={() => history.push("/startup/events")}>View Details</button>
               <span className="mx-4">
                 {images.map((data, i) => (
-                  <img className="mx-n2" key={i} src={data.icon} />
+                  <img className="mx-n2" key={i} src={data.icon} alt="" />
                 ))}
               </span>
             </div>
           </UpcomingCard>
-        ))}
+        )
+        ) : (
+          <EmptyState message={"No Upcoming Events at the moment"} />
+        )
+      }
       </div>
     </div>
   );

@@ -15,8 +15,6 @@ const [checkSat, setCheckSat] = useState(false)
     }else{
       alert('click check')
     }
-
-
 }
 
   return (

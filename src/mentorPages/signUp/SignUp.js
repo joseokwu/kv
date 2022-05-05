@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState  } from 'react'
 import './signUp.css'
 import {
   AuthSide,
   AuthButton,
   AuthTextField,
   AuthPasswordField,
-  PhoneInput,
+ 
 } from '../../mentorComponents/index';
-import { useLocation }  from 'react-router-dom';
+import { useLocation  }  from 'react-router-dom';
 import check from '../../assets/icons/checkmark.svg'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../hooks'
-import { setRole } from '../../utils/helpers'
+import { setType , getType } from '../../utils/helpers';
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 // import { PhoneInput } from '../../components'
 
 const { Option } = Select
@@ -19,45 +21,43 @@ const { Option } = Select
 export const SignUp = ({ history }) => {
   const [checkSat, setCheckSat] = useState(false)
   const { stateAuth, register } = useAuth()
+  const userType = getType();
   const [industry, setIndustry] = useState('')
   const [phone, setPhone] = useState('')
-  const location = useLocation();
+  const search = useLocation().search;
+  const name = new URLSearchParams(search).get('name');
   function handleChange(value) {
     setIndustry(value)
   }
-  console.log(window.location.origin)
-  console.log(stateAuth?.signUpStatus)
-  const onFinish = (values) => {
 
-    if(stateAuth?.signUpStatus !== 'startup'){
-      console.log({
-        ...values,
-        type: stateAuth?.signUpStatus,
-        phone: phone?.id,
-      })
-      register({
-        ...values,
-        type: stateAuth?.signUpStatus,
-        phone: phone?.id,
-        origin:window.location.origin
-      })
-    }else{
-      register({
-        ...values,
-        type: stateAuth?.signUpStatus,
-        industry: industry,
-        phone: phone?.id,
-        origin:window.location.origin
-      })
-      console.log({
-        ...values,
-        type: stateAuth?.signUpStatus,
-        industry: industry,
-        phone: phone?.id,
-      })
-    }
-    setRole(stateAuth?.signUpStatus)
+
+
+ const changePhone = (value) =>{
+   setPhone(value);
+   console.log(value)
+ }
+
+  const onFinish = (values) => {
+    console.log({
+      ...values,
+      type: name ?? userType ,
+      phone: phone,
+    })
+    register({
+      ...values,
+      type: stateAuth?.signUpStatus,
+      phone: phone,
+      origin:window.location.origin
+    })
   }
+
+  const[eye, setEye] = useState(false);
+
+// console.log(name)
+
+
+
+
 
   return (
     <div className="row mx-0 mentor_auth_wrap">
@@ -78,17 +78,17 @@ export const SignUp = ({ history }) => {
             <div className="col-md-6 col-12 mb-2">
               <AuthTextField
                 name={
-                  stateAuth?.signUpStatus === 'startup'
+                  name === 'startup' ||  userType === 'startup'
                     ? 'startupname'
                     : 'firstname'
                 }
                 label={
-                  stateAuth?.signUpStatus === 'startup'
+                  name === 'startup' ||  userType === 'startup'
                     ? 'Startup Name'
                     : 'First name'
                 }
                 placeholder={
-                  stateAuth?.signUpStatus === 'startup'
+                  name === 'startup' ||  userType === 'startup'
                     ? 'Enter your Startup name'
                     : 'Enter your first name'
                 }
@@ -96,14 +96,19 @@ export const SignUp = ({ history }) => {
               />
             </div>
             <div className="col-md-6 col-12 mb-2">
-              {stateAuth?.signUpStatus === 'startup' ? (
+              {  name === 'startup' ||  userType === 'startup' ? (
                 <div className="inputContainer">
-                  <label>Industry</label>
+                  
                   <div className="select">
+                  <Form.Item
+                    name="industry"
+                    label="Industry"
+                    rules={[{ required: true, message: 'Please select a industry!' }]}
+                    >
                     <Select
                       onChange={handleChange}
                       id="industry1"
-                      name="industry"
+                      style={{width: "fit-content", color: "#f9f9fc"}}
                       placeholder="Select your industry"
                     >
                       <Option disabled selected>
@@ -148,7 +153,28 @@ export const SignUp = ({ history }) => {
                         Sustainability and circular economy
                       </Option>
                       <Option value="Transportation">Transportation</Option>
+                      <Option value="Others">Others</Option>
+                      <Option value="Financial Services">Financial Services</Option>
+                      <Option value="Education">Education</Option>
+                      <Option value="Health">Health</Option>
+                      <Option value="Agriculture">Agriculture</Option>
+                      <Option value="Insurance">Insurance</Option>
+                      <Option value="Clean Energy">Clean Energy</Option>
+                      <Option value="Construction">Construction</Option>
+                      <Option value="Mobility/Logistics">Mobility/Logistics</Option>
+                      <Option value="Social Impact">Social Impact</Option>
+                      <Option value="Artificial Intelligence">Artificial Intelligence</Option>
+                      <Option value="Blockchain">Blockchain</Option>
+                      <Option value="Internet of Things">Internet of Things</Option>
+                      <Option value="Mobile">Mobile</Option>
+                      <Option value="Software as a Service">Software as a Service</Option>
+                      <Option value="Sports">Sports</Option>
+                      <Option value="B2B">B2B</Option>
+                      <Option value="B2C">B2C</Option>
+                      <Option value="D2C">D2C</Option>
+                      <Option value="Marketplace">Marketplace</Option>
                     </Select>
+                    </Form.Item>
                   </div>
                 </div>
               ) : (
@@ -161,7 +187,7 @@ export const SignUp = ({ history }) => {
               )}
             </div>
 
-            <div className="col-12 mb-2">
+            <div className="col-12 mb-2 email">
               <AuthTextField
                 name="email"
                 label="Email"
@@ -170,21 +196,35 @@ export const SignUp = ({ history }) => {
               />
             </div>
 
-            <div className="col-12 mb-2">
+            <div className="col-12 mb-2 position-relative">
+              <i onClick={()=> setEye(!eye)} className={`pass-eye fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i>
               <AuthPasswordField
                 numb={8}
+                name="password"
                 message="Password must be 8 digits"
                 label="Password"
+                id={'password'}
                 placeholder="Password must be at least 8 characters"
-                type="password"
                 className="mentor_gray_card_input"
+                type={eye ? "text" : "password"}
               />
             </div>
 
-            <div className=" numsign col-12 mb-4">
+            <div className="numsign col-12 mb-4">
+              <label style={{color: '#D5D6F4'}}>
+                <span style={{ color: "#ff4d4f" }}>* </span>Mobile Number
+              </label>
+            
               <PhoneInput
-                label ={'Mobile Number'} 
-                onChange={setPhone}
+                id="phoneNumber"
+                placeholder={"+234 000 0000 000"}
+                name="phone"
+                international
+                countryCallingCodeEditable={true}
+                className="signup_num ps-3"
+                value={phone}
+                onChange={(value) => changePhone(value)}
+                maxLength={17}
               />
             </div>
 

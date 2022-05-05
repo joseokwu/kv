@@ -25,4 +25,14 @@
   letter-spacing: 0.01em;
   text-decoration-line: underline;
   color: #2e3192;
+  cursor: pointer;
+}
+
+.modal-startup {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
 }

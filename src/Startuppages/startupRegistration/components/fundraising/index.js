@@ -96,7 +96,7 @@ export const FundRaising = () => {
   return (
     <>
       <HeaderFund>
-        <h5> Fund Raising </h5>
+        <h5 style={{color: "#2E3192"}}>Fund Raising</h5>
         <p className='text-nowrap'>
           Let’s help you explain your fund raising plan
         </p>

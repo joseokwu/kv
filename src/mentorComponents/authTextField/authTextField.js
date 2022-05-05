@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './authTextField.css'
 import { Form, Input, Checkbox, message } from 'antd'
 
@@ -38,11 +38,13 @@ export const AuthTextField = ({
   )
 }
 
-export const AuthPasswordField = ({ className, numb, message, placeholder, label }) => {
+
+export const AuthPasswordField = ({ className, numb, message, placeholder, label='Password', id, name, type }) => {
+
   return (
     <div className="mentor_field">
       <Form.Item
-        name="password"
+        name={id}
         style={{ color: '#fe0003' }}
         rules={[
           {
@@ -54,14 +56,15 @@ export const AuthPasswordField = ({ className, numb, message, placeholder, label
             message: message,
           },
         ]}
-        label="Password"
+        label={label}
       >
         <Input
-          type="password"
-          id="password"
+          type={type}
+          id={id}
           className={`${className}`}
           placeholder={placeholder}
           label={label}
+          name={name}
         />
       </Form.Item>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useActivity } from '../../hooks/useBusiness'
 import 'antd/dist/antd.css'
 import { Select } from 'antd'
@@ -12,29 +12,31 @@ import {
   FormWrapper,
   TeamMemberWrapper,
 } from './teamMember.styled'
-import DatePicker from 'react-datepicker'
+import { DatePicker } from 'antd'
 import PhoneInput from 'react-phone-number-input'
-import { Tag } from '../../Startupcomponents'
 import { CustomButton } from '../../Startupcomponents/button/button.styled'
 import { toast } from 'react-hot-toast'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { WorkExperience, Education } from '../../Startupcomponents'
+import { WorkExperience, Education, SkillTab } from '../../Startupcomponents'
+import { CircularLoader } from '../../Startupcomponents/CircluarLoader/CircularLoader'
+import { upload } from '../../services/utils'
+
 
 const { Option } = Select
 
 export const StartupTeamMember = () => {
   const { stateAuth } = useAuth()
-  const [disImg, setImg] = useState(null)
   const [show, setShow] = useState(false)
   const [showEducation, setShowEducation] = useState(false)
+  const [logoUploading, setLogoUploading] = useState(false)
   const [loading, setLoading] = useState(false)
   // const [nextLoading, setNextLoading] = useState(false)
   const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
   const [startDate, setStartDate] = useState(new Date())
   const [phone, setPhone] = useState(stateAuth?.user?.teamMember?.mobile_number)
   const [teamMemberInfo, setTeamMemberInfo] = useState({
-    avatar: stateAuth?.user?.teamMember?.avatar ?? '',
+    // avatar: stateAuth?.user?.teamMember?.avatar ?? '',
     briefIntroduction: stateAuth?.user?.teamMember?.briefIntroduction ?? '',
     firstName: stateAuth?.user?.teamMember?.firstName ?? '',
     lastName: stateAuth?.user?.teamMember?.lastName ?? '',
@@ -45,24 +47,44 @@ export const StartupTeamMember = () => {
   })
   const [editIndex, setEditIndex] = useState()
   const [isEditing, setIsEditing] = useState(false)
+  const [inVal, setVal] = useState('')
+  const [avatar, setAvatar] = useState(
+    stateAuth?.user?.teamMember?.avatar ?? null,
+  )
   const {
     changePath,
     setWorkExperience,
     setEducation,
-    state: { path, workExperience, education },
+    state: { path, experience, education },
   } = useActivity()
 
   const onChange = (e) => {
-    setTeamMemberInfo({ ...teamMemberInfo, [e.target.name] : e.target.value })
+    setTeamMemberInfo({ ...teamMemberInfo, [e.target.name]: e.target.value })
   }
 
-  const onChangeImage = (e) => {
-    const { files } = e.target
+  const [skillSet, setSkill] = useState(stateAuth?.user?.team?.skills ?? [])
 
-    if (files && files[0]) {
-      setImg(URL.createObjectURL(files[0]))
+  const onChangeImage = async (e) => {
+    const { files } = e.target
+    const formData = new FormData()
+    formData.append('dir', 'kv')
+    formData.append('ref', stateAuth.user?.userId)
+    formData.append('type', 'image')
+    formData.append(0, files[0])
+    try {
+      console.log('uploaded')
+      setLogoUploading(true)
+      const response = await upload(formData)
+      console.log(response)
+      setAvatar(response?.path)
+      setLogoUploading(false)
+    } catch (error) {
+      console.log(error)
+      setLogoUploading(false)
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image')
     }
   }
+
   let colors = []
 
   for (let i = 0; i < 20; i++) {
@@ -82,8 +104,20 @@ export const StartupTeamMember = () => {
     children.push(<Option key={i}>{skill[i]}</Option>)
   }
 
-  function handleChange(value) {
-    console.log(`selected ${value}`)
+  const handleChange = (e) => {
+    setVal(e.target.value)
+  }
+
+  const handleKey = (e) => {
+    if (e.keyCode === 32 && e.target.value !== '') {
+      console.log(inVal)
+      setVal('')
+      setSkill([...skillSet, inVal])
+    }
+  }
+
+  const onDelete = (value) =>{
+    setSkill(skillSet.filter(item => item !== value))
   }
 
   const onSubmit = async (value) => {
@@ -93,10 +127,12 @@ export const StartupTeamMember = () => {
         accType: 'startup',
         values: {
           ...value,
-          experience: workExperience,
+          skills: skillSet,
+          avatar: avatar,
+          experience: experience,
           education: education,
         },
-        userId: stateAuth?.user?.teamMemberInfo?.userId,
+        userId: stateAuth?.user?.userId,
       }
       console.log(teamMember)
     } catch (err) {
@@ -138,41 +174,51 @@ export const StartupTeamMember = () => {
   })
   const handleWorkDetails = ({
     from,
-    title,
+    companyName,
     location,
     position,
-    description,
+    responsibility,
     startDate,
     endDate,
-    school,
+    schoolName,
     course,
     degree,
     activities,
     eduStartDate,
     eduEndDate,
+    founder,
   }) => {
     if (from === 'workExperience') {
       setWorkExperience({
-        title,
+        companyName,
         location,
         position,
-        description,
+        responsibility,
         startDate,
         endDate,
+        isPresentWorking: false,
       })
       setIsEditing(false)
     } else if (from === 'education') {
       setEducation({
-        school,
+        schoolName,
         course,
-        degree,
+        degreeType: degree,
         activities,
-        eduStartDate,
-        eduEndDate,
+        startDate: eduStartDate,
+        endDate: eduEndDate,
+        isPresent: false,
       })
       setIsEditing(false)
     }
   }
+
+  useEffect(() => {
+    if (stateAuth?.user?.team) {
+      setWorkExperience(stateAuth?.user?.team?.experience, 'server')
+      setEducation(stateAuth?.user?.team?.education, 'server')
+    }
+  }, [])
 
   return (
     <>
@@ -183,7 +229,7 @@ export const StartupTeamMember = () => {
               handleClose={setShow}
               handleWorkDetails={handleWorkDetails}
               editIndex={editIndex}
-              workExperience={workExperience}
+              workExperience={experience}
               isEditing={isEditing}
               setIsEditing={setIsEditing}
             />
@@ -219,12 +265,16 @@ export const StartupTeamMember = () => {
                 }}
               >
                 <ImageWrapper>
-                  {disImg === null ? (
-                    <UserOutlined />
+                  {avatar === null ? (
+                    logoUploading ? (
+                      <CircularLoader color={'#000'} />
+                    ) : (
+                      <UserOutlined />
+                    )
                   ) : (
                     <img
                       className=""
-                      src={disImg}
+                      src={avatar}
                       style={{
                         borderRadius: '70px',
                         width: '90px',
@@ -359,8 +409,8 @@ export const StartupTeamMember = () => {
                 <span>Work Experience</span>
               </div>
               <hr />
-              {workExperience.length > 0 &&
-                workExperience.map((item, index) => {
+              {experience.length > 0 &&
+                experience.map((item, index) => {
                   return (
                     <WorkExperience
                       key={index}
@@ -427,15 +477,25 @@ export const StartupTeamMember = () => {
                 <div>
                   <label>What are your skills*</label>
                 </div>
-                <Select
-                  mode="multiple"
-                  allowClear
-                  style={{ width: '60%', color: 'red' }}
-                  placeholder="Please select"
+                <input
                   onChange={handleChange}
-                >
-                  {children}
-                </Select>
+                  style={{ width: '100%', outline: 'none', color: 'purple' }}
+                  value={inVal}
+                  type="text"
+                  placeholder="Enter your skills"
+                  className="py-2 px-3"
+                  // className='form-control ps-3'
+                  // onBlur={formik.handleBlur}
+                  onKeyDown={handleKey}
+                />
+                {skillSet.length > 0 &&
+                  skillSet.map((item, i) => (
+                    <SkillTab
+                      key={i}
+                      skill={item}
+                      onClick={() => onDelete(item)}
+                    />
+                  ))}
               </div>
             </FormWrapper>
 

@@ -49,3 +49,24 @@ export const getInvestorEvaluation = async (values) => {
     throw new Error(error);
   }
 };
+
+export const updateInvestor = async(values) =>{
+  try{
+    const result = await request.post("updateInvestorOnce", values);
+    console.log(result?.data)
+    return result?.data;
+  }catch (err) {
+    const error = err?.response?.data?.message || err?.message;
+    throw new Error(error);
+  }
+}
+
+export const sendInvitation = async(values) =>{
+  try{
+    const res = await request.post("sendInvitation", values);
+    console.log(res.data)
+    return res.data;
+  }catch(err){
+    throw err
+  }
+}

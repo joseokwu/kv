@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const BodyWrapper = styled.div`
   margin-bottom: 10px;
   margin-top: 30px;
-  margin-left: 15px;
+  margin-left: 0px;
 
   .sold {
     flex-direction: column;
@@ -90,9 +90,10 @@ export const BodyWrapper = styled.div`
   }
   .cust {
     border: none;
-    background: #f4f4f4;
+    background: #fafafc;
     width: 70%;
     margin-left: 15px;
+    border-radius: 7px;
 
     @media (max-width: 768px) {
       width: 100%;

@@ -22,13 +22,14 @@ export const getLocationHistory = () => {
 //     localStorage.removeItem('user:redirect:location')
 // }
 
-export const setRole = (role) => {
-  localStorage.setItem("kv:user:role", role);
+export const setType = (type) => {
+  localStorage.setItem("kv:user:role", type);
 };
 
-export const getRole = () => {
-  let role = localStorage.getItem("kv:user:role");
-  return role;
+export const getType = () => {
+  let type = localStorage.getItem("kv:user:role");
+  // console.log(type)
+  return type;
 };
 
 export const formatBytes = (bytes, decimals = 2) => {
@@ -53,6 +54,29 @@ export const convertToMillion = (num = "0") => {
   } else {
     return num;
   }
+};
+
+export const parseFile = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (e) => reject(e);
+    reader.readAsBinaryString(file);
+  });
+};
+
+export const formatAMPM = (date) => {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "pm" : "am";
+
+  hours %= 12;
+  hours = hours || 12;
+  minutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  const strTime = `${hours}:${minutes} ${ampm}`;
+
+  return strTime;
 };
 
 export const months = [
@@ -95,4 +119,32 @@ export function formatDate(dateToFormat) {
   return `${new Date(dateToFormat).getDate()} ${
     months[new Date(dateToFormat).getMonth()]
   }, ${new Date(dateToFormat).getFullYear()}`;
+}
+
+export const deleteProperty = (obj, prop) => {
+  let { [prop]: omit, ...res } = obj;
+  return res;
+};
+
+export const validate = (obj, validations) => 
+  validations.every(key => ![undefined, null, ""].includes(key.split('.').reduce((acc, cur) => acc?.[cur], obj)));
+
+export const letterOnly = (e) => {
+  const charCode = e.charCode || e.which;
+  const keyValue = String.fromCharCode(charCode);
+  const isValid = new RegExp(/^[a-zA-Z,.\s]*$/).test(keyValue);
+  if (!isValid) {
+    e.preventDefault();
+    return;
+  }
+}
+
+export const onNumberOnlyChange = (e) => {
+  const keyCode = e.keyCode || e.which
+  const keyValue = String.fromCharCode(keyCode)
+  const isValid = new RegExp('[0-9]').test(keyValue)
+  if (!isValid) {
+    e.preventDefault()
+    return
+  }
 }

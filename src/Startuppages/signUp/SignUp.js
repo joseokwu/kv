@@ -79,6 +79,7 @@ const [checkSat, setCheckSat] = useState(false)
             <div className="col-12 mb-4">
               <PasswordField
                 numb={8}
+                
                 message='Password must be 8 digits'
                 label="Create Password"
                 placeholder="Password must be 8 digits"

@@ -202,7 +202,7 @@ const routes = [
   },
   {
     name: "StartupTeamMember",
-    path: "/startup/team/member",
+    path: "/startup/team-member",
     component: WithStartupRegisterLayout(StartupTeamMember),
     exact: true,
     protected: true,
@@ -219,7 +219,7 @@ const routes = [
   {
     name: "StartupContactus",
     path: "/startup/support",
-    component: WithStartupDashboardLayout(StartupContactUs),
+    component: WithStartupRegisterLayout(StartupContactUs),
     exact: true,
     protected: true,
     type: "startup",
@@ -259,7 +259,7 @@ const routes = [
     path: "/investor/dashboard",
     component: WithMainInvestorLayout(InvestorDashboard),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -268,7 +268,7 @@ const routes = [
     path: "/investor/registration",
     component: WithInvestorRegisterLayout(InvestorRegistration),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -277,7 +277,7 @@ const routes = [
     path: "/investor/opportunities",
     component: WithMainInvestorLayout(InvestorOpportunity),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -286,7 +286,7 @@ const routes = [
     path: "/investor/opportunities/:id",
     component: WithMainInvestorLayout(Opportunity),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -295,7 +295,7 @@ const routes = [
     path: "/investor/interested",
     component: WithMainInvestorLayout(InvestorInterested),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
   {
@@ -303,7 +303,7 @@ const routes = [
     path: "/investor/interested/:id",
     component: WithMainInvestorLayout(Opportunity),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -312,16 +312,16 @@ const routes = [
     path: "/investor/portfolio",
     component: WithMainInvestorLayout(InvestorPortfolio),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
   {
     name: "Investor Profile",
     path: "/investor/profile",
-    component: WithMainInvestorLayout(InvestorProfile),
+    component: WithInvestorRegisterLayout(InvestorProfile),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -330,7 +330,7 @@ const routes = [
     path: "/investor/events",
     component: WithMainInvestorLayout(InvestorEvents),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -339,7 +339,7 @@ const routes = [
     path: "/investor/evaluation",
     component: WithMainInvestorLayout(MentorEvaluation),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -357,7 +357,7 @@ const routes = [
     path: "/investor/networking",
     component: WithMainInvestorLayout(StartupNetworking),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -366,7 +366,7 @@ const routes = [
     path: "/investor/schedule",
     component: WithMainInvestorLayout(InvestorScheduleCalendar),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
   {
@@ -374,7 +374,7 @@ const routes = [
     path: "/investor/opportunities/:id/founder",
     component: WithMainInvestorLayout(InvestorFounderProfile),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
   {
@@ -382,7 +382,7 @@ const routes = [
     path: "/investor/opportunities/:id/commitment",
     component: WithMainInvestorLayout(InvestorCommitment),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
   {
@@ -390,7 +390,7 @@ const routes = [
     path: "/investor/deal_room",
     component: WithMainInvestorLayout(StartupNetworking),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
   {
@@ -398,7 +398,7 @@ const routes = [
     path: "/investor/deal_room/:id",
     component: WithMainInvestorLayout(InvestorDealRoom),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -407,7 +407,7 @@ const routes = [
     path: "/investor/deal_room/:id/:folderName",
     component: WithMainInvestorLayout(InvestorDealFolder),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
   {
@@ -415,7 +415,7 @@ const routes = [
     path: "/investor/schedule-calendar",
     component: WithMainInvestorLayout(InvestorScheduleCalendar),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -424,7 +424,7 @@ const routes = [
     path: "/investor/support",
     component: WithMainInvestorLayout(InvestorContactUs),
     exact: true,
-    protected: false,
+    protected: true,
     type: "investor",
   },
 
@@ -448,10 +448,10 @@ const routes = [
 
   {
     name: "Booster Dashboard",
-    path: "/booster/dashboard",
+    path: "/boosterpartner/dashboard",
     component: WithMainInvestorLayout(BoosterDashboard),
     exact: true,
-    protected: false,
+    protected: true,
     type: "booster",
   },
   {
@@ -459,7 +459,7 @@ const routes = [
     path: "/booster/applicants",
     component: WithMainInvestorLayout(BoosterApplicants),
     exact: true,
-    protected: false,
+    protected: true,
     type: "booster",
   },
   {
@@ -472,10 +472,10 @@ const routes = [
   },
   {
     name: "Booster Profile",
-    path: "/booster/profile",
+    path: "/boosterpartner/profile",
     component: WithInvestorRegisterLayout(BoosterProfile),
     exact: true,
-    protected: false,
+    protected: true,
     type: "booster",
   },
 
@@ -484,7 +484,7 @@ const routes = [
     path: "/boosterpartner/registration",
     component: WithInvestorRegisterLayout(BoosterPartnerRegistration),
     exact: true,
-    protected: false,
+    protected: true,
     type: "booster",
   },
   //Investor Routes End
@@ -550,7 +550,7 @@ const routes = [
   },
   {
     name: "ResetPassword",
-    path: "/reset/password",
+    path: "/reset/password/:token",
     component: MentorResetPassword,
     exact: true,
     protected: false,
@@ -762,7 +762,7 @@ const routes = [
   {
     name: "admin application management",
     path: "/admin/application_mgt",
-    component: WithAdminLayout(ApplicationMgt),
+    component: WithAdminLayout(() => <div>Application Management</div>),
     exact: true,
     protected: false,
     type: "admin",

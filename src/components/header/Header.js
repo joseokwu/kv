@@ -3,7 +3,6 @@ import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/images/kvLogo.png'
 import notification from '../../assets/icons/notification.svg'
-import chat from '../../assets/icons/chat.svg'
 import angleDown from '../../assets/icons/angleDown.svg'
 import sampleUser from '../../assets/images/sampleUser.png'
 import { Notification } from '../index'
@@ -12,6 +11,7 @@ import edit from '../../assets/icons/ep.svg'
 import logout from '../../assets/icons/logout.svg'
 import './header.css'
 import { useAuth } from '../../hooks';
+import { getType } from './../../utils/helpers';
 
 export const Header = ({ setOpen, open }) => {
   const {
@@ -23,11 +23,13 @@ export const Header = ({ setOpen, open }) => {
     if (pathname.includes('investor')) {
       return '/investor/dashboard'
     } else {
-      return '/booster/dashboard'
+      return '/boosterpartner/dashboard'
     }
   }
 
+const { stateAuth } = useAuth();
 
+//console.log(stateAuth)
 
   const [openNotice, setOpenNotice] = useState(false)
   return (
@@ -64,8 +66,9 @@ export const Header = ({ setOpen, open }) => {
 
         <div className="d-flex align-items-center h-100">
           <span className="d-flex align-items-center header-profile d-none d-lg-flex">
-            <img src={sampleUser} alt="profile" className="" />
-            <p className="mb-0 header-text">Micheal Smith</p>
+          <img src={ stateAuth?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.username}`
+             } alt="profile" className="" />
+            <p className="mb-0 header-text"> { stateAuth?.username } </p>
           </span>
           <div>
             <HeaderDropdownMenu />
@@ -86,13 +89,15 @@ const HeaderDropdownMenu = () => {
     push,
     location: { pathname },
   } = useHistory()
-  const { userLogout } = useAuth();
+  const { userLogout, editUser } = useAuth();
+  const type = getType();
+
 
   const getCurrentProfile = () => {
     if (pathname.includes('investor')) {
-      return () => push('/investor/profile')
+      return '/investor/profile'
     } else {
-      return () => push('/booster/profile')
+      return '/boosterpartner/profile'
     }
   }
 
@@ -113,13 +118,15 @@ const HeaderDropdownMenu = () => {
       <div className="dropdown-menu headerMenu drop-menu px-2 py-3">
         <button
           className="dropdown-item text-center py-2"
-          onClick={getCurrentProfile()}
+          // onClick={()=> push(`/${type}/profile`)}
+          onClick={() => push (getCurrentProfile())}
+          // onClick={()=> push(`/${type}/profile`)}
         >
           {' '}
           <img className="pe-1" src={view} alt="" /> View Profile
         </button>
         <button
-         onClick={() => userLogout()}
+          onClick={()=> {push(`/${type}/registration`); editUser()}}
          className="dropdown-item text-center py-2 my-2">
           {' '}
           <img className="pe-1" src={edit} alt="" /> Edit Profile

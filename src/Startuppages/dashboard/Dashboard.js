@@ -7,7 +7,7 @@ import { UpComing } from "./components/upComing";
 import { getDashboardInfo } from "../../services";
 import newApp from "../../assets/icons/Star.svg";
 import dateFormat from "dateformat";
-import { convertToMillion } from "../../utils/helpers";
+import { convertToMillion , getType } from "../../utils/helpers";
 import { PageLoader } from "../../components";
 import { useAuth} from '../../hooks/useAuth';
 
@@ -15,9 +15,19 @@ import { useAuth} from '../../hooks/useAuth';
 export const StartupDashboard = () => {
   const [dashInfo, setDashInfo] = useState({});
   const [loading, setLoading] = useState(false);
-  const { stateAuth } = useAuth();
+  const { stateAuth , getDashboardProfile } = useAuth();
+  
+  console.log()
 
-  console.log(stateAuth.user)
+useEffect(() =>{
+    getDashboardProfile(getType())
+},[getDashboardProfile])
+
+//console.log(stateAuth)
+
+  if(stateAuth.dashboardLoad){
+    return <PageLoader num={[1, 2 , 3, 4]} />
+  }
 
   return (
     <div className="dashboardMain">
@@ -61,7 +71,7 @@ export const StartupDashboard = () => {
           header={"Total Fund"}
           color={"#2E3192"}
           img={""}
-          amount={stateAuth?.user?.fundRaising?.capTable?.amountInvestedByFounders}
+          amount={`$${stateAuth?.startupData?.fundRaising?.capTable?.amountInvestedByFounders ?? 0}`}
           time={""}
           className="col-3 col-6-md "
         />
@@ -69,7 +79,7 @@ export const StartupDashboard = () => {
           header={"Last Funding Round"}
           color={"#00ADEF"}
           img={""}
-          amount={stateAuth?.user?.fundRaising?.capTable?.amountRaised}
+          amount={`$${stateAuth?.startupData?.fundRaising?.capTable?.amountRaised ?? 0}`}
           time={dateFormat(dashInfo?.lastFund?.date, "fullDate")}
           className="col-3 col-6-md "
         />
@@ -77,26 +87,27 @@ export const StartupDashboard = () => {
           header={"Investors"}
           color={"#00ADEF"}
           img={""}
+          amount={"0"}
           className="col-3 col-6-md "
         />
         <CardFill
           header={"Valuation"}
           color={"#2E3192"}
           img={""}
-          amount={
-            typeof stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation !== undefined &&
-            convertToMillion(stateAuth?.user?.fundRaising?.fundingAsk?.postMoneyValuation)
-          }
-          time={dateFormat(stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding, "fullDate")}
+          amount={`$${
+            typeof stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation !== undefined &&
+            convertToMillion(stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation)
+          }`}
+          time={dateFormat(stateAuth?.startupData?.fundRaising?.previousRound?.dateOfFunding, "fullDate")}
           className="col-3 col-6-md "
         />
 
       </section>
 
       <section className="row">
-        <div className="col-lg-12">
+        {/* <div className="col-lg-12">
           <TodoList data={stateAuth?.user?.assignments?.data ?? []} />
-        </div>
+        </div> */}
       </section>
       <section className="my-4">
         <UpComing data={stateAuth?.user?.event?.data} />

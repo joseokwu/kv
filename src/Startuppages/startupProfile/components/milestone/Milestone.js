@@ -40,7 +40,7 @@ export const Milestone = ({ data = [] }) => {
 export const UpdateMilestoneModal = () => {
   return (
     <MilestoneModal>
-      <div className="milestoneModal mx-4">
+      <div className="milestoneModal mx-3">
         <div>
           <h4>Update Milestone</h4>
         </div>

@@ -4,15 +4,15 @@ import './style.css';
 export const Brand = ({data, handleChange = ()=>{} }) =>{
 
     return (
-        <div className='my-5' >
+        <div className='my-5 mx-3' >
 
             <div className='form-group mb-3' >
                 <label>Value Proposition</label>
                 <input 
                 type='text'
-                name='proposition'
-                value={data?.proposition}
-                onChange={handleChange}
+                name='valueProposition'
+                value={data?.valueProposition}
+                onChange={(e) =>handleChange(e, 'brand')}
                 className='form-control '
                  />
             </div>
@@ -21,9 +21,9 @@ export const Brand = ({data, handleChange = ()=>{} }) =>{
                 <label>Competitive Advantage</label>
                 <input 
                 type='text'
-                name='advantage'
-                value={data?.advantage}
-                onChange={handleChange}
+                name='competitiveAdvantage'
+                value={data?.competitiveAdvantage}
+                onChange={(e) =>handleChange(e, 'brand')}
             className='form-control'
                  />
             </div>
@@ -31,9 +31,9 @@ export const Brand = ({data, handleChange = ()=>{} }) =>{
                 <label>Product Road Map</label>
                 <input 
                 type='text'
-                name='roadmap'
-                value={data?.roadmap}
-                onChange={handleChange}
+                name='productRoadMap'
+                value={data?.productRoadMap}
+                onChange={(e) =>handleChange(e, 'brand')}
             className='form-control'
                  />
             </div>
@@ -41,9 +41,9 @@ export const Brand = ({data, handleChange = ()=>{} }) =>{
                 <label>Brand Building</label>
                 <input 
                 type='text'
-                name='brand'
-                value={data?.brand}
-                onChange={handleChange}
+                name='brandBuilding'
+                value={data?.brandBuilding}
+                onChange={(e) =>handleChange(e, 'brand')}
             className='form-control'
                  />
             </div>
@@ -51,9 +51,9 @@ export const Brand = ({data, handleChange = ()=>{} }) =>{
                 <label>Brand Value</label>
                 <input 
                 type='text'
-                name='bvalue'
-                value={data?.bvalue}
-                onChange={handleChange}
+                name='brandValue'
+                value={data?.brandValue}
+                onChange={(e) =>handleChange(e, 'brand')}
             className='form-control'
                  />
             </div>

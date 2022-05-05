@@ -1,18 +1,10 @@
 import { request } from "../utils/axios";
 
-export const getDashboardInfo = async () => {
-  try {
-    const res = await request.post("startup/dashboard");
 
-    return res?.data;
-  } catch (err) {
-    throw err;
-  }
-};
 
 export const getEventInfo = async () => {
   try {
-    const res = await request.post("event/all");
+    const res = await request.post("events");
     return res?.data;
   } catch (err) {
     throw err;
@@ -30,22 +22,33 @@ export const getProgramInfo = async () => {
 
 export const getBoosterData = async () => {
   try {
-    const res = await request.post("startup/boosterpartner");
+    const res = await request.post("partners");
+    console.log(res?.data)
     return res?.data;
   } catch (err) {
     throw err;
   }
 };
 
-export const getFundraisingData = async () => {
+export const getStartupRequest = async (value) => {
   try {
-    const res = await request.post("startup/fundraising");
-
+    const res = await request.post("allRequest" , {startupId:value});
+    console.log(res?.data)
     return res?.data;
   } catch (err) {
     throw err;
   }
 };
+
+export const applyToPartners = async(value) =>{
+  try{
+    const res = await request.post("apply" , value);
+    
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
 
 export const getStartupProfile = async () => {
   try {
@@ -73,15 +76,61 @@ export const updateFounderProfile = async (values) => {
     console.log(res?.data)
     return res?.data;
   } catch (err) {
-    console.log('heeeee')
+    console.log(err?.response)
     throw err;
   }
 };
 
 
+export const getPrograms = async(value) =>{
+  try{
+    const res = await request.post("programs", value);
+    console.log(res?.data)
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
 
+export const assignment = async(value) =>{
+  try{
+    const res = await request.post("assignments", value);
+    console.log(res?.data)
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
 
+export const getSubmittedAssignment = async(value) =>{
+  try{
+    const res = await request.post("submittedAssignment", value);
+    console.log(res?.data)
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
 
+export const submitAssignment = async(value) =>{
+  try{
+    const res = await request.post("submitAssignment", value);
+    console.log(res?.data)
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
+
+export const updateStartup = async(value) =>{
+  try{
+    const res = await request.post("updateOnce", value);
+    console.log(res?.data)
+    return res?.data;
+  }catch(err){
+    throw err;
+  }
+}
 
 
 

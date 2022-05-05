@@ -2,8 +2,8 @@
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
-  font-size: 60px;
-  line-height: 75px;
+  font-size: 55px;
+  line-height: 70px;
   color: #f9f9fc;
 }
 
@@ -20,6 +20,7 @@
   .authContent h4 {
     font-size: 32px;
     line-height: 41px;
+    max-width: 100%;
   }
 
   .authContent p {

@@ -315,7 +315,7 @@ const EventScheduleModal = () => {
         </section>
 
         <section className="event_link">
-          <a href="https://www.yebox.io/" target="_blank">
+          <a href="https://www.yebox.io/" target="_blank" rel="noreferrer">
             <img className="pr-3" src={location} alt="location" />{" "}
             meet.google.com/jce-wata-fux
           </a>

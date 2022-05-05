@@ -1248,6 +1248,1054 @@ onClick={() => history.push('/startup/dashboard')}
                 }
                 className="cust"
               />
+ const [contacts, setContacts] = useState({
+  registeredAddress:
+    stateAuth?.startupData?.startUpProfile?.contactInfo?.registeredAddress ?? '',
+  country: stateAuth?.startupData?.startUpProfile?.contactInfo?.country ?? '',
+  state: stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? '',
+  city: stateAuth?.startupData?.startUpProfile?.contactInfo?.city ?? '',
+  companyEmail:
+    stateAuth?.startupData?.startUpProfile?.contactInfo?.companyEmail ?? '',
+})
+const [socialMedia, setSocialmedia] = useState({
+  profileHandle:
+    stateAuth?startupData?.startUpProfile?.socialMedia?.profileHandle ?? '',
+  companyWebsite:
+    stateAuth?.startupData?.startUpProfile?.socialMedia?.companyWebsite ?? '',
+  linkedInHandle:
+    stateAuth?.startupData?.startUpProfile?.socialMedia?.linkedInHandle ?? '',
+  twitterHandle: stateAuth?.startupData?.startUpProfile?.socialMedia?.twitterHandle ?? '',
+})
+
+
+"value":{
+  "startupId":"62401b6c823102897a328985",
+  "startupName":"Bisi business card",
+  "description":"we sell rice",
+  "logo":"www.logo.com"
+},
+  "userId":"6246bcb64d65461c8b2756cf"
+
+
+  approvedRequests: []
+categories: "Tech"
+city: "exxi"
+companyDescription: "WE sell bread"
+companyEmail: "dhhdjd@gmail.com"
+companyLogo: "https://cdn.shoutng.com/kvkhwym84u5gzhccppfste.jpg"
+companyName: "bulee Sea"
+coordinatorName: "ziikoo"
+country: "Nigeria"
+declinedRequests: []
+designation: "hdhdammnnkf"
+industry: "Tech"
+linkedin: "www.link.com"
+offerings: {offerings: 'bread service', eligibilityCriteria: 'Eligibility', importantNote: 'hddjjfkkd', process: 'dhhdjjsjhd', partnershipValidity: 'gdhhfdhf', …}
+pendingRequests: []
+phoneNumber: "ryhhdjd"
+state: "imo"
+twitter: "www.twitt.com"
+userId: "6246bcb64d65461c8b2756cf"
+website: "http://web.com"
+
+
+approvedRequests: []
+categories: "Tech"
+city: "exxi"
+companyDescription: "WE sell bread"
+companyEmail: "dhhdjd.gmail.com"
+companyLogo: "http://google.com"
+companyName: "bulee"
+coordinatorName: "ziikoo"
+country: "Nigeria"
+declinedRequests: []
+designation: "hdhdjfkf"
+industry: "Tech"
+linkedin: "www.link.com"
+offerings: {eligibilityCriteria: 'Eligibility', importantNote: 'hddjjfkkd', process: 'dhhdjjsjhd', partnershipValidity: 'gdhhfdhf', turnAroundTime: 'gdhhfyeyyr', …}
+pendingRequests: [{…}]
+phoneNumber: "hhjdkdd"
+state: "imo"
+twitter: "www.twitt.com"
+userId: "6246bc
+
+) : item?.status === "declined" ? (
+  <button className="declinedBtn mt-2">
+    <img className="mr-2 mb-1" src={cancel} alt="declined icon" />
+    Declined
+  </button>
+) : item?.status === "applied" ? (
+  <button className="expiredBtn mt-2">
+    <img className="mr-2 mb-1" src={expired} alt="expired icon" />
+    Expired
+  </button>
+
+====================================================================
+=======================================================================
+if (opts === 'next') {
+  setOpts(true)
+  let result = await updateFounderProfile(startupProfile)
+
+  if (result?.success) {
+    toast.success('Profile' + ' ' + result?.message)
+    setOpts(false)
+    return changePath(path + 1)
+  }
+}
+setLoading(true)
+let result = await updateFounderProfile(startupProfile)
+
+if (!result?.success) {
+  toast.error(result?.message || 'There was an error in updating profile')
+  setLoading(false)
+  return
+}
+toast.success('Profile' + ' ' + result?.message)
+setLoading(false)
+history.push('/startup/dashboard')
+
+ {/* <label> Paste Youtube Link of pitch video </label>
+                <div className="d-flex my-2">
+                  <input
+                    type="text"
+                    name="pitchDeckVideo"
+                    onChange={handleChangeVid}
+                    className="form-control youtube-input ps-3"
+                    placeholder="Youtube link"
+                    
+                  />
+                  <button className="button">Upload</button>
+                </div> */}
+
+                {/* <FileWrapper className="d-flex justify-content-center text-center">
+                  {fileDoc !== null ? (
+                    <img
+                      style={{ width: "70px", height: "70px" }}
+                      src={RedFile}
+                      alt=".#"
+                      className="mb-2"
+                    />
+                  ) : logoUploading ? (
+                    <CircularLoader color={"#000"} />
+                  ) : (
+                    <>
+                      <img src={DownloadIcon} alt="#" />
+                      <FileText>Drag & Drop</FileText>
+                      <FileText>
+                        Drag files or click here to upload document{" "}
+                      </FileText>
+                    </>
+                  )}
+
+                  <input
+                    type="file"
+                    name="pitchDeckFile"
+                    id="pitch-doc"
+                    onChange={handleChange}
+                    hidden
+                  />
+                  <LabelButton for="pitch-doc">Upload Files</LabelButton>
+                </FileWrapper> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // const onNumberOnlyChange = (e) => {
+  //   const keyCode = e.keyCode || e.which
+  //   const keyValue = String.fromCharCode(keyCode)
+  //   const isValid = new RegExp('[0-9]').test(keyValue)
+  //   if (!isValid) {
+  //     e.preventDefault()
+  //     return
+  //   }
+  // }
+
+  const handleChange = async(e) => {
+
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+
+    } catch(error) {
+      console.log(error)
+      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
+    }
+
+  }
+  const handleChange = async(e) => {
+
+    const { files, name } = e.target;
+    const formData = new FormData();
+    formData.append("dir", "kv");
+    formData.append("ref", stateAuth.user?.userId);
+    formData.append("type", "image");
+    formData.append(0 , files[0])
+
+    try {
+      setLogoUploading(true);
+      const response = await upload(formData)
+      console.log(response) 
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+
+    } catch(error) {
+      console.log(error)
+      toast.error(error?.res?.data?.message || 'The was an error updating pitch deck');
+    }
+
+  }
+
+  if (opts === 'next') {
+        setOpts(true)
+        let result = await updateFounderProfile(startupProfile)
+
+        if (result?.success) {
+          toast.success('Profile' + ' ' + result?.message)
+          setOpts(false)
+          return changePath(path + 1)
+        }
+      }
+      setLoading(true)
+      let result = await updateFounderProfile(startupProfile)
+
+      if (!result?.success) {
+        toast.error(result?.message || 'There was an error in updating profile')
+        setLoading(false)
+        return
+      }
+      toast.success('Profile' + ' ' + result?.message)
+      setLoading(false)
+      history.push('/startup/dashboard')
+
+
+      handleWorkDetails({
+        from,
+        title: formik.getFieldProps('title').value,
+        location: formik.getFieldProps('location').value,
+        position: formik.getFieldProps('position').value,
+        description: formik.getFieldProps('description').value,
+        startDate: startDate,
+        endDate: checked ? 'present' : endDate,
+        school: formik.getFieldProps('school').value,
+        course: formik.getFieldProps('course').value,
+        degree: formik.getFieldProps('degree').value,
+        activities: formik.getFieldProps('activities').value,
+        eduStartDate: eduStartDate,
+        eduEndDate: checked ? 'present' : eduEndDate,
+        founder: false,
+      });
+      formik.resetForm({
+        values: {
+          title: '',
+          location: '',
+          position: '',
+          description: '',
+          startDate: '',
+          endDate: '',
+          school: '',
+          course: '',
+          degree: '',
+          activities: '',
+          eduStartDate: '',
+          eduEndDate: '',
+        },
+      });
+
+      const handleDateInput = (value , prefix) => {
+        updateProfile("team" ,{
+          coFounder: {
+            ...stateAuth?.startupData?.team.coFounder,
+            [prefix]: value,
+          },
+        });
+      };
+      
+      const handlePhoneInput = (value) => {
+        updateProfile("team",{
+          coFounder: {
+            ...stateAuth?.startupData?.team.coFounder,
+            mobile_number: value,
+          },
+        });
+      };
+    
+      const handleEduSubmit = (value) =>{
+        updateProfile("team",{
+          coFounder: {
+            ...stateAuth?.startupData?.team.coFounder,
+            eduction:[...stateAuth?.startupData?.team.coFounder.education, ...value]
+          }
+        });
+      }
+
+
+      const handleChange = (e, prefix = "") => {
+        const { name, value } = e.target;
+        if (prefix !== "") {
+          updateProfile("team",{
+            coFounder: {
+              ...stateAuth?.startupData?.team.coFounder,
+              [prefix]:{...stateAuth?.startupData?.team.coFounder[prefix], [name]: value}
+            }
+          });
+          formik.handleChange(e);
+          return;
+        }
+        updateProfile("team",{
+          coFounder: {
+            ...stateAuth?.startupData?.team.coFounder,
+            [name]: value,
+          },
+        });
+        formik.handleChange(e);
+      }
+
+      const handleKey = (e) =>{
+        if(e.keyCode === 13){
+        if(inputCompetitiveEdge.trim() === "") return;
+        setValueChecker([...valueChecker , setInputCompetitiveEdge]);
+        setInputCompetitiveEdge("");
+        }
+      }
+
+
+      validationSchema: Yup.object({
+        briefIntroduction: Yup.string().required('Required'),
+        firstName: Yup.string().required('Required'),
+        lastName: Yup.string().required('Required'),
+        email: Yup.string().required('Required'),
+        dob: Yup.string().required('Required'),
+        linkedIn: Yup.string().required('Required'),
+        twitter: Yup.string().required('Required'),
+        website: Yup.string().required('Required'),
+        country: Yup.string().required('Required'),
+        state: Yup.string().required('Required'),
+        city: Yup.string().required('Required'),
+        mobile_number: Yup.number().min(13, 'Number must not be less than 13 digit').required('Required'),
+      }),
+
+
+      const handleChange = (e, prefix = "") => {
+        const { name, value } = e.target;
+        if (prefix !== "") {
+          updateProfile("team",{
+            coFounder: {
+              ...stateAuth?.startupData?.team.coFounder,
+              [prefix]:{...stateAuth?.startupData?.team.coFounder[prefix], [name]: value}
+            }
+          });
+          formik.handleChange(e);
+          return;
+        }
+        updateProfile("team",{
+          coFounder: {
+            ...stateAuth?.startupData?.team.coFounder,
+            [name]: value,
+          },
+        });
+        formik.handleChange(e);
+      }
+
+===========================================================
+===============================================================
+
+const handleDateInput = (value , prefix) => {
+  updateProfile("team" ,{
+    coFounder: {
+      ...stateAuth?.startupData?.team.coFounder,
+      [prefix]: value,
+    },
+  });
+};
+
+const handlePhoneInput = (value) => {
+  updateProfile("team",{
+    coFounder: {
+      ...stateAuth?.startupData?.team.coFounder,
+      mobile_number: value,
+    },
+  });
+};
+
+{/* 
+  <FormWrapper height="70%">
+    <div className="div border-bottom pb-3">
+      <span>Invite Team Members</span>
+      <p className="pt-3">Key team members</p>
+    </div>
+
+    <div className="form-group mt-5 mb-4">
+      <label>
+        Invite a team member that can benefit from knight venture
+      </label>
+      <input
+        type="text"
+        className="form-control my-2 ps-3"
+        placeholder="Enter email address"
+      />
+    </div>
+    <div className="my-3 mx-3">
+      <CustomButton background="#031298"> Invite </CustomButton>
+    </div>
+  </FormWrapper> */}
+
+========================================================
+===========================================================
+
+
+const renderCard =(num) =>{
+  num.map(item => {
+    return (
+      <div key={item} className="col-lg-3 mb-3">
+    <Skeleton width={160} height={120} />
+  </div>
+    )
+  })
+}
+
+
+
+{dashboard ? (
+  <article>
+    <section className="row py-4">
+      {
+        num.map((item, i) => {
+        return (
+          <div key={i} className="col-lg-2 mb-3 mx-4">
+        <Skeleton width={160} height={120} />
+      </div>
+        )
+      })
+      }
+      
+     
+    </section>
+    <section>
+    {
+    big ? (
+      <div className=" d-flex" >
+      <div  className="col-lg-6  mb-3 ">
+        <Skeleton width={290} height={190} />
+      </div>
+      <div className="col-lg-6  mb-3 mx-1">
+        <Skeleton width={290} height={190} />
+      </div>
+      </div>
+    ): (<Skeleton count={7} height={25} className="mb-3" />)
+    }
+    
+    </section>
+    <section>
+    <Skeleton count={3} height={25} className="mb-3" />
+    </section>
+  </article>
+) : (
+  <article>
+    <section className="p-4">
+      <Skeleton count={12} height={20} className="mb-3" />
+    </section>
+  </article>
+)}
+==================================================
+=================================================
+
+// import DownloadIcon from "../../../../../../assets/icons/download.svg";
+// import RedFile from "../../../../../../assets/icons/redFile.svg";
+// import BluFile from "../../../../../../assets/icons/bluFile.svg";
+// import { upload } from "./../../../../../../services/utils";
+
+
+   {/* <FileWrapper className='d-flex justify-content-center text-center'>
+            {
+                fileDoc !== null ? (
+                  <img src={RedFile} alt='.' 
+                  style={{width:'70px', height:'70px'}}
+                   />
+                ):(
+                  logoUploading ? <CircularLoader color={'#000'} /> : 
+                 <>
+                 <img src={DownloadIcon} alt='#' />
+              <FileText>Drag & Drop</FileText>
+              <FileText>Drag files or click here to upload </FileText>
+              <FileSize> {'(Max. File size 5mb)'} </FileSize>
+              </>
+                )
+              }
+              <input type='file'
+              onChange={handleChange} 
+              id='utilize' hidden />
+              <LabelButton for='utilize'>Upload Files</LabelButton>
+            </FileWrapper> */}
+
+==================================================
+=====================================================
+{/* <div className='form-group col-12'>
+<label> Do you have a lead investor for this round?* </label>
+<BntWrap>
+  <button
+    className={`me-3 ${hasLeadInvestor === 'yes' && 'active'}`}
+    onClick={(e) => {
+      e.preventDefault();
+      setHasLeadInvestor('yes');
+    }}
+  >
+    Yes
+  </button>
+  <button
+    className={hasLeadInvestor === 'no' && 'active'}
+    onClick={(e) => {
+      e.preventDefault();
+      setHasLeadInvestor('no');
+    }}
+  >
+    No
+  </button>
+</BntWrap>
+</div> */}
+{/* <div className='sold my-3'>
+<div
+  className='d-flex justify-content-center'
+  data-target='#cofounder'
+  onClick={() => setShowModal(true)}
+>
+  <Tag
+    name='+ Add Lead Investor'
+    color='#4F4F4F'
+    bg='rgba(183, 218, 231, 0.5)'
+    padding='9px 30px'
+  />
+</div>
+</div> */}
+
+
+   {/* <label>Investors who participated in last funding round*</label>
+          <div className='row'>
+            <div className='sold my-3 col-lg-12 d-flex justify-content-center'>
+              <Tag
+                name='+ Add Lead Investor'
+                color='#4F4F4F'
+                bg='rgba(183, 218, 231, 0.5)'
+                padding='10px 32px'
+              />
+            </div>
+          </div> */}
+
+=========================================================
+====================================================================
+
+{/* <div className='form-group col-12'>
+<label>Did you have a lead investor for last round?<span style={{color: "red"}}>*</span></label>
+<BntWrap>
+  <button
+    className={`me-3 ${hasLeadInvestor === true ? 'active' : ''}`}
+    onClick={(e) => {
+      e.preventDefault();
+      setHasLeadInvestor(true);
+    }}
+  >
+    Yes
+  </button>
+  <button
+    className={hasLeadInvestor === false ? 'active' : ''}
+    onClick={(e) => {
+      e.preventDefault();
+      setHasLeadInvestor(false);
+    }}
+  >
+    No
+  </button>
+</BntWrap>
+</div> */}
+
+
+{/* <div className='col-12 my-5'>
+<span
+  style={{
+    color: '#120297',
+    borderBottom: '1px solid #120297',
+    fontWeight: '600',
+    cursor: 'pointer',
+  }}
+>
+  Add previous founding round +
+</span>
+</div> */}
+
+
+<section className="side-footer " onClick={() => history.push('/startup/support')}>
+
+
+
+
+
+"startUpProfile" : {
+  "logo" : "https://cdn.shoutng.com/kv304nexraqfgbwbnfuxpe.jpg",
+  "elevatorPitch" : "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.",
+  "brand" : "Trav",
+  "startupName" : "Winner Airlines",
+  "yearFounded" : "2017-04-09",
+  "registrationNumber" : "6889990088",
+  "companySize" : "11-20",
+  "businessSector" : "business",
+  "startupStage" : "Growth Stage",
+  "acceleratorName" : "Accelerator",
+  "contactInfo" : {
+      "registeredAddress" : "Adeneyi",
+      "country" : "Nigeria",
+      "state" : "Lagos",
+      "city" : "Lagos",
+      "phoneNumber" : "+2348165796896",
+      "companyEmail" : "brightbrain@gmail.com",
+      "_id" : ObjectId("62592f345af52b0b6724f96e")
+  },
+  "socialMedia" : {
+      "profileHandle" : "Yebox",
+      "companyWebsite" : "https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
+      "linkedInHandle" : "Yebox",
+      "twitterHandle" : "Yebox",
+      "_id" : ObjectId("62592f345af52b0b6724f96f")
+  },
+  "_id" : ObjectId("62592f345af52b0b6724f96d")
+},
+"pitchDeck" : {
+  "pitchDeckFile" : "https://cdn.shoutng.com/kvxf0c883zyo2goabeonpv.pdf",
+  "pitchDeckVideo" : "https://cdn.shoutng.com/kvvfji44soqr5vvx4ynogk.mp4",
+  "_id" : ObjectId("625930305af52b0b6724f975")
+},
+"team" : {
+  "avatar" : "https://cdn.shoutng.com/kvlyknlq810h4lxzagidxw.png",
+  "briefIntroduction" : "Hellooooo",
+  "gender" : "male",
+  "firstName" : "Enerst",
+  "lastName" : "Owunbuzia",
+  "email" : "isaackelvin256@gmail.com",
+  "dob" : ISODate("2007-04-18T00:00:00.000Z"),
+  "country" : "Nigeria",
+  "state" : "Lagos",
+  "city" : "Lagos",
+  "mobile_number" : "+2348163394719",
+  "skills" : [ 
+      "java", 
+      "c#"
+  ],
+  "experience" : [ 
+      {
+          "companyName" : "Purplegate Technology",
+          "position" : "",
+          "location" : "USA",
+          "startDate" : "2017-04-10T09:05:46.548Z",
+          "endDate" : "2022-04-04T09:05:54.603Z",
+          "isPresentWorking" : false,
+          "responsibility" : "Work well",
+          "_id" : ObjectId("625938105af52b0b6724f97d")
+      }
+  ],
+  "education" : [ 
+      {
+      
+        averageInvestment: ""
+investmentExperience: ""
+investmentPreference: "B2B"
+investmentThesis: ""
+stage: "Pre-seed"
+techSector: ""
+preferredStage
+  =================================================================
+  ========================================================================
+  ===============================================================================================
+  Booster partner page dont touch
+  ==============================================================
+
+  <section className="row mt-4 dash-main-content">
+  <div className="col-lg-6">
+    <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
+      <h5>New Applications</h5>
+      <span onClick={() => push("/booster/applicants#all")}>See All</span>
+    </header>
+
+    <section>
+      {bossterRes && bossterRes?.application.map((data, i) => (
+        <div style={{ marginBottom: 21 }}>
+          <ApplicationCard data={data} logo={applicantLogo} key={i} />
+        </div>
+      ))}
+    </section>
+  </div>
+  <div className="col-lg-6 mt-5">
+    <ApplicationChart />
+  </div>
+</section>
+
+      
+========================================================================
+children, closeModal, title
+
+
+const [cate , setCate] = useState([
+  {
+    name:'test1',
+    id:'21bc',
+    questions:[
+      {
+        quest:'whaoo',
+        ansa:''
+      },
+      {
+        quest:'whaoo are',
+        ansa:''
+      },
+      {
+        quest:'whaoo we',
+        ansa:''
+      },
+      {
+        quest:'whaoo ueue',
+        ansa:''
+      }
+    ]
+  },
+  {
+    name:'test2',
+    id:'298sc',
+    questions:[
+      {
+        quest:'what is r',
+        ansa:''
+      },
+      {
+        quest:'where do u',
+        ansa:''
+      },
+      {
+        quest:'hmmm',
+        ansa:''
+      },
+      {
+        quest:'arrr',
+        ansa:''
+      }
+    ]
+  },
+  {
+    name:'test3',
+    id:'31dq',
+    questions:[
+      {
+        quest:'dhjjss',
+        ansa:''
+      },
+      {
+        quest:'dhjsjs',
+        ansa:''
+      },
+      {
+        quest:'dhjsune',
+        ansa:''
+      },
+      {
+        quest:'whaoo ueue',
+        ansa:''
+      }
+    ]
+  }
+])
+
+
+
+
+
+
+
+const [pageHolder , setPageHolder] = useState(0)
+
+const tabItems = cate.map(item => item.name);
+
+const dashCardColors = ["#E5FFE4", "#FAD7DC", "#DFF1FF"];
+
+const bunts = [1, 2 , 3, 4 , 5]
+console.log(cate)
+
+
+const handleChange =(id , index , value) =>{
+  setCate( cate.map(data =>{
+    if(data.id === id){
+      data.questions.map((item, ind) =>{
+        if(ind === index){
+          item.ansa = value
+        }
+        return item ;
+      })
+    }
+    return data;
+  }) )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<<<<<<< HEAD
+=======
+const renderPage = () =>{
+
+  switch(pageHolder){
+    case 0 : 
+    return (
+      <div>
+        { cate[0].name }
+     <div className="my-3 mb-3" >
+      {
+        cate[0].questions.map((item , i) =>(
+          <>
+            <h6> { item.quest } </h6>
+           <div>
+            { 
+            bunts.map((data) => (
+              <button onClick={() => handleChange(cate[0].id , i , data)} className="btn btn-outline-success mx-2" >  { data } </button>
+            ))  
+            }
+           </div>
+          </>
+        ))
+      }
+     </div>
+<div className="my-3">
+<button className="btn btn-primary"  onClick={() => setPageHolder(pageHolder + 1)} > next { pageHolder} </button>
+</div>
+      </div>
+    )
+    case 1 :
+      return (
+        <div>
+      {
+      cate[1].name  
+      }
+      <div className="my-3 mb-3" >
+      {
+        cate[1].questions.map((item , i) =>(
+          <>
+            <h6> { item.quest } </h6>
+           <div>
+            { 
+            bunts.map((data) => (
+              <button onClick={() => handleChange(cate[1].id , i , data)} className="btn btn-outline-success mx-2" >  { data } </button>
+            ))  
+            }
+           </div>
+          </>
+        ))
+      }
+     </div>
+      <div className="my-3 mb-3" >
+
+</div>
+      <div className="my-3">
+<button className="btn btn-primary"  onClick={() => setPageHolder(pageHolder + 1)} > next { pageHolder } </button>
+</div>
+        </div>
+      )
+
+   case 2 :
+     return (
+      <div>
+      {
+      cate[2].name  
+      }
+      <div className="my-3 mb-3" >
+      {
+        cate[2].questions.map((item , i) =>(
+          <>
+            <h6> { item.quest } </h6>
+           <div>
+            { 
+            bunts.map((data) => (
+              <button onClick={() => handleChange(cate[2].id , i , data)} className="btn btn-outline-success mx-2" >  { data } </button>
+            ))  
+            }
+           </div>
+          </>
+        ))
+      }
+     </div>
+      <div className="my-3 mb-3" >
+     
+      </div>
+      <div className="my-3">
+<button className="btn btn-primary"  onClick={() => setPageHolder(pageHolder + 1)} > next { pageHolder } </button>
+</div>
+        </div> 
+     )   
+    default :
+  return <div> { cate[0].name }  </div>
+  }
+
+  
+}
+====================================================================
+=====================================================================
+categories: "Bike Rentals"
+city: "Lagos"
+companyDescription: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+companyEmail: "brightbrain@gmail.com"
+companyName: "Purplegate Technology"
+coordinatorName: "Enerst Owunbuzia"
+country: "Nigeria"
+declinedRequests: []
+designation: "Enerst Owunbuzia"
+industry: "AI"
+linkedin: "@Enerst"
+logo: "https://cdn.shoutng.com/kve5rz0dhhtxob4wvrvapk.png"
+offerings: {offerings: '4 Apr 2020 — I am trying to add Select All / Unsel…mponent but it is not working. The code is below.', eligibilityCriteria: '4 Apr 2020 — I am trying to add Select All / Unsel…mponent but it is not working. The code is below.', importantNote: '4 Apr 2020 — I am trying to add Select All / Unsel…mponent but it is not working. The code is below.', process: '4 Apr 2020 — I am trying to add Select All / Unsel…mponent but it is not working. The code is below.', partnershipValidity: 'Analytics', …}
+pendingRequests: [{…}]
+phoneNumber: "+2348165796896"
+state: "Lagos"
+twitter: "@twitter"
+userId: "6263fcb3ed0b02cccd2c96a9"
+website: "ww.hdhh.com"
+__v: 0
+
+
+eligibilityCriteria: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+freeCreditValue: true
+importantNote: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+offerings: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+partnershipValidity: "Analytics"
+process: "4 Apr 2020 — I am trying to add Select All / Unselect All to React Antd's 'SELECT' component. ... I see that I do get everything selected & unselected in the \" ...\n3 answers\n \n·\n \nTop answer: \nThe issue was with using Antd's Form & Form.item along with Select. Code works perfectly ...\n\nHow to set border-radius to ant design Select componenthttps://stackoverflow.com › questions › how-to-set-bor...\n10 Mar 2022 — I am using ant design and I want to change border-radius of Select component but it is not working. The code is below."
+turnAroundTime: "April"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>Test out test</h1>
+<div className="d-flex" >
+{
+  cate.map((item , i) =>(
+  <button className="btn btn-gray mx-3 " onClick={() => setPageHolder(i)} > { item.name } </button> 
+  ))
+}
+</div>
+<div>
+{  renderPage()  }
+</div>
+
+
+
+
+
+
+>>>>>>> 96bab1e6e3b9075a200e6822d3b5733eacca606b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

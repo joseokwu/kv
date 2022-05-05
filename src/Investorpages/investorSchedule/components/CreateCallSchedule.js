@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Modal, Select, Button } from "../../../components";
 import close from "../../../assets/icons/grayClose.svg";
 import copy from "../../../assets/icons/copy.svg";
-import { GuestItem } from "./ScheduleModal";
+import { GuestItem } from "./ScheduleModal";   
 
 export const CreateCallSchedule = () => {
   const [searchInput, setSearchInput] = useState("");

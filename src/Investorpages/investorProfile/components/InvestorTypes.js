@@ -1,8 +1,10 @@
-import React from "react";
-import edit from "../../../assets/icons/edit.svg";
-import { Button, Modal, RowOption } from "../../../components";
+import React from 'react'
+import edit from '../../../assets/icons/edit.svg'
+import { Button, Modal, RowOption } from '../../../components'
+import { useAuth } from '../../../hooks'
+import { Form, Select } from 'antd'
 
-export const InvestorTypes = () => {
+export const InvestorTypes = ({ data }) => {
   return (
     <section className="profile-offering">
       <span className="text-right d-block">
@@ -26,11 +28,11 @@ export const InvestorTypes = () => {
           <p className="partner-cat-txt mb-3">Angel Network</p>
           <section className="free-credit-answer d-flex align-items-center">
             <span></span>
-            <p>Yes</p>
+            <p>{data?.personalDetail?.angelInvestedBefore === true ? 'Yes' : 'No'}</p>
           </section>
         </div>
-        <span className="cat-tag" style={{ width: "fit-content" }}>
-          Solo investor
+        <span className="cat-tag" style={{ width: 'fit-content' }}>
+          {data?.personalDetail?.angelInvestorOrSyndicateInvestor}
         </span>
       </article>
 
@@ -38,7 +40,7 @@ export const InvestorTypes = () => {
         <p className="partner-cat-txt mb-3">Lead investor</p>
         <section className="free-credit-answer d-flex align-items-center">
           <span></span>
-          <p>Yes</p>
+          <p>{data?.personalDetail?.isLeadInvestor === true ? 'Yes' : 'No'}</p>
         </section>
       </div>
 
@@ -46,39 +48,96 @@ export const InvestorTypes = () => {
         <p className="partner-cat-txt mb-3">Mentor</p>
         <section className="free-credit-answer d-flex align-items-center">
           <span></span>
-          <p>Yes</p>
+          <p>{data?.personalDetail?.mentorsStartups === true ? 'Yes' : 'No'}</p>
         </section>
       </div>
     </section>
-  );
-};
+  )
+}
 
 const EditInfo = () => {
+  const { updateInvestorProfileData, stateAuth, updateInvestorInfo } = useAuth()
+
+  const onFinish = async () => {
+    updateInvestorInfo()
+  }
+
   return (
     <div className="px-4">
-      <section className="mb-4">
-        <p className="mb-3">Are you a Lead investor</p>
-        <RowOption options={["yes", "no"]} />
-      </section>
+      <Form onFinish={onFinish} initialValues={{ remember: true }}>
+        <section className="mb-4">
+          <label className="mb-3">Are you a Lead investor</label>
+          <RowOption
+            currentSelected={
+              stateAuth?.investorData?.personalDetail?.isLeadInvestor === true
+                ? 'yes'
+                : 'no'
+            }
+            getSelected={(value) => {
+              updateInvestorProfileData('personalDetail', {
+                isLeadInvestor: value === 'yes' ? true : false,
+              })
+            }}
+            options={['yes', 'no']}
+          />
+        </section>
 
-      <section className="mb-4">
-        <p className="mb-3"> Have you angel invested before?</p>
-        <RowOption options={["yes", "no"]} />
-      </section>
+        <section className="mb-4">
+          <label className="mb-3"> Have you angel invested before?</label>
+          <RowOption
+            currentSelected={
+              stateAuth?.investorData?.personalDetail?.angelInvestedBefore ===
+              true
+                ? 'yes'
+                : 'no'
+            }
+            getSelected={(value) => {
+              updateInvestorProfileData('personalDetail', {
+                angelInvestedBefore: value === 'yes' ? true : false,
+              })
+            }}
+            options={['yes', 'no']}
+          />
+        </section>
 
-      <section className="mb-4">
-        <p className="mb-3"> Have you angel invested before?</p>
-        <RowOption options={["Solo", "Syndicate", "Both"]} />
-      </section>
+        <section className="mb-4">
+          <label className="mb-3"> Have you angel invested before?</label>
+          <RowOption
+            currentSelected={
+              stateAuth?.investorData?.personalDetail
+                ?.angelInvestorOrSyndicateInvestor
+            }
+            getSelected={(value) => {
+              updateInvestorProfileData('personalDetail', {
+                angelInvestorOrSyndicateInvestor: value,
+              })
+            }}
+            options={['Solo', 'Syndicate', 'Both']}
+          />
+        </section>
 
-      <section className="mb-4">
-        <p className="mb-3"> Would you like to mentor startups?</p>
-        <RowOption options={["yes", "no"]} />
-      </section>
+        <section className="mb-4">
+          <label className="mb-3"> Would you like to mentor startups?</label>
+          {/* <RowOption options={['yes', 'no']} /> */}
+          <RowOption
+            currentSelected={
+              stateAuth?.investorData?.personalDetail?.mentorsStartups === true
+                ? 'yes'
+                : 'no'
+            }
+            getSelected={(value) => {
+              updateInvestorProfileData('personalDetail', {
+                mentorsStartups: value === 'yes' ? true : false,
+              })
+            }}
+            options={['yes', 'no']}
+          />
+        </section>
 
-      <section className="text-right">
-        <Button label="Save" />
-      </section>
+        <section className="text-right">
+          <Button label="Save" type={'submit'} />
+        </section>
+      </Form>
     </div>
-  );
-};
+  )
+}

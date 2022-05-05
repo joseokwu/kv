@@ -1,6 +1,6 @@
 import React from "react";
 import "./dashCard.css";
-import { CardWrapper, CardWrap } from "./dash.styled";
+import { CardWrapper, CardWrap , Wrapper } from "./dash.styled";
 
 // export const DashCard = ({
 //   count = '100',
@@ -57,11 +57,21 @@ export const CardFill = ({ header, color, amount, time }) => {
       <CardWrap bg={color}>
         <p className="pb-3"> {header} </p>
         <h5>
-          ${amount}
+          {amount}
           <span className=""> {time} </span>
         </h5>
       </CardWrap>
       {/* </div> */}
     </>
+  );
+};
+
+
+export  const RandomCard = ({ img, name }) => {
+  return (
+    <Wrapper>
+      <img src={img} alt='profile' />
+      <h5>{name}</h5>
+    </Wrapper>
   );
 };

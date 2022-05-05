@@ -5,6 +5,7 @@ import { InvestorDetails } from "./components/InvestorDetails";
 import { InvestorInvestments } from "./components/InvestorInvestments";
 import { InvestorTypes } from "./components/InvestorTypes";
 import { SectorExpertise } from "./components/SectorExpertise";
+import { useAuth } from "../../hooks";
 import "./investorProfile.css";
 
 export const InvestorProfile = () => {
@@ -13,16 +14,20 @@ export const InvestorProfile = () => {
     push,
   } = useHistory();
 
+  const { stateAuth } = useAuth();  
+
+  console.log(stateAuth);
+
   const renderComponent = () => {
     switch (hash) {
       case "#info":
         return (
           <div>
             <section className="mb-3">
-              <InvestorInvestments />
+              <InvestorInvestments data={stateAuth?.investorData} />
             </section>
             <section>
-              <InvestmentProfile />
+              <InvestmentProfile data={stateAuth?.investorData} />
             </section>
           </div>
         );
@@ -31,10 +36,10 @@ export const InvestorProfile = () => {
         return (
           <div>
             <section className="mb-3">
-              <InvestorInvestments />
+              <InvestorInvestments data={stateAuth?.investorData} />
             </section>
             <section>
-              <InvestmentProfile />
+              <InvestmentProfile data={stateAuth?.investorData} />
             </section>
           </div>
         );
@@ -44,7 +49,7 @@ export const InvestorProfile = () => {
     <section style={{ background: "#edf1f4", minHeight: "100vh" }}>
       <div className="wrapper">
         <section className="mb-3">
-          <InvestorDetails />
+          <InvestorDetails data={stateAuth?.investorData} />
         </section>
         <section className="mb-3 profile-tab-investor">
           <h2
@@ -67,10 +72,10 @@ export const InvestorProfile = () => {
           <div className="col-lg-8 pl-0">{renderComponent()}</div>
           <div className="col-lg-4 pr-0">
             <div>
-              <SectorExpertise />
+              <SectorExpertise data={stateAuth?.investorData} />
             </div>
             <div>
-              <InvestorTypes />
+              <InvestorTypes data={stateAuth?.investorData} />
             </div>
           </div>
         </section>

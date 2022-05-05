@@ -9,7 +9,7 @@ import { StartupSideBar } from "../sidebar/Sidebar";
         <Header />
       </section>
       <section className="">
-        <div className="layout-child">{children}</div>
+        <div className="layoutChild">{children}</div>
       </section>
     </div>
   );
@@ -36,10 +36,10 @@ const StartupRegistrationLayout = ({ children }) => {
       </section>
       <section className="">
         <div className='row'>
-        <div className='col-lg-3 is-hidden-mobile' style={{background:'white'}} >
+        <div className='col-lg-2 ' style={{background:'white'}} >
           <StartupSideBar />
         </div>
-        <div className="col-lg-9" style={{background:""}} >{children}</div>
+        <div className="col-lg-10" style={{background:""}} >{children}</div>
         </div>
 
       </section>

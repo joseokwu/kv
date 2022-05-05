@@ -16,10 +16,11 @@ import {
   LabelButton,
 } from '../../../startupRegistration/components/pitchdeck/pitch.styled'
 import './product.css'
+import { useAuth } from '../../../../hooks/useAuth'
 
 export const Product = () => {
-  const countInvestor = [1, 2, 3, 4]
   const [showModal, setShowModal] = useState(false)
+  const { stateAuth } = useAuth()
 
   return (
     <div>
@@ -43,27 +44,26 @@ export const Product = () => {
             <div className="wrap mb-5 py-5 px-5">
               <h3>Product Description</h3>
               <p className="mb-5 prod-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Malesuada aliquet turpis urna dui aliquam in nisl, pharetra
-                pharetra. Id diam urna, facilisi augue. Tellus, senectus odio
-                vel, laoreet condimentum consequat id sapien. Nunc consectetur
-                senectus risus condimentum risus lectus eget sed. Sed luctus
-                faucibus elementum risus egestas nullam. Tristique tempor et
-                amet dui, cursus quam porta fames tellus. Fermentum ut et congue
-                nec phasellus quis. Vehicula ut rutrum congue nisi, et sit.
-                Morbi elementum sed pretium, elementum risus. Lacus vitae nisl,
-                enim, tempor, lorem nullam ullamcorper scelerisque amet.
-                Venenatis a arcu egestas tincidunt turpis sagittis fames.
+                {stateAuth?.user?.product?.description}
               </p>
             </div>
 
             <h3>Product Demo</h3>
 
-            <img
-              src={demo}
-              alt="demo video placeholder"
-              className="product-demo"
-            />
+            {stateAuth?.user?.product?.files && (
+              <video
+                style={{
+                  borderRadius: '20px',
+                  maxHeight: '150px',
+                  width: '250px',
+                }}
+                className="mb-3"
+                controls
+              >
+                <source src={stateAuth?.user?.product?.files} id="video_here" />
+                Your browser does not support HTML5 video.
+              </video>
+            )}
           </div>
         </section>
       </div>
@@ -73,7 +73,7 @@ export const Product = () => {
 
 const EditProductModal = () => {
   return (
-    <div className="mx-5 my-4">
+    <div className="mx-0 my-4">
       <div className="product-desc border-bottom">
         <h1>Product / Service Description</h1>
         <p className="py-4">A brief description of your product</p>

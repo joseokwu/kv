@@ -1252,27 +1252,176 @@ key={i}
                       Your browser does not support HTML5 video.
                      </video> 
 
+=======================================================================
+=====================================================================
+
+ const pitchDeck = {
+        type: "pitchDeck",
+        accType: "startup",
+        values: {
+          pitchDeckFile: fileDoc,
+          pitchDeckVideo: videoDoc,
+        },
+        userId: stateAuth?.user?.userId,
+      };
+      console.log(pitchDeck);
+
+      if (opts === "next") {
+        setOpts(true);
+        let result = await updateFounderProfile(pitchDeck);
+
+        if (result?.success) {
+          toast.success("Pitch Deck" + "     " + result?.message);
+          setOpts(false);
+          return changePath(path + 1);
+        }
+      }
+      setLoading(true);
+      let result = await updateFounderProfile(pitchDeck);
+
+      if (!result?.success) {
+        toast.error(
+          result?.message || "There was an error updating the pitchDeck"
+        );
+        setLoading(false);
+        return;
+      }
+      toast.success("Pitch Deck" + " " + result?.message);
+      setLoading(false);
+      history.push("/startup/dashboard");
+=====================================================================
+=======================================================================
+      {/* <FileWrapper className="d-flex justify-content-center text-center">
+                  {videoDoc !== null ? (
+                    <video
+                      style={{
+                        borderRadius: '20px',
+                        maxHeight: '150px',
+                        width: '250px',
+                      }}
+                      className="mb-3"
+                      controls
+                    >
+                      <source src={videoDoc} id="video_here" />
+                      Your browser does not support HTML5 video.
+                    </video>
+                  ) : videoUploading ? (
+                    <CircularLoader color={'#000'} />
+                  ) : (
+                    <>
+                      <img src={DownloadIcon} alt="#" />
+                      <FileText>Drag & Drop</FileText>
+                      <FileText>
+                        Drag files or click here to upload pitch video{' '}
+                      </FileText>
+                    </>
+                  )}
+
+                  <input
+                    type="file"
+                    name="pitchDeckVideo"
+                    id="pitch-docu"
+                    onChange={handleChangeVid}
+                    accept="video/*"
+                    hidden
+                  />
+                  <LabelButton for="pitch-docu">Upload Files</LabelButton>
+                </FileWrapper> */}
+
+=====================================================================
+==================================================================
 
 
+// import { CircularLoader } from "../../../../../../Startupcomponents/CircluarLoader/CircularLoader";
+// import toast from "react-hot-toast";
 
 
+  // const [fileDoc, setFileDoc] = useState(
+  //   stateAuth?.user?.fundRaising?.fundUtilization?.files ?? null
+  // );
+
+  const handleChange = async (e) => {
+    const { files } = e.target
+    const formData = new FormData()
+    formData.append('dir', 'kv')
+    formData.append('ref', stateAuth.user?.userId)
+    formData.append('type', 'image')
+    formData.append(0, files[0])
+
+    try {
+      setLogoUploading(true)
+      const response = await upload(formData)
+      console.log(response)
+      setFileDoc(response?.path)
+      setLogoUploading(false)
+    } catch (error) {
+      console.log(error)
+      toast.error(
+        error?.res?.data?.message || 'The was an error updating pitch deck',
+      )
+    }
+  }
 
 
+  stateAuth?.investorData
+
+  amount: ""
+  amountPerYear: ""
+  angelInvestedBefore: false
+  angelInvestorOrSyndicateInvestor: "solo"
+  bankAccountNumber: ""
+  bankAccountType: ""
+  bankBranch: ""
+  bankName: ""
+  budgetAmount: ""
+  budgetPerYear: ""
+  individualHaving: ""
+  interestedInOnlinePitching: false
+  investingFrom: "personal fund"
+  isLeadInvestor: false
+  isPublic: false
+  mentorsStartups: false
+  nationality: ""
+  numberOfInvestmentPerYear: ""
+  previousAngelInvestingExperience: false
+  sectorOfExpertise: ""
+  taxResidentOutsideNigeria: false
+  yetToInvest: false
 
 
+  updateInvestorProfileData('profile', {
+    referral: e.target.value,
+  })
 
+  brand: {valueProposition: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+   competitiveAdvantage: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+    productRoadMap: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+     brandBuilding: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+      brandValue: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", …}
+  businessModel: {channels: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+   customerRelationship: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+    revenueStreams: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+     keyActivities: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", 
+     keyResource: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", …}
+  market: {problemStatement: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", product: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", targetMarket: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", marketSize: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", keyCompetitors: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", …}
+  plan: {marketStrategy: "const validate = (obj, validations) => \n  validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", 
+  salesStrategy: "const validate = (obj, validations) => \n  validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", _id: '6270fdfaad958f6a70f90b83'}
+  _id: "6270fdfaad958f6a70f90b84"
 
-
-
-
-
-
-
-
-
-
-
-
+[
+  "brand.valueProposition",
+  "brand.competitiveAdvantage",
+  "brand.productRoadMap",
+  "brand.brandBuilding",
+  "brand.brandValue",
+  "market.problemStatement",
+  "market.product",
+  "market.targetMarket",
+  "market.marketSize",
+  "market.keyCompetitors",
+  "plan.marketStrategy",
+  "plan.salesStrategy"
+]
 
 
 

@@ -27,6 +27,13 @@
   padding: 200px 6%;
 }
 
+@media (max-width: 1024px) {
+  .mentor_gray_card {
+    margin-top: 0px;
+    padding: 0px 0%;
+  }
+}
+
 /* .mentor_auth_wrap {
   height: 100%;
   background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
