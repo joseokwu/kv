@@ -52,8 +52,8 @@ export const useAuth = () => {
     [dispatch]
   );
 
-  const callUpdateStartupData = async (value) => {
-    dispatch(await updateStartupData(value));
+  const callUpdateStartupData = async () => {
+    dispatch(updateStartupData());
   };
 
   const getDashboardProfile = useCallback(

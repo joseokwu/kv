@@ -7,6 +7,7 @@ export const INIT_STATE = {
   logo: null,
   dashboardLoad: true,
   type: [],
+  modalClose:false,
   signUpStatus: "startup",
   username: "",
   completedRegistration: false,

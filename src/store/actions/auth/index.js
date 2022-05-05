@@ -159,7 +159,6 @@ export const updateStartupData = async (value) => async (dispatch) => {
      // console.log(res?.data?.startupData);
       dispatch({
         type: UPDATE_STARTUP_DATA,
-        payload: res?.data?.startupData,
       });
     }
   } catch (err) {
