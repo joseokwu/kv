@@ -1,0 +1,33 @@
+.model_canva_title h3 {
+    font-family: DM Sans;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 31px;
+    align-items: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+  }
+  
+  .business_model_canva_card {
+    background: #ffffff;
+    box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+  }
+  
+  .business_model_canva_card h3 {
+    font-family: DM Sans;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 23px;
+    letter-spacing: 0.01em;
+    color: #000000;
+  }
+  
+  .business_model_canva_card p {
+    font-family: DM Sans;
+    font-size: 1rem;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #323232;
+  }
+  

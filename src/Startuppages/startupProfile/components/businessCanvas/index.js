@@ -1,10 +1,11 @@
 import { BusCanButton, Header, Wrapper } from './business.styled'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
 import Plus from '../../../../assets/icons/add.svg'
-import { Modal, ModalTabs, Button } from '../../../../Startupcomponents'
+import { Modal, ModalTabs, Button, BusinessCanvas } from '../../../../Startupcomponents'
 import { useState } from 'react'
 import { Market, Brand, BrandModeling, Plan } from './container'
 import { useAuth } from '../../../../hooks/useAuth';
+import { BusinessModel } from '../../../../Startupcomponents/businessCanvas/components/businessModel/businessModel'
 
 
 export const BusinessCanavas = () => {
@@ -112,7 +113,6 @@ export const BusinessCanavas = () => {
                 </button>
               )}
               <button
-                className="nex"
                 type="button"
                 style={{
                   fontFamily: 'DM Sans',
@@ -130,7 +130,7 @@ export const BusinessCanavas = () => {
                 onClick={() => {
                   state < 3 ? handleFunc() : genSubmit()
                 }}
-                className="mx-2"
+                className="mx-2 nex"
               >
                 {' '}
                 {state < 3 ? 'Next' : 'Create'}{' '}
@@ -154,7 +154,7 @@ export const BusinessCanavas = () => {
             }}
           />
           <p className="my-2"> Create Business canvas </p>
-          <div>
+          <div style={{cursor: 'pointer'}}>
             <img
               src={Plus}
               alt="."
@@ -166,6 +166,7 @@ export const BusinessCanavas = () => {
           </div>
         </div>
       </Wrapper>
+      <BusinessCanvas />
     </div>
   )
 }

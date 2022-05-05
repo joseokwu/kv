@@ -1,12 +1,15 @@
 import React from 'react'
 
-export const Competitive = () => {
+export const Channels = () => {
   return (
     <div>
       <div className="business_model_canva_card mb-4">
         <section className="p-4">
-          <h3>Competitive Advantages</h3>
+          <h3>Channels</h3>
           <p className="pt-2">
+            <ul>
+              <li></li>
+            </ul>
           </p>
         </section>
       </div>
