@@ -96,7 +96,7 @@ export const LargeModal = ({ children, closeModal, title }) => {
       <div className="large-modal">
         <div className="top-grey"></div>
         <div className="d-flex justify-content-between mx-4">
-          <p className="kv-modal-title px-3 pt-5">{title}</p>
+          <p className="kv-modal-title px-3 pt-5 mb-4">{title}</p>
           <img
             className="modalCloseImg mx-4 my-4"
             onClick={() => closeModal(false)}

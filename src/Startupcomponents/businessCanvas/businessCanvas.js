@@ -7,20 +7,21 @@ import { Market } from './components/market/market'
 import { Planning } from './components/planning/planning'
 
 
-export const BusinessCanvas = () => {
+export const BusinessCanvas = ({data}) => {
+  console.log(data)
   const renderContent = () => {
     switch (currentTab) {
       case 'Market':
-        return <Market />
+        return <Market data={data?.market} />
 
       case 'Brand':
-        return <Brand />
+        return <Brand  data={data?.brand} />
 
       case 'Business Modeling':
-        return <BusinessModel />
+        return <BusinessModel data={data?.businessModel}   />
 
       case 'Planning':
-        return <Planning />
+        return <Planning data={data?.plan} />
 
       default:
         return

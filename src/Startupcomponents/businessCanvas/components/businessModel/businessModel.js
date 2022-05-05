@@ -6,27 +6,27 @@ import { KeyResources } from './components/keyResources'
 import { Relationship } from './components/relationship'
 import { RevenueStreams } from './components/revenueStreams'
 
-export const BusinessModel = () => {
+export const BusinessModel = ({ data }) => {
   return (
     <section className="mb-4 mt-5">
       <div className="row">
         <div className="col-lg-10">
-          <Channels />
+          <Channels data={data?.channels} />
         </div>
         <div className="col-lg-10">
-          <Relationship />
+          <Relationship data={data?.customerRelationship} />
         </div>
         <div className="col-lg-10">
-          <RevenueStreams />
+          <RevenueStreams data={data?.revenueStreams} />
         </div>
         <div className="col-lg-10">
-          <KeyActivities />
+          <KeyActivities data={data?.keyActivities} />
         </div>
         <div className="col-lg-10">
-          <KeyResources />
+          <KeyResources data={data?.keyResource} />
         </div>
         <div className="col-lg-10">
-          <KeyPartners />
+          <KeyPartners data={data?.keyPartners} />
         </div>
       </div>
     </section>
