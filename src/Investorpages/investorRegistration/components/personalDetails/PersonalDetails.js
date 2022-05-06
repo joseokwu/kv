@@ -373,7 +373,7 @@ export const PersonalDetails = () => {
               <TextField
                 label="Company Email"
                 id={'companyEmail'}
-                name={"email"}
+                name={"companyEmail"}
                 value={stateAuth?.investorData?.profile?.companyEmail}
                 required={true}
                 placeholder={'E.g. info@knight.ventures'}

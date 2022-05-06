@@ -165,7 +165,7 @@ export const TeamProfile = () => {
     updateProfile('team', {
       mobile_number: value,
     })
-    formik.setFieldValue('mobile_number', value.value)
+    // formik.setFieldValue('mobile_number', value.value)
   }
   const handleChangeVal = (e) => {
     setVal(e.target.value)
