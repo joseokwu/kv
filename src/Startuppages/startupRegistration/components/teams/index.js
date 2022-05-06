@@ -119,7 +119,6 @@ export const TeamProfile = () => {
       state: stateAuth?.startupData?.team?.state ?? '',
       city: stateAuth?.startupData?.team?.city ?? '',
       dob: stateAuth?.startupData?.team?.dob ?? moment(),
-      mobile_number: stateAuth?.startupData?.team?.mobile_number ?? phone,
       country: stateAuth?.startupData?.team?.country,
       gender: stateAuth?.startupData?.team?.gender ?? '',
       website: stateAuth?.startupData?.team?.socialMedia?.website,
@@ -162,10 +161,11 @@ export const TeamProfile = () => {
   }
 
   const handlePhoneInput = (value) => {
+  
     updateProfile('team', {
       mobile_number: value,
     })
-    formik.setFieldValue('mobile_number', value.value)
+  
   }
   const handleChangeVal = (e) => {
     setVal(e.target.value)

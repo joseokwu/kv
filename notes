@@ -2070,8 +2070,6 @@ const handleChange =(id , index , value) =>{
 
 
 
-<<<<<<< HEAD
-=======
 const renderPage = () =>{
 
   switch(pageHolder){
@@ -2226,11 +2224,13 @@ turnAroundTime: "April"
 </div>
 
 
+0:
+dateOfAchievement: "2018-05-15"
+description: "10\n\nPlease update your react dependency in package.json to explicitly be 15.0.2, not ^15.0.2 since the latter resolves to 15.1.0 which causes this issue. It is recommended to leave it that way until you upgrade for the next time and get this error on"
+title: 
 
 
 
-
->>>>>>> 96bab1e6e3b9075a200e6822d3b5733eacca606b
 
 
 
