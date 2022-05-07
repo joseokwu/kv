@@ -2229,6 +2229,142 @@ dateOfAchievement: "2018-05-15"
 description: "10\n\nPlease update your react dependency in package.json to explicitly be 15.0.2, not ^15.0.2 since the latter resolves to 15.1.0 which causes this issue. It is recommended to leave it that way until you upgrade for the next time and get this error on"
 title: 
 
+======================================================
+============================================================
+avatar: "https://cdn.shoutng.com/kvjl4h2xjaqpsh3r07eom8.jpg"
+briefIntroduction: "We just render good services to our customers"
+city: null
+coFounder: Array(2)
+0:
+avatar: "https://cdn.shoutng.com/kvdmwlvgpg36fq7aijlwoc.jpg"
+briefIntroduction: "We just render good services to our customers"
+city: "Haaaa"
+country: "Angola"
+dob: Moment {_isAMomentObject: true, _isUTC: false, _pf: {…}, _locale: Locale, _d: Wed May 18 2022 19:33:59 GMT+0100 (West Africa Standard Time), …}
+education: [{…}]
+email: "isaac@gmail.com"
+experience: [{…}]
+firstName: "jane"
+lastName: "hhhhssjss"
+linkedIn: "ww.hdhh.com"
+mobile_number: "+2348163394719"
+position: "Director"
+skills: (2) ['javaag', 'css']
+state: "Cunene"
+twitter: "ww.hdhh.com"
+website: "ww.hdhh.com"
+[[Prototype]]: Object
+1: {avatar: 'https://cdn.shoutng.com/kvcbqjweuukqu53gwyt7xp.png', briefIntroduction: 'Hellooooo', firstName: 'Shummi', lastName: 'gshsjs', email: 'jahhh@gmail.com', …}
+length: 2
+[[Prototype]]: Array(0)
+country: null
+dob: Moment {_isAMomentObject: true, _i: '2022-05-05T23:12:20.548Z', _f: 'YYYY-MM-DDTHH:mm:ss.SSSSZ', _tzm: 0, _isUTC: false, …}
+education: [{…}]
+email: "isaacjane@gmail.com"
+experience: [{…}]
+firstName: "Jane"
+gender: "female"
+isCofounder: false
+lastName: "Fola"
+mobile_number: "+2348163394719"
+skills: (2) ['java', 'c##']
+socialMedia: {linkedIn: 'ww.hdhh.com', twitter: 'ww.hdhh.com', website: 'ww.hdhh.com'}
+state: null
+_id: "627459d45adf4b9ac3a118d9"
+[[Prototype]]: Object
+userId: "62745
+
+
+
+avatar: "https://cdn.shoutng.com/kvjl4h2xjaqpsh3r07eom8.jpg"
+briefIntroduction: "We just render good services to our customers"
+city: null
+coFounder: (2) [{…}, {…}]
+country: null
+dob: Moment {_isAMomentObject: true, _i: '2022-05-05T23:12:20.548Z', _f: 'YYYY-MM-DDTHH:mm:ss.SSSSZ', _tzm: 0, _isUTC: false, …}
+education: [{…}]
+email: "isaacjane@gmail.com"
+experience: [{…}]
+firstName: "Jane"
+gender: "female"
+isCofounder: false
+lastName: "Fola"
+mobile_number: "+2348163394719"
+skills: (2) ['java', 'c##']
+socialMedia: {linkedIn: 'ww.hdhh.com', twitter: 'ww.hdhh.com', website: 'ww.hdhh.com'}
+state: null
+
+
+companyName: "Purplegate Technology"
+endDate: "present"
+isPresentWorking: false
+location: "Fanilaa"
+position: ""
+responsibility: "10\n\nPlease update your react dependency in package.json to explicitly be 15.0.2, not ^15.0.2 since the latter resolves to 15.1.0 which causes this issue. It is recommended to leave it that way until you upgrade for the next time and get this error once again (to avoid react changing its version in the meantime and react-native not being ready for it)."
+startDate: "2022-05-11T18:31:54.549Z"
+_id: "62756b838e31b20f62db6fac
+
+activities: "10\n\nPlease update your react dependency in package.json to explicitly be 15.0.2, not ^15.0.2 since the latter resolves to 15.1.0 which causes this issue. It is recommended to leave it that way until you upgrade for the next time and get this error once again (to avoid react changing its version in the meantime and react-native not being ready for it)."
+course: "Account"
+degreeType: null
+endDate: "2022-05-11T18:32:24.659Z"
+isPresent: false
+schoolName: "BBC"
+startDate: "2017-05-18T18:32:15.262Z"
+_id: "62756b838e31b20f62db6fad"
+
+
+{showCofounder ? (
+  <LargeModal id="founderModal" title="" closeModal={setCofounder}>
+    <FounderModal data={c} />
+  </LargeModal>
+) : (
+  <span></span>
+)}
+
+
+
+
+
+<h3 className="tab-section-title">Team</h3>
+<section className="d-flex justify-content-end">
+  <button className="teamBtn">Add team member</button>
+</section>
+<section>
+  {/* <h4 className="team-group-title">Founder & Co-Founders</h4> */}
+  <h4 className="team-group-title">Founder</h4>
+  <div className="row">
+  
+          <section
+           
+            onClick={() => setShowModal(true)}
+            className="col-lg-4 mb-4"
+          >
+          
+            <TeamMember data={data} />
+          </section>
+       
+  </div>
+</section>
+
+<section>
+  <h4 className="team-group-title mt-5">Team Members</h4>
+  <div className="row">
+    {data?.coFounder &&
+      data?.coFounder.map((c, i) => {
+        return (
+         <>
+         {  displayModal(c)   }
+         <div  className="col-lg-4 col-6 mb-4" key={i} onClick={()=>setCofounder(true)}  >
+            <TeamMember  data={c} />
+        </div>
+         </>
+        );
+      })}
+  </div>
+</section>
+
+
 
 
 

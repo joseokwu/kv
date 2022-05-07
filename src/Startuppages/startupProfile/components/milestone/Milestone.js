@@ -48,7 +48,7 @@ export const Milestone = ({ data = [] }) => {
 };
 
 export const UpdateMilestoneModal = ({close}) => {
-  const {  updateStartupInfo , updateProfile  } = useAuth();
+  const { callUpdateStartupData  } = useAuth();
   const [date, setDate] = useState();
 
   const handleDate = (value) =>{
@@ -58,22 +58,14 @@ export const UpdateMilestoneModal = ({close}) => {
 
   const onFinish = async (values) => {
   
-  try{
-    const res = await updateFounderProfile({
+   callUpdateStartupData({
       type:'mileStone',
       values:{
        ...values,
        dateOfAchievement:date
      }
     });
-   // console.log(date)
-    toast.success(res?.message)
     close(false)
-
-  }catch(err){
-    toast.error(err?.response?.data?.message ?? 'Unable to update profile')
-  }
-
   }
 
 

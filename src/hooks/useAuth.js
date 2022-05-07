@@ -14,6 +14,7 @@ import {
   updateInvestorData,
   updateMentorProfile,
   updateMentorData,
+  updateStartupUserProfile
 } from "../store/actions/auth";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
@@ -52,8 +53,8 @@ export const useAuth = () => {
     [dispatch]
   );
 
-  const callUpdateStartupData = async () => {
-    dispatch(updateStartupData());
+  const callUpdateStartupData = async (value) => {
+    dispatch(updateStartupUserProfile(value));
   };
 
   const getDashboardProfile = useCallback(
