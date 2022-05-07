@@ -10,7 +10,12 @@ export const SelectionStartup = ({ data = {} }) => {
     evaluated: "#0A6CF4",
     pending: "#D42323",
   };
-  const { push } = useHistory();
+  const {
+    push,
+    location: { pathname },
+  } = useHistory();
+
+  const isMentor = pathname.includes("mentors");
   return (
     <div className={styles?.card}>
       <section className="d-flex align-items-center justify-content-between">
@@ -43,7 +48,11 @@ export const SelectionStartup = ({ data = {} }) => {
           className="view-link"
           style={{ color: data?.status === "pending" ? "#DADADA" : "" }}
           onClick={() => {
-            push("/admin/selection_process/kv_answer/1");
+            push(
+              isMentor
+                ? "/admin/selection_process/mentors_answer/1"
+                : "/admin/selection_process/kv_answer/1"
+            );
           }}
           role={data?.status === "evaluated" ? "button" : ""}
         >

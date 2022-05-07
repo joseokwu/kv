@@ -10,10 +10,12 @@ export const ViewKVMemberSelectionProcess = () => {
   const tabs = ["Startups", "Selection Team"];
 
   const {
-    location: { hash },
+    location: { hash, pathname },
     push,
     goBack,
   } = useHistory();
+
+  const isMentor = pathname.includes("mentors");
 
   const startups = [
     { status: "evaluated" },
@@ -58,7 +60,7 @@ export const ViewKVMemberSelectionProcess = () => {
       </section>
       <section className="d-flex align-items-center justify-content-between mb-4">
         <Tabs tabItems={tabs} />
-        {hash === `#${tabs[1]}` && (
+        {hash === `#${tabs[1]}` && !isMentor && (
           <Button
             label="Add Member"
             variant="trans"
@@ -69,7 +71,8 @@ export const ViewKVMemberSelectionProcess = () => {
       </section>
       <section className="mb-4">
         <p className={styles.pageSubtitle}>
-          Evaluation / KV Members Evaluation
+          Evaluation /{" "}
+          {isMentor ? "Mentors Evaluation" : "KV Members Evaluation"}
         </p>
       </section>
       <section>{renderComp()}</section>

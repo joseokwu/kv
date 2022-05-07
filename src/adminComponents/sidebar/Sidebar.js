@@ -140,7 +140,11 @@ export const Sidebar = () => {
                 <li key={i}>
                   <Link to={nav.path}>
                     <img src={nav.icon} alt="dash" />
-                    <p className={`${activateLink(nav.activator)} side-text`}>
+                    <p
+                      className={`${activateLink(
+                        nav.activator
+                      )} side-text-admin`}
+                    >
                       {nav.title}
                     </p>
                   </Link>

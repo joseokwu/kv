@@ -9,6 +9,7 @@ import styles from "./viewSelectionAnswer.module.css";
 import { useHistory } from "react-router-dom";
 import { Overview } from "./components/Overview";
 import { Evaluators } from "./components/Evaluators";
+import { Assignments } from "./components/Assignments";
 
 export const ViewSelectionAnswer = () => {
   const [currentTab, setCurrentTab] = useState(0);
@@ -16,9 +17,15 @@ export const ViewSelectionAnswer = () => {
   const tabComponents = [
     <Overview setCurrentTab={setCurrentTab} />,
     <Evaluators />,
+    <Assignments />,
   ];
 
-  const { goBack } = useHistory();
+  const {
+    goBack,
+    location: { pathname },
+  } = useHistory();
+
+  const isMentor = pathname.includes("mentors");
   return (
     <div className="p-5">
       <section
@@ -78,7 +85,11 @@ export const ViewSelectionAnswer = () => {
 
       <section className="white-strip my-3" style={{ padding: "9px 1.5rem" }}>
         <FullTab
-          tabItems={["Overview", "Evaluators"]}
+          tabItems={
+            isMentor
+              ? ["Overview", "Evaluators", "Assignment"]
+              : ["Overview", "Evaluators"]
+          }
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}
         />

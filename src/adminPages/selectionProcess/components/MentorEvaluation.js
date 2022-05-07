@@ -5,6 +5,7 @@ import apple from "../../../assets/images/apple.svg";
 import teamMember from "../../../assets/images/sampleTeamMember.png";
 import { Tag } from "../../../components";
 import styles from "../selection.module.css";
+import { useHistory } from "react-router-dom";
 
 export const MentorEvaluation = () => {
   const header = [
@@ -15,6 +16,8 @@ export const MentorEvaluation = () => {
     { title: "Status", accessor: "status" },
     { title: "Action", accessor: "action" },
   ];
+
+  const { push } = useHistory();
 
   const data = [
     {
@@ -58,7 +61,11 @@ export const MentorEvaluation = () => {
 
       action: (
         <div className="d-flex align-items-center space-out">
-          <p className="view-link" role="button">
+          <p
+            className="view-link"
+            role="button"
+            onClick={() => push("/admin/selection_process/mentors/0001")}
+          >
             View
           </p>
           <p role="button" className="delete-link">
@@ -107,7 +114,11 @@ export const MentorEvaluation = () => {
       ),
       action: (
         <div className="d-flex align-items-center space-out">
-          <p className="view-link" role="button">
+          <p
+            className="view-link"
+            role="button"
+            onClick={() => push("/admin/selection_process/mentors/0001")}
+          >
             View
           </p>
           <p role="button" className="delete-link">

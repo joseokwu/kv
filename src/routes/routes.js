@@ -762,7 +762,7 @@ const routes = [
   {
     name: "admin application management",
     path: "/admin/application_mgt",
-    component: WithAdminLayout(() => <div>Application Management</div>),
+    component: WithAdminLayout(ApplicationMgt),
     exact: true,
     protected: false,
     type: "admin",
@@ -806,6 +806,15 @@ const routes = [
 
   {
     name: "admin Selection Process",
+    path: "/admin/selection_process/mentors/:id",
+    component: WithAdminLayout(ViewKVMemberSelectionProcess),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
     path: "/admin/selection_process/kv_add_member/:id",
     component: WithAdminLayout(AddKVMemberForSelectionProcess),
     exact: true,
@@ -816,6 +825,15 @@ const routes = [
   {
     name: "admin Selection Process",
     path: "/admin/selection_process/kv_answer/:id",
+    component: WithAdminLayout(ViewSelectionAnswer),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/mentors_answer/:id",
     component: WithAdminLayout(ViewSelectionAnswer),
     exact: true,
     protected: false,

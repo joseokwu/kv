@@ -89,6 +89,7 @@ h6 {
 
 .space-out {
   column-gap: 10px;
+  row-gap: 10px;
 }
 
 .max_fill {
