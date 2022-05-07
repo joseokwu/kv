@@ -13,8 +13,17 @@ import close from "../../../../assets/icons/closesm.svg";
 import girl from "../../../../assets/icons/person2.svg";
 import guy from "../../../../assets/icons/person3.svg";
 
-export const RoadMap = ({ data = [] }) => {
+export const RoadMap = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const data = [
+    {
+      tabName: "tabName",
+      dueData: new Date(2021, 9, 23),
+      contributors: [girl, guy],
+      progress: 70,
+    },
+  ];
 
   return (
     <div>
