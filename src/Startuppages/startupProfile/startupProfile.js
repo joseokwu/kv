@@ -49,7 +49,7 @@ export const StartupProfile = ({ history }) => {
       case "#product road map":
         return <RoadMap data={prof?.ProductRoadMap} />;
       case "#team":
-        return <Team data={prof?.team} />;
+        return <Team data={stateAuth?.startupData?.team} />;
       case "#milestone/timeline":
         return <Milestone data={stateAuth?.startupData?.mileStone} />;
       default:

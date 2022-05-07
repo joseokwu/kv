@@ -19,6 +19,7 @@ import {
   UPDATE_PARTNER_INFO,
   UPDATE_MENTOR_INFO,
   UPDATE_MENTOR_DATA,
+  UPDATE_STARTUP_USER_PROFILE
 } from "../../actions/actions.types";
 import { INIT_STATE } from "../../initialstates";
 
@@ -185,6 +186,11 @@ const authReducer = (state = INIT_STATE, action) => {
         ...state,
         modalClose:true,
       };
+    case UPDATE_STARTUP_USER_PROFILE :
+      return {
+        ...state,
+        startupData:action.payload
+      }  
     case UPDATE_STARTUP_INFO:
 
       return {

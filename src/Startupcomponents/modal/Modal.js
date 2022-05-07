@@ -88,12 +88,12 @@ export const SmallModal = ({ children, closeModal, title }) => {
   );
 };
 
-export const LargeModal = ({ children, closeModal, title }) => {
+export const LargeModal = ({ children, closeModal, title , id }) => {
   return (
     <>
       <div className="backDrop" onClick={() => closeModal(false)}></div>
 
-      <div className="large-modal">
+      <div id={id} className="large-modal">
         <div className="top-grey"></div>
         <div className="d-flex justify-content-between mx-4">
           <p className="kv-modal-title px-3 pt-5 mb-4">{title}</p>
