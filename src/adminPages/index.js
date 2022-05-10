@@ -17,3 +17,4 @@ export * from "./viewKVMemberSelectionProcess/ViewKVMemberSelectionProcess";
 export * from "./viewKVMember/ViewKVMember";
 export * from "./viewSelectionAnswer/ViewSelectionAnswer";
 export * from "./addKVMemberForSelectionProcess/AddKVMemberForSelectionProcess";
+export * from "./selectionProcessMentor/SelectionProcessMentor";

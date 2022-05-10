@@ -117,6 +117,7 @@ import {
   ViewKVMember,
   ViewSelectionAnswer,
   AddKVMemberForSelectionProcess,
+  SelectionProcessMentor,
 } from "../adminPages";
 
 const routes = [
@@ -835,6 +836,15 @@ const routes = [
     name: "admin Selection Process",
     path: "/admin/selection_process/mentors_answer/:id",
     component: WithAdminLayout(ViewSelectionAnswer),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/mentor/:id",
+    component: WithAdminLayout(SelectionProcessMentor),
     exact: true,
     protected: false,
     type: "admin",

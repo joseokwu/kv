@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Table } from "../../../adminComponents";
 import userPic from "../../../assets/images/sampleUser.png";
 import { Tag } from "../../../components/index";
@@ -42,9 +42,13 @@ export const SelectionTeam = () => {
       status: <Tag name="Accepted" color="#18A615" />,
       action: (
         <div className="d-flex align-items-center space-out">
-          <p className="view-link" role="button">
+          <Link
+            to="/admin/selection_process/mentor/1"
+            className="view-link"
+            role="button"
+          >
             View
-          </p>
+          </Link>
           <p className="view-link" role="button" style={{ color: "#00ADEF" }}>
             Replace
           </p>
