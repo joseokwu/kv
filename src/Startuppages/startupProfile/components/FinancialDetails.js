@@ -15,23 +15,31 @@ export const FinancialDetails = ({data}) => {
         style={{ rowGap: 10 }}
       >
         <div className="d-flex align-items-center">
-          <img src={web} alt="web" />
+        { data?.startUpProfile?.socialMedia?.companyWebsite &&  <img src={web} alt="web" />}
           <a
             href={data?.startUpProfile?.socialMedia?.companyWebsite}
             className="ml-2 extra-info"
             style={{ textDecoration: "underline", color: "#2E3192" }}
           >
-            { data?.startUpProfile?.socialMedia?.companyWebsite }
+            { data?.startUpProfile?.socialMedia?.companyWebsite ?? '' }
           </a>
         </div>
         <div className="d-flex align-items-center">
-          <img src={clock} alt="web" width="20" height="20" />
+         { data?.startUpProfile?.yearFounded && (
+           <>
+           <img src={clock} alt="web" width="20" height="20" />
           <p className="ml-2 extra-info">Incorporated { new Date(data?.startUpProfile?.yearFounded).toUTCString() }</p>
+           </>
+         ) }
         </div>
 
         <div className="d-flex align-items-center">
-          <img src={office} alt="web" />
-          <p className="ml-2 extra-info"> { `${data?.startUpProfile?.contactInfo?.registeredAddress} , ${data?.startUpProfile?.contactInfo?.state} , ${data?.startUpProfile?.contactInfo?.country}` } </p>
+         { data?.startUpProfile?.contactInfo?.registeredAddress && (
+           <>
+           <img src={office} alt="web" />
+          <p className="ml-2 extra-info"> { `${data?.startUpProfile?.contactInfo?.registeredAddress ?? '' } , ${data?.startUpProfile?.contactInfo?.state ?? ''} , ${data?.startUpProfile?.contactInfo?.country ?? ''}` } </p>
+           </>
+         )}
         </div>
       </section>
     </div>

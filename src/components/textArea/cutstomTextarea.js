@@ -10,6 +10,9 @@ export const TextareaCustom = ({
   onChange,
   placeholder,
   onKeyPress,
+  required = true,
+  min=200,
+  showCount = true
 }) => {
   return (
     <div>
@@ -18,7 +21,7 @@ export const TextareaCustom = ({
         label={label}
         
         initialValue={value}
-        rules={[{ required: true, message: `This field is required` }, { min: 200 , message:'Characters should not be less than 200 words' }]}
+        rules={[{ required: required, message: `This field is required` }, { min: min , message:'Characters should not be less than 200 words' }]}
       >
         <TextArea
           rows={4}
@@ -26,7 +29,7 @@ export const TextareaCustom = ({
           placeholder={placeholder}
           onChange={onChange}
           onKeyPress={onKeyPress}
-          showCount
+          showCount = {showCount}
           maxLength={250}
         />
       </Form.Item>

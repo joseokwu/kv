@@ -40,10 +40,10 @@ export const OppCompanyInfo = ({data}) => {
         </div>
       </section>
       <section className="mt-3">
-        <h6 className="mb-3"> { data?.industry } </h6>
+        <h6 className="mb-3"> { data?.industry ?? '' } </h6>
         <p className="">
          {
-           data?.description
+           data?.description ?? ''
          } 
         </p>
       </section>
