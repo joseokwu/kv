@@ -10,7 +10,7 @@ export const TextField = ({
   type,
   disabled = false,
   className,
-  required = false,
+  required = true,
   placeholder,
   ...rest
 }) => {
@@ -21,7 +21,7 @@ export const TextField = ({
         style={{ color: "#fe0003" }}
         rules={[
           {
-            required: true,
+            required: required,
             message: `Please input your ${name}!`,
           },
           {

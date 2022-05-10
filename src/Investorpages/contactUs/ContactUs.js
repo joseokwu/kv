@@ -71,7 +71,7 @@ const onChange = (e) =>{
             <p><a style={{textDecoration: 'none', color: '#2e3192'}} href="mailto:info@knight.ventures">info@knight.ventures</a> </p>
           </div>
 
-          <div className="d-flex align-items-center social-links">
+          <div className="d-flex align-items-center social-links mb-3">
             <img src={twitter} alt="twitter" />
 
             <a href="https://www.instagram.com/knightventures/" target="_blank" rel="noopener noreferrer"><img src={instagram} alt="instagram" /></a>

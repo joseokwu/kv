@@ -1393,18 +1393,46 @@ key={i}
     referral: e.target.value,
   })
 
+  brand: {valueProposition: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+   competitiveAdvantage: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+    productRoadMap: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+     brandBuilding: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+      brandValue: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", …}
+  businessModel: {channels: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+   customerRelationship: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+    revenueStreams: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));",
+     keyActivities: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", 
+     keyResource: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", …}
+  market: {problemStatement: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", product: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", targetMarket: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", marketSize: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", keyCompetitors: "const validate = (obj, validations) =>    validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", …}
+  plan: {marketStrategy: "const validate = (obj, validations) => \n  validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", 
+  salesStrategy: "const validate = (obj, validations) => \n  validati…lit('.').reduce((acc, cur) => acc?.[cur], obj)));", _id: '6270fdfaad958f6a70f90b83'}
+  _id: "6270fdfaad958f6a70f90b84"
 
-businessCanvas:
-brand: {valueProposition: '', competitiveAdvantage: '', productRoadMap: '', brandBuilding: '', brandValue: '', …}
-businessModel: {channels: '', customerRelationship: '', revenueStreams: '', keyActivities: '', keyResource: '', …}
-market: {problemStatement: '', product: '', targetMarket: '', marketSize: '', keyCompetitors: '', …}
-plan: {marketStrategy: '', salesStrategy: '', _id: '6270fdfaad958f6a70f90b83'}
-_id: "6270fdfaad958f6a70f90b84"
-[[Prototype]]: Objec
+[
+  "brand.valueProposition",
+  "brand.competitiveAdvantage",
+  "brand.productRoadMap",
+  "brand.brandBuilding",
+  "brand.brandValue",
+  "market.problemStatement",
+  "market.product",
+  "market.targetMarket",
+  "market.marketSize",
+  "market.keyCompetitors",
+  "plan.marketStrategy",
+  "plan.salesStrategy"
+]
 
-
-
-
+console.log({
+  ...state,
+  startupData:{
+   ...state.startupData,
+   [action.payload.property]:[
+     ...state.startupData[action.payload.property],
+     action.payload.value
+   ] 
+  }
+})
 
 
 

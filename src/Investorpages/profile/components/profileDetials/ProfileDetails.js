@@ -5,12 +5,7 @@ import linkedIn from '../../../../assets/images/profileLinkedIn.svg'
 import location from '../../../../assets/icons/locationSm.svg'
 import phone from '../../../../assets/icons/phoneSm.svg'
 import web from '../../../../assets/icons/webSm.svg'
-import {
-  Modal,
-  TextField,
-  Button,
-  Select,
-} from '../../../../components'
+import { Modal, TextField, Button, Select } from '../../../../components'
 import add from '../../../../assets/icons/addFile.svg'
 import imageRep from '../../../../assets/icons/image.svg'
 import FormCard from '../../../partnerRegisteration/components/formCard/FormCard'
@@ -25,7 +20,6 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
 
-
 const { TextArea } = Input
 const { Option } = Select
 
@@ -33,9 +27,9 @@ const ProfileDetails = ({ data }) => {
   return (
     <section className="profile-info">
       <div className="profile-banner">
-        <span className="edit-banner">
+        {/* <span className="edit-banner">
           <img src={edit} alt="edit" />
-        </span>
+        </span> */}
       </div>
 
       <div className="profile-contact-info">
@@ -55,45 +49,70 @@ const ProfileDetails = ({ data }) => {
           <img src={data?.logo} alt="sample company" />
         </span>
 
-        <article>
-          <h1 className="mb-4 profile-name"> {data?.companyName} </h1>
+        <article className="row">
+          <div className="col-lg-12">
+            <h1 className="mb-4 profile-name"> {data?.companyName} </h1>
+          </div>
 
-          <div className="d-flex align-items-center justify-content-between mb-3">
-            <span className="d-flex align-items-center contact-name">
-              <p>CONTACT : {data?.coordinatorName} </p>
-              <p> {data?.designation} </p>
-            </span>
-            <span>
+          <div className="col-lg-12 d-flex justify-content-between mb-3">
+            <div className="d-flex" style={{ color: '#2E3192' }}>
+              <div>
+                <span>CONTACT: {data?.coordinatorName}</span>
+              </div>
+              <div className="mx-5">
+                <p> {data?.designation} </p>
+              </div>
+            </div>
+
+            <div className=" d-flex ">
               <a
                 href={`${data?.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={twitter} alt="twitter" className="mr-3" />
+                <img src={twitter} alt="twitter" className="" />
               </a>
               <a
                 href={`${data?.linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="ps-2"
               >
-                <img src={linkedIn} alt="linkedIn" className="mr-3" />
+                <img src={linkedIn} alt="linkedIn" />
               </a>
-            </span>
+            </div>
           </div>
 
-          <div className="d-flex align-items-center web-phone-local mb-3">
-            <p>
-              <img src={location} alt="location" />{' '}
-              {`${data?.city} ${data?.state} ${data?.country}`}
-            </p>
-            <p>
-              <img src={phone} alt="phone" /> {data?.phoneNumber}
-            </p>
-            <a href={data?.website}>
-              <img src={web} alt="web" />
-              {data?.website}
-            </a>
+          {/* <div className="row mb-3"> */}
+          <div
+            className="row mb-3 d-flex"
+            style={{ color: '#828282' }}
+          >
+            <div className="col-lg-3">
+              <p className="text-decoration-none">
+                <img className="pe-1" src={location} alt="location" />{' '}
+                {`${data?.city} ${data?.state} ${data?.country}`}
+              </p>
+            </div>
+
+            <div className="col-lg-3">
+              <p className="text-decoration-none">
+                <img src={phone} alt="phone" /> {data?.phoneNumber}
+              </p>
+            </div>
+
+            <div className="col-lg-3">
+              <a
+                className="text-decoration-none"
+                style={{ color: '#828282' }}
+                href={data?.website}
+              >
+                <img className="pe-1" src={web} alt="web" />
+                {data?.website}
+              </a>
+            </div>
           </div>
+          {/* </div> */}
 
           <div className="profile-bio pb-5">
             <p>{data?.companyDescription}</p>
@@ -158,7 +177,11 @@ const EditProfileInfo = () => {
 
   return (
     <div>
-      <Form initialValues={{ remember: true }} layout="vertical" onFinish={onFinish}>
+      <Form
+        initialValues={{ remember: true }}
+        layout="vertical"
+        onFinish={onFinish}
+      >
         <FormCard>
           <div className="row mb-4">
             <section className="col-md-3">
@@ -257,8 +280,8 @@ const EditProfileInfo = () => {
             </section>
 
             <section className="col-md-6 mb-4">
-            <Select
-                label='Categories'
+              <Select
+                label="Categories"
                 name="categories"
                 placeholder="Select your categories"
                 initialValue={stateAuth?.partnerData?.categories}
@@ -275,7 +298,7 @@ const EditProfileInfo = () => {
             </section>
             <section className="col-md-6 mb-4">
               <Select
-                label='Industry'
+                label="Industry"
                 name="industry"
                 placeholder="Select your industry"
                 initialValue={stateAuth?.partnerData?.industry}
@@ -291,12 +314,12 @@ const EditProfileInfo = () => {
               />
             </section>
             <section className="col-md-6 mb-4">
-              <TextField 
-                label="Twitter" 
+              <TextField
+                label="Twitter"
                 name={'twitter'}
                 type={'url'}
                 placeholder="Enter twitter URL"
-                value={stateAuth?.partnerData?.twitter ?? ""} 
+                value={stateAuth?.partnerData?.twitter ?? ''}
                 onChange={(e) =>
                   updatePartnerLocalData('', {
                     twitter: e.target.value,
@@ -358,7 +381,7 @@ const EditProfileInfo = () => {
               />
             </section>
             <section className="col-md-6 mb-4">
-            <label>
+              <label>
                 Mobile Number<span style={{ color: 'red' }}>*</span>
               </label>
               <PhoneInput
@@ -398,7 +421,7 @@ const EditProfileInfo = () => {
               ></CountryDropdown>
             </section>
             <section className="col-md-4 mb-4">
-            <label>
+              <label>
                 State<span style={{ color: 'red' }}>*</span>
               </label>
               <RegionDropdown
@@ -410,7 +433,7 @@ const EditProfileInfo = () => {
               />
             </section>
             <section className="col-md-4 mb-4">
-            <TextField
+              <TextField
                 onChange={(e) =>
                   updatePartnerLocalData('', {
                     city: e.target.value,
@@ -426,10 +449,9 @@ const EditProfileInfo = () => {
           </div>
         </FormCard>
         <section className="text-right mb-3">
-        <Button label="Save" type={"submit"} />
-      </section>
+          <Button label="Save" type={'submit'} />
+        </section>
       </Form>
-      
     </div>
   )
 }

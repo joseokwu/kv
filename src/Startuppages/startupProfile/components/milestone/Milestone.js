@@ -6,9 +6,18 @@ import {
   TextField,
 } from "../../../../Startupcomponents";
 import { MilestoneModal } from "./milestone.styled";
+import { Form , DatePicker  } from 'antd';
+import { TextareaCustom } from '../../../../components/textArea/cutstomTextarea';
+import { useAuth } from '../../../../hooks/useAuth';
+import moment from 'moment';
+
+
 
 export const Milestone = ({ data = [] }) => {
   const [showModal, setShowModal] = useState(false);
+  
+ 
+
 
   return (
     <div>
@@ -18,7 +27,7 @@ export const Milestone = ({ data = [] }) => {
           title=""
           closeModal={setShowModal}
         >
-          <UpdateMilestoneModal />
+          <UpdateMilestoneModal close={setShowModal} />
         </SmallModal>
       ) : (
         <span></span>
@@ -37,28 +46,64 @@ export const Milestone = ({ data = [] }) => {
   );
 };
 
-export const UpdateMilestoneModal = () => {
+export const UpdateMilestoneModal = ({close}) => {
+  const { callUpdateStartupData  } = useAuth();
+  const [date, setDate] = useState();
+
+  const handleDate = (value) =>{
+    setDate(moment(value).format('YYYY-MM-DD'))
+    console.log(moment(value).format('YYYY-MM-DD'))
+  }
+
+  const onFinish = async (values) => {
+  
+   callUpdateStartupData({
+      type:'mileStone',
+      values:{
+       ...values,
+       dateOfAchievement:date
+     }
+    });
+    close(false)
+  }
+
+
   return (
     <MilestoneModal>
       <div className="milestoneModal mx-3">
+      <Form
+        name="Mile stone"
+        initialValues={{
+          remember: true,
+        }}
+        layout="vertical"
+        onFinish={onFinish}
+      >
         <div>
           <h4>Update Milestone</h4>
         </div>
         <div className="mt-5">
-          <TextArea label="Title" rows={1} />
+          <TextareaCustom 
+           label="Title"
+           name={'title'}
+           />
         </div>
         <div className="my-3">
-          <TextArea label="Description" rows={4} />
+          <TextareaCustom 
+          name={'description'}
+           label="Description"  />
         </div>
-        <TextArea
-          className="col-lg-8 mt-1"
+        <DatePicker
+          onChange={handleDate}
           label="Date of achievement"
-          placeholder={"yyyy-mm-dd"}
-          rows={1}
+          name={'dateOfAchievement'}
         />
         <div className="mt-5">
-          <button>Create task</button>
+          <button 
+          type="submit"
+           >Create task</button>
         </div>
+        </Form>
       </div>
     </MilestoneModal>
   );

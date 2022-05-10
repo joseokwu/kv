@@ -18,11 +18,13 @@ import {
   UPDATE_PARTNER_INFO,
   UPDATE_MENTOR_INFO,
   UPDATE_MENTOR_DATA,
+  UPDATE_STARTUP_USER_PROFILE
 } from "../actions.types";
 import {
   register,
   userLogin,
   profile,
+  updateFounderProfile,
   forgorPassword,
 } from "../../../services";
 import toast from "react-hot-toast";
@@ -159,7 +161,6 @@ export const updateStartupData = async (value) => async (dispatch) => {
      // console.log(res?.data?.startupData);
       dispatch({
         type: UPDATE_STARTUP_DATA,
-        payload: res?.data?.startupData,
       });
     }
   } catch (err) {
@@ -168,6 +169,19 @@ export const updateStartupData = async (value) => async (dispatch) => {
     });
   }
 };
+
+export const updateStartupUserProfile = async (value) => async(dispatch) => {
+  try{
+    const res = await updateFounderProfile(value);
+    dispatch({
+      type:UPDATE_STARTUP_USER_PROFILE,
+      payload:res?.data
+    });
+    toast.success(res?.message)
+  }catch(err){
+    toast.error(err?.response?.data?.message ?? 'Unable to update profile')
+  }
+}
 
 export const updateMentorData = async (value) => async (dispatch) => {
   try {
