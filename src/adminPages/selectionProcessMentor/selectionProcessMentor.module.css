@@ -193,3 +193,12 @@
   color: #000000;
   margin-bottom: 2.06rem;
 }
+
+.start_desc {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5d5d5e;
+}

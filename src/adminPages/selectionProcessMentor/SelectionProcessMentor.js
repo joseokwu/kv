@@ -175,7 +175,7 @@ export const StartupCard = ({ data = {} }) => {
       </section>
 
       <section className="border-bottom pb-3 mb-3">
-        <p>
+        <p className={styles.start_desc}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
           eu lorem ipsum dolor sit amet, consectetur adipiscing eli
         </p>
@@ -192,6 +192,7 @@ export const StartupCard = ({ data = {} }) => {
             onClick={() => {
               push("/admin/selection_process/mentors_answer/1");
             }}
+            role="button"
           >
             View answer
           </p>
