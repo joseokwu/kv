@@ -11,13 +11,13 @@ export const MilestoneList = ({ data = [] }) => {
           data?.map((x, i) => {
             if (i % 2 === 0) {
               return (
-                <div className="mb-5 mile-item d-flex justify-content-end mile-item-left">
+                <div key={i} className="mb-5 mile-item d-flex justify-content-end mile-item-left">
                   <MilestoneCard side="left" data={x} />
                 </div>
               );
             } else {
               return (
-                <div className="mb-5 d-flex justify-content-start mile-item-right">
+                <div key={i} className="mb-5 d-flex justify-content-start mile-item-right">
                   <MilestoneCard side="right" data={x} />
                 </div>
               );

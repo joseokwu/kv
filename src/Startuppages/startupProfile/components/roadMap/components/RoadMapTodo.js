@@ -5,6 +5,7 @@ import { DraftMapModal } from "./roadMapTodo.styled";
 import girl from "../../../../../assets/images/smallgirl.svg";
 import guy from "../../../../../assets/images/smallguy.svg";
 import { formatDate } from "../../../../../utils/helpers";
+import moment from 'moment';
 
 export const RoadMapTodo = ({ progress = 0, data = {} }) => {
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +14,7 @@ export const RoadMapTodo = ({ progress = 0, data = {} }) => {
     <div>
       {showModal ? (
         <SmallModal id="draftModal" title="" closeModal={setShowModal}>
-          <DraftModal />
+          <DraftModal data={data} />
         </SmallModal>
       ) : (
         <span></span>
@@ -25,19 +26,24 @@ export const RoadMapTodo = ({ progress = 0, data = {} }) => {
         onClick={() => setShowModal(true)}
       >
         <p className="todo-task" style={{ flexBasis: "37%" }}>
-          {data?.tabName}
+          {data?.title}
         </p>
         <span>
           <p className="todo-info-header">Due Data</p>
-          <p className="todo-date">{formatDate(data?.dueDate)}</p>
+          <p className="todo-date">{data?.dueDate}</p>
         </span>
 
         <span>
           <p className="todo-info-header">Contributors</p>
           <div className="todo-contributor">
-            {data?.contributors?.length > 0 &&
-              data?.contributors?.map((d, i) => {
-                return <img src={d} alt="contributor" />;
+            {data?.teamMember?.length > 0 &&
+              data?.teamMember?.map((d, i) => {
+                return <img src={d?.avatar} 
+                key={i} alt="contributor"
+                className="mx-2"
+                 style={{
+                  width:'40px', height:'40px', borderRadius:'60px'
+                }} />;
               })}
           </div>
         </span>
@@ -46,7 +52,7 @@ export const RoadMapTodo = ({ progress = 0, data = {} }) => {
           <ProgressBar
             isMeasured={true}
             className="todo-progress"
-            progress={progress}
+            progress={data?.completed}
           />
         </span>
       </div>
@@ -54,35 +60,40 @@ export const RoadMapTodo = ({ progress = 0, data = {} }) => {
   );
 };
 
-export const DraftModal = () => {
+export const DraftModal = ({data}) => {
   const actArr = [1, 2, 3, 4];
   return (
     <DraftMapModal>
       <div className="mx-4">
         <div>
-          <h4>Drafting of business structure</h4>
+          <h4> {data?.title} </h4>
         </div>
         <div className="d-flex my-5">
           <p className="pe-3 pt-2">Contributors:</p>
-          <img className="pr-2" src={girl} alt="girl" />
-          <img src={guy} alt="girl" />
+          {data?.teamMember?.length > 0 &&
+              data?.teamMember?.map((d, i) => {
+                return <img src={d?.avatar} 
+                key={i} alt="contributor"
+                className="mx-2"
+                 style={{
+                  width:'40px', height:'40px', borderRadius:'60px'
+                }} />;
+              })}
         </div>
         <div>
           <h6>Description</h6>
           <article>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et amet,
-            facilisi sodales cursus tellus nam ut. Enim, at imperdiet praesent
-            velit. Eget consequat, sollicitudin molestie curabitur lobortis
-            imperdiet. Vulputate malesuada tortor sit mi laoreet. Iaculis quis
-            pretium urna.
+          {data?.description }
           </article>
         </div>
         <div className="mt-5">
           <h6>Activities</h6>
-          {actArr.map((i) => (
-            <div className="d-flex my-3">
-              <input className="me-4 mt-1" type="radio" />
-              <article>Drafting of business structure</article>
+          {data?.activities?.map((item , i) => (
+            <div className="d-flex my-3" key={i} >
+              <input className="me-4 mt-1"
+              onChange={() => {}}
+               checked={item?.checked} type="radio" />
+              <article> { item?.name } </article>
             </div>
           ))}
         </div>

@@ -9,9 +9,8 @@ import { MilestoneModal } from "./milestone.styled";
 import { Form , DatePicker  } from 'antd';
 import { TextareaCustom } from '../../../../components/textArea/cutstomTextarea';
 import { useAuth } from '../../../../hooks/useAuth';
-import moment from 'moment'
-import { updateFounderProfile  } from '../../../../services/startup';
-import { toast } from 'react-hot-toast';
+import moment from 'moment';
+
 
 
 export const Milestone = ({ data = [] }) => {
@@ -98,8 +97,6 @@ export const UpdateMilestoneModal = ({close}) => {
           onChange={handleDate}
           label="Date of achievement"
           name={'dateOfAchievement'}
-       
-          
         />
         <div className="mt-5">
           <button 
