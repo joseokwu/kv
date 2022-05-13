@@ -98,12 +98,28 @@ import { MentorViewFeedback } from "../mentorPages/mentorAssignments/components/
 import { InvestorEvaluate } from "../Investorpages/evaluation/evaluation";
 import { WithAdminLayout } from "../adminComponents";
 import {
+  AcceptedApplication,
   AllMentors,
   AllSessions,
+  ApplicationMgt,
+  Assignments,
+  CreateAssignment,
+  CreateProgram,
+  Events,
+  PendingApplication,
+  Programs,
+  SelectionProcess,
   UserManagement,
   ViewInvestor,
+  ViewKVMemberSelectionProcess,
   ViewMentor,
   ViewPartner,
+  ViewKVMember,
+  ViewSelectionAnswer,
+  AddKVMemberForSelectionProcess,
+  SelectionProcessMentor,
+  CreateNewCriteriaIntro,
+  CreateNewCriteria,
 } from "../adminPages";
 
 const routes = [
@@ -749,7 +765,25 @@ const routes = [
   {
     name: "admin application management",
     path: "/admin/application_mgt",
-    component: WithAdminLayout(() => <div>Application Management</div>),
+    component: WithAdminLayout(ApplicationMgt),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin application management",
+    path: "/admin/application_mgt/pending/:id",
+    component: WithAdminLayout(PendingApplication),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin application management",
+    path: "/admin/application_mgt/accepted/:id",
+    component: WithAdminLayout(AcceptedApplication),
     exact: true,
     protected: false,
     type: "admin",
@@ -758,7 +792,79 @@ const routes = [
   {
     name: "admin Selection Process",
     path: "/admin/selection_process",
-    component: WithAdminLayout(() => <div>Selection Process</div>),
+    component: WithAdminLayout(SelectionProcess),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/kv/:id",
+    component: WithAdminLayout(ViewKVMemberSelectionProcess),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/mentors/:id",
+    component: WithAdminLayout(ViewKVMemberSelectionProcess),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/kv_add_member/:id",
+    component: WithAdminLayout(AddKVMemberForSelectionProcess),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/kv_answer/:id",
+    component: WithAdminLayout(ViewSelectionAnswer),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/mentors_answer/:id",
+    component: WithAdminLayout(ViewSelectionAnswer),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/mentor/:id",
+    component: WithAdminLayout(SelectionProcessMentor),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/new-criteria-intro",
+    component: WithAdminLayout(CreateNewCriteriaIntro),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/new-criteria",
+    component: WithAdminLayout(CreateNewCriteria),
     exact: true,
     protected: false,
     type: "admin",
@@ -767,7 +873,34 @@ const routes = [
   {
     name: "admin Program",
     path: "/admin/program",
-    component: WithAdminLayout(() => <div>Program</div>),
+    component: WithAdminLayout(Programs),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/create",
+    component: WithAdminLayout(CreateProgram),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/assignments",
+    component: WithAdminLayout(Assignments),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/create_assignment",
+    component: WithAdminLayout(CreateAssignment),
     exact: true,
     protected: false,
     type: "admin",
@@ -828,6 +961,15 @@ const routes = [
   },
 
   {
+    name: "admin User Management",
+    path: "/admin/users/member/:id",
+    component: WithAdminLayout(ViewKVMember),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
     name: "admin Booster Partners",
     path: "/admin/booster_partners",
     component: WithAdminLayout(() => <div>Booster Partners</div>),
@@ -848,7 +990,7 @@ const routes = [
   {
     name: "admin Program",
     path: "/admin/events",
-    component: WithAdminLayout(() => <div>Events</div>),
+    component: WithAdminLayout(Events),
     exact: true,
     protected: false,
     type: "admin",
