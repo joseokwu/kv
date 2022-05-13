@@ -43,7 +43,7 @@ export const ViewMentor = () => {
     }
   };
   return (
-    <div className="p-5">
+    <div className="p-5" style={{ maxWidth: 2000 }}>
       <Modal id="viewRating" title="View Ratings" width={568}>
         <RatingCard />
       </Modal>

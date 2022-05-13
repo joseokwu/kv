@@ -94,7 +94,7 @@ export const AllMentors = () => {
     .concat(data);
 
   return (
-    <div className="p-5">
+    <div className="p-5" style={{ maxWidth: 2000 }}>
       <Modal id="addMentor" title="Add Mentor" width={568}>
         <AddMentor />
       </Modal>

@@ -155,6 +155,11 @@ export const Investor = () => {
   ];
   return (
     <div>
+      <DeleteModal
+        id="deleteInvestor"
+        title="Delete Investor"
+        desc="Are you sure you want to delete Kate Mcbeth Joan"
+      />
       <section className="d-flex align-items-center justify-content-between white-strip mb-3">
         <h2 className="mb-0">Investors (20)</h2>
 
@@ -176,11 +181,6 @@ export const Investor = () => {
 const Filter = () => {
   return (
     <div className="dropdown">
-      <DeleteModal
-        id="deleteInvestor"
-        title="Delete Investor"
-        desc="Are you sure you want to delete Kate Mcbeth Joan"
-      />
       <button
         className="d-flex align-items-center filter-btn"
         style={{ columnGap: 7, boxShadow: "none", border: "1px solid #F2F2F2" }}

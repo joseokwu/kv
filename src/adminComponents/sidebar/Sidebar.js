@@ -52,12 +52,12 @@ export const Sidebar = () => {
         path: "/admin/users",
         icon: userMgt,
       },
-      {
-        title: "Booster Partners",
-        activator: "booster_partners",
-        path: "/admin/booster_partners",
-        icon: booster,
-      },
+      // {
+      //   title: "Booster Partners",
+      //   activator: "booster_partners",
+      //   path: "/admin/booster_partners",
+      //   icon: booster,
+      // },
       {
         title: "To-Do List",
         activator: "todo",
@@ -140,7 +140,11 @@ export const Sidebar = () => {
                 <li key={i}>
                   <Link to={nav.path}>
                     <img src={nav.icon} alt="dash" />
-                    <p className={`${activateLink(nav.activator)} side-text`}>
+                    <p
+                      className={`${activateLink(
+                        nav.activator
+                      )} side-text-admin`}
+                    >
                       {nav.title}
                     </p>
                   </Link>

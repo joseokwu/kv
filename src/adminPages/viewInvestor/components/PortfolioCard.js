@@ -3,13 +3,13 @@ import styles from "../viewInvestor.module.css";
 import apple from "../../../assets/images/apple.svg";
 import { Badge, Tag } from "../../../components";
 
-export const PortfolioCard = ({ data = {} }) => {
+export const PortfolioCard = ({ data = {}, ...rest }) => {
   const statusList = {
     active: "#0E760C",
     "in-active": "#E31919",
   };
   return (
-    <div className={styles.portfolioCard}>
+    <div className={styles.portfolioCard} {...rest}>
       <section className="d-flex justify-content-between mb-2">
         <img src={apple} alt="startup logo" />
         {/* <p>Transaction type: Round</p> */}

@@ -70,7 +70,7 @@ h6 {
 .delete-link {
   font-family: "DM Sans";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
   line-height: 140%;
   color: #e31937;
@@ -80,7 +80,7 @@ h6 {
 .view-link {
   font-family: "DM Sans";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
   line-height: 140%;
   color: #2e3192;
@@ -89,6 +89,7 @@ h6 {
 
 .space-out {
   column-gap: 10px;
+  row-gap: 10px;
 }
 
 .max_fill {

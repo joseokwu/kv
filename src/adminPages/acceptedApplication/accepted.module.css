@@ -1,0 +1,233 @@
+.card {
+  background-color: #f9f9fc;
+  padding: 2.5rem 4.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.card img {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.card h3 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.card h3 + p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.statusHeader {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  color: #2e3192;
+}
+
+.stageIndustry p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.person img,
+.person span {
+  display: block;
+  width: 54px;
+  min-width: 54px;
+  height: 54px;
+  background-color: lightgray;
+  border-radius: 50%;
+}
+
+.person section p:first-child {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #323232;
+}
+
+.person section p:last-child {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  color: #828282;
+}
+
+.currentAdvisors {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+}
+
+.currentAdvisors h4 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 1.8rem;
+  padding-bottom: 1.5rem;
+}
+
+.fundCard {
+  padding: 2rem 3rem;
+  border-radius: 10px;
+}
+
+.fundCard p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.fundCard h4 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 39px;
+}
+
+.commitAmount {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2e3192;
+}
+
+.finalScore h3 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 70px;
+  color: #1c8050;
+}
+
+.finalScore p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 140%;
+  color: #262627;
+}
+
+.finalScore span {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 100%;
+  color: #7f8084;
+}
+
+.founderProfile {
+  display: flex;
+}
+
+.founderProfile img {
+  width: 67px;
+  height: 67px;
+  min-width: 67px;
+  border-radius: 50%;
+  margin-right: 2.2rem;
+}
+
+.founderProfile h5 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  color: #323232;
+}
+
+.founderProfile p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #828282;
+  margin-bottom: 1rem !important;
+}
+
+.fileDownload {
+  border: 1px solid #e6e7e9;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.fileDownload span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(56, 85, 179, 0.04);
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.fileDownload h6 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+  color: rgba(24, 24, 25, 0.9);
+  margin-bottom: 4px;
+}
+
+.fileDownload p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.42);
+  margin-bottom: 0;
+}
