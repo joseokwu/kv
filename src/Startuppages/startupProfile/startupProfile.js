@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import left from "../../assets/icons/chervonLeft.svg";
 import "./opportunity.css";
-import { Tabs, Tag } from "../../Startupcomponents";
+import { Tabs } from "../../Startupcomponents";
 import { OppCompanyInfo } from "./components/OppCompanyInfo";
 import { FinancialDetails } from "./components/FinancialDetails";
 import { FundingRound } from "./components/FundingRound";
@@ -13,6 +12,7 @@ import { RoadMap } from "./components/roadMap/RoadMap";
 import { Milestone } from "./components/milestone/Milestone";
 import { getStartupProfile } from "../../services";
 import { useAuth } from '../../hooks/useAuth';
+import { EmptyState } from "../../mentorComponents";
 
 
 export const StartupProfile = ({ history }) => {
@@ -36,7 +36,7 @@ export const StartupProfile = ({ history }) => {
     setProf(res);
   };
 
-  console.log(`pathname`, stateAuth);
+  console.log(stateAuth); 
 
   const renderContent = () => {
     switch (hash.replaceAll("%20", " ")) {
@@ -58,6 +58,10 @@ export const StartupProfile = ({ history }) => {
   };
 
 
+
+  if(!stateAuth?.startupData?.applicationCompleted){
+    return <EmptyState message="No Profile information to display, please complete registration" />
+   }
 
   return (
     <div>

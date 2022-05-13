@@ -10,7 +10,6 @@ export const INIT_STATE = {
   modalClose:false,
   signUpStatus: "startup",
   username: "",
-  completedRegistration: false,
   partnerData:{},
   startupData: {
    

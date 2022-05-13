@@ -20,9 +20,9 @@ export const getProgramInfo = async () => {
   }
 };
 
-export const getBoosterData = async () => {
+export const getBoosterData = async (value) => {
   try {
-    const res = await request.post("partners");
+    const res = await request.post("partners", value);
     console.log(res?.data)
     return res?.data;
   } catch (err) {

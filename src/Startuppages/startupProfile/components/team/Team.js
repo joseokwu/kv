@@ -90,7 +90,7 @@ const TeamMember = ({ data ,modalData,  showCofounder, setCofounder  }) => {
       </LargeModal> : <span />
   }
 
-      <img src={data?.avatar} alt="team member" className="mr-4 rounded-circle w-50 h-75" />
+{ data?.avatar &&  <img src={data?.avatar} alt="team member" className="mr-4 rounded-circle w-50 h-75" />}
       <section>
         <p> {data?.firstName + data?.lastName } </p>
         <p className="small"> {data?.position ?? 'Founder'} </p>

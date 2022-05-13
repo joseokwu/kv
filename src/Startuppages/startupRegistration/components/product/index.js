@@ -8,13 +8,11 @@ import { product } from './../../../../services/startUpReg';
 import { formatBytes } from '../../../../utils/helpers';
 import { TextareaCustom } from '../../../../components/textArea/cutstomTextarea';
 import { useAuth } from '../../../../hooks/useAuth';
-import {  Form } from 'antd'
+import {  Form } from 'antd';
 import { UploadFile } from "../../../../components/uploadFile";
 import { FileWrapper, FileText, LabelButton } from '../pitchdeck/pitch.styled';
 import { letterOnly } from '../../../../utils/helpers';
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
 import { upload } from '../../../../services/utils';
 import { useHistory } from 'react-router-dom';
 
@@ -36,7 +34,7 @@ export const Product = () => {
   const handleChangeVids = (e) => {
     setYoutube(e.target.value);
   };
-  console.log(stateAuth?.startupData?.product)
+ // console.log(stateAuth?.startupData?.product)
   const addVid = () => {
 
     setUrls(youtube);
@@ -75,8 +73,7 @@ export const Product = () => {
 
   const handleFullChange = (e,name) => {
     const { value } = e.target;
-    console.log(name)
-  
+    
     updateProfile('product', { [name]: value });
 
   };

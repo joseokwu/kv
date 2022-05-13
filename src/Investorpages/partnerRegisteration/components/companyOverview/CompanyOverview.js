@@ -112,11 +112,18 @@ const CompanyOverview = () => {
                       </>
                     )
                   ) : (
-                    <img
+                    
+                      logoUploading ? (
+                        <CircularLoader color={'#000'} />
+                      ) :(
+                        <img
                       src={stateAuth?.partnerData?.logo}
                       alt="add"
                       className="image-placeholder"
                     />
+                      ) 
+                    
+                   
                   )}
                 </span>
 

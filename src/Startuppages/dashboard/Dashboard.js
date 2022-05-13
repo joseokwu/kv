@@ -15,13 +15,11 @@ import { useAuth} from '../../hooks/useAuth';
 export const StartupDashboard = () => {
   const [dashInfo, setDashInfo] = useState({});
   const [loading, setLoading] = useState(false);
-  const { stateAuth , getDashboardProfile } = useAuth();
+  const { stateAuth } = useAuth();
   
-  console.log()
+ 
 
-useEffect(() =>{
-    getDashboardProfile(getType())
-},[getDashboardProfile])
+
 
 //console.log(stateAuth)
 
