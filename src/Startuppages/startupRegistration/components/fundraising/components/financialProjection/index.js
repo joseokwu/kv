@@ -1,11 +1,6 @@
 import {
   BodyWrapper,
   DownloadableButton,
-  FileWrapper,
-  FileText,
-  FileSize,
-  LabelButton,
-  VideoWrapper,
   Terms,
 } from './financial.styled'
 import { useHistory } from 'react-router-dom'
@@ -14,17 +9,13 @@ import {
   OutlineButton,
 } from '../../../../../../Startupcomponents/button/button.styled'
 import Download from '../../../../../../assets/icons/downloadoutline.svg'
-import DownloadIcon from '../../../../../../assets/icons/download.svg'
-import RedFile from '../../../../../../assets/icons/redFile.svg'
-import BluFile from '../../../../../../assets/icons/bluFile.svg'
 import { useActivity } from '../../../../../../hooks/useBusiness'
-import { updateFounderProfile } from '../../../../../../services'
 import { useAuth } from '../../../../../../hooks/useAuth'
-import toast from 'react-hot-toast'
-import { CircularLoader } from '../../../../../../Startupcomponents/CircluarLoader/CircularLoader'
 import { upload } from './../../../../../../services/utils'
 import { useState } from 'react'
 import { UploadFile } from '../../../../../../components'
+import { validate } from './../../../../../../utils/helpers';
+import { startupValidation } from './../../../../../../utils/utils';
 
 export const FinancialProjection = () => {
   const {
@@ -32,10 +23,7 @@ export const FinancialProjection = () => {
   } = useActivity()
   const history = useHistory()
   const {  updateProfile, stateAuth , updateStartupInfo } = useAuth()
-  const [logoUploading, setLogoUploading] = useState(false)
-  const [fileDoc, setFileDoc] = useState(
-    stateAuth?.startupData?.fundRaising?.financialProjection?.files ?? null,
-  ) 
+ 
 
 
  
@@ -43,8 +31,10 @@ export const FinancialProjection = () => {
   const handleSubmit = async (e) => {
     
       e.preventDefault();
-      updateStartupInfo();
-      window.open('/startup/dashboard', '_self');
+       console.log(stateAuth?.startupData)
+       console.log(validate(stateAuth?.startupData ,startupValidation))
+     updateStartupInfo(validate(stateAuth?.startupData ,startupValidation));
+     // window.open('/startup/dashboard', '_self');
     
   }
 
@@ -75,6 +65,7 @@ export const FinancialProjection = () => {
                 maxFileSize: 5,
                 extension: 'MB',
               }}
+              initData={stateAuth?.startupData?.fundRaising?.financialProjection?.files ? [stateAuth?.startupData?.fundRaising?.financialProjection?.files] : []  }
               onUpload={async (filesInfo) => {
                 const formData = new FormData()
                 formData.append('dir', 'kv')

@@ -57,6 +57,14 @@ export const UpdateMilestoneModal = ({close}) => {
 
   const onFinish = async (values) => {
   
+    // console.log({
+    //   type:'mileStone',
+    //   values:{
+    //    ...values,
+    //    dateOfAchievement:date
+    //  }
+    // })
+
    callUpdateStartupData({
       type:'mileStone',
       values:{
@@ -83,15 +91,21 @@ export const UpdateMilestoneModal = ({close}) => {
           <h4>Update Milestone</h4>
         </div>
         <div className="mt-5">
-          <TextareaCustom 
+          <TextField 
            label="Title"
            name={'title'}
+           required={true}
+           placeholder="Enter name of Title"
            />
         </div>
         <div className="my-3">
           <TextareaCustom 
           name={'description'}
-           label="Description"  />
+           label="Description"
+           required={false}
+           min={0}
+           showCount={false}
+             />
         </div>
         <DatePicker
           onChange={handleDate}

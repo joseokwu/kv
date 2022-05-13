@@ -45,6 +45,8 @@
   font-size: 1rem;
   line-height: 140%;
   color: #525151;
+  display: flex;
+  align-items: center;
 }
 
 .program_accept_btn button {

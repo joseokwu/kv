@@ -32,27 +32,13 @@ import { UploadFile } from "../../../../../../components/uploadFile";
 export const CapTable = ({ setFundraising }) => {
   const history = useHistory();
   const { updateProfile, stateAuth } = useAuth();
-  const [amnt, setAmnt] = useState(
-    stateAuth?.startupData?.fundRaising?.capTable?.amountRaised ?? ""
-  );
-  const [amntInvested, setAmntInvested] = useState(
-    stateAuth?.startupData?.fundRaising?.capTable?.amountInvestedByFounders ?? ""
-  );
 
-  const {
-    state: { fundraising },
-  } = useActivity();
+
   const [fileDoc, setFileDoc] = useState(stateAuth?.startupData?.fundRaising?.capTable?.files ?? []);
   // const { location  } = history;
 
   const onSubmit = () => {
-    updateProfile("fundRaising", {
-      capTable: {
-        amountRaised: amnt,
-        amountInvestedByFounders: amntInvested,
-        files: fileDoc,
-      },
-    });
+    console.log(stateAuth)
     history.push("#Previous Round");
   };
 
@@ -73,11 +59,16 @@ export const CapTable = ({ setFundraising }) => {
               id="amountRaised"
               name="amountRaised"
               type="text"
-              value={amnt}
+              value={stateAuth?.startupData?.fundRaising?.capTable?.amountRaised }
               className="form-control ps-3"
               placeholder="$100,000"
               intlConfig={{ locale: "en-US", currency: "USD" }}
-              onValueChange={(value) => setAmnt(value)}
+              onValueChange={(value) =>   updateProfile("fundRaising", {
+                        capTable: {
+                          ...stateAuth?.startupData?.fundRaising?.capTable,
+                          amountRaised: value,
+                        }
+                      })}
             />
           </div>
           <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
@@ -86,12 +77,17 @@ export const CapTable = ({ setFundraising }) => {
               id="amountInvestedByFounders"
               name="amountInvestedByFounders"
               type="text"
-              value={amntInvested}
+              value={stateAuth?.startupData?.fundRaising?.capTable?.amountInvestedByFounders}
               className="form-control ps-3"
               placeholder="$150,000"
               intlConfig={{ locale: "en-US", currency: "USD" }}
               required
-              onValueChange={(value) => setAmntInvested(value)}
+              onValueChange={(value) =>  updateProfile("fundRaising", {
+                        capTable: {
+                        ...stateAuth?.startupData?.fundRaising?.capTable,
+                        amountInvestedByFounders: value,
+                        }
+                      }) }
             />
           </div>
           <div className="col-12 my-3">
@@ -108,7 +104,7 @@ export const CapTable = ({ setFundraising }) => {
                 maxFileSize: 5,
                 extension: "MB",
               }}
-              initData={stateAuth?.startupData?.fundRaising?.capTable?.files.length > 0 ? [stateAuth?.startupData?.fundRaising?.capTable?.files] : []}
+              initData={stateAuth?.startupData?.fundRaising?.capTable?.files?.length > 0 ?[ stateAuth?.startupData?.fundRaising?.capTable?.files] : []}
               onUpload={async (filesInfo) => {
                 const file = filesInfo[0].file;
                 const fileData = await parseFile(file);
@@ -119,6 +115,12 @@ export const CapTable = ({ setFundraising }) => {
                   raw: false,
                 });
                 if (Array.isArray(data)) {
+                  updateProfile("fundRaising", {
+                        capTable: {
+                        ...stateAuth?.startupData?.fundRaising?.capTable,
+                        files: data,
+                        }
+                      })
                   setFileDoc(data);
                 }
               }}

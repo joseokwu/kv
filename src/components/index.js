@@ -35,3 +35,5 @@ export * from "./allEvaluationCard/allEvaluationCard";
 export * from "./evaluationPendingCard/evaluationPendingCard";
 export * from "./pageLoader/PageLoader";
 export * from "./uploadFile";
+export * from "./pagination";
+export * from "./goBack/GoBack";

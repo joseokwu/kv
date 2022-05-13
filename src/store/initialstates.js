@@ -7,10 +7,9 @@ export const INIT_STATE = {
   logo: null,
   dashboardLoad: true,
   type: [],
-  modalClose:false,
+  modalClose: false,
   signUpStatus: "startup",
   username: "",
-  completedRegistration: false,
   partnerData:{},
   startupData: {
    
@@ -101,4 +100,14 @@ export const INIT_STATE_BUSINESS = {
     action: false,
   },
   path: 1,
+};
+
+export const INIT_STATE_ADMIN = {
+  criteria: [
+    {
+      category: "",
+      noOfQuestion: "1",
+      titleAndQuestion: [{ title: "", question: "" }],
+    },
+  ],
 };

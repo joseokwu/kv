@@ -13,7 +13,9 @@ const MainLayout = ({ children }) => {
         <div className={`${open ? "sm-side" : "sm-side-close"}`}>
           <Sidebar />
         </div>
-        <div className="layout-child">{children}</div>
+        <div className="layout-child" style={{ backgroundColor: "#f9fafa" }}>
+          {children}
+        </div>
       </section>
     </div>
   );

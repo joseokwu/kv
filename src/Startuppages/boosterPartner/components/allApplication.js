@@ -33,9 +33,7 @@ console.log(approvedReq)
       }
 
       {
-        approvedReq && approvedReq.length > 0 ? (
-          
-          approvedReq.map((item, i) => (
+        approvedReq && approvedReq.map((item, i) => (
           <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
           <Modal id={`approved${i}`} withHeader={false}>
         <ApprovedModal data={item} />
@@ -74,9 +72,7 @@ console.log(approvedReq)
             </div>
           </ApplicationCard>
         
-        ))) : (
-          <EmptyState message={"No Applications yet"} />
-        )
+        ))
       }
 
       {

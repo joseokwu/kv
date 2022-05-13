@@ -113,12 +113,18 @@ export const useAuth = () => {
     try {
       const payload = {
         accType: stateAuth.type[0],
-        values: stateAuth.startupData,
-        lastPage,
+        values: lastPage ? {...stateAuth.startupData,applicationCompleted:true}: stateAuth.startupData ,
+        lastPage,  
       }
       console.log(payload)
-      const res = await updateStartup(payload)
-      toast.success(res?.message)
+     const res = await updateStartup(payload)
+     console.log(res)
+     toast.success(res?.message)
+     if(res?.success && lastPage){ 
+      window.open('/startup/dashboard', '_self');
+     }
+      
+     
     } catch (err) {
       console.log(err?.response);
       toast.error(err?.response?.data?.message ?? err?.response?.message);

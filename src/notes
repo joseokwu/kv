@@ -1436,6 +1436,343 @@ console.log({
 
 
 
+======================================================================
+===========================================================================
+<Pagination>
+          {events && events?.results?.currentPage > 1 ? (
+            <>
+              <Pagination.Prev onClick={prevPage} className="mx-1" />
+              {
+                <Pagination.Item className="mx-1">{`${currentPage} of  ${
+                  events?.results?.limit ?? 1
+                }`}</Pagination.Item>
+              }
+              {events?.results?.currentPage === events?.results?.limit ? (
+                <span />
+              ) : (
+                <Pagination.Next onClick={nextPage} className="mx-1" />
+              )}
+            </>
+          ) : (
+            <>
+              {
+                <Pagination.Item
+                  onClick={() => movePage(currentPage + 1)}
+                  className="mx-1"
+                >{`${currentPage} of  ${events?.results?.limit}`}</Pagination.Item>
+              }
+
+              {events &&
+              events?.results?.currentPage === events?.results?.limit ? (
+                <span />
+              ) : (
+                <Pagination.Next onClick={nextPage} className="mx-1" />
+              )}
+            </>
+          )}
+        </Pagination>
+
+
+product: {description: null, competitiveEdge: null, youtubeDemoUrl: null, files: null, _id: '627c8417c62f67917c468efa'}
+recommende
+fundRaising:
+capTable: {amountRaised: '', amountInvestedByFounders: '', files: Array(0), _id: '627c8417c62f67917c468efe'}
+financialProjection: {files: null, _id: '627c8417c62f67917c468f00'}
+fundUtilization: {files: Array(0), _id: '627c8417c62f67917c468efd'}
+fundingAsk: {hasPreviousFundraising: false, description: '', instrumentForRound: '', numberOfRounds: '', fundraisingAmount: '', …}
+previousRound: {instrumentForRound: '', numberOfRounds: '', fundraisingAmount: '', dilution: '', preMoneyValuation: '', …}
+_id: "627c8417c6
+
+pitchDeck:
+pitchDeckFile: null
+pitchDeckVideo: null
+_id: "627c8
+
+avatar: null
+briefIntroduction: null
+city: null
+coFounder: []
+country: null
+dob: "2022-05-12T03:50:47.609Z"
+education: []
+email: null
+experience: []
+firstName: null
+gender: null
+isCofounder: false
+lastName: null
+mobile_number: null
+skills: []
+state: null
+
+acceleratorName: ""
+brand: ""
+businessSector: ""
+companySize: ""
+elevatorPitch: ""
+logo: null
+registrationNumber: ""
+startupStage: ""
+yearFounded: "2022-05-12T03:50:47.601Z"
+_id: "627c8417c62f67917c468ef7"
+[[Prototype]]: Obje
+
+
+
+competitiveEdge: null
+description: null
+files: null
+youtubeDemoUrl: null
+_id: "627
+
+const handleChange = (e, prefix = "") => {
+  const { name, value } = e.target;
+  if (prefix !== "") {
+    updateProfile("startUpProfile",{
+      [prefix]: {
+        ...stateAuth?.startupData?.startUpProfile[prefix],
+        [name]: value,
+      },
+    });
+    formik.handleChange(e);
+    return;
+  }
+  updateProfile("startUpProfile", {[name]: value });
+  console.log(stateAuth)
+};
+
+
+
+
+ 
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const formik = useFormik({
+  initialValues: {
+    startupName: stateAuth?.user?.businessname ?? "",
+    elevatorPitch:
+      stateAuth?.startupData?.startUpProfile?.elevatorPitch ?? "",
+    brand: stateAuth?.startupData?.startUpProfile?.brand ?? "",
+    registrationNumber:
+      stateAuth?.startupData?.startUpProfile?.registrationNumber ?? "",
+    companySize: stateAuth?.startupData?.startUpProfile?.companySize ?? "",
+    businessSector:
+      stateAuth?.startupData?.startUpProfile?.businessSector ?? "",
+    startupStage: stateAuth?.startupData?.startUpProfile?.startupStage ?? "",
+    acceleratorName:  
+      stateAuth?.startupData?.startUpProfile?.acceleratorName ?? "",
+    registeredAddress:
+      stateAuth?.startupData?.startUpProfile?.contactInfo
+        ?.registeredAddress ?? "",
+   
+    city: stateAuth?.startupData?.startUpProfile?.contactInfo?.city ?? "",
+    companyEmail:
+      stateAuth?.startupData?.startUpProfile?.contactInfo?.companyEmail ?? "",
+    profileHandle:
+      stateAuth?.startupData?.startUpProfile?.socialMedia?.profileHandle ??
+      "",
+    companyWebsite:
+      stateAuth?.startupData?.startUpProfile?.socialMedia?.companyWebsite ??
+      "",
+    linkedInHandle:
+      stateAuth?.startupData?.startUpProfile?.socialMedia?.linkedInHandle ??
+      "",
+    twitterHandle:
+      stateAuth?.startupData?.startUpProfile?.socialMedia?.twitterHandle ??
+      "",
+  },
+  validationSchema: Yup.object({
+    elevatorPitch: Yup.string().required("This field is required"),
+    brand: Yup.string().required("This field is required"),
+    registrationNumber: Yup.number()
+      .min(3)
+      .required("This field is required"),
+    companySize: Yup.string().required("This field is required"),
+    businessSector: Yup.string().required("This field is required"),
+    startupStage: Yup.string().required("This field is require"),
+    acceleratorName: Yup.string().required("This field is required"),
+    registeredAddress: Yup.string().required("This field is required"),
+    city: Yup.string().required("This field is required"),
+    companyEmail: Yup.string().email("Invalid email").required("Email Required"),
+    companyWebsite: Yup.string().url().required("This field is required"),
+    linkedInHandle: Yup.string().required("This field is required"),
+    twitterHandle: Yup.string().required("This field is required"),
+    startupName: Yup.string().required("This field is required"),
+  })
+});
+   
+const selectChange = (e) =>{
+  const { value , name } = e.target;
+  updateProfile("startUpProfile" ,{
+    [name]: value,
+  });
+ 
+}  
+
+================================================================
+=======================================================================
+const [amount, setAmount] = useState(
+  stateAuth?.startupData?.fundRaising?.fundingAsk?.fundraisingAmount ?? '',
+)
+const [preMoney, setPreMoney] = useState(
+  stateAuth?.startupData?.fundRaising?.fundingAsk?.preMoneyValuation ?? '',
+)
+const [postMoney, setPostMoney] = useState(
+  stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation ?? '',
+)
+
+const formik = useFormik({
+  initialValues: {
+    hasPreviousFundraising:
+      stateAuth?.startupData?.fundRaising?.fundingAsk
+        ?.hasPreviousFundraising ?? false,
+    description:
+      stateAuth?.startupData?.fundRaising?.fundingAsk?.description ?? '',
+    instrumentForRound:
+      stateAuth?.startupData?.fundRaising?.fundingAsk?.instrumentForRound ??
+      'Fund1',
+    numberOfRounds:
+      stateAuth?.startupData?.fundRaising?.fundingAsk?.numberOfRounds ??
+      'Fund1',
+    fundraisingAmount:
+      stateAuth?.startupData?.fundRaising?.fundingAsk?.fundraisingAmount ??
+      '',
+    dilution: stateAuth?.startupData?.fundRaising?.fundingAsk?.dilution ?? '',
+    preMoneyValuation:
+      stateAuth?.startupData?.fundRaising?.fundingAsk?.preMoneyValuation ??
+      '',
+    postMoneyValuation:
+      stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation ??
+      '',
+    hasLeadInvestor:
+      stateAuth?.startupData?.fundRaising?.fundingAsk?.hasLeadInvestor ?? '',
+    terms: stateAuth?.startupData?.fundRaising?.fundingAsk?.terms ?? [],
+  },
+  validationSchema: Yup.object({
+    instrumentForRound: Yup.string().required('Required'),
+    fundraisingAmount: Yup.string().required('Required'),
+    dilution: Yup.string().required('Required'),
+    preMoneyValuation: Yup.string().required('Required'),
+    postMoneyValuation: Yup.string().required('Required'),
+    description: Yup.string().required('Required'),
+  }),
+  // onSubmit: (value) => onSubmit(value),
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

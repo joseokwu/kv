@@ -10,23 +10,22 @@ import toast from 'react-hot-toast';
 import { CircularLoader } from '../../../Startupcomponents/CircluarLoader/CircularLoader';
 import { EmptyState } from '../../../mentorComponents'
 import { validate } from '../../../utils/helpers';
+import { getBoosterData  } from '../../../services';
+import { PaginationData } from '../../../components';
 
-
-
-export const Applied = () => {
+export const Applied = ({data , apply}) => {
   
   const validationSchema = ["eligibilityCriteria", "importantNote", "offerings", "partnershipValidity", "process", "turnAroundTime"]
   const { state , sendApp } = useActivity();
   const { stateAuth } = useAuth();
   const [partners , setPartners] = useState([])
-
   const [loading, setLoading] = useState(false);
   const [show , setShow] = useState(false)
  const notInteracted = useMemo(() =>{
-  return state.applications.length > 0 && state.applications.filter((item) => !item?.pendingRequests.find(i => i.startupId === stateAuth?.user?.userId) && !item?.approvedRequests.find(i => i.startupId === stateAuth?.user?.userId) )
- }, [state.applications , stateAuth?.user?.userId ])
+  return data?.length > 0 && data.filter((item) => !item?.pendingRequests.find(i => i.startupId === stateAuth?.user?.userId) && !item?.approvedRequests.find(i => i.startupId === stateAuth?.user?.userId) )
+ }, [data , stateAuth?.user?.userId ])
 
- console.log(stateAuth)
+ console.log(notInteracted)
 
 const sendApplication = async(value) =>{
  try{
@@ -42,12 +41,12 @@ const sendApplication = async(value) =>{
     logo: stateAuth?.startupData?.startUpProfile?.logo,
     date: new Date()
   }
-
+  console.log(value)  
   const response = await applyToPartners(newApplication);
  // console.log(response)  
   toast.success(response?.message)
   setLoading(false);
-  sendApp(value?.userId)
+  apply(value?.userId)
  }catch(err){
    console.log(err)
   toast.error(err?.response?.data?.message ?? 'There was an error sending this application')
@@ -74,13 +73,32 @@ const sendApplication = async(value) =>{
 
 
 
+// useEffect(() => {
+    
+//   const getData = async () => {
+//     setLoading(true)
+//     const res = await getBoosterData({
+//       page:currentPage,
+//       limit:5
+//     })
+//     console.log(res?.data)
+//     setPartners(res?.data)
+//     setLoading(false);
+
+//   }
+//   getData()
+
+// }, [currentPage])
+
+
+
   return (
     <div className="row" style={{ columnGap: 10 }}>
-      {
-        notInteracted === null && (<EmptyState />)
-      }
+      {/* {
+        data === null && (<EmptyState />)
+      } */}
     
-      {   notInteracted && notInteracted.length > 0 ?
+      {   notInteracted && notInteracted?.length > 0 ?
        ( notInteracted.map((item, i) => {
          if (validate(item.offerings, validationSchema)) {
            return (
@@ -129,12 +147,13 @@ const sendApplication = async(value) =>{
                </ApplicationCard>
            )
          }
-          console.log(item.offerings)
+        
        })) : (
           <EmptyState message={"No Offerings yet"} />
         )
         
         }
+       
     </div>
   )
 }

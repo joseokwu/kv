@@ -1,0 +1,51 @@
+.card {
+  background-color: #f9f9fc;
+  padding: 2.5rem 4.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.card img {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.card h3 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.card h3 + p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.statusHeader {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  color: #2e3192;
+}
+
+.stageIndustry p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}

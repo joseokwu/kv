@@ -197,7 +197,7 @@ export const AllSessions = () => {
     .concat(sessionData)
     .concat(sessionData);
   return (
-    <div className="p-5">
+    <div className="p-5" style={{ maxWidth: 2000 }}>
       <DeleteModal
         id="deleteSession"
         title="Delete Session"

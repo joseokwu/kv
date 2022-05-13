@@ -1,0 +1,204 @@
+.mentor_detail_card {
+  padding: 2.9rem;
+  background: #f9f9fc;
+  border-radius: 5px;
+}
+
+.person_info img {
+  width: 53px;
+  min-width: 53px;
+  height: 53px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.person_info h3 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.875rem;
+  line-height: 1.88rem;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.person_info a {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  color: #3e3e3e;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.person_info p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 110%;
+  color: #828282;
+  margin-bottom: 1.5rem !important;
+}
+
+.person_info h5 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #3e3e3e;
+}
+
+.skills h5 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.skills > span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills > span > span {
+  padding: 10px 1rem;
+}
+
+.mentor_links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+@media (max-width: 992px) {
+  .mentor_links {
+    align-items: flex-start;
+    margin-top: 2rem;
+  }
+}
+
+.mentor_links > span {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 1rem;
+  margin-bottom: 14px;
+}
+
+.mentor_links > a {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #828282;
+  text-decoration: none;
+  word-break: break-all;
+  text-align: right;
+  display: block;
+}
+
+.mentor_links > div {
+  margin-top: 3rem;
+}
+
+.mentor_links > div > span {
+  display: flex;
+  align-items: center;
+  column-gap: 9px;
+  margin-bottom: 8px;
+}
+
+.mentor_links > div > p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #525151;
+  margin-bottom: 1rem !important;
+}
+
+.mentor_links > div > span > p,
+.mentor_links > div > span > a {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #323232;
+  text-decoration: none;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.card {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 1.5rem 1.3rem;
+}
+
+.card h4 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+  margin-bottom: 0;
+}
+
+.card .location {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  color: #828282;
+}
+
+.card .tag {
+  text-transform: capitalize;
+}
+
+.card .result {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #828282;
+}
+
+.eval_header {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 2.06rem;
+}
+
+.start_desc {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5d5d5e;
+}

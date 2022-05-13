@@ -20,7 +20,7 @@ export const TextField = ({
   ...rest
 }) => {
   return (
-    <div className="field">
+    <div className="field w-100">
       <Form.Item
         name={name}
         style={{ color: "#fe0003" }}
@@ -31,7 +31,12 @@ export const TextField = ({
           },
           {
             type: name === "email" ? name : type === "url" ? "url" : "",
-            message: name === "email" ? `Please input a correct ${name}` : type === "url" ? `Please enter a valid ${name} url` : "",
+            message:
+              name === "email"
+                ? `Please input a correct ${name}`
+                : type === "url"
+                ? `Please enter a valid ${name} url`
+                : "",
           },
         ]}
         type={type}
@@ -47,7 +52,7 @@ export const TextField = ({
           type={type}
           value={value}
           onChange={onChange}
-          defaultValue={value}
+          defaultValue={defaultValue}
           onKeyPress={onKeyPress}
           disabled={disabled}
           required={required}

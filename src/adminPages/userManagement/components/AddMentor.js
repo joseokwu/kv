@@ -9,7 +9,7 @@ export const AddMentor = () => {
         <TextField
           label="Mentor Name*"
           className="max_fill mb-4"
-          placeholder="Enter event title"
+          placeholder="Enter mentor name"
         />
 
         <TextField
