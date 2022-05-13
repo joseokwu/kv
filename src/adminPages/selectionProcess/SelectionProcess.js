@@ -9,6 +9,7 @@ export const SelectionProcess = () => {
 
   const {
     location: { hash },
+    push,
   } = useHistory();
   const renderComp = () => {
     switch (hash) {
@@ -26,7 +27,11 @@ export const SelectionProcess = () => {
     <div className="p-5">
       <section className="d-flex align-items-center justify-content-between mb-4">
         <Tabs tabItems={tabs} />
-        <Button label="Create New Criteria" variant="secondary" />
+        <Button
+          label="Create New Criteria"
+          variant="secondary"
+          onClick={() => push("/admin/selection_process/new-criteria-intro")}
+        />
       </section>
 
       <section>{renderComp()}</section>

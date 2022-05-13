@@ -67,7 +67,11 @@ export const ViewKVMemberSelectionProcess = () => {
             onClick={() => push("/admin/selection_process/kv_add_member/0001")}
           />
         )}
-        <Button label="Create New Criteria" variant="secondary" />
+        <Button
+          label="Create New Criteria"
+          variant="secondary"
+          onClick={() => push("/admin/selection_process/new-criteria-intro")}
+        />
       </section>
       <section className="mb-4">
         <p className={styles.pageSubtitle}>

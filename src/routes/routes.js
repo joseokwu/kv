@@ -118,6 +118,8 @@ import {
   ViewSelectionAnswer,
   AddKVMemberForSelectionProcess,
   SelectionProcessMentor,
+  CreateNewCriteriaIntro,
+  CreateNewCriteria,
 } from "../adminPages";
 
 const routes = [
@@ -845,6 +847,24 @@ const routes = [
     name: "admin Selection Process",
     path: "/admin/selection_process/mentor/:id",
     component: WithAdminLayout(SelectionProcessMentor),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/new-criteria-intro",
+    component: WithAdminLayout(CreateNewCriteriaIntro),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/new-criteria",
+    component: WithAdminLayout(CreateNewCriteria),
     exact: true,
     protected: false,
     type: "admin",

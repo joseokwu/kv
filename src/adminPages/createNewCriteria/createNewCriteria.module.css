@@ -1,0 +1,79 @@
+.wrap {
+  max-width: 830px;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.page_desc h4 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.page_desc p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #828282;
+}
+
+.form_area {
+  border: 1px solid #e0e0e0;
+  padding: 2rem 3rem;
+  border-radius: 20px;
+}
+
+.form_area > h5 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.form_area > p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  letter-spacing: 0.01em;
+  color: #bcbcbc;
+  margin-bottom: 12px !important;
+}
+
+.form_area > div {
+  display: flex;
+  column-gap: 9px;
+  color: #00adef;
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 2.62rem;
+  margin-bottom: 2rem;
+}
+
+.category_input {
+  display: flex;
+  align-items: flex-end;
+  column-gap: 1.25rem;
+}
+
+.cta_area {
+  background-color: #fafafc;
+  margin: 0 -3rem;
+  margin-top: 3rem;
+  margin-bottom: -1.95rem;
+  border-radius: 0 0 20px 20px;
+  padding: 2rem;
+}

@@ -18,3 +18,5 @@ export * from "./viewKVMember/ViewKVMember";
 export * from "./viewSelectionAnswer/ViewSelectionAnswer";
 export * from "./addKVMemberForSelectionProcess/AddKVMemberForSelectionProcess";
 export * from "./selectionProcessMentor/SelectionProcessMentor";
+export * from "./createNewCriteriaIntro/CreateNewCriteriaIntro";
+export * from "./createNewCriteria/CreateNewCriteria";
