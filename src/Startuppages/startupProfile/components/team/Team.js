@@ -86,7 +86,7 @@ const TeamMember = ({ data ,modalData,  showCofounder, setCofounder  }) => {
     >
   {
     showCofounder ? <LargeModal closeModal={setCofounder}>
-        <FounderModal data={modalData}  />
+        <FounderModal data={data}  />
       </LargeModal> : <span />
   }
 
