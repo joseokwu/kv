@@ -11,9 +11,7 @@ export const INIT_STATE = {
   signUpStatus: "startup",
   username: "",
   partnerData:{},
-  startupData: {
-   
-  },
+  startupData: {},
   mentorData: {
     personalDetail: {
       firstname: "",
