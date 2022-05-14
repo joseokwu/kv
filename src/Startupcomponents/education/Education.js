@@ -39,9 +39,7 @@ export const Education = ({
   return (
     <>
       <div className='main'>
-        <div className='icon'>
-          <img src={blue} alt='apple' />
-        </div>
+       
         <div className='info'>
           <h5 className='school'>{schoolName}</h5>
           <h6 className='course'>{course}</h6>

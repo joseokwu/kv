@@ -39,7 +39,7 @@ export const WorkExperience = ({
     <>
       <div className="main">
         <div className="icon">
-          <img src={appleSmall} alt="apple" />
+          
         </div>
         <div className="info">
           <h5 className="title">{companyName}</h5>
