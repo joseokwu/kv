@@ -23,9 +23,9 @@ export const DashSidebar = () => {
   return (
     <div className="sideMain">
       <section className="sideNavigator">
-        <div  style={{width:'70px', height:'70px', borderRadius:'60px', marginLeft:'0px'}} >
+        <div  style={{ marginLeft:'0px'}} >
         <img src={ stateAuth?.startupData?.startUpProfile?.logo ?? `https://ui-avatars.com/api/?name=${stateAuth?.user?.businessname}`
-             } alt="profile" className="rounded-circle " style={{maxWidth:'80px', height:'80px'}} />
+             } alt="profile" className="" style={{width:'60px', height:'60px', borderRadius:'60px'}} />
         </div>
         <h5 className="mb-0 sideHeader">Hello </h5>
         <p className="mb-0 sideText"> { stateAuth?.user?.businessname } </p>

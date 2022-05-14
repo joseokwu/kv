@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { RowOption, TextField, Button } from '../../../../components'
 import FormCard from '../../../partnerRegisteration/components/formCard/FormCard'
-import { addInvestorProfile } from '../../../../services/investor'
-import { useFormik } from 'formik'
+
 import { useHistory } from 'react-router'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../../../hooks/useAuth'
-import { letterOnly } from '../../../../utils/utils'
+
 
 const { Option } = Select
 
