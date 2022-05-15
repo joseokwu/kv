@@ -123,6 +123,7 @@ import {
   CriteriaQuestions,
   CohortStartups,
   ViewCriteria,
+  ReviewCriteria,
 } from "../adminPages";
 
 const routes = [
@@ -895,6 +896,15 @@ const routes = [
     name: "admin Selection Process",
     path: "/admin/selection_process/criteria/:id",
     component: WithAdminLayout(ViewCriteria),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/review_criteria",
+    component: WithAdminLayout(ReviewCriteria),
     exact: true,
     protected: false,
     type: "admin",

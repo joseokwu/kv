@@ -157,8 +157,6 @@ export const ViewCriteria = () => {
     },
   ];
 
-  console.log("criteria", criteria[currentTab]);
-
   useEffect(() => {
     setCriteria(dataForCriteria);
   }, []);
