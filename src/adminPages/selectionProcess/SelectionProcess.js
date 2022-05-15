@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Tabs, Modal } from "../../components";
 import { CohortTable } from "./components/CohortTable";
 import { CreateCohort } from "./components/CreateCohort";
+import { CriteriaTable } from "./components/CriteriaTable";
 import { EvaluationTable } from "./components/EvaluationTable";
 import styles from "./selection.module.css";
 
@@ -20,9 +21,9 @@ export const SelectionProcess = () => {
       case `#${tabs[1]}`:
         return <CohortTable />;
       case `#${tabs[2]}`:
-        return tabs[2];
+        return <CriteriaTable />;
       default:
-        return tabs[0];
+        return <EvaluationTable />;
     }
   };
   return (
