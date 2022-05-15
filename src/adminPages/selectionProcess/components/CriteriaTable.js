@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Table } from "../../../adminComponents";
 import teamMember from "../../../assets/images/sampleTeamMember.png";
 import { Button, Modal, Tag } from "../../../components";
@@ -14,6 +15,7 @@ export const CriteriaTable = () => {
     { title: "Action", accessor: "action" },
   ];
 
+  const { push } = useHistory();
   const data = [
     {
       id: "0001",
@@ -36,7 +38,11 @@ export const CriteriaTable = () => {
       status: <Tag name="Active" />,
       action: (
         <div className="d-flex align-items-center space-out">
-          <p className="view-link" role="button">
+          <p
+            className="view-link"
+            role="button"
+            onClick={() => push(`/admin/selection_process/criteria/001`)}
+          >
             View
           </p>
           <p className="view-link" role="button">
@@ -75,13 +81,22 @@ export const CriteriaTable = () => {
       status: <Tag name="Active" />,
       action: (
         <div className="d-flex align-items-center space-out">
-          <p className="view-link" role="button">
+          <p
+            className="view-link"
+            role="button"
+            onClick={() => push(`/admin/selection_process/criteria/001`)}
+          >
             View
           </p>
           <p className="view-link" role="button">
             Edit
           </p>
-          <p role="button" className="delete-link">
+          <p
+            role="button"
+            className="delete-link"
+            data-target="#deleteCriteria"
+            data-toggle="modal"
+          >
             Delete
           </p>
         </div>
