@@ -10,8 +10,7 @@ import { DatePicker } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import 'antd/dist/antd.css';
-import { Tag } from '../../../../../../Startupcomponents/tag/Tag';
-import { useActivity } from '../../../../../../hooks/useBusiness';
+import moment from 'moment';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import CurrencyInput from 'react-currency-input-field'
 
@@ -40,10 +39,10 @@ export const PreviousRound = ({ setFundraising }) => {
     stateAuth?.startupData?.fundRaising?.previousRound?.fundraisingAmount ?? '',
   )
   const [preMoney, setPreMoney] = useState(
-    stateAuth?.startupData?.fundRaising?.fundingAsk?.preMoneyValuation ?? '',
+    stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation ?? '',
   )
   const [postMoney, setPostMoney] = useState(
-    stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation ?? '',
+    stateAuth?.startupData?.fundRaising?.previousRound?.postMoneyValuation ?? '',
   )
 
   // function btn(e) {
@@ -162,15 +161,19 @@ export const PreviousRound = ({ setFundraising }) => {
                 id='dateOfFunding'
                 name='dateOfFunding'
                 style={{ background: '#FAFAFC', border: 'none' }}
-                selected={startDate}
+                defaultValue={
+                  moment(stateAuth?.startupData?.fundRaising?.previousRound?.dateOfFunding) ?? moment()
+                }
                 className='form-control w-lg-50 w-100 datePick mx-3'
                 onBlur={formik.handleBlur}
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) =>   updateProfile("fundRaising", {
+                previousRound: {
+                dateOfFunding:date,
+                  },
+                })}
               />
             </div>
-            {formik.touched.dateOfFunding && !startDate ? (
-              <label className='error'>{formik.errors.dateOfFunding}</label>
-            ) : null}
+          
           </div>
 
           <div className='form-group my-2 col-12'>

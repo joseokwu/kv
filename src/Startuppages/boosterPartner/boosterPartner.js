@@ -10,16 +10,22 @@ import newApp from '../../assets/icons/Star.svg'
 import { useAuth } from '../../hooks/useAuth';
 import { PageLoader } from "../../components";
 import { useActivity  } from '../../hooks/useBusiness';
+import { PaginationData } from '../../components'
+
 
 
 export const StartupBoosterPartner = () => {
 
   const { getApp } = useActivity();
   const { stateAuth} = useAuth();
-
+  const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(false);
   const [boosterData, setBoosterData] = useState([])
+  const [partners , setPartners] = useState({})
 
+  const apply = (id) =>{
+    setPartners({...partners , partners:partners.partners.filter((item) => item?.userId !== id)})
+  }
 
 
 
@@ -70,18 +76,22 @@ export const StartupBoosterPartner = () => {
     
     const getData = async () => {
       setLoading(true)
-      const res = await getBoosterData()
+      const res = await getBoosterData({
+        page:currentPage,
+        limit:4
+      })
       const resData = await getStartupRequest(stateAuth?.user?.userId);
       if(resData?.data){
-        console.log(resData?.data , 'boosterpartner data')
-        getApp(res?.data?.data)
+        console.log(res?.data?.data , 'boosterpartner data')
+        
+        setPartners(res?.data?.data)
       }
       setLoading(false);
   
     }
     getData()
 
-  }, [])
+  }, [currentPage])
 
 
   const history = useHistory()
@@ -102,7 +112,13 @@ export const StartupBoosterPartner = () => {
   const renderContent = () => {
     switch (hash) {
       case '#All Offerings':
-        return <AllOfferings  />
+        return <AllOfferings
+          setCurrentPage={setCurrentPage}
+          data={partners}
+          total={ partners?.metadata && partners?.metadata[0]?.total}
+          currentPage={currentPage}
+         partners={partners?.partners}
+         apply={apply} />
         // return <AllOfferings data={boosterData?.offerings} />
       case '#My Applications':
         return <MyApplications  />
@@ -157,6 +173,7 @@ export const StartupBoosterPartner = () => {
         </div>
       </section>
       <section className="mb-5 container ">{renderContent()}</section>
+   
     </div>
   )
 }

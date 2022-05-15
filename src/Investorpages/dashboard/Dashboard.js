@@ -32,7 +32,7 @@ export const BoosterDashboard = ({ history }) => {
           <DashCard
             icon={total}
             name={'Total Application'}
-            count={stateAuth?.partnerData?.pendingRequests.length + stateAuth?.partnerData?.approvedRequests.length + stateAuth?.partnerData?.declinedRequests.length }
+            count={stateAuth?.partnerData?.pendingRequests?.length + stateAuth?.partnerData?.approvedRequests?.length + stateAuth?.partnerData?.declinedRequests?.length }
             color={dashCardColors[0]}
           />
           
@@ -67,13 +67,21 @@ export const BoosterDashboard = ({ history }) => {
 
           <section>
 
-           <EmptyState 
-           message="No Application sent yet."
+          {
+            stateAuth?.partnerData?.pendingRequests?.length > 0 ? stateAuth?.partnerData?.pendingRequests?.map((item, i) =>(
+              <div style={{ marginBottom: 21 }} key={i} >
+                <ApplicationCard data={item}  logo={applicantLogo}  />
+              </div>
+            )):(
+              <EmptyState 
+               message="No Application sent yet."
             />
+            )
+          }
 
-              {/* <div style={{ marginBottom: 21 }}>
-                <ApplicationCard  logo={applicantLogo}  />
-              </div> */}
+           
+
+              
            
           </section>
         </div>

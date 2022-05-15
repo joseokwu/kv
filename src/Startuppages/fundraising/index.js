@@ -24,12 +24,10 @@ export const StartupFundingRaising = () => {
     location: { hash },
   } = history;
 
-  const { stateAuth , getDashboardProfile } = useAuth();
+  const { stateAuth  } = useAuth();
 
   
-  useEffect(() =>{
-    getDashboardProfile(getType())
-},[getDashboardProfile])
+
 
 
   console.log(stateAuth)

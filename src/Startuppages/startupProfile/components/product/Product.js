@@ -1,32 +1,36 @@
-import React, { useState } from 'react'
-import demo from '../../../../assets/icons/demoImg.png'
-import downloadIcon from '../../../../assets/icons/download.svg'
-import founder from '../../../../assets/images/sampleFounderImg.png'
-import investor from '../../../../assets/images/sampleinvestors.png'
+import React, { useState } from "react";
+import demo from "../../../../assets/icons/demoImg.png";
+import downloadIcon from "../../../../assets/icons/download.svg";
+import { UploadFile } from "../../../../components/uploadFile";
+import { upload } from "../../../../services/utils";
 import {
   Button,
   ModalCus,
   TextArea,
   TextField,
-} from '../../../../Startupcomponents'
+} from "../../../../Startupcomponents";
 import {
   FileSize,
   FileText,
   FileWrapper,
   LabelButton,
-} from '../../../startupRegistration/components/pitchdeck/pitch.styled'
-import './product.css'
-import { useAuth } from '../../../../hooks/useAuth'
+  VideoWrapper,
+} from "../../../startupRegistration/components/pitchdeck/pitch.styled";
+import "./product.css";
+import { letterOnly } from "../../../../utils/helpers";
+import { Form } from "antd";
+import { TextareaCustom } from "../../../../components/textArea/cutstomTextarea";
+import { useAuth } from "../../../../hooks/useAuth";
 
 export const Product = () => {
-  const [showModal, setShowModal] = useState(false)
-  const { stateAuth } = useAuth()
+  const [showModal, setShowModal] = useState(false);
+  const { stateAuth } = useAuth();
 
   return (
     <div>
       {showModal ? (
         <ModalCus id="editProductModal" title="" closeModal={setShowModal}>
-          <EditProductModal />
+          <EditProductModal data={stateAuth?.user?.product} close={setShowModal} />
         </ModalCus>
       ) : (
         <span></span>
@@ -44,81 +48,187 @@ export const Product = () => {
             <div className="wrap mb-5 py-5 px-5">
               <h3>Product Description</h3>
               <p className="mb-5 prod-desc">
-                {stateAuth?.user?.product?.description}
+                {stateAuth?.startupData?.product?.description}
               </p>
             </div>
 
             <h3>Product Demo</h3>
 
-            {stateAuth?.user?.product?.files && (
+            {stateAuth?.startupData?.product?.files && (
               <video
                 style={{
-                  borderRadius: '20px',
-                  maxHeight: '150px',
-                  width: '250px',
+                  borderRadius: "20px",
+                  maxHeight: "150px",
+                  width: "250px",
+                  marginLeft:"15px"
                 }}
                 className="mb-3"
                 controls
               >
-                <source src={stateAuth?.user?.product?.files} id="video_here" />
+                <source src={stateAuth?.startupData?.product?.files} id="video_here" />
                 Your browser does not support HTML5 video.
               </video>
             )}
+            {
+              stateAuth?.startupData?.product?.youtubeDemoUrl &&  <iframe
+                  src={`https://www.youtube.com/embed/${stateAuth?.startupData?.product?.youtubeDemoUrl.replace(
+                    "https://youtu.be/",
+                    ""
+                  )}`}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; execution-while-not-rendered 'none'"
+                  allowfullscreen
+                  title="video"
+                  style={{
+                    borderRadius: "20px",
+                    maxHeight: "150px",
+                    width: "250px",
+                    marginLeft:"15px"
+                  }}
+                />
+            }
           </div>
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-const EditProductModal = () => {
+const EditProductModal = ({ data , close }) => {
+ 
+  const { stateAuth, updateStartupInfo, updateProfile } = useAuth();
+  const [youtube, setYoutube] = useState("");
+  const [urls, setUrls] = useState(
+    stateAuth?.startupData?.product?.youtubeDemoUrl ?? ""
+  );
+  const onSubmit = async () => {
+    updateStartupInfo();
+    close(false);
+  };
+  const handleFullChange = (e, name) => {
+    const { value } = e.target;
+    //console.log(name);
+    updateProfile("product", { [name]: value });
+  };
+  const handleChangeVids = (e) => {
+    setYoutube(e.target.value);
+  };
+  const removeVideo = () => {
+    setUrls("");
+    updateProfile("product", { youtubeDemoUrl: '' });
+  };
+  const addVid = () => {
+    setUrls(youtube);
+    setYoutube("");
+    updateProfile("product", {
+      youtubeDemoUrl: youtube,
+    });
+  };
+
   return (
     <div className="mx-0 my-4">
-      <div className="product-desc border-bottom">
-        <h1>Product / Service Description</h1>
-        <p className="py-4">A brief description of your product</p>
-      </div>
+      <Form
+        name="Product"
+        initialValues={{
+          remember: true,
+        }}
+        layout="vertical"
+        onFinish={onSubmit}
+        style={{ marginBottom: "4rem" }}
+      >
+        <div className="product-desc border-bottom">
+          <h1>Product / Service Description</h1>
+          <p className="py-4">A brief description of your product</p>
+        </div>
 
-      <div className="row my-4 d-flex justify-content-between">
-        <TextArea
-          className="col-lg-12"
-          label={
-            'Briefly describe the users of your product or services? 250 words'
-          }
-          placeholder={'Enter brief bio about you'}
-          rows={5}
-        />
-      </div>
-
-      <div className="row my-4">
-        <div className="col-lg-6">
-          <TextArea
-            className="col-lg-12"
-            label={'Paste Youtube Link of product Demo'}
-            placeholder={'Youtube link'}
-            rows={1}
+        <div className="row my-4 d-flex justify-content-between">
+          <TextareaCustom
+            name={"description"}
+            value={stateAuth?.startupData?.product?.description}
+            onChange={(e) => handleFullChange(e, "description")}
+            onKeyPress={letterOnly}
+            placeholder={"Enter Brief info about your product"}
           />
         </div>
 
-        <div className="col-lg-6 mt-4 pt-1 youtube">
-          <button className="">Upload</button>
+        <div className="form-group col-12 mt-3">
+          <label> Paste Youtube Link of product Demo </label>
+          <div className="d-flex my-2">
+            <input
+              type="text"
+              name="youtubeDemoUrl"
+              onChange={handleChangeVids}
+              value={youtube}
+              className="form-control youtube-input ps-3"
+              placeholder="Youtube link"
+            />
+            <button type="button"
+            className="btn btn-primary"
+              onClick={addVid}>
+              Upload
+            </button>
+          </div>
+          {!urls.includes("https://youtu.be/") ? (
+            <div className="form-group col-12 mt-3">
+              <UploadFile
+                data={{
+                  maxFiles: 1,
+                  supportedMimeTypes: ["video/mp4"],
+                  maxFileSize: 10,
+                  extension: "MB",
+                }}
+                initData={
+                  stateAuth?.startupData?.product?.files
+                    ? [stateAuth.startupData?.product?.files]
+                    : []
+                }
+                onUpload={async (filesInfo) => {
+                  const formData = new FormData();
+                  formData.append("dir", "kv");
+                  formData.append("ref", stateAuth.user?.userId);
+                  formData.append("type", "video");
+                  formData.append(0, filesInfo[0]?.file);
+                  const response = await upload(formData);
+                  // setVidDoc(response?.path);
+                  updateProfile("product", {
+                    files: response?.path,
+                  });
+                }}
+              />
+            </div>
+          ) : (
+            <div className="form-group col-12">
+              <VideoWrapper>
+                <div className="mb-2 d-flex justify-content-end">
+                  <button type="button" onClick={removeVideo}>
+                    Delete
+                  </button>
+                </div>
+
+                <iframe
+                  src={`https://www.youtube.com/embed/${urls.replace(
+                    "https://youtu.be/",
+                    ""
+                  )}`}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; execution-while-not-rendered 'none'"
+                  allowfullscreen
+                  title="video"
+                  style={{
+                    borderRadius: "20px",
+                    maxHeight: "150px",
+                    width: "250px",
+                  }}
+                />
+              </VideoWrapper>
+            </div>
+          )}
         </div>
-      </div>
 
-      <div className="">
-        <FileWrapper className="d-flex justify-content-center text-center col-lg-12">
-          <img src={downloadIcon} alt="Download Icon" />
-          <FileText className="my-3 font-weight-bold">Drag & Drop</FileText>
-          <FileText>Drag files or click here to upload </FileText>
-          <FileSize className="my-3">{'(Max. File size 5mb)'}</FileSize>
-          <input type="file" id="pitch-doc" hidden />
-          <LabelButton for="pitch-doc">Upload Files</LabelButton>
-        </FileWrapper>
-      </div>
-
-      <div className="my-5 product-update">
-        <button>Update</button>
-      </div>
+        <div className="my-5 product-update">
+          <button type="submit">Update</button>
+        </div>
+      </Form>
     </div>
-  )
-}
+  );
+};

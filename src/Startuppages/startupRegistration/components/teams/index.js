@@ -110,6 +110,8 @@ export const TeamProfile = () => {
     }
   }
 
+
+
   const formik = useFormik({
     initialValues: {
       briefIntroduction: stateAuth?.startupData?.team?.briefIntroduction ?? '',

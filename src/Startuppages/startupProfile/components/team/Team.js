@@ -86,11 +86,11 @@ const TeamMember = ({ data ,modalData,  showCofounder, setCofounder  }) => {
     >
   {
     showCofounder ? <LargeModal closeModal={setCofounder}>
-        <FounderModal data={modalData}  />
+        <FounderModal data={data}  />
       </LargeModal> : <span />
   }
 
-      <img src={data?.avatar} alt="team member" className="mr-4 rounded-circle w-50 h-75" />
+{ data?.avatar &&  <img src={data?.avatar} alt="team member" className="mr-4" style={{width:'60px', height:'60px', borderRadius:'60px'}} />}
       <section>
         <p> {data?.firstName + data?.lastName } </p>
         <p className="small"> {data?.position ?? 'Founder'} </p>
@@ -118,7 +118,7 @@ const FounderModal = ({data}) => {
     <section className="container dashboard_profle mt-4">
       <div className="row founder_profile px-5">
         <div className="col-lg-2 me-5">
-          <img src={data?.avatar} alt="" />
+          <img src={data?.avatar} style={{width:'60px', height:'60px', borderRadius:'60px'}} alt="" />
         </div>
         <div className="col-lg-9 mt-3">
           <div className="d-flex justify-content-between ">
@@ -160,9 +160,6 @@ const FounderModal = ({data}) => {
                 {
                   data?.experience?.map((item , i) =>(
                    <div key={i}>
-                    <div >
-                    <img src={apple} alt="apple" />
-                  </div>
                   <div className="founder_experience ml-4">
                     <h3 className=""> { item?.companyName } </h3>
                     <p className="pt-2 pb-2"> { item?.position } </p>
@@ -186,9 +183,7 @@ const FounderModal = ({data}) => {
                  data?.education.map((item , i) =>(
                   <div key={i} className="col-lg-8 d-flex mt-4">
 
-                  <div>
-                    <img src={blue} alt="blue" />
-                  </div>
+                
                   <div className="mx-4">
                     <h6> { item?.schoolName } </h6>
                     <p className="py-2">{item?.course} </p>

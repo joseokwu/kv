@@ -50,6 +50,7 @@ const authReducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         loading: false,
+        ...action.payload,
         type: action.payload?.type,
         username: action.payload?.startupname
           ? action.payload?.startupname
@@ -87,6 +88,7 @@ const authReducer = (state = INIT_STATE, action) => {
           dashboardLoad: false,
           authenticated: true,
           user: action?.payload,
+          ...action?.payload,
           startupData: action.payload.startupData,
           type: action?.payload?.type,
           signUpStatus: action?.payload?.type[0],
@@ -128,6 +130,7 @@ const authReducer = (state = INIT_STATE, action) => {
         loading: false,
         dashboardLoad: false,
         partnerData:action?.payload,
+        ...action?.payload,
         type: action?.payload?.type,
         signUpStatus: action?.payload?.type[0],
         email: action?.payload?.email,

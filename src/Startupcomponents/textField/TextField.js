@@ -5,13 +5,18 @@ import { Form, Input, Checkbox, message } from "antd";
 export const TextField = ({
   label,
   id = "",
-  onFocus,
   name,
+  defaultValue,
+  value,
+  onBlur,
   type,
-  disabled = false,
+  disabled,
   className,
-  required = true,
+  required,
   placeholder,
+  onChange,
+  onFocus,
+  onKeyPress,
   ...rest
 }) => {
   return (
@@ -25,18 +30,27 @@ export const TextField = ({
             message: `Please input your ${name}!`,
           },
           {
-            type: name === "email" ? name : "",
-            message: name === "email" ? `Please input a correct ${name}` : "",
+            type: name === "email" ? name : type === "url" ? "url" : "",
+            message: name === "email" ? `Please input a correct ${name}` : type === "url" ? `Please enter a valid ${name} url` : "",
           },
         ]}
         type={type}
+        initialValue={value}
         label={label}
       >
         <Input
           id={name}
+          onBlur={onBlur}
+          onFocus={onFocus}
           className={`${className}`}
           placeholder={placeholder}
           type={type}
+          value={value}
+          onChange={onChange}
+          defaultValue={value}
+          onKeyPress={onKeyPress}
+          disabled={disabled}
+          required={required}
           {...rest}
         />
       </Form.Item>
