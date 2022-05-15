@@ -120,6 +120,7 @@ import {
   SelectionProcessMentor,
   CreateNewCriteriaIntro,
   CreateNewCriteria,
+  CriteriaQuestions,
 } from "../adminPages";
 
 const routes = [
@@ -865,6 +866,15 @@ const routes = [
     name: "admin Selection Process",
     path: "/admin/selection_process/new-criteria",
     component: WithAdminLayout(CreateNewCriteria),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/criteria-questions",
+    component: WithAdminLayout(CriteriaQuestions),
     exact: true,
     protected: false,
     type: "admin",

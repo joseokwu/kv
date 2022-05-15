@@ -4,9 +4,12 @@ import info from "../../assets/icons/scaleIcon.svg";
 import close from "../../assets/icons/close.svg";
 import styles from "./createNewCriteria.module.css";
 import { useAdmin } from "../../hooks";
+import { useHistory } from "react-router-dom";
 
 export const CreateNewCriteria = () => {
-  const { adminState } = useAdmin();
+  const { adminState, setCriteria } = useAdmin();
+
+  const { push } = useHistory();
 
   console.log("adminState", adminState);
   const [categories, setCategories] = useState([
@@ -41,6 +44,11 @@ export const CreateNewCriteria = () => {
     if (categories.length > 1) {
       setCategories(() => categories?.filter((x, i) => i !== index));
     }
+  };
+
+  const handleNext = () => {
+    setCriteria(categories);
+    push("/admin/selection_process/criteria-questions");
   };
 
   return (
@@ -101,7 +109,11 @@ export const CreateNewCriteria = () => {
               <p>Total Score: 150</p>
               <div className={`d-flex align-items-center space-out `}>
                 <Button label="Review" variant="secondary" />
-                <Button label="Next" variant="primary" />
+                <Button
+                  label="Next"
+                  variant="primary"
+                  onClick={() => handleNext()}
+                />
               </div>
             </section>
           </section>
