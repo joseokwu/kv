@@ -45,7 +45,13 @@ export const CohortTable = () => {
       ),
       action: (
         <div className="d-flex align-items-center space-out">
-          <p className="view-link" role="button">
+          <p
+            className="view-link"
+            role="button"
+            onClick={() =>
+              push(`/admin/selection_process/cohort/January Cohort/0001`)
+            }
+          >
             View
           </p>
         </div>
@@ -55,7 +61,7 @@ export const CohortTable = () => {
       id: "0002",
       startDate: formatDate(new Date(2021, 7, 13)),
       endDate: formatDate(new Date(2021, 8, 13)),
-      title: "January Cohort",
+      title: "February Cohort",
       startups: (
         <section className="event_people">
           {Array.from("fiver").map((item, i) => {
@@ -77,7 +83,13 @@ export const CohortTable = () => {
       ),
       action: (
         <div className="d-flex align-items-center space-out">
-          <p className="view-link" role="button">
+          <p
+            className="view-link"
+            role="button"
+            onClick={() =>
+              push(`/admin/selection_process/cohort/February Cohort/0002`)
+            }
+          >
             View
           </p>
         </div>

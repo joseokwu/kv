@@ -21,3 +21,4 @@ export * from "./selectionProcessMentor/SelectionProcessMentor";
 export * from "./createNewCriteriaIntro/CreateNewCriteriaIntro";
 export * from "./createNewCriteria/CreateNewCriteria";
 export * from "./criteriaQuestions/CriteriaQuestions";
+export * from "./cohortStartups/CohortStartups";
