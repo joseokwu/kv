@@ -65,11 +65,6 @@ export const StartupProfile = () => {
   //console.log(stateAuth)
   
 
-  
-
- 
-
- 
 
   const handlePhoneInput = (value) => {
    
@@ -140,7 +135,7 @@ export const StartupProfile = () => {
     updateStartupInfo()
     console.log(stateAuth?.startupData)
   };
-  console.log(stateAuth)
+  //console.log(stateAuth)
   return (
     <>
       <HeaderStartup className="mb-3">
@@ -259,8 +254,8 @@ export const StartupProfile = () => {
 
             <div className="form-group col-lg-6 col-12">
             <Form.Item
-                name="Company Size"
-                label="companySize"
+                name="companySize"
+                label="Company Size"
                 initialValue={stateAuth?.startupData?.startUpProfile?.companySize}
                 rules={[
                   { required: true, message: 'Please select a Company Size' },
@@ -494,7 +489,7 @@ export const StartupProfile = () => {
             </div>
             <div className="form-group col-lg-6 col-12">
             <TextField
-                label="Twitter"
+                label="Twitter" 
                 type={'url'}
                 name={'twitterHandle'}
                 onChange={(e) => updateProfile("startUpProfile", {
