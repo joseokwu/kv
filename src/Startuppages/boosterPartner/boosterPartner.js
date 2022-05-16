@@ -115,7 +115,7 @@ export const StartupBoosterPartner = () => {
         return <AllOfferings
           setCurrentPage={setCurrentPage}
           data={partners}
-          total={ partners?.metadata && partners?.metadata[0]?.total}
+          total={ partners?.metadata && partners?.metadata?.total}
           currentPage={currentPage}
          partners={partners?.partners}
          apply={apply} />

@@ -15,7 +15,7 @@ import { UserOutlined, PlusOutlined } from '@ant-design/icons';
 import { useActivity } from '../../../../hooks/useBusiness';
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { Select , DatePicker } from 'antd';
+import { Select , DatePicker , Form } from 'antd';
 import { TeamModal, EducationModal } from './teamModal';
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';

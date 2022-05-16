@@ -6,11 +6,8 @@ import {
   FormWrapper,
   BntWrap,
 } from './teams.styled'
-import { updateFounderProfile } from '../../../../services/startup'
 import { UserOutlined, PlusOutlined } from '@ant-design/icons'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { DatePicker } from 'antd'
+import { DatePicker , Form , Select } from 'antd'
 import 'react-datepicker/dist/react-datepicker.css'
 // import { CustomSelect } from "../../../../Startupcomponents/select/customSelect";
 import 'react-phone-number-input/style.css'
@@ -18,10 +15,9 @@ import PhoneInput from 'react-phone-number-input'
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled'
 import { useActivity } from '../../../../hooks/useBusiness'
 import { TeamModal, EducationModal } from './teamModal'
-import { Select } from 'antd'
 
 import 'antd/dist/antd.css'
-// import { team } from "./../../../../services/startUpReg";
+import { TextField } from '../../../../Startupcomponents'
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader'
 import { toast } from 'react-hot-toast'
 import { CoFounder } from './coFounder'
@@ -33,12 +29,11 @@ import {
   Tag,
   RandomCard,
 } from '../../../../Startupcomponents'
-import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../../hooks/useAuth';
 import { upload } from '../../../../services/utils'
 // import CountryDropdown from 'country-dropdown-with-flags-for-react'
 import moment from 'moment'
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 const { Option } = Select
 
@@ -49,12 +44,8 @@ export const TeamProfile = () => {
   const [show, setShow] = useState(false)
   const [showEducation, setShowEducation] = useState(false)
   const [showModal, setShowModal] = useState(false)
-  const history = useHistory()
-  const skill = ['Java', 'C++', 'Ruby', 'Javascript', 'HTML', 'CSS', 'Express']
-  const [dob, setDob] = useState(moment(stateAuth?.user?.team?.dob) ?? '')
-  const [loading, setLoading] = useState(false)
   const [coFounder, setCoFounder] = useState('no')
-  const [phone, setPhone] = useState(stateAuth?.user?.team?.mobile_number ?? '')
+
  
   const [country, setCountry] = useState(stateAuth?.startupData?.team?.country ?? '');
   const [region , setRegion] = useState(stateAuth?.startupData?.team?.state ?? '');
@@ -112,43 +103,9 @@ export const TeamProfile = () => {
 
 
 
-  const formik = useFormik({
-    initialValues: {
-      briefIntroduction: stateAuth?.startupData?.team?.briefIntroduction ?? '',
-      firstName: stateAuth?.startupData?.team?.firstName ?? '',
-      lastName: stateAuth?.startupData?.team?.lastName ?? '',
-      email: stateAuth?.startupData?.team?.email ?? '',
-      state: stateAuth?.startupData?.team?.state ?? '',
-      city: stateAuth?.startupData?.team?.city ?? '',
-      dob: stateAuth?.startupData?.team?.dob ?? moment(),
-      country: stateAuth?.startupData?.team?.country,
-      gender: stateAuth?.startupData?.team?.gender ?? '',
-      website: stateAuth?.startupData?.team?.socialMedia?.website,
-      linkedIn: stateAuth?.startupData?.team?.socialMedia?.linkedIn ?? '',
-      twitter: stateAuth?.startupData?.team?.socialMedia?.twitter ?? '',
-      isCofounder: true,
-    },
 
-    onSubmit: (value) => onSubmit(value),
-  })
 
   //console.log(stateAuth)
-
-  const handleChange = (e, prefix = '') => {
-    const { name, value } = e.target
-    if (prefix !== '') {
-      updateProfile('team', {
-        [prefix]: {
-          ...stateAuth?.startupData?.team[prefix],
-          [name]: value,
-        },
-      })
-      formik.handleChange(e)
-      return
-    }
-    updateProfile('team', { [name]: value })
-    formik.handleChange(e)
-  }
 
   const handleChangeCountry = (value) => {
     updateProfile('team', { country: value })
@@ -176,7 +133,7 @@ export const TeamProfile = () => {
     updateProfile('team', {
       dob: value,
     })
-    formik.setFieldValue('dob', value.value)
+    
   }
 
   const handleKey = (e) => {
@@ -216,20 +173,10 @@ export const TeamProfile = () => {
     changePath(path - 1)
   }
 
-  const children = []
-  for (let i = 0; i < skill.length; i++) {
-    children.push(<Option key={i}>{skill[i]}</Option>)
-  }
 
   const onSubmit = async (value) => {
-    // if(stateAuth?.startupData?.team?.experience.length < 0 &&
-    //   stateAuth?.startupData?.team?.education.length < 0 && stateAuth?.startupData?.team?.coFounder.length < 0
-    //   ){
-    //     toast.error('All fields are required');
-    //     console.log('heyyy')
-    //     return ;
-    //   }
-    console.log('heyyy', value)
+ 
+   // console.log(stateAuth)
     updateStartupInfo()
   }
 
@@ -306,6 +253,7 @@ export const TeamProfile = () => {
     if (stateAuth?.startupData?.team?.coFounder.length > 0) {
       setCoFounder('yes')
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -357,7 +305,14 @@ export const TeamProfile = () => {
         <p className="text-nowrap">Let’s you introduce your Founder(s)</p>
       </HeaderTeam>   
 
-      <form style={{ marginBottom: '4rem' }} onSubmit={formik.handleSubmit}>
+      <Form style={{ marginBottom: '4rem' }} 
+      name="Team Member"
+        initialValues={{
+          remember: true,
+        }}
+        layout="vertical"
+        onFinish={onSubmit}
+      >
         <FormWrapper height="70%">
           <div className="div">
             <span>Founder</span>
@@ -394,78 +349,51 @@ export const TeamProfile = () => {
 
           <div className="row my-5">
             <div className="form-group col-12">
-              <div className="d-flex justify-content-between">
-                <label>
-                  Brief Introduction<span style={{ color: 'red' }}>*</span>
-                </label>
-                <label style={{ color: '#828282' }}>10 words at most</label>
-              </div>
-              <input
-                onChange={handleChange}
-                value={formik.values.briefIntroduction}
-                // onBlur={formik.handleBlur}
-                type="text"
-                name="briefIntroduction"
+              
+              <TextField
+                label="Brief Introduction"
+                name={'briefIntroduction'}
+                onChange={(e) => updateProfile("team", {briefIntroduction:e.target.value })}
+                value={stateAuth?.startupData?.team?.briefIntroduction}
+                required={true}
+                className={'form-control'}
                 placeholder="Enter a brief bio about yourself"
-                className="form-control ps-3"
               />
-              {formik.touched.briefIntroduction &&
-              formik.errors.briefIntroduction ? (
-                <label className="error">
-                  {formik.errors.briefIntroduction}
-                </label>
-              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>
-                First Name<span style={{ color: 'red' }}>*</span>
-              </label>
-              <input
-                onChange={handleChange}
-                value={formik.values.firstName}
-                onBlur={formik.handleBlur}
-                type="text"
-                name="firstName"
+
+            <TextField
+                label="First Name"
+                name={'firstName'}
+                onChange={(e) => updateProfile("team", {firstName:e.target.value })}
+                value={stateAuth?.startupData?.team?.firstName}
+                required={true}
+                className={'form-control'}
                 placeholder="Enter first name"
-                className="form-control ps-3"
               />
-              {formik.touched.firstName && formik.errors.firstName ? (
-                <label className="error">{formik.errors.firstName}</label>
-              ) : null}
+     
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>
-                Last Name<span style={{ color: 'red' }}>*</span>
-              </label>
-              <input
-                onChange={handleChange}
-                value={formik.values.lastName}
-                onBlur={formik.handleBlur}
-                type="text"
-                name="lastName"
+            <TextField
+                label="Last Name"
+                name={'lastName'}
+                onChange={(e) => updateProfile("team", {lastName:e.target.value })}
+                value={stateAuth?.startupData?.team?.lastName}
+                required={true}
+                className={'form-control'}
                 placeholder="Enter last name"
-                className="form-control ps-3"
               />
-              {formik.touched.lastName && formik.errors.lastName ? (
-                <label className="error">{formik.errors.lastName}</label>
-              ) : null}
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>
-                Email<span style={{ color: 'red' }}>*</span>
-              </label>
-              <input
-                onChange={handleChange}
-                value={formik.values.email}
-                onBlur={formik.handleBlur}
-                type="text"
-                name="email"
+            <TextField
+                label="Email"
+                name={'email'}
+                onChange={(e) => updateProfile("team", {email:e.target.value })}
+                value={stateAuth?.startupData?.team?.email}
+                required={true}
+                className={'form-control'}
                 placeholder="Enter email address"
-                className="form-control ps-3"
               />
-              {formik.touched.email && formik.errors.email ? (
-                <label className="error">{formik.errors.email}</label>
-              ) : null}
             </div>
             <div className="form-group  col-lg-6 col-12">
               <label>
@@ -482,9 +410,7 @@ export const TeamProfile = () => {
                 format={dateFormat}
                 onChange={handleDateInput}
               />
-              {formik.touched.dob && formik.errors.dob ? (
-                <label className="error">{formik.errors.dob}</label>
-              ) : null}
+           
             </div>
             <div className="form-group col-lg-4 col-12">
               <label>
@@ -511,28 +437,18 @@ export const TeamProfile = () => {
                 onChange={(value) => handleChangeState(value)}
                 className="form-control ps-3"
                  /> 
-
-
-              {formik.touched.state && formik.errors.state ? (
-                <label className="error">{formik.errors.state}</label>
-              ) : null}
             </div>
             <div className="form-group col-lg-4 col-12">
-              <label>
-                City<span style={{ color: 'red' }}>*</span>
-              </label>
-              <input
-                onChange={handleChange}
-                value={formik.values.city}
-                onBlur={formik.handleBlur}
-                type="text"
-                name="city"
+            <TextField
+                label="City"
+                name={'city'}
+                onChange={(e) => updateProfile("team", {city:e.target.value })}
+                value={stateAuth?.startupData?.team?.city}
+                required={true}
+                className={'form-control'}
                 placeholder="Enter your city"
-                className="form-control ps-3"
               />
-              {formik.touched.city && formik.errors.city ? (
-                <label className="error">{formik.errors.city}</label>
-              ) : null}
+  
             </div>
             <div className="form-group  col-lg-6 col-12">
               <label>
@@ -544,36 +460,34 @@ export const TeamProfile = () => {
                 countryCallingCodeEditable={true}
                 className="custs w-lg-50 ps-3 py-2"
                 value={stateAuth?.startupData?.team?.mobile_number ?? ''}
-                onBlur={formik.handleBlur}
                 onChange={handlePhoneInput}
                 MaxLength={17}
               />
-              {formik.touched.mobile_number && formik.errors.mobile_number ? (
-                <label className="error">{formik.errors.mobile_number}</label>
-              ) : null}
+           
             </div>
             <div className="form-group  col-lg-6 col-12">
-              <label>
-                Gender<span style={{ color: 'red' }}>*</span>
-              </label>
-              <select
-                className="cust mx-3 px-2 py-2 extra"
-                id="gender"
+            <Form.Item
                 name="gender"
-                value={formik.values.gender}
-                onChange={handleChange}
+                label="Gender"
+                initialValue={stateAuth?.startupData?.team?.gender }
+                rules={[
+                  { required: true, message: 'Please select a Company Size' },
+                ]}
               >
-                {gender.map((item, index) => {
-                  return (
-                    <option value={item.value} key={index}>
-                      {item.label}
-                    </option>
-                  )
-                })}
-              </select>
-              {formik.touched.gender && formik.errors.gender ? (
-                <label className="error">{formik.errors.gender}</label>
-              ) : null}
+                  <Select
+                  id="gender"
+                  style={{ width: 200, backgroundColor: '#959596' }}
+                  onChange={(e) => updateProfile("team", {gender:e })}
+                >
+                  {gender.map((item, i) => (
+                    <Option value={item.value} key={i}>
+                      {' '}
+                      {item.label}{' '}
+                    </Option>
+                  ))}
+                </Select>
+               </Form.Item>
+       
             </div>
           </div>
         </FormWrapper>
@@ -761,55 +675,59 @@ export const TeamProfile = () => {
           </div>
           <div className="row">
             <div className="form-group col-lg-6 col-12">
-              <label>
-                LinkedIn<span style={{ color: 'red' }}>*</span>
-              </label>
-              <input
-                onChange={(e) => handleChange(e, 'socialMedia')}
-                value={formik.values.linkedIn}
-                // onBlur={formik.handleBlur}
-                type="text"
-                name="linkedIn"
-                placeholder="Enter Linkdin link"
-                className="form-control ps-3"
+            <TextField
+                label="LinkedIn"
+                name={'linkedIn'}
+                onChange={(e) =>    updateProfile('team', {
+                  socialMedia: {
+                  ...stateAuth?.startupData?.team?.socialMedia,
+                  linkedIn: e.target.value,
+                },
+              })}
+                value={stateAuth?.startupData?.team?.socialMedia?.linkedIn}
+                required={true}
+                type={'url'}
+                className={'form-control'}
+                placeholder="Enter Linkedin link"
               />
-              {formik.touched.linkedIn && formik.errors.linkedIn ? (
-                <label className="error">{formik.errors.linkedIn}</label>
-              ) : null}
+            
             </div>
             <div className="form-group col-lg-6 col-12">
-              <label>
-                Twitter<span style={{ color: 'red' }}>*</span>
-              </label>
-              <input
-                onChange={(e) => handleChange(e, 'socialMedia')}
-                value={formik.values.twitter}
-                // onBlur={formik.handleBlur}
-                type="text"
-                name="twitter"
+            <TextField
+                label="Twitter"
+                name={'twitter'}
+                onChange={(e) =>  updateProfile('team', {
+                  socialMedia: {
+                  ...stateAuth?.startupData?.team?.socialMedia,
+                  twitter: e.target.value,
+                },
+              })}
+                value={stateAuth?.startupData?.team?.socialMedia?.twitter}
+                required={true}
+                type={'url'}
+                className={'form-control'}
                 placeholder="Enter Twitter link"
-                className="form-control ps-3"
               />
-              {formik.touched.twitter && formik.errors.twitter ? (
-                <label className="error">{formik.errors.twitter}</label>
-              ) : null}
+            
             </div>
 
             <div className="form-group col-lg-6 col-12">
-              <label>
-                Website<span style={{ color: 'red' }}>*</span>
-              </label>
-              <input
-                onChange={(e) => handleChange(e, 'socialMedia')}
-                value={formik.values.website}
-                type="text"
-                name="website"
-                placeholder="Enter website"
-                className="form-control ps-3"
+            <TextField
+                label="Website"
+                name={'website'}
+                onChange={(e) => updateProfile('team', {
+                  socialMedia: {
+                  ...stateAuth?.startupData?.team?.socialMedia,
+                  website: e.target.value,
+                },
+              })}
+                value={stateAuth?.startupData?.team?.socialMedia?.website}
+                required={true}
+                type={'url'}
+                className={'form-control'}
+                placeholder="Enter Website link"
               />
-              {formik.touched.website && formik.errors.website ? (
-                <label className="error">{formik.errors.website}</label>
-              ) : null}
+             
             </div>
           </div>
         </FormWrapper>
@@ -822,7 +740,7 @@ export const TeamProfile = () => {
           </div>
           <div className="col-9 d-flex justify-content-end">
             <CustomButton type="submit" className="mx-2" background="#00ADEF">
-              {loading ? <CircularLoader /> : 'Save'}
+              {'Save'}
             </CustomButton>
             <CustomButton
               type="button"
@@ -840,7 +758,7 @@ export const TeamProfile = () => {
             </CustomButton> */}
           </div>
         </div>
-      </form>
+      </Form>
     </>
   )
 }

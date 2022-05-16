@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HeaderModal, ModalForm } from "./teams.styled";
 import { ModalCus } from "../../../../Startupcomponents/modal/Modal";
-import { DatePicker } from "antd";
+import { DatePicker  } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
 import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
 import { useFormik } from "formik";
