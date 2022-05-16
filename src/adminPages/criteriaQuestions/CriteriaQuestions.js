@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, GoBack, TextField } from "../../components";
 import { useAdmin } from "../../hooks";
 import styles from "./criteriaQuestion.module.css";
@@ -10,6 +10,7 @@ export const CriteriaQuestions = () => {
   const { push } = useHistory();
   const {
     adminState: { criteria },
+    setCriteria,
   } = useAdmin();
 
   const handleNext = () => {
@@ -23,6 +24,16 @@ export const CriteriaQuestions = () => {
       setCurrentCategory(currentCategory - 1);
     }
   };
+
+  const addToCriteria = (index, data) => {
+    let tempCriteria = criteria;
+    console.log("tempCriteria", tempCriteria);
+    console.log("currentCategory", currentCategory);
+    tempCriteria[currentCategory].titleAndQuestion[index] = data;
+    setCriteria(tempCriteria);
+  };
+
+  console.log("criteria", criteria);
 
   return (
     <div className="bg-white" style={{ minHeight: "94vh" }}>
@@ -91,7 +102,14 @@ export const CriteriaQuestions = () => {
                 {criteria?.length > 0 &&
                   criteria[currentCategory]?.titleAndQuestion.length > 0 &&
                   criteria[currentCategory]?.titleAndQuestion?.map((tq, i) => {
-                    return <TQItem data={tq} key={`tq-${i}`} />;
+                    return (
+                      <TQItem
+                        data={tq}
+                        key={`tq-${i}`}
+                        index={i}
+                        addToCriteria={addToCriteria}
+                      />
+                    );
                   })}
               </div>
               <div
@@ -133,14 +151,34 @@ export const CriteriaQuestions = () => {
   );
 };
 
-const TQItem = ({ data }) => {
+const TQItem = ({ data, index = 0, addToCriteria = () => {} }) => {
+  const [inputs, setInputs] = useState({ title: "", question: "" });
+
+  const handleChange = (e) => {
+    setInputs({ ...inputs, [e.target.id]: e.target.value });
+  };
+
+  useEffect(() => {
+    addToCriteria(index, inputs);
+  }, [inputs]);
+
   return (
     <div className="row mb-4">
       <section className="col-lg-4">
-        <TextField label="Title" value={data?.title} />
+        <TextField
+          label="Title"
+          value={data?.title}
+          name="title"
+          onChange={handleChange}
+        />
       </section>
       <section className="col-lg-8">
-        <TextField label="Question" value={data?.question} />
+        <TextField
+          label="Question"
+          value={data?.question}
+          name="question"
+          onChange={handleChange}
+        />
       </section>
     </div>
   );
