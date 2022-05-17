@@ -3,9 +3,9 @@ import { request } from "../utils/axios";
 export const register = async (values) => {
   try {
     const res = await request.post("register", values);
-
     return res?.data;
   } catch (err) {
+    console.log(err?.response?.data?.message , 'somethings went wrong')
     throw err;
   }
 };
