@@ -167,3 +167,8 @@
   display: inline-flex;
   padding: 3px 11px;
 }
+
+.view_assign_btn {
+  border: 1px solid #17b3ee !important;
+  color: #17b3ee !important;
+}
