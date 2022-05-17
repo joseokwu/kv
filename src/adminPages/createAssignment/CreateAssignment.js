@@ -72,8 +72,9 @@ export const CreateAssignment = () => {
         })}
       </section>
 
-      <section className={styles.btnWrapper}>
-        <Button label="Save" variant="secondary" />
+      <section className={`d-flex justify-content-end ${styles.btnWrapper}`}>
+        <Button label="Cancel" variant="gray" />
+        <Button label="Create Assignment" variant="secondary" />
       </section>
     </div>
   );
