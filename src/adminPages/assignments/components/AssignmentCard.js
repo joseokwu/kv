@@ -16,14 +16,10 @@ export const AssignmentCard = ({ data = {}, id = 0 }) => {
         <h4 data-target={`#assignment-${id}`} data-toggle="modal">
           Create a business plan
         </h4>
-        <AssignDropdown />
+        <AssignDropdown id={id} />
       </section>
 
-      <section
-        className="border-bottom mb-4 pb-3"
-        data-target={`#assignment-${id}`}
-        data-toggle="modal"
-      >
+      <section className="border-bottom mb-4 pb-3">
         <p className={styles.desc}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
           morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -31,11 +27,7 @@ export const AssignmentCard = ({ data = {}, id = 0 }) => {
         </p>
       </section>
 
-      <section
-        className="d-flex align-items-center justify-content-between mb-4"
-        data-target={`#assignment-${id}`}
-        data-toggle="modal"
-      >
+      <section className="d-flex align-items-center justify-content-between mb-4">
         <div className={`d-flex align-items-center ${styles?.date}`}>
           <h5 className="mb-0">{new Date(2022, 3, 5).getDate()}</h5>
           <p>{months[new Date(2022, 3, 5).getMonth()]}</p>
@@ -62,14 +54,19 @@ export const AssignmentCard = ({ data = {}, id = 0 }) => {
   );
 };
 
-const AssignDropdown = () => {
+const AssignDropdown = ({ id = 0 }) => {
   return (
     <div className="dropdown mb-2">
       <div id="dropdownMenu2" data-toggle="dropdown" role="button">
         <img src={dots} alt="dots" />
       </div>
       <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button className="dropdown-item" type="button">
+        <button
+          className="dropdown-item"
+          type="button"
+          data-target={`#assignment-${id}`}
+          data-toggle="modal"
+        >
           Assignment Details
         </button>
         <button className="dropdown-item" type="button">
