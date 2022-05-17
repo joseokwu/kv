@@ -124,6 +124,7 @@ import {
   CohortStartups,
   ViewCriteria,
   ReviewCriteria,
+  AssignmentResponse,
 } from "../adminPages";
 
 const routes = [
@@ -941,6 +942,15 @@ const routes = [
     name: "admin Program",
     path: "/admin/program/create_assignment",
     component: WithAdminLayout(CreateAssignment),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/response/:id",
+    component: WithAdminLayout(AssignmentResponse),
     exact: true,
     protected: false,
     type: "admin",

@@ -2,9 +2,6 @@ import React from "react";
 import { months } from "../../../utils/helpers";
 import styles from "../viewSelectionAnswer.module.css";
 import user from "../../../assets/images/sampleTeamMember.png";
-import maindoc from "../../../assets/images/mani-doc.svg";
-import pitchicon from "../../../assets/icons/pitchd.svg";
-import download from "../../../assets/icons/downloadoutline.svg";
 import { AssignmentFile } from "../../../adminComponents";
 
 export const Assignments = () => {

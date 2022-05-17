@@ -1,0 +1,72 @@
+.response_tab {
+  flex-basis: 12%;
+  column-gap: 1.5rem;
+}
+
+.top_section {
+  background: #dcebff;
+  padding: 1.56rem;
+}
+
+.top_section article {
+  column-gap: 1.5rem;
+}
+
+.top_section > article > h4 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.bottom_section {
+  border: 1px solid #f2f2f2;
+  padding: 3.8rem;
+  overflow: hidden;
+}
+
+.bottom_section > div > section > div > p {
+  margin-bottom: 2.5rem !important;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #525151;
+}
+
+.bottom_section > div > section > div > h5 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.closeSection {
+  max-height: 0;
+  padding: 0 !important;
+  transition: all 0.3s ease-out;
+  overflow: hidden;
+}
+
+.openSection {
+  max-height: 500px;
+  transition: all 0.3s ease-in;
+  overflow: hidden;
+}
+
+.openArrow {
+  transform: rotateX(180deg);
+  transform-origin: center;
+  transition: all 0.3s ease-in;
+}
+
+.closeArrow {
+  transform: rotateX(0deg);
+  transform-origin: center;
+  transition: all 0.3s ease-in;
+}

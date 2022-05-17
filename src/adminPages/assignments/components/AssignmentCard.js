@@ -5,6 +5,7 @@ import { months, formatTime } from "../../../utils/helpers";
 import doc from "../../../assets/images/doc.svg";
 import styles from "../assignment.module.css";
 import { ViewAssignment } from "./ViewAssignment";
+import { useHistory } from "react-router-dom";
 
 export const AssignmentCard = ({ data = {}, id = 0 }) => {
   return (
@@ -55,6 +56,7 @@ export const AssignmentCard = ({ data = {}, id = 0 }) => {
 };
 
 const AssignDropdown = ({ id = 0 }) => {
+  const { push } = useHistory();
   return (
     <div className="dropdown mb-2">
       <div id="dropdownMenu2" data-toggle="dropdown" role="button">
@@ -69,7 +71,11 @@ const AssignDropdown = ({ id = 0 }) => {
         >
           Assignment Details
         </button>
-        <button className="dropdown-item" type="button">
+        <button
+          className="dropdown-item"
+          type="button"
+          onClick={() => push(`/admin/program/response/${id}`)}
+        >
           Responses
         </button>
         <button

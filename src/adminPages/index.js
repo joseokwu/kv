@@ -24,3 +24,4 @@ export * from "./criteriaQuestions/CriteriaQuestions";
 export * from "./cohortStartups/CohortStartups";
 export * from "./viewCriteria/ViewCriteria";
 export * from "./reviewCriteria/ReviewCriteria";
+export * from "./assignmentResponse/AssignmentResponse";

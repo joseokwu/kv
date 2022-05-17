@@ -48,7 +48,7 @@ export const ViewAssignment = () => {
                 return (
                   <li>
                     <img src={apple} alt="apple" />
-                    <p>Applane Insteen.</p>
+                    <p>{startup?.name}</p>
                   </li>
                 );
               })
