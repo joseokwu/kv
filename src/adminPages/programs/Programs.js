@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Modal, Tabs } from "../../components";
 import { ProgramList } from "./components/ProgramList";
+import { UploadProgramInfo } from "./components/UploadProgramInfo";
 import styles from "./programs.module.css";
 
 export const Programs = () => {
@@ -84,13 +85,21 @@ export const Programs = () => {
       <Modal
         id="uploadProgram"
         title="Upload Program Info Pack"
+        subTitle="Upload the cohorts program info pack"
         width={697}
-      ></Modal>
+      >
+        <UploadProgramInfo />
+      </Modal>
       <section
         className="d-flex align-items-center justify-content-end mb-45"
         style={{ columnGap: "1rem", maxWidth: 2000 }}
       >
-        <Button label="Upload Program Info Pack" variant="trans" />
+        <Button
+          label="Upload Program Info Pack"
+          variant="trans"
+          data-target="#uploadProgram"
+          data-toggle="modal"
+        />
         <Button
           label="Add new program"
           onClick={() => push("/admin/program/create")}
