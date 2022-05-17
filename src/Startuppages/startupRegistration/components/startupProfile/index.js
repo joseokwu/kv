@@ -326,7 +326,7 @@ export const StartupProfile = () => {
                 name={'acceleratorName'}
                 onChange={(e) => updateProfile("startUpProfile", {acceleratorName: e.target.value })}
                 value={stateAuth?.startupData?.startUpProfile?.acceleratorName}
-                required={true}
+                required={false}
                 placeholder="Enter Accelerator name"
               />
 
