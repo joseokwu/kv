@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Select, TextArea, TextField } from "../../components";
+import { Button, GoBack, Select, TextArea, TextField } from "../../components";
 import { sectors } from "../../utils/utils";
 import searchIcon from "../../assets/icons/searchSm.svg";
 import closeIcon from "../../assets/icons/closesm.svg";
@@ -10,8 +10,9 @@ import styles from "./createProgram.module.css";
 
 export const CreateProgram = () => {
   return (
-    <div className="py-5 px-4">
-      <section className={styles.createProgram}>
+    <div className="py-5 px-5">
+      <GoBack />
+      <section className={`mt-4 ${styles.createProgram}`}>
         <h3 className="border-bottom pb-4">Create Program</h3>
 
         <Select
