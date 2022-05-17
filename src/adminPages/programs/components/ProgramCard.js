@@ -10,7 +10,7 @@ export const ProgramCard = ({ data = {}, id = 0 }) => {
   return (
     <div className={styles.programCard}>
       <Modal id={`program-${id}`} width={768}>
-        <ViewProgramDetails />
+        <ViewProgramDetails data={data} />
       </Modal>
       <section className="d-flex align-items-center justify-content-between">
         <h4 data-target={`#program-${id}`} data-toggle="modal">
