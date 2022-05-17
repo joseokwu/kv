@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Tabs } from "../../components";
+import { Button, Modal, Tabs } from "../../components";
 import { ProgramList } from "./components/ProgramList";
 import styles from "./programs.module.css";
 
@@ -81,6 +81,11 @@ export const Programs = () => {
   };
   return (
     <div className="p-5">
+      <Modal
+        id="uploadProgram"
+        title="Upload Program Info Pack"
+        width={697}
+      ></Modal>
       <section
         className="d-flex align-items-center justify-content-end mb-45"
         style={{ columnGap: "1rem", maxWidth: 2000 }}

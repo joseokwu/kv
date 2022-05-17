@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Select, TextArea, TextField } from "../../components";
+import { sectors } from "../../utils/utils";
 import searchIcon from "../../assets/icons/searchSm.svg";
 import closeIcon from "../../assets/icons/closesm.svg";
 import apple from "../../assets/icons/appleSmall.svg";
@@ -16,6 +17,7 @@ export const CreateProgram = () => {
         <Select
           label="Choose sector from program list"
           className="max_fill mb-4"
+          options={sectors}
         />
 
         <TextField label="Topic" className="max_fill mb-4" />
