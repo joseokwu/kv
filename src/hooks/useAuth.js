@@ -31,12 +31,12 @@ export const useAuth = () => {
   const register = async (values) => {
     try {
       const res = await dispatch(registerUser(values));
-      console.log(res);
+      //console.log(res , 'something dey wrong');
       if (res) {
         history.push("/confirm/email");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err?.response?.data?.message ?? 'Sever error please try again')
     }
   };
 
