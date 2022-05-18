@@ -5,7 +5,7 @@ import { GuestItem } from "../../events/components/index";
 import clock from "../../../assets/icons/clocksm.svg";
 import styles from "../programs.module.css";
 
-export const ViewProgramDetails = () => {
+export const ViewProgramDetails = ({ data = {} }) => {
   const ratingData = [
     { name: "Bad", count: 3 },
     { name: "Very poor", count: 5 },
@@ -15,6 +15,13 @@ export const ViewProgramDetails = () => {
     { name: "Best", count: 6 },
     { name: "Excellent", count: 10 },
   ];
+
+  const statColor = {
+    declined: "#E31937",
+    accepted: "#4caf50",
+    completed: "#64aa73",
+    pending: "#64aa73",
+  };
   return (
     <div className="px-4">
       <section
@@ -62,31 +69,41 @@ export const ViewProgramDetails = () => {
           </section>
         </div>
 
-        <div className="col-lg-6">
-          <section className={styles.box}>
-            <p className="mb-3">Rescheduled Date</p>
-            <article className="d-flex align-items-center justify-content-between mb-3">
-              <div className={`d-flex align-items-center ${styles?.date}`}>
-                <h5 className="mb-0">{new Date(2022, 3, 5).getDate()}</h5>
-                <p>{months[new Date(2022, 3, 5).getMonth()]}</p>
-              </div>
+        <div className="col-lg-6 d-flex align-items-end">
+          {data?.status === "rescheduled" ? (
+            <section className={styles.box}>
+              <p className="mb-3">Rescheduled Date</p>
+              <article className="d-flex align-items-center justify-content-between mb-3">
+                <div className={`d-flex align-items-center ${styles?.date}`}>
+                  <h5 className="mb-0">{new Date(2022, 3, 5).getDate()}</h5>
+                  <p>{months[new Date(2022, 3, 5).getMonth()]}</p>
+                </div>
+                <div
+                  style={{ color: "#525151", fontSize: 14, columnGap: "7.5px" }}
+                  className="d-flex align-items-center"
+                >
+                  <img src={clock} alt="clock" />
+                  {formatTime(new Date(2022, 3, 5, 14, 0))}-
+                  {formatTime(new Date(2022, 3, 5, 18, 0))}
+                </div>
+              </article>
               <div
-                style={{ color: "#525151", fontSize: 14, columnGap: "7.5px" }}
-                className="d-flex align-items-center"
+                className="d-flex align-items-end"
+                style={{ columnGap: "1rem" }}
               >
-                <img src={clock} alt="clock" />
-                {formatTime(new Date(2022, 3, 5, 14, 0))}-
-                {formatTime(new Date(2022, 3, 5, 18, 0))}
+                <Button label="Accept" variant="secondary" />
+                <p className="delete-link">Assign new host</p>
               </div>
-            </article>
-            <div
-              className="d-flex align-items-end"
-              style={{ columnGap: "1rem" }}
-            >
-              <Button label="Accept" variant="secondary" />
-              <p className="delete-link">Assign new host</p>
-            </div>
-          </section>
+            </section>
+          ) : (
+            <section className="mb-3">
+              <Tag
+                name={data?.status}
+                color={statColor[data?.status]}
+                className={styles.view_tag}
+              />
+            </section>
+          )}
         </div>
       </section>
 

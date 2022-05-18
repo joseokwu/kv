@@ -120,6 +120,11 @@ import {
   SelectionProcessMentor,
   CreateNewCriteriaIntro,
   CreateNewCriteria,
+  CriteriaQuestions,
+  CohortStartups,
+  ViewCriteria,
+  ReviewCriteria,
+  AssignmentResponse,
 } from "../adminPages";
 
 const routes = [
@@ -871,6 +876,42 @@ const routes = [
   },
 
   {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/criteria-questions",
+    component: WithAdminLayout(CriteriaQuestions),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/cohort/:name/:id",
+    component: WithAdminLayout(CohortStartups),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/criteria/:id",
+    component: WithAdminLayout(ViewCriteria),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Selection Process",
+    path: "/admin/selection_process/review_criteria",
+    component: WithAdminLayout(ReviewCriteria),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
     name: "admin Program",
     path: "/admin/program",
     component: WithAdminLayout(Programs),
@@ -901,6 +942,15 @@ const routes = [
     name: "admin Program",
     path: "/admin/program/create_assignment",
     component: WithAdminLayout(CreateAssignment),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/response/:id",
+    component: WithAdminLayout(AssignmentResponse),
     exact: true,
     protected: false,
     type: "admin",

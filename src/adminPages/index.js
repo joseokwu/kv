@@ -20,3 +20,8 @@ export * from "./addKVMemberForSelectionProcess/AddKVMemberForSelectionProcess";
 export * from "./selectionProcessMentor/SelectionProcessMentor";
 export * from "./createNewCriteriaIntro/CreateNewCriteriaIntro";
 export * from "./createNewCriteria/CreateNewCriteria";
+export * from "./criteriaQuestions/CriteriaQuestions";
+export * from "./cohortStartups/CohortStartups";
+export * from "./viewCriteria/ViewCriteria";
+export * from "./reviewCriteria/ReviewCriteria";
+export * from "./assignmentResponse/AssignmentResponse";
