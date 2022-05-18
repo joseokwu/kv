@@ -106,20 +106,6 @@ export const Sidebar = () => {
 
   const [navigator, setNavigator] = useState([]);
 
-  // useEffect(() => {
-  //   if (pathname !== "/support") {
-  //     if (pathname.includes("investor")) {
-  //       setNavigator(investorNavigators);
-  //     } else {
-  //       setNavigator(boosterNavigators);
-  //     }
-  //   } else {
-  //     state?.from === "investor"
-  //       ? setNavigator(investorNavigators)
-  //       : setNavigator(boosterNavigators);
-  //   }
-  // }, [pathname]);
-
   useEffect(() => {
     setNavigator(adminNavigation);
   }, []);
@@ -155,7 +141,7 @@ export const Sidebar = () => {
       </section>
       <section className="side-footer" onClick={() => push("/booster/support")}>
         <img src={helpDesk} alt="help" />
-        <p className="mb-0 side-text" role="button">
+        <p className="mb-0 side-text text-white" role="button">
           Need help? Contact us
         </p>
       </section>

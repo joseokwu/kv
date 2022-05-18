@@ -1,7 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Tabs } from "../../components";
+import { Button, Modal, Tabs } from "../../components";
 import { ProgramList } from "./components/ProgramList";
+import { UploadProgramInfo } from "./components/UploadProgramInfo";
+import styles from "./programs.module.css";
 
 export const Programs = () => {
   const tabs = [
@@ -80,19 +82,27 @@ export const Programs = () => {
   };
   return (
     <div className="p-5">
+      <Modal
+        id="uploadProgram"
+        title="Upload Program Info Pack"
+        subTitle="Upload the cohorts program info pack"
+        width={697}
+      >
+        <UploadProgramInfo />
+      </Modal>
       <section
         className="d-flex align-items-center justify-content-end mb-45"
         style={{ columnGap: "1rem", maxWidth: 2000 }}
       >
         <Button
-          label="View Assignment"
+          label="Upload Program Info Pack"
           variant="trans"
-          onClick={() => push("/admin/program/assignments")}
+          data-target="#uploadProgram"
+          data-toggle="modal"
         />
         <Button
-          label="Create Assignment"
-          variant="secondary"
-          onClick={() => push("/admin/program/create_assignment")}
+          label="Add new program"
+          onClick={() => push("/admin/program/create")}
         />
       </section>
 
@@ -105,10 +115,19 @@ export const Programs = () => {
         style={{ maxWidth: 2000 }}
       >
         <p className="mb-0">Total Programs created: 6</p>
-        <Button
-          label="Add new program"
-          onClick={() => push("/admin/program/create")}
-        />
+        <div className="d-flex align-items-center space-out">
+          <Button
+            label="View Assignment"
+            variant="trans"
+            className={styles.view_assign_btn}
+            onClick={() => push("/admin/program/assignments")}
+          />
+          <Button
+            label="Create Assignment"
+            variant="secondary"
+            onClick={() => push("/admin/program/create_assignment")}
+          />
+        </div>
       </section>
 
       <section style={{ maxWidth: 2000 }}>{renderComp()}</section>

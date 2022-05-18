@@ -1,0 +1,33 @@
+.footer_control {
+  background: #fafafc;
+  padding: 1.9rem 5rem;
+}
+
+.content {
+  padding: 2rem 5rem;
+  border: 1px solid #f2f2f2;
+}
+
+.content b {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  background: linear-gradient(180deg, #242679 -13.89%, #1d2147 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  text-transform: capitalize;
+}
+
+.note {
+  padding: 0 5rem;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #858585;
+}
