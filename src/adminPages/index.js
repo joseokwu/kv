@@ -25,3 +25,4 @@ export * from "./cohortStartups/CohortStartups";
 export * from "./viewCriteria/ViewCriteria";
 export * from "./reviewCriteria/ReviewCriteria";
 export * from "./assignmentResponse/AssignmentResponse";
+export * from "./responseFeedback/ResponseFeedback";

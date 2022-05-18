@@ -125,6 +125,7 @@ import {
   ViewCriteria,
   ReviewCriteria,
   AssignmentResponse,
+  ResponseFeedback,
 } from "../adminPages";
 
 const routes = [
@@ -951,6 +952,15 @@ const routes = [
     name: "admin Program",
     path: "/admin/program/response/:id",
     component: WithAdminLayout(AssignmentResponse),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Program",
+    path: "/admin/program/feedback/:id",
+    component: WithAdminLayout(ResponseFeedback),
     exact: true,
     protected: false,
     type: "admin",
