@@ -59,20 +59,20 @@ export const StartupProfile = ({ history }) => {
 
 
 
-  if(!stateAuth?.startupData?.applicationCompleted){
-    return <EmptyState message="No Profile information to display, please complete registration" />
-   }
+  // if(!stateAuth?.startupData?.applicationCompleted){
+  //   return <EmptyState message="No Profile information to display, please complete registration" />
+  //  }
 
   return (
     <div>
       <article className="wrapper pt-3" style={{ background: "#F9F9FC" }}>
         <div className="row mt-5">
           <div className="col-lg-7 col-12">
-            <OppCompanyInfo data={stateAuth?.user} />
-            <FinancialDetails data={stateAuth?.user} />
+            <OppCompanyInfo data={stateAuth} />
+            <FinancialDetails data={stateAuth} />
           </div>
           <div className="col-lg-5 col-12 ">
-            <FundingRound data={stateAuth?.user} />
+            <FundingRound data={stateAuth} />
           </div>
         </div>
       </article>
