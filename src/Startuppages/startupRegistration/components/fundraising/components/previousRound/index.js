@@ -57,7 +57,7 @@ export const PreviousRound = ({ setFundraising }) => {
     e.preventDefault();
    // console.log('hello')
     console.log(stateAuth)
-   // history.push('#Financial Projection');
+    history.push('#Financial Projection');
   };
 
 

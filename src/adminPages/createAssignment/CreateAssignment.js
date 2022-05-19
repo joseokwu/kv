@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Select, TextArea, TextField } from "../../components";
+import { Button, GoBack, Select, TextArea, TextField } from "../../components";
 import download from "../../assets/icons/download.svg";
 import apple from "../../assets/icons/appleSmall.svg";
 import closeIcon from "../../assets/icons/closesm.svg";
@@ -7,8 +7,9 @@ import styles from "./createAssignment.module.css";
 
 export const CreateAssignment = () => {
   return (
-    <div className="py-5 px-4">
-      <section className={styles.createProgram}>
+    <div className="py-5 px-5">
+      <GoBack />
+      <section className={`mt-4 ${styles.createProgram}`}>
         <h3 className="border-bottom pb-4">Create Assignment</h3>
 
         <Select label="Programs" className="max_fill mb-4" />
@@ -72,8 +73,9 @@ export const CreateAssignment = () => {
         })}
       </section>
 
-      <section className={styles.btnWrapper}>
-        <Button label="Save" variant="secondary" />
+      <section className={`d-flex justify-content-end ${styles.btnWrapper}`}>
+        <Button label="Cancel" variant="gray" />
+        <Button label="Create Assignment" variant="secondary" />
       </section>
     </div>
   );

@@ -67,4 +67,10 @@
   margin: 0 auto;
   text-align: right;
   padding: 2rem 0;
+  column-gap: 1rem;
+}
+
+.btnWrapper button:first-child {
+  background: #717177 !important;
+  color: #fff !important;
 }

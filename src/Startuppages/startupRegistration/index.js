@@ -40,8 +40,8 @@ export const StartUpRegistration = () => {
       <div className="mx-1">
         <div className="">
           <div
-            className="px-3"
-            style={{ zIndex: "", background: "#FFFFFF", width: "100%" }}
+            className="px-1"
+            style={{ zIndex: "", background: "#FFFFFF"}}
           >
             <WelcomeMessage>
               <h5>

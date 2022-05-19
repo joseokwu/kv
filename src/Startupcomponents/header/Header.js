@@ -58,8 +58,10 @@ export const Header = ({ setOpen, open}) => {
             <p className=" w- mb-0 header-text">{ stateAuth?.user?.businessname }</p>
           </span>
           <div>
-            {/* <img src={angleDown} alt="dropdown" /> */}
-            <HeaderDropdownMenu />
+            {
+              stateAuth?.startupData?.applicationCompleted  ?   <HeaderDropdownMenu /> : <span />
+            }
+           
           </div>
         </div>
       </section>
