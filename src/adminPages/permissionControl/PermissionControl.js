@@ -9,6 +9,12 @@ import { Users } from "./components/Users";
 export const PermissionControl = () => {
   const [state, setState] = useState("Users");
   const { userId } = useParams();
+
+  const switchTab = (item) => {
+    if (!userId?.length > 0) {
+      setState(item);
+    }
+  };
   return (
     <div className="p-5">
       <Modal id="addRole" title="Add Role" width={568}>
@@ -24,7 +30,7 @@ export const PermissionControl = () => {
           tabItems={["Users", "Roles & Permissions"]}
           withState={true}
           state={state}
-          setState={setState}
+          setState={switchTab}
         />
 
         {state === "Roles & Permissions" && (
