@@ -82,7 +82,7 @@ export const TeamModal = ({
         >
           <ModalForm className="row">
             <div className="col-12 form-group">
-              <label>Title<span style={{color: "red"}}>*</span></label>
+              <label>Company Name<span style={{color: "red"}}>*</span></label>
               <input
                 id="title"
                 name="companyName"

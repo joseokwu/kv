@@ -22,6 +22,7 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import moment from "moment";
 import { TextareaCustom } from './../../../../components/textArea/cutstomTextarea';
 import { letterOnly } from "../../../../utils/helpers";
+import { industry } from '../../../../constants/domiData';
 
 const { Option } = Select
 
@@ -87,7 +88,7 @@ export const StartupProfile = () => {
     console.log(value)
   }
 
-  //console.log(stateAuth)
+  console.log(stateAuth?.startupData)
 
   const handleChangeState = (value) => {
 
@@ -263,7 +264,7 @@ export const StartupProfile = () => {
               >
                 <Select
                   id="companySize"
-                  style={{ width: 200, backgroundColor: '#959596' }}
+                  style={{ width: 200}}
                   placeholder="Enter company size"
                   onChange={(e) => updateProfile("startUpProfile", {companySize: e })}
                 >
@@ -279,14 +280,30 @@ export const StartupProfile = () => {
             </div>
 
             <div className="form-group col-lg-6 col-12">
-            <TextField
-                label=" Which sector does your business operate in?"
-                name={'businessSector'}
-                onChange={(e) => updateProfile("startUpProfile", {businessSector: e.target.value })}
-                value={stateAuth?.startupData?.startUpProfile?.businessSector}
-                required={true}
-                placeholder="Enter Business Sector"
-              />
+            
+            <Form.Item
+                name="businessSector"
+                label="Which sector does your business operate in?"
+                initialValue={stateAuth?.startupData?.startUpProfile?.businessSector}
+                rules={[
+                  { required: true, message: 'Please select a sector' },
+                ]}
+              >
+                <Select
+                  id="businessSector"
+                  style={{ width: 200 }}
+               
+                  onChange={(e) => updateProfile("startUpProfile", {businessSector: e })}
+                >
+                  {industry.map((item, i) => (
+                    <Option value={item} key={i}>
+                      {' '}
+                      {item}{' '}
+                    </Option>
+                  ))}
+                </Select>
+             </Form.Item>
+         
             </div>
 
             <div className="form-group col-lg-6 col-12">
@@ -301,7 +318,7 @@ export const StartupProfile = () => {
               >
                 <Select
                   id="startupStage"
-                  style={{ width: 200, backgroundColor: '#959596' }}
+                  style={{ width: 200}}
                   placeholder="Enter business stage"
                   onChange={(e) => updateProfile("startUpProfile", {startupStage: e })}
                 >
