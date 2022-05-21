@@ -22,7 +22,7 @@ export const OppCompanyInfo = ({data}) => {
       >
         <div>
           <img src={data?.startupData?.startUpProfile?.logo} alt="logo" className="mb-3" width="50px" style={{objectFit: "cover", objectPosition: "100% 0"}} />
-          <h3 className="opp-page-card-title"> { data?.startUpProfile?.acceleratorName } </h3>
+          <h3 className="opp-page-card-title"> { data?.startupData?.startUpProfile?.acceleratorName } </h3>
         </div>
 
         <div className="d-flex align-items-center">

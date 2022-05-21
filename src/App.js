@@ -5,16 +5,18 @@ import { Alert } from "./Startupcomponents/index";
 import { BrowserRouter as Router } from 'react-router-dom';
 import {AppRouter} from './routes/AppRouter';
 import { Toaster } from 'react-hot-toast';
-
+import { ErrorHandler } from './components/error/index';
+import {ErrorBoundary} from 'react-error-boundary'
 
 // const AppRouter = lazy(()=> import('./routes/AppRouter'))
+
 
 function App() {
 
   return (
     
     <Router>
-
+	
       <AppRouter />
       <Alert />
 	 

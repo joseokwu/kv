@@ -15,7 +15,7 @@ import yeLogo from "../../../assets/images/yeLogo.svg";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
-export const Product = ({ data }) => {
+export const Product = ({ data , founder }) => {
   const countInvestor = [1, 2, 3, 4];
   return (
     <div className="row">
@@ -30,16 +30,35 @@ export const Product = ({ data }) => {
         <div className="product-wrap">
           <h3>Product Description</h3>
           <p className="border-bottom pb-3 mb-5 prod-desc">
-            {data?.productDes}
+            {data?.description}
           </p>
 
           <h3>Product Demo</h3>
-
-          <img
+           {
+            data?.youtubeDemoUrl && <a href={data?.youtubeDemoUrl}>
+           <img
             src={demo}
             alt="demo video placeholder"
             className="product-demo"
           />
+           </a>
+           }
+           {
+            data?.files && <article className="">
+                <video 
+                      style={{
+                        borderRadius:"20px",
+                       maxHeight:"150px",
+                        width:"250px"
+                      }}
+                      className='mb-3'
+                     controls>
+                    <source src={data?.files} id="video_here" />
+                      Your browser does not support HTML5 video.
+                     </video>
+                     </article>
+           }
+         
         </div>
       </section>
 
@@ -47,10 +66,10 @@ export const Product = ({ data }) => {
         <div className="product-wrap mb-4">
           <h3 className="border-bottom pb-3">Founder’s Profile</h3>
           <section className="d-flex align-items-center mt-3 product-founder">
-            <img src={founder} alt="founder" />
+          { founder?.avatar &&  <img src={founder?.avatar} alt="team member" className="mr-4" style={{width:'60px', height:'60px', borderRadius:'60px'}} />}
             <div>
-              <p>{data?.founderProfile?.name}</p>
-              <small>{data?.founderProfile?.position}</small>
+            <p> {founder?.firstName + founder?.lastName } </p>
+              <small>{founder?.position}</small>
             </div>
           </section>
           <section className="text-center mt-3">
@@ -65,7 +84,7 @@ export const Product = ({ data }) => {
         <div className="product-wrap">
           <h3 className="border-bottom pb-3 mb-4">Investors</h3>
 
-          {data?.investor.map((c, i) => {
+          {data?.investor && data?.investor?.map((c, i) => {
             return (
               <section
                 className="d-flex align-items-center justify-content-between mt-4 product-investor"
@@ -76,7 +95,7 @@ export const Product = ({ data }) => {
                 <div className="d-flex align-items-center">
                   <img src={investor} alt="investor" className="mr-3" />
                   <span>
-                    <p>{c.name}</p>
+                    <p>{c?.name}</p>
                     <small>{"Lead Investor"}</small>
                   </span>
                 </div>

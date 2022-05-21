@@ -5,3 +5,4 @@ export * from './startUpReg';
 export * from './utils';
 export * from './partners';
 export * from './investor';
+export * from './admin';

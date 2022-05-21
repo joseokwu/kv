@@ -18,7 +18,7 @@ export const StartupBoosterPartner = () => {
 
   const { getApp } = useActivity();
   const { stateAuth} = useAuth();
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [boosterData, setBoosterData] = useState([])
   const [partners , setPartners] = useState({})
@@ -69,9 +69,6 @@ export const StartupBoosterPartner = () => {
     'Virtual Assistant',
   ]
 
-  
-
-
   useEffect(() => {
     
     const getData = async () => {
@@ -79,6 +76,7 @@ export const StartupBoosterPartner = () => {
       const res = await getBoosterData({
         page:currentPage,
         limit:4
+        
       })
       const resData = await getStartupRequest(stateAuth?.user?.userId);
       if(resData?.data){

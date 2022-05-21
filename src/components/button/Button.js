@@ -24,3 +24,28 @@ export const Button = ({
     </button>
   );
 };
+
+
+
+export const AdminButton = ({
+  onClick = () => {},
+  label = "button",
+  variant = "primary",
+  className = "",
+  disabled,
+  type,
+  loading,
+  ...rest
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+      className={`btn-main btn-${variant} ${className}`}
+      {...rest}
+    >
+      {loading ? <CircularLoader /> : label}
+    </button>
+  );
+};
