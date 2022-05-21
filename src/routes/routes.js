@@ -764,7 +764,7 @@ const routes = [
     path: "/admin/dashboard",
     component: WithAdminLayout(() => <div>Admin</div>),
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 
@@ -773,7 +773,7 @@ const routes = [
     path: "/admin/application_mgt",
     component: WithAdminLayout(ApplicationMgt),
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 
@@ -782,7 +782,7 @@ const routes = [
     path: "/admin/application_mgt/pending/:id",
     component: WithAdminLayout(PendingApplication),
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 
@@ -971,7 +971,7 @@ const routes = [
     path: "/admin/users",
     component: WithAdminLayout(UserManagement),
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 
@@ -980,7 +980,7 @@ const routes = [
     path: "/admin/users/mentors",
     component: WithAdminLayout(AllMentors),
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 
@@ -998,7 +998,7 @@ const routes = [
     path: "/admin/users/sessions",
     component: WithAdminLayout(AllSessions),
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 

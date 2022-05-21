@@ -1,10 +1,10 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React , { useEffect , useState } from "react";
+import { useHistory , useParams } from "react-router-dom";
 import apple from "../../assets/images/apple.svg";
 import left from "../../assets/icons/chervonLeft.svg";
 import contributor from "../../assets/images/sampleTeamMember.png";
-
-import { Button, Tabs, Tag } from "../../components";
+import { applicationManagement } from '../../services';
+import { AdminButton, Tabs, Tag } from "../../components";
 import styles from "./pending.module.css";
 import {
   BusinessCanvas,
@@ -14,6 +14,8 @@ import {
   RoadMap,
   Team,
 } from "./components";
+import { toast } from 'react-hot-toast';
+
 
 export const PendingApplication = () => {
   const tabItems = [
@@ -24,126 +26,87 @@ export const PendingApplication = () => {
     "Milestone/Timeline",
     "Future Road Map",
   ];
+  const [loading , setLoading] = useState('none');
+  const [startupData , setStartupData] = useState({});
+  const { id } = useParams();
+  //console.log(id)
 
-  const pitchData = [
-    { file: "file", filename: "Pitch Deck Document", size: "4mb" },
-    { file: "video", filename: "Pitch Video", size: "24mb" },
-  ];
-
-  const teamData = [
-    { name: "Winner", position: "Founder and CEO" },
-    { name: "Eric", position: "Founder and CEO" },
-    { name: "Isaac", position: "Founder and CEO" },
-    { name: "Ify", position: "" },
-    { name: "Promise", position: "" },
-    { name: "Jamil", position: "" },
-  ];
-
-  const productData = {
-    productDes:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies placerat elit. Aliquam ac hendrerit ante, et rhoncus metus. Aenean tempor orci vel urna feugiat, et ultricies orci dictum. Cras consectetur euismod nulla id cursus. Etiam sodales, tortor at varius fermentum, augue arcu tristique libero, a vehicula odio diam non ligula. Aenean vulputate enim dolor, vel finibus odio pharetra eu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam dignissim at nulla et consequat. Maecenas egestas mi ut mauris bibendum, ut tempus arcu aliquam. Praesent tempor purus in turpis tempus sollicitudin. Aliquam erat volutpat. Aenean aliquam velit felis.",
-    founderProfile: { name: "Arthur Chief", position: "Founder and CEO" },
-    investor: [{ name: "Winner" }, { name: "Eric" }, { name: "Isaac" }],
-  };
-
-  const busyData = {
-    problem:
-      "In hac habitasse platea dictumst. Nam velit dui, vestibulum eu massa in, viverra feugiat ante. Nam et urna mi. Integer imperdiet est in hendrerit fermentum. Ut pretium ante quis dolor interdum, a commodo enim sodales. Fusce porttitor tristique dapibus. Nullam sit amet turpis id purus lobortis lobortis",
-    solution:
-      "In hac habitasse platea dictumst. Nam velit dui, vestibulum eu massa in, viverra feugiat ante. Nam et urna mi. Integer imperdiet est in hendrerit fermentum. Ut pretium ante quis dolor interdum, a commodo enim sodales.",
-    goToMarket:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies placerat elit. Aliquam ac hendrerit ante, et rhoncus metus. Aenean tempor orci vel urna feugiat, et ultricies orci dictum.",
-    marketSize:
-      "Cras consectetur euismod nulla id cursus. Etiam sodales, tortor at varius fermentum, augue arcu tristique libero, a vehicula odio diam non ligula.",
-    competitors: [
-      "Cras consectetur",
-      "euismod nulla id cursus.",
-      "laoreet dolor eu, ullamcorper odio.",
-      "habitasse platea dictumst",
-    ],
-    competitiveAdvantage:
-      "Cras consectetur euismod nulla id cursus. Etiam sodales, tortor at varius fermentum, augue arcu tristique libero, a vehicula odio diam non ligula.",
-    valueProposition:
-      "Curabitur ac neque sagittis, laoreet dolor eu, ullamcorper odio. Nam id leo imperdiet, eleifend ex eget, laoreet velit. Quisque vel enim sed leo dapibus tempor.",
-    targetMarket:
-      "Curabitur ac neque sagittis, laoreet dolor eu, ullamcorper odio. Nam id leo imperdiet, eleifend ex eget, laoreet velit. Quisque vel enim sed leo dapibus tempor.",
-    marketAlliance:
-      "Nulla ut massa tincidunt, sagittis sapien quis, aliquam neque. Sed eget varius libero. Quisque tincidunt dui eu ipsum mollis pretium.",
-  };
-
-  const roadMapData = [
-    {
-      dueDate: new Date(2021, 8, 23),
-      tabName: "Work",
-      contributors: [contributor, contributor],
-      progress: 70,
-    },
-    {
-      dueDate: new Date(2021, 8, 23),
-      tabName: "Work",
-      contributors: [contributor, contributor],
-      progress: 30,
-    },
-    {
-      dueDate: new Date(2021, 8, 23),
-      tabName: "Work",
-      contributors: [contributor, contributor],
-      progress: 50,
-    },
-    {
-      dueDate: new Date(2021, 8, 23),
-      tabName: "Work",
-      contributors: [contributor, contributor],
-      progress: 20,
-    },
-    {
-      dueDate: new Date(2021, 8, 23),
-      tabName: "Work",
-      contributors: [contributor, contributor],
-      progress: 70,
-    },
-    {
-      dueDate: new Date(2021, 8, 23),
-      tabName: "Work",
-      contributors: [contributor, contributor],
-      progress: 70,
-    },
-  ];
-
-  const mileData = [{}, {}, {}];
   const {
     location: { hash },
-    goBack,
+    push
   } = useHistory();
 
   const renderComponent = () => {
     switch (hash) {
       case `#${tabItems[0]}`:
-        return <PitchDeck data={pitchData} />;
+        return <PitchDeck data={startupData?.pitchDeck} />;
       case `#${tabItems[1]}`:
-        return <Team data={teamData} />;
+        return <Team data={startupData?.team} />;
       case `#${tabItems[2]}`:
-        return <Product data={productData} />;
+        return <Product data={startupData?.product} founder={startupData?.team} />;
       case `#${tabItems[3]}`:
-        return <BusinessCanvas data={busyData} />;
+        return <BusinessCanvas data={startupData?.businessCanvas} />;
       case `#${tabItems[4]}`:
-        return <Milestone data={mileData} />;
+        return <Milestone data={startupData?.mileStone} />;
       case `#${tabItems[5]}`:
-        return <RoadMap data={roadMapData} />;
+        return <RoadMap data={startupData?.roadMap} />;
       default:
-        return <PitchDeck data={pitchData} />;
+        return <PitchDeck data={startupData?.pitchDeck} />;
     }
   };
+
+  const manageAccount = async(type , value) =>{
+    try{
+      setLoading(type);
+      const res = await applicationManagement({
+        userId:id,
+        action:'manage_account',
+        type:type,
+        values:value
+      });
+      //console.log(res)
+      if(res?.success){
+        setLoading('none');
+        push('/admin/application_mgt');
+        toast.success('successfully treated user account')
+      }
+    }catch(err){
+      setLoading('none');
+      toast.error(err?.response?.data?.message)
+    }
+  }
+
+  useEffect(() => {
+
+    const getData = async () => {
+      const res = await applicationManagement({
+        userId:id,
+        action:'get_account'
+      });
+     // console.log(res?.data)
+      setStartupData(res?.data)
+    }
+
+    getData()   
+    
+    return () =>{
+      setStartupData();
+    }
+
+  },[id])
+
+
+
   return (
     <div className="p-5 bg-white" style={{ minHeight: "100vh" }}>
       <section
         className="d-flex align-items-center mb-3"
-        onClick={() => goBack()}
+        onClick={() =>  push('/admin/application_mgt')}
         role="button"
         style={{ width: "fit-content" }}
       >
         <img
-          src={left}
+          src={ left}
           alt="left"
           className="mr-2"
           style={{ transform: "rotate(180deg)" }}
@@ -155,9 +118,9 @@ export const PendingApplication = () => {
       <section className={styles.card}>
         <div className="row mx-0">
           <section className="col-lg-7">
-            <img src={apple} alt="startup logo" className="mb-2" />
-            <h3>Gecko Inc.</h3>
-            <p className="mb-4">Tech Industry</p>
+            <img src={startupData?.startUpProfile?.logo ?? apple} alt="startup logo" className="mb-2" />
+            <h3>{ startupData?.startupname}</h3>
+            <p className="mb-4"> { startupData?.industry } </p>
 
             <article className="d-flex align-items-center mb-45">
               <p className={`${styles.statusHeader} mr-3`}>
@@ -167,9 +130,20 @@ export const PendingApplication = () => {
             </article>
 
             <article className="d-flex align-items-center space-out">
-              <Button label="Approve to evaluate" />
-              <Button label="Schedule call" variant="secondary" />
-              <Button label="Decline" variant="danger" />
+              <AdminButton loading={loading === 'approveToEvaluate' ? true : false }
+               label={ startupData?.approveToEvaluate ? "Approved" : "Approve to evaluate"}
+               disabled={startupData?.approveToEvaluate || startupData?.recommended}
+               onClick={() =>manageAccount('approveToEvaluate', true)}
+               variant={startupData?.approveToEvaluate || startupData?.recommended ? 'grey' : 'primary'}
+                />
+              <AdminButton label="Schedule call" variant="secondary" />
+              <AdminButton 
+              loading={loading === 'recommended' ? true : false}
+              disabled={startupData?.recommended || startupData?.approveToEvaluate}
+              onClick={() =>manageAccount('recommended', true)}
+              label={startupData?.recommended ? "Recommended" : "Recommend"} 
+              variant={startupData?.recommended || startupData?.approveToEvaluate ? 'grey' : 'danger'}
+               />
             </article>
           </section>
 
@@ -178,7 +152,7 @@ export const PendingApplication = () => {
           >
             <article className="d-flex align-items-center mb-3">
               <p className="mr-1">Stage</p>
-              <Tag name="Proof of Concept" color="#40439A" />
+              <Tag name={startupData?.startUpProfile?.startupStage} color="#40439A" />
             </article>
 
             <article className="d-flex align-items-center mb-3">
@@ -187,15 +161,14 @@ export const PendingApplication = () => {
                 className="d-flex align-items-center space-out"
                 style={{ columnGap: 3 }}
               >
-                <Tag name="Tech" color="#058DC1" />
-                <Tag name="Engineering" color="#40439A" />
-                <Tag name="Career" color="#E31937" />
+                <Tag name={startupData?.industry} color="#058DC1" />
+               
               </div>
             </article>
 
             <article className="d-flex align-items-center ">
               <p className="mr-1">Funding Round</p>
-              <Tag name="Series A" />
+              <Tag name={startupData?.fundRaising?.fundingAsk?.instrumentForRound} />
             </article>
           </section>
         </div>

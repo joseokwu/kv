@@ -19,9 +19,10 @@ import UploadIcon from "../../assets/icons/upload.svg";
 import CancelIcon from "../../assets/icons/cancel.svg";
 import SmallDocumentIcon from "../../assets/icons/small_document.svg";
 import DocumentIcon from "../../assets/icons/document_upload.svg";
+import VideoIcon from "../../assets/icons/videoIcon.svg";
 import { bytesToSize, theme } from "./config";
 
-const Document = ({ url }) => {
+const Document = ({ url , icon }) => {
   return (
     <PitchDeckCardContainer
       onClick={() => {
@@ -30,7 +31,7 @@ const Document = ({ url }) => {
       }}
     >
       <Column flex={2} align="center" justify="center">
-        <img src={DocumentIcon} alt="" />
+        <img src={ icon === 'video' ? VideoIcon :  DocumentIcon} alt="" />
       </Column>
       <PitchDeckCardDetails gap={1} align="center" justify="center">
         <img src={SmallDocumentIcon} alt="" />
@@ -117,7 +118,7 @@ const renderItem = (item, index, removeItem, filesUploaded) => {
   }
 };
 
-export const UploadFile = ({ data, onUpload, initData = [] }) => {
+export const UploadFile = ({ data, onUpload, initData = [] , fileType }) => {
   const [filesInfo, setFilesInfo] = useState([]);
   const [initialData, setInitialData] = useState(initData);
   const [loading, setLoading] = useState(false);
@@ -221,7 +222,7 @@ export const UploadFile = ({ data, onUpload, initData = [] }) => {
       ) : initialData.length > 0 ? (
         <Column gap={1} align="center" justify="center">
           {initialData.map((url, i) => {
-            return <Document key={i} url={url} />;
+            return <Document key={i} url={url} icon={fileType} />;
           })}
           <ToFull padding="1rem" width="40%">
             <Button

@@ -11,7 +11,7 @@ import {
 import DownloadIcon from "../../../../assets/icons/download.svg";
 import { useFormik } from "formik";
 import RedFile from "../../../../assets/icons/redFile.svg";
-import BlueFile from "../../../../assets/icons/bluFile.svg";
+import BlueFile from "../../../../assets/icons/videoIcon.svg";
 import { useActivity } from "../../../../hooks/useBusiness";
 import { pitchDeck } from "./../../../../services/startUpReg";
 import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
@@ -118,8 +118,8 @@ const onNext = () =>{
                   data={{
                     maxFiles: 1,
                     supportedMimeTypes: ["application/pdf"],
-                    maxFileSize: 5,
-                    extension: "MB",
+                    maxFileSize: 400,
+                    extension: "KB",
                   }}
                   initData={stateAuth.startupData?.pitchDeck?.pitchDeckFile ? [stateAuth.startupData?.pitchDeck?.pitchDeckFile] : []}
                   onUpload={async (filesInfo) => {
@@ -166,6 +166,7 @@ const onNext = () =>{
                    maxFileSize: 10,
                    extension: "MB",
                  }}
+                 fileType={'video'}
                  initData={stateAuth.startupData?.pitchDeck?.pitchDeckVideo ? [stateAuth.startupData?.pitchDeck?.pitchDeckVideo] : []}
                  onUpload={async (filesInfo) => {
                    const formData = new FormData();

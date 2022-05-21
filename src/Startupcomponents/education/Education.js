@@ -44,7 +44,7 @@ export const Education = ({
           <h5 className='school'>{schoolName}</h5>
           <h6 className='course'>{course}</h6>
           <h6 className='degree'>{degree}</h6>
-          <p className='course'> { activities } </p>
+          <p className=''  > { activities } </p>
           <h6 className='year'>
          
             {startDateYear} - {endDateYear}
