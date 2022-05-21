@@ -126,6 +126,7 @@ import {
   ReviewCriteria,
   AssignmentResponse,
   ResponseFeedback,
+  PermissionControl,
 } from "../adminPages";
 
 const routes = [
@@ -1077,7 +1078,16 @@ const routes = [
   {
     name: "admin Permission Control",
     path: "/admin/permission",
-    component: WithAdminLayout(() => <div>Permission Control</div>),
+    component: WithAdminLayout(PermissionControl),
+    exact: true,
+    protected: false,
+    type: "admin",
+  },
+
+  {
+    name: "admin Permission Control",
+    path: "/admin/permission/:userId",
+    component: WithAdminLayout(PermissionControl),
     exact: true,
     protected: false,
     type: "admin",

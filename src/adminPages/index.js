@@ -26,3 +26,4 @@ export * from "./viewCriteria/ViewCriteria";
 export * from "./reviewCriteria/ReviewCriteria";
 export * from "./assignmentResponse/AssignmentResponse";
 export * from "./responseFeedback/ResponseFeedback";
+export * from "./permissionControl/PermissionControl";
