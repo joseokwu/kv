@@ -2321,7 +2321,21 @@ title:
   'product.competitiveEdge',
 ]
 
+    // if(!stateAuth.type[0]?.includes(props.type)){
+    //   setLocationHistory(history.location.pathname);
+    //   history.push("/");
+    // }
+    // if(!stateAuth.completedRegistration){
+    //     console.log(history.location.pathname)
+    // history.push(`/${getRole()}/registration`)
+    // }
+    // if(!stateAuth.roles.includes(props.type)){
 
+    //     history.push('/')
+    //     // setLocationHistory(history.location.pathname)
+    //     console.log('e noh work')
+    //     console.log(!stateAuth.roles.includes(props.type))
+    // }
 
 
 
