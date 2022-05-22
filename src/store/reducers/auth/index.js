@@ -126,6 +126,7 @@ const authReducer = (state = INIT_STATE, action) => {
         loading: false,
         dashboardLoad: false,
         authenticated: true,
+        type: action?.payload?.type,
         ...action.payload,
       }
     case DASHBOARD_USER_PROFILE:
