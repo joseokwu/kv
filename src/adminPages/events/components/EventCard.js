@@ -8,7 +8,7 @@ import { Button, Modal, Tag } from "../../../components";
 import { ViewEventDetails } from "./ViewEventDetails";
 import { EditEvent } from "./EditEvent";
 
-export const EventCard = ({ data = {}, id = 0 }) => {
+export const EventCard = ({ data = {}, id = 0, onDashboard = false }) => {
   const isOngoing =
     new Date().getTime() >= new Date(data?.startDate).getTime() &&
     new Date().getTime() < new Date(data?.endDate).getTime();
@@ -77,7 +77,15 @@ export const EventCard = ({ data = {}, id = 0 }) => {
         </section>
 
         <section className="d-flex align-items-center justify-content-between">
-          <Button label="Join Event" />
+          {onDashboard ? (
+            <Button
+              label="View Details"
+              data-toggle="modal"
+              data-target={`#viewEvent${id}`}
+            />
+          ) : (
+            <Button label="Join Event" />
+          )}
 
           <section className="event_people">
             <img src={doc} alt="doc" />

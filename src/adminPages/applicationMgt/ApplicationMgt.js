@@ -14,7 +14,7 @@ import {
 export const ApplicationMgt = () => {
   const cardDetails = [
     {
-      name: "Application Declined",
+      name: "New Applications",
       count: 20,
       color: "#D5D6F4",
     },
@@ -41,7 +41,6 @@ export const ApplicationMgt = () => {
     "Recommended",
     "Mentor Screening",
     "Accepted",
-    "Declined",
   ];
 
   const {
