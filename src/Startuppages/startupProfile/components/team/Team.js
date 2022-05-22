@@ -89,6 +89,7 @@ const TeamMember = ({ data ,modalData,  showCofounder, setCofounder  }) => {
         <FounderModal data={data}  />
       </LargeModal> : <span />
   }
+  
 
 { data?.avatar &&  <img src={data?.avatar} alt="team member" className="mr-4" style={{width:'60px', height:'60px', borderRadius:'60px'}} />}
       <section>

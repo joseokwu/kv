@@ -133,18 +133,21 @@ export const MapPoint = ({ color = "#D5D5D5", withStem = true }) => {
 export const RoadMapTodo = ({ progress = 0, data }) => {
   return (
     <div className="road-map-todo">
-      <p className="todo-task"> {data?.tabName} </p>
+      <p className="todo-task">  {data?.title} </p>
       <span>
         <p className="todo-info-header">Due Data</p>
-        <p className="todo-date">{formatDate(data?.dueDate)}</p>
+        <p className="todo-date">{data?.dueDate}</p>
       </span>
 
       <span>
         <p className="todo-info-header">Contributors</p>
         <div className="todo-contributor">
-          {data?.contributors?.length > 0 &&
-            data?.contributors?.map((d, i) => {
-              return <img src={d} alt="contributor" />;
+          {data?.teamMember?.length > 0 &&
+            data?.teamMember?.map((d, i) => {
+              return <img src={d?.avatar} 
+              alt="contributor"
+              key={i}
+               />;
             })}
         </div>
       </span>
@@ -153,7 +156,7 @@ export const RoadMapTodo = ({ progress = 0, data }) => {
         <ProgressBar
           isMeasured={true}
           className="todo-progress"
-          progress={progress}
+          progress={data?.completed}
         />
       </span>
     </div>

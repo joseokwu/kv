@@ -526,7 +526,7 @@ export const TeamProfile = () => {
           </div>
         </FormWrapper>
 
-        <FormWrapper height="70%">
+        <FormWrapper >
           <div className="div">
             <span>Education</span>
           </div>

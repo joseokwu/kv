@@ -121,7 +121,13 @@ const authReducer = (state = INIT_STATE, action) => {
           email: action?.payload?.email,
         };
       }
-      break;
+      return {
+        ...state,
+        loading: false,
+        dashboardLoad: false,
+        authenticated: true,
+        ...action.payload,
+      }
     case DASHBOARD_USER_PROFILE:
       console.log(action?.payload)
     if(action?.payload?.type[0] === 'boosterpartner'){

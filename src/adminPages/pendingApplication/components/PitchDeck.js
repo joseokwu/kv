@@ -9,32 +9,46 @@ export const PitchDeck = ({ data }) => {
     <div>
       {/* <h3 className="tab-section-title">Pitch Deck</h3> */}
       <section className="row">
-        {data &&
-          data.map((item, i) => {
-            return (
-              <div key={i} className="col-xl-3 col-lg-4 mb-4">
+
+      {
+       data?.pitchDeckFile && <div  className="col-xl-3 col-lg-4 mb-4">
                 <article className="deck-card">
                   <div className="deck-card-img">
+                   
+                  <a href={data?.pitchDeckFile} style={{textDecoration:'none'}}  download>
                     <img
-                      src={item?.file === "file" ? doc : videoDemo}
+                      src={doc}
                       alt="document"
                     />
+                  </a>
+                   
                   </div>
                   <div className="d-flex align-items-start p-3">
-                    <img
-                      src={item?.file === "file" ? docIcon : videoIcon}
-                      alt="document icon"
-                      className="mr-2"
-                    />
+                    
                     <span>
-                      <p> {item?.filename.toUpperCase()} </p>
-                      <small> {item?.size} </small>
+                      <p> PITCH DECK FILE </p>
                     </span>
                   </div>
                 </article>
               </div>
-            );
-          })}
+      }
+       {
+        data?.pitchDeckVideo && <div className="col-xl-3 col-lg-4 mb-4">
+        <article className="">
+        <video 
+                      style={{
+                        borderRadius:"20px",
+                       maxHeight:"150px",
+                        width:"250px"
+                      }}
+                      className='mb-3'
+                     controls>
+                    <source src={data?.pitchDeckVideo} id="video_here" />
+                      Your browser does not support HTML5 video.
+                     </video>
+                     </article>
+        </div>
+       } 
       </section>
       {/* 
         <div className="col-xl-3 col-lg-4 mb-4">

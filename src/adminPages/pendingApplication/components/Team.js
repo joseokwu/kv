@@ -4,7 +4,7 @@ import linkedIn from "../../../assets/icons/linkedInLogo.svg";
 import whatsApp from "../../../assets/icons/whatsapp.svg";
 import member from "../../../assets/images/sampleTeamMember.png";
 
-export const Team = ({ data = [] }) => {
+export const Team = ({ data }) => {
   console.log("data", data);
   return (
     <div>
@@ -14,16 +14,11 @@ export const Team = ({ data = [] }) => {
         <h4 className="team-group-title">Founder & Co-Founders</h4>
 
         <div className="row">
-          {data &&
-            data
-              ?.filter((x) => x?.position?.toLowerCase() === "founder and ceo")
-              ?.map((c, i) => {
-                return (
+         
                   <article className="col-lg-4 mb-4">
-                    <TeamMember data={c} key={i} />
+                   <TeamMember data={data} />
                   </article>
-                );
-              })}
+               
         </div>
       </section>
 
@@ -32,9 +27,8 @@ export const Team = ({ data = [] }) => {
 
         <div className="row">
           {data &&
-            data
-              ?.filter((x) => x?.position?.toLowerCase() !== "founder and ceo")
-              ?.map((c, i) => {
+            data?.coFounder
+             ?.map((c, i) => {
                 return (
                   <article className="col-lg-4 mb-4">
                     <TeamMember data={c} key={i} />
@@ -50,28 +44,23 @@ export const Team = ({ data = [] }) => {
 const TeamMember = ({ data }) => {
   return (
     <div className="d-flex align-items-center flex-wrap member-card">
-      <img src={member} alt="team member" className="mr-4" />
+      { data?.avatar &&  <img src={data?.avatar} alt="team member" className="mr-4" style={{width:'60px', height:'60px', borderRadius:'60px'}} />}
       <section>
-        <p> {data?.name} </p>
+      <p> {data?.firstName + data?.lastName } </p>
         <p className="small"> {data?.position} </p>
-        <span className="d-flex pt-1">
-          {data?.socialMedia?.map((c) => (
-            <img
-              className="me-1"
-              src={
-                c === "linkedin"
-                  ? linkedIn
-                  : c === "facebook"
-                  ? twitter
-                  : c === "Whatsapp"
-                  ? whatsApp
-                  : ""
-              }
-              alt={c}
-              width="24"
-              height="24"
-            />
-          ))}
+        <span className="d-flex">
+          <img src={linkedIn} alt="linkedIn" to={data?.socialMedia?.linkedIn} width="24" height="24" />
+          <img
+            src={twitter}
+            alt="twitter"
+            className="mx-2"
+            width="24"
+            to={data?.socialMedia?.twitter}
+            height="24"
+          />
+          <img src={whatsApp}
+        
+           alt="whatsapp" />
         </span>
       </section>
     </div>

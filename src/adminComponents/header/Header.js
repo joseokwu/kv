@@ -3,7 +3,6 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/kvLogo.png";
 import notification from "../../assets/icons/notification.svg";
-import chat from "../../assets/icons/chat.svg";
 import angleDown from "../../assets/icons/angleDown.svg";
 import sampleUser from "../../assets/images/sampleUser.png";
 import { Notification } from "../index";
@@ -11,6 +10,7 @@ import view from "../../assets/icons/vp.svg";
 import edit from "../../assets/icons/ep.svg";
 import logout from "../../assets/icons/logout.svg";
 import "./header.css";
+import { useAuth } from './../../hooks/useAuth';
 
 export const Header = ({ setOpen, open }) => {
   const {
@@ -21,7 +21,7 @@ export const Header = ({ setOpen, open }) => {
   const getCurrentDashboard = () => {
     return "/admin/dashboard";
   };
-
+  const { stateAuth } = useAuth();
   const [openNotice, setOpenNotice] = useState(false);
   return (
     <div className="header-main d-flex align-items-center justify-content-between">
@@ -57,8 +57,8 @@ export const Header = ({ setOpen, open }) => {
 
         <div className="d-flex align-items-center h-100">
           <span className="d-flex align-items-center header-profile d-none d-lg-flex">
-            <img src={sampleUser} alt="profile" className="" />
-            <p className="mb-0 header-text">Micheal Smith</p>
+            <img src={logo} alt="profile" className="" />
+            <p className="mb-0 header-text"> { stateAuth?.firstname + ' ' +  stateAuth?.lastname + " " + "Admin" } </p>
           </span>
           <div>
             <HeaderDropdownMenu />
@@ -79,6 +79,7 @@ const HeaderDropdownMenu = () => {
     push,
     location: { pathname },
   } = useHistory();
+  const { userLogout } = useAuth();
   const getCurrentProfile = () => {
     return () => push("/admin/profile");
   };
@@ -111,6 +112,7 @@ const HeaderDropdownMenu = () => {
         <button
           className="dropdown-item text-center py-2"
           style={{ color: "#D62828" }}
+          onClick={() => userLogout()}
         >
           {" "}
           <img className="pe-1" src={logout} alt="" /> Log Out

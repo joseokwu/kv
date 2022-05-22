@@ -203,10 +203,9 @@ export const StartupProfile = () => {
               <TextField
                 label="Startup Name"
                 name={'startupName'}
-                value={stateAuth?.user?.businessname}
+                value={stateAuth?.startupData?.startUpProfile?.startupName}
                 required={true}
                 disabled={true}
-                placeholder={stateAuth?.user?.businessname}
               />
          
             </div>

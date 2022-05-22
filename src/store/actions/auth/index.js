@@ -205,6 +205,7 @@ export const getProfile = async (value) => async (dispatch) => {
       type: AUTH_START,
     });
     const res = await profile(value);
+   
     if (res) {
       dispatch({
         type: USER_PROFILE,
