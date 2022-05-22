@@ -127,6 +127,7 @@ import {
   AssignmentResponse,
   ResponseFeedback,
   PermissionControl,
+  Dashboard,
 } from "../adminPages";
 
 const routes = [
@@ -754,7 +755,7 @@ const routes = [
   {
     name: "admin dashboard",
     path: "/admin/",
-    component: WithAdminLayout(() => <div>Admin</div>),
+    component: WithAdminLayout(Dashboard),
     exact: true,
     protected: false,
     type: "admin",
@@ -763,7 +764,7 @@ const routes = [
   {
     name: "admin dashboard",
     path: "/admin/dashboard",
-    component: WithAdminLayout(() => <div>Admin</div>),
+    component: WithAdminLayout(Dashboard),
     exact: true,
     protected: true,
     type: "admin",
