@@ -793,7 +793,7 @@ const routes = [
     path: "/admin/application_mgt/accepted/:id",
     component: WithAdminLayout(AcceptedApplication),
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 
