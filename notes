@@ -2321,21 +2321,9 @@ title:
   'product.competitiveEdge',
 ]
 
-    // if(!stateAuth.type[0]?.includes(props.type)){
-    //   setLocationHistory(history.location.pathname);
-    //   history.push("/");
-    // }
-    // if(!stateAuth.completedRegistration){
-    //     console.log(history.location.pathname)
-    // history.push(`/${getRole()}/registration`)
-    // }
-    // if(!stateAuth.roles.includes(props.type)){
-
-    //     history.push('/')
-    //     // setLocationHistory(history.location.pathname)
-    //     console.log('e noh work')
-    //     console.log(!stateAuth.roles.includes(props.type))
-    // }
+description: "If you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated."
+subgoals: []
+title: "sell thingss"
 
     const data = useMemo(
       () => [
