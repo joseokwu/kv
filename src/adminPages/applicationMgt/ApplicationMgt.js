@@ -11,34 +11,15 @@ import {
   RecommendationTable,
   AcceptedTable,
   DeclinedTable,
+  ApprovedTable
 } from "./components";
 
 export const ApplicationMgt = () => {
-  const cardDetails = [
-    {
-      name: "New Applications",
-      count: 20,
-      color: "#D5D6F4",
-    },
-    {
-      name: "KV Screening",
-      count: 30,
-      color: "#DEF6FF",
-    },
-    {
-      name: "Mentor Screening",
-      count: 20,
-      color: "#D5D6F4",
-    },
-    {
-      name: "Accepted",
-      count: 10,
-      color: "#DEF6FF",
-    },
-  ];
+
 
   const mgtTab = [
     "Pending",
+    "Approved",
     "KV Screening",
     "Recommended",
     "Mentor Screening",
@@ -67,7 +48,12 @@ const { stateAuth } = useAuth();
         page:currentPagePending,
         limit:5,
         type:'startup',
-        query:{applicationCompleted:true}
+        query:{
+          applicationCompleted:true ,
+          recommended:false,
+          approveToEvaluate:false,
+          passedEvaluation:false
+        }
       })
       const kvRes = await getStakeHolders({
         page:currentKv,
@@ -119,15 +105,17 @@ const { stateAuth } = useAuth();
       case `#${mgtTab[0]}`:
         return <PendingTable applications={applications} currentPending={currentPagePending}
          setCurrentPending={setCurrentPagePending}  />;
-      case `#${mgtTab[1]}`:
-        return <KVScreeningTable />;
+         case `#${mgtTab[1]}`:
+           return <ApprovedTable approved={kvScreening}  />
       case `#${mgtTab[2]}`:
-        return <RecommendationTable />;
+        return <KVScreeningTable />;
       case `#${mgtTab[3]}`:
-        return <MentorScreeningTable />;
+        return <RecommendationTable />;
       case `#${mgtTab[4]}`:
-        return <AcceptedTable />;
+        return <MentorScreeningTable />;
       case `#${mgtTab[5]}`:
+        return <AcceptedTable />;
+      case `#${mgtTab[6]}`:
         return <DeclinedTable />;
       default:
         return <PendingTable />;

@@ -2337,7 +2337,47 @@ title:
     //     console.log(!stateAuth.roles.includes(props.type))
     // }
 
-
+    const data = useMemo(
+      () => [
+        {
+          startup: (
+            <div className="d-flex align-items-center space-out">
+              <img src={apple} alt="user" className={styles.userPic} />
+              <p className="mb-0">Apple inc.</p>
+            </div>
+          ),
+  
+          date: formatDate(new Date(2022, 9, 9)),
+  
+          status: <Tag name="Pending" color="#2E3192" />,
+  
+          action: (
+            <Link to="/admin/application_mgt/pending/0" className="view-link">
+              View
+            </Link>
+          ),
+        },
+        {
+          startup: (
+            <div className="d-flex align-items-center space-out">
+              <img src={apple} alt="user" className={styles.userPic} />
+              <p className="mb-0">Apple inc.</p>
+            </div>
+          ),
+  
+          date: formatDate(new Date(2022, 9, 9)),
+  
+          status: <Tag name="Pending" color="#2E3192" />,
+  
+          action: (
+            <Link to="/admin/application_mgt/pending/1" className="view-link">
+              View
+            </Link>
+          ),
+        },
+      ],
+      []
+    );
 
 
 

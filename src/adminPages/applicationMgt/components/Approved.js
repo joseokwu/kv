@@ -9,7 +9,7 @@ import { EmptyState } from './../../../mentorComponents/emptyState/EmptyState';
 
 
 
-export const PendingTable = ({applications, currentPending , setCurrentPending}) => {
+export const ApprovedTable = ({approved, currentPending , setCurrentPending}) => {
 
 
 
@@ -38,7 +38,7 @@ export const PendingTable = ({applications, currentPending , setCurrentPending})
 
 
   const applicationData = useMemo(
-    () => applications?.startups?.map((item , i) =>{
+    () => approved?.startups?.map((item , i) =>{
       return  {
         startup: (
           <div className="d-flex align-items-center space-out">
@@ -62,8 +62,8 @@ export const PendingTable = ({applications, currentPending , setCurrentPending})
     
   )
 
-  if(applications?.startups?.length === 0){
-    return <EmptyState message="No Application yet." />
+  if(approved?.startups?.length === 0){
+    return <EmptyState message="No  Startup has been approved" />
   }
 
   return (
