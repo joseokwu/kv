@@ -19,7 +19,7 @@ export const ApplicationMgt = () => {
 
   const mgtTab = [
     "Pending",
-    "Approved",
+    "Approved to Evaluate",
     "KV Screening",
     "Recommended",
     "Mentor Screening",

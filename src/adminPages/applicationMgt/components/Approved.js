@@ -20,17 +20,18 @@ export const ApprovedTable = ({approved, currentPending , setCurrentPending}) =>
         accessor: "startup",
       },
       {
-        title: "Application Date",
+        title: "Date Approved",
         accessor: "date",
+      },
+      {
+        title: "Approved by",
+        accessor: "approvedBy",
       },
       {
         title: "Status",
         accessor: "status",
       },
-      {
-        title: "Action",
-        accessor: "action",
-      },
+    
     ],
     []
   );
@@ -46,18 +47,11 @@ export const ApprovedTable = ({approved, currentPending , setCurrentPending}) =>
             <p className="mb-0">{ item?.startUpProfile?.acceleratorName }</p>
           </div>
         ),
-
-        date: formatDate(new Date(item?.startUpProfile?.yearFounded)),
-
-        status: <Tag name="Pending" color="#2E3192" />,
-
-        action: (
-          <Link to={`/admin/application_mgt/pending/${item?.userId}`} className="view-link">
-            View
-          </Link>
-        ),
+        date: formatDate(new Date(item?.updatedAt)),
+        approvedBy: item?.approvedBy,
+        status: <Tag name="Appproved" color="#0a9714" />,
       }
-    })
+    },[])
 
     
   )
