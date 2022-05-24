@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { ProgressBar, SmallModal } from "../../../../../Startupcomponents";
-import contributor from "../../../../../assets/images/contrib.svg";
 import { DraftMapModal } from "./roadMapTodo.styled";
-import girl from "../../../../../assets/images/smallgirl.svg";
-import guy from "../../../../../assets/images/smallguy.svg";
-import { formatDate } from "../../../../../utils/helpers";
-import moment from 'moment';
 
-export const RoadMapTodo = ({ progress = 0, data = {} }) => {
+
+export const RoadMapTodo = ({  data = {} }) => {
   const [showModal, setShowModal] = useState(false);
-
+  
   return (
     <div>
       {showModal ? (
@@ -36,8 +32,8 @@ export const RoadMapTodo = ({ progress = 0, data = {} }) => {
         <span>
           <p className="todo-info-header">Contributors</p>
           <div className="todo-contributor">
-            {data?.teamMember?.length > 0 &&
-              data?.teamMember?.map((d, i) => {
+            {data?.team?.length > 0 &&
+              data?.team?.map((d, i) => {
                 return <img src={d?.avatar} 
                 key={i} alt="contributor"
                 className="mx-2"
@@ -70,8 +66,8 @@ export const DraftModal = ({data}) => {
         </div>
         <div className="d-flex my-5">
           <p className="pe-3 pt-2">Contributors:</p>
-          {data?.teamMember?.length > 0 &&
-              data?.teamMember?.map((d, i) => {
+          {data?.team?.length > 0 &&
+              data?.team?.map((d, i) => {
                 return <img src={d?.avatar} 
                 key={i} alt="contributor"
                 className="mx-2"

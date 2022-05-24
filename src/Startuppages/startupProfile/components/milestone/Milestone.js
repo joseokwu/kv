@@ -57,19 +57,17 @@ export const UpdateMilestoneModal = ({close}) => {
 
   const onFinish = async (values) => {
   
+    
+    const updateValue = {
+      ...values,
+      dateOfAchievement:date
+    }
     // console.log({
-    //   type:'mileStone',
-    //   values:{
-    //    ...values,
-    //    dateOfAchievement:date
-    //  }
+     
     // })
-
    callUpdateStartupData({
-      type:'mileStone',
       values:{
-       ...values,
-       dateOfAchievement:date
+      mileStone:updateValue
      }
     });
     close(false)

@@ -23,14 +23,25 @@ const { Option } = Select;
 
 export const RoadMap = () => {
   const [showModal, setShowModal] = useState(false);
+  const [newGoal , setNewgOAL] = useState(false);
   const { stateAuth  } = useAuth();
+  const [dataIndex , setDataIndex] = useState(0);
+  const [subVal , setSubVal] = useState({})
 
+ // console.log(stateAuth?.startupData?.roadMap);
 
   return (
     <div>
       {showModal ? (
         <SmallModal id="addNewGoalModal" title="" closeModal={setShowModal}>
-          <AddNewGoalModal closeModal={setShowModal} />
+          <AddNewGoalModal index={dataIndex} data={subVal} closeModal={setShowModal} />
+        </SmallModal>
+      ) : (
+        <span></span>
+      )}
+      {newGoal ? (
+        <SmallModal id="GoalModal" title="" closeModal={setNewgOAL}>
+          <AddGoal closeModal={setNewgOAL} />
         </SmallModal>
       ) : (
         <span></span>
@@ -38,66 +49,31 @@ export const RoadMap = () => {
       <section className="row">
         <div className="col-xl-4 col-lg-5 mb-4">
           <article className="road-map-card">
-            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
-              <MapPoint color="#35D662" />
+          
+               <Button
+                style={{ cursor: "pointer", marginTop:'-1rem' }}
+                onClick={() => setNewgOAL(true)}
+                label="Add new goal"
+              />
+              {
+                stateAuth?.startupData?.roadMap?.map((item , i) =>(
+                  <div className="d-flex mb-4 mt-3"
+                    onClick={() => {setSubVal(item); setDataIndex(i)}}
+                   style={{ columnGap: "1rem" , cursor:"pointer" }}>
+                  <MapPoint color="#35D662" />
               <span>
-                <p className="point-title">Stage</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
+                <p className="point-title">{ item?.title }</p>
+                <p className="point-desc"> {item?.description}</p>
               </span>
-            </div>
+              </div>
+                ))   
+              }
 
-            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
-              <MapPoint color="#2E3192" />
-              <span>
-                <p className="point-title">Idea</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
-              </span>
-            </div>
-
-            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
-              <MapPoint />
-              <span>
-                <p className="point-title">Prototype</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
-              </span>
-            </div>
-
-            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
-              <MapPoint />
-              <span>
-                <p className="point-title">Minimum Viable Product</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
-              </span>
-            </div>
-
-            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
-              <MapPoint />
-              <span>
-                <p className="point-title">Early customers</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
-              </span>
-            </div>
-
-            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
-              <MapPoint />
-              <span>
-                <p className="point-title">Revenue generating</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
-              </span>
-            </div>
-
-            <div className="d-flex mb-4" style={{ columnGap: "1rem" }}>
-              <MapPoint withStem={false} />
-              <span>
-                <p className="point-title">Growth</p>
-                <p className="point-desc">Euismod netus eget donec diam.</p>
-              </span>
-            </div>
           </article>
         </div>
 
         <div className="col-xl-8 col-lg-7 mb-4">
-          <article className="road-map-card" style={{ background: "white" }}>
+{  Object.keys(subVal).length > 0 &&  <article className="road-map-card" style={{ background: "white" }}>
             <section
               className="d-flex align-items-center justify-content-between flex-wrap mb-5"
               style={{ rowGap: 10 }}
@@ -116,26 +92,84 @@ export const RoadMap = () => {
                 style={{ cursor: "pointer" }}
                 data-target="#addNewGoalModal"
                 onClick={() => setShowModal(true)}
-                label="Add new goal"
+                label="Add sub goal"
               />
             </section>
 
             <section> 
-            {stateAuth?.startupData?.roadMap?.length > 0 &&
-              stateAuth?.startupData?.roadMap?.map((item, i) => {
-                return <RoadMapTodo data={item} progress={item?.progress} key={i} />;
+            {subVal?.subgoals?.length > 0 &&
+              subVal?.subgoals?.map((item, i) => {
+             return <RoadMapTodo index={dataIndex} data={item} progress={item?.progress} key={i} />;
               })}
           </section>
-          </article>
+          </article>}
         </div>
       </section>
     </div>
   );
 };
 
-export const AddNewGoalModal = ({closeModal}) => {
+const AddGoal = ({closeModal}) =>{
 
-  const { stateAuth , callUpdateStartupData } = useAuth();
+  const {  callUpdateStartupData } = useAuth();
+
+  const onFinish = async (values) => {
+  
+  
+    callUpdateStartupData({
+      type:'roadMap',
+      values:{
+       ...values,
+       subgoals:[],
+       
+     }
+      
+     });
+     closeModal(false)
+   }
+
+  return (
+    <NewGoalModal>
+      <Form
+        name="Road New Map"
+        initialValues={{
+          remember: true,
+        }}
+        layout="vertical"
+        onFinish={onFinish}
+      >
+
+<div className="border-bottom pb-4">
+          <h4>Add new goal</h4>
+          <span>In Idea stage</span>
+        </div>
+        <div className="my-4">
+          <TextField
+            
+            name={'title'}
+           label="Title" rows={1} />
+        </div>
+        <div className="">
+        <TextareaCustom 
+          name={'description'}
+           label="Description"
+           min={0}
+          showCount={false}
+           required={false}
+             />
+             <div>
+             <button type="submit" className="createGoal">Create goal</button>
+             </div>
+        </div>
+
+      </Form>
+      </NewGoalModal>
+  )
+}
+
+export const AddNewGoalModal = ({closeModal , data , index}) => {
+
+  const { stateAuth , updateProfile , updateStartupInfo } = useAuth();
   const [teamMem , setTeamMem] = useState([]);
   const [teamData , setTeamData] = useState([]);
   const [activities, setActivites] = useState([]);
@@ -208,30 +242,29 @@ export const AddNewGoalModal = ({closeModal}) => {
   const onFinish = async (values) => {
   
     const { progress , completed } =  progressCheck();
-    // console.log({
-    //   type:'roadMap',
-    //   values:{
-    //    ...values,
-    //    teamMember:teamData,
-    //    activities:activities,
-    //    dueDate:date,
-    //    progress:progress,
-    //    completed:completed
-    //  }
-    // })
-
-    callUpdateStartupData({
-      type:'roadMap',
-      values:{
-       ...values,
-       teamMember:teamData,
-       activities:activities,
-       dueDate:date,
-       progress:progress,
-       completed:completed
-     }
-      
-     });
+    const newVal = {
+     ...stateAuth.startupData,
+     roadMap:stateAuth.startupData.roadMap?.map(item =>{
+       if(item?.title === data?.title){
+         item.subgoals = [
+          ...item.subgoals,
+          {
+            ...values,
+            activities,
+            team:teamData,
+            progress,
+            dueDate:date,
+            completed
+          }
+         ]
+       }
+       return item;
+     })
+    
+    }
+     console.log(stateAuth.startupData);
+    // updateProfile('roadMap', newVal?.roadMap);
+     updateStartupInfo()
      closeModal(false)
    }
  
@@ -249,7 +282,7 @@ export const AddNewGoalModal = ({closeModal}) => {
       <div className="mx-3">
         <div className="border-bottom pb-4">
           <h4>Add new goal</h4>
-          <span>In Idea stage</span>
+          <span> {data?.title} </span>
         </div>
         <div className="my-4">
           <TextField
@@ -331,7 +364,7 @@ export const AddNewGoalModal = ({closeModal}) => {
           onChange={(e) => setActVal(e.target.value)}
           />
         </div>
-        <div className="w-25 my-4">
+        <div className="w-25 my-4 mx-2">
             <button type="button" 
             onClick={addActivities}
              >Add</button>

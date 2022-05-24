@@ -61,8 +61,7 @@ export const PendingApplication = () => {
       const res = await applicationManagement({
         userId:id,
         action:'manage_account',
-        type:type,
-        values:value
+        values:{[type]:value , updatedAt:new Date()}
       });
       //console.log(res)
       if(res?.success){
