@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import styles from "./viewMentor.module.css";
 import userPic from "../../assets/images/sampleUser.png";
 import stars from "../../assets/icons/Stars.svg";
@@ -10,8 +10,9 @@ import web from "../../assets/icons/webSm.svg";
 import left from "../../assets/icons/chervonLeft.svg";
 import { Modal, Tabs } from "../../components";
 import { WorkExp, AreaOfInterest, Consult, Availability } from "./components";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { RatingCard } from "../../adminComponents";
+import { applicationManagement } from "../../services";
 
 export const ViewMentor = () => {
   const tabItems = useMemo(
@@ -23,6 +24,23 @@ export const ViewMentor = () => {
     ],
     []
   );
+
+  const { id } = useParams();
+  console.log("werwewqe");
+
+  const getMentor = async () => {
+    const res = await applicationManagement({
+      userId: id,
+      action: "get_mentor",
+    });
+
+    console.log("res", res);
+  };
+
+  useEffect(() => {
+    getMentor();
+    return () => {};
+  }, []);
 
   const {
     location: { hash },
