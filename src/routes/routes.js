@@ -757,7 +757,7 @@ const routes = [
     path: "/admin/",
     component: WithAdminLayout(Dashboard),
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 

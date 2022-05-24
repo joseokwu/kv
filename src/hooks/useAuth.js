@@ -87,7 +87,7 @@ export const useAuth = () => {
     try {
       const dataToPost = {
         accType: "mentor",
-        values: stateAuth.mentorData,
+        values:lastPage ? {...stateAuth.mentorData,applicationCompleted:true}: stateAuth.mentorData,
         lastPage,
       };
 
@@ -143,7 +143,7 @@ export const useAuth = () => {
     try {
       const payload = {
         accType: stateAuth.type[0],
-        values: stateAuth.investorData,
+        values: lastPage ? {...stateAuth.investorData,applicationCompleted:true}:stateAuth.investorData,
         lastPage,
       };
       const res = await updateStartup(payload)

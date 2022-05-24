@@ -2321,23 +2321,51 @@ title:
   'product.competitiveEdge',
 ]
 
-    // if(!stateAuth.type[0]?.includes(props.type)){
-    //   setLocationHistory(history.location.pathname);
-    //   history.push("/");
-    // }
-    // if(!stateAuth.completedRegistration){
-    //     console.log(history.location.pathname)
-    // history.push(`/${getRole()}/registration`)
-    // }
-    // if(!stateAuth.roles.includes(props.type)){
+description: "If you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated."
+subgoals: []
+title: "sell thingss"
 
-    //     history.push('/')
-    //     // setLocationHistory(history.location.pathname)
-    //     console.log('e noh work')
-    //     console.log(!stateAuth.roles.includes(props.type))
-    // }
-
-
+    const data = useMemo(
+      () => [
+        {
+          startup: (
+            <div className="d-flex align-items-center space-out">
+              <img src={apple} alt="user" className={styles.userPic} />
+              <p className="mb-0">Apple inc.</p>
+            </div>
+          ),
+  
+          date: formatDate(new Date(2022, 9, 9)),
+  
+          status: <Tag name="Pending" color="#2E3192" />,
+  
+          action: (
+            <Link to="/admin/application_mgt/pending/0" className="view-link">
+              View
+            </Link>
+          ),
+        },
+        {
+          startup: (
+            <div className="d-flex align-items-center space-out">
+              <img src={apple} alt="user" className={styles.userPic} />
+              <p className="mb-0">Apple inc.</p>
+            </div>
+          ),
+  
+          date: formatDate(new Date(2022, 9, 9)),
+  
+          status: <Tag name="Pending" color="#2E3192" />,
+  
+          action: (
+            <Link to="/admin/application_mgt/pending/1" className="view-link">
+              View
+            </Link>
+          ),
+        },
+      ],
+      []
+    );
 
 
 

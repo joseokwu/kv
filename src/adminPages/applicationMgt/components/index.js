@@ -4,3 +4,4 @@ export * from "./RecommendationTable";
 export * from "./MentorScreeningTable";
 export * from "./AcceptedTable";
 export * from "./DeclinedTable";
+export * from "./Approved";
