@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import styles from "./viewMentor.module.css";
 import userPic from "../../assets/images/sampleUser.png";
 import stars from "../../assets/icons/Stars.svg";
@@ -25,6 +25,8 @@ export const ViewMentor = () => {
     []
   );
 
+  const [mentor, setMentor] = useState({});
+
   const { id } = useParams();
  
     console.log(id , 'heyy')
@@ -33,6 +35,10 @@ export const ViewMentor = () => {
       userId: id,
       action: "get_mentor",
     });
+
+    if (res?.success) {
+      setMentor(res?.data);
+    }
 
     console.log("res", res);
   };
@@ -51,11 +57,11 @@ export const ViewMentor = () => {
       case `#${tabItems[0]}`:
         return <WorkExp />;
       case `#${tabItems[1]}`:
-        return <AreaOfInterest />;
+        return <AreaOfInterest data={mentor?.areaOfInterest} />;
       case `#${tabItems[2]}`:
-        return <Consult />;
+        return <Consult data={mentor?.consultantOffering} />;
       case `#${tabItems[3]}`:
-        return <Availability />;
+        return <Availability data={mentor?.assistantInfo} />;
       default:
         return <WorkExp />;
     }
@@ -92,9 +98,14 @@ export const ViewMentor = () => {
             </p>
           </article>
 
-          <h4 className={styles.user_name}>Micheal Smith</h4>
-          <a href="" className={`mb-4 d-block ${styles.text}`}>
-            Michealsmith@gmail.com
+          <h4
+            className={styles.user_name}
+          >{`${mentor?.personalDetail?.firstname} ${mentor?.personalDetail?.lastname}`}</h4>
+          <a
+            href={`https://${mentor?.email}`}
+            className={`mb-4 d-block ${styles.text}`}
+          >
+            {mentor?.email}
           </a>
 
           <p className={styles.text} style={{ color: "#828282" }}>
@@ -113,11 +124,11 @@ export const ViewMentor = () => {
               <img src={linkedIn} alt="linked in" />
             </article>
             <a
-              href=""
+              href={mentor?.personalDetail?.website}
               className={`mb-4 d-block text-right ${styles.text}`}
               style={{ color: "#828282" }}
             >
-              www.Knightventure/michealsmith
+              {mentor?.personalDetail?.website}
             </a>
           </section>
 
@@ -126,15 +137,17 @@ export const ViewMentor = () => {
               className={`d-flex align-items-center justify-content-end space-out mb-2 ${styles.contact_det}`}
             >
               <img src={location} alt="location" />
-              <p className={styles.text}>San francisco United State</p>
+              <p className={styles.text}>
+                {`${mentor?.personalDetail?.city} ${mentor?.personalDetail?.country}`}
+              </p>
             </div>
 
             <div
               className={`d-flex align-items-center justify-content-end space-out mb-2 ${styles.contact_det}`}
             >
-              <img src={web} alt="web" />
+              <img src={web} alt={mentor?.personalDetail?.website} />
               <a href="" className={styles.text}>
-                www.michealsmith.com
+                {mentor?.personalDetail?.website}
               </a>
             </div>
 
@@ -143,7 +156,7 @@ export const ViewMentor = () => {
             >
               <img src={phone} alt="phone" />
               <a href="" className={styles.text}>
-                +212456789865
+                {mentor?.phone}
               </a>
             </div>
           </section>

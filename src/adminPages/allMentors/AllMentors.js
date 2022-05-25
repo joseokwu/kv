@@ -46,7 +46,7 @@ export const AllMentors = () => {
           actions: (
             <div className="d-flex align-items-center space-out">
               <Link
-                to={`/admin/users/mentors/${mentor?._id}`}
+                to={`/admin/users/mentors/${mentor?.userId}`}
                 className="view-link"
               >
                 View
