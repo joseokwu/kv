@@ -5,7 +5,7 @@ import stageIcon from "../../../assets/icons/stageIcon.svg";
 import { YesNo } from "../../../adminComponents";
 import { RowOption, Tag } from "../../../components";
 
-export const InvestmentInfo = () => {
+export const InvestmentInfo = ({data}) => {
   const pitchData = [
     {
       name: "Investment profile name",

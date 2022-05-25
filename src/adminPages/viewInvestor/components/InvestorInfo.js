@@ -3,7 +3,7 @@ import { YesNo } from "../../../adminComponents";
 import { RowOption, Tag } from "../../../components";
 import styles from "../viewInvestor.module.css";
 
-export const InvestorInfo = () => {
+export const InvestorInfo = ({ data }) => {
   return (
     <div>
       <section className="row mx-0">
@@ -12,14 +12,14 @@ export const InvestorInfo = () => {
             <div className="d-flex align-items-start mb-45">
               <div className="mr-4">
                 <h6>Angel Network</h6>
-                <YesNo text="Yes" />
+                <YesNo text={data?.angelInvestedBefore ? "Yes" : "No"} />
               </div>
-              <RowOption options={["Solo investor"]} selectAll={true} />
+              <RowOption options={[data?.angelInvestorOrSyndicateInvestor]} selectAll={true} />
             </div>
 
             <div className="mb-45">
               <h6>Lead investor</h6>
-              <YesNo text="Yes" />
+              <YesNo text={data?.isLeadInvestor ? "Yes" : "No"} />
             </div>
 
             <div className="mb-45">
@@ -28,8 +28,8 @@ export const InvestorInfo = () => {
             </div>
 
             <div className="mb-45">
-              <h6>Interested in offline pitching session</h6>
-              <YesNo text="Yes" />
+              <h6>Interested in online pitching session</h6>
+              <YesNo text={data?.interestedInOnlinePitching ? "Yes" : "No"} />
             </div>
           </section>
 

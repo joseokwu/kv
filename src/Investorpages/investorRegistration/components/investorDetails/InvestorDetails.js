@@ -46,7 +46,7 @@ export const InvestorDetails = () => {
     updateInvestorInfo()
     console.log(values)
   }
-  console.log(stateAuth)
+  
 
   const letterOnly = (e) => {
     const charCode = e.charCode || e.which

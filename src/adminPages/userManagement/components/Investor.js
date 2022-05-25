@@ -1,10 +1,12 @@
-import React from "react";
+import React ,  { useEffect, useState , useMemo } from "react";
 import { Link } from "react-router-dom";
 import { DeleteModal, Table } from "../../../adminComponents";
 import userPic from "../../../assets/images/sampleUser.png";
 import styles from "../user.module.css";
 import down from "../../../assets/icons/chevronDown.svg";
 import filter from "../../../assets/icons/filterFunnel.svg";
+import { getStakeHolders } from "../../../services";
+
 
 export const Investor = () => {
   const header = [
@@ -16,21 +18,44 @@ export const Investor = () => {
     { title: "Action", accessor: "action" },
   ];
 
-  const data = [
-    {
-      name: (
+  const [investorsData , setInvestors] = useState({});
+
+
+
+
+    useEffect(() => {
+      const getData = async () => {
+        const res = await getStakeHolders({
+          page: 1,
+          limit: 5,
+          type: "investor",
+          query: { applicationCompleted: true },
+        });
+        console.log(res)
+
+        setInvestors(res?.data)
+      }
+      getData();
+     
+    }, []);
+
+    
+
+  const data = useMemo(()=> investorsData?.investors?.map((item , i) =>{
+    return {
+      name:  (
         <div className="d-flex align-items-center space-out">
-          <img src={userPic} alt="user" className={styles.userPic} />
-          <p className="mb-0">Kate Mcbeth Joan</p>
+          <img src={item?.profile?.avatar} alt="user" className={styles.userPic} />
+          <p className="mb-0"> {item?.profile?.firstName + " " + item?.profile?.lastName} </p>
         </div>
       ),
-      email: "KateMc@gmail.com",
-      phone: "+234 709 975 097",
-      country: "Nigeria",
-      type: "Angel investor",
-      action: (
+      email: item?.profile?.email,
+      phone: item?.profile?.mobile_number,
+      country:item?.profile?.country,
+      type: item?.personalDetail?.investorType,
+      action:(
         <div className="d-flex align-items-center space-out">
-          <Link to="/admin/users/investors/0" className="view-link">
+          <Link to={`/admin/users/investors/${item?.userId}`} className="view-link">
             View
           </Link>
           <p
@@ -42,117 +67,11 @@ export const Investor = () => {
             Delete
           </p>
         </div>
-      ),
-    },
-    {
-      name: (
-        <div className="d-flex align-items-center space-out">
-          <img src={userPic} alt="user" className={styles.userPic} />
-          <p className="mb-0">Kate Mcbeth Joan</p>
-        </div>
-      ),
-      email: "KateMc@gmail.com",
-      phone: "+234 709 975 097",
-      country: "Nigeria",
-      type: "Angel investor",
-      action: (
-        <div className="d-flex align-items-center space-out">
-          <Link to="/admin/users/investors/1" className="view-link">
-            View
-          </Link>
-          <p
-            role="button"
-            data-target="#deleteInvestor"
-            data-toggle="modal"
-            className="delete-link"
-          >
-            Delete
-          </p>
-        </div>
-      ),
-    },
-    {
-      name: (
-        <div className="d-flex align-items-center space-out">
-          <img src={userPic} alt="user" className={styles.userPic} />
-          <p className="mb-0">Kate Mcbeth Joan</p>
-        </div>
-      ),
-      email: "KateMc@gmail.com",
-      phone: "+234 709 975 097",
-      country: "Nigeria",
-      type: "Angel investor",
-      action: (
-        <div className="d-flex align-items-center space-out">
-          <Link to="/admin/users/investors/2" className="view-link">
-            View
-          </Link>
-          <p
-            role="button"
-            data-target="#deleteInvestor"
-            data-toggle="modal"
-            className="delete-link"
-          >
-            Delete
-          </p>
-        </div>
-      ),
-    },
-    {
-      name: (
-        <div className="d-flex align-items-center space-out">
-          <img src={userPic} alt="user" className={styles.userPic} />
-          <p className="mb-0">Kate Mcbeth Joan</p>
-        </div>
-      ),
-      email: "KateMc@gmail.com",
-      phone: "+234 709 975 097",
-      country: "Nigeria",
-      type: "Angel investor",
-      action: (
-        <div className="d-flex align-items-center space-out">
-          <Link to="/" className="view-link">
-            View
-          </Link>
-          <p
-            role="button"
-            data-target="#deleteInvestor"
-            data-toggle="modal"
-            className="delete-link"
-          >
-            Delete
-          </p>
-        </div>
-      ),
-    },
-    {
-      name: (
-        <div className="d-flex align-items-center space-out">
-          <img src={userPic} alt="user" className={styles.userPic} />
-          <p className="mb-0">Kate Mcbeth Joan</p>
-        </div>
-      ),
-      email: "KateMc@gmail.com",
-      phone: "+234 709 975 097",
-      country: "Nigeria",
-      type: "Angel investor",
-      action: (
-        <div className="d-flex align-items-center space-out">
-          <Link to="/" className="view-link">
-            View
-          </Link>
-          <p
-            role="button"
-            data-target="#deleteInvestor"
-            data-toggle="modal"
-            className="delete-link"
-          >
-            Delete
-          </p>
-        </div>
-      ),
-    },
-  ];
+      )
+      
+    }
+  }))
+  
   return (
     <div>
       <DeleteModal
@@ -172,7 +91,7 @@ export const Investor = () => {
       </section>
 
       <section>
-        <Table headers={header} data={data.concat(data)} />
+        <Table headers={header} data={data} />
       </section>
     </div>
   );
