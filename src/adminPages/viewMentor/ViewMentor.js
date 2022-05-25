@@ -28,8 +28,7 @@ export const ViewMentor = () => {
   const [mentor, setMentor] = useState({});
 
   const { id } = useParams();
- 
-    console.log(id , 'heyy')
+
   const getMentor = async () => {
     const res = await applicationManagement({
       userId: id,
@@ -45,7 +44,6 @@ export const ViewMentor = () => {
 
   useEffect(() => {
     getMentor();
-   
   }, []);
 
   const {
@@ -55,7 +53,7 @@ export const ViewMentor = () => {
   const renderComponent = () => {
     switch (hash) {
       case `#${tabItems[0]}`:
-        return <WorkExp />;
+        return <WorkExp data={mentor?.workExperience} />;
       case `#${tabItems[1]}`:
         return <AreaOfInterest data={mentor?.areaOfInterest} />;
       case `#${tabItems[2]}`:
@@ -85,7 +83,11 @@ export const ViewMentor = () => {
       <section className={`${styles.contact_card} row mx-0 p-5 mb-5`}>
         <div className="col-lg-6">
           <article className="d-flex align-items-center space-out mb-2">
-            <img src={userPic} alt="user" className={styles.userDp} />
+            <img
+              src={mentor?.personalDetail?.logo ?? userPic}
+              alt="user"
+              className={styles.userDp}
+            />
             <img src={stars} alt="stars" className="ml-2" />
             <p className={`ml-2 mb-0 ${styles.rate}`}>4.5</p>
             <p
