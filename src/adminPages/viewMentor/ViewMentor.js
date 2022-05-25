@@ -28,8 +28,8 @@ export const ViewMentor = () => {
   const [mentor, setMentor] = useState({});
 
   const { id } = useParams();
-  console.log("werwewqe");
-
+ 
+    console.log(id , 'heyy')
   const getMentor = async () => {
     const res = await applicationManagement({
       userId: id,
@@ -45,7 +45,7 @@ export const ViewMentor = () => {
 
   useEffect(() => {
     getMentor();
-    return () => {};
+   
   }, []);
 
   const {

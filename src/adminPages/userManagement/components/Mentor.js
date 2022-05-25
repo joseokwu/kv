@@ -49,6 +49,7 @@ export const Mentor = () => {
       type: "mentor",
       query: { applicationCompleted: true },
     });
+    
     if (res.success && res?.data?.mentors?.length > 0) {
       setMentors(() =>
         res?.data?.mentors.map((mentor) => ({
