@@ -2,7 +2,6 @@ import React from "react";
 import { InterestCard, ListCard } from "../../../adminComponents";
 
 export const Consult = ({ data = {} }) => {
-  console.log("areaOfService", data);
   const serviceArea = {
     title1: "What are your areas of service?",
     list1: data?.areaofService,
