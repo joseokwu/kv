@@ -4,6 +4,7 @@ import { RowOption, Tag } from "../../../components";
 import styles from "../viewInvestor.module.css";
 
 export const InvestorInfo = ({ data }) => {
+  console.log(data)
   return (
     <div>
       <section className="row mx-0">
@@ -12,36 +13,25 @@ export const InvestorInfo = ({ data }) => {
             <div className="d-flex align-items-start mb-45">
               <div className="mr-4">
                 <h6>Angel Network</h6>
-                <YesNo text={data?.angelInvestedBefore ? "Yes" : "No"} />
+                <YesNo text={data?.personalDetail?.angelInvestedBefore ? "Yes" : "No"} />
               </div>
-              <RowOption options={[data?.angelInvestorOrSyndicateInvestor]} selectAll={true} />
+              <RowOption options={[data?.personalDetail?.angelInvestorOrSyndicateInvestor]} selectAll={true} />
             </div>
 
             <div className="mb-45">
               <h6>Lead investor</h6>
-              <YesNo text={data?.isLeadInvestor ? "Yes" : "No"} />
+              <YesNo text={data?.personalDetail?.isLeadInvestor ? "Yes" : "No"} />
             </div>
 
             <div className="mb-45">
               <h6>Mentor</h6>
-              <YesNo text="Yes" />
+              <YesNo text={data?.personalDetail?.mentorsStartups ? "Yes" : "No"} />
             </div>
 
             <div className="mb-45">
               <h6>Interested in online pitching session</h6>
-              <YesNo text={data?.interestedInOnlinePitching ? "Yes" : "No"} />
+              <YesNo text={data?.personalDetail?.interestedInOnlinePitching ? "Yes" : "No"} />
             </div>
-          </section>
-
-          <section className="mt-4">
-            <h6 className={styles.header} style={{ fontSize: 18 }}>
-              Note to Start-up
-            </h6>
-            <p className={styles.text}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation
-            </p>
           </section>
         </div>
 
@@ -55,11 +45,12 @@ export const InvestorInfo = ({ data }) => {
             <div className="mb-4">
               <h6 className="mb-3">Sector with expertise</h6>
               <div className="d-flex flex-wrap space-out">
-                <Tag name="Tech" />
-                <Tag name="Engineering" color="#40439A" />
-                <Tag name="Career" color="#E31937" />
-                <Tag name="Engineering" color="#40439A" />
-                <Tag name="Career" color="#E31937" />
+              {
+                data?.personalDetail?.sectorOfExpertise?.map((item , i) =>(
+                  <Tag key={i} name={item} color="#E31937" />
+                ))
+              }
+                
               </div>
             </div>
           </section>
@@ -68,14 +59,14 @@ export const InvestorInfo = ({ data }) => {
             <div className="mb-5">
               <h6 className="mb-3">Investment Fund</h6>
               <RowOption
-                options={["Personal Fund", "Lead deals"]}
+                options={[data?.personalDetail?.investingFrom]}
                 selectAll={true}
               />
             </div>
 
             <div>
               <h6>Investment budget per year</h6>
-              <p style={{ color: "#000", fontSize: "18px" }}>$1000- $2000</p>
+              <p style={{ color: "#000", fontSize: "18px" }}> { data?.investorApproach?.averageInvestment } </p>
             </div>
           </section>
         </div>

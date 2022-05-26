@@ -1,10 +1,12 @@
-import React from "react";
+import React ,  { useEffect, useState , useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "../../../adminComponents";
 import down from "../../../assets/icons/chevronDown.svg";
 import filter from "../../../assets/icons/filterFunnel.svg";
 import apple from "../../../assets/images/apple.svg";
 import styles from "../user.module.css";
+import { getStakeHolders } from "../../../services";
+
 
 export const Partner = () => {
   const header = [
@@ -15,6 +17,7 @@ export const Partner = () => {
     { title: "Category", accessor: "category" },
     { title: "Action", accessor: "action" },
   ];
+const [partnersData , setPartnerData] = useState({});
 
   const data = [
     {
@@ -42,6 +45,25 @@ export const Partner = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await getStakeHolders({
+        page: 1,
+        limit: 5,
+        type: "boosterpartner",
+        query: { applicationCompleted: true },
+      });
+      console.log(res)
+
+      setPartnerData(res?.data)
+    }
+    getData();
+   
+  }, []);
+
+
+
   return (
     <div>
       <section className="d-flex align-items-center justify-content-between white-strip mb-3">

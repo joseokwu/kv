@@ -5,36 +5,16 @@ import stageIcon from "../../../assets/icons/stageIcon.svg";
 import { YesNo } from "../../../adminComponents";
 import { RowOption, Tag } from "../../../components";
 
-export const InvestmentInfo = ({data}) => {
-  const pitchData = [
-    {
-      name: "Investment profile name",
-      investor: "Micheal Smith",
-      address: "Califonia, United States",
-      bankName: "Access Bank",
-      bankAccount: "098382080",
-    },
-    {
-      name: "Investment profile name",
-      investor: "Micheal Smith",
-      address: "Califonia, United States",
-      bankName: "Access Bank",
-      bankAccount: "098382080",
-    },
-  ];
+export const InvestmentInfo = ({data , info}) => {
+ console.log(data)
   return (
     <div>
       <section className="row mx-0">
         <div className="col-lg-6 mb-3">
-          <h6 className={styles.header}>Investment Pitch</h6>
-          <p className={`mb-4 ${styles.text}`} style={{ color: "#000" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation{" "}
-          </p>
+          <h6 className={styles.header}>Investment Detail</h6>
+          
 
-          {pitchData?.length > 0 &&
-            pitchData.map((p, i) => <PitchCard data={p} key={`pitch-${i}`} />)}
+          <PitchCard data={data} />
 
           <div
             className="border-top border-bottom py-4 mb-4"
@@ -43,7 +23,7 @@ export const InvestmentInfo = ({data}) => {
             <section className={`d-flex ${styles.pitchCard}`}>
               <article>
                 <h6>Tax Resident</h6>
-                <YesNo text="Yes" />
+                <YesNo text={data?.taxResidentOutsideNigeria ? "Yes" : "No"} />
               </article>
               <article>
                 <h6>Taxation Number</h6>
@@ -55,10 +35,10 @@ export const InvestmentInfo = ({data}) => {
           <div>
             <h6 className={`mb-3 ${styles.header}`}>Preferred Stage</h6>
             <section className="row">
-              {Array.from("1111").map((x, i) => {
+              {info?.preferredStage?.map((x, i) => {
                 return (
-                  <div className="col-lg-6 mb-3" key={`preferred-stage-${i}`}>
-                    <PreferStage name="Minimum Viable Product" />
+                  <div className="col-lg-6 mb-3" key={i}>
+                    <PreferStage name={x} />
                   </div>
                 );
               })}
@@ -69,13 +49,9 @@ export const InvestmentInfo = ({data}) => {
         <div className="col-lg-6">
           <section className={`mb-5 ${styles.pitchCard}`}>
             <div className="mb-5">
-              <h6 className="mb-3">About</h6>
+              <h6 className="mb-3"> Investor Type </h6>
               <RowOption
-                options={[
-                  "Business Owner",
-                  "VC & PE Professional",
-                  "VC & PE Professional",
-                ]}
+                options={data?.investorType}
                 selectAll={true}
               />
             </div>
@@ -83,17 +59,18 @@ export const InvestmentInfo = ({data}) => {
             <div className="mb-5">
               <h6 className="mb-3">Sector Interested in</h6>
               <div className="d-flex flex-wrap space-out">
-                <Tag name="Tech" />
-                <Tag name="Engineering" color="#40439A" />
-                <Tag name="Career" color="#E31937" />
-                <Tag name="Engineering" color="#40439A" />
-                <Tag name="Career" color="#E31937" />
+                {
+                  data?.sectorOfExpertise?.map((item , i) =>(
+                    <Tag name={item} color="#40439A" />
+                  ))
+                }
+                
               </div>
             </div>
 
             <div className="mb-5">
               <h6 className="mb-3">Preference</h6>
-              <RowOption options={["B2B", "B2B"]} selectAll={true} />
+              <RowOption options={[info?.investmentPreference]} selectAll={true} />
             </div>
 
             <div className="">
@@ -104,7 +81,7 @@ export const InvestmentInfo = ({data}) => {
 
           <section className="pt-5">
             <h6 className={styles.header}>Preferred Investment Amount</h6>
-            <p>$1000- $2000</p>
+            <p> {info?.averageInvestment} </p>
           </section>
         </div>
       </section>
@@ -115,17 +92,16 @@ export const InvestmentInfo = ({data}) => {
 const PitchCard = ({ data = {} }) => {
   return (
     <div className={`${styles.pitchCard} d-flex w-100 mb-4`}>
-      <img src={pitchIcon} alt="pitch" />
+      
       <section className="w-100">
-        <h6>{data?.name}</h6>
         <div className="d-flex w-100">
           <article>
-            <p className="mb-2">Investor: {data?.investor}</p>
-            <p>Address: {data?.address} </p>
+            <p className="mb-2">Bank Type: {data?.bankAccountType}</p>
+            <p>Address: {data?.bankBranch} </p>
           </article>
           <article>
             <p className="mb-2">Bank: {data?.bankName}</p>
-            <p>Act No : {data?.bankAccount}</p>
+            <p>Act No : {data?.bankAccountNumber}</p>
           </article>
         </div>
       </section>

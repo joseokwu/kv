@@ -36,7 +36,7 @@ useEffect(() => {
       action:"get_investor",
     });
     setPartnerData(res?.data)
-    console.log("res", res?.data);
+    //console.log("res", res?.data);
   };
   getMentor();
  
@@ -46,9 +46,9 @@ useEffect(() => {
   const renderComponent = () => {
     switch (hash) {
       case `#${tabItems[0]}`:
-        return <InvestmentInfo data={partnerData?.investorApproach} />;
+        return <InvestmentInfo data={partnerData?.personalDetail} info={partnerData?.investorApproach} />;
       case `#${tabItems[1]}`:
-        return <InvestorInfo data={partnerData?.personalDetail} />;
+        return <InvestorInfo data={partnerData} />;
       case `#${tabItems[2]}`:
         return <StartupPortfolio />;
       default:
@@ -71,10 +71,10 @@ useEffect(() => {
       <section className={`${styles.contact_card} row mx-0 p-5 mb-5`}>
         <div className="col-lg-6">
           <article className="d-flex align-items-center space-out mb-2">
-            <img src={partnerData?.profile?.avatar} alt="user" className={styles.userDp} />
+          { partnerData?.profile?.avatar && <img src={  partnerData?.profile?.avatar} alt="user" className={styles.userDp} />}
           </article>
 
-          <h4 className={styles.user_name}> { partnerData?.firstname + " " + partnerData?.lastname } </h4>
+          <h4 className={styles.user_name}> { partnerData?.firstname && partnerData?.firstname + " " + partnerData?.lastname  } </h4>
           <a href="#." className={`mb-4 d-block ${styles.text}`}>
             {partnerData?.email}
           </a>

@@ -2451,10 +2451,46 @@ title: "sell thingss"
       ],
       []
     );
+===========================================================
+==============================================================
+personalDetail:
+amount: ""
+amountPerYear: ""
+angelInvestedBefore: true
+angelInvestedExperience: ""
+angelInvestorOrSyndicateInvestor: "Solo"
+bankAccountNumber: "99009868897"
+bankAccountType: "Savings Account"
+bankBranch: "Ikeja"
+bankName: "FCMB"
+budgetAmount: "88999"
+budgetPerYear: "7899987766"
+individualHaving: "Business Owner"
+interestedInOnlinePitching: true
+investingFrom: "Personal Fund"
+investorType: (8) ['', 'Angel Investor', 'Corporation', 'VC Fund', 'Business Owner', 'CXO', 'PE Fund', 'VC / PE Professional']
+isLeadInvestor: true
+isPublic: true
+mentorsStartups: true
+nationality: "Nigeria"
+numberOfInvestmentPerYear: "90000"
+previousAngelInvestingExperience: false
+sectorOfExpertise: (3) ['Advanced manufacturing and materials', 'Agriculture, food and beverages', 'Artificial intelligence']
+taxResidentOutsideNigeria: true
+yetToInvest: true
 
 
-
-
+investorApproach:
+averageInvestment: "$25,000 - $50,000"
+investmentExperience: "I have invested in one or two businesses and would like to find more opportunities"
+investmentPreference: "Marketplace"
+investmentThesis: "sdfjsbfjbfdskjbkfsdbjsfdbkjfbjksdbjfskfbjIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from package.json and then run yarn install, the deleted package is not i"
+preferredStage: ['Top College Graduates']
+region: "Aruba"
+sectorExpertise: []
+stage: "Pre-Seed"
+techSector: "Agriculture, food and beverages"
+_id: "628e034826acad312f4ad6
 
 
 

@@ -1,7 +1,6 @@
 import React ,  { useEffect, useState , useMemo } from "react";
 import { Link } from "react-router-dom";
 import { DeleteModal, Table } from "../../../adminComponents";
-import userPic from "../../../assets/images/sampleUser.png";
 import styles from "../user.module.css";
 import down from "../../../assets/icons/chevronDown.svg";
 import filter from "../../../assets/icons/filterFunnel.svg";
@@ -52,7 +51,7 @@ export const Investor = () => {
       email: item?.profile?.email,
       phone: item?.profile?.mobile_number,
       country:item?.profile?.country,
-      type: item?.personalDetail?.investorType,
+      type: item?.investorApproach?.stage,
       action:(
         <div className="d-flex align-items-center space-out">
           <Link to={`/admin/users/investors/${item?.userId}`} className="view-link">

@@ -1009,7 +1009,7 @@ const routes = [
     path: "/admin/users/investors/:id",
     component: ViewInvestor,
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 
@@ -1018,7 +1018,7 @@ const routes = [
     path: "/admin/users/partners/:id",
     component: ViewPartner,
     exact: true,
-    protected: false,
+    protected: true,
     type: "admin",
   },
 
