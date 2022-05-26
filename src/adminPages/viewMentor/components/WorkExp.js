@@ -1,12 +1,15 @@
 import React from "react";
 import { ExpCard } from "../../../adminComponents";
 
-export const WorkExp = () => {
+export const WorkExp = ({ data = {} }) => {
   const expData = [
-    { title: "CEO", company: "Wales Digital Agency" },
-    { title: "IT Specialist", company: "Wales Digital Agency" },
-    { title: "CEO", company: "Wales Digital Agency" },
-    { title: "IT Specialist", company: "Wales Digital Agency" },
+    {
+      title: data?.position,
+      company: data?.companyName,
+      industry: data?.industry,
+      achievements: data?.achievements,
+      amountRaised: data?.amountRaised,
+    },
   ];
   return (
     <div className="row">

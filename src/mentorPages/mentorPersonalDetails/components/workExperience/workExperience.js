@@ -44,10 +44,7 @@ const WorkExperience = () => {
     setData(stateAuth?.mentorData?.workExperience);
   }, [stateAuth?.mentorData?.workExperience]);
 
-  console.log("data", stateAuth);
-
   const onSubmit = async () => {
-    updateMentorProfileState("workExperience", [data]);
     setLoading(true);
     const uploaded = await updateMentorInfo();
 
@@ -95,6 +92,10 @@ const WorkExperience = () => {
     const { name, value } = e.target;
 
     setData({ ...data, [name]: value });
+
+    updateMentorProfileState("workExperience", {
+      [name]: value,
+    });
 
     formik.handleChange(e);
   };
