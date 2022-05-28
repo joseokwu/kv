@@ -12,10 +12,11 @@ import { getStakeHolders } from "../../../services";
 
 export const Mentor = () => {
   const { push } = useHistory();
+  const [numOfMentors, setNumOfMentors] = useState(0);
   const cardDetails = [
     {
       name: "No. of Mentors",
-      count: 12,
+      count: numOfMentors,
       color: "#D5D6F4",
     },
     {
@@ -50,7 +51,10 @@ export const Mentor = () => {
       query: { applicationCompleted: true },
     });
 
+    console.log("res", res);
+
     if (res.success && res?.data?.mentors?.length > 0) {
+      setNumOfMentors(res?.data?.metadata?.total);
       setMentors(() =>
         res?.data?.mentors.map((mentor) => ({
           name: (
