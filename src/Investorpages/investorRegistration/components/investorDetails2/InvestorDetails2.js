@@ -15,7 +15,7 @@ export const InvestorDetails2 = () => {
     updateInvestorInfo()
     console.log(values)
   }
-  //console.log(stateAuth);
+  console.log(stateAuth);
 
   const onNumberOnlyChange = (e) => {
     const keyCode = e.keyCode || e.which
@@ -117,21 +117,23 @@ export const InvestorDetails2 = () => {
                 name="sectorOfExpertise"
                 // label="Choose the sectors you have expertise in?"
                 initialValue={
-                  stateAuth?.investorData?.personalDetail?.sectorOfExpertise
+                  !stateAuth?.investorData?.personalDetail?.sectorOfExpertise?.includes('') ? stateAuth?.investorData?.personalDetail?.sectorOfExpertise : []
                 }
-                rules={[{ message: 'Please select a sector' }]}
+                
               >
                 <Select
                   placeholder="Choose sector"
                   className="edit_input"
+                  mode="tags"
                   onChange={(e) =>
                     updateInvestorProfileData('personalDetail', {
-                      sectorOfExpertise: e,
+                      sectorOfExpertise:  e,
                     })
                   }
                 >
                   {sectors.map((item, i) => (
-                    <Option value={item} key={i}>
+                    <Option
+                     value={item} key={i}>
                       {' '}
                       {item}{' '}
                     </Option>

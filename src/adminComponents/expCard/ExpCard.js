@@ -9,22 +9,10 @@ export const ExpCard = ({ data = {} }) => {
       <p>{data?.company}</p>
 
       <ul className={`px-3`}>
-        <li className="mb-3">
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-        </li>
-        <li className="mb-3">
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-        </li>
-        <li className="mb-3">
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-          Vitae elementum et diam vitae nec, fringilla vivamus posuere neque.
-        </li>
+        <li className="mb-3">{data?.achievements}</li>
       </ul>
       <section className="d-flex space-out border-bottom pb-4 mb-4">
-        <Tag name="Technology" color="#40439A" />
-        <Tag name="Technology" color="#40439A" />
-        <Tag name="Technology" color="#40439A" />
+        <Tag name={data?.industry} color="#40439A" />
       </section>
 
       <section>
@@ -32,7 +20,7 @@ export const ExpCard = ({ data = {} }) => {
           Have you been one of the first 10 employees of a company that has been
           valued or exited at $5m or more?
         </p>
-        <Tag name="Yes" color="#40439A" />
+        <Tag name={data?.amountRaised} color="#40439A" />
       </section>
     </div>
   );

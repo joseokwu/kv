@@ -57,10 +57,12 @@ export const PendingTable = ({applications, currentPending , setCurrentPending})
           </Link>
         ),
       }
-    })
+    }, [])
 
     
   )
+
+
 
   if(applications?.startups?.length === 0){
     return <EmptyState message="No Application yet." />

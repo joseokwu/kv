@@ -2321,6 +2321,91 @@ title:
   'product.competitiveEdge',
 ]
 
+
+
+//   applicationCompleted: true
+// investorApproach:
+// averageInvestment: "$25,000 - $50,000"
+// investmentExperience: "I am an angel investor / high net worth individual making regular investments"
+// investmentPreference: "Marketplace"
+// investmentThesis: "@gkeenley You have to update project.pbxproj by hand unfortunately – \nGuy\n Apr 10, 2020 at 2:41\n1\nThe things that I know are: using Xcode and applying their recommended updates. using react-native upgrade or any command line tools that help upgrading"
+// preferredStage: "Prior Start-up experience"
+// region: "Armenia"
+// stage: "Pre-Seed"
+// techSector: "Consumer products and services"
+// _id: "628597dda32ef136e27d6af0"
+// [[Prototype]]: Object
+// personalDetail:
+// amount: ""
+// amountPerYear: ""
+// angelInvestedBefore: true
+// angelInvestedExperience: ""
+// angelInvestorOrSyndicateInvestor: "Syndicate"
+// bankAccountNumber: "99009868897"
+// bankAccountType: "Savings Account"
+// bankBranch: "Ikeja"
+// bankName: "FCMB"
+// budgetAmount: "88999"
+// budgetPerYear: "7899987766"
+// individualHaving: "Business Owner"
+// interestedInOnlinePitching: true
+// investingFrom: "Personal Fund"
+// investorType: "Corporation"
+// isLeadInvestor: true
+// isPublic: true
+// mentorsStartups: true
+// nationality: "Nigeria"
+// numberOfInvestmentPerYear: "90000"
+// previousAngelInvestingExperience: false
+// sectorOfExpertise: "Artificial intelligence"
+// taxResidentOutsideNigeria: true
+// yetToInvest: true
+// _id: "628597dda32ef136e27d6aed"
+// [[Prototype]]: Object
+// portfolio: []
+// profile:
+// address: "Adeneyi"
+// avatar: "https://cdn.shoutng.com/kvdbjeggjsxz0fvetferok.png"
+// briefIntroduction: " If you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.  If you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated."
+// city: "Lagos"
+// companyEmail: ""
+// country: "Nigeria"
+// dob: "2022-05-19T01:05:33.389Z"
+// email: ""
+// firstName: ""
+// howDidYouAboutUs: "social media"
+// lastName: ""
+// mobile_number: "+376748848484444"
+// referral: "hjkkkkjh"
+// socialMedia: {linkedIn: 'http://localhost:3000/startup/registration', twitter: 'http://localhost:3000/boosterpartner/registration', website: 'http://localhost:3000/boosterpartner/registration', profileLink: '', _id: '628597dda32ef136e27d6aee'}
+// state: "Bauchi"
+// _id: "628597dda32ef136e27d6aef"
+// [[Prototype]]: Object
+// userId: "628597dd1f0f5989e8619f7f"
+// __v: 0
+// _id: "628597dda32ef136e27d6af1"
+// [[Prototype]]: Object
+// length: 1
+// [[Prototype]]: Array(0)
+// metadata: {total: 1, page: 1}
+// results: {}
+// [[Prototype]]: Object
+// message: "Successfully gotten investors"
+// success: true
+// [[Prototype]]: ObjectuseMemo(()=> investorsData?.investors?.map((item , i) =>{
+   
+return {
+      name:  (
+        <div className="d-flex align-items-center space-out">
+          <img src={userPic} alt="user" className={styles.userPic} />
+          <p className="mb-0"> {item?.profile} </p>
+        </div>
+      ),
+    }
+  }))
+
+
+
 description: "If you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated."
 subgoals: []
 title: "sell thingss"
@@ -2366,10 +2451,46 @@ title: "sell thingss"
       ],
       []
     );
+===========================================================
+==============================================================
+personalDetail:
+amount: ""
+amountPerYear: ""
+angelInvestedBefore: true
+angelInvestedExperience: ""
+angelInvestorOrSyndicateInvestor: "Solo"
+bankAccountNumber: "99009868897"
+bankAccountType: "Savings Account"
+bankBranch: "Ikeja"
+bankName: "FCMB"
+budgetAmount: "88999"
+budgetPerYear: "7899987766"
+individualHaving: "Business Owner"
+interestedInOnlinePitching: true
+investingFrom: "Personal Fund"
+investorType: (8) ['', 'Angel Investor', 'Corporation', 'VC Fund', 'Business Owner', 'CXO', 'PE Fund', 'VC / PE Professional']
+isLeadInvestor: true
+isPublic: true
+mentorsStartups: true
+nationality: "Nigeria"
+numberOfInvestmentPerYear: "90000"
+previousAngelInvestingExperience: false
+sectorOfExpertise: (3) ['Advanced manufacturing and materials', 'Agriculture, food and beverages', 'Artificial intelligence']
+taxResidentOutsideNigeria: true
+yetToInvest: true
 
 
-
-
+investorApproach:
+averageInvestment: "$25,000 - $50,000"
+investmentExperience: "I have invested in one or two businesses and would like to find more opportunities"
+investmentPreference: "Marketplace"
+investmentThesis: "sdfjsbfjbfdskjbkfsdbjsfdbkjfbjksdbjfskfbjIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from package.json and then run yarn install, the deleted package is not i"
+preferredStage: ['Top College Graduates']
+region: "Aruba"
+sectorExpertise: []
+stage: "Pre-Seed"
+techSector: "Agriculture, food and beverages"
+_id: "628e034826acad312f4ad6
 
 
 

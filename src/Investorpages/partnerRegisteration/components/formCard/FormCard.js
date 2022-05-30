@@ -8,7 +8,9 @@ const FormCard = ({ children, title = "", className = "" }) => {
           <h4>{title}</h4>
         </div>
       )}
+      <div>
       {children}
+      </div>
     </div>
   );
 };

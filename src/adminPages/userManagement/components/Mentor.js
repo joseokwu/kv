@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DeleteModal, Table, ViewSession } from "../../../adminComponents";
 import { Button, DashCard, Modal, Tag } from "../../../components";
@@ -8,13 +8,15 @@ import { formatDate, formatTime } from "../../../utils/helpers";
 import apple from "../../../assets/images/apple.svg";
 import { AddMentor } from "./AddMentor";
 import { useHistory } from "react-router-dom";
+import { getStakeHolders } from "../../../services";
 
 export const Mentor = () => {
   const { push } = useHistory();
+  const [numOfMentors, setNumOfMentors] = useState(0);
   const cardDetails = [
     {
       name: "No. of Mentors",
-      count: 12,
+      count: numOfMentors,
       color: "#D5D6F4",
     },
     {
@@ -38,6 +40,69 @@ export const Mentor = () => {
       color: "#D5D6F4",
     },
   ];
+
+  const [mentors, setMentors] = useState([]);
+
+  const getData = async () => {
+    const res = await getStakeHolders({
+      page: 1,
+      limit: 2,
+      type: "mentor",
+      query: { applicationCompleted: true },
+    });
+
+    console.log("res", res);
+
+    if (res.success && res?.data?.mentors?.length > 0) {
+      setNumOfMentors(res?.data?.metadata?.total);
+      setMentors(() =>
+        res?.data?.mentors.map((mentor) => ({
+          name: (
+            <div className="d-flex align-items-center space-out">
+              <img
+                src={mentor?.personalDetail?.logo ?? userPic}
+                alt="user"
+                className={styles.userPic}
+              />
+              <p className="mb-0">{`${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`}</p>
+            </div>
+          ),
+          skills: (
+            <div className="d-flex space-out flex-wrap">
+              {mentor?.areaOfInterest?.skills?.map((skill, i) => (
+                <Tag name={skill} color={i > 0 ? "#40439A" : "#058dc1"} />
+              ))}
+            </div>
+          ),
+          company: "Seam Technologies Inc.",
+          sessions: 3,
+          actions: (
+            <div className="d-flex align-items-center space-out">
+              <Link
+                to={`/admin/users/mentors/${mentor?.userId}`}
+                className="view-link"
+              >
+                View
+              </Link>
+              <p
+                role="button"
+                className="delete-link"
+                data-target="#deleteMentor"
+                data-toggle="modal"
+              >
+                Delete
+              </p>
+            </div>
+          ),
+        }))
+      );
+    }
+  };
+
+  useEffect(() => {
+    getData();
+    return () => {};
+  }, []);
 
   const headers = [
     { title: "Name", accessor: "name" },
@@ -350,7 +415,7 @@ export const Mentor = () => {
         </div>
 
         <div>
-          <Table headers={headers} data={data} />
+          <Table headers={headers} data={mentors} />
         </div>
       </section>
 
