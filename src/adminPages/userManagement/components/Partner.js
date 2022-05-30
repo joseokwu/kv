@@ -1,4 +1,4 @@
-import React ,  { useEffect, useState , useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "../../../adminComponents";
 import down from "../../../assets/icons/chevronDown.svg";
@@ -6,9 +6,72 @@ import filter from "../../../assets/icons/filterFunnel.svg";
 import apple from "../../../assets/images/apple.svg";
 import styles from "../user.module.css";
 import { getStakeHolders } from "../../../services";
-
+import { Tag } from "../../../components";
 
 export const Partner = () => {
+  const [boosterPartner, setBoosterPartner] = useState([]);
+  const [NumOfPartner, setNumOfPartner] = useState(0);
+
+  const getData = async () => {
+    const res = await getStakeHolders({
+      page: 1,
+      limit: 2,
+      type: "boosterpartner",
+      query: { applicationCompleted: true },
+    });
+
+    console.log("res", res);
+
+    if (res.success && res?.data?.mentors?.length > 0) {
+      setNumOfPartner(res?.data?.metadata?.total);
+      setBoosterPartner(() =>
+        res?.data?.mentors.map((partner) => ({
+          name: (
+            <div className="d-flex align-items-center space-out">
+              <img
+                src={partner?.personalDetail?.logo ?? apple}
+                alt="user"
+                className={styles.userPic}
+              />
+              <p className="mb-0">{`${partner?.personalDetail?.lastname} ${partner?.personalDetail?.firstname}`}</p>
+            </div>
+          ),
+          skills: (
+            <div className="d-flex space-out flex-wrap">
+              {partner?.areaOfInterest?.skills?.map((skill, i) => (
+                <Tag name={skill} color={i > 0 ? "#40439A" : "#058dc1"} />
+              ))}
+            </div>
+          ),
+          company: "Seam Technologies Inc.",
+          sessions: 3,
+          actions: (
+            <div className="d-flex align-items-center space-out">
+              <Link
+                to={`/admin/users/mentors/${partner?.userId}`}
+                className="view-link"
+              >
+                View
+              </Link>
+              <p
+                role="button"
+                className="delete-link"
+                data-target="#deleteMentor"
+                data-toggle="modal"
+              >
+                Delete
+              </p>
+            </div>
+          ),
+        }))
+      );
+    }
+  };
+
+  useEffect(() => {
+    getData();
+    return () => {};
+  }, []);
   const header = [
     { title: "Brand", accessor: "brand" },
     { title: "Name", accessor: "name" },
@@ -17,7 +80,7 @@ export const Partner = () => {
     { title: "Category", accessor: "category" },
     { title: "Action", accessor: "action" },
   ];
-const [partnersData , setPartnerData] = useState({});
+  const [partnersData, setPartnerData] = useState({});
 
   const data = [
     {
@@ -54,15 +117,12 @@ const [partnersData , setPartnerData] = useState({});
         type: "boosterpartner",
         query: { applicationCompleted: true },
       });
-      console.log(res)
+      console.log(res);
 
-      setPartnerData(res?.data)
-    }
+      setPartnerData(res?.data);
+    };
     getData();
-   
   }, []);
-
-
 
   return (
     <div>
