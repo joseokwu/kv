@@ -77,7 +77,7 @@ export const loginUser = async (value) => async (dispatch) => {
     }
   } catch (err) {
     console.log(err?.response?.data?.message, "err");
-    toast.error(err?.response?.data?.message);
+    toast.error(err?.response?.data?.message ?? "Connection Error");
     //console.log('error')
     dispatch({
       type: LOGIN_FAILED,
