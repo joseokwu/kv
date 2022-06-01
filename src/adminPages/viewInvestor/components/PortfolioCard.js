@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styles from "../viewInvestor.module.css";
 import apple from "../../../assets/images/apple.svg";
-import { Badge, Tag } from "../../../components";
-import dots from "../../../assets/icons/dot.svg";
+import { Badge, Tag , ReuseableDropdownMenu } from "../../../components";
+
 
 export const PortfolioCard = ({ data = {}, ...rest }) => {
     
@@ -11,10 +11,9 @@ export const PortfolioCard = ({ data = {}, ...rest }) => {
         active: "#0E760C",
         "in-active": "#E31919",
     };
-    useEffect(() => {
-        console.log(data);
-        console.log(data?.startupCommitted?.fundRaising?.previousRound);
-    }, []);
+   
+    console.log(data)
+
     return (
         <div className={styles.portfolioCard} {...rest}>
             <section className="d-flex justify-content-between mb-2">
@@ -31,7 +30,7 @@ export const PortfolioCard = ({ data = {}, ...rest }) => {
                         ]
                     }
                 />
-                <ActiveDropdown />
+                <ReuseableDropdownMenu />
             </section>
 
             <section>

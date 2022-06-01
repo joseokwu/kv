@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import logo from '../../assets/images/kvLogo.png'
 import notification from '../../assets/icons/notification.svg'
 import angleDown from '../../assets/icons/angleDown.svg'
-import sampleUser from '../../assets/images/sampleUser.png'
-import { Notification } from '../index'
+import ThreeDots from '../../assets/icons/3dots.svg';
+import { Notification , Badge } from '../index'
 import view from '../../assets/icons/vp.svg'
 import edit from '../../assets/icons/ep.svg'
 import logout from '../../assets/icons/logout.svg'
@@ -140,6 +140,38 @@ const HeaderDropdownMenu = () => {
           <img className="pe-1" src={logout} alt="" /> Log Out
         </button>
       </div>
+    </div>
+  )
+}
+
+
+ export const ReuseableDropdownMenu = ({ active , inActive}) => {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="" >
+      <button
+        className=" p-0"
+        
+        style={{
+          columnGap: 7,
+        }}
+        onClick={(e) => {e.stopPropagation(); setShow(!show)}}
+      >
+        <img src={ThreeDots} alt="" />
+      </button>
+   { show ?   <div  className="px-2 py-3">
+        <Badge
+        name='Active'
+          className=" text-center py-2"
+        onClick={active}
+        />
+     
+        <Badge
+        name='In-Active'
+         onClick={inActive}
+         className="text-center py-2 my-2"/>
+         
+      </div> : <span /> }
     </div>
   )
 }
