@@ -1,49 +1,109 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../viewInvestor.module.css";
 import apple from "../../../assets/images/apple.svg";
 import { Badge, Tag } from "../../../components";
+import dots from "../../../assets/icons/dot.svg";
 
 export const PortfolioCard = ({ data = {}, ...rest }) => {
-  const statusList = {
-    active: "#0E760C",
-    "in-active": "#E31919",
-  };
-  return (
-    <div className={styles.portfolioCard} {...rest}>
-      <section className="d-flex justify-content-between mb-2">
-        <img src={apple} alt="startup logo" />
-        {/* <p>Transaction type: Round</p> */}
-        <Badge
-          name={data?.status}
-          color={statusList[data?.status?.toLowerCase()]}
-        />
-      </section>
+    const statusList = {
+        active: "#0E760C",
+        "in-active": "#E31919",
+    };
+    useEffect(() => {
+        console.log(data);
+        console.log(data?.startupCommitted?.fundRaising?.previousRound);
+    }, []);
+    return (
+        <div className={styles.portfolioCard} {...rest}>
+            <section className="d-flex justify-content-between mb-2">
+                <img
+                    src={data?.startupCommitted?.startUpProfile?.logo}
+                    alt="startup logo"
+                />
+                {/* <p>Transaction type: Round</p> */}
+                <Badge
+                    name={data?.status ? "Active" : "Inactive"}
+                    color={
+                        statusList[
+                            (data?.status ? "Active" : "Inactive").toLowerCase()
+                        ]
+                    }
+                />
+                <ActiveDropdown />
+            </section>
 
-      <section>
-        <h4>Applane Insteen.</h4>
-        <div className="d-flex flex-wrap space-out mb-2">
-          <Tag name="Tech" />
-          <Tag name="Engineering" color="#40439A" />
-          <Tag name="Career" color="#E31937" />
-        </div>
+            <section>
+                <h4>{data?.startupCommitted?.startUpProfile?.startupName}</h4>
+                <div className="d-flex flex-wrap space-out mb-2">
+                    <Tag
+                        name={
+                            data?.startupCommitted?.startUpProfile
+                                ?.businessSector
+                        }
+                    />
+                </div>
 
-        <p className={`border-bottom ${styles.portDesc}`}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus
-          morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit...
-        </p>
-      </section>
+                <p className={`border-bottom ${styles.portDesc}`}>
+                    {data?.startupCommitted?.startUpProfile?.elevatorPitch}
+                </p>
+            </section>
 
-      <section className="row">
-        <div className="col-md-6">
-          <p>Idea stage</p>
-          <p>Funding amount: $7</p>
+            <section className="row">
+                <div className="col-md-6">
+                    <p>
+                        {data?.startupCommitted?.startUpProfile?.startupStage}
+                    </p>
+                    <p>
+                        Funding amount: $
+                        {
+                            data?.startupCommitted?.fundRaising?.fundingAsk
+                                ?.fundraisingAmount
+                        }
+                    </p>
+                </div>
+                <div className="col-md-6 text-right">
+                    <p>
+                        Last funding date:{" "}
+                        {new Date(
+                            data?.startupCommitted?.fundRaising?.previousRound?.dateOfFunding
+                        ).toLocaleDateString("en-gb")}
+                    </p>
+                    <p>Invest. requirement: $21</p>
+                </div>
+            </section>
         </div>
-        <div className="col-md-6 text-right">
-          <p>Last funding date: 20/3/21</p>
-          <p>Invest. requirement: $21</p>
+    );
+};
+
+const ActiveDropdown = ({ id = "" }) => {
+    return (
+        <div
+            class="dropdown"
+            onClick={(ev) => {
+                ev.stopPropagation();
+            }}
+        >
+            <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
+                Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">
+                    Action
+                </a>
+                <a class="dropdown-item" href="#">
+                    Another action
+                </a>
+                <a class="dropdown-item" href="#">
+                    Something else here
+                </a>
+            </div>
         </div>
-      </section>
-    </div>
-  );
+    );
 };
