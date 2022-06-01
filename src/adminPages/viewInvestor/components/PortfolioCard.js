@@ -5,6 +5,8 @@ import { Badge, Tag } from "../../../components";
 import dots from "../../../assets/icons/dot.svg";
 
 export const PortfolioCard = ({ data = {}, ...rest }) => {
+    
+
     const statusList = {
         active: "#0E760C",
         "in-active": "#E31919",
@@ -77,33 +79,14 @@ export const PortfolioCard = ({ data = {}, ...rest }) => {
 
 const ActiveDropdown = ({ id = "" }) => {
     return (
-        <div
-            class="dropdown"
-            onClick={(ev) => {
-                ev.stopPropagation();
-            }}
+        <button
+            type="button"
+            class="btn btn-secondary"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Tooltip on bottom"
         >
-            <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-            >
-                Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">
-                    Action
-                </a>
-                <a class="dropdown-item" href="#">
-                    Another action
-                </a>
-                <a class="dropdown-item" href="#">
-                    Something else here
-                </a>
-            </div>
-        </div>
+            Tooltip on bottom
+        </button>
     );
 };
