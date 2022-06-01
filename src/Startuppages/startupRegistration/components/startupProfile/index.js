@@ -63,7 +63,7 @@ export const StartupProfile = () => {
   const [logoUploading, setLogoUploading] = useState(false);
 
   
-  //console.log(stateAuth)
+  console.log(stateAuth)
   
 
 
@@ -203,7 +203,7 @@ export const StartupProfile = () => {
               <TextField
                 label="Startup Name"
                 name={'startupName'}
-                value={stateAuth?.startupData?.startUpProfile?.startupName}
+                value={stateAuth?.startupData?.startUpProfile?.startupName ?? stateAuth?.startupname}
                 required={true}
                 disabled={true}
               />
