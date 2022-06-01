@@ -75,7 +75,7 @@ export const Partner = () => {
 
     useEffect(() => {
         getData();
-
+        console.log(boosterPartner);
         return () => {};
     }, []);
     const header = [
