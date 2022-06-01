@@ -10,6 +10,7 @@ import digitalLogo from "../../assets/icons/digitalOceanLogo.png";
 import styles from "./viewPartner.module.css";
 import { Tabs } from "../../components";
 import { AppliedStartup, Offerings } from "./components";
+import { CircularLoader } from "../../mentorComponents/CircluarLoader";
 
 export const ViewPartner = () => {
   const {

@@ -2,34 +2,35 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Tabs } from "../../components";
 import { Investor, KVMember, Mentor, Partner } from "./components";
+import { CircularLoader } from "../../components/CircluarLoader";
 
 export const UserManagement = () => {
-  const tabItems = ["Mentor", "Investor", "Partner", "KV Member"];
+    const tabItems = ["Mentor", "Investor", "Partner", "KV Member"];
 
-  const {
-    location: { hash },
-  } = useHistory();
-  const renderComponent = () => {
-    switch (hash) {
-      case `#${tabItems[0]}`:
-        return <Mentor />;
-      case `#${tabItems[1]}`:
-        return <Investor />;
-      case `#${tabItems[2]}`:
-        return <Partner />;
-      case `#${tabItems[3]}`:
-        return <KVMember />;
-      default:
-        return <Mentor />;
-    }
-  };
-  return (
-    <div className="p-5" style={{ maxWidth: 2000 }}>
-      <section className="mb-4">
-        <Tabs tabItems={tabItems} />
-      </section>
+    const {
+        location: { hash },
+    } = useHistory();
+    const renderComponent = () => {
+        switch (hash) {
+            case `#${tabItems[0]}`:
+                return <Mentor />;
+            case `#${tabItems[1]}`:
+                return <Investor />;
+            case `#${tabItems[2]}`:
+                return <Partner />;
+            case `#${tabItems[3]}`:
+                return <KVMember />;
+            default:
+                return <Mentor />;
+        }
+    };
+    return (
+        <div className="p-5" style={{ maxWidth: 2000 }}>
+            <section className="mb-4">
+                <Tabs tabItems={tabItems} />
+            </section>
 
-      <section>{renderComponent()}</section>
-    </div>
-  );
+            <section>{renderComponent()}</section>
+        </div>
+    );
 };
