@@ -5,19 +5,22 @@ import scaleIcon from "../../assets/icons/scaleIcon.svg";
 import { Button, Modal, Select, TextField } from "../../components";
 import styles from "./createNewCriteria.module.css";
 import { Form } from 'antd';
+import { SmallModal } from "../../Startupcomponents";
 import { useAdmin } from "../../hooks";
 
 export const CreateNewCriteriaIntro = () => {
   const { goBack } = useHistory();
+  const [show , setShow] = useState(false);
   return (
     <div className="bg-white" style={{ minHeight: "93vh" }}>
-      <Modal
+     { show ?  <SmallModal
         id="createNewCriteriaModal"
         title="Create New Criteria"
         width={568}
+        closeModal={setShow}
       >
-        <CreateNewCriteriaModal />
-      </Modal>
+        <CreateNewCriteriaModal close={setShow} />
+      </SmallModal> : <span />}
       <section className="p-5">
         <div
           className="d-flex align-items-center mb-3"
@@ -73,8 +76,7 @@ export const CreateNewCriteriaIntro = () => {
               <Button label="Cancel" variant="trans" onClick={goBack} />
               <Button
                 label="Next"
-                data-toggle="modal"
-                data-target="#createNewCriteriaModal"
+                onClick={() => setShow(true)}
               />
             </section>
           </div>
@@ -84,9 +86,9 @@ export const CreateNewCriteriaIntro = () => {
   );
 };
 
-const CreateNewCriteriaModal = () => {
+const CreateNewCriteriaModal = ({close}) => {
   const { push } = useHistory();
-  const { setCriteria } = useAdmin();
+  const { setCriteria , adminState : {loading}  } = useAdmin();
 
   const [seletType , setSelect] = useState('');
   const onFinish = async(values) =>{
@@ -100,6 +102,8 @@ const CreateNewCriteriaModal = () => {
         evaluationType:seletType
       }
     )
+    close(false)   
+  
   }
   
 
@@ -156,7 +160,8 @@ const CreateNewCriteriaModal = () => {
 
         <Button
           label="Continue"
-          
+          data-dismiss='modal'
+          loading={loading}
           type={'submit'}
         />
       </section>

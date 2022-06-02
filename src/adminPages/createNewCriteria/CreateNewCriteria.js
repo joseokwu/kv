@@ -5,13 +5,15 @@ import close from "../../assets/icons/close.svg";
 import styles from "./createNewCriteria.module.css";
 import { useAdmin } from "../../hooks";
 import { useHistory } from "react-router-dom";
+import { Form } from 'antd';
+
 
 export const CreateNewCriteria = () => {
-  const { adminState, setCriteria } = useAdmin();
+  const { adminState , setCriteria } = useAdmin();
 
   const { push } = useHistory();
 
-  console.log("adminState", adminState);
+  // console.log("adminState", adminState);
   const [categories, setCategories] = useState([
     { category: "", noOfQuestion: "1" },
   ]);
@@ -35,6 +37,7 @@ export const CreateNewCriteria = () => {
    * @param {{category: string, noOfQuestion: string}} data
    */
   const addToCategoryArray = (index, data) => {
+   
     let tempCategories = categories;
     tempCategories[index] = data;
     setCategories(tempCategories);
@@ -48,7 +51,8 @@ export const CreateNewCriteria = () => {
 
   const handleNext = () => {
     setCriteria(categories);
-    push("/admin/selection_process/criteria-questions");
+    console.log(adminState?.criteria);
+    //push("/admin/selection_process/criteria-questions");
   };
 
   return (
@@ -111,6 +115,7 @@ export const CreateNewCriteria = () => {
                 <Button label="Review" variant="secondary" />
                 <Button
                   label="Next"
+                  type='button'
                   variant="primary"
                   onClick={() => handleNext()}
                 />
@@ -153,7 +158,7 @@ const CategoryInput = ({
     }
   };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   useEffect(() => {
     addToCategoryArray(index, data);
@@ -164,6 +169,7 @@ const CategoryInput = ({
       className={styles.category_input}
       style={{ marginTop: index > 0 ? "1.4rem" : "" }}
     >
+    
       <TextField
         label={`Category ${index + 1}`}
         placeholder="Enter Title"
@@ -180,6 +186,7 @@ const CategoryInput = ({
         defaultValue={noOfQuestion}
       />
       {/* <img src={close} alt="close" onClick={deleteCategory} /> */}
+
     </div>
   );
 };
