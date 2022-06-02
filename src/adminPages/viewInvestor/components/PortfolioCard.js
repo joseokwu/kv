@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
 import styles from "../viewInvestor.module.css";
 import apple from "../../../assets/images/apple.svg";
-import { Badge, Tag , ReuseableDropdownMenu } from "../../../components";
+import { Badge, Tag, ReuseableDropdownMenu } from "../../../components";
+import { manageCommitment } from "../../../services";
 
-
-export const PortfolioCard = ({ data = {}, ...rest }) => {
-    
-
+export const PortfolioCard = ({ data = {}, refetch, setRefetch, ...rest }) => {
     const statusList = {
         active: "#0E760C",
         "in-active": "#E31919",
     };
-   
-    console.log(data)
+
+    console.log(data);
 
     return (
         <div className={styles.portfolioCard} {...rest}>
@@ -22,15 +20,39 @@ export const PortfolioCard = ({ data = {}, ...rest }) => {
                     alt="startup logo"
                 />
                 {/* <p>Transaction type: Round</p> */}
-                <Badge
+                {/* <Badge
                     name={data?.status ? "Active" : "Inactive"}
                     color={
                         statusList[
                             (data?.status ? "Active" : "Inactive").toLowerCase()
                         ]
                     }
+                /> */}
+                <ReuseableDropdownMenu
+                    value={data?.status}
+                    list={["Active", "Inactive"]}
+                    valueList={[true, false]}
+                    onChange={(val) => {
+                        manageCommitment({
+                            _id: data?._id,
+                            // status: val,
+                            payload: {
+                                status: val,
+                                comments: [
+                                    {
+                                        commentBody: "Hii. I'm Elijah",
+                                        time: new Date().toISOString(),
+                                    },
+                                ],
+                            },
+                        });
+                        setRefetch(!refetch);
+                        console.log({
+                            commitmentId: data?._id,
+                            status: val,
+                        });
+                    }}
                 />
-                <ReuseableDropdownMenu />
             </section>
 
             <section>
@@ -73,19 +95,5 @@ export const PortfolioCard = ({ data = {}, ...rest }) => {
                 </div>
             </section>
         </div>
-    );
-};
-
-const ActiveDropdown = ({ id = "" }) => {
-    return (
-        <button
-            type="button"
-            class="btn btn-secondary"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title="Tooltip on bottom"
-        >
-            Tooltip on bottom
-        </button>
     );
 };

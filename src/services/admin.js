@@ -39,3 +39,13 @@ export const getInvestorCommitment = async (values) => {
         throw err;
     }
 };
+
+export const manageCommitment = async (values) => {
+    try {
+        const response = await request.post("manageCommitment", values);
+        return response.data;
+    } catch (err) {
+        console.log("serdsd", err?.response?.data?.message);
+        throw err;
+    }
+};

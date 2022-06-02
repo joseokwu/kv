@@ -5,11 +5,15 @@ import yeboxLogo from "../../../assets/images/yeLogo.svg";
 import styles from "../viewInvestor.module.css";
 import { getInvestorCommitment, profile } from "../../../services";
 import { SkeletonLoader } from "../../../components";
+import CommentBlock from "./CommentBlock";
+import { manageCommitment } from "../../../services";
 
 export const StartupPortfolio = ({ partnerData }) => {
     const [open, setOpen] = useState(false);
     const [portfolios, setPortfolios] = useState([]);
+    const [comments, setComments] = useState({});
     const [fetched, setFetched] = useState(false);
+    const [refetch, setRefetch] = useState(false);
 
     const [portfolioInView, setPortfolioInView] = useState({});
 
@@ -31,7 +35,7 @@ export const StartupPortfolio = ({ partnerData }) => {
             setFetched(true);
         };
         getCommitments();
-    }, []);
+    }, [refetch]);
 
     return (
         <div>
@@ -51,6 +55,8 @@ export const StartupPortfolio = ({ partnerData }) => {
                                         setOpen(!open);
                                     }}
                                     key={i}
+                                    refetch={refetch}
+                                    setRefetch={setRefetch}
                                 />
                             </div>
                         ))}
@@ -61,6 +67,8 @@ export const StartupPortfolio = ({ partnerData }) => {
                     <OpenPortfolio
                         close={() => setOpen(false)}
                         portfolio={portfolioInView}
+                        refetch={refetch}
+                        setRefetch={setRefetch}
                     />
                 </SkeletonLoader>
             )}
@@ -68,7 +76,12 @@ export const StartupPortfolio = ({ partnerData }) => {
     );
 };
 
-const OpenPortfolio = ({ close = () => {}, portfolio = {} }) => {
+const OpenPortfolio = ({
+    close = () => {},
+    portfolio = {},
+    refetch,
+    setRefetch,
+}) => {
     const commitInfo = useMemo(
         () => [
             {
@@ -134,6 +147,7 @@ const OpenPortfolio = ({ close = () => {}, portfolio = {} }) => {
         active: "#0E760C",
         "in-active": "#E31919",
     };
+    const [commentVal, setCommentVal] = useState("");
 
     return (
         <section>
@@ -250,33 +264,39 @@ const OpenPortfolio = ({ close = () => {}, portfolio = {} }) => {
                 </section>
 
                 <section className="col-12 my-5">
-                    <TextArea label="Comment" rows="6" />
+                    <TextArea
+                        label="Comment"
+                        rows="6"
+                        value={commentVal}
+                        onChange={(ev) => {
+                            setCommentVal(ev.target.value);
+                        }}
+                    />
                     <div className="mt-2 text-right">
-                        <Button label="Comment" />
+                        <Button
+                            label="Comment"
+                            onClick={() => {
+                                manageCommitment({
+                                    _id: portfolio?._id,
+                                    payload: {
+                                        status: portfolio?.status,
+                                        comments: portfolio?.comments?.concat([
+                                            {
+                                                commentBody: commentVal,
+                                                time: new Date().toISOString(),
+                                            },
+                                        ]),
+                                    },
+                                });
+                                setRefetch(!refetch);
+                            }}
+                        />
                     </div>
                 </section>
 
-                <section className="col-12">
-                    <div
-                        className="d-flex align-items-center mb-3"
-                        style={{ columnGap: 14 }}
-                    >
-                        <span className={styles.commenterInit}>A</span>
-                        <p>Admin</p>
-                        <p>2 day ago</p>
-                        <p>3:15am</p>
-                    </div>
-                    <div className="mb-5">
-                        <p className={styles.comment}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Enim lectus morbi elementum eu.Lorem ipsum
-                            dolor sit amet, consectetur adipiscing elitLorem
-                            ipsum dolor sit amet, consectetur adipiscing elit.
-                            Enim lectus morbi elementum eu.Lorem ipsum dolor sit
-                            amet, consectetur adipiscing elit...
-                        </p>
-                    </div>
-                </section>
+                {portfolio?.comments?.map((comment) => (
+                    <CommentBlock comment={comment} />
+                ))}
             </div>
         </section>
     );

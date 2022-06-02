@@ -1,334 +1,46 @@
 {
-    "_id": "6297700ba27f6db79d025f47",
-    "commitmentAmount": "20000",
-    "registrationFee": "100",
-    "status": false,
-    "investorId": "62961c51689adb1ac763e08a",
-    "startupCommitted": {
-        "_id": "6287be424a215cec09f9aa3e",
-        "startUpProfile": {
-            "logo": "https://cdn.shoutng.com/kvsg4j8mdersj3aymderqd.jpg",
-            "elevatorPitch": "62\n\nIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from packa",
-            "brand": "wqwqqwerrr",
-            "startupName": "Foni cakes",
-            "yearFounded": "2018-05-16T00:00:00.000Z",
-            "registrationNumber": "6889990088",
-            "companySize": "5-10",
-            "businessSector": "Agriculture",
-            "startupStage": "Early Stage",
-            "acceleratorName": "zee world",
-            "contactInfo": {
-                "registeredAddress": "Adeneyi",
-                "country": "Nigeria",
-                "state": "Kano",
-                "city": "Lagos",
-                "phoneNumber": "+2348165796896",
-                "companyEmail": "brightbrain@gmail.com",
-                "profileHandle": "",
-                "companyWebsite": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
-                "linkedInHandle": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
-                "twitterHandle": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current",
-                "_id": "6287c1e04a215cec09f9abf8"
-            },
-            "_id": "6287be424a215cec09f9aa3f"
-        },
-        "pitchDeck": {
-            "pitchDeckFile": "https://cdn.shoutng.com/kvg9cysxtin9gtpeeuot45.pdf",
-            "pitchDeckVideo": "https://cdn.shoutng.com/kvilyqtk20dhjehbz052wg.mp4",
-            "_id": "6287be424a215cec09f9aa30"
-        },
-        "team": {
-            "avatar": "https://cdn.shoutng.com/kvwon0d01k4qqyqhbn4p7f.png",
-            "briefIntroduction": " If you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.  If you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated.",
-            "gender": "female",
-            "firstName": "Enerst",
-            "lastName": "Owunbuzia",
-            "email": "brightbrain@gmail.com",
-            "dob": "2022-05-20T16:13:54.776Z",
-            "country": "Nigeria",
-            "state": "Lagos",
-            "city": "Lagos",
-            "mobile_number": "+2348163394719",
-            "skills": ["javsnna", "hhjss", "ssjs"],
-            "experience": [
-                {
-                    "companyName": "Purplegate Technology",
-                    "position": "",
-                    "location": "USA",
-                    "startDate": "2016-05-05T16:25:07.938Z",
-                    "endDate": "2022-05-03T16:25:14.269Z",
-                    "isPresentWorking": false,
-                    "responsibility": "62\n\nIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated.",
-                    "_id": "6287c1e04a215cec09f9abfb"
-                }
-            ],
-            "education": [
-                {
-                    "schoolName": "BBC",
-                    "course": "Account",
-                    "degreeType": null,
-                    "startDate": "2018-05-04T16:25:32.203Z",
-                    "endDate": "2022-05-03T16:25:38.773Z",
-                    "isPresent": false,
-                    "activities": "62\n\nIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated.",
-                    "_id": "6287c1e04a215cec09f9abfc"
-                }
-            ],
-            "socialMedia": {
-                "linkedIn": "http://localhost:3000/startup/registration",
-                "twitter": "http://localhost:3000/boosterpartner/registration",
-                "website": "http://localhost:3000/startup/registration",
-                "_id": "6287c1e04a215cec09f9abfd"
-            },
-            "coFounder": [
-                {
-                    "avatar": "https://cdn.shoutng.com/kv8r51yuwodgymsnewjjb0.png",
-                    "briefIntroduction": " If you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.  If you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated.",
-                    "gender": "",
-                    "firstName": "Enerst",
-                    "lastName": "Owunbuzia",
-                    "email": "brightbrain@gmail.com",
-                    "position": "Director",
-                    "dob": "2019-05-14T16:26:11.455Z",
-                    "country": "Nigeria",
-                    "state": "Lagos",
-                    "city": "Lagos",
-                    "mobile_number": "+2348163394719",
-                    "skills": ["sjkkss", "sjsjsks", "jjssj"],
-                    "experience": [
-                        {
-                            "companyName": "Purplegate Technology",
-                            "position": "",
-                            "location": "USA",
-                            "startDate": "2021-02-10T16:26:24.635Z",
-                            "endDate": "2022-05-10T16:26:29.233Z",
-                            "isPresentWorking": false,
-                            "responsibility": "62\n\nIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated.",
-                            "_id": "6287c1e04a215cec09f9abff"
-                        }
-                    ],
-                    "education": [
-                        {
-                            "schoolName": "Bright Brainnnn",
-                            "course": "Account",
-                            "degreeType": null,
-                            "startDate": "2017-05-09T16:26:43.424Z",
-                            "endDate": "2022-05-10T16:26:48.518Z",
-                            "isPresent": false,
-                            "activities": "62\n\nIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated.",
-                            "_id": "6287c1e04a215cec09f9ac00"
-                        }
-                    ],
-                    "linkedIn": "http://localhost:3000/startup/registration",
-                    "twitter": "http://localhost:3000/boosterpartner/registration",
-                    "website": "http://localhost:3000/startup/registration",
-                    "_id": "6287c1e04a215cec09f9abfe"
-                }
-            ],
-            "isCofounder": false,
-            "_id": "6287be424a215cec09f9aa31"
-        },
-        "product": {
-            "description": "62\n\nIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is no",
-            "competitiveEdge": "62\n\nIf you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.\n\nIf you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is no",
-            "youtubeDemoUrl": null,
-            "files": "https://cdn.shoutng.com/kvjnjqenjyjm6p1mfyk2zx.mp4",
-            "_id": "6287be424a215cec09f9aa32"
-        },
-        "fundRaising": {
-            "fundingAsk": {
-                "hasPreviousFundraising": true,
-                "description": "",
-                "instrumentForRound": "Series B",
-                "numberOfRounds": "3",
-                "fundraisingAmount": "800000",
-                "dilution": "900000",
-                "preMoneyValuation": "111111",
-                "postMoneyValuation": "8008993",
-                "hasLeadInvestor": false,
-                "terms": [],
-                "_id": "6287be424a215cec09f9aa34"
-            },
-            "fundUtilization": {
-                "files": [
-                    {
-                        "__EMPTY": "Revenue",
-                        "Month1": "N 200,000",
-                        "Month2": "N 300,000",
-                        "Month3": "N100,000",
-                        "Month4": "N20,000",
-                        "Month5": "40,000",
-                        "Month6": "N 100,000"
-                    },
-                    {
-                        "__EMPTY": "Growth %",
-                        "Month1": "N 200,001",
-                        "Month2": "N 300,001",
-                        "Month3": "N100,001",
-                        "Month4": "N20,001",
-                        "Month5": "40,000",
-                        "Month6": "N 100,001"
-                    },
-                    {
-                        "__EMPTY": "Expenses",
-                        "Month1": "N 200,002",
-                        "Month2": "N 300,002",
-                        "Month3": "N100,002",
-                        "Month4": "N20,002",
-                        "Month5": "40,000",
-                        "Month6": "N 100,002"
-                    },
-                    {
-                        "__EMPTY": "Growth %",
-                        "Month1": "N 200,003",
-                        "Month2": "N 300,003",
-                        "Month3": "N100,003",
-                        "Month4": "N20,003",
-                        "Month5": "40,000",
-                        "Month6": "N 100,003"
-                    },
-                    {
-                        "Month1": "N 200,004",
-                        "Month2": "N 300,004",
-                        "Month3": "N100,004",
-                        "Month4": "N20,004",
-                        "Month5": "40,000",
-                        "Month6": "N 100,004"
-                    },
-                    {
-                        "__EMPTY": "Burn Rate",
-                        "Month1": "N 200,005",
-                        "Month2": "N 300,005",
-                        "Month3": "N100,005",
-                        "Month4": "N20,005",
-                        "Month5": "40,000",
-                        "Month6": "N 100,005"
-                    },
-                    {
-                        "__EMPTY": "Runway Months",
-                        "Month1": "N 200,006",
-                        "Month2": "N 300,006",
-                        "Month3": "N100,006",
-                        "Month4": "N20,006",
-                        "Month5": "40,000",
-                        "Month6": "N 100,006"
-                    },
-                    {
-                        "__EMPTY": "No of Customers",
-                        "Month1": "20",
-                        "Month2": "20",
-                        "Month3": "20",
-                        "Month4": "20",
-                        "Month5": "20",
-                        "Month6": "20"
-                    },
-                    {
-                        "__EMPTY": "Growth"
-                    },
-                    {
-                        "__EMPTY": "No of Employees",
-                        "Month1": "10",
-                        "Month2": "20",
-                        "Month3": "30",
-                        "Month4": "30",
-                        "Month5": "30",
-                        "Month6": "30"
-                    }
-                ],
-                "_id": "6287c1e04a215cec09f9ac04"
-            },
-            "capTable": {
-                "amountRaised": "79890",
-                "amountInvestedByFounders": "98980",
-                "files": [
-                    {
-                        "Shareholders": "Jane",
-                        "Sharetype": "angel investor",
-                        "numberofshares": "4",
-                        "sharesPercent": "0.80%"
-                    },
-                    {
-                        "Shareholders": "shane",
-                        "Sharetype": "angel investor",
-                        "numberofshares": "8",
-                        "sharesPercent": "0.49%"
-                    },
-                    {
-                        "Shareholders": "shola",
-                        "Sharetype": "angel investor",
-                        "numberofshares": "16",
-                        "sharesPercent": "19.30%"
-                    },
-                    {
-                        "Shareholders": "bola",
-                        "Sharetype": "angel investor",
-                        "numberofshares": "40",
-                        "sharesPercent": "10%"
-                    }
-                ],
-                "_id": "6287be424a215cec09f9aa36"
-            },
-            "previousRound": {
-                "instrumentForRound": "3",
-                "numberOfRounds": "Angel round",
-                "fundraisingAmount": "696767",
-                "dilution": "87870",
-                "preMoneyValuation": "111111",
-                "postMoneyValuation": "8008993",
-                "hasLeadInvestor": false,
-                "dateOfFunding": "2017-05-16T16:13:54.777Z",
-                "_id": "6287be424a215cec09f9aa37"
-            },
-            "financialProjection": {
-                "files": "https://cdn.shoutng.com/kvid1ovecqn6ndtj1bzwdh.pdf",
-                "_id": "6287c1e04a215cec09f9ac07"
-            },
-            "_id": "6287be424a215cec09f9aa33"
-        },
-        "userId": "6287be42fb8864c55074ec72",
-        "evaluations": [],
-        "passedEvaluation": false,
-        "businessCanvas": {
-            "market": {
-                "problemStatement": "",
-                "product": "",
-                "targetMarket": "",
-                "marketSize": "",
-                "keyCompetitors": "",
-                "_id": "6287be424a215cec09f9aa39"
-            },
-            "brand": {
-                "valueProposition": "",
-                "competitiveAdvantage": "",
-                "productRoadMap": "",
-                "brandBuilding": "",
-                "brandValue": "",
-                "_id": "6287be424a215cec09f9aa3a"
-            },
-            "businessModel": {
-                "channels": "",
-                "customerRelationship": "",
-                "revenueStreams": "",
-                "keyActivities": "",
-                "keyResource": "",
-                "keyPartners": "",
-                "_id": "6287be424a215cec09f9aa3b"
-            },
-            "plan": {
-                "marketStrategy": "",
-                "salesStrategy": "",
-                "_id": "6287be424a215cec09f9aa3c"
-            },
-            "_id": "6287be424a215cec09f9aa3d"
-        },
-        "mileStone": [],
-        "roadMap": [],
-        "applicationCompleted": true,
-        "recommended": false,
-        "approveToEvaluate": false,
-        "partner": [],
-        "__v": 0
+    "_id": "6298792810dd9dfcecfbb761",
+    "logo": "https://cdn.shoutng.com/kvegxpimpih4nyfahwzket.jpg",
+    "companyDescription": "",
+    "companyName": "Galaxy Inc.",
+    "website": "https://mail.google.com/mail/u/0/#inbox",
+    "categories": "Cloud computing",
+    "industry": "AI",
+    "twitter": "https://mail.google.com/mail/u/0/#inbox",
+    "linkedin": "https://mail.google.com/mail/u/0/#inbox",
+    "coordinatorName": "Elijah Oyerinde",
+    "designation": "CEO",
+    "phoneNumber": "+2347000000000",
+    "companyEmail": "galaxyofbosses@gmail.com",
+    "country": "Nigeria",
+    "state": "Lagos",
+    "city": "Ikeja",
+    "offerings": {
+      "offerings": " VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu vVEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu",
+      "eligibilityCriteria": " VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu ggggggggggggggggggggggggggggggggvVssssssEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu dsssdcsdceewefdefwef",
+      "importantNote": " VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu aaaaaaaaaaaaaaaaaaaaaaaaaaaaVEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu vVEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu",
+      "process": " VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu aaaaaaaaaaaaaaaaaaaaaaaaaaaaVEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu vVEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu VEsfwfeferfergregaergagqgqergrqregqgrgergrhyjuu",
+      "partnershipValidity": "AI",
+      "turnAroundTime": "April",
+      "freeCreditValue": true,
+      "_id": "62987928ebda321fc36f8359"
     },
-    "committedDate": "2022-06-01T13:56:27.483Z",
-    "__v": 0
-}
+    "userId": "6298792810dd9dfcecfbb761",
+    "applicationCompleted": true,
+    "isTrash": false,
+    "approvedRequests": [],
+    "declinedRequests": [],
+    "pendingRequests": [],
+    "__v": 0,
+    "firstname": "Elijah",
+    "lastname": "Oyerinde",
+    "email": "galaxyofbosses@gmail.com",
+    "password": "$2a$10$W/FkFqb7XScj9Bz./Bx36eNIiierLjwuEjErKBFEG66MMH9iiKy0i",
+    "phone": "+2340000000",
+    "permissions": [],
+    "type": [
+      "boosterpartner"
+    ],
+    "verified": true,
+    "isRegCompleted": true
+  }
