@@ -5,6 +5,7 @@ import scaleIcon from "../../assets/icons/scaleIcon.svg";
 import { Button, Modal, Select, TextField } from "../../components";
 import styles from "./createNewCriteria.module.css";
 import { Form } from 'antd';
+import { useAdmin } from "../../hooks";
 
 export const CreateNewCriteriaIntro = () => {
   const { goBack } = useHistory();
@@ -85,10 +86,22 @@ export const CreateNewCriteriaIntro = () => {
 
 const CreateNewCriteriaModal = () => {
   const { push } = useHistory();
+  const { setCriteria } = useAdmin();
+
+  const [seletType , setSelect] = useState('');
   const onFinish = async(values) =>{
-    console.log(values)
+    console.log({
+      ...values,
+      evaluationType:seletType
+    })
+    setCriteria(
+      {
+        ...values,
+        evaluationType:seletType
+      }
+    )
   }
-  const [seletType , setSelect] = useState('')
+  
 
   return (
     <Form
@@ -109,16 +122,16 @@ const CreateNewCriteriaModal = () => {
 
       <Select
         id="type"
-        name='criteriaType'
+        name='evaluationType'
         label="Evaluation Type"
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e) => setSelect(e.target.value)}
         placeholder="Choose evaluation type"
         options={["KV Member", "Mentors"]}
         className="max_fill mb-4"
       />
 
       <TextField
-      name={'date'}
+      name={'evaluationDate'}
         label="Evaluation Date"
         placeholder="yyyy-mm-dd"
         type="date"

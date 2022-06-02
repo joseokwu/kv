@@ -108,4 +108,5 @@ export const INIT_STATE_ADMIN = {
       titleAndQuestion: [{ title: "", question: "" }],
     },
   ],
+  criteriaDetail:{}
 };

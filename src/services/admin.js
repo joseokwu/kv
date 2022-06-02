@@ -39,3 +39,13 @@ export const getInvestorCommitment = async (values) => {
         throw err;
     }
 };
+
+export const createCriteria = async (values) =>{
+    try{
+    const response = await request.post("createCriterial" , values);
+    console.log(response.data);
+    return response.data ;
+    }catch(err){
+        throw err ;
+    }
+}
