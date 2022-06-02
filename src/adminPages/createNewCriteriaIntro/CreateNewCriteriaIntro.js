@@ -1,9 +1,10 @@
-import React from "react";
+import React , {useState} from "react";
 import { useHistory } from "react-router-dom";
 import left from "../../assets/icons/chervonLeft.svg";
 import scaleIcon from "../../assets/icons/scaleIcon.svg";
 import { Button, Modal, Select, TextField } from "../../components";
 import styles from "./createNewCriteria.module.css";
+import { Form } from 'antd';
 
 export const CreateNewCriteriaIntro = () => {
   const { goBack } = useHistory();
@@ -84,22 +85,40 @@ export const CreateNewCriteriaIntro = () => {
 
 const CreateNewCriteriaModal = () => {
   const { push } = useHistory();
+  const onFinish = async(values) =>{
+    console.log(values)
+  }
+  const [seletType , setSelect] = useState('')
+
   return (
+    <Form
+        name="Criteria"
+        initialValues={{
+          remember: true,
+        }}
+        layout="vertical"
+        onFinish={onFinish}
+       >
     <div className="px-4">
       <TextField
         label="Criteria Title"
+        name={'title'}
         placeholder="Enter criteria title"
         className="max_fill mb-4"
       />
 
       <Select
+        id="type"
+        name='criteriaType'
         label="Evaluation Type"
+        onChange={(e) => console.log(e.target.value)}
         placeholder="Choose evaluation type"
         options={["KV Member", "Mentors"]}
         className="max_fill mb-4"
       />
 
       <TextField
+      name={'date'}
         label="Evaluation Date"
         placeholder="yyyy-mm-dd"
         type="date"
@@ -108,10 +127,14 @@ const CreateNewCriteriaModal = () => {
 
       <section className="row">
         <div className="col-lg-6">
-          <TextField type="time" label="Start time" className="max_fill mb-4" />
+          <TextField type="time"
+            name={'startDate'}
+           label="Start time" className="max_fill mb-4" />
         </div>
         <div className="col-lg-6">
-          <TextField type="time" label="End time" className="max_fill mb-4" />
+          <TextField 
+          name={'endDate'}
+           type="time" label="End time" className="max_fill mb-4" />
         </div>
       </section>
 
@@ -120,10 +143,11 @@ const CreateNewCriteriaModal = () => {
 
         <Button
           label="Continue"
-          data-dismiss="modal"
-          onClick={() => push("/admin/selection_process/new-criteria")}
+          
+          type={'submit'}
         />
       </section>
     </div>
+    </Form>
   );
 };

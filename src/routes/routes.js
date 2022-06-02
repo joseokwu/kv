@@ -805,7 +805,7 @@ const routes = [
         path: "/admin/selection_process",
         component: WithAdminLayout(SelectionProcess),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -814,7 +814,7 @@ const routes = [
         path: "/admin/selection_process/kv/:id",
         component: WithAdminLayout(ViewKVMemberSelectionProcess),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -823,7 +823,7 @@ const routes = [
         path: "/admin/selection_process/mentors/:id",
         component: WithAdminLayout(ViewKVMemberSelectionProcess),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -832,7 +832,7 @@ const routes = [
         path: "/admin/selection_process/kv_add_member/:id",
         component: WithAdminLayout(AddKVMemberForSelectionProcess),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -841,7 +841,7 @@ const routes = [
         path: "/admin/selection_process/kv_answer/:id",
         component: WithAdminLayout(ViewSelectionAnswer),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -850,7 +850,7 @@ const routes = [
         path: "/admin/selection_process/mentors_answer/:id",
         component: WithAdminLayout(ViewSelectionAnswer),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -859,7 +859,7 @@ const routes = [
         path: "/admin/selection_process/mentor/:id",
         component: WithAdminLayout(SelectionProcessMentor),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -868,7 +868,7 @@ const routes = [
         path: "/admin/selection_process/new-criteria-intro",
         component: WithAdminLayout(CreateNewCriteriaIntro),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -877,7 +877,7 @@ const routes = [
         path: "/admin/selection_process/new-criteria",
         component: WithAdminLayout(CreateNewCriteria),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -886,7 +886,7 @@ const routes = [
         path: "/admin/selection_process/criteria-questions",
         component: WithAdminLayout(CriteriaQuestions),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -895,7 +895,7 @@ const routes = [
         path: "/admin/selection_process/cohort/:name/:id",
         component: WithAdminLayout(CohortStartups),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -904,7 +904,7 @@ const routes = [
         path: "/admin/selection_process/criteria/:id",
         component: WithAdminLayout(ViewCriteria),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -913,7 +913,7 @@ const routes = [
         path: "/admin/selection_process/review_criteria",
         component: WithAdminLayout(ReviewCriteria),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -922,7 +922,7 @@ const routes = [
         path: "/admin/program",
         component: WithAdminLayout(Programs),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -931,7 +931,7 @@ const routes = [
         path: "/admin/program/create",
         component: WithAdminLayout(CreateProgram),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -940,7 +940,7 @@ const routes = [
         path: "/admin/program/assignments",
         component: WithAdminLayout(Assignments),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -949,7 +949,7 @@ const routes = [
         path: "/admin/program/create_assignment",
         component: WithAdminLayout(CreateAssignment),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -958,7 +958,7 @@ const routes = [
         path: "/admin/program/response/:id",
         component: WithAdminLayout(AssignmentResponse),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -967,7 +967,7 @@ const routes = [
         path: "/admin/program/feedback/:id",
         component: WithAdminLayout(ResponseFeedback),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -994,7 +994,7 @@ const routes = [
         path: "/admin/users/mentors/:id",
         component: ViewMentor,
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -1030,7 +1030,7 @@ const routes = [
         path: "/admin/users/member/:id",
         component: WithAdminLayout(ViewKVMember),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -1039,7 +1039,7 @@ const routes = [
         path: "/admin/booster_partners",
         component: WithAdminLayout(() => <div>Booster Partners</div>),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -1057,7 +1057,7 @@ const routes = [
         path: "/admin/events",
         component: WithAdminLayout(Events),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -1075,7 +1075,7 @@ const routes = [
         path: "/admin/documents",
         component: WithAdminLayout(() => <div>Documents</div>),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -1084,7 +1084,7 @@ const routes = [
         path: "/admin/permission",
         component: WithAdminLayout(PermissionControl),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 
@@ -1093,7 +1093,7 @@ const routes = [
         path: "/admin/permission/:userId",
         component: WithAdminLayout(PermissionControl),
         exact: true,
-        protected: false,
+        protected: true,
         type: "admin",
     },
 

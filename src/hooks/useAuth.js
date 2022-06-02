@@ -167,10 +167,10 @@ export const useAuth = () => {
     try {
       const payload = {
         accType: stateAuth.type[0],
-        values: stateAuth.partnerData,
+        values:lastPage ? {...stateAuth.partnerData,applicationCompleted:true}:stateAuth.partnerData, 
         lastPage,
       };
-      console.log(payload);
+      
       const res = await updateStartup(payload);
       toast.success(res?.message);
       if(lastPage){
@@ -178,8 +178,8 @@ export const useAuth = () => {
         return ;
       }
     } catch (err) {
-      console.log(err?.response);
-      toast.error(err?.response?.data?.message ?? err?.response?.message);
+     console.log(err?.response);
+     toast.error(err?.response?.data?.message ?? err?.response?.message);
     }
   };
 
