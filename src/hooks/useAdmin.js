@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_CRITERIA } from "../store/actions/actions.types";
-import { newCriteria } from "../store/actions/admin";
+import { newCriteria , addCategory } from "../store/actions/admin";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
@@ -15,9 +15,14 @@ export const useAdmin = () => {
         history.push("/admin/selection_process/new-criteria");
     };
 
+    const addNewCategory = (data) =>{
+      dispatch(addCategory(data))
+    }
+
     return {
         adminState,
         setCriteria,
+        addNewCategory
         // loading,
     };
 };

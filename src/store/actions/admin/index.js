@@ -1,4 +1,4 @@
-import { ADD_CRITERIA , START_ACTION , END_ACTION } from "../actions.types";
+import { ADD_CRITERIA , START_ACTION , END_ACTION , ADD_CATEGORY } from "../actions.types";
 import { createCriteria } from '../../../services';
 import toast from 'react-hot-toast';
 
@@ -25,3 +25,12 @@ export const newCriteria = async(data) => async(dispatch) => {
   }
   
 };
+
+export const addCategory = (data) => (dispatch) =>{
+
+  dispatch({
+    type:ADD_CATEGORY,
+    payload:data
+  })
+} 
+

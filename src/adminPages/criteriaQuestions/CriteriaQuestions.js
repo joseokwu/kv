@@ -9,12 +9,12 @@ export const CriteriaQuestions = () => {
   const [currentCategory, setCurrentCategory] = useState(0);
   const { push } = useHistory();
   const {
-    adminState: { criteria },
-    setCriteria,
+    adminState: { categories  },
+     addNewCategory
   } = useAdmin();
 
   const handleNext = () => {
-    if (currentCategory !== criteria?.length - 1) {
+    if (currentCategory !== categories?.length - 1) {
       setCurrentCategory(currentCategory + 1);
     }
   };
@@ -26,14 +26,14 @@ export const CriteriaQuestions = () => {
   };
 
   const addToCriteria = (index, data) => {
-    let tempCriteria = criteria;
+    let tempCriteria = categories;
     console.log("tempCriteria", tempCriteria);
     console.log("currentCategory", currentCategory);
     tempCriteria[currentCategory].titleAndQuestion[index] = data;
-    setCriteria(tempCriteria);
+    addNewCategory(tempCriteria);
   };
 
-  console.log("criteria", criteria);
+  console.log("criteria", categories);
 
   return (
     <div className="bg-white" style={{ minHeight: "94vh" }}>
@@ -56,8 +56,8 @@ export const CriteriaQuestions = () => {
 
           <section className="col-lg-3">
             <ul className={styles.category_list}>
-              {criteria?.length > 0 &&
-                criteria?.map((c, i) => {
+              {categories?.length > 0 &&
+                categories?.map((c, i) => {
                   return (
                     <li
                       key={`category-${i}`}
@@ -85,7 +85,7 @@ export const CriteriaQuestions = () => {
             <article className={`mb-45 ${styles.tq_space}`}>
               <div>
                 <h5>
-                  {criteria?.length > 0 && criteria[currentCategory]?.category}
+                  {categories?.length > 0 && categories[currentCategory]?.category}
                 </h5>
                 <p className="mb-3">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -99,9 +99,9 @@ export const CriteriaQuestions = () => {
                   </p>
                 </span>
 
-                {criteria?.length > 0 &&
-                  criteria[currentCategory]?.titleAndQuestion.length > 0 &&
-                  criteria[currentCategory]?.titleAndQuestion?.map((tq, i) => {
+                {categories?.length > 0 &&
+                  categories[currentCategory]?.titleAndQuestion.length > 0 &&
+                  categories[currentCategory]?.titleAndQuestion?.map((tq, i) => {
                     return (
                       <TQItem
                         data={tq}
@@ -131,10 +131,10 @@ export const CriteriaQuestions = () => {
                       push("/admin/selection_process/review_criteria")
                     }
                   />
-                  {currentCategory !== criteria?.length - 1 && (
+                  {currentCategory !== categories?.length - 1 && (
                     <Button label="Next" onClick={handleNext} />
                   )}
-                  {currentCategory === criteria?.length - 1 && (
+                  {currentCategory === categories?.length - 1 && (
                     <Button label="Continue" />
                   )}
                 </section>

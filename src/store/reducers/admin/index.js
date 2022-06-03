@@ -1,4 +1,5 @@
-import { ADD_CRITERIA , START_ACTION , END_ACTION } from "../../actions/actions.types";
+import { ADD_CRITERIA , START_ACTION ,
+   END_ACTION , ADD_CATEGORY } from "../../actions/actions.types";
 import { INIT_STATE_ADMIN } from "../../initialstates";
 
 const adminReducer = (state = INIT_STATE_ADMIN, action) => {
@@ -11,13 +12,18 @@ const adminReducer = (state = INIT_STATE_ADMIN, action) => {
     case ADD_CRITERIA:
       return {
         ...state,
-        criteria: action.payload,
+        criteriaDetail: action.payload,
       };
     case END_ACTION : 
       return {
         ...state,
         loading:false
       }
+    case ADD_CATEGORY :
+      return {
+        ...state,
+        categories:action.payload
+      }  
     default:
       return state;
   }
