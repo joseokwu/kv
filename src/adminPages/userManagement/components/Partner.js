@@ -7,10 +7,13 @@ import apple from "../../../assets/images/apple.svg";
 import styles from "../user.module.css";
 import { getStakeHolders } from "../../../services";
 import { Tag } from "../../../components";
+import { SkeletonLoader } from "../../../components";
 
 export const Partner = () => {
-    const [boosterPartner, setBoosterPartner] = useState([]);
+    // const [boosterPartner, setBoosterPartner] = useState([]);
     const [NumOfPartner, setNumOfPartner] = useState(0);
+    const [boosterPartners, setBoosterPartners] = useState([]);
+    const [fetched, setFetched] = useState(false);
 
     const getData = async () => {
         const res = await getStakeHolders({
@@ -22,38 +25,28 @@ export const Partner = () => {
 
         console.log("res", res);
 
-        if (res.success && res?.data?.mentors?.length > 0) {
+        if (res.success && res?.data?.partners?.length > 0) {
             setNumOfPartner(res?.data?.metadata?.total);
-            setBoosterPartner(() =>
-                res?.data?.mentors.map((partner) => ({
+            setBoosterPartners(() =>
+                res?.data?.partners.map((partner) => ({
                     name: (
                         <div className="d-flex align-items-center space-out">
                             <img
-                                src={partner?.personalDetail?.logo ?? apple}
+                                src={partner?.logo ?? apple}
                                 alt="user"
                                 className={styles.userPic}
                             />
-                            <p className="mb-0">{`${partner?.personalDetail?.lastname} ${partner?.personalDetail?.firstname}`}</p>
+                            {/* <p className="mb-0">{`${partner?.personalDetail?.coordinatorName}`}</p> */}
                         </div>
                     ),
-                    skills: (
-                        <div className="d-flex space-out flex-wrap">
-                            {partner?.areaOfInterest?.skills?.map(
-                                (skill, i) => (
-                                    <Tag
-                                        name={skill}
-                                        color={i > 0 ? "#40439A" : "#058dc1"}
-                                    />
-                                )
-                            )}
-                        </div>
-                    ),
-                    company: "Seam Technologies Inc.",
-                    sessions: 3,
+                    email: partner?.companyEmail,
+                    contactNo: partner?.phoneNumber,
+                    brand: partner?.companyName,
+                    category: partner?.categories,
                     actions: (
                         <div className="d-flex align-items-center space-out">
                             <Link
-                                to={`/admin/users/mentors/${partner?.userId}`}
+                                to={`/admin/users/partners/${partner?.userId}`}
                                 className="view-link"
                             >
                                 View
@@ -61,7 +54,7 @@ export const Partner = () => {
                             <p
                                 role="button"
                                 className="delete-link"
-                                data-target="#deleteMentor"
+                                data-target="#deleteBoosterPartner"
                                 data-toggle="modal"
                             >
                                 Delete
@@ -70,12 +63,17 @@ export const Partner = () => {
                     ),
                 }))
             );
+            setFetched(true);
+            console.log(res?.data?.partners);
+            console.log(boosterPartners.length);
+        } else {
+            console.log("Error!!");
         }
     };
 
     useEffect(() => {
         getData();
-        console.log(boosterPartner);
+
         return () => {};
     }, []);
     const header = [
@@ -84,40 +82,9 @@ export const Partner = () => {
         { title: "Email", accessor: "email" },
         { title: "Contact No:", accessor: "contactNo" },
         { title: "Category", accessor: "category" },
-        { title: "Action", accessor: "action" },
+        { title: "Actions", accessor: "actions" },
     ];
     const [partnersData, setPartnerData] = useState({});
-
-    const data = [
-        {
-            brand: (
-                <img
-                    src={apple}
-                    alt="partner logo"
-                    className={styles.brandIcon}
-                />
-            ),
-            name: "Applean Partner",
-            email: "KateMc@gmail.com",
-            contactNo: "+234 709 975 097",
-            category: "Application",
-            action: (
-                <div className="d-flex align-items-center space-out">
-                    <Link to="/admin/users/partners/0" className="view-link">
-                        View
-                    </Link>
-                    <p
-                        role="button"
-                        data-target="#deleteInvestor"
-                        data-toggle="modal"
-                        className="delete-link"
-                    >
-                        Delete
-                    </p>
-                </div>
-            ),
-        },
-    ];
 
     useEffect(() => {
         const getData = async () => {
@@ -148,7 +115,9 @@ export const Partner = () => {
                 </div>
             </section>
             <section>
-                <Table headers={header} data={data.concat(data)} />
+                <SkeletonLoader fetched={fetched}>
+                    <Table headers={header} data={boosterPartners} />
+                </SkeletonLoader>
             </section>
         </div>
     );

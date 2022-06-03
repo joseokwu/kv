@@ -40,12 +40,22 @@ export const getInvestorCommitment = async (values) => {
     }
 };
 
-export const createCriteria = async (values) =>{
-    try{
-    const response = await request.post("createCriterial" , values);
-    console.log(response.data);
-    return response.data ;
-    }catch(err){
-        throw err ;
+export const manageCommitment = async (values) => {
+    try {
+        const response = await request.post("manageCommitment", values);
+        return response.data;
+    } catch (err) {
+        console.log("serdsd", err?.response?.data?.message);
+        throw err;
     }
-}
+};
+
+export const createCriteria = async (values) => {
+    try {
+        const response = await request.post("createCriterial", values);
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};
