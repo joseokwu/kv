@@ -101,6 +101,8 @@ export const INIT_STATE_BUSINESS = {
 };
 
 export const INIT_STATE_ADMIN = {
+  loading:false,
+  evaluationCriteria:[],
   criteria: [
     {
       category: "",
@@ -108,4 +110,5 @@ export const INIT_STATE_ADMIN = {
       titleAndQuestion: [{ title: "", question: "" }],
     },
   ],
+  criteriaDetail:{}
 };

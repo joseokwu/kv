@@ -5,11 +5,6 @@ import { Badge, Tag, ReuseableDropdownMenu } from "../../../components";
 import { manageCommitment } from "../../../services";
 
 export const PortfolioCard = ({ data = {}, refetch, setRefetch, ...rest }) => {
-    const statusList = {
-        active: "#0E760C",
-        "in-active": "#E31919",
-    };
-
     console.log(data);
 
     return (
@@ -35,22 +30,13 @@ export const PortfolioCard = ({ data = {}, refetch, setRefetch, ...rest }) => {
                     onChange={(val) => {
                         manageCommitment({
                             _id: data?._id,
-                            // status: val,
                             payload: {
                                 status: val,
-                                comments: [
-                                    {
-                                        commentBody: "Hii. I'm Elijah",
-                                        time: new Date().toISOString(),
-                                    },
-                                ],
+                                comments: data?.comments,
                             },
                         });
                         setRefetch(!refetch);
-                        console.log({
-                            commitmentId: data?._id,
-                            status: val,
-                        });
+                        console.log(refetch);
                     }}
                 />
             </section>

@@ -289,6 +289,7 @@ const OpenPortfolio = ({
                                     },
                                 });
                                 setRefetch(!refetch);
+                                setCommentVal("");
                             }}
                         />
                     </div>
