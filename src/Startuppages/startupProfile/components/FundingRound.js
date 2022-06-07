@@ -18,7 +18,7 @@ export const FundingRound = ({data}) => {
             color="#058DC1"
             // w="23%"
           >
-            {data?.industry }
+            {data?.industry ?? '' }
           </Btn>
         </div>
 
@@ -29,7 +29,7 @@ export const FundingRound = ({data}) => {
             color="#212463"
             // w="50%"
           >
-            { data?.startUpProfile?.startupStage }
+            { data?.startUpProfile?.startupStage ?? '' }
           </Btn>
         </div>
       </FundRounding>
@@ -43,7 +43,7 @@ export const FundingRound = ({data}) => {
             bg="#DEF6FF"
             color="#058DC1"
           >
-          { data?.fundRaising?.capTable?.amountInvestedByFounders }
+          { data?.fundRaising?.capTable?.amountInvestedByFounders ?? '' }
           </Btn>
         </div>
 
@@ -53,7 +53,7 @@ export const FundingRound = ({data}) => {
             bg="#F1F2FE"
             color="#212463"
           >
-            { data?.fundRaising?.capTable?.amountRaised } {  }
+            { data?.fundRaising?.capTable?.amountRaised ?? '' } {  }
           </Btn>
         </div>
 
@@ -81,7 +81,7 @@ export const FundingRound = ({data}) => {
             color="#212463"  
             // w="80%"
           >
-            { data?.fundRaising?.fundingAsk?.postMoneyValuation }
+            { data?.fundRaising?.fundingAsk?.postMoneyValuation ?? '' }
           </Btn>
         </div>
       </FundRounding>

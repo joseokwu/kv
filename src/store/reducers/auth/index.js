@@ -186,7 +186,7 @@ const authReducer = (state = INIT_STATE, action) => {
         modalClose:true,
       };
     case UPDATE_STARTUP_INFO:
-     
+
       return {
         ...state,
         startupData: {
@@ -219,7 +219,7 @@ const authReducer = (state = INIT_STATE, action) => {
           }
           }
         }
-        console.log(action.payload.value)
+       // console.log(action.payload.value)
     return {
           ...state,
           investorData: {

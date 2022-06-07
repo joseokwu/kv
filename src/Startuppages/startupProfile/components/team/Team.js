@@ -13,6 +13,7 @@ import navy from "../../../../assets/images/navy.svg";
 import "./team.css";
 import { LargeModal, Tag } from "../../../../Startupcomponents";
 import founder from "../../../../assets/images/femaleFounder.svg";
+import { useAuth } from "../../../../hooks";
 
 export const Team = ({ data }) => {
   // const count = [1, 2, 3, 4, 5, 6]
@@ -75,11 +76,13 @@ export const Team = ({ data }) => {
 };
 
 const TeamMember = ({ data }) => {
+  const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
+
   return (
     <div className="d-flex align-items-center flex-wrap member-card">
-      <img src={member} alt="team member" className="mr-4" />
+      <img src={data?.avatar} alt="team member" className="mr-4" />
       <section>
-        <p> {data?.name} </p>
+        <p> {stateAuth?.startupData?.team?.firstName} </p>
         <p className="small"> {data?.position} </p>
         <span className="d-flex">
           <img src={linkedIn} alt="linkedIn" width="24" height="24" />

@@ -43,7 +43,7 @@ export const StartupProfile = ({ history }) => {
       case "#product":
         return <Product />;
       case "#pitch deck":
-        return <PitchDeck data={stateAuth?.user?.pitchDeck} />;
+        return <PitchDeck data={stateAuth?.startupData?.pitchDeck} />;
       case "#business canvas":
         return <BusinessCanavas />;
       case "#product road map":
@@ -51,7 +51,7 @@ export const StartupProfile = ({ history }) => {
       case "#team":
         return <Team data={prof?.team} />;
       case "#milestone/timeline":
-        return <Milestone data={prof?.mileStone} />;
+        return <Milestone data={stateAuth?.startupData?.mileStone} />;
       default:
         return <Product />;
     }

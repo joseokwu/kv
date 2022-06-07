@@ -1,6 +1,7 @@
 import React from "react";
 import { months } from "../../utils/helpers";
 import "./milestone.css";
+import moment from 'moment';
 
 export const MilestoneCard = ({ side = "", data = {} }) => {
   return (
@@ -26,10 +27,10 @@ export const MilestoneCard = ({ side = "", data = {} }) => {
 
         <section className="date-card">
           <p className="month">
-            {months[new Date(data?.date).getMonth()].substring(0, 3)}.
+            {moment(data.dateOfAchievement).format('MM')}.
           </p>
-          <p className="day">{new Date(data?.date).getDate()}</p>
-          <p className="year">{new Date(data?.date).getFullYear()}</p>
+          <p className="day">{moment(data.dateOfAchievement).format('DD')}</p>
+          <p className="year">{moment(data.dateOfAchievement).format('YYYY')}</p>
         </section>
       </div>
       {side === "left" && (

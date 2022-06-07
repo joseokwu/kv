@@ -1423,7 +1423,16 @@ key={i}
   "plan.salesStrategy"
 ]
 
-
+console.log({
+  ...state,
+  startupData:{
+   ...state.startupData,
+   [action.payload.property]:[
+     ...state.startupData[action.payload.property],
+     action.payload.value
+   ] 
+  }
+})
 
 
 
