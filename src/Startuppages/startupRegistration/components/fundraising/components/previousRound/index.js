@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
-import { BodyWrapper, BntWrap, BoxBorder, Terms } from './previous.styled';
+import { BodyWrapper,  Terms } from './previous.styled';
 import { useHistory } from 'react-router-dom';
 import {
   CustomButton,
   OutlineButton,
 } from '../../../../../../Startupcomponents/button/button.styled';
 import { CustomSelect } from '../../../../../../Startupcomponents/select/customSelect';
-import { DatePicker } from 'antd';
+import { DatePicker ,  Form , Select } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { TextField } from '../../../../../../Startupcomponents';
 import 'antd/dist/antd.css';
-import { Tag } from '../../../../../../Startupcomponents/tag/Tag';
-import { useActivity } from '../../../../../../hooks/useBusiness';
+import moment from 'moment';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import CurrencyInput from 'react-currency-input-field'
 
+
+const { Option } = Select
 
 export const PreviousRound = ({ setFundraising }) => {
   const history = useHistory();
@@ -40,10 +42,10 @@ export const PreviousRound = ({ setFundraising }) => {
     stateAuth?.startupData?.fundRaising?.previousRound?.fundraisingAmount ?? '',
   )
   const [preMoney, setPreMoney] = useState(
-    stateAuth?.startupData?.fundRaising?.fundingAsk?.preMoneyValuation ?? '',
+    stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation ?? '',
   )
   const [postMoney, setPostMoney] = useState(
-    stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation ?? '',
+    stateAuth?.startupData?.fundRaising?.previousRound?.postMoneyValuation ?? '',
   )
 
   // function btn(e) {
@@ -53,54 +55,24 @@ export const PreviousRound = ({ setFundraising }) => {
   const onSubmit = (e) => {
     
     e.preventDefault();
-    console.log('hello')
-    updateProfile("fundRaising", {
-      previousRound: {
-        instrumentForRound: formik.getFieldProps('instrumentForRound').value,
-        numberOfRounds: formik.getFieldProps('numberOfRounds').value,
-        fundraisingAmount: formik.getFieldProps('fundraisingAmount').value,
-        dilution: formik.getFieldProps('dilution').value,
-        preMoneyValuation: formik.getFieldProps('preMoneyValuation').value,
-        postMoneyValuation:formik.getFieldProps('postMoneyValuation').value,
-        hasLeadInvestor,
-        dateOfFunding:startDate.toISOString(),
-       
-      },
-    });
-
+   // console.log('hello')
+    console.log(stateAuth)
     history.push('#Financial Projection');
   };
 
-  const formik = useFormik({
-    initialValues: {
-      dateOfFunding:stateAuth?.startupData?.fundRaising?.previousRound?.dateOfFunding ?? startDate ,
-      instrumentForRound:
-        stateAuth?.startupData?.fundRaising?.previousRound?.instrumentForRound ?? '',
-      numberOfRounds: stateAuth?.startupData?.fundRaising?.previousRound?.numberOfRounds ?? '',
-      fundraisingAmount: stateAuth?.startupData?.fundRaising?.previousRound?.fundraisingAmount ?? '',
-      dilution: stateAuth?.startupData?.fundRaising?.previousRound?.dilution ?? '',
-      preMoneyValuation: stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation ?? '',
-      postMoneyValuation:
-        stateAuth?.startupData?.fundRaising?.previousRound?.postMoneyValuation ?? '',
-    },
-    validationSchema: Yup.object({
-      instrumentForRound: Yup.string().required('Required'),
-      numberOfRounds: Yup.string().required('Required'),
-      fundraisingAmount: Yup.string().required('Required'),
-      dilution: Yup.string().required('Required'),
-      preMoneyValuation: Yup.string().required('Required'),
-      postMoneyValuation: Yup.string().required('Required'),
-      dateOfFunding: Yup.string().required('Required'),
-   
-    }),
-  
-  });
 
-  
+ 
 
   return (
     <>
-       <form >
+       <Form
+          name="Previous Round"
+        initialValues={{
+          remember: true,
+        }}
+        layout="vertical"
+        onFinish={onSubmit} 
+        >
       <BodyWrapper>
         <div className='mx-1 border-bottom pb-3'>
           <p>A brief description of your previous round</p>
@@ -110,49 +82,67 @@ export const PreviousRound = ({ setFundraising }) => {
         <div className='row my-4'>
         
           <div className='form-group col-12'>
-            <label>
-              Which instrument did you use for your previous round?<span style={{color: "red"}}>*</span>
-            </label>
-            <select
-              id='instrumentForRound'
-              name='instrumentForRound'
-              // options={optionsNumb}
-              className='cust mx-3 px-2 extra'
-              // placeholder='Choose your instrument for your round'
-              value={
-                
-                formik.values.instrumentForRound
-              }
-              onChange={formik.handleChange}
-            >
-              {fundNum.map((item, index) => {
-                return <option key={index}>{item}</option>;
-              })}
-            </select>
+           
+            <Form.Item
+                name="instrumentForRound"
+                label="Which instrument did you use for your previous round?"
+                initialValue={stateAuth?.startupData?.fundRaising?.previousRound?.instrumentForRound}
+                rules={[
+                  { required: true, message: 'Please select an instrument' },
+                ]}
+              >
+                <Select
+                  id="instrumentForRound"
+                  style={{ width: 200}}
+                  onChange={(e) => updateProfile("fundRaising", {
+                   previousRound:{
+                    ...stateAuth?.startupData?.fundRaising?.previousRound,
+                    instrumentForRound:e
+                   }
+                   })}
+                >
+                  {fundNum.map((item, i) => (
+                    <Option value={item} key={i}>
+                      {' '}
+                      {item}{' '}
+                    </Option>
+                  ))}
+                </Select>
+
+             </Form.Item>
+          
           </div>
 
           <div className='form-group my-2 col-lg-6 col-12'>
-            <label>Select your previous round<span style={{color: "red"}}>*</span></label>
-            <select
-              id={'numberOfRounds'}
-              name={'numberOfRounds'}
-              // options={optionsNumb}
-              className='cust mx-3 px-2 extra'
-              // placeholder='Choose round'
-              value={
-                
-                formik.values.numberOfRounds
-              }
-              onChange={formik.handleChange}
-            >
-              {optionsNumb.map((item, index) => {
-                return <option value={item.value} key={index}>{item.label}</option>;
-              })}
-            </select>
+              
+          <Form.Item
+                name="numberOfRounds"
+                label="Select your previous round"
+                initialValue={stateAuth?.startupData?.fundRaising?.previousRound?.numberOfRounds}
+                rules={[
+                  { required: true, message: 'Please select number of round' },
+                ]}
+              >
+                <Select
+                  id="numberOfRounds"
+                  style={{ width: 200 }}
+                  onChange={(e) => updateProfile("fundRaising", {
+                   previousRound:{
+                    ...stateAuth?.startupData?.fundRaising?.previousRound,
+                    numberOfRounds:e
+                   }
+                   })}
+                >
+                  {optionsNumb.map((item, i) => (
+                    <Option value={item.value} key={i}>
+                      {' '}
+                      {item.label}{' '}
+                    </Option>
+                  ))}
+                </Select>
 
-            {formik.touched.numberOfRounds && formik.errors.numberOfRounds ? (
-                <label className="error">{formik.errors.numberOfRounds}</label>
-              ) : null}  
+             </Form.Item>
+           
 
           </div>
           <div className='form-group my-2 col-12'>
@@ -162,49 +152,42 @@ export const PreviousRound = ({ setFundraising }) => {
                 id='dateOfFunding'
                 name='dateOfFunding'
                 style={{ background: '#FAFAFC', border: 'none' }}
-                selected={startDate}
+                defaultValue={
+                  moment(stateAuth?.startupData?.fundRaising?.previousRound?.dateOfFunding) ?? moment()
+                }
                 className='form-control w-lg-50 w-100 datePick mx-3'
-                onBlur={formik.handleBlur}
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) =>    updateProfile("fundRaising", {                   
+                   previousRound:{
+                    ...stateAuth?.startupData?.fundRaising?.previousRound,
+                    dateOfFunding:date
+                   }
+                   })}
               />
             </div>
-            {formik.touched.dateOfFunding && !startDate ? (
-              <label className='error'>{formik.errors.dateOfFunding}</label>
-            ) : null}
+          
           </div>
 
           <div className='form-group my-2 col-12'>
             <label> How much did you raise in last funding round?<span style={{color: "red"}}>*</span></label>
-            {/* <input
-              id='fundraisingAmount'
-              name='fundraisingAmount'
-              type='text'
-              className='form-control ps-3'
-              placeholder='Enter amount raised'
-              onBlur={formik.handleBlur}
-              value={
-                
-                formik.values.fundraisingAmount
-              }
-              onChange={formik.handleChange}
-            /> */}
+ 
             <CurrencyInput
               id="fundraisingAmount"
               name="fundraisingAmount"
               type="text"
-              value={amount}
-              onBlur={formik.handleBlur}
+              value={stateAuth?.startupData?.fundRaising?.previousRound?.fundraisingAmount}
               className="form-control ps-3"
               placeholder="Enter amount"
               intlConfig={{ locale: 'en-US', currency: 'USD' }}
               required
-              onChange={formik.handleChange}
-              onValueChange={(value) => setAmount(value)}
+              onValueChange={(value) => updateProfile("fundRaising", {
+ 
+                   previousRound:{
+                    ...stateAuth?.startupData?.fundRaising?.previousRound,
+                    fundraisingAmount:value
+                   }
+                   })}
             />
-            {formik.touched.fundraisingAmount &&
-            formik.errors.fundraisingAmount ? (
-              <label className='error'>{formik.errors.fundraisingAmount}</label>
-            ) : null}
+      
           </div>
           <div className='form-group my-2 col-12'>
             <label>Dilution (%)<span style={{color: "red"}}>*</span></label>
@@ -214,81 +197,59 @@ export const PreviousRound = ({ setFundraising }) => {
               type='text'
               className='form-control ps-3'
               placeholder='Enter what your business does'
-              onBlur={formik.handleBlur}
               value={
-             formik.values.dilution
+                stateAuth?.startupData?.fundRaising?.previousRound?.dilution
               }
-              onChange={formik.handleChange}
+              onChange={(e) => updateProfile("fundRaising", {
+                   previousRound:{
+                    ...stateAuth?.startupData?.fundRaising?.previousRound,  
+                    dilution:e.target.value
+                   }
+                   })}
             />
-            {formik.touched.dilution && formik.errors.dilution ? (
-              <label className='error'>{formik.errors.dilution}</label>
-            ) : null}
+           
           </div>
           <div className='form-group my-2 col-12'>
             <label>What was your pre-money valuation in last round?<span style={{color: "red"}}>*</span></label>
-            {/* <input
-              id='preMoneyValuation'
-              name='preMoneyValuation'
-              type='text'
-              className='form-control ps-3'
-              placeholder='Pre money = Post money - investment amount.'
-              onBlur={formik.handleBlur}
-              value={
-                formik.values.preMoneyValuation
-              }
-              onChange={formik.handleChange}
-            /> */}
+           
             <CurrencyInput
                 id="preMoneyValuation"
                 name="preMoneyValuation"
                 type="text"
-                value={preMoney}
-                onBlur={formik.handleBlur}
+                value={stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation}
+                
                 className="form-control ps-3"
                 placeholder="Pre money = Post money - investment amount."
                 intlConfig={{ locale: 'en-US', currency: 'USD' }}
-                required
-                onChange={formik.handleChange}
-                onValueChange={(value) => setPreMoney(value)}
+                onValueChange={(value) => updateProfile("fundRaising", {
+                   previousRound:{
+                    ...stateAuth?.startupData?.fundRaising?.previousRound,
+                    preMoneyValuation:value
+                   }
+                   })}
               />
-            {formik.touched.preMoneyValuation &&
-            formik.errors.preMoneyValuation ? (
-              <label className='error'>{formik.errors.preMoneyValuation}</label>
-            ) : null}
+ 
           </div>
           <div className='form-group my-2 col-12'>
             <label>Post-Money valuation for last round<span style={{color: "red"}}>*</span></label>
-            {/* <input
-              id='postMoneyValuation'
-              name='postMoneyValuation'
-              type='text'
-              className='form-control ps-3'
-              placeholder='Post-money valuation = Investment dollar amount ÷ percent investor receives.'
-              onBlur={formik.handleBlur}
-              value={
-                formik.values.postMoneyValuation
-              }
-              onChange={formik.handleChange}
-            /> */}
+   
             <CurrencyInput
               id="postMoneyValuation"
               name="postMoneyValuation"
               type="text"
-              value={postMoney}
-              onBlur={formik.handleBlur}
+              value={stateAuth?.startupData?.fundRaising?.previousRound?.postMoneyValuation}
               className="form-control ps-3"
               placeholder="Post-money valuation = Investment dollar amount ÷ percent investor receives."
               intlConfig={{ locale: 'en-US', currency: 'USD' }}
               required
-              onChange={formik.handleChange}
-              onValueChange={(value) => setPostMoney(value)}
+              onValueChange={(value) => updateProfile("fundRaising", {
+                   previousRound:{
+                    ...stateAuth?.startupData?.fundRaising?.previousRound,  
+                    postMoneyValuation:value
+                   }
+                   })}
             />
-            {formik.touched.postMoneyValuation &&
-            formik.errors.postMoneyValuation ? (
-              <label className='error'>
-                {formik.errors.postMoneyValuation}
-              </label>
-            ) : null }
+ 
           </div>
       
         </div>
@@ -326,7 +287,7 @@ export const PreviousRound = ({ setFundraising }) => {
         </div>
       
       </div>
-      </form>
+      </Form>
     </>
   );
 };

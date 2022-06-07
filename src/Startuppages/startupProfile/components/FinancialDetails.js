@@ -1,9 +1,7 @@
-import network from '../../../assets/icons/networkingIcon.svg';
-import {GlobalOutlined } from '@ant-design/icons';
 import web from "../../../assets/icons/webSm.svg";
 import clock from "../../../assets/icons/clock.svg";
 import office from "../../../assets/icons/building.svg";
-
+import moment from 'moment';
 
 export const FinancialDetails = ({data}) => {
   return (
@@ -15,29 +13,29 @@ export const FinancialDetails = ({data}) => {
         style={{ rowGap: 10 }}
       >
         <div className="d-flex align-items-center">
-        { data?.startUpProfile?.socialMedia?.companyWebsite &&  <img src={web} alt="web" />}
+        { data?.startupData?.startUpProfile?.contactInfo?.companyWebsite &&  <img src={web} alt="web" />}
           <a
-            href={data?.startUpProfile?.socialMedia?.companyWebsite}
+            href={data?.startupData?.startUpProfile?.contactInfo?.companyWebsite}
             className="ml-2 extra-info"
             style={{ textDecoration: "underline", color: "#2E3192" }}
           >
-            { data?.startUpProfile?.socialMedia?.companyWebsite ?? '' }
+            { data?.startupData?.startUpProfile?.contactInfo?.companyWebsite ?? '' }
           </a>
         </div>
         <div className="d-flex align-items-center">
-         { data?.startUpProfile?.yearFounded && (
+         { data?.startupData?.startUpProfile?.yearFounded && (
            <>
            <img src={clock} alt="web" width="20" height="20" />
-          <p className="ml-2 extra-info">Incorporated { new Date(data?.startUpProfile?.yearFounded).toUTCString() }</p>
+          <p className="ml-2 extra-info">Incorporated {moment(data?.startupData?.startUpProfile?.yearFounded).format('YYYY-MM-DD') }</p>
            </>
          ) }
         </div>
 
         <div className="d-flex align-items-center">
-         { data?.startUpProfile?.contactInfo?.registeredAddress && (
+         { data?.startupData?.startUpProfile?.contactInfo?.registeredAddress && (
            <>
            <img src={office} alt="web" />
-          <p className="ml-2 extra-info"> { `${data?.startUpProfile?.contactInfo?.registeredAddress ?? '' } , ${data?.startUpProfile?.contactInfo?.state ?? ''} , ${data?.startUpProfile?.contactInfo?.country ?? ''}` } </p>
+          <p className="ml-2 extra-info"> { `${data?.startupData?.startUpProfile?.contactInfo?.registeredAddress ?? '' } , ${data?.startupData?.startUpProfile?.contactInfo?.state ?? ''} , ${data?.startupData?.startUpProfile?.contactInfo?.country ?? ''}` } </p>
            </>
          )}
         </div>

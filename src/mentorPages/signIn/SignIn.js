@@ -43,13 +43,19 @@ export const SignIn = () => {
       const loca = getLocationHistory()
       console.log(res)
       if (res?.success) {
-        if (loca !== null) {
+        if (loca) {
+          console.log(loca)
           history.push(loca)
-         return sessionStorage.removeItem('user:redirect:location')
+        sessionStorage.removeItem('user:redirect:location');
+        return ;
         }
         console.log(res)
-        if(res?.data?.user?.isRegCompleted){
+        if(res?.data?.user?.type[0] === 'admin'){
+          history.push(`/admin/application_mgt`)
+          return;
+        }else if(res?.data?.user?.isRegCompleted){
           history.push(`/${res?.data?.user?.type[0]}/dashboard`)
+          return;
         }else{
           history.push(`/${res?.data?.user?.type[0]}/registration`)
         }

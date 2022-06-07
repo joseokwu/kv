@@ -7,14 +7,11 @@ export const INIT_STATE = {
   logo: null,
   dashboardLoad: true,
   type: [],
-  modalClose:false,
+  modalClose: false,
   signUpStatus: "startup",
   username: "",
-  completedRegistration: false,
   partnerData:{},
-  startupData: {
-   
-  },
+  startupData: {},
   mentorData: {
     personalDetail: {
       firstname: "",
@@ -101,4 +98,11 @@ export const INIT_STATE_BUSINESS = {
     action: false,
   },
   path: 1,
+};
+
+export const INIT_STATE_ADMIN = {
+  loading:false,
+  evaluationCriteria:[],
+  categories: [],
+  criteriaDetail:{}
 };

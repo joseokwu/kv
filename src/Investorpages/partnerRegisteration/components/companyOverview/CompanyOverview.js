@@ -15,6 +15,7 @@ import PhoneInput from 'react-phone-number-input'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
 import { industry, category } from '../../../../constants/domiData';
 import { letterOnly, onNumberOnlyChange } from '../../../../utils/helpers'
+import { FormWrapper } from './style';
 
 const { Option } = Select
 const { TextArea } = Input
@@ -81,6 +82,7 @@ const CompanyOverview = () => {
     <div className="register-form-wrap">
       <h3>Company Overview</h3>
       <p>Fill in partner details</p>
+      
       <Form
         name="Sign-Up"
         initialValues={{
@@ -89,9 +91,10 @@ const CompanyOverview = () => {
         layout="vertical"
         onFinish={onFinish}
       >
-        <FormCard>
+      
+        <FormWrapper>
           <div className="row mb-4">
-            <section className="col-md-3">
+          <section className="col-md-3">
               <div className="form-dp">
                 <span className="image-placeholder">
                   {stateAuth?.partnerData?.logo === null ? (
@@ -112,18 +115,26 @@ const CompanyOverview = () => {
                       </>
                     )
                   ) : (
-                    <img
+                    
+                      logoUploading ? (
+                        <CircularLoader color={'#000'} />
+                      ) :(
+                        <img
                       src={stateAuth?.partnerData?.logo}
                       alt="add"
                       className="image-placeholder"
                     />
+                      ) 
+                    
+                   
                   )}
                 </span>
 
-                <label for="op">
+                <label for='dn' >
                   <img src={add} className="add-dp" alt="add" />
-                  <input type="file" onChange={onChangeImage} id="op" hidden />
+                  <input type="file" onChange={onChangeImage} id="dn" hidden />
                 </label>
+               
               </div>
             </section>
             <section className="col-md-9 pl-5">
@@ -273,7 +284,7 @@ const CompanyOverview = () => {
               />
             </section>
           </div>
-        </FormCard>
+        </FormWrapper>
 
         <FormCard>
           <div className="contact-title">

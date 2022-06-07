@@ -22,20 +22,21 @@ const approvedReq = data && data.filter(item => item.approvedRequests.length > 0
 const pending = data && data.filter(item => item.pendingRequests.length > 0)  
 const declined = data && data.filter(item => item.declinedRequests.length > 0)
 
-console.log(pending)
-console.log(approvedReq)
+// console.log(pending)
+// console.log(approvedReq)
+// console.log(declined)
+// console.log(approvedReq?.length === 0 && pending?.length === 0 && declined?.length === 0 )
+
+if(approvedReq?.length === 0 && pending?.length === 0 && declined?.length === 0){
+  return <EmptyState message="No applications" />
+}
 
   return (
     <div className="row" style={{ columnGap: 10 }}>
       
-      {
-        approvedReq === null && (<EmptyState />)
-      }
 
       {
-        approvedReq && approvedReq.length > 0 ? (
-          
-          approvedReq.map((item, i) => (
+        approvedReq && approvedReq.map((item, i) => (
           <ApplicationCard key={i} className="col-lg-4 col-12 col-md-6 mb-4">
           <Modal id={`approved${i}`} withHeader={false}>
         <ApprovedModal data={item} />
@@ -74,9 +75,7 @@ console.log(approvedReq)
             </div>
           </ApplicationCard>
         
-        ))) : (
-          <EmptyState message={"No Applications yet"} />
-        )
+        ))
       }
 
       {

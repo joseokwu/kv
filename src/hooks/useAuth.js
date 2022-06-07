@@ -14,6 +14,7 @@ import {
   updateInvestorData,
   updateMentorProfile,
   updateMentorData,
+  updateStartupUserProfile
 } from "../store/actions/auth";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
@@ -30,12 +31,12 @@ export const useAuth = () => {
   const register = async (values) => {
     try {
       const res = await dispatch(registerUser(values));
-      console.log(res);
+      //console.log(res , 'something dey wrong');
       if (res) {
         history.push("/confirm/email");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err?.response?.data?.message ?? 'Sever error please try again')
     }
   };
 
@@ -52,8 +53,8 @@ export const useAuth = () => {
     [dispatch]
   );
 
-  const callUpdateStartupData = async () => {
-    dispatch(updateStartupData());
+  const callUpdateStartupData = async (value) => {
+    dispatch(updateStartupUserProfile(value));
   };
 
   const getDashboardProfile = useCallback(
@@ -86,7 +87,7 @@ export const useAuth = () => {
     try {
       const dataToPost = {
         accType: "mentor",
-        values: stateAuth.mentorData,
+        values:lastPage ? {...stateAuth.mentorData,applicationCompleted:true}: stateAuth.mentorData,
         lastPage,
       };
 
@@ -112,12 +113,18 @@ export const useAuth = () => {
     try {
       const payload = {
         accType: stateAuth.type[0],
-        values: stateAuth.startupData,
-        lastPage,
+        values: lastPage ? {...stateAuth.startupData,applicationCompleted:true}: stateAuth.startupData ,
+        lastPage,  
       }
       console.log(payload)
-      const res = await updateStartup(payload)
-      toast.success(res?.message)
+     const res = await updateStartup(payload)
+     console.log(res)
+     toast.success(res?.message)
+     if(res?.success && lastPage){ 
+      window.open('/startup/dashboard', '_self');
+     }
+      
+     
     } catch (err) {
       console.log(err?.response);
       toast.error(err?.response?.data?.message ?? err?.response?.message);
@@ -136,7 +143,7 @@ export const useAuth = () => {
     try {
       const payload = {
         accType: stateAuth.type[0],
-        values: stateAuth.investorData,
+        values: lastPage ? {...stateAuth.investorData,applicationCompleted:true}:stateAuth.investorData,
         lastPage,
       };
       const res = await updateStartup(payload)
@@ -160,10 +167,10 @@ export const useAuth = () => {
     try {
       const payload = {
         accType: stateAuth.type[0],
-        values: stateAuth.partnerData,
+        values:lastPage ? {...stateAuth.partnerData,applicationCompleted:true}:stateAuth.partnerData, 
         lastPage,
       };
-      console.log(payload);
+      
       const res = await updateStartup(payload);
       toast.success(res?.message);
       if(lastPage){
@@ -171,8 +178,8 @@ export const useAuth = () => {
         return ;
       }
     } catch (err) {
-      console.log(err?.response);
-      toast.error(err?.response?.data?.message ?? err?.response?.message);
+     console.log(err?.response);
+     toast.error(err?.response?.data?.message ?? err?.response?.message);
     }
   };
 

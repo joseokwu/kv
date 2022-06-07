@@ -1,0 +1,133 @@
+.feedback_content > h6 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.feedback_content > p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 21px;
+  color: #525151;
+  margin-bottom: 11px !important;
+}
+
+.feedback_date b {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
+  color: #3855b3;
+  border-right: 1px solid #3855b3;
+  padding-right: 8px;
+  margin-right: 8px;
+}
+
+.feedback_date p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #3855b3;
+}
+
+.feedback {
+  background: #fafafc;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.feedback h5 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.feedback > div {
+  background: #fafafc;
+  border-radius: 4px;
+  padding: 1.9rem;
+}
+
+.feedback > div > span {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.feedback > div > span > div {
+  margin-right: 1rem;
+  margin-left: 8px;
+}
+
+.feedback > div > span > div > p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 13px;
+  color: #525151;
+}
+
+.feedback > div > span > div > small {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 11px;
+  color: #828282;
+}
+
+.feedback > div > span > small {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 10px;
+  text-transform: capitalize;
+  color: #3855b3;
+}
+
+.feedback > div > p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #757575;
+}
+
+.feedback > div > span > img {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.feedbackHeader {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 31px;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+  margin-bottom: 1.5rem;
+}

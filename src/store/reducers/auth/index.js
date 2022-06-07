@@ -19,6 +19,7 @@ import {
   UPDATE_PARTNER_INFO,
   UPDATE_MENTOR_INFO,
   UPDATE_MENTOR_DATA,
+  UPDATE_STARTUP_USER_PROFILE,
 } from "../../actions/actions.types";
 import { INIT_STATE } from "../../initialstates";
 
@@ -49,6 +50,7 @@ const authReducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         loading: false,
+        ...action.payload,
         type: action.payload?.type,
         username: action.payload?.startupname
           ? action.payload?.startupname
@@ -78,14 +80,13 @@ const authReducer = (state = INIT_STATE, action) => {
         };
       }
       if (action?.payload?.type[0] === "startup") {
-     
         return {
-
           ...state,
           loading: false,
           dashboardLoad: false,
           authenticated: true,
           user: action?.payload,
+          ...action?.payload,
           startupData: action.payload.startupData,
           type: action?.payload?.type,
           signUpStatus: action?.payload?.type[0],
@@ -118,43 +119,51 @@ const authReducer = (state = INIT_STATE, action) => {
           email: action?.payload?.email,
         };
       }
-      break;
+      return {
+        ...state,
+        loading: false,
+        dashboardLoad: false,
+        authenticated: true,
+        type: action?.payload?.type,
+        ...action.payload,
+      };
     case DASHBOARD_USER_PROFILE:
-      console.log(action?.payload)
-    if(action?.payload?.type[0] === 'boosterpartner'){
-      return {
-        ...state,
-        loading: false,
-        dashboardLoad: false,
-        partnerData:action?.payload,
-        type: action?.payload?.type,
-        signUpStatus: action?.payload?.type[0],
-        email: action?.payload?.email,
-      };
-    }
-    if(action?.payload?.type[0] === 'startup'){
-      return {
-        ...state,
-        loading: false,
-        dashboardLoad: false,
-        user: action?.payload,
-        type: action?.payload?.type,
-        signUpStatus: action?.payload?.type[0],
-        email: action?.payload?.email,
-        startupData: action.payload.startupData
-      };
-    }
-    // if(action?.payload?.type[0] === 'investor'){
-    //   return {
-    //     ...state,
-    //     dashboardLoad: false,
-    //     user: action?.payload,
-    //     type: action?.payload?.type,
-    //     signUpStatus: action?.payload?.type[0],
-    //     email: action?.payload?.email,
-    //     investorData: action.payload
-    //   };
-    // }
+      console.log(action?.payload);
+      if (action?.payload?.type[0] === "boosterpartner") {
+        return {
+          ...state,
+          loading: false,
+          dashboardLoad: false,
+          partnerData: action?.payload,
+          ...action?.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+        };
+      }
+      if (action?.payload?.type[0] === "startup") {
+        return {
+          ...state,
+          loading: false,
+          dashboardLoad: false,
+          user: action?.payload,
+          type: action?.payload?.type,
+          signUpStatus: action?.payload?.type[0],
+          email: action?.payload?.email,
+          startupData: action.payload.startupData,
+        };
+      }
+      // if(action?.payload?.type[0] === 'investor'){
+      //   return {
+      //     ...state,
+      //     dashboardLoad: false,
+      //     user: action?.payload,
+      //     type: action?.payload?.type,
+      //     signUpStatus: action?.payload?.type[0],
+      //     email: action?.payload?.email,
+      //     investorData: action.payload
+      //   };
+      // }
 
       break;
     case USER_PROFILE_FAIL:
@@ -183,10 +192,14 @@ const authReducer = (state = INIT_STATE, action) => {
     case UPDATE_STARTUP_DATA:
       return {
         ...state,
-        modalClose:true,
+        modalClose: true,
+      };
+    case UPDATE_STARTUP_USER_PROFILE:
+      return {
+        ...state,
+        startupData: action.payload,
       };
     case UPDATE_STARTUP_INFO:
-
       return {
         ...state,
         startupData: {
@@ -204,72 +217,61 @@ const authReducer = (state = INIT_STATE, action) => {
         investorData: action.payload,
       };
 
-      case UPDATE_INVESTOR_INFO:
-      
-        if(action.payload.property === 'portfolio'){
-  
-          return {
-            ...state,
-          investorData:{
-            ...state.investorData , 
-          portfolio : [
-        ...state.investorData.portfolio,
-        {...action.payload.value } 
-          ]
-          }
-          }
-        }
-       // console.log(action.payload.value)
-    return {
+    case UPDATE_INVESTOR_INFO:
+      if (action.payload.property === "portfolio") {
+        return {
           ...state,
           investorData: {
             ...state.investorData,
+            portfolio: [
+              ...state.investorData.portfolio,
+              { ...action.payload.value },
+            ],
+          },
+        };
+      }
+      // console.log(action.payload.value)
+      return {
+        ...state,
+        investorData: {
+          ...state.investorData,
+          [action.payload.property]: {
+            ...state.investorData[action.payload.property],
+            ...action.payload.value,
+          },
+        },
+      };
+    case UPDATE_PARTNER_INFO:
+      if (action.payload.property.trim() !== "") {
+        return {
+          ...state,
+          partnerData: {
+            ...state.partnerData,
             [action.payload.property]: {
-              ...state.investorData[action.payload.property],
+              ...state.partnerData[action.payload.property],
               ...action.payload.value,
             },
           },
         };
-      case UPDATE_PARTNER_INFO: 
-      if(action.payload.property.trim() !== ""){
-      
-        return {
-          ...state,
-          partnerData :{
-            ...state.partnerData,
-            [action.payload.property] :{
-          ...state.partnerData[action.payload.property],
-          ...action.payload.value
-            }
-          }
-        }
-      } 
-   
-   return {
-     ...state,
-     partnerData: {
-       ...state.partnerData,...action.payload.value
-     }
-   }
+      }
+
+      return {
+        ...state,
+        partnerData: {
+          ...state.partnerData,
+          ...action.payload.value,
+        },
+      };
     case UPDATE_MENTOR_INFO:
       return {
         ...state,
-        mentorData:
-          action.payload.property === "workExperience"
-            ? {
-                ...state.mentorData,
-                [action.payload.property]: [
-                  // ...state.mentorData[action.payload.property],
-                  ...action.payload.value,
-                ],
-              }
-            : {
-                ...state.mentorData,
-                [action.payload.property]: {
-                  ...state.mentorData[action.payload.property],
-                  ...action.payload.value,
-                },
-              },
+        mentorData: {
+          ...state.mentorData,
+          [action.payload.property]: {
+            ...state.mentorData[action.payload.property],
+            ...action.payload.value,
+          },
+        },
       };
 
     case UPDATE_PROFILE_FAIL:

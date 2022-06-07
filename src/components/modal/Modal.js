@@ -27,7 +27,7 @@ export const Modal = ({
       >
         <div className="modal-content kv-modal-content">
           {withHeader && (
-            <header>
+            <header style={{ border: title === "" ? "none" : "" }}>
               <div className="w-100">
                 <button
                   type="button"

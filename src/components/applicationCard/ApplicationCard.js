@@ -24,54 +24,7 @@ export const ApplicationCard = ({
 
   //const { stateAuth } = useAuth()
 
-  // const statusRender = () => {
-  //   switch (data?.status) {
-  //     case "pending":
-  //       return (
-  //         <div className="d-flex align-items-center appCard-btn-group mb-3">
-  //           <Button label="Approve" />
-  //           <Button label="Decline" variant="secondary" />
-  //         </div>
-  //       );
-  //     case "approved":
-  //       return (
-  //         <div className="d-flex align-items-center mb-3">
-  //           <img src={approvedIcon} alt="approved" />
-  //           <p className="approved-txt">Approved</p>
-  //         </div>
-  //       );
-
-  //     case "declined":
-  //       return (
-  //         <div className="d-flex align-items-center mb-3">
-  //           <img src={declinedIcon} alt="declined" />
-  //           <p className="declined-txt">Declined</p>
-  //         </div>
-  //       );
-  //     case "expired":
-  //       return (
-  //         <div className="d-flex align-items-center mb-3">
-  //           <img src={expiredIcon} alt="expired" />
-  //           <p className="expired-txt">Expired</p>
-  //         </div>
-  //       );
-  //     case "re-applied":
-  //       return (
-  //         <div className="d-flex align-items-center appCard-btn-group mb-3">
-  //           <Button label="Accept" />
-  //           <Button label="Ignore" variant="secondary" />
-  //         </div>
-  //       );
-
-  //     default:
-  //       return (
-  //         <div className="d-flex align-items-center appCard-btn-group mb-3">
-  //           <Button label="Approve" />
-  //           <Button label="Decline" variant="secondary" />
-  //         </div>
-  //       );
-  //   }
-  // };
+ 
 
   return (
     <div className="appCard-main" role="button">

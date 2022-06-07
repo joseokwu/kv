@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import left from "../../assets/icons/chervonLeft.svg";
 import "./opportunity.css";
-import { Tabs, Tag } from "../../Startupcomponents";
+import { Tabs } from "../../Startupcomponents";
 import { OppCompanyInfo } from "./components/OppCompanyInfo";
 import { FinancialDetails } from "./components/FinancialDetails";
 import { FundingRound } from "./components/FundingRound";
@@ -13,6 +12,7 @@ import { RoadMap } from "./components/roadMap/RoadMap";
 import { Milestone } from "./components/milestone/Milestone";
 import { getStartupProfile } from "../../services";
 import { useAuth } from '../../hooks/useAuth';
+import { EmptyState } from "../../mentorComponents";
 
 
 export const StartupProfile = ({ history }) => {
@@ -36,7 +36,7 @@ export const StartupProfile = ({ history }) => {
     setProf(res);
   };
 
-  console.log(`pathname`, stateAuth);
+  console.log(stateAuth); 
 
   const renderContent = () => {
     switch (hash.replaceAll("%20", " ")) {
@@ -49,7 +49,7 @@ export const StartupProfile = ({ history }) => {
       case "#product road map":
         return <RoadMap data={prof?.ProductRoadMap} />;
       case "#team":
-        return <Team data={prof?.team} />;
+        return <Team data={stateAuth?.startupData?.team} />;
       case "#milestone/timeline":
         return <Milestone data={stateAuth?.startupData?.mileStone} />;
       default:
@@ -59,16 +59,20 @@ export const StartupProfile = ({ history }) => {
 
 
 
+  // if(!stateAuth?.startupData?.applicationCompleted){
+  //   return <EmptyState message="No Profile information to display, please complete registration" />
+  //  }
+
   return (
     <div>
       <article className="wrapper pt-3" style={{ background: "#F9F9FC" }}>
         <div className="row mt-5">
           <div className="col-lg-7 col-12">
-            <OppCompanyInfo data={stateAuth?.user} />
-            <FinancialDetails data={stateAuth?.user} />
+            <OppCompanyInfo data={stateAuth} />
+            <FinancialDetails data={stateAuth} />
           </div>
           <div className="col-lg-5 col-12 ">
-            <FundingRound data={stateAuth?.user} />
+            <FundingRound data={stateAuth} />
           </div>
         </div>
       </article>

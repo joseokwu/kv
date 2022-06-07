@@ -1,4 +1,4 @@
-import React from 'react'
+import React  from 'react'
 import { Input, Form } from 'antd'
 
 const { TextArea } = Input
@@ -10,7 +10,15 @@ export const TextareaCustom = ({
   onChange,
   placeholder,
   onKeyPress,
+  required = true,
+  min=200,
+  maxLength=250,
+  showCount = true
 }) => {
+
+ 
+
+
   return (
     <div>
       <Form.Item
@@ -18,7 +26,7 @@ export const TextareaCustom = ({
         label={label}
         
         initialValue={value}
-        rules={[{ required: true, message: `This field is required` }, { min: 200 , message:'Characters should not be less than 200 words' }]}
+        rules={[{ required: required, message: `This field is required` }, { min: min , message:`Characters should not be less than ${min} words` }]}
       >
         <TextArea
           rows={4}
@@ -26,9 +34,9 @@ export const TextareaCustom = ({
           placeholder={placeholder}
           onChange={onChange}
           onKeyPress={onKeyPress}
-          showCount
-          maxLength={250}
-        />
+          showCount = {showCount}
+          maxLength={maxLength}
+              />
       </Form.Item>
     </div>
   )

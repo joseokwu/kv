@@ -9,9 +9,8 @@ import { MilestoneModal } from "./milestone.styled";
 import { Form , DatePicker  } from 'antd';
 import { TextareaCustom } from '../../../../components/textArea/cutstomTextarea';
 import { useAuth } from '../../../../hooks/useAuth';
-import moment from 'moment'
-import { updateFounderProfile  } from '../../../../services/startup';
-import { toast } from 'react-hot-toast';
+import moment from 'moment';
+
 
 
 export const Milestone = ({ data = [] }) => {
@@ -48,7 +47,7 @@ export const Milestone = ({ data = [] }) => {
 };
 
 export const UpdateMilestoneModal = ({close}) => {
-  const {  updateStartupInfo , updateProfile  } = useAuth();
+  const { callUpdateStartupData  } = useAuth();
   const [date, setDate] = useState();
 
   const handleDate = (value) =>{
@@ -58,22 +57,20 @@ export const UpdateMilestoneModal = ({close}) => {
 
   const onFinish = async (values) => {
   
-  try{
-    const res = await updateFounderProfile({
-      type:'mileStone',
+    
+    const updateValue = {
+      ...values,
+      dateOfAchievement:date
+    }
+    // console.log({
+     
+    // })
+   callUpdateStartupData({
       values:{
-       ...values,
-       dateOfAchievement:date
+      mileStone:updateValue
      }
     });
-   // console.log(date)
-    toast.success(res?.message)
     close(false)
-
-  }catch(err){
-    toast.error(err?.response?.data?.message ?? 'Unable to update profile')
-  }
-
   }
 
 
@@ -92,22 +89,26 @@ export const UpdateMilestoneModal = ({close}) => {
           <h4>Update Milestone</h4>
         </div>
         <div className="mt-5">
-          <TextareaCustom 
+          <TextField 
            label="Title"
            name={'title'}
+           required={true}
+           placeholder="Enter name of Title"
            />
         </div>
         <div className="my-3">
           <TextareaCustom 
           name={'description'}
-           label="Description"  />
+           label="Description"
+           required={false}
+           min={0}
+           showCount={false}
+             />
         </div>
         <DatePicker
           onChange={handleDate}
           label="Date of achievement"
           name={'dateOfAchievement'}
-       
-          
         />
         <div className="mt-5">
           <button 

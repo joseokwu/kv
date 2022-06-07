@@ -38,16 +38,13 @@ const WorkExperience = () => {
   const [opts, setOpts] = useState("");
   const [nextloading, setNextLoading] = useState(false);
   const [startDate, setStartDate] = useState();
-  const [data, setData] = useState(
-    stateAuth?.mentorData?.workExperience[0] ?? ""
-  );
+  const [data, setData] = useState(stateAuth?.mentorData?.workExperience ?? "");
 
   useEffect(() => {
-    setData(stateAuth?.mentorData?.workExperience[0]);
-  }, [stateAuth?.mentorData?.workExperience[0]]);
+    setData(stateAuth?.mentorData?.workExperience);
+  }, [stateAuth?.mentorData?.workExperience]);
 
   const onSubmit = async () => {
-    updateMentorProfileState("workExperience", [data]);
     setLoading(true);
     const uploaded = await updateMentorInfo();
 
@@ -96,6 +93,10 @@ const WorkExperience = () => {
 
     setData({ ...data, [name]: value });
 
+    updateMentorProfileState("workExperience", {
+      [name]: value,
+    });
+
     formik.handleChange(e);
   };
 
@@ -136,7 +137,7 @@ const WorkExperience = () => {
   return (
     <div className="mentor_details_form_wrap">
       <h3>Work Experience</h3>
-      <p>You are required to add a current experence.</p>
+      <p>You are required to add a current experience.</p>
 
       <form onSubmit={formik.handleSubmit}>
         <FormCard>

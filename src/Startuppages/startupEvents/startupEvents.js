@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Select, Tabs } from '../../Startupcomponents'
 import './startupEvents.css'
 import down from '../../assets/icons/downArrow.svg'
 import { SelectionDay } from './components/selectionDay'
 import { getEvents } from '../../services/events'
-import { PageLoader } from '../../components'
+import { PageLoader , PaginationData } from '../../components'
 import { useAuth } from '../../hooks/useAuth'
-import Pagination from 'react-bootstrap/Pagination'
+import Pagination from 'react-bootstrap/Pagination';
 import { EmptyState } from '../../mentorComponents/emptyState/EmptyState'
+
+
+
 
 export const StartupEvents = ({ history }) => {
   const industry = [
@@ -176,7 +179,7 @@ export const StartupEvents = ({ history }) => {
       <div className="d-flex justify-content-center">
         {events === null && <EmptyState />}
         {
-          events && events.length > 0 ? (
+          events && events?.length > 0 ? (
             <Pagination>
           {events && events?.results?.currentPage > 1 ? (
             <>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HeaderModal, ModalForm } from "./teams.styled";
 import { ModalCus } from "../../../../Startupcomponents/modal/Modal";
-import { DatePicker } from "antd";
+import { DatePicker  } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
 import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
 import { useFormik } from "formik";
@@ -82,7 +82,7 @@ export const TeamModal = ({
         >
           <ModalForm className="row">
             <div className="col-12 form-group">
-              <label>Title<span style={{color: "red"}}>*</span></label>
+              <label>Company Name<span style={{color: "red"}}>*</span></label>
               <input
                 id="title"
                 name="companyName"

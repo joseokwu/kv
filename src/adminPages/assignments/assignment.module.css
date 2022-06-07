@@ -1,0 +1,117 @@
+.programCard {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 1.5rem 1.93rem;
+}
+
+.programCard h4 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.programCard .desc {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5d5d5e;
+}
+.date {
+  color: #3855b3 !important;
+}
+.date h5 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
+  color: #3855b3 !important;
+  padding-right: 8px;
+  margin-right: 8px;
+  border-right: 1px solid #3855b3;
+}
+
+.date p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+}
+
+.host img {
+  width: 29px;
+  height: 29px;
+  min-width: 29px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+
+.host p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.startups_box {
+  background: #f9f9fc;
+  padding: 1.9rem 1.5rem;
+}
+
+.startups_box h5 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.startups_box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.startups_box ul li {
+  padding-right: 1rem;
+  margin-right: 1rem;
+  border-right: 1px solid #bdbdbd;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.startups_box ul li p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  color: #828282;
+}
+
+.startups_box ul li img {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 50%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.startups_box ul li:last-child {
+  border-right: none;
+}

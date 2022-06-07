@@ -16,7 +16,7 @@ export const Tabs = ({
   } = history;
 
   useEffect(() => {
-    if (hash === "" && tabItems?.length > 0) {
+    if (hash === "" && tabItems?.length > 0 && !withState) {
       replace(`#${tabItems[0]}`);
     }
   }, [hash, tabItems, replace]);

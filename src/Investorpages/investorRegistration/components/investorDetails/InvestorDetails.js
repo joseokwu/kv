@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { RowOption, TextField, Button } from '../../../../components'
+import { RowOption, TextField, Button , MultipleRowOption } from '../../../../components'
 import FormCard from '../../../partnerRegisteration/components/formCard/FormCard'
-import { addInvestorProfile } from '../../../../services/investor'
-import { useFormik } from 'formik'
+
 import { useHistory } from 'react-router'
 import { Form, Select } from 'antd'
 import { useAuth } from '../../../../hooks/useAuth'
-import { letterOnly } from '../../../../utils/utils'
+
 
 const { Option } = Select
 
@@ -26,7 +25,7 @@ export const InvestorDetails = () => {
   ]
 
   const accountType = ['Current Account', 'Savings Account']
-
+ 
   const [taxOutsideEligible, setTaxOutsideEligible] = useState('')
   const [selectedInvestorType, setSelectedInvestorType] = useState('')
 
@@ -47,7 +46,7 @@ export const InvestorDetails = () => {
     updateInvestorInfo()
     console.log(values)
   }
-  console.log(stateAuth)
+  
 
   const letterOnly = (e) => {
     const charCode = e.charCode || e.which
@@ -58,7 +57,7 @@ export const InvestorDetails = () => {
       return
     }
   }
-
+   console.log(stateAuth)
   const onNumberOnlyChange = (e) => {
     const keyCode = e.keyCode || e.which
     const keyValue = String.fromCharCode(keyCode)
@@ -275,7 +274,7 @@ export const InvestorDetails = () => {
             >
               <span style={{ color: 'red' }}>*</span> Investor Type
             </p>
-            <RowOption
+            {/* <RowOption
               currentSelected={
                 stateAuth?.investorData?.personalDetail?.investorType
               }
@@ -283,7 +282,16 @@ export const InvestorDetails = () => {
               getSelected={(e) => {
                 updateInvestorProfileData('personalDetail', { investorType: e })
               }}
-            />
+            /> */}
+            <MultipleRowOption 
+             currentSelected={
+                stateAuth?.investorData?.personalDetail?.investorType
+              }
+              options={investorTypes}
+              getSelected={(e) => {
+                updateInvestorProfileData('personalDetail', { investorType: [...stateAuth?.investorData?.personalDetail?.investorType , e] })
+              }}
+             />
           </div>
         </FormCard>
 

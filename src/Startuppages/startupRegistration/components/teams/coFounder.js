@@ -15,7 +15,7 @@ import { UserOutlined, PlusOutlined } from '@ant-design/icons';
 import { useActivity } from '../../../../hooks/useBusiness';
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { Select , DatePicker } from 'antd';
+import { Select , DatePicker , Form } from 'antd';
 import { TeamModal, EducationModal } from './teamModal';
 import { CustomButton } from '../../../../Startupcomponents/button/button.styled';
 import { CircularLoader } from '../../../../Startupcomponents/CircluarLoader/CircularLoader';
@@ -187,10 +187,10 @@ export const CoFounder = ({
 
   const workFormik = useFormik({
     initialValues:{
-      title: '',
+      companyName: '',
       location: '',
       position: '',
-      description: '',
+      responsibility: '',
       startDate: '',
       endDate: '',
     },
@@ -200,10 +200,10 @@ export const CoFounder = ({
   const handleExpeSubmit = () =>{
    
     setLocalExperience([...localExperience , {
-      title: workFormik.getFieldProps('title').value,
+      companyName: workFormik.getFieldProps('companyName').value,
       location: workFormik.getFieldProps('location').value,
       position: workFormik.getFieldProps('position').value,
-      description: workFormik.getFieldProps('description').value,
+      responsibility: workFormik.getFieldProps('responsibility').value,
       startDate:startDate,
       endDate:checked ? 'present' : endDate
 
@@ -211,10 +211,10 @@ export const CoFounder = ({
     
     workFormik.resetForm({
   values:{
-    title: '',
+    companyName: '',
     location: '',
     position: '',
-    description: '',
+    responsibility: '',
     startDate: '',
     endDate: '',
   }
@@ -407,27 +407,27 @@ export const CoFounder = ({
             <div className='mx-5'>
               <HeaderModal>
                 {' '}
-                {isEditing ? 'Edit Work Experience' : 'Add Work Experience'}
+                {'Add Work Experience'}
               </HeaderModal>
               <hr style={{ background: '#323232' }} />
               <form>
                 <ModalForm className='row'>
                   <div className='col-12 form-group'>
-                    <label>Title<span style={{color: "red"}}>*</span></label>
+                    <label>Company Name<span style={{color: "red"}}>*</span></label>
                     <input
                       id='title'
-                      name='title'
+                      name='companyName'
                       type='text'
                       className='form-control ps-3'
                       placeholder='CEO and Founder'
                       value={
-                        workFormik.values.title
+                        workFormik.values.companyName
                       }
                       onBlur={workFormik.handleBlur}
                       onChange={workFormik.handleChange}
                     />
-                    {workFormik.touched.title && workFormik.errors.title ? (
-                      <label className='error'>{workFormik.errors.title}</label>
+                    {workFormik.touched.companyName && workFormik.errors.companyName ? (
+                      <label className='error'>{workFormik.errors.companyName}</label>
                     ) : null}
                   </div>
                   <div className='col-12 form-group'>
@@ -461,21 +461,21 @@ export const CoFounder = ({
 
                     <textarea
                       id='description'
-                      name='description'
+                      name='responsibility'
                       cols='5'
                       rows='5'
                       className='form-control ps-3'
                       placeholder='Tell us about your role'
                       value={
 
-                        workFormik.values.description
+                        workFormik.values.responsibility
                       }
                       onBlur={workFormik.handleBlur}
                       onChange={workFormik.handleChange}
                     />
-                    {workFormik.touched.description && workFormik.errors.description ? (
+                    {workFormik.touched.responsibility && workFormik.errors.responsibility ? (
                       <label className='error'>
-                        {workFormik.errors.description}
+                        {workFormik.errors.responsibility}
                       </label>
                     ) : null}
                   </div>
