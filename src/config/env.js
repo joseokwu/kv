@@ -6,5 +6,5 @@
 
 //https://d20kwg47th11r1.cloudfront.net
 
-// export const BASE_URL = "https://d20kwg47th11r1.cloudfront.net/";
-export const BASE_URL = "https://fca9-102-89-42-194.ngrok.io";
+export const BASE_URL = "https://d20kwg47th11r1.cloudfront.net/";
+// export const BASE_URL = "https://80b8-102-89-34-84.ngrok.io";

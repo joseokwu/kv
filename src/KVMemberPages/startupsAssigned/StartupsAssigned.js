@@ -26,6 +26,9 @@ export const StartupsAssigned = () => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus eu lorem ",
             eventDate: "2022-08-24T23:00:00.000Z",
             evaluated: false,
+            city: "Califonia, United States",
+            incorporationDate: "02/09/19",
+            website: "www.applaneinsteen.com",
         },
         {
             name: "Yebox  Technology",
@@ -37,6 +40,9 @@ export const StartupsAssigned = () => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus eu lorem ipsum dolor sit  eu lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit consectetur adipiscing el ",
             eventDate: "2022-02-05T23:00:00.000Z",
             evaluated: false,
+            city: "Califonia, United States",
+            incorporationDate: "02/09/19",
+            website: "www.applaneinsteen.com",
         },
         {
             name: "Yebox  Technology",
@@ -48,6 +54,9 @@ export const StartupsAssigned = () => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus eu lorem ipsum dolor sit  eu lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit consectetur adipiscing el ",
             eventDate: "2022-02-05T23:00:00.000Z",
             evaluated: false,
+            city: "Califonia, United States",
+            incorporationDate: "02/09/19",
+            website: "www.applaneinsteen.com",
         },
         {
             name: "Yebox  Technology",
@@ -59,6 +68,9 @@ export const StartupsAssigned = () => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus eu lorem ipsum dolor sit  eu lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit consectetur adipiscing el ",
             eventDate: "2022-02-05T23:00:00.000Z",
             evaluated: true,
+            city: "Califonia, United States",
+            incorporationDate: "02/09/19",
+            website: "www.applaneinsteen.com",
         },
         {
             name: "Yebox  Technology",
@@ -70,6 +82,9 @@ export const StartupsAssigned = () => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus eu lorem ipsum dolor sit  eu lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit consectetur adipiscing el ",
             eventDate: "2022-02-05T23:00:00.000Z",
             evaluated: true,
+            city: "Califonia, United States",
+            incorporationDate: "02/09/19",
+            website: "www.applaneinsteen.com",
         },
     ];
 
