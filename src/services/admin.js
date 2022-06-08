@@ -59,3 +59,13 @@ export const createCriteria = async (values) => {
         throw err;
     }
 };
+
+export const createCategory = async (values) => {
+    try {
+        const response = await request.post("createCategory", values);
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};

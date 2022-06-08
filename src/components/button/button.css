@@ -27,11 +27,13 @@
   outline: none;
   background: #2e3192 !important;
 }
+
 .btn-secondary:focus,
 .btn-secondary:active {
   outline: none;
   background: #00adef !important;
 }
+
 .btn-main {
   border-radius: 10px;
   font-family: DM Sans;
@@ -60,7 +62,7 @@
 }
 
 .btn-main:disabled {
-  background-color: lightgray;
+  background-color: lightgray !important;
 }
 
 .resend-code {

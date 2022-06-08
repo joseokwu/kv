@@ -55,9 +55,11 @@
   line-height: 24px;
   color: #5d5d5e;
 }
+
 .date {
   color: #3855b3 !important;
 }
+
 .date h5 {
   font-family: "DM Sans";
   font-style: normal;
@@ -219,3 +221,18 @@
 .view_tag {
   text-transform: capitalize;
 }
+
+.flexParent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.flexChild {
+  width: 48%;
+  min-width: 324px;
+}
+
