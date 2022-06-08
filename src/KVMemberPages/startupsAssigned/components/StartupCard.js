@@ -2,105 +2,65 @@ import React from "react";
 import dots from "../../../assets/icons/dot.svg";
 import { Modal, Tag } from "../../../components";
 import { months, formatTime } from "../../../utils/helpers";
+import { ReadMore } from "../../../mentorComponents";
+import { AdminButton } from "../../../components";
 import host from "../../../assets/images/sampleTeamMember.png";
-import { ViewProgramDetails } from "./ViewProgramDetails";
+import { ViewStartupDetails } from "./ViewStartupDetails";
 import styles from "../programs.module.css";
-import { ViewAssignment } from "../../assignments/components/ViewAssignment";
+import { industry } from "../../../constants/domiData";
+// import { ViewAssignment } from "../../assignments/components/ViewAssignment";
 
 export const StartupCard = ({ data = {}, id = 0 }) => {
+    const statusTags = {
+        Pending: "#D3C013",
+        "In-Progress": "#828282",
+        Complete: "#0F9214",
+    };
+
     return (
         <div className={styles.programCard}>
-            <Modal id={`program-${id}`} width={768}>
-                <ViewProgramDetails data={data} />
+            <Modal id={`startup-${id}`} width={768} withHeader={false}>
+                <ViewStartupDetails data={data} />
             </Modal>
-            <Modal id={`assignment-${id}`}>
+            {/* <Modal id={`assignment-${id}`}>
                 <ViewAssignment />
-            </Modal>
-            <section className="d-flex align-items-center justify-content-between">
-                <h4>Go to market</h4>
-                <ProgramDropdown id={id} />
+            </Modal> */}
+            <div className="h-4 mb-2">
+                <img src={data?.logo} />
+            </div>
+            <section className="d-flex align-items-center justify-content-between mb-2">
+                <h4>{data?.name}</h4>
+                <Tag name={data?.status} color={statusTags[data?.status]} />
             </section>
-            <section className="d-flex align-items-center justify-content-between mb-3">
-                <div
-                    className="d-flex align-items-center"
-                    style={{ columnGap: "2rem" }}
-                >
-                    <Tag name="Fintech" />
-                    <p className={styles[data?.status]}>
-                        Status: {data?.status}
-                    </p>
-                </div>
-
-                {data?.status === "declined" && (
-                    <p className="view-link">Assign new host</p>
-                )}
+            <section className="d-flex align-items-center flex-wrap gap-3 mb-3">
+                {data?.industry.map((item) => (
+                    <Tag name={item} />
+                ))}
             </section>
 
-            <section className="border-bottom mb-4 pb-3">
+            <section className="border-bottom mb-3 pb-3">
                 <p className={styles.desc}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit...
+                    <ReadMore>{data?.description}</ReadMore>
                 </p>
             </section>
 
-            <section className="d-flex align-items-center justify-content-between mb-4">
-                <div className={`d-flex align-items-center ${styles?.date}`}>
-                    <h5 className="mb-0">{new Date(2022, 3, 5).getDate()}</h5>
-                    <p>{months[new Date(2022, 3, 5).getMonth()]}</p>
-                </div>
-
-                <div style={{ color: "#525151", fontSize: 14 }}>
-                    {formatTime(new Date(2022, 3, 5, 14, 0))}-
-                    {formatTime(new Date(2022, 3, 5, 18, 0))}
-                </div>
+            <section className="d-flex align-items-center justify-content-between mb-3">
+                {new Date() > new Date(data?.eventDate) ? (
+                    data?.evaluated ? (
+                        <AdminButton
+                            label="Evaluate"
+                            variant="secondary"
+                            disabled={data?.status === "Complete"}
+                            data-toggle="modal"
+                            data-target={`#startup-${id}`}
+                        />
+                    ) : (
+                        <AdminButton label="View Evaluation" />
+                    )
+                ) : (
+                    "Evaluation can only be done after the event."
+                )}
             </section>
-
-            <section
-                className={`d-flex align-items-center justify-content-between ${styles.host}`}
-            >
-                <p style={{ color: "#6466AA" }}>Host:</p>
-
-                <div className="d-flex align-items-center space-out">
-                    <img src={host} alt="host" />
-                    <p>Prima Jakatar</p>
-                </div>
-            </section>
-        </div>
-    );
-};
-
-const StartupDropdown = ({ id }) => {
-    return (
-        <div className="dropdown mb-2">
-            <div id="dropdownMenu2" data-toggle="dropdown" role="button">
-                <img src={dots} alt="dots" />
-            </div>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button
-                    className="dropdown-item"
-                    type="button"
-                    data-target={`#program-${id}`}
-                    data-toggle="modal"
-                >
-                    Program Details
-                </button>
-                <button
-                    className="dropdown-item"
-                    type="button"
-                    data-target={`#assignment-${id}`}
-                    data-toggle="modal"
-                >
-                    Assignment Details
-                </button>
-                <button
-                    className="dropdown-item"
-                    type="button"
-                    style={{ color: "#E31937" }}
-                >
-                    Delete
-                </button>
-            </div>
         </div>
     );
 };
