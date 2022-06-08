@@ -31,7 +31,7 @@ const sendApplication = async(value) =>{
  try{
     setLoading(true)
   const newApplication = {
-    userId:value?.userId,
+    partnerId:value?.userId,
     startupId:stateAuth?.startupData?.userId,
     startupName:stateAuth?.user?.businessname,
     email:stateAuth?.email,
@@ -43,7 +43,7 @@ const sendApplication = async(value) =>{
   }
   console.log(value)  
   const response = await applyToPartners(newApplication);
- // console.log(response)  
+  console.log(response)  
   toast.success(response?.message)
   setLoading(false);
   apply(value?.userId)
