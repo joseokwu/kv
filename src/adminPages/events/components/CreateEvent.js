@@ -1,10 +1,10 @@
-import React from "react";
-import { Button, Select, TextField } from "../../../components";
-import searchIcon from "../../../assets/icons/searchSm.svg";
-import copyIcon from "../../../assets/icons/copy.svg";
-import closeIcon from "../../../assets/icons/closesm.svg";
-import styles from "../events.module.css";
-import { GuestItem } from "./GuestItem";
+import React from 'react'
+import { Button, Select, TextField } from '../../../components'
+import searchIcon from '../../../assets/icons/searchSm.svg'
+import copyIcon from '../../../assets/icons/copy.svg'
+import closeIcon from '../../../assets/icons/closesm.svg'
+import styles from '../events.module.css'
+import { GuestItem } from './GuestItem'
 
 export const CreateEvent = () => {
   return (
@@ -60,7 +60,7 @@ export const CreateEvent = () => {
         <section className="d-flex align-items-center space-out mb-4">
           <p>Join with:</p>
           <Select
-            options={["Zoom", "Google Meet", "Skype"]}
+            options={['Zoom', 'Google Meet', 'Skype']}
             defaultValue="Zoom"
           />
         </section>
@@ -74,11 +74,11 @@ export const CreateEvent = () => {
 
         <section
           className="d-flex align-items-center mb-4"
-          style={{ columnGap: "1rem" }}
+          style={{ columnGap: '1rem' }}
         >
           <p>Notify me :</p>
           <TextField defaultValue="30" className="w-50" />
-          <Select options={["Seconds", "Minutes"]} defaultValue="Minutes" />
+          <Select options={['Seconds', 'Minutes']} defaultValue="Minutes" />
         </section>
 
         <hr className="mb-4" />
@@ -86,7 +86,7 @@ export const CreateEvent = () => {
         <section className={styles?.visible}>
           <p>Visibility</p>
           <Select
-            options={["Private", "Public"]}
+            options={['Private', 'Public']}
             className="d-flex"
             defaultValue="Private"
           />
@@ -110,5 +110,5 @@ export const CreateEvent = () => {
         </section>
       </form>
     </div>
-  );
-};
+  )
+}

@@ -83,7 +83,7 @@ export const Events = () => {
         description: eventDesc,
       },
     ],
-    []
+    [eventDesc]
   );
   return (
     <div className="p-5">
