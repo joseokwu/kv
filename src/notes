@@ -1940,7 +1940,15 @@ yetToInvest: true
 
 
 
-
+email: "isaackelvin256@gmail.com"
+industry: "Engineering and Technology"
+isRegCompleted: true
+password: "$2a$10$VFZe49DGrNdpKd1YSjzqrOAHFjOw55sKazp7tmOSCt.W0oyT0Q0hi"
+permissions: []
+phone: "+2348163394719"
+startupname: "Winner Airlines"
+type: ['startup']
+verified: true
 
 
 
