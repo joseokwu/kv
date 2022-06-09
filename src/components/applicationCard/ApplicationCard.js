@@ -10,14 +10,16 @@ import { ReadMore } from "./../../mentorComponents/readMore/readMore";
 import { manageStartupApplication } from "../../services";
 import { useAuth } from "../../hooks/useAuth";
 import { moment } from "moment";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { IoMdCloseCircle } from "react-icons/io";
 
-export const ApplicationCard = ({ index = 0, data, status }) => {
+export const ApplicationCard = ({ index = 0, data, status, apply }) => {
     // const date = new Date(data?.applied)
     // const [numVal, setNum] = useState(120);
 
     const { updatePartnerInfo } = useAuth();
     useEffect(() => {
-        console.log(status);
+        // console.log(status);
     }, []);
 
     return (
@@ -71,49 +73,107 @@ export const ApplicationCard = ({ index = 0, data, status }) => {
                 data-toggle="modal"
                 data-target={`#applicantModal${index}`}
             >
-                <div className="d-flex align-items-center gap-2">
-                    <Button
-                        label="Approve"
-                        onClick={async () => {
-                            console.log(data);
-                            console.log({
-                                value: {
+                {data?.status === "PENDING" ? (
+                    <div className="d-flex align-items-center gap-2">
+                        <Button
+                            label="Approve"
+                            onClick={async () => {
+                                console.log(data);
+                                console.log({
+                                    payload: {
+                                        status: "APPROVED",
+                                    },
                                     startupId: data?.startupId,
-                                },
-                                action: "approve",
-                            });
-                            await manageStartupApplication({
-                                value: {
+                                });
+                                await manageStartupApplication({
+                                    payload: {
+                                        status: "APPROVED",
+                                    },
                                     startupId: data?.startupId,
-                                },
-                                action: "approve",
-                            });
-                            window.location.reload(false);
-                            updatePartnerInfo();
-                        }}
-                    />
-                    <Button
-                        label="Decline"
-                        variant="secondary"
-                        onClick={async () => {
-                            console.log(data);
-                            console.log({
-                                value: {
+                                });
+                                apply(data?.startupId, "APPROVED");
+                            }}
+                        />
+                        <Button
+                            label="Decline"
+                            variant="secondary"
+                            onClick={async () => {
+                                console.log(data);
+                                console.log({
+                                    payload: {
+                                        status: "DECLINED",
+                                    },
                                     startupId: data?.startupId,
-                                },
-                                action: "decline",
-                            });
-                            await manageStartupApplication({
-                                value: {
+                                });
+                                await manageStartupApplication({
+                                    payload: {
+                                        status: "DECLINED",
+                                    },
                                     startupId: data?.startupId,
-                                },
-                                action: "decline",
-                            });
-                            // window.location.reload(false);
-                            updatePartnerInfo();
-                        }}
-                    />
-                </div>
+                                });
+                                apply(data?.startupId, "DECLINED");
+                            }}
+                        />
+                    </div>
+                ) : data?.status === "APPROVED" ? (
+                    <div
+                        style={{ color: "#18A615", fontSize: "16px" }}
+                        className="d-flex flex-row align-items-center gap-2"
+                    >
+                        <BsFillCheckCircleFill size={16} />
+                        Approved
+                    </div>
+                ) : data?.status === "DECLINED" ? (
+                    <div
+                        style={{ color: "#E21919", fontSize: "16px" }}
+                        className="d-flex flex-row align-items-center gap-2"
+                    >
+                        <IoMdCloseCircle size={16} />
+                        Declined
+                    </div>
+                ) : (
+                    <div className="d-flex align-items-center gap-2">
+                        <Button
+                            label="Approve"
+                            onClick={async () => {
+                                console.log(data);
+                                console.log({
+                                    payload: {
+                                        status: "APPROVED",
+                                    },
+                                    startupId: data?.startupId,
+                                });
+                                await manageStartupApplication({
+                                    payload: {
+                                        status: "APPROVED",
+                                    },
+                                    startupId: data?.startupId,
+                                });
+                                apply(data?.startupId, "APPROVED");
+                            }}
+                        />
+                        <Button
+                            label="Decline"
+                            variant="secondary"
+                            onClick={async () => {
+                                console.log(data);
+                                console.log({
+                                    payload: {
+                                        status: "DECLINED",
+                                    },
+                                    startupId: data?.startupId,
+                                });
+                                await manageStartupApplication({
+                                    payload: {
+                                        status: "DECLINED",
+                                    },
+                                    startupId: data?.startupId,
+                                });
+                                apply(data?.startupId, "DECLINED");
+                            }}
+                        />
+                    </div>
+                )}
                 <div className="d-flex align-items-center appCard-comment mb-3">
                     <p className="appCard-text">Comment</p>
                     <img src={comment} alt="comment" />

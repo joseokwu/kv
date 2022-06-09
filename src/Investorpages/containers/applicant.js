@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import logo from "../../assets/images/sampleApplicantsLogo.png";
 import { ApplicationCard } from "../../components/applicationCard/ApplicationCard";
 import { useAuth } from "./../../hooks/useAuth";
+import { EmptyState } from "../../mentorComponents";
+import { SkeletonLoader } from "../../components";
 
-export const AllComponent = ({ data = [] }) => {
+export const AllComponent = ({ data = [], fetched = true, apply }) => {
     const { stateAuth } = useAuth();
     const [allApplicants, setAllApplicants] = useState([]);
 
@@ -17,12 +19,10 @@ export const AllComponent = ({ data = [] }) => {
     }, []);
 
     return (
-        <>
-            {/* stateAuth?.partnerData?.pendingRequests.length > 0  && stateAuth?.partnerData?.pendingRequests.map((d, i) => { */}
-
+        <SkeletonLoader fetched={fetched} height={360}>
             <div className="row mb-4">
-                {stateAuth?.partnerData?.pendingRequests?.length > 0 &&
-                    stateAuth?.partnerData?.pendingRequests?.map((item, i) => {
+                {data.length > 0 ? (
+                    data?.map((item, i) => {
                         return (
                             <div key={i} className="col-lg-6 mb-4">
                                 <ApplicationCard
@@ -30,12 +30,15 @@ export const AllComponent = ({ data = [] }) => {
                                     data={item}
                                     index={i}
                                     status={"data?.status"}
+                                    apply={apply}
                                 />
                             </div>
                         );
-                    })}
-                {/* <ApplicationCard logo={d.logo} data={d} index={i} /> */}
+                    })
+                ) : (
+                    <EmptyState message="No Applications available" />
+                )}
             </div>
-        </>
+        </SkeletonLoader>
     );
 };

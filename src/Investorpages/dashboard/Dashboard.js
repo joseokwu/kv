@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import total from "../../assets/icons/totalApp.svg";
 import { ApplicationCard, DashCard } from "../../components/index";
@@ -7,16 +7,53 @@ import ApplicationChart from "./components/applicationChart/ApplicationChart";
 import { PageLoader } from "../../components/pageLoader/PageLoader";
 import { EmptyState } from "../../mentorComponents";
 import { useAuth } from "../../hooks";
+import { getPartnersApplication } from "../../services";
+import { SkeletonLoader } from "../../components";
 
 export const BoosterDashboard = ({ history }) => {
     const { push } = history;
     const [bossterRes, setBoosterRes] = useState(null);
+    const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(false);
     const { stateAuth } = useAuth();
+    const [fetched, setFetched] = useState(false);
 
-    console.log(stateAuth);
+    // console.log(stateAuth);
+
+    const apply = (id, action) => {
+        const applicationInd = applications.findIndex(
+            (item) => item?.startupId === id
+        );
+        const newApplications = [...applications];
+        newApplications[applicationInd].status = action;
+
+        setApplications(newApplications);
+    };
 
     const dashCardColors = ["#E5FFE4", "#FAD7DC", "#DFF1FF"];
+
+    useEffect(() => {
+        const fetchPartners = async () => {
+            const res = await getPartnersApplication({ page: 1, limit: 5 });
+            console.log(res);
+            console.log(res?.data?.data);
+            setApplications(res?.data?.data);
+            setFetched(true);
+        };
+
+        fetchPartners();
+        console.log(applications);
+    }, []);
+
+    const pending = applications?.filter(
+        (application) => application?.status === "PENDING"
+    );
+    const approved = applications?.filter(
+        (application) => application?.status === "APPROVED"
+    );
+    const declined = applications?.filter(
+        (application) => application?.status === "DECLINED"
+    );
 
     if (loading) {
         return <PageLoader />;
@@ -28,11 +65,9 @@ export const BoosterDashboard = ({ history }) => {
                         icon={total}
                         name={"Total Application"}
                         count={
-                            stateAuth?.partnerData?.pendingRequests?.length +
-                                stateAuth?.partnerData?.approvedRequests
-                                    ?.length +
-                                stateAuth?.partnerData?.declinedRequests
-                                    ?.length || 0
+                            pending?.length +
+                                approved?.length +
+                                declined?.length || 0
                         }
                         color={dashCardColors[0]}
                     />
@@ -40,28 +75,20 @@ export const BoosterDashboard = ({ history }) => {
                     <DashCard
                         icon={total}
                         name={"Pending"}
-                        count={
-                            stateAuth?.partnerData?.pendingRequests?.length || 0
-                        }
+                        count={pending?.length || 0}
                         color={dashCardColors[1]}
                     />
 
                     <DashCard
                         icon={total}
                         name={"Approved"}
-                        count={
-                            stateAuth?.partnerData?.approvedRequests?.length ||
-                            0
-                        }
+                        count={approved?.length || 0}
                         color={dashCardColors[2]}
                     />
                     <DashCard
                         icon={total}
                         name={"Declined"}
-                        count={
-                            stateAuth?.partnerData?.declinedRequests?.length ||
-                            0
-                        }
+                        count={declined?.length || 0}
                         color={dashCardColors[0]}
                     />
                 </section>
@@ -77,29 +104,38 @@ export const BoosterDashboard = ({ history }) => {
                             </span>
                         </header>
 
-                        <section>
-                            {stateAuth?.partnerData?.pendingRequests?.length >
-                            0 ? (
-                                stateAuth?.partnerData?.pendingRequests?.map(
-                                    (item, i) => {
-                                        console.log(item);
-                                        return (
-                                            <div
-                                                style={{ marginBottom: 21 }}
-                                                key={i}
-                                            >
-                                                <ApplicationCard
-                                                    data={item}
-                                                    logo={applicantLogo}
-                                                />
-                                            </div>
-                                        );
-                                    }
-                                )
-                            ) : (
-                                <EmptyState message="No Application sent yet." />
-                            )}
-                        </section>
+                        <SkeletonLoader fetched={fetched} height={360}>
+                            <section>
+                                {applications?.filter(
+                                    (application) =>
+                                        application?.status === "PENDING"
+                                )?.length > 0 ? (
+                                    applications
+                                        ?.filter(
+                                            (application) =>
+                                                application?.status ===
+                                                "PENDING"
+                                        )
+                                        ?.map((item, i) => {
+                                            console.log(item);
+                                            return (
+                                                <div
+                                                    style={{ marginBottom: 21 }}
+                                                    key={i}
+                                                >
+                                                    <ApplicationCard
+                                                        data={item}
+                                                        logo={applicantLogo}
+                                                        apply={apply}
+                                                    />
+                                                </div>
+                                            );
+                                        })
+                                ) : (
+                                    <EmptyState message="No Application sent yet." />
+                                )}
+                            </section>
+                        </SkeletonLoader>
                     </div>
                     {/* <div className="col-lg-6 mt-5">
           <ApplicationChart />
