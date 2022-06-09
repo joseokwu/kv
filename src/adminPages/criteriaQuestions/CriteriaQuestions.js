@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, GoBack, TextField } from "../../components";
 import { useAdmin } from "../../hooks";
 import styles from "./criteriaQuestion.module.css";
@@ -9,8 +9,8 @@ export const CriteriaQuestions = () => {
   const [currentCategory, setCurrentCategory] = useState(0);
   const { push } = useHistory();
   const {
-    adminState: { categories  },
-     addNewCategory
+    adminState: { categories },
+    addNewCategory,
   } = useAdmin();
 
   const handleNext = () => {
@@ -25,6 +25,13 @@ export const CriteriaQuestions = () => {
     }
   };
 
+  const showTq = (data , i) =>{
+    return <TQItem
+    data={data} 
+    index={i}
+    />
+  }
+
   const addToCriteria = (index, data) => {
     let tempCriteria = categories;
     console.log("tempCriteria", tempCriteria);
@@ -33,7 +40,13 @@ export const CriteriaQuestions = () => {
     addNewCategory(tempCriteria);
   };
 
-  console.log("criteria", categories);
+
+useEffect(() =>{
+  showTq();
+
+},[currentCategory])
+
+  //console.log("criteria", categories);
 
   return (
     <div className="bg-white" style={{ minHeight: "94vh" }}>
@@ -80,12 +93,13 @@ export const CriteriaQuestions = () => {
                 })}
             </ul>
           </section>
-
+                    
           <section className="col-lg-7">
             <article className={`mb-45 ${styles.tq_space}`}>
               <div>
                 <h5>
-                  {categories?.length > 0 && categories[currentCategory]?.category}
+                  {categories?.length > 0 &&
+                    categories[currentCategory]?.category}
                 </h5>
                 <p className="mb-3">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -99,18 +113,18 @@ export const CriteriaQuestions = () => {
                   </p>
                 </span>
 
-                {categories?.length > 0 &&
-                  categories[currentCategory]?.titleAndQuestion.length > 0 &&
-                  categories[currentCategory]?.titleAndQuestion?.map((tq, i) => {
-                    return (
-                      <TQItem
-                        data={tq}
-                        key={`tq-${i}`}
-                        index={i}
-                        addToCriteria={addToCriteria}
-                      />
-                    );
-                  })}
+                    {
+                       showTq(categories[currentCategory]?.titleAndQuestion , currentCategory)
+                    }
+
+                {/* {categories?.length > 0 &&
+                  categories[currentCategory]?.titleAndQuestion.length > 0 && (
+                    <TQItem
+                      data={categories[currentCategory]?.titleAndQuestion}
+                      subdata={categories[currentCategory]}
+                      index={currentCategory}
+                    />
+                  )} */}
               </div>
               <div
                 className={`d-flex align-items-center justify-content-between ${styles.footer_questions}`}
@@ -151,35 +165,54 @@ export const CriteriaQuestions = () => {
   );
 };
 
-const TQItem = ({ data, index = 0, addToCriteria = () => {} }) => {
-  const [inputs, setInputs] = useState({ title: "", question: "" });
-
-  const handleChange = (e) => {
-    setInputs({ ...inputs, [e.target.id]: e.target.value });
+const TQItem = ({ data , index }) => {
+  
+  const [inputs, setInputs] = useState([]);
+  const inputLength = useMemo(() => Array(inputs.length).fill(inputs.length), [inputs])
+  useEffect(() => {
+    setInputs(data);
+    console.log(data)
+  }, [data , index]);
+  useEffect(() => {
+   console.log("rerender");
+  }, [index]);
+  const handleChange = (index) => (e) => {
+    const { name, value } = e.target;
+    console.log(name);
+    const inputCopy = [...inputs];
+    inputCopy[index] = { ...inputCopy[index], [name]: value };
+    console.log(inputCopy);
+    setInputs([...inputCopy]);
   };
 
-  useEffect(() => {
-    addToCriteria(index, inputs);
-  }, [inputs]);
+  // useEffect(() => {
+  //   addToCriteria(index, inputs);
+  // }, [inputs]);
 
   return (
-    <div className="row mb-4">
-      <section className="col-lg-4">
-        <TextField
-          label="Title"
-          value={data?.title}
-          name="title"
-          onChange={handleChange}
-        />
-      </section>
-      <section className="col-lg-8">
-        <TextField
-          label="Question"
-          value={data?.question}
-          name="question"
-          onChange={handleChange}
-        />
-      </section>
+    <div className="mb-4"> 
+      { inputs.length > 0 && inputs.map((item, i) => (
+        <div key={i} className="d-flex">
+          <section className="col-lg-6 form-group">
+          <label>Title</label>
+            <input
+              value={item?.title}
+              name="title"
+              className="form-control"
+              onChange={handleChange(i)}
+            />
+          </section>
+          <section className="col-lg-6 form-group">
+          <label>Question</label>
+            <input
+             className="mx-4 form-control"
+              value={item?.question}
+              name="question"
+              onChange={handleChange(i)}
+            />
+          </section>
+        </div>
+      ))}
     </div>
   );
 };

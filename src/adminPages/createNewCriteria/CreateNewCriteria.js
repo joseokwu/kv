@@ -15,7 +15,7 @@ export const CreateNewCriteria = () => {
 
    console.log("adminState", adminState);
   const [categories, setCategories] = useState([
-    { category: "", noOfQuestion: "1" , criteriaId:adminState?.criteriaDetail?._id },
+    { category: "", noOfQuestion: "1" , criteriaId:adminState?.criteriaDetail?._id , titleAndQuestion:[] },
   ]);
 
   useEffect(() => {
@@ -28,7 +28,9 @@ export const CreateNewCriteria = () => {
    * adds a single category input to the UI list
    */
   const addCategoryInput = () => {
-    setCategories([...categories, {}]);
+    setCategories([...categories, 
+      { category: "", noOfQuestion: "1" , criteriaId:adminState?.criteriaDetail?._id , titleAndQuestion:[] }
+    ]);
   };
 
   /**
@@ -134,7 +136,7 @@ const CategoryInput = ({
   addToCategoryArray = () => {},
   noOfQuestion = "1",
   category = "",
-  titleAndQuestion = [{}],
+  titleAndQuestion = [{ title: "", question: "" }],
   deleteCategory = () => {},
 }) => {
   const [data, setData] = useState({
@@ -154,7 +156,7 @@ const CategoryInput = ({
       setData({
         ...data,
         [e.target.id]: e.target.value,
-        titleAndQuestion: new Array(Number(e.target.value)).fill({}),
+        titleAndQuestion: new Array(Number(e.target.value)).fill({ title: "", question: "" }),
       });
     }
   };

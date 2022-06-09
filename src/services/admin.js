@@ -59,3 +59,17 @@ export const createCriteria = async (values) => {
         throw err;
     }
 };
+
+
+export const getCriteria = async () => {
+    try {
+        const response = await request.post("getCriterial", {});
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+
+//KV Member
