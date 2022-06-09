@@ -16,6 +16,7 @@ import {
     ExpireComponent,
 } from "../containers";
 import { useAuth } from "./../../hooks/useAuth";
+import { getPartnersApplication } from "../../services";
 
 export const BoosterApplicants = ({ history }) => {
     const {
@@ -25,10 +26,37 @@ export const BoosterApplicants = ({ history }) => {
     const { stateAuth } = useAuth();
     const [applicants, setApplicatnts] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [partners, setPartners] = useState([]);
+    const [fetched, setFetched] = useState(false);
 
-    const pendin = stateAuth?.partnerData?.pendingRequests;
-    const approve = stateAuth?.partnerData?.approvedRequests;
-    const decline = stateAuth?.partnerData?.declinedRequests;
+    useEffect(() => {
+        const fetchPartners = async () => {
+            const res = await getPartnersApplication({ page: 1, limit: 5 });
+            console.log(res);
+            console.log(res?.data?.data);
+            setPartners(res?.data?.data);
+            setFetched(true);
+        };
+
+        fetchPartners();
+    }, []);
+
+    const pendin = partners?.filter((partner) => partner?.status === "PENDING");
+    const approve = partners?.filter(
+        (partner) => partner?.status === "APPROVED"
+    );
+    const decline = partners?.filter(
+        (partner) => partner?.status === "DECLINED"
+    );
+
+    const apply = (id, action) => {
+        const partnerInd = partners.findIndex((item) => item?.startupId === id);
+        const newPartners = [...partners];
+        newPartners[partnerInd].status = action;
+
+        setPartners(newPartners);
+    };
+
     // const expire =
     //     applicants && applicants?.filter((item) => item?.status === "expired");
     // const reApply =
@@ -39,15 +67,25 @@ export const BoosterApplicants = ({ history }) => {
         switch (hash.replaceAll("%20", " ")) {
             case "#all":
                 return (
-                    <AllComponent data={[...pendin, ...approve, ...decline]} />
+                    <AllComponent
+                        data={pendin.concat(approve).concat(decline)}
+                        fetched={fetched}
+                        apply={apply}
+                    />
                 );
             case "#pending":
-                return <PendingComponent data={pendin} />;
+                return (
+                    <PendingComponent
+                        data={pendin}
+                        fetched={fetched}
+                        apply={apply}
+                    />
+                );
             case "#approved":
-                return <ApproveComponent data={approve} />;
+                return <ApproveComponent data={approve} fetched={fetched} />;
 
             case "#declined":
-                return <DeclineComponent data={decline} />;
+                return <DeclineComponent data={decline} fetched={fetched} />;
 
             // case "#expired":
             //     return <ExpireComponent data={expire} />;
@@ -55,7 +93,12 @@ export const BoosterApplicants = ({ history }) => {
             // case "#re-applied":
             //     return <ReapplyComponent data={reApply} />;
             default:
-                return <AllComponent data={applicants} />;
+                return (
+                    <AllComponent
+                        data={pendin.concat(approve).concat(decline)}
+                        fetched={fetched}
+                    />
+                );
         }
     };
 

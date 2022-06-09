@@ -37,3 +37,14 @@ export const manageStartupApplication = async (values) => {
         throw err;
     }
 };
+
+export const getPartnersApplication = async (values) => {
+    try {
+        const response = await request.post("getPartnersApplication", values);
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+};
