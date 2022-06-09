@@ -13,17 +13,17 @@ export const CriteriaQuestions = () => {
     addNewCategory,
   } = useAdmin();
 
-  const handleNext = () => {
-    if (currentCategory !== categories?.length - 1) {
-      setCurrentCategory(currentCategory + 1);
-    }
-  };
+    const handleNext = () => {
+        if (currentCategory !== categories?.length - 1) {
+            setCurrentCategory(currentCategory + 1);
+        }
+    };
 
-  const handleGoBack = () => {
-    if (currentCategory > 0) {
-      setCurrentCategory(currentCategory - 1);
-    }
-  };
+    const handleGoBack = () => {
+        if (currentCategory > 0) {
+            setCurrentCategory(currentCategory - 1);
+        }
+    };
 
   const showTq = (data , i) =>{
     return <TQItem
@@ -48,24 +48,25 @@ useEffect(() =>{
 
   //console.log("criteria", categories);
 
-  return (
-    <div className="bg-white" style={{ minHeight: "94vh" }}>
-      <section className="p-5">
-        <GoBack />
-        <div className="row">
-          <section className={`col-lg-3`}></section>
-          <section className="col-lg-7">
-            <div className={styles.page_desc}>
-              <h4>Create Evaluation Criteria</h4>
-              <p className="mb-5">
-                Welcome to evaluation criteria. Create the necessary questions
-                which you will use to analayze and evaluate the startups
-                applying for the KV program. Please know that all question
-                categories are prefilled and you are expected to adjust the
-                questions base on your criteria.
-              </p>
-            </div>
-          </section>
+    return (
+        <div className="bg-white" style={{ minHeight: "94vh" }}>
+            <section className="p-5">
+                <GoBack />
+                <div className="row">
+                    <section className={`col-lg-3`}></section>
+                    <section className="col-lg-7">
+                        <div className={styles.page_desc}>
+                            <h4>Create Evaluation Criteria</h4>
+                            <p className="mb-5">
+                                Welcome to evaluation criteria. Create the
+                                necessary questions which you will use to
+                                analayze and evaluate the startups applying for
+                                the KV program. Please know that all question
+                                categories are prefilled and you are expected to
+                                adjust the questions base on your criteria.
+                            </p>
+                        </div>
+                    </section>
 
           <section className="col-lg-3">
             <ul className={styles.category_list}>
@@ -155,14 +156,17 @@ useEffect(() =>{
               </div>
             </article>
 
-            <article className={styles.note}>
-              <p>Note that all questions most total up to 150% score</p>
-            </article>
-          </section>
+                        <article className={styles.note}>
+                            <p>
+                                Note that all questions most total up to 150%
+                                score
+                            </p>
+                        </article>
+                    </section>
+                </div>
+            </section>
         </div>
-      </section>
-    </div>
-  );
+    );
 };
 
 const TQItem = ({ data , index }) => {

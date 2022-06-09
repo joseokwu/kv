@@ -1,17 +1,25 @@
 import React from "react";
-import { ProgramCard } from "./ProgramCard";
+import { StartupCard } from "./StartupCard";
+import styles from "../programs.module.css";
 
-export const ProgramList = ({ data = [] }) => {
-  return (
-    <div className="row mx-0">
-      {data?.length > 0 &&
-        data?.map((info, i) => {
-          return (
-            <section className="col-lg-6 mb-3">
-              <ProgramCard data={info} id={i} />
-            </section>
-          );
-        })}
-    </div>
-  );
+export const StartupList = ({ dataList = [], filters = [] }) => {
+    let filteredList;
+    if (filters.length > 0) {
+        filteredList = dataList.filter((item) => filters.includes(item.status));
+    } else {
+        filteredList = dataList;
+    }
+
+    return (
+        <div className={styles.flexParent}>
+            {dataList?.length > 0 &&
+                filteredList.map((info, i) => {
+                    return (
+                        <section className={styles.flexChild}>
+                            <StartupCard data={info} id={i} />
+                        </section>
+                    );
+                })}
+        </div>
+    );
 };

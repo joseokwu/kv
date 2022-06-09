@@ -8,3 +8,16 @@ export const getEvents = async (values) => {
     throw err;
   }
 };
+
+export const eventRequest = async (url, values) => {
+  try {
+    const res = await request.post(url, values);
+    return res?.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+
+
+

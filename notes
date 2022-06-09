@@ -2524,27 +2524,8 @@ const TQItem = ({ data, index = 0, addToCriteria = () => {} }) => {
   //   addToCriteria(index, inputs);
   // }, [inputs]);
 
-  return (
-    <div className="row mb-4">
-      <section className="col-lg-4">
-        <TextField
-          label="Title"
-          value={data?.title}
-          name="title"
-          onChange={handleChange}
-        />
-      </section>
-      <section className="col-lg-8">
-        <TextField
-          label="Question"
-          value={data?.question}
-          name="question"
-          onChange={handleChange}
-        />
-      </section>
-    </div>
-  );
-};
+
+  
 
 
 

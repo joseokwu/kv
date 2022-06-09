@@ -481,7 +481,6 @@ export const StartupProfile = () => {
               })}
                 value={stateAuth?.startupData?.startUpProfile?.contactInfo?.companyWebsite}
                 required={true}
-                type={'url'}
                 placeholder="Enter your website url"
               />   
     

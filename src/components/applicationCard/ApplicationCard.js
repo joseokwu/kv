@@ -1,4 +1,4 @@
-import React , { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./applicationCard.css";
 import comment from "../../assets/icons/comment.svg";
 import approvedIcon from "../../assets/icons/greenCircleCheck.svg";
@@ -6,97 +6,127 @@ import declinedIcon from "../../assets/icons/declinedIcon.svg";
 import expiredIcon from "../../assets/icons/expired.svg";
 import sampleCommenter from "../../assets/images/sampleCommenter.png";
 import { Button, Tag, Badge } from "../index";
-import { ReadMore } from './../../mentorComponents/readMore/readMore';
-import { useAuth  } from '../../hooks/useAuth';
-import { moment } from 'moment';
+import { ReadMore } from "./../../mentorComponents/readMore/readMore";
+import { manageStartupApplication } from "../../services";
+import { useAuth } from "../../hooks/useAuth";
+import { moment } from "moment";
 
+export const ApplicationCard = ({ index = 0, data, status }) => {
+    // const date = new Date(data?.applied)
+    // const [numVal, setNum] = useState(120);
 
-export const ApplicationCard = ({
+    const { updatePartnerInfo } = useAuth();
+    useEffect(() => {
+        console.log(status);
+    }, []);
 
-  index = 0,
-  data
-}) => {
+    return (
+        <div className="appCard-main" role="button">
+            <section
+                className="appCard-title"
+                data-toggle="modal"
+                data-target={`#applicantModal`}
+            >
+                <article>
+                    <section className="d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center mb-2">
+                            <img src={data?.logo} alt="applicant logo" />
+                            <h3 className="ml-2"> {data?.startupName} </h3>
+                        </div>
+                        <div>
+                            <Badge name="Acceleration" />
+                        </div>
+                    </section>
+                    <section className="d-flex flex-wrap appCard-tag-group">
+                        <Tag name={data?.industry} color={"#E31937"} />
+                    </section>
+                </article>
+            </section>
+            <section
+                className="appCard-desc"
+                data-toggle="modal"
+                data-target={`#applicantModal`}
+            >
+                <p className="appCard-text">
+                    <ReadMore>{data?.description}</ReadMore>
+                </p>
+            </section>
+            <section
+                className="d-flex align-items-center justify-content-between appCard-info"
+                data-toggle="modal"
+                data-target={`#applicantModal`}
+            >
+                <div>
+                    <p>Applied : {data?.date?.substr(0, 10)} </p>
+                    <p>Contact Person: {data?.startupName} </p>
+                </div>
+                <div className="text-right">
+                    <p> {data?.email} </p>
+                    <p>Contact No: {data?.phone} </p>
+                </div>
+            </section>
 
-  
-
-  // const date = new Date(data?.applied)
- // const [numVal, setNum] = useState(120);
-
-  //const { stateAuth } = useAuth()
-
- 
-
-  return (
-    <div className="appCard-main" role="button">
-      
-      <section
-        className="appCard-title"
-        data-toggle="modal"
-        data-target={`#applicantModal`}
-      >
-        <article>
-          <section className="d-flex align-items-center justify-content-between">
-            <div className="d-flex align-items-center mb-2">
-              <img src={data?.logo} alt="applicant logo" />
-              <h3 className="ml-2"> { data?.startupName} </h3>
-            </div>
-            <div>
-              <Badge name="Acceleration" />
-            </div>
-          </section>
-          <section className="d-flex flex-wrap appCard-tag-group">
-         
-          <Tag name={data?.industry} color={'#E31937'}  />
-  
-          </section>
-        </article>
-      </section>
-      <section
-        className="appCard-desc"
-        data-toggle="modal"
-        data-target={`#applicantModal`}
-      >
-        <p className="appCard-text">
-          <ReadMore>{
-           data?.description
-          }</ReadMore>
-          
-        </p>
-      </section>
-      <section
-        className="d-flex align-items-center justify-content-between appCard-info"
-        data-toggle="modal"
-        data-target={`#applicantModal`}
-      >
-        <div>
-          <p>Applied : { data?.date?.substr(0, 10) }  </p>
-          <p>Contact Person: { data?.startupName }  </p>
+            <section
+                className="d-flex align-items-center justify-content-between flex-wrap"
+                data-toggle="modal"
+                data-target={`#applicantModal${index}`}
+            >
+                <div className="d-flex align-items-center gap-2">
+                    <Button
+                        label="Approve"
+                        onClick={async () => {
+                            console.log(data);
+                            console.log({
+                                value: {
+                                    startupId: data?.startupId,
+                                },
+                                action: "approve",
+                            });
+                            await manageStartupApplication({
+                                value: {
+                                    startupId: data?.startupId,
+                                },
+                                action: "approve",
+                            });
+                            window.location.reload(false);
+                            updatePartnerInfo();
+                        }}
+                    />
+                    <Button
+                        label="Decline"
+                        variant="secondary"
+                        onClick={async () => {
+                            console.log(data);
+                            console.log({
+                                value: {
+                                    startupId: data?.startupId,
+                                },
+                                action: "decline",
+                            });
+                            await manageStartupApplication({
+                                value: {
+                                    startupId: data?.startupId,
+                                },
+                                action: "decline",
+                            });
+                            // window.location.reload(false);
+                            updatePartnerInfo();
+                        }}
+                    />
+                </div>
+                <div className="d-flex align-items-center appCard-comment mb-3">
+                    <p className="appCard-text">Comment</p>
+                    <img src={comment} alt="comment" />
+                </div>
+            </section>
         </div>
-        <div className="text-right">
-          <p> { data?.email } </p>
-          <p>Contact No: { data?.phone } </p>
-        </div>
-      </section>
-
-      <section
-        className="d-flex align-items-center justify-content-between flex-wrap"
-        data-toggle="modal"
-        data-target={`#applicantModal${index}`}
-      >
-     
-        <div className="d-flex align-items-center appCard-comment mb-3">
-          <p className="appCard-text">Comment</p>
-          <img src={comment} alt="comment" />
-        </div>
-      </section>
-    </div>
-  );
+    );
 };
 
 // const ApplicantModal = ({ logo = "", status = "", id = "" , data }) => {
-  
+
 //   const date = new Date(data?.applied)
-  
+
 //   const statusRender = () => {
 //     switch (data?.status) {
 //       case "pending":
@@ -222,7 +252,7 @@ export const ApplicationCard = ({
 //                   </p>
 //                 </section>
 //                 <section className="d-flex align-items-center justify-content-between flex-wrap">
-                  
+
 //                   <div className="d-flex align-items-center appCard-comment mb-3">
 //                     <p className="appCard-text">Comment</p>
 //                     <img src={comment} alt="comment" />

@@ -9,14 +9,15 @@ import { ViewEventDetails } from "./ViewEventDetails";
 import { EditEvent } from "./EditEvent";
 
 export const EventCard = ({ data = {}, id = 0, onDashboard = false }) => {
-  const isOngoing =
+  const isOngoing = 
     new Date().getTime() >= new Date(data?.startDate).getTime() &&
     new Date().getTime() < new Date(data?.endDate).getTime();
 
   const eventTime = (
     <p className="pending_time pt-1">
-      <img src={bigClock} alt="clock" /> {formatTime(data?.startDate)}-
-      {formatTime(data?.endDate)}
+      <img src={bigClock} alt="clock" /> 
+      {formatTime(data?.startDate)}-  
+        {formatTime(data?.endDate)}
     </p>
   );
 
