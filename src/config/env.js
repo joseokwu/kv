@@ -1,5 +1,6 @@
  export const BASE_URL = 'http://localhost:8085/';
 
+
 //http://a86f4fc2bf8b347d191ece7f35409017-724927569.eu-central-1.elb.amazonaws.com/
 
 //http://a86f4fc2bf8b347d191ece7f35409017-724927569.eu-central-1.elb.amazonaws.com
