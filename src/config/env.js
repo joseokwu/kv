@@ -1,4 +1,4 @@
- export const BASE_URL = 'http://192.168.0.132:8085/';
+ export const BASE_URL = 'http://172.20.10.4:8085/';
 
 //http://a86f4fc2bf8b347d191ece7f35409017-724927569.eu-central-1.elb.amazonaws.com/
 
