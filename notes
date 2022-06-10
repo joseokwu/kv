@@ -2493,13 +2493,39 @@ techSector: "Agriculture, food and beverages"
 _id: "628e034826acad312f4ad6
 
 
+====================================================================
+===============================================================
+
+{categories?.length > 0 &&
+  categories[currentCategory]?.titleAndQuestion.length > 0 &&
+  categories[currentCategory]?.titleAndQuestion?.map((tq, i) => {
+    return (
+      <TQItem
+        data={tq}
+        key={`tq-${i}`}
+        index={i}
+        addToCriteria={addToCriteria}
+      />
+    );
+  })}
 
 
 
+==================================================
+==========================================================
+const TQItem = ({ data, index = 0, addToCriteria = () => {} }) => {
+  const [inputs, setInputs] = useState(data);
+  console.log(inputs)
+  const handleChange = (e) => {
+    setInputs({ ...inputs, [e.target.id]: e.target.value });
+  };
+
+  // useEffect(() => {
+  //   addToCriteria(index, inputs);
+  // }, [inputs]);
 
 
-
-
+  
 
 
 

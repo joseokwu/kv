@@ -1,7 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo , useEffect , useState } from "react";
 import { Button, Modal, Tabs } from "../../components";
 import { CreateEvent, EventCard } from "./components";
 import eventImage from "../../assets/icons/eventImage.png";
+import { eventRequest } from '../../services/events';
+
 
 export const Events = () => {
   const tabsItems = [
@@ -11,6 +13,7 @@ export const Events = () => {
     "Pitching Session",
     "Others",
   ];
+  const [eventData , setEventData] = useState([]);
 
   const eventDesc = useMemo(
     () =>
@@ -83,8 +86,23 @@ export const Events = () => {
         description: eventDesc,
       },
     ],
-    []
+    [eventDesc]
   );
+
+    useEffect(() =>{
+      const fetchData = async() =>{
+        const res = await eventRequest('allEvents' ,{
+          page:1,
+          limit:5
+        });
+        console.log(res)
+        setEventData(res?.data?.data)
+      }
+
+      fetchData();
+
+    },[])
+
   return (
     <div className="p-5">
       <Modal id="createEvent" title="Create Event" width={568}>
@@ -106,8 +124,8 @@ export const Events = () => {
 
       <section className="row">
         <div className="col-lg-6">
-          {data?.length > 0 &&
-            data?.map((info, i) => {
+          {eventData?.length > 0 &&
+            eventData?.map((info, i) => {
               if (i % 2 === 0) {
                 return (
                   <div className="mb-3">
@@ -119,8 +137,8 @@ export const Events = () => {
         </div>
 
         <div className="col-lg-6">
-          {data?.length > 0 &&
-            data?.map((info, i) => {
+          {eventData?.length > 0 &&
+            eventData?.map((info, i) => {
               if (i % 2 !== 0) {
                 return (
                   <div className="mb-3">
