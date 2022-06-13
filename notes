@@ -2525,6 +2525,29 @@ const TQItem = ({ data, index = 0, addToCriteria = () => {} }) => {
   // }, [inputs]);
 
 
+  const formData = values;
+            const startTime = new Date(
+                formData?.startDate?.slice(0, 4),
+                formData?.startDate?.slice(5, 7) - 1,
+                formData?.startDate?.slice(8),
+                formData?.startTime?.slice(0, 2),
+                formData?.startTime?.slice(3),
+                0
+            );
+            const endTime = new Date(
+                formData?.startDate?.slice(0, 4),
+                formData?.startDate?.slice(5, 7) - 1,
+                formData?.startDate?.slice(8),
+                formData?.endTime?.slice(0, 2),
+                formData?.endTime?.slice(3),
+                0
+            );
+
+            formData.startTime = startTime.toISOString();
+            formData.endTime = endTime.toISOString();
+
+
+
   
 
   {

@@ -20,7 +20,7 @@ export const MyApplications = () => {
      page:1,
      limit:5
    })
-   console.log(allReq?.data)
+
      setRequests(allReq?.data);
      setLoading(false);
 
