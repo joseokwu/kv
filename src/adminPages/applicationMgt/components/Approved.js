@@ -1,78 +1,183 @@
-import React, { useMemo } from "react";
-import { Link } from "react-router-dom";
-import { Table } from "../../../adminComponents";
-import { Tag } from "../../../components";
-import { formatDate } from "../../../utils/helpers";
-import left from "../../../assets/icons/chervonLeft.svg";
-import styles from "../applicationMgt.module.css";
+import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Table } from '../../../adminComponents';
+import { AdminButton, Tag } from '../../../components';
+import { formatDate } from '../../../utils/helpers';
+import left from '../../../assets/icons/chervonLeft.svg';
+import styles from '../applicationMgt.module.css';
 import { EmptyState } from './../../../mentorComponents/emptyState/EmptyState';
+import { applicationManagement } from '../../../services';
+import { toast } from 'react-hot-toast';
 
+export const ApprovedTable = ({
+  approved,
+  currentPending,
+  setCurrentPending,
+  setResetAccept,
+}) => {
+  const [loading, setLoading] = useState({ type: 'none', id: '' });
+  const [acceptedSuccess, setAcceptedSuccess] = useState({
+    success: false,
+    id: '',
+  });
+  const [recommendedSuccess, setRecommendedSuccess] = useState({
+    success: false,
+    id: '',
+  });
 
+  const manageAccount = async ({ type, value, userId }) => {
+    try {
+      setLoading({ type, id: userId });
+      const res = await applicationManagement({
+        userId,
+        action: 'manage_account',
+        values: { [type]: value, updatedAt: new Date() },
+      });
+      //console.log(res)
+      if (res?.success) {
+        if (type === 'recommended') {
+          setRecommendedSuccess({ success: true, id: userId });
+        }
+        if (type === 'accepted') {
+          setAcceptedSuccess({ success: true, id: userId });
+        }
+        setLoading({ type: 'none', id: userId });
+        toast.success('Action Successful!');
+        setResetAccept(true);
+      }
+    } catch (err) {
+      console.log(err);
 
-export const ApprovedTable = ({approved, currentPending , setCurrentPending}) => {
-
-
+      setLoading({ type: 'none', id: userId });
+      toast.error(err?.response?.data?.message);
+    }
+  };
 
   const header = useMemo(
     () => [
       {
-        title: "Startup",
-        accessor: "startup",
+        title: 'Startup',
+        accessor: 'startup',
       },
       {
-        title: "Date Approved",
-        accessor: "date",
+        title: 'Date Approved',
+        accessor: 'date',
       },
       {
-        title: "Approved by",
-        accessor: "approvedBy",
+        title: 'Approved by',
+        accessor: 'approvedBy',
       },
       {
-        title: "Status",
-        accessor: "status",
+        title: 'Status',
+        accessor: 'status',
       },
-    
     ],
     []
   );
 
-
-
-  const applicationData = useMemo(
-    () => approved?.startups?.map((item , i) =>{
-      return  {
+  const applicationData = useMemo(() =>
+    approved?.startups?.map((item, i) => {
+      return {
         startup: (
-          <div className="d-flex align-items-center space-out">
-            <img src={item?.startUpProfile?.logo} alt="user" className={styles.userPic} />
-            <p className="mb-0">{ item?.startUpProfile?.acceleratorName }</p>
+          <div className='d-flex align-items-center space-out'>
+            <img
+              src={item?.startUpProfile?.logo}
+              alt='user'
+              className={styles.userPic}
+            />
+            <p className='mb-0'>{item?.startUpProfile?.acceleratorName}</p>
           </div>
         ),
         date: formatDate(new Date(item?.updatedAt)),
         approvedBy: item?.approvedBy,
-        status: <Tag name="Appproved" color="#0a9714" />,
-      }
-    },[])
+        status: (
+          <div className={styles.appRecBtns}>
+            <AdminButton
+              onClick={() =>
+                manageAccount({
+                  type: 'accepted',
+                  value: true,
+                  userId: item?.userId,
+                })
+              }
+              disabled={
+                item?.accepted ||
+                (acceptedSuccess.success && acceptedSuccess.id === item.userId)
+              }
+              loading={
+                loading.type === 'accepted' && loading.id === item.userId
+                  ? true
+                  : false
+              }
+              label={
+                item?.accepted ||
+                (acceptedSuccess.success && acceptedSuccess.id === item.userId)
+                  ? 'Accepted'
+                  : 'Accept'
+              }
+              variant={
+                item?.accepted ||
+                (acceptedSuccess.success && acceptedSuccess.id === item.userId)
+                  ? 'grey'
+                  : 'primary'
+              }
+            />
+            <AdminButton
+              onClick={() =>
+                manageAccount({
+                  type: 'recommended',
+                  value: true,
+                  userId: item?.userId,
+                })
+              }
+              disabled={
+                item?.recommended ||
+                (recommendedSuccess.success &&
+                  recommendedSuccess.id === item.userId)
+              }
+              loading={
+                loading.type === 'recommended' && loading.id === item.userId
+                  ? true
+                  : false
+              }
+              label={
+                item?.recommended ||
+                (recommendedSuccess.success &&
+                  recommendedSuccess.id === item.userId)
+                  ? 'Recommended'
+                  : 'Recommend'
+              }
+              variant={
+                item?.recommended ||
+                (recommendedSuccess.success &&
+                  recommendedSuccess.id === item.userId)
+                  ? 'grey'
+                  : 'primary'
+              }
+            />
+          </div>
+        ),
+      };
+    }, [])
+  );
 
-    
-  )
-
-  if(approved?.startups?.length === 0){
-    return <EmptyState message="No  Startup has been approved" />
+  if (approved?.startups?.length === 0) {
+    return <EmptyState message='No  Startup has been approved' />;
   }
 
   return (
     <div>
       <Table headers={header} data={applicationData} />
-      <div className="d-flex align-item-center pt-4 justify-content-end">
-        <p className="page-num">1 of 26</p>
+      <div className='d-flex align-item-center pt-4 justify-content-end'>
+        <p className='page-num'>1 of 26</p>
         <img
           src={left}
-          alt="left"
-          className="mx-3"
-          style={{ transform: "rotate(180deg)" }}
-          role="button"
+          alt='left'
+          className='mx-3'
+          style={{ transform: 'rotate(180deg)' }}
+          role='button'
         />
-        <img src={left} alt="left" className="mx-3" role="button" />
+        <img src={left} alt='left' className='mx-3' role='button' />
       </div>
     </div>
   );
