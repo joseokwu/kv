@@ -3,8 +3,13 @@ import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
 import ApplicationChart from "./applicationChart/ApplicationChart";
 import html2pdf from "html2pdf.js";
 import { Select } from "../../../../Startupcomponents";
+import { useHistory } from "react-router-dom";
+
 
 export const FundUtilization = ({ data }) => {
+
+  const history = useHistory();
+
   const downloadStatement = () => {
     const element = document.querySelector("#utilization");
 
@@ -26,11 +31,8 @@ export const FundUtilization = ({ data }) => {
       <Header className="d-flex justify-content-between">
         <div>{/* <h4>Funding Utilization</h4> */}</div>
         <div className="d-flex">
-          <img src={downloadIcon} className="mr-2" alt="." />
-          <b className="pe-3" onClick={downloadStatement}>
-            Download.xlsx
-          </b>
-          <span>Update details</span>
+         
+          <span onClick={() => history.push('/startup/registration#Fund%20Utilization')} >Update details</span>
         </div>
       </Header>
 

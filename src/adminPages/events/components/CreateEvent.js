@@ -78,14 +78,14 @@ export const CreateEvent = () => {
                 ...values,
                 attendees: guests,
             });
-            setLoading(true);
+           setLoading(true);
             const res = await eventRequest("createEvent", {
                 ...values,
                 attendees: guests,
             });
             console.log(res);
-            setLoading(false);
-            toast.success(res?.message ?? "Event created successfully");
+           setLoading(false);
+           toast.success(res?.message ?? "Event created successfully");
         } catch (err) {
             toast.error(
                 err?.response?.data?.message ??

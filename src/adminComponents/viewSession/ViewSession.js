@@ -2,7 +2,7 @@ import React from 'react';
 import { formatTime, months } from '../../utils/helpers';
 import bigClock from '../../assets/icons/bigclock.svg';
 import { Button } from '../../components';
-import apple from '../../assets/images/apple.svg';
+// import apple from '../../assets/images/apple.svg';
 import styles from './viewSession.module.css';
 
 export const ViewSession = ({ singleProgram }) => {

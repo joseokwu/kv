@@ -6,6 +6,8 @@ export const SkeletonLoader = ({
     fetched,
     height = 140,
     width = "100%",
+    columns = 1,
+    rows = 1,
 }) => {
     return fetched ? children : <Skeleton width={width} height={height} />;
 };

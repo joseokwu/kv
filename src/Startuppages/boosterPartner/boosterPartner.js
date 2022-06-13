@@ -19,6 +19,7 @@ export const StartupBoosterPartner = () => {
     const [loading, setLoading] = useState(false);
     const [boosterData, setBoosterData] = useState([]);
     const [partners, setPartners] = useState({});
+    const [requests , setRequests] = useState([]);
 
     const apply = (id) => {
         setPartners({
@@ -66,6 +67,9 @@ export const StartupBoosterPartner = () => {
         "Travel",
         "Virtual Assistant",
     ];
+    const approvedStartups = requests?.data?.filter(item => item?.status === 'APPROVED')?.length ;
+   
+
 
     useEffect(() => {
         const getData = async () => {
@@ -75,12 +79,15 @@ export const StartupBoosterPartner = () => {
                 limit: 4,
                 startupId: stateAuth?.startupData?.userId,
             });
-            const resData = await getStartupRequest(stateAuth?.user?.userId);
-            if (resData?.data) {
-                console.log(res?.data?.data, "boosterpartner data");
-
-                setPartners(res?.data?.data);
-            }
+            const allReq = await getStartupRequest({
+                startupId:stateAuth?.user?.userId,
+                page:1,
+                limit:5
+              })
+           
+            setRequests(allReq?.data);
+            setPartners(res?.data);
+            console.log(res?.data?.data);
             setLoading(false);
         };
         getData();
@@ -88,14 +95,7 @@ export const StartupBoosterPartner = () => {
 
     const history = useHistory();
 
-    // const alOff =
-    //   boosterData?.offerings &&
-    //   boosterData?.offerings.filter((item) => item?.status !== 'declined')
-    //console.log(alOff)
-    // const apli =
-    //   boosterData?.offerings &&
-    //   boosterData?.offerings.filter((item) => item?.status !== 'not-applied')
-
+  
     const {
         location: { hash },
     } = history;
@@ -139,21 +139,21 @@ export const StartupBoosterPartner = () => {
                     className="col-lg-4 col-md-12 col-12"
                     icon={newApp}
                     name={"New Deals"}
-                    count={boosterData?.newDeals ?? 0}
+                    count={partners?.partners?.length ?? 0}
                     color={"#D5D6F4"}
                 />
                 <DashCard
                     className="col-lg-4 col-md-12 col-12"
                     icon={newApp}
                     name={"Applied"}
-                    count={boosterData?.applied ?? 0}
+                    count={requests?.data?.length ?? 0}
                     color={"#DEF6FF"}
                 />
                 <DashCard
                     className="col-lg-4 col-md-12 col-12"
                     icon={newApp}
-                    name={"Active"}
-                    count={boosterData?.active ?? 0}
+                    name={"Approved"}
+                    count={ approvedStartups ?? 0}
                     color={"#D5D6F4"}
                 />
                 {/* </> */}

@@ -1,8 +1,10 @@
 import { Header, Table, Section } from "./cap.styled";
 import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
 import html2pdf from "html2pdf.js";
+import { useHistory } from "react-router-dom";
 
 export const CapTable = (data) => {
+  const history = useHistory();
   const downloadStatement = () => {
     const element = document.querySelector("#cap");
 
@@ -25,11 +27,11 @@ export const CapTable = (data) => {
       <Header className="d-flex justify-content-between">
         <div>{/* <h4>Cap Table</h4> */}</div>
         <div className="d-flex">
-          <img src={downloadIcon} className="mr-2" alt="." />
+          {/* <img src={downloadIcon} className="mr-2" alt="." />
           <a className="pe-3" href="#" onClick={downloadStatement}>
             Download.xlsx
-          </a>
-          <span>Update details</span>
+          </a> */}
+          <span onClick={() => history.push('/startup/registration#Financial%20Projection')} >Update details</span>
         </div>
       </Header>
 

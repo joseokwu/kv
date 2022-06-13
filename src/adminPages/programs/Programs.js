@@ -1,85 +1,69 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Button, Modal, Tabs } from '../../components';
-import { ProgramList } from './components/ProgramList';
-import { UploadProgramInfo } from './components/UploadProgramInfo';
-import styles from './programs.module.css';
+
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { Button, Modal, Tabs } from "../../components";
+import { ProgramList } from "./components/ProgramList";
+import { UploadProgramInfo } from "./components/UploadProgramInfo";
+import { getPrograms } from "../../services/admin";
+import styles from "./programs.module.css";
+import { SkeletonLoader } from "../../components";
 
 export const Programs = () => {
-  const tabs = [
-    'All',
-    'Pending',
-    'Accepted',
-    'Rescheduled',
-    'Declined',
-    'Completed',
-  ];
+    const tabs = [
+        "All",
+        // "Pending",
+        // "Accepted",
+        // "Rescheduled",
+        // "Declined",
+        // "Completed",
+    ];
 
-  const {
-    location: { hash },
-    push,
-  } = useHistory();
 
-  const programList = [
-    { status: 'pending' },
-    { status: 'accepted' },
-    { status: 'rescheduled' },
-    { status: 'declined' },
-    { status: 'completed' },
-    { status: 'completed' },
-    { status: 'pending' },
-    { status: 'pending' },
-    { status: 'accepted' },
-  ];
+    const {
+        location: { hash },
+        push,
+    } = useHistory();
 
-  const renderComp = () => {
-    switch (hash) {
-      case `#${tabs[0]}`:
-        return <ProgramList data={programList} />;
-      case `#${tabs[1]}`:
-        return (
-          <ProgramList
-            data={programList?.filter(
-              (x) => x.status.toLowerCase() === tabs[1].toLowerCase()
-            )}
-          />
-        );
-      case `#${tabs[2]}`:
-        return (
-          <ProgramList
-            data={programList?.filter(
-              (x) => x.status.toLowerCase() === tabs[2].toLowerCase()
-            )}
-          />
-        );
-      case `#${tabs[3]}`:
-        return (
-          <ProgramList
-            data={programList?.filter(
-              (x) => x.status.toLowerCase() === tabs[3].toLowerCase()
-            )}
-          />
-        );
-      case `#${tabs[4]}`:
-        return (
-          <ProgramList
-            data={programList?.filter(
-              (x) => x.status.toLowerCase() === tabs[4].toLowerCase()
-            )}
-          />
-        );
-      case `#${tabs[5]}`:
-        return (
-          <ProgramList
-            data={programList?.filter(
-              (x) => x.status.toLowerCase() === tabs[5].toLowerCase()
-            )}
-          />
-        );
-      default:
-        return <ProgramList data={programList} />;
-    }
-  };
+    const [programs, setPrograms] = useState([]);
+    const [fetched, setFetched] = useState(false);
+    useEffect( () => {
+        const fetchData = async() =>{
+        const res = await getPrograms();
+        console.log(res?.data?.data);
+        setPrograms(res?.data?.data);
+        setFetched(true);
+        };
+
+        fetchData();
+    }, []);
+
+    const renderComp = () => {
+        switch (hash) {
+            case `#${tabs[0]}`:
+                return (
+                    <SkeletonLoader fetched={fetched} height={352}>
+                        <ProgramList data={programs} />
+                    </SkeletonLoader>
+                );
+
+            // case `#${tabs[1]}`:
+            //     return <ProgramList data={programs} />;
+            // case `#${tabs[2]}`:
+            //     return <ProgramList data={programs} />;
+            // case `#${tabs[3]}`:
+            //     return <ProgramList data={programs} />;
+            // case `#${tabs[4]}`:
+            //     return <ProgramList data={programs} />;
+            // case `#${tabs[5]}`:
+            //     return <ProgramList data={programs} />;
+             default:
+                 return <ProgramList data={programs} />;
+        }
+    };
+    
+
+  
+
   return (
     <div className='p-5'>
       <Modal
@@ -129,8 +113,7 @@ export const Programs = () => {
           />
         </div>
       </section>
-
-      <section style={{ maxWidth: 2000 }}>{renderComp()}</section>
-    </div>
-  );
+            <section style={{ maxWidth: 2000 }}>{renderComp()}</section>
+        </div>
+    );
 };
