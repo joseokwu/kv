@@ -1,18 +1,18 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { Button, Modal, Tabs } from "../../components";
-import { ProgramList } from "./components/ProgramList";
-import { UploadProgramInfo } from "./components/UploadProgramInfo";
-import styles from "./programs.module.css";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Button, Modal, Tabs } from '../../components';
+import { ProgramList } from './components/ProgramList';
+import { UploadProgramInfo } from './components/UploadProgramInfo';
+import styles from './programs.module.css';
 
 export const Programs = () => {
   const tabs = [
-    "All",
-    "Pending",
-    "Accepted",
-    "Rescheduled",
-    "Declined",
-    "Completed",
+    'All',
+    'Pending',
+    'Accepted',
+    'Rescheduled',
+    'Declined',
+    'Completed',
   ];
 
   const {
@@ -21,15 +21,15 @@ export const Programs = () => {
   } = useHistory();
 
   const programList = [
-    { status: "pending" },
-    { status: "accepted" },
-    { status: "rescheduled" },
-    { status: "declined" },
-    { status: "completed" },
-    { status: "completed" },
-    { status: "pending" },
-    { status: "pending" },
-    { status: "accepted" },
+    { status: 'pending' },
+    { status: 'accepted' },
+    { status: 'rescheduled' },
+    { status: 'declined' },
+    { status: 'completed' },
+    { status: 'completed' },
+    { status: 'pending' },
+    { status: 'pending' },
+    { status: 'accepted' },
   ];
 
   const renderComp = () => {
@@ -81,51 +81,51 @@ export const Programs = () => {
     }
   };
   return (
-    <div className="p-5">
+    <div className='p-5'>
       <Modal
-        id="uploadProgram"
-        title="Upload Program Info Pack"
-        subTitle="Upload the cohorts program info pack"
+        id='uploadProgram'
+        title='Upload Program Info Pack'
+        subTitle='Upload the cohorts program info pack'
         width={697}
       >
         <UploadProgramInfo />
       </Modal>
       <section
-        className="d-flex align-items-center justify-content-end mb-45"
-        style={{ columnGap: "1rem", maxWidth: 2000 }}
+        className='d-flex align-items-center justify-content-end mb-45'
+        style={{ columnGap: '1rem', maxWidth: 2000 }}
       >
         <Button
-          label="Upload Program Info Pack"
-          variant="trans"
-          data-target="#uploadProgram"
-          data-toggle="modal"
+          label='Upload Program Info Pack'
+          variant='trans'
+          data-target='#uploadProgram'
+          data-toggle='modal'
         />
         <Button
-          label="Add new program"
-          onClick={() => push("/admin/program/create")}
+          label='Add new program'
+          onClick={() => push('/admin/program/create')}
         />
       </section>
 
-      <section className="mb-45" style={{ maxWidth: 2000 }}>
+      <section className='mb-45' style={{ maxWidth: 2000 }}>
         <Tabs tabItems={tabs} />
       </section>
 
       <section
-        className="d-flex align-items-center justify-content-between mb-4"
+        className='d-flex align-items-center justify-content-between mb-4'
         style={{ maxWidth: 2000 }}
       >
-        <p className="mb-0">Total Programs created: 6</p>
-        <div className="d-flex align-items-center space-out">
+        <p className='mb-0'>Total Programs created: 6</p>
+        <div className='d-flex align-items-center space-out'>
           <Button
-            label="View Assignment"
-            variant="trans"
+            label='View Assignment'
+            variant='trans'
             className={styles.view_assign_btn}
-            onClick={() => push("/admin/program/assignments")}
+            onClick={() => push('/admin/program/assignments')}
           />
           <Button
-            label="Create Assignment"
-            variant="secondary"
-            onClick={() => push("/admin/program/create_assignment")}
+            label='Create Assignment'
+            variant='secondary'
+            onClick={() => push('/admin/program/create_assignment')}
           />
         </div>
       </section>
