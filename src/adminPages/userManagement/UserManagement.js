@@ -2,10 +2,10 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Tabs } from "../../components";
 import { Investor, KVMember, Mentor, Partner } from "./components";
-import { CircularLoader } from "../../components/CircluarLoader";
+
 
 export const UserManagement = () => {
-    const tabItems = ["Mentor", "Investor", "Partner", "KV Member"];
+    const tabItems = ["Mentor", "Investor", "Partner"];
 
     const {
         location: { hash },
