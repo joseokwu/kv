@@ -62,12 +62,7 @@ export const StartupProgram = () => {
             programInfo?.description
            }
           </p>
-          <div className="my-5">
-            <button>
-              Program Info Pack{" "}
-              <img className="ps-2" src={DownloadIcon} alt="download Icon" />
-            </button>
-          </div>
+    
         </div>
       </ProgramCardWrapper>
 

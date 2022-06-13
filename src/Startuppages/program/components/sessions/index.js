@@ -21,7 +21,7 @@ import { EmptyState } from '../../../../mentorComponents';
 
 export const Session = () => {
  
-  const [programInfo, setProgramInfo] = useState(null);
+  const [programInfo, setProgramInfo] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false)
   const [openModal, setOpenModal] = useState(false)
@@ -39,7 +39,8 @@ export const Session = () => {
         page:currentPage,
         limit:5
       });
-      setProgramInfo(res?.data);
+     // console.log(res?.data?.data)
+      setProgramInfo(res?.data?.data);
       setLoading(false);
       } catch {
         setProgramInfo(null)
@@ -120,9 +121,9 @@ export const Session = () => {
       </TabFilterWrapper> */}
 
       {
-        programInfo === null && (<EmptyState />)
+        programInfo.length < 1 && (<EmptyState />)
       }
-        { programInfo && programInfo.length > 0 ? programInfo.map((info, i) =>{
+        { programInfo && programInfo?.length > 0 ? programInfo.map((info, i) =>{
 
           let date = new Date("Fri May 13 2022 20:00:00 GMT+0100 (West Africa Standard Time)").getHours() % 12;
           let strt = new Date(info?.startTime).getHours() % 12;
@@ -133,7 +134,7 @@ export const Session = () => {
           const checkEqual = dateToCompare - strt;
           console.log(checkEqual)
         return (
-          <>
+          <div  key={i}>
        { showModal &&  <SmallModal id={`${i}`} title="" closeModal={setShowModal}>
           <InProgressModal data={info} />
         </SmallModal>}
@@ -192,16 +193,16 @@ export const Session = () => {
               <button>View Session</button>
               <div className="d-flex mx-4">
                 <div style={{width:'50px', height:"50px" , }}>
-                  <img className="rounded-circle" style={{width:'50px',borderRadius:"60px", height:"50px"}} src={`https://ui-avatars.com/api/?name=${info?.guest}`} alt="" />
+                  <img className="rounded-circle" style={{width:'50px',borderRadius:"60px", height:"50px"}} src={info?.guest?.logo ?? `https://ui-avatars.com/api/?name=${info?.guest?.name}`} alt="" />
                 </div>
                 <div className="d-block ms-2 mt-2">
-                  <p className="p">{info?.guest}</p>
+                  <p className="p">{info?.guest?.name}</p>
 
                 </div>
               </div>
             </div>
           </TodoCard>
-          </>
+          </div>
         )
         }
         ) : (
@@ -275,9 +276,11 @@ export const InProgressModal = ({data}) => {
         <div className="mt-4 mentor">
           <h3 className="pb-2">Mentor</h3>
           <div className="d-flex">
-            <img className='rounded-circle' src={`https://ui-avatars.com/api/?name=${data?.guest}`} alt="mentor pic" />
+            <img className='rounded-circle' src={ data?.guest?.logo ?? `https://ui-avatars.com/api/?name=${data?.guest}`}
+            style={{width:'60px', height:'60px'}}
+             alt="mentor pic" />
             <div className="ms-3">
-              <p> { data?.guest } </p>
+              <p> { data?.guest?.name } </p>
              
             </div>
             <div className="ms-5">
