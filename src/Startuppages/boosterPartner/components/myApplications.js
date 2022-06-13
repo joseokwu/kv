@@ -15,7 +15,12 @@ export const MyApplications = () => {
   const getData = useCallback(async () => {
 
     setLoading(true)
-   const allReq = await getStartupRequest(stateAuth?.user?.userId)
+   const allReq = await getStartupRequest({
+     startupId:stateAuth?.user?.userId,
+     page:1,
+     limit:5
+   })
+   console.log(allReq?.data)
      setRequests(allReq?.data);
      setLoading(false);
 

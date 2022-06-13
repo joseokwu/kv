@@ -32,7 +32,7 @@ export const getBoosterData = async (value) => {
 
 export const getStartupRequest = async (value) => {
   try {
-    const res = await request.post("allRequest" , {startupId:value});
+    const res = await request.post("allRequest" , value);
     console.log(res?.data)
     return res?.data;
   } catch (err) {

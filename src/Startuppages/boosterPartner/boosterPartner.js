@@ -75,12 +75,8 @@ export const StartupBoosterPartner = () => {
                 limit: 4,
                 startupId: stateAuth?.startupData?.userId,
             });
-            const resData = await getStartupRequest(stateAuth?.user?.userId);
-            if (resData?.data) {
-                console.log(res?.data?.data, "boosterpartner data");
-
-                setPartners(res?.data?.data);
-            }
+            setPartners(res?.data);
+            console.log(res?.data?.data);
             setLoading(false);
         };
         getData();

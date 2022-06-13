@@ -2,10 +2,13 @@ import { Header, Table, Section } from "./prevRpund.styled";
 import html2pdf from "html2pdf.js";
 import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
 import moment from "moment";
-
+import { useHistory } from "react-router-dom";
 
 
 export const PreviousRound = ({ data  }) => {
+
+  const history = useHistory();
+
   const downloadStatement = () => {
     const element = document.querySelector("#fndRound");
 
@@ -28,11 +31,11 @@ export const PreviousRound = ({ data  }) => {
         {/* <h4>Previous Round</h4> */}
 
         <div className="d-flex">
-          <img src={downloadIcon} className="mr-2" alt="." />
+          {/* <img src={downloadIcon} className="mr-2" alt="." />
           <a className="pe-3" href="#" onClick={downloadStatement}>
             Download.xlsx
-          </a>
-          <span>Update details</span>
+          </a> */}
+          <span onClick={() => history.push('/startup/registration#Previous%20Round')} >Update details</span>
         </div>
       </Header>
       <Table className="table table-borderless">

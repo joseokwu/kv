@@ -1,16 +1,17 @@
 import { Header, Section, VideoWrapper } from './financial.styled'
 import RedFile from '../../../../assets/icons/greenFile.svg'
 import BlueFile from '../../../../assets/icons/bluFile.svg'
+import { useHistory } from "react-router-dom";
 
 export const FinancialProjection = (data) => {
-
+  const history = useHistory();
 
   return (
     <div>
       <Header className="d-flex justify-content-end">
         {/* <h4>Financial Projection</h4> */}
         <div>
-          <span>Update details</span>
+        <span onClick={() => history.push('/startup/registration#Financial%20Projection')} >Update details</span>
         </div>
       </Header>
 

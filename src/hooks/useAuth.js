@@ -56,6 +56,7 @@ export const useAuth = () => {
     );
 
     const callUpdateStartupData = async (value) => {
+        console.log(value)
         dispatch(updateStartupUserProfile(value));
     };
 

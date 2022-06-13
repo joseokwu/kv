@@ -1102,10 +1102,10 @@ const routes = [
     // KV Member routes
     {
         name: "kv member dashboard",
-        path: "/kv-member/",
+        path: "/kv-member",
         component: WithKVMemberLayout(Dashboard),
         exact: true,
-        protected: true,
+        protected: false,
         type: "admin",
     },
     {

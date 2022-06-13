@@ -15,29 +15,23 @@ import "../boosterPartner.css";
 import { EmptyState } from "../../../mentorComponents";
 
 export const AllApplication = ({ data }) => {
-    const approvedReq =
-        data && data.filter((item) => item.approvedRequests.length > 0);
-    const pending =
-        data && data.filter((item) => item.pendingRequests.length > 0);
-    const declined =
-        data && data.filter((item) => item.declinedRequests.length > 0);
-
+  
     // console.log(pending)
     // console.log(approvedReq)
     // console.log(declined)
     // console.log(approvedReq?.length === 0 && pending?.length === 0 && declined?.length === 0 )
 
-    if (
-        approvedReq?.length === 0 &&
-        pending?.length === 0 &&
-        declined?.length === 0
-    ) {
-        return <EmptyState message="No applications" />;
-    }
+    // if (
+    //     approvedReq?.length === 0 &&
+    //     pending?.length === 0 &&
+    //     declined?.length === 0
+    // ) {
+    //     return <EmptyState message="No applications" />;
+    // }
 
     return (
         <div className="row" style={{ columnGap: 10 }}>
-            {approvedReq &&
+            {/* {approvedReq &&
                 approvedReq.map((item, i) => (
                     <ApplicationCard
                         key={i}
@@ -84,9 +78,9 @@ export const AllApplication = ({ data }) => {
                             </button>
                         </div>
                     </ApplicationCard>
-                ))}
+                ))} */}
 
-            {declined.length > 0 &&
+            {/* {declined.length > 0 &&
                 declined.map((item, i) => (
                     <ApplicationCard
                         key={i}
@@ -133,9 +127,9 @@ export const AllApplication = ({ data }) => {
                             </button>
                         </div>
                     </ApplicationCard>
-                ))}
+                ))} */}
 
-            {pending.length > 0 &&
+            {/* {pending.length > 0 &&
                 pending.map((item, i) => {
                     console.log(item);
                     return (
@@ -185,7 +179,7 @@ export const AllApplication = ({ data }) => {
                             </div>
                         </ApplicationCard>
                     );
-                })}
+                })} */}
         </div>
     );
 };
