@@ -1620,440 +1620,335 @@ const [postMoney, setPostMoney] = useState(
   stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation ?? '',
 )
 
-const formik = useFormik({
-  initialValues: {
-    hasPreviousFundraising:
-      stateAuth?.startupData?.fundRaising?.fundingAsk
-        ?.hasPreviousFundraising ?? false,
-    description:
-      stateAuth?.startupData?.fundRaising?.fundingAsk?.description ?? '',
-    instrumentForRound:
-      stateAuth?.startupData?.fundRaising?.fundingAsk?.instrumentForRound ??
-      'Fund1',
-    numberOfRounds:
-      stateAuth?.startupData?.fundRaising?.fundingAsk?.numberOfRounds ??
-      'Fund1',
-    fundraisingAmount:
-      stateAuth?.startupData?.fundRaising?.fundingAsk?.fundraisingAmount ??
-      '',
-    dilution: stateAuth?.startupData?.fundRaising?.fundingAsk?.dilution ?? '',
-    preMoneyValuation:
-      stateAuth?.startupData?.fundRaising?.fundingAsk?.preMoneyValuation ??
-      '',
-    postMoneyValuation:
-      stateAuth?.startupData?.fundRaising?.fundingAsk?.postMoneyValuation ??
-      '',
-    hasLeadInvestor:
-      stateAuth?.startupData?.fundRaising?.fundingAsk?.hasLeadInvestor ?? '',
-    terms: stateAuth?.startupData?.fundRaising?.fundingAsk?.terms ?? [],
-  },
-  validationSchema: Yup.object({
-    instrumentForRound: Yup.string().required('Required'),
-    fundraisingAmount: Yup.string().required('Required'),
-    dilution: Yup.string().required('Required'),
-    preMoneyValuation: Yup.string().required('Required'),
-    postMoneyValuation: Yup.string().required('Required'),
-    description: Yup.string().required('Required'),
-  }),
-  // onSubmit: (value) => onSubmit(value),
-})
-
-
-
-fundingAsk:
-description: ""
-dilution: "900000"
-fundraisingAmount: "800000"
-hasLeadInvestor: false
-hasPreviousFundraising: true
-instrumentForRound
-
-
-data:
 applicationCompleted: true
-approveToEvaluate: false
-businessCanvas: {market: {…}, brand: {…}, businessModel: {…}, plan: {…}, _id: '627e6d22c62f67917c46ac1c'}
-evaluations: []
-fundRaising: {fundingAsk: {…}, fundUtilization: {…}, capTable: {…}, previousRound: {…}, financialProjection: {…}, …}
-mileStone: []
-partner: []
-passedEvaluation: false
-pitchDeck:
-pitchDeckFile: "https://cdn.shoutng.com/kvigpsbun3wcanlnr0yfi3.pdf"
-pitchDeckVideo: "https://cdn.shoutng.com/kvtlxxaxphckbrioq1zslp.mp4"
-_id: "627e6d22c62f67917c46ac0f"
-[[Prototype]]: Object
-product: {description: 'Please update your react dependency in package.jso…grade for the next time and get this error once a', competitiveEdge: 'Please update your react dependency in package.jso…grade for the next time and get this error once a', youtubeDemoUrl: null, files: 'https://cdn.shoutng.com/kv5hkarzjaom0hqcyd6nws.mp4', _id: '627e6d22c62f67917c46ac11'}
-recommended: false
-roadMap: []
-startUpProfile:
-acceleratorName: "zee world"
-brand: "fggggf"
-businessSector: "business"
-companySize: "5-10"
-contactInfo:
-city: "Lagos"
-companyEmail: "brightbrain@gmail.com"
-companyWebsite: ""
-country: "Nigeria"
-linkedInHandle: ""
-phoneNumber: "+2348165796896"
-profileHandle: ""
-registeredAddress: "Adeneyi"
-state: "Ekiti"
-twitterHandle: ""
-_id: "627e7371c62f67917c46ae09"
-[[Prototype]]: Object
-elevatorPitch: "Please update your react dependency in package.json to explicitly be 15.0.2, not ^15.0.2 since the latter resolves to 15.1.0 which causes this issue. "
-logo: "https://cdn.shoutng.com/kv0hhgufib3sgi5vcfnx8l.png"
-registrationNumber: "6889990088"
-startupStage: "Early Stage"
-yearFounded: "2013-05-14T00:00:00.000Z"
-_id: "627e6d22c62f67917c46ac0e"
-[[Prototype]]: Object
-team:
-avatar: "https://cdn.shoutng.com/kvafa2sry4pw0ybfyrx3cm.jpg"
-briefIntroduction: "We just render good services to our customers"
-city: "Lagos"
-coFounder: (2) [{…}, {…}]
-country: "Nigeria"
-dob: "2015-05-13T14:37:22.132Z"
-education: [{…}]
-email: "brightbrain@gmail.com"
-experience: [{…}]
-firstName: "Enerst"
-gender: "male"
-isCofounder: false
-lastName: "Owunbuzia"
-mobile_number: "+2348163394719"
-skills: (3) ['java', 'shhhshdsdsn', 'kdshd']
-socialMedia: {linkedIn: 'ww.hdhh.com', twitter: 'ww.hdhh.com', website: 'ww.hdhh.com', _id: '627e7371c62f67917c46ae0e'}
-state: "Lagos"
-_id: "627e6d22c62f67917c46ac10"
-[[Prototype]]: Object
-userId: "627e6d217f607dd959aa7b72"
-__v: 0
-_id: "627e6d22c62f67917c46ac1d"
-
-acceleratorName
-
-applicationCompleted: true
-approveToEvaluate: false
-businessCanvas: {market: {…}, brand: {…}, businessModel: {…}, plan: {…}, _id: '6287be424a215cec09f9aa3d'}
-email: "isaackelvin378@gmail.com"
-evaluations: []
-fundRaising: {fundingAsk: {…}, fundUtilization: {…}, capTable: {…}, previousRound: {…}, financialProjection: {…}, …}
-industry: "Agriculture, food and beverages"
+email: "jane@gmail.com"
+firstname: "janeee"
+investorApproach: {techSector: 'Consumer products and services', investmentExperience: 'I am an angel investor / high net worth individual making regular investments', investmentPreference: 'Marketplace', investmentThesis: '@gkeenley You have to update project.pbxproj by ha…ade or any command line tools that help upgrading', stage: 'Pre-Seed', …}
 isRegCompleted: true
-mileStone: []
-partner: []
-passedEvaluation: false
-password: "$2a$10$vY6R8H.JOcDYkjPWPq5ZmOIg8uivDItDxC8lv0LZtYt9IDJyKm3XO"
+isTrash: false
+lastname: "Mina"
+password: "$2a$10$vPh6QRgPUg.T6gBk8Zrim.s2YFG2o2gi3/L5o6XeABdNYM9XPiJi."
+permissions: []
+personalDetail: {nationality: 'Nigeria', taxResidentOutsideNigeria: true, individualHaving: 'Business Owner', bankName: 'FCMB', bankBranch: 'Ikeja', …}
+phone: "+2348163394719"
+portfolio: []
+profile:
+address: "Adeneyi"
+avatar: "https://cdn.shoutng.com/kvdbjeggjsxz0fvetferok.png"
+briefIntroduction: " If you run yarn remove [package] it will remove the package from node_modules and also from the yarn.lock file.  If you manually delete from package.json and then run yarn install, the deleted package is not installed and the yarn.lock file is not updated."
+city: "Lagos"
+companyEmail: ""
+country: "Nigeria"
+dob: "2022-05-19T01:05:33.389Z"
+email: "brightbrain@gmail.com"
+firstName: "Enerst"
+howDidYouAboutUs: "social media"
+lastName: "Owunbuzia"
+mobile_number: "+376748848484444"
+referral: "hjkkkkjh"
+socialMedia: {linkedIn: 'http://localhost:3000/startup/registration', twitter: 'http://localhost:3000/boosterpartner/registration', website: 'http://localhost:3000/boosterpartner/registration', profileLink: '', _id: '628597dda32ef136e27d6aee'}
+state: "Lagos"
+_id: "628597dda32ef136e27d6aef"
+[[Prototype]]: Object
+type: ['investor']
+userId: "628597dd1f0f5989e8619f7f"
+verified: true
+__v: 0
+
+
+amount: ""
+amountPerYear: ""
+angelInvestedBefore: true
+angelInvestedExperience: ""
+angelInvestorOrSyndicateInvestor: "Syndicate"
+bankAccountNumber: "99009868897"
+bankAccountType: "Savings Account"
+bankBranch: "Ikeja"
+bankName: "FCMB"
+budgetAmount: "88999"
+budgetPerYear: "7899987766"
+individualHaving: "Business Owner"
+interestedInOnlinePitching: true
+investingFrom: "Personal Fund"
+investorType: "Corporation"
+isLeadInvestor: true
+isPublic: true
+mentorsStartups: true
+nationality: "Nigeria"
+numberOfInvestmentPerYear: "90000"
+previousAngelInvestingExperience: false
+sectorOfExpertise: "Artificial intelligence"
+taxResidentOutsideNigeria: true
+yetToInvest: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+email: "isaackelvin256@gmail.com"
+industry: "Engineering and Technology"
+isRegCompleted: true
+password: "$2a$10$VFZe49DGrNdpKd1YSjzqrOAHFjOw55sKazp7tmOSCt.W0oyT0Q0hi"
 permissions: []
 phone: "+2348163394719"
-pitchDeck: {pitchDeckFile: 'https://cdn.shoutng.com/kvg9cysxtin9gtpeeuot45.pdf', pitchDeckVideo: 'https://cdn.shoutng.com/kvilyqtk20dhjehbz052wg.mp4', _id: '6287be424a215cec09f9aa30'}
-product: {description: '62\n\nIf you run yarn remove [package] it will remov…age is not installed and the yarn.lock file is no', competitiveEdge: '62\n\nIf you run yarn remove [package] it will remov…age is not installed and the yarn.lock file is no', youtubeDemoUrl: null, files: 'https://cdn.shoutng.com/kvjnjqenjyjm6p1mfyk2zx.mp4', _id: '6287be424a215cec09f9aa32'}
-recommended: false
-roadMap: []
-startUpProfile: {logo: 'https://cdn.shoutng.com/kvsg4j8mdersj3aymderqd.jpg', elevatorPitch: '62\n\nIf you run yarn remove [package] it will remov…arn.lock file.\n\nIf you manually delete from packa', brand: 'wqwqqwerrr', startupName: 'Foni cakes', yearFounded: '2018-05-16T00:00:00.000Z', …}
-startupname: "Foni cakes"
-team: {avatar: 'https://cdn.shoutng.com/kvwon0d01k4qqyqhbn4p7f.png', briefIntroduction: ' If you run yarn remove [package] it will remove t… installed and the yarn.lock file is not updated.', gender: 'female', firstName: 'Enerst', lastName: 'Owunbuzia', …}
+startupname: "Winner Airlines"
 type: ['startup']
-userId: "6287be42fb8864c55074ec72"
 verified: true
-
-
-
-
-
-
-{data &&
-  data.map((item, i) => {
-    return (
-      <div key={i} className="col-xl-3 col-lg-4 mb-4">
-        <article className="deck-card">
-          <div className="deck-card-img">
-            <img
-              src={item?.file === "file" ? doc : videoDemo}
-              alt="document"
-            />
-          </div>
-          <div className="d-flex align-items-start p-3">
-            <img
-              src={item?.file === "file" ? docIcon : videoIcon}
-              alt="document icon"
-              className="mr-2"
-            />
-            <span>
-              <p> {item?.filename.toUpperCase()} </p>
-              <small> {item?.size} </small>
-            </span>
-          </div>
-        </article>
-      </div>
-    );
-  })}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

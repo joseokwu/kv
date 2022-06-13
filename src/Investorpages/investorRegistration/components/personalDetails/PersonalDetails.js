@@ -45,7 +45,7 @@ export const PersonalDetails = () => {
    // console.log(values)
   }
 
-  console.log(stateAuth)
+ 
 
   const onChangeImage = async (e) => {
     const { files } = e.target
@@ -184,9 +184,7 @@ export const PersonalDetails = () => {
                 name={'firstName'}
                 onKeyPress={letterOnly}
                 type={'text'}
-                value={stateAuth?.firstname}
-                disabled
-                placeholder={'Enter first name'}
+                value={stateAuth?.investorData?.profile?.firstName}                placeholder={'Enter first name'}
                 className={'edit_input text-black'}
                 onChange={(e) =>
                   updateInvestorProfileData('profile', {
@@ -206,8 +204,7 @@ export const PersonalDetails = () => {
                 name={'lastName'}
                 onKeyPress={letterOnly}
                 type={'text'}
-                value={stateAuth?.lastname}
-                disabled
+                value={stateAuth?.investorData?.profile?.lastName}
                 placeholder={'Enter last name'}
                 className={'edit_input text-black'}
                 onChange={(e) =>
@@ -226,8 +223,7 @@ export const PersonalDetails = () => {
                 label="Email"
                 id={'email'}
                 name={'email'}
-                value={stateAuth?.email}
-                disabled
+                value={stateAuth?.investorData?.profile?.email}
                 placeholder={'Enter email'}
                 type={'email'}
                 className={'edit_input text-black'}
@@ -373,7 +369,7 @@ export const PersonalDetails = () => {
               <TextField
                 label="Company Email"
                 id={'companyEmail'}
-                name={"email"}
+                name={"companyEmail"}
                 value={stateAuth?.investorData?.profile?.companyEmail}
                 required={true}
                 placeholder={'E.g. info@knight.ventures'}

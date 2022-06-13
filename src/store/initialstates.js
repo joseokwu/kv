@@ -101,11 +101,8 @@ export const INIT_STATE_BUSINESS = {
 };
 
 export const INIT_STATE_ADMIN = {
-  criteria: [
-    {
-      category: "",
-      noOfQuestion: "1",
-      titleAndQuestion: [{ title: "", question: "" }],
-    },
-  ],
+  loading:false,
+  evaluationCriteria:[],
+  categories: [],
+  criteriaDetail:{}
 };

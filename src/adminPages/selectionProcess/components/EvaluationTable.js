@@ -1,15 +1,31 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { FullTab } from "../../../adminComponents";
 import down from "../../../assets/icons/chevronDown.svg";
 import filter from "../../../assets/icons/filterFunnel.svg";
 import { KVMemberEvaluation } from "./KVMemberEvaluation";
 import { MentorEvaluation } from "./MentorEvaluation";
+import { getCriteria } from './../../../services/admin';
+
 
 export const EvaluationTable = () => {
   const tabs = ["KV Members Evaluation", "Mentor Evaluation"];
-
+  const [kvMems , setKvMems] = useState([])
   const [currentTab, setCurrentTab] = useState(0);
   const tables = [<KVMemberEvaluation />, <MentorEvaluation />];
+
+
+
+  useEffect(() =>{
+
+    const fetchCriteria = async() =>{
+      const res = await getCriteria();
+      console.log(res)
+    }
+
+    fetchCriteria()
+  },[])
+
+
   return (
     <div>
       <section

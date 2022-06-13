@@ -6,7 +6,7 @@ import { Button } from "../../../components";
 import styles from "../viewMentor.module.css";
 import "react-calendar/dist/Calendar.css";
 
-export const Availability = () => {
+export const Availability = ({ data = {} }) => {
   const [value, onChange] = useState(new Date());
   return (
     <div className="row mx-0">
@@ -15,9 +15,12 @@ export const Availability = () => {
           <h2 className="border-bottom">Assistant Profile</h2>
           <section className="row mx-0 pt-4">
             <div className="col-lg-5">
-              <h6>Mr Promise Amstel</h6>
-              <a href="" className={styles.text}>
-                promiseamstel@gmail.com
+              <h6>{`${data?.assistantFirstname} ${data?.assistantLastname}`}</h6>
+              <a
+                href={`mailto:${data?.assistantEmail}`}
+                className={styles.text}
+              >
+                {data?.assistantEmail}
               </a>
             </div>
 
@@ -26,7 +29,9 @@ export const Availability = () => {
                 className={`d-flex align-items-center justify-content-end space-out mb-2 ${styles.contact_det}`}
               >
                 <img src={location} alt="location" />
-                <p className={styles.text}>San francisco United State</p>
+                <p
+                  className={styles.text}
+                >{`${data?.assistantCity} ${data?.assistantCountry}`}</p>
               </article>
 
               <article
@@ -34,7 +39,7 @@ export const Availability = () => {
               >
                 <img src={phone} alt="phone" />
                 <a href="" className={styles.text}>
-                  +212456789865
+                  {data?.assistantPhone}
                 </a>
               </article>
             </div>

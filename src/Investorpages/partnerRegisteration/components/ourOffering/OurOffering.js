@@ -23,8 +23,7 @@ const OurOffering = () => {
     // console.log(stateAuth)
 
     updatePartnerInfo(true)
-    push('/boosterpartner/dashboard')
-    // console.log(values)
+  
   }
 
   return (
