@@ -121,7 +121,7 @@ export const Session = () => {
       </TabFilterWrapper> */}
 
       {
-        programInfo.length < 1 && (<EmptyState />)
+        programInfo?.length < 1 && (<EmptyState />)
       }
         { programInfo && programInfo?.length > 0 ? programInfo.map((info, i) =>{
 
