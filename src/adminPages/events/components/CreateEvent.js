@@ -48,8 +48,7 @@ export const CreateEvent = () => {
 
     const onChange = (e) => {
         const { value } = e.target;
-        let bounce = debounce(searchItem(value), 5000);
-        bounce();
+        searchItem(value);
     };
 
     const onSubmit = async (values) => {

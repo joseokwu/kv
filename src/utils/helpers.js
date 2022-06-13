@@ -126,6 +126,18 @@ export function newFormatTime(timeToFormat) {
         .toUpperCase();
 }
 
+export function mergeDateTime(date, time) {
+    const mergedDateObj = new Date(
+        date?.slice(0, 4),
+        date?.slice(5, 7) - 1,
+        date?.slice(8),
+        time?.slice(0, 2),
+        time?.slice(3),
+        0
+    );
+    return mergedDateObj.toISOString();
+}
+
 export function formatDate(dateToFormat) {
     return `${new Date(dateToFormat).getDate()} ${
         months[new Date(dateToFormat).getMonth()]
