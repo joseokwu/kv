@@ -2527,7 +2527,29 @@ const TQItem = ({ data, index = 0, addToCriteria = () => {} }) => {
 
   
 
+  {
+programs:'',
+topic:'',
+description:'',
+assignmentFile:'',
+deadlineDay:date,
+deadlineTime:date,
+mentor:{
+ profileId:'',
+  name:'',
+   email:'' ,
+   logo:''
+} ,
+assignees:[
+    {
+        profileId:'',
+        name:"",
+        email:'',
+        logo
+    }
+],
 
+}
 
 
 
