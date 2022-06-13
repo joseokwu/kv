@@ -84,7 +84,7 @@ export const updateFounderProfile = async (values) => {
 
 export const getPrograms = async(value) =>{
   try{
-    const res = await request.post("programs", value);
+    const res = await request.post("getUserPrograms", value);
     console.log(res?.data)
     return res?.data;
   }catch(err){

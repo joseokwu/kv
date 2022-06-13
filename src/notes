@@ -2058,11 +2058,33 @@ cancelApp
 
 
 
+attendees: (2) [{…}, {…}]
+description: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available."
+duration: "5"
+endTime: "2022-05-13T16:00:00.000Z"
+guest: {profileId: '628cea9ae13f0600a1621a68', name: 'chief', email: 'ertyu@gmail.com', logo: 'https://cdn.shoutng.com/kv8hshfq95wje0vprrcxkb.png'}
+joinWith: "https://meet.google.com/mer-thuh-cqr?pli=1&authuser=1"
+notifyMe: "20"
+sector: "Finance"
+startTime: "2022-05-13T11:00:00.000Z"
+topic: "Meeting with peter Obi"
+__v: 0
 
 
 
 
+email: "isaackelvin256@gmail.com"
+logo: "https://cdn.shoutng.com/kv8hshfq95wje0vprrcxkb.png"
+name: "Winner Airlines"
+profileId: "6283d2e21f0f5989e8619f56"
+_id: "62a75db127050020f6
 
+
+email: "ertyu@gmail.com"
+logo: "https://cdn.shoutng.com/kv8hshfq95wje0vprrcxkb.png"
+name: "chief"
+profileId: "628cea9ae13f0600a1621a68"
+[[Prototype]]
 
 
 
