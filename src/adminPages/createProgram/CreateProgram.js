@@ -34,13 +34,13 @@ export const CreateProgram = () => {
                         label="Choose sector from program list"
                         className="max_fill mb-4"
                         options={sectors}
-                        name="sector"
+                        name="programs"
                     />
 
                     <TextField
                         label="Topic"
                         className="max_fill mb-4"
-                        name="Topic"
+                        name="topic"
                     />
 
                     <TextField
@@ -53,7 +53,7 @@ export const CreateProgram = () => {
                         label="Session Description"
                         rows={4}
                         className="max_fill mb-4"
-                        name="session_description"
+                        name="description"
                         onChange={(ev) => {
                             setSessionDesc(ev.target.value);
                         }}

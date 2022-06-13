@@ -1,17 +1,22 @@
 import { Header, Table, Section } from "./ask.styled";
 import downloadIcon from "../../../../assets/icons/downloadoutline.svg";
+import { useHistory } from "react-router-dom";
+
 
 export const FundingAsk = ({ data  }) => {
+
+  const history = useHistory();
+
   return (
     <div>
       <Header className="d-flex justify-content-end">
         <div>{/* <h4>Funding Ask</h4> */}</div>
         <div className="d-flex">
-          <img src={downloadIcon} className="mr-2" alt="." />
+          {/* <img src={downloadIcon} className="mr-2" alt="." />
           <a className="pe-3" href="#">
             Download.xlsx
-          </a>
-          <span>Update details</span>
+          </a> */}
+          <span onClick={() => history.push('/startup/registration#Funding%20Ask')} >Update details</span>
         </div>
       </Header>
       <section className="my-5 table-responsive">
