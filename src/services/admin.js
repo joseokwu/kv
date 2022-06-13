@@ -71,5 +71,15 @@ export const getCriteria = async () => {
     }
 };
 
+export const createPrograms = async () => {
+    try {
+        const response = await request.post("createPrograms", {});
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
 
 //KV Member

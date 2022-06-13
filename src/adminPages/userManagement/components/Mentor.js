@@ -22,22 +22,22 @@ export const Mentor = () => {
         },
         {
             name: "Total Sessions",
-            count: 30,
+            count: null,
             color: "#DEF6FF",
         },
         {
             name: "Confirmed Session",
-            count: 12,
+            count: null,
             color: "#D5D6F4",
         },
         {
             name: "Pending Sessions",
-            count: 10,
+            count: null,
             color: "#DEF6FF",
         },
         {
             name: "Rejected Sessions",
-            count: 8,
+            count: null,
             color: "#D5D6F4",
         },
     ];
@@ -396,7 +396,7 @@ export const Mentor = () => {
                             <DashCard
                                 name={card?.name}
                                 color={card.color}
-                                count={card?.count}
+                                count={card?.count || 0}
                             />
                         );
                     })}
