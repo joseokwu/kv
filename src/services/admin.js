@@ -60,7 +60,6 @@ export const createCriteria = async (values) => {
     }
 };
 
-
 export const getCriteria = async () => {
     try {
         const response = await request.post("getCriterial", {});
@@ -71,9 +70,9 @@ export const getCriteria = async () => {
     }
 };
 
-export const createPrograms = async () => {
+export const createPrograms = async (values) => {
     try {
-        const response = await request.post("createPrograms", {});
+        const response = await request.post("createPrograms", values);
         console.log(response.data);
         return response.data;
     } catch (err) {
@@ -81,5 +80,40 @@ export const createPrograms = async () => {
     }
 };
 
+export const createAssignment = async (values) => {
+    try {
+        const response = await request.post("createAssignment", values);
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const getPrograms = async () => {
+    try {
+        const response = await request.post("getPrograms", {
+            limit: 5,
+            page: 1,
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const getAssignments = async () => {
+    try {
+        const response = await request.post("getAssignments", {
+            limit: 5,
+            page: 1,
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};
 
 //KV Member
