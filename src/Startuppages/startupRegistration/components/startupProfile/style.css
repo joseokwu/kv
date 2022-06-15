@@ -58,3 +58,17 @@
 input {
   padding: 0 !important;
 }
+
+.form-group-spacee {
+  margin-bottom: 2rem;
+}
+
+.fields {
+  padding-top: 22px;
+
+}
+
+.ant-select {
+  width: 100% !important;
+  background: #FAFAFC;
+}

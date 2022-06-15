@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const BodyWrapper = styled.div`
   margin-bottom: 10px;
   margin-top: 30px;
-  margin-left: 50px;
+  // margin-left: 50px;
   .span {
     font-family: DM Sans;
     font-weight: 500;

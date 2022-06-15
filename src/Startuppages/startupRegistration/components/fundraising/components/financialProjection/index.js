@@ -1,3 +1,4 @@
+import { css } from "styled-components/macro";
 import { BodyWrapper, DownloadableButton, Terms } from "./financial.styled";
 import { useHistory } from "react-router-dom";
 import {
@@ -25,13 +26,24 @@ export const FinancialProjection = () => {
         console.log(stateAuth?.startupData);
         console.log(validate(stateAuth?.startupData, startupValidation));
         updateStartupInfo(validate(stateAuth?.startupData, startupValidation));
-        // window.open('/startup/dashboard', '_self');
+        window.open("/startup/registration/success", "_self");
     };
 
     return (
         <>
             <BodyWrapper>
-                <div className="mt-5">
+                <span
+                    css={css`
+                        font-family: DM Sans;
+                        font-weight: 500;
+                        font-size: 24px;
+                        line-height: 30.83px;
+                        color: #2e3192;
+                    `}
+                >
+                    Financial Projection
+                </span>
+                <div className="pt-3">
                     <p>
                         A document containing all your financial plan and
                         statements for your business.
@@ -41,13 +53,13 @@ export const FinancialProjection = () => {
                 <hr />
 
                 <div className="my-5">
-                    <div className="col-12 my-3 mx-5">
-                        <DownloadableButton href="." className="mx-n5 mx-lg-n0">
+                    <div className="col-12 my-3 mx-0 px-0">
+                        <DownloadableButton href="." className="">
                             <img className="pr-2" src={Download} alt="" />
                             Download fund utilization template here
                         </DownloadableButton>
                     </div>
-                    <div className="col-12 my-5">
+                    <div className="col-12 my-5 px-0">
                         <UploadFile
                             data={{
                                 maxFiles: 1,
