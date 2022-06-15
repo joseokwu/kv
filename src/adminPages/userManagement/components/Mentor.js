@@ -66,7 +66,7 @@ export const Mentor = () => {
       query: { applicationCompleted: true },
     });
 
-    console.log('res', res);
+
 
     if (res.success && res?.data?.mentors?.length > 0) {
       setNumOfMentors(res?.data?.metadata?.total);
@@ -99,14 +99,7 @@ export const Mentor = () => {
               >
                 View
               </Link>
-              <p
-                role='button'
-                className='delete-link'
-                data-target='#deleteMentor'
-                data-toggle='modal'
-              >
-                Delete
-              </p>
+         
             </div>
           ),
         }))
@@ -128,72 +121,7 @@ export const Mentor = () => {
     { title: 'Actions', accessor: 'actions' },
   ];
 
-  const data = [
-    {
-      name: (
-        <div className='d-flex align-items-center space-out'>
-          <img src={userPic} alt='user' className={styles.userPic} />
-          <p className='mb-0'>Kate Mcbeth Joan</p>
-        </div>
-      ),
-      skills: (
-        <div className='d-flex space-out flex-wrap'>
-          <Tag name='Design' />
-          <Tag name='3D Printing' color='#40439A' />
-          <Tag name='Front end development' color='#40439A' />
-        </div>
-      ),
-      company: 'Seam Technologies Inc.',
-      sessions: 3,
-      actions: (
-        <div className='d-flex align-items-center space-out'>
-          <Link to='/admin/users/mentors/0' className='view-link'>
-            View
-          </Link>
-          <p
-            role='button'
-            className='delete-link'
-            data-target='#deleteMentor'
-            data-toggle='modal'
-          >
-            Delete
-          </p>
-        </div>
-      ),
-    },
-    {
-      name: (
-        <div className='d-flex align-items-center space-out'>
-          <img src={userPic} alt='user' className={styles.userPic} />
-          <p className='mb-0'>Kate Mcbeth Joan</p>
-        </div>
-      ),
-      skills: (
-        <div className='d-flex space-out flex-wrap'>
-          <Tag name='Design' />
-          <Tag name='3D Printing' color='#40439A' />
-          <Tag name='Front end development' color='#40439A' />
-        </div>
-      ),
-      company: 'Seam Technologies Inc.',
-      sessions: 3,
-      actions: (
-        <div className='d-flex align-items-center space-out'>
-          <Link to='/admin/users/mentors/1' className='view-link'>
-            View
-          </Link>
-          <p
-            role='button'
-            className='delete-link'
-            data-target='#deleteMentor'
-            data-toggle='modal'
-          >
-            Delete
-          </p>
-        </div>
-      ),
-    },
-  ];
+  
 
   const sessionHeaders = [
     { title: 'Startups', accessor: 'startups' },
@@ -218,11 +146,7 @@ export const Mentor = () => {
           <p className='mb-0'>{item?.guest?.name}</p>
         </div>
       ),
-      //   status: (
-      //     <div className='d-flex space-out flex-wrap'>
-      //       <Tag name='Completed' color='#18A615' />
-      //     </div>
-      //   ),
+   
       startups: (
         <section className='event_people'>
           {item?.attendees.map((att, i) => {
@@ -259,14 +183,7 @@ export const Mentor = () => {
           >
             View
           </p>
-          {/* <p
-            role='button'
-            data-target='#deleteSession'
-            data-toggle='modal'
-            className='delete-link'
-          >
-            Delete
-          </p> */}
+     
         </div>
       ),
     };
@@ -490,12 +407,7 @@ export const Mentor = () => {
               variant='trans'
               onClick={() => push('/admin/users/mentors')}
             />
-            <Button
-              label='Add Mentor'
-              variant='secondary'
-              data-target='#addMentor'
-              data-toggle='modal'
-            />
+      
           </div>
         </div>
 
