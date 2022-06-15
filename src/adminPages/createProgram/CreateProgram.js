@@ -10,22 +10,18 @@ import apple from "../../assets/icons/appleSmall.svg";
 import mentorPic from "../../assets/images/teamMember.svg";
 import copyIcon from "../../assets/icons/copy.svg";
 import styles from "./createProgram.module.css";
-
 export const CreateProgram = () => {
     const [sector, setSector] = useState(sectors[0]);
     const [notifyMe, setNotifyMe] = useState("30 minutes");
     const [eventDate, setEventDate] = useState("");
-
     const [mentorInput, setMentorInput] = useState("");
     const [mentorArr, setMentorArr] = useState([]);
     const [selectedMentor, setSelectedMentor] = useState({});
     const [selectedMentorObj, setSelectedMentorObj] = useState({});
-
     const [startupInput, setStartupInput] = useState("");
     const [startupArr, setStartupArr] = useState([]);
     const [selectedStartups, setSelectedStartups] = useState([]);
     const [selectedStartupsArr, setSelectedStartupsArr] = useState([]);
-
     const searchMentor = async (value) => {
         const res = await search({
             value,
@@ -33,7 +29,6 @@ export const CreateProgram = () => {
         });
         setMentorArr(res?.data);
     };
-
     const searchStartup = async (value) => {
         const res = await search({
             value,
@@ -42,27 +37,23 @@ export const CreateProgram = () => {
         console.log(res);
         setStartupArr(res?.data);
     };
-
     const newMentorObj = ({ userId, personalDetail }) => ({
         profileId: userId,
         name: `${personalDetail?.firstname} ${personalDetail?.lastname}`,
         email: personalDetail?.email,
         logo: personalDetail?.logo,
     });
-
     const newStartupObj = ({ _id, startUpProfile }) => ({
         profileId: _id,
         name: startUpProfile?.startupName,
         email: startUpProfile?.contactInfo?.companyEmail,
         logo: startUpProfile?.logo,
     });
-
     useEffect(() => {
         console.log(selectedMentor);
         console.log("newMentorObj", newMentorObj(selectedMentor));
         setSelectedMentorObj(newMentorObj(selectedMentor));
     }, [selectedMentor?.userId]);
-
     useEffect(() => {
         selectedStartups?.forEach((selectedStartup) => {
             console.log(newStartupObj(selectedStartup));
@@ -73,7 +64,6 @@ export const CreateProgram = () => {
         });
         console.log(selectedStartupsArr);
     }, [Object.entries(selectedStartups)?.length]);
-
     return (
         <div className="py-5 px-5">
             <GoBack />
@@ -95,7 +85,6 @@ export const CreateProgram = () => {
             >
                 <section className={`mt-4 ${styles.createProgram}`}>
                     <h3 className="border-bottom pb-4">Create Program</h3>
-
                     <Select
                         label="Choose sector from sector list"
                         className="max_fill mb-4"
@@ -103,18 +92,18 @@ export const CreateProgram = () => {
                         name="sector"
                         defaultValue={sector}
                         onChange={(ev) => setSector(ev.target.value)}
-
                     />
-
                     <TextField
                         label="Topic"
                         className="max_fill mb-4"
                         name="topic"
                         required={true}
-
                     />
-
-    
+                    {/* <TextField
+                        label="Workshop Title"
+                        className="max_fill mb-4"
+                        name="workshop_title"
+                    /> */}
                     <Form.Item name="description">
                         <TextArea
                             label="Session Description"
@@ -168,28 +157,9 @@ export const CreateProgram = () => {
                                     await searchMentor(mentorInput);
                                     console.log("fetched");
                                 }}
-
-                    <TextArea
-                        label="Session Description"
-                        rows={4}
-                        className="max_fill mb-4"
-                        name="description"
-                        onChange={(ev) => {
-                            setSessionDesc(ev.target.value);
-                        }}
-                    />
-                    <div className="mb-4 pb-3 ">
-                        <p className="mb-3">Invite Mentor</p>
-                        <section className="search-input mb-3">
-                            <img src={searchIcon} alt="search" />
-                            <input
-                                type="search"
-                                placeholder="Search for mentor"
-
                             />
                         </section>
                     </div>
-
                     <div id="added-mentors" className={styles.mentorList}>
                         {mentorArr?.map((mentor, i) => {
                             return (
@@ -216,7 +186,6 @@ export const CreateProgram = () => {
                             );
                         })}
                     </div>
-
                     <div className="mb-4">
                         <div className="mb-3">
                             Invite Startups:
@@ -262,7 +231,6 @@ export const CreateProgram = () => {
                             />
                         </section>
                     </div>
-
                     <div id="added-startups" className={styles.startupList}>
                         {startupArr?.map((startup, i) => {
                             return (
@@ -300,7 +268,6 @@ export const CreateProgram = () => {
                             );
                         })}
                     </div>
-
                     <TextField
                         label="Event Date"
                         className="mb-4"
@@ -310,7 +277,6 @@ export const CreateProgram = () => {
                             setEventDate(ev.target.value);
                         }}
                     />
-
                     <div className="row">
                         <article className="col-lg-4">
                             <TextField
@@ -320,7 +286,6 @@ export const CreateProgram = () => {
                                 name="startTime"
                             />
                         </article>
-
                         <article className="col-lg-4">
                             <TextField
                                 type="time"
@@ -330,7 +295,6 @@ export const CreateProgram = () => {
                             />
                         </article>
                     </div>
-
                     <div className="d-flex align-items-center space-out mb-4">
                         <p>Join with:</p>
                         <Select
@@ -339,7 +303,6 @@ export const CreateProgram = () => {
                             name="meetOption"
                         />
                     </div>
-
                     <div
                         className={`d-flex align-items-center justify-content-between mb-4 ${styles.copyLink}`}
                     >
@@ -350,10 +313,8 @@ export const CreateProgram = () => {
                             placeholder="meet.google.com/jce-wata-fux"
                             required={true}
                         />
-
                         <img src={copyIcon} alt="copy" />
                     </div>
-
                     <Select
                         label="Notify me"
                         className="mb-4"
@@ -362,10 +323,8 @@ export const CreateProgram = () => {
                         defaultValue="30 minutes"
                         onChange={(ev) => setNotifyMe(ev.target.value)}
                     />
-
                     <div className="d-flex align-items-center justify-content-between">
                         <p>How often is this program?</p>
-
                         <article className="d-flex align-items-center space-out">
                             <label>
                                 <input
@@ -385,7 +344,6 @@ export const CreateProgram = () => {
                                 />
                                 Weekly
                             </label>
-
                             <label>
                                 <input
                                     type="radio"
@@ -398,7 +356,6 @@ export const CreateProgram = () => {
                         </article>
                     </div>
                 </section>
-
                 <section
                     className={`d-flex justify-content-end ${styles.btnWrapper}`}
                 >
@@ -409,3 +366,5 @@ export const CreateProgram = () => {
         </div>
     );
 };
+
+   

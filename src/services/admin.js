@@ -116,25 +116,27 @@ export const getAssignments = async () => {
         throw err;
     }
 
-export const createPrograms = async () => {
-  try {
-    const response = await request.post('createPrograms', {});
-    console.log(response.data);
-    return response.data;
-  } catch (err) {
-    throw err;
-  }
-};
-
-export const getPrograms = async (values) => {
-  try {
-    const response = await request.post('getPrograms', values);
-    return response.data;
-  } catch (err) {
-    console.log(err?.response?.data?.message);
-    throw err;
   }
 
-};
+// export const createPrograms = async () => {
+//   try {
+//     const response = await request.post('createPrograms', {});
+//     console.log(response.data);
+//     return response.data;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
+
+// export const getPrograms = async (values) => {
+//   try {
+//     const response = await request.post('getPrograms', values);
+//     return response.data;
+//   } catch (err) {
+//     console.log(err?.response?.data?.message);
+//     throw err;
+//   }
+
+// };
 
 //KV Member
