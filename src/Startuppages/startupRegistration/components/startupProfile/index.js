@@ -9,6 +9,7 @@ import "./style.css";
 import { UserOutlined, PlusOutlined } from "@ant-design/icons";
 import { DatePicker, Form, Select } from "antd";
 import { AiOutlineUser } from "react-icons/ai";
+import { IoAdd } from "react-icons/io5";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -145,7 +146,7 @@ export const StartupProfile = () => {
                         logoUploading ? (
                             <CircularLoader color={"#000"} />
                         ) : (
-                            <AiOutlineUser size={36} />
+                            <AiOutlineUser size={36} color="#828282" />
                         )
                     ) : (
                         <img
@@ -167,7 +168,7 @@ export const StartupProfile = () => {
                         id="dp"
                         hidden
                     />
-                    <PlusOutlined style={{ color: "white" }} />
+                    <IoAdd style={{ color: "#858585" }} size="14" />
                 </InputWrapper>
             </ImageWrapper>
 
@@ -178,6 +179,7 @@ export const StartupProfile = () => {
                 }}
                 layout="vertical"
                 onFinish={onSubmit}
+                className="px-3"
             >
                 <FormWrapper className="pe-5">
                     <div className="div border-bottom pb-3">

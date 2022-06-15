@@ -90,13 +90,17 @@ export const PitchDeck = () => {
 
     return (
         <>
-            <HeaderPitch>
+            <HeaderPitch className="px-3">
                 <h5 style={{ color: "#2E3192" }}>Pitch Deck</h5>
                 <p>Let's get to know your startup</p>
             </HeaderPitch>
-            <form style={{ marginBottom: "4rem" }} onSubmit={onSubmit}>
+            <form
+                style={{ marginBottom: "4rem" }}
+                onSubmit={onSubmit}
+                className="px-3"
+            >
                 <FormWrapper>
-                    <div className="div">
+                    <div className="div mt-0 ml-0">
                         <span>Pitch Deck</span>
                         <p className="pt-3">
                             A brief presentation and overview about you startup.
@@ -172,7 +176,7 @@ export const PitchDeck = () => {
                                 <div
                                     className="form-group col-12 mt-3"
                                     style={{ marginBottom: "40px" }}
-                                 >
+                                >
                                     <UploadFile
                                         data={{
                                             maxFiles: 1,

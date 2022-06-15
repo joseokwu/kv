@@ -23,8 +23,8 @@ export const StartupSideBar = () => {
 
     return (
         <div className="start-main tab-wrap d-none d-lg-flex">
-            <section className="side-navigator">
-                <ul className="side-list-start">
+            <section className="side-navigator  d-flex flex-column align-items-center">
+                <ul className="side-list-start pl-0">
                     {startUpRoutes &&
                         startUpRoutes.map((nav, i) => {
                             return (

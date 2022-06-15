@@ -96,13 +96,14 @@ export const FundRaising = () => {
 
     return (
         <>
-            <HeaderFund>
+            <HeaderFund className="px-3">
                 <h5 style={{ color: "#2E3192" }}>Fund Raising</h5>
                 <p className="text-nowrap">
                     Let’s help you explain your fund raising plan
                 </p>
             </HeaderFund>
             <div
+                className="px-3"
                 css={css`
                     margin-top: 2rem;
                 `}
@@ -110,7 +111,7 @@ export const FundRaising = () => {
                 <Tabs tabItems={tabList} />
             </div>
 
-            <form style={{ marginBottom: "4rem" }}>
+            <form style={{ marginBottom: "4rem" }} className="px-3">
                 <FormWrapper height="85%">{renderContent()}</FormWrapper>
             </form>
         </>

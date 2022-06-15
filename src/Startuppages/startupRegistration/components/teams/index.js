@@ -297,7 +297,7 @@ export const TeamProfile = () => {
             ) : (
                 <span></span>
             )}
-            <HeaderTeam>
+            <HeaderTeam className="px-3">
                 <h5 style={{ color: "#2E3192" }}>Team</h5>
                 <p className="text-nowrap">
                     Let’s you introduce your Founder(s)
@@ -312,6 +312,7 @@ export const TeamProfile = () => {
                 }}
                 layout="vertical"
                 onFinish={onSubmit}
+                className="px-3"
             >
                 <FormWrapper height="70%">
                     <div className="div ml-0">

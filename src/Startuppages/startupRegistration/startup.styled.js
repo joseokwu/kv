@@ -21,6 +21,14 @@ export const WelcomeMessage = styled.div`
 
 export const RegCard = styled.div`
     padding-top: 50px;
+    overflow-y: auto;
+    padding-right: 7rem;
+    max-height: calc(100vh - 160px);
+
+    @media (max-width: 1024px) {
+        padding-right: 0;
+    }
+
     .reg-card {
         background: #f9f9fc;
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);

@@ -33,12 +33,25 @@ const StartupRegistrationLayout = ({ children }) => {
             <section className="layout-header">
                 <Header />
             </section>
-            <section className="">
-                <div className="row">
-                    <div className="col-lg-3" style={{ background: "white" }}>
+            <section className="layout-body" style={{ overflow: "hidden" }}>
+                <div className="row" style={{}}>
+                    <div
+                        className="col-lg-3"
+                        style={{
+                            background: "white",
+                            maxHeight: "calc(100vh - 60px)",
+                        }}
+                    >
                         <StartupSideBar />
                     </div>
-                    <div className="col-lg-8" style={{ background: "" }}>
+                    <div
+                        className="col-lg-9 main-body"
+                        style={{
+                            background: "",
+                            overflowY: "hidden",
+                            // maxHeight: "calc(100vh - 60px)",
+                        }}
+                    >
                         {children}
                     </div>
                 </div>

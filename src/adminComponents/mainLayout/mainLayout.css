@@ -6,6 +6,15 @@
   z-index: 200;
 }
 
+.layout-body {
+  /* height: calc(100vh - 60px); */
+}
+
+.main-body {
+  padding-right: 8vw;
+  max-height: calc(100vh - 60px);
+}
+
 .layout-main {
   display: grid;
   grid-template-columns: minmax(200px, 278px) 6fr;
@@ -24,6 +33,10 @@
   .layout-main {
     display: block;
     position: relative;
+  }
+
+  .main-body {
+    padding-right: 0;
   }
 
   .sm-side {

@@ -286,6 +286,7 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
                             css={css`
                                 margin-top: 0.5rem !important;
                                 margin-bottom: 1rem !important;
+                                text-align: center;
                             `}
                         >
                             Only files of type:{" "}
