@@ -247,6 +247,7 @@ const routes = [
         protected: true,
         type: "startup",
     },
+<<<<<<< HEAD
     {
         name: "StartupRegistrationSuccess",
         path: "/startup/registration/success",
@@ -255,6 +256,8 @@ const routes = [
         protected: true,
         type: "startup",
     },
+=======
+>>>>>>> f6a0d427e98ed3a523c9e908207824c34ccf9305
 
     {
         name: "StartupProfile",
@@ -629,7 +632,11 @@ const routes = [
         path: "/mentor/evaluation",
         component: WithMentorMainLayout(MentorEvaluation),
         exact: true,
+<<<<<<< HEAD
         protected: false,
+=======
+        protected: true,
+>>>>>>> f6a0d427e98ed3a523c9e908207824c34ccf9305
         type: "mentor",
     },
     {
@@ -1111,10 +1118,17 @@ const routes = [
     // KV Member routes
     {
         name: "kv member dashboard",
+<<<<<<< HEAD
         path: "/kv-member/",
         component: WithKVMemberLayout(Dashboard),
         exact: true,
         protected: true,
+=======
+        path: "/kv-member",
+        component: WithKVMemberLayout(Dashboard),
+        exact: true,
+        protected: false,
+>>>>>>> f6a0d427e98ed3a523c9e908207824c34ccf9305
         type: "admin",
     },
     {

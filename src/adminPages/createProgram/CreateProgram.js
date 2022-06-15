@@ -103,6 +103,7 @@ export const CreateProgram = () => {
                         name="sector"
                         defaultValue={sector}
                         onChange={(ev) => setSector(ev.target.value)}
+
                     />
 
                     <TextField
@@ -110,14 +111,10 @@ export const CreateProgram = () => {
                         className="max_fill mb-4"
                         name="topic"
                         required={true}
+
                     />
 
-                    {/* <TextField
-                        label="Workshop Title"
-                        className="max_fill mb-4"
-                        name="workshop_title"
-                    /> */}
-
+    
                     <Form.Item name="description">
                         <TextArea
                             label="Session Description"
@@ -171,6 +168,24 @@ export const CreateProgram = () => {
                                     await searchMentor(mentorInput);
                                     console.log("fetched");
                                 }}
+
+                    <TextArea
+                        label="Session Description"
+                        rows={4}
+                        className="max_fill mb-4"
+                        name="description"
+                        onChange={(ev) => {
+                            setSessionDesc(ev.target.value);
+                        }}
+                    />
+                    <div className="mb-4 pb-3 ">
+                        <p className="mb-3">Invite Mentor</p>
+                        <section className="search-input mb-3">
+                            <img src={searchIcon} alt="search" />
+                            <input
+                                type="search"
+                                placeholder="Search for mentor"
+
                             />
                         </section>
                     </div>
