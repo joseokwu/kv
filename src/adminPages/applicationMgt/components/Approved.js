@@ -168,17 +168,7 @@ export const ApprovedTable = ({
   return (
     <div>
       <Table headers={header} data={applicationData} />
-      <div className='d-flex align-item-center pt-4 justify-content-end'>
-        <p className='page-num'>1 of 26</p>
-        <img
-          src={left}
-          alt='left'
-          className='mx-3'
-          style={{ transform: 'rotate(180deg)' }}
-          role='button'
-        />
-        <img src={left} alt='left' className='mx-3' role='button' />
-      </div>
+           {/* Pagination goes here */}
     </div>
   );
 };
