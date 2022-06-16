@@ -18,9 +18,9 @@ export const ApplicationMgt = () => {
   const mgtTab = [
     'Pending',
     'Approved to Evaluate',
-    // "KV Screening",
+    'KV Screening',
     'Recommended',
-    // "Mentor Screening",
+    'Mentor Screening',
     'Accepted',
   ];
 
@@ -152,14 +152,16 @@ export const ApplicationMgt = () => {
             setResetAccept={setResetAccept}
           />
         );
-      // case `#${mgtTab[2]}`:
-      //   return <KVScreeningTable />;
       case `#${mgtTab[2]}`:
-        return <RecommendationTable recommended={recommended} />;
-      // case `#${mgtTab[4]}`:
-      //   return <MentorScreeningTable />;
+        return <KVScreeningTable />;
       case `#${mgtTab[3]}`:
-        return <AcceptedTable accepted={accepted} />;
+        return <RecommendationTable recommended={recommended} />;
+      case `#${mgtTab[4]}`:
+        return <MentorScreeningTable />;
+      case `#${mgtTab[5]}`:
+        return (
+          <AcceptedTable setResetAccept={setResetAccept} accepted={accepted} />
+        );
       case `#${mgtTab[4]}`:
         return <DeclinedTable />;
       default:
@@ -172,19 +174,22 @@ export const ApplicationMgt = () => {
       <section className='d-flex align-items-center dashboard-cards mb-5'>
         <DashCard
           className='col-lg-3 col-md-6 col-12'
-          name={'All Application'}
+          // name={'All Application'}
+          name={'New Application'}
           count={applications?.metadata?.total ?? 0}
           color={'#E5FFE4'}
         />
         <DashCard
           className='col-lg-3 col-md-6 col-12'
-          name={'Approved to Evaluate'}
+          // name={'Approved to Evaluate'}
+          name={'KV Screening'}
           count={kvScreening?.metadata?.total ?? 0}
           color={'#FAD7DC'}
         />
         <DashCard
           className='col-lg-3 col-md-6 col-12'
-          name={'Recommended'}
+          // name={'Recommended'}
+          name={'Mentor Screening'}
           count={recommended?.metadata?.total ?? 0}
           color={'#E5FFE4'}
         />

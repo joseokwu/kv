@@ -10,7 +10,7 @@ export const Events = () => {
     'Selection Day',
     'Demo day',
     'Pitching Session',
-    // "Others",
+    'Others',
   ];
   const [eventData, setEventData] = useState([]);
 
