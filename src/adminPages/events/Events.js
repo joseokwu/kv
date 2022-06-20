@@ -1,7 +1,7 @@
+   
 import React, { useMemo, useEffect, useState } from 'react';
 import { Button, Modal, Tabs } from '../../components';
 import { CreateEvent, EventCard } from './components';
-import eventImage from '../../assets/icons/eventImage.png';
 import { eventRequest } from '../../services/events';
 
 export const Events = () => {
@@ -14,79 +14,7 @@ export const Events = () => {
   ];
   const [eventData, setEventData] = useState([]);
 
-  const eventDesc = useMemo(
-    () =>
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim lectus morbi elementum eu.Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    []
-  );
-  const data = useMemo(
-    () => [
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(2021, 5, 20, 2, 10),
-        endDate: new Date(2021, 5, 23, 5, 0),
-        description: eventDesc,
-        image: eventImage,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(2021, 5, 20, 3, 10),
-        endDate: new Date(2021, 5, 23, 5, 0),
-        description: eventDesc,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(),
-        endDate: new Date(2022, 5, 23, 5, 0),
-        description: eventDesc,
-        image: eventImage,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(2021, 5, 20, 12, 0),
-        endDate: new Date(2022, 5, 23, 5, 0),
-        description: eventDesc,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(2021, 5, 20, 10, 30),
-        endDate: new Date(2022, 5, 23, 2, 0),
-        description: eventDesc,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(),
-        endDate: new Date(2022, 5, 23, 5, 0),
-        description: eventDesc,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(2021, 5, 20, 3, 45),
-        endDate: new Date(2021, 5, 23, 5, 0),
-        description: eventDesc,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(2021, 5, 20, 4, 30),
-        endDate: new Date(2021, 5, 23, 7, 0),
-        description: eventDesc,
-        image: eventImage,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(),
-        endDate: new Date(2022, 5, 23, 5, 0),
-        description: eventDesc,
-      },
-      {
-        name: 'Appleiine House Demo',
-        startDate: new Date(2021, 5, 20, 7, 0),
-        endDate: new Date(2021, 5, 23, 12, 0),
-        description: eventDesc,
-      },
-    ],
-    [eventDesc]
-  );
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -145,8 +73,10 @@ export const Events = () => {
                 );
               }
             })}
+
+
         </div>
-      </section>
-    </div>
-  );
+        </section>
+        </div>
+    );
 };

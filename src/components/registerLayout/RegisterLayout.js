@@ -7,7 +7,7 @@ import { Header } from "../../components/index";
       <section className="layout-header">
         <Header />
       </section>
-      <section className="">
+      <section>
         <div className="layout-child">{children}</div>
       </section>
     </div>

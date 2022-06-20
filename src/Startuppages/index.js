@@ -15,6 +15,7 @@ export * from "./notification/Notification";
 export * from "./eAcademy/eAcademy";
 export * from "./todoList/todoList";
 export * from "./startupRegistration";
+export * from "./startupRegistration/startupRegistrationSuccess";
 export * from "./program";
 export * from "./fundraising";
 export * from "./boosterPartner/boosterPartner";

@@ -11,9 +11,6 @@ export const Assignment = () => {
   const [currentTab, setCurrentTab] = useState(tabItems[0])
   
 
-
-
-
   const renderContent = () => {
     switch (currentTab) {
       case 'Not Submitted':

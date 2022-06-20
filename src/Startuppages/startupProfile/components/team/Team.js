@@ -41,9 +41,9 @@ export const Team = ({ data }) => {
   <span></span>
 )}
 <h3 className="tab-section-title">Team</h3>
-<section className="d-flex justify-content-end">
+{/* <section className="d-flex justify-content-end">
   <button className="teamBtn">Add team member</button>
-</section>
+</section> */}
 <section>
   {/* <h4 className="team-group-title">Founder & Co-Founders</h4> */}
   <h4 className="team-group-title">Founder</h4>

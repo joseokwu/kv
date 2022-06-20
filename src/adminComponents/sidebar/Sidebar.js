@@ -34,12 +34,12 @@ export const Sidebar = () => {
         icon: appMgt,
       },
 
-      // {
-      //   title: "Selection Process",
-      //   activator: "selection_process",
-      //   path: "/admin/selection_process",
-      //   icon: selectProcess,
-      // },
+      {
+        title: 'Selection Process',
+        activator: 'selection_process',
+        path: '/admin/selection_process',
+        icon: selectProcess,
+      },
       {
         title: 'program',
         activator: 'program',

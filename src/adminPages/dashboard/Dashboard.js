@@ -72,17 +72,7 @@ export const Dashboard = () => {
                     content={`$${res?.value || 0}`}
                     variant="secondary"
                 />
-                <Box
-                    title="Latest Funded Startup"
-                    content={
-                        <div className={styles?.latest_startup}>
-                            <img src={founder} alt="founder of startup" />
-                            <img src={founder} alt="founder of startup" />
-                            <img src={founder} alt="founder of startup" />
-                            <img src={founder} alt="founder of startup" />
-                        </div>
-                    }
-                />
+                
                 <Box
                     title="Total Valuation"
                     content={`$${res?.value || 0}`}
@@ -96,12 +86,12 @@ export const Dashboard = () => {
                 </article>
 
                 <article className="col-lg-4">
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                         <AppMgtDash />
-                    </div>
-                    <div>
+                    </div> */}
+                    {/* <div>
                         <UserMgtDash />
-                    </div>
+                    </div> */}
                 </article>
             </section>
         </div>

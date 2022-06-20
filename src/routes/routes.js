@@ -80,6 +80,7 @@ import {
   StartupDashboard,
   StartupFundingRaising,
   StartUpRegistration,
+  StartupRegistrationSuccess,
   StartupProgram,
   StartupBoosterPartner,
   StartupEAcademy,
@@ -117,6 +118,8 @@ import {
   ViewPartner,
   ViewKVMember,
   ViewSelectionAnswer,
+  ViewKvAnswer,
+  ViewMentorAnswer,
   AddKVMemberForSelectionProcess,
   SelectionProcessMentor,
   CreateNewCriteriaIntro,
@@ -242,6 +245,14 @@ const routes = [
     name: 'StartupRegistration',
     path: '/startup/registration',
     component: WithStartupRegistrationLayout(StartUpRegistration),
+    exact: true,
+    protected: true,
+    type: 'startup',
+  },
+  {
+    name: 'StartupRegistrationSuccess',
+    path: '/startup/registration/success',
+    component: WithStartupRegisterLayout(StartupRegistrationSuccess),
     exact: true,
     protected: true,
     type: 'startup',
@@ -801,6 +812,24 @@ const routes = [
   },
 
   {
+    name: 'admin application management',
+    path: '/admin/application_mgt/kv_view/:id',
+    component: WithAdminLayout(ViewKvAnswer),
+    exact: true,
+    protected: true,
+    type: 'admin',
+  },
+
+  {
+    name: 'admin application management',
+    path: '/admin/application_mgt/mentor_screening_view/:id',
+    component: WithAdminLayout(ViewMentorAnswer),
+    exact: true,
+    protected: true,
+    type: 'admin',
+  },
+
+  {
     name: 'admin Selection Process',
     path: '/admin/selection_process',
     component: WithAdminLayout(SelectionProcess),
@@ -1102,10 +1131,10 @@ const routes = [
   // KV Member routes
   {
     name: 'kv member dashboard',
-    path: '/kv-member/',
+    path: '/kv-member',
     component: WithKVMemberLayout(Dashboard),
     exact: true,
-    protected: true,
+    protected: false,
     type: 'admin',
   },
   {
