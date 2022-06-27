@@ -5,30 +5,30 @@ import left from "../../assets/icons/chervonLeft.svg";
 import searchIcon from "../../assets/icons/searchSm.svg";
 import closeIcon from "../../assets/icons/closesm.svg";
 import teamMember from "../../assets/images/sampleTeamMember.png";
-import styles from "./addKVMSelectionProcess.module.css";
+import styles from "./addMentorForSelectionProcess.module.css";
 
-export const AddKVMemberForSelectionProcess = () => {
+export const AddMentorForSelectionProcess = () => {
     const { goBack } = useHistory();
 
     return (
         <div className="p-5">
             <section className={styles.assignTeam}>
-                <h3>Assign Team Members</h3>
+                <h3>Invite Mentors</h3>
 
                 <div
                     className="d-flex align-items-end w-100 mb-4"
                     style={{ columnGap: "1.7rem" }}
                 >
                     <TextField
-                        label="Assign KV members"
+                        label="Invite Mentors"
                         placeholder="Enter email address"
                         className="max_fill"
                     />
-                    <Button label="Assign" variant="trans" />
+                    <Button label="Invite" variant="trans" />
                 </div>
 
                 <div className="mb-4">
-                    <p className="mb-3">Members</p>
+                    <p className="mb-3">Mentors</p>
                     <section className="search-input mb-3">
                         <img src={searchIcon} alt="search" />
                         <input

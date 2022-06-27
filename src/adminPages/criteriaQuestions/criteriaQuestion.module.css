@@ -1,3 +1,11 @@
+.wrap {
+  max-width: 1090px;
+  /* margin: 0 auto; */
+  /* display: grid; */
+  /* grid-template-columns: 830px 1fr; */
+  margin-top: 3rem;
+}
+
 .page_desc h4 {
   font-family: "DM Sans";
   font-style: normal;
@@ -45,11 +53,11 @@
   overflow: hidden;
 }
 
-.tq_space > div:first-child {
+.tq_space>div:first-child {
   padding: 1.8rem 3.75rem;
 }
 
-.tq_space > div:first-child h5 {
+.tq_space>div:first-child h5 {
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 700;
@@ -59,7 +67,7 @@
   color: #2e3192;
 }
 
-.tq_space > div:first-child > p {
+.tq_space>div:first-child>p {
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 400;
@@ -69,7 +77,7 @@
   color: #bcbcbc;
 }
 
-.tq_space div:first-child > span > p {
+.tq_space div:first-child>span>p {
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 400;
