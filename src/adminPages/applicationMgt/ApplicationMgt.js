@@ -49,7 +49,6 @@ export const ApplicationMgt = () => {
         limit: 5,
         type: 'startup',
         query: {
-          applicationCompleted: true,
           recommended: false,
           approveToEvaluate: false,
           passedEvaluation: false,

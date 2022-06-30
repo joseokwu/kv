@@ -97,7 +97,10 @@ import {
 } from '../Startuppages';
 import { MentorViewFeedback } from '../mentorPages/mentorAssignments/components/viewFeedback/viewFeedback';
 import { InvestorEvaluate } from '../Investorpages/evaluation/evaluation';
-import { WithAdminLayout } from '../adminComponents';
+import {
+  WithAdminLayout,
+  WithCriteriaEvaluationLayout,
+} from '../adminComponents';
 import { WithKVMemberLayout } from '../KVMemberComponents';
 import {
   AcceptedApplication,
@@ -132,6 +135,7 @@ import {
   ResponseFeedback,
   PermissionControl,
   Dashboard,
+  CreateCriteriaPage,
 } from '../adminPages';
 
 import { StartupsAssigned } from '../KVMemberPages';
@@ -895,29 +899,36 @@ const routes = [
   {
     name: 'admin Selection Process',
     path: '/admin/selection_process/new-criteria-intro',
-    component: WithAdminLayout(CreateNewCriteriaIntro),
-    exact: true,
+    component: WithCriteriaEvaluationLayout(CreateNewCriteriaIntro),
+    // exact: true,
     protected: true,
     type: 'admin',
   },
 
+  // {
+  //     name: "admin Selection Process",
+  //     path: "/admin/selection_process/new-criteria/:id",
+  //     component: WithCriteriaEvaluationLayout(CreateNewCriteria),
+  //     exact: true,
+  //     protected: true,
+  //     type: "admin",
+  // },
   {
     name: 'admin Selection Process',
-    path: '/admin/selection_process/new-criteria',
-    component: WithAdminLayout(CreateNewCriteria),
+    path: '/admin/selection_process/new-criteria/:id',
+    component: WithCriteriaEvaluationLayout(CreateCriteriaPage),
     exact: true,
     protected: true,
     type: 'admin',
   },
-
-  {
-    name: 'admin Selection Process',
-    path: '/admin/selection_process/criteria-questions',
-    component: WithAdminLayout(CriteriaQuestions),
-    exact: true,
-    protected: true,
-    type: 'admin',
-  },
+  // {
+  //     name: "admin Selection Process",
+  //     path: "/admin/selection_process/criteria-questions",
+  //     component: WithAdminLayout(CriteriaQuestions),
+  //     exact: true,
+  //     protected: true,
+  //     type: "admin",
+  // },
 
   {
     name: 'admin Selection Process',
@@ -931,7 +942,7 @@ const routes = [
   {
     name: 'admin Selection Process',
     path: '/admin/selection_process/criteria/:id',
-    component: WithAdminLayout(ViewCriteria),
+    component: ViewCriteria,
     exact: true,
     protected: true,
     type: 'admin',

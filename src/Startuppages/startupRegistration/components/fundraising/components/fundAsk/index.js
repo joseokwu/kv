@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { css } from "styled-components/macro";
 import { useHistory } from "react-router-dom";
 import { BodyWrapper, BntWrap, Terms } from "./fundAsk.styled";
 import {
@@ -133,7 +134,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     </button>
                                 </BntWrap>
                             </div>
-                            <div className="form-group my-2 col-lg-6 col-12">
+                            <div className="form-group my-2 col-12">
                                 <label>
                                     {stateAuth?.startupData?.fundRaising
                                         ?.fundingAsk?.hasPreviousFundraising
@@ -155,7 +156,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         },
                                     ]}
                                 >
-                                    <Select
+                                    <TextField
                                         id="instrumentForRound"
                                         name="instrumentForRound"
                                         // options={optionsNumb}
@@ -174,21 +175,15 @@ export const FundAsk = ({ setFundraising, back }) => {
                                                 },
                                             });
                                         }}
-                                    >
-                                        {optionsNumb.map((item, index) => {
-                                            return (
-                                                <Option
-                                                    value={item.value}
-                                                    key={index}
-                                                >
-                                                    {item.label}
-                                                </Option>
-                                            );
-                                        })}
-                                    </Select>
+                                        css={css`
+                                            input {
+                                                margin-left: 0.5rem;
+                                            }
+                                        `}
+                                    />
                                 </Form.Item>
                             </div>
-                            <div className="form-group my-2 col-lg-6 col-12">
+                            <div className="form-group my-2 col-12">
                                 <Form.Item
                                     name="numberOfRounds"
                                     label="Select your round?"
@@ -206,7 +201,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                                 >
                                     <Select
                                         id="numberOfRounds"
-                                        style={{ width: 200 }}
+                                        style={{
+                                            width: 200,
+                                            marginLeft: "0.5rem",
+                                        }}
                                         placeholder="--Select--"
                                         onChange={(e) => {
                                             updateProfile("fundRaising", {
@@ -219,12 +217,16 @@ export const FundAsk = ({ setFundraising, back }) => {
                                             });
                                         }}
                                     >
-                                        {fundNum.map((item, i) => (
-                                            <Option value={item} key={i}>
-                                                {" "}
-                                                {item}{" "}
-                                            </Option>
-                                        ))}
+                                        {optionsNumb.map((item, index) => {
+                                            return (
+                                                <Option
+                                                    value={item.value}
+                                                    key={index}
+                                                >
+                                                    {item.label}
+                                                </Option>
+                                            );
+                                        })}
                                     </Select>
                                 </Form.Item>
                             </div>
@@ -243,6 +245,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         stateAuth?.startupData?.fundRaising
                                             ?.fundingAsk?.fundraisingAmount
                                     }
+                                    style={{ marginLeft: "8px" }}
                                     className="form-control ps-3"
                                     placeholder="Enter amount"
                                     intlConfig={{

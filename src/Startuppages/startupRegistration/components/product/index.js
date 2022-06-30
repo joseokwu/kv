@@ -95,7 +95,7 @@ export const Product = () => {
             >
                 <FormWrapper>
                     <div className="div">
-                        <span>Product / Service Description</span>
+                        {/* <span>Product / Service Description</span> */}
                         <p className="pt-3">
                             A brief description of your product
                         </p>

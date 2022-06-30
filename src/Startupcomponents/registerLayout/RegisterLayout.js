@@ -31,7 +31,7 @@ const StartupRegistrationLayout = ({ children }) => {
     return (
         <div>
             <section className="layout-header">
-                <Header />
+                <Header disabled={true} />
             </section>
             <section className="layout-body" style={{ overflow: "hidden" }}>
                 <div className="row" style={{}}>

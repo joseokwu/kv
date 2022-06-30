@@ -30,3 +30,4 @@ export * from './permissionControl/PermissionControl';
 export * from './dashboard/Dashboard';
 export * from './viewKvScreening/ViewKvAnswer';
 export * from './viewMentorScreening/ViewMentorAnswer';
+export * from './createCriteriaPage/createCriteriaPage';
