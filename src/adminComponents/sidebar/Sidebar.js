@@ -35,9 +35,9 @@ export const Sidebar = () => {
       },
 
       {
-        title: "Selection Process",
-        activator: "selection_process",
-        path: "/admin/selection_process",
+        title: 'Selection Process',
+        activator: 'selection_process',
+        path: '/admin/selection_process',
         icon: selectProcess,
       },
       {
