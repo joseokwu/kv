@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 
 export const HeaderPitch = styled.div`
-    width: 224px;
+    // width: 224px;
 
     align-items: flex-start;
     h5 {

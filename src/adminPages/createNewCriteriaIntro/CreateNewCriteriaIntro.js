@@ -10,11 +10,11 @@ import { useAdmin } from "../../hooks";
 import { useSelector } from "react-redux";
 
 export const CreateNewCriteriaIntro = () => {
-    const { goBack } = useHistory();
+    const { goBack, push } = useHistory();
     const [show, setShow] = useState(false);
     return (
-        <div className="bg-white" style={{ minHeight: "93vh" }}>
-            {show ? (
+        <div className="bg-white">
+            {/* {show ? (
                 <SmallModal
                     id="createNewCriteriaModal"
                     title="Create New Criteria"
@@ -25,7 +25,7 @@ export const CreateNewCriteriaIntro = () => {
                 </SmallModal>
             ) : (
                 <span />
-            )}
+            )} */}
             <section className="p-5">
                 <div
                     className="d-flex align-items-center mb-3"
@@ -81,18 +81,6 @@ export const CreateNewCriteriaIntro = () => {
                                 <p className="border-0">5-Excellent</p>
                             </div>
                         </section>
-
-                        <section className="d-flex align-items-center justify-content-end space-out mt-5">
-                            <Button
-                                label="Cancel"
-                                variant="trans"
-                                onClick={goBack}
-                            />
-                            <Button
-                                label="Next"
-                                onClick={() => setShow(true)}
-                            />
-                        </section>
                     </div>
                 </section>
             </section>
@@ -101,22 +89,17 @@ export const CreateNewCriteriaIntro = () => {
 };
 
 const CreateNewCriteriaModal = ({ close }) => {
-    const { push } = useHistory();
-    const { setCriteria, adminState } = useAdmin();
-    const aaa = useSelector((state) => state.admin);
-
-    const [seletType, setSelect] = useState("");
+    const { setCriteria } = useAdmin();
+    const [select, setSelect] = useState("");
     const onFinish = async (values) => {
         console.log({
             ...values,
-            evaluationType: seletType,
+            evaluationType: select,
         });
         setCriteria({
             ...values,
-            evaluationType: seletType,
+            evaluationType: select,
         });
-        console.log(adminState);
-        console.log(aaa);
         close(false);
     };
 

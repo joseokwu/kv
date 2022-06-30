@@ -101,7 +101,7 @@ export const PitchDeck = () => {
             >
                 <FormWrapper>
                     <div className="div mt-0 ml-0">
-                        <span>Pitch Deck</span>
+                        {/* <span>Pitch Deck</span> */}
                         <p className="pt-3">
                             A brief presentation and overview about you startup.
                             It can be a pdf, powerpoint presentation or keynote
