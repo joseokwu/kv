@@ -85,20 +85,22 @@ export const ViewKvAnswer = () => {
             </section>
           </div>
 
-          <div className='col-lg-6 align-items-center justify-content-center d-flex'>
-            <section className='d-flex align-items-center justify-content-center space-out'>
-              <Button
-                label='Approve and publish'
-                variant='trans'
-                className={styles.approve_btn}
-              />
-              <Button
-                label='Recommend'
-                variant='trans'
-                className={styles.rec_btn}
-              />
-            </section>
-          </div>
+          {status === 'completed' && (
+            <div className='col-lg-6 align-items-center justify-content-center d-flex'>
+              <section className='d-flex align-items-center justify-content-center space-out'>
+                <Button
+                  label='Approve and publish'
+                  variant='trans'
+                  className={styles.approve_btn}
+                />
+                <Button
+                  label='Recommend'
+                  variant='trans'
+                  className={styles.rec_btn}
+                />
+              </section>
+            </div>
+          )}
         </article>
       </section>
 

@@ -14,7 +14,7 @@ export const EventCard = ({ data = {}, id = 0, onDashboard = false }) => {
     new Date().getTime() < new Date(data?.endTime).getTime();
 
   const eventTime = (
-    <p className='pending_time pt-1'>
+    <p className='pending_time pt-1' style={{ fontSize: '0.85rem' }}>
       <img src={bigClock} alt='clock' />
       {newFormatTime(data?.startTime)} - {newFormatTime(data?.endTime)}
     </p>
