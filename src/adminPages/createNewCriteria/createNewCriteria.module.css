@@ -33,7 +33,7 @@
   border-radius: 20px;
 }
 
-.form_area > h5 {
+.form_area>h5 {
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 700;
@@ -43,7 +43,7 @@
   color: #2e3192;
 }
 
-.form_area > p {
+.form_area>p {
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 400;
@@ -54,7 +54,7 @@
   margin-bottom: 12px !important;
 }
 
-.form_area > div {
+.form_area>div {
   display: flex;
   column-gap: 9px;
   color: #00adef;

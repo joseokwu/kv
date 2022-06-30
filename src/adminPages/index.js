@@ -28,3 +28,4 @@ export * from "./assignmentResponse/AssignmentResponse";
 export * from "./responseFeedback/ResponseFeedback";
 export * from "./permissionControl/PermissionControl";
 export * from "./dashboard/Dashboard";
+export * from "./createCriteriaPage/createCriteriaPage";

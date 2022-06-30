@@ -90,7 +90,7 @@ export const PreviousRound = ({ setFundraising }) => {
                         {/* <hr /> */}
 
                         <div className="row my-4">
-                            <div className="form-group col-12">
+                            <div className="form-group col-12 mb-0">
                                 <Form.Item
                                     name="instrumentForRound"
                                     label="Which instrument did you use for your previous round?"
@@ -100,13 +100,13 @@ export const PreviousRound = ({ setFundraising }) => {
                                     }
                                     rules={[
                                         {
-                                            required: true,
+                                            required: false,
                                             message:
                                                 "Please select an instrument",
                                         },
                                     ]}
                                 >
-                                    <Select
+                                    <TextField
                                         id="instrumentForRound"
                                         style={{ width: 200 }}
                                         onChange={(e) =>
@@ -119,18 +119,11 @@ export const PreviousRound = ({ setFundraising }) => {
                                                 },
                                             })
                                         }
-                                    >
-                                        {fundNum.map((item, i) => (
-                                            <Option value={item} key={i}>
-                                                {" "}
-                                                {item}{" "}
-                                            </Option>
-                                        ))}
-                                    </Select>
+                                    />
                                 </Form.Item>
                             </div>
 
-                            <div className="form-group my-2 col-lg-6 col-12">
+                            <div className="form-group my-2 col-12">
                                 <Form.Item
                                     name="numberOfRounds"
                                     label="Select your previous round"
@@ -140,7 +133,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     }
                                     rules={[
                                         {
-                                            required: true,
+                                            required: false,
                                             message:
                                                 "Please select number of round",
                                         },
@@ -172,7 +165,7 @@ export const PreviousRound = ({ setFundraising }) => {
                             <div className="form-group my-2 col-12">
                                 <label>
                                     In which month/year did you get funding?
-                                    <span style={{ color: "red" }}>*</span>
+                                    {/* <span style={{ color: "red" }}>*</span> */}
                                 </label>
                                 <div>
                                     <DatePicker
@@ -209,7 +202,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     {" "}
                                     How much did you raise in last funding
                                     round?
-                                    <span style={{ color: "red" }}>*</span>
+                                    {/* <span style={{ color: "red" }}>*</span> */}
                                 </label>
 
                                 <CurrencyInput
@@ -226,7 +219,6 @@ export const PreviousRound = ({ setFundraising }) => {
                                         locale: "en-US",
                                         currency: "USD",
                                     }}
-                                    required
                                     onValueChange={(value) =>
                                         updateProfile("fundRaising", {
                                             previousRound: {
@@ -270,7 +262,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                 <label>
                                     What was your pre-money valuation in last
                                     round?
-                                    <span style={{ color: "red" }}>*</span>
+                                    {/* <span style={{ color: "red" }}>*</span> */}
                                 </label>
 
                                 <CurrencyInput
@@ -302,7 +294,7 @@ export const PreviousRound = ({ setFundraising }) => {
                             <div className="form-group my-2 col-12">
                                 <label>
                                     Post-Money valuation for last round
-                                    <span style={{ color: "red" }}>*</span>
+                                    {/* <span style={{ color: "red" }}>*</span> */}
                                 </label>
 
                                 <CurrencyInput
@@ -319,7 +311,6 @@ export const PreviousRound = ({ setFundraising }) => {
                                         locale: "en-US",
                                         currency: "USD",
                                     }}
-                                    required
                                     onValueChange={(value) =>
                                         updateProfile("fundRaising", {
                                             previousRound: {
