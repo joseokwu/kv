@@ -61,7 +61,7 @@ export const ViewEventDetails = ({
 
       <section className={styles?.eventFullDesc}>
         <header className='mb-3'>Description</header>
-        <p>{data?.description}</p>
+        <p>{data?.eventDescription}</p>
       </section>
 
       <section className={styles?.visible}>
@@ -83,33 +83,37 @@ export const ViewEventDetails = ({
         </div>
       </section>
 
-      <section className='mb-4'>
-        <p className='mb-3'>Guests</p>
+      {data?.guests?.length > 0 && (
+        <section className='mb-4'>
+          <p className='mb-3'>Guests</p>
 
-        <div className='row'>
-          {Array.from('four').map((x, i) => {
-            return (
-              <article className='col-lg-6 mb-3' key={`guest-${i}`}>
-                <GuestItem />
-              </article>
-            );
-          })}
-        </div>
-      </section>
+          <div className='row'>
+            {Array.from('four').map((x, i) => {
+              return (
+                <article className='col-lg-6 mb-3' key={`guest-${i}`}>
+                  <GuestItem />
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
-      <section className='mb-4'>
-        <p className='mb-3'>Attendees</p>
+      {data?.attendees?.length > 0 && (
+        <section className='mb-4'>
+          <p className='mb-3'>Attendees</p>
 
-        <div className='row'>
-          {Array.from('four').map((x, i) => {
-            return (
-              <article className='col-lg-6 mb-3' key={`guest-${i}`}>
-                <GuestItem />
-              </article>
-            );
-          })}
-        </div>
-      </section>
+          <div className='row'>
+            {data?.attendees?.map((x, i) => {
+              return (
+                <article className='col-lg-6 mb-3' key={`guest-${i}`}>
+                  <GuestItem name={x.name} />
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       <section className='text-right'>
         <Button label='Join Event' />

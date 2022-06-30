@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from '../../../adminComponents';
 import apple from '../../../assets/images/apple.svg';
@@ -8,8 +8,10 @@ import left from '../../../assets/icons/chervonLeft.svg';
 import styles from '../applicationMgt.module.css';
 import { EmptyState } from '../../../mentorComponents';
 
-export const AcceptedTable = ({ accepted }) => {
-  
+export const AcceptedTable = ({ accepted, setResetAccept }) => {
+  useEffect(() => {
+    setResetAccept(true);
+  }, []);
   const header = useMemo(
     () => [
       {
@@ -52,7 +54,10 @@ export const AcceptedTable = ({ accepted }) => {
           status: <Tag name='Accepted' color='#235405' />,
 
           action: (
-            <Link to={`/admin/application_mgt/accepted/${item?.userId}`} className='view-link'>
+            <Link
+              to={`/admin/application_mgt/accepted/${item?.userId}`}
+              className='view-link'
+            >
               View
             </Link>
           ),
