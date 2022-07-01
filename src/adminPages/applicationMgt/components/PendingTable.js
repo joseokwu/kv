@@ -1,100 +1,101 @@
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { Table } from '../../../adminComponents';
-import { Tag } from '../../../components';
-import { formatDate } from '../../../utils/helpers';
-import apple from '../../../assets/images/apple.svg';
-import left from '../../../assets/icons/chervonLeft.svg';
-import styles from '../applicationMgt.module.css';
-import { EmptyState } from './../../../mentorComponents/emptyState/EmptyState';
+import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { Table } from "../../../adminComponents";
+import { Tag } from "../../../components";
+import { formatDate } from "../../../utils/helpers";
+import left from "../../../assets/icons/chervonLeft.svg";
+import styles from "../applicationMgt.module.css";
+import { EmptyState } from "./../../../mentorComponents/emptyState/EmptyState";
+import { PaginationData } from "../../../components";
 
 export const PendingTable = ({
-  applications,
-  currentPending,
-  setCurrentPending,
+    applications,
+    currentPending,
+    setCurrentPending,
 }) => {
-  const header = useMemo(
-    () => [
-      {
-        title: 'Startup',
-        accessor: 'startup',
-      },
-      {
-        title: 'Application Date',
-        accessor: 'date',
-      },
-      {
-        title: 'Status',
-        accessor: 'status',
-      },
-      {
-        title: 'Action',
-        accessor: 'action',
-      },
-    ],
-    []
-  );
+    const [currentPage, setCurrentPage] = useState(1);
 
-  // const applicationData = useMemo(
-  //   () => applications?.startups?.map((item , i) =>{
-  //     return  {
-  //       startup: (
-  //         <div className="d-flex align-items-center space-out">
-  //           <img src={item?.startUpProfile?.logo} alt="user" className={styles.userPic} />
-  //           <p className="mb-0">{ item?.startUpProfile?.acceleratorName }</p>
-  //         </div>
-  //       ),
+    let limit = 5;
+    let visible = [];
 
-  //       date: formatDate(new Date(item?.startUpProfile?.yearFounded)),
+    if (applications?.startups) {
+        if (applications?.startups.length < limit)
+            visible = applications?.startups;
+        else
+            visible = applications?.startups.slice(
+                limit * (currentPage - 1),
+                limit * (currentPage - 1) + limit
+            );
+    }
 
-  //       status: <Tag name="Pending" color="#2E3192" />,
+    const header = useMemo(
+        () => [
+            {
+                title: "Startup",
+                accessor: "startup",
+            },
+            {
+                title: "Application Date",
+                accessor: "date",
+            },
+            {
+                title: "Status",
+                accessor: "status",
+            },
+            {
+                title: "Action",
+                accessor: "action",
+            },
+        ],
+        []
+    );
 
-  //       action: (
-  //         <Link to={`/admin/application_mgt/pending/${item?.userId}`} className="view-link">
-  //           View
-  //         </Link>
-  //       ),
-  //     }
-  //   }, [])
+    const applicationData = useMemo(() =>
+        visible?.map((item, i) => {
+            return {
+                startup: (
+                    <div className="d-flex align-items-center space-out">
+                        <img
+                            src={item?.startUpProfile?.logo}
+                            alt="user"
+                            className={styles.userPic}
+                        />
+                        <p className="mb-0">
+                            {item?.startUpProfile?.acceleratorName}
+                        </p>
+                    </div>
+                ),
 
-  // )
+                date: formatDate(new Date(item?.startUpProfile?.yearFounded)),
 
-  const applicationData = useMemo(
-    () => [
-      {
-        startup: (
-          <div className='d-flex align-items-center space-out'>
-            <img src={apple} alt='user' className={styles.userPic} />
-            <p className='mb-0'>Apple inc.</p>
-          </div>
-        ),
+                status: <Tag name="Pending" color="#2E3192" />,
 
-        date: formatDate(new Date(2022, 9, 9)),
+                action: (
+                    <Link
+                        to={`/admin/application_mgt/pending/${item?.userId}`}
+                        className="view-link"
+                    >
+                        View
+                    </Link>
+                ),
+            };
+        }, [])
+    );
 
-        status: <Tag name='Pending' color='#2E3192' />,
+    if (applications?.startups?.length === 0) {
+        return <EmptyState message="No Application yet." />;
+    }
 
-        action: (
-          <Link to='/admin/application_mgt/pending/0' className='view-link'>
-            View
-          </Link>
-        ),
-      },
-    ],
-    []
-  );
-
-  // if (applications?.startups?.length === 0) {
-  //   return <EmptyState message='No Application yet.' />;
-  // }
-
-  if (applicationData.length === 0) {
-    return <EmptyState message='No Application yet.' />;
-  }
-
-  return (
-    <div>
-      <Table headers={header} data={applicationData} />
-      {/* Pagination goes here */}
-    </div>
-  );
+    return (
+        <div>
+            <Table headers={header} data={applicationData} />
+            <PaginationData
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                data={applications?.startups || []}
+                limit={limit}
+            />
+            {/* Pagination goes here */}
+        </div>
+    );
 };
