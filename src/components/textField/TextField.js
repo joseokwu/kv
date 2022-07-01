@@ -1,10 +1,10 @@
-import React from "react";
-import "./textField.css";
-import { Form, Input, Checkbox, message } from "antd";
+import React from 'react';
+import './textField.css';
+import { Form, Input, Checkbox, message } from 'antd';
 
 export const TextField = ({
   label,
-  id = "",
+  id = '',
   name,
   defaultValue,
   value,
@@ -20,23 +20,23 @@ export const TextField = ({
   ...rest
 }) => {
   return (
-    <div className="field w-100">
+    <div className='field'>
       <Form.Item
         name={name}
-        style={{ color: "#fe0003" }}
+        style={{ color: '#fe0003' }}
         rules={[
           {
             required: required,
             message: `Please input your ${name}!`,
           },
           {
-            type: name === "email" ? name : type === "url" ? "url" : "",
+            type: name === 'email' ? name : type === 'url' ? 'url' : '',
             message:
-              name === "email"
+              name === 'email'
                 ? `Please input a correct ${name}`
-                : type === "url"
+                : type === 'url'
                 ? `Please enter a valid ${name} url`
-                : "",
+                : '',
           },
         ]}
         type={type}
@@ -44,7 +44,6 @@ export const TextField = ({
         label={label}
       >
         <Input
-        
           id={name}
           onBlur={onBlur}
           onFocus={onFocus}
@@ -66,27 +65,27 @@ export const TextField = ({
 
 export const PasswordField = ({ className, numb, message }) => {
   return (
-    <div className="field">
+    <div className='field'>
       <Form.Item
-        name="password"
-        style={{ color: "#fe0003" }}
+        name='password'
+        style={{ color: '#fe0003' }}
         rules={[
           {
             required: true,
-            message: "Please input your Password!",
+            message: 'Please input your Password!',
           },
           {
             min: numb,
             message: message,
           },
         ]}
-        label="Password"
+        label='Password'
       >
         <Input
-          type="password"
-          id="password"
+          type='password'
+          id='password'
           className={`${className}`}
-          placeholder="Password"
+          placeholder='Password'
         />
       </Form.Item>
     </div>
