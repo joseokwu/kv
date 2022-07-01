@@ -8,25 +8,8 @@ import styles from "../applicationMgt.module.css";
 import { EmptyState } from "./../../../mentorComponents/emptyState/EmptyState";
 import { PaginationData } from "../../../components";
 
-export const PendingTable = ({
-    applications,
-    currentPending,
-    setCurrentPending,
-}) => {
-    const [currentPage, setCurrentPage] = useState(1);
-
+export const PendingTable = ({ applications, currentPage, setCurrentPage }) => {
     let limit = 5;
-    let visible = [];
-
-    if (applications?.startups) {
-        if (applications?.startups.length < limit)
-            visible = applications?.startups;
-        else
-            visible = applications?.startups.slice(
-                limit * (currentPage - 1),
-                limit * (currentPage - 1) + limit
-            );
-    }
 
     const header = useMemo(
         () => [
@@ -50,36 +33,40 @@ export const PendingTable = ({
         []
     );
 
-    const applicationData = useMemo(() =>
-        visible?.map((item, i) => {
-            return {
-                startup: (
-                    <div className="d-flex align-items-center space-out">
-                        <img
-                            src={item?.startUpProfile?.logo}
-                            alt="user"
-                            className={styles.userPic}
-                        />
-                        <p className="mb-0">
-                            {item?.startUpProfile?.acceleratorName}
-                        </p>
-                    </div>
-                ),
+    const applicationData = useMemo(
+        () =>
+            applications?.startups?.map((item, i) => {
+                return {
+                    startup: (
+                        <div className="d-flex align-items-center space-out">
+                            <img
+                                src={item?.startUpProfile?.logo}
+                                alt="user"
+                                className={styles.userPic}
+                            />
+                            <p className="mb-0">
+                                {item?.startUpProfile?.acceleratorName}
+                            </p>
+                        </div>
+                    ),
 
-                date: formatDate(new Date(item?.startUpProfile?.yearFounded)),
+                    date: formatDate(
+                        new Date(item?.startUpProfile?.yearFounded)
+                    ),
 
-                status: <Tag name="Pending" color="#2E3192" />,
+                    status: <Tag name="Pending" color="#2E3192" />,
 
-                action: (
-                    <Link
-                        to={`/admin/application_mgt/pending/${item?.userId}`}
-                        className="view-link"
-                    >
-                        View
-                    </Link>
-                ),
-            };
-        }, [])
+                    action: (
+                        <Link
+                            to={`/admin/application_mgt/pending/${item?.userId}`}
+                            className="view-link"
+                        >
+                            View
+                        </Link>
+                    ),
+                };
+            }),
+        []
     );
 
     if (applications?.startups?.length === 0) {
@@ -94,6 +81,7 @@ export const PendingTable = ({
                 setCurrentPage={setCurrentPage}
                 data={applications?.startups || []}
                 limit={limit}
+                total={applications?.metadata?.total}
             />
             {/* Pagination goes here */}
         </div>
