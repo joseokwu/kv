@@ -12,8 +12,8 @@ import { PaginationData } from "../../../components";
 
 export const ApprovedTable = ({
     approved,
-    currentPending,
-    setCurrentPending,
+    currentPage,
+    setCurrentPage,
     setResetAccept,
 }) => {
     const [loading, setLoading] = useState({ type: "none", id: "" });
@@ -25,18 +25,7 @@ export const ApprovedTable = ({
         success: false,
         id: "",
     });
-    const [currentPage, setCurrentPage] = useState(1);
     let limit = 5;
-    let visible = [];
-
-    if (approved?.startups) {
-        if (approved?.startups.length < limit) visible = approved?.startups;
-        else
-            visible = approved?.startups.slice(
-                limit * (currentPage - 1),
-                limit * (currentPage - 1) + limit
-            );
-    }
 
     const manageAccount = async ({ type, value, userId }) => {
         try {
@@ -89,7 +78,7 @@ export const ApprovedTable = ({
     );
 
     const applicationData = useMemo(() =>
-        visible?.map((item, i) => {
+        approved?.startups?.map((item, i) => {
             return {
                 startup: (
                     <div className="d-flex align-items-center space-out">
@@ -193,6 +182,7 @@ export const ApprovedTable = ({
                 setCurrentPage={setCurrentPage}
                 data={approved?.startups || []}
                 limit={limit}
+                total={approved?.metadata?.total}
             />
             {/* Pagination goes here */}
         </div>

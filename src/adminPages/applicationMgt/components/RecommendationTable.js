@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "../../../adminComponents";
 import apple from "../../../assets/images/apple.svg";
@@ -9,7 +9,15 @@ import styles from "../applicationMgt.module.css";
 import { EmptyState } from "../../../mentorComponents";
 import { PaginationData } from "../../../components";
 
-export const RecommendationTable = ({ recommended }) => {
+export const RecommendationTable = ({
+    recommended,
+    currentPage,
+    setCurrentPage,
+}) => {
+    useEffect(() => {
+        console.log(recommended);
+    }, []);
+
     const header = useMemo(
         () => [
             {
@@ -32,21 +40,10 @@ export const RecommendationTable = ({ recommended }) => {
         []
     );
 
-    const [currentPage, setCurrentPage] = useState(1);
     let limit = 5;
-    let visible;
 
-    if (recommended?.startups) {
-        if (recommended?.startups.length < limit)
-            visible = recommended?.startups;
-        else
-            visible = recommended?.startups.slice(
-                limit * (currentPage - 1),
-                limit * (currentPage - 1) + limit
-            );
-    }
     const data = useMemo(() =>
-        visible?.map((item, i) => {
+        recommended?.startups?.map((item, i) => {
             return {
                 startup: (
                     <div className="d-flex align-items-center space-out">
@@ -80,6 +77,7 @@ export const RecommendationTable = ({ recommended }) => {
                     setCurrentPage={setCurrentPage}
                     data={recommended?.startups || []}
                     limit={limit}
+                    total={recommended?.metadata?.total}
                 />
                 {/* Pagination goes here */}
             </div>
