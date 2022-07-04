@@ -7,8 +7,15 @@ import left from "../../../assets/icons/chervonLeft.svg";
 import styles from "../applicationMgt.module.css";
 import { EmptyState } from "./../../../mentorComponents/emptyState/EmptyState";
 import { PaginationData } from "../../../components";
+import { RoundLoader } from "../../../components/RoundLoader/RoundLoader";
 
-export const PendingTable = ({ applications, currentPage, setCurrentPage }) => {
+export const PendingTable = ({
+    applications,
+    currentPage,
+    setCurrentPage,
+    fetched,
+    setFetched,
+}) => {
     let limit = 5;
 
     const header = useMemo(
@@ -75,14 +82,16 @@ export const PendingTable = ({ applications, currentPage, setCurrentPage }) => {
 
     return (
         <div>
-            <Table headers={header} data={applicationData} />
-            <PaginationData
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                // data={applications?.startups || []}
-                limit={limit}
-                total={applications?.metadata?.total}
-            />
+            <RoundLoader color="blue" fetched={fetched}>
+                <Table headers={header} data={applicationData} />
+                <PaginationData
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    // data={applications?.startups || []}
+                    limit={limit}
+                    total={applications?.metadata?.total}
+                />
+            </RoundLoader>
             {/* Pagination goes here */}
         </div>
     );

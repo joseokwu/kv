@@ -29,6 +29,7 @@ export const ApplicationMgt = () => {
     const {
         location: { hash },
     } = useHistory();
+    const [fetched, setFetched] = useState(false);
     const [currentPagePending, setCurrentPagePending] = useState(1);
     const [currentPageKv, setCurrentPageKv] = useState(1);
     const [currentPageMentor, setCurrentPageMentor] = useState(1);
@@ -51,6 +52,7 @@ export const ApplicationMgt = () => {
 
     useEffect(() => {
         const getData = async () => {
+            setFetched(false);
             console.log("currentPagePending", currentPagePending);
             console.log("currentPageKv", currentPageKv);
             console.log("currentPageRecommended", currentPageRecommended);
@@ -127,6 +129,7 @@ export const ApplicationMgt = () => {
 
             console.log(kvRes?.data);
             console.log(acceptedRes?.data);
+            setFetched(true);
         };
 
         getData();
@@ -156,6 +159,8 @@ export const ApplicationMgt = () => {
                         applications={applications}
                         currentPage={currentPagePending}
                         setCurrentPage={setCurrentPagePending}
+                        fetched={fetched}
+                        setFetched={setFetched}
                     />
                 );
             case `#${mgtTab[1]}`:
@@ -213,6 +218,8 @@ export const ApplicationMgt = () => {
                         applications={applications}
                         currentPage={currentPagePending}
                         setCurrentPage={setCurrentPagePending}
+                        fetched={fetched}
+                        setFetched={setFetched}
                     />
                 );
         }
