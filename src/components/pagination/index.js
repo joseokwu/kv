@@ -3,22 +3,20 @@ import Pagination from "react-bootstrap/Pagination";
 
 export const PaginationData = ({
     currentPage,
-    data,
     setCurrentPage,
     limit,
+    total,
 }) => {
-    useEffect(() => {
-        console.log(data);
-    }, []);
-
-    let total;
-    if (data.length < limit) total = 1;
+    let lastPage;
+    if (total < limit) lastPage = 1;
     else {
-        total = Math.ceil(data.length / limit);
+        lastPage = Math.ceil(total / limit);
     }
 
     const nextPage = () => {
-        if (currentPage < total) setCurrentPage(currentPage + 1);
+        console.log(currentPage < lastPage);
+        if (currentPage < lastPage) setCurrentPage(currentPage + 1);
+        // if (currentPage < lastPage) setCurrentPage(2);
     };
 
     const prevPage = () => {
@@ -46,7 +44,7 @@ export const PaginationData = ({
                     <Pagination.Prev onClick={prevPage} className="mx-1" />
                     {
                         <Pagination.Item className="mx-1">{`${currentPage} of  ${
-                            !isNaN(total) ? total : 1
+                            !isNaN(lastPage) ? lastPage : 1
                         }`}</Pagination.Item>
                     }
                     {/* {data?.results?.currentPage === data?.results?.limit ? (

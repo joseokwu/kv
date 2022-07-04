@@ -9,19 +9,8 @@ import styles from "../applicationMgt.module.css";
 import { EmptyState } from "../../../mentorComponents";
 import { PaginationData } from "../../../components";
 
-export const AcceptedTable = ({ accepted }) => {
-    const [currentPage, setCurrentPage] = useState(1);
+export const AcceptedTable = ({ accepted, currentPage, setCurrentPage }) => {
     let limit = 5;
-    let visible = [];
-
-    if (accepted?.startups) {
-        if (accepted?.startups.length < limit) visible = accepted?.startups;
-        else
-            visible = accepted?.startups.slice(
-                limit * (currentPage - 1),
-                limit * (currentPage - 1) + limit
-            );
-    }
 
     const header = useMemo(
         () => [
@@ -47,7 +36,7 @@ export const AcceptedTable = ({ accepted }) => {
 
     const data = useMemo(
         () =>
-            visible?.map((item, i) => {
+            accepted?.startups?.map((item, i) => {
                 return {
                     startup: (
                         <div className="d-flex align-items-center space-out">
@@ -91,6 +80,7 @@ export const AcceptedTable = ({ accepted }) => {
                     setCurrentPage={setCurrentPage}
                     data={accepted?.startups || []}
                     limit={limit}
+                    total={accepted?.metadata?.total}
                 />
                 {/* Pagination goes here */}
             </div>

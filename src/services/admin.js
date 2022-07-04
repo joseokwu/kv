@@ -2,6 +2,7 @@ import { request } from "../utils/axios";
 
 export const getStakeHolders = async (values) => {
     try {
+        console.log(values);
         const response = await request.post("allStakeHolders", values);
         return response.data;
     } catch (err) {
@@ -90,12 +91,14 @@ export const createAssignment = async (values) => {
     }
 };
 
-export const getPrograms = async () => {
+export const getPrograms = async (
+    values = {
+        limit: 5,
+        page: 1,
+    }
+) => {
     try {
-        const response = await request.post("getPrograms", {
-            limit: 5,
-            page: 1,
-        });
+        const response = await request.post("getPrograms", values);
         console.log(response.data);
         return response.data;
     } catch (err) {
