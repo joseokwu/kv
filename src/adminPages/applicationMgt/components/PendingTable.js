@@ -66,7 +66,7 @@ export const PendingTable = ({ applications, currentPage, setCurrentPage }) => {
                     ),
                 };
             }),
-        []
+        [applications]
     );
 
     if (applications?.startups?.length === 0) {
@@ -79,7 +79,7 @@ export const PendingTable = ({ applications, currentPage, setCurrentPage }) => {
             <PaginationData
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                data={applications?.startups || []}
+                // data={applications?.startups || []}
                 limit={limit}
                 total={applications?.metadata?.total}
             />

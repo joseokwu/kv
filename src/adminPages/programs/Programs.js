@@ -70,20 +70,27 @@ export const Programs = () => {
             >
                 <UploadProgramInfo />
             </Modal>
+
             <section
-                className="d-flex align-items-center justify-content-end mb-45"
+                className="d-flex align-items-center justify-content-between mb-45"
                 style={{ columnGap: "1rem", maxWidth: 2000 }}
             >
-                <Button
-                    label="Upload Program Info Pack"
-                    variant="trans"
-                    data-target="#uploadProgram"
-                    data-toggle="modal"
-                />
-                <Button
-                    label="Add new program"
-                    onClick={() => push("/admin/program/create")}
-                />
+                <h4 className="blue-title">Programs</h4>
+                <div
+                    className="d-flex align-items-center justify-content-end gap-3"
+                    style={{ columnGap: "1rem", maxWidth: 2000 }}
+                >
+                    <Button
+                        label="Upload Program Info Pack"
+                        variant="trans"
+                        data-target="#uploadProgram"
+                        data-toggle="modal"
+                    />
+                    <Button
+                        label="Add new program"
+                        onClick={() => push("/admin/program/create")}
+                    />
+                </div>
             </section>
 
             <section className="mb-45" style={{ maxWidth: 2000 }}>

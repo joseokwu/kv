@@ -3,16 +3,10 @@ import Pagination from "react-bootstrap/Pagination";
 
 export const PaginationData = ({
     currentPage,
-    data,
     setCurrentPage,
     limit,
     total,
 }) => {
-    useEffect(() => {
-        console.log(data);
-        console.log(`page ${currentPage}`);
-    }, [data?.length]);
-
     let lastPage;
     if (total < limit) lastPage = 1;
     else {
@@ -20,7 +14,9 @@ export const PaginationData = ({
     }
 
     const nextPage = () => {
+        console.log(currentPage < lastPage);
         if (currentPage < lastPage) setCurrentPage(currentPage + 1);
+        // if (currentPage < lastPage) setCurrentPage(2);
     };
 
     const prevPage = () => {

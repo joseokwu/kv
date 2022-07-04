@@ -26,7 +26,7 @@ export const AddMentor = () => {
     <div className="px-4">
       <form onSubmit={formik.handleSubmit}>
         <TextField
-          label="Mentor Name*"
+          label="First Name*"
           className="max_fill mb-4"
           placeholder="Enter mentor first name"
           name="firstname"
@@ -34,7 +34,7 @@ export const AddMentor = () => {
         />
 
         <TextField
-          label="Mentor Name*"
+          label="Last Name*"
           className="max_fill mb-4"
           placeholder="Enter mentor last name"
           name="lastname"
@@ -54,7 +54,7 @@ export const AddMentor = () => {
           label="Password*"
           className="max_fill mb-4"
           type="password"
-          placeholder="password"
+          placeholder="Password"
           name="password"
           onChange={handleChange}
         />

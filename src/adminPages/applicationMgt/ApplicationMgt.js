@@ -51,6 +51,12 @@ export const ApplicationMgt = () => {
 
     useEffect(() => {
         const getData = async () => {
+            console.log("currentPagePending", currentPagePending);
+            console.log("currentPageKv", currentPageKv);
+            console.log("currentPageRecommended", currentPageRecommended);
+            console.log("currentPageAccepted", currentPageAccepted);
+            // console.log("currentPagePending", currentPagePending);
+
             const res = await getStakeHolders({
                 page: currentPagePending,
                 limit: 5,
@@ -67,16 +73,16 @@ export const ApplicationMgt = () => {
                 type: "startup",
                 query: { applicationCompleted: true, approveToEvaluate: true },
             });
-            const mentRes = await getStakeHolders({
-                page: currentPageMentor,
-                limit: 5,
-                type: "startup",
-                query: {
-                    applicationCompleted: true,
-                    recommended: true,
-                    approveToEvaluate: false,
-                },
-            });
+            // const mentRes = await getStakeHolders({
+            //     page: currentPageMentor,
+            //     limit: 5,
+            //     type: "startup",
+            //     query: {
+            //         applicationCompleted: true,
+            //         recommended: true,
+            //         approveToEvaluate: false,
+            //     },
+            // });
             // const acceptedRes = await getStakeHolders({
             //   page: currentPageAccept,
             //   limit: 5,
@@ -116,7 +122,7 @@ export const ApplicationMgt = () => {
             setKvScreening(kvRes?.data);
             console.log(kvRes?.data);
             setAccepted(acceptedRes?.data);
-            setMentorScreening(mentRes?.data);
+            // setMentorScreening(mentRes?.data);
             setRecommended(recommendedRes?.data);
 
             console.log(kvRes?.data);
@@ -131,15 +137,15 @@ export const ApplicationMgt = () => {
             setKvScreening();
             setAccepted();
             // setMentorScreening();
-            setCurrentPageRecommended();
+            setRecommended();
         };
     }, [
         currentPagePending,
         currentPageKv,
-        currentPageMentor,
+        // currentPageMentor,
         currentPageAccepted,
         currentPageRecommended,
-        resetAccept,
+        // resetAccept,
     ]);
 
     const renderComponent = () => {
@@ -204,6 +210,7 @@ export const ApplicationMgt = () => {
             default:
                 return (
                     <PendingTable
+                        applications={applications}
                         currentPage={currentPagePending}
                         setCurrentPage={setCurrentPagePending}
                     />
