@@ -2,6 +2,7 @@ import { request } from "../utils/axios";
 
 export const getStakeHolders = async (values) => {
     try {
+        console.log(values);
         const response = await request.post("allStakeHolders", values);
         return response.data;
     } catch (err) {

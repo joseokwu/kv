@@ -419,7 +419,7 @@ export const Mentor = () => {
                 </div>
 
                 <div>
-                    {mentors?.length === 0 ? (
+                    {mentors?.length !== 0 ? (
                         <EmptyState message="No mentors yet." />
                     ) : (
                         <SkeletonLoader fetched={fetched}>
