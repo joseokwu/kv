@@ -8,6 +8,7 @@ import founderLg from "../../../assets/images/sampleFounder.png";
 import facebook from "../../../assets/icons/facebookLogo.svg";
 import twitter from "../../../assets/icons/twitterLogo.svg";
 import linkedIn from "../../../assets/icons/linkedInLogo.svg";
+import { AiFillLinkedin, AiFillTwitterCircle } from "react-icons/ai";
 import web from "../../../assets/icons/webSm.svg";
 import split from "../../../assets/icons/split.svg";
 import mail from "../../../assets/icons/mail.svg";
@@ -15,12 +16,20 @@ import yeLogo from "../../../assets/images/yeLogo.svg";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
-export const Product = ({ data, founder }) => {
+export const Product = ({ data, founder, startupData }) => {
     const countInvestor = [1, 2, 3, 4];
+
+    useEffect(() => {
+        console.log(data);
+    }, []);
+
     return (
         <div className="row">
             <Modal id="founderInfo" withHeader={false}>
-                <FounderInfo founder={founder} />
+                <FounderInfo
+                    founder={founder}
+                    startupname={startupData?.startupname}
+                />
             </Modal>
 
             <Modal id="investorInfo" withHeader={false}>
@@ -229,7 +238,7 @@ const InvestorInfo = () => {
     );
 };
 
-const FounderInfo = ({ founder }) => {
+const FounderInfo = ({ founder, startupname }) => {
     const { id } = useParams();
 
     useEffect(() => {
@@ -267,41 +276,71 @@ const FounderInfo = ({ founder }) => {
                             founder?.gender === "female" ? "Mrs" : "Mr"
                         } ${founder?.firstName} ${founder?.lastName}`}</h2>
                         <span>
-                            <img src={twitter} alt="twitter" />
-                            <img
-                                src={facebook}
-                                alt="facebook"
-                                className="mx-3"
-                            />
-                            <img src={linkedIn} alt="linkedIn" />
+                            <a
+                                href={founder?.socialMedia?.twitter}
+                                target="_blank"
+                            >
+                                <img src={twitter} alt="twitter" />
+                            </a>
+                            <a
+                                href={founder?.socialMedia?.facebook}
+                                target="_blank"
+                            >
+                                <img
+                                    src={facebook}
+                                    alt="facebook"
+                                    className="mx-3"
+                                />
+                            </a>
+                            <a
+                                href={founder?.socialMedia?.linkedIn}
+                                target="_blank"
+                            >
+                                <img src={linkedIn} alt="linkedIn" />
+                            </a>
                         </span>
                     </article>
-                    <p className="founder-modal-title">CEO Applean Insteen</p>
-                    <span className="founder-modal-mail">
+                    <p className="founder-modal-title">Founder {startupname}</p>
+                    <span className="founder-modal-mail my-2">
                         <img src={mail} alt="mail" />
-                        <a href="mailto:Promise_Amstel@gmail.com">
-                            Promise_Amstel@gmail.com
+                        <a href={`mailto:${founder?.email}`} target="_blank">
+                            {founder?.email}
                         </a>
                     </span>
 
                     <article className="d-flex align-items-center flex-wrap founder-links">
-                        <span>
+                        <span className="mb-3">
                             <img src={web} alt="web" />
-                            <a href="https://www.promiseamstel.com">
-                                @promiseamstel
+                            <a
+                                href={founder?.socialMedia?.website}
+                                target="_blank"
+                            >
+                                {founder?.socialMedia?.website}
                             </a>
                         </span>
 
-                        <span>
+                        <span className="mb-3">
                             <img src={split} alt="split" />
-                            <a href="https://www.promiseamstel.com">
-                                @promiseamstel
+                            <a
+                                href={founder?.socialMedia?.twitter}
+                                target="_blank"
+                            >
+                                {`@${founder?.socialMedia?.twitter
+                                    ?.split("/")
+                                    .slice(-1)
+                                    .pop()}`}
                             </a>
                         </span>
-                        <span>
+                        <span className="mb-3">
                             <img src={split} alt="split" />
-                            <a href="https://www.promiseamstel.com">
-                                @promiseamstel
+                            <a
+                                href={founder?.socialMedia?.linkedIn}
+                                target="_blank"
+                            >
+                                {`@${founder?.socialMedia?.linkedIn
+                                    ?.split("/")
+                                    .slice(-1)
+                                    .pop()}`}
                             </a>
                         </span>
                     </article>
@@ -309,7 +348,7 @@ const FounderInfo = ({ founder }) => {
                         className="d-flex align-items-center mt-5"
                         style={{ columnGap: 12, rowGap: 10 }}
                     >
-                        <Button label="Schedule call" />
+                        {/* <Button label="Schedule call" /> */}
                         <Button label="Send a message" variant="secondary" />
                         <a
                             href={`/investor/opportunities/${id}/founder`}

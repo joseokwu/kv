@@ -10,8 +10,9 @@ import { AddMentor } from "./AddMentor";
 import { useHistory } from "react-router-dom";
 import { getStakeHolders } from "../../../services";
 import { SkeletonLoader } from "../../../components";
-import { getPrograms } from "../../../services/admin";
+import { RoundLoader } from "../../../components";
 import { EmptyState } from "../../../mentorComponents";
+import { getPrograms } from "../../../services/admin";
 
 export const Mentor = () => {
     const { push } = useHistory();
@@ -76,45 +77,56 @@ export const Mentor = () => {
     };
 
     useEffect(() => {
-        const res = getData();
-        if (res.success && res?.data?.mentors?.length > 0) {
-            setNumOfMentors(res?.data?.metadata?.total);
-            setMentors(() =>
-                res?.data?.mentors.map((mentor) => ({
-                    name: (
-                        <div className="d-flex align-items-center space-out">
-                            <img
-                                src={mentor?.personalDetail?.logo ?? userPic}
-                                alt="user"
-                                className={styles.userPic}
-                            />
-                            <p className="mb-0">{`${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`}</p>
-                        </div>
-                    ),
-                    skills: (
-                        <div className="d-flex space-out flex-wrap">
-                            {mentor?.areaOfInterest?.skills?.map((skill, i) => (
-                                <Tag
-                                    name={skill}
-                                    color={i > 0 ? "#40439A" : "#058dc1"}
+        try {
+            const res = getData();
+            if (res.success && res?.data?.mentors?.length > 0) {
+                setNumOfMentors(res?.data?.metadata?.total);
+                setMentors(() =>
+                    res?.data?.mentors.map((mentor) => ({
+                        name: (
+                            <div className="d-flex align-items-center space-out">
+                                <img
+                                    src={
+                                        mentor?.personalDetail?.logo ?? userPic
+                                    }
+                                    alt="user"
+                                    className={styles.userPic}
                                 />
-                            ))}
-                        </div>
-                    ),
-                    company: "Seam Technologies Inc.",
-                    sessions: 3,
-                    actions: (
-                        <div className="d-flex align-items-center space-out">
-                            <Link
-                                to={`/admin/users/mentors/${mentor?.userId}`}
-                                className="view-link"
-                            >
-                                View
-                            </Link>
-                        </div>
-                    ),
-                }))
-            );
+                                <p className="mb-0">{`${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`}</p>
+                            </div>
+                        ),
+                        skills: (
+                            <div className="d-flex space-out flex-wrap">
+                                {mentor?.areaOfInterest?.skills?.map(
+                                    (skill, i) => (
+                                        <Tag
+                                            name={skill}
+                                            color={
+                                                i > 0 ? "#40439A" : "#058dc1"
+                                            }
+                                        />
+                                    )
+                                )}
+                            </div>
+                        ),
+                        company: "Seam Technologies Inc.",
+                        sessions: 3,
+                        actions: (
+                            <div className="d-flex align-items-center space-out">
+                                <Link
+                                    to={`/admin/users/mentors/${mentor?.userId}`}
+                                    className="view-link"
+                                >
+                                    View
+                                </Link>
+                            </div>
+                        ),
+                    }))
+                );
+            }
+            setFetched(true);
+        } catch (e) {
+            console.log(e);
             setFetched(true);
         }
 
@@ -419,12 +431,12 @@ export const Mentor = () => {
                 </div>
 
                 <div>
-                    {mentors?.length !== 0 ? (
+                    {fetched && mentors?.length === 0 ? (
                         <EmptyState message="No mentors yet." />
                     ) : (
-                        <SkeletonLoader fetched={fetched}>
+                        <RoundLoader fetched={fetched} color="blue">
                             <Table headers={headers} data={mentors} />
-                        </SkeletonLoader>
+                        </RoundLoader>
                     )}
                 </div>
             </section>
