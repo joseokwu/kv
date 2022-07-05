@@ -16,6 +16,8 @@ import {
 } from "./components";
 import { toast } from "react-hot-toast";
 import { CircularLoader } from "../../components/CircluarLoader";
+import { BiPhoneCall } from "react-icons/bi";
+import { MdOutlineMail } from "react-icons/md";
 
 export const PendingApplication = () => {
     const tabItems = [
@@ -47,6 +49,7 @@ export const PendingApplication = () => {
             case `#${tabItems[2]}`:
                 return (
                     <Product
+                        startupData={startupData}
                         data={startupData?.product}
                         founder={startupData?.team}
                     />
@@ -88,7 +91,7 @@ export const PendingApplication = () => {
                 userId: id,
                 action: "get_account",
             });
-            // console.log(res?.data)
+            console.log(res?.data);
             setStartupData(res?.data);
             setFetched(true);
         };
@@ -143,6 +146,20 @@ export const PendingApplication = () => {
                             <Tag name="Pending" color="#2E3192" />
                         </article>
 
+                        <article className={styles.contactInfo}>
+                            <h4>Contact Information</h4>
+                            <div>
+                                <div>
+                                    <BiPhoneCall size={20} />
+                                    {startupData?.email}
+                                </div>
+                                <div>
+                                    <MdOutlineMail size={20} />
+                                    {startupData?.phone}
+                                </div>
+                            </div>
+                        </article>
+
                         <article className="d-flex align-items-center space-out">
                             <AdminButton
                                 loading={
@@ -169,10 +186,10 @@ export const PendingApplication = () => {
                                         : "primary"
                                 }
                             />
-                            <AdminButton
+                            {/* <AdminButton
                                 label="Schedule call"
                                 variant="secondary"
-                            />
+                            /> */}
                             <AdminButton
                                 loading={
                                     loading === "recommended" ? true : false
@@ -203,7 +220,7 @@ export const PendingApplication = () => {
                         className={`${styles.stageIndustry} col-lg-5 d-flex flex-column justify-content-center`}
                     >
                         <article className="d-flex align-items-center mb-3">
-                            <p className="mr-1">Stage</p>
+                            <p className="mr-3">Stage</p>
                             <Tag
                                 name={startupData?.startUpProfile?.startupStage}
                                 color="#40439A"
@@ -211,7 +228,7 @@ export const PendingApplication = () => {
                         </article>
 
                         <article className="d-flex align-items-center mb-3">
-                            <p className="mr-1">Industry</p>
+                            <p className="mr-3">Industry</p>
                             <div
                                 className="d-flex align-items-center space-out"
                                 style={{ columnGap: 3 }}
@@ -224,7 +241,7 @@ export const PendingApplication = () => {
                         </article>
 
                         <article className="d-flex align-items-center ">
-                            <p className="mr-1">Funding Round</p>
+                            <p className="mr-3">Funding Round</p>
                             <Tag
                                 name={
                                     startupData?.fundRaising?.fundingAsk

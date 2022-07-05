@@ -95,6 +95,7 @@ export const getPrograms = async (
     values = {
         limit: 5,
         page: 1,
+        query: {},
     }
 ) => {
     try {
