@@ -234,6 +234,7 @@ export const ApplicationMgt = () => {
                     name={"New Application"}
                     count={applications?.metadata?.total ?? 0}
                     color={"#E5FFE4"}
+                    fetched={fetched}
                 />
                 <DashCard
                     className="col-lg-3 col-md-6 col-12"
@@ -241,6 +242,7 @@ export const ApplicationMgt = () => {
                     name={"KV Screening"}
                     count={kvScreening?.metadata?.total ?? 0}
                     color={"#FAD7DC"}
+                    fetched={fetched}
                 />
                 <DashCard
                     className="col-lg-3 col-md-6 col-12"
@@ -248,12 +250,14 @@ export const ApplicationMgt = () => {
                     name={"Mentor Screening"}
                     count={recommended?.metadata?.total ?? 0}
                     color={"#E5FFE4"}
+                    fetched={fetched}
                 />
                 <DashCard
                     className="col-lg-3 col-md-6 col-12"
                     name={"Accepted"}
                     count={accepted?.metadata?.total ?? 0}
                     color={"#FAD7DC"}
+                    fetched={fetched}
                 />
             </section>
 

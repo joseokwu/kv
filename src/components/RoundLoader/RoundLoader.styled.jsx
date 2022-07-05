@@ -22,6 +22,6 @@ export const LoaderWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    // background-color: #fff;
+    background-color: ${(props) => props.bg};
     height: ${(props) => props.height}px;
 `;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DashCard } from "../../components";
 import founder from "../../assets/images/sampleFounder.png";
 import styles from "./dashboard.module.css";
@@ -6,9 +6,28 @@ import { EventCard } from "../events/components";
 import { EventDashboard } from "./components/EventDashboard";
 import { AppMgtDash } from "./components/AppMgtDash";
 import { UserMgtDash } from "./components/UserMgtDash";
+import { getStakeHolders } from "../../services";
+import { CircularLoader } from "../../mentorComponents/CircluarLoader";
 
 export const Dashboard = () => {
     const res = {};
+
+    const [numOfApplications, setNumOfApplications] = useState(0);
+    const [fetched, setFetched] = useState(false);
+
+    const getData = async () => {
+        const res = await getStakeHolders({
+            page: 1,
+            limit: 5,
+            type: "startup",
+            query: {
+                recommended: false,
+                approveToEvaluate: false,
+                passedEvaluation: false,
+            },
+        });
+        return res;
+    };
     const cardDetails = [
         {
             name: "Incubation Cohort",
@@ -27,7 +46,7 @@ export const Dashboard = () => {
         },
         {
             name: "Total Applications",
-            // count: 10,
+            count: numOfApplications,
             color: "#DEF6FF",
         },
         {
@@ -41,6 +60,19 @@ export const Dashboard = () => {
             color: "#DEF6FF",
         },
     ];
+
+    useEffect(async () => {
+        try {
+            const res = await getData();
+            console.log(res);
+            setNumOfApplications(res?.data?.metadata?.total);
+            setFetched(true);
+        } catch (e) {
+            console.log(e);
+            setFetched(true);
+        }
+    }, []);
+
     return (
         <div className="p-5">
             <section
@@ -54,6 +86,7 @@ export const Dashboard = () => {
                                 name={card?.name}
                                 color={card.color}
                                 count={card?.count || 0}
+                                fetched={fetched}
                             />
                         );
                     })}
@@ -72,7 +105,7 @@ export const Dashboard = () => {
                     content={`$${res?.value || 0}`}
                     variant="secondary"
                 />
-                
+
                 <Box
                     title="Total Valuation"
                     content={`$${res?.value || 0}`}
