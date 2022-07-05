@@ -150,11 +150,11 @@ export const PendingApplication = () => {
                             <h4>Contact Information</h4>
                             <div>
                                 <div>
-                                    <BiPhoneCall size={20} />
+                                    <MdOutlineMail size={20} />
                                     {startupData?.email}
                                 </div>
                                 <div>
-                                    <MdOutlineMail size={20} />
+                                    <BiPhoneCall size={20} />
                                     {startupData?.phone}
                                 </div>
                             </div>
