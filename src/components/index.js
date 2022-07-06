@@ -42,4 +42,4 @@ export * from "./reuseableDropdownMenu/ReuseableDropdownMenu";
 export * from "./seeMore/SeeMore";
 export * from "./filter/filter";
 export * from "./RoundLoader/RoundLoader";
-export { default } from "./avatarWrapper";
+export * from "./avatarWrapper";

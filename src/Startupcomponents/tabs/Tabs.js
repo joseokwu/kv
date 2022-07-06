@@ -56,7 +56,7 @@ export const ModalTabs = ({
 
   
   return (
-    <ul className="applicant-tabs-list mx-3">
+    <ul className="applicant-tabs-list">
       {tabItems.length > 0 &&
         tabItems.map((item, i) => {
           return (

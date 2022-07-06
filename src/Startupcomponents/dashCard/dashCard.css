@@ -47,6 +47,13 @@
   bottom: 0;
 }
 
-.dashCard-main > section {
+.dashCard-main>section {
   height: 100%;
+}
+
+.dash__time {
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  margin-bottom: 0.5rem;
 }

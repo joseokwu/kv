@@ -1,1 +1,1 @@
-export { default } from "./avatarWrapper";
+export * from "./avatarWrapper";

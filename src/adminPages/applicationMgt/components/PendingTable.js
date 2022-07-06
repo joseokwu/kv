@@ -8,7 +8,7 @@ import styles from "../applicationMgt.module.css";
 import { EmptyState } from "./../../../mentorComponents/emptyState/EmptyState";
 import { PaginationData } from "../../../components";
 import { RoundLoader } from "../../../components/RoundLoader/RoundLoader";
-import AvatarWrapper from "../../../components/avatarWrapper";
+import { AvatarWrapper } from "../../../components/avatarWrapper";
 
 export const PendingTable = ({
     applications,
