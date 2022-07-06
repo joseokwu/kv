@@ -101,21 +101,26 @@ export const SmallModal = ({ children, closeModal, title }) => {
     );
 };
 
-export const LargeModal = ({ children, closeModal, title, id }) => {
+export const LargeModal = ({ children, closeModal, title, subTitle, id }) => {
     return (
         <>
             <div className="backDrop" onClick={() => closeModal(false)}></div>
 
             <div id={id} className="large-modal">
                 <div className="top-grey"></div>
-                <div className="d-flex justify-content-between mx-4">
-                    <p className="kv-modal-title px-3 pt-5 mb-4">{title}</p>
-                    <img
-                        className="modalCloseImg mx-4 my-4"
-                        onClick={() => closeModal(false)}
-                        src={Close}
-                        alt={""}
-                    />
+                <div className="mb-4">
+                    <div className="d-flex justify-content-between ">
+                        <p className="kv-modal-title mt-3">{title}</p>
+                        <img
+                            className="modalCloseImg"
+                            onClick={() => closeModal(false)}
+                            src={Close}
+                            alt={""}
+                        />
+                    </div>
+                    {subTitle && (
+                        <p className="kv-modal-subtitle mb-4">{subTitle}</p>
+                    )}
                 </div>
 
                 {children || "Enter element here"}

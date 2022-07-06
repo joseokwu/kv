@@ -1,4 +1,4 @@
-const AvatarWrapper = ({ condition, initials, children, size }) => {
+export const AvatarWrapper = ({ condition, initials, children, size }) => {
     return condition ? (
         children
     ) : (
@@ -18,5 +18,3 @@ const AvatarWrapper = ({ condition, initials, children, size }) => {
         </div>
     );
 };
-
-export default AvatarWrapper;

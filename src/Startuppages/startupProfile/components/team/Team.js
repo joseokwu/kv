@@ -6,10 +6,12 @@ import whatsApp from "../../../../assets/icons/whtsm.svg";
 import apple from "../../../../assets/images/apple.svg";
 import mail from "../../../../assets/icons/mail.svg";
 import blue from "../../../../assets/images/edublue.svg";
+import { AvatarWrapper } from "../../../../components";
 
 import "./team.css";
 import { LargeModal, Tag, Modal } from "../../../../Startupcomponents";
 import moment from "moment";
+import { EmptyState } from "../../../../mentorComponents";
 
 export const Team = ({ data }) => {
     // const count = [1, 2, 3, 4, 5, 6]
@@ -81,7 +83,7 @@ export const Team = ({ data }) => {
                             );
                         })
                     ) : (
-                        <span />
+                        <EmptyState message="You have no team members" />
                     )}
                 </div>
             </section>
@@ -90,12 +92,9 @@ export const Team = ({ data }) => {
 };
 
 const TeamMember = ({ data, modalData, showCofounder, setCofounder }) => {
-    //console.log(data)
+    // console.log(data)
     return (
-        <div
-            className="d-flex align-items-center flex-wrap member-card"
-            onClick={() => setCofounder(!showCofounder)}
-        >
+        <>
             {showCofounder ? (
                 <LargeModal closeModal={setCofounder}>
                     <FounderModal data={data} />
@@ -103,43 +102,79 @@ const TeamMember = ({ data, modalData, showCofounder, setCofounder }) => {
             ) : (
                 <span />
             )}
-
-            {data?.avatar && (
-                <img
-                    src={data?.avatar}
-                    alt="team member"
-                    className="mr-4"
-                    style={{
-                        width: "60px",
-                        height: "60px",
-                        borderRadius: "60px",
-                    }}
-                />
-            )}
-            <section>
-                <p> {data?.firstName + data?.lastName} </p>
-                <p className="small"> {data?.position ?? "Founder"} </p>
-                <span className="d-flex">
+            <div
+                className="d-flex align-items-center flex-wrap gap-4 member-card"
+                onClick={() => setCofounder(!showCofounder)}
+            >
+                <AvatarWrapper
+                    condition={data?.avatar}
+                    size={80}
+                    initials={
+                        data?.firstName?.slice(0, 1) +
+                        data?.lastName?.slice(0, 1)
+                    }
+                >
                     <img
-                        src={linkedIn}
-                        alt="linkedIn"
-                        to={data?.socialMedia?.linkedIn}
-                        width="20"
-                        height="20"
+                        src={data?.avatar}
+                        alt="team member"
+                        className="mr-4"
+                        style={{
+                            width: "80px",
+                            height: "80px",
+                            borderRadius: "50px",
+                        }}
                     />
+                </AvatarWrapper>
+                <section>
+                    <p className="mb-1">
+                        {data?.firstName + data?.lastName || "Anon Founder"}
+                    </p>
+                    <p className="small"> {data?.position ?? "Founder"} </p>
+                    <span className="d-flex mt-3">
+                        <a
+                            href={data?.socialMedia?.linkedIn}
+                            target="_blank"
+                            onClick={(ev) => ev.stopPropagation()}
+                        >
+                            <img
+                                src={linkedIn}
+                                alt="linkedIn"
+                                to={data?.socialMedia?.linkedIn}
+                                width="24"
+                                height="24"
+                            />
+                        </a>
 
-                    <img
-                        src={twitter}
-                        alt="twitter"
-                        className="mx-2"
-                        width="20"
-                        to={data?.socialMedia?.twitter}
-                        height="20"
-                    />
-                    <img src={whatsApp} alt="whatsapp" width="20" height="20" />
-                </span>
-            </section>
-        </div>
+                        <a
+                            href={data?.socialMedia?.twitter}
+                            target="_blank"
+                            onClick={(ev) => ev.stopPropagation()}
+                        >
+                            <img
+                                src={twitter}
+                                alt="twitter"
+                                className="mx-2"
+                                width="24"
+                                to={data?.socialMedia?.twitter}
+                                height="24"
+                            />
+                        </a>
+                        <a
+                            href={`https://wa.me/${data?.mobile_number}?text=`}
+                            target="_blank"
+                            onClick={(ev) => ev.stopPropagation()}
+                        >
+                            <img
+                                src={whatsApp}
+                                alt="whatsapp"
+                                width="24"
+                                height="24"
+                            />
+                        </a>
+                    </span>
+                </section>
+            </div>
+        </>
     );
 };
 
