@@ -9,7 +9,18 @@
   text-align: left;
 }
 
-.kv-modal-content > header {
+.kv-modal-subtitle {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #828282;
+  margin-top: 0.5rem !important;
+}
+
+.kv-modal-content>header {
   border-bottom: 1px solid #f4f4f4;
   padding-bottom: 20px;
   padding-top: 34.5px;
@@ -99,11 +110,17 @@
   overflow-y: auto;
   text-align: justify;
   height: 90vh;
+  padding: 0 60px;
+  padding-top: 42px;
 }
+
+
 
 @media (max-width: 768px) {
   .large-modal {
     width: 90%;
+    padding: 0 30px;
+    padding-top: 40px;
   }
 }
 

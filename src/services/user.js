@@ -26,6 +26,7 @@ export const profile = async (value) => {
     // console.log(value)
     console.log("trying to make request");
     const res = await request.post("getProfile", { type: value });
+    console.log(res.data)
     return res?.data;
   } catch (err) {
     console.log(err);
