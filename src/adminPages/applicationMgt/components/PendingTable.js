@@ -8,6 +8,7 @@ import styles from "../applicationMgt.module.css";
 import { EmptyState } from "./../../../mentorComponents/emptyState/EmptyState";
 import { PaginationData } from "../../../components";
 import { RoundLoader } from "../../../components/RoundLoader/RoundLoader";
+import AvatarWrapper from "../../../components/avatarWrapper";
 
 export const PendingTable = ({
     applications,
@@ -46,13 +47,22 @@ export const PendingTable = ({
                 return {
                     startup: (
                         <div className="d-flex align-items-center space-out">
-                            <img
-                                src={item?.startUpProfile?.logo}
-                                alt="user"
-                                className={styles.userPic}
-                            />
+                            <AvatarWrapper
+                                condition={item?.startUpProfile?.logo}
+                                initials={item?.startUpProfile?.startupName?.slice(
+                                    0,
+                                    1
+                                )}
+                                size={31}
+                            >
+                                <img
+                                    src={item?.startUpProfile?.logo}
+                                    alt="user"
+                                    className={styles.userPic}
+                                />
+                            </AvatarWrapper>
                             <p className="mb-0">
-                                {item?.startUpProfile?.acceleratorName}
+                                {item?.startUpProfile?.startupName}
                             </p>
                         </div>
                     ),
