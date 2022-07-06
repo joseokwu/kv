@@ -149,13 +149,17 @@ export const PendingApplication = () => {
                         <article className={styles.contactInfo}>
                             <h4>Contact Information</h4>
                             <div>
-                                <div>
+                                <div className="d-flex flex-row align-items-center">
                                     <MdOutlineMail size={20} />
-                                    {startupData?.email}
+                                    <span className="ml-2">
+                                        {startupData?.email}
+                                    </span>
                                 </div>
                                 <div>
                                     <BiPhoneCall size={20} />
-                                    {startupData?.phone}
+                                    <span className="ml-2">
+                                        {startupData?.phone}
+                                    </span>
                                 </div>
                             </div>
                         </article>
