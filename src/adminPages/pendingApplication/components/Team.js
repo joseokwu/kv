@@ -148,9 +148,28 @@ const FounderModal = ({ data, setCofounder }) => {
                             <p> {data?.position ?? "Founder"} </p>
                         </div>
                         <div className="">
-                            <img src={linkedIn} alt="linkedIn" />
-                            <img className="px-3" src={twitter} alt="twitter" />
-                            <img src={whatsApp} alt="whatsApp" />
+                            <a
+                                href={data?.socialMedia?.linkedIn}
+                                target="_blank"
+                            >
+                                <img src={linkedIn} alt="linkedIn" />
+                            </a>
+                            <a
+                                href={data?.socialMedia?.twitter}
+                                target="_blank"
+                            >
+                                <img
+                                    className="px-3"
+                                    src={twitter}
+                                    alt="twitter"
+                                />
+                            </a>
+                            <a
+                                href={`https://wa.me/${data?.mobile_number}?text=`}
+                                target="_blank"
+                            >
+                                <img src={whatsApp} alt="whatsApp" />
+                            </a>
                         </div>
                     </div>
 
