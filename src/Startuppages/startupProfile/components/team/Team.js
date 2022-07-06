@@ -124,19 +124,19 @@ const TeamMember = ({ data, modalData, showCofounder, setCofounder }) => {
                         src={linkedIn}
                         alt="linkedIn"
                         to={data?.socialMedia?.linkedIn}
-                        width="24"
-                        height="24"
+                        width="20"
+                        height="20"
                     />
 
                     <img
                         src={twitter}
                         alt="twitter"
                         className="mx-2"
-                        width="24"
+                        width="20"
                         to={data?.socialMedia?.twitter}
-                        height="24"
+                        height="20"
                     />
-                    <img src={whatsApp} alt="whatsapp" />
+                    <img src={whatsApp} alt="whatsapp" width="20" height="20" />
                 </span>
             </section>
         </div>
