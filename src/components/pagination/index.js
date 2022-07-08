@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Pagination from "react-bootstrap/Pagination";
 
 export const PaginationData = ({
@@ -12,6 +12,12 @@ export const PaginationData = ({
     else {
         lastPage = Math.ceil(total / limit);
     }
+    const [tempPage, setTempPage] = useState(currentPage);
+
+    useEffect(() => {
+        setTempPage(currentPage);
+        sessionStorage.setItem("KV:current-page", currentPage);
+    }, [currentPage]);
 
     const nextPage = () => {
         console.log(currentPage < lastPage);
@@ -23,8 +29,18 @@ export const PaginationData = ({
         if (currentPage > 1) setCurrentPage(currentPage - 1);
     };
 
-    const movePage = (id) => {
-        setCurrentPage(id);
+    const movePage = (ev) => {
+        ev.preventDefault();
+        if (!isNaN(parseInt(tempPage))) {
+            if (tempPage >= 1 && tempPage <= lastPage)
+                setCurrentPage(parseInt(tempPage));
+            else {
+                setCurrentPage(1);
+            }
+        } else {
+            console.log("gibberish");
+            console.log(tempPage);
+        }
     };
 
     // const getTotal = () => {
@@ -43,9 +59,25 @@ export const PaginationData = ({
                 <>
                     <Pagination.Prev onClick={prevPage} className="mx-1" />
                     {
-                        <Pagination.Item className="mx-1">{`${currentPage} of  ${
-                            !isNaN(lastPage) ? lastPage : 1
-                        }`}</Pagination.Item>
+                        <Pagination.Item className="mx-1">
+                            <form
+                                style={{ display: "inline" }}
+                                onSubmit={movePage}
+                            >
+                                <input
+                                    type="text"
+                                    style={{
+                                        maxWidth: "2rem",
+                                        textAlign: "center",
+                                    }}
+                                    value={tempPage}
+                                    onChange={(ev) =>
+                                        setTempPage(ev.target.value)
+                                    }
+                                />
+                            </form>
+                            {`of  ${!isNaN(lastPage) ? lastPage : 1}`}
+                        </Pagination.Item>
                     }
                     {/* {data?.results?.currentPage === data?.results?.limit ? (
                             <span />

@@ -17,7 +17,6 @@ export const StartupContactUs = () => {
     const [form] = Form.useForm();
 
     const onFinish = async (value) => {
-        console.log(value);
         try {
             setLoading(true);
             const res = await sendFeedBack({ ...value, message: message });
@@ -38,7 +37,7 @@ export const StartupContactUs = () => {
     };
 
     return (
-        <div className="wrapper">
+        <div className="wrapper" style={{ minHeight: "calc(100vh - 60px)" }}>
             <section>
                 <h1 className="contact-header">Contact Us</h1>
                 <p className="contact-txt">
@@ -112,7 +111,9 @@ export const StartupContactUs = () => {
 
                 <article className="col-lg-6">
                     <section className="message-card">
-                        {/* <header className="message-header">Send a message</header> */}
+                        <header className="message-header">
+                            Send a message
+                        </header>
                         <Form
                             name="contact"
                             form={form}
