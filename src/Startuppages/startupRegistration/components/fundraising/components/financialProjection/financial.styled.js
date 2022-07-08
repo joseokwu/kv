@@ -4,7 +4,7 @@ export const BodyWrapper = styled.div`
     margin-bottom: 10px;
     margin-top: 15px;
     margin-left: 15px;
-    .span {
+    .mini-title {
         font-family: DM Sans;
         font-weight: 500;
         font-size: 24px;

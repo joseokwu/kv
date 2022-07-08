@@ -47,27 +47,46 @@ export const OppCompanyInfo = ({ data }) => {
                             {startUpProfile?.startupName}
                         </h3>
                         <span>
-                            <img
-                                src={linkedIn}
-                                alt="linkedIn"
-                                width="24"
-                                height="24"
-                            />
-                            <img
-                                src={twitter}
-                                alt="twitter"
-                                className="mx-2"
-                                width="24"
-                                height="24"
-                            />
-                            <img src={whatsApp} alt="whatsapp" />
+                            <a
+                                href={
+                                    startUpProfile?.contactInfo?.linkedInHandle
+                                }
+                                target="_blank"
+                            >
+                                <img
+                                    src={linkedIn}
+                                    alt="linkedIn"
+                                    width="24"
+                                    height="24"
+                                />
+                            </a>
+                            <a
+                                href={
+                                    startUpProfile?.contactInfo?.twitterHandle
+                                }
+                                target="_blank"
+                            >
+                                <img
+                                    src={twitter}
+                                    alt="twitter"
+                                    className="mx-2"
+                                    width="24"
+                                    height="24"
+                                />
+                            </a>
+                            <a
+                                href={`https://wa.me/${startUpProfile?.contactInfo?.phoneNumber}?text=`}
+                                target="_blank"
+                            >
+                                <img src={whatsApp} alt="whatsapp" />
+                            </a>
                         </span>
                     </div>
                 </div>
             </section>
             <section className="mt-2">
                 <p className="mb-4 text-black"> {data?.industry ?? ""} </p>
-                <p className="mb-2">{data?.description || "-"}</p>
+                <p className="mb-2">{startUpProfile?.elevatorPitch || "-"}</p>
             </section>
         </section>
     );

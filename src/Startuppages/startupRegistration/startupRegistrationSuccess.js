@@ -1,7 +1,15 @@
+import { useEffect } from "react";
+import { Router } from "react-router-dom/cjs/react-router-dom.min";
 import { css } from "styled-components/macro";
 import purpleTick from "../../assets/icons/purple-tick.svg";
 
 export const StartupRegistrationSuccess = () => {
+    useEffect(() => {
+        setTimeout(() => {
+            window.location.replace("/startup/dashboard");
+        }, 5000);
+    }, []);
+
     return (
         <div
             css={css`

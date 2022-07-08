@@ -76,7 +76,7 @@ export const FundAsk = ({ setFundraising, back }) => {
             >
                 <BodyWrapper className="">
                     <div className="div">
-                        <span>Fund Ask</span>
+                        <span className="mini-title">Fund Ask</span>
                         <p className="pt-3">
                             A brief description of funding ask
                         </p>

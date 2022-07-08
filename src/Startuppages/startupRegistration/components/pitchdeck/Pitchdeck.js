@@ -122,8 +122,8 @@ export const PitchDeck = () => {
                                     data={{
                                         maxFiles: 1,
                                         supportedMimeTypes: ["application/pdf"],
-                                        maxFileSize: 400,
-                                        extension: "KB",
+                                        maxFileSize: 5,
+                                        extension: "MB",
                                     }}
                                     initData={
                                         stateAuth.startupData?.pitchDeck
