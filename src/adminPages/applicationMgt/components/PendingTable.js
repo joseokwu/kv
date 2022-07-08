@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "../../../adminComponents";
 import { Tag } from "../../../components";
@@ -18,6 +18,13 @@ export const PendingTable = ({
     setFetched,
 }) => {
     let limit = 5;
+
+    useEffect(() => {
+        const storedPage = sessionStorage.getItem("KV:current-page");
+        if (storedPage && !isNaN(parseInt(storedPage))) {
+            setCurrentPage(parseInt(storedPage));
+        }
+    }, []);
 
     const header = useMemo(
         () => [
