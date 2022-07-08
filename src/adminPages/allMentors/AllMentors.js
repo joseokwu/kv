@@ -9,6 +9,9 @@ import styles from "../userManagement/user.module.css";
 import { AddMentor } from "../userManagement/components";
 import { getStakeHolders } from "../../services";
 import { SkeletonLoader } from "../../components";
+import { RoundLoader } from "../../components/RoundLoader/RoundLoader";
+import { EmptyState } from "../../mentorComponents";
+import { CircularLoader } from "../../mentorComponents/CircluarLoader";
 
 export const AllMentors = () => {
     const { push } = useHistory();
@@ -17,60 +20,71 @@ export const AllMentors = () => {
     const [fetched, setFetched] = useState(false);
 
     const getData = async () => {
-        const res = await getStakeHolders({
-            page: 1,
-            limit: 2,
-            type: "mentor",
-            query: { applicationCompleted: true },
-        });
-        if (res.success && res?.data?.mentors?.length > 0) {
-            setMentors(() =>
-                res?.data?.mentors.map((mentor) => ({
-                    name: (
-                        <div className="d-flex align-items-center space-out">
-                            <img
-                                src={mentor?.personalDetail?.logo ?? userPic}
-                                alt="user"
-                                className={styles.userPic}
-                            />
-                            <p className="mb-0">{`${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`}</p>
-                        </div>
-                    ),
-                    skills: (
-                        <div className="d-flex space-out flex-wrap">
-                            {mentor?.areaOfInterest?.skills?.map((skill, i) => (
-                                <Tag
-                                    name={skill}
-                                    color={i > 0 ? "#40439A" : "#058dc1"}
+        try {
+            const res = await getStakeHolders({
+                page: 1,
+                limit: 2,
+                type: "mentor",
+                query: { applicationCompleted: true },
+            });
+            if (res.success && res?.data?.mentors?.length > 0) {
+                setMentors(() =>
+                    res?.data?.mentors.map((mentor) => ({
+                        name: (
+                            <div className="d-flex align-items-center space-out">
+                                <img
+                                    src={
+                                        mentor?.personalDetail?.logo ?? userPic
+                                    }
+                                    alt="user"
+                                    className={styles.userPic}
                                 />
-                            ))}
-                        </div>
-                    ),
-                    company: "Seam Technologies Inc.",
-                    sessions: 3,
-                    actions: (
-                        <div className="d-flex align-items-center space-out">
-                            <Link
-                                to={`/admin/users/mentors/${mentor?.userId}`}
-                                className="view-link"
-                            >
-                                View
-                            </Link>
-                            <p
-                                role="button"
-                                className="delete-link"
-                                data-target="#deleteMentor"
-                                data-toggle="modal"
-                            >
-                                Delete
-                            </p>
-                        </div>
-                    ),
-                }))
-            );
+                                <p className="mb-0">{`${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`}</p>
+                            </div>
+                        ),
+                        skills: (
+                            <div className="d-flex space-out flex-wrap">
+                                {mentor?.areaOfInterest?.skills?.map(
+                                    (skill, i) => (
+                                        <Tag
+                                            name={skill}
+                                            color={
+                                                i > 0 ? "#40439A" : "#058dc1"
+                                            }
+                                        />
+                                    )
+                                )}
+                            </div>
+                        ),
+                        company: "Seam Technologies Inc.",
+                        sessions: 3,
+                        actions: (
+                            <div className="d-flex align-items-center space-out">
+                                <Link
+                                    to={`/admin/users/mentors/${mentor?.userId}`}
+                                    className="view-link"
+                                >
+                                    View
+                                </Link>
+                                <p
+                                    role="button"
+                                    className="delete-link"
+                                    data-target="#deleteMentor"
+                                    data-toggle="modal"
+                                >
+                                    Delete
+                                </p>
+                            </div>
+                        ),
+                    }))
+                );
+            }
+            console.log("res", res);
             setFetched(true);
-        }
-        console.log("res", res);
+        } catch (e) {
+            console.log(e);
+            setFetched(true);
+        }   
     };
 
     useEffect(() => {
@@ -193,9 +207,13 @@ export const AllMentors = () => {
                 </div>
 
                 <div>
-                    <SkeletonLoader fetched={fetched}>
-                        <Table headers={headers} data={mentors} />
-                    </SkeletonLoader>
+                    {fetched && mentors?.length === 0 ? (
+                        <EmptyState message="No mentors yet." />
+                    ) : (
+                        <RoundLoader fetched={fetched} color="blue">
+                            <Table headers={headers} data={mentors} />
+                        </RoundLoader>
+                    )}
                 </div>
 
                 <div className="d-flex align-item-center pt-4 justify-content-end">

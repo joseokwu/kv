@@ -130,6 +130,7 @@ export const StartupContactUs = () => {
                                     type="text"
                                     name={"fullName"}
                                     className="message-input"
+                                    required={true}
                                 />
                             </div>
 
@@ -140,6 +141,7 @@ export const StartupContactUs = () => {
                                     type="email"
                                     name={"emailAddress"}
                                     className="message-input"
+                                    required={true}
                                 />
                             </div>
 
@@ -150,6 +152,7 @@ export const StartupContactUs = () => {
                                     placeholder="Enter Message"
                                     value={message}
                                     onChange={onChange}
+                                    required={true}
                                     rows="5"
                                 />
                             </div>

@@ -1,100 +1,108 @@
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { Table } from '../../../adminComponents';
-import { Tag } from '../../../components';
-import { formatDate } from '../../../utils/helpers';
-import apple from '../../../assets/images/apple.svg';
-import left from '../../../assets/icons/chervonLeft.svg';
-import styles from '../applicationMgt.module.css';
-import { EmptyState } from './../../../mentorComponents/emptyState/EmptyState';
+import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { Table } from "../../../adminComponents";
+import { Tag } from "../../../components";
+import { formatDate } from "../../../utils/helpers";
+import left from "../../../assets/icons/chervonLeft.svg";
+import styles from "../applicationMgt.module.css";
+import { EmptyState } from "./../../../mentorComponents/emptyState/EmptyState";
+import { PaginationData } from "../../../components";
+import { RoundLoader } from "../../../components/RoundLoader/RoundLoader";
+import { AvatarWrapper } from "../../../components/avatarWrapper";
 
 export const PendingTable = ({
-  applications,
-  currentPending,
-  setCurrentPending,
+    applications,
+    currentPage,
+    setCurrentPage,
+    fetched,
+    setFetched,
 }) => {
-  const header = useMemo(
-    () => [
-      {
-        title: 'Startup',
-        accessor: 'startup',
-      },
-      {
-        title: 'Application Date',
-        accessor: 'date',
-      },
-      {
-        title: 'Status',
-        accessor: 'status',
-      },
-      {
-        title: 'Action',
-        accessor: 'action',
-      },
-    ],
-    []
-  );
+    let limit = 5;
 
-  // const applicationData = useMemo(
-  //   () => applications?.startups?.map((item , i) =>{
-  //     return  {
-  //       startup: (
-  //         <div className="d-flex align-items-center space-out">
-  //           <img src={item?.startUpProfile?.logo} alt="user" className={styles.userPic} />
-  //           <p className="mb-0">{ item?.startUpProfile?.acceleratorName }</p>
-  //         </div>
-  //       ),
+    const header = useMemo(
+        () => [
+            {
+                title: "Startup",
+                accessor: "startup",
+            },
+            {
+                title: "Application Date",
+                accessor: "date",
+            },
+            {
+                title: "Status",
+                accessor: "status",
+            },
+            {
+                title: "Action",
+                accessor: "action",
+            },
+        ],
+        []
+    );
 
-  //       date: formatDate(new Date(item?.startUpProfile?.yearFounded)),
+    const applicationData = useMemo(
+        () =>
+            applications?.startups?.map((item, i) => {
+                return {
+                    startup: (
+                        <div className="d-flex align-items-center space-out">
+                            <AvatarWrapper
+                                condition={item?.startUpProfile?.logo}
+                                initials={item?.startUpProfile?.startupName?.slice(
+                                    0,
+                                    1
+                                )}
+                                size={31}
+                            >
+                                <img
+                                    src={item?.startUpProfile?.logo}
+                                    alt="user"
+                                    className={styles.userPic}
+                                />
+                            </AvatarWrapper>
+                            <p className="mb-0">
+                                {item?.startUpProfile?.startupName}
+                            </p>
+                        </div>
+                    ),
 
-  //       status: <Tag name="Pending" color="#2E3192" />,
+                    date: formatDate(
+                        new Date(item?.startUpProfile?.yearFounded)
+                    ),
 
-  //       action: (
-  //         <Link to={`/admin/application_mgt/pending/${item?.userId}`} className="view-link">
-  //           View
-  //         </Link>
-  //       ),
-  //     }
-  //   }, [])
+                    status: <Tag name="Pending" color="#2E3192" />,
 
-  // )
+                    action: (
+                        <Link
+                            to={`/admin/application_mgt/pending/${item?.userId}`}
+                            className="view-link"
+                        >
+                            View
+                        </Link>
+                    ),
+                };
+            }),
+        [applications]
+    );
 
-  const applicationData = useMemo(
-    () => [
-      {
-        startup: (
-          <div className='d-flex align-items-center space-out'>
-            <img src={apple} alt='user' className={styles.userPic} />
-            <p className='mb-0'>Apple inc.</p>
-          </div>
-        ),
+    if (applications?.startups?.length === 0) {
+        return <EmptyState message="No Application yet." />;
+    }
 
-        date: formatDate(new Date(2022, 9, 9)),
-
-        status: <Tag name='Pending' color='#2E3192' />,
-
-        action: (
-          <Link to='/admin/application_mgt/pending/0' className='view-link'>
-            View
-          </Link>
-        ),
-      },
-    ],
-    []
-  );
-
-  // if (applications?.startups?.length === 0) {
-  //   return <EmptyState message='No Application yet.' />;
-  // }
-
-  if (applicationData.length === 0) {
-    return <EmptyState message='No Application yet.' />;
-  }
-
-  return (
-    <div>
-      <Table headers={header} data={applicationData} />
-      {/* Pagination goes here */}
-    </div>
-  );
+    return (
+        <div>
+            <RoundLoader color="blue" fetched={fetched}>
+                <Table headers={header} data={applicationData} />
+                <PaginationData
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    // data={applications?.startups || []}
+                    limit={limit}
+                    total={applications?.metadata?.total}
+                />
+            </RoundLoader>
+            {/* Pagination goes here */}
+        </div>
+    );
 };

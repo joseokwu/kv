@@ -47,7 +47,7 @@ export const CapTable = ({ setFundraising }) => {
         <>
             <BodyWrapper>
                 <div className="div">
-                    <span>Cap Table</span>
+                    <span className="mini-title">Cap Table</span>
                     <p>
                         A document containing all your Cap Table and statements
                         for your business.

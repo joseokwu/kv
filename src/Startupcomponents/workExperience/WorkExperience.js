@@ -14,6 +14,7 @@ export const WorkExperience = ({
   showTeamModal,
   setEditIndex,
   id,
+  data,
   setIsEditing,
   removeWorkExperience,
 }) => {

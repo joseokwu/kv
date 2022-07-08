@@ -78,7 +78,9 @@ export const loginUser = async (value) => async (dispatch) => {
         }
     } catch (err) {
         console.log(err?.response?.data?.message, "err");
-        toast.error(err?.response?.data?.message ?? "Login error please try again");
+        toast.error(
+            err?.response?.data?.message ?? "Login error please try again"
+        );
         //console.log('error')
         dispatch({
             type: LOGIN_FAILED,
@@ -208,6 +210,8 @@ export const getProfile = async (value) => async (dispatch) => {
         const res = await profile(value);
 
         if (res) {
+            console.log(res);
+            console.log(value);
             dispatch({
                 type: USER_PROFILE,
                 payload: res?.data,
