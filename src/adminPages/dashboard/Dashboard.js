@@ -30,6 +30,11 @@ export const Dashboard = () => {
     };
     const cardDetails = [
         {
+            name: "Total Applications",
+            count: numOfApplications,
+            color: "#DEF6FF",
+        },
+        {
             name: "Incubation Cohort",
             // count: 20,
             color: "#D5D6F4",
@@ -44,11 +49,7 @@ export const Dashboard = () => {
             // count: 20,
             color: "#D5D6F4",
         },
-        {
-            name: "Total Applications",
-            count: numOfApplications,
-            color: "#DEF6FF",
-        },
+
         {
             name: "Mentors",
             // count: 10,

@@ -123,7 +123,7 @@ export function newFormatTime(timeToFormat) {
             minute: "2-digit",
             hour12: true,
         })
-        .toUpperCase();
+        // .toUpperCase();
 }
 
 export function mergeDateTime(date, time) {
