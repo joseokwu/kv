@@ -181,22 +181,34 @@ const TeamMember = ({ data, modalData, showCofounder, setCofounder }) => {
 const FounderModal = ({ data }) => {
     return (
         <section className="container dashboard_profle mt-4">
-            <div className="row founder_profile px-5">
+            <div className="row founder_profile">
                 <div className="col-lg-2 me-5">
-                    <img
-                        src={data?.avatar}
-                        style={{
-                            width: "60px",
-                            height: "60px",
-                            borderRadius: "60px",
-                        }}
-                        alt=""
-                    />
+                    <AvatarWrapper
+                        condition={data?.avatar}
+                        size={150}
+                        initials={
+                            data?.firstName?.slice(0, 1) +
+                            data?.lastName?.slice(0, 1)
+                        }
+                    >
+                        <img
+                            src={data?.avatar}
+                            style={{
+                                width: "150px",
+                                height: "150px",
+                                borderRadius: "60px",
+                            }}
+                            alt=""
+                        />
+                    </AvatarWrapper>
                 </div>
                 <div className="col-lg-9 mt-3">
                     <div className="d-flex justify-content-between ">
                         <div>
-                            <h1>{data?.firstName + data?.lastName}</h1>
+                            <h1>
+                                {data?.firstName + " " + data?.lastName ||
+                                    "Anon Founder"}
+                            </h1>
                             <p> {data?.position ?? "Founder"} </p>
                         </div>
                         <div className="">

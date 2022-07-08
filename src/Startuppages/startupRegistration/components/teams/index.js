@@ -76,6 +76,7 @@ export const TeamProfile = () => {
         editWorkExperience,
         setEducation,
         editEducation,
+        state,
         state: {
             path,
             experience,
@@ -85,6 +86,7 @@ export const TeamProfile = () => {
         },
     } = useActivity();
     //const [skillSet, setSkill] = useState(stateAuth?.user?.team?.skills ?? []);
+    // console.log(state);
     const onChangeImage = async (e) => {
         const { files } = e.target;
         const formData = new FormData();
@@ -262,7 +264,10 @@ export const TeamProfile = () => {
                     handleClose={setShow}
                     handleWorkDetails={handleWorkDetails}
                     editIndex={editIndex}
-                    workExperience={experience}
+                    workExperience={[
+                        ...experience,
+                        ...stateAuth?.startupData?.team?.experience,
+                    ]}
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
                 />
@@ -540,6 +545,7 @@ export const TeamProfile = () => {
                                     <WorkExperience
                                         key={index}
                                         {...item}
+                                        data={item}
                                         removeWorkExperience={
                                             removeWorkExperience
                                         }
