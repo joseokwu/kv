@@ -20,7 +20,7 @@
 
 .social-links {
   column-gap: 18px;
-  margin-top: 20px;
+  margin-top: 32px;
 }
 
 .message-card {
@@ -28,7 +28,7 @@
   /* background-color: #2e3192; */
   width: 100%;
   max-width: 546px;
-  padding: 41px 13.1%;
+  padding: 41px 10%;
 }
 
 .message-header {
