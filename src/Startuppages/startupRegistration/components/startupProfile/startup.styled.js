@@ -39,15 +39,25 @@ export const ImageWrapper = styled.span`
 export const InputWrapper = styled.label`
     position: absolute;
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    background: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 8px;
-    right: -8px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    lef: 0;
+
     margin-bottom: 0;
+
+    div {
+        width: 45px;
+        height: 45px;
+        background: #f4f4f4;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 8px;
+        right: -8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     input {
         width: inherit;

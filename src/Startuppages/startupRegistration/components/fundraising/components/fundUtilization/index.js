@@ -38,11 +38,13 @@ export const FundUtilization = () => {
         history.push("#Cap Table");
     };
 
+    // console.log(stateAuth?.startupData?.fundRaising?.fundUtilization?.files);
+
     return (
         <>
             <BodyWrapper>
                 <div className="div">
-                    <span>Fund Utilization</span>
+                    <span className="mini-title">Fund Utilization</span>
                     <p className="pt-3">
                         A document containing all your financial plan and
                         statements for your business.
@@ -51,7 +53,27 @@ export const FundUtilization = () => {
 
                     <div className="my-5">
                         <div className="">
-                            <DownloadableButton href="." className="">
+                            <DownloadableButton
+                                href={null}
+                                className=""
+                                onClick={async () => {
+                                    var workbook = XLSX.utils.book_new();
+                                    const CSVfile = XLSX.utils.json_to_sheet(
+                                        stateAuth?.startupData?.fundRaising
+                                            ?.fundUtilization?.files,
+                                        {
+                                            raw: false,
+                                        }
+                                    );
+                                    XLSX.utils.book_append_sheet(
+                                        workbook,
+                                        CSVfile,
+                                        "Sheet 1"
+                                    );
+                                    XLSX.writeFile(workbook, "Report.csv");
+                                    console.log(CSVfile);
+                                }}
+                            >
                                 <img className="pr-2" src={Download} alt="" />
                                 Download fund utilization template here
                             </DownloadableButton>

@@ -168,7 +168,9 @@ export const StartupProfile = () => {
                         id="dp"
                         hidden
                     />
-                    <IoAdd style={{ color: "#858585" }} size="14" />
+                    <div>
+                        <IoAdd style={{ color: "#858585" }} size="14" />
+                    </div>
                 </InputWrapper>
             </ImageWrapper>
 
@@ -271,7 +273,7 @@ export const StartupProfile = () => {
                                 }
                                 value={
                                     stateAuth?.startupData?.startUpProfile
-                                        ?.registrationNumber
+                                        ?.registrationNumber || stateAuth?.phone
                                 }
                                 required={true}
                                 placeholder="eg; 1234567890"
@@ -494,7 +496,8 @@ export const StartupProfile = () => {
                                 className="custs ps-3 py-2"
                                 value={
                                     stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.phoneNumber
+                                        ?.contactInfo?.phoneNumber ||
+                                    stateAuth?.phone
                                 }
                                 onChange={handlePhoneInput}
                                 MaxLength={17}
@@ -515,7 +518,8 @@ export const StartupProfile = () => {
                                 }
                                 value={
                                     stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.companyEmail
+                                        ?.contactInfo?.companyEmail ||
+                                    stateAuth?.email
                                 }
                                 required={true}
                                 placeholder="Enter your email"
@@ -536,7 +540,10 @@ export const StartupProfile = () => {
                                 label="What should be your startup profile handle?"
                                 type="text"
                                 name="profileHandle"
-                                defaultValue={`knight.venture/${stateAuth?.user?.businessname}`}
+                                value={`knight.venture/${
+                                    stateAuth?.user?.businessname ||
+                                    stateAuth?.startupName
+                                }`}
                                 disabled={true}
                                 required={true}
                                 placeholder="Enter your startup profile handle"
