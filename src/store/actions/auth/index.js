@@ -19,6 +19,7 @@ import {
     UPDATE_MENTOR_INFO,
     UPDATE_MENTOR_DATA,
     UPDATE_STARTUP_USER_PROFILE,
+    REMOVE_WORK_EXPERIENCE,
 } from "../actions.types";
 import {
     register,
@@ -254,3 +255,9 @@ export const updateMentorProfile =
             },
         });
     };
+export const removeWorkExperienceAction = (id) => (dispatch) => {
+    dispatch({
+        type: REMOVE_WORK_EXPERIENCE,
+        payload: id,
+    });
+};
