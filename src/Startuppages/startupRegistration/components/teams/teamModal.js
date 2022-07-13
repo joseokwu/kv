@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HeaderModal, ModalForm } from "./teams.styled";
 import { ModalCus } from "../../../../Startupcomponents/modal/Modal";
 import { DatePicker } from "antd";
@@ -7,6 +7,9 @@ import { CustomButton } from "../../../../Startupcomponents/button/button.styled
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../../../hooks/useAuth";
+import moment from "moment";
+import "moment/locale/zh-cn";
+import locale from "antd/es/locale/zh_CN";
 
 export const TeamModal = ({
     handleClose,
@@ -16,12 +19,22 @@ export const TeamModal = ({
     isEditing,
     setIsEditing,
 }) => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(
+        workExperience[editIndex]?.endDate === "present" ? true : false
+    );
     const { updateProfile, stateAuth } = useAuth();
 
+    const [startDate, setStartDate] = useState(
+        workExperience[editIndex]?.startDate || new Date().toISOString()
+    );
+    const [endDate, setEndDate] = useState(
+        workExperience[editIndex]?.endDate || new Date().toISOString()
+    );
+
+    console.log(workExperience[editIndex]);
+
     const onSubmit = (e, from) => {
+        e.preventDefault();
         console.log("Old Experiences");
 
         const indexInExistingState =
@@ -41,8 +54,8 @@ export const TeamModal = ({
                     position: formik.getFieldProps("position").value,
                     responsibility:
                         formik.getFieldProps("responsibility").value,
-                    startDate: startDate.toISOString(),
-                    endDate: checked ? "present" : endDate.toISOString(),
+                    startDate: startDate,
+                    endDate: checked ? "present" : endDate,
                     founder: true,
                 };
                 updateProfile("team", { experience: newList });
@@ -58,8 +71,8 @@ export const TeamModal = ({
                         position: formik.getFieldProps("position").value,
                         responsibility:
                             formik.getFieldProps("responsibility").value,
-                        startDate: startDate.toISOString(),
-                        endDate: checked ? "present" : endDate.toISOString(),
+                        startDate: startDate,
+                        endDate: checked ? "present" : endDate,
                         founder: true,
                     },
                 ],
@@ -70,6 +83,9 @@ export const TeamModal = ({
     };
 
     // console.log(editIndex)
+    useEffect(() => {
+        console.log(startDate);
+    }, [startDate]);
 
     const formik = useFormik({
         initialValues: {
@@ -81,8 +97,8 @@ export const TeamModal = ({
             responsibility: isEditing
                 ? workExperience[editIndex]?.responsibility
                 : "",
-            startDate: "",
-            endDate: "",
+            startDate: isEditing ? workExperience[editIndex]?.startDate : "",
+            endDate: isEditing ? workExperience[editIndex]?.endDate : "",
         },
         validationSchema: Yup.object({
             companyName: Yup.string().required("Required"),
@@ -91,6 +107,7 @@ export const TeamModal = ({
             responsibility: Yup.string().required("Required"),
         }),
     });
+    console.log(moment(workExperience[editIndex]?.startDate));
 
     return (
         <ModalCus
@@ -200,8 +217,12 @@ export const TeamModal = ({
                                 name="startDate"
                                 className="date-input col-lg-12 ps-3 py-2"
                                 style={{ padding: "15px" }}
-                                selected={startDate}
-                                onChange={(date) => setStartDate(date)}
+                                // selected={startDate}
+                                defaultValue={moment(startDate)}
+                                onChange={(date) => {
+                                    console.log(date._i);
+                                    setStartDate(date._i);
+                                }}
                                 required={true}
                             />
                         </div>

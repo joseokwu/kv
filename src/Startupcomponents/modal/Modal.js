@@ -128,3 +128,30 @@ export const LargeModal = ({ children, closeModal, title, subTitle, id }) => {
         </>
     );
 };
+
+export const TinyModal = ({ children, closeModal, title, titleCol }) => {
+    return (
+        <>
+            <div className="backDrop" onClick={() => closeModal(false)}></div>
+
+            <div className="tiny-modal">
+                <div
+                    className="m-0 d-flex justify-content-between"
+                    style={{ paddingBottom: "1.5rem" }}
+                >
+                    <p className="kv-modal-title" style={{ color: titleCol }}>
+                        {title}
+                    </p>
+                    <img
+                        className="modalCloseImg"
+                        onClick={() => closeModal(false)}
+                        src={Close}
+                        alt={""}
+                    />
+                </div>
+
+                {children || "Enter element here"}
+            </div>
+        </>
+    );
+};

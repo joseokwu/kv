@@ -39,7 +39,12 @@ import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 const { Option } = Select;
 
 export const TeamProfile = () => {
-    const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
+    const {
+        updateProfile,
+        stateAuth,
+        updateStartupInfo,
+        removeWorkExperience,
+    } = useAuth();
     // const [disImg, setImg] = useState(null);
     const [logoUploading, setLogoUploading] = useState(false);
     const [show, setShow] = useState(false);
@@ -71,7 +76,7 @@ export const TeamProfile = () => {
     const {
         changePath,
         setWorkExperience,
-        removeWorkExperience,
+        // removeWorkExperience,
         removeEducation,
         editWorkExperience,
         setEducation,
@@ -256,6 +261,7 @@ export const TeamProfile = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    // console.log(stateAuth);
 
     return (
         <>

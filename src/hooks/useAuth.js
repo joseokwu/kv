@@ -15,6 +15,7 @@ import {
     updateMentorProfile,
     updateMentorData,
     updateStartupUserProfile,
+    removeWorkExperienceAction,
 } from "../store/actions/auth";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
@@ -56,7 +57,7 @@ export const useAuth = () => {
     );
 
     const callUpdateStartupData = async (value) => {
-        console.log(value)
+        console.log(value);
         dispatch(updateStartupUserProfile(value));
     };
 
@@ -192,6 +193,9 @@ export const useAuth = () => {
             toast.error(err?.response?.data?.message ?? err?.response?.message);
         }
     };
+    const removeWorkExperience = (id) => {
+        dispatch(removeWorkExperienceAction(id));
+    };
 
     return {
         stateAuth,
@@ -213,5 +217,6 @@ export const useAuth = () => {
         updateMentorProfileState,
         getSavedMentorData,
         updateMentorInfo,
+        removeWorkExperience,
     };
 };
