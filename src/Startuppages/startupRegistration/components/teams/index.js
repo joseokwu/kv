@@ -43,6 +43,7 @@ export const TeamProfile = () => {
         updateProfile,
         stateAuth,
         updateStartupInfo,
+        removeEducation,
         removeWorkExperience,
     } = useAuth();
     // const [disImg, setImg] = useState(null);
@@ -77,7 +78,6 @@ export const TeamProfile = () => {
         changePath,
         setWorkExperience,
         // removeWorkExperience,
-        removeEducation,
         editWorkExperience,
         setEducation,
         editEducation,
@@ -271,7 +271,7 @@ export const TeamProfile = () => {
                     handleWorkDetails={handleWorkDetails}
                     editIndex={editIndex}
                     workExperience={[
-                        ...experience,
+                        // ...experience,
                         ...stateAuth?.startupData?.team?.experience,
                     ]}
                     isEditing={isEditing}
@@ -285,7 +285,10 @@ export const TeamProfile = () => {
                     handleClose={setShowEducation}
                     handleWorkDetails={handleWorkDetails}
                     editIndex={editIndex}
-                    education={education}
+                    education={[
+                        // ...education,
+                        ...stateAuth?.startupData?.team?.education,
+                    ]}
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
                 />
@@ -579,7 +582,7 @@ export const TeamProfile = () => {
                     </div>
                 </FormWrapper>
 
-                <FormWrapper>
+                <FormWrapper height="80%">
                     <div className="div ml-0">
                         <span>Education</span>
                     </div>

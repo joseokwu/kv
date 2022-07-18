@@ -39,9 +39,6 @@ export const useActivity = () => {
         dispatch(setDEducation(values, type));
     };
 
-    const removeEducation = (id) => {
-        dispatch(removeEducationAction(id));
-    };
     const editEducation = (value) => {
         dispatch(editEducationAction(value));
     };
@@ -67,7 +64,6 @@ export const useActivity = () => {
         setFundraising,
         getApp,
         sendApp,
-        removeEducation,
         editWorkExperience,
         editEducation,
     };

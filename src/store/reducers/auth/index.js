@@ -20,6 +20,7 @@ import {
     UPDATE_MENTOR_INFO,
     UPDATE_MENTOR_DATA,
     UPDATE_STARTUP_USER_PROFILE,
+    REMOVE_EDUCATION,
     REMOVE_WORK_EXPERIENCE,
 } from "../../actions/actions.types";
 import { INIT_STATE } from "../../initialstates";
@@ -304,8 +305,21 @@ const authReducer = (state = INIT_STATE, action) => {
                     action.payload + 1
                 ),
             ];
-
             return newState;
+
+        case REMOVE_EDUCATION:
+            console.log(action.payload, "education index");
+            console.log(state, "state");
+
+            const newwState = { ...state };
+            newwState.startupData.team.education = [
+                ...state?.startupData?.team?.education.slice(0, action.payload),
+                ...state?.startupData?.team?.education.slice(
+                    action.payload + 1
+                ),
+            ];
+
+            return newwState;
     }
 };
 
