@@ -13,7 +13,6 @@ import {
     SET_FUNDRAISING,
     SET_WORK_EXPERIENCE_DATABASE,
     SET_EDUCATION_DATABASE,
-    REMOVE_EDUCATION,
     EDIT_EDUCATION,
     GET_APPLICATIONS,
     SEND_APPLICATION,
@@ -112,16 +111,6 @@ const businessReducer = (state = INIT_STATE_BUSINESS, action) => {
             return {
                 ...state,
                 education: [...state.education, action.payload],
-            };
-
-        case REMOVE_EDUCATION:
-            console.log(action.payload, "Education index");
-            return {
-                ...state,
-                education: [
-                    ...state.education.slice(0, action.payload),
-                    ...state.education.slice(action.payload + 1),
-                ],
             };
 
         case EDIT_EDUCATION:

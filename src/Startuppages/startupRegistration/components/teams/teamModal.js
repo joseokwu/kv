@@ -25,41 +25,44 @@ export const TeamModal = ({
     const { updateProfile, stateAuth } = useAuth();
 
     const [startDate, setStartDate] = useState(
-        workExperience[editIndex]?.startDate || new Date().toISOString()
+        new Date(workExperience[editIndex]?.startDate)?.toLocaleDateString(
+            "zh-cn"
+        ) || new Date().toLocaleDateString("zh-cn")
     );
     const [endDate, setEndDate] = useState(
-        workExperience[editIndex]?.endDate || new Date().toISOString()
+        new Date(workExperience[editIndex]?.endDate)?.toLocaleDateString(
+            "zh-cn"
+        ) || new Date().toLocaleDateString("zh-cn")
     );
 
     console.log(workExperience[editIndex]);
+    console.log(editIndex);
+
+    useEffect(() => {
+        setEndDate(new Date().toLocaleDateString("zh-cn"));
+    }, [checked]);
 
     const onSubmit = (e, from) => {
         e.preventDefault();
         console.log("Old Experiences");
 
-        const indexInExistingState =
-            stateAuth?.startupData?.team?.experience?.findIndex(
-                (item) => item?.index === editIndex
-            );
-
         if (isEditing) {
             const newList = [...stateAuth?.startupData?.team?.experience];
-            console.log(indexInExistingState);
+            console.log("start at", new Date(startDate));
+            console.log("start at", startDate);
+
+            newList[editIndex] = {
+                index: editIndex,
+                companyName: formik.getFieldProps("companyName").value,
+                location: formik.getFieldProps("location").value,
+                position: formik.getFieldProps("position").value,
+                responsibility: formik.getFieldProps("responsibility").value,
+                startDate: new Date(startDate).toISOString(),
+                endDate: checked ? "present" : new Date(endDate).toISOString(),
+                founder: true,
+            };
             console.log(newList);
-            if (editIndex < newList.length) {
-                newList[indexInExistingState] = {
-                    index: editIndex,
-                    companyName: formik.getFieldProps("companyName").value,
-                    location: formik.getFieldProps("location").value,
-                    position: formik.getFieldProps("position").value,
-                    responsibility:
-                        formik.getFieldProps("responsibility").value,
-                    startDate: startDate,
-                    endDate: checked ? "present" : endDate,
-                    founder: true,
-                };
-                updateProfile("team", { experience: newList });
-            }
+            updateProfile("team", { experience: newList });
         } else {
             updateProfile("team", {
                 experience: [
@@ -71,8 +74,10 @@ export const TeamModal = ({
                         position: formik.getFieldProps("position").value,
                         responsibility:
                             formik.getFieldProps("responsibility").value,
-                        startDate: startDate,
-                        endDate: checked ? "present" : endDate,
+                        startDate: new Date(startDate).toISOString(),
+                        endDate: checked
+                            ? "present"
+                            : new Date(endDate).toISOString(),
                         founder: true,
                     },
                 ],
@@ -81,11 +86,6 @@ export const TeamModal = ({
 
         handleClose(false);
     };
-
-    // console.log(editIndex)
-    useEffect(() => {
-        console.log(startDate);
-    }, [startDate]);
 
     const formik = useFormik({
         initialValues: {
@@ -107,7 +107,6 @@ export const TeamModal = ({
             responsibility: Yup.string().required("Required"),
         }),
     });
-    console.log(moment(workExperience[editIndex]?.startDate));
 
     return (
         <ModalCus
@@ -143,6 +142,29 @@ export const TeamModal = ({
                             formik.errors.companyName ? (
                                 <article className="error">
                                     {formik.errors.companyName}
+                                </article>
+                            ) : null}
+                        </div>
+                        <div className="col-12 form-group">
+                            <label>
+                                Position
+                                <span style={{ color: "red" }}>*</span>
+                            </label>
+                            <input
+                                id="title"
+                                name="position"
+                                type="text"
+                                className="form-control ps-3"
+                                placeholder="MD/CEO"
+                                required={true}
+                                value={formik.values.position}
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange}
+                            />
+                            {formik.touched.position &&
+                            formik.errors.position ? (
+                                <article className="error">
+                                    {formik.errors.position}
                                 </article>
                             ) : null}
                         </div>
@@ -218,10 +240,10 @@ export const TeamModal = ({
                                 className="date-input col-lg-12 ps-3 py-2"
                                 style={{ padding: "15px" }}
                                 // selected={startDate}
-                                defaultValue={moment(startDate)}
-                                onChange={(date) => {
-                                    console.log(date._i);
-                                    setStartDate(date._i);
+                                value={moment(startDate)}
+                                onChange={(date, dateString) => {
+                                    console.log(dateString);
+                                    setStartDate(dateString);
                                 }}
                                 required={true}
                             />
@@ -236,8 +258,11 @@ export const TeamModal = ({
                                     id="endDate"
                                     name="endDate"
                                     className="date-input col-lg-12 ps-3 py-2"
-                                    selected={endDate}
-                                    onChange={(date) => setEndDate(date)}
+                                    value={moment(endDate)}
+                                    onChange={(date, dateString) => {
+                                        console.log(dateString);
+                                        setEndDate(dateString);
+                                    }}
                                     required={true}
                                 />
                             </div>
@@ -271,30 +296,65 @@ export const EducationModal = ({
     isEditing,
     setIsEditing,
 }) => {
-    const [eduStartDate, setEduStartDate] = useState(new Date());
-    const [eduEndDate, setEduEndDate] = useState(new Date());
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(
+        education[editIndex]?.endDate === "present" ? true : false
+    );
     const { updateProfile, stateAuth } = useAuth();
+
+    const [startDate, setStartDate] = useState(
+        new Date(education[editIndex]?.startDate)?.toLocaleDateString(
+            "zh-cn"
+        ) || new Date().toLocaleDateString("zh-cn")
+    );
+    const [endDate, setEndDate] = useState(
+        new Date(education[editIndex]?.endDate)?.toLocaleDateString("zh-cn") ||
+            new Date().toLocaleDateString("zh-cn")
+    );
+
+    useEffect(() => {
+        setEndDate(new Date().toLocaleDateString("zh-cn"));
+    }, [checked]);
+
+    console.log(stateAuth?.startupData?.team?.education);
 
     const onSubmit = (e) => {
         console.log(education, "prev education");
         e.preventDefault();
 
-        updateProfile("team", {
-            education: [
-                ...stateAuth?.startupData?.team.education,
-                {
-                    index: editIndex,
-                    schoolName: formik.getFieldProps("schoolName").value,
-                    course: formik.getFieldProps("course").value,
-                    degree: formik.getFieldProps("degree").value,
-                    activities: formik.getFieldProps("activities").value,
-                    startDate: eduStartDate.toISOString(),
-                    endDate: checked ? "present" : eduEndDate.toISOString(),
-                    founder: true,
-                },
-            ],
-        });
+        if (isEditing) {
+            const newList = [...stateAuth?.startupData?.team?.education];
+            newList[editIndex] = {
+                index: editIndex,
+                schoolName: formik.getFieldProps("schoolName").value,
+                course: formik.getFieldProps("course").value,
+                degreeType: formik.getFieldProps("degreeType").value,
+                activities: formik.getFieldProps("activities").value,
+                startDate: new Date(startDate).toISOString(),
+                endDate: checked ? "present" : new Date(endDate).toISOString(),
+                founder: true,
+            };
+            console.log(newList);
+            updateProfile("team", { education: newList });
+        } else {
+            updateProfile("team", {
+                education: [
+                    ...stateAuth?.startupData?.team.education,
+                    {
+                        index: editIndex,
+                        schoolName: formik.getFieldProps("schoolName").value,
+                        course: formik.getFieldProps("course").value,
+                        degreeType: formik.getFieldProps("degreeType").value,
+                        activities: formik.getFieldProps("activities").value,
+                        startDate: new Date(startDate).toISOString(),
+                        endDate: checked
+                            ? "present"
+                            : new Date(endDate).toISOString(),
+                        founder: true,
+                    },
+                ],
+            });
+        }
+
         handleClose(false);
     };
 
@@ -302,21 +362,23 @@ export const EducationModal = ({
         initialValues: {
             schoolName: isEditing ? education[editIndex]?.schoolName : "",
             course: isEditing ? education[editIndex]?.course : "",
-            degree: isEditing ? education[editIndex]?.degree : "",
+            degreeType: isEditing ? education[editIndex]?.degreeType : "",
             activities: isEditing ? education[editIndex]?.activities : "",
-            eduStartDate: "",
-            eduEndDate: "",
+            startDate: "",
+            endDate: "",
         },
         validationSchema: Yup.object({
             schoolName: Yup.string().required("Required"),
             course: Yup.string().required("Required"),
-            degree: Yup.string().required("Required"),
+            degreeType: Yup.string().required("Required"),
             activities: Yup.string().required("Required"),
-            eduStartDate: Yup.string().required("Required"),
-            eduEndDate: Yup.string().required("Required"),
+            startDate: Yup.string().required("Required"),
+            endDate: Yup.string().required("Required"),
         }),
         onSubmit: (value) => console.log(value),
     });
+
+    console.log(formik.getFieldProps("course").value);
 
     return (
         <ModalCus
@@ -330,11 +392,7 @@ export const EducationModal = ({
                     {isEditing ? "Edit Education" : "Add Education"}
                 </HeaderModal>
                 <hr style={{ background: "#323232" }} />
-                <form
-                    onSubmit={(e) =>
-                        onSubmit(e, isEditing ? "educationEdit" : "education")
-                    }
-                >
+                <form onSubmit={onSubmit}>
                     <ModalForm className="row">
                         <div className="col-12 form-group">
                             <label>
@@ -349,6 +407,7 @@ export const EducationModal = ({
                                 value={formik.values.schoolName}
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
+                                required={true}
                             />
                             {formik.touched.school && formik.errors.school ? (
                                 <article className="error">
@@ -358,21 +417,24 @@ export const EducationModal = ({
                         </div>
                         <div className="col-12 form-group">
                             <label>
-                                Degree<span style={{ color: "red" }}>*</span>
+                                Degree
+                                <span style={{ color: "red" }}>*</span>
                             </label>
                             <input
-                                id="degree"
-                                name="degree"
+                                id="degreeType"
+                                name="degreeType"
                                 type="text"
                                 className="form-control ps-3"
-                                placeholder="Enter Degree "
-                                value={formik.values.degree}
+                                placeholder="Enter Degree"
+                                value={formik.values.degreeType}
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
+                                required={true}
                             />
-                            {formik.touched.degree && formik.errors.degree ? (
+                            {formik.touched.degreeType &&
+                            formik.errors.degreeType ? (
                                 <article className="error">
-                                    {formik.errors.degree}
+                                    {formik.errors.degreeType}
                                 </article>
                             ) : null}
                         </div>
@@ -390,6 +452,7 @@ export const EducationModal = ({
                                 value={formik.values.course}
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
+                                required={true}
                             />
                             {formik.touched.course && formik.errors.course ? (
                                 <article className="error">
@@ -418,6 +481,7 @@ export const EducationModal = ({
                                 value={formik.values.activities}
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
+                                required={true}
                             />
                             {formik.touched.activities &&
                             formik.errors.activities ? (
@@ -441,12 +505,16 @@ export const EducationModal = ({
                                 <span style={{ color: "red" }}>*</span>
                             </label>
                             <DatePicker
-                                id="eduStartDate"
-                                name="eduStartDate"
+                                id="startDate"
+                                name="startDate"
                                 className="date-input col-lg-12 ps-3 py-2"
+                                required={true}
                                 // style={{ padding: '15px' }}
-                                selected={eduStartDate}
-                                onChange={(date) => setEduStartDate(date)}
+                                value={moment(startDate)}
+                                onChange={(date, dateString) => {
+                                    console.log(dateString);
+                                    setStartDate(dateString);
+                                }}
                             />
                         </div>
 
@@ -457,12 +525,16 @@ export const EducationModal = ({
                                     <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <DatePicker
-                                    id="eduEndDate"
-                                    name="eduEndDate"
+                                    id="endDate"
+                                    name="endDate"
                                     className="date-input col-lg-12 ps-3 py-2"
+                                    required={true}
                                     // style={{ padding: '15px' }}
-                                    selected={eduEndDate}
-                                    onChange={(date) => setEduEndDate(date)}
+                                    value={moment(endDate)}
+                                    onChange={(date, dateString) => {
+                                        console.log(dateString);
+                                        setEndDate(dateString);
+                                    }}
                                 />
                             </div>
                         )}

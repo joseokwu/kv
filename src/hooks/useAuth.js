@@ -16,6 +16,7 @@ import {
     updateMentorData,
     updateStartupUserProfile,
     removeWorkExperienceAction,
+    removeEducationAction,
 } from "../store/actions/auth";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
@@ -196,6 +197,9 @@ export const useAuth = () => {
     const removeWorkExperience = (id) => {
         dispatch(removeWorkExperienceAction(id));
     };
+    const removeEducation = (id) => {
+        dispatch(removeEducationAction(id));
+    };
 
     return {
         stateAuth,
@@ -217,6 +221,7 @@ export const useAuth = () => {
         updateMentorProfileState,
         getSavedMentorData,
         updateMentorInfo,
+        removeEducation,
         removeWorkExperience,
     };
 };

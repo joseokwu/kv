@@ -7,7 +7,7 @@ export const StartupRegistrationSuccess = () => {
     useEffect(() => {
         setTimeout(() => {
             window.location.replace("/startup/dashboard");
-        }, 5000);
+        }, 4000);
     }, []);
 
     return (

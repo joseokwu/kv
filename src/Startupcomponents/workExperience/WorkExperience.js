@@ -39,9 +39,7 @@ export const WorkExperience = ({
     };
 
     const handleDelete = () => {
-        console.log(id);
         removeWorkExperience(id);
-        console.log(state);
     };
 
     const [showDelete, setShowDelete] = useState(false);
@@ -68,26 +66,30 @@ export const WorkExperience = ({
                     <h5 className="title">{companyName}</h5>
                     <h6 className="position">{position}</h6>
                     <h6 className="country">{location}</h6>
-                    <h6 className="date">
-                        {startDateYear} -{" "}
-                        {endDate === "present" ? "present" : endDateYear}{" "}
-                        {endDate !== "present" &&
-                        endDateYear - startDateYear > 0
-                            ? `${endDateYear - startDateYear} years`
-                            : endDate !== "present" &&
-                              endDateYear - startDateYear < 1
-                            ? `${endDateMonth - startDateMonth} months`
-                            : endDate === "present" &&
-                              new Date().getFullYear() - startDateYear > 0
-                            ? `${
-                                  new Date().getFullYear() - startDateYear
-                              } years`
-                            : endDate === "present" &&
-                              new Date().getFullYear() - startDateYear < 1
-                            ? `${new Date().getMonth() - startDateMonth} months`
-                            : null}
-                    </h6>
-                    <p>{responsibility}</p>
+                    <div className="moreDeets">
+                        <h6 className="date">
+                            {startDateYear} -{" "}
+                            {endDate === "present" ? "Present" : endDateYear}{" "}
+                            {endDate !== "present" &&
+                            endDateYear - startDateYear > 0
+                                ? `${endDateYear - startDateYear} years`
+                                : endDate !== "present" &&
+                                  endDateYear - startDateYear < 1
+                                ? `${endDateMonth - startDateMonth} months`
+                                : endDate === "present" &&
+                                  new Date().getFullYear() - startDateYear > 0
+                                ? `${
+                                      new Date().getFullYear() - startDateYear
+                                  } years`
+                                : endDate === "present" &&
+                                  new Date().getFullYear() - startDateYear < 1
+                                ? `${
+                                      new Date().getMonth() - startDateMonth
+                                  } months`
+                                : null}
+                        </h6>
+                        <p>{responsibility}</p>
+                    </div>
                 </div>
                 <div className="buttons">
                     <img
@@ -110,10 +112,10 @@ export const WorkExperience = ({
     );
 };
 
-const DeleteComponent = ({ setShowDelete,handleDelete }) => (
+const DeleteComponent = ({ setShowDelete, handleDelete }) => (
     <div
         className="d-flex flex-column align-items-start gap-4"
-        style={{ minHeight: "calc(100% - 50px)" }}
+        style={{ minHeight: "calc(100% - 60px)" }}
     >
         <p>
             Are you sure you want to delete this work experience? This action is
