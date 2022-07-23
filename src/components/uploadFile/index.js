@@ -149,6 +149,7 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
         if (!data) return "MB";
         return data.extension;
     }, [data]);
+    // console.log("initialData", initialData);
 
     const handleFiles = () => {
         if (!data) return toast.error("File config not found");
@@ -201,13 +202,68 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
             }
         };
     };
+
     const removeItem = (index) => {
         const newFilesInfo = filesInfo.filter((_, i) => i !== index);
         setFilesInfo(newFilesInfo);
     };
 
+    const handleFileDrop = (fileList) => {
+        if (fileList.length > data.maxFiles) {
+            toast.error(`You can't upload more than ${data.maxFiles} files`);
+            return;
+        }
+        if (fileList.length === 0) return;
+        const lFilesInfo = [];
+        try {
+            for (let i = 0; i < fileList.length; i += 1) {
+                const file = fileList[i];
+                const [size, ext] = bytesToSize(file.size).split(" ");
+                if (sizes.indexOf(ext) > sizes.indexOf(extension)) {
+                    return toast.error(`File too large.`);
+                }
+                if (parseInt(size, 10) > maxFileSize && ext === extension) {
+                    return toast.error(`File too large.`);
+                }
+                if (data.supportedMimeTypes.indexOf(file.type) === -1) {
+                    return toast.error(
+                        `File type ${file.type} is not supported`
+                    );
+                }
+                const lFileInfo = {
+                    name: file.name,
+                    size: size + ext,
+                    type: file.type,
+                    file,
+                };
+                lFilesInfo.push(lFileInfo);
+            }
+            setFilesInfo(lFilesInfo);
+        } catch (e) {
+            toast.error(`${e?.message}`);
+        }
+    };
+
     return (
-        <FileUploadBase align="center" justify="center" width="100%" gap={0.5}>
+        <FileUploadBase
+            align="center"
+            justify="center"
+            width="100%"
+            gap={0.5}
+            onDragOver={(ev) => {
+                ev.preventDefault();
+                console.log("file is in our drop area.");
+            }}
+            onDragLeave={() => {
+                console.log("file is out of our drop area.");
+            }}
+            onDrop={(ev) => {
+                console.log("File Dropped");
+                ev.preventDefault();
+                console.log(ev.dataTransfer.files);
+                handleFileDrop(ev.dataTransfer.files);
+            }}
+        >
             {!filesUploaded && filesInfo.length > 0 && (
                 <UploadButton
                     type="button"

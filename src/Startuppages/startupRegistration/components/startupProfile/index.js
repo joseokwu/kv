@@ -25,6 +25,7 @@ import moment from "moment";
 import { TextareaCustom } from "./../../../../components/textArea/cutstomTextarea";
 import { letterOnly } from "../../../../utils/helpers";
 import { industry } from "../../../../constants/domiData";
+import { useEffect } from "react";
 
 const { Option } = Select;
 
@@ -55,6 +56,7 @@ export const StartupProfile = () => {
     const [region, setRegion] = useState(
         stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? ""
     );
+    const [buttonClicked, setButtonClicked] = useState("Save");
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [logo, setLogo] = useState(
@@ -131,7 +133,9 @@ export const StartupProfile = () => {
         // e.preventDefault();
         updateStartupInfo();
         console.log(stateAuth?.startupData);
+        if (buttonClicked === "Next") changePath(2);
     };
+
     //console.log(stateAuth)
     return (
         <>
@@ -618,14 +622,29 @@ export const StartupProfile = () => {
                     </div>
                     <div className="d-flex my-4 justify-content-end">
                         <div>
-                            <CustomButton type="submit" background="#06ADEF">
+                            <CustomButton
+                                type="submit"
+                                background="#06ADEF"
+                                onClick={() => {
+                                    setButtonClicked("Save");
+                                }}
+                            >
                                 Save
                             </CustomButton>
                         </div>
                         <div className="mx-2">
                             <CustomButton
-                                type="button"
-                                onClick={() => changePath(2)}
+                                type="submit"
+                                onClick={() => {
+                                    console.log(
+                                        "nextttttttttttttttttttttttttttttt"
+                                    );
+                                    setButtonClicked("Next");
+                                    // if (validated) {
+
+                                    //     changePath(2);
+                                    // }
+                                }}
                                 background="#2E3192"
                             >
                                 Next

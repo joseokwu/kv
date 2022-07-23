@@ -52,6 +52,7 @@ export const TeamProfile = () => {
     const [showEducation, setShowEducation] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [coFounder, setCoFounder] = useState("no");
+    const [buttonClicked, setButtonClicked] = useState("Save");
 
     const [country, setCountry] = useState(
         stateAuth?.startupData?.team?.country ?? ""
@@ -183,6 +184,7 @@ export const TeamProfile = () => {
 
     const onSubmit = async (value) => {
         // console.log(stateAuth)
+        if (buttonClicked === "Next") changePath(path + 1);
         updateStartupInfo();
     };
 
@@ -850,13 +852,18 @@ export const TeamProfile = () => {
                             type="submit"
                             className="mx-2"
                             background="#00ADEF"
+                            onClick={() => {
+                                setButtonClicked("Save");
+                            }}
                         >
                             {"Save"}
                         </CustomButton>
                         <CustomButton
-                            type="button"
-                            onClick={() => changePath(path + 1)}
+                            type="submit"
                             background="#2E3192"
+                            onClick={() => {
+                                setButtonClicked("Next");
+                            }}
                         >
                             Next
                         </CustomButton>

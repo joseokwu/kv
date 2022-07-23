@@ -48,9 +48,8 @@ export const FundAsk = ({ setFundraising, back }) => {
     //   setHasPreviousFundraising(e.target.dataset.id);
     // }
 
-    const onSubmit = (e) => {
+    const onFinish = (e) => {
         e.preventDefault();
-
         history.push("#Fund Utilization");
     };
 
@@ -72,7 +71,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                     remember: true,
                 }}
                 layout="vertical"
-                onFinish={onSubmit}
+                onFinish={onFinish}
+                onSubmit={(e) => e.preventDefault()}
             >
                 <BodyWrapper className="">
                     <div className="div">
@@ -372,15 +372,12 @@ export const FundAsk = ({ setFundraising, back }) => {
                     </div>
                     <div className="col-9 d-flex justify-content-end">
                         <OutlineButton
-                            type="button"
+                            type="submit"
                             // onClick={(e) => {
                             //   e.preventDefault();
                             //   history.push(forwardHash());
                             // }}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onSubmit(e);
-                            }}
+                            // onClick={}
                             className="ms-2"
                             style={{ marginRight: "0rem" }}
                             background="none"

@@ -29,6 +29,7 @@ export const Product = () => {
         stateAuth?.startupData?.product?.youtubeDemoUrl ?? ""
     );
     const [youtube, setYoutube] = useState("");
+    const [buttonClicked, setButtonClicked] = useState("Save");
 
     const history = useHistory();
     const handleChangeVids = (e) => {
@@ -64,6 +65,7 @@ export const Product = () => {
         setLoading(true);
         updateStartupInfo();
         setLoading(false);
+        if (buttonClicked === "Next") changePath(path + 1);
     };
 
     const handleFullChange = (e, name) => {
@@ -254,12 +256,17 @@ export const Product = () => {
                             disabled={loading}
                             className="mx-2"
                             background="#00ADEF"
+                            onClick={() => {
+                                setButtonClicked("Save");
+                            }}
                         >
                             {loading ? <CircularLoader /> : "Save"}
                         </CustomButton>
                         <CustomButton
-                            type="button"
-                            onClick={() => changePath(path + 1)}
+                            type="submit"
+                            onClick={() => {
+                                setButtonClicked("Next");
+                            }}
                             background="#2E3192"
                         >
                             Next
