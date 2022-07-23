@@ -23,29 +23,28 @@ import { useAuth } from "../../../../hooks/useAuth";
 import { updateFounderProfile } from "../../../../services";
 import { upload } from "../../../../services/utils";
 import { UploadFile } from "../../../../components/uploadFile";
+import { TextField } from "../../../../components";
 
 export const PitchDeck = () => {
     const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
     const [loading, setLoading] = useState(false);
     const [nextloading, setNextLoading] = useState(false);
     const [opts, setOpts] = useState("");
+    const [buttonClicked, setButtonClicked] = useState("Save");
 
     const history = useHistory();
 
+    console.log(stateAuth.startupData?.pitchDeck);
     const {
         changePath,
         state: { path },
     } = useActivity();
 
     const [youtube, setYoutube] = useState("");
-
+    console.log("pitchdeck", stateAuth.startupData);
     const [urls, setUrls] = useState(
         stateAuth.startupData?.pitchDeck?.pitchDeckVideo ?? ""
     );
-
-    const handleChangeVids = (e) => {
-        setYoutube(e.target.value);
-    };
 
     const removeVideo = () => {
         setUrls("");
@@ -59,7 +58,7 @@ export const PitchDeck = () => {
         //const newVal = youtube.replace('https://youtu.be/', '');
 
         setUrls(youtube);
-        setYoutube("");
+        // setYoutube("");
         updateProfile("pitchDeck", {
             pitchDeckVideo: youtube,
         });
@@ -83,9 +82,11 @@ export const PitchDeck = () => {
             stateAuth.startupData?.pitchDeck?.pitchDeckVideo !== null
         ) {
             updateStartupInfo();
+            if (buttonClicked === "Next") onNext();
             return;
+        } else {
+            toast.error("Please provide a pitch deck document or video");
         }
-        toast.error("Please provide a pitch deck document or video");
     };
 
     return (
@@ -146,7 +147,10 @@ export const PitchDeck = () => {
                                         formData.append(0, filesInfo[0]?.file);
 
                                         const response = await upload(formData);
-                                        console.log(response);
+                                        console.log(
+                                            "response response response",
+                                            response
+                                        );
                                         updateProfile("pitchDeck", {
                                             pitchDeckFile: response?.path,
                                         });
@@ -155,14 +159,23 @@ export const PitchDeck = () => {
                             </div>
                             <label> Paste Youtube Link of product Demo </label>
                             <div className="d-flex my-2">
-                                <input
-                                    type="text"
-                                    name="youtubeDemoUrl"
-                                    onChange={handleChangeVids}
-                                    value={youtube}
-                                    className="form-control youtube-input ps-3"
-                                    placeholder="Youtube link"
-                                />
+                                <div className="form-group form-group-spacee col-lg-6 col-12">
+                                    <TextField
+                                        type={"url"}
+                                        name={"youtubeDemoUrl"}
+                                        value={youtube}
+                                        onChange={(e) => {
+                                            setYoutube(e.target.value);
+                                        }}
+                                        className="form-control youtube-input ps-3"
+                                        style={{
+                                            width: "100%",
+                                            marginLeft: "0",
+                                        }}
+                                        required={true}
+                                        placeholder="https://youtube.com/"
+                                    />
+                                </div>
                                 <button
                                     type="button"
                                     className="button"
@@ -262,19 +275,23 @@ export const PitchDeck = () => {
                     </div>
                     <div className="col-9 d-flex justify-content-end">
                         <CustomButton
-                            type="button"
                             disabled={loading}
-                            onClick={(e) => onSubmit(e)}
+                            type="submit"
                             className="mx-2"
                             background="#00ADEF"
+                            onClick={() => {
+                                setButtonClicked("Save");
+                            }}
                         >
                             {loading ? <CircularLoader /> : "Save"}
                         </CustomButton>
                         <div className="">
                             <CustomButton
-                                onClick={onNext}
-                                type="button"
+                                type="submit"
                                 background="#2E3192"
+                                onClick={() => {
+                                    setButtonClicked("Next");
+                                }}
                             >
                                 Next
                             </CustomButton>

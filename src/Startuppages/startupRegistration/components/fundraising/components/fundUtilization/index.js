@@ -25,12 +25,13 @@ import { UploadFile } from "../../../../../../components/uploadFile";
 export const FundUtilization = () => {
     const history = useHistory();
     const { stateAuth, updateProfile } = useAuth();
-
+    console.log(stateAuth?.startupData?.fundRaising?.fundUtilization);
     const onSubmit = () => {
         if (
             stateAuth?.startupData?.fundRaising?.fundUtilization?.files ===
                 null ||
-            stateAuth?.startupData?.fundRaising?.fundUtilization?.files === ""
+            stateAuth?.startupData?.fundRaising?.fundUtilization?.files
+                .length === 0
         ) {
             toast.error("Please upload a document");
             return;
@@ -151,10 +152,7 @@ export const FundUtilization = () => {
                 <div className="col-9 d-flex justify-content-end">
                     <OutlineButton
                         type="button"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            onSubmit();
-                        }}
+                        onClick={onSubmit}
                         className="ms-2"
                         style={{ marginRight: "0rem" }}
                         background="none"

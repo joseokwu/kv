@@ -8,6 +8,7 @@ import {
     VideoWrapper,
     Terms,
 } from "./cap.styled.js";
+import { Form } from "antd";
 import { useHistory } from "react-router-dom";
 import {
     CustomButton,
@@ -38,13 +39,21 @@ export const CapTable = ({ setFundraising }) => {
     );
     // const { location  } = history;
 
-    const onSubmit = () => {
-        console.log(stateAuth);
+    console.log(stateAuth?.startupData?.fundRaising?.capTable);
+    const onSubmit = (ev) => {
+        ev.preventDefault();
+        if (
+            stateAuth?.startupData?.fundRaising?.capTable?.files?.length === 0
+        ) {
+            return;
+        }
+
         history.push("#Previous Round");
     };
+    console.log(stateAuth?.startupData?.fundRaising?.capTable);
 
     return (
-        <>
+        <form name="Cap Table" onSubmit={onSubmit}>
             <BodyWrapper>
                 <div className="div">
                     <span className="mini-title">Cap Table</span>
@@ -84,7 +93,10 @@ export const CapTable = ({ setFundraising }) => {
                             />
                         </div>
                         <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
-                            <label>Total Capital invested by Founders*</label>
+                            <label>
+                                Total Capital invested by Founders
+                                <span style={{ color: "red" }}>*</span>
+                            </label>
                             <CurrencyInput
                                 id="amountInvestedByFounders"
                                 name="amountInvestedByFounders"
@@ -99,7 +111,7 @@ export const CapTable = ({ setFundraising }) => {
                                     locale: "en-US",
                                     currency: "USD",
                                 }}
-                                required
+                                required={true}
                                 onValueChange={(value) =>
                                     updateProfile("fundRaising", {
                                         capTable: {
@@ -212,11 +224,10 @@ export const CapTable = ({ setFundraising }) => {
                 </div>
                 <div className="col-9 d-flex justify-content-end">
                     <OutlineButton
-                        type="button"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            onSubmit();
-                        }}
+                        type="submit"
+                        // onClick={(e) => {
+
+                        // }}
                         className="ms-2"
                         style={{ marginRight: "0rem" }}
                         background="none"
@@ -225,6 +236,6 @@ export const CapTable = ({ setFundraising }) => {
                     </OutlineButton>
                 </div>
             </div>
-        </>
+        </form>
     );
 };
