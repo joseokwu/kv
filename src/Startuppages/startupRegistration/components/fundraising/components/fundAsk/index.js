@@ -6,8 +6,6 @@ import {
     CustomButton,
     OutlineButton,
 } from "../../../../../../Startupcomponents/button/button.styled";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { LargeModal } from "../../../../../../Startupcomponents";
 import { CoFounder } from "../../../teams/coFounder";
 import { Form, Select } from "antd";
@@ -48,8 +46,8 @@ export const FundAsk = ({ setFundraising, back }) => {
     //   setHasPreviousFundraising(e.target.dataset.id);
     // }
 
-    const onFinish = (e) => {
-        e.preventDefault();
+    const onFinish = (values) => {
+        console.log(values);
         history.push("#Fund Utilization");
     };
 
@@ -66,13 +64,13 @@ export const FundAsk = ({ setFundraising, back }) => {
                 <span></span>
             )}
             <Form
-                name="Fund Ask"
+                name="Fund aAsk"
                 initialValues={{
                     remember: true,
                 }}
                 layout="vertical"
                 onFinish={onFinish}
-                onSubmit={(e) => e.preventDefault()}
+                className="px-3"
             >
                 <BodyWrapper className="">
                     <div className="div">
@@ -83,10 +81,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                         <hr />
                         <div className="row mt-4">
                             <div className="form-group col-12">
-                                <label>
+                                <p>
                                     Have you fundraised before?
                                     <span style={{ color: "red" }}>*</span>
-                                </label>
+                                </p>
                                 <BntWrap>
                                     <button
                                         className={`me-3 ${
@@ -96,8 +94,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                                 ? "active"
                                                 : ""
                                         }`}
-                                        onClick={(e) => {
-                                            e.preventDefault();
+                                        type="button"
+                                        onClick={() => {
                                             updateProfile("fundRaising", {
                                                 fundingAsk: {
                                                     ...stateAuth?.startupData
@@ -118,8 +116,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                                 ? "active"
                                                 : ""
                                         }
-                                        onClick={(e) => {
-                                            e.preventDefault();
+                                        type="button"
+                                        onClick={() => {
                                             updateProfile("fundRaising", {
                                                 fundingAsk: {
                                                     ...stateAuth?.startupData
@@ -135,58 +133,42 @@ export const FundAsk = ({ setFundraising, back }) => {
                                 </BntWrap>
                             </div>
                             <div className="form-group my-2 col-12">
-                                <label>
-                                    {stateAuth?.startupData?.fundRaising
-                                        ?.fundingAsk?.hasPreviousFundraising
-                                        ? "What was the instrument for your previous round"
-                                        : "Which instrument would you prefer to use for your current round?"}
-                                    <span style={{ color: "red" }}>*</span>
-                                </label>
-                                <Form.Item
+                                <TextField
+                                    id="instrumentForRound"
                                     name="instrumentForRound"
-                                    initialValue={
+                                    errName="instrument for round"
+                                    // options={optionsNumb}
+                                    className="cust extra"
+                                    label={
+                                        stateAuth?.startupData?.fundRaising
+                                            ?.fundingAsk?.hasPreviousFundraising
+                                            ? "What was the instrument for your previous round"
+                                            : "Which instrument would you prefer to use for your current round?"
+                                    }
+                                    value={
                                         stateAuth?.startupData?.fundRaising
                                             ?.fundingAsk?.instrumentForRound
                                     }
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Please select a instrument for round",
-                                        },
-                                    ]}
-                                >
-                                    <TextField
-                                        id="instrumentForRound"
-                                        name="instrumentForRound"
-                                        // options={optionsNumb}
-                                        className="cust extra"
-                                        value={
-                                            stateAuth?.startupData?.fundRaising
-                                                ?.fundingAsk?.instrumentForRound
+                                    onChange={(e) => {
+                                        updateProfile("fundRaising", {
+                                            fundingAsk: {
+                                                ...stateAuth?.startupData
+                                                    ?.fundRaising?.fundingAsk,
+                                                instrumentForRound: e,
+                                            },
+                                        });
+                                    }}
+                                    css={css`
+                                        input {
+                                            margin-left: 0.5rem;
                                         }
-                                        onChange={(e) => {
-                                            updateProfile("fundRaising", {
-                                                fundingAsk: {
-                                                    ...stateAuth?.startupData
-                                                        ?.fundRaising
-                                                        ?.fundingAsk,
-                                                    instrumentForRound: e,
-                                                },
-                                            });
-                                        }}
-                                        css={css`
-                                            input {
-                                                margin-left: 0.5rem;
-                                            }
-                                        `}
-                                    />
-                                </Form.Item>
+                                    `}
+                                />
                             </div>
                             <div className="form-group my-2 col-12">
                                 <Form.Item
                                     name="numberOfRounds"
-                                    label="Select your round?"
+                                    label="Select your round"
                                     initialValue={
                                         stateAuth?.startupData?.fundRaising
                                             ?.fundingAsk?.numberOfRounds
@@ -231,38 +213,50 @@ export const FundAsk = ({ setFundraising, back }) => {
                                 </Form.Item>
                             </div>
                             <div className="form-group my-2 col-12">
-                                <label>
-                                    How much investment is your company looking
-                                    to raise?
-                                    <span style={{ color: "red" }}>*</span>
-                                </label>
-
-                                <CurrencyInput
-                                    id="fundraisingAmount"
+                                <Form.Item
                                     name="fundraisingAmount"
-                                    type="text"
-                                    value={
+                                    label="How much investment is your company looking
+                                    to raise?"
+                                    initialValue={
                                         stateAuth?.startupData?.fundRaising
                                             ?.fundingAsk?.fundraisingAmount
                                     }
-                                    style={{ marginLeft: "8px" }}
-                                    className="form-control ps-3"
-                                    placeholder="Enter amount"
-                                    intlConfig={{
-                                        locale: "en-US",
-                                        currency: "USD",
-                                    }}
-                                    required
-                                    onValueChange={(value) => {
-                                        updateProfile("fundRaising", {
-                                            fundingAsk: {
-                                                ...stateAuth?.startupData
-                                                    ?.fundRaising?.fundingAsk,
-                                                fundraisingAmount: value,
-                                            },
-                                        });
-                                    }}
-                                />
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please enter a fundraising amount",
+                                        },
+                                    ]}
+                                >
+                                    <CurrencyInput
+                                        id="fundraisingAmount"
+                                        name="fundraisingAmount"
+                                        type="text"
+                                        value={
+                                            stateAuth?.startupData?.fundRaising
+                                                ?.fundingAsk?.fundraisingAmount
+                                        }
+                                        style={{ marginLeft: "8px" }}
+                                        className="form-control ps-3"
+                                        placeholder="Enter amount"
+                                        intlConfig={{
+                                            locale: "en-US",
+                                            currency: "USD",
+                                        }}
+                                        onValueChange={(value) => {
+                                            updateProfile("fundRaising", {
+                                                fundingAsk: {
+                                                    ...stateAuth?.startupData
+                                                        ?.fundRaising
+                                                        ?.fundingAsk,
+                                                    fundraisingAmount:
+                                                        parseInt(value),
+                                                },
+                                            });
+                                        }}
+                                    />
+                                </Form.Item>
                             </div>
                             <div className="form-group my-2 col-12">
                                 <TextField
@@ -285,69 +279,92 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     placeholder="Enter what your business does"
                                 />
                             </div>
-                            <div className="form-group my-2 col-12">
-                                <label>
-                                    What is your pre-money valuation?
-                                    <span style={{ color: "red" }}>*</span>
-                                </label>
 
-                                <CurrencyInput
-                                    id="preMoneyValuation"
+                            <div className="form-group my-2 col-12">
+                                <Form.Item
                                     name="preMoneyValuation"
-                                    type="text"
-                                    value={
+                                    label="What is your pre-money valuation?"
+                                    initialValue={
                                         stateAuth?.startupData?.fundRaising
                                             ?.fundingAsk?.preMoneyValuation
                                     }
-                                    className="form-control ps-3"
-                                    placeholder="Pre money = Post money - investment amount."
-                                    intlConfig={{
-                                        locale: "en-US",
-                                        currency: "USD",
-                                    }}
-                                    required
-                                    onValueChange={(value) => {
-                                        updateProfile("fundRaising", {
-                                            fundingAsk: {
-                                                ...stateAuth?.startupData
-                                                    ?.fundRaising?.fundingAsk,
-                                                preMoneyValuation: value,
-                                            },
-                                        });
-                                    }}
-                                />
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please enter a pre-money valuation",
+                                        },
+                                    ]}
+                                >
+                                    <CurrencyInput
+                                        id="preMoneyValuation"
+                                        name="preMoneyValuation"
+                                        type="text"
+                                        value={
+                                            stateAuth?.startupData?.fundRaising
+                                                ?.fundingAsk?.preMoneyValuation
+                                        }
+                                        className="form-control ps-3"
+                                        placeholder="Pre money = Post money - investment amount."
+                                        intlConfig={{
+                                            locale: "en-US",
+                                            currency: "USD",
+                                        }}
+                                        onValueChange={(value) => {
+                                            updateProfile("fundRaising", {
+                                                fundingAsk: {
+                                                    ...stateAuth?.startupData
+                                                        ?.fundRaising
+                                                        ?.fundingAsk,
+                                                    preMoneyValuation: value,
+                                                },
+                                            });
+                                        }}
+                                    />
+                                </Form.Item>
                             </div>
                             <div className="form-group my-2 col-12">
-                                <label>
-                                    Post-Money valuation
-                                    <span style={{ color: "red" }}>*</span>
-                                </label>
-
-                                <CurrencyInput
-                                    id="postMoneyValuation"
+                                <Form.Item
                                     name="postMoneyValuation"
-                                    type="text"
-                                    value={
+                                    label="What is your post-money valuation?"
+                                    initialValue={
                                         stateAuth?.startupData?.fundRaising
                                             ?.fundingAsk?.postMoneyValuation
                                     }
-                                    className="form-control ps-3"
-                                    placeholder="Post-money valuation = Investment dollar amount ÷ percent investor receives."
-                                    intlConfig={{
-                                        locale: "en-US",
-                                        currency: "USD",
-                                    }}
-                                    required
-                                    onValueChange={(value) => {
-                                        updateProfile("fundRaising", {
-                                            fundingAsk: {
-                                                ...stateAuth?.startupData
-                                                    ?.fundRaising?.fundingAsk,
-                                                postMoneyValuation: value,
-                                            },
-                                        });
-                                    }}
-                                />
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please enter a post-money valuation",
+                                        },
+                                    ]}
+                                >
+                                    <CurrencyInput
+                                        id="postMoneyValuation"
+                                        name="postMoneyValuation"
+                                        type="text"
+                                        value={
+                                            stateAuth?.startupData?.fundRaising
+                                                ?.fundingAsk?.postMoneyValuation
+                                        }
+                                        className="form-control ps-3"
+                                        placeholder="Post-money valuation = Investment dollar amount ÷ percent investor receives."
+                                        intlConfig={{
+                                            locale: "en-US",
+                                            currency: "USD",
+                                        }}
+                                        onValueChange={(value) => {
+                                            updateProfile("fundRaising", {
+                                                fundingAsk: {
+                                                    ...stateAuth?.startupData
+                                                        ?.fundRaising
+                                                        ?.fundingAsk,
+                                                    postMoneyValuation: value,
+                                                },
+                                            });
+                                        }}
+                                    />
+                                </Form.Item>
                             </div>
                         </div>
                     </div>
@@ -377,7 +394,6 @@ export const FundAsk = ({ setFundraising, back }) => {
                             //   e.preventDefault();
                             //   history.push(forwardHash());
                             // }}
-                            // onClick={}
                             className="ms-2"
                             style={{ marginRight: "0rem" }}
                             background="none"

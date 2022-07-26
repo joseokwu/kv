@@ -29,6 +29,7 @@ import * as XLSX from "xlsx";
 import { parseFile } from "../../../../../../utils/helpers";
 import { upload } from "../../../../../../services/utils";
 import { UploadFile } from "../../../../../../components/uploadFile";
+import toast from "react-hot-toast";
 
 export const CapTable = ({ setFundraising }) => {
     const history = useHistory();
@@ -40,11 +41,11 @@ export const CapTable = ({ setFundraising }) => {
     // const { location  } = history;
 
     console.log(stateAuth?.startupData?.fundRaising?.capTable);
-    const onSubmit = (ev) => {
-        ev.preventDefault();
+    const onFinish = () => {
         if (
             stateAuth?.startupData?.fundRaising?.capTable?.files?.length === 0
         ) {
+            toast.error("Please upload a Capital Table");
             return;
         }
 
@@ -53,7 +54,15 @@ export const CapTable = ({ setFundraising }) => {
     console.log(stateAuth?.startupData?.fundRaising?.capTable);
 
     return (
-        <form name="Cap Table" onSubmit={onSubmit}>
+        <Form
+            name="Cap Table"
+            initialValues={{
+                remember: true,
+            }}
+            layout="vertical"
+            onFinish={onFinish}
+            className="px-3"
+        >
             <BodyWrapper>
                 <div className="div">
                     <span className="mini-title">Cap Table</span>
@@ -93,35 +102,47 @@ export const CapTable = ({ setFundraising }) => {
                             />
                         </div>
                         <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
-                            <label>
-                                Total Capital invested by Founders
-                                <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <CurrencyInput
-                                id="amountInvestedByFounders"
+                            <Form.Item
                                 name="amountInvestedByFounders"
-                                type="text"
-                                value={
+                                label="Total Capital invested by Founders"
+                                initialValue={
                                     stateAuth?.startupData?.fundRaising
                                         ?.capTable?.amountInvestedByFounders
                                 }
-                                className="form-control ps-3"
-                                placeholder="$150,000"
-                                intlConfig={{
-                                    locale: "en-US",
-                                    currency: "USD",
-                                }}
-                                required={true}
-                                onValueChange={(value) =>
-                                    updateProfile("fundRaising", {
-                                        capTable: {
-                                            ...stateAuth?.startupData
-                                                ?.fundRaising?.capTable,
-                                            amountInvestedByFounders: value,
-                                        },
-                                    })
-                                }
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter the amount invested",
+                                    },
+                                ]}
+                            >
+                                <CurrencyInput
+                                    id="amountInvestedByFounders"
+                                    name="amountInvestedByFounders"
+                                    type="text"
+                                    value={
+                                        stateAuth?.startupData?.fundRaising
+                                            ?.capTable?.amountInvestedByFounders
+                                    }
+                                    className="form-control ps-3"
+                                    placeholder="$150,000"
+                                    intlConfig={{
+                                        locale: "en-US",
+                                        currency: "USD",
+                                    }}
+                                    required={true}
+                                    onValueChange={(value) =>
+                                        updateProfile("fundRaising", {
+                                            capTable: {
+                                                ...stateAuth?.startupData
+                                                    ?.fundRaising?.capTable,
+                                                amountInvestedByFounders: value,
+                                            },
+                                        })
+                                    }
+                                />
+                            </Form.Item>
                         </div>
                         <div className="col-12 my-3">
                             <DownloadableButton href=".">
@@ -236,6 +257,6 @@ export const CapTable = ({ setFundraising }) => {
                     </OutlineButton>
                 </div>
             </div>
-        </form>
+        </Form>
     );
 };

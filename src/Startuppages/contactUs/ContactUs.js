@@ -10,6 +10,7 @@ import linkedIn from "../../assets/icons/linkedInLogo.svg";
 import "./contactUs.css";
 import { Form } from "antd";
 import { sendFeedBack } from "../../services";
+import { Link } from "react-router-dom";
 
 export const StartupContactUs = () => {
     const [loading, setLoading] = useState(false);
@@ -50,12 +51,25 @@ export const StartupContactUs = () => {
                 <article className="col-lg-6 mt-2 mb-4">
                     <div className="d-flex align-items-center contact-us-info">
                         <img src={map} alt="location" />
-                        <p>274, Ikorodu Road, Anthony, Lagos State, Nigeria.</p>
+                        <a
+                            href="https://goo.gl/maps/r9J3b9dEGzVzUJ7i6"
+                            target="_blank"
+                        >
+                            <p>
+                                274, Ikorodu Road, Anthony, Lagos State,
+                                Nigeria.
+                            </p>
+                        </a>
                     </div>
 
                     <div className="d-flex align-items-center contact-us-info">
                         <img src={map} alt="location" />
-                        <p>4652 Ripley Manor Terr, Olney MD 20832 USA</p>
+                        <a
+                            href="https://goo.gl/maps/3JJytmv6zeBqzLiR8"
+                            target="_blank"
+                        >
+                            <p>4652 Ripley Manor Terr, Olney MD 20832 USA</p>
+                        </a>
                     </div>
 
                     <div className="d-flex align-items-center contact-us-info">
@@ -124,37 +138,46 @@ export const StartupContactUs = () => {
                             onFinish={onFinish}
                         >
                             <div className="mb-4">
-                                <label>Full Name</label>
                                 <TextField
                                     placeholder=""
                                     type="text"
                                     name={"fullName"}
                                     className="message-input"
+                                    label="Full Name"
                                     required={true}
                                 />
                             </div>
 
                             <div className="mb-4">
-                                <label>Email Address</label>
                                 <TextField
                                     placeholder=""
                                     type="email"
                                     name={"emailAddress"}
                                     className="message-input"
                                     required={true}
+                                    label="Email Address"
                                 />
                             </div>
 
                             <div className="mb-4">
-                                <label>Message</label>
-                                <TextArea
-                                    name={"message"}
-                                    placeholder="Enter Message"
-                                    value={message}
-                                    onChange={onChange}
-                                    required={true}
-                                    rows="5"
-                                />
+                                <Form.Item
+                                    name="message"
+                                    label="Message"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please enter a message",
+                                        },
+                                    ]}
+                                >
+                                    <TextArea
+                                        name={"message"}
+                                        placeholder="Enter Message"
+                                        value={message}
+                                        onChange={onChange}
+                                        rows="5"
+                                    />
+                                </Form.Item>
                             </div>
 
                             <div className="text-right">

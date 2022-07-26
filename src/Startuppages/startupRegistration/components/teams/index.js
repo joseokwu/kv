@@ -6,6 +6,7 @@ import {
     FormWrapper,
     BntWrap,
 } from "./teams.styled";
+import { css } from "styled-components/macro";
 import { UserOutlined, PlusOutlined } from "@ant-design/icons";
 import { AiOutlineUser } from "react-icons/ai";
 import { DatePicker, Form, Select } from "antd";
@@ -141,7 +142,7 @@ export const TeamProfile = () => {
     };
     const handleDateInput = (value) => {
         updateProfile("team", {
-            dob: value,
+            dob: value === "" ? null : value,
         });
     };
 
@@ -435,46 +436,92 @@ export const TeamProfile = () => {
                             />
                         </div>
                         <div className="form-group  col-lg-6 col-12">
-                            <label>
-                                Date of Birth
-                                <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <DatePicker
-                                id="dob"
+                            <Form.Item
                                 name="dob"
-                                className="custs p-2 py-4"
-                                style={{ padding: "15px" }}
-                                defaultValue={
-                                    moment(stateAuth?.startupData?.team?.dob) ??
-                                    moment()
+                                label="Date of Birth"
+                                initialValue={
+                                    stateAuth?.startupData?.team?.dob
+                                        ? moment(
+                                              stateAuth?.startupData?.team?.dob
+                                          )
+                                        : undefined
                                 }
-                                format={dateFormat}
-                                onChange={handleDateInput}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please select the date of birth",
+                                    },
+                                ]}
+                            >
+                                <DatePicker
+                                    id="dob"
+                                    name="dob"
+                                    className="custs p-2 py-4"
+                                    style={{ padding: "15px" }}
+                                    defaultValue={
+                                        stateAuth?.startupData?.team?.dob
+                                            ? moment(
+                                                  stateAuth?.startupData?.team
+                                                      ?.dob
+                                              )
+                                            : undefined
+                                    }
+                                    format={dateFormat}
+                                    onChange={(_, dateString) => {
+                                        console.log(dateString);
+                                        return handleDateInput(dateString);
+                                    }}
+                                />
+                            </Form.Item>
                         </div>
-                        <div className="form-group col-lg-4 col-12">
-                            <label>
-                                Country<span style={{ color: "red" }}>*</span>
-                            </label>
-
-                            <CountryDropdown
-                                className="form-control px-5 py-1 country-bg"
-                                value={country}
-                                onChange={(value) => handleChangeCountry(value)}
-                            ></CountryDropdown>
+                        <div className="form-group col-lg-4 col-12 select-field">
+                            <Form.Item
+                                name="country"
+                                label="Country"
+                                initialValue={
+                                    stateAuth?.startupData?.team?.country
+                                }
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please select a country",
+                                    },
+                                ]}
+                            >
+                                <CountryDropdown
+                                    className="form-control px-5 py-1 country-bg"
+                                    value={country}
+                                    onChange={(value) =>
+                                        handleChangeCountry(value)
+                                    }
+                                ></CountryDropdown>
+                            </Form.Item>
                         </div>
-                        <div className="form-group col-lg-4 col-12">
-                            <label>
-                                State<span style={{ color: "red" }}>*</span>
-                            </label>
-
-                            <RegionDropdown
+                        <div className="form-group col-lg-4 col-12 select-field">
+                            <Form.Item
                                 name="state"
-                                country={country}
-                                value={region}
-                                onChange={(value) => handleChangeState(value)}
-                                className="form-control ps-3"
-                            />
+                                label="State"
+                                initialValue={
+                                    stateAuth?.startupData?.team?.state
+                                }
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please select a state",
+                                    },
+                                ]}
+                            >
+                                <RegionDropdown
+                                    name="state"
+                                    country={country}
+                                    value={region}
+                                    onChange={(value) =>
+                                        handleChangeState(value)
+                                    }
+                                    className="form-control ps-3"
+                                />
+                            </Form.Item>
                         </div>
                         <div className="form-group col-lg-4 col-12">
                             <TextField
@@ -491,23 +538,38 @@ export const TeamProfile = () => {
                                 placeholder="Enter your city"
                             />
                         </div>
-                        <div className="form-group  col-lg-6 col-12">
-                            <label>
-                                Mobile Number
-                                <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <PhoneInput
-                                international
+                        <div className="form-group col-lg-6 col-12 field">
+                            <Form.Item
                                 name="mobile_number"
-                                countryCallingCodeEditable={true}
-                                className="custs w-lg-50 ps-3 py-2"
-                                value={
-                                    stateAuth?.startupData?.team
-                                        ?.mobile_number ?? ""
+                                label="Mobile Number"
+                                initialValue={
+                                    stateAuth?.startupData?.team?.mobile_number
                                 }
-                                onChange={handlePhoneInput}
-                                MaxLength={17}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a mobile number.",
+                                    },
+                                ]}
+                            >
+                                <PhoneInput
+                                    international
+                                    name="mobile_number"
+                                    countryCallingCodeEditable={true}
+                                    className="custs w-lg-50 ps-3 py-2"
+                                    value={
+                                        stateAuth?.startupData?.team
+                                            ?.mobile_number ?? ""
+                                    }
+                                    onChange={handlePhoneInput}
+                                    MaxLength={17}
+                                    css={css`
+                                        padding-top: 0 !important;
+                                        padding-bottom: 0 !important;
+                                    `}
+                                />
+                            </Form.Item>
                         </div>
                         <div className="form-group  col-lg-6 col-12">
                             <Form.Item
@@ -624,42 +686,53 @@ export const TeamProfile = () => {
                     <div className="div border-bottom pb-3 ml-0">
                         <span>Skills</span>
                     </div>
-
                     <div className="form-group fields">
-                        <div>
-                            <label>
-                                What are your skills
-                                <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <p className="py-2">
-                                Please press the space button to add your skill
-                            </p>
-                        </div>
-                        <input
-                            onChange={handleChangeVal}
-                            style={{
-                                width: "100%",
-                                outline: "none",
-                                color: "purple",
-                            }}
-                            value={inVal}
-                            type="text"
-                            placeholder="Enter your skills and press the space button to add "
-                            className="py-2 px-3"
-                            // className='form-control ps-3'
-                            onKeyDown={handleKey}
-                        />
+                        <Form.Item
+                            name="skills"
+                            label="What are your skills"
+                            initialValue={
+                                stateAuth?.startupData?.team?.skills[0] ?? null
+                            }
+                            rules={[
+                                {
+                                    required: true,
+                                    message:
+                                        "Please select at least one skill.",
+                                },
+                            ]}
+                        >
+                            <div>
+                                <p className="py-2">
+                                    Please press the space button to add your
+                                    skill
+                                </p>
+                            </div>
+                            <input
+                                onChange={handleChangeVal}
+                                style={{
+                                    width: "100%",
+                                    outline: "none",
+                                    color: "purple",
+                                }}
+                                value={inVal}
+                                type="text"
+                                placeholder="Enter your skills and press the space button to add "
+                                className="py-2 px-3"
+                                // className='form-control ps-3'
+                                onKeyDown={handleKey}
+                            />
 
-                        {stateAuth?.startupData?.team?.skills &&
-                            stateAuth?.startupData?.team?.skills.map(
-                                (item, i) => (
-                                    <SkillTab
-                                        key={i}
-                                        skill={item}
-                                        onClick={() => onDelete(item)}
-                                    />
-                                )
-                            )}
+                            {stateAuth?.startupData?.team?.skills &&
+                                stateAuth?.startupData?.team?.skills.map(
+                                    (item, i) => (
+                                        <SkillTab
+                                            key={i}
+                                            skill={item}
+                                            onClick={() => onDelete(item)}
+                                        />
+                                    )
+                                )}
+                        </Form.Item>
                     </div>
                 </FormWrapper>
 
@@ -854,6 +927,7 @@ export const TeamProfile = () => {
                             background="#00ADEF"
                             onClick={() => {
                                 setButtonClicked("Save");
+                                console.log(stateAuth);
                             }}
                         >
                             {"Save"}

@@ -54,8 +54,7 @@ export const PreviousRound = ({ setFundraising }) => {
     //  stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding
     // }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onFinish = () => {
         // console.log('hello')
         console.log(stateAuth);
         history.push("#Financial Projection");
@@ -69,7 +68,7 @@ export const PreviousRound = ({ setFundraising }) => {
                     remember: true,
                 }}
                 layout="vertical"
-                onFinish={onSubmit}
+                onFinish={onFinish}
             >
                 <BodyWrapper>
                     <div>
@@ -91,36 +90,27 @@ export const PreviousRound = ({ setFundraising }) => {
 
                         <div className="row my-4">
                             <div className="form-group col-12 mb-0">
-                                <Form.Item
-                                    name="instrumentForRound"
+                                <TextField
+                                    id="instrumentForRound"
                                     label="Which instrument did you use for your previous round?"
-                                    initialValue={
+                                    // errName="instrument"
+                                    style={{ width: 200 }}
+                                    value={
                                         stateAuth?.startupData?.fundRaising
                                             ?.previousRound?.instrumentForRound
                                     }
-                                    rules={[
-                                        {
-                                            required: false,
-                                            message:
-                                                "Please select an instrument",
-                                        },
-                                    ]}
-                                >
-                                    <TextField
-                                        id="instrumentForRound"
-                                        style={{ width: 200 }}
-                                        onChange={(e) =>
-                                            updateProfile("fundRaising", {
-                                                previousRound: {
-                                                    ...stateAuth?.startupData
-                                                        ?.fundRaising
-                                                        ?.previousRound,
-                                                    instrumentForRound: e,
-                                                },
-                                            })
-                                        }
-                                    />
-                                </Form.Item>
+                                    onChange={(e) =>
+                                        updateProfile("fundRaising", {
+                                            previousRound: {
+                                                ...stateAuth?.startupData
+                                                    ?.fundRaising
+                                                    ?.previousRound,
+                                                instrumentForRound: e,
+                                            },
+                                        })
+                                    }
+                                    required={false}
+                                />
                             </div>
 
                             <div className="form-group my-2 col-12">
@@ -232,21 +222,17 @@ export const PreviousRound = ({ setFundraising }) => {
                                 />
                             </div>
                             <div className="form-group my-2 col-12">
-                                <label>
-                                    Dilution (%)
-                                    <span style={{ color: "red" }}>*</span>
-                                </label>
-                                <input
-                                    id="dilution"
+                                <TextField
                                     name="dilution"
-                                    type="text"
-                                    className="form-control ps-3"
-                                    placeholder="Enter what your business does"
+                                    label="Dilution (%)"
+                                    errName="dilution percentage"
+                                    style={{ width: 200 }}
                                     value={
                                         stateAuth?.startupData?.fundRaising
                                             ?.previousRound?.dilution
                                     }
-                                    onChange={(e) =>
+                                    required={true}
+                                    onChange={(e) => {
                                         updateProfile("fundRaising", {
                                             previousRound: {
                                                 ...stateAuth?.startupData
@@ -254,8 +240,9 @@ export const PreviousRound = ({ setFundraising }) => {
                                                     ?.previousRound,
                                                 dilution: e.target.value,
                                             },
-                                        })
-                                    }
+                                        });
+                                    }}
+                                    placeholder=""
                                 />
                             </div>
                             <div className="form-group my-2 col-12">
@@ -347,10 +334,6 @@ export const PreviousRound = ({ setFundraising }) => {
                     <div className="col-9 d-flex justify-content-end">
                         <OutlineButton
                             type="submit"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onSubmit(e);
-                            }}
                             className="ms-2"
                             style={{ marginRight: "0rem" }}
                             background="none"

@@ -205,7 +205,7 @@ const CompanyOverview = () => {
                 label="Industry"
                 initialValue={stateAuth?.partnerData?.industry}
                 rules={[
-                  { required: true, message: 'Please select a industry!' },
+                  { required: true, message: 'Please select an industry!' },
                 ]}
               >
                 <Select
