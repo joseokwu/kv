@@ -9,10 +9,10 @@ export const SignInAuthSide = () => {
         <div className="mb-3">
           <img src={logo} alt={'logo'} />
         </div>
-        <h1>Grow your business ideas with our incubator, accelerator and investor platform</h1>
+        <h1>Grow your business ideas with our incubator, accelerator and investor platform.</h1>
         <p className="py-4">
-          We are inviting startups to help them incubate and accelerate business
-          idea to funding
+          We are inviting startups to help them incubate and accelerate their business
+          ideas to funding.
         </p>
       </div>
     </div>

@@ -5,6 +5,7 @@ import {
     InputWrapper,
     FormWrapper,
 } from "./startup.styled";
+import { css } from "styled-components/macro";
 import "./style.css";
 import { UserOutlined, PlusOutlined } from "@ant-design/icons";
 import { DatePicker, Form, Select } from "antd";
@@ -26,6 +27,7 @@ import { TextareaCustom } from "./../../../../components/textArea/cutstomTextare
 import { letterOnly } from "../../../../utils/helpers";
 import { industry } from "../../../../constants/domiData";
 import { useEffect } from "react";
+import { fetchCities } from "../../../../services";
 
 const { Option } = Select;
 
@@ -66,6 +68,8 @@ export const StartupProfile = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [logoUploading, setLogoUploading] = useState(false);
 
+    const [form] = Form.useForm();
+
     console.log(stateAuth);
 
     const handlePhoneInput = (value) => {
@@ -76,7 +80,8 @@ export const StartupProfile = () => {
             },
         });
     };
-
+    fetchCities();
+    
     const handleCountry = (value) => {
         updateProfile("startUpProfile", {
             contactInfo: {
@@ -103,7 +108,7 @@ export const StartupProfile = () => {
 
     const handleDateInput = (value) => {
         updateProfile("startUpProfile", {
-            yearFounded: value,
+            yearFounded: value === "" ? null : value,
         });
     };
     const onChangeImage = async (e) => {
@@ -131,6 +136,11 @@ export const StartupProfile = () => {
 
     const onSubmit = async (e) => {
         // e.preventDefault();
+        // form.validateFieldsAndScroll((err, values) => {
+        //     if (!err) {
+        //         console.log("Received values of form: ", values);
+        //     }
+        // });
         updateStartupInfo();
         console.log(stateAuth?.startupData);
         if (buttonClicked === "Next") changePath(2);
@@ -185,7 +195,14 @@ export const StartupProfile = () => {
                 }}
                 layout="vertical"
                 onFinish={onSubmit}
+                // onSubmit={onSubmit}
+                // onFinishFailed={({ errorFields }) => {
+                //     form.scrollToField(errorFields[0].name);
+                // }}
+                // onFin
                 className="px-3"
+                form={form}
+                validateTrigger="onFinish"
             >
                 <FormWrapper className="pe-5">
                     <div className="div border-bottom pb-3">
@@ -196,7 +213,7 @@ export const StartupProfile = () => {
                         <div className="form-group form-group-spacee col-12">
                             <TextareaCustom
                                 name={"elevatorPitch"}
-                                label={" Elevator Pitch"}
+                                label={"Elevator Pitch"}
                                 value={
                                     stateAuth?.startupData?.startUpProfile
                                         ?.elevatorPitch
@@ -242,28 +259,47 @@ export const StartupProfile = () => {
                             />
                         </div>
                         <div className="form-group form-group-spacee col-lg-6 col-12">
-                            <label>
-                                Year Founded
-                                <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <DatePicker
-                                className="col-md-12 py-2 px-2"
-                                id="yearFounded"
+                            <Form.Item
                                 name="yearFounded"
-                                defaultValue={
+                                label="Year Founded"
+                                initialValue={
                                     stateAuth?.startupData?.startUpProfile
-                                        ?.yearFounded !== null
+                                        ?.yearFounded
                                         ? moment(
                                               stateAuth?.startupData
                                                   ?.startUpProfile?.yearFounded
                                           )
-                                        : moment()
+                                        : undefined
                                 }
-                                format={dateFormat}
-                                onChange={(_, dateString) =>
-                                    handleDateInput(dateString)
-                                }
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please select the year founded",
+                                    },
+                                ]}
+                            >
+                                <DatePicker
+                                    className="col-md-12 py-2 px-2"
+                                    id="yearFounded"
+                                    name="yearFounded"
+                                    defaultValue={
+                                        stateAuth?.startupData?.startUpProfile
+                                            ?.yearFounded
+                                            ? moment(
+                                                  stateAuth?.startupData
+                                                      ?.startUpProfile
+                                                      ?.yearFounded
+                                              )
+                                            : undefined
+                                    }
+                                    format={dateFormat}
+                                    onChange={(_, dateString) => {
+                                        console.log(dateString);
+                                        return (dateString);
+                                    }}handleDateInput
+                                />
+                            </Form.Item>
                         </div>
 
                         <div className="form-group form-group-spacee col-lg-6 col-12">
@@ -440,31 +476,57 @@ export const StartupProfile = () => {
                                 placeholder="Enter your registered address"
                             />
                         </div>
-                        <div className="form-group form-group-spacee col-lg-4 col-12">
-                            <label>
-                                Country<span style={{ color: "red" }}>*</span>
-                            </label>
-                            <CountryDropdown
+                        <div className="form-group form-group-spacee col-lg-4 col-12 select-field">
+                            <Form.Item
                                 name="country"
-                                className="form-control px-5 py-1 country-bg"
-                                value={country}
-                                onChange={(value) => handleCountry(value)}
-                            ></CountryDropdown>
-                        </div>
-                        <div className="form-group form-group-spacee col-lg-4 col-12">
-                            <label>
-                                State<span style={{ color: "red" }}>*</span>
-                            </label>
-                            <RegionDropdown
-                                name="state"
-                                country={country}
-                                value={
+                                label="Country"
+                                initialValue={
                                     stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.state ?? ""
+                                        ?.contactInfo?.country
                                 }
-                                onChange={(value) => handleChangeState(value)}
-                                className="form-control ps-3"
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please select a country",
+                                    },
+                                ]}
+                            >
+                                <CountryDropdown
+                                    name="country"
+                                    className="form-control px-5 py-1 country-bg"
+                                    value={country}
+                                    onChange={(value) => handleCountry(value)}
+                                />
+                            </Form.Item>
+                        </div>
+                        <div className="form-group form-group-spacee col-lg-4 col-12 select-field">
+                            <Form.Item
+                                name="state"
+                                label="State"
+                                initialValue={
+                                    stateAuth?.startupData?.startUpProfile
+                                        ?.contactInfo?.state
+                                }
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please select a state",
+                                    },
+                                ]}
+                            >
+                                <RegionDropdown
+                                    name="state"
+                                    country={country}
+                                    value={
+                                        stateAuth?.startupData?.startUpProfile
+                                            ?.contactInfo?.state ?? ""
+                                    }
+                                    onChange={(value) =>
+                                        handleChangeState(value)
+                                    }
+                                    className="form-control ps-3"
+                                />
+                            </Form.Item>
                         </div>
                         <div className="form-group form-group-spacee col-lg-4 col-12">
                             <TextField
@@ -487,25 +549,42 @@ export const StartupProfile = () => {
                                 placeholder="Enter your registered address"
                             />
                         </div>
-                        <div className="form-group form-group-spacee col-lg-6 col-12 ">
-                            <label>
-                                Mobile Number
-                                <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <PhoneInput
-                                id="phoneNumber"
-                                international
+                        <div className="form-group form-group-spacee col-lg-6 col-12 field">
+                            <Form.Item
                                 name="phoneNumber"
-                                countryCallingCodeEditable={true}
-                                className="custs ps-3 py-2"
-                                value={
+                                label="Mobile Number"
+                                initialValue={
                                     stateAuth?.startupData?.startUpProfile
                                         ?.contactInfo?.phoneNumber ||
                                     stateAuth?.phone
                                 }
-                                onChange={handlePhoneInput}
-                                MaxLength={17}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a mobile number.",
+                                    },
+                                ]}
+                            >
+                                <PhoneInput
+                                    id="phoneNumber"
+                                    international
+                                    name="phoneNumber"
+                                    countryCallingCodeEditable={true}
+                                    className="custs ps-3 py-2"
+                                    value={
+                                        stateAuth?.startupData?.startUpProfile
+                                            ?.contactInfo?.phoneNumber ||
+                                        stateAuth?.phone
+                                    }
+                                    onChange={handlePhoneInput}
+                                    MaxLength={17}
+                                    css={css`
+                                        padding-top: 0 !important;
+                                        padding-bottom: 0 !important;
+                                    `}
+                                />
+                            </Form.Item>
                         </div>
                         <div className="form-group col-lg-6 col-12">
                             <TextField
@@ -639,6 +718,8 @@ export const StartupProfile = () => {
                                     console.log(
                                         "nextttttttttttttttttttttttttttttt"
                                     );
+                                    // updateStartupInfo();
+
                                     setButtonClicked("Next");
                                     // if (validated) {
 

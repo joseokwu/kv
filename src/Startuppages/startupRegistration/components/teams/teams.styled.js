@@ -106,7 +106,7 @@ export const FormWrapper = styled.div`
     .div {
         margin-bottom: 10px;
         margin-top: 15px;
-        margin-left: 15px;
+        // margin-left: 15px;
         span {
             font-family: DM Sans;
             font-weight: 500;

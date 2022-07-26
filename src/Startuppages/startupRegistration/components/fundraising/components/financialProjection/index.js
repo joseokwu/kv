@@ -13,6 +13,8 @@ import { useState } from "react";
 import { UploadFile } from "../../../../../../components";
 import { validate } from "./../../../../../../utils/helpers";
 import { startupValidation } from "./../../../../../../utils/utils";
+import toast from "react-hot-toast";
+import Form from "antd/lib/form/Form";
 
 export const FinancialProjection = () => {
     const {
@@ -23,14 +25,22 @@ export const FinancialProjection = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(stateAuth?.startupData);
-        console.log(validate(stateAuth?.startupData, startupValidation));
-        updateStartupInfo(validate(stateAuth?.startupData, startupValidation));
-        window.open("/startup/registration/success", "_self");
+
+        if (
+            stateAuth?.startupData?.fundRaising?.financialProjection?.files
+                ?.length !== 0
+        ) {
+            console.log(stateAuth?.startupData);
+            console.log(validate(stateAuth?.startupData, startupValidation));
+            updateStartupInfo(
+                validate(stateAuth?.startupData, startupValidation)
+            );
+            window.open("/startup/registration/success", "_self");
+        } else toast.error("Please provide a financial projection document");
     };
 
     return (
-        <>
+        <form onSubmit={handleSubmit}>
             <BodyWrapper>
                 <span
                     css={css`
@@ -124,7 +134,6 @@ export const FinancialProjection = () => {
                 <div className="col-9 d-flex justify-content-end">
                     <OutlineButton
                         type="submit"
-                        onClick={(e) => handleSubmit(e)}
                         className="ms-2"
                         style={{ marginRight: "0rem" }}
                         background="none"
@@ -133,6 +142,6 @@ export const FinancialProjection = () => {
                     </OutlineButton>
                 </div>
             </div>
-        </>
+        </form>
     );
 };

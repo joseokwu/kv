@@ -111,9 +111,9 @@ export const FundRaising = () => {
                 <Tabs tabItems={tabList} />
             </div>
 
-            <form style={{ marginBottom: "4rem" }} className="px-3">
+            <div style={{ marginBottom: "4rem" }} className="px-3">
                 <FormWrapper height="85%">{renderContent()}</FormWrapper>
-            </form>
+            </div>
         </>
     );
 };

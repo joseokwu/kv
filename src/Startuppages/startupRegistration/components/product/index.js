@@ -15,6 +15,8 @@ import { letterOnly } from "../../../../utils/helpers";
 import { CircularLoader } from "../../../../Startupcomponents/CircluarLoader/CircularLoader";
 import { upload } from "../../../../services/utils";
 import { useHistory } from "react-router-dom";
+import { TextField } from "../../../../Startupcomponents";
+import { Button } from "../../../../Startupcomponents";
 
 export const Product = () => {
     const [wordCount, setWordCount] = useState();
@@ -28,8 +30,14 @@ export const Product = () => {
     const [urls, setUrls] = useState(
         stateAuth?.startupData?.product?.youtubeDemoUrl ?? ""
     );
-    const [youtube, setYoutube] = useState("");
+
+    const [youtube, setYoutube] = useState(
+        stateAuth?.startupData?.product?.youtubeDemoUrl ?? ""
+    );
     const [buttonClicked, setButtonClicked] = useState("Save");
+
+    const youtubeRegExp =
+        /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
 
     const history = useHistory();
     const handleChangeVids = (e) => {
@@ -106,14 +114,10 @@ export const Product = () => {
 
                         <div className="row mt-4">
                             <div className="form-group col-12">
-                                <div className="d-flex justify-content-between mt-2">
-                                    <label>
-                                        Briefly describe the users of your
-                                        product or services?
-                                    </label>
-                                </div>
                                 <TextareaCustom
                                     name={"description"}
+                                    errName={"product description"}
+                                    label="Briefly describe the users of your product or services?"
                                     value={
                                         stateAuth?.startupData?.product
                                             ?.description
@@ -128,13 +132,10 @@ export const Product = () => {
                                 />
                             </div>
                             <div className="form-group col-12">
-                                <div className="d-flex justify-content-between">
-                                    <label>
-                                        What makes your solution unique from
-                                        others in the market?
-                                    </label>
-                                </div>
                                 <TextareaCustom
+                                    label="What makes your solution unique from
+                                others in the market?"
+                                    errName={"competitive edge"}
                                     name={"competitiveEdge"}
                                     value={
                                         stateAuth?.startupData?.product
@@ -148,24 +149,44 @@ export const Product = () => {
                                 />
                             </div>
                         </div>
+
                         <div className="form-group col-12 mt-3">
-                            <label> Paste Youtube Link of product Demo </label>
-                            <div className="d-flex my-2">
-                                <input
-                                    type="text"
+                            <div className="d-flex flex-row align-items-center my-2 gap-4">
+                                <Form.Item
                                     name="youtubeDemoUrl"
-                                    onChange={handleChangeVids}
-                                    value={youtube}
-                                    className="form-control youtube-input ps-3"
-                                    placeholder="Youtube link"
-                                />
-                                <button
+                                    label="Paste Youtube Link of product Demo"
+                                    initialValue={youtube}
+                                    rules={[
+                                        {
+                                            required: stateAuth?.startupData
+                                                ?.product?.files
+                                                ? false
+                                                : true,
+                                            message:
+                                                "Please enter a valid youtube url or upload a video.",
+                                            pattern: youtubeRegExp,
+                                        },
+                                    ]}
+                                >
+                                    <input
+                                        type="text"
+                                        name="youtubeDemoUrl"
+                                        onChange={handleChangeVids}
+                                        value={youtube}
+                                        className="form-control youtube-input ps-3 w-100"
+                                        placeholder="Youtube link"
+                                    />
+                                </Form.Item>
+                                <Button
                                     type="button"
                                     className="button"
                                     onClick={addVid}
-                                >
-                                    Upload
-                                </button>
+                                    label="Upload"
+                                    disabled={
+                                        !youtubeRegExp.test(youtube) &&
+                                        youtube !== ""
+                                    }
+                                />
                             </div>
                             {!urls.includes("https://youtu.be/") ? (
                                 <div className="form-group col-12 mt-3">
@@ -266,6 +287,7 @@ export const Product = () => {
                             type="submit"
                             onClick={() => {
                                 setButtonClicked("Next");
+                                console.log(stateAuth);
                             }}
                             background="#2E3192"
                         >

@@ -30,10 +30,10 @@ export const MentorConfirmEmail = () => {
       case 'startup':
         return (
           <div>
-            <h2> Grow your business today with our accelerator program </h2>
+            <h2> Grow your business today with our accelerator program.</h2>
             <span>
-              We are inviting startups to help them incubate and accelerate
-              business idea to funding
+              We are inviting startups to help them incubate and accelerate their
+              business ideas to funding.
             </span>
           </div>
         )
