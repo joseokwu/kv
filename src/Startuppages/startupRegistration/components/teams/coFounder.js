@@ -66,6 +66,26 @@ export const CoFounder = ({
     const [inVal, setVal] = useState("");
     const [region, setRegion] = useState("");
 
+    const [generalValues, setGeneralValues] = useState({
+        avatar: avatar,
+        briefIntroduction: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        dob: dob,
+        linkedIn: '',
+        twitter: '',
+        website: '',
+        country: country,
+        position: '',
+        state: region,
+        city: '',
+        skills: skills,
+        mobile_number: phone,
+        education: localEducation,
+        experience: localExperience,
+    });
+
     const handleChangeVal = (e) => {
         setVal(e.target.value);
     };
@@ -247,7 +267,13 @@ export const CoFounder = ({
                 <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
                     <div className="div">
                         <span>Co-Founder</span>
-                        <p>A brief profile of co-founders</p>
+                        <p
+                            onClick={() =>
+                                console.log(stateAuth.startupData.team)
+                            }
+                        >
+                            A brief profile of co-founders
+                        </p>
                     </div>
 
                     <div style={{ marginTop: "10px", marginLeft: "10px" }}>
