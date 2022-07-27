@@ -63,7 +63,7 @@ export const TeamProfile = () => {
     );
 
     const gender = [
-        { label: "--Select-gender--", value: "" },
+        // { label: "--Select-gender--", value: "" },
         { label: "Male", value: "male" },
         { label: "Female", value: "female" },
     ];

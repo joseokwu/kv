@@ -47,7 +47,8 @@ export const registerUser = async (value) => async (dispatch) => {
 
         return res;
     } catch (err) {
-        toast.success(err?.response?.data?.message ?? err?.response);
+        console.log(err?.response);
+        toast.error(err?.response?.data?.message ?? err?.response);
         console.log(err?.response?.data?.message ?? err?.response);
         dispatch({
             type: REGISTER_FAILED,
