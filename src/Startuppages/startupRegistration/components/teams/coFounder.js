@@ -30,8 +30,10 @@ import {
     CountryRegionData,
 } from "react-country-region-selector";
 import { TextField } from "../../../../Startupcomponents";
+import { TextareaCustom } from "../../../../components/textArea/cutstomTextarea";
 import moment from "moment";
 import { useAuth } from "../../../../hooks/useAuth";
+import { letterOnly } from "../../../../utils/helpers";
 
 const { Option } = Select;
 
@@ -68,22 +70,40 @@ export const CoFounder = ({
 
     const [generalValues, setGeneralValues] = useState({
         avatar: avatar,
-        briefIntroduction: '',
-        firstName: '',
-        lastName: '',
-        email: '',
+        briefIntroduction: "",
+        firstName: "",
+        lastName: "",
+        email: "",
         dob: dob,
-        linkedIn: '',
-        twitter: '',
-        website: '',
+        linkedIn: "",
+        twitter: "",
+        website: "",
         country: country,
-        position: '',
+        position: "",
         state: region,
-        city: '',
+        city: "",
         skills: skills,
         mobile_number: phone,
         education: localEducation,
         experience: localExperience,
+    });
+
+    const [currentEducationValues, setCurrentEducationValues] = useState({
+        schoolName: "",
+        course: "",
+        degree: "",
+        activities: "",
+        startDate: "",
+        endDate: checked ? "present" : "",
+    });
+
+    const [currentExperienceValues, setCurrentExperienceValues] = useState({
+        companyName: "",
+        location: "",
+        position: "",
+        responsibility: "",
+        startDate: "",
+        endDate: checked ? "present" : endDate,
     });
 
     const handleChangeVal = (e) => {
@@ -263,7 +283,20 @@ export const CoFounder = ({
                 <span></span>
             )}
 
-            <Form>
+            <Form.Provider>
+                <Form
+                    id="Cofounder-general"
+                    name="Cofounder-general"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={(values) => {
+                        console.log(values);
+                        // handleExpeSubmit();
+                        // setDisplayWorkExperience(true);
+                    }}
+                ></Form>
                 <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
                     <div className="div">
                         <span>Co-Founder</span>
@@ -441,115 +474,63 @@ export const CoFounder = ({
                             />
                         </div>
                     </div>
-                    <CustomButton
-                        type="button"
-                        background="#021098"
-                        onClick={() => {
-                            handleExpeSubmit();
-                            setDisplayWorkExperience(true);
-                        }}
-                        style={{
-                            marginLeft: displayWorkExperience ? "7rem" : "0rem",
-                        }}
-                    >
-                        Save
-                    </CustomButton>
                 </FormWrapper>
-            </Form>
-            <Form>
-                <FormWrapper height="80%" style={{ padding: "0 0 1rem 0" }}>
-                    {!displayWorkExperience ? (
-                        <div>
-                            <HeaderModal> {"Add Work Experience"}</HeaderModal>
-                            <hr style={{ background: "#323232" }} />
-                            <form>
+                <Form
+                    name="Cofounder-Experience"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={(values) => {
+                        console.log(values);
+                        // handleExpeSubmit();
+                        // setDisplayWorkExperience(true);
+                    }}
+                >
+                    <FormWrapper height="80%" style={{ padding: "0 0 1rem 0" }}>
+                        {!displayWorkExperience ? (
+                            <div>
+                                <HeaderModal>
+                                    {" "}
+                                    {"Add Work Experience"}
+                                </HeaderModal>
+                                <hr style={{ background: "#323232" }} />
                                 <ModalForm className="row">
                                     <div className="col-12 form-group">
-                                        <label>
-                                            Company Name
-                                            <span style={{ color: "red" }}>
-                                                *
-                                            </span>
-                                        </label>
-                                        <input
-                                            id="title"
-                                            name="companyName"
-                                            type="text"
-                                            className="form-control ps-3"
-                                            placeholder="CEO and Founder"
+                                        <TextField
+                                            label="Company Name"
+                                            name={"companyName"}
                                             value={
-                                                workFormik.values.companyName
+                                                currentExperienceValues.companyName
                                             }
-                                            onBlur={workFormik.handleBlur}
-                                            onChange={workFormik.handleChange}
+                                            placeholder="e.g. Knight Ventures"
+                                            required={true}
                                         />
-                                        {workFormik.touched.companyName &&
-                                        workFormik.errors.companyName ? (
-                                            <label className="error">
-                                                {workFormik.errors.companyName}
-                                            </label>
-                                        ) : null}
                                     </div>
                                     <div className="col-12 form-group">
-                                        <label>
-                                            Location
-                                            <span style={{ color: "red" }}>
-                                                *
-                                            </span>
-                                        </label>
-                                        <input
-                                            id="location"
-                                            name="location"
-                                            type="text"
-                                            className="form-control ps-3"
-                                            placeholder="United state of America"
-                                            value={workFormik.values.location}
-                                            onBlur={workFormik.handleBlur}
-                                            onChange={workFormik.handleChange}
+                                        <TextField
+                                            label="Location"
+                                            name={"location"}
+                                            value={
+                                                currentExperienceValues.location
+                                            }
+                                            placeholder="e.g. United state of America"
+                                            required={true}
                                         />
-                                        {workFormik.touched.location &&
-                                        workFormik.errors.location ? (
-                                            <label className="error">
-                                                {workFormik.errors.location}
-                                            </label>
-                                        ) : null}
                                     </div>
 
                                     <div className="col-12 form-group">
-                                        <div className="d-flex justify-content-between">
-                                            <label>
-                                                Description
-                                                <span style={{ color: "red" }}>
-                                                    *
-                                                </span>
-                                            </label>
-                                            <label style={{ color: "#828282" }}>
-                                                50 characters at most
-                                            </label>
-                                        </div>
-
-                                        <textarea
-                                            id="description"
-                                            name="responsibility"
-                                            cols="5"
-                                            rows="5"
-                                            className="form-control ps-3"
+                                        <TextareaCustom
+                                            name={"responsibility"}
+                                            label={"Description"}
+                                            value={
+                                                currentExperienceValues.responsibility
+                                            }
+                                            min={10}
+                                            maxLength={50}
+                                            onKeyPress={letterOnly}
                                             placeholder="Tell us about your role"
-                                            value={
-                                                workFormik.values.responsibility
-                                            }
-                                            onBlur={workFormik.handleBlur}
-                                            onChange={workFormik.handleChange}
                                         />
-                                        {workFormik.touched.responsibility &&
-                                        workFormik.errors.responsibility ? (
-                                            <label className="error">
-                                                {
-                                                    workFormik.errors
-                                                        .responsibility
-                                                }
-                                            </label>
-                                        ) : null}
                                     </div>
                                     <div className="col-12 form-group">
                                         <input
@@ -562,41 +543,67 @@ export const CoFounder = ({
                                         <span>I current work in this role</span>
                                     </div>
                                     <div className="col-6 form-group">
-                                        <label>
-                                            Start Date
-                                            <span style={{ color: "red" }}>
-                                                *
-                                            </span>
-                                        </label>
-                                        <DatePicker
-                                            id="startDate"
+                                        <Form.Item
                                             name="startDate"
-                                            className="p-2"
-                                            style={{ padding: "15px" }}
-                                            selected={startDate}
-                                            onChange={(date) =>
-                                                setStartDate(date)
+                                            label="Start Date"
+                                            initialValue={
+                                                currentExperienceValues.startDate
+                                                    ? moment(
+                                                          currentExperienceValues.startDate
+                                                      )
+                                                    : undefined
                                             }
-                                        />
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Please select the day you started",
+                                                },
+                                            ]}
+                                        >
+                                            <DatePicker
+                                                id="startDate"
+                                                name="startDate"
+                                                className="p-2"
+                                                style={{ padding: "15px" }}
+                                                selected={startDate}
+                                                onChange={(date) =>
+                                                    setStartDate(date)
+                                                }
+                                            />
+                                        </Form.Item>
                                     </div>
                                     {!checked && (
                                         <div className="col-6 form-group">
-                                            <label>
-                                                End Date
-                                                <span style={{ color: "red" }}>
-                                                    *
-                                                </span>
-                                            </label>
-                                            <DatePicker
-                                                id="endDate"
+                                            <Form.Item
                                                 name="endDate"
-                                                className="p-2"
-                                                style={{ padding: "15px" }}
-                                                selected={endDate}
-                                                onChange={(date) =>
-                                                    setEndDate(date)
+                                                label="End Date"
+                                                initialValue={
+                                                    currentExperienceValues.endDate
+                                                        ? moment(
+                                                              currentExperienceValues.endDate
+                                                          )
+                                                        : undefined
                                                 }
-                                            />
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "Please select the day you left",
+                                                    },
+                                                ]}
+                                            >
+                                                <DatePicker
+                                                    id="endDate"
+                                                    name="endDate"
+                                                    className="p-2"
+                                                    style={{ padding: "15px" }}
+                                                    selected={endDate}
+                                                    onChange={(date) =>
+                                                        setEndDate(date)
+                                                    }
+                                                />
+                                            </Form.Item>
                                         </div>
                                     )}
 
@@ -618,12 +625,11 @@ export const CoFounder = ({
                                         )}
 
                                         <CustomButton
-                                            type="button"
+                                            type="submit"
                                             background="#021098"
-                                            onClick={() => {
-                                                handleExpeSubmit();
-                                                setDisplayWorkExperience(true);
-                                            }}
+                                            // onClick={() => {
+
+                                            // }}
                                             style={{
                                                 marginLeft:
                                                     displayWorkExperience
@@ -635,196 +641,178 @@ export const CoFounder = ({
                                         </CustomButton>
                                     </div>
                                 </ModalForm>
-                            </form>
-                        </div>
-                    ) : (
-                        <div className="mx-5">
-                            <HeaderModal>Work Experience</HeaderModal>
-                            <hr style={{ background: "#323232" }} />
-                            {localExperience.length > 0 &&
-                                localExperience.map((item, index) => {
-                                    return (
-                                        <WorkExperience
-                                            key={index}
-                                            {...item}
-                                            showTeamModal={() =>
-                                                setDisplayWorkExperience(false)
-                                            }
-                                            setEditIndex={setEditIndex}
-                                            setIsEditing={setIsEditing}
-                                            id={index}
-                                        />
-                                    );
-                                })}
-                            <div className="col-7 my-4">
-                                <span
-                                    style={{
-                                        color: "#120297",
-                                        borderBottom: "1px solid #120297",
-                                        fontWeight: "600",
-                                        marginTop: "10px",
-                                    }}
-                                    onClick={() =>
-                                        setDisplayWorkExperience(false)
-                                    }
-                                >
-                                    Add another work experience +
-                                </span>
                             </div>
-                        </div>
-                    )}
-                </FormWrapper>
-            </Form>
+                        ) : (
+                            <div>
+                                <HeaderModal>Work Experience</HeaderModal>
+                                <hr style={{ background: "#323232" }} />
+                                {localExperience.length > 0 &&
+                                    localExperience.map((item, index) => {
+                                        return (
+                                            <WorkExperience
+                                                key={index}
+                                                {...item}
+                                                showTeamModal={() =>
+                                                    setDisplayWorkExperience(
+                                                        false
+                                                    )
+                                                }
+                                                setEditIndex={setEditIndex}
+                                                setIsEditing={setIsEditing}
+                                                id={index}
+                                            />
+                                        );
+                                    })}
+                                <div className="col-7 my-4 px-0">
+                                    <span
+                                        style={{
+                                            color: "#120297",
+                                            borderBottom: "1px solid #120297",
+                                            fontWeight: "600",
+                                            marginTop: "10px",
+                                        }}
+                                        onClick={() =>
+                                            setDisplayWorkExperience(false)
+                                        }
+                                    >
+                                        Add another work experience +
+                                    </span>
+                                </div>
+                            </div>
+                        )}
+                    </FormWrapper>
+                </Form>
 
-            <Form>
-                <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
-                    {!displayEducation ? (
-                        <div>
-                            <HeaderModal>
-                                {isEditing ? "Edit Education" : "Add Education"}
-                            </HeaderModal>
-                            <hr style={{ background: "#323232" }} />
-                            <form>
+                <Form
+                    name="Cofounder-Education"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={(values) => {
+                        console.log(values);
+                        // handleEduSubmit();
+                        // setDisplayEducation(true);
+                    }}
+                >
+                    <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
+                        {!displayEducation ? (
+                            <div>
+                                <HeaderModal>
+                                    {isEditing
+                                        ? "Edit Education"
+                                        : "Add Education"}
+                                </HeaderModal>
+                                <hr style={{ background: "#323232" }} />
                                 <ModalForm className="row">
                                     <div className="col-12 form-group">
-                                        <label>
-                                            School
-                                            <span style={{ color: "red" }}>
-                                                *
-                                            </span>
-                                        </label>
-                                        <input
-                                            id="school"
-                                            name="school"
-                                            type="text"
-                                            className="form-control ps-3"
+                                        <TextField
+                                            label="School"
+                                            name={"school"}
+                                            value={
+                                                currentEducationValues.school
+                                            }
                                             placeholder="Enter School name"
-                                            value={eduFormik.values.school}
-                                            onBlur={eduFormik.handleBlur}
-                                            onChange={eduFormik.handleChange}
+                                            required={true}
                                         />
-                                        {eduFormik.touched.school &&
-                                        eduFormik.errors.school ? (
-                                            <label className="error">
-                                                {eduFormik.errors.school}
-                                            </label>
-                                        ) : null}
                                     </div>
                                     <div className="col-12 form-group">
-                                        <label>
-                                            Degree
-                                            <span style={{ color: "red" }}>
-                                                *
-                                            </span>
-                                        </label>
-                                        <input
-                                            id="degree"
-                                            name="degree"
-                                            type="text"
-                                            className="form-control ps-3"
-                                            placeholder="Enter Degree "
-                                            value={eduFormik.values.degree}
-                                            onBlur={eduFormik.handleBlur}
-                                            onChange={eduFormik.handleChange}
+                                        <TextField
+                                            label="Degree"
+                                            name={"degree"}
+                                            value={
+                                                currentEducationValues.degree
+                                            }
+                                            placeholder="Enter Degree"
+                                            required={true}
                                         />
-                                        {eduFormik.touched.degree &&
-                                        eduFormik.errors.degree ? (
-                                            <label className="error">
-                                                {eduFormik.errors.degree}
-                                            </label>
-                                        ) : null}
                                     </div>
                                     <div className="col-12 form-group">
-                                        <label>
-                                            Filed of study
-                                            <span style={{ color: "red" }}>
-                                                *
-                                            </span>
-                                        </label>
-                                        <input
-                                            id="course"
-                                            name="course"
-                                            type="text"
-                                            className="form-control ps-3"
+                                        <TextField
+                                            label="Field of study"
+                                            name={"course"}
+                                            value={
+                                                currentEducationValues.course
+                                            }
                                             placeholder="Enter filed of study"
-                                            value={eduFormik.values.course}
-                                            onBlur={eduFormik.handleBlur}
-                                            onChange={eduFormik.handleChange}
+                                            required={true}
                                         />
-                                        {eduFormik.touched.course &&
-                                        eduFormik.errors.course ? (
-                                            <label className="error">
-                                                {eduFormik.errors.course}
-                                            </label>
-                                        ) : null}
                                     </div>
                                     <div className="col-12 form-group">
-                                        <div className="d-flex justify-content-between">
-                                            <label>
-                                                Activities and societies
-                                                <span style={{ color: "red" }}>
-                                                    *
-                                                </span>
-                                            </label>
-                                            <label style={{ color: "#828282" }}>
-                                                50 characters at most
-                                            </label>
-                                        </div>
-
-                                        <textarea
-                                            id="activities"
-                                            name="activities"
-                                            cols="5"
-                                            rows="6"
-                                            className="form-control ps-3"
+                                        <TextareaCustom
+                                            name={"activities"}
+                                            label={"Activities and societies"}
+                                            value={
+                                                currentEducationValues.activities
+                                            }
+                                            min={10}
+                                            maxLength={50}
+                                            onKeyPress={letterOnly}
                                             placeholder="Enter Activities and Societies"
-                                            value={eduFormik.values.activities}
-                                            onBlur={eduFormik.handleBlur}
-                                            onChange={eduFormik.handleChange}
                                         />
-                                        {eduFormik.touched.activities &&
-                                        eduFormik.errors.activities ? (
-                                            <label className="error">
-                                                {eduFormik.errors.activities}
-                                            </label>
-                                        ) : null}
                                     </div>
 
                                     <div className="col-6 form-group">
-                                        <label>
-                                            Entry Date
-                                            <span style={{ color: "red" }}>
-                                                *
-                                            </span>
-                                        </label>
-                                        <DatePicker
-                                            id="eduStartDate"
+                                        <Form.Item
                                             name="eduStartDate"
-                                            className="p-2"
-                                            style={{ padding: "15px" }}
-                                            selected={eduStartDate}
-                                            onChange={(date) =>
-                                                setEduStartDate(date)
+                                            label="Entry Date"
+                                            initialValue={
+                                                currentEducationValues.eduStartDate
+                                                    ? moment(
+                                                          currentEducationValues.eduStartDate
+                                                      )
+                                                    : undefined
                                             }
-                                        />
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Please select the day you started",
+                                                },
+                                            ]}
+                                        >
+                                            <DatePicker
+                                                id="eduStartDate"
+                                                name="eduStartDate"
+                                                className="p-2"
+                                                style={{ padding: "15px" }}
+                                                selected={startDate}
+                                                onChange={(date) =>
+                                                    setEduStartDate(date)
+                                                }
+                                            />
+                                        </Form.Item>
                                     </div>
                                     <div className="col-6 form-group">
-                                        <label>
-                                            Graduation Date
-                                            <span style={{ color: "red" }}>
-                                                *
-                                            </span>
-                                        </label>
-                                        <DatePicker
-                                            id="eduEndDate"
+                                        <Form.Item
                                             name="eduEndDate"
-                                            className="p-2"
-                                            style={{ padding: "15px" }}
-                                            selected={eduEndDate}
-                                            onChange={(date) =>
-                                                setEduEndDate(date)
+                                            label="Graduation Date"
+                                            initialValue={
+                                                currentEducationValues.eduEndDate
+                                                    ? moment(
+                                                          currentEducationValues.eduEndDate
+                                                      )
+                                                    : undefined
                                             }
-                                        />
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Please select the day you started",
+                                                },
+                                            ]}
+                                        >
+                                            <DatePicker
+                                                id="eduEndDate"
+                                                name="eduEndDate"
+                                                className="p-2"
+                                                style={{ padding: "15px" }}
+                                                selected={startDate}
+                                                onChange={(date) =>
+                                                    setEduEndDate(date)
+                                                }
+                                            />
+                                        </Form.Item>
                                     </div>
 
                                     <div
@@ -842,11 +830,7 @@ export const CoFounder = ({
                                             </CustomButton>
                                         )}
                                         <CustomButton
-                                            type="button"
-                                            onClick={() => {
-                                                handleEduSubmit();
-                                                setDisplayEducation(true);
-                                            }}
+                                            type="submit"
                                             background="#021098"
                                             style={{
                                                 marginLeft: displayEducation
@@ -858,46 +842,46 @@ export const CoFounder = ({
                                         </CustomButton>
                                     </div>
                                 </ModalForm>
-                            </form>
-                        </div>
-                    ) : (
-                        <div className="mx-5">
-                            <HeaderModal>Education</HeaderModal>
-                            <hr style={{ background: "#323232" }} />
-                            {localEducation &&
-                                localEducation.map((item, index) => {
-                                    return (
-                                        <Education
-                                            key={index}
-                                            {...item}
-                                            showEducationModal={() =>
-                                                setDisplayEducation(false)
-                                            }
-                                            setEditIndex={setEditIndex}
-                                            setIsEditing={setIsEditing}
-                                            id={index}
-                                        />
-                                    );
-                                })}
-                            <div className="col-6 my-4">
-                                <span
-                                    style={{
-                                        color: "#120297",
-                                        borderBottom: "1px solid #120297",
-                                        fontWeight: "600",
-                                        marginTop: "10px",
-                                    }}
-                                    onClick={() => setDisplayEducation(false)}
-                                >
-                                    Add another education +
-                                </span>
                             </div>
-                        </div>
-                    )}
-                </FormWrapper>
-            </Form>
+                        ) : (
+                            <div className="mx-5">
+                                <HeaderModal>Education</HeaderModal>
+                                <hr style={{ background: "#323232" }} />
+                                {localEducation &&
+                                    localEducation.map((item, index) => {
+                                        return (
+                                            <Education
+                                                key={index}
+                                                {...item}
+                                                showEducationModal={() =>
+                                                    setDisplayEducation(false)
+                                                }
+                                                setEditIndex={setEditIndex}
+                                                setIsEditing={setIsEditing}
+                                                id={index}
+                                            />
+                                        );
+                                    })}
+                                <div className="col-6 my-4">
+                                    <span
+                                        style={{
+                                            color: "#120297",
+                                            borderBottom: "1px solid #120297",
+                                            fontWeight: "600",
+                                            marginTop: "10px",
+                                        }}
+                                        onClick={() =>
+                                            setDisplayEducation(false)
+                                        }
+                                    >
+                                        Add another education +
+                                    </span>
+                                </div>
+                            </div>
+                        )}
+                    </FormWrapper>
+                </Form>
 
-            <Form>
                 <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
                     <div className="div">
                         <span>Skills</span>
@@ -935,23 +919,23 @@ export const CoFounder = ({
                             ))}
                     </div>
                 </FormWrapper>
-            </Form>
 
-            <Form>
                 <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
                     <div className="div border-bottom pb-3">
                         <span>Web & Social Media</span>
                     </div>
                     <div className="row">
                         <div className="form-group col-lg-6 col-12">
-                            <label>Linkedin*</label>
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.linkedIn}
-                                type="text"
-                                name="linkedIn"
-                                placeholder="Enter Linkdin link"
-                                className="form-control ps-3"
+                            <TextField
+                                label="Linkedin"
+                                name={"linkedInHandle"}
+                                value={
+                                    stateAuth?.startupData?.startUpProfile
+                                        ?.contactInfo?.linkedInHandle
+                                }
+                                required={true}
+                                type={"url"}
+                                placeholder="Enter your Linkedin link"
                             />
                         </div>
                         <div className="form-group col-lg-6 col-12">
@@ -979,31 +963,31 @@ export const CoFounder = ({
                         </div>
                     </div>
                 </FormWrapper>
-            </Form>
 
-            <div className="row mx-5 mb-5">
-                <div className="col-3">
-                    <CustomButton
-                        className=""
-                        background="#D0D0D1"
-                        onClick={back}
-                    >
-                        Back
-                    </CustomButton>
-                </div>
-                <div className="col-9 d-flex justify-content-end">
-                    {/* <CustomButton className="mx-2" background="#00ADEF">
+                <div className="row mb-5">
+                    <div className="col-3">
+                        <CustomButton
+                            className=""
+                            background="#D0D0D1"
+                            onClick={back}
+                        >
+                            Back
+                        </CustomButton>
+                    </div>
+                    <div className="col-9 d-flex justify-content-end">
+                        {/* <CustomButton className="mx-2" background="#00ADEF">
               Save
             </CustomButton> */}
-                    <CustomButton
-                        type="button"
-                        onClick={onSubmit}
-                        background="#00ADEF"
-                    >
-                        {"Save"}
-                    </CustomButton>
+                        <CustomButton
+                            type="submit"
+                            onClick={onSubmit}
+                            background="#00ADEF"
+                        >
+                            {"Save"}
+                        </CustomButton>
+                    </div>
                 </div>
-            </div>
+            </Form.Provider>
         </div>
     );
 };

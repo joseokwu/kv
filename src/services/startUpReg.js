@@ -51,7 +51,7 @@ export const fundraising = async (values) => {
     }
 };
 
-export const fetchCities = async (country, state) => {
+export const fetchCountries = async () => {
     var headers = new Headers();
     headers.append(
         "X-CSCAPI-KEY",
@@ -64,11 +64,49 @@ export const fetchCities = async (country, state) => {
         redirect: "follow",
     };
 
-    fetch(
-        "https://api.countrystatecity.in/v1/countries/NG/states",
+    return fetch("https://api.countrystatecity.in/v1/countries", requestOptions)
+        .then((response) => response.json())
+        .catch((error) => console.log("error", error));
+};
+
+export const fetchStates = async (countryISO) => {
+    var headers = new Headers();
+    headers.append(
+        "X-CSCAPI-KEY",
+        "R3NUdUE3RTdlbWt5ckF3WEJLMkFwQ0VJWDNUaThLUGdrU09VZEhuaA=="
+    );
+
+    var requestOptions = {
+        method: "GET",
+        headers: headers,
+        redirect: "follow",
+    };
+
+    return fetch(
+        `https://api.countrystatecity.in/v1/countries/${countryISO}/states`,
         requestOptions
     )
-        .then((response) => response.text())
-        .then((result) => console.log(result))
+        .then((response) => response.json())
+        .catch((error) => console.log("error", error));
+};
+
+export const fetchCities = async (countryISO, stateISO) => {
+    var headers = new Headers();
+    headers.append(
+        "X-CSCAPI-KEY",
+        "R3NUdUE3RTdlbWt5ckF3WEJLMkFwQ0VJWDNUaThLUGdrU09VZEhuaA=="
+    );
+
+    var requestOptions = {
+        method: "GET",
+        headers: headers,
+        redirect: "follow",
+    };
+
+    return fetch(
+        `https://api.countrystatecity.in/v1/countries/${countryISO}/states/${stateISO}/cities`,
+        requestOptions
+    )
+        .then((response) => response.json())
         .catch((error) => console.log("error", error));
 };
