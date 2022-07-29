@@ -27,6 +27,7 @@ import { TextareaCustom } from "./../../../../components/textArea/cutstomTextare
 import { letterOnly } from "../../../../utils/helpers";
 import { industry } from "../../../../constants/domiData";
 import { useEffect } from "react";
+import { getCountryISO, getStateISO } from "../../../../utils/helpers";
 import { fetchCities } from "../../../../services";
 
 const { Option } = Select;
@@ -58,6 +59,10 @@ export const StartupProfile = () => {
     const [region, setRegion] = useState(
         stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? ""
     );
+    const [cityList, setCityList] = useState([]);
+
+    const [countryISO, setCountryISO] = useState("");
+    const [stateISO, setStateISO] = useState("");
     const [buttonClicked, setButtonClicked] = useState("Save");
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -70,8 +75,6 @@ export const StartupProfile = () => {
 
     const [form] = Form.useForm();
 
-    console.log(stateAuth);
-
     const handlePhoneInput = (value) => {
         updateProfile("startUpProfile", {
             contactInfo: {
@@ -80,8 +83,7 @@ export const StartupProfile = () => {
             },
         });
     };
-    fetchCities();
-    
+
     const handleCountry = (value) => {
         updateProfile("startUpProfile", {
             contactInfo: {
@@ -93,7 +95,40 @@ export const StartupProfile = () => {
         console.log(value);
     };
 
-    console.log(stateAuth?.startupData);
+    // useEffect(async () => {
+    //     try {
+    //         if (country) {
+    //             const val = await getCountryISO(country);
+    //             setCountryISO(val);
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    //     console.log(countryISO);
+    // }, [country]);
+
+    // useEffect(async () => {
+    //     try {
+    //         if (region) {
+    //             const val = await getStateISO(countryISO, region);
+    //             setStateISO(val);
+    //             console.log(val);
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }, [region]);
+
+    // useEffect(async () => {
+    //     try {
+    //         if (stateISO) {
+    //             const cities = await fetchCities(countryISO, stateISO);
+    //             setCityList(cities);
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }, [stateISO]);
 
     const handleChangeState = (value) => {
         updateProfile("startUpProfile", {
@@ -296,8 +331,9 @@ export const StartupProfile = () => {
                                     format={dateFormat}
                                     onChange={(_, dateString) => {
                                         console.log(dateString);
-                                        return (dateString);
-                                    }}handleDateInput
+                                        return dateString;
+                                    }}
+                                    handleDateInput
                                 />
                             </Form.Item>
                         </div>

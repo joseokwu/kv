@@ -1,3 +1,5 @@
+import { fetchCountries, fetchStates, fetchCities } from "../services";
+
 export const getToken = () => {
     return localStorage.getItem("user:token");
 };
@@ -117,13 +119,12 @@ export function formatTime(timeToFormat) {
 
 export function newFormatTime(timeToFormat) {
     const dateObj = new Date(timeToFormat);
-    return dateObj
-        .toLocaleTimeString("en-gb", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true,
-        })
-        // .toUpperCase();
+    return dateObj.toLocaleTimeString("en-gb", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+    });
+    // .toUpperCase();
 }
 
 export function mergeDateTime(date, time) {
@@ -174,5 +175,32 @@ export const onNumberOnlyChange = (e) => {
     if (!isValid) {
         e.preventDefault();
         return;
+    }
+};
+
+export const getCountryISO = async (countryName) => {
+    try {
+        const countryList = await fetchCountries();
+        return countryList.filter((country) => country.name === countryName)[0]
+            .iso2;
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+export const getStateISO = async (countryISO, stateName) => {
+    try {
+        const stateList = await fetchStates(countryISO);
+        console.log(stateList);
+        const currentState = stateList.filter(
+            (state) => state.name === stateName
+        );
+        if (currentState) return currentState[0].iso2;
+        else
+            return stateList.filter((state) =>
+                state.name.includes(stateName)
+            )[0].iso2;
+    } catch (e) {
+        console.log(e);
     }
 };
