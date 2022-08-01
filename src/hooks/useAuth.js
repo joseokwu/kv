@@ -52,7 +52,7 @@ export const useAuth = () => {
 
     const userProfile = useCallback(
         async (value) => {
-            dispatch(await profile(value));
+            // dispatch(await profile(value));
         },
         [dispatch]
     );

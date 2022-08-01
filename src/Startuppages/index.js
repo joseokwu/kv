@@ -1,6 +1,5 @@
 export * from "./dashboard/Dashboard";
 export * from "./partnerRegisteration/PartnerRegistration";
-export * from "./signUp/SignUp";
 export * from "./signIn/SignIn";
 export * from "./confirmEmail/ConfirmEmail";
 export * from "./signUpCompleted/SignUpCompleted";
