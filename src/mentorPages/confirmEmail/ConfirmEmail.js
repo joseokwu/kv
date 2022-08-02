@@ -5,7 +5,7 @@ import logo from "../../assets/icons/kvlogo.svg";
 import sentMail from "../../assets/images/mentorSentEmail.svg";
 import { useAuth } from "../../hooks";
 import { getType, getToken } from "../../utils/helpers";
-import { resendEmail, forgotPassword } from "../../services/user";
+import { resendEmail } from "../../services/user";
 import toast from "react-hot-toast";
 
 export const MentorConfirmEmail = () => {
@@ -16,7 +16,7 @@ export const MentorConfirmEmail = () => {
 
     const handleResend = async () => {
         try {
-            const res = await forgotPassword({
+            const res = await resendEmail({
                 origin: window.location.origin,
                 email: localStorage.getItem("KV-signupEmail"),
                 // token: getToken(),

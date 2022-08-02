@@ -50,8 +50,11 @@ export const forgotPassword = async (values) => {
 
 export const resendEmail = async (value) => {
     try {
-        const res = await request.post("resendEmail", value);
-        console.log(res?.data);
+        const res = await request.post(
+            "v1/auth/resend-account-verification",
+            value
+        );
+        console.log(res);
         return res?.data;
     } catch (err) {
         throw err;
