@@ -18,7 +18,7 @@
 }
 
 .main-body {
-    padding-right: 8vw;
+    /* padding-right: 8vw; */
     max-height: calc(100vh - 60px);
 }
 
