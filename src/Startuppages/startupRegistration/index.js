@@ -49,6 +49,9 @@ export const StartUpRegistration = () => {
                             @media (max-width: 1140px) {
                                 margin: 0 16px;
                             }
+                            @media (max-width: 1024px) {
+                                padding-right: 0 !important;
+                            }
                         `}
                     >
                         <WelcomeMessage>
