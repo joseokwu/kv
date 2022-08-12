@@ -50,10 +50,10 @@ const authReducer = (state = INIT_STATE, action) => {
             };
         case LOGIN_SUCCESS:
             return {
-                ...state,
+                // ...state,
                 loading: false,
                 ...action.payload,
-                type: action.payload?.type,
+                type: action.payload?.userType,
                 username: action.payload?.startupname
                     ? action.payload?.startupname
                     : action.payload?.firstname,
@@ -67,94 +67,123 @@ const authReducer = (state = INIT_STATE, action) => {
                 error: action.payload,
             };
         case USER_PROFILE:
-            if (action?.payload?.type[0] === "boosterpartner") {
-                return {
-                    ...state,
-                    loading: false,
-                    authenticated: true,
-                    dashboardLoad: false,
-                    logo: action.payload?.logo,
-                    username: action?.payload.username,
-                    ...action?.payload,
-                    type: action?.payload?.type,
-                    signUpStatus: action?.payload?.type[0],
-                    email: action?.payload?.email,
-                };
-            }
-            if (action?.payload?.type[0] === "startup") {
-                return {
-                    ...state,
-                    loading: false,
-                    dashboardLoad: false,
-                    authenticated: true,
-                    user: action?.payload,
-                    ...action?.payload,
-                    startupData: action.payload.startupData,
-                    type: action?.payload?.type,
-                    signUpStatus: action?.payload?.type[0],
-                    email: action?.payload?.email,
-                };
-            }
-            if (action?.payload?.type[0] === "investor") {
-                return {
-                    ...state,
-                    loading: false,
-                    dashboardLoad: false,
-                    authenticated: true,
-                    user: action?.payload,
-                    ...action.payload,
-                    type: action?.payload?.type,
-                    signUpStatus: action?.payload?.type[0],
-                    email: action?.payload?.email,
-                };
-            }
-            if (action?.payload?.type[0] === "mentor") {
-                return {
-                    ...state,
-                    loading: false,
-                    dashboardLoad: false,
-                    authenticated: true,
-                    user: action?.payload,
-                    ...action.payload,
-                    type: action?.payload?.type,
-                    signUpStatus: action?.payload?.type[0],
-                    email: action?.payload?.email,
-                };
-            }
+            // if (action?.payload?.type[0] === "boosterpartner") {
+            //     return {
+            //         ...state,
+            //         loading: false,
+            //         authenticated: true,
+            //         dashboardLoad: false,
+            //         logo: action.payload?.logo,
+            //         username: action?.payload.username,
+            //         ...action?.payload,
+            //         type: action?.payload?.type,
+            //         signUpStatus: action?.payload?.type[0],
+            //         email: action?.payload?.email,
+            //     };
+            // }
+            // if (action?.payload?.type[0] === "startup") {
+            //     return {
+            //         ...state,
+            //         loading: false,
+            //         dashboardLoad: false,
+            //         authenticated: true,
+            //         user: action?.payload,
+            //         ...action?.payload,
+            //         startupData: action.payload.startupData,
+            //         type: action?.payload?.type,
+            //         signUpStatus: action?.payload?.type[0],
+            //         email: action?.payload?.email,
+            //     };
+            // }
+            // if (action?.payload?.type[0] === "investor") {
+            //     return {
+            //         ...state,
+            //         loading: false,
+            //         dashboardLoad: false,
+            //         authenticated: true,
+            //         user: action?.payload,
+            //         ...action.payload,
+            //         type: action?.payload?.type,
+            //         signUpStatus: action?.payload?.type[0],
+            //         email: action?.payload?.email,
+            //     };
+            // }
+            // if (action?.payload?.type[0] === "mentor") {
+            //     return {
+            //         ...state,
+            //         loading: false,
+            //         dashboardLoad: false,
+            //         authenticated: true,
+            //         user: action?.payload,
+            //         ...action.payload,
+            //         type: action?.payload?.type,
+            //         signUpStatus: action?.payload?.type[0],
+            //         email: action?.payload?.email,
+            //     };
+            // }
+            console.log({
+                ...state,
+                loading: false,
+                dashboardLoad: false,
+                authenticated: true,
+                userType: action?.payload?.userType,
+                ...action.payload,
+            });
             return {
                 ...state,
                 loading: false,
                 dashboardLoad: false,
                 authenticated: true,
-                type: action?.payload?.type,
+                userType: action?.payload?.userType,
                 ...action.payload,
             };
         case DASHBOARD_USER_PROFILE:
-            console.log(action?.payload);
-            if (action?.payload?.type[0] === "boosterpartner") {
-                return {
-                    ...state,
-                    loading: false,
-                    dashboardLoad: false,
-                    partnerData: action?.payload,
-                    ...action?.payload,
-                    type: action?.payload?.type,
-                    signUpStatus: action?.payload?.type[0],
-                    email: action?.payload?.email,
-                };
-            }
-            if (action?.payload?.type[0] === "startup") {
-                return {
-                    ...state,
-                    loading: false,
-                    dashboardLoad: false,
-                    user: action?.payload,
-                    type: action?.payload?.type,
-                    signUpStatus: action?.payload?.type[0],
-                    email: action?.payload?.email,
-                    startupData: action.payload.startupData,
-                };
-            }
+            console.log({
+                ...state,
+                loading: false,
+                dashboardLoad: false,
+                profileData: action?.payload,
+                // type: action?.payload?.type,
+                // signUpStatus: action?.payload?.type[0],
+                // email: action?.payload?.email,
+            });
+
+            return {
+                ...state,
+                loading: false,
+                dashboardLoad: false,
+                profileData: action?.payload,
+                // type: action?.payload?.type,
+                // signUpStatus: action?.payload?.type[0],
+                email: action?.payload?.email,
+            };
+            // if (action?.payload?.type[0] === "boosterpartner") {
+            //     return {
+            //         ...state,
+            //         loading: false,
+            //         dashboardLoad: false,
+            //         partnerData: action?.payload,
+            //         ...action?.payload,
+            //         type: action?.payload?.type,
+            //         signUpStatus: action?.payload?.type[0],
+            //         email: action?.payload?.email,
+            //     };
+            // } else if (action?.payload?.type[0] === "startup") {
+            //     return {
+            //         ...state,
+            //         loading: false,
+            //         dashboardLoad: false,
+            //         user: action?.payload,
+            //         type: action?.payload?.type,
+            //         signUpStatus: action?.payload?.type[0],
+            //         email: action?.payload?.email,
+            //         startupData: action.payload.startupData,
+            //     };
+            // } else {
+            console.log("payload", action?.payload);
+            return { ...action?.payload };
+            // }
+
             // if(action?.payload?.type[0] === 'investor'){
             //   return {
             //     ...state,
@@ -204,11 +233,15 @@ const authReducer = (state = INIT_STATE, action) => {
         case UPDATE_STARTUP_INFO:
             return {
                 ...state,
-                startupData: {
-                    ...state.startupData,
-                    [action.payload.property]: {
-                        ...state.startupData[action.payload.property],
-                        ...action.payload.value,
+                profileData: {
+                    startupRes: {
+                        ...state.profileData.startupRes,
+                        [action.payload.property]: {
+                            ...state.profileData.startupRes[
+                                action.payload.property
+                            ],
+                            ...action.payload.value,
+                        },
                     },
                 },
             };

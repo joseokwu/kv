@@ -35,7 +35,8 @@ export const FundAsk = ({ setFundraising, back }) => {
 
     const [showModal, setShowModal] = useState(false);
     const [hasPreviousFundraising, setHasPreviousFundraising] = useState(
-        stateAuth?.startupData?.fundraising?.hasPreviousFundraising ?? false
+        stateAuth?.profileData?.startupRes?.fundraising
+            ?.hasPreviousFundraising ?? false
     );
     // const [hasLeadInvestor, setHasLeadInvestor] = useState(
     //   stateAuth?.user?.fundraising?.hasPreviousFundraising ?? 'no'
@@ -88,8 +89,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                 <BntWrap>
                                     <button
                                         className={`me-3 ${
-                                            stateAuth?.startupData?.fundRaising
-                                                ?.fundingAsk
+                                            stateAuth?.profileData?.startupRes
+                                                ?.fundRaising?.fundingAsk
                                                 ?.hasPreviousFundraising
                                                 ? "active"
                                                 : ""
@@ -98,7 +99,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         onClick={() => {
                                             updateProfile("fundRaising", {
                                                 fundingAsk: {
-                                                    ...stateAuth?.startupData
+                                                    ...stateAuth?.profileData
+                                                        ?.startupRes
                                                         ?.fundRaising
                                                         ?.fundingAsk,
                                                     hasPreviousFundraising: true,
@@ -110,8 +112,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     </button>
                                     <button
                                         className={
-                                            !stateAuth?.startupData?.fundRaising
-                                                ?.fundingAsk
+                                            !stateAuth?.profileData?.startupRes
+                                                ?.fundRaising?.fundingAsk
                                                 ?.hasPreviousFundraising
                                                 ? "active"
                                                 : ""
@@ -120,7 +122,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         onClick={() => {
                                             updateProfile("fundRaising", {
                                                 fundingAsk: {
-                                                    ...stateAuth?.startupData
+                                                    ...stateAuth?.profileData
+                                                        ?.startupRes
                                                         ?.fundRaising
                                                         ?.fundingAsk,
                                                     hasPreviousFundraising: false,
@@ -140,20 +143,23 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     // options={optionsNumb}
                                     className="cust extra"
                                     label={
-                                        stateAuth?.startupData?.fundRaising
-                                            ?.fundingAsk?.hasPreviousFundraising
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk
+                                            ?.hasPreviousFundraising
                                             ? "What was the instrument for your previous round"
                                             : "Which instrument would you prefer to use for your current round?"
                                     }
                                     value={
-                                        stateAuth?.startupData?.fundRaising
-                                            ?.fundingAsk?.instrumentForRound
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk
+                                            ?.instrumentForRound
                                     }
                                     onChange={(e) => {
                                         updateProfile("fundRaising", {
                                             fundingAsk: {
-                                                ...stateAuth?.startupData
-                                                    ?.fundRaising?.fundingAsk,
+                                                ...stateAuth?.profileData
+                                                    ?.startupRes?.fundRaising
+                                                    ?.fundingAsk,
                                                 instrumentForRound: e,
                                             },
                                         });
@@ -170,8 +176,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     name="numberOfRounds"
                                     label="Select your round"
                                     initialValue={
-                                        stateAuth?.startupData?.fundRaising
-                                            ?.fundingAsk?.numberOfRounds
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk
+                                            ?.numberOfRounds
                                     }
                                     rules={[
                                         {
@@ -191,7 +198,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         onChange={(e) => {
                                             updateProfile("fundRaising", {
                                                 fundingAsk: {
-                                                    ...stateAuth?.startupData
+                                                    ...stateAuth?.profileData
+                                                        ?.startupRes
                                                         ?.fundRaising
                                                         ?.fundingAsk,
                                                     numberOfRounds: e,
@@ -218,8 +226,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     label="How much investment is your company looking
                                     to raise?"
                                     initialValue={
-                                        stateAuth?.startupData?.fundRaising
-                                            ?.fundingAsk?.fundraisingAmount
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk
+                                            ?.fundraisingAmount
                                     }
                                     rules={[
                                         {
@@ -234,8 +243,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         name="fundraisingAmount"
                                         type="text"
                                         value={
-                                            stateAuth?.startupData?.fundRaising
-                                                ?.fundingAsk?.fundraisingAmount
+                                            stateAuth?.profileData?.startupRes
+                                                ?.fundRaising?.fundingAsk
+                                                ?.fundraisingAmount
                                         }
                                         style={{ marginLeft: "8px" }}
                                         className="form-control ps-3"
@@ -247,7 +257,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         onValueChange={(value) => {
                                             updateProfile("fundRaising", {
                                                 fundingAsk: {
-                                                    ...stateAuth?.startupData
+                                                    ...stateAuth?.profileData
+                                                        ?.startupRes
                                                         ?.fundRaising
                                                         ?.fundingAsk,
                                                     fundraisingAmount:
@@ -265,15 +276,16 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     onChange={(e) => {
                                         updateProfile("fundRaising", {
                                             fundingAsk: {
-                                                ...stateAuth?.startupData
-                                                    ?.fundRaising?.fundingAsk,
+                                                ...stateAuth?.profileData
+                                                    ?.startupRes?.fundRaising
+                                                    ?.fundingAsk,
                                                 dilution: e.target.value,
                                             },
                                         });
                                     }}
                                     value={
-                                        stateAuth?.startupData?.fundRaising
-                                            ?.fundingAsk?.dilution
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk?.dilution
                                     }
                                     required={true}
                                     placeholder="Enter what your business does"
@@ -285,8 +297,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     name="preMoneyValuation"
                                     label="What is your pre-money valuation?"
                                     initialValue={
-                                        stateAuth?.startupData?.fundRaising
-                                            ?.fundingAsk?.preMoneyValuation
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk
+                                            ?.preMoneyValuation
                                     }
                                     rules={[
                                         {
@@ -301,8 +314,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         name="preMoneyValuation"
                                         type="text"
                                         value={
-                                            stateAuth?.startupData?.fundRaising
-                                                ?.fundingAsk?.preMoneyValuation
+                                            stateAuth?.profileData?.startupRes
+                                                ?.fundRaising?.fundingAsk
+                                                ?.preMoneyValuation
                                         }
                                         className="form-control ps-3"
                                         placeholder="Pre money = Post money - investment amount."
@@ -313,7 +327,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         onValueChange={(value) => {
                                             updateProfile("fundRaising", {
                                                 fundingAsk: {
-                                                    ...stateAuth?.startupData
+                                                    ...stateAuth?.profileData
+                                                        ?.startupRes
                                                         ?.fundRaising
                                                         ?.fundingAsk,
                                                     preMoneyValuation: value,
@@ -328,8 +343,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     name="postMoneyValuation"
                                     label="What is your post-money valuation?"
                                     initialValue={
-                                        stateAuth?.startupData?.fundRaising
-                                            ?.fundingAsk?.postMoneyValuation
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk
+                                            ?.postMoneyValuation
                                     }
                                     rules={[
                                         {
@@ -344,8 +360,9 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         name="postMoneyValuation"
                                         type="text"
                                         value={
-                                            stateAuth?.startupData?.fundRaising
-                                                ?.fundingAsk?.postMoneyValuation
+                                            stateAuth?.profileData?.startupRes
+                                                ?.fundRaising?.fundingAsk
+                                                ?.postMoneyValuation
                                         }
                                         className="form-control ps-3"
                                         placeholder="Post-money valuation = Investment dollar amount ÷ percent investor receives."
@@ -356,7 +373,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                         onValueChange={(value) => {
                                             updateProfile("fundRaising", {
                                                 fundingAsk: {
-                                                    ...stateAuth?.startupData
+                                                    ...stateAuth?.profileData
+                                                        ?.startupRes
                                                         ?.fundRaising
                                                         ?.fundingAsk,
                                                     postMoneyValuation: value,

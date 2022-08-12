@@ -26,7 +26,7 @@ export const FundingRound = ({ data }) => {
                         color="#212463"
                         // w="50%"
                     >
-                        {data?.startupData?.startUpProfile?.startupStage || "-"}
+                        {data?.profileData?.startupRes?.startUpProfile?.startupStage || "-"}
                     </Btn>
                 </div>
             </FundRounding>
@@ -37,7 +37,7 @@ export const FundingRound = ({ data }) => {
                 <div className="d-flex mb-3">
                     <article className="mr-3">Total Funding </article>
                     <Btn bg="#DEF6FF" color="#058DC1">
-                        {data?.startupData?.fundRaising?.capTable
+                        {data?.profileData?.startupRes?.fundRaising?.capTable
                             ?.amountInvestedByFounders || "-"}
                     </Btn>
                 </div>
@@ -45,7 +45,7 @@ export const FundingRound = ({ data }) => {
                 <div className="d-flex mb-3">
                     <article className="mr-3">Last Funding </article>{" "}
                     <Btn bg="#F1F2FE" color="#212463">
-                        {data?.startupData?.fundRaising?.capTable
+                        {data?.profileData?.startupRes?.fundRaising?.capTable
                             ?.amountRaised || "-"}{" "}
                         {}
                     </Btn>
@@ -68,7 +68,7 @@ export const FundingRound = ({ data }) => {
                         color="#212463"
                         // w="80%"
                     >
-                        {data?.startupData?.fundRaising?.fundingAsk
+                        {data?.profileData?.startupRes?.fundRaising?.fundingAsk
                             ?.postMoneyValuation || "-"}
                     </Btn>
                 </div>

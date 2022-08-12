@@ -26,6 +26,7 @@ import {
     register,
     userLogin,
     profile,
+    user,
     updateFounderProfile,
     forgorPassword,
 } from "../../../services";
@@ -62,6 +63,7 @@ export const loginUser = async (value) => async (dispatch) => {
             type: AUTH_START,
         });
         const res = await userLogin(value);
+        console.log(res);
         console.log(res?.data?.user);
         if (!res?.success) {
             toast.error(res?.message);
@@ -69,8 +71,9 @@ export const loginUser = async (value) => async (dispatch) => {
                 type: LOGIN_FAILED,
             });
         } else {
+            console.log("continua");
             setAuthToken(res?.data?.token);
-            setType(res?.data?.user?.type[0]);
+            setType(res?.data?.user?.userType);
             console.log(res);
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -81,6 +84,7 @@ export const loginUser = async (value) => async (dispatch) => {
         }
     } catch (err) {
         console.log(err?.response?.data?.message, "err");
+        console.log(err, "errorr");
         toast.error(
             err?.response?.data?.message ?? "Login error please try again"
         );
@@ -91,12 +95,12 @@ export const loginUser = async (value) => async (dispatch) => {
     }
 };
 
-export const dashboardProfile = async (value) => async (dispatch) => {
+export const dashboardProfile = async () => async (dispatch) => {
     try {
         dispatch({
             type: DASHBOARD_LOAD,
         });
-        const res = await profile(value);
+        const res = await profile();
         if (res) {
             dispatch({
                 type: DASHBOARD_USER_PROFILE,
@@ -104,6 +108,7 @@ export const dashboardProfile = async (value) => async (dispatch) => {
             });
         }
     } catch (err) {
+        console.log("failed to store user profile ");
         dispatch({
             type: USER_PROFILE_FAIL,
         });
@@ -210,14 +215,14 @@ export const getProfile = async (value) => async (dispatch) => {
         dispatch({
             type: AUTH_START,
         });
-        const res = await profile(value);
+        const res = await user(value);
 
         if (res) {
             console.log(res);
             console.log(value);
             dispatch({
                 type: USER_PROFILE,
-                payload: res?.data,
+                payload: res?.data?.data,
             });
         }
     } catch (err) {

@@ -18,16 +18,31 @@ export const userLogin = async (values) => {
 
         return res?.data;
     } catch (err) {
+        console.log(err?.response?.data);
         console.log(err?.response?.data?.message);
         throw err;
     }
 };
 
-export const profile = async (value) => {
+export const profile = async () => {
     try {
         // console.log(value)
         console.log("trying to make request");
-        const res = await request.post("getProfile", { type: value });
+        const res = await request.get("v1/profile");
+        console.log(res.data);
+        return res?.data;
+    } catch (err) {
+        console.log(err);
+        const error = err?.response?.data?.message || err?.message;
+        throw new Error(error);
+    }
+};
+
+export const user = async () => {
+    try {
+        // console.log(value)
+        console.log("trying to make request");
+        const res = await request.get("v1/user");
         console.log(res.data);
         return res?.data;
     } catch (err) {

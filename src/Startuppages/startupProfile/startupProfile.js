@@ -43,21 +43,21 @@ export const StartupProfile = ({ history }) => {
             case "#product":
                 return <Product />;
             case "#pitch deck":
-                return <PitchDeck data={stateAuth?.startupData?.pitchDeck} />;
+                return <PitchDeck data={stateAuth?.profileData?.startupRes?.pitchDeck} />;
             case "#business canvas":
                 return <BusinessCanavas />;
             case "#product road map":
                 return <RoadMap data={prof?.ProductRoadMap} />;
             case "#team":
-                return <Team data={stateAuth?.startupData?.team} />;
+                return <Team data={stateAuth?.profileData?.startupRes?.team} />;
             case "#milestone/timeline":
-                return <Milestone data={stateAuth?.startupData?.mileStone} />;
+                return <Milestone data={stateAuth?.profileData?.startupRes?.mileStone} />;
             default:
                 return <Product />;
         }
     };
 
-    // if(!stateAuth?.startupData?.applicationCompleted){
+    // if(!stateAuth?.profileData?.startupRes?.applicationCompleted){
     //   return <EmptyState message="No Profile information to display, please complete registration" />
     //  }
 

@@ -54,10 +54,12 @@ export const StartupProfile = () => {
     const dateFormat = "YYYY-MM-DD";
     const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
     const [country, setCountry] = useState(
-        stateAuth?.startupData?.startUpProfile?.contactInfo?.country ?? ""
+        stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
+            ?.country ?? ""
     );
     const [region, setRegion] = useState(
-        stateAuth?.startupData?.startUpProfile?.contactInfo?.state ?? ""
+        stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
+            ?.state ?? ""
     );
     const [cityList, setCityList] = useState([]);
 
@@ -67,7 +69,7 @@ export const StartupProfile = () => {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [logo, setLogo] = useState(
-        stateAuth?.startupData?.startUpProfile?.logo
+        stateAuth?.profileData?.startupRes?.startUpProfile?.logo
     );
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -78,7 +80,8 @@ export const StartupProfile = () => {
     const handlePhoneInput = (value) => {
         updateProfile("startUpProfile", {
             contactInfo: {
-                ...stateAuth?.startupData?.startUpProfile?.contactInfo,
+                ...stateAuth?.profileData?.startupRes?.startUpProfile
+                    ?.contactInfo,
                 phoneNumber: value,
             },
         });
@@ -87,7 +90,8 @@ export const StartupProfile = () => {
     const handleCountry = (value) => {
         updateProfile("startUpProfile", {
             contactInfo: {
-                ...stateAuth?.startupData?.startUpProfile?.contactInfo,
+                ...stateAuth?.profileData?.startupRes?.startUpProfile
+                    ?.contactInfo,
                 country: value,
             },
         });
@@ -133,7 +137,8 @@ export const StartupProfile = () => {
     const handleChangeState = (value) => {
         updateProfile("startUpProfile", {
             contactInfo: {
-                ...stateAuth?.startupData?.startUpProfile?.contactInfo,
+                ...stateAuth?.profileData?.startupRes?.startUpProfile
+                    ?.contactInfo,
                 state: value,
             },
         });
@@ -177,11 +182,11 @@ export const StartupProfile = () => {
         //     }
         // });
         updateStartupInfo();
-        console.log(stateAuth?.startupData);
+        console.log(stateAuth?.profileData);
         if (buttonClicked === "Next") changePath(2);
     };
 
-    //console.log(stateAuth)
+    console.log(stateAuth)
     return (
         <>
             <HeaderStartup>
@@ -191,7 +196,7 @@ export const StartupProfile = () => {
 
             <ImageWrapper>
                 <div className="start-img-p">
-                    {stateAuth?.startupData?.startUpProfile?.logo === null ? (
+                    {stateAuth?.profileData?.startupRes?.startUpProfile?.logo === null ? (
                         logoUploading ? (
                             <CircularLoader color={"#000"} />
                         ) : (
@@ -200,7 +205,7 @@ export const StartupProfile = () => {
                     ) : (
                         <img
                             className=""
-                            src={stateAuth?.startupData?.startUpProfile?.logo}
+                            src={stateAuth?.profileData?.startupRes?.startUpProfile?.logo}
                             style={{
                                 borderRadius: "70px",
                                 width: "90px",
@@ -250,8 +255,8 @@ export const StartupProfile = () => {
                                 name={"elevatorPitch"}
                                 label={"Elevator Pitch"}
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.elevatorPitch
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.elevatorPitch
                                 }
                                 onChange={(e) =>
                                     updateProfile("startUpProfile", {
@@ -269,8 +274,9 @@ export const StartupProfile = () => {
                                 label="Startup Name"
                                 name={"startupName"}
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.startupName ?? stateAuth?.startupname
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.startupName ??
+                                    stateAuth?.startupname
                                 }
                                 required={true}
                                 disabled={true}
@@ -286,8 +292,8 @@ export const StartupProfile = () => {
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.brand
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.brand
                                 }
                                 required={true}
                                 placeholder="eg; Knight Ventures"
@@ -298,10 +304,10 @@ export const StartupProfile = () => {
                                 name="yearFounded"
                                 label="Year Founded"
                                 initialValue={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.yearFounded
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.yearFounded
                                         ? moment(
-                                              stateAuth?.startupData
+                                              stateAuth?.profileData?.startupRes
                                                   ?.startUpProfile?.yearFounded
                                           )
                                         : undefined
@@ -319,10 +325,11 @@ export const StartupProfile = () => {
                                     id="yearFounded"
                                     name="yearFounded"
                                     defaultValue={
-                                        stateAuth?.startupData?.startUpProfile
-                                            ?.yearFounded
+                                        stateAuth?.profileData?.startupRes
+                                            ?.startUpProfile?.yearFounded
                                             ? moment(
-                                                  stateAuth?.startupData
+                                                  stateAuth?.profileData
+                                                      ?.startupRes
                                                       ?.startUpProfile
                                                       ?.yearFounded
                                               )
@@ -348,8 +355,9 @@ export const StartupProfile = () => {
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.registrationNumber || stateAuth?.phone
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.registrationNumber ||
+                                    stateAuth?.phone
                                 }
                                 required={true}
                                 placeholder="eg; 1234567890"
@@ -361,8 +369,8 @@ export const StartupProfile = () => {
                                 name="companySize"
                                 label="Company Size"
                                 initialValue={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.companySize
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.companySize
                                 }
                                 rules={[
                                     {
@@ -396,8 +404,8 @@ export const StartupProfile = () => {
                                 name="businessSector"
                                 label="Which sector does your business operate in?"
                                 initialValue={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.businessSector
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.businessSector
                                 }
                                 rules={[
                                     {
@@ -430,8 +438,8 @@ export const StartupProfile = () => {
                                 name="startupStage"
                                 label="What stage is your startup in ?"
                                 initialValue={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.startupStage
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.startupStage
                                 }
                                 rules={[
                                     {
@@ -472,8 +480,8 @@ export const StartupProfile = () => {
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.acceleratorName
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.acceleratorName
                                 }
                                 required={false}
                                 placeholder="Enter Accelerator name"
@@ -498,15 +506,17 @@ export const StartupProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("startUpProfile", {
                                         contactInfo: {
-                                            ...stateAuth?.startupData
-                                                ?.startUpProfile?.contactInfo,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.startUpProfile
+                                                ?.contactInfo,
                                             registeredAddress: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.registeredAddress
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo
+                                        ?.registeredAddress
                                 }
                                 required={true}
                                 placeholder="Enter your registered address"
@@ -517,8 +527,8 @@ export const StartupProfile = () => {
                                 name="country"
                                 label="Country"
                                 initialValue={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.country
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo?.country
                                 }
                                 rules={[
                                     {
@@ -540,8 +550,8 @@ export const StartupProfile = () => {
                                 name="state"
                                 label="State"
                                 initialValue={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.state
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo?.state
                                 }
                                 rules={[
                                     {
@@ -554,8 +564,9 @@ export const StartupProfile = () => {
                                     name="state"
                                     country={country}
                                     value={
-                                        stateAuth?.startupData?.startUpProfile
-                                            ?.contactInfo?.state ?? ""
+                                        stateAuth?.profileData?.startupRes
+                                            ?.startUpProfile?.contactInfo
+                                            ?.state ?? ""
                                     }
                                     onChange={(value) =>
                                         handleChangeState(value)
@@ -571,15 +582,16 @@ export const StartupProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("startUpProfile", {
                                         contactInfo: {
-                                            ...stateAuth?.startupData
-                                                ?.startUpProfile?.contactInfo,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.startUpProfile
+                                                ?.contactInfo,
                                             city: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.city
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo?.city
                                 }
                                 required={true}
                                 placeholder="Enter your registered address"
@@ -590,9 +602,9 @@ export const StartupProfile = () => {
                                 name="phoneNumber"
                                 label="Mobile Number"
                                 initialValue={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.phoneNumber ||
-                                    stateAuth?.phone
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo
+                                        ?.phoneNumber || stateAuth?.phone
                                 }
                                 rules={[
                                     {
@@ -609,9 +621,9 @@ export const StartupProfile = () => {
                                     countryCallingCodeEditable={true}
                                     className="custs ps-3 py-2"
                                     value={
-                                        stateAuth?.startupData?.startUpProfile
-                                            ?.contactInfo?.phoneNumber ||
-                                        stateAuth?.phone
+                                        stateAuth?.profileData?.startupRes
+                                            ?.startUpProfile?.contactInfo
+                                            ?.phoneNumber || stateAuth?.phone
                                     }
                                     onChange={handlePhoneInput}
                                     MaxLength={17}
@@ -629,16 +641,17 @@ export const StartupProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("startUpProfile", {
                                         contactInfo: {
-                                            ...stateAuth?.startupData
-                                                ?.startUpProfile?.contactInfo,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.startUpProfile
+                                                ?.contactInfo,
                                             companyEmail: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.companyEmail ||
-                                    stateAuth?.email
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo
+                                        ?.companyEmail || stateAuth?.email
                                 }
                                 required={true}
                                 placeholder="Enter your email"
@@ -676,15 +689,17 @@ export const StartupProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("startUpProfile", {
                                         contactInfo: {
-                                            ...stateAuth?.startupData
-                                                ?.startUpProfile?.contactInfo,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.startUpProfile
+                                                ?.contactInfo,
                                             companyWebsite: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.companyWebsite
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo
+                                        ?.companyWebsite
                                 }
                                 required={true}
                                 placeholder="Enter your website url"
@@ -697,15 +712,17 @@ export const StartupProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("startUpProfile", {
                                         contactInfo: {
-                                            ...stateAuth?.startupData
-                                                ?.startUpProfile?.contactInfo,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.startUpProfile
+                                                ?.contactInfo,
                                             linkedInHandle: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.linkedInHandle
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo
+                                        ?.linkedInHandle
                                 }
                                 required={true}
                                 type={"url"}
@@ -720,15 +737,17 @@ export const StartupProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("startUpProfile", {
                                         contactInfo: {
-                                            ...stateAuth?.startupData
-                                                ?.startUpProfile?.contactInfo,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.startUpProfile
+                                                ?.contactInfo,
                                             twitterHandle: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
-                                        ?.contactInfo?.twitterHandle
+                                    stateAuth?.profileData?.startupRes
+                                        ?.startUpProfile?.contactInfo
+                                        ?.twitterHandle
                                 }
                                 required={true}
                                 placeholder="Enter your Twitter profile name"

@@ -12,13 +12,13 @@ export const FinancialDetails = ({ data }) => {
                 className="d-flex align-items-center justify-content-between flex-wrap mt-3"
                 style={{ rowGap: 10 }}
             >
-                {data?.startupData?.startUpProfile?.contactInfo
+                {data?.profileData?.startupRes?.startUpProfile?.contactInfo
                     ?.companyWebsite && (
                     <div className="d-flex align-items-center">
                         <img src={web} alt="web" />
                         <a
                             href={
-                                data?.startupData?.startUpProfile?.contactInfo
+                                data?.profileData?.startupRes?.startUpProfile?.contactInfo
                                     ?.companyWebsite
                             }
                             className="ml-2 extra-info"
@@ -27,20 +27,20 @@ export const FinancialDetails = ({ data }) => {
                                 color: "#2E3192",
                             }}
                         >
-                            {data?.startupData?.startUpProfile?.contactInfo
+                            {data?.profileData?.startupRes?.startUpProfile?.contactInfo
                                 ?.companyWebsite ?? ""}
                         </a>
                     </div>
                 )}
 
                 <div className="d-flex align-items-center">
-                    {data?.startupData?.startUpProfile?.yearFounded && (
+                    {data?.profileData?.startupRes?.startUpProfile?.yearFounded && (
                         <>
                             <img src={clock} alt="web" width="20" height="20" />
                             <p className="ml-2 extra-info">
                                 Incorporated{" "}
                                 {moment(
-                                    data?.startupData?.startUpProfile
+                                    data?.profileData?.startupRes?.startUpProfile
                                         ?.yearFounded
                                 ).format("YYYY-MM-DD")}
                             </p>
@@ -49,20 +49,20 @@ export const FinancialDetails = ({ data }) => {
                 </div>
 
                 <div className="d-flex align-items-center">
-                    {data?.startupData?.startUpProfile?.contactInfo
+                    {data?.profileData?.startupRes?.startUpProfile?.contactInfo
                         ?.registeredAddress && (
                         <>
                             <img src={office} alt="web" />
                             <p className="ml-2 extra-info">
                                 {" "}
                                 {`${
-                                    data?.startupData?.startUpProfile
+                                    data?.profileData?.startupRes?.startUpProfile
                                         ?.contactInfo?.registeredAddress ?? ""
                                 } , ${
-                                    data?.startupData?.startUpProfile
+                                    data?.profileData?.startupRes?.startUpProfile
                                         ?.contactInfo?.state ?? ""
                                 } , ${
-                                    data?.startupData?.startUpProfile
+                                    data?.profileData?.startupRes?.startUpProfile
                                         ?.contactInfo?.country ?? ""
                                 }`}{" "}
                             </p>

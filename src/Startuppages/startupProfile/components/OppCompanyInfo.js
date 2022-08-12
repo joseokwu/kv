@@ -10,7 +10,7 @@ import share from "../../../assets/icons/share.svg";
 import { AvatarWrapper } from "../../../components";
 
 export const OppCompanyInfo = ({ data }) => {
-    const startUpProfile = data?.startupData?.startUpProfile;
+    const startUpProfile = data?.profileData?.startupRes?.startUpProfile;
     return (
         <section className="opp-page-card py-4">
             <div
@@ -44,7 +44,7 @@ export const OppCompanyInfo = ({ data }) => {
                         style={{ marginTop: "1.5rem" }}
                     >
                         <h3 className="opp-page-card-title">
-                            {startUpProfile?.startupName}
+                            {data?.startupname}
                         </h3>
                         <span>
                             <a

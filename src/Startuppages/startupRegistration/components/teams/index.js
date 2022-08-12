@@ -56,10 +56,10 @@ export const TeamProfile = () => {
     const [buttonClicked, setButtonClicked] = useState("Save");
 
     const [country, setCountry] = useState(
-        stateAuth?.startupData?.team?.country ?? ""
+        stateAuth?.profileData?.startupRes?.team?.country ?? ""
     );
     const [region, setRegion] = useState(
-        stateAuth?.startupData?.team?.state ?? ""
+        stateAuth?.profileData?.startupRes?.team?.state ?? ""
     );
 
     const gender = [
@@ -73,9 +73,9 @@ export const TeamProfile = () => {
     const [editIndex, setEditIndex] = useState();
     const [isEditing, setIsEditing] = useState(false);
     const [avatar, setAvatar] = useState(
-        stateAuth?.startupData?.team?.avatar ?? null
+        stateAuth?.profileData?.startupRes?.team?.avatar ?? null
     );
-    // console.log(stateAuth?.startupData?.team?.city)
+    // console.log(stateAuth?.profileData?.startupRes?.team?.city)
     const {
         changePath,
         setWorkExperience,
@@ -118,7 +118,7 @@ export const TeamProfile = () => {
         }
     };
 
-    //console.log(stateAuth)
+    console.log(stateAuth)
 
     const handleChangeCountry = (value) => {
         updateProfile("team", { country: value });
@@ -151,19 +151,19 @@ export const TeamProfile = () => {
             e.preventDefault();
             if (
                 inVal.trim() === "" ||
-                stateAuth.startupData.team.skills.indexOf(inVal.trim()) !== -1
+                stateAuth?.profileData?.startupRes.team.skills.indexOf(inVal.trim()) !== -1
             )
                 return;
             setVal("");
             updateProfile("team", {
-                skills: [...stateAuth.startupData.team.skills, inVal],
+                skills: [...stateAuth?.profileData?.startupRes.team.skills, inVal],
             });
         }
     };
 
     const onDelete = (value) => {
         updateProfile("team", {
-            skills: stateAuth.startupData.team.skills.filter(
+            skills: stateAuth?.profileData?.startupRes.team.skills.filter(
                 (item) => item !== value
             ),
         });
@@ -259,7 +259,7 @@ export const TeamProfile = () => {
     };
 
     useEffect(() => {
-        if (stateAuth?.startupData?.team?.coFounder.length > 0) {
+        if (stateAuth?.profileData?.startupRes?.team?.coFounder.length > 0) {
             setCoFounder("yes");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -275,7 +275,7 @@ export const TeamProfile = () => {
                     editIndex={editIndex}
                     workExperience={[
                         // ...experience,
-                        ...stateAuth?.startupData?.team?.experience,
+                        ...stateAuth?.profileData?.startupRes?.team?.experience,
                     ]}
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
@@ -290,7 +290,7 @@ export const TeamProfile = () => {
                     editIndex={editIndex}
                     education={[
                         // ...education,
-                        ...stateAuth?.startupData?.team?.education,
+                        ...stateAuth?.profileData?.startupRes?.team?.education,
                     ]}
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
@@ -382,7 +382,7 @@ export const TeamProfile = () => {
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.team
+                                    stateAuth?.profileData?.startupRes?.team
                                         ?.briefIntroduction
                                 }
                                 required={true}
@@ -399,7 +399,7 @@ export const TeamProfile = () => {
                                         firstName: e.target.value,
                                     })
                                 }
-                                value={stateAuth?.startupData?.team?.firstName}
+                                value={stateAuth?.profileData?.startupRes?.team?.firstName}
                                 required={true}
                                 className={"form-control"}
                                 placeholder="Enter first name"
@@ -414,7 +414,7 @@ export const TeamProfile = () => {
                                         lastName: e.target.value,
                                     })
                                 }
-                                value={stateAuth?.startupData?.team?.lastName}
+                                value={stateAuth?.profileData?.startupRes?.team?.lastName}
                                 required={true}
                                 className={"form-control"}
                                 placeholder="Enter last name"
@@ -429,7 +429,7 @@ export const TeamProfile = () => {
                                         email: e.target.value,
                                     })
                                 }
-                                value={stateAuth?.startupData?.team?.email}
+                                value={stateAuth?.profileData?.startupRes?.team?.email}
                                 required={true}
                                 className={"form-control"}
                                 placeholder="Enter email address"
@@ -440,9 +440,9 @@ export const TeamProfile = () => {
                                 name="dob"
                                 label="Date of Birth"
                                 initialValue={
-                                    stateAuth?.startupData?.team?.dob
+                                    stateAuth?.profileData?.startupRes?.team?.dob
                                         ? moment(
-                                              stateAuth?.startupData?.team?.dob
+                                              stateAuth?.profileData?.startupRes?.team?.dob
                                           )
                                         : undefined
                                 }
@@ -460,9 +460,9 @@ export const TeamProfile = () => {
                                     className="custs p-2 py-4"
                                     style={{ padding: "15px" }}
                                     defaultValue={
-                                        stateAuth?.startupData?.team?.dob
+                                        stateAuth?.profileData?.startupRes?.team?.dob
                                             ? moment(
-                                                  stateAuth?.startupData?.team
+                                                  stateAuth?.profileData?.startupRes?.team
                                                       ?.dob
                                               )
                                             : undefined
@@ -480,7 +480,7 @@ export const TeamProfile = () => {
                                 name="country"
                                 label="Country"
                                 initialValue={
-                                    stateAuth?.startupData?.team?.country
+                                    stateAuth?.profileData?.startupRes?.team?.country
                                 }
                                 rules={[
                                     {
@@ -503,7 +503,7 @@ export const TeamProfile = () => {
                                 name="state"
                                 label="State"
                                 initialValue={
-                                    stateAuth?.startupData?.team?.state
+                                    stateAuth?.profileData?.startupRes?.team?.state
                                 }
                                 rules={[
                                     {
@@ -532,7 +532,7 @@ export const TeamProfile = () => {
                                         city: e.target.value,
                                     })
                                 }
-                                value={stateAuth?.startupData?.team?.city}
+                                value={stateAuth?.profileData?.startupRes?.team?.city}
                                 required={true}
                                 className={"form-control"}
                                 placeholder="Enter your city"
@@ -543,7 +543,7 @@ export const TeamProfile = () => {
                                 name="mobile_number"
                                 label="Mobile Number"
                                 initialValue={
-                                    stateAuth?.startupData?.team?.mobile_number
+                                    stateAuth?.profileData?.startupRes?.team?.mobile_number
                                 }
                                 rules={[
                                     {
@@ -559,7 +559,7 @@ export const TeamProfile = () => {
                                     countryCallingCodeEditable={true}
                                     className="custs w-lg-50 ps-3 py-2"
                                     value={
-                                        stateAuth?.startupData?.team
+                                        stateAuth?.profileData?.startupRes?.team
                                             ?.mobile_number ?? ""
                                     }
                                     onChange={handlePhoneInput}
@@ -576,7 +576,7 @@ export const TeamProfile = () => {
                                 name="gender"
                                 label="Gender"
                                 initialValue={
-                                    stateAuth?.startupData?.team?.gender
+                                    stateAuth?.profileData?.startupRes?.team?.gender
                                 }
                                 rules={[
                                     {
@@ -611,8 +611,8 @@ export const TeamProfile = () => {
                         <span>Work Experience</span>
                     </div>
                     <hr />
-                    {stateAuth?.startupData?.team?.experience &&
-                        stateAuth?.startupData?.team?.experience.map(
+                    {stateAuth?.profileData?.startupRes?.team?.experience &&
+                        stateAuth?.profileData?.startupRes?.team?.experience.map(
                             (item, index) => {
                                 return (
                                     <WorkExperience
@@ -651,9 +651,9 @@ export const TeamProfile = () => {
                         <span>Education</span>
                     </div>
                     <hr />
-                    {stateAuth?.startupData?.team?.education &&
-                        stateAuth?.startupData?.team?.education.length > 0 &&
-                        stateAuth?.startupData?.team?.education.map(
+                    {stateAuth?.profileData?.startupRes?.team?.education &&
+                        stateAuth?.profileData?.startupRes?.team?.education.length > 0 &&
+                        stateAuth?.profileData?.startupRes?.team?.education.map(
                             (item, index) => {
                                 return (
                                     <Education
@@ -691,15 +691,15 @@ export const TeamProfile = () => {
                             name="skills"
                             label="What are your skills"
                             initialValue={
-                                stateAuth?.startupData?.team?.skills[0] ?? null
+                                stateAuth?.profileData?.startupRes?.team?.skills[0] ?? null
                             }
-                            rules={[
-                                {
-                                    required: true,
-                                    message:
-                                        "Please select at least one skill.",
-                                },
-                            ]}
+                            // rules={[
+                            //     {
+                            //         required: true,
+                            //         message:
+                            //             "Please select at least one skill.",
+                            //     },
+                            // ]}
                         >
                             <div>
                                 <p className="py-2">
@@ -722,8 +722,8 @@ export const TeamProfile = () => {
                                 onKeyDown={handleKey}
                             />
 
-                            {stateAuth?.startupData?.team?.skills &&
-                                stateAuth?.startupData?.team?.skills.map(
+                            {stateAuth?.profileData?.startupRes?.team?.skills &&
+                                stateAuth?.profileData?.startupRes?.team?.skills.map(
                                     (item, i) => (
                                         <SkillTab
                                             key={i}
@@ -748,14 +748,14 @@ export const TeamProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("team", {
                                         socialMedia: {
-                                            ...stateAuth?.startupData?.team
+                                            ...stateAuth?.profileData?.startupRes?.team
                                                 ?.socialMedia,
                                             linkedIn: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.team?.socialMedia
+                                    stateAuth?.profileData?.startupRes?.team?.socialMedia
                                         ?.linkedIn
                                 }
                                 required={true}
@@ -771,14 +771,14 @@ export const TeamProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("team", {
                                         socialMedia: {
-                                            ...stateAuth?.startupData?.team
+                                            ...stateAuth?.profileData?.startupRes?.team
                                                 ?.socialMedia,
                                             twitter: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.team?.socialMedia
+                                    stateAuth?.profileData?.startupRes?.team?.socialMedia
                                         ?.twitter
                                 }
                                 required={true}
@@ -795,14 +795,14 @@ export const TeamProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("team", {
                                         socialMedia: {
-                                            ...stateAuth?.startupData?.team
+                                            ...stateAuth?.profileData?.startupRes?.team
                                                 ?.socialMedia,
                                             website: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.startupData?.team?.socialMedia
+                                    stateAuth?.profileData?.startupRes?.team?.socialMedia
                                         ?.website
                                 }
                                 required={true}
@@ -865,11 +865,11 @@ export const TeamProfile = () => {
                                 <div className="d-flex justify-content-center">
                                     <div className="">
                                         <div className="row">
-                                            {stateAuth?.startupData?.team
+                                            {stateAuth?.profileData?.startupRes?.team
                                                 ?.coFounder &&
-                                            stateAuth?.startupData?.team
+                                            stateAuth?.profileData?.startupRes?.team
                                                 ?.coFounder.length > 0 ? (
-                                                stateAuth?.startupData?.team?.coFounder.map(
+                                                stateAuth?.profileData?.startupRes?.team?.coFounder.map(
                                                     (item, i) => (
                                                         <div
                                                             className="col-6"

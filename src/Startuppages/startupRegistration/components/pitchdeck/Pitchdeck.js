@@ -34,16 +34,16 @@ export const PitchDeck = () => {
 
     const history = useHistory();
 
-    console.log(stateAuth.startupData?.pitchDeck);
+    console.log(stateAuth?.profileData?.startupRes?.pitchDeck);
     const {
         changePath,
         state: { path },
     } = useActivity();
 
     const [youtube, setYoutube] = useState("");
-    console.log("pitchdeck", stateAuth.startupData);
+    console.log("pitchdeck", stateAuth?.profileData?.startupRes);
     const [urls, setUrls] = useState(
-        stateAuth.startupData?.pitchDeck?.pitchDeckVideo ?? ""
+        stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckVideo ?? ""
     );
 
     const removeVideo = () => {
@@ -66,8 +66,8 @@ export const PitchDeck = () => {
 
     const onNext = () => {
         if (
-            stateAuth.startupData?.pitchDeck?.pitchDeckFile !== null ||
-            stateAuth.startupData?.pitchDeck?.pitchDeckVideo !== null
+            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckFile !== null ||
+            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckVideo !== null
         ) {
             changePath(path + 1);
             return;
@@ -78,8 +78,8 @@ export const PitchDeck = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (
-            stateAuth.startupData?.pitchDeck?.pitchDeckFile !== null ||
-            stateAuth.startupData?.pitchDeck?.pitchDeckVideo !== null
+            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckFile !== null ||
+            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckVideo !== null
         ) {
             updateStartupInfo();
             if (buttonClicked === "Next") onNext();
@@ -127,10 +127,10 @@ export const PitchDeck = () => {
                                         extension: "MB",
                                     }}
                                     initData={
-                                        stateAuth.startupData?.pitchDeck
+                                        stateAuth?.profileData?.startupRes?.pitchDeck
                                             ?.pitchDeckFile
                                             ? [
-                                                  stateAuth.startupData
+                                                  stateAuth?.profileData?.startupRes
                                                       ?.pitchDeck
                                                       ?.pitchDeckFile,
                                               ]
@@ -199,10 +199,10 @@ export const PitchDeck = () => {
                                         }}
                                         fileType={"video"}
                                         initData={
-                                            stateAuth.startupData?.pitchDeck
+                                            stateAuth?.profileData?.startupRes?.pitchDeck
                                                 ?.pitchDeckVideo
                                                 ? [
-                                                      stateAuth.startupData
+                                                      stateAuth?.profileData?.startupRes
                                                           ?.pitchDeck
                                                           ?.pitchDeckVideo,
                                                   ]

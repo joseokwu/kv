@@ -28,11 +28,11 @@ export const Product = () => {
     const [nextLoading, setnextLoading] = useState(false);
     const [opts, setOpts] = useState("");
     const [urls, setUrls] = useState(
-        stateAuth?.startupData?.product?.youtubeDemoUrl ?? ""
+        stateAuth?.profileData?.startupRes?.product?.youtubeDemoUrl ?? ""
     );
 
     const [youtube, setYoutube] = useState(
-        stateAuth?.startupData?.product?.youtubeDemoUrl ?? ""
+        stateAuth?.profileData?.startupRes?.product?.youtubeDemoUrl ?? ""
     );
     const [buttonClicked, setButtonClicked] = useState("Save");
 
@@ -43,7 +43,7 @@ export const Product = () => {
     const handleChangeVids = (e) => {
         setYoutube(e.target.value);
     };
-    // console.log(stateAuth?.startupData?.product)
+    // console.log(stateAuth?.profileData?.startupRes?.product)
     const addVid = () => {
         setUrls(youtube);
         setYoutube("");
@@ -82,6 +82,8 @@ export const Product = () => {
         updateProfile("product", { [name]: value });
     };
 
+    console.log(stateAuth?.profileData?.startupRes);
+
     return (
         <>
             <HeaderProduct className="px-3">
@@ -119,8 +121,8 @@ export const Product = () => {
                                     errName={"product description"}
                                     label="Briefly describe the users of your product or services?"
                                     value={
-                                        stateAuth?.startupData?.product
-                                            ?.description
+                                        stateAuth?.profileData?.startupRes
+                                            ?.product?.description
                                     }
                                     onChange={(e) =>
                                         handleFullChange(e, "description")
@@ -138,8 +140,8 @@ export const Product = () => {
                                     errName={"competitive edge"}
                                     name={"competitiveEdge"}
                                     value={
-                                        stateAuth?.startupData?.product
-                                            ?.competitiveEdge
+                                        stateAuth?.profileData?.startupRes
+                                            ?.product?.competitiveEdge
                                     }
                                     onChange={(e) =>
                                         handleFullChange(e, "competitiveEdge")
@@ -158,8 +160,8 @@ export const Product = () => {
                                     initialValue={youtube}
                                     rules={[
                                         {
-                                            required: stateAuth?.startupData
-                                                ?.product?.files
+                                            required: stateAuth?.profileData
+                                                ?.startupRes?.product?.files
                                                 ? false
                                                 : true,
                                             message:
@@ -198,11 +200,12 @@ export const Product = () => {
                                             extension: "MB",
                                         }}
                                         initData={
-                                            stateAuth?.startupData?.product
-                                                ?.files
+                                            stateAuth?.profileData?.startupRes
+                                                ?.product?.files
                                                 ? [
-                                                      stateAuth.startupData
-                                                          ?.product?.files,
+                                                      stateAuth?.profileData
+                                                          ?.startupRes?.product
+                                                          ?.files,
                                                   ]
                                                 : []
                                         }

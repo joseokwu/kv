@@ -62,12 +62,13 @@ export const useAuth = () => {
         dispatch(updateStartupUserProfile(value));
     };
 
-    const getDashboardProfile = useCallback(
-        async (value) => {
-            dispatch(await dashboardProfile(value));
-        },
-        [dispatch]
-    );
+    const getUserData = useCallback(async () => {
+        dispatch(await profile());
+    }, [dispatch]);
+
+    const getDashboardProfile = useCallback(async () => {
+        dispatch(await dashboardProfile());
+    }, [dispatch]);
 
     const editUser = () => {
         dispatch(edit());
@@ -121,11 +122,14 @@ export const useAuth = () => {
     const updateStartupInfo = async (lastPage = false) => {
         try {
             const payload = {
-                accType: stateAuth.type[0],
-                values: lastPage
-                    ? { ...stateAuth.startupData, applicationCompleted: true }
-                    : stateAuth.startupData,
-                lastPage,
+                _id: stateAuth.profileData?.startupRes?._id,
+                payload: lastPage
+                    ? {
+                          ...stateAuth.profileData?.startupRes,
+                          applicationCompleted: true,
+                      }
+                    : stateAuth.profileData?.startupRes,
+                // lastPage,
             };
             console.log(payload);
             const res = await updateStartup(payload);
@@ -213,6 +217,7 @@ export const useAuth = () => {
         updatePartnerInfo,
         updatePartnerLocalData,
         getDashboardProfile,
+        getUserData,
         updateProfile,
         updateStartupInfo,
         updateInvestorProfileData,
