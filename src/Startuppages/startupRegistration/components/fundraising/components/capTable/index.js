@@ -103,7 +103,7 @@ export const CapTable = ({ setFundraising }) => {
                         </div>
                         <div className="col-lg-6 col-12 form-group mx-n4 mx-lg-n0">
                             <Form.Item
-                                name="amountInvestedByFounders"
+                                // name="amountInvestedByFounders"
                                 label="Total Capital invested by Founders"
                                 initialValue={
                                     stateAuth?.startupData?.fundRaising
