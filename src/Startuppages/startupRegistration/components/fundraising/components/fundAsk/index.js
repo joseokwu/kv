@@ -214,7 +214,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                             </div>
                             <div className="form-group my-2 col-12">
                                 <Form.Item
-                                    name="fundraisingAmount"
+                                    // name="fundraisingAmount"
                                     label="How much investment is your company looking
                                     to raise?"
                                     initialValue={
@@ -232,28 +232,31 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     <CurrencyInput
                                         id="fundraisingAmount"
                                         name="fundraisingAmount"
-                                        type="text"
                                         value={
                                             stateAuth?.startupData?.fundRaising
                                                 ?.fundingAsk?.fundraisingAmount
                                         }
-                                        style={{ marginLeft: "8px" }}
-                                        className="form-control ps-3"
-                                        placeholder="Enter amount"
                                         intlConfig={{
                                             locale: "en-US",
                                             currency: "USD",
                                         }}
+                                        style={{ marginLeft: "8px" }}
+                                        className="form-control ps-3"
+                                        placeholder="Enter amount"
                                         onValueChange={(value) => {
-                                            updateProfile("fundRaising", {
-                                                fundingAsk: {
-                                                    ...stateAuth?.startupData
-                                                        ?.fundRaising
-                                                        ?.fundingAsk,
-                                                    fundraisingAmount:
-                                                        parseInt(value),
-                                                },
-                                            });
+                                            if (!Number.isNaN(Number(value))) {
+                                                updateProfile("fundRaising", {
+                                                    fundingAsk: {
+                                                        ...stateAuth
+                                                            ?.startupData
+                                                            ?.fundRaising
+                                                            ?.fundingAsk,
+                                                        fundraisingAmount:
+                                                            Number(value),
+                                                    },
+                                                });
+                                                console.log(value);
+                                            }
                                         }}
                                     />
                                 </Form.Item>
@@ -282,7 +285,7 @@ export const FundAsk = ({ setFundraising, back }) => {
 
                             <div className="form-group my-2 col-12">
                                 <Form.Item
-                                    name="preMoneyValuation"
+                                    // name="preMoneyValuation"
                                     label="What is your pre-money valuation?"
                                     initialValue={
                                         stateAuth?.startupData?.fundRaising
@@ -325,7 +328,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                             </div>
                             <div className="form-group my-2 col-12">
                                 <Form.Item
-                                    name="postMoneyValuation"
+                                    // name="postMoneyValuation"
                                     label="What is your post-money valuation?"
                                     initialValue={
                                         stateAuth?.startupData?.fundRaising
