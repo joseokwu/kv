@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     HeaderTeam,
     ImageWrapper,
@@ -75,6 +75,12 @@ export const TeamProfile = () => {
     const [avatar, setAvatar] = useState(
         stateAuth?.startupData?.team?.avatar ?? null
     );
+    const formRef = useRef();
+    useEffect(() => {
+        formRef.current.setFieldsValue({
+            skills: stateAuth?.startupData?.team?.skills[0] ?? "",
+        });
+    }, [stateAuth?.startupData?.team?.skills]);
     // console.log(stateAuth?.startupData?.team?.city)
     const {
         changePath,
@@ -264,7 +270,7 @@ export const TeamProfile = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    // console.log(stateAuth);
+    console.log(stateAuth?.startupData?.team);
 
     return (
         <>
@@ -330,6 +336,7 @@ export const TeamProfile = () => {
                 layout="vertical"
                 onFinish={onSubmit}
                 className="px-3"
+                ref={formRef}
             >
                 <FormWrapper height="70%">
                     <div className="div ml-0">
@@ -686,12 +693,21 @@ export const TeamProfile = () => {
                     <div className="div border-bottom pb-3 ml-0">
                         <span>Skills</span>
                     </div>
-                    <div className="form-group fields">
+                    <div
+                        className="form-group fields"
+                        css={css`
+                            .ant-form-item-control-input {
+                                display: none;
+                            }
+                        `}
+                    >
                         <Form.Item
                             name="skills"
                             label="What are your skills"
                             initialValue={
-                                stateAuth?.startupData?.team?.skills[0] ?? null
+                                stateAuth?.startupData?.team?.skills.length > 0
+                                    ? stateAuth?.startupData?.team?.skills[0]
+                                    : ""
                             }
                             rules={[
                                 {
@@ -701,38 +717,48 @@ export const TeamProfile = () => {
                                 },
                             ]}
                         >
-                            <div>
-                                <p className="py-2">
-                                    Please press the space button to add your
-                                    skill
-                                </p>
-                            </div>
                             <input
-                                onChange={handleChangeVal}
-                                style={{
-                                    width: "100%",
-                                    outline: "none",
-                                    color: "purple",
-                                }}
-                                value={inVal}
                                 type="text"
-                                placeholder="Enter your skills and press the space button to add "
-                                className="py-2 px-3"
-                                // className='form-control ps-3'
-                                onKeyDown={handleKey}
+                                value={
+                                    stateAuth?.startupData?.team?.skills
+                                        .length > 0
+                                        ? stateAuth?.startupData?.team
+                                              ?.skills[0]
+                                        : ""
+                                }
+                                style={{ height: 0 }}
                             />
-
-                            {stateAuth?.startupData?.team?.skills &&
-                                stateAuth?.startupData?.team?.skills.map(
-                                    (item, i) => (
-                                        <SkillTab
-                                            key={i}
-                                            skill={item}
-                                            onClick={() => onDelete(item)}
-                                        />
-                                    )
-                                )}
                         </Form.Item>
+                        <div>
+                            <p className="py-2">
+                                Please press the space button to add your skill
+                            </p>
+                        </div>
+                        <input
+                            onChange={handleChangeVal}
+                            style={{
+                                width: "100%",
+                                outline: "none",
+                                color: "purple",
+                            }}
+                            value={inVal}
+                            name="skills"
+                            type="text"
+                            placeholder="Enter your skills and press the space button to add "
+                            className="py-2 px-3"
+                            // className='form-control ps-3'
+                            onKeyDown={handleKey}
+                        />
+                        {stateAuth?.startupData?.team?.skills &&
+                            stateAuth?.startupData?.team?.skills.map(
+                                (item, i) => (
+                                    <SkillTab
+                                        key={i}
+                                        skill={item}
+                                        onClick={() => onDelete(item)}
+                                    />
+                                )
+                            )}
                     </div>
                 </FormWrapper>
 
