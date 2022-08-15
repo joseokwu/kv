@@ -185,7 +185,6 @@ export const StartupProfile = () => {
                 layout="vertical"
                 onFinish={onSubmit}
                 className="px-3"
-                validateTrigger="onFinish"
             >
                 <FormWrapper className="pe-5">
                     <div className="div border-bottom pb-3">

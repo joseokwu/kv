@@ -93,8 +93,8 @@ export const useAuth = () => {
     const updateMentorInfo = async (lastPage = false) => {
         try {
             const dataToPost = {
-                accType: "mentor",
-                values: lastPage
+                _id: stateAuth.mentorData?._id,
+                payload: lastPage
                     ? { ...stateAuth.mentorData, applicationCompleted: true }
                     : stateAuth.mentorData,
                 lastPage,
@@ -122,7 +122,7 @@ export const useAuth = () => {
 
     const updateStartupInfo = async (lastPage = false) => {
         try {
-            const payload = {
+            const dataToPost = {
                 _id: stateAuth.profileData?.startupRes?._id,
                 payload: lastPage
                     ? {
@@ -132,8 +132,8 @@ export const useAuth = () => {
                     : stateAuth.profileData?.startupRes,
                 // lastPage,
             };
-            console.log(payload);
-            const res = await updateStartup(payload);
+            console.log(dataToPost);
+            const res = await updateStartup(dataToPost);
             console.log(res);
             toast.success(res?.message);
             if (res?.success && lastPage) {
