@@ -56,7 +56,9 @@ export const TeamModal = ({
 
     const onFinish = (values) => {
         if (isEditing) {
-            const newList = [...stateAuth?.startupData?.team?.experience];
+            const newList = [
+                ...stateAuth?.profileData?.startupRes?.team?.experience,
+            ];
 
             newList[editIndex] = {
                 ...values,
@@ -69,7 +71,7 @@ export const TeamModal = ({
         } else {
             updateProfile("team", {
                 experience: [
-                    ...stateAuth?.startupData?.team?.experience,
+                    ...stateAuth?.profileData?.startupRes?.team?.experience,
                     {
                         ...values,
                         index: editIndex,
@@ -309,19 +311,21 @@ export const EducationModal = ({
         course: isEditing ? education[editIndex]?.course : "",
         degreeType: isEditing
             ? education[editIndex]?.degreeType
-            : degreeList[0],
+            : degreeList[0].value,
         activities: isEditing ? education[editIndex]?.activities : "",
         startDate: isEditing ? education[editIndex]?.startDate : "",
         endDate: isEditing ? education[editIndex]?.endDate : "",
     });
 
-    console.log(stateAuth?.startupData?.team?.education);
+    console.log(stateAuth?.profileData?.startupRes?.team?.education);
 
     const onFinish = (values) => {
         console.log(values);
 
         if (isEditing) {
-            const newList = [...stateAuth?.startupData?.team?.education];
+            const newList = [
+                ...stateAuth?.profileData?.startupRes?.team?.education,
+            ];
             newList[editIndex] = {
                 ...values,
                 index: editIndex,
@@ -334,7 +338,7 @@ export const EducationModal = ({
         } else {
             updateProfile("team", {
                 education: [
-                    ...stateAuth?.startupData?.team.education,
+                    ...stateAuth?.profileData?.startupRes?.team.education,
                     {
                         ...values,
                         index: editIndex,
@@ -407,7 +411,7 @@ export const EducationModal = ({
                                     value={
                                         formValues.degreeType !== ""
                                             ? formValues.degreeType
-                                            : degreeList[0]
+                                            : degreeList[0]?.value
                                     }
                                     onChange={(e) => {
                                         console.log(e);
