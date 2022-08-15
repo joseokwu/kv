@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import * as Yup from "yup";
 import imageRep from "../../../../assets/icons/mentorDetails.svg";
 import add from "../../../../assets/icons/addFile.svg";
+import Form from "antd/lib/form/Form";
 import {
     Button,
     TextField,
@@ -38,6 +39,7 @@ const Details = () => {
     const { stateAuth } = useAuth();
     const [opts, setOpts] = useState("");
     const [loading, setLoading] = useState(false);
+    const [buttonClicked, setButtonClicked] = useState("Save");
     const [logoUploading, setLogoUploading] = useState(false);
     console.log(stateAuth);
 
@@ -212,7 +214,16 @@ const Details = () => {
         <div className="mentor_details_form_wrap">
             <h3>Personal Details</h3>
             <p>Let’s get to know you</p>
-            <form onSubmit={formik.handleSubmit}>
+            <Form
+                name="Personal-Details"
+                initialValues={{
+                    remember: true,
+                }}
+                layout="vertical"
+                // onFinish={onSubmit}
+                className="px-3"
+                validateTrigger="onFinish"
+            >
                 <div className="row mb-4">
                     <section className="col-md">
                         <div className="form-dp">
@@ -249,16 +260,16 @@ const Details = () => {
 
                     <div className="row">
                         <section className="col-md-6 mb-4">
-                            <label>First Name*</label>
                             <TextField
-                                // label={'First Name*'}
+                                label={"First Name"}
                                 id="firstname"
                                 type="text"
                                 name="firstname"
+                                errName="First Name"
                                 value={formik.values.firstname}
                                 onChange={(e) => handleChange(e)}
                                 placeholder={"Micheal"}
-                                // required={true}
+                                required={true}
                             />
                             {formik.errors.firstname ? (
                                 <label className="error">
@@ -267,16 +278,16 @@ const Details = () => {
                             ) : null}
                         </section>
                         <section className="col-md-6 mb-4">
-                            <label>Last Name*</label>
                             <TextField
-                                // label={'Last Name*'}
+                                label={"Last Name"}
                                 id="lastname"
                                 type="text"
                                 name="lastname"
+                                errName="Last Name"
                                 value={formik.values.lastname}
                                 onChange={(e) => handleChange(e)}
                                 placeholder={"Smith"}
-                                // required={true}
+                                required={true}
                             />
                             {formik.errors.lastname ? (
                                 <label className="error">
@@ -708,20 +719,26 @@ const Details = () => {
                             label={loading ? <CircularLoader /> : "Save"}
                             disabled={loading}
                             variant="secondary"
+                            onClick={() => {
+                                setButtonClicked("Save");
+                            }}
                         />
 
                         <Button
                             label={"Next"}
-                            type="button"
+                            type="submit"
                             variant="primary"
                             disabled={nextloading}
+                            // onClick={() => {
+                            //     push("#work_experience");
+                            // }}
                             onClick={() => {
-                                push("#work_experience");
+                                setButtonClicked("Next");
                             }}
                         />
                     </div>
                 </section>
-            </form>
+            </Form>
         </div>
     );
 };

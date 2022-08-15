@@ -64,7 +64,6 @@ export const StartupProfile = () => {
     //         ?.state ?? ""
     // );
     const setRegion = (val) => {};
-    // const [form] = Form.useForm();
     const handlePhoneInput = (value) => {
         updateProfile("startUpProfile", {
             contactInfo: {
@@ -185,13 +184,7 @@ export const StartupProfile = () => {
                 }}
                 layout="vertical"
                 onFinish={onSubmit}
-                // onSubmit={onSubmit}
-                // onFinishFailed={({ errorFields }) => {
-                //     form.scrollToField(errorFields[0].name);
-                // }}
-                // onFin
                 className="px-3"
-                // form={form}
                 validateTrigger="onFinish"
             >
                 <FormWrapper className="pe-5">
@@ -710,14 +703,7 @@ export const StartupProfile = () => {
                             <CustomButton
                                 type="submit"
                                 onClick={() => {
-                                    console.log(
-                                        "nextttttttttttttttttttttttttttttt"
-                                    );
-                                    // updateStartupInfo();
                                     setButtonClicked("Next");
-                                    // if (validated) {
-                                    //     changePath(2);
-                                    // }
                                 }}
                                 background="#2E3192"
                             >

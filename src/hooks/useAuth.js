@@ -63,6 +63,7 @@ export const useAuth = () => {
     };
 
     const getUserData = useCallback(async () => {
+        console.log("function getUserData");
         dispatch(await profile());
     }, [dispatch]);
 

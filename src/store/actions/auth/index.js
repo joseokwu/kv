@@ -100,6 +100,7 @@ export const dashboardProfile = async () => async (dispatch) => {
         dispatch({
             type: DASHBOARD_LOAD,
         });
+        console.log("function dashboardProfile");
         const res = await profile();
         if (res) {
             dispatch({
@@ -108,6 +109,7 @@ export const dashboardProfile = async () => async (dispatch) => {
             });
         }
     } catch (err) {
+        console.log("err", err);
         console.log("failed to store user profile ");
         dispatch({
             type: USER_PROFILE_FAIL,
@@ -150,7 +152,7 @@ export const updateInvestorProfile =
 
 export const updateInvestorData = async (value) => async (dispatch) => {
     try {
-        const res = await profile(value);
+        const res = await profile();
         if (res) {
             console.log(res?.data?.investorData);
             dispatch({
@@ -159,6 +161,7 @@ export const updateInvestorData = async (value) => async (dispatch) => {
             });
         }
     } catch (err) {
+        console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,
         });
@@ -167,7 +170,7 @@ export const updateInvestorData = async (value) => async (dispatch) => {
 
 export const updateStartupData = async (value) => async (dispatch) => {
     try {
-        const res = await profile(value);
+        const res = await profile();
         if (res) {
             // console.log(res?.data?.startupData);
             dispatch({
@@ -175,6 +178,8 @@ export const updateStartupData = async (value) => async (dispatch) => {
             });
         }
     } catch (err) {
+        console.log("err", err);
+        console.log("failed to update startup bbb");
         dispatch({
             type: USER_PROFILE_FAIL,
         });
@@ -196,7 +201,8 @@ export const updateStartupUserProfile = async (value) => async (dispatch) => {
 
 export const updateMentorData = async (value) => async (dispatch) => {
     try {
-        const res = await profile(value);
+        console.log("function updateMentorData");
+        const res = await profile();
         if (res) {
             dispatch({
                 type: UPDATE_MENTOR_DATA,
@@ -204,6 +210,7 @@ export const updateMentorData = async (value) => async (dispatch) => {
             });
         }
     } catch (err) {
+        console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,
         });
@@ -226,6 +233,7 @@ export const getProfile = async (value) => async (dispatch) => {
             });
         }
     } catch (err) {
+        console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,
         });

@@ -15,7 +15,7 @@ export const register = async (values) => {
 export const userLogin = async (values) => {
     try {
         const res = await request.post("v1/auth/login", values);
-
+        console.log(res);
         return res?.data;
     } catch (err) {
         console.log(err?.response?.data);
@@ -43,7 +43,7 @@ export const user = async () => {
         // console.log(value)
         console.log("trying to make request");
         const res = await request.get("v1/user");
-        console.log(res.data);
+        console.log(res);
         return res?.data;
     } catch (err) {
         console.log(err);
