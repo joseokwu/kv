@@ -33,7 +33,9 @@ import { fetchCities } from "../../../../services";
 const { Option } = Select;
 
 export const StartupProfile = () => {
+    const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
     const { changePath } = useActivity();
+
     const startupStage = [
         { value: "Pre-seed Stage", label: "Pre-seed Stage" },
         { value: "Seed Stage", label: "Seed Stage" },
@@ -58,11 +60,11 @@ export const StartupProfile = () => {
     );
 
     const dateFormat = "YYYY-MM-DD";
-    const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
     const [country, setCountry] = useState(
         stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
             ?.country ?? ""
     );
+
     const [region, setRegion] = useState(
         stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
             ?.state ?? ""
