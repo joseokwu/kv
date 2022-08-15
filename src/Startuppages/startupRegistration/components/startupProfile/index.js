@@ -51,6 +51,12 @@ export const StartupProfile = () => {
         { value: "Larger than 30", label: "Larger than 30" },
     ];
 
+    const [buttonClicked, setButtonClicked] = useState("Save");
+
+    const [logo, setLogo] = useState(
+        stateAuth?.profileData?.startupRes?.startUpProfile?.logo ?? ""
+    );
+
     const dateFormat = "YYYY-MM-DD";
     const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
     const [country, setCountry] = useState(
@@ -60,12 +66,6 @@ export const StartupProfile = () => {
     const [region, setRegion] = useState(
         stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
             ?.state ?? ""
-    );
-
-    const [buttonClicked, setButtonClicked] = useState("Save");
-
-    const [logo, setLogo] = useState(
-        stateAuth?.profileData?.startupRes?.startUpProfile?.logo
     );
 
     const [logoUploading, setLogoUploading] = useState(false);
