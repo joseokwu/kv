@@ -278,8 +278,6 @@ export const TeamModal = ({
     );
 };
 
-//
-
 export const EducationModal = ({
     handleClose,
     handleWorkDetails,
