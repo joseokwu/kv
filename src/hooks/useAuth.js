@@ -52,7 +52,7 @@ export const useAuth = () => {
 
     const userProfile = useCallback(
         async (value) => {
-            // dispatch(await profile(value));
+            dispatch(await profile());
         },
         [dispatch]
     );
@@ -181,7 +181,7 @@ export const useAuth = () => {
     const updatePartnerInfo = async (lastPage = false) => {
         try {
             const payload = {
-                accType: stateAuth.type[0],
+                accType: stateAuth.userType,
                 values: lastPage
                     ? { ...stateAuth.partnerData, applicationCompleted: true }
                     : stateAuth.partnerData,

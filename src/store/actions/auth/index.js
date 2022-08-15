@@ -102,7 +102,7 @@ export const dashboardProfile = async () => async (dispatch) => {
         });
         console.log("function dashboardProfile");
         const res = await profile();
-        if (res) {
+        if (res?.success) {
             dispatch({
                 type: DASHBOARD_USER_PROFILE,
                 payload: res?.data,
@@ -206,7 +206,7 @@ export const updateMentorData = async (value) => async (dispatch) => {
         if (res) {
             dispatch({
                 type: UPDATE_MENTOR_DATA,
-                payload: res?.data?.mentorData,
+                payload: res?.data?.data,
             });
         }
     } catch (err) {
@@ -222,14 +222,23 @@ export const getProfile = async (value) => async (dispatch) => {
         dispatch({
             type: AUTH_START,
         });
-        const res = await user(value);
+        const res1 = await user(value);
+        const res2 = await profile(value);
 
-        if (res) {
-            console.log(res);
+        if (res1) {
+            console.log(res1);
             console.log(value);
             dispatch({
                 type: USER_PROFILE,
-                payload: res?.data?.data,
+                payload: res1?.data?.data,
+            });
+        }
+        if (res2) {
+            console.log(res2);
+            console.log(value);
+            dispatch({
+                type: DASHBOARD_USER_PROFILE,
+                payload: res2?.data,
             });
         }
     } catch (err) {

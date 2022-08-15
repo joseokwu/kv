@@ -141,16 +141,6 @@ const authReducer = (state = INIT_STATE, action) => {
                 ...action.payload,
             };
         case DASHBOARD_USER_PROFILE:
-            console.log({
-                ...state.mentorData,
-                loading: false,
-                dashboardLoad: false,
-                profileData: action?.payload,
-                // type: action?.payload?.type,
-                // signUpStatus: action?.payload?.type[0],
-                // email: action?.payload?.email,
-            });
-
             if (state.userType === "mentor")
                 return {
                     ...state,
@@ -167,6 +157,7 @@ const authReducer = (state = INIT_STATE, action) => {
                     profileData: action?.payload,
                     email: action?.payload?.email,
                 };
+
             // if (action?.payload?.type[0] === "boosterpartner") {
             //     return {
             //         ...state,
@@ -190,8 +181,7 @@ const authReducer = (state = INIT_STATE, action) => {
             //         startupData: action.payload.startupData,
             //     };
             // } else {
-            console.log("payload", action?.payload);
-            return { ...action?.payload };
+
             // }
 
             // if(action?.payload?.type[0] === 'investor'){
@@ -214,7 +204,8 @@ const authReducer = (state = INIT_STATE, action) => {
                 authenticated: false,
                 dashboardLoad: false,
                 user: null,
-                type: [],
+                type: "",
+                profilefail: true,
             };
         case SET_SIGNUP_STATUS:
             return {

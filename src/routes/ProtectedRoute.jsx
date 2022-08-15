@@ -5,7 +5,7 @@ import { setLocationHistory } from "../utils/helpers";
 
 export const ProtectedRoute = ({ ...props }) => {
     const history = useHistory();
-    const { stateAuth } = useAuth();
+    const { stateAuth, getDashboardProfile } = useAuth();
 
     //user:token
     useEffect(() => {
@@ -13,7 +13,7 @@ export const ProtectedRoute = ({ ...props }) => {
         console.log(stateAuth.userType, stateAuth.authenticated);
         console.log(props.type);
         if (!stateAuth.authenticated || !stateAuth.userType === props.type) {
-            // console.log(history.location.pathname)
+            console.log(history.location.pathname);
             setLocationHistory(history.location.pathname);
             history.push("/");
         }
