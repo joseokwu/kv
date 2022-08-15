@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     HeaderTeam,
     ImageWrapper,
@@ -75,6 +75,12 @@ export const TeamProfile = () => {
     const [avatar, setAvatar] = useState(
         stateAuth?.profileData?.startupRes?.team?.avatar ?? null
     );
+    const formRef = useRef();
+    useEffect(() => {
+        formRef.current.setFieldsValue({
+            skills: stateAuth?.profileData?.startupRes?.team?.skills[0] ?? "",
+        });
+    }, [stateAuth?.profileData?.startupRes?.team?.skills]);
     // console.log(stateAuth?.profileData?.startupRes?.team?.city)
     const {
         changePath,
@@ -118,7 +124,7 @@ export const TeamProfile = () => {
         }
     };
 
-    console.log(stateAuth)
+    console.log(stateAuth);
 
     const handleChangeCountry = (value) => {
         updateProfile("team", { country: value });
@@ -151,12 +157,17 @@ export const TeamProfile = () => {
             e.preventDefault();
             if (
                 inVal.trim() === "" ||
-                stateAuth?.profileData?.startupRes.team.skills.indexOf(inVal.trim()) !== -1
+                stateAuth?.profileData?.startupRes.team.skills.indexOf(
+                    inVal.trim()
+                ) !== -1
             )
                 return;
             setVal("");
             updateProfile("team", {
-                skills: [...stateAuth?.profileData?.startupRes.team.skills, inVal],
+                skills: [
+                    ...stateAuth?.profileData?.startupRes.team.skills,
+                    inVal,
+                ],
             });
         }
     };
@@ -264,7 +275,7 @@ export const TeamProfile = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    // console.log(stateAuth);
+    console.log(stateAuth?.profileData?.startupRes?.team);
 
     return (
         <>
@@ -330,6 +341,7 @@ export const TeamProfile = () => {
                 layout="vertical"
                 onFinish={onSubmit}
                 className="px-3"
+                ref={formRef}
             >
                 <FormWrapper height="70%">
                     <div className="div ml-0">
@@ -399,7 +411,10 @@ export const TeamProfile = () => {
                                         firstName: e.target.value,
                                     })
                                 }
-                                value={stateAuth?.profileData?.startupRes?.team?.firstName}
+                                value={
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.firstName
+                                }
                                 required={true}
                                 className={"form-control"}
                                 placeholder="Enter first name"
@@ -414,7 +429,10 @@ export const TeamProfile = () => {
                                         lastName: e.target.value,
                                     })
                                 }
-                                value={stateAuth?.profileData?.startupRes?.team?.lastName}
+                                value={
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.lastName
+                                }
                                 required={true}
                                 className={"form-control"}
                                 placeholder="Enter last name"
@@ -429,7 +447,10 @@ export const TeamProfile = () => {
                                         email: e.target.value,
                                     })
                                 }
-                                value={stateAuth?.profileData?.startupRes?.team?.email}
+                                value={
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.email
+                                }
                                 required={true}
                                 className={"form-control"}
                                 placeholder="Enter email address"
@@ -440,9 +461,11 @@ export const TeamProfile = () => {
                                 name="dob"
                                 label="Date of Birth"
                                 initialValue={
-                                    stateAuth?.profileData?.startupRes?.team?.dob
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.dob
                                         ? moment(
-                                              stateAuth?.profileData?.startupRes?.team?.dob
+                                              stateAuth?.profileData?.startupRes
+                                                  ?.team?.dob
                                           )
                                         : undefined
                                 }
@@ -460,10 +483,11 @@ export const TeamProfile = () => {
                                     className="custs p-2 py-4"
                                     style={{ padding: "15px" }}
                                     defaultValue={
-                                        stateAuth?.profileData?.startupRes?.team?.dob
+                                        stateAuth?.profileData?.startupRes?.team
+                                            ?.dob
                                             ? moment(
-                                                  stateAuth?.profileData?.startupRes?.team
-                                                      ?.dob
+                                                  stateAuth?.profileData
+                                                      ?.startupRes?.team?.dob
                                               )
                                             : undefined
                                     }
@@ -480,7 +504,8 @@ export const TeamProfile = () => {
                                 name="country"
                                 label="Country"
                                 initialValue={
-                                    stateAuth?.profileData?.startupRes?.team?.country
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.country
                                 }
                                 rules={[
                                     {
@@ -503,7 +528,8 @@ export const TeamProfile = () => {
                                 name="state"
                                 label="State"
                                 initialValue={
-                                    stateAuth?.profileData?.startupRes?.team?.state
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.state
                                 }
                                 rules={[
                                     {
@@ -532,7 +558,10 @@ export const TeamProfile = () => {
                                         city: e.target.value,
                                     })
                                 }
-                                value={stateAuth?.profileData?.startupRes?.team?.city}
+                                value={
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.city
+                                }
                                 required={true}
                                 className={"form-control"}
                                 placeholder="Enter your city"
@@ -543,7 +572,8 @@ export const TeamProfile = () => {
                                 name="mobile_number"
                                 label="Mobile Number"
                                 initialValue={
-                                    stateAuth?.profileData?.startupRes?.team?.mobile_number
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.mobile_number
                                 }
                                 rules={[
                                     {
@@ -576,7 +606,8 @@ export const TeamProfile = () => {
                                 name="gender"
                                 label="Gender"
                                 initialValue={
-                                    stateAuth?.profileData?.startupRes?.team?.gender
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.gender
                                 }
                                 rules={[
                                     {
@@ -652,7 +683,8 @@ export const TeamProfile = () => {
                     </div>
                     <hr />
                     {stateAuth?.profileData?.startupRes?.team?.education &&
-                        stateAuth?.profileData?.startupRes?.team?.education.length > 0 &&
+                        stateAuth?.profileData?.startupRes?.team?.education
+                            .length > 0 &&
                         stateAuth?.profileData?.startupRes?.team?.education.map(
                             (item, index) => {
                                 return (
@@ -686,53 +718,74 @@ export const TeamProfile = () => {
                     <div className="div border-bottom pb-3 ml-0">
                         <span>Skills</span>
                     </div>
-                    <div className="form-group fields">
+                    <div
+                        className="form-group fields"
+                        css={css`
+                            .ant-form-item-control-input {
+                                display: none;
+                            }
+                        `}
+                    >
                         <Form.Item
                             name="skills"
                             label="What are your skills"
                             initialValue={
-                                stateAuth?.profileData?.startupRes?.team?.skills[0] ?? null
+                                stateAuth?.profileData?.startupRes?.team?.skills
+                                    .length > 0
+                                    ? stateAuth?.profileData?.startupRes?.team
+                                          ?.skills[0]
+                                    : ""
                             }
-                            // rules={[
-                            //     {
-                            //         required: true,
-                            //         message:
-                            //             "Please select at least one skill.",
-                            //     },
-                            // ]}
+                            rules={[
+                                {
+                                    required: true,
+                                    message:
+                                        "Please select at least one skill.",
+                                },
+                            ]}
                         >
-                            <div>
-                                <p className="py-2">
-                                    Please press the space button to add your
-                                    skill
-                                </p>
-                            </div>
                             <input
-                                onChange={handleChangeVal}
-                                style={{
-                                    width: "100%",
-                                    outline: "none",
-                                    color: "purple",
-                                }}
-                                value={inVal}
                                 type="text"
-                                placeholder="Enter your skills and press the space button to add "
-                                className="py-2 px-3"
-                                // className='form-control ps-3'
-                                onKeyDown={handleKey}
+                                value={
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.skills.length > 0
+                                        ? stateAuth?.profileData?.startupRes
+                                              ?.team?.skills[0]
+                                        : ""
+                                }
+                                style={{ height: 0 }}
                             />
-
-                            {stateAuth?.profileData?.startupRes?.team?.skills &&
-                                stateAuth?.profileData?.startupRes?.team?.skills.map(
-                                    (item, i) => (
-                                        <SkillTab
-                                            key={i}
-                                            skill={item}
-                                            onClick={() => onDelete(item)}
-                                        />
-                                    )
-                                )}
                         </Form.Item>
+                        <div>
+                            <p className="py-2">
+                                Please press the space button to add your skill
+                            </p>
+                        </div>
+                        <input
+                            onChange={handleChangeVal}
+                            style={{
+                                width: "100%",
+                                outline: "none",
+                                color: "purple",
+                            }}
+                            value={inVal}
+                            name="skills"
+                            type="text"
+                            placeholder="Enter your skills and press the space button to add "
+                            className="py-2 px-3"
+                            // className='form-control ps-3'
+                            onKeyDown={handleKey}
+                        />
+                        {stateAuth?.profileData?.startupRes?.team?.skills &&
+                            stateAuth?.profileData?.startupRes?.team?.skills.map(
+                                (item, i) => (
+                                    <SkillTab
+                                        key={i}
+                                        skill={item}
+                                        onClick={() => onDelete(item)}
+                                    />
+                                )
+                            )}
                     </div>
                 </FormWrapper>
 
@@ -748,15 +801,15 @@ export const TeamProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("team", {
                                         socialMedia: {
-                                            ...stateAuth?.profileData?.startupRes?.team
-                                                ?.socialMedia,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.team?.socialMedia,
                                             linkedIn: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.profileData?.startupRes?.team?.socialMedia
-                                        ?.linkedIn
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.socialMedia?.linkedIn
                                 }
                                 required={true}
                                 type={"url"}
@@ -771,15 +824,15 @@ export const TeamProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("team", {
                                         socialMedia: {
-                                            ...stateAuth?.profileData?.startupRes?.team
-                                                ?.socialMedia,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.team?.socialMedia,
                                             twitter: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.profileData?.startupRes?.team?.socialMedia
-                                        ?.twitter
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.socialMedia?.twitter
                                 }
                                 required={true}
                                 type={"url"}
@@ -795,15 +848,15 @@ export const TeamProfile = () => {
                                 onChange={(e) =>
                                     updateProfile("team", {
                                         socialMedia: {
-                                            ...stateAuth?.profileData?.startupRes?.team
-                                                ?.socialMedia,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.team?.socialMedia,
                                             website: e.target.value,
                                         },
                                     })
                                 }
                                 value={
-                                    stateAuth?.profileData?.startupRes?.team?.socialMedia
-                                        ?.website
+                                    stateAuth?.profileData?.startupRes?.team
+                                        ?.socialMedia?.website
                                 }
                                 required={true}
                                 type={"url"}
@@ -865,10 +918,10 @@ export const TeamProfile = () => {
                                 <div className="d-flex justify-content-center">
                                     <div className="">
                                         <div className="row">
-                                            {stateAuth?.profileData?.startupRes?.team
-                                                ?.coFounder &&
-                                            stateAuth?.profileData?.startupRes?.team
-                                                ?.coFounder.length > 0 ? (
+                                            {stateAuth?.profileData?.startupRes
+                                                ?.team?.coFounder &&
+                                            stateAuth?.profileData?.startupRes
+                                                ?.team?.coFounder.length > 0 ? (
                                                 stateAuth?.profileData?.startupRes?.team?.coFounder.map(
                                                     (item, i) => (
                                                         <div
