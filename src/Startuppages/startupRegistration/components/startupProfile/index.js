@@ -27,8 +27,6 @@ import { TextareaCustom } from "./../../../../components/textArea/cutstomTextare
 import { letterOnly } from "../../../../utils/helpers";
 import { industry } from "../../../../constants/domiData";
 import { useEffect } from "react";
-import { getCountryISO, getStateISO } from "../../../../utils/helpers";
-import { fetchCities } from "../../../../services";
 
 const { Option } = Select;
 
@@ -72,7 +70,7 @@ export const StartupProfile = () => {
 
     const [logoUploading, setLogoUploading] = useState(false);
 
-    const [form] = Form.useForm();
+    // const [form] = Form.useForm();
 
     const handlePhoneInput = (value) => {
         updateProfile("startUpProfile", {
@@ -207,7 +205,7 @@ export const StartupProfile = () => {
                 // }}
                 // onFin
                 className="px-3"
-                form={form}
+                // form={form}
                 validateTrigger="onFinish"
             >
                 <FormWrapper className="pe-5">
