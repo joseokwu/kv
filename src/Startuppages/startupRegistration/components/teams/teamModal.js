@@ -309,7 +309,7 @@ export const EducationModal = ({
         course: isEditing ? education[editIndex]?.course : "",
         degreeType: isEditing
             ? education[editIndex]?.degreeType
-            : degreeList[0],
+            : degreeList[0].value,
         activities: isEditing ? education[editIndex]?.activities : "",
         startDate: isEditing ? education[editIndex]?.startDate : "",
         endDate: isEditing ? education[editIndex]?.endDate : "",
@@ -407,7 +407,7 @@ export const EducationModal = ({
                                     value={
                                         formValues.degreeType !== ""
                                             ? formValues.degreeType
-                                            : degreeList[0]
+                                            : degreeList[0].value
                                     }
                                     onChange={(e) => {
                                         console.log(e);
