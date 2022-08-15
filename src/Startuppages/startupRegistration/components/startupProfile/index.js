@@ -61,18 +61,13 @@ export const StartupProfile = () => {
         stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
             ?.state ?? ""
     );
-    const [cityList, setCityList] = useState([]);
 
-    const [countryISO, setCountryISO] = useState("");
-    const [stateISO, setStateISO] = useState("");
     const [buttonClicked, setButtonClicked] = useState("Save");
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [logo, setLogo] = useState(
         stateAuth?.profileData?.startupRes?.startUpProfile?.logo
     );
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [logoUploading, setLogoUploading] = useState(false);
 
     const [form] = Form.useForm();
@@ -98,41 +93,6 @@ export const StartupProfile = () => {
         setCountry(value);
         console.log(value);
     };
-
-    // useEffect(async () => {
-    //     try {
-    //         if (country) {
-    //             const val = await getCountryISO(country);
-    //             setCountryISO(val);
-    //         }
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    //     console.log(countryISO);
-    // }, [country]);
-
-    // useEffect(async () => {
-    //     try {
-    //         if (region) {
-    //             const val = await getStateISO(countryISO, region);
-    //             setStateISO(val);
-    //             console.log(val);
-    //         }
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // }, [region]);
-
-    // useEffect(async () => {
-    //     try {
-    //         if (stateISO) {
-    //             const cities = await fetchCities(countryISO, stateISO);
-    //             setCityList(cities);
-    //         }
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // }, [stateISO]);
 
     const handleChangeState = (value) => {
         updateProfile("startUpProfile", {
@@ -186,7 +146,7 @@ export const StartupProfile = () => {
         if (buttonClicked === "Next") changePath(2);
     };
 
-    console.log(stateAuth)
+    console.log(stateAuth);
     return (
         <>
             <HeaderStartup>
@@ -196,7 +156,8 @@ export const StartupProfile = () => {
 
             <ImageWrapper>
                 <div className="start-img-p">
-                    {stateAuth?.profileData?.startupRes?.startUpProfile?.logo === null ? (
+                    {stateAuth?.profileData?.startupRes?.startUpProfile
+                        ?.logo === null ? (
                         logoUploading ? (
                             <CircularLoader color={"#000"} />
                         ) : (
@@ -205,7 +166,10 @@ export const StartupProfile = () => {
                     ) : (
                         <img
                             className=""
-                            src={stateAuth?.profileData?.startupRes?.startUpProfile?.logo}
+                            src={
+                                stateAuth?.profileData?.startupRes
+                                    ?.startUpProfile?.logo
+                            }
                             style={{
                                 borderRadius: "70px",
                                 width: "90px",

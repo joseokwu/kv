@@ -127,6 +127,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 dashboardLoad: false,
                 authenticated: true,
                 userType: action?.payload?.userType,
+                signUpStatus: action?.payload?.userType,
                 ...action.payload,
             });
             return {
@@ -135,6 +136,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 dashboardLoad: false,
                 authenticated: true,
                 userType: action?.payload?.userType,
+                signUpStatus: action?.payload?.userType,
                 ...action.payload,
             };
         case DASHBOARD_USER_PROFILE:
@@ -148,13 +150,20 @@ const authReducer = (state = INIT_STATE, action) => {
                 // email: action?.payload?.email,
             });
 
+            if (state.userType === "mentor")
+                return {
+                    ...state,
+                    loading: false,
+                    dashboardLoad: false,
+                    mentorData: action?.payload?.data,
+                    email: action?.payload?.email,
+                };
+
             return {
                 ...state,
                 loading: false,
                 dashboardLoad: false,
                 profileData: action?.payload,
-                // type: action?.payload?.type,
-                // signUpStatus: action?.payload?.type[0],
                 email: action?.payload?.email,
             };
             // if (action?.payload?.type[0] === "boosterpartner") {
