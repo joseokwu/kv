@@ -58,10 +58,11 @@ export const StartupProfile = () => {
         stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
             ?.country ?? ""
     );
-    const [region, setRegion] = useState(
-        stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
-            ?.state ?? ""
-    );
+    // const [region, setRegion] = useState(
+    //     stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
+    //         ?.state ?? ""
+    // );
+    const setRegion = (val) => {};
     const [logoUploading, setLogoUploading] = useState(false);
     // const [form] = Form.useForm();
     const handlePhoneInput = (value) => {
