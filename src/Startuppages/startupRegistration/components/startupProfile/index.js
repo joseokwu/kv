@@ -50,6 +50,7 @@ export const StartupProfile = () => {
         { value: "Larger than 30", label: "Larger than 30" },
     ];
     const [buttonClicked, setButtonClicked] = useState("Save");
+    const [logoUploading, setLogoUploading] = useState(false);
     const [logo, setLogo] = useState(
         stateAuth?.profileData?.startupRes?.startUpProfile?.logo ?? ""
     );
@@ -63,7 +64,6 @@ export const StartupProfile = () => {
     //         ?.state ?? ""
     // );
     const setRegion = (val) => {};
-    const [logoUploading, setLogoUploading] = useState(false);
     // const [form] = Form.useForm();
     const handlePhoneInput = (value) => {
         updateProfile("startUpProfile", {
