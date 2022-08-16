@@ -60,7 +60,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
-  padding: 20px;
+  padding: 2rem;
   border-radius: 8px;
   z-index: 999;
   overflow-x: hidden;

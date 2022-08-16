@@ -11,6 +11,8 @@ export const linkedinRegExp =
 export const googlemeetRegExp =
     /^(https?:\/\/)?(www.)?meet\.google\.com\/([a-zA-Z0-9_-]+)$/;
 
+export const zoomRegExp = /^(https?:\/\/)?[\w-]*\.zoom\.us\/[\w-]{1}\/(.+)$/;
+
 export const twitterRegExp =
     /^(https?:\/\/)?(www.)?twitter\.com\/([a-zA-Z0-9_-]+)$/;
 export const angelistRegExp =
