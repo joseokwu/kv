@@ -18,7 +18,6 @@ export const MentorPersonalDetails = () => {
 
     useEffect(() => {
         getSavedMentorData("mentor");
-        
     }, []);
 
     const {
@@ -79,9 +78,9 @@ export const MentorPersonalDetails = () => {
                 </section>
 
                 <section className="mentor_personal_details_grid">
-                    <div className="d-none d-lg-flex">
-                        {/* <div className="tab-wrap"> */}
-                        <ul className="mentor_personal_details_list">
+                    {/* <div className="d-none d-lg-flex"> */}
+                    {/* <div className="tab-wrap"> */}
+                    {/* <ul className="mentor_personal_details_list">
                             <li
                                 onClick={() => switchForm("#personal_details")}
                                 className={
@@ -130,10 +129,10 @@ export const MentorPersonalDetails = () => {
                             >
                                 Assistant Info
                             </li>
-                        </ul>
-                        {/* </div> */}
-                    </div>
-                    <div className="mt-0 d-flex justify-content-end">
+                        </ul> */}
+                    {/* </div> */}
+                    {/* </div> */}
+                    <div className="mt-0 d-flex justify-content-stretch">
                         {hash === "" || hash === "#personal_details" ? (
                             <Details />
                         ) : hash === "#work_experience" ? (

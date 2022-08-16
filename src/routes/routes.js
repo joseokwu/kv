@@ -1,6 +1,7 @@
 import {
     WithMentorMainLayout,
-    WithMentorRegisterLayout,
+    WithMentorSecLayout,
+    WithMentorRegistrationLayout,
 } from "../mentorComponents";
 import { lazy } from "react";
 
@@ -543,7 +544,7 @@ const routes = [
     {
         name: "Congrats",
         path: "/mentor/signup/congrats",
-        component: WithMentorRegisterLayout(MentorCongrats),
+        component: WithMentorSecLayout(MentorCongrats),
         exact: true,
         protected: false,
     },
@@ -594,7 +595,7 @@ const routes = [
     {
         name: "InvitePeer",
         path: "/mentor/signup/invite",
-        component: WithMentorRegisterLayout(MentorInvitePeer),
+        component: WithMentorSecLayout(MentorInvitePeer),
         exact: true,
         protected: false,
     },
@@ -609,7 +610,7 @@ const routes = [
     {
         name: "MentorDashboard",
         path: "/mentor/profile",
-        component: WithMentorRegisterLayout(MentorProfile),
+        component: WithMentorSecLayout(MentorProfile),
         exact: true,
         protected: true,
         type: "mentor",
@@ -617,7 +618,7 @@ const routes = [
     {
         name: "PersonalDetails",
         path: "/mentor/registration",
-        component: WithMentorRegisterLayout(MentorPersonalDetails),
+        component: WithMentorRegistrationLayout(MentorPersonalDetails),
         exact: true,
         protected: false,
         type: "mentor",
@@ -712,7 +713,7 @@ const routes = [
     {
         name: "Evaluation",
         path: "/mentor/evaluation/evaluate",
-        component: WithMentorRegisterLayout(MentorEvaluate),
+        component: WithMentorSecLayout(MentorEvaluate),
         exact: true,
         protected: true,
         type: "mentor",

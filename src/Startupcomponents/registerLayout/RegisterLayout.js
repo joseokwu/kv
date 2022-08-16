@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "../index";
-import { StartupSideBar } from "../sidebar/Sidebar";
+import { StartupSideBar, MentorSideBar } from "../sidebar/Sidebar";
 
 const RegisterLayout = ({ children }) => {
     return (
@@ -71,3 +71,5 @@ export const WithStartupRegistrationLayout = (Component) => {
         );
     };
 };
+
+
