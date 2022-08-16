@@ -75,7 +75,7 @@ const Details = ({ data }) => {
                             <img src={location} alt="location" /> {data?.city},{" "}
                             {data?.country || "-"}
                         </p>
-                        <a href={data?.website}>
+                        <a href={data?.website} target="_blank">
                             <img src={web} alt="web" />
                             {data?.website || "-"}
                         </a>
