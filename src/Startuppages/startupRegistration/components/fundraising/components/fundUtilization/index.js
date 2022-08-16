@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import * as XLSX from "xlsx";
 import { parseFile } from "../../../../../../utils/helpers";
 import { UploadFile } from "../../../../../../components/uploadFile";
+import { upload } from "../../../../../../services";
 
 export const FundUtilization = () => {
     const history = useHistory();
@@ -115,6 +116,13 @@ export const FundUtilization = () => {
                                             raw: false,
                                         }
                                     );
+
+                                    const formData = new FormData();
+
+                                    formData.append("type", "video");
+                                    formData.append("file", filesInfo[0]?.file);
+                                    const response = await upload(formData);
+
                                     if (Array.isArray(data)) {
                                         updateProfile("fundRaising", {
                                             fundUtilization: {
@@ -122,6 +130,10 @@ export const FundUtilization = () => {
                                             },
                                         });
                                     }
+
+                                    if (!response?.path) return [];
+
+                                    return [response?.path];
                                 }}
                             />
                         </div>

@@ -15,6 +15,7 @@ import { validate } from "./../../../../../../utils/helpers";
 import { startupValidation } from "./../../../../../../utils/utils";
 import toast from "react-hot-toast";
 import Form from "antd/lib/form/Form";
+import * as XLSX from "xlsx";
 
 export const FinancialProjection = () => {
     const {
@@ -92,10 +93,9 @@ export const FinancialProjection = () => {
                             }
                             onUpload={async (filesInfo) => {
                                 const formData = new FormData();
-                                formData.append("dir", "kv");
-                                formData.append("ref", stateAuth.user?.userId);
+
                                 formData.append("type", "pdf");
-                                formData.append(0, filesInfo[0]?.file);
+                                formData.append("file", filesInfo[0]?.file);
 
                                 try {
                                     const response = await upload(formData);
@@ -105,6 +105,10 @@ export const FinancialProjection = () => {
                                             files: response.path,
                                         },
                                     });
+
+                                    if (!response?.path) return [];
+
+                                    return [response?.path];
                                 } catch (error) {
                                     console.log(error);
                                 }

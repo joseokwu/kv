@@ -103,24 +103,23 @@ export const StartupProfile = () => {
     const onChangeImage = async (e) => {
         const { files } = e.target;
         const formData = new FormData();
-        formData.append("dir", "kv");
-        formData.append("ref", stateAuth.user?.userId);
+
         formData.append("type", "image");
-        formData.append(0, files[0]);
+        formData.append("file", files[0]);
+
+        setLogoUploading(true);
         try {
-            setLogoUploading(true);
             const response = await upload(formData);
             setLogo(response?.path);
             updateProfile("startUpProfile", {
                 logo: response?.path,
             });
-            setLogoUploading(false);
         } catch (error) {
-            setLogoUploading(false);
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
             );
         }
+        setLogoUploading(false);
     };
     const onSubmit = async (e) => {
         // e.preventDefault();

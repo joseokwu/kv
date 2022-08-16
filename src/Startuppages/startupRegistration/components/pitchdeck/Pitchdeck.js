@@ -66,8 +66,10 @@ export const PitchDeck = () => {
 
     const onNext = () => {
         if (
-            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckFile !== null ||
-            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckVideo !== null
+            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckFile !==
+                null ||
+            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckVideo !==
+                null
         ) {
             changePath(path + 1);
             return;
@@ -78,8 +80,10 @@ export const PitchDeck = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (
-            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckFile !== null ||
-            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckVideo !== null
+            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckFile !==
+                null ||
+            stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckVideo !==
+                null
         ) {
             updateStartupInfo();
             if (buttonClicked === "Next") onNext();
@@ -127,24 +131,23 @@ export const PitchDeck = () => {
                                         extension: "MB",
                                     }}
                                     initData={
-                                        stateAuth?.profileData?.startupRes?.pitchDeck
-                                            ?.pitchDeckFile
+                                        stateAuth?.profileData?.startupRes
+                                            ?.pitchDeck?.pitchDeckFile
                                             ? [
-                                                  stateAuth?.profileData?.startupRes
-                                                      ?.pitchDeck
+                                                  stateAuth?.profileData
+                                                      ?.startupRes?.pitchDeck
                                                       ?.pitchDeckFile,
                                               ]
                                             : []
                                     }
                                     onUpload={async (filesInfo) => {
                                         const formData = new FormData();
-                                        formData.append("dir", "kv");
-                                        formData.append(
-                                            "ref",
-                                            stateAuth.user?.userId
-                                        );
+
                                         formData.append("type", "pdf");
-                                        formData.append(0, filesInfo[0]?.file);
+                                        formData.append(
+                                            "file",
+                                            filesInfo[0]?.file
+                                        );
 
                                         const response = await upload(formData);
                                         console.log(
@@ -154,6 +157,10 @@ export const PitchDeck = () => {
                                         updateProfile("pitchDeck", {
                                             pitchDeckFile: response?.path,
                                         });
+
+                                        if (!response?.path) return [];
+
+                                        return [response?.path];
                                     }}
                                 />
                             </div>
@@ -172,7 +179,7 @@ export const PitchDeck = () => {
                                             width: "100%",
                                             marginLeft: "0",
                                         }}
-                                        required={true}
+                                        required={false}
                                         placeholder="https://youtube.com/"
                                     />
                                 </div>
@@ -199,10 +206,11 @@ export const PitchDeck = () => {
                                         }}
                                         fileType={"video"}
                                         initData={
-                                            stateAuth?.profileData?.startupRes?.pitchDeck
-                                                ?.pitchDeckVideo
+                                            stateAuth?.profileData?.startupRes
+                                                ?.pitchDeck?.pitchDeckVideo
                                                 ? [
-                                                      stateAuth?.profileData?.startupRes
+                                                      stateAuth?.profileData
+                                                          ?.startupRes
                                                           ?.pitchDeck
                                                           ?.pitchDeckVideo,
                                                   ]
@@ -210,14 +218,10 @@ export const PitchDeck = () => {
                                         }
                                         onUpload={async (filesInfo) => {
                                             const formData = new FormData();
-                                            formData.append("dir", "kv");
-                                            formData.append(
-                                                "ref",
-                                                stateAuth.user?.userId
-                                            );
+
                                             formData.append("type", "video");
                                             formData.append(
-                                                0,
+                                                "file",
                                                 filesInfo[0]?.file
                                             );
                                             const response = await upload(
@@ -227,6 +231,10 @@ export const PitchDeck = () => {
                                             updateProfile("pitchDeck", {
                                                 pitchDeckVideo: response?.path,
                                             });
+
+                                            if (!response?.path) return [];
+
+                                            return [response?.path];
                                         }}
                                     />
                                 </div>

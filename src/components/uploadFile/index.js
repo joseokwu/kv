@@ -270,7 +270,7 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
                     onClick={async () => {
                         try {
                             setLoading(true);
-                            await onUpload(filesInfo);
+                            const data = await onUpload(filesInfo);
                             setLoading(false);
                             toast.success(
                                 `${
@@ -279,7 +279,7 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
                             );
                             setFilesUploaded(true);
                             setFilesInfo([]);
-                            setInitialData([...Array(data.maxFiles).fill(1)]);
+                            setInitialData(data);
                         } catch (e) {
                             toast.error(`${e?.message}`);
                         }
