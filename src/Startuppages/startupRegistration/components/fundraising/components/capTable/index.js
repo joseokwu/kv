@@ -164,29 +164,28 @@ export const CapTable = ({ setFundraising }) => {
                                 }}
                                 initData={
                                     stateAuth?.startupData?.fundRaising
-                                        ?.capTable?.files?.length > 0
+                                        ?.capTable?.file
                                         ? [
                                               stateAuth?.startupData
-                                                  ?.fundRaising?.capTable
-                                                  ?.files,
+                                                  ?.fundRaising?.capTable?.file,
                                           ]
                                         : []
                                 }
                                 onUpload={async (filesInfo) => {
                                     const file = filesInfo[0].file;
-                                    const fileData = await parseFile(file);
-                                    const workbook = XLSX.read(fileData, {
-                                        type: "binary",
-                                    });
-                                    const sheetName = workbook.SheetNames[0];
-                                    const worksheet =
-                                        workbook.Sheets[sheetName];
-                                    const data = XLSX.utils.sheet_to_json(
-                                        worksheet,
-                                        {
-                                            raw: false,
-                                        }
-                                    );
+                                    // const fileData = await parseFile(file);
+                                    // const workbook = XLSX.read(fileData, {
+                                    //     type: "binary",
+                                    // });
+                                    // const sheetName = workbook.SheetNames[0];
+                                    // const worksheet =
+                                    //     workbook.Sheets[sheetName];
+                                    // const data = XLSX.utils.sheet_to_json(
+                                    //     worksheet,
+                                    //     {
+                                    //         raw: false,
+                                    //     }
+                                    // );
 
                                     const formData = new FormData();
 
@@ -194,16 +193,14 @@ export const CapTable = ({ setFundraising }) => {
                                     formData.append("file", filesInfo[0]?.file);
                                     const response = await upload(formData);
 
-                                    if (Array.isArray(data)) {
-                                        updateProfile("fundRaising", {
-                                            capTable: {
-                                                ...stateAuth?.startupData
-                                                    ?.fundRaising?.capTable,
-                                                files: data,
-                                            },
-                                        });
-                                        setFileDoc(data);
-                                    }
+                                    updateProfile("fundRaising", {
+                                        capTable: {
+                                            ...stateAuth?.startupData
+                                                ?.fundRaising?.capTable,
+                                            file: response?.path,
+                                        },
+                                    });
+                                    // setFileDoc(data);
 
                                     if (!response?.path) return [];
 

@@ -84,10 +84,10 @@ export const FinancialProjection = () => {
                             }}
                             initData={
                                 stateAuth?.startupData?.fundRaising
-                                    ?.financialProjection?.files
+                                    ?.financialProjection?.file
                                     ? [
                                           stateAuth?.startupData?.fundRaising
-                                              ?.financialProjection?.files,
+                                              ?.financialProjection?.file,
                                       ]
                                     : []
                             }
@@ -102,7 +102,7 @@ export const FinancialProjection = () => {
                                     console.log(response);
                                     updateProfile("fundRaising", {
                                         financialProjection: {
-                                            files: response.path,
+                                            file: response?.path,
                                         },
                                     });
 
