@@ -3,10 +3,18 @@ export const emailRegex =
 
 export const whatsappRegExp = /^(https?:\/\/)?wa\.me\/([a-zA-Z0-9_-]+)$/;
 
-export const linkedinRegExp = /^(https?:\/\/)?(www.)?linkedin\.com\/([a-zA-Z0-9_-]+)$/;
+export const skypeRegExp = /^live:([a-zA-Z0-9_-]+)$/;
 
-export const twitterRegExp = /^(https?:\/\/)?(www.)?twitter\.com\/([a-zA-Z0-9_-]+)$/;
-export const angelistRegExp = /^(https?:\/\/)?(www.)?angel\.co\/([a-zA-Z0-9_-]+)$/;
+export const linkedinRegExp =
+    /^(https?:\/\/)?(www.)?linkedin\.com\/([a-zA-Z0-9_-]+)$/;
+
+export const googlemeetRegExp =
+    /^(https?:\/\/)?(www.)?meet\.google\.com\/([a-zA-Z0-9_-]+)$/;
+
+export const twitterRegExp =
+    /^(https?:\/\/)?(www.)?twitter\.com\/([a-zA-Z0-9_-]+)$/;
+export const angelistRegExp =
+    /^(https?:\/\/)?(www.)?angel\.co\/([a-zA-Z0-9_-]+)$/;
 
 export const crunchbaseRegExp =
     /^(https?:\/\/)?(www.)?crunchbase\.com\/([a-zA-Z0-9_-]+)$/;

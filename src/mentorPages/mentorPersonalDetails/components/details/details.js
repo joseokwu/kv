@@ -18,6 +18,8 @@ import {
     crunchbaseRegExp,
     twitterRegExp,
     angelistRegExp,
+    skypeRegExp,
+    googlemeetRegExp,
 } from "../../../../utils/utils";
 
 import "./details.css";
@@ -472,34 +474,70 @@ const Details = () => {
 
                     <div className="row">
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Skype Id"}
-                                type="text"
+                            <Form.Item
                                 name="skypeid"
-                                id="skypeid"
-                                value={
+                                label="Skype Id"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.skypeid
                                 }
-                                onChange={(e) => handleChange(e, "skypeid")}
-                                placeholder={"www.knightventure/michealsmith"}
-                                required={true}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a valid skype id",
+                                        pattern: skypeRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Skype Id"}
+                                    type="text"
+                                    // name="skypeid"
+                                    id="skypeid"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.skypeid
+                                    }
+                                    onChange={(e) => handleChange(e, "skypeid")}
+                                    placeholder={"live:myusername"}
+                                    // required={true}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Google Meet"}
-                                type="text"
+                            <Form.Item
                                 name="googlemeet"
-                                id="googlemeet"
-                                value={
+                                label="Google Meet"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.googlemeet
                                 }
-                                onChange={(e) => handleChange(e, "googlemeet")}
-                                placeholder={"Enter Google Meet Link"}
-                                required={true}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a valid google meet link",
+                                        pattern: googlemeetRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Google Meet"}
+                                    type="text"
+                                    // name="googlemeet"
+                                    id="googlemeet"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.googlemeet
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "googlemeet")
+                                    }
+                                    placeholder={"Enter Google Meet Link"}
+                                    // required={true}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-4 mb-4">
                             <Form.Item
