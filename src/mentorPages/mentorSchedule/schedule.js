@@ -95,6 +95,11 @@ export const MentorSchedule = () => {
 };
 
 const AddAvailability = ({ closeModal }) => {
+    const [formValues, setFormValues] = useState({
+        date: "",
+        startTime: "",
+        endTime: "",
+    });
     const onSubmit = () => {
         closeModal();
     };
@@ -120,11 +125,7 @@ const AddAvailability = ({ closeModal }) => {
                     name="date"
                     label="Date"
                     initialValue={
-                        stateAuth?.mentorData?.workExperience?.start
-                            ? moment(
-                                  stateAuth?.mentorData?.workExperience?.start
-                              )
-                            : undefined
+                        formValues?.date ? moment(formValues?.date) : undefined
                     }
                     rules={[
                         {
@@ -135,23 +136,20 @@ const AddAvailability = ({ closeModal }) => {
                 >
                     <DatePicker
                         className="col-md-12 py-2 px-2"
-                        id="start"
-                        name="start"
+                        id="date"
+                        // name="start"
                         defaultValue={
-                            // stateAuth?.mentorData?.workExperience?.start
-                            //     ? moment(
-                            //           stateAuth?.mentorData?.workExperience
-                            //               ?.start
-                            //       )
-                            //     : undefined
-                            undefined
+                            formValues?.date
+                                ? moment(formValues?.date)
+                                : undefined
                         }
                         format={"YYYY-MM-DD"}
                         onChange={(_, dateString) => {
                             console.log(dateString);
-                            // updateMentorProfileState("workExperience", {
-                            //     start: new Date(dateString).toISOString(),
-                            // });
+                            setFormValues({
+                                ...formValues,
+                                date: new Date(dateString).toISOString(),
+                            });
                             return dateString;
                         }}
                         handleDateInput
@@ -159,14 +157,86 @@ const AddAvailability = ({ closeModal }) => {
                 </Form.Item>
                 <div className="row mt-3">
                     <div className="col-lg-6">
-                        <Select label={"Start time"} placeholder={"Time"} />
+                        <Form.Item
+                            name="startTime"
+                            label="Start Time"
+                            initialValue={
+                                formValues?.startTime
+                                    ? formValues?.startTime
+                                    : undefined
+                            }
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please select the Start Time",
+                                },
+                            ]}
+                        >
+                            <TimePicker
+                                className="col-md-12 py-2 px-2"
+                                id="startTime"
+                                // name="start"
+                                defaultValue={
+                                    formValues?.startTime
+                                        ? formValues?.startTime
+                                        : undefined
+                                }
+                                onChange={(_, timeString) => {
+                                    console.log(timeString);
+                                    setFormValues({
+                                        ...formValues,
+                                        startTime: timeString,
+                                    });
+                                    return timeString;
+                                }}
+                                handleDateInput
+                            />
+                        </Form.Item>
                     </div>
                     <div className="col-lg-6">
-                        <Select label={"End time"} placeholder={"Time"} />
+                        <Form.Item
+                            name="endTime"
+                            label="End Time"
+                            initialValue={
+                                formValues?.endTime
+                                    ? formValues?.endTime
+                                    : undefined
+                            }
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please select the End Time",
+                                },
+                            ]}
+                        >
+                            <TimePicker
+                                className="col-md-12 py-2 px-2"
+                                id="endTime"
+                                // name="end"
+                                defaultValue={
+                                    formValues?.endTime
+                                        ? formValues?.endTime
+                                        : undefined
+                                }
+                                onChange={(_, timeString) => {
+                                    console.log(timeString);
+                                    setFormValues({
+                                        ...formValues,
+                                        endTime: timeString,
+                                    });
+                                    return timeString;
+                                }}
+                                handleDateInput
+                            />
+                        </Form.Item>
                     </div>
                 </div>
                 <div className="text-right mt-4">
-                    <Button variant={`btn_main btn_secondary`} label={"Add"} />
+                    <Button
+                        variant={`btn_main btn_secondary`}
+                        label={"Add"}
+                        type="submit"
+                    />
                 </div>
             </div>
         </Form>
