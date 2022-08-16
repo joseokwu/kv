@@ -114,25 +114,25 @@ const Details = () => {
 
     const onChangeImage = async (e) => {
         const { files } = e.target;
+        const file = files[0];
         const formData = new FormData();
-        formData.append("dir", "kv");
-        formData.append("ref", stateAuth.user?.userId);
         formData.append("type", "image");
-        formData.append(0, files[0]);
+        formData.append("file", file);
+
+        console.log(formData.get("file"));
+        setLogoUploading(true);
         try {
-            setLogoUploading(true);
             const response = await upload(formData);
             setLogo(response?.path);
             updateMentorProfileState("personalDetail", {
                 logo: response?.path,
             });
-            setLogoUploading(false);
         } catch (error) {
-            setLogoUploading(false);
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
             );
         }
+        setLogoUploading(false);
     };
 
     return (

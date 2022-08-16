@@ -1,8 +1,9 @@
 import { uploadRequest, request } from "../utils/axios";
 
-export const upload = async (value) => {
+export const upload = async (formData) => {
     try {
-        const response = await request.post("/v1/file", value);
+        const response = await uploadRequest.post("/v1/file", formData);
+        console.log(response);
         return response.data?.data;
     } catch (err) {
         console.log(err);

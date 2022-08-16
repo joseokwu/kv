@@ -12,7 +12,7 @@ const options = {
 };
 
 const uploadOptions = {
-    baseURL: FILE_UPLOAD_URL,
+    baseURL: BASE_URL,
     headers: { "Content-Type": "multipart/form-data" },
 };
 
