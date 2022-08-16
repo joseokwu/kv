@@ -12,6 +12,13 @@ import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/Circ
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
 import { useAuth } from "../../../../hooks/useAuth";
 import { upload } from "../../../../services/utils";
+import {
+    whatsappRegExp,
+    linkedinRegExp,
+    crunchbaseRegExp,
+    twitterRegExp,
+    angelistRegExp,
+} from "../../../../utils/utils";
 
 import "./details.css";
 
@@ -282,78 +289,169 @@ const Details = () => {
 
                     <div className="row">
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"LinkedIn"}
-                                type="text"
+                            <Form.Item
                                 name="linkedin"
-                                value={
+                                label="Linkedin"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.linkedin
                                 }
-                                onChange={(e) => handleChange(e, "linkedin")}
-                                placeholder={"Enter LinkdIn link"}
-                                required={true}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a valid linkedin url",
+                                        pattern: linkedinRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    type="text"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.linkedin
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "linkedin")
+                                    }
+                                    placeholder={"Enter LinkdIn link"}
+                                    required={true}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Twitter"}
-                                type="text"
+                            <Form.Item
                                 name="twitter"
-                                value={
+                                label="Twitter"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.twitter
                                 }
-                                onChange={(e) => handleChange(e, "twitter")}
-                                placeholder={"Enter Twitter link"}
-                            />
+                                rules={[
+                                    {
+                                        required: false,
+                                        message:
+                                            "Please enter a valid twitter url",
+                                        pattern: twitterRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Twitter"}
+                                    type="text"
+                                    // name="twitter"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.twitter
+                                    }
+                                    onChange={(e) => handleChange(e, "twitter")}
+                                    placeholder={"Enter Twitter link"}
+                                />
+                            </Form.Item>
                         </section>
 
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Angelist"}
-                                type="text"
+                            <Form.Item
                                 name="angelist"
-                                value={
+                                label="AngelList"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.angelist
                                 }
-                                onChange={(e) => handleChange(e, "angelist")}
-                                placeholder={"Enter Angelist link"}
-                            />
+                                rules={[
+                                    {
+                                        required: false,
+                                        message:
+                                            "Please enter a valid angelList url",
+                                        pattern: angelistRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Angelist"}
+                                    type="text"
+                                    // name="angelist"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.angelist
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "angelist")
+                                    }
+                                    placeholder={"Enter AngelList link"}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Crunchbase"}
-                                type="text"
+                            <Form.Item
                                 name="crunchbase"
-                                value={
+                                label="Crunchbase"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.crunchbase
                                 }
-                                onChange={(e) => handleChange(e, "crunchbase")}
-                                placeholder={"Enter Crunchbase link"}
-                            />
+                                rules={[
+                                    {
+                                        required: false,
+                                        message:
+                                            "Please enter a valid Crunchbase url",
+                                        pattern: crunchbaseRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Crunchbase"}
+                                    type="text"
+                                    // name="crunchbase"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.crunchbase
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "crunchbase")
+                                    }
+                                    placeholder={"Enter Crunchbase link"}
+                                />
+                            </Form.Item>
                         </section>
 
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Whatsapp"}
-                                type="text"
+                            <Form.Item
                                 name="whatsapp"
-                                value={
+                                label="Whatsapp"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.whatsapp
                                 }
-                                onChange={(e) => handleChange(e, "whatsapp")}
-                                placeholder={"Enter Whatsapp number"}
-                                required={true}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a valid whatsapp url",
+                                        pattern: whatsappRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Whatsapp"}
+                                    type="text"
+                                    // name="whatsapp"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.whatsapp
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "whatsapp")
+                                    }
+                                    placeholder={"Enter Whatsapp number"}
+                                    required={true}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-6 mb-4">
                             <TextField
                                 label={"Website"}
-                                type="text"
+                                type="url"
                                 name="website"
                                 value={
                                     stateAuth?.mentorData?.personalDetail
