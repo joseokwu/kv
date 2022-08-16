@@ -78,6 +78,7 @@ const Details = () => {
             toast.error("Something went wrong");
         }
         if (uploaded && buttonClicked === "Next") {
+            next();
             push("#work_experience");
         }
         setLoading(false);

@@ -2,7 +2,7 @@ import { uploadRequest, request } from "../utils/axios";
 
 export const upload = async (value) => {
     try {
-        const response = await uploadRequest.post("/v1/file/upload", value);
+        const response = await request.post("/v1/file", value);
         return response.data?.data;
     } catch (err) {
         console.log(err);

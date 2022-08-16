@@ -8,7 +8,7 @@ import { TextField, TextArea } from "../../../../Startupcomponents";
 import { Form } from "antd";
 import "./assistantInfo.css";
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
-import { useAuth } from "../../../../hooks";
+import { useAuth, useActivity } from "../../../../hooks";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
 import CountryDropdown from "country-dropdown-with-flags-for-react";
 import { RegionDropdown } from "react-country-region-selector";
@@ -23,6 +23,19 @@ const AssistantInfo = () => {
         country: stateAuth?.mentorData?.assistantInfo?.assistantCountry ?? "",
     });
 
+    const {
+        changePath,
+        state: { path },
+    } = useActivity();
+
+    const back = () => {
+        changePath(path - 1);
+    };
+
+    const next = () => {
+        changePath(path + 1);
+    };
+
     const handleSubmit = async () => {
         setLoading(true);
 
@@ -35,6 +48,7 @@ const AssistantInfo = () => {
         }
         if (uploaded) {
             push("/mentor/dashboard");
+            // next();
         }
         setLoading(false);
     };
@@ -294,6 +308,7 @@ const AssistantInfo = () => {
                     className="back-btn"
                     onClick={() => {
                         push("#consulting");
+                        back();
                     }}
                 >
                     Go Back
