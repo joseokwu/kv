@@ -84,7 +84,7 @@
   text-align: justify;
   height: 100%;
   min-height: 250px;
-  max-height: 300px;
+  max-height: 400px;
 }
 
 @media (max-width: 768px) {

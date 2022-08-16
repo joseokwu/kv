@@ -8,12 +8,17 @@ import {
 } from "../../mentorComponents";
 import down from "../../assets/icons/downArrow.svg";
 import "./schedule.css";
+import { Form, DatePicker, TimePicker } from "antd";
 import { getAllSchedule } from "./../../services/schedule";
 import { CircularLoader } from "../../components/CircluarLoader";
+import { useAuth } from "../../hooks";
+import moment from "moment";
+import { TinyModal } from "../../Startupcomponents";
 
 export const MentorSchedule = () => {
     const [schedules, setSchedule] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [openAvailabilityModal, setopenAvailabilityModal] = useState(false);
 
     const fetchData = async () => {
         setLoading(true);
@@ -36,9 +41,17 @@ export const MentorSchedule = () => {
 
     return (
         <div className="px-4 pb-5 mx-3 my-4">
-            <Modal id="addAvailabilityModal" title="Add Availability">
-                <AddAvailability />
-            </Modal>
+            {openAvailabilityModal && (
+                <TinyModal
+                    id="addAvailabilityModal"
+                    title="Add Availability"
+                    closeModal={(val) => {
+                        setopenAvailabilityModal(val);
+                    }}
+                >
+                    <AddAvailability closeModal={setopenAvailabilityModal} />
+                </TinyModal>
+            )}
 
             <Modal id="createCallScheduleModal" title="Create Call Schedule">
                 <CreateCallSchedule />
@@ -52,8 +65,7 @@ export const MentorSchedule = () => {
                     <div className="d-flex">
                         <section className="mt-2 mr-3 my_add_ava">
                             <span
-                                data-toggle="modal"
-                                data-target="#addAvailabilityModal"
+                                onClick={() => setopenAvailabilityModal(true)}
                             >
                                 Add to Availability
                             </span>
@@ -82,26 +94,82 @@ export const MentorSchedule = () => {
     );
 };
 
-const AddAvailability = () => {
+const AddAvailability = ({ closeModal }) => {
+    const onSubmit = () => {
+        closeModal();
+    };
+    const { stateAuth } = useAuth();
+
     return (
-        <div className="px-4 pb-3">
-            <TextArea
-                label={"Date"}
-                placeholder={"Thursday 17th Oct 2021"}
-                rows={1}
-            />
-            <div className="row mt-3">
-                <div className="col-lg-6">
-                    <Select label={"Start time"} placeholder={"Time"} />
+        <Form
+            name="Personal-Details"
+            initialValues={{
+                remember: true,
+            }}
+            layout="vertical"
+            onFinish={onSubmit}
+            // className="px-3"
+        >
+            <div className="pb-3">
+                {/* <TextArea
+                    label={"Date"}
+                    placeholder={"Thursday 17th Oct 2021"}
+                    rows={1}
+                /> */}
+                <Form.Item
+                    name="date"
+                    label="Date"
+                    initialValue={
+                        stateAuth?.mentorData?.workExperience?.start
+                            ? moment(
+                                  stateAuth?.mentorData?.workExperience?.start
+                              )
+                            : undefined
+                    }
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please select the date you are available",
+                        },
+                    ]}
+                >
+                    <DatePicker
+                        className="col-md-12 py-2 px-2"
+                        id="start"
+                        name="start"
+                        defaultValue={
+                            // stateAuth?.mentorData?.workExperience?.start
+                            //     ? moment(
+                            //           stateAuth?.mentorData?.workExperience
+                            //               ?.start
+                            //       )
+                            //     : undefined
+                            undefined
+                        }
+                        format={"YYYY-MM-DD"}
+                        onChange={(_, dateString) => {
+                            console.log(dateString);
+                            // updateMentorProfileState("workExperience", {
+                            //     start: new Date(dateString).toISOString(),
+                            // });
+                            return dateString;
+                        }}
+                        handleDateInput
+                    />
+                </Form.Item>
+                <div className="row mt-3">
+                    <div className="col-lg-6">
+                        <Select label={"Start time"} placeholder={"Time"} />
+                    </div>
+                    <div className="col-lg-6">
+                        <Select label={"End time"} placeholder={"Time"} />
+                    </div>
                 </div>
-                <div className="col-lg-6">
-                    <Select label={"End time"} placeholder={"Time"} />
+                <div className="text-right mt-4">
+                    <Button variant={`btn_main btn_secondary`} label={"Add"} />
                 </div>
             </div>
-            <div className="text-right mt-4">
-                <Button variant={`btn_main btn_secondary`} label={"Add"} />
-            </div>
-        </div>
+        </Form>
     );
 };
 
