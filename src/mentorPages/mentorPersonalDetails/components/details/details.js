@@ -303,7 +303,7 @@ const Details = () => {
                                     stateAuth?.mentorData?.personalDetail
                                         ?.twitter
                                 }
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChange(e, "twitter")}
                                 placeholder={"Enter Twitter link"}
                             />
                         </section>
@@ -317,7 +317,7 @@ const Details = () => {
                                     stateAuth?.mentorData?.personalDetail
                                         ?.angelist
                                 }
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChange(e, "angelist")}
                                 placeholder={"Enter Angelist link"}
                             />
                         </section>
@@ -330,7 +330,7 @@ const Details = () => {
                                     stateAuth?.mentorData?.personalDetail
                                         ?.crunchbase
                                 }
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChange(e, "crunchbase")}
                                 placeholder={"Enter Crunchbase link"}
                             />
                         </section>
@@ -358,7 +358,7 @@ const Details = () => {
                                     stateAuth?.mentorData?.personalDetail
                                         ?.website
                                 }
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChange(e, "website")}
                                 placeholder={"Enter Webiste link"}
                                 // wid
                             />
