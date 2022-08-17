@@ -60,7 +60,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
-  padding: 20px;
+  padding: 2rem;
   border-radius: 8px;
   z-index: 999;
   overflow-x: hidden;
@@ -84,7 +84,7 @@
   text-align: justify;
   height: 100%;
   min-height: 250px;
-  max-height: 300px;
+  max-height: 400px;
 }
 
 @media (max-width: 768px) {

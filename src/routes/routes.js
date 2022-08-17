@@ -452,7 +452,7 @@ const routes = [
     {
         name: "Investor Contact us",
         path: "/investor/support",
-        component: WithMainInvestorLayout(InvestorContactUs),
+        component: WithMainInvestorLayout(StartupContactUs),
         exact: true,
         protected: true,
         type: "investor",
@@ -461,7 +461,7 @@ const routes = [
     {
         name: "Booster Contact us",
         path: "/booster/support",
-        component: WithMainInvestorLayout(InvestorContactUs),
+        component: WithMainInvestorLayout(StartupContactUs),
         exact: true,
         protected: true,
         type: "investor",
@@ -761,7 +761,7 @@ const routes = [
     {
         name: "ContactUS",
         path: "/mentor/support",
-        component: WithMentorMainLayout(MentorContactUs),
+        component: WithMentorSecLayout(StartupContactUs),
         exact: true,
         protected: true,
         type: "mentor",

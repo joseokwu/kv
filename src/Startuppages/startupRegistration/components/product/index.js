@@ -211,14 +211,10 @@ export const Product = () => {
                                         }
                                         onUpload={async (filesInfo) => {
                                             const formData = new FormData();
-                                            formData.append("dir", "kv");
-                                            formData.append(
-                                                "ref",
-                                                stateAuth.user?.userId
-                                            );
+
                                             formData.append("type", "video");
                                             formData.append(
-                                                0,
+                                                "file",
                                                 filesInfo[0]?.file
                                             );
                                             const response = await upload(
@@ -228,6 +224,10 @@ export const Product = () => {
                                             updateProfile("product", {
                                                 files: response?.path,
                                             });
+
+                                            if (!response?.path) return [];
+
+                                            return [response?.path];
                                         }}
                                     />
                                 </div>

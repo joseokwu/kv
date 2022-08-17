@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import CountryDropdown from "country-dropdown-with-flags-for-react";
+// import CountryDropdown from "country-dropdown-with-flags-for-react";
 import toast from "react-hot-toast";
 import { css } from "styled-components//macro";
 import imageRep from "../../../../assets/icons/mentorDetails.svg";
@@ -12,6 +12,15 @@ import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/Circ
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
 import { useAuth } from "../../../../hooks/useAuth";
 import { upload } from "../../../../services/utils";
+import {
+    whatsappRegExp,
+    linkedinRegExp,
+    crunchbaseRegExp,
+    twitterRegExp,
+    angelistRegExp,
+    skypeRegExp,
+    googlemeetRegExp,
+} from "../../../../utils/utils";
 
 import "./details.css";
 
@@ -19,7 +28,7 @@ import "./details.css";
 import { useActivity } from "../../../../hooks/useBusiness";
 import { updateMentorProfile } from "../../../../services/mentor";
 import { hearOption } from "../../../../utils/utils";
-import { RegionDropdown } from "react-country-region-selector";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 // import { toast } from "react-toastify";
 const { Option } = Select;
@@ -46,9 +55,10 @@ const Details = () => {
     const [phone, setPhone] = useState(
         stateAuth?.mentorData?.personalDetail?.contactInfo?.mobilenumber ?? ""
     );
-    const [contacts, setContacts] = useState({
-        country: stateAuth?.mentorData?.personalDetail?.country ?? "",
-    });
+    const [country, setCountry] = useState(
+        stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
+            ?.country ?? ""
+    );
 
     useEffect(() => {
         if (stateAuth?.mentorData?.personalDetail?.mobilenumber.length <= 4)
@@ -78,6 +88,7 @@ const Details = () => {
             toast.error("Something went wrong");
         }
         if (uploaded && buttonClicked === "Next") {
+            next();
             push("#work_experience");
         }
         setLoading(false);
@@ -104,26 +115,37 @@ const Details = () => {
 
     const onChangeImage = async (e) => {
         const { files } = e.target;
+        const file = files[0];
         const formData = new FormData();
-        formData.append("dir", "kv");
-        formData.append("ref", stateAuth.user?.userId);
         formData.append("type", "image");
-        formData.append(0, files[0]);
+        formData.append("file", file);
+
+        console.log(formData.get("file"));
+        setLogoUploading(true);
         try {
-            setLogoUploading(true);
             const response = await upload(formData);
             setLogo(response?.path);
             updateMentorProfileState("personalDetail", {
                 logo: response?.path,
             });
-            setLogoUploading(false);
         } catch (error) {
-            setLogoUploading(false);
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
             );
         }
+        setLogoUploading(false);
     };
+
+    // useEffect(() => {
+    //     handleChange(
+    //         {
+    //             target: {
+    //                 value: "",
+    //             },
+    //         },
+    //         "logo"
+    //     );
+    // }, []);
 
     return (
         <div className="mentor_details_form_wrap">
@@ -227,6 +249,10 @@ const Details = () => {
                                         width: 200,
                                         backgroundColor: "#f8f8f8",
                                     }}
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.gender
+                                    }
                                     onChange={(e) => {
                                         handleChange(
                                             { target: { value: e } },
@@ -281,78 +307,169 @@ const Details = () => {
 
                     <div className="row">
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"LinkedIn"}
-                                type="text"
+                            <Form.Item
                                 name="linkedin"
-                                value={
+                                label="Linkedin"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.linkedin
                                 }
-                                onChange={(e) => handleChange(e, "linkedin")}
-                                placeholder={"Enter LinkdIn link"}
-                                required={true}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a valid linkedin url",
+                                        pattern: linkedinRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    type="text"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.linkedin
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "linkedin")
+                                    }
+                                    placeholder={"Enter LinkdIn link"}
+                                    required={true}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Twitter"}
-                                type="text"
+                            <Form.Item
                                 name="twitter"
-                                value={
+                                label="Twitter"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.twitter
                                 }
-                                onChange={(e) => handleChange(e, "twitter")}
-                                placeholder={"Enter Twitter link"}
-                            />
+                                rules={[
+                                    {
+                                        required: false,
+                                        message:
+                                            "Please enter a valid twitter url",
+                                        pattern: twitterRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Twitter"}
+                                    type="text"
+                                    // name="twitter"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.twitter
+                                    }
+                                    onChange={(e) => handleChange(e, "twitter")}
+                                    placeholder={"Enter Twitter link"}
+                                />
+                            </Form.Item>
                         </section>
 
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Angelist"}
-                                type="text"
+                            <Form.Item
                                 name="angelist"
-                                value={
+                                label="AngelList"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.angelist
                                 }
-                                onChange={(e) => handleChange(e, "angelist")}
-                                placeholder={"Enter Angelist link"}
-                            />
+                                rules={[
+                                    {
+                                        required: false,
+                                        message:
+                                            "Please enter a valid angelList url",
+                                        pattern: angelistRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Angelist"}
+                                    type="text"
+                                    // name="angelist"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.angelist
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "angelist")
+                                    }
+                                    placeholder={"Enter AngelList link"}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Crunchbase"}
-                                type="text"
+                            <Form.Item
                                 name="crunchbase"
-                                value={
+                                label="Crunchbase"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.crunchbase
                                 }
-                                onChange={(e) => handleChange(e, "crunchbase")}
-                                placeholder={"Enter Crunchbase link"}
-                            />
+                                rules={[
+                                    {
+                                        required: false,
+                                        message:
+                                            "Please enter a valid Crunchbase url",
+                                        pattern: crunchbaseRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Crunchbase"}
+                                    type="text"
+                                    // name="crunchbase"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.crunchbase
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "crunchbase")
+                                    }
+                                    placeholder={"Enter Crunchbase link"}
+                                />
+                            </Form.Item>
                         </section>
 
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Whatsapp"}
-                                type="text"
+                            <Form.Item
                                 name="whatsapp"
-                                value={
+                                label="Whatsapp"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.whatsapp
                                 }
-                                onChange={(e) => handleChange(e, "whatsapp")}
-                                placeholder={"Enter Whatsapp number"}
-                                required={true}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a valid whatsapp url",
+                                        pattern: whatsappRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Whatsapp"}
+                                    type="text"
+                                    // name="whatsapp"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.whatsapp
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "whatsapp")
+                                    }
+                                    placeholder={"Enter Whatsapp number"}
+                                    required={true}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-6 mb-4">
                             <TextField
                                 label={"Website"}
-                                type="text"
+                                type="url"
                                 name="website"
                                 value={
                                     stateAuth?.mentorData?.personalDetail
@@ -373,34 +490,70 @@ const Details = () => {
 
                     <div className="row">
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Skype Id"}
-                                type="text"
+                            <Form.Item
                                 name="skypeid"
-                                id="skypeid"
-                                value={
+                                label="Skype Id"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.skypeid
                                 }
-                                onChange={(e) => handleChange(e, "skypeid")}
-                                placeholder={"www.knightventure/michealsmith"}
-                                required={true}
-                            />
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please enter a valid skype id",
+                                        pattern: skypeRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Skype Id"}
+                                    type="text"
+                                    // name="skypeid"
+                                    id="skypeid"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.skypeid
+                                    }
+                                    onChange={(e) => handleChange(e, "skypeid")}
+                                    placeholder={"live:myusername"}
+                                    // required={true}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-6 mb-4">
-                            <TextField
-                                label={"Google Meet"}
-                                type="text"
+                            <Form.Item
                                 name="googlemeet"
-                                id="googlemeet"
-                                value={
+                                label="Google Meet"
+                                initialValue={
                                     stateAuth?.mentorData?.personalDetail
                                         ?.googlemeet
                                 }
-                                onChange={(e) => handleChange(e, "googlemeet")}
-                                placeholder={"Enter Google Meet Link"}
-                                required={true}
-                            />
+                                rules={[
+                                    {
+                                        required: false,
+                                        message:
+                                            "Please enter a valid google meet link",
+                                        pattern: googlemeetRegExp,
+                                    },
+                                ]}
+                            >
+                                <TextField
+                                    // label={"Google Meet"}
+                                    type="text"
+                                    // name="googlemeet"
+                                    id="googlemeet"
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.googlemeet
+                                    }
+                                    onChange={(e) =>
+                                        handleChange(e, "googlemeet")
+                                    }
+                                    placeholder={"Enter Google Meet Link"}
+                                    // required={true}
+                                />
+                            </Form.Item>
                         </section>
                         <section className="col-md-4 mb-4">
                             <Form.Item
@@ -422,21 +575,20 @@ const Details = () => {
                                     type="text"
                                     name="country"
                                     className="form-control px-5 py-1 country-bg"
-                                    preferredCountries={["ng"]}
-                                    value={contacts.country}
-                                    handleChange={(e) => {
-                                        setContacts({
-                                            ...contacts,
-                                            country: e.target.value,
-                                        });
-                                        handleChange({
-                                            target: {
-                                                name: "country",
-                                                value: e.target.value,
+                                    // preferredCountries={["ng"]}
+                                    value={country}
+                                    onChange={(value) => {
+                                        handleChange(
+                                            {
+                                                target: {
+                                                    value: value,
+                                                },
                                             },
-                                        });
+                                            "country"
+                                        );
+                                        setCountry(value);
                                     }}
-                                ></CountryDropdown>
+                                />
                             </Form.Item>
                         </section>
                         <section className="col-md-4 mb-4">
@@ -465,9 +617,12 @@ const Details = () => {
                                             ?.state
                                     }
                                     onChange={(e) =>
-                                        handleChange({
-                                            target: { name: "state", value: e },
-                                        })
+                                        handleChange(
+                                            {
+                                                target: { value: e },
+                                            },
+                                            "state"
+                                        )
                                     }
                                     className="form-control ps-3"
                                 />
@@ -482,7 +637,7 @@ const Details = () => {
                                 value={
                                     stateAuth?.mentorData?.personalDetail?.city
                                 }
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChange(e, "city")}
                                 placeholder={"Enter your city"}
                                 // required={true}
                             />
@@ -570,7 +725,7 @@ const Details = () => {
                                     stateAuth?.mentorData?.personalDetail
                                         ?.referral
                                 }
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChange(e, "referral")}
                                 label={"Knight Ventures Referral"}
                                 placeholder={"Select a user in knight ventures"}
                                 rows={"1"}

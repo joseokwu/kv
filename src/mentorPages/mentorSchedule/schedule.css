@@ -55,8 +55,8 @@
   font-family: DM Sans;
   font-size: 16px;
   line-height: 20px;
-  color: #2e3192;
-  text-decoration: underline;
+  /* color: #2e3192; */
+  /* text-decoration: underline; */
   cursor: pointer;
 
 }

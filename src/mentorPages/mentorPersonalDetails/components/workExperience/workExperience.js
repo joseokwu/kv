@@ -60,6 +60,7 @@ const WorkExperience = () => {
 
         if (uploaded && buttonClicked === "Next") {
             push("#area_of_interest");
+            next();
         }
         setLoading(false);
     };
@@ -320,7 +321,7 @@ const WorkExperience = () => {
                                         }
                                         rules={[
                                             {
-                                                required: true,
+                                                required: false,
                                                 message:
                                                     "Please select the date you left",
                                             },
@@ -469,6 +470,7 @@ const WorkExperience = () => {
                         onClick={() => {
                             updateMentorProfileState("workExperience", [data]);
                             push("#personal_details");
+                            back();
                         }}
                     >
                         Go Back

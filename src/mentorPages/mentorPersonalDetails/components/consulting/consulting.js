@@ -10,7 +10,7 @@ import imageRep from "../../../../assets/icons/circleTimes.svg";
 import searchSm from "../../../../assets/icons/searchSm.svg";
 import "./consulting.css";
 import { SkillTab } from "../../../../Startupcomponents";
-import { useAuth } from "../../../../hooks";
+import { useAuth, useActivity } from "../../../../hooks";
 
 const Consulting = () => {
     const { goBack, push } = useHistory();
@@ -19,6 +19,11 @@ const Consulting = () => {
     const [inVal, setVal] = useState("");
     const [loading, setLoading] = useState(false);
     const [buttonClicked, setButtonClicked] = useState("Save");
+
+    const {
+        changePath,
+        state: { path },
+    } = useActivity();
 
     const handleChangeVal = (e) => {
         setVal(e.target.value);
@@ -53,6 +58,14 @@ const Consulting = () => {
         });
     };
 
+    const back = () => {
+        changePath(path - 1);
+    };
+
+    const next = () => {
+        changePath(path + 1);
+    };
+
     const handleSubmit = async () => {
         setLoading(true);
 
@@ -65,6 +78,7 @@ const Consulting = () => {
         }
         if (uploaded && buttonClicked === "Next") {
             push("#assistant_info");
+            next();
         }
         setLoading(false);
     };
@@ -193,6 +207,7 @@ const Consulting = () => {
                     className="back-btn"
                     onClick={() => {
                         push("#area_of_interest");
+                        back();
                     }}
                 >
                     Go Back

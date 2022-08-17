@@ -270,22 +270,33 @@ export const SignUp = ({ history }) => {
                         </div>
 
                         <div className="numsign col-12 mb-4">
-                            <label style={{ color: "#D5D6F4" }}>
-                                <span style={{ color: "#ff4d4f" }}>* </span>
-                                Mobile Number
-                            </label>
-
-                            <PhoneInput
-                                id="phoneNumber"
-                                placeholder={"+234 000 0000 000"}
-                                name="phone"
-                                international
-                                countryCallingCodeEditable={true}
-                                className="signup_num ps-3"
-                                value={phone}
-                                onChange={(value) => changePhone(value)}
-                                maxLength={17}
-                            />
+                            <Form.Item
+                                name="phoneNumber"
+                                label={
+                                    <span style={{ color: "#d5d6f4" }}>
+                                        Mobile Number
+                                    </span>
+                                }
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please enter a mobile number",
+                                    },
+                                ]}
+                                style={{ color: "#fff" }}
+                            >
+                                <PhoneInput
+                                    id="phoneNumber"
+                                    placeholder={"+234 000 0000 000"}
+                                    name="phone"
+                                    international
+                                    countryCallingCodeEditable={true}
+                                    className="signup_num ps-3"
+                                    value={phone}
+                                    onChange={(value) => changePhone(value)}
+                                    maxLength={17}
+                                />
+                            </Form.Item>
                         </div>
 
                         <div className="col-12 mb-4">

@@ -164,39 +164,47 @@ export const CapTable = ({ setFundraising }) => {
                                 }}
                                 initData={
                                     stateAuth?.startupData?.fundRaising
-                                        ?.capTable?.files?.length > 0
+                                        ?.capTable?.file
                                         ? [
                                               stateAuth?.startupData
-                                                  ?.fundRaising?.capTable
-                                                  ?.files,
+                                                  ?.fundRaising?.capTable?.file,
                                           ]
                                         : []
                                 }
                                 onUpload={async (filesInfo) => {
                                     const file = filesInfo[0].file;
-                                    const fileData = await parseFile(file);
-                                    const workbook = XLSX.read(fileData, {
-                                        type: "binary",
+                                    // const fileData = await parseFile(file);
+                                    // const workbook = XLSX.read(fileData, {
+                                    //     type: "binary",
+                                    // });
+                                    // const sheetName = workbook.SheetNames[0];
+                                    // const worksheet =
+                                    //     workbook.Sheets[sheetName];
+                                    // const data = XLSX.utils.sheet_to_json(
+                                    //     worksheet,
+                                    //     {
+                                    //         raw: false,
+                                    //     }
+                                    // );
+
+                                    const formData = new FormData();
+
+                                    formData.append("type", "video");
+                                    formData.append("file", filesInfo[0]?.file);
+                                    const response = await upload(formData);
+
+                                    updateProfile("fundRaising", {
+                                        capTable: {
+                                            ...stateAuth?.startupData
+                                                ?.fundRaising?.capTable,
+                                            file: response?.path,
+                                        },
                                     });
-                                    const sheetName = workbook.SheetNames[0];
-                                    const worksheet =
-                                        workbook.Sheets[sheetName];
-                                    const data = XLSX.utils.sheet_to_json(
-                                        worksheet,
-                                        {
-                                            raw: false,
-                                        }
-                                    );
-                                    if (Array.isArray(data)) {
-                                        updateProfile("fundRaising", {
-                                            capTable: {
-                                                ...stateAuth?.startupData
-                                                    ?.fundRaising?.capTable,
-                                                files: data,
-                                            },
-                                        });
-                                        setFileDoc(data);
-                                    }
+                                    // setFileDoc(data);
+
+                                    if (!response?.path) return [];
+
+                                    return [response?.path];
                                 }}
                             />
                             {/* <FileWrapper className='d-flex justify-content-center text-center mx-n4 mx-lg-n0'>

@@ -14,6 +14,7 @@ import { sectors, kvRoles, founderType } from "../../../../utils/utils";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
 import { TextField } from "../../../../Startupcomponents";
 import { TextArea } from "../../../../Startupcomponents";
+import { useActivity } from "../../../../hooks";
 
 const { Option } = Select;
 
@@ -22,12 +23,25 @@ const Interest = () => {
 
     const { stateAuth, updateMentorProfileState, updateMentorInfo } = useAuth();
 
+    const {
+        changePath,
+        state: { path },
+    } = useActivity();
+
     const [inVal, setVal] = useState("");
     const [loading, setLoading] = useState(false);
     const [buttonClicked, setButtonClicked] = useState("Save");
 
     const handleChangeVal = (e) => {
         setVal(e.target.value);
+    };
+
+    const back = () => {
+        changePath(path - 1);
+    };
+
+    const next = () => {
+        changePath(path + 1);
     };
 
     console.log(stateAuth?.mentorData?.areaOfInterest);
@@ -68,6 +82,7 @@ const Interest = () => {
         }
         if (uploaded && buttonClicked === "Next") {
             push("#consulting");
+            next();
         }
         setLoading(false);
     };
@@ -476,6 +491,7 @@ const Interest = () => {
                     type="button"
                     onClick={() => {
                         push("#work_experience");
+                        back();
                     }}
                 >
                     Go Back

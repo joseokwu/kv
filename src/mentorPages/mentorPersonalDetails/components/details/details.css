@@ -8,7 +8,7 @@
   margin-bottom: 50px;
 }
 
-.mentor_details_form_wrap > h3 {
+.mentor_details_form_wrap>h3 {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
@@ -18,7 +18,7 @@
   color: #000000;
 }
 
-.mentor_details_form_wrap > p {
+.mentor_details_form_wrap>p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
@@ -26,6 +26,10 @@
   line-height: 21px;
   color: #828282;
   margin-bottom: 44px;
+}
+
+#mobilenumber {
+  color: #212529 !important;
 }
 
 .personal_info {

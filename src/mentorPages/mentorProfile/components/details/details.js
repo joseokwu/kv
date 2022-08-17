@@ -19,6 +19,7 @@ import location from "../../../../assets/icons/locationSm.svg";
 import web from "../../../../assets/icons/webSm.svg";
 import "./details.css";
 import { useAuth } from "../../../../hooks";
+import { AvatarWrapper } from "../../../../components";
 
 const Details = ({ data }) => {
     console.log(data);
@@ -41,10 +42,19 @@ const Details = ({ data }) => {
                     />
                 </span>
                 <span className="profile-image">
-                    <img
-                        src={data?.logo !== "" ? data?.logo : mentorPic}
-                        alt={"mentor profile pic"}
-                    />
+                    <AvatarWrapper
+                        condition={data?.logo}
+                        initials={`${data?.firstname?.slice(
+                            0,
+                            1
+                        )}${data?.lastname?.slice(0, 1)}`}
+                        size={213}
+                    >
+                        <img
+                            src={data?.logo !== "" ? data?.logo : ""}
+                            alt={"mentor profile pic"}
+                        />
+                    </AvatarWrapper>
                 </span>
 
                 <article>

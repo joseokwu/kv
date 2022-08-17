@@ -63,7 +63,7 @@ export const StartupSideBar = () => {
     );
 };
 
-export const MentorSideBar = ({ routes }) => {
+export const MentorSideBar = () => {
     const {
         state: { path },
         changePath,
