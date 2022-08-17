@@ -86,7 +86,9 @@ export const OppCompanyInfo = ({ data }) => {
             </section>
             <section className="mt-2">
                 <p className="mb-4 text-black"> {data?.industry ?? ""} </p>
-                <p className="mb-2">{startUpProfile?.elevatorPitch || "-"}</p>
+                <p className="mb-2" style={{ wordWrap: "break-word" }}>
+                    {startUpProfile?.elevatorPitch || "-"}
+                </p>
             </section>
         </section>
     );

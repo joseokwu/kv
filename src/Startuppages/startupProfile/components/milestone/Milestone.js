@@ -27,6 +27,7 @@ export const Milestone = ({ data = [] }) => {
             ) : (
                 <span></span>
             )}
+            <h3 className="tab-section-title">Milestone/timeline</h3>
             <section className="d-flex justify-content-end">
                 <button
                     className="teamBtn"

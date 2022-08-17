@@ -103,25 +103,23 @@ export const TeamProfile = () => {
     const onChangeImage = async (e) => {
         const { files } = e.target;
         const formData = new FormData();
-        formData.append("dir", "kv");
-        formData.append("ref", stateAuth.user?.userId);
+
         formData.append("type", "image");
-        formData.append(0, files[0]);
+        formData.append("file", files[0]);
+
+        setLogoUploading(true);
         try {
-            console.log("uploaded");
-            setLogoUploading(true);
             const response = await upload(formData);
             console.log(response);
             updateProfile("team", { avatar: response?.path });
             setAvatar(response?.path);
-            setLogoUploading(false);
         } catch (error) {
             console.log(error);
-            setLogoUploading(false);
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
             );
         }
+        setLogoUploading(false);
     };
 
     console.log(stateAuth);
@@ -612,7 +610,7 @@ export const TeamProfile = () => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: "Please select a Company Size",
+                                        message: "Please select your gender",
                                     },
                                 ]}
                             >

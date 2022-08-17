@@ -35,6 +35,7 @@ export const PitchDeck = ({ data }) => {
             ) : (
                 <span></span>
             )}
+            <h3 className="tab-section-title">Pitch Deck</h3>
             <section className="row pt-3">
                 {data &&
                     Object.values(data).map((item, i) => {

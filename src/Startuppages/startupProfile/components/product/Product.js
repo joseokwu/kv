@@ -43,6 +43,7 @@ export const Product = () => {
             ) : (
                 <span></span>
             )}
+            <h3 className="tab-section-title">Product</h3>
             <section
                 className="d-flex justify-content-end"
                 data-target="#editProductModal"
@@ -53,13 +54,14 @@ export const Product = () => {
             <div className="row">
                 <section className="col-xl-12">
                     <div className="product-wrap">
-                        {stateAuth?.startupData?.product?.description ? (
+                        {stateAuth?.profileData?.startupRes?.product
+                            ?.description ? (
                             <div className="wrap mb-5 py-5 px-5">
                                 <h3>Product Description</h3>
                                 <p className="mb-5 prod-desc">
                                     {
-                                        stateAuth?.startupData?.product
-                                            ?.description
+                                        stateAuth?.profileData?.startupRes
+                                            ?.product?.description
                                     }
                                 </p>
                             </div>
@@ -67,26 +69,22 @@ export const Product = () => {
                             <EmptyState message="Product description not set" />
                         )}
 
-                        {stateAuth?.startupData?.product?.files ||
-                        stateAuth?.startupData?.product?.youtubeDemoUrl ? (
+                        {stateAuth?.profileData?.startupRes?.product?.files ||
+                        stateAuth?.profileData?.startupRes?.product
+                            ?.youtubeDemoUrl ? (
                             <>
                                 <h3>Product Demo</h3>
 
-                                {stateAuth?.startupData?.product?.files && (
+                                {stateAuth?.profileData?.startupRes?.product
+                                    ?.files && (
                                     <video
-                                        style={{
-                                            borderRadius: "20px",
-                                            maxHeight: "150px",
-                                            width: "250px",
-                                            marginLeft: "15px",
-                                        }}
-                                        className="mb-3"
+                                        className="mb-3 product-vid"
                                         controls
                                     >
                                         <source
                                             src={
-                                                stateAuth?.startupData?.product
-                                                    ?.files
+                                                stateAuth?.profileData
+                                                    ?.startupRes?.product?.files
                                             }
                                             id="video_here"
                                         />
@@ -94,10 +92,10 @@ export const Product = () => {
                                         video.
                                     </video>
                                 )}
-                                {stateAuth?.startupData?.product
+                                {stateAuth?.profileData?.startupRes?.product
                                     ?.youtubeDemoUrl && (
                                     <iframe
-                                        src={`https://www.youtube.com/embed/${stateAuth?.startupData?.product?.youtubeDemoUrl.replace(
+                                        src={`https://www.youtube.com/embed/${stateAuth?.profileData?.startupRes?.product?.youtubeDemoUrl.replace(
                                             "https://youtu.be/",
                                             ""
                                         )}`}
@@ -128,7 +126,7 @@ const EditProductModal = ({ data, close }) => {
     const { stateAuth, updateStartupInfo, updateProfile } = useAuth();
     const [youtube, setYoutube] = useState("");
     const [urls, setUrls] = useState(
-        stateAuth?.startupData?.product?.youtubeDemoUrl ?? ""
+        stateAuth?.profileData?.startupRes?.product?.youtubeDemoUrl ?? ""
     );
     const onSubmit = async () => {
         updateStartupInfo();
@@ -173,7 +171,10 @@ const EditProductModal = ({ data, close }) => {
                 <div className="row my-4 d-flex justify-content-between">
                     <TextareaCustom
                         name={"description"}
-                        value={stateAuth?.startupData?.product?.description}
+                        value={
+                            stateAuth?.profileData?.startupRes?.product
+                                ?.description
+                        }
                         onChange={(e) => handleFullChange(e, "description")}
                         onKeyPress={letterOnly}
                         placeholder={"Enter Brief info about your product"}
@@ -209,10 +210,11 @@ const EditProductModal = ({ data, close }) => {
                                     extension: "MB",
                                 }}
                                 initData={
-                                    stateAuth?.startupData?.product?.files
+                                    stateAuth?.profileData?.startupRes?.product
+                                        ?.files
                                         ? [
-                                              stateAuth.startupData?.product
-                                                  ?.files,
+                                              stateAuth.profileData?.startupRes
+                                                  ?.product?.files,
                                           ]
                                         : []
                                 }
