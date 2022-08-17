@@ -179,6 +179,7 @@ const TeamMember = ({ data, modalData, showCofounder, setCofounder }) => {
 };
 
 const FounderModal = ({ data }) => {
+    console.log(data);
     return (
         <section className="container dashboard_profle mt-4">
             <div className="row founder_profile">
@@ -212,9 +213,31 @@ const FounderModal = ({ data }) => {
                             <p> {data?.position ?? "Founder"} </p>
                         </div>
                         <div className="">
-                            <img src={linkedIn} alt="linkedIn" />
-                            <img className="px-3" src={twitter} alt="twitter" />
-                            <img src={whatsApp} alt="whatsApp" />
+                            <a
+                                href={data?.socialMedia?.linkedIn}
+                                target="_blank"
+                                className="icon"
+                            >
+                                <img src={linkedIn} alt="linkedIn" />
+                            </a>
+                            <a
+                                href={data?.socialMedia?.twitter}
+                                target="_blank"
+                                className="icon"
+                            >
+                                <img
+                                    className="px-3"
+                                    src={twitter}
+                                    alt="twitter"
+                                />
+                            </a>
+                            <a
+                                href={data?.socialMedia?.whatsApp}
+                                target="_blank"
+                                className="icon"
+                            >
+                                <img src={whatsApp} alt="whatsApp" />
+                            </a>
                         </div>
                     </div>
 
@@ -306,7 +329,7 @@ const FounderModal = ({ data }) => {
                                 ))}
                             </div>
 
-                            <section className="col-lg mt-4 mb-5">
+                            <section className="p-4 col-lg mt-4 mb-5">
                                 <h3 className="pb-3">Skills</h3>
                                 <span
                                     className="d-flex align-items-center flex-wrap"

@@ -61,6 +61,7 @@ export const BusinessCanavas = () => {
     return (
         <div>
             <Header className="mb-4">
+                <h3 className="tab-section-title">Business Canvas</h3>
                 {/* <h3>Create Business Canvas</h3> */}
                 <section className="d-flex justify-content-end">
                     <button className="teamBtn" onClick={() => setClose(true)}>
