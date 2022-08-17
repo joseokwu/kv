@@ -321,7 +321,7 @@ const WorkExperience = () => {
                                         }
                                         rules={[
                                             {
-                                                required: true,
+                                                required: false,
                                                 message:
                                                     "Please select the date you left",
                                             },

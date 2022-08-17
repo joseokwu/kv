@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import CountryDropdown from "country-dropdown-with-flags-for-react";
+// import CountryDropdown from "country-dropdown-with-flags-for-react";
 import toast from "react-hot-toast";
 import { css } from "styled-components//macro";
 import imageRep from "../../../../assets/icons/mentorDetails.svg";
@@ -28,7 +28,7 @@ import "./details.css";
 import { useActivity } from "../../../../hooks/useBusiness";
 import { updateMentorProfile } from "../../../../services/mentor";
 import { hearOption } from "../../../../utils/utils";
-import { RegionDropdown } from "react-country-region-selector";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 // import { toast } from "react-toastify";
 const { Option } = Select;
@@ -55,9 +55,10 @@ const Details = () => {
     const [phone, setPhone] = useState(
         stateAuth?.mentorData?.personalDetail?.contactInfo?.mobilenumber ?? ""
     );
-    const [contacts, setContacts] = useState({
-        country: stateAuth?.mentorData?.personalDetail?.country ?? "",
-    });
+    const [country, setCountry] = useState(
+        stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
+            ?.country ?? ""
+    );
 
     useEffect(() => {
         if (stateAuth?.mentorData?.personalDetail?.mobilenumber.length <= 4)
@@ -134,6 +135,17 @@ const Details = () => {
         }
         setLogoUploading(false);
     };
+
+    // useEffect(() => {
+    //     handleChange(
+    //         {
+    //             target: {
+    //                 value: "",
+    //             },
+    //         },
+    //         "logo"
+    //     );
+    // }, []);
 
     return (
         <div className="mentor_details_form_wrap">
@@ -237,6 +249,10 @@ const Details = () => {
                                         width: 200,
                                         backgroundColor: "#f8f8f8",
                                     }}
+                                    value={
+                                        stateAuth?.mentorData?.personalDetail
+                                            ?.gender
+                                    }
                                     onChange={(e) => {
                                         handleChange(
                                             { target: { value: e } },
@@ -515,7 +531,7 @@ const Details = () => {
                                 }
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                         message:
                                             "Please enter a valid google meet link",
                                         pattern: googlemeetRegExp,
@@ -559,21 +575,20 @@ const Details = () => {
                                     type="text"
                                     name="country"
                                     className="form-control px-5 py-1 country-bg"
-                                    preferredCountries={["ng"]}
-                                    value={contacts.country}
-                                    handleChange={(e) => {
-                                        setContacts({
-                                            ...contacts,
-                                            country: e.target.value,
-                                        });
-                                        handleChange({
-                                            target: {
-                                                name: "country",
-                                                value: e.target.value,
+                                    // preferredCountries={["ng"]}
+                                    value={country}
+                                    onChange={(value) => {
+                                        handleChange(
+                                            {
+                                                target: {
+                                                    value: value,
+                                                },
                                             },
-                                        });
+                                            "country"
+                                        );
+                                        setCountry(value);
                                     }}
-                                ></CountryDropdown>
+                                />
                             </Form.Item>
                         </section>
                         <section className="col-md-4 mb-4">
@@ -602,9 +617,12 @@ const Details = () => {
                                             ?.state
                                     }
                                     onChange={(e) =>
-                                        handleChange({
-                                            target: { name: "state", value: e },
-                                        })
+                                        handleChange(
+                                            {
+                                                target: { value: e },
+                                            },
+                                            "state"
+                                        )
                                     }
                                     className="form-control ps-3"
                                 />
@@ -619,7 +637,7 @@ const Details = () => {
                                 value={
                                     stateAuth?.mentorData?.personalDetail?.city
                                 }
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChange(e, "city")}
                                 placeholder={"Enter your city"}
                                 // required={true}
                             />
@@ -707,7 +725,7 @@ const Details = () => {
                                     stateAuth?.mentorData?.personalDetail
                                         ?.referral
                                 }
-                                onChange={(e) => handleChange(e)}
+                                onChange={(e) => handleChange(e, "referral")}
                                 label={"Knight Ventures Referral"}
                                 placeholder={"Select a user in knight ventures"}
                                 rows={"1"}

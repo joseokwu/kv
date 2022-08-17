@@ -10,8 +10,7 @@ import "./assistantInfo.css";
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
 import { useAuth, useActivity } from "../../../../hooks";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
-import CountryDropdown from "country-dropdown-with-flags-for-react";
-import { RegionDropdown } from "react-country-region-selector";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 const AssistantInfo = () => {
     const { goBack, push } = useHistory();
@@ -19,9 +18,9 @@ const AssistantInfo = () => {
     const [loading, setLoading] = useState(false);
     const { stateAuth, updateMentorProfileState, updateMentorInfo } = useAuth();
 
-    const [country, setCountry] = useState({
-        country: stateAuth?.mentorData?.assistantInfo?.assistantCountry ?? "",
-    });
+    const [country, setCountry] = useState(
+        stateAuth?.mentorData?.assistantInfo?.assistantCountry ?? ""
+    );
 
     const {
         changePath,
@@ -53,57 +52,57 @@ const AssistantInfo = () => {
         setLoading(false);
     };
 
-    const formik = useFormik({
-        enableReinitialize: true,
-        initialValues: {
-            assistantFirstname:
-                stateAuth?.mentorData?.assistantInfo?.assistantFirstname ?? "",
-            assistantLastname:
-                stateAuth?.mentorData?.assistantInfo?.assistantLastname ?? "",
-            assistantEmail:
-                stateAuth?.mentorData?.assistantInfo?.assistantEmail ?? "",
-            assistantPhone:
-                stateAuth?.mentorData?.assistantInfo?.assistantPhone ?? "",
-            assistantAddress:
-                stateAuth?.mentorData?.assistantInfo?.assistantAddress ?? "",
-            assistantCountry:
-                stateAuth?.mentorData?.assistantInfo?.assistantCountry ??
-                "Nigeria",
-            assistantState:
-                stateAuth?.mentorData?.assistantInfo?.assistantState ?? "",
-            assistantCity:
-                stateAuth?.mentorData?.assistantInfo?.assistantCity ?? "",
-        },
+    // const formik = useFormik({
+    //     enableReinitialize: true,
+    //     initialValues: {
+    //         assistantFirstname:
+    //             stateAuth?.mentorData?.assistantInfo?.assistantFirstname ?? "",
+    //         assistantLastname:
+    //             stateAuth?.mentorData?.assistantInfo?.assistantLastname ?? "",
+    //         assistantEmail:
+    //             stateAuth?.mentorData?.assistantInfo?.assistantEmail ?? "",
+    //         assistantPhone:
+    //             stateAuth?.mentorData?.assistantInfo?.assistantPhone ?? "",
+    //         assistantAddress:
+    //             stateAuth?.mentorData?.assistantInfo?.assistantAddress ?? "",
+    //         assistantCountry:
+    //             stateAuth?.mentorData?.assistantInfo?.assistantCountry ??
+    //             "Nigeria",
+    //         assistantState:
+    //             stateAuth?.mentorData?.assistantInfo?.assistantState ?? "",
+    //         assistantCity:
+    //             stateAuth?.mentorData?.assistantInfo?.assistantCity ?? "",
+    //     },
 
-        validationSchema: Yup.object({
-            assistantFirstname: Yup.string()
-                .matches(
-                    /^[A-Za-z ]+$/,
-                    "Numbers or special characters not allowed"
-                )
-                .required("This field is required"),
-            assistantLastname: Yup.string()
-                .matches(
-                    /^[A-Za-z ]+$/,
-                    "Numbers or special characters not allowed"
-                )
-                .required("This field is required"),
-            assistantEmail: Yup.string()
-                .email("Invalid email address")
-                .required("This field is required"),
-            assistantPhone: Yup.string().required("This field is required"),
-            assistantAddress: Yup.string().required("This field is required"),
-            assistantCountry: Yup.string().required("This field is required"),
-            assistantCity: Yup.string()
-                .matches(
-                    /^[A-Za-z ]+$/,
-                    "Numbers or special characters not allowed"
-                )
-                .required("This field is required"),
-            assistantState: Yup.string().required("This field is required"),
-        }),
-        onSubmit: (values) => handleSubmit(),
-    });
+    //     validationSchema: Yup.object({
+    //         assistantFirstname: Yup.string()
+    //             .matches(
+    //                 /^[A-Za-z ]+$/,
+    //                 "Numbers or special characters not allowed"
+    //             )
+    //             .required("This field is required"),
+    //         assistantLastname: Yup.string()
+    //             .matches(
+    //                 /^[A-Za-z ]+$/,
+    //                 "Numbers or special characters not allowed"
+    //             )
+    //             .required("This field is required"),
+    //         assistantEmail: Yup.string()
+    //             .email("Invalid email address")
+    //             .required("This field is required"),
+    //         assistantPhone: Yup.string().required("This field is required"),
+    //         assistantAddress: Yup.string().required("This field is required"),
+    //         assistantCountry: Yup.string().required("This field is required"),
+    //         assistantCity: Yup.string()
+    //             .matches(
+    //                 /^[A-Za-z ]+$/,
+    //                 "Numbers or special characters not allowed"
+    //             )
+    //             .required("This field is required"),
+    //         assistantState: Yup.string().required("This field is required"),
+    //     }),
+    //     onSubmit: (values) => handleSubmit(),
+    // });
 
     const handleChange = (e, name, prefix = "") => {
         const { value } = e.target;
@@ -146,7 +145,7 @@ const AssistantInfo = () => {
                         <TextField
                             label="First Name"
                             placeholder={"Micheal"}
-                            required={true}
+                            // required={true}
                             name="assistantFirstname"
                             onChange={(e) =>
                                 handleChange(e, "assistantFirstname")
@@ -161,7 +160,7 @@ const AssistantInfo = () => {
                         <TextField
                             label="Last Name"
                             placeholder={"Smith"}
-                            required={true}
+                            // required={true}
                             name="assistantLastname"
                             onChange={(e) =>
                                 handleChange(e, "assistantLastname")
@@ -180,40 +179,38 @@ const AssistantInfo = () => {
                             type="text"
                             name="country"
                             className="form-control px-5 py-1 country-bg"
-                            preferredCountries={["ng"]}
-                            value={country.country}
+                            // preferredCountries={["ng"]}
+                            value={country}
                             // value={stateAuth?.mentorData?.assistantInfo?.country}
-                            handleChange={(e) => {
-                                setCountry({
-                                    ...country,
-                                    country: e.target.value,
-                                });
+
+                            onChange={(value) => {
                                 handleChange(
                                     {
                                         target: {
-                                            value: e.target.value,
+                                            value: value,
                                         },
                                     },
-                                    "assistantCountry"
+                                    "country"
                                 );
+                                setCountry(value);
                             }}
-                        ></CountryDropdown>
+                        />
                     </section>
                     <section className="col-md-4 mb-4">
                         <label style={{ fontSize: "16px" }}>State</label>
                         <RegionDropdown
                             id={"assistantState"}
                             name={"assistantState"}
-                            country={country.country}
+                            country={country}
                             value={
                                 stateAuth?.mentorData?.assistantInfo
                                     ?.assistantState
                             }
-                            onChange={(e) =>
+                            onChange={(value) =>
                                 handleChange(
                                     {
                                         target: {
-                                            value: e,
+                                            value: value,
                                         },
                                     },
                                     "assistantState"
@@ -245,7 +242,7 @@ const AssistantInfo = () => {
                             }
                             rules={[
                                 {
-                                    required: true,
+                                    required: false,
                                     message:
                                         "Please enter your permanent address",
                                 },
@@ -271,7 +268,7 @@ const AssistantInfo = () => {
                             label="Email"
                             placeholder={"Michealsmith@gmail.com"}
                             type="email"
-                            required={true}
+                            // required={true}
                             onChange={(e) => handleChange(e, "assistantEmail")}
                             name="assistantEmail"
                             value={

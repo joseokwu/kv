@@ -137,7 +137,7 @@ export const MentorProgram = ({ history }) => {
                             })
                         ) : (
                             <p className="text-center">
-                                No accepted program available
+                                No declined program available
                             </p>
                         )}
                     </div>

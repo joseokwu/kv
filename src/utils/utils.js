@@ -1,12 +1,12 @@
 export const emailRegex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const whatsappRegExp = /^(https?:\/\/)?wa\.me\/([a-zA-Z0-9_-]+)$/;
+export const whatsappRegExp = /^(https?:\/\/)?wa\.me\/(.+)$/;
 
-export const skypeRegExp = /^live:([a-zA-Z0-9_-]+)$/;
+export const skypeRegExp = /(.+)/;
+// export const skypeRegExp = /^live:([a-zA-Z0-9_-]+)$/;
 
-export const linkedinRegExp =
-    /^(https?:\/\/)?(www.)?linkedin\.com\/([a-zA-Z0-9_-]+)$/;
+export const linkedinRegExp = /^(https?:\/\/)?(www.)?linkedin\.com\/(.+)$/;
 
 export const googlemeetRegExp =
     /^(https?:\/\/)?(www.)?meet\.google\.com\/([a-zA-Z0-9_-]+)$/;
