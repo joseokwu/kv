@@ -332,7 +332,7 @@ const Details = () => {
                                     onChange={(e) =>
                                         handleChange(e, "linkedin")
                                     }
-                                    placeholder={"Enter LinkdIn link"}
+                                    placeholder={"Enter LinkedIn link"}
                                     required={true}
                                 />
                             </Form.Item>
@@ -476,7 +476,7 @@ const Details = () => {
                                         ?.website
                                 }
                                 onChange={(e) => handleChange(e, "website")}
-                                placeholder={"Enter Webiste link"}
+                                placeholder={"Enter Website link"}
                                 // wid
                             />
                         </section>

@@ -120,7 +120,16 @@ export const StartupBoosterPartner = () => {
             case "#My Applications":
                 return <MyApplications />;
             default:
-                return <AllOfferings />;
+                return (
+                    <AllOfferings
+                        setCurrentPage={setCurrentPage}
+                        data={partners}
+                        total={partners?.metadata && partners?.metadata?.total}
+                        currentPage={currentPage}
+                        partners={partners?.partners}
+                        apply={apply}
+                    />
+                );
         }
     };
 

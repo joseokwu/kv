@@ -164,7 +164,12 @@ const AddGoal = ({ closeModal }) => {
                     <span>In Idea stage</span>
                 </div>
                 <div className="my-4">
-                    <TextField name={"title"} label="Title" rows={1} />
+                    <TextField
+                        name={"title"}
+                        label="Title"
+                        rows={1}
+                        required={true}
+                    />
                 </div>
                 <div className="">
                     <TextareaCustom
@@ -172,9 +177,9 @@ const AddGoal = ({ closeModal }) => {
                         label="Description"
                         min={0}
                         showCount={false}
-                        required={false}
+                        required={true}
                     />
-                    <div>
+                    <div className="mt-4">
                         <button type="submit" className="createGoal">
                             Create goal
                         </button>
@@ -317,7 +322,7 @@ export const AddNewGoalModal = ({ closeModal, data, index }) => {
                         <span> {data?.title} </span>
                     </div>
                     <div className="my-4">
-                        <TextField name={"title"} label="Title" rows={1} />
+                        <TextField name={"title"} label="Title" rows={1} required={true} />
                     </div>
                     <div className="">
                         <TextareaCustom
@@ -325,7 +330,7 @@ export const AddNewGoalModal = ({ closeModal, data, index }) => {
                             label="Description"
                             min={0}
                             showCount={false}
-                            required={false}
+                            required={true}
                         />
                     </div>
                     <div className="my-4 form-group">
