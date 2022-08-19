@@ -95,6 +95,7 @@ const Details = () => {
     };
 
     console.log(stateAuth?.mentorData?.personalDetail);
+    console.log(stateAuth)
 
     const handleChange = (e, name, prefix = "") => {
         const { value } = e.target;

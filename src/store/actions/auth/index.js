@@ -154,7 +154,8 @@ export const updateInvestorData = async (value) => async (dispatch) => {
     try {
         const res = await profile();
         if (res) {
-            console.log(res?.data?.investorData);
+            // console.log(res?.data?.investorData);
+            console.log("updateInvestorData", res);
             dispatch({
                 type: UPDATE_INVESTOR_DATA,
                 payload: res?.data?.investorData,
@@ -203,13 +204,14 @@ export const updateMentorData = async (value) => async (dispatch) => {
     try {
         console.log("function updateMentorData");
         const res = await profile();
-        if (res) {
+        if (res.success) {
             dispatch({
                 type: UPDATE_MENTOR_DATA,
-                payload: res?.data?.data,
+                payload: res?.data?.mentor_response,
             });
         }
     } catch (err) {
+        console.log("USER_PROFILE_FAIL");
         console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,

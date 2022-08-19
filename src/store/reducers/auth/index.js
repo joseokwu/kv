@@ -146,7 +146,7 @@ const authReducer = (state = INIT_STATE, action) => {
                     ...state,
                     loading: false,
                     dashboardLoad: false,
-                    mentorData: action?.payload.data,
+                    mentorData: action?.payload.mentor_response,
                     email: action?.payload?.email,
                 };
             else if (state.userType === "startup")
@@ -162,10 +162,10 @@ const authReducer = (state = INIT_STATE, action) => {
                     ...state,
                     loading: false,
                     dashboardLoad: false,
-                    investorData: action?.payload,
+                    investorData: action?.payload?.data,
                     email: action?.payload?.email,
                 };
-            else if (state.userType === "boosterpartner")
+            else if (state.userType === "partner")
                 return {
                     ...state,
                     loading: false,
@@ -371,7 +371,10 @@ const authReducer = (state = INIT_STATE, action) => {
 
             const newwState = { ...state };
             newwState.profileData.startupRes.team.education = [
-                ...state?.profileData.startupRes?.team?.education.slice(0, action.payload),
+                ...state?.profileData.startupRes?.team?.education.slice(
+                    0,
+                    action.payload
+                ),
                 ...state?.profileData.startupRes?.team?.education.slice(
                     action.payload + 1
                 ),
