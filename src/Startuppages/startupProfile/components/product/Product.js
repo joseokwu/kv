@@ -43,13 +43,14 @@ export const Product = () => {
             ) : (
                 <span></span>
             )}
-            <h3 className="tab-section-title">Product</h3>
             <section
-                className="d-flex justify-content-end"
+                className="d-flex align-items-center justify-content-between"
                 data-target="#editProductModal"
-                onClick={() => setShowModal(true)}
             >
-                <button className="teamBtn">Edit product</button>
+                <h3 className="tab-section-title">Product</h3>
+                <button className="teamBtn" onClick={() => setShowModal(true)}>
+                    Edit product
+                </button>
             </section>
             <div className="row">
                 <section className="col-xl-12">
@@ -171,6 +172,7 @@ const EditProductModal = ({ data, close }) => {
                 <div className="row my-4 d-flex justify-content-between">
                     <TextareaCustom
                         name={"description"}
+                        label="Description"
                         value={
                             stateAuth?.profileData?.startupRes?.product
                                 ?.description
@@ -178,6 +180,7 @@ const EditProductModal = ({ data, close }) => {
                         onChange={(e) => handleFullChange(e, "description")}
                         onKeyPress={letterOnly}
                         placeholder={"Enter Brief info about your product"}
+                        required={true}
                     />
                 </div>
 

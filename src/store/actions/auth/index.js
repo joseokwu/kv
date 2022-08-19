@@ -188,12 +188,12 @@ export const updateStartupData = async (value) => async (dispatch) => {
 
 export const updateStartupUserProfile = async (value) => async (dispatch) => {
     try {
-        const res = await updateFounderProfile(value);
+        // const res = await updateFounderProfile(value);
         dispatch({
             type: UPDATE_STARTUP_USER_PROFILE,
-            payload: res?.data,
+            payload: value,
         });
-        toast.success(res?.message);
+        // toast.success(res?.message);
     } catch (err) {
         toast.error(err?.response?.data?.message ?? "Unable to update profile");
     }
