@@ -114,7 +114,7 @@ export const CoFounder = ({
             e.preventDefault();
             if (
                 inVal.trim() === "" ||
-                stateAuth.startupData.team.skills.indexOf(inVal.trim()) !== -1
+                stateAuth.profileData?.startupRes.team.skills.indexOf(inVal.trim()) !== -1
             )
                 return;
             setVal("");
@@ -169,7 +169,7 @@ export const CoFounder = ({
     const onSubmit = () => {
         updateProfile("team", {
             coFounder: [
-                ...stateAuth?.startupData?.team.coFounder,
+                ...stateAuth?.profileData?.startupRes?.team.coFounder,
                 {
                     avatar: avatar,
                     briefIntroduction:
@@ -302,7 +302,7 @@ export const CoFounder = ({
                         <span>Co-Founder</span>
                         <p
                             onClick={() =>
-                                console.log(stateAuth.startupData.team)
+                                console.log(stateAuth.profileData?.startupRes.team)
                             }
                         >
                             A brief profile of co-founders
@@ -369,7 +369,7 @@ export const CoFounder = ({
                                 //     })
                                 // }
                                 // value={
-                                //     stateAuth?.startupData?.startUpProfile
+                                //     stateAuth?.profileData?.startupRes?.startUpProfile
                                 //         ?.brand
                                 // }
                                 required={true}
@@ -930,7 +930,7 @@ export const CoFounder = ({
                                 label="Linkedin"
                                 name={"linkedInHandle"}
                                 value={
-                                    stateAuth?.startupData?.startUpProfile
+                                    stateAuth?.profileData?.startupRes?.startUpProfile
                                         ?.contactInfo?.linkedInHandle
                                 }
                                 required={true}

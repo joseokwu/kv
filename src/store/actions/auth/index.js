@@ -172,7 +172,7 @@ export const updateStartupData = async (value) => async (dispatch) => {
     try {
         const res = await profile();
         if (res) {
-            // console.log(res?.data?.startupData);
+            // console.log(res?.data?.profileData.startupRes);
             dispatch({
                 type: UPDATE_STARTUP_DATA,
             });
@@ -222,8 +222,8 @@ export const getProfile = async (value) => async (dispatch) => {
         dispatch({
             type: AUTH_START,
         });
-        const res1 = await user(value);
-        const res2 = await profile(value);
+        const res1 = await user();
+        const res2 = await profile();
 
         if (res1) {
             console.log(res1);

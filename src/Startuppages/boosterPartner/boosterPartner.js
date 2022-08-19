@@ -78,7 +78,7 @@ export const StartupBoosterPartner = () => {
                 const res = await getBoosterData({
                     page: currentPage,
                     limit: 4,
-                    startupId: stateAuth?.startupData?.userId,
+                    startupId: stateAuth?.profileData?.startupRes?.userId,
                 });
                 const allReq = await getStartupRequest({
                     startupId: stateAuth?.user?.userId,

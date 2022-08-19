@@ -25,7 +25,7 @@ export const NotSubmitted = () => {
     const [openModal, setOpenModal] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [NotsubmittedAssignment, setNotSubmittedAssignment] = useState(null);
+    const [NotsubmittedAssignment, setNotSubmittedAssignment] = useState([]);
     const [loading, setLoading] = useState(false);
     const [sub, setSub] = useState("");
 
@@ -43,18 +43,18 @@ export const NotSubmitted = () => {
 
     useEffect(() => {
         const getData = async () => {
+            setLoading(true);
             try {
-                setLoading(true);
                 const res = await assignment({
                     page: currentPage,
                     limit: 5,
                 });
                 console.log(res?.data);
                 setNotSubmittedAssignment(res?.data);
-                setLoading(false);
-            } catch {
-                setNotSubmittedAssignment(null);
+            } catch (e) {
+                console.log(e);
             }
+            setLoading(false);
         };
 
         getData();
@@ -67,8 +67,7 @@ export const NotSubmitted = () => {
     return (
         <div>
             <div className="row mt-3">
-                {NotsubmittedAssignment === null && <EmptyState />}
-                {NotsubmittedAssignment && NotsubmittedAssignment.length > 0 ? (
+                {NotsubmittedAssignment?.length > 0 ? (
                     NotsubmittedAssignment?.data.map((info, i) => (
                         <TodoCard
                             key={i}
@@ -145,8 +144,7 @@ export const NotSubmitted = () => {
                 ) : (
                     <EmptyState />
                 )}
-                {NotsubmittedAssignment &&
-                NotsubmittedAssignment?.data.length > 0 ? (
+                {NotsubmittedAssignment?.data?.length > 0 ? (
                     <div className="d-flex justify-content-center text-center">
                         <span> </span>
                     </div>

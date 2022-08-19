@@ -28,14 +28,15 @@ export const FinancialProjection = () => {
         e.preventDefault();
 
         if (
-            stateAuth?.startupData?.fundRaising?.financialProjection?.files
+            stateAuth?.profileData?.startupRes?.fundRaising?.financialProjection?.files
                 ?.length !== 0
         ) {
-            console.log(stateAuth?.startupData);
-            console.log(validate(stateAuth?.startupData, startupValidation));
-            updateStartupInfo(
-                validate(stateAuth?.startupData, startupValidation)
-            );
+            console.log(stateAuth?.profileData?.startupRes);
+            console.log(validate(stateAuth?.profileData?.startupRes, startupValidation));
+            // updateStartupInfo(
+            //     validate(stateAuth?.profileData?.startupRes, startupValidation)
+            // );
+            updateStartupInfo(true);
             window.open("/startup/registration/success", "_self");
         } else toast.error("Please provide a financial projection document");
     };
@@ -83,10 +84,10 @@ export const FinancialProjection = () => {
                                 extension: "MB",
                             }}
                             initData={
-                                stateAuth?.startupData?.fundRaising
+                                stateAuth?.profileData?.startupRes?.fundRaising
                                     ?.financialProjection?.file
                                     ? [
-                                          stateAuth?.startupData?.fundRaising
+                                          stateAuth?.profileData?.startupRes?.fundRaising
                                               ?.financialProjection?.file,
                                       ]
                                     : []

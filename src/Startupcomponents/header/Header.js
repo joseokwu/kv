@@ -65,7 +65,7 @@ export const Header = ({ setOpen, open, disabled }) => {
                         </p>
                     </span>
                     <div>
-                        {/* {stateAuth?.startupData?.applicationCompleted ? ( */}
+                        {/* {stateAuth?.profileData?.startupRes?.applicationCompleted ? ( */}
                         <HeaderDropdownMenu />
                         {/* // ) : ( // <span /> */}
                         {/* // )} */}

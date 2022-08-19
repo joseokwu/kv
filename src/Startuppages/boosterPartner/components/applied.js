@@ -32,13 +32,13 @@ const sendApplication = async(value) =>{
     setLoading(true)
   const newApplication = {
     partnerId:value?.userId,
-    startupId:stateAuth?.startupData?.userId,
+    startupId:stateAuth?.profileData?.startupRes?.userId,
     startupName:stateAuth?.user?.businessname,
     email:stateAuth?.email,
     industry:stateAuth?.user?.industry,
     phone:stateAuth?.user?.phone,
-    description:stateAuth?.startupData?.product?.description,
-    logo: stateAuth?.startupData?.startUpProfile?.logo,
+    description:stateAuth?.profileData?.startupRes?.product?.description,
+    logo: stateAuth?.profileData?.startupRes?.startUpProfile?.logo,
     date: new Date()
   }
   console.log(value)  

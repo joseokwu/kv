@@ -27,12 +27,13 @@ export const userLogin = async (values) => {
 export const profile = async () => {
     try {
         // console.log(value)
-        console.log("trying to make request");
+        console.log("trying to make profile request");
         const res = await request.get("v1/profile");
         console.log(res.data);
         return res?.data;
     } catch (err) {
         console.log(err);
+        console.log(err?.response?.data?.message);
         const error = err?.response?.data?.message || err?.message;
         throw new Error(error);
     }
