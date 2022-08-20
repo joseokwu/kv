@@ -95,6 +95,7 @@ const Details = () => {
     };
 
     console.log(stateAuth?.mentorData?.personalDetail);
+    console.log(stateAuth)
 
     const handleChange = (e, name, prefix = "") => {
         const { value } = e.target;
@@ -332,7 +333,7 @@ const Details = () => {
                                     onChange={(e) =>
                                         handleChange(e, "linkedin")
                                     }
-                                    placeholder={"Enter LinkdIn link"}
+                                    placeholder={"Enter LinkedIn link"}
                                     required={true}
                                 />
                             </Form.Item>
@@ -476,7 +477,7 @@ const Details = () => {
                                         ?.website
                                 }
                                 onChange={(e) => handleChange(e, "website")}
-                                placeholder={"Enter Webiste link"}
+                                placeholder={"Enter Website link"}
                                 // wid
                             />
                         </section>

@@ -64,6 +64,29 @@ export const mentorRoutes = [
     },
 ];
 
+export const investorRoutes = [
+    {
+        title: "Personal Details",
+        hash: "details",
+        path: 1,
+    },
+    {
+        title: "Investor Details",
+        hash: "investor",
+        path: 2,
+    },
+    {
+        title: "Investment Approach",
+        hash: "approach",
+        path: 3,
+    },
+    {
+        title: "Portfolio",
+        hash: "portfolio",
+        path: 4,
+    },
+];
+
 export const dashboardRoutes = [
     {
         title: "Dashboard",

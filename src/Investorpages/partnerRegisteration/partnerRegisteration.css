@@ -18,7 +18,7 @@
 }
 
 .register-wrap {
-  padding: 48px 9%;
+  /* padding: 48px 9%; */
   background-color: #fdfdfd;
   height: calc(100vh - 60px);
   overflow-y: auto;
@@ -33,9 +33,11 @@
 
 .register-header {
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   margin-bottom: 18px;
+  padding: 10px;
 }
+
 .register-header div {
   width: 100%;
   max-width: 931px;
@@ -79,8 +81,10 @@
 }
 
 .register-grid {
-  display: grid;
-  grid-template-columns: minmax(220px, 250px) auto;
+  /* display: grid; */
+  /* grid-template-columns: minmax(220px, 250px) auto; */
+  max-height: calc(-221px + 100vh);
+  overflow-y: auto;
 }
 
 @media (max-width: 1024px) {

@@ -40,7 +40,8 @@ import {
 
 import { MentorViewAssignment } from "../mentorPages/mentorAssignments/components/viewAssignment/viewAssignment";
 import {
-    WithInvestorRegisterLayout,
+    WithInvestorSecLayout,
+    WithInvestorRegistrationLayout,
     WithMainInvestorLayout,
 } from "../components";
 
@@ -296,7 +297,7 @@ const routes = [
     {
         name: "Investor Registration",
         path: "/investor/registration",
-        component: WithInvestorRegisterLayout(InvestorRegistration),
+        component: WithInvestorRegistrationLayout(InvestorRegistration),
         exact: true,
         protected: true,
         type: "investor",
@@ -349,7 +350,7 @@ const routes = [
     {
         name: "Investor Profile",
         path: "/investor/profile",
-        component: WithInvestorRegisterLayout(InvestorProfile),
+        component: WithInvestorSecLayout(InvestorProfile),
         exact: true,
         protected: true,
         type: "investor",
@@ -503,7 +504,7 @@ const routes = [
     {
         name: "Booster Profile",
         path: "/boosterpartner/profile",
-        component: WithInvestorRegisterLayout(BoosterProfile),
+        component: WithInvestorSecLayout(BoosterProfile),
         exact: true,
         protected: true,
         type: "booster",
@@ -512,7 +513,7 @@ const routes = [
     {
         name: "Booster Registration",
         path: "/boosterpartner/registration",
-        component: WithInvestorRegisterLayout(BoosterPartnerRegistration),
+        component: WithInvestorSecLayout(BoosterPartnerRegistration),
         exact: true,
         protected: true,
         type: "booster",

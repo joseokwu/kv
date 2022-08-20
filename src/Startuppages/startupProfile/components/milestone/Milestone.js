@@ -27,8 +27,8 @@ export const Milestone = ({ data = [] }) => {
             ) : (
                 <span></span>
             )}
-            <h3 className="tab-section-title">Milestone/timeline</h3>
-            <section className="d-flex justify-content-end">
+            <section className="d-flex align-items-center justify-content-between">
+                <h3 className="tab-section-title">Milestone/timeline</h3>
                 <button
                     className="teamBtn"
                     data-target="#updateMilestoneModal"
@@ -43,33 +43,31 @@ export const Milestone = ({ data = [] }) => {
 };
 
 export const UpdateMilestoneModal = ({ close }) => {
-    const { callUpdateStartupData } = useAuth();
-    const [date, setDate] = useState();
-
-    const handleDate = (value) => {
-        setDate(moment(value).format("YYYY-MM-DD"));
-        console.log(moment(value).format("YYYY-MM-DD"));
-    };
+    const { stateAuth, callUpdateStartupData, updateStartupInfo } = useAuth();
+    const [formData, setFormData] = useState({
+        title: "",
+        description: "",
+        dateOfAchievement: "",
+    });
 
     const onFinish = async (values) => {
-        const updateValue = {
-            ...values,
-            dateOfAchievement: date,
-        };
-        // console.log({
+        console.log(stateAuth?.profileData?.startupRes?.mileStone);
 
-        // })
-        callUpdateStartupData({
-            values: {
-                mileStone: updateValue,
-            },
+        await callUpdateStartupData({
+            ...stateAuth?.profileData?.startupRes,
+            mileStone: [
+                ...stateAuth?.profileData?.startupRes?.mileStone,
+                formData,
+            ],
         });
+        await updateStartupInfo();
         close(false);
     };
 
+    console.log(stateAuth?.profileData?.startupRes);
     return (
         <MilestoneModal>
-            <div className="milestoneModal mx-3">
+            <div className="milestoneModal px-3">
                 <Form
                     name="Mile stone"
                     initialValues={{
@@ -87,6 +85,12 @@ export const UpdateMilestoneModal = ({ close }) => {
                             name={"title"}
                             required={true}
                             placeholder="Enter name of Title"
+                            onChange={(e) => {
+                                setFormData({
+                                    ...formData,
+                                    title: e.target.value,
+                                });
+                            }}
                         />
                     </div>
                     <div className="my-3">
@@ -96,13 +100,47 @@ export const UpdateMilestoneModal = ({ close }) => {
                             required={false}
                             min={0}
                             showCount={false}
+                            onChange={(e) => {
+                                setFormData({
+                                    ...formData,
+                                    description: e.target.value,
+                                });
+                            }}
                         />
                     </div>
-                    <DatePicker
-                        onChange={handleDate}
+                    <Form.Item
+                        name="dateOfAchievement"
                         label="Date of achievement"
-                        name={"dateOfAchievement"}
-                    />
+                        initialValue={
+                            formData?.dateOfAchievement
+                                ? moment(formData?.dateOfAchievement)
+                                : undefined
+                        }
+                        rules={[
+                            {
+                                required: true,
+                                message:
+                                    "Please select the Date of achievement",
+                            },
+                        ]}
+                    >
+                        <DatePicker
+                            name={"dateOfAchievement"}
+                            defaultValue={
+                                formData?.dateOfAchievement
+                                    ? moment(formData?.dateOfAchievement)
+                                    : undefined
+                            }
+                            onChange={(dateString) => {
+                                setFormData({
+                                    ...formData,
+                                    dateOfAchievement: new Date(
+                                        dateString
+                                    ).toISOString(),
+                                });
+                            }}
+                        />
+                    </Form.Item>
                     <div className="mt-5">
                         <button type="submit">Create task</button>
                     </div>

@@ -155,19 +155,23 @@ export const useAuth = () => {
 
     const updateInvestorInfo = async (lastPage = false) => {
         try {
-            const payload = {
-                accType: stateAuth.type[0],
-                values: lastPage
-                    ? { ...stateAuth.investorData, applicationCompleted: true }
+            const dataToPost = {
+                _id: stateAuth.investorData?._id,
+                payload: lastPage
+                    ? {
+                          ...stateAuth.investorData,
+                          applicationCompleted: true,
+                      }
                     : stateAuth.investorData,
-                lastPage,
+                // lastPage,
             };
-            const res = await updateStartup(payload);
+
+            const res = await updateStartup(dataToPost);
             toast.success(res?.message);
             if (lastPage) {
                 history.push("/investor/dashboard");
             }
-            console.log(payload);
+            console.log(dataToPost);
         } catch (err) {
             console.log(err?.response);
             toast.error(err?.response?.data?.message ?? err?.response?.message);

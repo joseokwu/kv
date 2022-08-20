@@ -154,7 +154,8 @@ export const updateInvestorData = async (value) => async (dispatch) => {
     try {
         const res = await profile();
         if (res) {
-            console.log(res?.data?.investorData);
+            // console.log(res?.data?.investorData);
+            console.log("updateInvestorData", res);
             dispatch({
                 type: UPDATE_INVESTOR_DATA,
                 payload: res?.data?.investorData,
@@ -172,7 +173,7 @@ export const updateStartupData = async (value) => async (dispatch) => {
     try {
         const res = await profile();
         if (res) {
-            // console.log(res?.data?.startupData);
+            // console.log(res?.data?.profileData.startupRes);
             dispatch({
                 type: UPDATE_STARTUP_DATA,
             });
@@ -188,12 +189,12 @@ export const updateStartupData = async (value) => async (dispatch) => {
 
 export const updateStartupUserProfile = async (value) => async (dispatch) => {
     try {
-        const res = await updateFounderProfile(value);
+        // const res = await updateFounderProfile(value);
         dispatch({
             type: UPDATE_STARTUP_USER_PROFILE,
-            payload: res?.data,
+            payload: value,
         });
-        toast.success(res?.message);
+        // toast.success(res?.message);
     } catch (err) {
         toast.error(err?.response?.data?.message ?? "Unable to update profile");
     }
@@ -203,13 +204,14 @@ export const updateMentorData = async (value) => async (dispatch) => {
     try {
         console.log("function updateMentorData");
         const res = await profile();
-        if (res) {
+        if (res.success) {
             dispatch({
                 type: UPDATE_MENTOR_DATA,
-                payload: res?.data?.data,
+                payload: res?.data?.mentor_response,
             });
         }
     } catch (err) {
+        console.log("USER_PROFILE_FAIL");
         console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,
@@ -222,8 +224,8 @@ export const getProfile = async (value) => async (dispatch) => {
         dispatch({
             type: AUTH_START,
         });
-        const res1 = await user(value);
-        const res2 = await profile(value);
+        const res1 = await user();
+        const res2 = await profile();
 
         if (res1) {
             console.log(res1);
