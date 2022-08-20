@@ -47,7 +47,7 @@ export const InvestorProfile = () => {
   };
   return (
     <section style={{ background: "#edf1f4", minHeight: "100vh" }}>
-      <div className="wrapper">
+      <div className="profile">
         <section className="mb-3">
           <InvestorDetails data={stateAuth?.investorData} />
         </section>
