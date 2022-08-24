@@ -55,7 +55,7 @@ export const MentorPersonalDetails = () => {
     }, [hash]);
 
     return (
-        <div style={{ backgroundColor: "#fdfdfd" }}>
+        <div>
             <div
                 className="mentor_personal_details_wrap"
                 style={{ maxWidth: 2000 }}

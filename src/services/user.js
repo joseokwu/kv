@@ -53,6 +53,21 @@ export const user = async () => {
     }
 };
 
+export const editUser = async (values) => {
+    // payload --- some variation of the user object. NOT profile object. they're different
+   
+    try {
+        // console.log(value)
+        const res = await request.post("v1/user", values);
+        console.log(res);
+        return res?.data;
+    } catch (err) {
+        console.log(err);
+        const error = err?.response?.data?.message || err?.message;
+        throw new Error(error);
+    }
+};
+
 export const forgotPassword = async (values) => {
     try {
         const res = await request.post("v1/auth/forgot-password", values);

@@ -67,6 +67,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 loading: false,
                 error: action.payload,
             };
+
         case USER_PROFILE:
             // if (action?.payload?.type[0] === "boosterpartner") {
             //     return {
@@ -124,6 +125,7 @@ const authReducer = (state = INIT_STATE, action) => {
             // }
             console.log({
                 ...state,
+                userObj: action?.payload,
                 loading: false,
                 dashboardLoad: false,
                 authenticated: true,
@@ -133,6 +135,7 @@ const authReducer = (state = INIT_STATE, action) => {
             });
             return {
                 ...state,
+                userObj: action?.payload,
                 loading: false,
                 dashboardLoad: false,
                 authenticated: true,
@@ -165,12 +168,12 @@ const authReducer = (state = INIT_STATE, action) => {
                     investorData: action?.payload?.data,
                     email: action?.payload?.email,
                 };
-            else if (state.userType === "partner")
+            else if (state.userType === "boosterpartner")
                 return {
                     ...state,
                     loading: false,
                     dashboardLoad: false,
-                    partnerData: action?.payload,
+                    partnerData: action?.payload?.data,
                     email: action?.payload?.email,
                 };
             else

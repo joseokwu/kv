@@ -513,7 +513,7 @@ const routes = [
     {
         name: "Booster Registration",
         path: "/boosterpartner/registration",
-        component: WithInvestorSecLayout(BoosterPartnerRegistration),
+        component: WithInvestorRegistrationLayout(BoosterPartnerRegistration),
         exact: true,
         protected: true,
         type: "booster",

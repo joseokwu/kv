@@ -6,6 +6,7 @@ import location from "../../../../assets/icons/locationSm.svg";
 import phone from "../../../../assets/icons/phoneSm.svg";
 import web from "../../../../assets/icons/webSm.svg";
 import { Modal, TextField, Button, Select } from "../../../../components";
+import { AvatarWrapper } from "../../../../components";
 import add from "../../../../assets/icons/addFile.svg";
 import imageRep from "../../../../assets/icons/image.svg";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
@@ -37,13 +38,22 @@ const ProfileDetails = ({ data }) => {
                     <EditProfileInfo />
                 </Modal>
                 <span className="edit-info">
-                    <img
-                        src={edit}
-                        alt="edit"
-                        data-toggle="modal"
-                        data-target="#profileEditModal"
-                        role="button"
-                    />
+                    {/* <AvatarWrapper
+                        condition={item?.startUpProfile?.logo}
+                        initials={item?.startUpProfile?.startupName?.slice(
+                            0,
+                            1
+                        )}
+                        size={31}
+                    >
+                        <img
+                            src={edit}
+                            alt="edit"
+                            data-toggle="modal"
+                            data-target="#profileEditModal"
+                            role="button"
+                        />
+                    </AvatarWrapper> */}
                 </span>
                 <span className="profile-image">
                     <img src={data?.logo} alt="sample company" />

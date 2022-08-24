@@ -1,7 +1,6 @@
 .mentor_personal_details_wrap {
   /* padding: 48px 9%; */
   /* padding: 0px 9% 48px 9%; */
-  background-color: #fdfdfd;
   height: calc(100vh - 60px);
   /* overflow-y: auto; */
   scroll-behavior: smooth;

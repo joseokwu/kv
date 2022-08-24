@@ -61,10 +61,12 @@ export const AuthSide = ({ history }) => {
                         </button>
                         <button
                             onClick={() => {
-                                setType("partner");
-                                changeSignup("partner");
+                                setType("boosterpartner");
+                                changeSignup("boosterpartner");
                             }}
-                            className={userType === "partner" ? "activ" : ""}
+                            className={
+                                userType === "boosterpartner" ? "activ" : ""
+                            }
                         >
                             Booster Partner
                         </button>
