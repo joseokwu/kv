@@ -65,6 +65,7 @@ const OurOffering = () => {
                 }}
                 layout="vertical"
                 onFinish={onFinish}
+                style={{ marginTop: "1.5rem" }}
             >
                 <FormCard>
                     <section className="mb-4">

@@ -18,6 +18,7 @@ import { industry, category } from "../../../../constants/domiData";
 import { letterOnly, onNumberOnlyChange } from "../../../../utils/helpers";
 import { FormWrapper } from "./style";
 import { twitterRegExp, linkedinRegExp } from "../../../../utils/utils";
+import { editUser } from "../../../../services";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -87,9 +88,14 @@ const CompanyOverview = () => {
         try {
             const response = await upload(formData);
             console.log(response?.path);
-            updatePartnerLocalData("", {
-                logo: response?.path,
+            const updateAvatar = await editUser({
+                ...stateAuth?.userObj,
+                avatar: response?.path,
             });
+            console.log(updateAvatar);
+            // updatePartnerLocalData("", {
+            //     logo: response?.path,
+            // });
         } catch (error) {
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
@@ -116,13 +122,14 @@ const CompanyOverview = () => {
                 }}
                 layout="vertical"
                 onFinish={onFinish}
+                style={{ marginTop: "1.5rem" }}
             >
                 <FormWrapper>
                     <div className="row mb-4">
                         <section className="col-md-3">
                             <div className="form-dp">
                                 <span className="image-placeholder">
-                                    {stateAuth?.partnerData?.logo === null ? (
+                                    {stateAuth?.userObj?.avatar === null ? (
                                         logoUploading ? (
                                             <CircularLoader color={"#000"} />
                                         ) : (
@@ -146,7 +153,7 @@ const CompanyOverview = () => {
                                         <CircularLoader color={"#000"} />
                                     ) : (
                                         <img
-                                            src={stateAuth?.partnerData?.logo}
+                                            src={stateAuth?.userObj?.avatar}
                                             alt="add"
                                             className="image-placeholder"
                                         />
