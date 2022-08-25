@@ -103,7 +103,9 @@ export const BoosterDashboard = ({ history }) => {
                         <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
                             <h5>New Applications</h5>
                             <span
-                                onClick={() => push("/booster/applicants#all")}
+                                onClick={() =>
+                                    push("/boosterpartner/applicants#all")
+                                }
                             >
                                 See All
                             </span>

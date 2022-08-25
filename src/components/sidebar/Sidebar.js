@@ -83,7 +83,7 @@ const boosterNavigators = [
     {
         title: "Startup Applicants",
         activator: "applicants",
-        path: "/booster/applicants",
+        path: "/boosterpartner/applicants",
         icon: startup,
     },
 ];

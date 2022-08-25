@@ -488,7 +488,7 @@ const routes = [
     },
     {
         name: "Booster Applicants",
-        path: "/booster/applicants",
+        path: "/boosterpartner/applicants",
         component: WithMainInvestorLayout(BoosterApplicants),
         exact: true,
         protected: true,
