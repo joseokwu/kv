@@ -25,6 +25,8 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 const ProfileDetails = ({ data }) => {
+    const { stateAuth } = useAuth();
+
     return (
         <section className="profile-info">
             <div className="profile-banner">
@@ -56,7 +58,10 @@ const ProfileDetails = ({ data }) => {
                     </AvatarWrapper> */}
                 </span>
                 <span className="profile-image">
-                    <img src={data?.logo} alt="sample company" />
+                    <img
+                        src={stateAuth?.userObj?.avatar}
+                        alt="sample company"
+                    />
                 </span>
 
                 <article className="row">
@@ -207,7 +212,7 @@ const EditProfileInfo = () => {
                         <section className="col-md-3">
                             <div className="form-dp">
                                 <span className="image-placeholder">
-                                    {stateAuth?.partnerData?.logo === null ? (
+                                    {stateAuth?.userObj?.avatar === null ? (
                                         logoUploading ? (
                                             <CircularLoader color={"#000"} />
                                         ) : (
@@ -229,7 +234,7 @@ const EditProfileInfo = () => {
                                         )
                                     ) : (
                                         <img
-                                            src={stateAuth?.partnerData?.logo}
+                                            src={stateAuth?.userObj?.avatar}
                                             alt="add"
                                             className="image-placeholder"
                                         />

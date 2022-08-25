@@ -88,10 +88,15 @@ const CompanyOverview = () => {
         try {
             const response = await upload(formData);
             console.log(response?.path);
-            const updateAvatar = await editUser({
-                ...stateAuth?.userObj,
-                avatar: response?.path,
-            });
+
+            const samplePayload = {
+                payload: {
+                    avatar: response?.path,
+                },
+            };
+            console.log(samplePayload);
+            const updateAvatar = await editUser(samplePayload);
+
             console.log(updateAvatar);
             // updatePartnerLocalData("", {
             //     logo: response?.path,
