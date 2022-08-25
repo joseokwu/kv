@@ -7,6 +7,7 @@ import imageRep from "../../../../assets/icons/mentorDetails.svg";
 import add from "../../../../assets/icons/addFile.svg";
 import { Button, PhoneInput } from "../../../../mentorComponents/index";
 import { TextField } from "../../../../Startupcomponents";
+import { AiOutlineUser } from "react-icons/ai";
 import { Form, Select } from "antd";
 import { CircularLoader } from "../../../../mentorComponents/CircluarLoader/CircularLoader";
 import FormCard from "../../../../mentorComponents/formCard/FormCard";
@@ -21,6 +22,7 @@ import {
     skypeRegExp,
     googlemeetRegExp,
 } from "../../../../utils/utils";
+import { editUser } from "../../../../services";
 
 import "./details.css";
 
@@ -34,7 +36,8 @@ import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 const { Option } = Select;
 
 const Details = () => {
-    const { updateMentorProfileState, updateMentorInfo } = useAuth();
+    const { updateMentorProfileState, updateMentorInfo, updateUserObj } =
+        useAuth();
     const {
         changePath,
         state: { path },
@@ -95,7 +98,7 @@ const Details = () => {
     };
 
     console.log(stateAuth?.mentorData?.personalDetail);
-    console.log(stateAuth)
+    console.log(stateAuth);
 
     const handleChange = (e, name, prefix = "") => {
         const { value } = e.target;
@@ -121,14 +124,19 @@ const Details = () => {
         formData.append("type", "image");
         formData.append("file", file);
 
-        console.log(formData.get("file"));
         setLogoUploading(true);
         try {
             const response = await upload(formData);
             setLogo(response?.path);
-            updateMentorProfileState("personalDetail", {
-                logo: response?.path,
-            });
+
+            const samplePayload = {
+                payload: {
+                    avatar: response?.path,
+                },
+            };
+            console.log(samplePayload);
+            const updateAvatar = await editUser(samplePayload);
+            await updateUserObj({ avatar: response?.path });
         } catch (error) {
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
@@ -160,11 +168,18 @@ const Details = () => {
                 layout="vertical"
                 onFinish={handleSubmit}
                 className="px-3"
+                style={{ marginTop: "1.5rem" }}
             >
                 <div className="row mb-4">
                     <section className="col-md">
                         <div className="form-dp">
-                            {logoUploading ? (
+                            {!stateAuth?.userObj?.avatar ? (
+                                logoUploading ? (
+                                    <CircularLoader color={"#000"} />
+                                ) : (
+                                    <AiOutlineUser size={36} color="#828282" />
+                                )
+                            ) : logoUploading ? (
                                 <CircularLoader color={"#000"} />
                             ) : (
                                 <span
@@ -174,7 +189,7 @@ const Details = () => {
                                             : "image-placeholder"
                                     }
                                 >
-                                    <img src={logo} alt="placeholder" />
+                                    <img src={stateAuth?.userObj?.avatar} alt="placeholder" />
                                 </span>
                             )}
 
