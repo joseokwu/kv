@@ -268,18 +268,31 @@ export const CreateCallSchedule = () => {
                                         // name="googlemeet"
                                         id="googlemeet"
                                         value={formValues?.googlemeet}
-                                        onChange={(e) =>
+                                        onChange={(e) => {
                                             setFormValues({
                                                 ...formValues,
                                                 googlemeet: e.target.value,
-                                            })
-                                        }
+                                            });
+                                            console.log(formValues);
+                                        }}
                                         placeholder={"Enter Google Meet Link"}
+                                        suffix={
+                                            <img
+                                                src={copy}
+                                                alt="copy"
+                                                style={{ cursor: "pointer" }}
+                                                onClick={() => {
+                                                    navigator.clipboard.writeText(
+                                                        formValues?.googlemeet
+                                                    );
+                                                }}
+                                            />
+                                        }
                                         // required={true}
                                     />
-                                    <img src={copy} alt="copy" />
                                 </Form.Item>
                             )}
+
                             {formValues.meetType === "Zoom" && (
                                 <Form.Item
                                     name="zoom"
@@ -308,6 +321,18 @@ export const CreateCallSchedule = () => {
                                         }
                                         placeholder={"Enter Zoom Link"}
                                         required={true}
+                                        suffix={
+                                            <img
+                                                src={copy}
+                                                alt="copy"
+                                                style={{ cursor: "pointer" }}
+                                                onClick={() => {
+                                                    navigator.clipboard.writeText(
+                                                        formValues?.zoom
+                                                    );
+                                                }}
+                                            />
+                                        }
                                     />
                                 </Form.Item>
                             )}

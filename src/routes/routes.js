@@ -462,7 +462,7 @@ const routes = [
 
     {
         name: "Booster Contact us",
-        path: "/booster/support",
+        path: "/boosterpartner/support",
         component: WithMainInvestorLayout(StartupContactUs),
         exact: true,
         protected: true,
@@ -496,7 +496,7 @@ const routes = [
     },
     {
         name: "Booster Notification",
-        path: "/booster/notification",
+        path: "/boosterpartner/notification",
         component: WithMainInvestorLayout(BoosterNotification),
         exact: true,
         protected: true,
