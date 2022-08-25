@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { Input, Form, Select, DatePicker } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
+import { AiOutlineUser } from "react-icons/ai";
 import { useAuth, useActivity } from "../../../../hooks";
 import { upload } from "../../../../services/utils";
 import { CircularLoader } from "../../../../components/CircluarLoader/CircularLoader";
@@ -17,6 +18,7 @@ import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import moment from "moment";
 import "./PersonalDetails.css";
 import { twitterRegExp, linkedinRegExp } from "../../../../utils/utils";
+import { editUser } from "../../../../services";
 
 export const PersonalDetails = () => {
     const hearOption = [
@@ -27,8 +29,12 @@ export const PersonalDetails = () => {
         "referral from investor",
     ];
 
-    const { updateInvestorProfileData, stateAuth, updateInvestorInfo } =
-        useAuth();
+    const {
+        updateInvestorProfileData,
+        stateAuth,
+        updateInvestorInfo,
+        updateUserObj,
+    } = useAuth();
     const { push } = useHistory();
     const {
         changePath,
@@ -42,7 +48,6 @@ export const PersonalDetails = () => {
         stateAuth?.investorData?.profile?.avatar ?? imageRep
     );
 
-    
     const next = () => {
         changePath(path + 1);
     };
@@ -71,9 +76,15 @@ export const PersonalDetails = () => {
         try {
             const response = await upload(formData);
             setAvatar(response?.path);
-            updateInvestorProfileData("profile", {
-                avatar: response?.path,
-            });
+
+            const samplePayload = {
+                payload: {
+                    avatar: response?.path,
+                },
+            };
+            console.log(samplePayload);
+            const updateAvatar = await editUser(samplePayload);
+            await updateUserObj({ avatar: response?.path });
         } catch (error) {
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
@@ -154,17 +165,23 @@ export const PersonalDetails = () => {
                 layout="vertical"
                 initialValues={{ remember: true }}
                 className="px-3"
+                style={{ marginTop: "1.5rem" }}
             >
                 <div className="form-dp mb-4 bg-white">
-                    {logoUploading ? (
+                    {!stateAuth?.userObj?.avatar ? (
+                        logoUploading ? (
+                            <CircularLoader color={"#000"} />
+                        ) : (
+                            <AiOutlineUser size={36} color="#828282" />
+                        )
+                    ) : logoUploading ? (
                         <CircularLoader color={"#000"} />
                     ) : (
-                        <span
-                            className={
-                                avatar === imageRep ? "" : "image-placeholder"
-                            }
-                        >
-                            <img src={avatar} alt="placeholder" />
+                        <span className={"image-placeholder"}>
+                            <img
+                                src={stateAuth?.userObj?.avatar}
+                                alt="placeholder"
+                            />
                         </span>
                     )}
                     <span className="add-dp">

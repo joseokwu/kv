@@ -6,6 +6,7 @@ import location from "../../../../assets/icons/locationSm.svg";
 import phone from "../../../../assets/icons/phoneSm.svg";
 import web from "../../../../assets/icons/webSm.svg";
 import { Modal, TextField, Button, Select } from "../../../../components";
+import { AvatarWrapper } from "../../../../components";
 import add from "../../../../assets/icons/addFile.svg";
 import imageRep from "../../../../assets/icons/image.svg";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
@@ -24,6 +25,8 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 const ProfileDetails = ({ data }) => {
+    const { stateAuth } = useAuth();
+
     return (
         <section className="profile-info">
             <div className="profile-banner">
@@ -37,16 +40,28 @@ const ProfileDetails = ({ data }) => {
                     <EditProfileInfo />
                 </Modal>
                 <span className="edit-info">
-                    <img
-                        src={edit}
-                        alt="edit"
-                        data-toggle="modal"
-                        data-target="#profileEditModal"
-                        role="button"
-                    />
+                    {/* <AvatarWrapper
+                        condition={item?.startUpProfile?.logo}
+                        initials={item?.startUpProfile?.startupName?.slice(
+                            0,
+                            1
+                        )}
+                        size={31}
+                    >
+                        <img
+                            src={edit}
+                            alt="edit"
+                            data-toggle="modal"
+                            data-target="#profileEditModal"
+                            role="button"
+                        />
+                    </AvatarWrapper> */}
                 </span>
                 <span className="profile-image">
-                    <img src={data?.logo} alt="sample company" />
+                    <img
+                        src={stateAuth?.userObj?.avatar}
+                        alt="sample company"
+                    />
                 </span>
 
                 <article className="row">
@@ -197,7 +212,7 @@ const EditProfileInfo = () => {
                         <section className="col-md-3">
                             <div className="form-dp">
                                 <span className="image-placeholder">
-                                    {stateAuth?.partnerData?.logo === null ? (
+                                    {stateAuth?.userObj?.avatar === null ? (
                                         logoUploading ? (
                                             <CircularLoader color={"#000"} />
                                         ) : (
@@ -219,7 +234,7 @@ const EditProfileInfo = () => {
                                         )
                                     ) : (
                                         <img
-                                            src={stateAuth?.partnerData?.logo}
+                                            src={stateAuth?.userObj?.avatar}
                                             alt="add"
                                             className="image-placeholder"
                                         />

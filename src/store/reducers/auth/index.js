@@ -5,6 +5,7 @@ import {
     LOGIN_SUCCESS,
     REGISTER_SUCCESS,
     USER_PROFILE,
+    USER_OBJ_UPDATE,
     USER_PROFILE_FAIL,
     SET_SIGNUP_STATUS,
     LOG_OUT,
@@ -67,6 +68,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 loading: false,
                 error: action.payload,
             };
+
         case USER_PROFILE:
             // if (action?.payload?.type[0] === "boosterpartner") {
             //     return {
@@ -124,6 +126,7 @@ const authReducer = (state = INIT_STATE, action) => {
             // }
             console.log({
                 ...state,
+                userObj: action?.payload,
                 loading: false,
                 dashboardLoad: false,
                 authenticated: true,
@@ -133,12 +136,25 @@ const authReducer = (state = INIT_STATE, action) => {
             });
             return {
                 ...state,
+                userObj: action?.payload,
                 loading: false,
                 dashboardLoad: false,
                 authenticated: true,
                 userType: action?.payload?.userType,
                 signUpStatus: action?.payload?.userType,
                 ...action.payload,
+            };
+
+        case USER_OBJ_UPDATE:
+            console.log("inState", action?.payload);
+            return {
+                ...state,
+                userObj: { ...state?.userObj, ...action?.payload },
+                loading: false,
+                dashboardLoad: false,
+                authenticated: true,
+                userType: action?.payload?.userType,
+                signUpStatus: action?.payload?.userType,
             };
         case DASHBOARD_USER_PROFILE:
             if (state.userType === "mentor")
@@ -165,12 +181,12 @@ const authReducer = (state = INIT_STATE, action) => {
                     investorData: action?.payload?.data,
                     email: action?.payload?.email,
                 };
-            else if (state.userType === "partner")
+            else if (state.userType === "boosterpartner")
                 return {
                     ...state,
                     loading: false,
                     dashboardLoad: false,
-                    partnerData: action?.payload,
+                    partnerData: action?.payload?.data,
                     email: action?.payload?.email,
                 };
             else

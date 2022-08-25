@@ -7,6 +7,7 @@ import { getAllSchedule } from "./../../services/schedule";
 
 export const InvestorScheduleCalendar = () => {
     const [schedules, setSchedule] = useState(null);
+    const [openAvailabilityModal, setopenAvailabilityModal] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -31,7 +32,10 @@ export const InvestorScheduleCalendar = () => {
     return (
         <div className="wrapper">
             <CreateCallSchedule />
-            <AddAvailability />
+            <AddAvailability
+                openAvailabilityModal={openAvailabilityModal}
+                setopenAvailabilityModal={setopenAvailabilityModal}
+            />
             <section className="d-flex align-items-center justify-content-end mb-4">
                 {/* <h1 className="page-title">My Schedule</h1> */}
                 <div
@@ -40,8 +44,7 @@ export const InvestorScheduleCalendar = () => {
                 >
                     <Button
                         label="Add Availability"
-                        data-toggle="modal"
-                        data-target="#addAvailable"
+                        onClick={() => setopenAvailabilityModal(true)}
                     />
                     <Button
                         label="Create Events"

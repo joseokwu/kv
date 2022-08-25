@@ -17,6 +17,7 @@ export const DashSidebar = () => {
     const activateLink = (path) => {
         return pathname.includes(path) ? "activeSide" : "";
     };
+    console.log(stateAuth);
 
     return (
         <div className="sideMain">
@@ -24,9 +25,8 @@ export const DashSidebar = () => {
                 <div style={{ marginLeft: "0px" }}>
                     <img
                         src={
-                            stateAuth?.profileData?.startupRes?.startUpProfile
-                                ?.logo ??
-                            `https://ui-avatars.com/api/?name=${stateAuth?.user?.businessname}`
+                            stateAuth?.userObj?.avatar ??
+                            `https://ui-avatars.com/api/?name=${stateAuth?.startupname}`
                         }
                         alt="profile"
                         className=""

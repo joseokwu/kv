@@ -107,6 +107,10 @@ export const StartupFundingRaising = () => {
                         count={`$${convertToMillion(
                             stateAuth?.profileData?.startupRes?.fundRaising
                                 ?.capTable?.amountInvestedByFounders
+                                ? stateAuth?.profileData?.startupRes
+                                      ?.fundRaising?.capTable
+                                      ?.amountInvestedByFounders
+                                : "0"
                         )}`}
                         color="#E5FFE4"
                     />
@@ -133,9 +137,11 @@ export const StartupFundingRaising = () => {
                         name="Pre-Money Valuation"
                         count={`$${convertToMillion(
                             stateAuth?.profileData?.startupRes?.fundRaising
-                                ?.previousRound?.preMoneyValuation &&
-                                stateAuth?.profileData?.startupRes?.fundRaising
-                                    ?.previousRound?.preMoneyValuation
+                                ?.previousRound?.preMoneyValuation
+                                ? stateAuth?.profileData?.startupRes
+                                      ?.fundRaising?.previousRound
+                                      ?.preMoneyValuation
+                                : "0"
                         )}`}
                         color="#E5FFE4"
                     />
@@ -147,9 +153,11 @@ export const StartupFundingRaising = () => {
                         name="Post-Money Valuation"
                         count={`$${convertToMillion(
                             stateAuth?.profileData?.startupRes?.fundRaising
-                                ?.previousRound?.postMoneyValuation &&
-                                stateAuth?.profileData?.startupRes?.fundRaising
-                                    ?.previousRound?.postMoneyValuation
+                                ?.previousRound?.postMoneyValuation
+                                ? stateAuth?.profileData?.startupRes
+                                      ?.fundRaising?.previousRound
+                                      ?.postMoneyValuation
+                                : "0"
                         )}`}
                         color="#FAD7DC"
                     />

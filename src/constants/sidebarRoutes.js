@@ -87,6 +87,19 @@ export const investorRoutes = [
     },
 ];
 
+export const boosterPartnerRoutes = [
+    {
+        title: "Partner Details",
+        hash: "details",
+        path: 1,
+    },
+    {
+        title: "Our Offerings",
+        hash: "offerings",
+        path: 2,
+    },
+];
+
 export const dashboardRoutes = [
     {
         title: "Dashboard",

@@ -1,4 +1,4 @@
-.application-card-list > div {
+.application-card-list>div {
   padding: 0 11px;
 }
 
@@ -26,9 +26,11 @@
   height: 49px;
   padding: 12px;
 }
+
 .filter-btn:focus {
   outline: none;
 }
+
 .applicant-tabs-list {
   list-style: none;
   display: flex;
@@ -66,6 +68,9 @@
   padding: 40px 18px;
   /* width: 100%; */
   width: 414px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 48px 18px !important;
 }
 
 .kv-search-input {

@@ -17,6 +17,8 @@ import {
 } from "../containers";
 import { useAuth } from "./../../hooks/useAuth";
 import { getPartnersApplication } from "../../services";
+import { industry } from "../../constants/domiData";
+import { Tag2 } from "../../mentorComponents";
 
 export const BoosterApplicants = ({ history }) => {
     const {
@@ -29,17 +31,34 @@ export const BoosterApplicants = ({ history }) => {
     const [partners, setPartners] = useState([]);
     const [fetched, setFetched] = useState(false);
 
+    const [filterSearch, setFilterSearch] = useState("");
+    const [tempIndustryList, setTempIndustryList] = useState(industry);
+    const [selectedList, setSelectedList] = useState([]);
+
     useEffect(() => {
         const fetchPartners = async () => {
-            const res = await getPartnersApplication({ page: 1, limit: 5 });
-            console.log(res);
-            console.log(res?.data?.data);
-            setPartners(res?.data?.data);
+            try {
+                const res = await getPartnersApplication({ page: 1, limit: 5 });
+                console.log(res);
+                console.log(res?.data?.data);
+                setPartners(res?.data?.data);
+            } catch (e) {
+                console.log(e);
+            }
+
             setFetched(true);
         };
 
         fetchPartners();
     }, []);
+
+    useEffect(() => {
+        setTempIndustryList(
+            industry.filter((item) =>
+                item.toLowerCase().startsWith(filterSearch.toLowerCase())
+            )
+        );
+    }, [filterSearch]);
 
     const pendin = partners?.filter((partner) => partner?.status === "PENDING");
     const approve = partners?.filter(
@@ -141,7 +160,10 @@ export const BoosterApplicants = ({ history }) => {
                         <img src={down} alt="down" />
                     </button>
 
-                    <section className="dropdown-menu filter-menu">
+                    <section
+                        className="dropdown-menu filter-menu"
+                        onClick={(ev) => ev.stopPropagation()}
+                    >
                         <div
                             className="d-flex align-items-center justify-content-between"
                             style={{ marginBottom: 35 }}
@@ -160,7 +182,12 @@ export const BoosterApplicants = ({ history }) => {
                                 <span>
                                     <img src={searchSm} alt="search" />
                                 </span>
-                                <input type="search" />
+                                <input
+                                    type="search"
+                                    onChange={(e) =>
+                                        setFilterSearch(e.target.value)
+                                    }
+                                />
                             </section>
                         </div>
 
@@ -168,74 +195,46 @@ export const BoosterApplicants = ({ history }) => {
                             <label htmlFor="all">All</label>
                             <input type="checkbox" name="type" id="all" />
                         </div>
-                        <div className="d-flex align-items-center justify-content-between">
-                            <label htmlFor="accounting">Accounting</label>
-                            <input
-                                type="checkbox"
-                                name="type"
-                                id="accounting"
-                            />
-                        </div>
-
                         <article className="filter-check-list">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <label htmlFor="analytics">Analytics</label>
-                                <input
-                                    type="checkbox"
-                                    name="type"
-                                    id="analytics"
-                                />
-                            </div>
-
-                            <div className="d-flex align-items-center justify-content-between">
-                                <label htmlFor="bike-rentals">
-                                    Bike Rentals
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    name="type"
-                                    id="bike-rentals"
-                                />
-                            </div>
-
-                            <div className="d-flex align-items-center justify-content-between">
-                                <label htmlFor="cloud-computing">
-                                    Cloud Computing
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    name="type"
-                                    id="cloud-computing"
-                                />
-                            </div>
-
-                            <div className="d-flex align-items-center justify-content-between">
-                                <label htmlFor="cloud-telephony">
-                                    Cloud Telephony
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    name="type"
-                                    id="cloud-telephony"
-                                />
-                            </div>
-
-                            <div className="d-flex align-items-center justify-content-between">
-                                <label htmlFor="content-services">
-                                    Content Services
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    name="type"
-                                    id="content-services"
-                                />
-                            </div>
-
-                            <div className="d-flex align-items-center justify-content-between">
-                                <label htmlFor="crm">CRM</label>
-                                <input type="checkbox" name="type" id="crm" />
-                            </div>
+                            {tempIndustryList.map((item) => (
+                                <div className="d-flex align-items-center justify-content-between">
+                                    <label htmlFor={item}>{item}</label>
+                                    <input
+                                        type="checkbox"
+                                        name="type"
+                                        id={item}
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                if (
+                                                    !selectedList.includes(
+                                                        item.toLowerCase()
+                                                    )
+                                                ) {
+                                                    setSelectedList([
+                                                        ...selectedList,
+                                                        item,
+                                                    ]);
+                                                }
+                                            } else {
+                                                setSelectedList(
+                                                    selectedList.filter(
+                                                        (selectedItem) =>
+                                                            item.toLowerCase() !==
+                                                            selectedItem.toLowerCase()
+                                                    )
+                                                );
+                                            }
+                                            console.log(selectedList);
+                                        }}
+                                    />
+                                </div>
+                            ))}
                         </article>
+                        <div className="d-flex flex-row align-items-start gap-3 flex-wrap mb-3">
+                            {selectedList.map((item) => (
+                                <Tag2 name={item} />
+                            ))}
+                        </div>
 
                         <article className="type-list">
                             <p className="filter-header mb-4">Programme Type</p>

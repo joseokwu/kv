@@ -9,14 +9,14 @@ export const AllComponent = ({ data = [], fetched = true, apply }) => {
     const { stateAuth } = useAuth();
     const [allApplicants, setAllApplicants] = useState([]);
 
-    useEffect(() => {
-        setAllApplicants([
-            ...stateAuth?.partnerData?.pendingRequests,
-            ...stateAuth?.partnerData?.approvedRequests,
-            ...stateAuth?.partnerData?.declinedRequests,
-        ]);
-        console.log(stateAuth);
-    }, []);
+    // useEffect(() => {
+    //     setAllApplicants([
+    //         ...stateAuth?.partnerData?.pendingRequests,
+    //         ...stateAuth?.partnerData?.approvedRequests,
+    //         ...stateAuth?.partnerData?.declinedRequests,
+    //     ]);
+    //     console.log(stateAuth);
+    // }, []);
 
     return (
         <SkeletonLoader fetched={fetched} height={360}>

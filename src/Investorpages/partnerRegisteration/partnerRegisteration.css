@@ -19,7 +19,6 @@
 
 .register-wrap {
   /* padding: 48px 9%; */
-  background-color: #fdfdfd;
   height: calc(100vh - 60px);
   overflow-y: auto;
   scroll-behavior: smooth;

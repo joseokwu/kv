@@ -23,6 +23,7 @@ import { AvatarWrapper } from "../../../../components";
 
 const Details = ({ data }) => {
     console.log(data);
+    const { stateAuth } = useAuth();
 
     return (
         <section className="mentor_profile_info">
@@ -42,19 +43,13 @@ const Details = ({ data }) => {
                     />
                 </span>
                 <span className="profile-image">
-                    <AvatarWrapper
-                        condition={data?.logo}
-                        initials={`${data?.firstname?.slice(
-                            0,
-                            1
-                        )}${data?.lastname?.slice(0, 1)}`}
-                        size={213}
-                    >
-                        <img
-                            src={data?.logo !== "" ? data?.logo : ""}
-                            alt={"mentor profile pic"}
-                        />
-                    </AvatarWrapper>
+                    <img
+                        src={
+                            stateAuth?.userObj?.avatar ??
+                            `https://ui-avatars.com/api/?name=${stateAuth?.firstname} ${stateAuth?.lastname}`
+                        }
+                        alt={"mentor profile pic"}
+                    />
                 </span>
 
                 <article>

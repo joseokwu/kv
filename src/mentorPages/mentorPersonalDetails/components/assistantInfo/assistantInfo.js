@@ -3,7 +3,9 @@ import { useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Button, PhoneInput } from "../../../../mentorComponents/index";
+import { css } from "styled-components/macro";
+import { Button } from "../../../../mentorComponents/index";
+import PhoneInput from "react-phone-number-input";
 import { TextField, TextArea } from "../../../../Startupcomponents";
 import { Form } from "antd";
 import "./assistantInfo.css";
@@ -277,25 +279,49 @@ const AssistantInfo = () => {
                             }
                         />
                     </section>
-                    <section className="col-md-6 mb-4">
-                        <PhoneInput
-                            label="Mobile Number"
+                    <section
+                        className="col-md-6 mb-4"
+                        css={css`
+                            input {
+                                padding: 8px 14px !important;
+                            }
+                        `}
+                    >
+                        <Form.Item
                             name="assistantPhone"
-                            value={
+                            label="Mobile Number"
+                            initialValue={
                                 stateAuth?.mentorData?.assistantInfo
                                     ?.assistantPhone
                             }
-                            onChange={(e) =>
-                                handleChange(
-                                    {
-                                        target: {
-                                            value: e.id,
+                            rules={[
+                                {
+                                    required: false,
+                                    message: "Please enter a mobile number",
+                                },
+                            ]}
+                        >
+                            <PhoneInput
+                                name="assistantPhone"
+                                international
+                                countryCallingCodeEditable={true}
+                                MaxLength={17}
+                                value={
+                                    stateAuth?.mentorData?.assistantInfo
+                                        ?.assistantPhone
+                                }
+                                onChange={(value) =>
+                                    handleChange(
+                                        {
+                                            target: {
+                                                value: value,
+                                            },
                                         },
-                                    },
-                                    "assistantPhone"
-                                )
-                            }
-                        />
+                                        "assistantPhone"
+                                    )
+                                }
+                            />
+                        </Form.Item>
                     </section>
                 </div>
             </FormCard>
