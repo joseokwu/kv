@@ -28,7 +28,7 @@ export const BoosterPartnerRegistration = () => {
     useEffect(() => {
         wrapRef.current.scrollTop = 0;
         if (hash === "#offerings") {
-            setProgress("90");
+            setProgress("100");
             changePath(2);
         } else {
             setProgress("0");

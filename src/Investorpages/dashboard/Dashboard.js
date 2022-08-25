@@ -99,7 +99,7 @@ export const BoosterDashboard = ({ history }) => {
                 </section>
 
                 <section className="row mt-4 dash-main-content">
-                    <div className="col-lg-6">
+                    <div className="">
                         <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
                             <h5>New Applications</h5>
                             <span

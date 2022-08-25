@@ -38,6 +38,7 @@ const OurOffering = () => {
 
         if (uploaded?.success) {
             toast.success("Saved Successfully");
+            push("/boosterpartner/dashboard");
         } else {
             toast.error("Something went wrong");
         }
@@ -108,7 +109,7 @@ const OurOffering = () => {
                     <section className="mb-4">
                         <TextareaCustom
                             name={"importantNote"}
-                            label={"Important Note "}
+                            label={"Important Notes"}
                             value={
                                 stateAuth?.partnerData?.offerings?.importantNote
                             }
@@ -222,7 +223,7 @@ const OurOffering = () => {
 
                     <div>
                         <p className="offer-text pt-2">
-                            Free Credit Value Alloted
+                            Free Credit Value Allotted
                         </p>
                         <section className="free-choice">
                             <button

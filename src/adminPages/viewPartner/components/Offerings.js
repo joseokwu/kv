@@ -83,7 +83,7 @@ export const Offerings = ({ partner }) => {
                         </div>
 
                         <div>
-                            <h6 className="mb-3">Free Credit Value Alloted</h6>
+                            <h6 className="mb-3">Free Credit Value Allotted</h6>
                             <YesNo
                                 text={
                                     partner?.offerings?.freeCreditValue
