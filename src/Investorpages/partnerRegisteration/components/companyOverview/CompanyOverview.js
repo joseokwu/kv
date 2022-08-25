@@ -28,7 +28,12 @@ const { TextArea } = Input;
 // ]
 
 const CompanyOverview = () => {
-    const { stateAuth, updatePartnerLocalData, updatePartnerInfo } = useAuth();
+    const {
+        stateAuth,
+        updatePartnerLocalData,
+        updatePartnerInfo,
+        updateUserObj,
+    } = useAuth();
     const [logoUploading, setLogoUploading] = useState(false);
     const [buttonClicked, setButtonClicked] = useState("Save");
     const { goBack, push } = useHistory();
@@ -96,6 +101,9 @@ const CompanyOverview = () => {
             };
             console.log(samplePayload);
             const updateAvatar = await editUser(samplePayload);
+            await updateUserObj({
+                avatar: response?.path,
+            });
 
             console.log(updateAvatar);
             // updatePartnerLocalData("", {

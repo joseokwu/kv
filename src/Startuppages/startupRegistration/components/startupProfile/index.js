@@ -27,11 +27,13 @@ import { TextareaCustom } from "./../../../../components/textArea/cutstomTextare
 import { letterOnly } from "../../../../utils/helpers";
 import { industry } from "../../../../constants/domiData";
 import { useEffect } from "react";
+import { editUser } from "../../../../services";
 
 const { Option } = Select;
 
 export const StartupProfile = () => {
-    const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
+    const { updateProfile, stateAuth, updateStartupInfo, updateUserObj } =
+        useAuth();
     const { changePath } = useActivity();
     const startupStage = [
         { value: "Pre-seed Stage", label: "Pre-seed Stage" },
@@ -51,9 +53,7 @@ export const StartupProfile = () => {
     ];
     const [buttonClicked, setButtonClicked] = useState("Save");
     const [logoUploading, setLogoUploading] = useState(false);
-    const [logo, setLogo] = useState(
-        stateAuth?.profileData?.startupRes?.startUpProfile?.logo ?? ""
-    );
+    const [logo, setLogo] = useState(stateAuth?.userObj?.avatar ?? "");
     const dateFormat = "YYYY-MM-DD";
     const [country, setCountry] = useState(
         stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
@@ -111,9 +111,17 @@ export const StartupProfile = () => {
         try {
             const response = await upload(formData);
             setLogo(response?.path);
-            updateProfile("startUpProfile", {
-                logo: response?.path,
-            });
+
+            const samplePayload = {
+                payload: {
+                    avatar: response?.path,
+                },
+            };
+            console.log(samplePayload);
+            const updateAvatar = await editUser(samplePayload);
+            await updateUserObj({ avatar: response?.path });
+
+            console.log(updateAvatar);
         } catch (error) {
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
@@ -141,20 +149,18 @@ export const StartupProfile = () => {
             </HeaderStartup>
             <ImageWrapper>
                 <div className="start-img-p">
-                    {stateAuth?.profileData?.startupRes?.startUpProfile
-                        ?.logo === null ? (
+                    {!stateAuth?.userObj?.avatar ? (
                         logoUploading ? (
                             <CircularLoader color={"#000"} />
                         ) : (
                             <AiOutlineUser size={36} color="#828282" />
                         )
+                    ) : logoUploading ? (
+                        <CircularLoader color={"#000"} />
                     ) : (
                         <img
                             className=""
-                            src={
-                                stateAuth?.profileData?.startupRes
-                                    ?.startUpProfile?.logo
-                            }
+                            src={stateAuth?.userObj?.avatar}
                             style={{
                                 borderRadius: "70px",
                                 width: "90px",

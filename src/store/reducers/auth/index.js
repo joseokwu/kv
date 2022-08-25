@@ -5,6 +5,7 @@ import {
     LOGIN_SUCCESS,
     REGISTER_SUCCESS,
     USER_PROFILE,
+    USER_OBJ_UPDATE,
     USER_PROFILE_FAIL,
     SET_SIGNUP_STATUS,
     LOG_OUT,
@@ -142,6 +143,18 @@ const authReducer = (state = INIT_STATE, action) => {
                 userType: action?.payload?.userType,
                 signUpStatus: action?.payload?.userType,
                 ...action.payload,
+            };
+
+        case USER_OBJ_UPDATE:
+            console.log("inState", action?.payload);
+            return {
+                ...state,
+                userObj: { ...state?.userObj, ...action?.payload },
+                loading: false,
+                dashboardLoad: false,
+                authenticated: true,
+                userType: action?.payload?.userType,
+                signUpStatus: action?.payload?.userType,
             };
         case DASHBOARD_USER_PROFILE:
             if (state.userType === "mentor")

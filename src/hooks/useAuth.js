@@ -6,6 +6,7 @@ import {
     changeStatus,
     logout,
     edit,
+    updateUserObjAction,
     dashboardProfile,
     updateStartupData,
     updateStartupProfile,
@@ -121,6 +122,10 @@ export const useAuth = () => {
         history.push("/");
     };
 
+    const updateUserObj = async (values) => {
+        dispatch(updateUserObjAction(values));
+    };
+
     const updateStartupInfo = async (lastPage = false) => {
         try {
             const dataToPost = {
@@ -225,6 +230,7 @@ export const useAuth = () => {
         changeSignup,
         userLogout,
         editUser,
+        updateUserObj,
         callUpdateStartupData,
         updatePartnerInfo,
         updatePartnerLocalData,

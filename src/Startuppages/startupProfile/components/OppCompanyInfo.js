@@ -8,9 +8,11 @@ import linkedIn from "../../../assets/icons/linkedInLogo.svg";
 import whatsApp from "../../../assets/icons/whatsapp.svg";
 import share from "../../../assets/icons/share.svg";
 import { AvatarWrapper } from "../../../components";
+import { useAuth } from "../../../hooks";
 
 export const OppCompanyInfo = ({ data }) => {
     const startUpProfile = data?.profileData?.startupRes?.startUpProfile;
+    const { stateAuth } = useAuth();
     return (
         <section className="opp-page-card py-4">
             <div
@@ -23,22 +25,28 @@ export const OppCompanyInfo = ({ data }) => {
                 style={{ rowGap: 10 }}
             >
                 <div className="w-100">
-                    <AvatarWrapper
-                        condition={startUpProfile?.logo}
-                        initials={startUpProfile?.startupName?.slice(0, 1)}
-                        size={50}
+                    <div
+                        style={{
+                            width: "60px",
+                            height: "60px",
+                            borderRadius: "50%",
+                            overflow: "hidden",
+                        }}
                     >
                         <img
-                            src={startUpProfile?.logo}
-                            alt="logo"
+                            src={
+                                stateAuth?.userObj?.avatar ??
+                                `https://ui-avatars.com/api/?name=${stateAuth?.startupname}`
+                            }
+                            alt="profile"
                             className="mb-3"
-                            width="50px"
                             style={{
+                                width: "100%",
                                 objectFit: "cover",
                                 objectPosition: "100% 0",
                             }}
                         />
-                    </AvatarWrapper>
+                    </div>
                     <div
                         className="d-flex align-items-center justify-content-between w-100"
                         style={{ marginTop: "1.5rem" }}

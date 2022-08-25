@@ -5,6 +5,7 @@ import {
     LOGIN_FAILED,
     LOGIN_SUCCESS,
     USER_PROFILE,
+    USER_OBJ_UPDATE,
     USER_PROFILE_FAIL,
     SET_SIGNUP_STATUS,
     EDIT,
@@ -249,6 +250,13 @@ export const getProfile = async (value) => async (dispatch) => {
             type: USER_PROFILE_FAIL,
         });
     }
+};
+
+export const updateUserObjAction = async (value) => async (dispatch) => {
+    dispatch({
+        type: USER_OBJ_UPDATE,
+        payload: value,
+    });
 };
 
 export const changeStatus = (value) => async (dispatch) => {
