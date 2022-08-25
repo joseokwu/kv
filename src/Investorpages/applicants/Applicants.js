@@ -31,10 +31,15 @@ export const BoosterApplicants = ({ history }) => {
 
     useEffect(() => {
         const fetchPartners = async () => {
-            const res = await getPartnersApplication({ page: 1, limit: 5 });
-            console.log(res);
-            console.log(res?.data?.data);
-            setPartners(res?.data?.data);
+            try {
+                const res = await getPartnersApplication({ page: 1, limit: 5 });
+                console.log(res);
+                console.log(res?.data?.data);
+                setPartners(res?.data?.data);
+            } catch (e) {
+                console.log(e);
+            }
+
             setFetched(true);
         };
 
