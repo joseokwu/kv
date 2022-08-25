@@ -7,7 +7,7 @@ import { InvestorDetails } from "./components/investorDetails/InvestorDetails";
 import { InvestorDetails2 } from "./components/investorDetails2/InvestorDetails2";
 import { InvestmentApproach } from "./components/investmentApproach/InvestmentApproach";
 import { Portfolio } from "./components/portfolio/Portfolio";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth, useActivity } from "../../hooks";
 
 export const InvestorRegistration = () => {
     const wrapRef = useRef();
@@ -19,6 +19,10 @@ export const InvestorRegistration = () => {
     } = useHistory();
 
     const { stateAuth } = useAuth();
+    const {
+        changePath,
+        state: { path },
+    } = useActivity();
 
     const switchForm = (currentHash) => {
         push(currentHash);
@@ -31,23 +35,29 @@ export const InvestorRegistration = () => {
         switch (hash) {
             case "#details":
                 setProgress("0");
+                changePath(1);
                 break;
             case "#investor":
                 setProgress("25");
+                changePath(2);
                 break;
 
             case "#investor2":
                 setProgress("50");
+                changePath(2);
                 break;
             case "#approach":
                 setProgress("75");
+                changePath(3);
                 break;
 
             case "#portfolio":
                 setProgress("100");
+                changePath(4);
                 break;
             default:
                 setProgress("0");
+                changePath(1);
                 break;
         }
     }, [hash]);

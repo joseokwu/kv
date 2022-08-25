@@ -33,7 +33,7 @@ export const InvestorRegistrationLayout = ({ children }) => {
                             maxHeight: "calc(100vh - 60px)",
                         }}
                     >
-                        <BoosterPartnerSideBar />
+                        <InvestorSideBar />
                     </div>
                     <div
                         className="col-lg-9 main-body"
@@ -66,7 +66,7 @@ export const BoosterPartnerRegistrationLayout = ({ children }) => {
                             maxHeight: "calc(100vh - 60px)",
                         }}
                     >
-                        <InvestorSideBar />
+                        <BoosterPartnerSideBar />
                     </div>
                     <div
                         className="col-lg-9 main-body"

@@ -5,12 +5,16 @@ import hi from "../../assets/icons/hiEmoji.png";
 import { useHistory } from "react-router-dom";
 import CompanyOverview from "./components/companyOverview/CompanyOverview";
 import OurOffering from "./components/ourOffering/OurOffering";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth, useActivity } from "../../hooks";
 
 export const BoosterPartnerRegistration = () => {
     const wrapRef = useRef();
     const [progress, setProgress] = useState("50");
     const { stateAuth } = useAuth();
+    const {
+        changePath,
+        state: { path },
+    } = useActivity();
 
     const {
         location: { hash },
@@ -25,8 +29,10 @@ export const BoosterPartnerRegistration = () => {
         wrapRef.current.scrollTop = 0;
         if (hash === "#offerings") {
             setProgress("90");
+            changePath(2);
         } else {
             setProgress("0");
+            changePath(1);
         }
     }, [hash]);
 

@@ -42,6 +42,7 @@ import { MentorViewAssignment } from "../mentorPages/mentorAssignments/component
 import {
     WithInvestorSecLayout,
     WithInvestorRegistrationLayout,
+    WithBoosterPartnerRegistrationLayout,
     WithMainInvestorLayout,
 } from "../components";
 
@@ -513,7 +514,9 @@ const routes = [
     {
         name: "Booster Registration",
         path: "/boosterpartner/registration",
-        component: WithInvestorRegistrationLayout(BoosterPartnerRegistration),
+        component: WithBoosterPartnerRegistrationLayout(
+            BoosterPartnerRegistration
+        ),
         exact: true,
         protected: true,
         type: "booster",
