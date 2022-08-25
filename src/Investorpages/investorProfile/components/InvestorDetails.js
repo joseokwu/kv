@@ -42,7 +42,10 @@ export const InvestorDetails = ({ data }) => {
                 </span>
                 <span className="profile-image">
                     <img
-                        src={stateAuth?.investorData?.profile?.avatar}
+                        src={
+                            stateAuth?.userObj?.avatar ??
+                            `https://ui-avatars.com/api/?name=${stateAuth?.firstname} ${stateAuth?.lastname}`
+                        }
                         alt="sample company"
                     />
                 </span>
