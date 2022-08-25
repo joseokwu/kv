@@ -63,7 +63,7 @@ export const Portfolio = () => {
             )}
             <h3 style={{ color: "#2e3192" }}>Start-up portfolio</h3>
             <p>
-                This will help us provide startups personalised for your
+                This will help us provide startups, personalised for your
                 preferences
             </p>
 

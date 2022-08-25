@@ -118,7 +118,7 @@ const Interest = () => {
         >
             <h3>Area of Interest </h3>
             <p>
-                This will help us provide startups personalised for your
+                This will help us provide startups, personalised for your
                 preferences
             </p>
 
