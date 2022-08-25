@@ -169,7 +169,12 @@ export const BoosterApplicants = ({ history }) => {
                             style={{ marginBottom: 35 }}
                         >
                             <p className="filter-title">Filter</p>
-                            <p className="filter-clear">Clear All</p>
+                            <p
+                                className="filter-clear"
+                                onClick={() => setSelectedList([])}
+                            >
+                                Clear All
+                            </p>
                         </div>
 
                         <div className="d-flex align-items-center justify-content-between mb-4">
@@ -203,12 +208,11 @@ export const BoosterApplicants = ({ history }) => {
                                         type="checkbox"
                                         name="type"
                                         id={item}
+                                        checked={selectedList.includes(item)}
                                         onChange={(e) => {
                                             if (e.target.checked) {
                                                 if (
-                                                    !selectedList.includes(
-                                                        item.toLowerCase()
-                                                    )
+                                                    !selectedList.includes(item)
                                                 ) {
                                                     setSelectedList([
                                                         ...selectedList,

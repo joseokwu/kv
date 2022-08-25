@@ -12,6 +12,12 @@ import down from "../../assets/icons/chevronDown.svg";
 import "./evaluation.css";
 import { mentorEvaluations } from "../../services/mentor";
 import { PageLoader } from "../../components";
+import { Select } from "antd";
+import { RowOption } from "../../components";
+import { Tag2 } from "../../mentorComponents";
+import { industry } from "../../constants/domiData";
+
+const { Option } = Select;
 
 export const MentorEvaluation = ({ history }) => {
     const {
@@ -167,21 +173,132 @@ export const MentorEvaluation = ({ history }) => {
             <section className="mt-3 d-flex align-items-center justify-content-between">
                 <Tabs tabItems={tabItems} />
                 <div className="">
-                    <button
-                        className="d-flex align-items-center filter-btn"
-                        style={{ columnGap: 7 }}
-                        data-toggle="dropdown"
-                    >
-                        <img src={filter} alt="filter" />
-                        <span>Filter</span>
-                        <img className="pl-1" src={down} alt="down" />
-                    </button>
+                    <EvaluationFilter />
                 </div>
             </section>
 
             <div className="pt-3">
                 <section className="mt-1">{renderContent()}</section>
             </div>
+        </div>
+    );
+};
+
+const EvaluationFilter = () => {
+    const [selectedList, setSelectedList] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
+    const [investmentRange, setInvestmentRange] = useState([0, 50000]);
+
+    return (
+        <div className="dropdown">
+            <button
+                className="d-flex align-items-center filter-btn"
+                style={{ columnGap: 7 }}
+                data-toggle="dropdown"
+            >
+                <img src={filter} alt="filter" />
+                <p>Filter</p>
+                <img src={down} alt="down" />
+            </button>
+
+            <section
+                className="dropdown-menu filter-menu pt-3"
+                onClick={(ev) => ev.stopPropagation()}
+            >
+                <div className="drop-section">
+                    <div
+                        className="d-flex align-items-center justify-content-between"
+                        style={{ marginBottom: 35 }}
+                    >
+                        <p className="filter-title">Filter</p>
+                        <p
+                            className="filter-clear"
+                            onClick={() => {
+                                setSelectedList([]);
+                                setSelectAll(false);
+                            }}
+                        >
+                            Clear All
+                        </p>
+                    </div>
+
+                    <div className="d-flex align-items-center justify-content-between mb-4">
+                        <p className="filter-industry">Industry</p>
+                        <img src={down} alt="down" />
+                    </div>
+                    <div className="mb-4">
+                        <Select
+                            mode="multiple"
+                            allowClear
+                            style={{
+                                width: "100%",
+                            }}
+                            placeholder="Please select"
+                            value={selectedList}
+                            onChange={(e) => {
+                                setSelectedList(e);
+                            }}
+                        >
+                            {industry.map((item) => (
+                                <Option key={item}>{item}</Option>
+                            ))}
+                        </Select>
+                    </div>
+
+                    <div className="d-flex align-items-center justify-content-between">
+                        <label htmlFor="all">All</label>
+                        <input
+                            type="checkbox"
+                            name="type"
+                            id="all"
+                            checked={selectAll}
+                            onChange={(e) => setSelectAll(e.target.checked)}
+                        />
+                    </div>
+
+                    <div className="d-flex flex-row align-items-start gap-3 flex-wrap">
+                        {selectAll ? (
+                            <Tag2 name={"All Sectors"} />
+                        ) : (
+                            selectedList.map((item) => <Tag2 name={item} />)
+                        )}
+                    </div>
+                </div>
+                <div className="drop-section">
+                    <div className="d-flex align-items-center justify-content-between mb-4">
+                        <p className="filter-industry">Stage</p>
+                        <img src={down} alt="down" />
+                    </div>
+                    <RowOption
+                        options={[
+                            "Series A",
+                            "Series B",
+                            "Minimum Viable Product",
+                            "Pre - Seed",
+                            "VC Funds (India & Global)",
+                            "Revenue Traction",
+                            "Customer Traction",
+                            "Angel",
+                        ]}
+                    />
+                </div>
+                <div className="drop-section">
+                    <div className="d-flex align-items-center justify-content-between mb-4">
+                        <p className="filter-industry">Program Type</p>
+                        <img src={down} alt="down" />
+                    </div>
+                    <RowOption options={["Incubation", "Accelerator"]} />
+                </div>
+                <div className="drop-section">
+                    <div className="d-flex align-items-center justify-content-between mb-4">
+                        <p className="filter-industry">Program Category</p>
+                        <img src={down} alt="down" />
+                    </div>
+                    <RowOption
+                        options={["Fintech", "HealthTech", "AgricTech"]}
+                    />
+                </div>
+            </section>
         </div>
     );
 };

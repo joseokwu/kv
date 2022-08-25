@@ -59,7 +59,8 @@
 .edit-info {
   position: absolute;
   top: 25px;
-  right: 25px;
+  /* right: 25px; */
+  right: 43px;
 }
 
 .web-phone-local {
@@ -230,6 +231,7 @@
   letter-spacing: 0.01em;
   color: #828282;
 }
+
 .free-credit-answer {
   column-gap: 8px;
 }

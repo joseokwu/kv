@@ -96,7 +96,12 @@ export const MentorDashboard = () => {
                     <div>
                         <section className="d-flex align-items-center justify-content-between mb-3">
                             <p className="dash-sub-title">Assigned Startups</p>
-                            <p className="see-all">See All</p>
+                            <p
+                                className="see-all"
+                                onClick={() => push("/mentor/program")}
+                            >
+                                See All
+                            </p>
                         </section>
                         <section className="row">
                             {assignedStartups?.length > 0 ? (
