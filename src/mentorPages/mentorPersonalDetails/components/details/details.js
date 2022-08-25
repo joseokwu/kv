@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 // import CountryDropdown from "country-dropdown-with-flags-for-react";
 import toast from "react-hot-toast";
-import { css } from "styled-components//macro";
+import { css } from "styled-components/macro";
 import imageRep from "../../../../assets/icons/mentorDetails.svg";
 import add from "../../../../assets/icons/addFile.svg";
-import { Button, PhoneInput } from "../../../../mentorComponents/index";
+import PhoneInput from "react-phone-number-input";
+import { Button } from "../../../../mentorComponents/index";
 import { TextField } from "../../../../Startupcomponents";
 import { AiOutlineUser } from "react-icons/ai";
 import { Form, Select } from "antd";
@@ -62,13 +63,6 @@ const Details = () => {
         stateAuth?.profileData?.startupRes?.startUpProfile?.contactInfo
             ?.country ?? ""
     );
-
-    useEffect(() => {
-        if (stateAuth?.mentorData?.personalDetail?.mobilenumber.length <= 4)
-            updateMentorProfileState("personalDetail", {
-                mobilenumber: "",
-            });
-    }, [stateAuth?.mentorData?.personalDetail?.mobilenumber]);
 
     const gender = [
         // { label: "--Select-gender--", value: "" },
@@ -189,7 +183,10 @@ const Details = () => {
                                             : "image-placeholder"
                                     }
                                 >
-                                    <img src={stateAuth?.userObj?.avatar} alt="placeholder" />
+                                    <img
+                                        src={stateAuth?.userObj?.avatar}
+                                        alt="placeholder"
+                                    />
                                 </span>
                             )}
 
@@ -680,11 +677,15 @@ const Details = () => {
                         <section
                             className="col-md-12 mb-4"
                             css={css`
-                                label {
-                                    display: none;
-                                }
-                                .ant-form-item-label > label {
-                                    display: block;
+                                // label {
+                                //     display: none;
+                                // }
+                                // .ant-form-item-label > label {
+                                //     display: block;
+                                // }
+
+                                input {
+                                    padding: 8px 14px !important;
                                 }
                             `}
                         >
@@ -705,16 +706,19 @@ const Details = () => {
                                 <PhoneInput
                                     id="mobilenumber"
                                     name="mobilenumber"
+                                    international
+                                    countryCallingCodeEditable={true}
                                     value={
                                         stateAuth?.mentorData?.personalDetail
                                             ?.mobilenumber
                                     }
-                                    onChange={(e) => {
-                                        console.log(e.id);
+                                    MaxLength={17}
+                                    onChange={(value) => {
+                                        console.log(value);
                                         handleChange(
                                             {
                                                 target: {
-                                                    value: e.id,
+                                                    value: value,
                                                 },
                                             },
                                             "mobilenumber"
