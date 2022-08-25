@@ -43,7 +43,8 @@ export const CapTable = ({ setFundraising }) => {
     console.log(stateAuth?.profileData?.startupRes?.fundRaising?.capTable);
     const onFinish = () => {
         if (
-            stateAuth?.profileData?.startupRes?.fundRaising?.capTable?.files?.length === 0
+            stateAuth?.profileData?.startupRes?.fundRaising?.capTable?.files
+                ?.length === 0
         ) {
             toast.error("Please upload a Capital Table");
             return;
@@ -81,8 +82,8 @@ export const CapTable = ({ setFundraising }) => {
                                 name="amountRaised"
                                 type="text"
                                 value={
-                                    stateAuth?.profileData?.startupRes?.fundRaising
-                                        ?.capTable?.amountRaised
+                                    stateAuth?.profileData?.startupRes
+                                        ?.fundRaising?.capTable?.amountRaised
                                 }
                                 className="form-control ps-3"
                                 placeholder="$100,000"
@@ -93,8 +94,9 @@ export const CapTable = ({ setFundraising }) => {
                                 onValueChange={(value) =>
                                     updateProfile("fundRaising", {
                                         capTable: {
-                                            ...stateAuth?.profileData?.startupRes
-                                                ?.fundRaising?.capTable,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.fundRaising
+                                                ?.capTable,
                                             amountRaised: value,
                                         },
                                     })
@@ -106,8 +108,9 @@ export const CapTable = ({ setFundraising }) => {
                                 // name="amountInvestedByFounders"
                                 label="Total Capital invested by Founders"
                                 initialValue={
-                                    stateAuth?.profileData?.startupRes?.fundRaising
-                                        ?.capTable?.amountInvestedByFounders
+                                    stateAuth?.profileData?.startupRes
+                                        ?.fundRaising?.capTable
+                                        ?.amountInvestedByFounders
                                 }
                                 rules={[
                                     {
@@ -122,8 +125,9 @@ export const CapTable = ({ setFundraising }) => {
                                     name="amountInvestedByFounders"
                                     type="text"
                                     value={
-                                        stateAuth?.profileData?.startupRes?.fundRaising
-                                            ?.capTable?.amountInvestedByFounders
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.capTable
+                                            ?.amountInvestedByFounders
                                     }
                                     className="form-control ps-3"
                                     placeholder="$150,000"
@@ -135,8 +139,9 @@ export const CapTable = ({ setFundraising }) => {
                                     onValueChange={(value) =>
                                         updateProfile("fundRaising", {
                                             capTable: {
-                                                ...stateAuth?.profileData?.startupRes
-                                                    ?.fundRaising?.capTable,
+                                                ...stateAuth?.profileData
+                                                    ?.startupRes?.fundRaising
+                                                    ?.capTable,
                                                 amountInvestedByFounders: value,
                                             },
                                         })
@@ -163,8 +168,8 @@ export const CapTable = ({ setFundraising }) => {
                                     extension: "MB",
                                 }}
                                 initData={
-                                    stateAuth?.profileData?.startupRes?.fundRaising
-                                        ?.capTable?.file
+                                    stateAuth?.profileData?.startupRes
+                                        ?.fundRaising?.capTable?.file
                                         ? [
                                               stateAuth?.profileData?.startupRes
                                                   ?.fundRaising?.capTable?.file,
@@ -195,8 +200,9 @@ export const CapTable = ({ setFundraising }) => {
 
                                     updateProfile("fundRaising", {
                                         capTable: {
-                                            ...stateAuth?.profileData?.startupRes
-                                                ?.fundRaising?.capTable,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.fundRaising
+                                                ?.capTable,
                                             file: response?.path,
                                         },
                                     });
