@@ -35,8 +35,12 @@ export const Investor = () => {
             setInvestors(res?.data);
             setFetched(true);
         };
-        getData();
-        console.log(investorsData);
+        try {
+            getData();
+            console.log(investorsData);
+        } catch (e) {
+            console.log(e);
+        }
     }, []);
 
     const data = useMemo(() =>

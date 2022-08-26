@@ -226,7 +226,6 @@ export const getProfile = async (value) => async (dispatch) => {
             type: AUTH_START,
         });
         const res1 = await user();
-        const res2 = await profile();
 
         if (res1) {
             console.log(res1);
@@ -236,13 +235,18 @@ export const getProfile = async (value) => async (dispatch) => {
                 payload: res1?.data?.data,
             });
         }
-        if (res2) {
-            console.log(res2);
-            console.log(value);
-            dispatch({
-                type: DASHBOARD_USER_PROFILE,
-                payload: res2?.data,
-            });
+
+        if (res1?.data?.data?.userType !== "admin") {
+            const res2 = await profile();
+
+            if (res2) {
+                console.log(res2);
+                console.log(value);
+                dispatch({
+                    type: DASHBOARD_USER_PROFILE,
+                    payload: res2?.data,
+                });
+            }
         }
     } catch (err) {
         console.log("err", err);

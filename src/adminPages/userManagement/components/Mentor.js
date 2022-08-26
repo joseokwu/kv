@@ -50,7 +50,7 @@ export const Mentor = () => {
     ];
 
     const [mentors, setMentors] = useState([]);
-    const [fetched, setFetched] = useState(false);
+    const [fetched, setFetched] = useState(true);
 
     const fetchPrograms = async () => {
         const res = await getPrograms({ page: 1, limit: 2 });
@@ -59,9 +59,13 @@ export const Mentor = () => {
     };
 
     useEffect(() => {
-        const res = fetchPrograms();
-        console.log(res);
-        console.log("res");
+        try {
+            const res = fetchPrograms();
+            console.log(res);
+            console.log("res");
+        } catch (e) {
+            console.log(e);
+        }
     }, []);
 
     const getData = async () => {
@@ -77,6 +81,7 @@ export const Mentor = () => {
     };
 
     useEffect(() => {
+        setFetched(false);
         try {
             const res = getData();
             if (res.success && res?.data?.mentors?.length > 0) {
@@ -124,11 +129,10 @@ export const Mentor = () => {
                     }))
                 );
             }
-            setFetched(true);
         } catch (e) {
             console.log(e);
-            setFetched(true);
         }
+        setFetched(true);
 
         return () => {};
     }, []);

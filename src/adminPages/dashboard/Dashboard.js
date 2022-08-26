@@ -13,7 +13,7 @@ export const Dashboard = () => {
     const res = {};
 
     const [numOfApplications, setNumOfApplications] = useState(0);
-    const [fetched, setFetched] = useState(false);
+    const [fetched, setFetched] = useState(true);
 
     const getData = async () => {
         const res = await getStakeHolders({
@@ -63,15 +63,15 @@ export const Dashboard = () => {
     ];
 
     useEffect(async () => {
+        setFetched(false);
         try {
             const res = await getData();
             console.log(res);
             setNumOfApplications(res?.data?.metadata?.total);
-            setFetched(true);
         } catch (e) {
             console.log(e);
-            setFetched(true);
         }
+        setFetched(true);
     }, []);
 
     return (

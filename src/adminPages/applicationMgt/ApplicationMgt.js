@@ -58,77 +58,83 @@ export const ApplicationMgt = () => {
             console.log("currentPageRecommended", currentPageRecommended);
             console.log("currentPageAccepted", currentPageAccepted);
             // console.log("currentPagePending", currentPagePending);
+            try {
+                const res = await getStakeHolders({
+                    page: currentPagePending,
+                    limit: 5,
+                    type: "startup",
+                    query: {
+                        recommended: false,
+                        approveToEvaluate: false,
+                        passedEvaluation: false,
+                    },
+                });
+                const kvRes = await getStakeHolders({
+                    page: currentPageKv,
+                    limit: 5,
+                    type: "startup",
+                    query: {
+                        applicationCompleted: true,
+                        approveToEvaluate: true,
+                    },
+                });
+                // const mentRes = await getStakeHolders({
+                //     page: currentPageMentor,
+                //     limit: 5,
+                //     type: "startup",
+                //     query: {
+                //         applicationCompleted: true,
+                //         recommended: true,
+                //         approveToEvaluate: false,
+                //     },
+                // });
+                // const acceptedRes = await getStakeHolders({
+                //   page: currentPageAccept,
+                //   limit: 5,
+                //   type: 'startup',
+                //   query: {
+                //     applicationCompleted: true,
+                //     recommended: false,
+                //     approveToEvaluate: true,
+                //     passedEvaluation: true,
+                //   },
+                // });
+                const recommendedRes = await getStakeHolders({
+                    page: currentPageRecommended,
+                    limit: 5,
+                    type: "startup",
+                    query: {
+                        applicationCompleted: true,
+                        recommended: true,
+                        approveToEvaluate: false,
+                        passedEvaluation: false,
+                    },
+                });
+                const acceptedRes = await getStakeHolders({
+                    page: currentPageAccepted,
+                    limit: 5,
+                    type: "startup",
+                    query: {
+                        applicationCompleted: true,
+                        recommended: false,
+                        approveToEvaluate: true,
+                        passedEvaluation: false,
+                        accepted: true,
+                    },
+                });
+                console.log(res?.data);
+                setApplication(res?.data);
+                setKvScreening(kvRes?.data);
+                console.log(kvRes?.data);
+                setAccepted(acceptedRes?.data);
+                // setMentorScreening(mentRes?.data);
+                setRecommended(recommendedRes?.data);
 
-            const res = await getStakeHolders({
-                page: currentPagePending,
-                limit: 5,
-                type: "startup",
-                query: {
-                    recommended: false,
-                    approveToEvaluate: false,
-                    passedEvaluation: false,
-                },
-            });
-            const kvRes = await getStakeHolders({
-                page: currentPageKv,
-                limit: 5,
-                type: "startup",
-                query: { applicationCompleted: true, approveToEvaluate: true },
-            });
-            // const mentRes = await getStakeHolders({
-            //     page: currentPageMentor,
-            //     limit: 5,
-            //     type: "startup",
-            //     query: {
-            //         applicationCompleted: true,
-            //         recommended: true,
-            //         approveToEvaluate: false,
-            //     },
-            // });
-            // const acceptedRes = await getStakeHolders({
-            //   page: currentPageAccept,
-            //   limit: 5,
-            //   type: 'startup',
-            //   query: {
-            //     applicationCompleted: true,
-            //     recommended: false,
-            //     approveToEvaluate: true,
-            //     passedEvaluation: true,
-            //   },
-            // });
-            const recommendedRes = await getStakeHolders({
-                page: currentPageRecommended,
-                limit: 5,
-                type: "startup",
-                query: {
-                    applicationCompleted: true,
-                    recommended: true,
-                    approveToEvaluate: false,
-                    passedEvaluation: false,
-                },
-            });
-            const acceptedRes = await getStakeHolders({
-                page: currentPageAccepted,
-                limit: 5,
-                type: "startup",
-                query: {
-                    applicationCompleted: true,
-                    recommended: false,
-                    approveToEvaluate: true,
-                    passedEvaluation: false,
-                    accepted: true,
-                },
-            });
-            console.log(res?.data);
-            setApplication(res?.data);
-            setKvScreening(kvRes?.data);
-            console.log(kvRes?.data);
-            setAccepted(acceptedRes?.data);
-            // setMentorScreening(mentRes?.data);
-            setRecommended(recommendedRes?.data);
-
-            console.log(kvRes?.data);
-            console.log(acceptedRes?.data);
+                console.log(kvRes?.data);
+                console.log(acceptedRes?.data);
+            } catch (e) {
+                console.log(e);
+            }
             setFetched(true);
         };
 
