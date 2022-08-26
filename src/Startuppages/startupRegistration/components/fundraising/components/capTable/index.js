@@ -33,25 +33,26 @@ import toast from "react-hot-toast";
 
 export const CapTable = ({ setFundraising }) => {
     const history = useHistory();
-    const { updateProfile, stateAuth } = useAuth();
+    const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
 
     const [fileDoc, setFileDoc] = useState(
-        stateAuth?.startupData?.fundRaising?.capTable?.files ?? []
+        stateAuth?.profileData?.startupRes?.fundRaising?.capTable?.files ?? []
     );
     // const { location  } = history;
 
-    console.log(stateAuth?.startupData?.fundRaising?.capTable);
+    console.log(stateAuth?.profileData?.startupRes?.fundRaising?.capTable);
     const onFinish = () => {
         if (
-            stateAuth?.startupData?.fundRaising?.capTable?.files?.length === 0
+            stateAuth?.profileData?.startupRes?.fundRaising?.capTable?.files
+                ?.length === 0
         ) {
             toast.error("Please upload a Capital Table");
             return;
         }
-
+        updateStartupInfo();
         history.push("#Previous Round");
     };
-    console.log(stateAuth?.startupData?.fundRaising?.capTable);
+    console.log(stateAuth?.profileData?.startupRes?.fundRaising?.capTable);
 
     return (
         <Form
@@ -81,8 +82,8 @@ export const CapTable = ({ setFundraising }) => {
                                 name="amountRaised"
                                 type="text"
                                 value={
-                                    stateAuth?.startupData?.fundRaising
-                                        ?.capTable?.amountRaised
+                                    stateAuth?.profileData?.startupRes
+                                        ?.fundRaising?.capTable?.amountRaised
                                 }
                                 className="form-control ps-3"
                                 placeholder="$100,000"
@@ -93,8 +94,9 @@ export const CapTable = ({ setFundraising }) => {
                                 onValueChange={(value) =>
                                     updateProfile("fundRaising", {
                                         capTable: {
-                                            ...stateAuth?.startupData
-                                                ?.fundRaising?.capTable,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.fundRaising
+                                                ?.capTable,
                                             amountRaised: value,
                                         },
                                     })
@@ -106,8 +108,9 @@ export const CapTable = ({ setFundraising }) => {
                                 // name="amountInvestedByFounders"
                                 label="Total Capital invested by Founders"
                                 initialValue={
-                                    stateAuth?.startupData?.fundRaising
-                                        ?.capTable?.amountInvestedByFounders
+                                    stateAuth?.profileData?.startupRes
+                                        ?.fundRaising?.capTable
+                                        ?.amountInvestedByFounders
                                 }
                                 rules={[
                                     {
@@ -122,8 +125,9 @@ export const CapTable = ({ setFundraising }) => {
                                     name="amountInvestedByFounders"
                                     type="text"
                                     value={
-                                        stateAuth?.startupData?.fundRaising
-                                            ?.capTable?.amountInvestedByFounders
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.capTable
+                                            ?.amountInvestedByFounders
                                     }
                                     className="form-control ps-3"
                                     placeholder="$150,000"
@@ -135,8 +139,9 @@ export const CapTable = ({ setFundraising }) => {
                                     onValueChange={(value) =>
                                         updateProfile("fundRaising", {
                                             capTable: {
-                                                ...stateAuth?.startupData
-                                                    ?.fundRaising?.capTable,
+                                                ...stateAuth?.profileData
+                                                    ?.startupRes?.fundRaising
+                                                    ?.capTable,
                                                 amountInvestedByFounders: value,
                                             },
                                         })
@@ -163,10 +168,10 @@ export const CapTable = ({ setFundraising }) => {
                                     extension: "MB",
                                 }}
                                 initData={
-                                    stateAuth?.startupData?.fundRaising
-                                        ?.capTable?.file
+                                    stateAuth?.profileData?.startupRes
+                                        ?.fundRaising?.capTable?.file
                                         ? [
-                                              stateAuth?.startupData
+                                              stateAuth?.profileData?.startupRes
                                                   ?.fundRaising?.capTable?.file,
                                           ]
                                         : []
@@ -195,8 +200,9 @@ export const CapTable = ({ setFundraising }) => {
 
                                     updateProfile("fundRaising", {
                                         capTable: {
-                                            ...stateAuth?.startupData
-                                                ?.fundRaising?.capTable,
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.fundRaising
+                                                ?.capTable,
                                             file: response?.path,
                                         },
                                     });

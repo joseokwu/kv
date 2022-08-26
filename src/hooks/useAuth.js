@@ -6,6 +6,7 @@ import {
     changeStatus,
     logout,
     edit,
+    updateUserObjAction,
     dashboardProfile,
     updateStartupData,
     updateStartupProfile,
@@ -93,7 +94,7 @@ export const useAuth = () => {
     const updateMentorInfo = async (lastPage = false) => {
         try {
             const dataToPost = {
-                _id: stateAuth.mentorData?._id,
+                id: stateAuth.mentorData?._id,
                 payload: lastPage
                     ? { ...stateAuth.mentorData, applicationCompleted: true }
                     : stateAuth.mentorData,
@@ -101,6 +102,7 @@ export const useAuth = () => {
             };
 
             const res = await updateStartup(dataToPost);
+            console.log(res);
             return res?.success;
         } catch (error) {
             console.error(
@@ -120,10 +122,14 @@ export const useAuth = () => {
         history.push("/");
     };
 
+    const updateUserObj = async (values) => {
+        dispatch(updateUserObjAction(values));
+    };
+
     const updateStartupInfo = async (lastPage = false) => {
         try {
             const dataToPost = {
-                _id: stateAuth.profileData?.startupRes?._id,
+                id: stateAuth.profileData?.startupRes?._id,
                 payload: lastPage
                     ? {
                           ...stateAuth.profileData?.startupRes,
@@ -155,19 +161,23 @@ export const useAuth = () => {
 
     const updateInvestorInfo = async (lastPage = false) => {
         try {
-            const payload = {
-                accType: stateAuth.type[0],
-                values: lastPage
-                    ? { ...stateAuth.investorData, applicationCompleted: true }
+            const dataToPost = {
+                id: stateAuth.investorData?._id,
+                payload: lastPage
+                    ? {
+                          ...stateAuth.investorData,
+                          applicationCompleted: true,
+                      }
                     : stateAuth.investorData,
-                lastPage,
+                // lastPage,
             };
-            const res = await updateStartup(payload);
+
+            const res = await updateStartup(dataToPost);
             toast.success(res?.message);
             if (lastPage) {
                 history.push("/investor/dashboard");
             }
-            console.log(payload);
+            console.log(dataToPost);
         } catch (err) {
             console.log(err?.response);
             toast.error(err?.response?.data?.message ?? err?.response?.message);
@@ -180,20 +190,26 @@ export const useAuth = () => {
 
     const updatePartnerInfo = async (lastPage = false) => {
         try {
+            const newData = stateAuth?.partnerData;
             const payload = {
-                accType: stateAuth.userType,
-                values: lastPage
-                    ? { ...stateAuth.partnerData, applicationCompleted: true }
-                    : stateAuth.partnerData,
-                lastPage,
+                id: stateAuth?.partnerData?._id,
+                payload: lastPage
+                    ? {
+                          ...stateAuth?.partnerData,
+                          applicationCompleted: true,
+                      }
+                    : stateAuth?.partnerData,
+                // lastPage,
             };
 
+            console.log("payload", payload);
             const res = await updateStartup(payload);
             toast.success(res?.message);
             if (lastPage) {
                 history.push("/boosterpartner/dashboard");
                 return;
             }
+            return res;
         } catch (err) {
             console.log(err?.response);
             toast.error(err?.response?.data?.message ?? err?.response?.message);
@@ -214,6 +230,7 @@ export const useAuth = () => {
         changeSignup,
         userLogout,
         editUser,
+        updateUserObj,
         callUpdateStartupData,
         updatePartnerInfo,
         updatePartnerLocalData,

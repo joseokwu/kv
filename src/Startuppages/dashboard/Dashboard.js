@@ -16,7 +16,7 @@ export const StartupDashboard = () => {
     const [loading, setLoading] = useState(false);
     const { stateAuth } = useAuth();
 
-    //console.log(stateAuth)
+    console.log(stateAuth?.profileData?.startupRes);
 
     if (stateAuth.dashboardLoad) {
         return <PageLoader num={[1, 2, 3, 4]} />;
@@ -35,14 +35,21 @@ export const StartupDashboard = () => {
                     className="col-lg-3 col-md-6 col-12"
                     icon={newApp}
                     name={"Founders"}
-                    count={stateAuth?.user?.founders || 0}
+                    count={
+                        1 +
+                            stateAuth?.profileData?.startupRes?.team?.coFounder
+                                ?.length ?? 0
+                    }
                     color={"#E5FFE4"}
                 />
                 <DashCard
                     className="col-lg-3 col-md-6 col-12"
                     icon={newApp}
                     name={"Investors"}
-                    count={stateAuth?.user?.investors || 0}
+                    count={
+                        stateAuth?.profileData?.startupRes?.investors?.length ??
+                        0
+                    }
                     color={"#FAD7DC"}
                 />
                 <DashCard
@@ -56,7 +63,9 @@ export const StartupDashboard = () => {
                     className="col-lg-3 col-md-6 col-12"
                     icon={newApp}
                     name={"Partners"}
-                    count={stateAuth?.user?.partners?.length ?? 0}
+                    count={
+                        stateAuth?.profileData?.startupRes?.partner?.length ?? 0
+                    }
                     color={"#FAD7DC"}
                 />
             </section>
@@ -67,8 +76,8 @@ export const StartupDashboard = () => {
                     color={"#2E3192"}
                     img={""}
                     amount={`$${
-                        stateAuth?.startupData?.fundRaising?.capTable
-                            ?.amountInvestedByFounders || 0
+                        stateAuth?.profileData?.startupRes?.fundRaising
+                            ?.capTable?.amountInvestedByFounders || 0
                     }`}
                     // time={""}
                     className="col-3 col-6-md "
@@ -78,10 +87,14 @@ export const StartupDashboard = () => {
                     color={"#00ADEF"}
                     img={""}
                     amount={`$${
-                        stateAuth?.startupData?.fundRaising?.capTable
-                            ?.amountRaised || 0
+                        stateAuth?.profileData?.startupRes?.fundRaising
+                            ?.previousRound?.fundraisingAmount || 0
                     }`}
-                    time={dateFormat(dashInfo?.lastFund?.date, "d, mmm, yyyy")}
+                    time={dateFormat(
+                        stateAuth?.profileData?.startupRes?.fundRaising
+                            ?.previousRound?.dateOfFunding,
+                        "d, mmm, yyyy"
+                    )}
                     className="col-3 col-6-md "
                 />
                 <CardFill
@@ -96,16 +109,16 @@ export const StartupDashboard = () => {
                     color={"#2E3192"}
                     img={""}
                     amount={`$${
-                        typeof stateAuth?.startupData?.fundRaising?.fundingAsk
-                            ?.postMoneyValuation !== undefined &&
+                        typeof stateAuth?.profileData?.startupRes?.fundRaising
+                            ?.fundingAsk?.postMoneyValuation !== undefined &&
                         convertToMillion(
-                            stateAuth?.startupData?.fundRaising?.fundingAsk
-                                ?.postMoneyValuation || "0"
+                            stateAuth?.profileData?.startupRes?.fundRaising
+                                ?.fundingAsk?.postMoneyValuation || "0"
                         )
                     }`}
                     time={dateFormat(
-                        stateAuth?.startupData?.fundRaising?.previousRound
-                            ?.dateOfFunding,
+                        stateAuth?.profileData?.startupRes?.fundRaising
+                            ?.previousRound?.dateOfFunding,
                         "d, mmm, yyyy"
                     )}
                     className="col-3 col-6-md "

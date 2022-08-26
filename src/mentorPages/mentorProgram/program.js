@@ -158,7 +158,8 @@ export const MentorProgram = ({ history }) => {
             <div className="col-lg-12">
                 <section className="d-flex align-items-center justify-content-between mb-3">
                     <p className="program-sub-title">
-                        {programs?.length} programs assigned to you
+                        {programs?.length === 0 ? "Zero (0)" : programs?.length}{" "}
+                        program(s) assigned to you
                     </p>
                     <div>
                         <button

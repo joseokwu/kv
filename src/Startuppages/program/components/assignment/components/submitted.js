@@ -14,7 +14,7 @@ import { EmptyState } from "../../../../../mentorComponents";
 export const Submitted = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [submittedAssignment, setSubmittedAssignment] = useState(null);
+    const [submittedAssignment, setSubmittedAssignment] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const nextPage = () => {
@@ -31,17 +31,17 @@ export const Submitted = () => {
 
     useEffect(() => {
         const getData = async () => {
+            setLoading(true);
             try {
-                setLoading(true);
                 const res = await getSubmittedAssignment({
                     page: currentPage,
                     limit: 5,
                 });
                 setSubmittedAssignment(res?.data);
-                setLoading(false);
-            } catch {
-                setSubmittedAssignment(null);
+            } catch (e) {
+                console.log(e);
             }
+            setLoading(false);
         };
 
         getData();
@@ -54,12 +54,7 @@ export const Submitted = () => {
     return (
         <div>
             <div className="row mt-3">
-                {submittedAssignment == null && (
-                    <EmptyState
-                        message={"No Submitted Assignment at the moment"}
-                    />
-                )}
-                {submittedAssignment && submittedAssignment.length > 0 ? (
+                {submittedAssignment.length > 0 ? (
                     submittedAssignment?.data.map((info, i) => (
                         <TodoCard
                             key={i}
@@ -122,51 +117,54 @@ export const Submitted = () => {
                 )}
             </div>
             <div className="d-flex justify-content-end">
-                <Pagination>
-                    {submittedAssignment &&
-                    submittedAssignment?.results?.currentPage > 1 ? (
-                        <>
-                            <Pagination.Prev
-                                onClick={prevPage}
-                                className="mx-1"
-                            />
-                            {
-                                <Pagination.Item className="mx-1">{`${currentPage} of  ${submittedAssignment?.results?.limit}`}</Pagination.Item>
-                            }
-                            {submittedAssignment?.results?.currentPage ===
-                            submittedAssignment?.results?.limit ? (
-                                <span />
-                            ) : (
-                                <Pagination.Next
-                                    onClick={nextPage}
+                {submittedAssignment?.length > 0 && (
+                    <Pagination>
+                        {submittedAssignment?.results?.currentPage > 1 ? (
+                            <>
+                                <Pagination.Prev
+                                    onClick={prevPage}
                                     className="mx-1"
                                 />
-                            )}
-                        </>
-                    ) : (
-                        <>
-                            {
-                                <Pagination.Item
-                                    onClick={() => movePage(currentPage + 1)}
-                                    className="mx-1"
-                                >{`${currentPage} of  ${
-                                    submittedAssignment?.results?.limit ?? 1
-                                }`}</Pagination.Item>
-                            }
-
-                            {submittedAssignment &&
-                            submittedAssignment?.results?.currentPage ===
+                                {
+                                    <Pagination.Item className="mx-1">{`${currentPage} of  ${submittedAssignment?.results?.limit}`}</Pagination.Item>
+                                }
+                                {submittedAssignment?.results?.currentPage ===
                                 submittedAssignment?.results?.limit ? (
-                                <span />
-                            ) : (
-                                <Pagination.Next
-                                    onClick={nextPage}
-                                    className="mx-1"
-                                />
-                            )}
-                        </>
-                    )}
-                </Pagination>
+                                    <span />
+                                ) : (
+                                    <Pagination.Next
+                                        onClick={nextPage}
+                                        className="mx-1"
+                                    />
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                {
+                                    <Pagination.Item
+                                        onClick={() =>
+                                            movePage(currentPage + 1)
+                                        }
+                                        className="mx-1"
+                                    >{`${currentPage} of  ${
+                                        submittedAssignment?.results?.limit ?? 1
+                                    }`}</Pagination.Item>
+                                }
+
+                                {submittedAssignment &&
+                                submittedAssignment?.results?.currentPage ===
+                                    submittedAssignment?.results?.limit ? (
+                                    <span />
+                                ) : (
+                                    <Pagination.Next
+                                        onClick={nextPage}
+                                        className="mx-1"
+                                    />
+                                )}
+                            </>
+                        )}
+                    </Pagination>
+                )}
             </div>
         </div>
     );

@@ -17,6 +17,7 @@ export const TextField = ({
     onChange,
     onFocus,
     onKeyPress,
+    errorMessage,
     ...rest
 }) => {
     return (
@@ -27,7 +28,9 @@ export const TextField = ({
                 rules={[
                     {
                         required: required,
-                        message: `Please input your ${label}!`,
+                        message: errorMessage
+                            ? errorMessage
+                            : `Please input your ${label}!`,
                     },
                     {
                         type:
@@ -36,12 +39,13 @@ export const TextField = ({
                                 : type === "url"
                                 ? "url"
                                 : "",
-                        message:
-                            name === "email"
-                                ? `Please input a correct ${name}`
-                                : type === "url"
-                                ? `Please enter a valid ${name} url`
-                                : "",
+                        message: errorMessage
+                            ? errorMessage
+                            : name === "email"
+                            ? `Please input a correct ${name}`
+                            : type === "url"
+                            ? `Please enter a valid ${name} url`
+                            : "",
                     },
                 ]}
                 type={type}

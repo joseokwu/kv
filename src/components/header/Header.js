@@ -69,7 +69,7 @@ export const Header = ({ setOpen, open }) => {
                     <span className="d-flex align-items-center header-profile d-none d-lg-flex">
                         <img
                             src={
-                                stateAuth?.logo ??
+                                stateAuth?.userObj?.avatar ??
                                 `https://ui-avatars.com/api/?name=${stateAuth?.username}`
                             }
                             alt="profile"

@@ -26,7 +26,7 @@ export const RoadMap = () => {
     const [dataIndex, setDataIndex] = useState(0);
     const [subVal, setSubVal] = useState({});
 
-    // console.log(stateAuth?.startupData?.roadMap);
+    // console.log(stateAuth?.profileData?.startupRes?.roadMap);
 
     return (
         <div>
@@ -61,7 +61,7 @@ export const RoadMap = () => {
                             onClick={() => setNewgOAL(true)}
                             label="Add new goal"
                         />
-                        {stateAuth?.startupData?.roadMap?.map((item, i) => (
+                        {stateAuth?.profileData?.startupRes?.roadMap?.map((item, i) => (
                             <div
                                 className="d-flex mb-4 mt-3"
                                 onClick={() => {
@@ -164,7 +164,12 @@ const AddGoal = ({ closeModal }) => {
                     <span>In Idea stage</span>
                 </div>
                 <div className="my-4">
-                    <TextField name={"title"} label="Title" rows={1} />
+                    <TextField
+                        name={"title"}
+                        label="Title"
+                        rows={1}
+                        required={true}
+                    />
                 </div>
                 <div className="">
                     <TextareaCustom
@@ -172,9 +177,9 @@ const AddGoal = ({ closeModal }) => {
                         label="Description"
                         min={0}
                         showCount={false}
-                        required={false}
+                        required={true}
                     />
-                    <div>
+                    <div className="mt-4">
                         <button type="submit" className="createGoal">
                             Create goal
                         </button>
@@ -195,7 +200,7 @@ export const AddNewGoalModal = ({ closeModal, data, index }) => {
 
     const searchTeam = (value) => {
         setTeamMem(
-            stateAuth?.startupData?.team?.coFounder.filter((item) =>
+            stateAuth?.profileData?.startupRes?.team?.coFounder.filter((item) =>
                 item.firstName.includes(value)
             )
         );
@@ -277,8 +282,8 @@ export const AddNewGoalModal = ({ closeModal, data, index }) => {
     const onFinish = async (values) => {
         const { progress, completed } = progressCheck();
         const newVal = {
-            ...stateAuth.startupData,
-            roadMap: stateAuth.startupData.roadMap?.map((item) => {
+            ...stateAuth.profileData?.startupRes,
+            roadMap: stateAuth.profileData?.startupRes.roadMap?.map((item) => {
                 if (item?.title === data?.title) {
                     item.subgoals = [
                         ...item.subgoals,
@@ -295,7 +300,7 @@ export const AddNewGoalModal = ({ closeModal, data, index }) => {
                 return item;
             }),
         };
-        console.log(stateAuth.startupData);
+        console.log(stateAuth.profileData?.startupRes);
         // updateProfile('roadMap', newVal?.roadMap);
         updateStartupInfo();
         closeModal(false);
@@ -317,7 +322,7 @@ export const AddNewGoalModal = ({ closeModal, data, index }) => {
                         <span> {data?.title} </span>
                     </div>
                     <div className="my-4">
-                        <TextField name={"title"} label="Title" rows={1} />
+                        <TextField name={"title"} label="Title" rows={1} required={true} />
                     </div>
                     <div className="">
                         <TextareaCustom
@@ -325,7 +330,7 @@ export const AddNewGoalModal = ({ closeModal, data, index }) => {
                             label="Description"
                             min={0}
                             showCount={false}
-                            required={false}
+                            required={true}
                         />
                     </div>
                     <div className="my-4 form-group">

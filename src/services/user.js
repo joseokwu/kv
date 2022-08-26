@@ -27,12 +27,13 @@ export const userLogin = async (values) => {
 export const profile = async () => {
     try {
         // console.log(value)
-        console.log("trying to make request");
+        console.log("trying to make profile request");
         const res = await request.get("v1/profile");
         console.log(res.data);
         return res?.data;
     } catch (err) {
         console.log(err);
+        console.log(err?.response?.data?.message);
         const error = err?.response?.data?.message || err?.message;
         throw new Error(error);
     }
@@ -44,6 +45,22 @@ export const user = async () => {
         console.log("trying to make request");
         const res = await request.get("v1/user");
         console.log(res);
+        return res?.data;
+    } catch (err) {
+        console.log(err);
+        const error = err?.response?.data?.message || err?.message;
+        throw new Error(error);
+    }
+};
+
+export const editUser = async (values) => {
+    // payload --- some variation of the user object. NOT profile object. they're different
+
+    try {
+        // console.log(value)
+        const res = await request.post("v1/user", values);
+        console.log(res);
+        // await user();
         return res?.data;
     } catch (err) {
         console.log(err);

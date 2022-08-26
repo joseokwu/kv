@@ -18,7 +18,7 @@ const { Option } = Select;
 
 export const FundAsk = ({ setFundraising, back }) => {
     const history = useHistory();
-    const { stateAuth, updateProfile } = useAuth();
+    const { stateAuth, updateProfile, updateStartupInfo } = useAuth();
 
     const {
         location: { hash },
@@ -49,6 +49,7 @@ export const FundAsk = ({ setFundraising, back }) => {
 
     const onFinish = (values) => {
         console.log(values);
+        updateStartupInfo();
         history.push("#Fund Utilization");
     };
 
@@ -160,7 +161,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                                 ...stateAuth?.profileData
                                                     ?.startupRes?.fundRaising
                                                     ?.fundingAsk,
-                                                instrumentForRound: e,
+                                                instrumentForRound:
+                                                    e.target.value,
                                             },
                                         });
                                     }}

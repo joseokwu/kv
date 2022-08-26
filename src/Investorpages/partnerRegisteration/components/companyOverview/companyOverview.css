@@ -10,7 +10,7 @@
   overflow-y: auto; */
 }
 
-.register-form-wrap > h3 {
+.register-form-wrap>h3 {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
@@ -20,7 +20,7 @@
   color: #000000;
 }
 
-.register-form-wrap > p {
+.register-form-wrap>p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
@@ -123,4 +123,8 @@
 
 .edit_input {
   min-width: 100%;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: white;
 }

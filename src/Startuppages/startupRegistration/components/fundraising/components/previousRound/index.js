@@ -20,7 +20,7 @@ const { Option } = Select;
 
 export const PreviousRound = ({ setFundraising }) => {
     const history = useHistory();
-    const { stateAuth, updateProfile } = useAuth();
+    const { stateAuth, updateProfile, updateStartupInfo } = useAuth();
 
     const optionsNumb = [
         { value: "Seed round", label: "Seed round" },
@@ -38,17 +38,19 @@ export const PreviousRound = ({ setFundraising }) => {
     );
 
     const [amount, setAmount] = useState(
-        stateAuth?.startupData?.fundRaising?.previousRound?.fundraisingAmount ??
+        stateAuth?.profileData?.startupRes?.fundRaising?.previousRound?.fundraisingAmount ??
             ""
     );
     const [preMoney, setPreMoney] = useState(
-        stateAuth?.startupData?.fundRaising?.previousRound?.preMoneyValuation ??
+        stateAuth?.profileData?.startupRes?.fundRaising?.previousRound?.preMoneyValuation ??
             ""
     );
     const [postMoney, setPostMoney] = useState(
-        stateAuth?.startupData?.fundRaising?.previousRound
+        stateAuth?.profileData?.startupRes?.fundRaising?.previousRound
             ?.postMoneyValuation ?? ""
     );
+
+    console.log(stateAuth?.profileData?.startupRes?.fundRaising?.previousRound);
 
     // function btn(e) {
     //  stateAuth?.user?.fundRaising?.previousRound?.dateOfFunding
@@ -57,6 +59,7 @@ export const PreviousRound = ({ setFundraising }) => {
     const onFinish = () => {
         // console.log('hello')
         console.log(stateAuth);
+        updateStartupInfo();
         history.push("#Financial Projection");
     };
 
@@ -96,16 +99,17 @@ export const PreviousRound = ({ setFundraising }) => {
                                     // errName="instrument"
                                     style={{ width: 200 }}
                                     value={
-                                        stateAuth?.startupData?.fundRaising
+                                        stateAuth?.profileData?.startupRes?.fundRaising
                                             ?.previousRound?.instrumentForRound
                                     }
                                     onChange={(e) =>
                                         updateProfile("fundRaising", {
                                             previousRound: {
-                                                ...stateAuth?.startupData
+                                                ...stateAuth?.profileData?.startupRes
                                                     ?.fundRaising
                                                     ?.previousRound,
-                                                instrumentForRound: e,
+                                                instrumentForRound:
+                                                    e.target.value,
                                             },
                                         })
                                     }
@@ -118,7 +122,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     name="numberOfRounds"
                                     label="Select your previous round"
                                     initialValue={
-                                        stateAuth?.startupData?.fundRaising
+                                        stateAuth?.profileData?.startupRes?.fundRaising
                                             ?.previousRound?.numberOfRounds
                                     }
                                     rules={[
@@ -135,7 +139,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                         onChange={(e) =>
                                             updateProfile("fundRaising", {
                                                 previousRound: {
-                                                    ...stateAuth?.startupData
+                                                    ...stateAuth?.profileData?.startupRes
                                                         ?.fundRaising
                                                         ?.previousRound,
                                                     numberOfRounds: e,
@@ -167,7 +171,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                         }}
                                         defaultValue={
                                             moment(
-                                                stateAuth?.startupData
+                                                stateAuth?.profileData?.startupRes
                                                     ?.fundRaising?.previousRound
                                                     ?.dateOfFunding
                                             ) ?? moment()
@@ -176,7 +180,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                         onChange={(date) =>
                                             updateProfile("fundRaising", {
                                                 previousRound: {
-                                                    ...stateAuth?.startupData
+                                                    ...stateAuth?.profileData?.startupRes
                                                         ?.fundRaising
                                                         ?.previousRound,
                                                     dateOfFunding: date,
@@ -200,7 +204,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     name="fundraisingAmount"
                                     type="text"
                                     value={
-                                        stateAuth?.startupData?.fundRaising
+                                        stateAuth?.profileData?.startupRes?.fundRaising
                                             ?.previousRound?.fundraisingAmount
                                     }
                                     className="form-control ps-3"
@@ -212,7 +216,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     onValueChange={(value) =>
                                         updateProfile("fundRaising", {
                                             previousRound: {
-                                                ...stateAuth?.startupData
+                                                ...stateAuth?.profileData?.startupRes
                                                     ?.fundRaising
                                                     ?.previousRound,
                                                 fundraisingAmount: value,
@@ -228,14 +232,14 @@ export const PreviousRound = ({ setFundraising }) => {
                                     errName="dilution percentage"
                                     style={{ width: 200 }}
                                     value={
-                                        stateAuth?.startupData?.fundRaising
+                                        stateAuth?.profileData?.startupRes?.fundRaising
                                             ?.previousRound?.dilution
                                     }
                                     required={true}
                                     onChange={(e) => {
                                         updateProfile("fundRaising", {
                                             previousRound: {
-                                                ...stateAuth?.startupData
+                                                ...stateAuth?.profileData?.startupRes
                                                     ?.fundRaising
                                                     ?.previousRound,
                                                 dilution: e.target.value,
@@ -257,7 +261,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     name="preMoneyValuation"
                                     type="text"
                                     value={
-                                        stateAuth?.startupData?.fundRaising
+                                        stateAuth?.profileData?.startupRes?.fundRaising
                                             ?.previousRound?.preMoneyValuation
                                     }
                                     className="form-control ps-3"
@@ -269,7 +273,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     onValueChange={(value) =>
                                         updateProfile("fundRaising", {
                                             previousRound: {
-                                                ...stateAuth?.startupData
+                                                ...stateAuth?.profileData?.startupRes
                                                     ?.fundRaising
                                                     ?.previousRound,
                                                 preMoneyValuation: value,
@@ -289,7 +293,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     name="postMoneyValuation"
                                     type="text"
                                     value={
-                                        stateAuth?.startupData?.fundRaising
+                                        stateAuth?.profileData?.startupRes?.fundRaising
                                             ?.previousRound?.postMoneyValuation
                                     }
                                     className="form-control ps-3"
@@ -301,7 +305,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                     onValueChange={(value) =>
                                         updateProfile("fundRaising", {
                                             previousRound: {
-                                                ...stateAuth?.startupData
+                                                ...stateAuth?.profileData?.startupRes
                                                     ?.fundRaising
                                                     ?.previousRound,
                                                 postMoneyValuation: value,

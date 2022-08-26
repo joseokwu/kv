@@ -34,10 +34,15 @@ export const BoosterDashboard = ({ history }) => {
 
     useEffect(() => {
         const fetchPartners = async () => {
-            const res = await getPartnersApplication({ page: 1, limit: 5 });
-            console.log(res);
-            console.log(res?.data?.data);
-            setApplications(res?.data?.data);
+            try {
+                const res = await getPartnersApplication({ page: 1, limit: 5 });
+                console.log(res);
+                console.log(res?.data?.data);
+                setApplications(res?.data?.data);
+            } catch (e) {
+                console.log(e);
+            }
+
             setFetched(true);
         };
 
@@ -94,48 +99,49 @@ export const BoosterDashboard = ({ history }) => {
                 </section>
 
                 <section className="row mt-4 dash-main-content">
-                    <div className="col-lg-6">
+                    <div className="">
                         <header className="d-flex align-items-center justify-content-between dashboard-applications-header">
                             <h5>New Applications</h5>
                             <span
-                                onClick={() => push("/booster/applicants#all")}
+                                onClick={() =>
+                                    push("/boosterpartner/applicants#all")
+                                }
                             >
                                 See All
                             </span>
                         </header>
 
-                        <SkeletonLoader fetched={fetched} height={360}>
-                            <section>
-                                {applications?.filter(
-                                    (application) =>
-                                        application?.status === "PENDING"
-                                )?.length > 0 ? (
-                                    applications
-                                        ?.filter(
-                                            (application) =>
-                                                application?.status ===
-                                                "PENDING"
-                                        )
-                                        ?.map((item, i) => {
-                                            console.log(item);
-                                            return (
-                                                <div
-                                                    style={{ marginBottom: 21 }}
-                                                    key={i}
-                                                >
-                                                    <ApplicationCard
-                                                        data={item}
-                                                        logo={applicantLogo}
-                                                        apply={apply}
-                                                    />
-                                                </div>
-                                            );
-                                        })
-                                ) : (
-                                    <EmptyState message="No Application sent yet." />
-                                )}
-                            </section>
-                        </SkeletonLoader>
+                        {/* <SkeletonLoader fetched={fetched} height={360}> */}
+                        <section>
+                            {applications?.filter(
+                                (application) =>
+                                    application?.status === "PENDING"
+                            )?.length > 0 ? (
+                                applications
+                                    ?.filter(
+                                        (application) =>
+                                            application?.status === "PENDING"
+                                    )
+                                    ?.map((item, i) => {
+                                        console.log(item);
+                                        return (
+                                            <div
+                                                style={{ marginBottom: 21 }}
+                                                key={i}
+                                            >
+                                                <ApplicationCard
+                                                    data={item}
+                                                    logo={applicantLogo}
+                                                    apply={apply}
+                                                />
+                                            </div>
+                                        );
+                                    })
+                            ) : (
+                                <EmptyState message="No Application sent yet." />
+                            )}
+                        </section>
+                        {/* </SkeletonLoader> */}
                     </div>
                     {/* <div className="col-lg-6 mt-5">
           <ApplicationChart />

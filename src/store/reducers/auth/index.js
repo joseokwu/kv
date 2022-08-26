@@ -5,6 +5,7 @@ import {
     LOGIN_SUCCESS,
     REGISTER_SUCCESS,
     USER_PROFILE,
+    USER_OBJ_UPDATE,
     USER_PROFILE_FAIL,
     SET_SIGNUP_STATUS,
     LOG_OUT,
@@ -67,6 +68,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 loading: false,
                 error: action.payload,
             };
+
         case USER_PROFILE:
             // if (action?.payload?.type[0] === "boosterpartner") {
             //     return {
@@ -124,6 +126,7 @@ const authReducer = (state = INIT_STATE, action) => {
             // }
             console.log({
                 ...state,
+                userObj: action?.payload,
                 loading: false,
                 dashboardLoad: false,
                 authenticated: true,
@@ -133,6 +136,7 @@ const authReducer = (state = INIT_STATE, action) => {
             });
             return {
                 ...state,
+                userObj: action?.payload,
                 loading: false,
                 dashboardLoad: false,
                 authenticated: true,
@@ -140,13 +144,49 @@ const authReducer = (state = INIT_STATE, action) => {
                 signUpStatus: action?.payload?.userType,
                 ...action.payload,
             };
+
+        case USER_OBJ_UPDATE:
+            console.log("inState", action?.payload);
+            return {
+                ...state,
+                userObj: { ...state?.userObj, ...action?.payload },
+                loading: false,
+                dashboardLoad: false,
+                authenticated: true,
+                userType: action?.payload?.userType,
+                signUpStatus: action?.payload?.userType,
+            };
         case DASHBOARD_USER_PROFILE:
             if (state.userType === "mentor")
                 return {
                     ...state,
                     loading: false,
                     dashboardLoad: false,
-                    mentorData: action?.payload.data,
+                    mentorData: action?.payload.mentor_response,
+                    email: action?.payload?.email,
+                };
+            else if (state.userType === "startup")
+                return {
+                    ...state,
+                    loading: false,
+                    dashboardLoad: false,
+                    profileData: action?.payload,
+                    email: action?.payload?.email,
+                };
+            else if (state.userType === "investor")
+                return {
+                    ...state,
+                    loading: false,
+                    dashboardLoad: false,
+                    investorData: action?.payload?.data,
+                    email: action?.payload?.email,
+                };
+            else if (state.userType === "boosterpartner")
+                return {
+                    ...state,
+                    loading: false,
+                    dashboardLoad: false,
+                    partnerData: action?.payload?.data,
                     email: action?.payload?.email,
                 };
             else
@@ -229,7 +269,7 @@ const authReducer = (state = INIT_STATE, action) => {
         case UPDATE_STARTUP_USER_PROFILE:
             return {
                 ...state,
-                startupData: action.payload,
+                profileData: { startupRes: action.payload },
             };
         case UPDATE_STARTUP_INFO:
             return {
@@ -330,12 +370,12 @@ const authReducer = (state = INIT_STATE, action) => {
             console.log(state, "state");
 
             const newState = { ...state };
-            newState.startupData.team.experience = [
-                ...state?.startupData?.team?.experience.slice(
+            newState.profileData.startupRes.team.experience = [
+                ...state?.profileData.startupRes?.team?.experience.slice(
                     0,
                     action.payload
                 ),
-                ...state?.startupData?.team?.experience.slice(
+                ...state?.profileData?.startupRes?.team?.experience.slice(
                     action.payload + 1
                 ),
             ];
@@ -346,9 +386,12 @@ const authReducer = (state = INIT_STATE, action) => {
             console.log(state, "state");
 
             const newwState = { ...state };
-            newwState.startupData.team.education = [
-                ...state?.startupData?.team?.education.slice(0, action.payload),
-                ...state?.startupData?.team?.education.slice(
+            newwState.profileData.startupRes.team.education = [
+                ...state?.profileData.startupRes?.team?.education.slice(
+                    0,
+                    action.payload
+                ),
+                ...state?.profileData.startupRes?.team?.education.slice(
                     action.payload + 1
                 ),
             ];

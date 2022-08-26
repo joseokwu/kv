@@ -8,7 +8,7 @@ import Details from "./components/details/details";
 import Interest from "./components/interest/interest";
 import WorkExperience from "./components/workExperience/workExperience";
 import "./personalDetails.css";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth, useActivity } from "../../hooks";
 
 export const MentorPersonalDetails = () => {
     const wrapRef = useRef();
@@ -29,33 +29,43 @@ export const MentorPersonalDetails = () => {
         push(currentHash);
     };
     const { stateAuth } = useAuth();
+    const {
+        changePath,
+        state: { path },
+    } = useActivity();
 
     useEffect(() => {
         wrapRef.current.scrollTop = 0;
         switch (hash) {
             case "#assistant_info":
                 setProgress("100");
+                changePath(5);
                 break;
             case "#consulting":
                 setProgress("70");
+                changePath(4);
                 break;
             case "#area_of_interest":
                 setProgress("50");
+                changePath(3);
                 break;
             case "#work_experience":
                 setProgress("30");
+                changePath(2);
                 break;
             case "#personal_details":
                 setProgress("0");
+                changePath(1);
                 break;
             default:
                 setProgress("0");
+                changePath(1);
                 break;
         }
     }, [hash]);
 
     return (
-        <div style={{ backgroundColor: "#fdfdfd" }}>
+        <div>
             <div
                 className="mentor_personal_details_wrap"
                 style={{ maxWidth: 2000 }}
@@ -78,60 +88,6 @@ export const MentorPersonalDetails = () => {
                 </section>
 
                 <section className="mentor_personal_details_grid">
-                    {/* <div className="d-none d-lg-flex"> */}
-                    {/* <div className="tab-wrap"> */}
-                    {/* <ul className="mentor_personal_details_list">
-                            <li
-                                onClick={() => switchForm("#personal_details")}
-                                className={
-                                    (hash === "#personal_details" ||
-                                        hash === "") &&
-                                    "active-li"
-                                }
-                            >
-                                Personal Details
-                            </li>
-
-                            <li
-                                onClick={() => switchForm("#work_experience")}
-                                className={
-                                    (hash === "#work_experience" ||
-                                        hash === "#work_experience") &&
-                                    "active-li"
-                                }
-                            >
-                                Work Experience
-                            </li>
-
-                            <li
-                                onClick={() => switchForm("#area_of_interest")}
-                                className={
-                                    hash === "#area_of_interest" && "active-li"
-                                }
-                            >
-                                Area of interest / skills
-                            </li>
-
-                            <li
-                                onClick={() => switchForm("#consulting")}
-                                className={
-                                    hash === "#consulting" && "active-li"
-                                }
-                            >
-                                Consultant Offerings
-                            </li>
-
-                            <li
-                                onClick={() => switchForm("#assistant_info")}
-                                className={
-                                    hash === "#assistant_info" && "active-li"
-                                }
-                            >
-                                Assistant Info
-                            </li>
-                        </ul> */}
-                    {/* </div> */}
-                    {/* </div> */}
                     <div className="mt-0 d-flex justify-content-stretch">
                         {hash === "" || hash === "#personal_details" ? (
                             <Details />

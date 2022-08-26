@@ -78,7 +78,7 @@ export const StartupBoosterPartner = () => {
                 const res = await getBoosterData({
                     page: currentPage,
                     limit: 4,
-                    startupId: stateAuth?.startupData?.userId,
+                    startupId: stateAuth?.profileData?.startupRes?.userId,
                 });
                 const allReq = await getStartupRequest({
                     startupId: stateAuth?.user?.userId,
@@ -120,7 +120,16 @@ export const StartupBoosterPartner = () => {
             case "#My Applications":
                 return <MyApplications />;
             default:
-                return <AllOfferings />;
+                return (
+                    <AllOfferings
+                        setCurrentPage={setCurrentPage}
+                        data={partners}
+                        total={partners?.metadata && partners?.metadata?.total}
+                        currentPage={currentPage}
+                        partners={partners?.partners}
+                        apply={apply}
+                    />
+                );
         }
     };
 

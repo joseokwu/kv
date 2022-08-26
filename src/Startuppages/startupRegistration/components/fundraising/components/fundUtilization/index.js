@@ -25,22 +25,23 @@ import { upload } from "../../../../../../services";
 
 export const FundUtilization = () => {
     const history = useHistory();
-    const { stateAuth, updateProfile } = useAuth();
-    console.log(stateAuth?.startupData?.fundRaising?.fundUtilization);
+    const { stateAuth, updateProfile, updateStartupInfo } = useAuth();
+    console.log(stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization);
     const onSubmit = () => {
         if (
-            stateAuth?.startupData?.fundRaising?.fundUtilization?.files ===
+            stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization?.files ===
                 null ||
-            stateAuth?.startupData?.fundRaising?.fundUtilization?.files
+            stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization?.files
                 .length === 0
         ) {
             toast.error("Please upload a document");
             return;
         }
+        updateStartupInfo();
         history.push("#Cap Table");
     };
 
-    // console.log(stateAuth?.startupData?.fundRaising?.fundUtilization?.files);
+    // console.log(stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization?.files);
 
     return (
         <>
@@ -61,7 +62,7 @@ export const FundUtilization = () => {
                                 onClick={async () => {
                                     var workbook = XLSX.utils.book_new();
                                     const CSVfile = XLSX.utils.json_to_sheet(
-                                        stateAuth?.startupData?.fundRaising
+                                        stateAuth?.profileData?.startupRes?.fundRaising
                                             ?.fundUtilization?.files,
                                         {
                                             raw: false,
@@ -92,10 +93,10 @@ export const FundUtilization = () => {
                                     extension: "MB",
                                 }}
                                 initData={
-                                    stateAuth?.startupData?.fundRaising
+                                    stateAuth?.profileData?.startupRes?.fundRaising
                                         ?.fundUtilization?.file
                                         ? [
-                                              stateAuth?.startupData
+                                              stateAuth?.profileData?.startupRes
                                                   ?.fundRaising?.fundUtilization
                                                   ?.file,
                                           ]

@@ -1,57 +1,107 @@
 import "./style.css";
+import { TextareaCustom } from "../../../../../components/textArea/cutstomTextarea";
+import { useAuth } from "../../../../../hooks";
+import { letterOnly } from "../../../../../utils/helpers";
 
 export const Market = ({ data, handleChange = () => {} }) => {
+    const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
+
     return (
         <div className="my-5">
             <div className="form-group mb-3">
-                <label>Problem Statement</label>
-                <input
-                    type="text"
-                    name="problemStatement"
+                <TextareaCustom
+                    name={"problemStatement"}
+                    label={"Problem Statement"}
                     value={data?.problemStatement}
-                    onChange={(e) => handleChange(e, "market")}
-                    className="form-control "
+                    onChange={(e) =>
+                        updateProfile("businessCanvas", {
+                            market: {
+                                ...data,
+                                problemStatement: e.target.value,
+                            },
+                        })
+                    }
+                    min={1}
+                    maxLength={150}
+                    onKeyPress={letterOnly}
+                    placeholder="One line statement 150 words maximum"
                 />
             </div>
 
             <div className="form-group mb-3">
-                <label>Product/Solution</label>
-                <input
-                    type="text"
-                    name="product"
-                    onChange={(e) => handleChange(e, "market")}
+                <TextareaCustom
+                    name={"product"}
+                    label={"Product/Solution"}
                     value={data?.product}
-                    className="form-control"
+                    onChange={(e) =>
+                        updateProfile("businessCanvas", {
+                            market: {
+                                ...data,
+                                product: e.target.value,
+                            },
+                        })
+                    }
+                    min={1}
+                    maxLength={150}
+                    onKeyPress={letterOnly}
+                    placeholder="One line statement 150 words maximum"
                 />
             </div>
             <div className="form-group mb-3">
-                <label>Target Customer Market</label>
-                <input
-                    type="text"
-                    name="targetMarket"
-                    onChange={(e) => handleChange(e, "market")}
+                <TextareaCustom
+                    name={"targetMarket"}
+                    label={"Target Customer Market"}
                     value={data?.targetMarket}
-                    className="form-control"
+                    onChange={(e) =>
+                        updateProfile("businessCanvas", {
+                            market: {
+                                ...data,
+                                targetMarket: e.target.value,
+                            },
+                        })
+                    }
+                    min={1}
+                    maxLength={150}
+                    onKeyPress={letterOnly}
+                    placeholder="One line statement 150 words maximum"
                 />
             </div>
             <div className="form-group mb-3">
-                <label>Market Size</label>
-                <input
-                    type="text"
-                    name="marketSize"
-                    onChange={(e) => handleChange(e, "market")}
+                <TextareaCustom
+                    name={"marketSize"}
+                    label={"Market Size"}
                     value={data?.marketSize}
-                    className="form-control"
+                    onChange={(e) =>
+                        updateProfile("businessCanvas", {
+                            market: {
+                                ...data,
+                                marketSize: e.target.value,
+                            },
+                        })
+                    }
+                    min={1}
+                    maxLength={150}
+                    onKeyPress={letterOnly}
+                    placeholder="One line statement 150 words maximum"
                 />
             </div>
             <div className="form-group mb-3">
-                <label>Key competitor</label>
-                <input
-                    type="text"
-                    name="keyCompetitors"
-                    onChange={(e) => handleChange(e, "market")}
+                <TextareaCustom
+                    name={"keyCompetitors"}
+                    label={"Key competitor"}
                     value={data?.keyCompetitors}
-                    className="form-control"
+                    onChange={(e) =>
+                        updateProfile("businessCanvas", {
+                            market: {
+                                ...data,
+                                keyCompetitors: e.target.value,
+                            },
+                        })
+                    }
+                    min={1}
+                    maxLength={150}
+                    onKeyPress={letterOnly}
+                    placeholder="One line statement 150 words maximum"
                 />
             </div>
         </div>

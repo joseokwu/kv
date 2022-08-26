@@ -13,10 +13,12 @@ import { useState } from "react";
 import { Market, Brand, BrandModeling, Plan } from "./container";
 import { useAuth } from "../../../../hooks/useAuth";
 import { validate } from "../../../../utils/helpers";
+import { Form } from "antd";
 
 export const BusinessCanavas = () => {
     const items = ["Market", "Brand", "Business Modeling", "Planning"];
     const [state, setState] = useState(0);
+    const [buttonClicked, setButtonClicked] = useState("Save");
     const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
     console.log(stateAuth);
 
@@ -42,7 +44,7 @@ export const BusinessCanavas = () => {
 
         updateProfile("businessCanvas", {
             [prefix]: {
-                ...stateAuth?.startupData?.businessCanvas[prefix],
+                ...stateAuth?.profileData?.startupRes?.businessCanvas[prefix],
                 [name]: value,
             },
         });
@@ -54,16 +56,34 @@ export const BusinessCanavas = () => {
     };
 
     const genSubmit = () => {
-        setClose(false);
-        updateStartupInfo();
+        // updateStartupInfo();
+    };
+
+    const onSubmit = async () => {
+        if (buttonClicked === "Save") {
+            try {
+                await updateStartupInfo();
+                setClose(false);
+            } catch (e) {
+                console.log(e);
+            }
+        } else {
+            try {
+                await updateStartupInfo();
+                if (state < 3) setState(state + 1);
+                else setClose(false);
+            } catch (e) {
+                console.log(e);
+            }
+        }
     };
 
     return (
         <div>
             <Header className="mb-4">
-                <h3 className="tab-section-title">Business Canvas</h3>
-                {/* <h3>Create Business Canvas</h3> */}
-                <section className="d-flex justify-content-end">
+                <section className="d-flex align-items-center justify-content-between">
+                    <h3 className="tab-section-title">Business Canvas</h3>
+                    {/* <h3>Create Business Canvas</h3> */}
                     <button className="teamBtn" onClick={() => setClose(true)}>
                         Update
                     </button>
@@ -77,108 +97,127 @@ export const BusinessCanavas = () => {
                     closeModal={() => setClose()}
                     subTitle="Let’s help you craft your business model canvas using our template"
                 >
-                    <div className="pt-4">
-                        <ModalTabs
-                            tabItems={items}
-                            state={state}
-                            setState={setState}
-                        />
+                    <Form
+                        name="Market"
+                        initialValues={{
+                            remember: true,
+                        }}
+                        layout="vertical"
+                        onFinish={onSubmit}
+                        className="px-3"
+                    >
+                        <div className="pt-4">
+                            <ModalTabs
+                                tabItems={items}
+                                state={state}
+                                setState={setState}
+                            />
 
-                        {state === 0 && (
-                            <Market
-                                data={
-                                    stateAuth?.startupData?.businessCanvas
-                                        ?.market
-                                }
-                                handleChange={handleChange}
-                            />
-                        )}
-                        {state === 1 && (
-                            <Brand
-                                data={
-                                    stateAuth?.startupData?.businessCanvas
-                                        ?.brand
-                                }
-                                handleChange={handleChange}
-                            />
-                        )}
-                        {state === 2 && (
-                            <BrandModeling
-                                data={
-                                    stateAuth?.startupData?.businessCanvas
-                                        ?.businessModel
-                                }
-                                handleChange={handleChange}
-                            />
-                        )}
-                        {state === 3 && (
-                            <Plan
-                                data={
-                                    stateAuth?.startupData?.businessCanvas?.plan
-                                }
-                                handleChange={handleChange}
-                            />
-                        )}
-                    </div>
+                            {state === 0 && (
+                                <Market
+                                    data={
+                                        stateAuth?.profileData?.startupRes
+                                            ?.businessCanvas?.market
+                                    }
+                                    handleChange={handleChange}
+                                />
+                            )}
+                            {state === 1 && (
+                                <Brand
+                                    data={
+                                        stateAuth?.profileData?.startupRes
+                                            ?.businessCanvas?.brand
+                                    }
+                                    handleChange={handleChange}
+                                />
+                            )}
+                            {state === 2 && (
+                                <BrandModeling
+                                    data={
+                                        stateAuth?.profileData?.startupRes
+                                            ?.businessCanvas?.businessModel
+                                    }
+                                    handleChange={handleChange}
+                                />
+                            )}
+                            {state === 3 && (
+                                <Plan
+                                    data={
+                                        stateAuth?.profileData?.startupRes
+                                            ?.businessCanvas?.plan
+                                    }
+                                    handleChange={handleChange}
+                                />
+                            )}
+                        </div>
 
-                    <BusCanButton>
-                        <div className="my-3 d-flex justify-content-between py-3">
-                            <div>
-                                {state < 3 && (
+                        <BusCanButton>
+                            <div className="my-3 d-flex justify-content-between py-3">
+                                <div>
+                                    {state < 3 && (
+                                        <button
+                                            className="can"
+                                            type="button"
+                                            onClick={() => {
+                                                if (state > 0)
+                                                    setState(state - 1);
+                                                else {
+                                                    setState(0);
+                                                    setClose(false);
+                                                }
+                                            }}
+                                        >
+                                            {" "}
+                                            {state > 0 ? "Back" : "Cancel"}{" "}
+                                        </button>
+                                    )}
+                                </div>
+                                <div className="d-flex">
+                                    {state < 3 && (
+                                        <button
+                                            className="sav"
+                                            type="submit"
+                                            onClick={() => {
+                                                setButtonClicked("Save");
+                                            }}
+                                        >
+                                            Save
+                                        </button>
+                                    )}
                                     <button
-                                        className="can"
-                                        type="button"
-                                        onClick={() => {
-                                            state > 0
-                                                ? setState(state - 1)
-                                                : setState(0);
+                                        type="submit"
+                                        style={{
+                                            fontFamily: "DM Sans",
+                                            fontWeight: "bold",
+                                            background: "#2E3192",
+                                            fontSize: "14px",
+                                            lineHeight: "140%",
+                                            border: "none",
+                                            borderRadius: "5px",
+                                            padding: "10px 30px",
+                                            color: "#fff",
                                         }}
+                                        onClick={() => {
+                                            setButtonClicked("Next");
+                                        }}
+                                        className="mx-2 nex"
                                     >
                                         {" "}
-                                        {state > 0 ? "Back" : "Cancel"}{" "}
+                                        {state < 3 ? "Next" : "Create"}{" "}
                                     </button>
-                                )}
+                                </div>
                             </div>
-                            <div className="d-flex">
-                                {state < 3 && (
-                                    <button
-                                        className="sav"
-                                        onClick={() => {
-                                            genSubmit();
-                                        }}
-                                        type="submit"
-                                    >
-                                        Save
-                                    </button>
-                                )}
-                                <button
-                                    type="button"
-                                    style={{
-                                        fontFamily: "DM Sans",
-                                        fontWeight: "bold",
-                                        background: "#2E3192",
-                                        fontSize: "14px",
-                                        lineHeight: "140%",
-                                        border: "none",
-                                        borderRadius: "5px",
-                                        padding: "10px 30px",
-                                        color: "#fff",
-                                    }}
-                                    onClick={() => {
-                                        state < 3 ? handleFunc() : genSubmit();
-                                    }}
-                                    className="mx-2 nex"
-                                >
-                                    {" "}
-                                    {state < 3 ? "Next" : "Create"}{" "}
-                                </button>
-                            </div>
-                        </div>
-                    </BusCanButton>
+                        </BusCanButton>
+                    </Form>
                 </LargeModal>
             )}
-            {validate(stateAuth?.startupData?.businessCanvas, propCheck) ? (
-                <BusinessCanvas data={stateAuth?.startupData?.businessCanvas} />
+            {validate(
+                stateAuth?.profileData?.startupRes?.businessCanvas,
+                propCheck
+            ) ? (
+                <BusinessCanvas
+                    data={stateAuth?.profileData?.startupRes?.businessCanvas}
+                />
             ) : (
                 <Wrapper className="d-flex justify-content-center text-center">
                     <div onClick={() => setClose(true)}>
