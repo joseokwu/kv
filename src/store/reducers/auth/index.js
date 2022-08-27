@@ -189,6 +189,14 @@ const authReducer = (state = INIT_STATE, action) => {
                     partnerData: action?.payload?.data,
                     email: action?.payload?.email,
                 };
+            else if (state.userType === "admin")
+                return {
+                    ...state,
+                    loading: false,
+                    dashboardLoad: false,
+                    adminData: action?.payload?.data,
+                    email: action?.payload?.email,
+                };
             else
                 return {
                     ...state,

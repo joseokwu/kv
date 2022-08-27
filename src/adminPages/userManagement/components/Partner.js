@@ -72,7 +72,11 @@ export const Partner = () => {
     };
 
     useEffect(() => {
-        getData();
+        try {
+            getData();
+        } catch (e) {
+            console.log(e);
+        }
 
         return () => {};
     }, []);
