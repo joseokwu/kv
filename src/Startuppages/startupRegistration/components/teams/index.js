@@ -10,6 +10,7 @@ import { css } from "styled-components/macro";
 import { UserOutlined, PlusOutlined } from "@ant-design/icons";
 import { AiOutlineUser } from "react-icons/ai";
 import { DatePicker, Form, Select } from "antd";
+import { MdAdd } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
 // import { CustomSelect } from "../../../../Startupcomponents/select/customSelect";
 import "react-phone-number-input/style.css";
@@ -31,6 +32,7 @@ import {
     Tag,
     RandomCard,
 } from "../../../../Startupcomponents";
+import { Tag2 } from "../../../../mentorComponents";
 import { useAuth } from "../../../../hooks/useAuth";
 import { upload } from "../../../../services/utils";
 // import CountryDropdown from 'country-dropdown-with-flags-for-react'
@@ -942,17 +944,30 @@ export const TeamProfile = () => {
                                             )}
                                         </div>
 
-                                        <div className="mt-2">
-                                            <Tag
-                                                name="+ Add Co-founder"
-                                                color="#4F4F4F"
-                                                bg="rgba(183, 218, 231, 0.5"
-                                                padding="8px 14px"
+                                        <div>
+                                            <div
                                                 data-target="#cofounder"
+                                                style={{
+                                                    backgroundColor:
+                                                        "rgba(183, 218, 231, 0.5)",
+                                                    color: "#4F4F4F",
+                                                    fontSize: "16px",
+                                                    lineHeight: "21px",
+                                                    padding: "12px 36px",
+                                                    cursor: "pointer",
+                                                    borderRadius: "10px",
+                                                    display: "flex",
+                                                    flexDirection: "row",
+                                                    alignItems: "center",
+                                                    gap: "21px",
+                                                }}
                                                 onClick={() =>
                                                     setShowModal(true)
                                                 }
-                                            />
+                                            >
+                                                <MdAdd size={16} />
+                                                Add Co-founder
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

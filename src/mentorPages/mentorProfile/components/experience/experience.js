@@ -214,10 +214,10 @@ const EditExperience = () => {
                 </section>
                 <section className="col-md-6 mb-4">
                     <TextField
-                        label={"End Date*"}
+                        label={"End Date"}
                         placeholder={"dd/mm/yy"}
                         type="date"
-                        required={true}
+                        required={false}
                         name="end"
                         value={formik.values?.end}
                         onChange={formik.handleChange}
