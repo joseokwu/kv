@@ -39,7 +39,11 @@ export const Pages = () => {
         <Tabs tabItems={mgtTab} />
         <Button
           label='Create'
-          onClick={() => push('/admin/webpages/create_webpage')}
+          onClick={() =>
+            hash === `#${mgtTab[0]}`
+              ? push('/admin/webpages/create_webpage')
+              : push('/admin/webpages/create_blog')
+          }
         />
       </section>
 

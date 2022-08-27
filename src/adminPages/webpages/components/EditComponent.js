@@ -14,6 +14,7 @@ import { CircularLoader } from '../../../components/CircluarLoader';
 import { TimePicker } from 'antd';
 import moment from 'moment';
 import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
+import { upload } from '../../../services';
 
 export const EditComponent = ({
   headers,
@@ -29,6 +30,8 @@ export const EditComponent = ({
 }) => {
   const [loading, setLoading] = useState();
   const [files, setFiles] = useState();
+  const [previewFile, setPreviewFile] = useState();
+  const [file, setFile] = useState();
 
   const handleHeaders = (e, value, i) => {
     let mainHeaders = [...headers];
@@ -58,7 +61,7 @@ export const EditComponent = ({
           mainTexts[i].key = e.target.value;
         }
         if (value === 'text') {
-          mainTexts[i].title = e.target.value;
+          mainTexts[i].text = e.target.value;
         }
       }
     }
@@ -68,7 +71,7 @@ export const EditComponent = ({
     let tempList = [...images];
     console.log(e);
     tempList[i] = e;
-
+    setFile(URL.createObjectURL(e));
     setImages([...tempList]);
   };
 
@@ -88,6 +91,23 @@ export const EditComponent = ({
       return URL.createObjectURL(value);
     } else {
       return '';
+    }
+  };
+
+  const handleUpload = async ({ filesInfo, index }) => {
+    const formData = new FormData();
+    formData.append('dir', 'kv');
+    formData.append('ref', Date.now().toString());
+    formData.append('type', 'pdf');
+    formData.append(0, filesInfo[0]?.file);
+    console.log(filesInfo);
+    handleImages(filesInfo, index);
+    try {
+      const response = await upload(formData);
+      console.log(response);
+      setFile(response?.path);
+    } catch (error) {
+      console.log(error.response);
     }
   };
 
@@ -129,7 +149,7 @@ export const EditComponent = ({
                 <TextField
                   label='Key'
                   className='max_fill mb-2'
-                  defaultValue={item?.key}
+                  value={item?.key}
                   // name={`headerKey${i}`}
                   required={false}
                   onChange={(e) => handleHeaders(e, 'key', i)}
@@ -138,7 +158,7 @@ export const EditComponent = ({
                   <TextField
                     label={i === 0 ? 'Main Title' : 'Subtitle'}
                     className='max_fill mb-2'
-                    defaultValue={item?.title}
+                    value={item?.title}
                     // name={`headerTitle${i}`}
                     required={false}
                     onChange={(e) => handleHeaders(e, 'title', i)}
@@ -171,17 +191,17 @@ export const EditComponent = ({
                 <TextField
                   label='Key'
                   className='max_fill mb-1'
-                  defaultValue={item?.key}
+                  value={item?.key}
                   // name={`textKey${i}`}
                   required={false}
                   onChange={(e) => handleTexts(e, 'key', i)}
                 />
                 <span className='w-50'>
-                  <Form.Item>
+                  <Form.Item initialValue={item?.text}>
                     <TextArea
                       label='Text'
                       className='max_fill mb-1'
-                      defaultValue={item?.text}
+                      value={item?.text}
                       rows='4'
                       onChange={(e) => handleTexts(e, 'text', i)}
                     />
@@ -214,8 +234,8 @@ export const EditComponent = ({
                 <span className={styles.upload} key={i}>
                   <DragAndDrop
                     index={i}
-                    setFiles={handleImages}
-                    image={handleFiles(images).toString()}
+                    handleUpload={handleUpload}
+                    image={handleFiles(item).toString()}
                   ></DragAndDrop>
                 </span>
               );

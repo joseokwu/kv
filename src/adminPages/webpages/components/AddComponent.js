@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Select,
@@ -14,6 +14,7 @@ import { CircularLoader } from '../../../components/CircluarLoader';
 import { TimePicker } from 'antd';
 import moment from 'moment';
 import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
+import { upload } from '../../../services';
 
 export const AddComponent = ({
   headers,
@@ -23,9 +24,11 @@ export const AddComponent = ({
   images,
   setImages,
   handleSubmit,
+  sections,
 }) => {
   const [loading, setLoading] = useState();
-  const [files, setFiles] = useState();
+  const [previewFile, setPreviewFile] = useState();
+  const [file, setFile] = useState();
 
   const handleHeaders = (e, value, i) => {
     let mainHeaders = [...headers];
@@ -55,7 +58,7 @@ export const AddComponent = ({
           mainTexts[i].key = e.target.value;
         }
         if (value === 'text') {
-          mainTexts[i].title = e.target.value;
+          mainTexts[i].text = e.target.value;
         }
       }
     }
@@ -88,6 +91,23 @@ export const AddComponent = ({
     }
   };
 
+  const handleUpload = async ({ filesInfo, index }) => {
+    const formData = new FormData();
+    formData.append('dir', 'kv');
+    formData.append('ref', Date.now().toString());
+    formData.append('type', 'pdf');
+    formData.append(0, filesInfo[0]?.file);
+    console.log(filesInfo);
+    handleImages(filesInfo, index);
+    try {
+      const response = await upload(formData);
+      console.log(response);
+      setFile(response?.path);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <div className='px-4'>
       <Form
@@ -103,7 +123,9 @@ export const AddComponent = ({
             <h4 onClick={() => console.log(headers)}>Header</h4>
             <button
               className={styles.textButton2}
-              onClick={() => setHeaders([...headers, { key: '', title: '' }])}
+              onClick={() => {
+                setHeaders([...headers, { key: '', title: '' }]);
+              }}
             >
               Add Header+
             </button>
@@ -115,6 +137,7 @@ export const AddComponent = ({
                   label='Key'
                   className='max_fill mb-2'
                   // name={`headerKey${i}`}
+                  value={item?.key}
                   required={false}
                   onChange={(e) => handleHeaders(e, 'key', i)}
                 />
@@ -123,6 +146,7 @@ export const AddComponent = ({
                     label={i === 0 ? 'Main Title' : 'Subtitle'}
                     className='max_fill mb-2'
                     // name={`headerTitle${i}`}
+                    value={item?.title}
                     required={false}
                     onChange={(e) => handleHeaders(e, 'title', i)}
                   />
@@ -143,7 +167,9 @@ export const AddComponent = ({
             <h4>Text</h4>
             <button
               className={styles.textButton2}
-              onClick={() => setTexts([...texts, { key: '', text: '' }])}
+              onClick={() => {
+                setTexts([...texts, { key: '', text: '' }]);
+              }}
             >
               Add Text+
             </button>
@@ -155,6 +181,7 @@ export const AddComponent = ({
                   label='Key'
                   className='max_fill mb-1'
                   // name={`textKey${i}`}
+                  value={item?.key}
                   required={false}
                   onChange={(e) => handleTexts(e, 'key', i)}
                 />
@@ -163,6 +190,7 @@ export const AddComponent = ({
                     <TextArea
                       label='Text'
                       className='max_fill mb-1'
+                      value={item?.text}
                       rows='4'
                       onChange={(e) => handleTexts(e, 'text', i)}
                     />
@@ -195,7 +223,8 @@ export const AddComponent = ({
                 <span className={styles.upload} key={i}>
                   <DragAndDrop
                     index={i}
-                    setFiles={handleImages}
+                    handleUpload={handleUpload}
+                    // setFiles={handleImages}
                     image={handleFiles(images[i]).toString()}
                   ></DragAndDrop>
                 </span>

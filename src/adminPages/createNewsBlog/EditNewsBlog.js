@@ -6,7 +6,7 @@ import searchIcon from '../../assets/icons/searchSm.svg';
 import closeIcon from '../../assets/icons/closesm.svg';
 import styles from './createNewsBlog.module.css';
 // import { debounce } from "lodash";
-import { search, createAssignment, createBlog } from '../../services';
+import { search, createAssignment, getBlog } from '../../services';
 import { mergeDateTime } from '../../utils/helpers';
 import { useAuth } from '../../hooks';
 import { UploadFile } from '../../components';
@@ -25,7 +25,7 @@ export const CreateNewsBlog = () => {
   const [body, setBody] = useState();
 
   const {
-    location: { hash },
+    location: { hash, state },
     goBack,
     replace,
   } = useHistory();
@@ -44,8 +44,8 @@ export const CreateNewsBlog = () => {
     formData.append('ref', Date.now().toString());
     formData.append('type', 'pdf');
     formData.append(0, filesInfo[0]?.file);
-    // setFile(filesInfo);
-    // console.log(filesInfo);
+    setFile(filesInfo);
+    console.log(filesInfo);
     try {
       const response = await upload(formData);
       console.log(response);
@@ -55,20 +55,17 @@ export const CreateNewsBlog = () => {
     }
   };
 
-  const handleCreate = async () => {
-    try {
-      await createBlog({
-        title,
-        body,
-        // viewed: 0,
-        cover: file,
-        publish: date,
-      });
-      replace('/admin/webpages');
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    if (state?.id) {
+      const getData = async () => {
+        const res = await getBlog(state?.id);
+      };
+      setTitle();
+      setDate();
+      setBody();
+      setFile();
     }
-  };
+  });
 
   return (
     <div className='py-5 px-5'>
@@ -128,7 +125,7 @@ export const CreateNewsBlog = () => {
             label='Create'
             variant='secondary'
             type='Submit'
-            onClick={handleCreate}
+            onClick={() => console.log(title, date, body)}
           />
         </section>
       </Form>

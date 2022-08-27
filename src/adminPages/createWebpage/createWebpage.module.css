@@ -135,6 +135,7 @@
 
 .good {
   animation: check 0.1s ease-in;
+  position: absolute;
 }
 
 @keyframes check {

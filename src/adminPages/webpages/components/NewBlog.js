@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from '../../../adminComponents';
 import { AdminButton, Tag } from '../../../components';
@@ -6,12 +6,22 @@ import { formatDate } from '../../../utils/helpers';
 import left from '../../../assets/icons/chervonLeft.svg';
 import styles from '../webpages.module.css';
 import { EmptyState } from '../../../mentorComponents/emptyState/EmptyState';
-import { applicationManagement } from '../../../services';
+import { applicationManagement, getAllBlog } from '../../../services';
 import { toast } from 'react-hot-toast';
 import { PaginationData } from '../../../components';
 
-export const NewsBlog = ({}) => {
+export const NewsBlog = () => {
+  const [blogs, setBlogs] = useState();
   let limit = 5;
+
+  useEffect(() => {
+    const getData = async () => {
+      const blogs = await getAllBlog();
+      setBlogs(blogs?.data);
+    };
+  }, []);
+
+  console.log(blogs);
 
   const header = useMemo(
     () => [
