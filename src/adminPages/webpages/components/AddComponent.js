@@ -13,6 +13,7 @@ import deleteIcon from '../../../assets/icons/del-red.svg';
 import { CircularLoader } from '../../../components/CircluarLoader';
 import { TimePicker } from 'antd';
 import moment from 'moment';
+import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 
 export const AddComponent = ({
   headers,
@@ -24,6 +25,7 @@ export const AddComponent = ({
   handleSubmit,
 }) => {
   const [loading, setLoading] = useState();
+  const [files, setFiles] = useState();
 
   const handleHeaders = (e, value, i) => {
     let mainHeaders = [...headers];
@@ -67,14 +69,22 @@ export const AddComponent = ({
     setImages([...tempList]);
   };
 
-  const deleteItem = (part, i) => {
-    if (part === 'header') {
-      const newVal = headers.filter((item, index) => index !== i);
-      setHeaders([...newVal]);
-    }
-    if (part === 'text') {
-      const newVal = texts.filter((item, index) => index !== i);
-      setTexts([...newVal]);
+  const deleteHeader = (i) => {
+    const newVal = headers.filter((item, index) => index !== i);
+
+    setHeaders((prev) => newVal);
+  };
+
+  const deleteText = (i) => {
+    const newVal = texts.filter((item, index) => index !== i);
+    setTexts((prev) => newVal);
+  };
+
+  const handleFiles = (value) => {
+    if (value) {
+      return URL.createObjectURL(value);
+    } else {
+      return '';
     }
   };
 
@@ -90,7 +100,7 @@ export const AddComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4>Header</h4>
+            <h4 onClick={() => console.log(headers)}>Header</h4>
             <button
               className={styles.textButton2}
               onClick={() => setHeaders([...headers, { key: '', title: '' }])}
@@ -98,7 +108,7 @@ export const AddComponent = ({
               Add Header+
             </button>
           </div>
-          {headers.map((item, i) => {
+          {headers?.map((item, i) => {
             return (
               <div key={i} className='d-flex  gap-2 my-4'>
                 <TextField
@@ -121,7 +131,7 @@ export const AddComponent = ({
                   className='ml-2'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteItem('header', i)}
+                  onClick={() => deleteHeader(i)}
                 />
               </div>
             );
@@ -138,7 +148,7 @@ export const AddComponent = ({
               Add Text+
             </button>
           </div>
-          {texts.map((item, i) => {
+          {texts?.map((item, i) => {
             return (
               <div className='d-flex  gap-2 my-4' key={i}>
                 <TextField
@@ -162,7 +172,7 @@ export const AddComponent = ({
                   className='ml-2'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteItem('text', i)}
+                  onClick={() => deleteText(i)}
                 />
               </div>
             );
@@ -183,27 +193,11 @@ export const AddComponent = ({
             {images.map((item, i) => {
               return (
                 <span className={styles.upload} key={i}>
-                  <UploadFile
-                    data={{
-                      maxFiles: 1,
-                      supportedMimeTypes: ['image/png'],
-                      maxFileSize: 100,
-                      extension: 'MB',
-                    }}
-                    onUpload={(e) => handleImages(e, i)}
-                    initData={[]}
-                    // onUpload={async (filesInfo) => {
-                    //   const formData = new FormData();
-                    //   formData.append('dir', 'kv');
-                    //   formData.append('ref', stateAuth.user?.userId);
-                    //   formData.append('type', 'pdf');
-                    //   formData.append(0, filesInfo[0]?.file);
-
-                    //   const response = await upload(formData);
-                    //   console.log(response);
-                    //   //   setFile(response?.path);
-                    // }}
-                  />
+                  <DragAndDrop
+                    index={i}
+                    setFiles={handleImages}
+                    image={handleFiles(images[i]).toString()}
+                  ></DragAndDrop>
                 </span>
               );
             })}

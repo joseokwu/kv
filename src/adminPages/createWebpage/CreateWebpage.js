@@ -24,6 +24,8 @@ import { AddComponent } from '../webpages/components/AddComponent';
 import Item from 'antd/lib/list/Item';
 import { useHistory } from 'react-router-dom';
 import { EditComponent } from '../webpages/components/EditComponent';
+import copy from '../../assets/icons/copy.svg';
+import success from '../../assets/icons/success-check.svg';
 // import updateProfile
 
 export const CreateWebpage = () => {
@@ -38,60 +40,81 @@ export const CreateWebpage = () => {
   const [columnIndex, setColumnIndex] = useState(0);
   const [sectionIndex, setSectionIndex] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
+  const [check, setCheck] = useState(false);
   const {
     location: { hash },
     push,
   } = useHistory();
 
   const handleSubmit = () => {
+    console.log(isEditing);
     const tempSections = [...sections];
     if (isEditing) {
-      if (Object.keys(tempSections[sectionIndex][columnIndex]).length > 0) {
-        let tempHeaders = tempSections[sectionIndex][columnIndex]['headers'];
-        let tempTexts = tempSections[sectionIndex][columnIndex]['texts'];
-        let tempImages = tempSections[sectionIndex][columnIndex]['images'];
-        tempHeaders = [...tempHeaders, ...headersEdit];
-        tempTexts = [...tempTexts, ...textsEdit];
-        tempImages = [...tempImages, ...imagesEdit];
-        tempSections[sectionIndex][columnIndex] = {
-          headers: tempHeaders,
-          texts: tempTexts,
-          images: tempImages,
-        };
-      } else {
-        tempSections[sectionIndex][columnIndex] = {
+      console.log('ddd');
+      if (
+        Object.keys(tempSections[sectionIndex][columnIndex]['components'])
+          .length > 0
+        // ) {
+        //   // console.log('fff');
+        //   // let tempHeaders =
+        //   //   tempSections[sectionIndex][columnIndex]['components']['headers'];
+        //   // let tempTexts =
+        //   //   tempSections[sectionIndex][columnIndex]['components']['texts'];
+        //   // let tempImages =
+        //   //   tempSections[sectionIndex][columnIndex]['components']['images'];
+        //   // tempHeaders = [...headersEdit];
+        //   // tempTexts = [...textsEdit];
+        //   // tempImages = [...imagesEdit];
+        //   tempSections[sectionIndex][columnIndex]['components'] = {
+        //     headers: tempHeaders,
+        //     texts: tempTexts,
+        //     images: tempImages,
+        //   };
+        // } else {
+      ) {
+        tempSections[sectionIndex][columnIndex]['components'] = {
           headers: headersEdit,
           texts: textsEdit,
           images: imagesEdit,
         };
       }
+      setIsEditing(false);
     } else {
-      if (Object.keys(tempSections[sectionIndex][columnIndex]).length > 0) {
-        let tempHeaders = tempSections[sectionIndex][columnIndex]['headers'];
-        let tempTexts = tempSections[sectionIndex][columnIndex]['texts'];
-        let tempImages = tempSections[sectionIndex][columnIndex]['images'];
+      if (
+        Object.keys(tempSections[sectionIndex][columnIndex]['components'])
+          .length > 0
+      ) {
+        let tempHeaders =
+          tempSections[sectionIndex][columnIndex]['components']['headers'];
+        let tempTexts =
+          tempSections[sectionIndex][columnIndex]['components']['texts'];
+        let tempImages =
+          tempSections[sectionIndex][columnIndex]['components']['images'];
         tempHeaders = [...tempHeaders, ...headers];
         tempTexts = [...tempTexts, ...texts];
         tempImages = [...tempImages, ...images];
-        tempSections[sectionIndex][columnIndex] = {
+        tempSections[sectionIndex][columnIndex]['components'] = {
           headers: tempHeaders,
           texts: tempTexts,
           images: tempImages,
         };
       } else {
-        tempSections[sectionIndex][columnIndex] = {
+        tempSections[sectionIndex][columnIndex]['components'] = {
           headers: headers,
           texts: texts,
           images: images,
         };
       }
     }
-
+    console.log('it worked');
     setSections(tempSections);
 
     setHeaders([]);
     setTexts([]);
     setImages([]);
+    setHeadersEdit([]);
+    setTextsEdit([]);
+    setImagesEdit([]);
   };
 
   const getColumnLength = (column) => {
@@ -102,6 +125,16 @@ export const CreateWebpage = () => {
   };
 
   const handleCreate = (e) => {};
+
+  useEffect(() => {
+    let timer;
+    if (check) {
+      timer = setTimeout(() => {
+        setCheck(false);
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [check]);
 
   return (
     <div className='py-5 px-5'>
@@ -132,9 +165,9 @@ export const CreateWebpage = () => {
         />
       </Modal>
       <Modal id='viewJson' title='Json Data' width={568}>
-        <pre className={styles.json}>
-          {JSON.stringify(sections[sectionIndex])}
-        </pre>
+        <div className={styles.json}>
+          <pre>{JSON.stringify(sections[sectionIndex], null, 2)}</pre>
+        </div>
       </Modal>
       <GoBack />
       <Form>
@@ -175,33 +208,62 @@ export const CreateWebpage = () => {
                   {section?.map((column, i) => {
                     return (
                       <div className={styles.subContainer} key={i}>
-                        <div className={styles.subLeft}>
-                          <span className='d-flex'>
-                            <h6 className='mr-2'>
-                              Components - {getColumnLength(column)}
-                            </h6>
-                            <img src={clip} alt='clip' />
-                          </span>
-                          <span>
-                            <div className='d-flex align-items-center space-out'>
-                              <p
-                                className='view-link'
-                                role='button'
-                                data-toggle='modal'
-                                data-target={`#editComponent`}
-                                onClick={() => {
-                                  setColumnIndex(i);
-                                  setSectionIndex(ind);
-                                }}
-                              >
-                                Edit
-                              </p>
-                              <p className='view-link' role='button'>
-                                Preview
-                              </p>
-                            </div>
-                          </span>
-                        </div>
+                        {getColumnLength(column['components']) > 0 ? (
+                          <div className={styles.subLeft}>
+                            <span className='d-flex'>
+                              <h6 className='mr-2'>
+                                Components -{' '}
+                                {getColumnLength(column['components'])}
+                              </h6>
+                              <span className={styles.referral}>
+                                <img
+                                  src={copy}
+                                  height={18}
+                                  width={18}
+                                  alt={'copy'}
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(
+                                      JSON.stringify(column['components'])
+                                    );
+                                    setCheck(true);
+                                  }}
+                                />
+                                {check && (
+                                  <span className={styles.good}>
+                                    <img
+                                      src={success}
+                                      height={18}
+                                      width={18}
+                                      alt={'copy'}
+                                    />
+                                  </span>
+                                )}
+                              </span>
+                            </span>
+                            <span>
+                              <div className='d-flex align-items-center space-out'>
+                                <p
+                                  className='view-link'
+                                  role='button'
+                                  data-toggle='modal'
+                                  data-target={`#editComponent`}
+                                  onClick={() => {
+                                    setColumnIndex(i);
+                                    setSectionIndex(ind);
+                                    setIsEditing(true);
+                                  }}
+                                >
+                                  Edit
+                                </p>
+                                <p className='view-link' role='button'>
+                                  Preview
+                                </p>
+                              </div>
+                            </span>
+                          </div>
+                        ) : (
+                          ''
+                        )}
                         <div key={i} className={styles.addComponent}>
                           <img
                             className={styles.img}
@@ -211,6 +273,7 @@ export const CreateWebpage = () => {
                           />
                           <button
                             onClick={() => {
+                              setIsEditing(false);
                               setColumnIndex(i);
                               setSectionIndex(ind);
                             }}
@@ -230,7 +293,7 @@ export const CreateWebpage = () => {
                   className={styles.textButton2}
                   onClick={() => {
                     const temp = [...sections];
-                    temp[ind].push({});
+                    temp[ind].push({ data: {}, components: {} });
                     setSections(temp);
                   }}
                 >

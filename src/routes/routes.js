@@ -40,7 +40,6 @@ import {
 
 import { MentorViewAssignment } from '../mentorPages/mentorAssignments/components/viewAssignment/viewAssignment';
 import {
-  WithInvestorRegisterLayout,
   WithInvestorSecLayout,
   WithInvestorRegistrationLayout,
   WithBoosterPartnerRegistrationLayout,
@@ -300,15 +299,6 @@ const routes = [
   },
 
   {
-    name: 'Investor Registration',
-    path: '/investor/registration',
-    component: WithInvestorRegisterLayout(InvestorRegistration),
-    exact: true,
-    protected: true,
-    type: 'investor',
-  },
-
-  {
     name: 'Investor Opportunities',
     path: '/investor/opportunities',
     component: WithMainInvestorLayout(InvestorOpportunity),
@@ -347,15 +337,6 @@ const routes = [
     name: 'Investor Portfolio',
     path: '/investor/portfolio',
     component: WithMainInvestorLayout(InvestorPortfolio),
-    exact: true,
-    protected: true,
-    type: 'investor',
-  },
-
-  {
-    name: 'Investor Profile',
-    path: '/investor/profile',
-    component: WithInvestorRegisterLayout(InvestorProfile),
     exact: true,
     protected: true,
     type: 'investor',
@@ -506,23 +487,7 @@ const routes = [
     protected: true,
     type: 'booster',
   },
-  {
-    name: 'Booster Profile',
-    path: '/boosterpartner/profile',
-    component: WithInvestorRegisterLayout(BoosterProfile),
-    exact: true,
-    protected: true,
-    type: 'booster',
-  },
 
-  {
-    name: 'Booster Registration',
-    path: '/boosterpartner/registration',
-    component: WithInvestorRegisterLayout(BoosterPartnerRegistration),
-    exact: true,
-    protected: true,
-    type: 'booster',
-  },
   //Investor Routes End
 
   // Mentor Routes Starts Here

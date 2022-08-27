@@ -7,7 +7,7 @@ export const TextArea = ({
   rows = '8',
   cols = '',
   placeholder = '',
-  defaultValue = '',
+  defaultValue,
   onChange = () => {},
   ...rest
 }) => {

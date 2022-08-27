@@ -109,8 +109,8 @@
 }
 
 .json {
-  text-align: center;
-  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .addComponent {
@@ -119,6 +119,34 @@
   width: 30%;
   border-radius: 10px;
   margin-bottom: 1rem;
+}
+
+.referral {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+  position: relative;
+}
+
+.referral:active {
+  transform: translateY(0.4rem);
+}
+
+.good {
+  animation: check 0.1s ease-in;
+}
+
+@keyframes check {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }
 
 .subContainer {

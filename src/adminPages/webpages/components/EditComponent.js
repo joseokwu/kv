@@ -13,6 +13,7 @@ import deleteIcon from '../../../assets/icons/del-red.svg';
 import { CircularLoader } from '../../../components/CircluarLoader';
 import { TimePicker } from 'antd';
 import moment from 'moment';
+import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 
 export const EditComponent = ({
   headers,
@@ -27,6 +28,7 @@ export const EditComponent = ({
   columnIndex,
 }) => {
   const [loading, setLoading] = useState();
+  const [files, setFiles] = useState();
 
   const handleHeaders = (e, value, i) => {
     let mainHeaders = [...headers];
@@ -63,21 +65,29 @@ export const EditComponent = ({
     setTexts(mainTexts);
   };
   const handleImages = (e, i) => {
-    const tempList = [...images];
+    let tempList = [...images];
     console.log(e);
     tempList[i] = e;
 
     setImages([...tempList]);
   };
 
-  const deleteItem = (part, i) => {
-    if (part === 'header') {
-      const newVal = headers.filter((item, index) => index !== i);
-      setHeaders([...newVal]);
-    }
-    if (part === 'text') {
-      const newVal = texts.filter((item, index) => index !== i);
-      setTexts([...newVal]);
+  const deleteHeader = (i) => {
+    const newVal = headers.filter((item, index) => index !== i);
+
+    setHeaders((prev) => newVal);
+  };
+
+  const deleteText = (i) => {
+    const newVal = texts.filter((item, index) => index !== i);
+    setTexts((prev) => newVal);
+  };
+
+  const handleFiles = (value) => {
+    if (value) {
+      return URL.createObjectURL(value);
+    } else {
+      return '';
     }
   };
 
@@ -85,13 +95,13 @@ export const EditComponent = ({
     if (
       sections.length > 0 &&
       sections[sectionIndex].length > 0 &&
-      Object.keys(sections[sectionIndex][columnIndex]).length > 0
+      Object.keys(sections[sectionIndex][columnIndex]['components']).length > 0
     ) {
-      setHeaders(sections[sectionIndex][columnIndex]['headers'] ?? []);
-      setTexts(sections[sectionIndex][columnIndex]['texts'] ?? []);
-      setImages(sections[sectionIndex][columnIndex]['images'] ?? []);
+      setHeaders(sections[sectionIndex][columnIndex]['components']['headers']);
+      setTexts(sections[sectionIndex][columnIndex]['components']['texts']);
+      setImages(sections[sectionIndex][columnIndex]['components']['images']);
     }
-  }, [sections]);
+  }, [sections, sectionIndex, columnIndex]);
 
   return (
     <div className='px-4'>
@@ -105,7 +115,7 @@ export const EditComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4 onClick={() => console.log(headers)}>Header</h4>
+            <h4 onClick={() => console.log(headers, texts)}>Header</h4>
             <button
               className={styles.textButton2}
               onClick={() => setHeaders([...headers, { key: '', title: '' }])}
@@ -138,7 +148,7 @@ export const EditComponent = ({
                   className='ml-2'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteItem('header', i)}
+                  onClick={(e) => deleteHeader(i)}
                 />
               </div>
             );
@@ -178,10 +188,10 @@ export const EditComponent = ({
                   </Form.Item>
                 </span>
                 <img
-                  className='ml-2'
+                  className='ml-2 cursor'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteItem('text', i)}
+                  onClick={() => deleteText(i)}
                 />
               </div>
             );
@@ -202,27 +212,11 @@ export const EditComponent = ({
             {images.map((item, i) => {
               return (
                 <span className={styles.upload} key={i}>
-                  <UploadFile
-                    data={{
-                      maxFiles: 1,
-                      supportedMimeTypes: ['image/png'],
-                      maxFileSize: 100,
-                      extension: 'MB',
-                    }}
-                    onUpload={(e) => handleImages(e, i)}
-                    initData={[]}
-                    // onUpload={async (filesInfo) => {
-                    //   const formData = new FormData();
-                    //   formData.append('dir', 'kv');
-                    //   formData.append('ref', stateAuth.user?.userId);
-                    //   formData.append('type', 'pdf');
-                    //   formData.append(0, filesInfo[0]?.file);
-
-                    //   const response = await upload(formData);
-                    //   console.log(response);
-                    //   //   setFile(response?.path);
-                    // }}
-                  />
+                  <DragAndDrop
+                    index={i}
+                    setFiles={handleImages}
+                    image={handleFiles(images).toString()}
+                  ></DragAndDrop>
                 </span>
               );
             })}
