@@ -21,7 +21,9 @@ export const BoosterProfile = () => {
             </section>
 
             <section className="mb-3 profile-tab">
-                <h2 className="active">Our Offerings</h2>
+                <h2 className="active" style={{ background: "transparent" }}>
+                    Our Offerings
+                </h2>
             </section>
 
             <section className="row profile-more">
