@@ -14,6 +14,7 @@ import { Input, Form, Select } from "antd";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { AiOutlineUser } from "react-icons/ai";
 import { industry, category } from "../../../../constants/domiData";
 import { letterOnly, onNumberOnlyChange } from "../../../../utils/helpers";
 import { FormWrapper } from "./style";
@@ -142,33 +143,38 @@ const CompanyOverview = () => {
                         <section className="col-md-3">
                             <div className="form-dp">
                                 <span className="image-placeholder">
-                                    {stateAuth?.userObj?.avatar === null ? (
+                                    {!stateAuth?.userObj?.avatar ? (
                                         logoUploading ? (
                                             <CircularLoader color={"#000"} />
                                         ) : (
-                                            <>
-                                                <img
-                                                    src={imageRep}
-                                                    style={{
-                                                        width: "40px",
-                                                        height: "40px",
-                                                    }}
-                                                    alt="placeholder"
-                                                />
-                                                <p>
-                                                    Company
-                                                    <br />
-                                                    logo
-                                                </p>
-                                            </>
+                                            <AiOutlineUser
+                                                size={36}
+                                                color="#828282"
+                                            />
                                         )
                                     ) : logoUploading ? (
-                                        <CircularLoader color={"#000"} />
+                                        <div
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                display: "grid",
+                                                placeItems: "center",
+                                            }}
+                                        >
+                                            <CircularLoader
+                                                color={"#000"}
+                                                style={{ margin: "auto 0" }}
+                                            />
+                                        </div>
                                     ) : (
                                         <img
-                                            src={stateAuth?.userObj?.avatar}
-                                            alt="add"
                                             className="image-placeholder"
+                                            src={stateAuth?.userObj?.avatar}
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                            }}
+                                            alt=""
                                         />
                                     )}
                                 </span>
