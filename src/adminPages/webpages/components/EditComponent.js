@@ -15,6 +15,7 @@ import { TimePicker } from 'antd';
 import moment from 'moment';
 import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 import { upload } from '../../../services';
+import { MdAlarmOn } from 'react-icons/md';
 
 export const EditComponent = ({
   headers,
@@ -27,15 +28,30 @@ export const EditComponent = ({
   sections,
   sectionIndex,
   columnIndex,
+  setSections,
+  data,
+  setData,
 }) => {
   const [loading, setLoading] = useState();
   const [files, setFiles] = useState();
   const [previewFile, setPreviewFile] = useState();
   const [file, setFile] = useState();
 
-  const handleHeaders = (e, value, i) => {
+  const handleHeaders = ({ e, value, i, oldVal }) => {
     let mainHeaders = [...headers];
-    if (mainHeaders.length < i + 1) {
+    let tempSections = [...sections];
+    let tempData = { ...data };
+
+    for (let k in tempData) {
+      if (k === oldVal) {
+        console.log(k, oldVal);
+        if (value === 'key') {
+          tempData[e.target.value] = tempData[k];
+          delete tempData[k];
+        } else {
+          tempData[oldVal] = e.target.value;
+        }
+      }
     }
 
     for (let index = 0; index < headers.length; index++) {
@@ -48,11 +64,23 @@ export const EditComponent = ({
         }
       }
     }
+    setData(tempData);
     setHeaders(mainHeaders);
   };
-  const handleTexts = (e, value, i) => {
+  const handleTexts = ({ e, value, i, oldVal }) => {
     let mainTexts = [...texts];
-    if (mainTexts.length < i + 1) {
+    let tempData = { ...data };
+
+    for (let k in tempData) {
+      if (k === oldVal) {
+        console.log(k, oldVal);
+        if (value === 'key') {
+          tempData[e.target.value] = tempData[k];
+          delete tempData[k];
+        } else {
+          tempData[oldVal] = e.target.value;
+        }
+      }
     }
 
     for (let index = 0; index < texts.length; index++) {
@@ -69,21 +97,32 @@ export const EditComponent = ({
   };
   const handleImages = (e, i) => {
     let tempList = [...images];
-    console.log(e);
     tempList[i] = e;
-    setFile(URL.createObjectURL(e));
     setImages([...tempList]);
   };
 
-  const deleteHeader = (i) => {
+  const deleteHeader = (i, oldVal) => {
+    let tempData = { ...data };
+    for (let k in tempData) {
+      if (k === oldVal) {
+        delete tempData[k];
+      }
+    }
     const newVal = headers.filter((item, index) => index !== i);
-
     setHeaders((prev) => newVal);
+    setData(tempData);
   };
 
-  const deleteText = (i) => {
+  const deleteText = (i, oldVal) => {
+    let tempData = { ...data };
+    for (let k in tempData) {
+      if (k === oldVal) {
+        delete tempData[k];
+      }
+    }
     const newVal = texts.filter((item, index) => index !== i);
     setTexts((prev) => newVal);
+    setData(tempData);
   };
 
   const handleFiles = (value) => {
@@ -95,20 +134,22 @@ export const EditComponent = ({
   };
 
   const handleUpload = async ({ filesInfo, index }) => {
+    const { files } = filesInfo.target;
     const formData = new FormData();
-    formData.append('dir', 'kv');
-    formData.append('ref', Date.now().toString());
-    formData.append('type', 'pdf');
-    formData.append(0, filesInfo[0]?.file);
-    console.log(filesInfo);
-    handleImages(filesInfo, index);
+
+    formData.append('type', 'image');
+    formData.append('file', files[0]);
+    toast.success('Image uploaded successfully');
+    // setFileUploading(true);
     try {
       const response = await upload(formData);
-      console.log(response);
+      console.log(response?.path);
       setFile(response?.path);
+      handleImages(response?.path, index);
     } catch (error) {
-      console.log(error.response);
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image');
     }
+    // setFileUploading(false);
   };
 
   useEffect(() => {
@@ -120,6 +161,7 @@ export const EditComponent = ({
       setHeaders(sections[sectionIndex][columnIndex]['components']['headers']);
       setTexts(sections[sectionIndex][columnIndex]['components']['texts']);
       setImages(sections[sectionIndex][columnIndex]['components']['images']);
+      setData(sections[sectionIndex][columnIndex]['data']);
     }
   }, [sections, sectionIndex, columnIndex]);
 
@@ -135,7 +177,7 @@ export const EditComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4 onClick={() => console.log(headers, texts)}>Header</h4>
+            <h4 onClick={() => console.log(data)}>Header</h4>
             <button
               className={styles.textButton2}
               onClick={() => setHeaders([...headers, { key: '', title: '' }])}
@@ -152,7 +194,14 @@ export const EditComponent = ({
                   value={item?.key}
                   // name={`headerKey${i}`}
                   required={false}
-                  onChange={(e) => handleHeaders(e, 'key', i)}
+                  onChange={(e) =>
+                    handleHeaders({
+                      e: e,
+                      value: 'key',
+                      i: i,
+                      oldVal: item?.key,
+                    })
+                  }
                 />
                 <span className='w-50'>
                   <TextField
@@ -161,14 +210,21 @@ export const EditComponent = ({
                     value={item?.title}
                     // name={`headerTitle${i}`}
                     required={false}
-                    onChange={(e) => handleHeaders(e, 'title', i)}
+                    onChange={(e) =>
+                      handleHeaders({
+                        e: e,
+                        value: 'title',
+                        i: i,
+                        oldVal: item?.key,
+                      })
+                    }
                   />
                 </span>
                 <img
                   className='ml-2'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={(e) => deleteHeader(i)}
+                  onClick={(e) => deleteHeader(i, item?.key)}
                 />
               </div>
             );
@@ -194,7 +250,14 @@ export const EditComponent = ({
                   value={item?.key}
                   // name={`textKey${i}`}
                   required={false}
-                  onChange={(e) => handleTexts(e, 'key', i)}
+                  onChange={(e) =>
+                    handleTexts({
+                      e: e,
+                      value: 'key',
+                      i: i,
+                      oldVal: item?.key,
+                    })
+                  }
                 />
                 <span className='w-50'>
                   <Form.Item initialValue={item?.text}>
@@ -203,7 +266,14 @@ export const EditComponent = ({
                       className='max_fill mb-1'
                       value={item?.text}
                       rows='4'
-                      onChange={(e) => handleTexts(e, 'text', i)}
+                      onChange={(e) =>
+                        handleTexts({
+                          e: e,
+                          value: 'text',
+                          i: i,
+                          oldVal: item?.text,
+                        })
+                      }
                     />
                   </Form.Item>
                 </span>
@@ -211,7 +281,7 @@ export const EditComponent = ({
                   className='ml-2 cursor'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteText(i)}
+                  onClick={() => deleteText(i, item?.key)}
                 />
               </div>
             );
@@ -235,7 +305,7 @@ export const EditComponent = ({
                   <DragAndDrop
                     index={i}
                     handleUpload={handleUpload}
-                    image={handleFiles(item).toString()}
+                    image={item}
                   ></DragAndDrop>
                 </span>
               );

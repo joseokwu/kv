@@ -148,7 +148,7 @@ export const getAllBlog = async (
 ) => {
   try {
     console.log(values);
-    const response = await request.post('v1/blog/get-all', values);
+    const response = await request.get('v1/blog', values);
     return response.data;
   } catch (err) {
     console.log(err?.response?.data?.message);
@@ -159,8 +159,98 @@ export const getAllBlog = async (
 export const getBlog = async (values) => {
   try {
     console.log(values);
-    const response = await request.post('v1/blog/get', {
+    const response = await request.post('v1/blog/details', {
       slug: values,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
+};
+
+export const deleteBlog = async (values) => {
+  try {
+    console.log(values);
+    const response = await request.post('v1/blog/delete', {
+      slug: values,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
+};
+
+export const updateBlog = async ({ payload, slug }) => {
+  try {
+    const response = await request.post('v1/blog/update', {
+      payload: payload,
+      slug: slug,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
+};
+
+export const createPage = async (value) => {
+  try {
+    const response = await request.post('v1/page/create', value);
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
+};
+
+export const getPages = async (
+  values = {
+    limit: 5,
+    page: 1,
+  }
+) => {
+  try {
+    console.log(values);
+    const response = await request.get('v1/page', values);
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
+};
+
+export const deletePage = async (values) => {
+  try {
+    const response = await request.post('v1/page/delete', {
+      slug: values,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
+};
+
+export const getPage = async (values) => {
+  try {
+    console.log(values);
+    const response = await request.post('v1/page/details', {
+      slug: values,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
+};
+
+export const updatePage = async ({ payload, slug }) => {
+  try {
+    const response = await request.post('v1/page/update', {
+      payload: payload,
+      slug: slug,
     });
     return response.data;
   } catch (err) {

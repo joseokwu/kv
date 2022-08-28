@@ -92,20 +92,22 @@ export const AddComponent = ({
   };
 
   const handleUpload = async ({ filesInfo, index }) => {
+    const { files } = filesInfo.target;
     const formData = new FormData();
-    formData.append('dir', 'kv');
-    formData.append('ref', Date.now().toString());
-    formData.append('type', 'pdf');
-    formData.append(0, filesInfo[0]?.file);
-    console.log(filesInfo);
-    handleImages(filesInfo, index);
+
+    formData.append('type', 'image');
+    formData.append('file', files[0]);
+    toast.success('Image uploaded successfully');
+    // setFileUploading(true);
     try {
       const response = await upload(formData);
-      console.log(response);
+      console.log(response?.path);
       setFile(response?.path);
+      handleImages(response?.path, index);
     } catch (error) {
-      console.log(error.response);
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image');
     }
+    // setFileUploading(false);
   };
 
   return (
@@ -225,7 +227,7 @@ export const AddComponent = ({
                     index={i}
                     handleUpload={handleUpload}
                     // setFiles={handleImages}
-                    image={handleFiles(images[i]).toString()}
+                    image={item}
                   ></DragAndDrop>
                 </span>
               );

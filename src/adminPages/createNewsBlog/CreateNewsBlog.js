@@ -14,6 +14,7 @@ import { UploadProgramInfo } from '../programs/components/UploadProgramInfo';
 import { upload } from '../../services';
 import DragAndDrop from '../../components/dragAndDrop/DragAndDrop';
 import { useHistory } from 'react-router-dom';
+import toast from 'react-hot-toast';
 // import updateProfile
 
 export const CreateNewsBlog = () => {
@@ -23,6 +24,7 @@ export const CreateNewsBlog = () => {
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
   const [body, setBody] = useState();
+  const [fileUploading, setFileUploading] = useState();
 
   const {
     location: { hash },
@@ -39,33 +41,37 @@ export const CreateNewsBlog = () => {
   };
 
   const handleUpload = async ({ filesInfo, index }) => {
+    const { files } = filesInfo.target;
     const formData = new FormData();
-    formData.append('dir', 'kv');
-    formData.append('ref', Date.now().toString());
-    formData.append('type', 'pdf');
-    formData.append(0, filesInfo[0]?.file);
-    // setFile(filesInfo);
-    // console.log(filesInfo);
+
+    formData.append('type', 'image');
+    formData.append('file', files[0]);
+    toast.success('Image uploaded successfully');
+    setFileUploading(true);
     try {
       const response = await upload(formData);
-      console.log(response);
       setFile(response?.path);
     } catch (error) {
-      console.log(error.response);
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image');
     }
+    setFileUploading(false);
   };
 
   const handleCreate = async () => {
+    console.log('ff');
     try {
-      await createBlog({
+      const res = await createBlog({
         title,
         body,
-        // viewed: 0,
+        viewed: 0,
         cover: file,
         publish: date,
       });
+      console.log(res);
+      toast.success('Blog Created');
       replace('/admin/webpages');
     } catch (error) {
+      toast.success('Blog Creation Failed');
       console.log(error);
     }
   };
@@ -101,7 +107,7 @@ export const CreateNewsBlog = () => {
 
           <Form.Item name='description'>
             <TextArea
-              label='body'
+              label='Body'
               className='max_fill mb-4'
               rows='5'
               value={body}
@@ -117,7 +123,7 @@ export const CreateNewsBlog = () => {
 
           <DragAndDrop
             setFiles={previewFile}
-            image={handleFiles(file).toString()}
+            image={file}
             handleUpload={handleUpload}
           ></DragAndDrop>
         </section>
@@ -128,7 +134,7 @@ export const CreateNewsBlog = () => {
             label='Create'
             variant='secondary'
             type='Submit'
-            onClick={handleCreate}
+            onClick={() => handleCreate()}
           />
         </section>
       </Form>

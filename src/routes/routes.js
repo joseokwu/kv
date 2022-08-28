@@ -141,7 +141,9 @@ import {
   CreateCriteriaPage,
   Pages,
   CreateNewsBlog,
+  EditNewsBlog,
   CreateWebpage,
+  EditWebpage,
 } from '../adminPages';
 
 import { StartupsAssigned } from '../KVMemberPages';
@@ -1114,24 +1116,40 @@ const routes = [
     path: '/admin/webpages',
     component: WithAdminLayout(Pages),
     exact: true,
-    protected: false,
+    protected: true,
     type: 'admin',
   },
   {
     name: 'create news/blog',
-    path: '/admin/webpages/create_blog',
+    path: '/admin/create_blog',
     component: WithAdminLayout(CreateNewsBlog),
     exact: true,
-    protected: false,
+    protected: true,
+    type: 'admin',
+  },
+  {
+    name: 'edit news/blog',
+    path: '/admin/edit_blog',
+    component: WithAdminLayout(EditNewsBlog),
+    exact: true,
+    protected: true,
     type: 'admin',
   },
 
   {
     name: 'create webpage',
-    path: '/admin/webpages/create_webpage',
+    path: '/admin/create_webpage',
     component: WithAdminLayout(CreateWebpage),
     exact: true,
-    protected: false,
+    protected: true,
+    type: 'admin',
+  },
+  {
+    name: 'edit webpage',
+    path: '/admin/edit_webpage',
+    component: WithAdminLayout(EditWebpage),
+    exact: true,
+    protected: true,
     type: 'admin',
   },
 

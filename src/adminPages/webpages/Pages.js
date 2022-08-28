@@ -41,8 +41,8 @@ export const Pages = () => {
           label='Create'
           onClick={() =>
             hash === `#${mgtTab[0]}`
-              ? push('/admin/webpages/create_webpage')
-              : push('/admin/webpages/create_blog')
+              ? push('/admin/create_webpage')
+              : push('/admin/create_blog')
           }
         />
       </section>

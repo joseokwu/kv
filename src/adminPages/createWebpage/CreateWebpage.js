@@ -19,13 +19,15 @@ import { mergeDateTime } from '../../utils/helpers';
 import { useAuth } from '../../hooks';
 import { UploadFile } from '../../components';
 import { UploadProgramInfo } from '../programs/components/UploadProgramInfo';
-import { upload } from '../../services';
+import { upload, createPage } from '../../services';
 import { AddComponent } from '../webpages/components/AddComponent';
 import Item from 'antd/lib/list/Item';
 import { useHistory } from 'react-router-dom';
 import { EditComponent } from '../webpages/components/EditComponent';
 import copy from '../../assets/icons/copy.svg';
 import success from '../../assets/icons/success-check.svg';
+import { logout } from '../../store/actions/auth';
+import toast from 'react-hot-toast';
 // import updateProfile
 
 export const CreateWebpage = () => {
@@ -35,43 +37,35 @@ export const CreateWebpage = () => {
   const [texts, setTexts] = useState([]);
   const [images, setImages] = useState([]);
   const [headersEdit, setHeadersEdit] = useState([]);
+  const [data, setData] = useState({});
   const [textsEdit, setTextsEdit] = useState([]);
   const [imagesEdit, setImagesEdit] = useState([]);
   const [columnIndex, setColumnIndex] = useState(0);
   const [sectionIndex, setSectionIndex] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
+  const [pageTitle, setPageTitle] = useState();
   const [check, setCheck] = useState(false);
   const {
     location: { hash },
     push,
+    replace,
   } = useHistory();
 
   const handleSubmit = () => {
-    console.log(isEditing);
-    const tempSections = [...sections];
+    let tempSections = [...sections];
     if (isEditing) {
-      console.log('ddd');
       if (
         Object.keys(tempSections[sectionIndex][columnIndex]['components'])
           .length > 0
-        // ) {
-        //   // console.log('fff');
-        //   // let tempHeaders =
-        //   //   tempSections[sectionIndex][columnIndex]['components']['headers'];
-        //   // let tempTexts =
-        //   //   tempSections[sectionIndex][columnIndex]['components']['texts'];
-        //   // let tempImages =
-        //   //   tempSections[sectionIndex][columnIndex]['components']['images'];
-        //   // tempHeaders = [...headersEdit];
-        //   // tempTexts = [...textsEdit];
-        //   // tempImages = [...imagesEdit];
-        //   tempSections[sectionIndex][columnIndex]['components'] = {
-        //     headers: tempHeaders,
-        //     texts: tempTexts,
-        //     images: tempImages,
-        //   };
-        // } else {
       ) {
+        const duplicates = findDuplicates(headersEdit, textsEdit);
+
+        if (duplicates.length > 0) {
+          return;
+        }
+
+        tempSections[sectionIndex][columnIndex]['data'] = data;
+
         tempSections[sectionIndex][columnIndex]['components'] = {
           headers: headersEdit,
           texts: textsEdit,
@@ -80,10 +74,48 @@ export const CreateWebpage = () => {
       }
       setIsEditing(false);
     } else {
+      let obj = {};
+      let trackHeader = false;
+      let trackText = false;
+
       if (
         Object.keys(tempSections[sectionIndex][columnIndex]['components'])
           .length > 0
       ) {
+        headers.map((v, _) => {
+          if (v.key !== '') {
+            if (
+              Object.keys(
+                tempSections[sectionIndex][columnIndex]['data']
+              ).includes(v.key)
+            ) {
+              console.log('toast');
+              toast.error(`Key ${v.key}  exists`);
+              trackHeader = true;
+              return;
+            }
+            obj[v.key] = v.title;
+          }
+        });
+        texts.map((v, _) => {
+          if (v.key !== '') {
+            if (
+              Object.keys(
+                tempSections[sectionIndex][columnIndex]['data']
+              ).includes(v.key)
+            ) {
+              toast.error(`Key ${v.key}  exists`);
+              trackText = true;
+              return;
+            }
+            obj[v.key] = v.text;
+          }
+        });
+
+        if (trackHeader || trackText) {
+          return;
+        }
+
         let tempHeaders =
           tempSections[sectionIndex][columnIndex]['components']['headers'];
         let tempTexts =
@@ -98,15 +130,40 @@ export const CreateWebpage = () => {
           texts: tempTexts,
           images: tempImages,
         };
+
+        tempSections[sectionIndex][columnIndex]['data'] = {
+          ...tempSections[sectionIndex][columnIndex]['data'],
+          ...obj,
+        };
       } else {
+        let obj = {};
+        const duplicates = findDuplicates(headers, texts);
+
+        if (duplicates.length > 0) {
+          return;
+        }
+
+        headers.map((v, _) => {
+          if (v.key !== '') {
+            obj[v.key] = v.title;
+          }
+        });
+        texts.map((v, _) => {
+          if (v.key !== '') {
+            obj[v.key] = v.text;
+          }
+        });
+        console.log(obj);
         tempSections[sectionIndex][columnIndex]['components'] = {
           headers: headers,
           texts: texts,
           images: images,
         };
+
+        tempSections[sectionIndex][columnIndex]['data'] = obj;
       }
     }
-    console.log('it worked');
+
     setSections(tempSections);
 
     setHeaders([]);
@@ -115,16 +172,53 @@ export const CreateWebpage = () => {
     setHeadersEdit([]);
     setTextsEdit([]);
     setImagesEdit([]);
+    setData({});
   };
 
   const getColumnLength = (column) => {
     let total = 0;
     Object.values(column).forEach((val) => (total += val.length));
-    console.log(total);
+
     return total;
   };
 
-  const handleCreate = (e) => {};
+  const findDuplicates = (headers, texts) => {
+    let tempArray = [];
+    let tempArray2 = [];
+    let duplicates = [];
+    for (let index = 0; index < headers.length; index++) {
+      tempArray.push(headers[index].key);
+    }
+
+    for (let index = 0; index < texts.length; index++) {
+      tempArray.push(texts[index].key);
+    }
+
+    for (let index = 0; index < tempArray.length; index++) {
+      if (tempArray2.includes(tempArray[index])) {
+        toast.error(`${tempArray[index]} has a duplicate`);
+        duplicates.push(tempArray[index]);
+      } else {
+        tempArray2.push(tempArray[index]);
+      }
+    }
+
+    return duplicates;
+  };
+
+  const handleCreate = async (e) => {
+    const details = {
+      title: pageTitle,
+      data: JSON.stringify(sections),
+    };
+    try {
+      const res = await createPage(details);
+      console.log(res);
+      replace('/admin/webpages');
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   useEffect(() => {
     let timer;
@@ -162,7 +256,10 @@ export const CreateWebpage = () => {
           handleSubmit={handleSubmit}
           columnIndex={columnIndex}
           sections={sections}
+          setSections={setSections}
           sectionIndex={sectionIndex}
+          data={data}
+          setData={setData}
         />
       </Modal>
       <Modal id='viewJson' title='Json Data' width={568}>
@@ -184,6 +281,7 @@ export const CreateWebpage = () => {
             label='Page Title'
             className='max_fill mb-4'
             name='title'
+            onChange={(e) => setPageTitle(e.target.value)}
             required={false}
           />
 

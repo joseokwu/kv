@@ -26,7 +26,7 @@ function DragDropFile({ setFiles, image, index, handleUpload }) {
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       // setFiles(e.dataTransfer.files[0], index);
-      handleUpload({ filesInfo: e.target.files[0], index: index });
+      handleUpload({ filesInfo: e, index: index });
     }
   };
 
@@ -35,7 +35,7 @@ function DragDropFile({ setFiles, image, index, handleUpload }) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       // setFiles(e.target.files[0], index);
-      handleUpload({ filesInfo: e.target.files[0], index: index });
+      handleUpload({ filesInfo: e, index: index });
     }
   };
 

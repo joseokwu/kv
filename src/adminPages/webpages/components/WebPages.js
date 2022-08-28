@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Table } from '../../../adminComponents';
 import { Tag } from '../../../components';
 import { formatDate } from '../../../utils/helpers';
@@ -9,6 +9,8 @@ import { EmptyState } from './../../../mentorComponents/emptyState/EmptyState';
 import { PaginationData } from '../../../components';
 import { RoundLoader } from '../../../components/RoundLoader/RoundLoader';
 import { AvatarWrapper } from '../../../components/avatarWrapper';
+import { deletePage, getPages } from '../../../services';
+import toast from 'react-hot-toast';
 
 export const WebPages = ({
   applications = [],
@@ -17,6 +19,13 @@ export const WebPages = ({
   fetched,
   setFetched,
 }) => {
+  const [pages, setPages] = useState();
+  const [trigger, setTrigger] = useState();
+  const {
+    location: { hash, state },
+    goBack,
+    push,
+  } = useHistory();
   let limit = 5;
 
   const header = useMemo(
@@ -38,35 +47,67 @@ export const WebPages = ({
     []
   );
 
-  const applicationData = useMemo(
-    () => [
-      {
-        title: (
-          <div className='d-flex align-items-center space-out'>
-            <p className='mb-0'>Joe Carbon</p>
-          </div>
-        ),
+  const applicationData = pages?.map((item, i) => {
+    return {
+      title: (
+        <div className='d-flex align-items-center space-out'>
+          <p className='mb-0'>{item?.title}</p>
+        </div>
+      ),
 
-        date: '17 May, 2022',
+      date: formatDate(item?.createdAt),
 
-        action: (
-          <div className='d-flex align-items-center space-out'>
-            <p
-              className='view-link'
-              role='button'
-              // onClick={() => push('/admin/selection_process/kv/0002')}
-            >
-              Edit
-            </p>
-            <p role='button' className='delete-link'>
-              Delete
-            </p>
-          </div>
-        ),
-      },
-    ],
-    []
-  );
+      action: (
+        <div className='d-flex align-items-center space-out'>
+          <p
+            className='view-link'
+            role='button'
+            onClick={() =>
+              push({
+                pathname: '/admin/edit_webpage',
+                state: { slug: item?.slug },
+              })
+            }
+          >
+            Edit
+          </p>
+          <p
+            role='button'
+            className='delete-link'
+            onClick={() => removePage(item?.slug)}
+          >
+            Delete
+          </p>
+        </div>
+      ),
+    };
+  });
+
+  const removePage = async (id) => {
+    console.log(id);
+    try {
+      const d = await deletePage(id);
+      console.log(d);
+      toast.success('Page Deleted');
+      setTrigger(!trigger);
+    } catch (error) {
+      toast.error('Unable to delete Page');
+    }
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const pages = await getPages();
+        console.log(pages.data);
+        setPages(pages?.data?.data);
+      } catch (error) {
+        toast.error('Unable to retrieve blogs');
+        console.log(error.response);
+      }
+    };
+    getData();
+  }, [trigger]);
 
   if (applications?.startups?.length === 0) {
     return <EmptyState message='No Application yet.' />;
