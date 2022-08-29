@@ -31,3 +31,8 @@ export * from './dashboard/Dashboard';
 export * from './viewKvScreening/ViewKvAnswer';
 export * from './viewMentorScreening/ViewMentorAnswer';
 export * from './createCriteriaPage/createCriteriaPage';
+export * from './webpages/Pages';
+export * from './createNewsBlog/EditNewsBlog';
+export * from './createNewsBlog/CreateNewsBlog';
+export * from './createWebpage/CreateWebpage';
+export * from './createWebpage/EditWebpage';
