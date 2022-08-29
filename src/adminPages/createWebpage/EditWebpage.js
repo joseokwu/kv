@@ -329,18 +329,23 @@ export const EditWebpage = () => {
       )}
       <Modal id='viewJson' title='Json Data' width={568}>
         <div className={styles.json}>
-          <pre>{JSON.stringify(sections[sectionIndex], null, 2)}</pre>
+          <pre>{JSON.stringify(sections, null, 2)}</pre>
         </div>
       </Modal>
       <GoBack />
       <Form>
         <section className={`mt-4 ${styles.createProgram}`}>
-          <h3
-            className='border-bottom pb-4'
-            onClick={() => console.log(pageTitle)}
-          >
-            Edit Webpage
-          </h3>
+          <div className={styles.heading}>
+            <h3 className='border-bottom pb-4'>Edit Webpage</h3>
+            <p
+              className={`view-link`}
+              role='button'
+              data-toggle='modal'
+              data-target={`#viewJson`}
+            >
+              View Json
+            </p>
+          </div>
           <label className='' htmlFor=''>
             Page Title
           </label>
@@ -358,17 +363,6 @@ export const EditWebpage = () => {
               <div className={styles.componentContainer} key={ind}>
                 <div className={styles.componentHeader}>
                   <h5 className='mb-5'>Section</h5>
-                  <p
-                    className={`view-link`}
-                    role='button'
-                    data-toggle='modal'
-                    data-target={`#viewJson`}
-                    onClick={() => {
-                      setSectionIndex(ind);
-                    }}
-                  >
-                    View Json
-                  </p>
                 </div>
 
                 <div className='d-flex flex-wrap justify-content-between'>

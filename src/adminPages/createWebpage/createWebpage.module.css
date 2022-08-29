@@ -6,7 +6,11 @@
   max-width: 858px;
   margin: 0 auto;
 }
-
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .createProgram h3 {
   font-family: 'DM Sans';
   font-style: normal;
