@@ -1,0 +1,61 @@
+.container {
+  background: #ffffff;
+  border: 1px solid #e6e7e9;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 312px;
+
+  main {
+    background: #f9f9fc;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 246px;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  div {
+  }
+}
+
+.details {
+  height: 60px;
+  display: grid;
+  align-items: center;
+  padding: 2px 30px;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  span {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    /* identical to box height, or 17px */
+
+    /* 900 */
+
+    color: #2e3192;
+  }
+
+  span:first-child {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    max-width: 185px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    color: rgba(24, 24, 25, 0.9);
+  }
+}
