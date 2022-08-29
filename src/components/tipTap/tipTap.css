@@ -73,7 +73,7 @@
   padding-bottom: 5px;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: space-between;
 }
 .menuBar button {
   font-size: 0.1rem;

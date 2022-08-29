@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from 'antd';
-import { Button, GoBack, Select, TextArea, TextField } from '../../components';
+import {
+  Button,
+  GoBack,
+  Select,
+  TextArea,
+  TextField,
+  TipTap,
+} from '../../components';
 import download from '../../assets/icons/download.svg';
 import searchIcon from '../../assets/icons/searchSm.svg';
 import closeIcon from '../../assets/icons/closesm.svg';
@@ -21,9 +28,9 @@ export const CreateNewsBlog = () => {
   const { stateAuth } = useAuth();
   const [previewFile, setPreviewFile] = useState();
   const [file, setFile] = useState();
-  const [title, setTitle] = useState();
-  const [date, setDate] = useState();
-  const [body, setBody] = useState();
+  const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
+  const [body, setBody] = useState('');
   const [fileUploading, setFileUploading] = useState();
 
   const {
@@ -47,18 +54,24 @@ export const CreateNewsBlog = () => {
     formData.append('type', 'image');
     formData.append('file', files[0]);
     toast.success('Image uploaded successfully');
-    setFileUploading(true);
+
     try {
       const response = await upload(formData);
       setFile(response?.path);
     } catch (error) {
       toast.error(error?.response?.data?.message ?? 'Unable to upload image');
     }
-    setFileUploading(false);
   };
 
   const handleCreate = async () => {
-    console.log('ff');
+    if (!title) {
+      toast.error('Please provide page title');
+      return;
+    }
+    if (!body) {
+      toast.error('Please provide page body');
+      return;
+    }
     try {
       const res = await createBlog({
         title,
@@ -67,7 +80,7 @@ export const CreateNewsBlog = () => {
         cover: file,
         publish: date,
       });
-      console.log(res);
+
       toast.success('Blog Created');
       replace('/admin/webpages');
     } catch (error) {
@@ -106,13 +119,17 @@ export const CreateNewsBlog = () => {
           </div>
 
           <Form.Item name='description'>
-            <TextArea
+            <label className='' htmlFor=''>
+              Body:
+            </label>
+            <TipTap setDescription={setBody} description={body} />
+            {/* <TextArea
               label='Body'
               className='max_fill mb-4'
               rows='5'
               value={body}
               onChange={(e) => setBody(e.target.value)}
-            />
+            /> */}
           </Form.Item>
           <div>
             <h5>Upload Image</h5>

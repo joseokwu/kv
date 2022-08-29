@@ -57,7 +57,7 @@ const MenuBar = ({ editor }) => {
         >
           <FaHeading />
         </button>
-        {/* <button
+        <button
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
@@ -66,7 +66,7 @@ const MenuBar = ({ editor }) => {
           }
         >
           <FaHeading className='heading3' />
-        </button> */}
+        </button>
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={editor.isActive('bulletList') ? 'is_active' : ''}
@@ -86,26 +86,26 @@ const MenuBar = ({ editor }) => {
           <FaQuoteLeft />
         </button>
       </div>
-      {/* <div>
+      <div>
         <button onClick={() => editor.chain().focus().undo().run()}>
           <FaUndo />
         </button>
         <button onClick={() => editor.chain().focus().redo().run()}>
           <FaRedo />
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };
 
-export const TipTap = ({ handleTexts, i, data, oldVal }) => {
+export const TipTap = ({ setDescription, description }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
-    content: data ? `${data}` : ``,
+    content: `${description}`,
 
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
-      handleTexts({ e: html, value: 'text', i: i, oldVal: oldVal });
+      setDescription(html);
     },
   });
 

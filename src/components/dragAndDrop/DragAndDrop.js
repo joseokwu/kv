@@ -1,7 +1,7 @@
 import React from 'react';
 import './drop.css';
 
-function DragDropFile({ setFiles, image, index, handleUpload }) {
+function DragDropFile({ image, index, handleUpload }) {
   // drag state
   const [dragActive, setDragActive] = React.useState(false);
 
@@ -25,7 +25,6 @@ function DragDropFile({ setFiles, image, index, handleUpload }) {
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      // setFiles(e.dataTransfer.files[0], index);
       handleUpload({ filesInfo: e, index: index });
     }
   };
@@ -34,7 +33,6 @@ function DragDropFile({ setFiles, image, index, handleUpload }) {
   const handleChange = function (e) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      // setFiles(e.target.files[0], index);
       handleUpload({ filesInfo: e, index: index });
     }
   };

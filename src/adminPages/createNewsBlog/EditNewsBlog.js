@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from 'antd';
-import { Button, GoBack, Select, TextArea, TextField } from '../../components';
+import {
+  Button,
+  GoBack,
+  Select,
+  TextArea,
+  TextField,
+  TipTap,
+} from '../../components';
 import download from '../../assets/icons/download.svg';
 import searchIcon from '../../assets/icons/searchSm.svg';
 import closeIcon from '../../assets/icons/closesm.svg';
@@ -22,9 +29,9 @@ export const EditNewsBlog = () => {
   const [previewFile, setPreviewFile] = useState();
   const [data, setData] = useState();
   const [file, setFile] = useState();
-  const [title, setTitle] = useState();
-  const [date, setDate] = useState();
-  const [body, setBody] = useState();
+  const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
+  const [body, setBody] = useState('');
 
   const {
     location: { hash, state },
@@ -40,22 +47,19 @@ export const EditNewsBlog = () => {
     }
   };
 
-  console.log(state);
-
   const handleUpload = async ({ filesInfo, index }) => {
+    const { files } = filesInfo.target;
     const formData = new FormData();
-    formData.append('dir', 'kv');
-    formData.append('ref', Date.now().toString());
-    formData.append('type', 'pdf');
-    formData.append(0, filesInfo[0]?.file);
-    setFile(filesInfo);
-    console.log(filesInfo);
+
+    formData.append('type', 'image');
+    formData.append('file', files[0]);
+    toast.success('Image uploaded successfully');
+
     try {
       const response = await upload(formData);
-      console.log(response);
       setFile(response?.path);
     } catch (error) {
-      console.log(error.response);
+      toast.error(error?.response?.data?.message ?? 'Unable to upload image');
     }
   };
 
@@ -67,7 +71,6 @@ export const EditNewsBlog = () => {
   };
 
   const handleUpdate = async () => {
-    console.log(state, details);
     const d = await updateBlog({ slug: state?.id, payload: details });
     if (d?.success) {
       replace('/admin/webpages');
@@ -81,7 +84,6 @@ export const EditNewsBlog = () => {
       const getData = async () => {
         try {
           const res = await getBlog(state.id);
-          console.log(res);
           setDate(res?.data?.publish);
           setBody(res?.data?.body);
           setFile(res?.data?.cover);
@@ -100,8 +102,11 @@ export const EditNewsBlog = () => {
       <GoBack />
       <Form>
         <section className={`mt-4 ${styles.createProgram}`}>
-          <h3 className='border-bottom pb-4' onClick={() => console.log(title)}>
-            Create News/Blog
+          <h3
+            className='border-bottom pb-4'
+            onClick={() => console.log(title, body)}
+          >
+            Edit News/Blog
           </h3>
           <div className='d-flex justify-content-between'>
             <span className='w-75'>
@@ -113,7 +118,6 @@ export const EditNewsBlog = () => {
                 className={`${styles.input} max_fill mb-4`}
                 name='title'
                 value={title}
-                defaultValue={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required={false}
               />
@@ -122,29 +126,32 @@ export const EditNewsBlog = () => {
               <label className={styles.label} htmlFor=''>
                 Publish Date
               </label>
+
               <input
                 label='Publish Date'
                 className={`${styles.input} max_fill mb-4`}
                 name='date'
                 onChange={(e) => setDate(e.target.value)}
                 required={false}
-                defaultValue={date}
-                value={date}
+                value={date.substr(0, 10)}
                 type='date'
               />
             </span>
           </div>
 
-          <Form.Item name='description'>
-            <TextArea
+          {body && (
+            <Form.Item name='description'>
+              <TipTap setDescription={setBody} description={body} />
+              {/* <TextArea
               label='body'
               className='max_fill mb-4'
               rows='5'
               defaultValue={body}
               value={body}
               onChange={(e) => setBody(e.target.value)}
-            />
-          </Form.Item>
+            /> */}
+            </Form.Item>
+          )}
           <div>
             <h5>Upload Image</h5>
             <p className='mb-4 w-75'>
@@ -152,17 +159,13 @@ export const EditNewsBlog = () => {
             </p>
           </div>
 
-          <DragAndDrop
-            setFiles={previewFile}
-            image={file}
-            handleUpload={handleUpload}
-          ></DragAndDrop>
+          <DragAndDrop image={file} handleUpload={handleUpload}></DragAndDrop>
         </section>
 
         <section className={`d-flex justify-content-end ${styles.btnWrapper}`}>
           <Button label='Cancel' variant='gray' onClick={() => goBack()} />
           <Button
-            label='Create'
+            label='Update'
             variant='secondary'
             type='Submit'
             onClick={handleUpdate}
