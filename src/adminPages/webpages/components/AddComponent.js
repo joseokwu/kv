@@ -15,6 +15,7 @@ import { TimePicker } from 'antd';
 import moment from 'moment';
 import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 import { upload } from '../../../services';
+import cuid from 'cuid';
 
 export const AddComponent = ({
   headers,
@@ -49,8 +50,6 @@ export const AddComponent = ({
   };
   const handleTexts = (e, value, i) => {
     let mainTexts = [...texts];
-    if (mainTexts.length < i + 1) {
-    }
 
     for (let index = 0; index < texts.length; index++) {
       if (index === i) {
@@ -64,13 +63,26 @@ export const AddComponent = ({
     }
     setTexts(mainTexts);
   };
-  const handleImages = (e, i) => {
-    const tempList = [...images];
-    console.log(e);
-    tempList[i] = e;
 
-    setImages([...tempList]);
+  const handleImages = (e, i) => {
+    let mainImages = [...images];
+
+    for (let index = 0; index < images.length; index++) {
+      if (index === i) {
+        mainImages[i].key = cuid();
+        mainImages[i].image = e;
+      }
+    }
+    setImages(mainImages);
   };
+
+  // const handleImages = (e, i) => {
+  //   const tempList = [...images];
+  //   console.log(e);
+  //   tempList[i] = e;
+
+  //   setImages([...tempList]);
+  // };
 
   const deleteHeader = (i) => {
     const newVal = headers.filter((item, index) => index !== i);
@@ -214,7 +226,7 @@ export const AddComponent = ({
             <h4>Image</h4>
             <button
               className={styles.textButton2}
-              onClick={() => setImages([...images, ''])}
+              onClick={() => setImages([...images, { key: '', image: '' }])}
             >
               Add Image+
             </button>
@@ -227,7 +239,7 @@ export const AddComponent = ({
                     index={i}
                     handleUpload={handleUpload}
                     // setFiles={handleImages}
-                    image={item}
+                    image={item?.image}
                   ></DragAndDrop>
                 </span>
               );

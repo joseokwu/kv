@@ -124,6 +124,10 @@ export const CreateWebpage = () => {
           }
         });
 
+        images.map((v, _) => {
+          obj[v.key] = v.image;
+        });
+
         if (trackHeader || trackText) {
           return;
         }
@@ -175,6 +179,10 @@ export const CreateWebpage = () => {
             trackEmptyText = true;
             return;
           }
+        });
+
+        images.map((v, _) => {
+          obj[v.key] = v.image;
         });
 
         if (trackEmptyHeader || trackEmptyText) {

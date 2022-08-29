@@ -16,6 +16,7 @@ import moment from 'moment';
 import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 import { upload } from '../../../services';
 import { MdAlarmOn } from 'react-icons/md';
+import cuid from 'cuid';
 
 export const EditComponent = ({
   headers,
@@ -95,11 +96,23 @@ export const EditComponent = ({
     }
     setTexts(mainTexts);
   };
+
   const handleImages = (e, i) => {
-    let tempList = [...images];
-    tempList[i] = e;
-    setImages([...tempList]);
+    let mainImages = [...images];
+
+    for (let index = 0; index < images.length; index++) {
+      if (index === i) {
+        // mainImages[i].key = cuid();
+        mainImages[i].image = e;
+      }
+    }
+    setImages(mainImages);
   };
+  // const handleImages = (e, i) => {
+  //   let tempList = [...images];
+  //   tempList[i] = e;
+  //   setImages([...tempList]);
+  // };
 
   const deleteHeader = (i, oldVal) => {
     let tempData = { ...data };
@@ -293,7 +306,7 @@ export const EditComponent = ({
             <h4>Image</h4>
             <button
               className={styles.textButton2}
-              onClick={() => setImages([...images, ''])}
+              onClick={() => setImages([...images, { key: '', image: '' }])}
             >
               Add Image+
             </button>
@@ -305,7 +318,7 @@ export const EditComponent = ({
                   <DragAndDrop
                     index={i}
                     handleUpload={handleUpload}
-                    image={item}
+                    image={item?.image}
                   ></DragAndDrop>
                 </span>
               );
