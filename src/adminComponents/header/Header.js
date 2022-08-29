@@ -60,11 +60,12 @@ export const Header = ({ setOpen, open, admin }) => {
                         <img src={logo} alt="profile" className="" />
                         <p className="mb-0 header-text">
                             {" "}
-                            {stateAuth?.firstname +
+                            {/* {stateAuth?.firstname +
                                 " " +
                                 stateAuth?.lastname +
                                 " " +
-                                "Admin"}{" "}
+                                "Admin"}{" "} */}
+                            Admin
                         </p>
                     </span>
                     <div>

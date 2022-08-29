@@ -126,7 +126,7 @@ export const Sidebar = () => {
                     />
                 </div>
                 <h5 className="mb-0 side-header">
-                    {stateAuth?.firstname + " " + stateAuth?.lastname}
+                    {/* {stateAuth?.firstname + " " + stateAuth?.lastname} */}
                 </h5>
                 <p className="mb-0 side-text">Admin</p>
 
