@@ -235,7 +235,7 @@ export const PreviousRound = ({ setFundraising }) => {
                                         stateAuth?.profileData?.startupRes?.fundRaising
                                             ?.previousRound?.dilution
                                     }
-                                    required={true}
+                                    required={false}
                                     onChange={(e) => {
                                         updateProfile("fundRaising", {
                                             previousRound: {

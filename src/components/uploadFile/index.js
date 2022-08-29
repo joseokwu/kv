@@ -23,7 +23,7 @@ import DocumentIcon from "../../assets/icons/document_upload.svg";
 import VideoIcon from "../../assets/icons/videoIcon.svg";
 import { bytesToSize, theme } from "./config";
 
-const Document = ({ url, icon }) => {
+const Document = ({ url, icon, name }) => {
     return (
         <PitchDeckCardContainer
             onClick={() => {
@@ -38,7 +38,7 @@ const Document = ({ url, icon }) => {
                 <img src={SmallDocumentIcon} alt="" />
                 <Column justify="center">
                     <Paragraph weight="normal" margin="0">
-                        Pitch Deck
+                        {name}
                     </Paragraph>
                     <Paragraph
                         size="sm"
@@ -140,6 +140,7 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
     const [initialData, setInitialData] = useState(initData);
     const [loading, setLoading] = useState(false);
     const [filesUploaded, setFilesUploaded] = useState(false);
+    const [name, setName] = useState("");
     const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
     const maxFileSize = useMemo(() => {
         if (!data) return 5;
@@ -243,6 +244,7 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
             toast.error(`${e?.message}`);
         }
     };
+    console.log(filesInfo);
 
     return (
         <FileUploadBase
@@ -278,6 +280,7 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
                                 } uploaded successfully`
                             );
                             setFilesUploaded(true);
+                            setName(filesInfo[0]?.name);
                             setFilesInfo([]);
                             setInitialData(data);
                         } catch (e) {
@@ -301,7 +304,14 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
             ) : initialData.length > 0 ? (
                 <Column gap={1} align="center" justify="center">
                     {initialData.map((url, i) => {
-                        return <Document key={i} url={url} icon={fileType} />;
+                        return (
+                            <Document
+                                key={i}
+                                url={url}
+                                icon={fileType}
+                                name={name}
+                            />
+                        );
                     })}
                     <ToFull padding="1rem" width="40%">
                         <Button

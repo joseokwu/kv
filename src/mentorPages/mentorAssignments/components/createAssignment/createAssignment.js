@@ -181,19 +181,19 @@ export const MentorCreateAssignment = ({ history }) => {
                                     className="col-md-12 py-2 px-2"
                                     id="time"
                                     name="time"
-                                    defaultValue={
-                                        // stateAuth?.profileData?.startupRes
-                                        //     ?.startUpProfile?.yearFounded
-                                        //     ? moment(
-                                        //           stateAuth?.profileData
-                                        //               ?.startupRes
-                                        //               ?.startUpProfile
-                                        //               ?.yearFounded
-                                        //       )
-                                        //     : undefined
-                                        undefined
-                                    }
-                                    format={"YYYY-MM-DD"}
+                                    // defaultValue={
+                                    // stateAuth?.profileData?.startupRes
+                                    //     ?.startUpProfile?.yearFounded
+                                    //     ? moment(
+                                    //           stateAuth?.profileData
+                                    //               ?.startupRes
+                                    //               ?.startUpProfile
+                                    //               ?.yearFounded
+                                    //       )
+                                    //     : undefined
+                                    // undefined
+                                    // }
+                                    // format={"YYYY-MM-DD"}
                                     onChange={(_, timeString) => {
                                         console.log(timeString);
                                         return timeString;

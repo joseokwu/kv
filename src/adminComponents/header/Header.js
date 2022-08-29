@@ -46,32 +46,33 @@ export const Header = ({ setOpen, open, admin }) => {
               <p className="mb-0 header-text">Chat</p>
             </span>
           </li> */}
-          <li
-            style={{ cursor: 'pointer' }}
-            className='d-flex align-items-center'
-            onClick={() => setOpenNotice(!openNotice)}
-          >
-            <img src={notification} alt='notification' />
-          </li>
-        </ul>
+                    <li
+                        style={{ cursor: "pointer" }}
+                        className="d-flex align-items-center"
+                        onClick={() => setOpenNotice(!openNotice)}
+                    >
+                        <img src={notification} alt="notification" />
+                    </li>
+                </ul>
 
-        <div className='d-flex align-items-center h-100'>
-          <span className='d-flex align-items-center header-profile d-none d-lg-flex'>
-            <img src={logo} alt='profile' className='' />
-            <p className='mb-0 header-text'>
-              {' '}
-              {stateAuth?.firstname +
-                ' ' +
-                stateAuth?.lastname +
-                ' ' +
-                'Admin'}{' '}
-            </p>
-          </span>
-          <div>
-            <HeaderDropdownMenu admin={admin} />
-          </div>
-        </div>
-      </section>
+                <div className="d-flex align-items-center h-100">
+                    <span className="d-flex align-items-center header-profile d-none d-lg-flex">
+                        <img src={logo} alt="profile" className="" />
+                        <p className="mb-0 header-text">
+                            {" "}
+                            {/* {stateAuth?.firstname +
+                                " " +
+                                stateAuth?.lastname +
+                                " " +
+                                "Admin"}{" "} */}
+                            Admin
+                        </p>
+                    </span>
+                    <div>
+                        <HeaderDropdownMenu admin={admin} />
+                    </div>
+                </div>
+            </section>
 
       <Notification
         closeNotice={() => setOpenNotice(false)}

@@ -129,6 +129,8 @@ const ProfileDetails = ({ data }) => {
                                 className="text-decoration-none"
                                 style={{ color: "#828282" }}
                                 href={data?.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 <img className="pe-1" src={web} alt="web" />
                                 {data?.website}

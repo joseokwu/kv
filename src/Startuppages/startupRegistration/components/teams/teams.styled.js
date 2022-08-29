@@ -9,8 +9,8 @@ export const CoInputWrapper = styled.label`
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 310px;
-    left: 120px;
+    bottom: 0;
+    right: 0;
 `;
 
 export const HeaderTeam = styled.div`

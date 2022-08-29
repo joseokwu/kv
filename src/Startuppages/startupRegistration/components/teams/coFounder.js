@@ -6,6 +6,9 @@ import {
     HeaderModal,
     ModalForm,
 } from "./teams.styled";
+import { css } from "styled-components/macro";
+import { AiOutlineUser } from "react-icons/ai";
+import { IoClose } from "react-icons/io5";
 import {
     SkillTab,
     WorkExperience,
@@ -34,6 +37,7 @@ import { TextareaCustom } from "../../../../components/textArea/cutstomTextarea"
 import moment from "moment";
 import { useAuth } from "../../../../hooks/useAuth";
 import { letterOnly } from "../../../../utils/helpers";
+import { linkedinRegExp, twitterRegExp } from "../../../../utils/utils";
 
 const { Option } = Select;
 
@@ -47,12 +51,12 @@ export const CoFounder = ({
     isEditing,
     setIsEditing,
 }) => {
-    const [country, setCountry] = useState("");
     const [skills, setSkills] = useState([]);
     const [phone, setPhone] = useState();
     const [show, setShow] = useState(false);
     const [avatar, setAvatar] = useState(null);
     const [showEducation, setShowEducation] = useState(false);
+    const [showEduForm, setShowEduForm] = useState(false);
     const [loading, setLoading] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -66,7 +70,8 @@ export const CoFounder = ({
     const [localExperience, setLocalExperience] = useState([]);
     const [dob, setDob] = useState(moment());
     const [inVal, setVal] = useState("");
-    const [region, setRegion] = useState("");
+
+    console.log(stateAuth);
 
     const [generalValues, setGeneralValues] = useState({
         avatar: avatar,
@@ -78,12 +83,12 @@ export const CoFounder = ({
         linkedIn: "",
         twitter: "",
         website: "",
-        country: country,
+        country: "",
         position: "",
-        state: region,
+        state: "",
         city: "",
         skills: skills,
-        mobile_number: phone,
+        mobile_number: "",
         education: localEducation,
         experience: localExperience,
     });
@@ -114,12 +119,33 @@ export const CoFounder = ({
             e.preventDefault();
             if (
                 inVal.trim() === "" ||
-                stateAuth.profileData?.startupRes.team.skills.indexOf(inVal.trim()) !== -1
+                stateAuth.profileData?.startupRes.team.skills.indexOf(
+                    inVal.trim()
+                ) !== -1
             )
                 return;
             setVal("");
             setSkills([...skills, inVal]);
         }
+    };
+
+    console.log(generalValues);
+
+    // update functions
+    const updateField = (name, value) => {
+        setGeneralValues({ ...generalValues, [name]: value });
+    };
+    const updateEducationField = (name, value) => {
+        setCurrentEducationValues({
+            ...currentEducationValues,
+            [name]: value,
+        });
+    };
+    const updateExperienceField = (name, value) => {
+        setCurrentExperienceValues({
+            ...currentExperienceValues,
+            [name]: value,
+        });
     };
 
     const onDelete = (value) => {
@@ -129,32 +155,20 @@ export const CoFounder = ({
     const onChangeImage = async (e) => {
         const { files } = e.target;
         const formData = new FormData();
-        formData.append("dir", "kv");
-        formData.append("ref", stateAuth.user?.userId);
         formData.append("type", "image");
-        formData.append(0, files[0]);
+        formData.append("file", files[0]);
+        setLoading(true);
         try {
-            console.log("uploaded");
-            setLoading(true);
             const response = await upload(formData);
-            console.log(response);
             setAvatar(response?.path);
-            setLoading(false);
+            updateField("avatar", avatar);
         } catch (error) {
             console.log(error);
-            setLoading(false);
             toast.error(
                 error?.response?.data?.message ?? "Unable to upload image"
             );
         }
-    };
-
-    const handleChangeCountry = (value) => {
-        setCountry(value);
-    };
-
-    const handleChangeState = (value) => {
-        setRegion(value);
+        setLoading(false);
     };
 
     const {
@@ -170,26 +184,7 @@ export const CoFounder = ({
         updateProfile("team", {
             coFounder: [
                 ...stateAuth?.profileData?.startupRes?.team.coFounder,
-                {
-                    avatar: avatar,
-                    briefIntroduction:
-                        formik.getFieldProps("briefIntroduction").value,
-                    firstName: formik.getFieldProps("firstName").value,
-                    lastName: formik.getFieldProps("lastName").value,
-                    email: formik.getFieldProps("email").value,
-                    dob: dob,
-                    linkedIn: formik.getFieldProps("linkedIn").value,
-                    twitter: formik.getFieldProps("twitter").value,
-                    website: formik.getFieldProps("website").value,
-                    country: country,
-                    position: formik.getFieldProps("position").value,
-                    state: region,
-                    city: formik.getFieldProps("city").value,
-                    skills: skills,
-                    mobile_number: phone,
-                    education: localEducation,
-                    experience: localExperience,
-                },
+                generalValues,
             ],
         });
 
@@ -200,79 +195,47 @@ export const CoFounder = ({
         setLocalEducation([
             ...localEducation,
             {
-                schoolName: eduFormik.getFieldProps("school").value,
-                course: eduFormik.getFieldProps("course").value,
-                degree: eduFormik.getFieldProps("degree").value,
-                activities: eduFormik.getFieldProps("activities").value,
-                startDate: eduStartDate,
-                endDate: checked ? "present" : eduEndDate,
+                ...currentEducationValues,
+                endDate: checked ? "present" : currentEducationValues.endDate,
             },
         ]);
-    };
-
-    const eduFormik = useFormik({
-        initialValues: {
-            school: "",
+        setGeneralValues({ ...generalValues, education: localEducation });
+        setCurrentEducationValues({
+            schoolName: "",
             course: "",
             degree: "",
             activities: "",
-        },
-    });
-
-    const workFormik = useFormik({
-        initialValues: {
-            companyName: "",
-            location: "",
-            position: "",
-            responsibility: "",
             startDate: "",
-            endDate: "",
-        },
-    });
+            endDate: checked ? "present" : "",
+        });
+    };
 
     const handleExpeSubmit = () => {
         setLocalExperience([
             ...localExperience,
             {
-                companyName: workFormik.getFieldProps("companyName").value,
-                location: workFormik.getFieldProps("location").value,
-                position: workFormik.getFieldProps("position").value,
-                responsibility:
-                    workFormik.getFieldProps("responsibility").value,
-                startDate: startDate,
-                endDate: checked ? "present" : endDate,
+                ...currentExperienceValues,
+                endDate: checked ? "present" : currentExperienceValues.endDate,
             },
         ]);
-
-        workFormik.resetForm({
-            values: {
-                companyName: "",
-                location: "",
-                position: "",
-                responsibility: "",
-                startDate: "",
-                endDate: "",
-            },
+        setGeneralValues({ ...generalValues, experience: localExperience });
+        setCurrentExperienceValues({
+            companyName: "",
+            location: "",
+            position: "",
+            responsibility: "",
+            startDate: "",
+            endDate: checked ? "present" : endDate,
         });
     };
 
-    const formik = useFormik({
-        initialValues: {
-            briefIntroduction: "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            dob: startDate,
-            country: "",
-            position: "",
-            city: "",
-            mobile_number: "",
-            skills: [],
-            linkedIn: "",
-            twitter: "",
-            website: "",
-        },
-    });
+    const [generalForm] = Form.useForm();
+    const [educationForm] = Form.useForm();
+    const [experienceForm] = Form.useForm();
+    const [socialMediaForm] = Form.useForm();
+
+    console.log(localExperience);
+    console.log(localEducation);
 
     return (
         <div className="px-3">
@@ -283,217 +246,334 @@ export const CoFounder = ({
                 <span></span>
             )}
 
-            <Form.Provider>
+            <section>
                 <Form
-                    id="Cofounder-general"
-                    name="Cofounder-general"
+                    id="Cofounder-profile"
+                    name="Cofounder-profile"
                     initialValues={{
                         remember: true,
                     }}
                     layout="vertical"
                     onFinish={(values) => {
                         console.log(values);
-                        // handleExpeSubmit();
-                        // setDisplayWorkExperience(true);
                     }}
-                ></Form>
-                <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
-                    <div className="div">
-                        <span>Co-Founder</span>
-                        <p
-                            onClick={() =>
-                                console.log(stateAuth.profileData?.startupRes.team)
-                            }
+                    form={generalForm}
+                >
+                    <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
+                        <div className="div">
+                            <span>Co-Founder</span>
+                            <p
+                                onClick={() =>
+                                    console.log(
+                                        stateAuth.profileData?.startupRes.team
+                                    )
+                                }
+                            >
+                                A brief profile of co-founders
+                            </p>
+                        </div>
+
+                        <div
+                            style={{
+                                marginTop: "10px",
+                                marginLeft: "10px",
+                                position: "relative",
+                                width: "max-content",
+                            }}
                         >
-                            A brief profile of co-founders
-                        </p>
-                    </div>
-
-                    <div style={{ marginTop: "10px", marginLeft: "10px" }}>
-                        <ImageWrapper>
-                            {avatar === null ? (
-                                loading ? (
-                                    <CircularLoader color={"#000"} />
+                            <ImageWrapper>
+                                {avatar === null ? (
+                                    loading ? (
+                                        <CircularLoader color={"#000"} />
+                                    ) : (
+                                        <AiOutlineUser size={40} />
+                                    )
                                 ) : (
-                                    <UserOutlined />
-                                )
-                            ) : (
-                                <img
-                                    className=""
-                                    src={avatar}
-                                    style={{
-                                        borderRadius: "70px",
-                                        width: "90px",
-                                        height: "90px",
-                                    }}
-                                    alt=""
+                                    <img
+                                        className=""
+                                        src={avatar}
+                                        style={{
+                                            borderRadius: "70px",
+                                            width: "90px",
+                                            height: "90px",
+                                        }}
+                                        alt=""
+                                    />
+                                )}
+                            </ImageWrapper>
+
+                            <CoInputWrapper for="found">
+                                <input
+                                    type="file"
+                                    onChange={onChangeImage}
+                                    id="found"
+                                    hidden
                                 />
-                            )}
-                        </ImageWrapper>
+                                <PlusOutlined style={{ color: "#ffffff" }} />
+                            </CoInputWrapper>
+                        </div>
 
-                        <CoInputWrapper for="found">
-                            <input
-                                type="file"
-                                onChange={onChangeImage}
-                                id="found"
-                                hidden
-                            />
-                            <PlusOutlined style={{ color: "#ffffff" }} />
-                        </CoInputWrapper>
-                    </div>
-
-                    <div className="row my-3 mt-4">
-                        <div className="form-group col-12">
-                            <div className="d-flex justify-content-between">
-                                <label>Brief Introduction *</label>
-                                <label style={{ color: "#828282" }}>
-                                    10 words at most
-                                </label>
+                        <div className="row my-3 mt-4">
+                            <div className="form-group col-12">
+                                <TextField
+                                    label="Brief Introduction"
+                                    name={"briefIntroduction"}
+                                    value={generalValues.briefIntroduction}
+                                    onChange={(e) => {
+                                        updateField(
+                                            "briefIntroduction",
+                                            e.target.value
+                                        );
+                                    }}
+                                    required={true}
+                                    placeholder="Enter a brief introduction"
+                                />
                             </div>
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.briefIntroduction}
-                                type="text"
-                                name="briefIntroduction"
-                                placeholder="Enter a brief bio about yourself"
-                                className="form-control ps-3"
-                            />
-                        </div>
-                        <div className="form-group col-lg-6 col-12">
-                            <TextField
-                                label="First Name"
-                                name={"firstName"}
-                                // onChange={(e) =>
-                                //     updateProfile("startUpProfile", {
-                                //         brand: e.target.value,
-                                //     })
-                                // }
-                                // value={
-                                //     stateAuth?.profileData?.startupRes?.startUpProfile
-                                //         ?.brand
-                                // }
-                                required={true}
-                                placeholder="eg; Knight Ventures"
-                            />
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.firstName}
-                                type="text"
-                                name="firstName"
-                                placeholder="Enter first name"
-                                className="form-control ps-3"
-                            />
-                        </div>
-                        <div className="form-group col-lg-6 col-12">
-                            <label>Last Name *</label>
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.lastName}
-                                type="text"
-                                name="lastName"
-                                placeholder="Enter last name"
-                                className="form-control ps-3"
-                            />
-                        </div>
-                        <div className="form-group col-lg-6 col-12">
-                            <label>Email *</label>
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.email}
-                                type="text"
-                                name="email"
-                                placeholder="Enter email address"
-                                className="form-control ps-3"
-                            />
-                        </div>
-                        <div className="form-group  col-lg-6 col-12">
-                            <label>Date of Birth *</label>
-                            <DatePicker
-                                className="custs p-2"
-                                style={{ padding: "15px" }}
-                                selected={dob}
-                                placeholderText="yyyy-mm-dd"
-                                onChange={(date) => setDob(date, "dob")}
-                            />
-                        </div>
-                        <div className="form-group col-lg-4 col-12">
-                            <label>Country *</label>
-                            <CountryDropdown
-                                className="form-control px-5 py-1 country-bg"
-                                value={country}
-                                onChange={(value) => handleChangeCountry(value)}
-                            ></CountryDropdown>
-                        </div>
-                        <div className="form-group col-lg-4 col-12">
-                            <label>State *</label>
-                            <RegionDropdown
-                                name="state"
-                                country={country}
-                                value={region}
-                                onChange={(value) => handleChangeState(value)}
-                                className="form-control ps-3"
-                            />
-                        </div>
-                        <div className="form-group col-lg-4 col-12">
-                            <label>City *</label>
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.city}
-                                type="text"
-                                name="city"
-                                placeholder="Enter your city"
-                                className="form-control ps-3"
-                            />
-                        </div>
-                        <div className="form-group col-6 ">
-                            <label>Mobile Number *</label>
-                            <PhoneInput
-                                international
-                                name="phone"
-                                countryCallingCodeEditable={true}
-                                className="custs w-lg-50 ps-1"
-                                value={phone}
-                                onChange={(value) => setPhone(value)}
-                                placeholder="0000 00000 0000"
-                                MaxLength={17}
-                            />
-                        </div>
+                            <div className="form-group col-lg-6 col-12">
+                                <TextField
+                                    label="First Name"
+                                    name={"firstName"}
+                                    value={generalValues.firstName}
+                                    onChange={(e) => {
+                                        updateField(
+                                            "firstName",
+                                            e.target.value
+                                        );
+                                    }}
+                                    required={true}
+                                    placeholder="Enter first name"
+                                />
+                            </div>
+                            <div className="form-group col-lg-6 col-12">
+                                <TextField
+                                    label="Last Name"
+                                    name={"lastName"}
+                                    value={generalValues.lastName}
+                                    onChange={(e) => {
+                                        updateField("lastName", e.target.value);
+                                    }}
+                                    required={true}
+                                    placeholder="Enter last name"
+                                />
+                            </div>
+                            <div className="form-group col-lg-6 col-12">
+                                <TextField
+                                    label="Email"
+                                    name={"email"}
+                                    value={generalValues.email}
+                                    onChange={(e) => {
+                                        updateField("email", e.target.value);
+                                    }}
+                                    type="email"
+                                    required={true}
+                                    placeholder="Enter an email"
+                                />
+                            </div>
+                            <div className="form-group  col-lg-6 col-12">
+                                <Form.Item
+                                    name="dob"
+                                    label="Date of Birth"
+                                    initialValue={
+                                        startDate ? moment(dob) : undefined
+                                    }
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please select the date of birth",
+                                        },
+                                    ]}
+                                >
+                                    <DatePicker
+                                        className="custs p-2"
+                                        style={{ padding: "15px" }}
+                                        placeholderText="yyyy-mm-dd"
+                                        value={
+                                            startDate
+                                                ? generalValues.dob
+                                                : undefined
+                                        }
+                                        onChange={(date, dateString) => {
+                                            updateField(
+                                                "dob",
+                                                dateString === ""
+                                                    ? null
+                                                    : new Date(
+                                                          dateString
+                                                      ).toISOString()
+                                            );
+                                            console.log(generalValues);
+                                        }}
+                                    />
+                                </Form.Item>
+                            </div>
+                            <div className="form-group col-lg-4 col-12">
+                                <Form.Item
+                                    name="country"
+                                    label="Country"
+                                    initialValue={generalValues.country}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please select a country",
+                                        },
+                                    ]}
+                                >
+                                    <CountryDropdown
+                                        className="form-control px-5 py-1 country-bg"
+                                        value={generalValues.country}
+                                        onChange={(value) => {
+                                            updateField("country", value);
+                                        }}
+                                    />
+                                </Form.Item>
+                            </div>
+                            <div className="form-group col-lg-4 col-12">
+                                <Form.Item
+                                    name="region"
+                                    label="State"
+                                    initialValue={generalValues.state}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please select a state",
+                                        },
+                                    ]}
+                                >
+                                    <RegionDropdown
+                                        name="state"
+                                        country={generalValues.country}
+                                        value={generalValues.state}
+                                        onChange={(value) => {
+                                            updateField("state", value);
+                                        }}
+                                        className="form-control ps-3"
+                                    />
+                                </Form.Item>
+                            </div>
+                            <div className="form-group col-lg-4 col-12">
+                                <TextField
+                                    label="City"
+                                    name={"city"}
+                                    value={generalValues.city}
+                                    onChange={(e) => {
+                                        updateField("city", e.target.value);
+                                        console.log(generalValues);
+                                    }}
+                                    required={true}
+                                    placeholder="Enter a city"
+                                />
+                            </div>
+                            <div className="form-group col-6 ">
+                                <Form.Item
+                                    name="phoneNumber"
+                                    label="Mobile Number"
+                                    initialValue={phone}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please enter a mobile number.",
+                                        },
+                                    ]}
+                                >
+                                    <PhoneInput
+                                        international
+                                        name="phone"
+                                        countryCallingCodeEditable={true}
+                                        className="custs w-lg-50 ps-1"
+                                        value={generalValues.mobile_number}
+                                        onChange={(value) => {
+                                            updateField("mobile_number", value);
+                                        }}
+                                        placeholder="+234 700 0000 000"
+                                        MaxLength={17}
+                                        style={{ padding: "5px" }}
+                                    />
+                                </Form.Item>
+                            </div>
 
-                        <div className="form-group col-lg-4 col-12">
-                            <label>
-                                Position at{" "}
-                                <em>{stateAuth?.user?.businessname}</em>*
-                            </label>
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.position}
-                                type="text"
-                                name="position"
-                                placeholder="Enter your position"
-                                className="form-control ps-3"
-                            />
+                            <div className="form-group col-lg-4 col-12">
+                                <TextField
+                                    label={`Position at ${stateAuth?.startupname}`}
+                                    name={"position"}
+                                    value={generalValues.position}
+                                    onChange={(value) => {
+                                        updateField("position", value);
+                                    }}
+                                    required={true}
+                                    placeholder="Enter a position"
+                                />
+                            </div>
                         </div>
-                    </div>
-                </FormWrapper>
+                    </FormWrapper>
+                </Form>
                 <Form
                     name="Cofounder-Experience"
                     initialValues={{
                         remember: true,
                     }}
                     layout="vertical"
+                    form={experienceForm}
                     onFinish={(values) => {
                         console.log(values);
-                        // handleExpeSubmit();
-                        // setDisplayWorkExperience(true);
+                        handleExpeSubmit();
+                        setDisplayWorkExperience(false);
                     }}
                 >
                     <FormWrapper height="80%" style={{ padding: "0 0 1rem 0" }}>
-                        {!displayWorkExperience ? (
+                        <div>
+                            <HeaderModal>Work Experience</HeaderModal>
+                            <hr style={{ background: "#323232" }} />
+                            {localExperience.length > 0 &&
+                                localExperience.map((item, index) => {
+                                    return (
+                                        <WorkExperience
+                                            key={index}
+                                            {...item}
+                                            showTeamModal={() =>
+                                                setDisplayWorkExperience(false)
+                                            }
+                                            setEditIndex={setEditIndex}
+                                            setIsEditing={setIsEditing}
+                                            id={index}
+                                        />
+                                    );
+                                })}
+                            {!displayWorkExperience && (
+                                <div className="col-7 my-4 px-0">
+                                    <span
+                                        style={{
+                                            color: "#120297",
+                                            borderBottom: "1px solid #120297",
+                                            fontWeight: "600",
+                                            marginTop: "10px",
+                                        }}
+                                        onClick={() =>
+                                            setDisplayWorkExperience(true)
+                                        }
+                                    >
+                                        Add another work experience +
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+                        {displayWorkExperience && (
                             <div>
-                                <HeaderModal>
-                                    {" "}
-                                    {"Add Work Experience"}
-                                </HeaderModal>
+                                <div className="d-flex flex-row align-items-center justify-content-between">
+                                    <HeaderModal>
+                                        {"Add Work Experience"}
+                                    </HeaderModal>
+                                    <IoClose
+                                        size={32}
+                                        css={css`
+                                            cursor: pointer;
+                                        `}
+                                        onClick={() => {
+                                            setDisplayWorkExperience(false);
+                                        }}
+                                    />
+                                </div>
                                 <hr style={{ background: "#323232" }} />
                                 <ModalForm className="row">
                                     <div className="col-12 form-group">
@@ -503,6 +583,12 @@ export const CoFounder = ({
                                             value={
                                                 currentExperienceValues.companyName
                                             }
+                                            onChange={(e) => {
+                                                updateExperienceField(
+                                                    "companyName",
+                                                    e.target.value
+                                                );
+                                            }}
                                             placeholder="e.g. Knight Ventures"
                                             required={true}
                                         />
@@ -514,6 +600,12 @@ export const CoFounder = ({
                                             value={
                                                 currentExperienceValues.location
                                             }
+                                            onChange={(e) => {
+                                                updateExperienceField(
+                                                    "location",
+                                                    e.target.value
+                                                );
+                                            }}
                                             placeholder="e.g. United state of America"
                                             required={true}
                                         />
@@ -526,6 +618,12 @@ export const CoFounder = ({
                                             value={
                                                 currentExperienceValues.responsibility
                                             }
+                                            onChange={(e) => {
+                                                updateExperienceField(
+                                                    "responsibility",
+                                                    e.target.value
+                                                );
+                                            }}
                                             min={10}
                                             maxLength={50}
                                             onKeyPress={letterOnly}
@@ -566,10 +664,22 @@ export const CoFounder = ({
                                                 name="startDate"
                                                 className="p-2"
                                                 style={{ padding: "15px" }}
-                                                selected={startDate}
-                                                onChange={(date) =>
-                                                    setStartDate(date)
+                                                value={
+                                                    currentExperienceValues.startDate
                                                 }
+                                                onChange={(
+                                                    date,
+                                                    dateString
+                                                ) => {
+                                                    updateExperienceField(
+                                                        "startDate",
+                                                        dateString === ""
+                                                            ? null
+                                                            : new Date(
+                                                                  dateString
+                                                              ).toISOString()
+                                                    );
+                                                }}
                                             />
                                         </Form.Item>
                                     </div>
@@ -598,10 +708,22 @@ export const CoFounder = ({
                                                     name="endDate"
                                                     className="p-2"
                                                     style={{ padding: "15px" }}
-                                                    selected={endDate}
-                                                    onChange={(date) =>
-                                                        setEndDate(date)
+                                                    value={
+                                                        currentExperienceValues.endDate
                                                     }
+                                                    onChange={(
+                                                        date,
+                                                        dateString
+                                                    ) => {
+                                                        updateExperienceField(
+                                                            "endDate",
+                                                            dateString === ""
+                                                                ? null
+                                                                : new Date(
+                                                                      dateString
+                                                                  ).toISOString()
+                                                        );
+                                                    }}
                                                 />
                                             </Form.Item>
                                         </div>
@@ -609,9 +731,9 @@ export const CoFounder = ({
 
                                     <div
                                         className="col-12 d-flex justify-content-between"
-                                        style={{ marginTop: "4rem" }}
+                                        style={{ marginTop: "1rem" }}
                                     >
-                                        {displayWorkExperience === false && (
+                                        {/* {displayWorkExperience === false && (
                                             <CustomButton
                                                 background="#D0D0D1"
                                                 onClick={() =>
@@ -622,7 +744,7 @@ export const CoFounder = ({
                                             >
                                                 Cancel
                                             </CustomButton>
-                                        )}
+                                        )} */}
 
                                         <CustomButton
                                             type="submit"
@@ -630,54 +752,11 @@ export const CoFounder = ({
                                             // onClick={() => {
 
                                             // }}
-                                            style={{
-                                                marginLeft:
-                                                    displayWorkExperience
-                                                        ? "7rem"
-                                                        : "0rem",
-                                            }}
                                         >
                                             Save
                                         </CustomButton>
                                     </div>
                                 </ModalForm>
-                            </div>
-                        ) : (
-                            <div>
-                                <HeaderModal>Work Experience</HeaderModal>
-                                <hr style={{ background: "#323232" }} />
-                                {localExperience.length > 0 &&
-                                    localExperience.map((item, index) => {
-                                        return (
-                                            <WorkExperience
-                                                key={index}
-                                                {...item}
-                                                showTeamModal={() =>
-                                                    setDisplayWorkExperience(
-                                                        false
-                                                    )
-                                                }
-                                                setEditIndex={setEditIndex}
-                                                setIsEditing={setIsEditing}
-                                                id={index}
-                                            />
-                                        );
-                                    })}
-                                <div className="col-7 my-4 px-0">
-                                    <span
-                                        style={{
-                                            color: "#120297",
-                                            borderBottom: "1px solid #120297",
-                                            fontWeight: "600",
-                                            marginTop: "10px",
-                                        }}
-                                        onClick={() =>
-                                            setDisplayWorkExperience(false)
-                                        }
-                                    >
-                                        Add another work experience +
-                                    </span>
-                                </div>
                             </div>
                         )}
                     </FormWrapper>
@@ -691,18 +770,67 @@ export const CoFounder = ({
                     layout="vertical"
                     onFinish={(values) => {
                         console.log(values);
-                        // handleEduSubmit();
-                        // setDisplayEducation(true);
+                        handleEduSubmit();
+                        setDisplayEducation(false);
                     }}
+                    form={educationForm}
                 >
                     <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
-                        {!displayEducation ? (
+                        <div>
+                            <HeaderModal>Education</HeaderModal>
+                            <hr style={{ background: "#323232" }} />
+                            {localEducation &&
+                                localEducation.map((item, index) => {
+                                    return (
+                                        <Education
+                                            key={index}
+                                            {...item}
+                                            showEducationModal={() =>
+                                                setDisplayEducation(false)
+                                            }
+                                            setEditIndex={setEditIndex}
+                                            setIsEditing={setIsEditing}
+                                            id={index}
+                                        />
+                                    );
+                                })}
+                            {!displayEducation && (
+                                <div className="mt-3">
+                                    <span
+                                        style={{
+                                            color: "#120297",
+                                            borderBottom: "1px solid #120297",
+                                            fontWeight: "600",
+                                            marginTop: "10px",
+                                        }}
+                                        onClick={() =>
+                                            setDisplayEducation(true)
+                                        }
+                                    >
+                                        Add another education +
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+                        {displayEducation && (
                             <div>
-                                <HeaderModal>
-                                    {isEditing
-                                        ? "Edit Education"
-                                        : "Add Education"}
-                                </HeaderModal>
+                                <div className="d-flex flex-row align-items-center justify-content-between">
+                                    <HeaderModal>
+                                        {/* {isEditing
+                                            ? "Edit Education"
+                                            : "Add Education"} */}
+                                        Add Education
+                                    </HeaderModal>
+                                    <IoClose
+                                        size={32}
+                                        css={css`
+                                            cursor: pointer;
+                                        `}
+                                        onClick={() => {
+                                            setDisplayEducation(false);
+                                        }}
+                                    />
+                                </div>
                                 <hr style={{ background: "#323232" }} />
                                 <ModalForm className="row">
                                     <div className="col-12 form-group">
@@ -710,8 +838,14 @@ export const CoFounder = ({
                                             label="School"
                                             name={"school"}
                                             value={
-                                                currentEducationValues.school
+                                                currentEducationValues.schoolName
                                             }
+                                            onChange={(e) => {
+                                                updateEducationField(
+                                                    "schoolName",
+                                                    e.target.value
+                                                );
+                                            }}
                                             placeholder="Enter School name"
                                             required={true}
                                         />
@@ -723,6 +857,12 @@ export const CoFounder = ({
                                             value={
                                                 currentEducationValues.degree
                                             }
+                                            onChange={(e) => {
+                                                updateEducationField(
+                                                    "degree",
+                                                    e.target.value
+                                                );
+                                            }}
                                             placeholder="Enter Degree"
                                             required={true}
                                         />
@@ -734,6 +874,12 @@ export const CoFounder = ({
                                             value={
                                                 currentEducationValues.course
                                             }
+                                            onChange={(e) => {
+                                                updateEducationField(
+                                                    "course",
+                                                    e.target.value
+                                                );
+                                            }}
                                             placeholder="Enter filed of study"
                                             required={true}
                                         />
@@ -745,10 +891,17 @@ export const CoFounder = ({
                                             value={
                                                 currentEducationValues.activities
                                             }
+                                            onChange={(e) => {
+                                                updateEducationField(
+                                                    "activities",
+                                                    e.target.value
+                                                );
+                                            }}
                                             min={10}
                                             maxLength={50}
                                             onKeyPress={letterOnly}
                                             placeholder="Enter Activities and Societies"
+                                            required={false}
                                         />
                                     </div>
 
@@ -757,9 +910,9 @@ export const CoFounder = ({
                                             name="eduStartDate"
                                             label="Entry Date"
                                             initialValue={
-                                                currentEducationValues.eduStartDate
+                                                currentEducationValues.startDate
                                                     ? moment(
-                                                          currentEducationValues.eduStartDate
+                                                          currentEducationValues.startDate
                                                       )
                                                     : undefined
                                             }
@@ -777,9 +930,19 @@ export const CoFounder = ({
                                                 className="p-2"
                                                 style={{ padding: "15px" }}
                                                 selected={startDate}
-                                                onChange={(date) =>
-                                                    setEduStartDate(date)
-                                                }
+                                                onChange={(
+                                                    date,
+                                                    dateString
+                                                ) => {
+                                                    updateEducationField(
+                                                        "startDate",
+                                                        dateString === ""
+                                                            ? null
+                                                            : new Date(
+                                                                  dateString
+                                                              ).toISOString()
+                                                    );
+                                                }}
                                             />
                                         </Form.Item>
                                     </div>
@@ -788,9 +951,9 @@ export const CoFounder = ({
                                             name="eduEndDate"
                                             label="Graduation Date"
                                             initialValue={
-                                                currentEducationValues.eduEndDate
+                                                currentEducationValues.endDate
                                                     ? moment(
-                                                          currentEducationValues.eduEndDate
+                                                          currentEducationValues.endDate
                                                       )
                                                     : undefined
                                             }
@@ -808,75 +971,42 @@ export const CoFounder = ({
                                                 className="p-2"
                                                 style={{ padding: "15px" }}
                                                 selected={startDate}
-                                                onChange={(date) =>
-                                                    setEduEndDate(date)
-                                                }
+                                                onChange={(
+                                                    date,
+                                                    dateString
+                                                ) => {
+                                                    updateEducationField(
+                                                        "endDate",
+                                                        dateString === ""
+                                                            ? null
+                                                            : new Date(
+                                                                  dateString
+                                                              ).toISOString()
+                                                    );
+                                                }}
                                             />
                                         </Form.Item>
                                     </div>
 
                                     <div
                                         className="col-12 d-flex justify-content-between"
-                                        style={{ marginTop: "4rem" }}
+                                        style={{ marginTop: "1rem" }}
                                     >
-                                        {displayEducation === false && (
-                                            <CustomButton
-                                                background="#D0D0D1"
-                                                onClick={() =>
-                                                    setDisplayEducation(true)
-                                                }
-                                            >
-                                                Cancel
-                                            </CustomButton>
-                                        )}
                                         <CustomButton
                                             type="submit"
                                             background="#021098"
-                                            style={{
-                                                marginLeft: displayEducation
-                                                    ? "7rem"
-                                                    : "0rem",
-                                            }}
+                                            style={
+                                                {
+                                                    // marginLeft: displayEducation
+                                                    //     ? "7rem"
+                                                    //     : "0rem",
+                                                }
+                                            }
                                         >
                                             Save
                                         </CustomButton>
                                     </div>
                                 </ModalForm>
-                            </div>
-                        ) : (
-                            <div className="mx-5">
-                                <HeaderModal>Education</HeaderModal>
-                                <hr style={{ background: "#323232" }} />
-                                {localEducation &&
-                                    localEducation.map((item, index) => {
-                                        return (
-                                            <Education
-                                                key={index}
-                                                {...item}
-                                                showEducationModal={() =>
-                                                    setDisplayEducation(false)
-                                                }
-                                                setEditIndex={setEditIndex}
-                                                setIsEditing={setIsEditing}
-                                                id={index}
-                                            />
-                                        );
-                                    })}
-                                <div className="col-6 my-4">
-                                    <span
-                                        style={{
-                                            color: "#120297",
-                                            borderBottom: "1px solid #120297",
-                                            fontWeight: "600",
-                                            marginTop: "10px",
-                                        }}
-                                        onClick={() =>
-                                            setDisplayEducation(false)
-                                        }
-                                    >
-                                        Add another education +
-                                    </span>
-                                </div>
                             </div>
                         )}
                     </FormWrapper>
@@ -890,10 +1020,7 @@ export const CoFounder = ({
 
                     <div className="form-group">
                         <div>
-                            <label>
-                                What are your skills
-                                <span style={{ color: "red" }}>*</span>
-                            </label>
+                            <label>What are your skills</label>
                         </div>
                         <input
                             onChange={handleChangeVal}
@@ -920,49 +1047,116 @@ export const CoFounder = ({
                     </div>
                 </FormWrapper>
 
-                <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
-                    <div className="div border-bottom pb-3">
-                        <span>Web & Social Media</span>
-                    </div>
-                    <div className="row">
-                        <div className="form-group col-lg-6 col-12">
-                            <TextField
-                                label="Linkedin"
-                                name={"linkedInHandle"}
-                                value={
-                                    stateAuth?.profileData?.startupRes?.startUpProfile
-                                        ?.contactInfo?.linkedInHandle
-                                }
-                                required={true}
-                                type={"url"}
-                                placeholder="Enter your Linkedin link"
-                            />
+                <Form
+                    name="Social-Media"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={(values) => {
+                        console.log(values);
+                        // handleEduSubmit();
+                        // setDisplayEducation(true);
+                    }}
+                    form={socialMediaForm}
+                >
+                    <FormWrapper height="70%" style={{ padding: "0 0 1rem 0" }}>
+                        <div className="div border-bottom pb-3">
+                            <span>Web & Social Media</span>
                         </div>
-                        <div className="form-group col-lg-6 col-12">
-                            <label>Twitter*</label>
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.twitter}
-                                type="text"
-                                name="twitter"
-                                placeholder="Enter Twitter link"
-                                className="form-control ps-3"
-                            />
-                        </div>
+                        <div className="row">
+                            <div
+                                className="form-group col-lg-6 col-12"
+                                css={css`
+                                    > * {
+                                        margin-bottom: 0;
+                                    }
+                                `}
+                            >
+                                <Form.Item
+                                    name="linkedin"
+                                    label="Linkedin"
+                                    initialValue={generalValues.linkedIn}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please enter a valid linkedin url",
+                                            pattern: linkedinRegExp,
+                                        },
+                                    ]}
+                                >
+                                    <TextField
+                                        type={"text"}
+                                        value={generalValues.linkedIn}
+                                        onChange={(e) => {
+                                            updateField(
+                                                "linkedIn",
+                                                e.target.value
+                                            );
+                                        }}
+                                        placeholder="Enter Linkedin URL"
+                                    />
+                                </Form.Item>
+                            </div>
+                            <div
+                                className="form-group col-lg-6 col-12"
+                                css={css`
+                                    > * {
+                                        margin-bottom: 0;
+                                    }
+                                `}
+                            >
+                                <Form.Item
+                                    name="twitter"
+                                    label="Twitter"
+                                    initialValue={generalValues.twitter}
+                                    rules={[
+                                        {
+                                            required: false,
+                                            message:
+                                                "Please enter a valid twitter url",
+                                            pattern: twitterRegExp,
+                                        },
+                                    ]}
+                                >
+                                    <TextField
+                                        type={"text"}
+                                        value={generalValues.twitter}
+                                        onChange={(e) => {
+                                            updateField(
+                                                "twitter",
+                                                e.target.value
+                                            );
+                                        }}
+                                        placeholder="Enter twitter URL"
+                                    />
+                                </Form.Item>
+                            </div>
 
-                        <div className="form-group col-lg-6 col-12">
-                            <label>Website*</label>
-                            <input
-                                onChange={formik.handleChange}
-                                value={formik.values.website}
-                                type="text"
-                                name="website"
-                                placeholder="Enter website"
-                                className="form-control ps-3"
-                            />
+                            <div
+                                className="form-group col-lg-6 col-12"
+                                css={css`
+                                    > * {
+                                        margin-bottom: 0;
+                                    }
+                                `}
+                            >
+                                <TextField
+                                    label={"Website"}
+                                    type="url"
+                                    name="website"
+                                    value={generalValues.website}
+                                    onChange={(e) => {
+                                        updateField("website", e.target.value);
+                                    }}
+                                    placeholder={"Enter Website link"}
+                                    required={true}
+                                />
+                            </div>
                         </div>
-                    </div>
-                </FormWrapper>
+                    </FormWrapper>
+                </Form>
 
                 <div className="row mb-5">
                     <div className="col-3">
@@ -979,15 +1173,37 @@ export const CoFounder = ({
               Save
             </CustomButton> */}
                         <CustomButton
-                            type="submit"
-                            onClick={onSubmit}
+                            type="button"
+                            onClick={() => {
+                                if (
+                                    generalForm.__INTERNAL__.name &&
+                                    educationForm.__INTERNAL__.name &&
+                                    experienceForm.__INTERNAL__.name &&
+                                    socialMediaForm.__INTERNAL__.name
+                                ) {
+                                    generalForm.submit();
+                                    experienceForm.submit();
+                                    educationForm.submit();
+                                    socialMediaForm.submit();
+                                    updateProfile("team", {
+                                        coFounder: [
+                                            ...stateAuth?.profileData
+                                                ?.startupRes?.team.coFounder,
+                                            generalValues,
+                                        ],
+                                    });
+                                    handleClose(false);
+                                } else {
+                                    console.log("form not connected");
+                                }
+                            }}
                             background="#00ADEF"
                         >
                             {"Save"}
                         </CustomButton>
                     </div>
                 </div>
-            </Form.Provider>
+            </section>
         </div>
     );
 };

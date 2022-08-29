@@ -302,7 +302,7 @@ export const InvestorDetails = () => {
               name="bankAccountType"
               onChange={(e) => updateInvestorProfileData("personalDetail", { bankAccountType: e.target.value })}
             /> */}
-                            <label className="mb-3">
+                            <label className="mb-2">
                                 <span style={{ color: "red" }}>*</span> Account
                                 Type
                             </label>

@@ -117,51 +117,54 @@ export const Sidebar = () => {
     setNavigator(adminNavigation);
   }, []);
 
-  return (
-    <div className='side-main'>
-      <section className='side-navigator'>
-        <div>
-          <img
-            src={`https://ui-avatars.com/api/?name=${stateAuth?.firstname}`}
-            style={{
-              width: '60px',
-              height: '60px',
-              borderRadius: '60px',
-            }}
-            alt='profile'
-          />
-        </div>
-        <h5 className='mb-0 side-header'>
-          {stateAuth?.firstname + ' ' + stateAuth?.lastname}
-        </h5>
-        <p className='mb-0 side-text'>Admin</p>
+    return (
+        <div className="side-main">
+            <section className="side-navigator">
+                <div>
+                    <img
+                        src={`https://ui-avatars.com/api/?name=${stateAuth?.firstname}`}
+                        style={{
+                            width: "60px",
+                            height: "60px",
+                            borderRadius: "60px",
+                        }}
+                        alt="profile"
+                    />
+                </div>
+                <h5 className="mb-0 side-header">
+                    {/* {stateAuth?.firstname + " " + stateAuth?.lastname} */}
+                </h5>
+                <p className="mb-0 side-text">Admin</p>
 
-        <ul className='side-list'>
-          {navigator.length > 0 &&
-            navigator.map((nav, i) => {
-              return (
-                <li key={i}>
-                  <Link to={nav.path}>
-                    <img src={nav.icon} alt='dash' />
-                    <p
-                      className={`${activateLink(
-                        nav.activator
-                      )} side-text-admin`}
-                    >
-                      {nav.title}
-                    </p>
-                  </Link>
-                </li>
-              );
-            })}
-        </ul>
-      </section>
-      <section className='side-footer' onClick={() => push('/booster/support')}>
-        <img src={helpDesk} alt='help' />
-        <p className='mb-0 side-text text-white' role='button'>
-          Need help? Contact us
-        </p>
-      </section>
-    </div>
-  );
+                <ul className="side-list">
+                    {navigator.length > 0 &&
+                        navigator.map((nav, i) => {
+                            return (
+                                <li key={i}>
+                                    <Link to={nav.path}>
+                                        <img src={nav.icon} alt="dash" />
+                                        <p
+                                            className={`${activateLink(
+                                                nav.activator
+                                            )} side-text-admin`}
+                                        >
+                                            {nav.title}
+                                        </p>
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                </ul>
+            </section>
+            <section
+                className="side-footer"
+                onClick={() => push("/booster/support")}
+            >
+                <img src={helpDesk} alt="help" />
+                <p className="mb-0 side-text text-white" role="button">
+                    Need help? Contact us
+                </p>
+            </section>
+        </div>
+    );
 };

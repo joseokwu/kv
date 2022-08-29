@@ -1,0 +1,36 @@
+.container {
+  padding: 40px 50px;
+  max-width: 1400px;
+
+  @media (max-width: 600px) {
+    padding: 20px 20px;
+  }
+
+  header {
+    margin-bottom: 39px;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    cursor: pointer;
+    p {
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 140%;
+      text-transform: capitalize;
+      /* identical to box height, or 34px */
+
+      /* 900 */
+
+      color: #2e3192;
+    }
+  }
+}
+
+.asset_container {
+  display: grid;
+  gap: 18px;
+  row-gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
