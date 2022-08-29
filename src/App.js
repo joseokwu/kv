@@ -12,29 +12,29 @@ import StartUpsProvider from "./context/startups";
 // const AppRouter = lazy(()=> import('./routes/AppRouter'))
 
 function App() {
-  return (
-    <Router>
-      <StartUpsProvider>
-        <AppRouter />
-      </StartUpsProvider>
-      <Alert />
+    return (
+        <Router>
+            <StartUpsProvider>
+                <AppRouter />
+            </StartUpsProvider>
+            <Alert />
 
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          className: "",
-          style: {
-            margin: "30px",
-            minWidth: "370px",
-            display: "inline-flex",
-            fontSize: "18px",
-            zIndex: 999999,
-          },
-          duration: 4000,
-        }}
-      />
-    </Router>
-  );
+            <Toaster
+                position="top-center"
+                toastOptions={{
+                    className: "",
+                    style: {
+                        margin: "30px",
+                        minWidth: "370px",
+                        display: "inline-flex",
+                        fontSize: "18px",
+                        zIndex: 999999,
+                    },
+                    duration: 4000,
+                }}
+            />
+        </Router>
+    );
 }
 
 export default App;
