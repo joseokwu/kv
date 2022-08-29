@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  Select,
-  TextArea,
-  TextField,
-  UploadFile,
-} from '../../../components';
+import { Button, TextArea, TextField } from '../../../components';
 import styles from '../webpages.module.css';
 import { Form } from 'antd';
 import toast from 'react-hot-toast';
 import deleteIcon from '../../../assets/icons/del-red.svg';
-import { CircularLoader } from '../../../components/CircluarLoader';
-import { TimePicker } from 'antd';
-import moment from 'moment';
 import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 import { upload } from '../../../services';
 import cuid from 'cuid';
@@ -28,8 +19,6 @@ export const AddComponent = ({
   sections,
 }) => {
   const [loading, setLoading] = useState();
-  const [previewFile, setPreviewFile] = useState();
-  const [file, setFile] = useState();
 
   const handleHeaders = (e, value, i) => {
     let mainHeaders = [...headers];
@@ -76,14 +65,6 @@ export const AddComponent = ({
     setImages(mainImages);
   };
 
-  // const handleImages = (e, i) => {
-  //   const tempList = [...images];
-  //   console.log(e);
-  //   tempList[i] = e;
-
-  //   setImages([...tempList]);
-  // };
-
   const deleteHeader = (i) => {
     const newVal = headers.filter((item, index) => index !== i);
 
@@ -95,13 +76,13 @@ export const AddComponent = ({
     setTexts((prev) => newVal);
   };
 
-  const handleFiles = (value) => {
-    if (value) {
-      return URL.createObjectURL(value);
-    } else {
-      return '';
-    }
-  };
+  // const handleFiles = (value) => {
+  //   if (value) {
+  //     return URL.createObjectURL(value);
+  //   } else {
+  //     return '';
+  //   }
+  // };
 
   const handleUpload = async ({ filesInfo, index }) => {
     const { files } = filesInfo.target;
@@ -113,8 +94,6 @@ export const AddComponent = ({
     // setFileUploading(true);
     try {
       const response = await upload(formData);
-      console.log(response?.path);
-      setFile(response?.path);
       handleImages(response?.path, index);
     } catch (error) {
       toast.error(error?.response?.data?.message ?? 'Unable to upload image');
@@ -134,7 +113,7 @@ export const AddComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4 onClick={() => console.log(headers)}>Header</h4>
+            <h4>Header</h4>
             <button
               className={styles.textButton2}
               onClick={() => {
