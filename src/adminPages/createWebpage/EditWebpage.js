@@ -58,6 +58,10 @@ export const EditWebpage = () => {
         Object.keys(tempSections[sectionIndex][columnIndex]['components'])
           .length > 0
       ) {
+        const isEmpty = findEmpty(headersEdit, textsEdit);
+        if (isEmpty) {
+          return;
+        }
         const duplicates = findDuplicates(headersEdit, textsEdit);
 
         if (duplicates.length > 0) {
@@ -95,6 +99,10 @@ export const EditWebpage = () => {
               return;
             }
             obj[v.key] = v.title;
+          } else {
+            toast.error(`Key cannot be empty`);
+            trackHeader = true;
+            return;
           }
         });
         texts.map((v, _) => {
@@ -109,6 +117,10 @@ export const EditWebpage = () => {
               return;
             }
             obj[v.key] = v.text;
+          } else {
+            toast.error(`Key cannot be empty`);
+            trackText = true;
+            return;
           }
         });
 
@@ -137,6 +149,9 @@ export const EditWebpage = () => {
         };
       } else {
         let obj = {};
+        let trackEmptyHeader = false;
+        let trackEmptyText = false;
+
         const duplicates = findDuplicates(headers, texts);
 
         if (duplicates.length > 0) {
@@ -146,13 +161,25 @@ export const EditWebpage = () => {
         headers.map((v, _) => {
           if (v.key !== '') {
             obj[v.key] = v.title;
+          } else {
+            toast.error(`Key cannot be empty`);
+            trackEmptyHeader = true;
+            return;
           }
         });
         texts.map((v, _) => {
           if (v.key !== '') {
             obj[v.key] = v.text;
+          } else {
+            toast.error(`Key cannot be empty`);
+            trackEmptyText = true;
+            return;
           }
         });
+
+        if (trackEmptyHeader || trackEmptyText) {
+          return;
+        }
 
         tempSections[sectionIndex][columnIndex]['components'] = {
           headers: headers,
@@ -180,6 +207,18 @@ export const EditWebpage = () => {
     Object.values(column).forEach((val) => (total += val.length));
 
     return total;
+  };
+
+  const findEmpty = (headers, texts) => {
+    let isEmpty = false;
+
+    for (let index = 0; index < headers.length; index++) {
+      if (headers[index].key === '') {
+        toast.error(`Please check for empty keys`);
+        isEmpty = true;
+        return;
+      }
+    }
   };
 
   const findDuplicates = (headers, texts) => {
@@ -234,7 +273,8 @@ export const EditWebpage = () => {
       const getData = async () => {
         try {
           const res = await getPage(state?.slug);
-          console.log(res?.data?.data);
+          console.log(res?.data);
+          setPageTitle(res?.data?.title);
           setSections(JSON.parse(res?.data?.data));
         } catch (error) {
           console.log(error.response);
@@ -289,15 +329,18 @@ export const EditWebpage = () => {
         <section className={`mt-4 ${styles.createProgram}`}>
           <h3
             className='border-bottom pb-4'
-            onClick={() => console.log(sections)}
+            onClick={() => console.log(pageTitle)}
           >
             Edit Webpage
           </h3>
-
-          <TextField
+          <label className='' htmlFor=''>
+            Page Title
+          </label>
+          <input
             label='Page Title'
-            className='max_fill mb-4'
+            className={`${styles.input} max_fill mb-4`}
             name='title'
+            value={pageTitle}
             onChange={(e) => setPageTitle(e.target.value)}
             required={false}
           />

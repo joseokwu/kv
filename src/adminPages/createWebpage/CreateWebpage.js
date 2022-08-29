@@ -43,7 +43,7 @@ export const CreateWebpage = () => {
   const [columnIndex, setColumnIndex] = useState(0);
   const [sectionIndex, setSectionIndex] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
-  const [pageTitle, setPageTitle] = useState();
+  const [pageTitle, setPageTitle] = useState('');
   const [check, setCheck] = useState(false);
   const {
     location: { hash },
@@ -58,6 +58,10 @@ export const CreateWebpage = () => {
         Object.keys(tempSections[sectionIndex][columnIndex]['components'])
           .length > 0
       ) {
+        const isEmpty = findEmpty(headersEdit, textsEdit);
+        if (isEmpty) {
+          return;
+        }
         const duplicates = findDuplicates(headersEdit, textsEdit);
 
         if (duplicates.length > 0) {
@@ -95,6 +99,10 @@ export const CreateWebpage = () => {
               return;
             }
             obj[v.key] = v.title;
+          } else {
+            toast.error(`Key cannot be empty`);
+            trackHeader = true;
+            return;
           }
         });
         texts.map((v, _) => {
@@ -109,6 +117,10 @@ export const CreateWebpage = () => {
               return;
             }
             obj[v.key] = v.text;
+          } else {
+            toast.error(`Key cannot be empty`);
+            trackText = true;
+            return;
           }
         });
 
@@ -137,6 +149,9 @@ export const CreateWebpage = () => {
         };
       } else {
         let obj = {};
+        let trackEmptyHeader = false;
+        let trackEmptyText = false;
+
         const duplicates = findDuplicates(headers, texts);
 
         if (duplicates.length > 0) {
@@ -146,14 +161,26 @@ export const CreateWebpage = () => {
         headers.map((v, _) => {
           if (v.key !== '') {
             obj[v.key] = v.title;
+          } else {
+            toast.error(`Key cannot be empty`);
+            trackEmptyHeader = true;
+            return;
           }
         });
         texts.map((v, _) => {
           if (v.key !== '') {
             obj[v.key] = v.text;
+          } else {
+            toast.error(`Key cannot be empty`);
+            trackEmptyText = true;
+            return;
           }
         });
-        console.log(obj);
+
+        if (trackEmptyHeader || trackEmptyText) {
+          return;
+        }
+
         tempSections[sectionIndex][columnIndex]['components'] = {
           headers: headers,
           texts: texts,
@@ -182,6 +209,28 @@ export const CreateWebpage = () => {
     return total;
   };
 
+  const findEmpty = (headers, texts) => {
+    let isEmpty = false;
+
+    for (let index = 0; index < headers.length; index++) {
+      if (headers[index].key === '') {
+        toast.error(`Please check for empty keys`);
+        isEmpty = true;
+        return;
+      }
+    }
+
+    for (let index = 0; index < texts.length; index++) {
+      if (texts[index].key === '') {
+        toast.error(`Please check for empty keys`);
+        isEmpty = true;
+        return;
+      }
+    }
+
+    return isEmpty;
+  };
+
   const findDuplicates = (headers, texts) => {
     let tempArray = [];
     let tempArray2 = [];
@@ -207,6 +256,14 @@ export const CreateWebpage = () => {
   };
 
   const handleCreate = async (e) => {
+    if (pageTitle.length <= 0) {
+      toast.error('The page must have a Title');
+      return;
+    }
+    if (sections.length <= 0) {
+      toast.error('Please add a section');
+      return;
+    }
     const details = {
       title: pageTitle,
       data: JSON.stringify(sections),
