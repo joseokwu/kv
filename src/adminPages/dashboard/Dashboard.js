@@ -37,7 +37,8 @@ export const Dashboard = () => {
             color: "#DEF6FF",
         },
         {
-            name: "Investor Connect",
+            name: "Investors",
+            // name: "Investor Connect",
             count: dashCardData?.totalinvestor,
             color: "#D5D6F4",
         },
