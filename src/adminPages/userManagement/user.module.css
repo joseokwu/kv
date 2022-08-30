@@ -13,6 +13,7 @@
   object-position: center;
 }
 
-.small-tag {
-  font-size: 12px !important;
+.smallTag {
+  font-size: 12px;
+  padding: 8px 10px;
 }

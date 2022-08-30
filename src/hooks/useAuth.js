@@ -65,11 +65,12 @@ export const useAuth = () => {
 
     const getUserData = useCallback(async () => {
         console.log("function getUserData");
-        dispatch(await profile());
+        const res = await dispatch(profile());
     }, [dispatch]);
 
     const getDashboardProfile = useCallback(async () => {
-        dispatch(await dashboardProfile());
+        const res = await dispatch(dashboardProfile());
+        return res;
     }, [dispatch]);
 
     const editUser = () => {

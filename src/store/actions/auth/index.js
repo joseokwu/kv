@@ -110,12 +110,14 @@ export const dashboardProfile = async () => async (dispatch) => {
                 payload: res?.data,
             });
         }
+        return res;
     } catch (err) {
         console.log("err", err);
         console.log("failed to store user profile ");
         dispatch({
             type: USER_PROFILE_FAIL,
         });
+        return { success: false };
     }
 };
 
@@ -248,12 +250,15 @@ export const getProfile = async (value) => async (dispatch) => {
                     payload: res2?.data,
                 });
             }
+            return res2;
         }
+        return res1;
     } catch (err) {
         console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,
         });
+        return { success: false };
     }
 };
 

@@ -106,7 +106,7 @@ export const Mentor = () => {
                                             color={
                                                 i > 0 ? "#40439A" : "#058dc1"
                                             }
-                                            className='small-tag'
+                                            className={styles.smallTag}
                                         />
                                     )
                                 )}
