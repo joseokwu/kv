@@ -74,19 +74,19 @@ export const Investor = () => {
                 action: (
                     <div className="d-flex align-items-center space-out">
                         <Link
-                            to={`/admin/users/investors/${item?.userId}`}
+                            to={`/admin/users/investors/${item?.userId?._id}`}
                             className="view-link"
                         >
                             View
                         </Link>
-                        <p
+                        {/* <p
                             role="button"
                             data-target="#deleteInvestor"
                             data-toggle="modal"
                             className="delete-link"
                         >
                             Delete
-                        </p>
+                        </p> */}
                     </div>
                 ),
             };

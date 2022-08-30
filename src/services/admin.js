@@ -1,5 +1,15 @@
 import { request } from "../utils/axios";
 
+export const getAdminDashboardData = async () => {
+    try {
+        const response = await request.get("v1/user/dash");
+        return response.data;
+    } catch (err) {
+        console.log(err?.response?.data?.message);
+        throw err;
+    }
+};
+
 export const getStakeHolders = async (values) => {
     try {
         console.log(values);
@@ -17,6 +27,16 @@ export const getUserList = async (userType) => {
         const response = await request.post(
             `v1/user/analytics?type=${userType}`
         );
+        return response.data;
+    } catch (err) {
+        console.log(err?.response?.data?.message);
+        throw err;
+    }
+};
+
+export const getOrCreateProfile = async (values) => {
+    try {
+        const response = await request.post(`v1/profile/admin`, values);
         return response.data;
     } catch (err) {
         console.log(err?.response?.data?.message);

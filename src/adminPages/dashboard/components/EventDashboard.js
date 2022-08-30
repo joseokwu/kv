@@ -26,17 +26,17 @@ export const EventDashboard = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await eventRequest("allEvents", {
-                page: 1,
-                limit: 5,
-            });
-            console.log(res);
-            const tempEventsList = [];
-            res?.data?.data?.forEach((item) => {
-                if (new Date() < new Date(item?.startTime))
-                    tempEventsList.push(item);
-            });
-            setEventData(tempEventsList);
+            // const res = await eventRequest("allEvents", {
+            //     page: 1,
+            //     limit: 5,
+            // });
+            // console.log(res);
+            // const tempEventsList = [];
+            // res?.data?.data?.forEach((item) => {
+            //     if (new Date() < new Date(item?.startTime))
+            //         tempEventsList.push(item);
+            // });
+            // setEventData(tempEventsList);
         };
 
         fetchData();

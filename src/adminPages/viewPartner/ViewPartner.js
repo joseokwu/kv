@@ -10,8 +10,9 @@ import digitalLogo from "../../assets/icons/digitalOceanLogo.png";
 import styles from "./viewPartner.module.css";
 import { Tabs } from "../../components";
 import { AppliedStartup, Offerings } from "./components";
-import { applicationManagement } from "../../services";
+import { applicationManagement, getOrCreateProfile } from "../../services";
 import { CircularLoader } from "../../mentorComponents/CircluarLoader";
+import { EmptyState } from "../../mentorComponents";
 
 export const ViewPartner = () => {
     const {
@@ -20,19 +21,27 @@ export const ViewPartner = () => {
     } = useHistory();
 
     const [partner, setPartner] = useState({});
+    const [loading, setLoading] = useState(false);
     const { id } = useParams();
 
     const getPartner = async () => {
-        const res = await applicationManagement({
-            userId: id,
-            action: "get_partner",
-        });
+        setLoading(true);
+        try {
+            const res = await getOrCreateProfile({
+                userId: id,
+                userType: "boosterpartner",
+            });
 
-        if (res?.success) {
-            setPartner(res?.data);
+            if (res?.success) {
+                setPartner(res?.data?.data);
+            }
+
+            console.log("res", res);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoading(false);
         }
-
-        console.log("res", res);
     };
 
     useEffect(() => {
@@ -53,7 +62,7 @@ export const ViewPartner = () => {
     };
 
     if (Object.keys(partner).length === 0) {
-        return (
+        return loading ? (
             <div
                 style={{
                     width: "100vw",
@@ -64,6 +73,25 @@ export const ViewPartner = () => {
             >
                 <CircularLoader color="#000000" />
             </div>
+        ) : (
+            <section>
+                <section className="d-flex align-items-center mb-3 p-5">
+                    <img
+                        src={left}
+                        alt="left"
+                        className="mr-2"
+                        style={{ transform: "rotate(180deg)" }}
+                    />
+                    <p
+                        className="bread-start"
+                        role="button"
+                        onClick={() => goBack()}
+                    >
+                        Go back
+                    </p>
+                </section>
+                <EmptyState message="Unable to find Booster Partner" />
+            </section>
         );
     }
     return (

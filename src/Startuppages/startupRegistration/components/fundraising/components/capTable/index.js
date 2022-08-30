@@ -150,7 +150,11 @@ export const CapTable = ({ setFundraising }) => {
                             </Form.Item>
                         </div>
                         <div className="col-12 my-3">
-                            <DownloadableButton href=".">
+                            <DownloadableButton
+                                href="/files/Knight Ventures Cap Table Template.xlsx"
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
                                 <img className="pr-2" src={Download} alt="" />
                                 Download Capital Table sample here
                             </DownloadableButton>

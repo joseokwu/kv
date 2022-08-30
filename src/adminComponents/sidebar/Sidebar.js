@@ -156,7 +156,7 @@ export const Sidebar = () => {
                         })}
                 </ul>
             </section>
-            <section
+            {/* <section
                 className="side-footer"
                 onClick={() => push("/booster/support")}
             >
@@ -164,7 +164,7 @@ export const Sidebar = () => {
                 <p className="mb-0 side-text text-white" role="button">
                     Need help? Contact us
                 </p>
-            </section>
+            </section> */}
         </div>
     );
 };

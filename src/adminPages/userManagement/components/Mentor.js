@@ -20,6 +20,7 @@ export const Mentor = () => {
     const [numOfMentors, setNumOfMentors] = useState(0);
     const [programs, setPrograms] = useState();
     const [programId, setProgramId] = useState();
+    const [deleteObj, setDeleteObj] = useState({});
 
     const cardDetails = [
         {
@@ -90,7 +91,7 @@ export const Mentor = () => {
                         name: (
                             <div className="d-flex align-items-center space-out">
                                 <img
-                                    src={mentor?.avatar ?? userPic}
+                                    src={mentor?.userId?.avatar ?? userPic}
                                     alt="user"
                                     className={styles.userPic}
                                 />
@@ -117,17 +118,22 @@ export const Mentor = () => {
                         actions: (
                             <div className="d-flex align-items-center space-out">
                                 <Link
-                                    to={`/admin/users/mentors/${mentor?.userId}`}
+                                    to={`/admin/users/mentors/${mentor?.userId?._id}`}
                                     className="view-link"
                                 >
                                     View
                                 </Link>
-                                <Link
-                                    to={`/admin/users/mentors/${mentor?.userId}`}
+                                {/* <p
                                     className="delete-link"
+                                    data-toggle="modal"
+                                    data-target="#deleteMentor"
+                                    onClick={() => {
+                                        console.log("delete ittt");
+                                        setDeleteObj(mentor);
+                                    }}
                                 >
                                     Delete
-                                </Link>
+                                </p> */}
                             </div>
                         ),
                     }))
@@ -402,7 +408,8 @@ export const Mentor = () => {
             <DeleteModal
                 id="deleteMentor"
                 title="Delete Mentor"
-                desc="Are you sure you want to delete Kate Mcbeth Joan"
+                desc={`Are you sure you want to delete ${deleteObj?.personalDetail?.lastname} ${deleteObj?.personalDetail?.firstname}`}
+                onDelete={() => {}}
             />
 
             <DeleteModal
