@@ -1,128 +1,128 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import './sidebar.css';
-import { useHistory } from 'react-router';
-import user from '../../assets/images/kvLogo.png';
-import dashboard from '../../assets/icons/dashboard.svg';
-import program from '../../assets/icons/program.svg';
-import event from '../../assets/icons/eventIcon.svg';
-import helpDesk from '../../assets/icons/helpDesk.svg';
-import booster from '../../assets/icons/booter.svg';
-import appMgt from '../../assets/icons/appMgt.svg';
-import selectProcess from '../../assets/icons/selectProcess.svg';
-import userMgt from '../../assets/icons/userMgt.svg';
-import todo from '../../assets/icons/list_alt.svg';
-import academy from '../../assets/icons/school.svg';
-import documentMgt from '../../assets/icons/documentMgt.svg';
-import permissionControl from '../../assets/icons/permissionControl.svg';
-import { useAuth } from './../../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from "react";
+import "./sidebar.css";
+import { useHistory } from "react-router";
+import user from "../../assets/images/kvLogo.png";
+import dashboard from "../../assets/icons/dashboard.svg";
+import program from "../../assets/icons/program.svg";
+import event from "../../assets/icons/eventIcon.svg";
+import helpDesk from "../../assets/icons/helpDesk.svg";
+import booster from "../../assets/icons/booter.svg";
+import appMgt from "../../assets/icons/appMgt.svg";
+import selectProcess from "../../assets/icons/selectProcess.svg";
+import userMgt from "../../assets/icons/userMgt.svg";
+import todo from "../../assets/icons/list_alt.svg";
+import academy from "../../assets/icons/school.svg";
+import documentMgt from "../../assets/icons/documentMgt.svg";
+import permissionControl from "../../assets/icons/permissionControl.svg";
+import { useAuth } from "./../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
-  const { stateAuth } = useAuth();
-  const adminNavigation = useMemo(
-    () => [
-      {
-        title: 'Dashboard',
-        activator: 'dashboard',
-        path: '/admin/dashboard',
-        icon: dashboard,
-      },
-      {
-        title: 'Application Mgt.',
-        activator: 'application_mgt',
-        path: '/admin/application_mgt',
-        icon: appMgt,
-      },
+    const { stateAuth } = useAuth();
+    const adminNavigation = useMemo(
+        () => [
+            {
+                title: "Dashboard",
+                activator: "dashboard",
+                path: "/admin/dashboard",
+                icon: dashboard,
+            },
+            {
+                title: "Application Mgt.",
+                activator: "application_mgt",
+                path: "/admin/application_mgt",
+                icon: appMgt,
+            },
 
-      {
-        title: 'Selection Process',
-        activator: 'selection_process',
-        path: '/admin/selection_process',
-        icon: selectProcess,
-      },
-      {
-        title: 'Program',
-        activator: 'program',
-        path: '/admin/program',
-        icon: program,
-      },
+            {
+                title: "Selection Process",
+                activator: "selection_process",
+                path: "/admin/selection_process",
+                icon: selectProcess,
+            },
+            {
+                title: "Program",
+                activator: "program",
+                path: "/admin/program",
+                icon: program,
+            },
 
-      {
-        title: 'User Management',
-        activator: 'users',
-        path: '/admin/users',
-        icon: userMgt,
-      },
-      // {
-      //   title: "Booster Partners",
-      //   activator: "booster_partners",
-      //   path: "/admin/booster_partners",
-      //   icon: booster,
-      // },
-      // {
-      //   title: "To-Do List",
-      //   activator: "todo",
-      //   path: "/admin/todo",
-      //   icon: todo,
-      // },
-      {
-        title: 'Events',
-        activator: 'events',
-        path: '/admin/events',
-        icon: event,
-      },
-      // {
-      //   title: "E-Academy",
-      //   activator: "academy",
-      //   path: "/admin/academy",
-      //   icon: academy,
-      // },
-      // {
-      //   title: "Documents",
-      //   activator: "documents",
-      //   path: "/admin/documents",
-      //   icon: documentMgt,
-      // },
-      // {
-      //   title: "Permission Control",
-      //   activator: "permission",
-      //   path: "/admin/permission",
-      //   icon: permissionControl,
-      // },
-      {
-        title: 'Webpages',
-        activator: 'webpages',
-        path: '/admin/webpages',
-        icon: appMgt,
-      },
-    ],
-    []
-  );
-  const {
-    location: { pathname, state },
-    push,
-  } = useHistory();
+            {
+                title: "User Management",
+                activator: "users",
+                path: "/admin/users",
+                icon: userMgt,
+            },
+            // {
+            //   title: "Booster Partners",
+            //   activator: "booster_partners",
+            //   path: "/admin/booster_partners",
+            //   icon: booster,
+            // },
+            // {
+            //   title: "To-Do List",
+            //   activator: "todo",
+            //   path: "/admin/todo",
+            //   icon: todo,
+            // },
+            {
+                title: "Events",
+                activator: "events",
+                path: "/admin/events",
+                icon: event,
+            },
+            // {
+            //   title: "E-Academy",
+            //   activator: "academy",
+            //   path: "/admin/academy",
+            //   icon: academy,
+            // },
+            // {
+            //   title: "Documents",
+            //   activator: "documents",
+            //   path: "/admin/documents",
+            //   icon: documentMgt,
+            // },
+            // {
+            //   title: "Permission Control",
+            //   activator: "permission",
+            //   path: "/admin/permission",
+            //   icon: permissionControl,
+            // },
+            {
+                title: "Webpages",
+                activator: "webpages",
+                path: "/admin/webpages",
+                icon: appMgt,
+            },
+        ],
+        []
+    );
+    const {
+        location: { pathname, state },
+        push,
+    } = useHistory();
 
-  const activateLink = (path) => {
-    if (pathname.includes('interested') && path === 'opportunities') {
-      return 'active-side';
-    } else {
-      return pathname.includes(path) ? 'active-side' : '';
-    }
-  };
+    const activateLink = (path) => {
+        if (pathname.includes("interested") && path === "opportunities") {
+            return "active-side";
+        } else {
+            return pathname.includes(path) ? "active-side" : "";
+        }
+    };
 
-  const [navigator, setNavigator] = useState([]);
+    const [navigator, setNavigator] = useState([]);
 
-  useEffect(() => {
-    setNavigator(adminNavigation);
-  }, []);
+    useEffect(() => {
+        setNavigator(adminNavigation);
+    }, []);
 
     return (
         <div className="side-main">
             <section className="side-navigator">
                 <div>
                     <img
-                        src={`https://ui-avatars.com/api/?name=${stateAuth?.firstname}`}
+                        src={`https://ui-avatars.com/api/?name=Knight Ventures`}
                         style={{
                             width: "60px",
                             height: "60px",

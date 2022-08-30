@@ -157,6 +157,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 signUpStatus: action?.payload?.userType,
             };
         case DASHBOARD_USER_PROFILE:
+            console.log("data", action.payload);
             if (state.userType === "mentor")
                 return {
                     ...state,

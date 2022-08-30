@@ -28,7 +28,7 @@ export const InvestorRegistration = () => {
         push(currentHash);
     };
 
-    //console.log(stateAuth)
+    console.log(stateAuth)
 
     useEffect(() => {
         wrapRef.current.scrollTop = 0;
