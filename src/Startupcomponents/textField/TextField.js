@@ -23,7 +23,6 @@ export const TextField = ({
     return (
         <div className="field">
             <Form.Item
-                name={name}
                 style={{ color: "#fe0003" }}
                 rules={[
                     {
@@ -53,6 +52,7 @@ export const TextField = ({
                 label={label}
             >
                 <Input
+                    name={name}
                     id={name}
                     onBlur={onBlur}
                     onFocus={onFocus}

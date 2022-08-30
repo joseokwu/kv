@@ -143,7 +143,7 @@ export const PersonalDetails = () => {
 
     const dateFormat = "YYYY-MM-DD";
 
-    //console.log(stateAuth);
+    // console.log(stateAuth?.investorData);
 
     const letterOnly = (e) => {
         const charCode = e.charCode || e.which;
@@ -274,7 +274,7 @@ export const PersonalDetails = () => {
 
                         <section className="col-md-6 mb-4">
                             <Form.Item
-                                name="dob"
+                                // name="dob"
                                 label="Date of Birth"
                                 initialValue={
                                     stateAuth?.investorData?.profile?.dob
