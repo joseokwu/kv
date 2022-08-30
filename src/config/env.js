@@ -5,6 +5,7 @@
 // export const BASE_URL = "https://d20kwg47th11r1.cloudfront.net/";
 
 // export const BASE_URL = "https://d20kwg47th11r1.cloudfront.net/";
-export const BASE_URL = "https://staging-api.knight.ventures/";
-export const FILE_UPLOAD_URL = "https://asset.knight.ventures";
+export const BASE_URL = 'https://staging-api.knight.ventures';
+// export const BASE_URL = 'https://prod-api.knight.ventures/';
+export const FILE_UPLOAD_URL = 'https://asset.knight.ventures';
 // export const FILE_UPLOAD_URL = "https://kv-file.yebox.net";

@@ -34,18 +34,13 @@ export const EditComponent = ({
   setData,
 }) => {
   const [loading, setLoading] = useState();
-  const [files, setFiles] = useState();
-  const [previewFile, setPreviewFile] = useState();
-  const [file, setFile] = useState();
 
   const handleHeaders = ({ e, value, i, oldVal }) => {
     let mainHeaders = [...headers];
-    let tempSections = [...sections];
     let tempData = { ...data };
 
     for (let k in tempData) {
       if (k === oldVal) {
-        console.log(k, oldVal);
         if (value === 'key') {
           tempData[e.target.value] = tempData[k];
           delete tempData[k];
@@ -69,12 +64,12 @@ export const EditComponent = ({
     setHeaders(mainHeaders);
   };
   const handleTexts = ({ e, value, i, oldVal }) => {
+    console.log(e.target.value, value, i, oldVal);
     let mainTexts = [...texts];
     let tempData = { ...data };
 
     for (let k in tempData) {
       if (k === oldVal) {
-        console.log(k, oldVal);
         if (value === 'key') {
           tempData[e.target.value] = tempData[k];
           delete tempData[k];
@@ -94,6 +89,7 @@ export const EditComponent = ({
         }
       }
     }
+    setData(tempData);
     setTexts(mainTexts);
   };
 
@@ -102,7 +98,6 @@ export const EditComponent = ({
 
     for (let index = 0; index < images.length; index++) {
       if (index === i) {
-        // mainImages[i].key = cuid();
         mainImages[i].image = e;
       }
     }
@@ -156,8 +151,6 @@ export const EditComponent = ({
     // setFileUploading(true);
     try {
       const response = await upload(formData);
-      console.log(response?.path);
-      setFile(response?.path);
       handleImages(response?.path, index);
     } catch (error) {
       toast.error(error?.response?.data?.message ?? 'Unable to upload image');
@@ -190,7 +183,7 @@ export const EditComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4 onClick={() => console.log(data)}>Header</h4>
+            <h4>Header</h4>
             <button
               className={styles.textButton2}
               onClick={() => setHeaders([...headers, { key: '', title: '' }])}
@@ -284,7 +277,7 @@ export const EditComponent = ({
                           e: e,
                           value: 'text',
                           i: i,
-                          oldVal: item?.text,
+                          oldVal: item?.key,
                         })
                       }
                     />

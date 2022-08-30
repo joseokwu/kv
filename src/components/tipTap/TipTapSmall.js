@@ -86,26 +86,27 @@ const MenuBar = ({ editor }) => {
           <FaQuoteLeft />
         </button>
       </div>
-      <div>
+      {/* <div>
         <button onClick={() => editor.chain().focus().undo().run()}>
           <FaUndo />
         </button>
         <button onClick={() => editor.chain().focus().redo().run()}>
           <FaRedo />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export const TipTap = ({ setDescription, description }) => {
+export const TipTapSmall = ({ setDescription, description, index, oldVal }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: `${description}`,
 
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
-      setDescription(html);
+      console.log('ff');
+      setDescription({ e: html, value: 'text', i: index, oldVal: oldVal });
     },
   });
 
