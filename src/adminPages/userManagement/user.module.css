@@ -12,3 +12,7 @@
   object-fit: contain;
   object-position: center;
 }
+
+.small-tag {
+  font-size: 12px !important;
+}

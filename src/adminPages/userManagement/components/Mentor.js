@@ -8,9 +8,9 @@ import { formatDate, formatTime } from "../../../utils/helpers";
 import apple from "../../../assets/images/apple.svg";
 import { AddMentor } from "./AddMentor";
 import { useHistory } from "react-router-dom";
-import { getStakeHolders } from "../../../services";
+import { getStakeHolders, getUserList } from "../../../services";
 import { SkeletonLoader } from "../../../components";
-import { RoundLoader } from "../../../components";
+import { RoundLoader, SpinLoader } from "../../../components";
 import { EmptyState } from "../../../mentorComponents";
 import { getPrograms } from "../../../services/admin";
 
@@ -50,50 +50,47 @@ export const Mentor = () => {
     ];
 
     const [mentors, setMentors] = useState([]);
-    const [fetched, setFetched] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    const fetchPrograms = async () => {
-        const res = await getPrograms({ page: 1, limit: 2 });
-        return res;
-        // setPrograms(res?.data?.data);
-    };
+    // const fetchPrograms = async () => {
+    //     const res = await getPrograms({ page: 1, limit: 2 });
+    //     return res;
+    //     // setPrograms(res?.data?.data);
+    // };
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     try {
+    //         const res = fetchPrograms();
+    //         console.log(res);
+    //         console.log("res");
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }, []);
+
+    const getData = async () => {
         try {
-            const res = fetchPrograms();
+            const res = await getUserList("mentor");
             console.log(res);
-            console.log("res");
+            console.log(res?.data?.data);
+            return res;
         } catch (e) {
             console.log(e);
         }
-    }, []);
-
-    const getData = async () => {
-        const res = await getStakeHolders({
-            page: 1,
-            limit: 2,
-            type: "mentor",
-            query: { applicationCompleted: true },
-        });
-        console.log(res);
-
-        return res;
     };
 
-    useEffect(() => {
-        setFetched(false);
+    useEffect(async () => {
+        setLoading(true);
         try {
-            const res = getData();
-            if (res.success && res?.data?.mentors?.length > 0) {
+            const res = await getData();
+            if (res?.success && res?.data?.data?.length > 0) {
                 setNumOfMentors(res?.data?.metadata?.total);
                 setMentors(() =>
-                    res?.data?.mentors.map((mentor) => ({
+                    res?.data?.data.map((mentor) => ({
                         name: (
                             <div className="d-flex align-items-center space-out">
                                 <img
-                                    src={
-                                        mentor?.personalDetail?.logo ?? userPic
-                                    }
+                                    src={mentor?.avatar ?? userPic}
                                     alt="user"
                                     className={styles.userPic}
                                 />
@@ -109,13 +106,14 @@ export const Mentor = () => {
                                             color={
                                                 i > 0 ? "#40439A" : "#058dc1"
                                             }
+                                            className='small-tag'
                                         />
                                     )
                                 )}
                             </div>
                         ),
-                        company: "Seam Technologies Inc.",
-                        sessions: 3,
+                        company: mentor?.workExperience?.companyName,
+                        sessions: 0,
                         actions: (
                             <div className="d-flex align-items-center space-out">
                                 <Link
@@ -124,6 +122,12 @@ export const Mentor = () => {
                                 >
                                     View
                                 </Link>
+                                <Link
+                                    to={`/admin/users/mentors/${mentor?.userId}`}
+                                    className="delete-link"
+                                >
+                                    Delete
+                                </Link>
                             </div>
                         ),
                     }))
@@ -131,11 +135,13 @@ export const Mentor = () => {
             }
         } catch (e) {
             console.log(e);
+        } finally {
+            setLoading(false);
         }
-        setFetched(true);
-
         return () => {};
     }, []);
+
+    console.log(mentors);
 
     const headers = [
         { title: "Name", accessor: "name" },
@@ -435,12 +441,12 @@ export const Mentor = () => {
                 </div>
 
                 <div>
-                    {fetched && mentors?.length === 0 ? (
+                    {!loading && mentors?.length === 0 ? (
                         <EmptyState message="No mentors yet." />
                     ) : (
-                        <RoundLoader fetched={fetched} color="blue">
+                        <SpinLoader loading={loading} color="blue">
                             <Table headers={headers} data={mentors} />
-                        </RoundLoader>
+                        </SpinLoader>
                     )}
                 </div>
             </section>

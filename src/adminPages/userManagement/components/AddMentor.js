@@ -21,7 +21,7 @@ export const AddMentor = () => {
     const handleChange = (e) => {
         formik.handleChange(e);
     };
-    console.log("formik.values", formik.values);
+    // console.log("formik.values", formik.values);
     return (
         <div className="px-4">
             <form onSubmit={formik.handleSubmit}>

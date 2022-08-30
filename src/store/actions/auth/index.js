@@ -104,6 +104,7 @@ export const dashboardProfile = async () => async (dispatch) => {
         console.log("function dashboardProfile");
         const res = await profile();
         if (res?.success) {
+            console.log("atThisPoint", res?.data);
             dispatch({
                 type: DASHBOARD_USER_PROFILE,
                 payload: res?.data,

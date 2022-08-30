@@ -18,7 +18,7 @@ export const InvestorRegistration = () => {
         push,
     } = useHistory();
 
-    const { stateAuth } = useAuth();
+    const { stateAuth, getDashboardProfile } = useAuth();
     const {
         changePath,
         state: { path },
@@ -28,7 +28,13 @@ export const InvestorRegistration = () => {
         push(currentHash);
     };
 
-    //console.log(stateAuth)
+    console.log(stateAuth);
+
+    // useEffect(async () => {
+    //     const profileRes = await getDashboardProfile();
+    // }, [stateAuth?.investorData]);
+
+    console.log(stateAuth?.investorData);
 
     useEffect(() => {
         wrapRef.current.scrollTop = 0;
