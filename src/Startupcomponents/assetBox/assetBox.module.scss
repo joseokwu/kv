@@ -30,6 +30,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    section {
+      span {
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px !important;
+        line-height: 120%;
+        max-width: 185px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        color: rgba(24, 24, 25, 0.9) !important;
+      }
+    }
   }
 
   span {
@@ -43,19 +58,5 @@
     /* 900 */
 
     color: #2e3192;
-  }
-
-  span:first-child {
-    font-family: "DM Sans";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 120%;
-    max-width: 185px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-
-    color: rgba(24, 24, 25, 0.9);
   }
 }

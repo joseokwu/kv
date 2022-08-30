@@ -18,34 +18,34 @@ import { useAuth } from "./../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
-    const { stateAuth } = useAuth();
-    const adminNavigation = useMemo(
-        () => [
-            {
-                title: "Dashboard",
-                activator: "dashboard",
-                path: "/admin/dashboard",
-                icon: dashboard,
-            },
-            {
-                title: "Application Mgt.",
-                activator: "application_mgt",
-                path: "/admin/application_mgt",
-                icon: appMgt,
-            },
+  const { stateAuth } = useAuth();
+  const adminNavigation = useMemo(
+    () => [
+      {
+        title: "Dashboard",
+        activator: "dashboard",
+        path: "/admin/dashboard",
+        icon: dashboard,
+      },
+      {
+        title: "Application Mgt.",
+        activator: "application_mgt",
+        path: "/admin/application_mgt",
+        icon: appMgt,
+      },
 
-            {
-                title: "Selection Process",
-                activator: "selection_process",
-                path: "/admin/selection_process",
-                icon: selectProcess,
-            },
-            {
-                title: "Program",
-                activator: "program",
-                path: "/admin/program",
-                icon: program,
-            },
+      {
+        title: "Selection Process",
+        activator: "selection_process",
+        path: "/admin/selection_process",
+        icon: selectProcess,
+      },
+      {
+        title: "Program",
+        activator: "program",
+        path: "/admin/program",
+        icon: program,
+      },
 
             {
                 title: "User Management",
@@ -71,12 +71,12 @@ export const Sidebar = () => {
                 path: "/admin/events",
                 icon: event,
             },
-            // {
-            //   title: "E-Academy",
-            //   activator: "academy",
-            //   path: "/admin/academy",
-            //   icon: academy,
-            // },
+            {
+              title: "E-Academy",
+              activator: "academy",
+              path: "/admin/academy",
+              icon: academy,
+            },
             // {
             //   title: "Documents",
             //   activator: "documents",
@@ -103,19 +103,19 @@ export const Sidebar = () => {
         push,
     } = useHistory();
 
-    const activateLink = (path) => {
-        if (pathname.includes("interested") && path === "opportunities") {
-            return "active-side";
-        } else {
-            return pathname.includes(path) ? "active-side" : "";
-        }
-    };
+  const activateLink = (path) => {
+    if (pathname.includes("interested") && path === "opportunities") {
+      return "active-side";
+    } else {
+      return pathname.includes(path) ? "active-side" : "";
+    }
+  };
 
-    const [navigator, setNavigator] = useState([]);
+  const [navigator, setNavigator] = useState([]);
 
-    useEffect(() => {
-        setNavigator(adminNavigation);
-    }, []);
+  useEffect(() => {
+    setNavigator(adminNavigation);
+  }, []);
 
     return (
         <div className="side-main">

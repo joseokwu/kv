@@ -2,9 +2,17 @@ import React from "react";
 import "./modal.css";
 import Close from "../../assets/icons/close.svg";
 
-export const Modal = ({ title = "", children, position = "", id = "", bold = false, subTitle = "", withHeader = true, forceTop = false }) => {
+export const Modal = ({ title = "", children, position = "", id = "", bold = false, subTitle = "", withHeader = true, forceTop = false, onCloseModal = () => {} }) => {
   return (
-    <div className="modal fade" tabIndex="-1" role="dialog" id={id}>
+    <div
+      onClick={() => {
+        onCloseModal();
+      }}
+      className="modal fade"
+      tabIndex="-1"
+      role="dialog"
+      id={id}
+    >
       <div className={`modal-dialog ${position === "center" ? "modal-dialog-centered" : ""}`} role="document" style={{ maxWidth: 723, marginTop: forceTop ? 28 : 200 }}>
         <div className="modal-content kv-modal-content">
           {withHeader && (
