@@ -7,7 +7,7 @@ import modulesImg from "../../assets/icons/modules-img.svg";
 import timeImg from "../../assets/icons/time.svg";
 import { Modal, Select, Tabs } from "../../Startupcomponents";
 import styles from "./eAcademy.module.scss";
-import { enrollCourse, getAllCourses, getCourseDetail, getUserCourses } from "../../services";
+import { enrollCourse, getAllCourses, getCourseDetail, getUserCourses, getEnrolledUsers } from "../../services";
 import { TabsV2 } from "../../Startupcomponents/tabs/TabsV2";
 import { StartUpsContext } from "../../context/startups";
 import { useSelector } from "react-redux";
@@ -20,6 +20,7 @@ export const AdminEAcademy = () => {
   const [activeCourseTab, setActiveCourseTab] = useState("Courses");
   const stateAuth = useSelector((state) => state.auth);
   const [enrolling, setEnrolling] = useState(false);
+  const [enrolledUsers, setEnrolledUsers] = useState([]);
   const closeModalRef = useRef(null);
   const history = useHistory();
 
@@ -52,6 +53,12 @@ export const AdminEAcademy = () => {
     });
 
     return total;
+  };
+
+  const getCourseEnrolled = async (courseId) => {
+    const enrolled = await getEnrolledUsers(courseId);
+    console.log("getting enrolled user", courseId, enrolled);
+    setEnrolledUsers(enrolled?.data?.enrollments);
   };
 
   useEffect(() => {
@@ -159,11 +166,24 @@ export const AdminEAcademy = () => {
             </div>
           )}
           {modalActiveTab === "Enrolled Users" && (
-            <div className={styles.modal_session_box}>
-              <h4>Enrolled Users (0)</h4>
-              {selectedCourse?.lecture_sections.map((el, i) => {
-                return <section></section>;
-              })}
+            <div className={styles.modal_enrolled_box}>
+              <h4>Enrolled Users ({enrolledUsers?.length})</h4>
+              <section>
+                {enrolledUsers?.map((el, i) => {
+                  return (
+                    <div>
+                      <img
+                        height={70}
+                        src={
+                          selectedCourse?.author_bio?.profile_image_url ??
+                          "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg"
+                        }
+                      ></img>
+                      <p>{el?.user_id}</p>
+                    </div>
+                  );
+                })}
+              </section>
             </div>
           )}
 
@@ -231,6 +251,7 @@ export const AdminEAcademy = () => {
                           <button
                             onClick={() => {
                               setSelectedCourse(el);
+                              getCourseEnrolled(el.id);
                             }}
                             data-toggle="modal"
                             data-target={`#founderInfo`}
