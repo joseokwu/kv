@@ -36,14 +36,16 @@ export const ViewInvestor = () => {
                 userType: "investor",
             });
             if (res) {
-                setInvestorData(res?.data);
-                console.log("res", res?.data);
+                setInvestorData(res?.data?.data);
+                console.log("res", res?.data?.data);
             }
         } catch (e) {
             console.log(e);
         }
         setLoading(false);
     }, [id]);
+
+    console.log(investorData);
 
     const renderComponent = () => {
         switch (hash) {
@@ -125,14 +127,13 @@ export const ViewInvestor = () => {
                     </article>
 
                     <h4 className={styles.user_name}>
-                        {" "}
-                        {investorData?.firstname &&
-                            investorData?.firstname +
-                                " " +
-                                investorData?.lastname}{" "}
+                        {`${
+                            investorData?.profile?.firstName &&
+                            investorData?.profile?.firstName
+                        } ${investorData?.profile?.lastName}`}
                     </h4>
                     <a href="#." className={`mb-4 d-block ${styles.text}`}>
-                        {investorData?.email}
+                        {investorData?.profile?.email}
                     </a>
 
                     <section className="mb-3 d-flex align-items-center flex-wrap">
@@ -155,6 +156,8 @@ export const ViewInvestor = () => {
                                     investorData?.profile?.socialMedia?.website
                                 }
                                 className={styles.text}
+                                target="_blank"
+                                rel="noreferrer noopener"
                             >
                                 {investorData?.profile?.socialMedia?.website}
                             </a>
@@ -169,13 +172,35 @@ export const ViewInvestor = () => {
                 <div className="col-lg-6 d-flex flex-column justify-content-center">
                     <section>
                         <article className="d-flex justify-content-end mb-2">
-                            <img src={twitter} alt="twitter" className="mr-3" />
-                            <img src={linkedIn} alt="linked in" />
+                            <a
+                                href={
+                                    investorData?.profile?.socialMedia?.twitter
+                                }
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
+                                <img
+                                    src={twitter}
+                                    alt="twitter"
+                                    className="mr-3"
+                                />
+                            </a>
+                            <a
+                                href={
+                                    investorData?.profile?.socialMedia?.linkedIn
+                                }
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
+                                <img src={linkedIn} alt="linked in" />
+                            </a>
                         </article>
                         <a
                             href={investorData?.profile?.socialMedia?.website}
                             className={`mb-4 d-block text-right ${styles.text}`}
                             style={{ color: "#828282" }}
+                            target="_blank"
+                            rel="noreferrer noopener"
                         >
                             {investorData?.profile?.socialMedia?.website}
                         </a>
