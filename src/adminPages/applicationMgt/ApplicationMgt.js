@@ -97,7 +97,7 @@ export const ApplicationMgt = () => {
         // setRecommended(recommendedRes?.data);
         // setApproveToEval(approveToEval?.data);
 
-        // console.log(kvRes?.data);
+        console.log(res?.data);
         // console.log('accept', acceptedRes?.data);
       } catch (e) {
         console.log(e);

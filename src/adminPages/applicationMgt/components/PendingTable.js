@@ -51,21 +51,22 @@ export const PendingTable = ({
   const applicationData = useMemo(
     () =>
       applications?.data?.map((item, i) => {
+        console.log(item?._id);
         return {
           startup: (
             <div className='d-flex align-items-center space-out'>
               <AvatarWrapper
-                condition={item?.startUpProfile?.logo}
-                initials={item?.startUpProfile?.acceleratorName?.slice(0, 1)}
+                condition={item?.userId?.avatar}
+                initials={item?.userId?.startupname?.slice(0, 1)}
                 size={31}
               >
                 <img
-                  src={item?.startUpProfile?.logo}
+                  src={item?.userId?.avatar}
                   alt='user'
                   className={styles.userPic}
                 />
               </AvatarWrapper>
-              <p className='mb-0'>{item?.startUpProfile?.acceleratorName}</p>
+              <p className='mb-0'>{item?.userId?.startupname}</p>
             </div>
           ),
 
@@ -75,7 +76,7 @@ export const PendingTable = ({
 
           action: (
             <Link
-              to={`/admin/application_mgt/pending/001`}
+              to={`/admin/application_mgt/pending/${item?._id}`}
               className='view-link'
             >
               View
