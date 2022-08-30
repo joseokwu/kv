@@ -37,7 +37,7 @@ const SessionLectures = () => {
           }
           /
           {
-            lectures?.courseSectionLecturesHash[`${id}${sectionId}`].filter((el) => {
+            lectures?.courseSectionLecturesHash[`${id}${sectionId}`]?.filter((el) => {
               return el?.id == lectureId;
             })[0]?.name
           }
