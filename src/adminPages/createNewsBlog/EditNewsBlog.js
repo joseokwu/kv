@@ -102,12 +102,7 @@ export const EditNewsBlog = () => {
       <GoBack />
       <Form>
         <section className={`mt-4 ${styles.createProgram}`}>
-          <h3
-            className='border-bottom pb-4'
-            onClick={() => console.log(title, body)}
-          >
-            Edit News/Blog
-          </h3>
+          <h3 className='border-bottom pb-4'>Edit News/Blog</h3>
           <div className='d-flex justify-content-between'>
             <span className='w-75'>
               <label className='' htmlFor=''>

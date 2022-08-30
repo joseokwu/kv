@@ -259,6 +259,25 @@ export const updatePage = async ({ payload, slug }) => {
   }
 };
 
+export const getStartups = async (
+  values = {
+    limit: 5,
+    page: 1,
+  }
+) => {
+  try {
+    console.log(values);
+    const response = await request.post(
+      'v1/user/analytics?type=startup',
+      values
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
+};
+
 // export const createPrograms = async () => {
 //   try {
 //     const response = await request.post('createPrograms', {});
