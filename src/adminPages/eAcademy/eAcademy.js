@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Section } from "./eAcademy.styled";
 import comingSoon from "../../assets/images/comingsoon.svg";
 import close from "../../assets/icons/close.svg";
 import sessionGray from "../../assets/icons/session-img-gray.svg";
@@ -14,7 +13,7 @@ import { StartUpsContext } from "../../context/startups";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-export const StartupEAcademy = () => {
+export const AdminEAcademy = () => {
   const [modalActiveTab, setModalActiveTab] = useState("Course Overview");
   const startUpsContextData = useContext(StartUpsContext);
   const [selectedCourse, setSelectedCourse] = useState({});
@@ -57,9 +56,6 @@ export const StartupEAcademy = () => {
 
   useEffect(() => {
     const fetchAndSetData = async () => {
-      startUpsContextData.setAllCourses((val) => {
-        return { ...val, isLoading: true };
-      });
       const res = await getAllCourses();
       const userCourses = await getUserCourses();
       console.log("all user courses are: ", userCourses?.data?.courses);
@@ -91,12 +87,11 @@ export const StartupEAcademy = () => {
       console.log("course hash is", courseIdHash);
       // console.log("all courses formatted are", allCourses);
       startUpsContextData.setAllCourses((val) => {
-        return { ...val, data: allCourses, isLoading: false, total: totalCourses, idHash: courseIdHash };
+        return { ...val, data: allCourses, loading: false, total: totalCourses, idHash: courseIdHash };
       });
     };
 
     if (startUpsContextData.allCourses?.data?.length < 1) {
-      console.log("No hash: fetching course data");
       fetchAndSetData();
     }
 
@@ -139,7 +134,7 @@ export const StartupEAcademy = () => {
               console.log("item change", item);
               setModalActiveTab(item);
             }}
-            tabItems={["Course Overview", "Sessions"]}
+            tabItems={["Course Overview", "Sessions", "Enrolled Users"]}
           ></TabsV2>
           {modalActiveTab === "Course Overview" && (
             <div className={styles.modal_desc_box}>
@@ -163,6 +158,14 @@ export const StartupEAcademy = () => {
               })}
             </div>
           )}
+          {modalActiveTab === "Enrolled Users" && (
+            <div className={styles.modal_session_box}>
+              <h4>Enrolled Users (0)</h4>
+              {selectedCourse?.lecture_sections.map((el, i) => {
+                return <section></section>;
+              })}
+            </div>
+          )}
 
           <div className={styles.modal_owner}>
             <p>Course Owner</p>
@@ -181,7 +184,7 @@ export const StartupEAcademy = () => {
             </div>
           </div>
 
-          <button
+          {/* <button
             disabled={enrolling}
             onClick={() => {
               startCourse(selectedCourse?.id, stateAuth?.teachableId);
@@ -195,7 +198,7 @@ export const StartupEAcademy = () => {
               </div>
             )}
             <span>{!startUpsContextData?.userCourses?.courseIdHash[selectedCourse?.id] ? "Start this course" : "Continue course"} </span>
-          </button>
+          </button> */}
         </div>
       </Modal>
       <div className={styles.container}>
@@ -203,13 +206,6 @@ export const StartupEAcademy = () => {
           <p>E-Academy</p>
         </header>
         <div className="mx-auto text-center my-auto">
-          <TabsV2
-            onChange={(item) => {
-              console.log("item change", item);
-              setActiveCourseTab(item);
-            }}
-            tabItems={["Courses", "My Courses"]}
-          ></TabsV2>
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: "50px", alignItems: "center", marginBottom: "40px" }}>
             <p className={styles.courses}>Total courses: {activeCourseTab === "Courses" ? startUpsContextData.allCourses?.total : startUpsContextData.userCourses?.data?.length}</p>
             {/* <Select placeholder={"Sort by: Industry"} options={["one", "two"]} /> */}
@@ -242,7 +238,7 @@ export const StartupEAcademy = () => {
                           >
                             View Course
                           </button>
-                          {/* <div>800+ Started course</div> */}
+                          <div>800+ Started course</div>
                         </footer>
                       </div>
                     </div>
@@ -274,7 +270,7 @@ export const StartupEAcademy = () => {
                           >
                             Go to course
                           </button>
-                          {/* <div>800+ Started course</div> */}
+                          <div>800+ Started course</div>
                         </footer>
                       </div>
                     </div>
@@ -282,8 +278,6 @@ export const StartupEAcademy = () => {
                 })}
               </div>
             )}
-
-            {startUpsContextData?.allCourses?.isLoading && "Loading..."}
           </main>
         </div>
       </div>

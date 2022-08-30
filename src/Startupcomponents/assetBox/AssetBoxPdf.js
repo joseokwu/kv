@@ -3,7 +3,7 @@ import styles from "./assetBox.module.scss";
 import pdf from "../../assets/icons/pdf-file.svg";
 import download from "../../assets/images/cloud-download.png";
 
-const AssetBoxPdf = ({ img, title = "Introduction to business", time = "1:30" }) => {
+const AssetBoxPdf = ({ img, title = "Introduction to business", time = "1:30", url }) => {
   return (
     <div className={styles.container}>
       <main>
@@ -11,9 +11,14 @@ const AssetBoxPdf = ({ img, title = "Introduction to business", time = "1:30" })
       </main>
       <div className={styles.details}>
         <div>
-          <span>{title}</span>
+          <section>
+            <span>{title ?? "No name"}</span>
+            <p>Section 1</p>
+          </section>
           <span>
-            <img height={16} src={download}></img>
+            <a download={title} href={url} rel="noopener noreferrer" target="_blank">
+              <img height={16} src={download}></img>
+            </a>
           </span>
         </div>
       </div>

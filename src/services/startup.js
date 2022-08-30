@@ -172,3 +172,15 @@ export const enrollCourse = async (courseId, teachableId) => {
     throw err;
   }
 };
+export const getLecture = async (courseId, lectureId) => {
+  try {
+    const res = await request.post(`/v1/course/lectureId`, {
+      lectureId,
+      courseId,
+    });
+    return res?.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};

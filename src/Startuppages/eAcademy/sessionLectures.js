@@ -1,19 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router";
 import AssetBoxPdf from "../../Startupcomponents/assetBox/AssetBoxPdf";
 import AssetBoxVid from "../../Startupcomponents/assetBox/AssetBoxVid";
-import sessionBlueImg from "../../assets/icons/session-img-blue.svg";
 import styles from "./session.module.scss";
 import leftArrow from "../../assets/icons/chevron-left-blue.svg";
 import { useHistory } from "react-router-dom";
 import { StartUpsContext } from "../../context/startups";
+import { EmptyState } from "../../mentorComponents";
 
-const Session = () => {
-  const { id, sectionId } = useParams();
+const SessionLectures = () => {
+  const { id, sectionId, lectureId } = useParams();
   const { lectures, allCourses } = useContext(StartUpsContext);
   const history = useHistory();
 
   useEffect(() => {
+    console.log("all section lectuess", lectures?.courseSectionLecturesHash[`${id}${sectionId}`]);
     if (!allCourses?.idHash[id]) {
       history.push(`/startup/e-academy/`);
     }
@@ -34,30 +35,28 @@ const Session = () => {
               return el?.id == sectionId;
             })[0]?.name
           }
+          /
+          {
+            lectures?.courseSectionLecturesHash[`${id}${sectionId}`].filter((el) => {
+              return el?.id == lectureId;
+            })[0]?.name
+          }
         </p>
       </header>
-      {/* <div className={styles.asset_container}>
-        {lectures?.courseSectionLecturesHash[`${id}${sectionId}`].map((lecture, i) => {
-          return 
-        })} */}
-      <section className={styles.card_container} style={{ marginTop: "40px" }}>
-        {lectures?.courseSectionLecturesHash[`${id}${sectionId}`]?.map((lecture, i) => {
-          return (
-            <div
-              key={i}
-              onClick={() => {
-                history.push(`/startup/e-academy/${id}/${sectionId}/${lecture?.id}`);
-              }}
-              className={styles.card}
-            >
-              <img height={18} src={sessionBlueImg}></img>
-              <span>{lecture?.name}</span>
-            </div>
-          );
-        })}
-      </section>
+      <div className={styles.asset_container}>
+        {lectures?.courseSectionLecturesHash[`${id}${sectionId}`]
+          ?.filter((lec) => lec.id == lectureId)
+          ?.map((lecture, i) => {
+            if (lecture?.attachments.length < 1) {
+              return <p>No attachments yet</p>;
+            }
+            return lecture?.attachments?.map((el, i) => {
+              return el?.kind == "video" ? <AssetBoxVid key={i} url={el?.url} title={el?.name}></AssetBoxVid> : <AssetBoxPdf key={i} url={el?.url} title={el?.name}></AssetBoxPdf>;
+            });
+          })}
+      </div>
     </div>
   );
 };
 
-export default Session;
+export default SessionLectures;

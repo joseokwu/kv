@@ -128,6 +128,8 @@ import {
 import { StartupsAssigned } from "../KVMemberPages";
 import CourseDetail from "../Startuppages/eAcademy/courseDetail";
 import Session from "../Startuppages/eAcademy/session";
+import SessionLectures from "../Startuppages/eAcademy/sessionLectures";
+import { AdminEAcademy } from "../adminPages/eAcademy/eAcademy";
 
 const routes = [
   // Start-up routes start
@@ -196,8 +198,16 @@ const routes = [
   },
   {
     name: "StartupEacademy",
-    path: "/startup/e-academy/:id/:session",
+    path: "/startup/e-academy/:id/:sectionId",
     component: WithStartupDashboardLayout(Session),
+    exact: true,
+    protected: true,
+    type: "startup",
+  },
+  {
+    name: "StartupEacademy",
+    path: "/startup/e-academy/:id/:sectionId/:lectureId",
+    component: WithStartupDashboardLayout(SessionLectures),
     exact: true,
     protected: true,
     type: "startup",
@@ -1109,7 +1119,7 @@ const routes = [
   {
     name: "admin E-academy",
     path: "/admin/academy",
-    component: WithAdminLayout(() => <div>E-Academy</div>),
+    component: WithAdminLayout(AdminEAcademy),
     exact: true,
     protected: false,
     type: "admin",

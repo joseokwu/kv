@@ -136,7 +136,7 @@ export const dashboardRoutes = [
     title: "E-Academy",
     activator: "e-academy",
     path: "/startup/e-academy",
-    icon: event,
+    icon: schedule,
   },
 ];
 
