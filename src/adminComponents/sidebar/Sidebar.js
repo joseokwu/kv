@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./sidebar.css";
 import { useHistory } from "react-router";
 import userPic from "../../assets/images/sampleUser.png";
-import user from "../../assets/images/kvLogo.png";
+import user from "../../assets/images/kvLogo.jpg";
 import dashboard from "../../assets/icons/dashboard.svg";
 import program from "../../assets/icons/program.svg";
 import event from "../../assets/icons/eventIcon.svg";

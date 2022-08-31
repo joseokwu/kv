@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./header.css";
-import logo from "../../assets/images/kvLogo.png";
+import logo from "../../assets/images/kvLogo.jpg";
 import notification from "../../assets/icons/notification.svg";
 import chat from "../../assets/icons/mentorchat.svg";
 import angleDown from "../../assets/icons/angleDown.svg";
