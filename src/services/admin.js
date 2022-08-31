@@ -1,13 +1,13 @@
 import { request } from '../utils/axios';
 
 export const getAdminDashboardData = async () => {
-    try {
-        const response = await request.get("v1/user/dash");
-        return response.data;
-    } catch (err) {
-        console.log(err?.response?.data?.message);
-        throw err;
-    }
+  try {
+    const response = await request.get('v1/user/dash');
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
 };
 
 export const getStakeHolders = async (values) => {
@@ -33,13 +33,13 @@ export const getUserList = async (userType) => {
 };
 
 export const getOrCreateProfile = async (values) => {
-    try {
-        const response = await request.post(`v1/profile/admin`, values);
-        return response.data;
-    } catch (err) {
-        console.log(err?.response?.data?.message);
-        throw err;
-    }
+  try {
+    const response = await request.post(`v1/profile/admin`, values);
+    return response.data;
+  } catch (err) {
+    console.log(err?.response?.data?.message);
+    throw err;
+  }
 };
 
 export const applicationManagement = async (values) => {
@@ -298,10 +298,7 @@ export const getStartups = async (
 ) => {
   try {
     console.log(values);
-    const response = await request.post(
-      'v1/user/analytics?type=startup',
-      values
-    );
+    const response = await request.post('v1/user/all-status', values);
     return response.data;
   } catch (err) {
     console.log(err?.response?.data?.message);

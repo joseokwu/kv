@@ -94,7 +94,7 @@ export const PendingApplication = () => {
       });
       setStartupData(res?.data?.startupRes);
       setFetched(true);
-      console.log(res?.data?.startupRes);
+      console.log(res);
     };
 
     getData();
@@ -175,9 +175,7 @@ export const PendingApplication = () => {
                     ? 'Approved'
                     : 'Approve to evaluate'
                 }
-                disabled={
-                  startupData?.approveToEvaluate || startupData?.recommended
-                }
+                disabled={!startupData?.userId?.isRegCompleted}
                 onClick={() => manageAccount('approveToEvaluate', true)}
                 variant={
                   startupData?.approveToEvaluate || startupData?.recommended
@@ -191,9 +189,7 @@ export const PendingApplication = () => {
                             /> */}
               <AdminButton
                 loading={loading === 'recommended' ? true : false}
-                disabled={
-                  startupData?.recommended || startupData?.approveToEvaluate
-                }
+                disabled={!startupData?.userId?.isRegCompleted}
                 onClick={() => manageAccount('recommended', true)}
                 label={startupData?.recommended ? 'Recommended' : 'Recommend'}
                 variant={

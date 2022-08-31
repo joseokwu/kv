@@ -50,33 +50,37 @@ export const PendingTable = ({
 
   const applicationData = useMemo(
     () =>
-      applications?.data?.map((item, i) => {
-        console.log(item?._id);
+      applications?.users?.map((item, i) => {
         return {
           startup: (
             <div className='d-flex align-items-center space-out'>
               <AvatarWrapper
-                condition={item?.userId?.avatar}
-                initials={item?.userId?.startupname?.slice(0, 1)}
+                condition={item?.avatar}
+                initials={item?.startupname?.slice(0, 1)}
                 size={31}
               >
                 <img
-                  src={item?.userId?.avatar}
+                  src={
+                    item?.avatar ??
+                    `https://ui-avatars.com/api/?name=${item?.startupname}`
+                  }
                   alt='user'
                   className={styles.userPic}
                 />
               </AvatarWrapper>
-              <p className='mb-0'>{item?.userId?.startupname}</p>
+              <p className='mb-0'>
+                {item?.startupname ?? item?.firstname + ' ' + item?.lastname}
+              </p>
             </div>
           ),
 
-          date: formatDate(new Date(item?.startUpProfile?.yearFounded)),
+          date: formatDate(new Date(item?.createdAt)),
 
           status: <Tag name='Pending' color='#2E3192' />,
 
           action: (
             <Link
-              to={`/admin/application_mgt/pending/${item?.userId?._id}`}
+              to={`/admin/application_mgt/pending/${item?._id}`}
               className='view-link'
             >
               View

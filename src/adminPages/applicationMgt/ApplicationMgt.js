@@ -20,7 +20,7 @@ export const ApplicationMgt = () => {
     'Approved to Evaluate',
     'KV Screening',
     'Recommended',
-    // "Mentor Screening",
+    'Mentor Screening',
     'Accepted',
   ];
 
@@ -61,9 +61,11 @@ export const ApplicationMgt = () => {
       console.log('currentPageAccepted', currentPageAccepted);
       // console.log("currentPagePending", currentPagePending);
       try {
-        const res = await getStartups({
-          //   page: currentPagePending,
-          //   limit: 5,
+        const pendingRes = await getStartups({
+          page: currentPagePending,
+          limit: 5,
+          isRegCompleted: false,
+          userType: 'startup',
         });
         // const kvRes = await getStartups({
         //   page: currentPageKv,
@@ -73,32 +75,35 @@ export const ApplicationMgt = () => {
         //   page: currentPageMentor,
         //   limit: 5,
         // });
-        // const acceptedRes = await getStartups({
-        //   //   page: currentPageAccepted,
-        //   //   limit: 5,
-        //   accepted: true,
-        // });
-        // const recommendedRes = await getStartups({
-        //   //   page: currentPageRecommended,
-        //   //   limit: 5,
-        //   recommended: true,
-        // });
+        const acceptedRes = await getStartups({
+          //   page: currentPageAccepted,
+          //   limit: 5,
+          acceptedIntoKV: true,
+          userType: 'startup',
+        });
+        const recommendedRes = await getStartups({
+          //   page: currentPageRecommended,
+          //   limit: 5,
+          recommendedForMentorship: true,
+          userType: 'startup',
+        });
         // const approveToEvalRes = await getStartups({
         //   //   page: currentPageRecommended,
         //   //   limit: 5,
         //   approveToEvaluate: true,
         // });
 
-        setApplication(res?.data);
+        setApplication(pendingRes?.data);
         // setKvScreening(kvRes?.data);
         // console.log(kvRes?.data);
-        // setAccepted(acceptedRes?.data);
+        setAccepted(acceptedRes?.data);
         // setMentorScreening(mentorsRes?.data);
-        // setRecommended(recommendedRes?.data);
+        setRecommended(recommendedRes?.data);
         // setApproveToEval(approveToEval?.data);
 
-        console.log(res?.data);
-        // console.log('accept', acceptedRes?.data);
+        console.log(pendingRes?.data);
+        console.log(recommendedRes?.data);
+        console.log('accept', acceptedRes?.data);
       } catch (e) {
         console.log(e);
       }
@@ -163,15 +168,15 @@ export const ApplicationMgt = () => {
             setCurrentPage={setCurrentPageRecommended}
           />
         );
-      // case `#${mgtTab[4]}`:
-      //     return (
-      //         <MentorScreeningTable
-      //             mentorScreening={mentorScreening}
-      //             currentPage={currentPageMentor}
-      //             setCurrentPage={setCurrentPageMentor}
-      //         />
-      //     );
       case `#${mgtTab[4]}`:
+        return (
+          <MentorScreeningTable
+            mentorScreening={mentorScreening}
+            currentPage={currentPageMentor}
+            setCurrentPage={setCurrentPageMentor}
+          />
+        );
+      case `#${mgtTab[5]}`:
         return (
           <AcceptedTable
             setResetAccept={setResetAccept}
@@ -207,7 +212,7 @@ export const ApplicationMgt = () => {
           // className='col-lg-3 col-md-6 col-12'
           // name={'All Application'}
           name={'New Application'}
-          count={applications?.metadata?.total ?? 0}
+          count={applications?.users?.length ?? 0}
           color={'#E5FFE4'}
           fetched={fetched}
         />
@@ -215,22 +220,22 @@ export const ApplicationMgt = () => {
           // className='col-lg-3 col-md-6 col-12'
           // name={'Approved to Evaluate'}
           name={'KV Screening'}
-          count={kvScreening?.metadata?.total ?? 0}
+          count={kvScreening?.users?.length ?? 0}
           color={'#FAD7DC'}
           fetched={fetched}
         />
         <DashCard
           // className='col-lg-3 col-md-6 col-12'
-          // name={'Recommended'}
-          name={'Mentor Screening'}
-          count={recommended?.metadata?.total ?? 0}
+          name={'Recommended'}
+          // name={'Mentor Screening'}
+          count={recommended?.users?.length ?? 0}
           color={'#E5FFE4'}
           fetched={fetched}
         />
         <DashCard
           // className='col-lg-3 col-md-6 col-12'
           name={'Accepted'}
-          count={accepted?.metadata?.total ?? 0}
+          count={accepted?.users?.length ?? 0}
           color={'#FAD7DC'}
           fetched={fetched}
         />
