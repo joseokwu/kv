@@ -100,16 +100,18 @@ const CourseDetail = () => {
       <div className={styles.hero}>
         <img width={451} height={329} src={course?.image_url}></img>
         <div>
-          <h3>{course?.heading}</h3>
+          <h3>{course?.heading ?? course?.name}</h3>
           <p>{course?.description ?? "No description yet"} </p>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "30px", maxWidth: "350px" }}>
+          <div className="scroll_hide" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", maxWidth: "350px", flexWrap: "wrap" }}>
             <div className={styles.stat}>
               <p>Sessions:</p>
               <span>{course?.lecture_sections?.length} Sessions</span>
             </div>
             <div className={styles.stat}>
               <p>Lectures:</p>
-              <span>{getTotalLectures(course?.lecture_sections)}Lectures</span>
+              <span>
+                {getTotalLectures(course?.lecture_sections)} Lecture{getTotalLectures(course?.lecture_sections) == 1 ? "" : "s"}
+              </span>
             </div>
           </div>
         </div>
@@ -145,8 +147,8 @@ const CourseDetail = () => {
       {active === "All Files" && (
         <div style={{ marginTop: "40px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: "50px", alignItems: "center", marginBottom: "40px" }}>
-            <p className={styles.courses}>Total courses: 6</p>
-            <Select placeholder={"Sort by: Industry"} options={["one", "two"]} />
+            <p className={styles.courses}>Total courses: {allCourses?.total}</p>
+            {/* <Select placeholder={"Sort by: Industry"} options={["one", "two"]} /> */}
           </div>
           <div style={{ marginTop: "40px" }} className={styles.asset_container}>
             {lectures.courseLecturesHash[id].map((lecture, i) => {

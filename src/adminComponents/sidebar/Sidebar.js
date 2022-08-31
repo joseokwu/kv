@@ -123,8 +123,7 @@ export const Sidebar = () => {
             <section className="side-navigator">
                 <div>
                     <img
-                        // src={`https://ui-avatars.com/api/?name=Knight Ventures`}
-                        src={userPic}
+                        src="https://deejayfarm.com/wp-content/uploads/2019/10/Profile-pic.jpg"
                         style={{
                             width: "60px",
                             height: "60px",

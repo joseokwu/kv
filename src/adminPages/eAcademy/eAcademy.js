@@ -123,7 +123,7 @@ export const AdminEAcademy = () => {
           </div>
           <img style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)" }} height={305} src={selectedCourse?.image_url}></img>
           <h3>{selectedCourse?.heading}</h3>
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "30px" }}>
+          <div className="scroll_hide" style={{ display: "flex", alignItems: "center", marginBottom: "30px", overflow: "scroll", whiteSpace: "nowrap" }}>
             <div style={{ marginRight: "32px" }} className={styles.modal_stat}>
               <p>Sessions: </p>
               <img height={18} src={sessionGray}></img>
@@ -168,7 +168,7 @@ export const AdminEAcademy = () => {
           {modalActiveTab === "Enrolled Users" && (
             <div className={styles.modal_enrolled_box}>
               <h4>Enrolled Users ({enrolledUsers?.length})</h4>
-              <section>
+              {/* <section>
                 {enrolledUsers?.map((el, i) => {
                   return (
                     <div>
@@ -183,7 +183,7 @@ export const AdminEAcademy = () => {
                     </div>
                   );
                 })}
-              </section>
+              </section> */}
             </div>
           )}
 
@@ -240,14 +240,14 @@ export const AdminEAcademy = () => {
                     <div key={i} className={styles.card}>
                       <img height={236} src={el?.image_url}></img>
                       {/* Details */}
-                      <div>
+                      <div style={{ flexGrow: "1", display: "flex", flexDirection: "column" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "36px", alignItems: "center" }}>
                           <h3>{el?.heading}</h3>
                           {/* <span style={{ display: "flex" }}>30 minutes</span> */}
                         </div>
                         {/* Desc */}
                         <p>{el?.description ?? "No description yet"} </p>
-                        <footer>
+                        <footer style={{ marginTop: "auto" }}>
                           <button
                             onClick={() => {
                               setSelectedCourse(el);
@@ -259,7 +259,7 @@ export const AdminEAcademy = () => {
                           >
                             View Course
                           </button>
-                          <div>800+ Started course</div>
+                          {/* <div>800+ Started course</div> */}
                         </footer>
                       </div>
                     </div>
@@ -275,14 +275,14 @@ export const AdminEAcademy = () => {
                     <div key={i} className={styles.card}>
                       <img height={236} src={startUpsContextData?.allCourses.idHash[el?.course_id].image_url}></img>
                       {/* Details */}
-                      <div>
+                      <div style={{ flexGrow: "1", display: "flex", flexDirection: "column" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "36px", alignItems: "center" }}>
                           <h3>{el?.heading}</h3>
                           {/* <span style={{ display: "flex" }}>30 minutes</span> */}
                         </div>
                         {/* Desc */}
                         <p>{el?.description ?? "No description yet"} </p>
-                        <footer>
+                        <footer style={{ marginTop: "auto" }}>
                           <button
                             onClick={() => {
                               history.push(`/startup/e-academy/${el?.course_id}`);

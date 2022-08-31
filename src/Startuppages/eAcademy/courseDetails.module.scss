@@ -43,11 +43,21 @@
   display: flex;
   flex-wrap: wrap;
 
+  @media (max-width: 500px) {
+    padding: 32px 22px;
+  }
+
   margin-bottom: 65px;
 
   img {
     margin-right: 60px;
     object-fit: cover;
+
+    @media (max-width: 500px) {
+      width: 100%;
+      max-height: 350px;
+      margin-right: 0;
+    }
   }
 
   h3 {
@@ -64,6 +74,11 @@
     /* 900 */
 
     color: #2e3192;
+
+    @media (max-width: 400px) {
+      font-size: 29px;
+      line-height: 37px;
+    }
   }
   p {
     font-family: "DM Sans", sans-serif;
@@ -141,6 +156,7 @@
 .stat {
   display: flex;
   align-items: center;
+  margin: 0 10px 10px 0;
   p {
     font-family: "DM Sans", sans-serif;
 

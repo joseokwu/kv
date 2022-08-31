@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-export const TabsV2 = ({ tabItems, onChange = () => {} }) => {
-  const [active, setActive] = useState(0);
+export const TabsV2 = ({ tabItems, onChange = () => {}, activeIndex = 0 }) => {
+  const [active, setActive] = useState(activeIndex);
   return (
     <ul className="applicant-tabs-list">
       {tabItems.length > 0 &&

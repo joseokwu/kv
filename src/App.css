@@ -147,3 +147,14 @@ h6 {
 .modal-backdrop {
   z-index: 1000 !important;
 }
+
+.scroll_hide::-webkit-scrollbar {
+  display: none !important;
+}
+
+.scroll_hide {
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+}

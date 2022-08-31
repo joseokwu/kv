@@ -33,6 +33,7 @@ export const StartupEAcademy = () => {
     console.log("course id and teachable id is", courseId, teachableId);
     setEnrolling(true);
     const resp = await enrollCourse(courseId, teachableId);
+    console.log("response is", resp);
     if (!resp) {
       toast.error("Error enrolling!");
     } else if (resp?.err || resp?.status == false) {
@@ -40,6 +41,8 @@ export const StartupEAcademy = () => {
     } else {
       console.log("enrol resp", resp);
       toast.success(resp?.message);
+      fetchAndSetData();
+      // setActiveCourseTab("My Courses");
     }
     setEnrolling(false);
     closeModalRef.current.click();
@@ -55,46 +58,45 @@ export const StartupEAcademy = () => {
     return total;
   };
 
+  const fetchAndSetData = async () => {
+    startUpsContextData.setAllCourses((val) => {
+      return { ...val, isLoading: true };
+    });
+    const res = await getAllCourses();
+    const userCourses = await getUserCourses();
+    console.log("all user courses are: ", userCourses?.data?.courses);
+
+    const userCoursesHash = {};
+    userCourses?.data?.courses.forEach((el) => {
+      userCoursesHash[el?.course_id] = el;
+    });
+
+    startUpsContextData.setUserCourses((val) => {
+      return { ...val, data: userCourses?.data?.courses, courseIdHash: userCoursesHash };
+    });
+    const totalCourses = res.data?.meta?.total;
+
+    // Fetch Details
+    const allCoursesDetailsPromise = res?.data?.courses?.map((el) => {
+      return getCourseDetail(el.id);
+    });
+
+    const allCoursesResolved = await Promise.all(allCoursesDetailsPromise);
+    console.log("resove courses are", allCoursesResolved);
+    const allCourses = allCoursesResolved.map((el) => {
+      return el?.data?.course;
+    });
+    const courseIdHash = {};
+    allCourses.forEach((el) => {
+      courseIdHash[el.id] = el;
+    });
+    console.log("course hash is", courseIdHash);
+    // console.log("all courses formatted are", allCourses);
+    startUpsContextData.setAllCourses((val) => {
+      return { ...val, data: allCourses, isLoading: false, total: totalCourses, idHash: courseIdHash };
+    });
+  };
   useEffect(() => {
-    const fetchAndSetData = async () => {
-      startUpsContextData.setAllCourses((val) => {
-        return { ...val, isLoading: true };
-      });
-      const res = await getAllCourses();
-      const userCourses = await getUserCourses();
-      console.log("all user courses are: ", userCourses?.data?.courses);
-
-      const userCoursesHash = {};
-      userCourses?.data?.courses.forEach((el) => {
-        userCoursesHash[el?.course_id] = el;
-      });
-
-      startUpsContextData.setUserCourses((val) => {
-        return { ...val, data: userCourses?.data?.courses, courseIdHash: userCoursesHash };
-      });
-      const totalCourses = res.data?.meta?.total;
-
-      // Fetch Details
-      const allCoursesDetailsPromise = res?.data?.courses?.map((el) => {
-        return getCourseDetail(el.id);
-      });
-
-      const allCoursesResolved = await Promise.all(allCoursesDetailsPromise);
-      console.log("resove courses are", allCoursesResolved);
-      const allCourses = allCoursesResolved.map((el) => {
-        return el?.data?.course;
-      });
-      const courseIdHash = {};
-      allCourses.forEach((el) => {
-        courseIdHash[el.id] = el;
-      });
-      console.log("course hash is", courseIdHash);
-      // console.log("all courses formatted are", allCourses);
-      startUpsContextData.setAllCourses((val) => {
-        return { ...val, data: allCourses, isLoading: false, total: totalCourses, idHash: courseIdHash };
-      });
-    };
-
     if (startUpsContextData.allCourses?.data?.length < 1) {
       console.log("No hash: fetching course data");
       fetchAndSetData();
@@ -121,7 +123,7 @@ export const StartupEAcademy = () => {
           </div>
           <img style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)" }} height={305} src={selectedCourse?.image_url}></img>
           <h3>{selectedCourse?.heading}</h3>
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "30px" }}>
+          <div className="scroll_hide" style={{ display: "flex", alignItems: "center", marginBottom: "30px", overflow: "scroll", whiteSpace: "nowrap" }}>
             <div style={{ marginRight: "32px" }} className={styles.modal_stat}>
               <p>Sessions: </p>
               <img height={18} src={sessionGray}></img>
@@ -224,15 +226,16 @@ export const StartupEAcademy = () => {
                     <div key={i} className={styles.card}>
                       <img height={236} src={el?.image_url}></img>
                       {/* Details */}
-                      <div>
+                      <div style={{ flexGrow: "1", display: "flex", flexDirection: "column" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "36px", alignItems: "center" }}>
-                          <h3>{el?.heading}</h3>
+                          <h3>{el?.heading ?? el?.name}</h3>
                           {/* <span style={{ display: "flex" }}>30 minutes</span> */}
                         </div>
                         {/* Desc */}
                         <p>{el?.description ?? "No description yet"} </p>
-                        <footer>
+                        <footer style={{ marginTop: "auto" }}>
                           <button
+                            style={{ marginTop: "auto" }}
                             onClick={() => {
                               setSelectedCourse(el);
                             }}
@@ -258,15 +261,16 @@ export const StartupEAcademy = () => {
                     <div key={i} className={styles.card}>
                       <img height={236} src={startUpsContextData?.allCourses.idHash[el?.course_id].image_url}></img>
                       {/* Details */}
-                      <div>
+                      <div style={{ flexGrow: "1", display: "flex", flexDirection: "column" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "36px", alignItems: "center" }}>
-                          <h3>{el?.heading}</h3>
+                          <h3>{startUpsContextData?.allCourses.idHash[el?.course_id]?.heading ?? startUpsContextData?.allCourses.idHash[el?.course_id]?.name}</h3>
                           {/* <span style={{ display: "flex" }}>30 minutes</span> */}
                         </div>
                         {/* Desc */}
-                        <p>{el?.description ?? "No description yet"} </p>
+                        <p>{startUpsContextData?.allCourses.idHash[el?.course_id]?.description ?? "No description yet"} </p>
                         <footer>
                           <button
+                            style={{ marginTop: "auto" }}
                             onClick={() => {
                               history.push(`/startup/e-academy/${el?.course_id}`);
                             }}

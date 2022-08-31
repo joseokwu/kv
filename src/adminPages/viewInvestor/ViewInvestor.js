@@ -117,23 +117,34 @@ export const ViewInvestor = () => {
             <section className={`${styles.contact_card} row mx-0 p-5 mb-5`}>
                 <div className="col-lg-6">
                     <article className="d-flex align-items-center space-out mb-2">
-                        {investorData?.userId?.avatar && (
-                            <img
-                                src={investorData?.userId?.avatar}
-                                alt="user"
-                                className={styles.userDp}
-                            />
-                        )}
+                        <img
+                            src={
+                                investorData?.userId?.avatar ??
+                                `https://ui-avatars.com/api/?name=${investorData?.userId?.firstname} ${investorData?.userId?.lastname}`
+                            }
+                            alt="user"
+                            className={styles.userDp}
+                        />
                     </article>
 
                     <h4 className={styles.user_name}>
-                        {`${
-                            investorData?.profile?.firstName &&
-                            investorData?.profile?.firstName
-                        } ${investorData?.profile?.lastName}`}
+                        {investorData?.profile?.firstName
+                            ? `${investorData?.profile?.firstName} ${investorData?.profile?.lastName}`
+                            : `${investorData?.userId?.firstname} ${investorData?.userId?.lastname}`}
                     </h4>
-                    <a href="#." className={`mb-4 d-block ${styles.text}`}>
-                        {investorData?.profile?.email}
+                    <a
+                        href={`mailto:${
+                            investorData?.profile?.email
+                                ? investorData?.profile?.email
+                                : investorData?.userId?.email
+                        }`}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className={`mb-4 d-block ${styles.text}`}
+                    >
+                        {investorData?.profile?.email
+                            ? investorData?.profile?.email
+                            : investorData?.userId?.email}
                     </a>
 
                     <section className="mb-3 d-flex align-items-center flex-wrap">
@@ -154,6 +165,9 @@ export const ViewInvestor = () => {
                             <a
                                 href={
                                     investorData?.profile?.socialMedia?.website
+                                        ? investorData?.profile?.socialMedia
+                                              ?.website
+                                        : null
                                 }
                                 className={styles.text}
                                 target="_blank"
@@ -175,6 +189,9 @@ export const ViewInvestor = () => {
                             <a
                                 href={
                                     investorData?.profile?.socialMedia?.twitter
+                                        ? investorData?.profile?.socialMedia
+                                              ?.twitter
+                                        : null
                                 }
                                 target="_blank"
                                 rel="noreferrer noopener"
@@ -188,6 +205,9 @@ export const ViewInvestor = () => {
                             <a
                                 href={
                                     investorData?.profile?.socialMedia?.linkedIn
+                                        ? investorData?.profile?.socialMedia
+                                              ?.linkedIn
+                                        : null
                                 }
                                 target="_blank"
                                 rel="noreferrer noopener"
@@ -196,13 +216,33 @@ export const ViewInvestor = () => {
                             </a>
                         </article>
                         <a
-                            href={investorData?.profile?.socialMedia?.website}
+                            href={
+                                investorData?.profile?.socialMedia?.website
+                                    ? investorData?.profile?.socialMedia
+                                          ?.website
+                                    : null
+                            }
                             className={`mb-4 d-block text-right ${styles.text}`}
                             style={{ color: "#828282" }}
                             target="_blank"
                             rel="noreferrer noopener"
                         >
-                            {investorData?.profile?.socialMedia?.website}
+                            {investorData?.profile?.socialMedia?.website || "-"}
+                        </a>
+                        <a
+                            href={
+                                investorData?.profile?.mobile_number
+                                    ? investorData?.profile?.mobile_number
+                                    : investorData?.profile?.phone
+                            }
+                            className={`mb-4 d-block text-right ${styles.text}`}
+                            style={{ color: "#828282" }}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                        >
+                            {investorData?.profile?.mobile_number
+                                ? investorData?.profile?.mobile_number
+                                : investorData?.userId?.phone}
                         </a>
                     </section>
                 </div>
