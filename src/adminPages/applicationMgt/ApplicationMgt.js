@@ -65,7 +65,7 @@ export const ApplicationMgt = () => {
           page: currentPagePending,
           limit: 5,
           isRegCompleted: false,
-          userType: 'startup',
+          // userType: 'startup',
         });
         // const kvRes = await getStartups({
         //   page: currentPageKv,
@@ -79,13 +79,13 @@ export const ApplicationMgt = () => {
           //   page: currentPageAccepted,
           //   limit: 5,
           acceptedIntoKV: true,
-          userType: 'startup',
+          // userType: 'startup',
         });
         const recommendedRes = await getStartups({
           //   page: currentPageRecommended,
           //   limit: 5,
           recommendedForMentorship: true,
-          userType: 'startup',
+          // userType: 'startup',
         });
         // const approveToEvalRes = await getStartups({
         //   //   page: currentPageRecommended,
