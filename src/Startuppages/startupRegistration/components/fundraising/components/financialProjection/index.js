@@ -9,6 +9,7 @@ import Download from "../../../../../../assets/icons/downloadoutline.svg";
 import { useActivity } from "../../../../../../hooks/useBusiness";
 import { useAuth } from "../../../../../../hooks/useAuth";
 import { upload } from "./../../../../../../services/utils";
+import { editUser } from "../../../../../../services";
 import { useState } from "react";
 import { UploadFile } from "../../../../../../components";
 import { validate } from "./../../../../../../utils/helpers";
@@ -38,10 +39,38 @@ export const FinancialProjection = () => {
             // updateStartupInfo(
             //     validate(stateAuth?.profileData?.startupRes, startupValidation)
             // );
-            updateStartupInfo(true);
-            window.open("/startup/registration/success", "_self");
+            const profileReq = await updateStartupInfo();
+
+            if (
+                // profileReq?.success &&
+                stateAuth?.profileData?.startupRes?.startUpProfile
+                    ?.elevatorPitch &&
+                stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckFile &&
+                stateAuth?.profileData?.startupRes?.team?.briefIntroduction &&
+                stateAuth?.profileData?.startupRes?.product?.description &&
+                stateAuth?.profileData?.startupRes?.fundRaising?.fundingAsk
+                    ?.instrumentForRound
+            ) {
+                console.log("registration actually  completed");
+                try {
+                    const completeReg = await editUser({
+                        payload: { isRegCompleted: true },
+                    });
+                    console.log(completeReg);
+                    if (completeReg?.success)
+                        window.open("/startup/registration/success", "_self");
+                } catch (e) {
+                    console.log(e);
+                }
+            } else {
+                toast.error(
+                    "Please go back and ensure you've completed your registration"
+                );
+            }
         } else toast.error("Please provide a financial projection document");
     };
+
+    console.log("complll", stateAuth?.profileData?.startupRes);
 
     return (
         <form onSubmit={handleSubmit}>

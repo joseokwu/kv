@@ -44,7 +44,7 @@ export const SignUp = ({ history }) => {
         localStorage.setItem("KV-signupEmail", values.email);
         register({
             ...values,
-            type: stateAuth?.signUpStatus,
+            type: stateAuth?.signUpStatus || 'startup',
             phone: phone,
             origin: window.location.origin,
         });

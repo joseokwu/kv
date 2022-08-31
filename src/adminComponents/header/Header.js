@@ -58,7 +58,11 @@ export const Header = ({ setOpen, open, admin, disabled = false }) => {
 
                 <div className="d-flex align-items-center h-100">
                     <span className="d-flex align-items-center header-profile d-none d-lg-flex">
-                        <img src={userPic} alt="profile" className="" />
+                        <img
+                            src="https://deejayfarm.com/wp-content/uploads/2019/10/Profile-pic.jpg"
+                            alt="profile"
+                            className=""
+                        />
                         <p className="mb-0 header-text">
                             {" "}
                             {/* {stateAuth?.firstname +
