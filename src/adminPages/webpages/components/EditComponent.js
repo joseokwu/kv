@@ -4,7 +4,6 @@ import {
   Select,
   TextArea,
   TextField,
-  TipTapSmall,
   UploadFile,
 } from '../../../components';
 import styles from '../webpages.module.css';
@@ -75,7 +74,7 @@ export const EditComponent = ({
           tempData[e.target.value] = tempData[k];
           delete tempData[k];
         } else {
-          tempData[oldVal] = e;
+          tempData[oldVal] = e.target.value;
         }
       }
     }
@@ -86,7 +85,7 @@ export const EditComponent = ({
           mainTexts[i].key = e.target.value;
         }
         if (value === 'text') {
-          mainTexts[i].text = e;
+          mainTexts[i].text = e.target.value;
         }
       }
     }
@@ -266,15 +265,9 @@ export const EditComponent = ({
                     })
                   }
                 />
-                <span className='w-55'>
+                <span className='w-50'>
                   <Form.Item initialValue={item?.text}>
-                    <TipTapSmall
-                      setDescription={handleTexts}
-                      index={i}
-                      description={item?.text}
-                      oldVal={item?.key}
-                    />
-                    {/* <TextArea
+                    <TextArea
                       label='Text'
                       className='max_fill mb-1'
                       value={item?.text}
@@ -287,7 +280,7 @@ export const EditComponent = ({
                           oldVal: item?.key,
                         })
                       }
-                    /> */}
+                    />
                   </Form.Item>
                 </span>
                 <img

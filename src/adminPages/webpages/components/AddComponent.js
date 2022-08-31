@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextArea, TextField, TipTapSmall } from '../../../components';
+import { Button, TextArea, TextField } from '../../../components';
 import styles from '../webpages.module.css';
 import { Form } from 'antd';
 import toast from 'react-hot-toast';
@@ -7,7 +7,6 @@ import deleteIcon from '../../../assets/icons/del-red.svg';
 import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 import { upload } from '../../../services';
 import cuid from 'cuid';
-import MyEditor from '../../../components/tipTap/Draft';
 
 export const AddComponent = ({
   headers,
@@ -38,8 +37,7 @@ export const AddComponent = ({
     }
     setHeaders(mainHeaders);
   };
-  const handleTexts = ({ e, value, i, oldVal }) => {
-    console.log(e);
+  const handleTexts = (e, value, i) => {
     let mainTexts = [...texts];
 
     for (let index = 0; index < texts.length; index++) {
@@ -48,7 +46,7 @@ export const AddComponent = ({
           mainTexts[i].key = e.target.value;
         }
         if (value === 'text') {
-          mainTexts[i].text = e;
+          mainTexts[i].text = e.target.value;
         }
       }
     }
@@ -178,23 +176,17 @@ export const AddComponent = ({
                   // name={`textKey${i}`}
                   value={item?.key}
                   required={false}
-                  onChange={(e) => handleTexts({ e: e, value: 'key', i: i })}
+                  onChange={(e) => handleTexts(e, 'key', i)}
                 />
-                <span className='w-55'>
+                <span className='w-50'>
                   <Form.Item>
-                    <MyEditor />
-                    {/* <TipTapSmall
-                      setDescription={handleTexts}
-                      description={item?.text}
-                      index={i}
-                    /> */}
-                    {/* <TextArea
+                    <TextArea
                       label='Text'
                       className='max_fill mb-1'
                       value={item?.text}
                       rows='4'
                       onChange={(e) => handleTexts(e, 'text', i)}
-                    /> */}
+                    />
                   </Form.Item>
                 </span>
                 <img
