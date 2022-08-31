@@ -76,7 +76,7 @@ export const PendingTable = ({
 
           action: (
             <Link
-              to={`/admin/application_mgt/pending/${item?._id}`}
+              to={`/admin/application_mgt/pending/${item?.userId?._id}`}
               className='view-link'
             >
               View

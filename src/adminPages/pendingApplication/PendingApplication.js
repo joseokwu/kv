@@ -34,7 +34,6 @@ export const PendingApplication = () => {
   const [fetched, setFetched] = useState(false);
 
   const { id } = useParams();
-  console.log(id);
 
   const {
     location: { hash },
@@ -90,11 +89,12 @@ export const PendingApplication = () => {
   useEffect(() => {
     const getData = async () => {
       const res = await getStartup({
-        _id: id,
+        userId: id,
         userType: 'startup',
       });
       setStartupData(res?.data?.startupRes);
       setFetched(true);
+      console.log(res?.data?.startupRes);
     };
 
     getData();
@@ -219,10 +219,7 @@ export const PendingApplication = () => {
                 className='d-flex align-items-center space-out'
                 style={{ columnGap: 3 }}
               >
-                <Tag
-                  name={startupData?.startUpProfile?.businessSector}
-                  color='#058DC1'
-                />
+                <Tag name={startupData?.userId?.industry} color='#058DC1' />
               </div>
             </article>
 

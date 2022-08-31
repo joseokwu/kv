@@ -13,6 +13,7 @@ import {
   FaStrikethrough,
   FaUnderline,
   FaUndo,
+  FaCode,
 } from 'react-icons/fa';
 
 const MenuBar = ({ editor }) => {
@@ -58,14 +59,10 @@ const MenuBar = ({ editor }) => {
           <FaHeading />
         </button>
         <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }
-          className={
-            editor.isActive('heading', { level: 3 }) ? 'is_active' : ''
-          }
+          onClick={() => editor.chain().focus().toggleCode().run()}
+          className={editor.isActive('code') ? 'is-active' : ''}
         >
-          <FaHeading className='heading3' />
+          <FaCode />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}

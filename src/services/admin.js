@@ -289,10 +289,10 @@ export const getStartups = async (
   }
 };
 
-export const getStartup = async ({ _id, userType }) => {
+export const getStartup = async ({ userId, userType }) => {
   try {
     const response = await request.post('v1/profile/admin', {
-      _id,
+      userId,
       userType,
     });
     return response.data;
