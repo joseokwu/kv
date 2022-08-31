@@ -34,7 +34,6 @@ export const PendingApplication = () => {
   const [fetched, setFetched] = useState(false);
 
   const { id } = useParams();
-  console.log(id);
 
   const {
     location: { hash },
@@ -90,11 +89,12 @@ export const PendingApplication = () => {
   useEffect(() => {
     const getData = async () => {
       const res = await getStartup({
-        _id: id,
+        userId: id,
         userType: 'startup',
       });
       setStartupData(res?.data?.startupRes);
       setFetched(true);
+      console.log(res);
     };
 
     getData();
@@ -133,7 +133,10 @@ export const PendingApplication = () => {
         <div className='row mx-0'>
           <section className='col-lg-7'>
             <img
-              src={startupData?.userId?.avatar ?? apple}
+              src={
+                startupData?.userId?.avatar ??
+                `https://ui-avatars.com/api/?name=${startupData?.userId?.startupname}`
+              }
               alt='startup logo'
               className='mb-2'
             />
@@ -172,9 +175,7 @@ export const PendingApplication = () => {
                     ? 'Approved'
                     : 'Approve to evaluate'
                 }
-                disabled={
-                  startupData?.approveToEvaluate || startupData?.recommended
-                }
+                disabled={!startupData?.userId?.isRegCompleted}
                 onClick={() => manageAccount('approveToEvaluate', true)}
                 variant={
                   startupData?.approveToEvaluate || startupData?.recommended
@@ -188,9 +189,7 @@ export const PendingApplication = () => {
                             /> */}
               <AdminButton
                 loading={loading === 'recommended' ? true : false}
-                disabled={
-                  startupData?.recommended || startupData?.approveToEvaluate
-                }
+                disabled={!startupData?.userId?.isRegCompleted}
                 onClick={() => manageAccount('recommended', true)}
                 label={startupData?.recommended ? 'Recommended' : 'Recommend'}
                 variant={
@@ -219,10 +218,7 @@ export const PendingApplication = () => {
                 className='d-flex align-items-center space-out'
                 style={{ columnGap: 3 }}
               >
-                <Tag
-                  name={startupData?.startUpProfile?.businessSector}
-                  color='#058DC1'
-                />
+                <Tag name={startupData?.userId?.industry} color='#058DC1' />
               </div>
             </article>
 

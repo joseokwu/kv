@@ -131,7 +131,10 @@ export const ViewMentor = () => {
                 <div className="col-lg-6">
                     <article className="d-flex align-items-center space-out mb-2">
                         <img
-                            src={mentor?.userId?.avatar ?? userPic}
+                            src={
+                                mentor?.userId?.avatar ??
+                                `https://ui-avatars.com/api/?name=${mentor?.userId?.firstname} ${mentor?.userId?.lastname}`
+                            }
                             alt="user"
                             className={styles.userDp}
                         />
@@ -147,14 +150,18 @@ export const ViewMentor = () => {
                         </p>
                     </article>
 
-                    <h4
-                        className={styles.user_name}
-                    >{`${mentor?.personalDetail?.firstname} ${mentor?.personalDetail?.lastname}`}</h4>
+                    <h4 className={styles.user_name}>
+                        {mentor?.personalDetail?.firstName
+                            ? `${mentor?.personalDetail?.firstName} ${mentor?.personalDetail?.lastName}`
+                            : `${mentor?.userId?.firstname} ${mentor?.userId?.lastname}`}
+                    </h4>
                     <a
                         href={`https://${mentor?.personalDetail?.email}`}
                         className={`mb-4 d-block ${styles.text}`}
                     >
-                        {mentor?.email}
+                        {mentor?.personalDetail?.email
+                            ? mentor?.personalDetail?.email
+                            : mentor?.userId?.email}
                     </a>
 
                     <p className={styles.text} style={{ color: "#828282" }}>
@@ -166,7 +173,11 @@ export const ViewMentor = () => {
                     <section>
                         <article className="d-flex justify-content-end mb-2">
                             <a
-                                href={mentor?.personalDetail?.twitter}
+                                href={
+                                    mentor?.personalDetail?.twitter
+                                        ? mentor?.personalDetail?.twitter
+                                        : null
+                                }
                                 target="_blank"
                                 rel="noreferrer noopener"
                             >
@@ -177,7 +188,11 @@ export const ViewMentor = () => {
                                 />
                             </a>
                             <a
-                                href={mentor?.personalDetail?.linkedin}
+                                href={
+                                    mentor?.personalDetail?.linkedin
+                                        ? mentor?.personalDetail?.linkedin
+                                        : null
+                                }
                                 target="_blank"
                                 rel="noreferrer noopener"
                             >
@@ -213,7 +228,10 @@ export const ViewMentor = () => {
                                 alt={mentor?.personalDetail?.website}
                             />
                             <a
-                                href={mentor?.personalDetail?.website}
+                                href={
+                                    mentor?.personalDetail?.website &&
+                                    mentor?.personalDetail?.website
+                                }
                                 className={styles.text}
                                 target="_blank"
                                 rel="noreferrer noopener"
@@ -227,12 +245,18 @@ export const ViewMentor = () => {
                         >
                             <img src={phone} alt="phone" />
                             <a
-                                href={`tel:${mentor?.personalDetail?.mobilenumber}`}
+                                href={`tel:${
+                                    mentor?.personalDetail?.mobilenumber
+                                        ? mentor?.personalDetail?.mobilenumber
+                                        : mentor?.userId?.phone
+                                }`}
                                 target="_blank"
                                 className={styles.text}
                                 rel="noreferrer noopener"
                             >
-                                {mentor?.personalDetail?.mobilenumber}
+                                {mentor?.personalDetail?.mobilenumber
+                                    ? mentor?.personalDetail?.mobilenumber
+                                    : mentor?.userId?.phone}
                             </a>
                         </div>
                     </section>

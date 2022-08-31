@@ -142,7 +142,7 @@ const CompanyOverview = () => {
                     <div className="row mb-4">
                         <section className="col-md-3">
                             <div className="form-dp">
-                                <span className="image-placeholder">
+                                <span className="image-placeholder d-flex flex-row align-items-center justify-content-center">
                                     {!stateAuth?.userObj?.avatar ? (
                                         logoUploading ? (
                                             <CircularLoader color={"#000"} />

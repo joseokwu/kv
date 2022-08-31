@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../assets/images/kvLogo.png";
+import logo from "../../assets/images/kvLogo.jpg";
 import notification from "../../assets/icons/notification.svg";
 import angleDown from "../../assets/icons/angleDown.svg";
 import sampleUser from "../../assets/images/sampleUser.png";

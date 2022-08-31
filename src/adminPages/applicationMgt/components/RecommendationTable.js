@@ -48,11 +48,17 @@ export const RecommendationTable = ({
         startup: (
           <div className='d-flex align-items-center space-out'>
             <img
-              src={item?.startUpProfile?.logo}
+              src={
+                item?.avatar ??
+                `https://ui-avatars.com/api/?name=${item?.startupname}`
+              }
               alt='user'
               className={styles.userPic}
             />
-            <p className='mb-0'>{item?.startUpProfile?.acceleratorName}</p>
+            <p className='mb-0'>
+              {' '}
+              {item?.startupname ?? item?.firstname + ' ' + item?.lastname}
+            </p>
           </div>
         ),
 

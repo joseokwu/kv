@@ -45,7 +45,7 @@ export const SignIn = () => {
             const loca = getLocationHistory();
             console.log(res);
             if (res?.success) {
-                const profileRes = await getDashboardProfile();
+                // const profileRes = await getDashboardProfile();
                 const userRes = await getUserData();
                 console.log("userRes", userRes);
 

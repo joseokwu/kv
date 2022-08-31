@@ -55,20 +55,26 @@ export const Investor = () => {
                 name: (
                     <div className="d-flex align-items-center space-out">
                         <img
-                            src={item?.userId?.avatar ?? userPic}
+                            src={
+                                item?.userId?.avatar ??
+                                `https://ui-avatars.com/api/?name=${item?.userId?.firstname} ${item?.userId?.lastname}`
+                            }
                             alt="user"
                             className={styles.userPic}
                         />
                         <p className="mb-0">
-                            {" "}
-                            {item?.profile?.firstName +
-                                " " +
-                                item?.profile?.lastName}{" "}
+                            {item?.profile?.firstName
+                                ? `${item?.profile?.firstName} ${item?.profile?.lastName}`
+                                : `${item?.userId?.firstname} ${item?.userId?.lastname}`}
                         </p>
                     </div>
                 ),
-                email: item?.profile?.email,
-                phone: item?.profile?.mobile_number,
+                email: item?.profile?.email
+                    ? item?.profile?.email
+                    : item?.userId?.email,
+                phone: item?.profile?.mobile_number
+                    ? item?.profile?.mobile_number
+                    : item?.userId?.phone,
                 country: item?.profile?.country,
                 type: item?.investorApproach?.stage,
                 action: (

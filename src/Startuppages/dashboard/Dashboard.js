@@ -16,7 +16,12 @@ export const StartupDashboard = () => {
     const [loading, setLoading] = useState(false);
     const { stateAuth } = useAuth();
 
-    console.log(stateAuth?.profileData?.startupRes);
+    console.log(
+        convertToMillion(
+            stateAuth?.profileData?.startupRes?.fundRaising?.fundingAsk
+                ?.postMoneyValuation || "0"
+        )
+    );
 
     if (stateAuth.dashboardLoad) {
         return <PageLoader num={[1, 2, 3, 4]} />;
@@ -76,8 +81,10 @@ export const StartupDashboard = () => {
                     color={"#2E3192"}
                     img={""}
                     amount={`$${
-                        stateAuth?.profileData?.startupRes?.fundRaising
-                            ?.capTable?.amountInvestedByFounders || 0
+                        Number(
+                            stateAuth?.profileData?.startupRes?.fundRaising
+                                ?.capTable?.amountInvestedByFounders
+                        )?.toLocaleString("en-US") || 0
                     }`}
                     // time={""}
                     className="col-3 col-6-md "
@@ -87,8 +94,10 @@ export const StartupDashboard = () => {
                     color={"#00ADEF"}
                     img={""}
                     amount={`$${
-                        stateAuth?.profileData?.startupRes?.fundRaising
-                            ?.previousRound?.fundraisingAmount || 0
+                        Number(
+                            stateAuth?.profileData?.startupRes?.fundRaising
+                                ?.previousRound?.fundraisingAmount
+                        )?.toLocaleString("en-US") || 0
                     }`}
                     time={dateFormat(
                         stateAuth?.profileData?.startupRes?.fundRaising
@@ -111,10 +120,22 @@ export const StartupDashboard = () => {
                     amount={`$${
                         typeof stateAuth?.profileData?.startupRes?.fundRaising
                             ?.fundingAsk?.postMoneyValuation !== undefined &&
-                        convertToMillion(
+                        (convertToMillion(
                             stateAuth?.profileData?.startupRes?.fundRaising
-                                ?.fundingAsk?.postMoneyValuation || "0"
-                        )
+                                ?.fundingAsk?.postMoneyValuation
+                        ) ===
+                        stateAuth?.profileData?.startupRes?.fundRaising
+                            ?.fundingAsk?.postMoneyValuation
+                            ? Number(
+                                  stateAuth?.profileData?.startupRes
+                                      ?.fundRaising?.fundingAsk
+                                      ?.postMoneyValuation || "0"
+                              ).toLocaleString("en-US")
+                            : convertToMillion(
+                                  stateAuth?.profileData?.startupRes
+                                      ?.fundRaising?.fundingAsk
+                                      ?.postMoneyValuation || "0"
+                              ))
                     }`}
                     time={dateFormat(
                         stateAuth?.profileData?.startupRes?.fundRaising

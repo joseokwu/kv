@@ -118,14 +118,19 @@ export const ViewPartner = () => {
                     <div className="w-100">
                         <article className="d-flex align-items-center space-out mb-2 w-100">
                             <img
-                                src={partner?.userId?.avatar || digitalLogo}
+                                src={
+                                    partner?.userId?.avatar ??
+                                    `https://ui-avatars.com/api/?name=${partner?.userId?.firstname} ${partner?.userId?.lastname}`
+                                }
                                 alt="user"
                                 className={styles.userDp}
                             />
                         </article>
 
                         <h4 className={styles.user_name}>
-                            {partner?.companyName}
+                            {partner?.companyName
+                                ? partner?.companyName
+                                : `${partner?.userId?.firstname} ${partner?.userId?.lastname}`}
                         </h4>
                         <div
                             className={`d-flex align-items-center mb-3 ${styles.partnerContact}`}
@@ -152,8 +157,17 @@ export const ViewPartner = () => {
                                 className={`d-flex align-items-center space-out mb-2 ml-4`}
                             >
                                 <img src={phone} alt="phone" />
-                                <a href="" className={styles.text}>
-                                    {partner?.phoneNumber}
+                                <a
+                                    href={`tel:${
+                                        partner?.phoneNumber
+                                            ? partner?.phoneNumber
+                                            : partner?.userId?.phone
+                                    }`}
+                                    className={styles.text}
+                                >
+                                    {partner?.phoneNumber
+                                        ? partner?.phoneNumber
+                                        : partner?.userId?.phone}
                                 </a>
                             </div>
 
@@ -161,7 +175,14 @@ export const ViewPartner = () => {
                                 className={`d-flex align-items-center space-out mb-2 ml-4`}
                             >
                                 <img src={web} alt="web" />
-                                <a href="" className={styles.text}>
+                                <a
+                                    href={
+                                        partner?.website
+                                            ? partner?.website
+                                            : null
+                                    }
+                                    className={styles.text}
+                                >
                                     {partner?.website}
                                 </a>
                             </div>
@@ -177,7 +198,9 @@ export const ViewPartner = () => {
                     <section>
                         <article className="d-flex justify-content-end mb-2">
                             <a
-                                href={partner?.twitter}
+                                href={
+                                    partner?.twitter ? partner?.twitter : null
+                                }
                                 rel="no-referrer no-opener"
                                 target="_blank"
                             >
@@ -188,7 +211,9 @@ export const ViewPartner = () => {
                                 />
                             </a>
                             <a
-                                href={partner?.linkedin}
+                                href={
+                                    partner?.linkedin ? partner?.linkedin : null
+                                }
                                 rel="no-referrer no-opener"
                                 target="_blank"
                             >

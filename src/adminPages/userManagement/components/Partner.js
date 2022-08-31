@@ -38,15 +38,24 @@ export const Partner = () => {
                         name: (
                             <div className="d-flex align-items-center space-out">
                                 <p className="mb-0">{`${
-                                    partner?.companyName || "-"
+                                    partner?.companyName
+                                        ? partner?.companyName
+                                        : `${partner?.userId?.firstname} ${partner?.userId?.lastname}`
                                 }`}</p>
                             </div>
                         ),
-                        email: partner?.companyEmail,
-                        contactNo: partner?.phoneNumber,
+                        email: partner?.companyEmail
+                            ? partner?.companyEmail
+                            : partner?.userId?.email,
+                        contactNo: partner?.phoneNumber
+                            ? partner?.phoneNumber
+                            : partner?.userId?.phone,
                         brand: (
                             <img
-                                src={partner?.userId?.avatar ?? userPic}
+                                src={
+                                    partner?.userId?.avatar ??
+                                    `https://ui-avatars.com/api/?name=${partner?.userId?.firstname} ${partner?.userId?.lastname}`
+                                }
                                 alt="user"
                                 className={styles.userPic}
                             />

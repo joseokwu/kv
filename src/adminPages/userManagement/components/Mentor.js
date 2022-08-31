@@ -91,11 +91,18 @@ export const Mentor = () => {
                         name: (
                             <div className="d-flex align-items-center space-out">
                                 <img
-                                    src={mentor?.userId?.avatar ?? userPic}
+                                    src={
+                                        mentor?.userId?.avatar ??
+                                        `https://ui-avatars.com/api/?name=${mentor?.userId?.firstname} ${mentor?.userId?.lastname}`
+                                    }
                                     alt="user"
                                     className={styles.userPic}
                                 />
-                                <p className="mb-0">{`${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`}</p>
+                                <p className="mb-0">
+                                    {mentor?.personalDetail?.firstname
+                                        ? `${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`
+                                        : `${mentor?.userId?.lastname} ${mentor?.userId?.firstname}`}
+                                </p>
                             </div>
                         ),
                         skills: (

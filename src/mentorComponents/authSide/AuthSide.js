@@ -20,8 +20,10 @@ export const AuthSide = ({ history }) => {
         }
     }, [name]);
     useEffect(() => {
-        if (!userType) setType("startup");
+        if (!userType || userType === "admin") setType("startup");
     }, []);
+
+    console.log(userType);
 
     return (
         <div className="py-5">
