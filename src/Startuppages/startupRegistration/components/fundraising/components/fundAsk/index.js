@@ -31,6 +31,11 @@ export const FundAsk = ({ setFundraising, back }) => {
         { value: "Series B", label: "Series B" },
         { value: "Series C", label: "Series C" },
     ];
+    const optionsInstrument = [
+        { value: "Debt", label: "Debt" },
+        { value: "Equity", label: "Equity" },
+        { value: "Other", label: "Other" },
+    ];
     const fundNum = [1, 2, 3, 4, 5];
 
     const [showModal, setShowModal] = useState(false);
@@ -66,7 +71,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                 <span></span>
             )}
             <Form
-                name="Fund aAsk"
+                name="Fund Ask"
                 initialValues={{
                     remember: true,
                 }}
@@ -137,7 +142,62 @@ export const FundAsk = ({ setFundraising, back }) => {
                                 </BntWrap>
                             </div>
                             <div className="form-group my-2 col-12">
-                                <TextField
+                                <Form.Item
+                                    name="instrumentForRound"
+                                    label={
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk
+                                            ?.hasPreviousFundraising
+                                            ? "What was the instrument for your previous round"
+                                            : "Which instrument would you prefer to use for your current round?"
+                                    }
+                                    initialValue={
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk
+                                            ?.instrumentForRound
+                                    }
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please select a Number of Rounds",
+                                        },
+                                    ]}
+                                >
+                                    <Select
+                                        id="instrumentForRound"
+                                        style={{
+                                            width: 200,
+                                            marginLeft: "0.5rem",
+                                        }}
+                                        placeholder="--Select--"
+                                        onChange={(e) => {
+                                            updateProfile("fundRaising", {
+                                                fundingAsk: {
+                                                    ...stateAuth?.profileData
+                                                        ?.startupRes
+                                                        ?.fundRaising
+                                                        ?.fundingAsk,
+                                                    instrumentForRound: e,
+                                                },
+                                            });
+                                        }}
+                                    >
+                                        {optionsInstrument.map(
+                                            (item, index) => {
+                                                return (
+                                                    <Option
+                                                        value={item.value}
+                                                        key={index}
+                                                    >
+                                                        {item.label}
+                                                    </Option>
+                                                );
+                                            }
+                                        )}
+                                    </Select>
+                                </Form.Item>
+                                {/* <TextField
                                     id="instrumentForRound"
                                     name="instrumentForRound"
                                     errName="instrument for round"
@@ -171,7 +231,7 @@ export const FundAsk = ({ setFundraising, back }) => {
                                             margin-left: 0.5rem;
                                         }
                                     `}
-                                />
+                                /> */}
                             </div>
                             <div className="form-group my-2 col-12">
                                 <Form.Item
@@ -278,6 +338,10 @@ export const FundAsk = ({ setFundraising, back }) => {
                                 <TextField
                                     label="Dilution (%)"
                                     name={"dilution"}
+                                    value={
+                                        stateAuth?.profileData?.startupRes
+                                            ?.fundRaising?.fundingAsk?.dilution
+                                    }
                                     onChange={(e) => {
                                         updateProfile("fundRaising", {
                                             fundingAsk: {
@@ -288,12 +352,8 @@ export const FundAsk = ({ setFundraising, back }) => {
                                             },
                                         });
                                     }}
-                                    value={
-                                        stateAuth?.profileData?.startupRes
-                                            ?.fundRaising?.fundingAsk?.dilution
-                                    }
                                     required={true}
-                                    placeholder="Enter what your business does"
+                                    placeholder="Enter your dilution"
                                 />
                             </div>
 
