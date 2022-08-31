@@ -184,3 +184,14 @@ export const getLecture = async (courseId, lectureId) => {
     throw err;
   }
 };
+export const getEnrolledUsers = async (courseId) => {
+  try {
+    const res = await request.post(`/v1/course/enrollments`, {
+      courseId,
+    });
+    return res?.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
