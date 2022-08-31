@@ -102,14 +102,16 @@ const CourseDetail = () => {
         <div>
           <h3>{course?.heading}</h3>
           <p>{course?.description ?? "No description yet"} </p>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "30px", maxWidth: "350px" }}>
+          <div className="scroll_hide" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", maxWidth: "350px", flexWrap: "wrap" }}>
             <div className={styles.stat}>
               <p>Sessions:</p>
               <span>{course?.lecture_sections?.length} Sessions</span>
             </div>
             <div className={styles.stat}>
               <p>Lectures:</p>
-              <span>{getTotalLectures(course?.lecture_sections)}Lectures</span>
+              <span>
+                {getTotalLectures(course?.lecture_sections)} Lecture{getTotalLectures(course?.lecture_sections) == 1 ? "" : "s"}
+              </span>
             </div>
           </div>
         </div>
