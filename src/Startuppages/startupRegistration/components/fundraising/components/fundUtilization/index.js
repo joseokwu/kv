@@ -26,13 +26,15 @@ import { upload } from "../../../../../../services";
 export const FundUtilization = () => {
     const history = useHistory();
     const { stateAuth, updateProfile, updateStartupInfo } = useAuth();
-    console.log(stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization);
+    console.log(
+        stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization
+    );
     const onSubmit = () => {
         if (
-            stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization?.files ===
-                null ||
-            stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization?.files
-                .length === 0
+            stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization
+                ?.files === null ||
+            stateAuth?.profileData?.startupRes?.fundRaising?.fundUtilization
+                ?.files.length === 0
         ) {
             toast.error("Please upload a document");
             return;
@@ -57,25 +59,27 @@ export const FundUtilization = () => {
                     <div className="my-5">
                         <div className="">
                             <DownloadableButton
-                                href={null}
+                                href="/files/KV Utilisation Table.xlsx"
+                                target="_blank"
+                                rel="noreferrer noopener"
                                 className=""
-                                onClick={async () => {
-                                    var workbook = XLSX.utils.book_new();
-                                    const CSVfile = XLSX.utils.json_to_sheet(
-                                        stateAuth?.profileData?.startupRes?.fundRaising
-                                            ?.fundUtilization?.files,
-                                        {
-                                            raw: false,
-                                        }
-                                    );
-                                    XLSX.utils.book_append_sheet(
-                                        workbook,
-                                        CSVfile,
-                                        "Sheet 1"
-                                    );
-                                    XLSX.writeFile(workbook, "Report.csv");
-                                    console.log(CSVfile);
-                                }}
+                                // onClick={async () => {
+                                //     var workbook = XLSX.utils.book_new();
+                                //     const CSVfile = XLSX.utils.json_to_sheet(
+                                //         stateAuth?.profileData?.startupRes?.fundRaising
+                                //             ?.fundUtilization?.files,
+                                //         {
+                                //             raw: false,
+                                //         }
+                                //     );
+                                //     XLSX.utils.book_append_sheet(
+                                //         workbook,
+                                //         CSVfile,
+                                //         "Sheet 1"
+                                //     );
+                                //     XLSX.writeFile(workbook, "Report.csv");
+                                //     console.log(CSVfile);
+                                // }}
                             >
                                 <img className="pr-2" src={Download} alt="" />
                                 Download fund utilization template here
@@ -93,8 +97,8 @@ export const FundUtilization = () => {
                                     extension: "MB",
                                 }}
                                 initData={
-                                    stateAuth?.profileData?.startupRes?.fundRaising
-                                        ?.fundUtilization?.file
+                                    stateAuth?.profileData?.startupRes
+                                        ?.fundRaising?.fundUtilization?.file
                                         ? [
                                               stateAuth?.profileData?.startupRes
                                                   ?.fundRaising?.fundUtilization

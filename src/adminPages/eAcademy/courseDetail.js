@@ -61,25 +61,8 @@ const CourseDetail = () => {
     });
   };
 
-  const getTotalLectures = (sections) => {
-    console.log("In get totlal", sections);
-    let total = 0;
-    sections?.forEach((el) => {
-      total = total + el?.lectures?.length;
-    });
-
-    return total;
-  };
-
   useEffect(() => {
-    console.log("all courses are", allCourses?.idHash, id);
-    if (!allCourses?.idHash[id]) {
-      history.push(`/startup/e-academy/`);
-    }
-    if (!lectures?.courseLecturesHash[id]) {
-      console.log("No lecture hash so fetch");
-      fetchBuildAllLectures();
-    }
+    fetchBuildAllLectures();
   }, []);
 
   useEffect(() => {
@@ -90,7 +73,7 @@ const CourseDetail = () => {
     <div className={styles.container}>
       <header
         onClick={() => {
-          history.push(`/startup/e-academy/`);
+          history.goBack();
         }}
         style={{ marginBottom: "34px" }}
       >
@@ -101,15 +84,18 @@ const CourseDetail = () => {
         <img width={451} height={329} src={course?.image_url}></img>
         <div>
           <h3>{course?.heading}</h3>
-          <p>{course?.description ?? "No description yet"} </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et amet, facilisi sodales cursus tellus nam ut. Enim, at imperdiet praesent velit. Eget consequat, sollicitudin molestie curabitur
+            lobortis imperdiet. Vulputate malesuada tortor sit mi laoreet. Iaculis quis pretium urna.
+          </p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "30px", maxWidth: "350px" }}>
             <div className={styles.stat}>
-              <p>Sessions:</p>
-              <span>{course?.lecture_sections?.length} Sessions</span>
+              <p>Duration:</p>
+              <span>40mins</span>
             </div>
             <div className={styles.stat}>
-              <p>Lectures:</p>
-              <span>{getTotalLectures(course?.lecture_sections)}Lectures</span>
+              <p>Duration:</p>
+              <span>40mins</span>
             </div>
           </div>
         </div>

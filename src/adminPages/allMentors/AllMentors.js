@@ -7,8 +7,8 @@ import { Button, Modal, Tag } from "../../components";
 import userPic from "../../assets/images/sampleUser.png";
 import styles from "../userManagement/user.module.css";
 import { AddMentor } from "../userManagement/components";
-import { getStakeHolders } from "../../services";
-import { SkeletonLoader } from "../../components";
+import { getStakeHolders, getUserList } from "../../services";
+import { SkeletonLoader, SpinLoader } from "../../components";
 import { RoundLoader } from "../../components/RoundLoader/RoundLoader";
 import { EmptyState } from "../../mentorComponents";
 import { CircularLoader } from "../../mentorComponents/CircluarLoader";
@@ -18,24 +18,21 @@ export const AllMentors = () => {
 
     const [mentors, setMentors] = useState([]);
     const [fetched, setFetched] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [deleteObj, setDeleteObj] = useState({});
 
     const getData = async () => {
+        setLoading(true);
         try {
-            const res = await getStakeHolders({
-                page: 1,
-                limit: 2,
-                type: "mentor",
-                query: { applicationCompleted: true },
-            });
-            if (res.success && res?.data?.mentors?.length > 0) {
+            const res = await getUserList("mentor");
+
+            if (res.success && res?.data?.data?.length > 0) {
                 setMentors(() =>
-                    res?.data?.mentors.map((mentor) => ({
+                    res?.data?.data.map((mentor) => ({
                         name: (
                             <div className="d-flex align-items-center space-out">
                                 <img
-                                    src={
-                                        mentor?.personalDetail?.logo ?? userPic
-                                    }
+                                    src={mentor?.userId?.avatar ?? userPic}
                                     alt="user"
                                     className={styles.userPic}
                                 />
@@ -51,29 +48,33 @@ export const AllMentors = () => {
                                             color={
                                                 i > 0 ? "#40439A" : "#058dc1"
                                             }
+                                            className={styles.smallTag}
                                         />
                                     )
                                 )}
                             </div>
                         ),
-                        company: "Seam Technologies Inc.",
-                        sessions: 3,
+                        company: mentor?.workExperience?.companyName,
+                        sessions: 0,
                         actions: (
                             <div className="d-flex align-items-center space-out">
                                 <Link
-                                    to={`/admin/users/mentors/${mentor?.userId}`}
+                                    to={`/admin/users/mentors/${mentor?.userId?._id}`}
                                     className="view-link"
                                 >
                                     View
                                 </Link>
-                                <p
-                                    role="button"
+                                {/* <p
                                     className="delete-link"
-                                    data-target="#deleteMentor"
                                     data-toggle="modal"
+                                    data-target="#deleteMentor"
+                                    onClick={() => {
+                                        console.log("delete ittt");
+                                        setDeleteObj(mentor);
+                                    }}
                                 >
                                     Delete
-                                </p>
+                                </p> */}
                             </div>
                         ),
                     }))
@@ -84,7 +85,7 @@ export const AllMentors = () => {
         } catch (e) {
             console.log(e);
             setFetched(true);
-        }   
+        }
     };
 
     useEffect(() => {
@@ -175,7 +176,7 @@ export const AllMentors = () => {
             <DeleteModal
                 id="deleteMentor"
                 title="Delete Mentor"
-                desc="Are you sure you want to delete Kate Mcbeth Joan"
+                desc={`Are you sure you want to delete ${deleteObj?.personalDetail?.lastname} ${deleteObj?.personalDetail?.firstname}`}
             />
             <section className="d-flex align-items-center mb-3">
                 <p

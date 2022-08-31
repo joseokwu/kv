@@ -28,11 +28,13 @@ export const FinancialProjection = () => {
         e.preventDefault();
 
         if (
-            stateAuth?.profileData?.startupRes?.fundRaising?.financialProjection?.files
-                ?.length !== 0
+            stateAuth?.profileData?.startupRes?.fundRaising?.financialProjection
+                ?.files?.length !== 0
         ) {
             console.log(stateAuth?.profileData?.startupRes);
-            console.log(validate(stateAuth?.profileData?.startupRes, startupValidation));
+            console.log(
+                validate(stateAuth?.profileData?.startupRes, startupValidation)
+            );
             // updateStartupInfo(
             //     validate(stateAuth?.profileData?.startupRes, startupValidation)
             // );
@@ -66,7 +68,12 @@ export const FinancialProjection = () => {
 
                 <div className="my-5">
                     <div className="col-12 my-3 mx-0 px-0">
-                        <DownloadableButton href="." className="">
+                        <DownloadableButton
+                            href="/files/KV Utilisation Table.xlsx"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className=""
+                        >
                             <img className="pr-2" src={Download} alt="" />
                             Download fund utilization template here
                         </DownloadableButton>
@@ -87,8 +94,9 @@ export const FinancialProjection = () => {
                                 stateAuth?.profileData?.startupRes?.fundRaising
                                     ?.financialProjection?.file
                                     ? [
-                                          stateAuth?.profileData?.startupRes?.fundRaising
-                                              ?.financialProjection?.file,
+                                          stateAuth?.profileData?.startupRes
+                                              ?.fundRaising?.financialProjection
+                                              ?.file,
                                       ]
                                     : []
                             }

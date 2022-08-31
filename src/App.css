@@ -99,6 +99,7 @@ h6 {
   line-height: 140%;
   color: #e31937;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .view-link {

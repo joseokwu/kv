@@ -8,7 +8,7 @@ export const ProtectedRoute = ({ ...props }) => {
     const { stateAuth, getDashboardProfile } = useAuth();
 
     //user:token
-    useEffect(() => {
+    useEffect(async () => {
         console.log(stateAuth.userType === props.type);
         console.log(stateAuth.userType, stateAuth.authenticated);
         console.log(props.type);

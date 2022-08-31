@@ -12,8 +12,9 @@ import { Modal, Tabs } from "../../components";
 import { WorkExp, AreaOfInterest, Consult, Availability } from "./components";
 import { useHistory, useParams } from "react-router-dom";
 import { RatingCard } from "../../adminComponents";
-import { applicationManagement } from "../../services";
+import { applicationManagement, getOrCreateProfile } from "../../services";
 import { CircularLoader } from "../../mentorComponents/CircluarLoader";
+import { EmptyState } from "../../mentorComponents";
 
 export const ViewMentor = () => {
     const tabItems = useMemo(
@@ -27,20 +28,28 @@ export const ViewMentor = () => {
     );
 
     const [mentor, setMentor] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const { id } = useParams();
 
     const getMentor = async () => {
-        const res = await applicationManagement({
-            userId: id,
-            action: "get_mentor",
-        });
+        setLoading(true);
+        try {
+            const res = await getOrCreateProfile({
+                userId: id,
+                userType: "mentor",
+            });
 
-        if (res?.success) {
-            setMentor(res?.data);
+            if (res?.success) {
+                setMentor(res?.data?.mentor_response);
+            }
+
+            console.log("res", res);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoading(false);
         }
-
-        console.log("res", res);
     };
 
     useEffect(() => {
@@ -66,7 +75,7 @@ export const ViewMentor = () => {
         }
     };
     if (Object.keys(mentor).length === 0) {
-        return (
+        return loading ? (
             <div
                 style={{
                     width: "100vw",
@@ -77,6 +86,25 @@ export const ViewMentor = () => {
             >
                 <CircularLoader color="#000000" />
             </div>
+        ) : (
+            <section>
+                <section className="d-flex align-items-center mb-3 p-5">
+                    <img
+                        src={left}
+                        alt="left"
+                        className="mr-2"
+                        style={{ transform: "rotate(180deg)" }}
+                    />
+                    <p
+                        className="bread-start"
+                        role="button"
+                        onClick={() => goBack()}
+                    >
+                        Go back
+                    </p>
+                </section>
+                <EmptyState message="Unable to find mentor" />
+            </section>
         );
     }
     return (
@@ -123,22 +151,38 @@ export const ViewMentor = () => {
                         className={styles.user_name}
                     >{`${mentor?.personalDetail?.firstname} ${mentor?.personalDetail?.lastname}`}</h4>
                     <a
-                        href={`https://${mentor?.email}`}
+                        href={`https://${mentor?.personalDetail?.email}`}
                         className={`mb-4 d-block ${styles.text}`}
                     >
                         {mentor?.email}
                     </a>
 
                     <p className={styles.text} style={{ color: "#828282" }}>
-                        {mentor?.consultantOffering?.serviceDescription}
+                        {mentor?.consultantOffering?.serviceDescription || "-"}
                     </p>
                 </div>
 
                 <div className="col-lg-6 d-flex flex-column justify-content-between">
                     <section>
                         <article className="d-flex justify-content-end mb-2">
-                            <img src={twitter} alt="twitter" className="mr-3" />
-                            <img src={linkedIn} alt="linked in" />
+                            <a
+                                href={mentor?.personalDetail?.twitter}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
+                                <img
+                                    src={twitter}
+                                    alt="twitter"
+                                    className="mr-3"
+                                />
+                            </a>
+                            <a
+                                href={mentor?.personalDetail?.linkedin}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
+                                <img src={linkedIn} alt="linkedin" />
+                            </a>
                         </article>
                         <a
                             href={mentor?.personalDetail?.website}
@@ -155,7 +199,9 @@ export const ViewMentor = () => {
                         >
                             <img src={location} alt="location" />
                             <p className={styles.text}>
-                                {`${mentor?.personalDetail?.city} ${mentor?.personalDetail?.country}`}
+                                {`${mentor?.personalDetail?.city || "-"} ${
+                                    mentor?.personalDetail?.country
+                                }`}
                             </p>
                         </div>
 
@@ -166,8 +212,13 @@ export const ViewMentor = () => {
                                 src={web}
                                 alt={mentor?.personalDetail?.website}
                             />
-                            <a href="" className={styles.text}>
-                                {mentor?.personalDetail?.website}
+                            <a
+                                href={mentor?.personalDetail?.website}
+                                className={styles.text}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
+                                {mentor?.personalDetail?.website || "-"}
                             </a>
                         </div>
 
@@ -175,8 +226,13 @@ export const ViewMentor = () => {
                             className={`d-flex align-items-center justify-content-end space-out ${styles.contact_det}`}
                         >
                             <img src={phone} alt="phone" />
-                            <a href="" className={styles.text}>
-                                {mentor?.phone}
+                            <a
+                                href={`tel:${mentor?.personalDetail?.mobilenumber}`}
+                                target="_blank"
+                                className={styles.text}
+                                rel="noreferrer noopener"
+                            >
+                                {mentor?.personalDetail?.mobilenumber}
                             </a>
                         </div>
                     </section>

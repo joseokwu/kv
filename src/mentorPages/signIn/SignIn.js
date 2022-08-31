@@ -47,6 +47,7 @@ export const SignIn = () => {
             if (res?.success) {
                 const profileRes = await getDashboardProfile();
                 const userRes = await getUserData();
+                console.log("userRes", userRes);
 
                 if (loca) {
                     console.log(loca);

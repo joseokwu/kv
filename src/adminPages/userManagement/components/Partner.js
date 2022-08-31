@@ -19,7 +19,7 @@ export const Partner = () => {
     const [loading, setLoading] = useState(false);
 
     const getData = async () => {
-        const res = await getUserList("investor");
+        const res = await getUserList("boosterpartner");
         console.log(res);
         console.log(res?.data?.data);
 
@@ -37,11 +37,13 @@ export const Partner = () => {
                     res?.data?.data.map((partner) => ({
                         name: (
                             <div className="d-flex align-items-center space-out">
-                                <p className="mb-0">{`${partner?.profile?.firstName} ${partner?.profile?.lastName}`}</p>
+                                <p className="mb-0">{`${
+                                    partner?.companyName || "-"
+                                }`}</p>
                             </div>
                         ),
-                        email: partner?.profile?.companyEmail,
-                        contactNo: partner?.profile?.mobile_number,
+                        email: partner?.companyEmail,
+                        contactNo: partner?.phoneNumber,
                         brand: (
                             <img
                                 src={partner?.logo ?? userPic}
@@ -53,19 +55,19 @@ export const Partner = () => {
                         actions: (
                             <div className="d-flex align-items-center space-out">
                                 <Link
-                                    to={`/admin/users/partners/${partner?.userId}`}
+                                    to={`/admin/users/partners/${partner?.userId?._id}`}
                                     className="view-link"
                                 >
                                     View
                                 </Link>
-                                <p
+                                {/* <p
                                     role="button"
                                     className="delete-link"
                                     data-target="#deleteBoosterPartner"
                                     data-toggle="modal"
                                 >
                                     Delete
-                                </p>
+                                </p> */}
                             </div>
                         ),
                     }))
@@ -90,22 +92,6 @@ export const Partner = () => {
         { title: "Category", accessor: "category" },
         { title: "Actions", accessor: "actions" },
     ];
-    const [partnersData, setPartnerData] = useState({});
-
-    useEffect(() => {
-        const getData = async () => {
-            const res = await getStakeHolders({
-                page: 1,
-                limit: 5,
-                type: "boosterpartner",
-                query: { applicationCompleted: true },
-            });
-            console.log(res);
-
-            setPartnerData(res?.data);
-        };
-        getData();
-    }, []);
 
     return (
         <div>
