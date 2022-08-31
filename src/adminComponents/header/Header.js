@@ -13,7 +13,7 @@ import logout from "../../assets/icons/logout.svg";
 import "./header.css";
 import { useAuth } from "./../../hooks/useAuth";
 
-export const Header = ({ setOpen, open, admin }) => {
+export const Header = ({ setOpen, open, admin, disabled = false }) => {
     const {
         push,
         location: { pathname },
@@ -26,7 +26,7 @@ export const Header = ({ setOpen, open, admin }) => {
     const [openNotice, setOpenNotice] = useState(false);
     return (
         <div className="header-main d-flex align-items-center justify-content-between">
-            <section className="d-flex align-items-center">
+            <section className="d-flex align-items-center h-100">
                 <div
                     className={`${open ? "hams-open" : "hams-close"} hams`}
                     onClick={() => setOpen(!open)}
@@ -35,7 +35,7 @@ export const Header = ({ setOpen, open, admin }) => {
                     <span></span>
                     <span></span>
                 </div>
-                <Link to={getCurrentDashboard()}>
+                <Link to={getCurrentDashboard()} className="header-logo">
                     <img src={logo} alt="logo" />
                 </Link>
             </section>

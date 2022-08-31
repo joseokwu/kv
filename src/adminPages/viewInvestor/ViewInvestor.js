@@ -117,9 +117,9 @@ export const ViewInvestor = () => {
             <section className={`${styles.contact_card} row mx-0 p-5 mb-5`}>
                 <div className="col-lg-6">
                     <article className="d-flex align-items-center space-out mb-2">
-                        {investorData?.profile?.avatar && (
+                        {investorData?.userId?.avatar && (
                             <img
-                                src={investorData?.profile?.avatar}
+                                src={investorData?.userId?.avatar}
                                 alt="user"
                                 className={styles.userDp}
                             />

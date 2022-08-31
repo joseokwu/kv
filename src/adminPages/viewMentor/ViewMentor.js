@@ -131,7 +131,7 @@ export const ViewMentor = () => {
                 <div className="col-lg-6">
                     <article className="d-flex align-items-center space-out mb-2">
                         <img
-                            src={mentor?.personalDetail?.logo ?? userPic}
+                            src={mentor?.userId?.avatar ?? userPic}
                             alt="user"
                             className={styles.userDp}
                         />

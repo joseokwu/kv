@@ -55,7 +55,7 @@ export const Investor = () => {
                 name: (
                     <div className="d-flex align-items-center space-out">
                         <img
-                            src={item?.profile?.avatar ?? userPic}
+                            src={item?.userId?.avatar ?? userPic}
                             alt="user"
                             className={styles.userPic}
                         />

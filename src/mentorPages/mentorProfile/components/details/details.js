@@ -470,7 +470,7 @@ const ProfileInfo = ({ data }) => {
                     <TextField
                         label={"Skype Id*"}
                         placeholder={"www.knightventure/michealsmith"}
-                        required={true}
+                        required={false}
                         name="skypeid"
                         value={formik.values.skypeid}
                         onChange={formik.handleChange}

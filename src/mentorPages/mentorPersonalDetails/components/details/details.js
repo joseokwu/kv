@@ -456,26 +456,33 @@ const Details = () => {
                                 }
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                         message:
-                                            "Please enter a valid whatsapp url",
-                                        pattern: whatsappRegExp,
+                                            "Please enter a Whatsapp number",
                                     },
                                 ]}
                             >
-                                <TextField
-                                    // label={"Whatsapp"}
-                                    type="text"
-                                    // name="whatsapp"
+                                <PhoneInput
+                                    id="whatsapp"
+                                    // name="mobilenumber"
+                                    international
+                                    countryCallingCodeEditable={true}
                                     value={
                                         stateAuth?.mentorData?.personalDetail
                                             ?.whatsapp
                                     }
-                                    onChange={(e) =>
-                                        handleChange(e, "whatsapp")
-                                    }
-                                    placeholder={"Enter Whatsapp number"}
-                                    required={true}
+                                    MaxLength={17}
+                                    onChange={(value) => {
+                                        console.log(value);
+                                        handleChange(
+                                            {
+                                                target: {
+                                                    value: value,
+                                                },
+                                            },
+                                            "whatsapp"
+                                        );
+                                    }}
                                 />
                             </Form.Item>
                         </section>
@@ -512,7 +519,7 @@ const Details = () => {
                                 }
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                         message:
                                             "Please enter a valid skype id",
                                         pattern: skypeRegExp,

@@ -14,17 +14,19 @@ import "./header.css";
 import { useAuth } from "../../hooks";
 import { getType } from "./../../utils/helpers";
 
-export const Header = ({ setOpen, open }) => {
+export const Header = ({ setOpen, open, disabled = false }) => {
     const {
         push,
         location: { pathname },
     } = useHistory();
 
     const getCurrentDashboard = () => {
-        if (pathname.includes("investor")) {
-            return "/investor/dashboard";
-        } else {
-            return "/boosterpartner/dashboard";
+        if (!disabled) {
+            if (pathname.includes("investor")) {
+                return "/investor/dashboard";
+            } else {
+                return "/boosterpartner/dashboard";
+            }
         }
     };
 
@@ -35,7 +37,7 @@ export const Header = ({ setOpen, open }) => {
     const [openNotice, setOpenNotice] = useState(false);
     return (
         <div className="header-main d-flex align-items-center justify-content-between">
-            <section className="d-flex align-items-center">
+            <section className="d-flex align-items-center h-100">
                 <div
                     className={`${open ? "hams-open" : "hams-close"} hams`}
                     onClick={() => setOpen(!open)}
@@ -44,7 +46,7 @@ export const Header = ({ setOpen, open }) => {
                     <span></span>
                     <span></span>
                 </div>
-                <Link to={getCurrentDashboard()}>
+                <Link to={getCurrentDashboard()} className="header-logo">
                     <img src={logo} alt="logo" />
                 </Link>
             </section>

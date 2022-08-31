@@ -11,14 +11,14 @@ import edit from "../../assets/icons/ep.svg";
 import logout from "../../assets/icons/logout.svg";
 import { useAuth } from "./../../hooks/useAuth";
 
-export const Header = ({ setOpen, open, disabled }) => {
+export const Header = ({ setOpen, open, disabled = false }) => {
     const { stateAuth } = useAuth();
 
     const history = useHistory();
     const [openNotice, setOpenNotice] = useState(false);
     return (
         <div className="header-main d-flex align-items-center justify-content-between">
-            <section className="d-flex align-items-center">
+            <section className="d-flex align-items-center h-100">
                 <div
                     className={`${open ? "hams-open" : "hams-close"} hams`}
                     onClick={() => setOpen(!open)}
@@ -27,7 +27,10 @@ export const Header = ({ setOpen, open, disabled }) => {
                     <span></span>
                     <span></span>
                 </div>
-                <a href={disabled ? null : "/startup/dashboard"}>
+                <a
+                    href={disabled ? null : "/startup/dashboard"}
+                    className="header-logo"
+                >
                     <img src={logo} alt="logo" />
                 </a>
             </section>

@@ -118,7 +118,7 @@ export const ViewPartner = () => {
                     <div className="w-100">
                         <article className="d-flex align-items-center space-out mb-2 w-100">
                             <img
-                                src={partner?.logo || digitalLogo}
+                                src={partner?.userId?.avatar || digitalLogo}
                                 alt="user"
                                 className={styles.userDp}
                             />

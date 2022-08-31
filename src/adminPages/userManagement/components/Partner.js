@@ -46,7 +46,7 @@ export const Partner = () => {
                         contactNo: partner?.phoneNumber,
                         brand: (
                             <img
-                                src={partner?.logo ?? userPic}
+                                src={partner?.userId?.avatar ?? userPic}
                                 alt="user"
                                 className={styles.userPic}
                             />
