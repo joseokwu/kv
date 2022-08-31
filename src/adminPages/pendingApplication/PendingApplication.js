@@ -133,7 +133,10 @@ export const PendingApplication = () => {
         <div className='row mx-0'>
           <section className='col-lg-7'>
             <img
-              src={startupData?.userId?.avatar ?? apple}
+              src={
+                startupData?.userId?.avatar ??
+                `https://ui-avatars.com/api/?name=${startupData?.userId?.startupname}`
+              }
               alt='startup logo'
               className='mb-2'
             />

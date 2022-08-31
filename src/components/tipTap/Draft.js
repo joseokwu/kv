@@ -7,8 +7,8 @@ import {
   convertToRaw,
 } from 'draft-js';
 
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import draftToHtml from 'draftjs-to-html';
+// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+// import draftToHtml from 'draftjs-to-html';
 import './draftEditor.css';
 import '../../../node_modules/draft-js/dist/Draft.css';
 
@@ -16,9 +16,13 @@ class MyEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };
+    this.myRef = React.createRef();
 
-    this.focus = () => this.refs.editor.focus();
-    this.onChange = (editorState) => this.setState({ editorState });
+    this.focus = () => this.myRef.current.focus();
+    this.onChange = (editorState) => {
+      this.props.handleTexts(editorState, 'text', this.props.index);
+      this.setState({ editorState });
+    };
 
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
     this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
@@ -92,7 +96,7 @@ class MyEditor extends React.Component {
             keyBindingFn={this.mapKeyToEditorCommand}
             onChange={this.onChange}
             placeholder='Tell a story...'
-            ref='editor'
+            ref={this.myRef}
             spellCheck={true}
           />
         </div>
