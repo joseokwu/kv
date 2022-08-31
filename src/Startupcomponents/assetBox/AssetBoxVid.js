@@ -52,7 +52,7 @@ const AssetBoxVid = ({ img, title = "Introduction to business", time = "1:30", u
               <span>{title ?? "No name"}</span>
               <p>Section 1</p>
             </section>
-            <span>{time}</span>
+            {/* <span>{time}</span> */}
           </div>
         </div>
       </div>

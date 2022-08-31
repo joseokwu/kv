@@ -228,7 +228,7 @@ export const StartupEAcademy = () => {
                       {/* Details */}
                       <div style={{ flexGrow: "1", display: "flex", flexDirection: "column" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "36px", alignItems: "center" }}>
-                          <h3>{el?.heading}</h3>
+                          <h3>{el?.heading ?? el?.name}</h3>
                           {/* <span style={{ display: "flex" }}>30 minutes</span> */}
                         </div>
                         {/* Desc */}
@@ -263,7 +263,7 @@ export const StartupEAcademy = () => {
                       {/* Details */}
                       <div style={{ flexGrow: "1", display: "flex", flexDirection: "column" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "36px", alignItems: "center" }}>
-                          <h3>{startUpsContextData?.allCourses.idHash[el?.course_id]?.heading}</h3>
+                          <h3>{startUpsContextData?.allCourses.idHash[el?.course_id]?.heading ?? startUpsContextData?.allCourses.idHash[el?.course_id]?.name}</h3>
                           {/* <span style={{ display: "flex" }}>30 minutes</span> */}
                         </div>
                         {/* Desc */}
