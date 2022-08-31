@@ -4,6 +4,7 @@ import Underline from '@tiptap/extension-underline';
 import './tipTap.css';
 import {
   FaBold,
+  FaCode,
   FaHeading,
   FaItalic,
   FaListOl,
@@ -14,6 +15,7 @@ import {
   FaUnderline,
   FaUndo,
 } from 'react-icons/fa';
+import { useEffect } from 'react';
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -58,14 +60,10 @@ const MenuBar = ({ editor }) => {
           <FaHeading />
         </button>
         <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }
-          className={
-            editor.isActive('heading', { level: 3 }) ? 'is_active' : ''
-          }
+          onClick={() => editor.chain().focus().toggleCode().run()}
+          className={editor.isActive('code') ? 'is-active' : ''}
         >
-          <FaHeading className='heading3' />
+          <FaCode />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -106,9 +104,28 @@ export const TipTapSmall = ({ setDescription, description, index, oldVal }) => {
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       console.log('ff');
-      setDescription({ e: html, value: 'text', i: index, oldVal: oldVal });
+      // handleTexts({
+      //   e: e,
+      //   value: 'text',
+      //   i: i,
+      //   oldVal: item?.key,
+      // });
+      // setDescription({ e: html, value: 'text', i: index, oldVal: oldVal });
     },
   });
+
+  useEffect(() => {
+    editor.on(
+      'update',
+      setDescription({
+        e: editor.getHTML(),
+        value: 'text',
+        i: index,
+        oldVal: oldVal,
+      })
+    );
+    // return editor.off('update', setDescription());
+  }, [editor]);
 
   return (
     <div className='textEditor'>

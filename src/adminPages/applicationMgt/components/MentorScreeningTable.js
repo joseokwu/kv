@@ -7,7 +7,7 @@ import { formatDate } from '../../../utils/helpers';
 import left from '../../../assets/icons/chervonLeft.svg';
 import styles from '../applicationMgt.module.css';
 
-export const MentorScreeningTable = () => {
+export const MentorScreeningTable = ({ mentorScreening }) => {
   const header = useMemo(
     () => [
       {
@@ -31,90 +31,40 @@ export const MentorScreeningTable = () => {
   );
 
   const data = useMemo(
-    () => [
-      {
-        startup: (
-          <div className='d-flex align-items-center space-out'>
-            <img src={apple} alt='user' className={styles.userPic} />
-            <p className='mb-0'>Apple inc.</p>
-          </div>
-        ),
+    () =>
+      mentorScreening?.users?.map((item, i) => {
+        return {
+          startup: (
+            <div className='d-flex align-items-center space-out'>
+              <img
+                src={
+                  item?.avatar ??
+                  `https://ui-avatars.com/api/?name=${item?.startupname}`
+                }
+                alt='user'
+                className={styles.userPic}
+              />
+              <p className='mb-0'>
+                {item?.startupname ?? item?.firstname + ' ' + item?.lastname}
+              </p>
+            </div>
+          ),
 
-        date: formatDate(new Date(2022, 9, 9)),
+          date: formatDate(new Date(item?.createdAt)),
 
-        status: <Tag name='In-progress' color='#0A6CF4' />,
+          status: <Tag name='In-progress' color='#0A6CF4' />,
 
-        action: (
-          <Link
-            to='application_mgt/mentor_screening_view/inProgress'
-            className='view-link'
-          >
-            View
-          </Link>
-        ),
-      },
-      {
-        startup: (
-          <div className='d-flex align-items-center space-out'>
-            <img src={apple} alt='user' className={styles.userPic} />
-            <p className='mb-0'>Apple inc.</p>
-          </div>
-        ),
-
-        date: formatDate(new Date(2022, 9, 9)),
-
-        status: <Tag name='Scheduled' color='#650A9D' />,
-
-        action: (
-          <Link
-            to='application_mgt/mentor_screening_view/scheduled'
-            className='view-link'
-          >
-            View
-          </Link>
-        ),
-      },
-      {
-        startup: (
-          <div className='d-flex align-items-center space-out'>
-            <img src={apple} alt='user' className={styles.userPic} />
-            <p className='mb-0'>Apple inc.</p>
-          </div>
-        ),
-
-        date: formatDate(new Date(2022, 9, 9)),
-
-        status: <Tag name='Completed' color='#0586B8' />,
-
-        action: (
-          <Link
-            to='application_mgt/mentor_screening_view/completed'
-            className='view-link'
-          >
-            View
-          </Link>
-        ),
-      },
-      {
-        startup: (
-          <div className='d-flex align-items-center space-out'>
-            <img src={apple} alt='user' className={styles.userPic} />
-            <p className='mb-0'>Apple inc.</p>
-          </div>
-        ),
-
-        date: formatDate(new Date(2022, 9, 9)),
-
-        status: <Tag name='Completed' color='#0586B8' />,
-
-        action: (
-          <Link to='completed' className='view-link'>
-            View
-          </Link>
-        ),
-      },
-    ],
-    []
+          action: (
+            <Link
+              to='application_mgt/mentor_screening_view/inProgress'
+              className='view-link'
+            >
+              View
+            </Link>
+          ),
+        };
+      }),
+    [mentorScreening]
   );
   return (
     <div>

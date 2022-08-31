@@ -1,8 +1,8 @@
-import { request } from "../utils/axios";
+import { request } from '../utils/axios';
 
 export const getEventInfo = async () => {
   try {
-    const res = await request.post("events");
+    const res = await request.post('events');
     return res?.data;
   } catch (err) {
     throw err;
@@ -11,7 +11,7 @@ export const getEventInfo = async () => {
 
 export const getProgramInfo = async () => {
   try {
-    const res = await request.post("startup/programs");
+    const res = await request.post('startup/programs');
     return res?.data;
   } catch (err) {
     throw err;
@@ -20,7 +20,7 @@ export const getProgramInfo = async () => {
 
 export const getBoosterData = async (value) => {
   try {
-    const res = await request.post("partners", value);
+    const res = await request.post('partners', value);
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -30,7 +30,7 @@ export const getBoosterData = async (value) => {
 
 export const getStartupRequest = async (value) => {
   try {
-    const res = await request.post("allRequest", value);
+    const res = await request.post('allRequest', value);
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -40,7 +40,7 @@ export const getStartupRequest = async (value) => {
 
 export const applyToPartners = async (value) => {
   try {
-    const res = await request.post("apply", value);
+    const res = await request.post('apply', value);
 
     return res?.data;
   } catch (err) {
@@ -50,7 +50,7 @@ export const applyToPartners = async (value) => {
 
 export const getStartupProfile = async () => {
   try {
-    const res = await request.post("startup/profile");
+    const res = await request.post('startup/profile');
 
     return res?.data;
   } catch (err) {
@@ -60,7 +60,7 @@ export const getStartupProfile = async () => {
 
 export const getStartupFounderProfile = async () => {
   try {
-    const res = await request.post("startup/founder-profile");
+    const res = await request.post('startup/founder-profile');
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -70,7 +70,7 @@ export const getStartupFounderProfile = async () => {
 
 export const updateFounderProfile = async (values) => {
   try {
-    const res = await request.post("updateProfile", values);
+    const res = await request.post('updateProfile', values);
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -81,7 +81,7 @@ export const updateFounderProfile = async (values) => {
 
 export const getPrograms = async (value) => {
   try {
-    const res = await request.post("getUserPrograms", value);
+    const res = await request.post('getUserPrograms', value);
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -91,7 +91,7 @@ export const getPrograms = async (value) => {
 
 export const assignment = async (value) => {
   try {
-    const res = await request.post("assignments", value);
+    const res = await request.post('assignments', value);
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -101,7 +101,7 @@ export const assignment = async (value) => {
 
 export const getSubmittedAssignment = async (value) => {
   try {
-    const res = await request.post("submittedAssignment", value);
+    const res = await request.post('submittedAssignment', value);
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -111,7 +111,7 @@ export const getSubmittedAssignment = async (value) => {
 
 export const submitAssignment = async (value) => {
   try {
-    const res = await request.post("submitAssignment", value);
+    const res = await request.post('submitAssignment', value);
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -121,7 +121,7 @@ export const submitAssignment = async (value) => {
 
 export const updateStartup = async (value) => {
   try {
-    const res = await request.post("v1/profile", value);
+    const res = await request.post('v1/profile', value);
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -131,7 +131,7 @@ export const updateStartup = async (value) => {
 };
 export const getAllCourses = async () => {
   try {
-    const res = await request.get("/v1/course/all?page=1&limit=10");
+    const res = await request.get('/v1/course/all?page=1&limit=10');
     console.log(res?.data);
     return res?.data;
   } catch (err) {
@@ -141,7 +141,7 @@ export const getAllCourses = async () => {
 };
 export const getUserCourses = async () => {
   try {
-    const res = await request.get("/v1/course/user");
+    const res = await request.get('/v1/course/user');
     console.log(res?.data);
     return res?.data;
   } catch (err) {

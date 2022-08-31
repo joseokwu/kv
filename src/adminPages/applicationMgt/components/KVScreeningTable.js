@@ -44,22 +44,28 @@ export const KVScreeningTable = ({
         startup: (
           <div className='d-flex align-items-center space-out'>
             <img
-              src={item?.startUpProfile?.logo}
+              src={
+                item?.avatar ??
+                `https://ui-avatars.com/api/?name=${item?.startupname}`
+              }
               alt='user'
               className={styles.userPic}
             />
-            <p className='mb-0'>{item?.startUpProfile?.acceleratorName}</p>
+            <p className='mb-0'>
+              {' '}
+              {item?.startupname ?? item?.firstname + ' ' + item?.lastname}
+            </p>
           </div>
         ),
 
-        date: formatDate(new Date(item?.updatedAt)),
+        date: formatDate(new Date(item?.createdAt)),
 
         mentor: item?.approvedBy,
         status: <Tag name='In-progress' color='#0A6CF4' />,
 
         action: (
           <Link
-            to={`/admin/application_mgt/pending/${item?.userId}`}
+            to={`/admin/application_mgt/kv_view/${item?._id}`}
             className='view-link'
           >
             View

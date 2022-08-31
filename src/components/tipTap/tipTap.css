@@ -4,11 +4,11 @@
   border-top: 1px solid grey;
   background: white;
   border-radius: 0 0 5px 5px;
-  min-height: 100px;
+  min-height: 15rem;
 }
 .ProseMirror:focus {
   border: none;
-  outline: 1px solid aqua;
+  outline: 1px solid #00adef;
 }
 
 .ProseMirror > * + * {
@@ -68,6 +68,12 @@
 .textEditor {
   border-radius: 5px;
   border: 1px solid grey;
+}
+.textEditor2 {
+  border-radius: 5px;
+  border: 1px solid grey;
+  width: 20rem;
+  height: 20rem;
 }
 .menuBar {
   padding-bottom: 5px;
