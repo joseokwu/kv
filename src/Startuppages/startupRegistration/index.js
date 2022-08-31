@@ -56,7 +56,7 @@ export const StartUpRegistration = () => {
                     >
                         <WelcomeMessage>
                             <h5>
-                                Hi {stateAuth?.user?.businessname}
+                                Hi {stateAuth?.startupname}
                                 <span
                                     style={{
                                         color: "rgb(199, 249, 15)",

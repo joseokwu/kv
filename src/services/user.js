@@ -96,7 +96,7 @@ export const resendEmail = async (value) => {
 export const verifyEmail = async (token) => {
     try {
         const res = await axios.post(
-            `${BASE_URL}v1/auth/verify`,
+            `${BASE_URL}/v1/auth/verify`,
             {},
             {
                 headers: {
@@ -117,7 +117,7 @@ export const verifyEmail = async (token) => {
 export const resetPassword = async (token, value) => {
     try {
         const res = await axios.post(
-            `${BASE_URL}v1/auth/reset-password`,
+            `${BASE_URL}/v1/auth/reset-password`,
             value,
             {
                 headers: {
