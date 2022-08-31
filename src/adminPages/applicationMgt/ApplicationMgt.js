@@ -204,7 +204,7 @@ export const ApplicationMgt = () => {
     <div className='p-5' style={{ maxWidth: 2000 }}>
       <section className='d-flex align-items-center dashboard-cards mb-5'>
         <DashCard
-          className='col-lg-3 col-md-6 col-12'
+          // className='col-lg-3 col-md-6 col-12'
           // name={'All Application'}
           name={'New Application'}
           count={applications?.metadata?.total ?? 0}
@@ -212,7 +212,7 @@ export const ApplicationMgt = () => {
           fetched={fetched}
         />
         <DashCard
-          className='col-lg-3 col-md-6 col-12'
+          // className='col-lg-3 col-md-6 col-12'
           // name={'Approved to Evaluate'}
           name={'KV Screening'}
           count={kvScreening?.metadata?.total ?? 0}
@@ -220,7 +220,7 @@ export const ApplicationMgt = () => {
           fetched={fetched}
         />
         <DashCard
-          className='col-lg-3 col-md-6 col-12'
+          // className='col-lg-3 col-md-6 col-12'
           // name={'Recommended'}
           name={'Mentor Screening'}
           count={recommended?.metadata?.total ?? 0}
@@ -228,7 +228,7 @@ export const ApplicationMgt = () => {
           fetched={fetched}
         />
         <DashCard
-          className='col-lg-3 col-md-6 col-12'
+          // className='col-lg-3 col-md-6 col-12'
           name={'Accepted'}
           count={accepted?.metadata?.total ?? 0}
           color={'#FAD7DC'}

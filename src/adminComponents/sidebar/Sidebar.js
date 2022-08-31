@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./sidebar.css";
 import { useHistory } from "react-router";
+import userPic from "../../assets/images/sampleUser.png";
 import user from "../../assets/images/kvLogo.png";
 import dashboard from "../../assets/icons/dashboard.svg";
 import program from "../../assets/icons/program.svg";
@@ -18,34 +19,34 @@ import { useAuth } from "./../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
-  const { stateAuth } = useAuth();
-  const adminNavigation = useMemo(
-    () => [
-      {
-        title: "Dashboard",
-        activator: "dashboard",
-        path: "/admin/dashboard",
-        icon: dashboard,
-      },
-      {
-        title: "Application Mgt.",
-        activator: "application_mgt",
-        path: "/admin/application_mgt",
-        icon: appMgt,
-      },
+    const { stateAuth } = useAuth();
+    const adminNavigation = useMemo(
+        () => [
+            {
+                title: "Dashboard",
+                activator: "dashboard",
+                path: "/admin/dashboard",
+                icon: dashboard,
+            },
+            {
+                title: "Application Mgt.",
+                activator: "application_mgt",
+                path: "/admin/application_mgt",
+                icon: appMgt,
+            },
 
-      {
-        title: "Selection Process",
-        activator: "selection_process",
-        path: "/admin/selection_process",
-        icon: selectProcess,
-      },
-      {
-        title: "Program",
-        activator: "program",
-        path: "/admin/program",
-        icon: program,
-      },
+            {
+                title: "Selection Process",
+                activator: "selection_process",
+                path: "/admin/selection_process",
+                icon: selectProcess,
+            },
+            {
+                title: "Program",
+                activator: "program",
+                path: "/admin/program",
+                icon: program,
+            },
 
             {
                 title: "User Management",
@@ -72,10 +73,10 @@ export const Sidebar = () => {
                 icon: event,
             },
             {
-              title: "E-Academy",
-              activator: "academy",
-              path: "/admin/academy",
-              icon: academy,
+                title: "E-Academy",
+                activator: "academy",
+                path: "/admin/academy",
+                icon: academy,
             },
             // {
             //   title: "Documents",
@@ -103,26 +104,27 @@ export const Sidebar = () => {
         push,
     } = useHistory();
 
-  const activateLink = (path) => {
-    if (pathname.includes("interested") && path === "opportunities") {
-      return "active-side";
-    } else {
-      return pathname.includes(path) ? "active-side" : "";
-    }
-  };
+    const activateLink = (path) => {
+        if (pathname.includes("interested") && path === "opportunities") {
+            return "active-side";
+        } else {
+            return pathname.includes(path) ? "active-side" : "";
+        }
+    };
 
-  const [navigator, setNavigator] = useState([]);
+    const [navigator, setNavigator] = useState([]);
 
-  useEffect(() => {
-    setNavigator(adminNavigation);
-  }, []);
+    useEffect(() => {
+        setNavigator(adminNavigation);
+    }, []);
 
     return (
         <div className="side-main">
             <section className="side-navigator">
                 <div>
                     <img
-                        src={`https://ui-avatars.com/api/?name=Knight Ventures`}
+                        // src={`https://ui-avatars.com/api/?name=Knight Ventures`}
+                        src={userPic}
                         style={{
                             width: "60px",
                             height: "60px",
