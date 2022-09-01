@@ -6,7 +6,11 @@ import { EventCard } from "../events/components";
 import { EventDashboard } from "./components/EventDashboard";
 import { AppMgtDash } from "./components/AppMgtDash";
 import { UserMgtDash } from "./components/UserMgtDash";
-import { getStakeHolders, getAdminDashboardData } from "../../services";
+import {
+    getStakeHolders,
+    getAdminDashboardData,
+    getStartups,
+} from "../../services";
 import { CircularLoader } from "../../mentorComponents/CircluarLoader";
 
 export const Dashboard = () => {
@@ -59,9 +63,15 @@ export const Dashboard = () => {
         setFetched(false);
         try {
             const res = await getAdminDashData();
+            const pendingRes = await getStartups({
+                isRegCompleted: true,
+                // userType: 'startup',
+            });
+            console.log("pendingRes", pendingRes);
+
             console.log(res);
             setDashCardData(res?.data?.data);
-            // setNumOfApplications(res?.data?.metadata?.total);
+            setNumOfApplications(pendingRes?.data?.users?.length);
         } catch (e) {
             console.log(e);
         }
