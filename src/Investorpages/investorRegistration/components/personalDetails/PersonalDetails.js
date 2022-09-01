@@ -185,7 +185,12 @@ export const PersonalDetails = () => {
                         </span>
                     )}
                     <span className="add-dp">
-                        <input type="file" id="dp" onChange={onChangeImage} />
+                        <input
+                            type="file"
+                            id="dp"
+                            onChange={onChangeImage}
+                            accept="image/*"
+                        />
                         <img src={add} alt="add" />
                     </span>
                 </div>

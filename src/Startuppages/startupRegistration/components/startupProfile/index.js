@@ -176,6 +176,7 @@ export const StartupProfile = () => {
                         onChange={onChangeImage}
                         id="dp"
                         hidden
+                        accept="image/*"
                     />
                     <div>
                         <IoAdd style={{ color: "#858585" }} size="14" />

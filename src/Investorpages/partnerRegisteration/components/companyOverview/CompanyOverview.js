@@ -190,6 +190,7 @@ const CompanyOverview = () => {
                                         onChange={onChangeImage}
                                         id="dn"
                                         hidden
+                                        accept="image/*"
                                     />
                                 </label>
                             </div>

@@ -195,6 +195,7 @@ const Details = () => {
                                     type="file"
                                     id="dp"
                                     onChange={onChangeImage}
+                                    accept="image/*"
                                 />
                                 <img src={add} alt="add" />
                             </span>
