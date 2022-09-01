@@ -290,7 +290,7 @@ export const InvestmentApproach = () => {
 
                         <section className="col-12 mb-4">
                             <label className="mb-3">
-                                I prefer start-ups founders with the fellowing
+                                I prefer start-ups founders with the following
                                 backgrounds
                             </label>
                             <RowOption

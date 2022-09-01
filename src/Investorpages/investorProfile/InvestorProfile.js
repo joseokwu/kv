@@ -62,6 +62,7 @@ export const InvestorProfile = () => {
                         }
                         onClick={() => push("#info")}
                         role="button"
+                        style={{ backgroundColor: "transparent" }}
                     >
                         Investment Info
                     </h2>
