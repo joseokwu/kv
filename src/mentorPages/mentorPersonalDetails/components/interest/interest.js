@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
@@ -127,7 +127,7 @@ const Interest = () => {
                     <section className="col-md-12 mb-4">
                         <Form.Item
                             name="industryExpertise"
-                            label="What industries do you have expertise in?"
+                            label="What industry do you have expertise in?"
                             initialValue={
                                 stateAuth?.mentorData?.areaOfInterest
                                     ?.industryExpertise
@@ -331,7 +331,6 @@ const Interest = () => {
                         label={
                             "In clear terms, please share your mentoring experience, and how that would come to bear as a Mentor in the Knight Ventures network?"
                         }
-                        placeholder={"e.g I was made a managing director...."}
                         rows={"6"}
                         name="mentorExperience"
                         onChange={(e) => handleChange(e, "mentorExperience")}
@@ -414,9 +413,6 @@ const Interest = () => {
                             // label={
                             //     "Are you interested in joining a company at a particular stage?"
                             // }
-                            placeholder={
-                                "e.g I was made a managing director...."
-                            }
                             rows={"6"}
                             name="companyInterest"
                             onChange={(e) => handleChange(e, "companyInterest")}
@@ -440,9 +436,7 @@ const Interest = () => {
                             // label={
                             //     "What is your most important criterion in selecting a company to join?"
                             // }
-                            placeholder={
-                                "e.g I was made a managing director...."
-                            }
+
                             rows={"6"}
                             name="criterion"
                             onChange={(e) => handleChange(e, "criterion")}
@@ -456,7 +450,6 @@ const Interest = () => {
                 <section className="col-md-12 mb-4">
                     <TextArea
                         label={"Please include any additional information"}
-                        placeholder={"e.g I was made a managing director...."}
                         rows={"6"}
                         name="additionalInfo"
                         onChange={(e) => handleChange(e, "additionalInfo")}

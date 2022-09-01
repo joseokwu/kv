@@ -1,5 +1,5 @@
 import { css } from "styled-components/macro";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { WelcomeMessage, RegCard } from "./startup.styled";
 import { ProgressBar } from "../../Startupcomponents";
 import { StartupProfile } from "./components/startupProfile";
@@ -16,10 +16,12 @@ export const StartUpRegistration = () => {
     } = useActivity();
     const { stateAuth } = useAuth();
     const [progressStat, setProgressStat] = useState();
+    const wrapRef = useRef();
 
     // console.log(stateAuth)
 
     useEffect(() => {
+        wrapRef.current.scrollTop = 0;
         switch (path) {
             case 1:
                 return setProgressStat(0);
@@ -74,7 +76,7 @@ export const StartUpRegistration = () => {
                         </div>
                     </div>
 
-                    <RegCard className="">
+                    <RegCard className="" ref={wrapRef}>
                         <div className="reg-card">
                             {path === 1 && <StartupProfile />}
                             {path === 2 && <PitchDeck />}

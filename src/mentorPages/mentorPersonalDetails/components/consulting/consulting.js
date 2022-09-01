@@ -175,7 +175,6 @@ const Consulting = () => {
                 <section className="col-md-12 mb-4">
                     <TextArea
                         label={"Write a short description of your service"}
-                        placeholder={"e.g I was made a managing director...."}
                         rows={"6"}
                         name="serviceDescription"
                         onChange={(e) => handleChange(e, "serviceDescription")}
@@ -191,7 +190,6 @@ const Consulting = () => {
                         label={
                             "If any, what is your offer / promotion for the Knight Ventures community?"
                         }
-                        placeholder={"e.g I was made a managing director...."}
                         rows={"6"}
                         value={
                             stateAuth?.mentorData?.consultantOffering?.promotion

@@ -189,7 +189,6 @@ const EditConsulting = ({ data }) => {
             <section className="mb-4">
                 <TextArea
                     label={"Write a short description of your service."}
-                    placeholder={"e.g I was made a managing director...."}
                     rows={"6"}
                     name="serviceDescription"
                     value={formik.values?.serviceDescription}
@@ -207,7 +206,6 @@ const EditConsulting = ({ data }) => {
                     label={
                         "If any, what is your offer / promotion for the Knight Ventures community?"
                     }
-                    placeholder={"e.g I was made a managing director...."}
                     rows={"6"}
                     name="promotion"
                     value={formik.values?.promotion}

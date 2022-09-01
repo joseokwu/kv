@@ -44,7 +44,7 @@ export const SignUp = ({ history }) => {
         localStorage.setItem("KV-signupEmail", values.email);
         register({
             ...values,
-            type: stateAuth?.signUpStatus || 'startup',
+            type: stateAuth?.signUpStatus || "startup",
             phone: phone,
             origin: window.location.origin,
         });
@@ -73,17 +73,20 @@ export const SignUp = ({ history }) => {
                         <div className="col-md-6 col-12 mb-2">
                             <AuthTextField
                                 name={
-                                    name === "startup" || userType === "startup"
+                                    name === "startup" ||
+                                    stateAuth?.signUpStatus === "startup"
                                         ? "startupname"
                                         : "firstname"
                                 }
                                 label={
-                                    name === "startup" || userType === "startup"
+                                    name === "startup" ||
+                                    stateAuth?.signUpStatus === "startup"
                                         ? "Startup Name"
                                         : "First name"
                                 }
                                 placeholder={
-                                    name === "startup" || userType === "startup"
+                                    name === "startup" ||
+                                    stateAuth?.signUpStatus === "startup"
                                         ? "Enter your Startup name"
                                         : "Enter your first name"
                                 }
@@ -91,7 +94,8 @@ export const SignUp = ({ history }) => {
                             />
                         </div>
                         <div className="col-md-6 col-12 mb-2">
-                            {name === "startup" || userType === "startup" ? (
+                            {name === "startup" ||
+                            stateAuth?.signUpStatus === "startup" ? (
                                 <div className="inputContainer">
                                     <div className="select">
                                         <Form.Item

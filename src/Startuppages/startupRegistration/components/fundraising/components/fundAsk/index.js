@@ -233,6 +233,35 @@ export const FundAsk = ({ setFundraising, back }) => {
                                     `}
                                 /> */}
                             </div>
+                            {stateAuth?.profileData?.startupRes?.fundRaising
+                                ?.fundingAsk?.instrumentForRound ===
+                                "Other" && (
+                                <div className="form-group my-2 col-12">
+                                    <TextField
+                                        label="Dilution (%)"
+                                        name={"dilution"}
+                                        value={
+                                            stateAuth?.profileData?.startupRes
+                                                ?.fundRaising?.fundingAsk
+                                                ?.instrumentForRound
+                                        }
+                                        onChange={(e) => {
+                                            updateProfile("fundRaising", {
+                                                fundingAsk: {
+                                                    ...stateAuth?.profileData
+                                                        ?.startupRes
+                                                        ?.fundRaising
+                                                        ?.fundingAsk,
+                                                    instrumentForRound:
+                                                        e.target.value,
+                                                },
+                                            });
+                                        }}
+                                        required={true}
+                                        placeholder="Enter your dilution"
+                                    />
+                                </div>
+                            )}
                             <div className="form-group my-2 col-12">
                                 <Form.Item
                                     name="numberOfRounds"

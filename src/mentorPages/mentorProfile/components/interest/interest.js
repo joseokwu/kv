@@ -340,7 +340,6 @@ const EditMentorInterest = () => {
                         label={
                             "In three sentences or less, tell us why you want to mentor with Knight Ventures and what experience you have with mentoring (being mentored included.)"
                         }
-                        placeholder={"e.g I was made a managing director...."}
                         rows={"4"}
                         name="mentorExperience"
                         onChange={handleChange}
@@ -413,7 +412,6 @@ const EditMentorInterest = () => {
                         label={
                             "Are you interested in joining a company at a particular stage?"
                         }
-                        placeholder={"e.g I was made a managing director...."}
                         rows={"4"}
                         name="companyInterest"
                         onChange={handleChange}
@@ -433,7 +431,6 @@ const EditMentorInterest = () => {
                         label={
                             "​​What do you care most about when selecting a company to join?"
                         }
-                        placeholder={"e.g I was made a managing director...."}
                         rows={"4"}
                         name="criterion"
                         onChange={handleChange}
@@ -450,7 +447,6 @@ const EditMentorInterest = () => {
                     <TextArea
                         className="mb-0"
                         label={"Please list any notes you want us to know"}
-                        placeholder={"e.g I was made a managing director...."}
                         rows={"4"}
                         name="additionalInfo"
                         onChange={handleChange}

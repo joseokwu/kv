@@ -2,7 +2,7 @@ import "./App.css";
 //import AppRoute from "./AppRouter";
 
 import { Alert } from "./Startupcomponents/index";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { AppRouter } from "./routes/AppRouter";
 import { Toaster } from "react-hot-toast";
 import { ErrorHandler } from "./components/error/index";

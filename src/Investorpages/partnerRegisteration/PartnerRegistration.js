@@ -37,7 +37,7 @@ export const BoosterPartnerRegistration = () => {
     }, [hash]);
 
     return (
-        <div className="register-wrap" ref={wrapRef}>
+        <div className="register-wrap">
             <section className="register-header mb-5">
                 <div className="pt-3">
                     <span>
@@ -53,7 +53,7 @@ export const BoosterPartnerRegistration = () => {
                     <ProgressBar progress={progress} />
                 </div>
             </section>
-            <section className="register-grid">
+            <section className="register-grid" ref={wrapRef}>
                 <div className="mt-2 d-flex">
                     {hash === "#details" ? (
                         <CompanyOverview />

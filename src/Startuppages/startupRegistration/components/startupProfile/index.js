@@ -609,10 +609,7 @@ export const StartupProfile = () => {
                                 label="What should be your startup profile handle?"
                                 type="text"
                                 name="profileHandle"
-                                value={`knight.venture/${
-                                    stateAuth?.user?.businessname ||
-                                    stateAuth?.startupName
-                                }`}
+                                value={`knight.venture/${stateAuth?.startupname}`}
                                 disabled={true}
                                 required={true}
                                 placeholder="Enter your startup profile handle"
