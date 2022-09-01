@@ -9,7 +9,7 @@ const AssetBoxVid = ({ img, title = "Introduction to business", time = "1:30", u
   const [playing, setPlaying] = useState(false);
   const closeModalRef = useRef(null);
   const vidRef = useRef(null);
-  const [vidDuration, setVidDuration] = useState(0);
+  const [vidDuration, setVidDuration] = useState("-+-");
 
   const setVidTime = (duration) => {
     if (duration < 60) {

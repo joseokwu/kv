@@ -127,12 +127,16 @@ export const StartupEAcademy = () => {
             <div style={{ marginRight: "32px" }} className={styles.modal_stat}>
               <p>Sessions: </p>
               <img height={18} src={sessionGray}></img>
-              <span>{selectedCourse?.lecture_sections?.length} Sessions</span>
+              <span>
+                {selectedCourse?.lecture_sections?.length} Session{selectedCourse?.lecture_sections?.length <= 1 ? "" : "s"}
+              </span>
             </div>
             <div className={styles.modal_stat}>
               <p>Lectures:</p>
               <img height={18} src={modulesImg}></img>
-              <span>{getTotalLectures(selectedCourse?.lecture_sections)} Lectures</span>
+              <span>
+                {getTotalLectures(selectedCourse?.lecture_sections)} Lecture{getTotalLectures(selectedCourse?.lecture_sections) <= 1 ? "" : "s"}
+              </span>
             </div>
           </div>
 
