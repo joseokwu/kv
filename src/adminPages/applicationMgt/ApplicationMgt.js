@@ -164,6 +164,7 @@ export const ApplicationMgt = () => {
                         setCurrentPage={setCurrentPageIncomplete}
                         fetched={fetched}
                         setFetched={setFetched}
+                        incomplete={true}
                     />
                 );
             case `#${mgtTab[2]}`:
