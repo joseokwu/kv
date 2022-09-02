@@ -207,3 +207,14 @@
   color: #00adef;
   font-weight: 700;
 }
+
+/* .sectionIndex {
+  display: inline-block;
+  margin-left: auto;
+} */
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}

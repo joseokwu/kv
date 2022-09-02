@@ -17,6 +17,8 @@ import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 import { upload } from '../../../services';
 import { MdAlarmOn } from 'react-icons/md';
 import cuid from 'cuid';
+import { hasAccess } from '../../../utils/variables';
+import { Warning1 } from './Warning1';
 
 export const EditComponent = ({
   headers,
@@ -34,6 +36,12 @@ export const EditComponent = ({
   setData,
 }) => {
   const [loading, setLoading] = useState();
+  const [modal, setModal] = useState();
+  const [deleteProps, setDeleteProps] = useState({
+    ind: '',
+    key: '',
+    path: '',
+  });
 
   const handleHeaders = ({ e, value, i, oldVal }) => {
     let mainHeaders = [...headers];
@@ -109,27 +117,51 @@ export const EditComponent = ({
   //   setImages([...tempList]);
   // };
 
-  const deleteHeader = (i, oldVal) => {
-    let tempData = { ...data };
+  const handleDelete = () => {
+    if (deleteProps.path === 'header') {
+      let tempData = { ...data };
 
-    delete tempData[oldVal];
+      delete tempData[deleteProps.key];
 
-    const newVal = headers.filter((item, index) => index !== i);
-    setHeaders((prev) => newVal);
-    setData(tempData);
-    toast.success('Header Deleted');
+      const newVal = headers.filter((item, index) => index !== deleteProps.ind);
+      setHeaders((prev) => newVal);
+      setData(tempData);
+      toast.success('Header Deleted');
+    }
+    if (deleteProps.path === 'text') {
+      let tempData = { ...data };
+
+      delete tempData[deleteProps.key];
+
+      const newVal = texts.filter((item, index) => index !== deleteProps.ind);
+      setTexts((prev) => newVal);
+      setData(tempData);
+      toast.success('Text Deleted');
+    }
+    setModal(false);
   };
 
-  const deleteText = (i, oldVal) => {
-    let tempData = { ...data };
+  // const deleteHeader = (i, oldVal) => {
+  //   let tempData = { ...data };
 
-    delete tempData[oldVal];
+  //   delete tempData[oldVal];
 
-    const newVal = texts.filter((item, index) => index !== i);
-    setTexts((prev) => newVal);
-    setData(tempData);
-    toast.success('Text Deleted');
-  };
+  //   const newVal = headers.filter((item, index) => index !== i);
+  //   setHeaders((prev) => newVal);
+  //   setData(tempData);
+  //   toast.success('Header Deleted');
+  // };
+
+  // const deleteText = (i, oldVal) => {
+  //   let tempData = { ...data };
+
+  //   delete tempData[oldVal];
+
+  //   const newVal = texts.filter((item, index) => index !== i);
+  //   setTexts((prev) => newVal);
+  //   setData(tempData);
+  //   toast.success('Text Deleted');
+  // };
 
   const handleFiles = (value) => {
     if (value) {
@@ -172,7 +204,8 @@ export const EditComponent = ({
   }, [sections, sectionIndex, columnIndex]);
 
   return (
-    <div className='px-4'>
+    <div className='px-4 position-relative e-transition'>
+      {modal && <Warning1 setModal={setModal} handleDelete={handleDelete} />}
       <Form
         name='Edit Component'
         initialValues={{
@@ -183,35 +216,46 @@ export const EditComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4 onClick={() => console.log(sections)}>Header</h4>
-            <button
-              className={styles.textButton2}
-              onClick={() => setHeaders([...headers, { key: '', title: '' }])}
-            >
-              Add Header+
-            </button>
+            <h4>Header</h4>
+            {hasAccess && (
+              <button
+                className={styles.textButton2}
+                onClick={() => setHeaders([...headers, { key: '', title: '' }])}
+              >
+                Add Header+
+              </button>
+            )}
           </div>
           {headers.map((item, i) => {
             return (
               <div key={i} className='d-flex  gap-2 my-4'>
-                <TextField
-                  label='Key'
-                  className='max_fill mb-2'
-                  value={item?.key}
-                  // name={`headerKey${i}`}
-                  required={false}
-                  onChange={(e) =>
-                    handleHeaders({
-                      e: e,
-                      value: 'key',
-                      i: i,
-                      oldVal: item?.key,
-                    })
-                  }
-                />
-                <span className='w-50'>
+                {hasAccess && (
                   <TextField
-                    label={i === 0 ? 'Main Title' : 'Subtitle'}
+                    disabled={!hasAccess}
+                    label='Key'
+                    className='max_fill mb-2'
+                    value={item?.key}
+                    // name={`headerKey${i}`}
+                    required={false}
+                    onChange={(e) =>
+                      handleHeaders({
+                        e: e,
+                        value: 'key',
+                        i: i,
+                        oldVal: item?.key,
+                      })
+                    }
+                  />
+                )}
+                <span className={`${hasAccess ? 'w-50' : styles.textWidth} `}>
+                  <TextField
+                    label={
+                      !hasAccess
+                        ? item?.key
+                        : i === 0
+                        ? 'Main Title'
+                        : 'Subtitle'
+                    }
                     className='max_fill mb-2'
                     value={item?.title}
                     // name={`headerTitle${i}`}
@@ -226,12 +270,24 @@ export const EditComponent = ({
                     }
                   />
                 </span>
-                <img
-                  className='ml-2'
-                  src={deleteIcon}
-                  alt='delete'
-                  onClick={(e) => deleteHeader(i, item?.key)}
-                />
+                {hasAccess && (
+                  <img
+                    className='ml-2'
+                    src={deleteIcon}
+                    role='button'
+                    alt='delete'
+                    onClick={() => {
+                      setModal(true);
+                      setDeleteProps({
+                        ...deleteProps,
+                        ind: i,
+                        path: 'header',
+                        key: item?.key,
+                      });
+                    }}
+                    // onClick={(e) => deleteHeader(i, item?.key)}
+                  />
+                )}
               </div>
             );
           })}
@@ -240,35 +296,40 @@ export const EditComponent = ({
         <section className='my-4'>
           <div className='d-flex justify-content-between'>
             <h4>Text</h4>
-            <button
-              className={styles.textButton2}
-              onClick={() => setTexts([...texts, { key: '', text: '' }])}
-            >
-              Add Text+
-            </button>
+            {hasAccess && (
+              <button
+                className={styles.textButton2}
+                onClick={() => setTexts([...texts, { key: '', text: '' }])}
+              >
+                Add Text+
+              </button>
+            )}
           </div>
           {texts.map((item, i) => {
             return (
               <div className='d-flex  gap-2 my-4' key={i}>
-                <TextField
-                  label='Key'
-                  className='max_fill mb-1'
-                  value={item?.key}
-                  // name={`textKey${i}`}
-                  required={false}
-                  onChange={(e) =>
-                    handleTexts({
-                      e: e,
-                      value: 'key',
-                      i: i,
-                      oldVal: item?.key,
-                    })
-                  }
-                />
-                <span className='w-50'>
+                {hasAccess && (
+                  <TextField
+                    disabled={!hasAccess}
+                    label='Key'
+                    className='max_fill mb-1'
+                    value={item?.key}
+                    // name={`textKey${i}`}
+                    required={false}
+                    onChange={(e) =>
+                      handleTexts({
+                        e: e,
+                        value: 'key',
+                        i: i,
+                        oldVal: item?.key,
+                      })
+                    }
+                  />
+                )}
+                <span className={`${hasAccess ? 'w-50' : styles.textWidth} `}>
                   <Form.Item initialValue={item?.text}>
                     <TextArea
-                      label='Text'
+                      label={hasAccess ? 'Text' : item?.key}
                       className='max_fill mb-1'
                       value={item?.text}
                       rows='4'
@@ -283,12 +344,24 @@ export const EditComponent = ({
                     />
                   </Form.Item>
                 </span>
-                <img
-                  className='ml-2 cursor'
-                  src={deleteIcon}
-                  alt='delete'
-                  onClick={() => deleteText(i, item?.key)}
-                />
+                {hasAccess && (
+                  <img
+                    className='ml-2'
+                    src={deleteIcon}
+                    alt='delete'
+                    role='button'
+                    onClick={() => {
+                      setModal(true);
+                      setDeleteProps({
+                        ...deleteProps,
+                        ind: i,
+                        path: 'text',
+                        key: item?.key,
+                      });
+                    }}
+                    // onClick={() => deleteText(i, item?.key)}
+                  />
+                )}
               </div>
             );
           })}
@@ -297,12 +370,14 @@ export const EditComponent = ({
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
             <h4>Image</h4>
-            <button
-              className={styles.textButton2}
-              onClick={() => setImages([...images, { key: '', image: '' }])}
-            >
-              Add Image+
-            </button>
+            {hasAccess && (
+              <button
+                className={styles.textButton2}
+                onClick={() => setImages([...images, { key: '', image: '' }])}
+              >
+                Add Image+
+              </button>
+            )}
           </div>
           <div className='d-flex  flex-wrap justify-content-between my-4'>
             {images.map((item, i) => {

@@ -29,6 +29,7 @@ import success from '../../assets/icons/success-check.svg';
 import { logout } from '../../store/actions/auth';
 import deleteIcon from '../../assets/icons/del-red.svg';
 import toast from 'react-hot-toast';
+import { Warning } from '../webpages/components/Warning';
 // import updateProfile
 
 export const CreateWebpage = () => {
@@ -46,6 +47,12 @@ export const CreateWebpage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [pageTitle, setPageTitle] = useState('');
   const [check, setCheck] = useState(false);
+  const [deleteProps, setDeleteProps] = useState({
+    sectionInd: '',
+    columnInd: '',
+    path: '',
+  });
+
   const {
     location: { hash },
     push,
@@ -274,6 +281,12 @@ export const CreateWebpage = () => {
       toast.error('Please add a section');
       return;
     }
+
+    // let tempSections = [...sections]
+    // for (let index = 0; index < sections.length; index++) {
+    //   const element = tempSections[index];
+
+    // }
     const details = {
       title: pageTitle,
       data: JSON.stringify(sections),
@@ -287,22 +300,23 @@ export const CreateWebpage = () => {
     }
   };
 
-  const deleteColumn = (sectionInd, columnInd) => {
-    let tempSections = [...sections];
+  const handleDelete = () => {
+    if (deleteProps.path === 'section') {
+      let tempSections = [...sections];
 
-    tempSections[sectionInd]?.splice(columnInd, 1);
+      tempSections.splice(deleteProps.sectionInd, 1);
 
-    setSections([...tempSections]);
-    toast.success('Column Deleted');
-  };
+      setSections(tempSections);
+      toast.success('Section Deleted');
+    }
+    if (deleteProps.path === 'column') {
+      let tempSections = [...sections];
 
-  const deleteSection = (ind) => {
-    let tempSections = [...sections];
+      tempSections[deleteProps.sectionInd]?.splice(deleteProps.columnInd, 1);
 
-    tempSections.splice(ind, 1);
-
-    setSections(tempSections);
-    toast.success('Section Deleted');
+      setSections([...tempSections]);
+      toast.success('Column Deleted');
+    }
   };
 
   useEffect(() => {
@@ -317,6 +331,9 @@ export const CreateWebpage = () => {
 
   return (
     <div className='py-5 px-5'>
+      <Modal id='warning' title='Warning' width={568}>
+        <Warning handleDelete={handleDelete} />
+      </Modal>
       <Modal id='addComponent' title='Add Component' width={568}>
         <AddComponent
           headers={headers}
@@ -386,11 +403,19 @@ export const CreateWebpage = () => {
                     height={20}
                     width={20}
                     alt='delete'
-                    onClick={() => deleteSection(ind)}
+                    data-toggle='modal'
+                    data-target={`#warning`}
+                    onClick={() =>
+                      setDeleteProps({
+                        ...deleteProps,
+                        sectionInd: ind,
+                        path: 'section',
+                      })
+                    }
                   />
                 </div>
 
-                <div className='d-flex flex-wrap gap-5'>
+                <div className='d-flex flex-wrap gap-2'>
                   {section?.map((column, i) => {
                     return (
                       <div className={styles.subContainer} key={i}>
@@ -426,6 +451,8 @@ export const CreateWebpage = () => {
                                 )}
                               </span>
                             </span>
+                            <h6 className='mb-2'>Id : {i}</h6>
+                            <hr />
                             <span>
                               <div className='d-flex align-items-center justify-content-between'>
                                 <p
@@ -446,7 +473,15 @@ export const CreateWebpage = () => {
                                   role='button'
                                   src={deleteIcon}
                                   alt='delete'
-                                  onClick={() => deleteColumn(ind, i)}
+                                  data-toggle='modal'
+                                  data-target={`#warning`}
+                                  onClick={() =>
+                                    setDeleteProps({
+                                      sectionInd: ind,
+                                      columnInd: i,
+                                      path: 'column',
+                                    })
+                                  }
                                 />
                               </div>
                             </span>
@@ -480,20 +515,23 @@ export const CreateWebpage = () => {
                     );
                   })}
                 </div>
-
-                <button
-                  className={styles.textButton2}
-                  onClick={() => {
-                    const temp = [...sections];
-                    temp[ind].push({ data: {}, components: {} });
-                    setSections(temp);
-                  }}
-                >
-                  Add Column+
-                </button>
+                <div className={styles.bottom}>
+                  <button
+                    className={styles.textButton2}
+                    onClick={() => {
+                      const temp = [...sections];
+                      temp[ind].push({ data: {}, components: {} });
+                      setSections(temp);
+                    }}
+                  >
+                    Add Column+
+                  </button>
+                  <h6 className={styles.sectInd}>Section Id : {ind}</h6>
+                </div>
               </div>
             );
           })}
+
           <button
             className={styles.textButton2}
             onClick={() => setSections([...sections, []])}

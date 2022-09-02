@@ -7,6 +7,9 @@ import deleteIcon from '../../../assets/icons/del-red.svg';
 import DragAndDrop from '../../../components/dragAndDrop/DragAndDrop';
 import { upload } from '../../../services';
 import cuid from 'cuid';
+import { hasAccess } from '../../../utils/variables';
+import { Modal } from '../../../components';
+import { Warning1 } from './Warning1';
 
 export const AddComponent = ({
   headers,
@@ -19,7 +22,12 @@ export const AddComponent = ({
   sections,
 }) => {
   const [loading, setLoading] = useState();
-
+  const [deleteProps, setDeleteProps] = useState({
+    ind: '',
+    key: '',
+    path: '',
+  });
+  const [modal, setModal] = useState();
   const handleHeaders = (e, value, i) => {
     let mainHeaders = [...headers];
     if (mainHeaders.length < i + 1) {
@@ -65,20 +73,37 @@ export const AddComponent = ({
     setImages(mainImages);
   };
 
-  const deleteHeader = (i, key) => {
-    delete headers[key];
-    const newVal = headers.filter((item, index) => index !== i);
+  const handleDelete = () => {
+    if (deleteProps.path === 'header') {
+      delete headers[deleteProps.key];
+      const newVal = headers.filter((item, index) => index !== deleteProps.ind);
 
-    setHeaders((prev) => newVal);
-    toast.success('Header Deleted');
+      setHeaders((prev) => newVal);
+      toast.success('Header Deleted');
+    }
+    if (deleteProps.path === 'text') {
+      delete texts[deleteProps.key];
+      const newVal = texts.filter((item, index) => index !== deleteProps.ind);
+      setTexts((prev) => newVal);
+      toast.success('Text Deleted');
+    }
+    setModal(false);
   };
 
-  const deleteText = (i, key) => {
-    delete texts[key];
-    const newVal = texts.filter((item, index) => index !== i);
-    setTexts((prev) => newVal);
-    toast.success('Text Deleted');
-  };
+  // const deleteHeader = (i, key) => {
+  //   delete headers[key];
+  //   const newVal = headers.filter((item, index) => index !== i);
+
+  //   setHeaders((prev) => newVal);
+  //   toast.success('Header Deleted');
+  // };
+
+  // const deleteText = (i, key) => {
+  //   delete texts[key];
+  //   const newVal = texts.filter((item, index) => index !== i);
+  //   setTexts((prev) => newVal);
+  //   toast.success('Text Deleted');
+  // };
 
   // const handleFiles = (value) => {
   //   if (value) {
@@ -106,7 +131,9 @@ export const AddComponent = ({
   };
 
   return (
-    <div className='px-4'>
+    <div className='px-4 position-relative e-transition'>
+      {modal && <Warning1 setModal={setModal} handleDelete={handleDelete} />}
+
       <Form
         name='Add Component'
         initialValues={{
@@ -117,7 +144,7 @@ export const AddComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4 onClick={() => console.log(headers, texts)}>Header</h4>
+            <h4>Header</h4>
             <button
               className={styles.textButton2}
               onClick={() => {
@@ -152,7 +179,16 @@ export const AddComponent = ({
                   className='ml-2'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteHeader(i, item?.key)}
+                  onClick={() => {
+                    setModal(true);
+                    setDeleteProps({
+                      ...deleteProps,
+                      ind: i,
+                      path: 'header',
+                      key: item?.key,
+                    });
+                  }}
+                  // onClick={() => deleteHeader(i, item?.key)}
                 />
               </div>
             );
@@ -197,7 +233,16 @@ export const AddComponent = ({
                   className='ml-2'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteText(i, item?.key)}
+                  onClick={() => {
+                    setModal(true);
+                    setDeleteProps({
+                      ...deleteProps,
+                      ind: i,
+                      path: 'text',
+                      key: item?.key,
+                    });
+                  }}
+                  // onClick={() => deleteText(i, item?.key)}
                 />
               </div>
             );

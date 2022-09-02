@@ -29,6 +29,8 @@ import success from '../../assets/icons/success-check.svg';
 import { logout } from '../../store/actions/auth';
 import toast from 'react-hot-toast';
 import deleteIcon from '../../assets/icons/del-red.svg';
+import { hasAccess } from '../../utils/variables';
+import { Warning } from '../webpages/components/Warning';
 
 // import updateProfile
 
@@ -47,6 +49,11 @@ export const EditWebpage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [pageTitle, setPageTitle] = useState();
   const [check, setCheck] = useState(false);
+  const [deleteProps, setDeleteProps] = useState({
+    sectionInd: '',
+    columnInd: '',
+    path: '',
+  });
   const {
     location: { hash, state },
     push,
@@ -279,22 +286,41 @@ export const EditWebpage = () => {
     }
   };
 
-  const deleteColumn = (sectionInd, columnInd) => {
-    let tempSections = [...sections];
-    tempSections[sectionInd]?.splice(columnInd, 1);
-    console.log(tempSections);
-    setSections([...tempSections]);
-    toast.success('Column Deleted');
+  const handleDelete = () => {
+    if (deleteProps.path === 'section') {
+      let tempSections = [...sections];
+
+      tempSections.splice(deleteProps.sectionInd, 1);
+
+      setSections(tempSections);
+      toast.success('Section Deleted');
+    }
+    if (deleteProps.path === 'column') {
+      let tempSections = [...sections];
+
+      tempSections[deleteProps.sectionInd]?.splice(deleteProps.columnInd, 1);
+
+      setSections([...tempSections]);
+      toast.success('Column Deleted');
+    }
   };
 
-  const deleteSection = (ind) => {
-    let tempSections = [...sections];
+  // const deleteColumn = (sectionInd, columnInd) => {
+  //   let tempSections = [...sections];
+  //   tempSections[sectionInd]?.splice(columnInd, 1);
+  //   console.log(tempSections);
+  //   setSections([...tempSections]);
+  //   toast.success('Column Deleted');
+  // };
 
-    tempSections.splice(ind, 1);
+  // const deleteSection = (ind) => {
+  //   let tempSections = [...sections];
 
-    setSections(tempSections);
-    toast.success('Section Deleted');
-  };
+  //   tempSections.splice(ind, 1);
+
+  //   setSections(tempSections);
+  //   toast.success('Section Deleted');
+  // };
 
   useEffect(() => {
     if (state?.slug) {
@@ -315,6 +341,9 @@ export const EditWebpage = () => {
 
   return (
     <div className='py-5 px-5'>
+      <Modal id='warning' title='Warning' width={400}>
+        <Warning handleDelete={handleDelete} />
+      </Modal>
       <Modal id='addComponent' title='Add Component' width={568}>
         <AddComponent
           headers={headers}
@@ -383,18 +412,28 @@ export const EditWebpage = () => {
               <div className={styles.componentContainer} key={ind}>
                 <div className={styles.componentHeader}>
                   <h5 className='mb-5'>Section</h5>
-                  <img
-                    className='ml-2'
-                    src={deleteIcon}
-                    role='button'
-                    height={20}
-                    width={20}
-                    alt='delete'
-                    onClick={() => deleteSection(ind)}
-                  />
+                  {hasAccess && (
+                    <img
+                      className='ml-2'
+                      src={deleteIcon}
+                      role='button'
+                      height={20}
+                      width={20}
+                      alt='delete'
+                      data-toggle='modal'
+                      data-target={`#warning`}
+                      onClick={() =>
+                        setDeleteProps({
+                          ...deleteProps,
+                          sectionInd: ind,
+                          path: 'section',
+                        })
+                      }
+                    />
+                  )}
                 </div>
 
-                <div className='d-flex flex-wrap gap-5'>
+                <div className='d-flex flex-wrap gap-2'>
                   {section?.map((column, i) => {
                     return (
                       <div className={styles.subContainer} key={i}>
@@ -430,6 +469,8 @@ export const EditWebpage = () => {
                                 )}
                               </span>
                             </span>
+                            <h6 className='mb-2'>Id : {i}</h6>
+                            <hr />
                             <span>
                               <div className='d-flex align-items-center justify-content-between'>
                                 <p
@@ -445,13 +486,23 @@ export const EditWebpage = () => {
                                 >
                                   Edit
                                 </p>
-                                <img
-                                  className='ml-2'
-                                  role='button'
-                                  src={deleteIcon}
-                                  alt='delete'
-                                  onClick={() => deleteColumn(ind, i)}
-                                />
+                                {hasAccess && (
+                                  <img
+                                    className='ml-2'
+                                    role='button'
+                                    src={deleteIcon}
+                                    alt='delete'
+                                    data-toggle='modal'
+                                    data-target={`#warning`}
+                                    onClick={() =>
+                                      setDeleteProps({
+                                        sectionInd: ind,
+                                        columnInd: i,
+                                        path: 'column',
+                                      })
+                                    }
+                                  />
+                                )}
                               </div>
                             </span>
                           </div>
@@ -484,26 +535,32 @@ export const EditWebpage = () => {
                     );
                   })}
                 </div>
-
-                <button
-                  className={styles.textButton2}
-                  onClick={() => {
-                    const temp = [...sections];
-                    temp[ind].push({ data: {}, components: {} });
-                    setSections(temp);
-                  }}
-                >
-                  Add Column+
-                </button>
+                <div className={styles.bottom}>
+                  {hasAccess && (
+                    <button
+                      className={styles.textButton2}
+                      onClick={() => {
+                        const temp = [...sections];
+                        temp[ind].push({ data: {}, components: {} });
+                        setSections(temp);
+                      }}
+                    >
+                      Add Column+
+                    </button>
+                  )}
+                  <h6>Section Id : {ind}</h6>
+                </div>
               </div>
             );
           })}
-          <button
-            className={styles.textButton2}
-            onClick={() => setSections([...sections, []])}
-          >
-            Add Section+
-          </button>
+          {hasAccess && (
+            <button
+              className={styles.textButton2}
+              onClick={() => setSections([...sections, []])}
+            >
+              Add Section+
+            </button>
+          )}
         </section>
 
         <section className={`d-flex justify-content-end ${styles.btnWrapper}`}>

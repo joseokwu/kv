@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Table } from '../../../adminComponents';
-import { AdminButton, Tag } from '../../../components';
+import { AdminButton, Modal, Tag } from '../../../components';
 import { formatDate } from '../../../utils/helpers';
 import left from '../../../assets/icons/chervonLeft.svg';
 import styles from '../webpages.module.css';
@@ -15,12 +15,14 @@ import {
 import { toast } from 'react-hot-toast';
 import { PaginationData } from '../../../components';
 import { Loading } from '../../../mentorComponents/CircluarLoader/CircularLoader.styled';
+import { Warning } from './Warning';
 
 export const NewsBlog = () => {
   const [blogs, setBlogs] = useState();
   const [trigger, setTrigger] = useState(false);
   const [isPublished, setIsPublished] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [blogId, setBlogId] = useState('');
   let limit = 5;
   const {
     location: { hash, state },
@@ -29,7 +31,6 @@ export const NewsBlog = () => {
   } = useHistory();
 
   const handleUpdate = async ({ id, details }) => {
-    console.log(state, details);
     setIsLoading(true);
     try {
       const d = await updateBlog({ slug: id, payload: details });
@@ -68,10 +69,9 @@ export const NewsBlog = () => {
     getData();
   }, [trigger]);
 
-  const removeBlog = async (id) => {
-    console.log(id);
+  const removeBlog = async () => {
     try {
-      const d = await deleteBlog(id);
+      const d = await deleteBlog(blogId);
       console.log(d);
       toast.success('Blog Deleted');
       setTrigger(!trigger);
@@ -164,7 +164,9 @@ export const NewsBlog = () => {
           <p
             role='button'
             className='delete-link'
-            onClick={() => removeBlog(item?.slug)}
+            data-toggle='modal'
+            data-target={`#warning`}
+            onClick={() => setBlogId(item?.slug)}
           >
             Delete
           </p>
@@ -179,6 +181,9 @@ export const NewsBlog = () => {
 
   return (
     <div>
+      <Modal id='warning' title='Warning' width={400}>
+        <Warning handleDelete={removeBlog} />
+      </Modal>
       <Table headers={header} data={applicationData} />
       {/* <PaginationData
         currentPage={currentPage}
