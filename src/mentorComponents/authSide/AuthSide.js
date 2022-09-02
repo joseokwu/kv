@@ -8,9 +8,8 @@ import { setType, getType } from "../../utils/helpers";
 import { useLocation } from "react-router-dom";
 
 export const AuthSide = ({ history }) => {
-    const [active, setActive] = useState("startup");
-    const { changeSignup } = useAuth();
-    const userType = getType();
+    const { changeSignup, stateAuth } = useAuth();
+    const [userType, setUserType] = useState(getType());
     const search = useLocation().search;
     const name = new URLSearchParams(search).get("name");
 
@@ -19,11 +18,18 @@ export const AuthSide = ({ history }) => {
             setType(name);
         }
     }, [name]);
+
     useEffect(() => {
-        if (!userType || userType === "admin") setType("startup");
+        if (!userType || userType === "admin") {
+            setType("startup");
+            setUserType("startup");
+            changeSignup("startup");
+        } else {
+            changeSignup(userType);
+        }
     }, []);
 
-    console.log(userType);
+    console.log("stateAuth", stateAuth);
 
     return (
         <div className="py-5">
@@ -36,38 +42,56 @@ export const AuthSide = ({ history }) => {
                     <section className="mentor_switch_signUp mb-4">
                         <button
                             onClick={() => {
+                                setUserType("startup");
                                 setType("startup");
                                 changeSignup("startup");
                             }}
-                            className={userType === "startup" ? "activ" : ""}
+                            className={
+                                stateAuth?.signUpStatus === "startup"
+                                    ? "activ"
+                                    : ""
+                            }
                         >
                             Startup
                         </button>
                         <button
                             onClick={() => {
+                                setUserType("investor");
                                 setType("investor");
                                 changeSignup("investor");
                             }}
-                            className={userType === "investor" ? "activ" : ""}
+                            className={
+                                stateAuth?.signUpStatus === "investor"
+                                    ? "activ"
+                                    : ""
+                            }
                         >
                             Investor
                         </button>
                         <button
                             onClick={() => {
+                                setUserType("mentor");
                                 setType("mentor");
                                 changeSignup("mentor");
                             }}
-                            className={userType === "mentor" ? "activ" : ""}
+                            className={
+                                stateAuth?.signUpStatus === "mentor"
+                                    ? "activ"
+                                    : ""
+                            }
                         >
                             Mentor
                         </button>
                         <button
                             onClick={() => {
+                                setUserType("boosterpartner");
                                 setType("boosterpartner");
                                 changeSignup("boosterpartner");
                             }}
                             className={
-                                userType === "boosterpartner" ? "activ" : ""
+                                stateAuth?.signUpStatus === "boosterpartner"
+                                    ? "activ"
+                                    : ""
                             }
                         >
                             Booster Partner
@@ -75,19 +99,19 @@ export const AuthSide = ({ history }) => {
                     </section>
                 )}
 
-                {userType === "startup" && (
+                {stateAuth?.signUpStatus === "startup" && (
                     <AuthContent authData={AuthData} authDataIndex={0} />
                 )}
 
-                {userType === "investor" && (
+                {stateAuth?.signUpStatus === "investor" && (
                     <AuthContent authData={AuthData} authDataIndex={1} />
                 )}
 
-                {userType === "mentor" && (
+                {stateAuth?.signUpStatus === "mentor" && (
                     <AuthContent authData={AuthData} authDataIndex={2} />
                 )}
 
-                {userType === "boosterpartner" && (
+                {stateAuth?.signUpStatus === "boosterpartner" && (
                     <AuthContent authData={AuthData} authDataIndex={3} />
                 )}
             </div>

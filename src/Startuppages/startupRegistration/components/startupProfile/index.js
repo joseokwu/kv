@@ -176,6 +176,7 @@ export const StartupProfile = () => {
                         onChange={onChangeImage}
                         id="dp"
                         hidden
+                        accept="image/*"
                     />
                     <div>
                         <IoAdd style={{ color: "#858585" }} size="14" />
@@ -609,10 +610,7 @@ export const StartupProfile = () => {
                                 label="What should be your startup profile handle?"
                                 type="text"
                                 name="profileHandle"
-                                value={`knight.venture/${
-                                    stateAuth?.user?.businessname ||
-                                    stateAuth?.startupName
-                                }`}
+                                value={`knight.venture/${stateAuth?.startupname}`}
                                 disabled={true}
                                 required={true}
                                 placeholder="Enter your startup profile handle"

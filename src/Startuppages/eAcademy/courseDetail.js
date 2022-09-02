@@ -105,12 +105,14 @@ const CourseDetail = () => {
           <div className="scroll_hide" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", maxWidth: "350px", flexWrap: "wrap" }}>
             <div className={styles.stat}>
               <p>Sessions:</p>
-              <span>{course?.lecture_sections?.length} Sessions</span>
+              <span>
+                {course?.lecture_sections?.length} Session{course?.lecture_sections?.length <= 1 ? "" : "s"}
+              </span>
             </div>
             <div className={styles.stat}>
               <p>Lectures:</p>
               <span>
-                {getTotalLectures(course?.lecture_sections)} Lecture{getTotalLectures(course?.lecture_sections) == 1 ? "" : "s"}
+                {getTotalLectures(course?.lecture_sections)} Lecture{getTotalLectures(course?.lecture_sections) <= 1 ? "" : "s"}
               </span>
             </div>
           </div>

@@ -69,7 +69,6 @@ export const MentorPersonalDetails = () => {
             <div
                 className="mentor_personal_details_wrap"
                 style={{ maxWidth: 2000 }}
-                ref={wrapRef}
             >
                 <section className="mentor_personal_details_header mb-5 tab-wrap">
                     <div className="pt-3">
@@ -87,7 +86,7 @@ export const MentorPersonalDetails = () => {
                     </div>
                 </section>
 
-                <section className="mentor_personal_details_grid">
+                <section className="mentor_personal_details_grid" ref={wrapRef}>
                     <div className="mt-0 d-flex justify-content-stretch">
                         {hash === "" || hash === "#personal_details" ? (
                             <Details />

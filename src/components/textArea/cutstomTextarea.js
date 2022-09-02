@@ -13,7 +13,7 @@ export const TextareaCustom = ({
     placeholder,
     onKeyPress,
     required = true,
-    min = 200,
+    min = 2,
     maxLength = 250,
     showCount = true,
 }) => {

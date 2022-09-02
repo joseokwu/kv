@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { css } from "styled-components/macro";
 import {
     FileUploadBase,
@@ -204,6 +204,29 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
         };
     };
 
+    useEffect(() => {
+        const FileUploadRequest = async () => {
+            await console.log("filesInfo", filesInfo);
+            try {
+                setLoading(true);
+                const data = await onUpload(filesInfo);
+                setLoading(false);
+                toast.success(
+                    `${
+                        data.maxFiles > 1 ? "Files" : "File"
+                    } uploaded successfully`
+                );
+                setFilesUploaded(true);
+                setName(filesInfo[0]?.name);
+                setFilesInfo([]);
+                setInitialData(data);
+            } catch (e) {
+                toast.error(`${e?.message}`);
+            }
+        };
+        if (filesInfo.length > 0) FileUploadRequest();
+    }, [filesInfo]);
+
     const removeItem = (index) => {
         const newFilesInfo = filesInfo.filter((_, i) => i !== index);
         setFilesInfo(newFilesInfo);
@@ -269,24 +292,24 @@ export const UploadFile = ({ data, onUpload, initData = [], fileType }) => {
             {!filesUploaded && filesInfo.length > 0 && (
                 <UploadButton
                     type="button"
-                    onClick={async () => {
-                        try {
-                            setLoading(true);
-                            const data = await onUpload(filesInfo);
-                            setLoading(false);
-                            toast.success(
-                                `${
-                                    data.maxFiles > 1 ? "Files" : "File"
-                                } uploaded successfully`
-                            );
-                            setFilesUploaded(true);
-                            setName(filesInfo[0]?.name);
-                            setFilesInfo([]);
-                            setInitialData(data);
-                        } catch (e) {
-                            toast.error(`${e?.message}`);
-                        }
-                    }}
+                    // onClick={async () => {
+                    //     try {
+                    //         setLoading(true);
+                    //         const data = await onUpload(filesInfo);
+                    //         setLoading(false);
+                    //         toast.success(
+                    //             `${
+                    //                 data.maxFiles > 1 ? "Files" : "File"
+                    //             } uploaded successfully`
+                    //         );
+                    //         setFilesUploaded(true);
+                    //         setName(filesInfo[0]?.name);
+                    //         setFilesInfo([]);
+                    //         setInitialData(data);
+                    //     } catch (e) {
+                    //         toast.error(`${e?.message}`);
+                    //     }
+                    // }}
                 >
                     {loading ? (
                         <CircularLoader color="#2E3192" />

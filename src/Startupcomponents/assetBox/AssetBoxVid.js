@@ -8,6 +8,20 @@ import { Modal } from "../modal/Modal";
 const AssetBoxVid = ({ img, title = "Introduction to business", time = "1:30", url }) => {
   const [playing, setPlaying] = useState(false);
   const closeModalRef = useRef(null);
+  const vidRef = useRef(null);
+  const [vidDuration, setVidDuration] = useState("-+-");
+
+  const setVidTime = (duration) => {
+    if (duration < 60) {
+      setVidDuration(`0:${Math.floor(duration)}`);
+      return;
+    } else if (duration > 60 && duration < 60 * 60) {
+      setVidDuration(`${Math.floor(duration / 60)}:${Math.floor(duration % 60)}`);
+      return;
+    } else {
+      setVidDuration(`${Math.floor(duration / (60 * 60))}:${Math.floor(duration % (60 * 60)) > 60 ? Math.floor(Math.floor(duration % (60 * 60)) / 60) : "00"}:00`);
+    }
+  };
 
   return (
     <>
@@ -31,7 +45,18 @@ const AssetBoxVid = ({ img, title = "Introduction to business", time = "1:30", u
             src={close}
           ></img>
         </div>
-        <ReactPlayer width={"100%"} height={"100%"} controls={true} playing={playing} url={url ? url : "https://www.youtube.com/watch?v=ysz5S6PUM-U"} />
+        <ReactPlayer
+          onReady={() => {
+            console.log("media loaded", vidRef.current?.getDuration());
+            setVidTime(vidRef.current?.getDuration());
+          }}
+          ref={vidRef}
+          width={"100%"}
+          height={"100%"}
+          controls={true}
+          playing={playing}
+          url={url ? url : "https://www.youtube.com/watch?v=ysz5S6PUM-U"}
+        />
       </Modal>
       <div className={styles.container}>
         <main>
@@ -52,7 +77,7 @@ const AssetBoxVid = ({ img, title = "Introduction to business", time = "1:30", u
               <span>{title ?? "No name"}</span>
               <p>Section 1</p>
             </section>
-            {/* <span>{time}</span> */}
+            <span>{vidDuration}</span>
           </div>
         </div>
       </div>

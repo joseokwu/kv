@@ -69,7 +69,7 @@ export const InvestorRegistration = () => {
     }, [hash]);
 
     return (
-        <div className="register-wrap" ref={wrapRef}>
+        <div className="register-wrap">
             <section
                 className="register-header mb-5"
                 style={{ maxWidth: 1440 }}
@@ -89,7 +89,11 @@ export const InvestorRegistration = () => {
                 </div>
             </section>
 
-            <section className="register-grid" style={{ maxWidth: 1440 }}>
+            <section
+                className="register-grid"
+                style={{ maxWidth: 1440 }}
+                ref={wrapRef}
+            >
                 <div className="mt-2 d-flex">
                     {hash === "" || hash === "#details" ? (
                         <PersonalDetails />
