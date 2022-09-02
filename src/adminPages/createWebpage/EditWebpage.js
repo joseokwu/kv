@@ -394,13 +394,13 @@ export const EditWebpage = () => {
                   />
                 </div>
 
-                <div className='d-flex flex-wrap justify-content-between'>
+                <div className='d-flex flex-wrap gap-5'>
                   {section?.map((column, i) => {
                     return (
                       <div className={styles.subContainer} key={i}>
                         {getColumnLength(column['components']) > 0 ? (
                           <div className={styles.subLeft}>
-                            <span className='d-flex'>
+                            <span className='d-flex mb-2'>
                               <h6 className='mr-2'>
                                 Components -{' '}
                                 {getColumnLength(column['components'])}
@@ -431,7 +431,7 @@ export const EditWebpage = () => {
                               </span>
                             </span>
                             <span>
-                              <div className='d-flex align-items-center space-out'>
+                              <div className='d-flex align-items-center justify-content-between'>
                                 <p
                                   className='view-link'
                                   role='button'
