@@ -97,7 +97,7 @@ const EditCategory = (data) => {
                 label="Industry"
                 initialValue={stateAuth?.partnerData?.industry}
                 rules={[
-                  { required: true, message: 'Please select a industry!' },
+                  { required: true, message: 'Please select an industry!' },
                 ]}
               >
                 <select

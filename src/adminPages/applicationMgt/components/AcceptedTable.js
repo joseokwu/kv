@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from '../../../adminComponents';
 import apple from '../../../assets/images/apple.svg';
@@ -7,8 +7,11 @@ import { formatDate } from '../../../utils/helpers';
 import left from '../../../assets/icons/chervonLeft.svg';
 import styles from '../applicationMgt.module.css';
 import { EmptyState } from '../../../mentorComponents';
+import { PaginationData } from '../../../components';
 
-export const AcceptedTable = ({ accepted }) => {
+export const AcceptedTable = ({ accepted, currentPage, setCurrentPage }) => {
+  let limit = 5;
+
   const header = useMemo(
     () => [
       {
@@ -33,7 +36,7 @@ export const AcceptedTable = ({ accepted }) => {
 
   const data = useMemo(
     () =>
-      accepted?.startups?.map((item, i) => {
+      accepted?.data?.map((item, i) => {
         return {
           startup: (
             <div className='d-flex align-items-center space-out'>
@@ -51,7 +54,10 @@ export const AcceptedTable = ({ accepted }) => {
           status: <Tag name='Accepted' color='#235405' />,
 
           action: (
-            <Link to='/admin/application_mgt/accepted/0' className='view-link'>
+            <Link
+              to={`/admin/application_mgt/accepted/${item?.userId}`}
+              className='view-link'
+            >
               View
             </Link>
           ),
@@ -67,17 +73,14 @@ export const AcceptedTable = ({ accepted }) => {
     <div>
       <div>
         <Table headers={header} data={data} />
-        <div className='d-flex align-item-center pt-4 justify-content-end'>
-          <p className='page-num'>1 of 26</p>
-          <img
-            src={left}
-            alt='left'
-            className='mx-3'
-            style={{ transform: 'rotate(180deg)' }}
-            role='button'
-          />
-          <img src={left} alt='left' className='mx-3' role='button' />
-        </div>
+        <PaginationData
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          data={accepted?.startups || []}
+          limit={limit}
+          total={accepted?.metadata?.total}
+        />
+        {/* Pagination goes here */}
       </div>
     </div>
   );

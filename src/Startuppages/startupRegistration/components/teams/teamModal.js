@@ -1,391 +1,572 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HeaderModal, ModalForm } from "./teams.styled";
 import { ModalCus } from "../../../../Startupcomponents/modal/Modal";
-import { DatePicker  } from "antd";
+import { DatePicker, Form, Select } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
 import { CustomButton } from "../../../../Startupcomponents/button/button.styled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../../../hooks/useAuth";
+import moment from "moment";
+import "moment/locale/zh-cn";
+import locale from "antd/es/locale/zh_CN";
+import { degreeList } from "../../../../constants/arrays";
+import { TextField } from "../../../../Startupcomponents";
+import { TextareaCustom } from "../../../../components/textArea/cutstomTextarea";
+import { letterOnly } from "../../../../utils/helpers";
 
+const { Option } = Select;
 
 export const TeamModal = ({
-  handleClose,
-  handleWorkDetails,
-  editIndex,
-  workExperience,
-  isEditing,
-  setIsEditing,
+    handleClose,
+    handleWorkDetails,
+    editIndex,
+    workExperience,
+    isEditing,
+    setIsEditing,
 }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [checked, setChecked] = useState(false);
-  const { updateProfile, stateAuth  } = useAuth();
+    const [checked, setChecked] = useState(
+        workExperience[editIndex]?.endDate === "present" ? true : false
+    );
+    const { updateProfile, stateAuth } = useAuth();
 
+    const [startDate, setStartDate] = useState(
+        workExperience[editIndex]?.startDate &&
+            workExperience[editIndex]?.startDate !== "present"
+            ? workExperience[editIndex]?.startDate
+            : undefined
+    );
+    const [endDate, setEndDate] = useState(
+        workExperience[editIndex]?.endDate &&
+            workExperience[editIndex]?.endDate !== "present"
+            ? workExperience[editIndex]?.endDate
+            : undefined
+    );
 
-  const onSubmit = (e, from) => {
-    console.log("Old Experiences");
-   
-   
-    updateProfile("team",  { experience: [
-    
-      ...stateAuth?.startupData?.team?.experience,
-        {
-          index: editIndex,
-          companyName: formik.getFieldProps("companyName").value,
-          location: formik.getFieldProps("location").value,
-          position: formik.getFieldProps("position").value,
-          responsibility: formik.getFieldProps("responsibility").value,
-          startDate: startDate.toISOString(),
-          endDate: checked ? "present" : endDate.toISOString(),
-          founder: true,
-        }
-      ],
+    const [formValues, setFormValues] = useState({
+        companyName: isEditing ? workExperience[editIndex]?.companyName : "",
+        location: isEditing ? workExperience[editIndex]?.location : "",
+        position: isEditing ? workExperience[editIndex]?.position : "",
+        responsibility: isEditing
+            ? workExperience[editIndex]?.responsibility
+            : "",
+        startDate: isEditing ? workExperience[editIndex]?.startDate : "",
+        endDate: isEditing ? workExperience[editIndex]?.endDate : "",
     });
-    
-    handleClose(false);
-  };
 
-  const formik = useFormik({
-    initialValues: {
-      companyName: isEditing ? workExperience[editIndex]?.companyName : "",
-      location: isEditing ? workExperience[editIndex]?.location : "",
-      position: isEditing ? workExperience[editIndex]?.position : "",
-      responsibility: isEditing ? workExperience[editIndex]?.responsibility : "",
-      startDate: "",
-      endDate: "",
-    },
-    validationSchema: Yup.object({
-      companyName: Yup.string().required("Required"),
-      location: Yup.string().required("Required"),
-      position: Yup.string().required("Required"),
-      responsibility: Yup.string().required("Required"),
+    const onFinish = (values) => {
+        if (isEditing) {
+            const newList = [
+                ...stateAuth?.profileData?.startupRes?.team?.experience,
+            ];
 
-    }),
-   
-  });
+            newList[editIndex] = {
+                ...values,
+                index: editIndex,
+                startDate: new Date(startDate).toISOString(),
+                endDate: checked ? "present" : new Date(endDate).toISOString(),
+                founder: true,
+            };
+            updateProfile("team", { experience: newList });
+        } else {
+            updateProfile("team", {
+                experience: [
+                    ...stateAuth?.profileData?.startupRes?.team?.experience,
+                    {
+                        ...values,
+                        index: editIndex,
+                        startDate: new Date(startDate).toISOString(),
+                        endDate: checked
+                            ? "present"
+                            : new Date(endDate).toISOString(),
+                        founder: true,
+                    },
+                ],
+            });
+        }
 
-  return (
-    <ModalCus
-      closeModal={() => {
-        setIsEditing(false);
-        handleClose();
-      }}
-    >
-      <div className="mx-2">
-        <HeaderModal>
-          {isEditing ? "Edit Work Experience" : "Add Work Experience"}
-        </HeaderModal>
-        <hr style={{ background: "#323232" }} />
-        <form
-         
+        handleClose(false);
+    };
+
+    return (
+        <ModalCus
+            closeModal={() => {
+                setIsEditing(false);
+                handleClose();
+            }}
         >
-          <ModalForm className="row">
-            <div className="col-12 form-group">
-              <label>Company Name<span style={{color: "red"}}>*</span></label>
-              <input
-                id="title"
-                name="companyName"
-                type="text"
-                className="form-control ps-3"
-                placeholder="CEO and Founder"
-              
-                value={formik.values.companyName}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.companyName && formik.errors.companyName ? (
-                <article className="error">{formik.errors.companyName}</article>
-              ) : null}
-            </div>
-            <div className="col-12 form-group">
-              <label>Location<span style={{color: "red"}}>*</span></label>
-              <input
-                id="location"
-                name="location"
-                type="text"
-                className="form-control ps-3"
-                placeholder="United state of America"
-               
-                value={formik.values.location}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.location && formik.errors.location ? (
-                <article className="error">{formik.errors.location}</article>
-              ) : null}
-            </div>
+            <div className="mx-2">
+                <HeaderModal>
+                    {isEditing ? "Edit Work Experience" : "Add Work Experience"}
+                </HeaderModal>
+                <hr style={{ background: "#323232" }} />
+                <Form
+                    onFinish={onFinish}
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                >
+                    <ModalForm className="row">
+                        <div className="col-12 form-group">
+                            <TextField
+                                label="Company Name"
+                                name={"companyName"}
+                                onChange={(e) =>
+                                    setFormValues({
+                                        ...formValues,
+                                        companyName: e.target.value,
+                                    })
+                                }
+                                value={formValues.companyName}
+                                required={true}
+                                placeholder="eg; Knight Ventures"
+                            />
+                        </div>
 
-            <div className="col-12 form-group">
-              <div className="d-flex justify-content-between">
-                <label>Description<span style={{color: "red"}}>*</span></label>
-                <label style={{ color: "#828282" }}>
-                  50 characters at most
-                </label>
-              </div>
+                        <div className="col-12 form-group">
+                            <TextField
+                                label="Position"
+                                name={"position"}
+                                onChange={(e) =>
+                                    setFormValues({
+                                        ...formValues,
+                                        position: e.target.value,
+                                    })
+                                }
+                                value={formValues.position}
+                                required={true}
+                                placeholder="MD/CEO"
+                            />
+                        </div>
+                        <div className="col-12 form-group">
+                            <TextField
+                                label="Location"
+                                name={"location"}
+                                onChange={(e) =>
+                                    setFormValues({
+                                        ...formValues,
+                                        location: e.target.value,
+                                    })
+                                }
+                                value={formValues.location}
+                                required={true}
+                                placeholder="United state of America"
+                            />
+                        </div>
 
-              <textarea
-                id="description"
-                name="responsibility"
-                cols="5"
-                rows="5"
-                className="form-control ps-3"
-                placeholder="Tell us about your role"
-              
-                value={formik.values.responsibility}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.responsibility && formik.errors.responsibility ? (
-                <article className="error">{formik.errors.responsibility}</article>
-              ) : null}
-            </div>
-            <div className="col-12 form-group">
-              <input
-                type="checkbox"
-                checked={checked}
-                onChange={() => setChecked(!checked)}
-              />
-              <span>I currently work in this role</span>
-            </div>
-            <div className="col-6 form-group">
-              <label>Start Date<span style={{color: "red"}}>*</span></label>
-              <DatePicker
-                id="startDate"
-                name="startDate"
-                className="date-input col-lg-12 ps-3 py-2"
-                style={{ padding: "15px" }}
-               
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-            </div>
-            {!checked && (
-              <div className="col-6 form-group">
-                <label>End Date<span style={{color: "red"}}>*</span></label>
-                <DatePicker
-                  id="endDate"
-                  name="endDate"
-                  className="date-input col-lg-12 ps-3 py-2"
-                 
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                />
-              </div>
-            )}
+                        <div className="col-12 form-group field">
+                            <TextareaCustom
+                                name={"responsibility"}
+                                label={"Description"}
+                                value={formValues.responsibility}
+                                onChange={(e) =>
+                                    setFormValues({
+                                        ...formValues,
+                                        responsibility: e.target.value,
+                                    })
+                                }
+                                min={10}
+                                maxLength={50}
+                                onKeyPress={letterOnly}
+                                placeholder="Description: 50 words maximum"
+                            />
+                        </div>
+                        <div className="col-12 form-group">
+                            <input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={() => setChecked(!checked)}
+                            />
+                            <span>I currently work in this role</span>
+                        </div>
+                        <div className="col-6 form-group field">
+                            <Form.Item
+                                name="startDate"
+                                label="Start Date"
+                                initialValue={
+                                    startDate ? moment(startDate) : undefined
+                                }
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please select the day you started",
+                                    },
+                                ]}
+                            >
+                                <DatePicker
+                                    id="startDate"
+                                    name="startDate"
+                                    className="date-input col-lg-12 ps-3 py-2"
+                                    style={{ padding: "15px" }}
+                                    // selected={startDate}
+                                    value={
+                                        startDate
+                                            ? moment(startDate)
+                                            : undefined
+                                    }
+                                    onChange={(date, dateString) => {
+                                        console.log(dateString);
+                                        setStartDate(
+                                            dateString === ""
+                                                ? null
+                                                : dateString
+                                        );
+                                    }}
+                                    // required={true}
+                                />
+                            </Form.Item>
+                        </div>
+                        {!checked && (
+                            <div className="col-6 form-group field">
+                                <Form.Item
+                                    name="endDate"
+                                    label="End Date"
+                                    initialValue={
+                                        endDate ? moment(endDate) : undefined
+                                    }
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please select the day you ended",
+                                        },
+                                    ]}
+                                >
+                                    <DatePicker
+                                        id="endDate"
+                                        name="endDate"
+                                        className="date-input col-lg-12 ps-3 py-2"
+                                        style={{ padding: "15px" }}
+                                        // selected={endDate}
+                                        value={
+                                            endDate
+                                                ? moment(endDate)
+                                                : undefined
+                                        }
+                                        onChange={(date, dateString) => {
+                                            console.log(dateString);
+                                            setEndDate(
+                                                dateString === ""
+                                                    ? null
+                                                    : dateString
+                                            );
+                                        }}
+                                        // required={true}
+                                    />
+                                </Form.Item>
+                            </div>
+                        )}
 
-            <div
-              className="col-12 d-flex justify-content-end"
-              style={{ marginTop: "4rem" }}
-            >
-              <CustomButton
-                type="button"
-                background="#021098"
-                onClick={()=> onSubmit()}
-                // style={{ marginLeft: '7rem' }}
-              >
-                Save
-              </CustomButton>
+                        <div
+                            className="col-12 d-flex justify-content-end"
+                            style={{ marginTop: "4rem" }}
+                        >
+                            <CustomButton
+                                type="submit"
+                                background="#021098"
+                                // style={{ marginLeft: '7rem' }}
+                            >
+                                Save
+                            </CustomButton>
+                        </div>
+                    </ModalForm>
+                </Form>
             </div>
-          </ModalForm>
-        </form>
-      </div>
-    </ModalCus>
-  );
+        </ModalCus>
+    );
 };
 
 export const EducationModal = ({
-  handleClose,
-  handleWorkDetails,
-  editIndex,
-  isLocal = false,
-  education,
-  isEditing,
-  setIsEditing,
+    handleClose,
+    handleWorkDetails,
+    editIndex,
+    isLocal = false,
+    education,
+    isEditing,
+    setIsEditing,
 }) => {
-  const [eduStartDate, setEduStartDate] = useState(new Date());
-  const [eduEndDate, setEduEndDate] = useState(new Date());
-  const [checked, setChecked] = useState(false);
-  const { updateProfile, stateAuth  } = useAuth();
-  
-  const onSubmit = (e) => {
-    console.log(education, 'prev education');
-    e.preventDefault();
-  
-       updateProfile("team",{ education: [
-    
-      ...stateAuth?.startupData?.team.education,
-        {
-          index: editIndex,
-          schoolName: formik.getFieldProps("schoolName").value,
-          course: formik.getFieldProps("course").value,
-          degree: formik.getFieldProps("degree").value,
-          activities: formik.getFieldProps("activities").value,
-          startDate: eduStartDate.toISOString(),
-          endDate: checked ? "present" : eduEndDate.toISOString(),
-          founder: true,
-        }
-      ],
+    const [checked, setChecked] = useState(
+        education[editIndex]?.endDate === "present" ? true : false
+    );
+    const { updateProfile, stateAuth } = useAuth();
+    const dateFormat = "YYYY-MM-DD";
+
+    const [startDate, setStartDate] = useState(
+        education[editIndex]?.startDate &&
+            education[editIndex]?.startDate !== "present"
+            ? education[editIndex]?.startDate
+            : undefined
+    );
+    const [endDate, setEndDate] = useState(
+        education[editIndex]?.endDate &&
+            education[editIndex]?.endDate !== "present"
+            ? education[editIndex]?.endDate
+            : undefined
+    );
+
+    const [formValues, setFormValues] = useState({
+        schoolName: isEditing ? education[editIndex]?.schoolName : "",
+        course: isEditing ? education[editIndex]?.course : "",
+        degreeType: isEditing
+            ? education[editIndex]?.degreeType
+            : degreeList[0].value,
+        activities: isEditing ? education[editIndex]?.activities : "",
+        startDate: isEditing ? education[editIndex]?.startDate : "",
+        endDate: isEditing ? education[editIndex]?.endDate : "",
     });
-    handleClose(false);
-  };
 
-  const formik = useFormik({
-    initialValues: {
-      schoolName: isEditing ? education[editIndex]?.schoolName : "",
-      course: isEditing ? education[editIndex]?.course : "",
-      degree: isEditing ? education[editIndex]?.degree : "",
-      activities: isEditing ? education[editIndex]?.activities : "",
-      eduStartDate: "",
-      eduEndDate: "",
-    },
-    validationSchema: Yup.object({
-      schoolName: Yup.string().required("Required"),
-      course: Yup.string().required("Required"),
-      degree: Yup.string().required("Required"),
-      activities: Yup.string().required("Required"),
-      eduStartDate: Yup.string().required("Required"),
-      eduEndDate: Yup.string().required("Required"),
-    }),
-    onSubmit: (value) => console.log(value),
-  });
+    console.log(stateAuth?.profileData?.startupRes?.team?.education);
 
-  return (
-    <ModalCus
-      closeModal={() => {
-        setIsEditing(false);
-        handleClose();
-      }}
-    >
-      <div className="mx-2">
-        <HeaderModal>
-          {isEditing ? "Edit Education" : "Add Education"}
-        </HeaderModal>
-        <hr style={{ background: "#323232" }} />
-        <form onSubmit={(e) => onSubmit(e, isEditing ? "educationEdit" : "education")}>
-          <ModalForm className="row">
-            <div className="col-12 form-group">
-              <label>School<span style={{color: "red"}}>*</span></label>
-              <input
-                id="school"
-                name="schoolName"
-                type="text"
-                className="form-control ps-3"
-                placeholder="Enter School name"
-                value={formik.values.schoolName}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.school && formik.errors.school ? (
-                <article className="error">{formik.errors.school}</article>
-              ) : null}
-            </div>
-            <div className="col-12 form-group">
-              <label>Degree<span style={{color: "red"}}>*</span></label>
-              <input
-                id="degree"
-                name="degree"
-                type="text"
-                className="form-control ps-3"
-                placeholder="Enter Degree "
-                value={ formik.values.degree}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.degree && formik.errors.degree ? (
-                <article className="error">{formik.errors.degree}</article>
-              ) : null}
-            </div>
-            <div className="col-12 form-group">
-              <label>Field of study<span style={{color: "red"}}>*</span></label>
-              <input
-                id="course"
-                name="course"
-                type="text"
-                className="form-control ps-3"
-                placeholder="Enter filed of study"
-                value={formik.values.course}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.course && formik.errors.course ? (
-                <article className="error">{formik.errors.course}</article>
-              ) : null}
-            </div>
-            <div className="col-12 form-group">
-              <div className="d-flex justify-content-between">
-                <label>Activities and societies<span style={{color: "red"}}>*</span></label>
-                <label style={{ color: "#828282" }}>
-                  50 characters at most
-                </label>
-              </div>
+    const onFinish = (values) => {
+        console.log(values);
 
-              <textarea
-                id="activities"
-                name="activities"
-                cols="5"
-                rows="6"
-                className="form-control ps-3"
-                placeholder="Enter Activities and Societies"
-                value={formik.values.activities}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.activities && formik.errors.activities ? (
-                <article className="error">{formik.errors.activities}</article>
-              ) : null}
-            </div>
-            <div className="col-12 form-group">
-              <input
-                type="checkbox"
-                checked={checked}
-                onChange={() => setChecked(!checked)}
-              />
-              <span>I currently school here.</span>
-            </div>
+        if (isEditing) {
+            const newList = [
+                ...stateAuth?.profileData?.startupRes?.team?.education,
+            ];
+            newList[editIndex] = {
+                ...values,
+                index: editIndex,
+                startDate: new Date(startDate).toISOString(),
+                endDate: checked ? "present" : new Date(endDate).toISOString(),
+                founder: true,
+            };
+            console.log(newList);
+            updateProfile("team", { education: newList });
+        } else {
+            updateProfile("team", {
+                education: [
+                    ...stateAuth?.profileData?.startupRes?.team.education,
+                    {
+                        ...values,
+                        index: editIndex,
+                        startDate: new Date(startDate).toISOString(),
+                        endDate: checked
+                            ? "present"
+                            : new Date(endDate).toISOString(),
+                        founder: true,
+                    },
+                ],
+            });
+        }
 
-            <div className="col-6 form-group">
-              <label>Entry Date<span style={{color: "red"}}>*</span></label>
-              <DatePicker
-                id="eduStartDate"
-                name="eduStartDate"
-                className="date-input col-lg-12 ps-3 py-2"
-                // style={{ padding: '15px' }}
-                selected={eduStartDate}
-                onChange={(date) => setEduStartDate(date)}
-              />
-            </div>
+        handleClose(false);
+    };
 
-            {!checked && (
-              <div className="col-6 form-group">
-                <label>Graduation Date<span style={{color: "red"}}>*</span></label>
-                <DatePicker
-                  id="eduEndDate"
-                  name="eduEndDate"
-                  className="date-input col-lg-12 ps-3 py-2"
-                  // style={{ padding: '15px' }}
-                  selected={eduEndDate}
-                  onChange={(date) => setEduEndDate(date)}
-                />
-              </div>
-            )}
+    return (
+        <ModalCus
+            closeModal={() => {
+                setIsEditing(false);
+                handleClose();
+            }}
+        >
+            <div className="mx-2">
+                <HeaderModal>
+                    {isEditing ? "Edit Education" : "Add Education"}
+                </HeaderModal>
+                <hr style={{ background: "#323232" }} />
+                <Form
+                    name="Education"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    onFinish={onFinish}
+                    layout="vertical"
+                >
+                    <ModalForm className="row">
+                        <div className="col-12 form-group">
+                            <TextField
+                                label="School"
+                                name={"schoolName"}
+                                onChange={(e) =>
+                                    setFormValues({
+                                        ...formValues,
+                                        schoolName: e.target.value,
+                                    })
+                                }
+                                value={formValues.schoolName}
+                                required={true}
+                                placeholder="e.g. University of Glasgow"
+                            />
+                        </div>
+                        <div className="col-12 form-group field">
+                            <Form.Item
+                                name="degreeType"
+                                label="Degree"
+                                initialValue={formValues.degreeType}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please select a degree type.",
+                                    },
+                                ]}
+                            >
+                                <Select
+                                    id="degreeType"
+                                    style={{ width: 200 }}
+                                    placeholder="Enter Degree"
+                                    name="degreeType"
+                                    value={
+                                        formValues.degreeType !== ""
+                                            ? formValues.degreeType
+                                            : degreeList[0]?.value
+                                    }
+                                    onChange={(e) => {
+                                        console.log(e);
+                                        setFormValues({
+                                            ...formValues,
+                                            degreeType: e,
+                                        });
+                                    }}
+                                >
+                                    {degreeList.map((item, i) => (
+                                        <Option value={item.value} key={i}>
+                                            {" "}
+                                            {item.label}{" "}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                        </div>
 
-            <div
-              className="col-12 d-flex justify-content-end"
-              style={{ marginTop: "2rem" }}
-            >
-              <CustomButton
-                type="button"
-                background="#021098"
-                onClick={(e) => onSubmit(e)}
-                // style={{ marginLeft: '7rem' }}
-              >
-                Save
-              </CustomButton>
+                        <div className="col-12 form-group">
+                            <TextField
+                                label="Field of study"
+                                name={"course"}
+                                onChange={(e) =>
+                                    setFormValues({
+                                        ...formValues,
+                                        course: e.target.value,
+                                    })
+                                }
+                                value={formValues.course}
+                                required={true}
+                                placeholder="e.g. Cyber Security"
+                            />
+                        </div>
+                        <div className="col-12 form-group ">
+                            <TextareaCustom
+                                name={"activities"}
+                                label={"Activities and societies"}
+                                value={formValues.activities}
+                                onChange={(e) =>
+                                    setFormValues({
+                                        ...formValues,
+                                        activities: e.target.value,
+                                    })
+                                }
+                                min={10}
+                                maxLength={50}
+                                onKeyPress={letterOnly}
+                                placeholder="Enter Activities and Societies"
+                            />
+                        </div>
+                        <div className="col-12 form-group">
+                            <input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={() => setChecked(!checked)}
+                            />
+                            <span>I currently school here.</span>
+                        </div>
+
+                        <div className="col-6 form-group field">
+                            <Form.Item
+                                name="startDate"
+                                label="Entry Date"
+                                initialValue={
+                                    startDate ? moment(startDate) : undefined
+                                }
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please select the day you started",
+                                    },
+                                ]}
+                            >
+                                <DatePicker
+                                    id="startDate"
+                                    name="startDate"
+                                    className="date-input col-lg-12 ps-3 py-2"
+                                    style={{ padding: "15px" }}
+                                    // selected={startDate}
+                                    value={
+                                        startDate
+                                            ? moment(startDate)
+                                            : undefined
+                                    }
+                                    onChange={(date, dateString) => {
+                                        console.log(dateString);
+                                        setStartDate(
+                                            dateString === ""
+                                                ? null
+                                                : dateString
+                                        );
+                                    }}
+                                    // required={true}
+                                />
+                            </Form.Item>
+                        </div>
+                        {!checked && (
+                            <div className="col-6 form-group field">
+                                <Form.Item
+                                    name="endDate"
+                                    label="Graduation Date"
+                                    initialValue={
+                                        endDate ? moment(endDate) : undefined
+                                    }
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please select the day you graduated",
+                                        },
+                                    ]}
+                                >
+                                    <DatePicker
+                                        id="endDate"
+                                        name="endDate"
+                                        className="date-input col-lg-12 ps-3 py-2"
+                                        style={{ padding: "15px" }}
+                                        // selected={endDate}
+                                        value={
+                                            endDate
+                                                ? moment(endDate)
+                                                : undefined
+                                        }
+                                        onChange={(date, dateString) => {
+                                            console.log(dateString);
+                                            setEndDate(
+                                                dateString === ""
+                                                    ? null
+                                                    : dateString
+                                            );
+                                        }}
+                                        // required={true}
+                                    />
+                                </Form.Item>
+                            </div>
+                        )}
+
+                        <div
+                            className="col-12 d-flex justify-content-end"
+                            style={{ marginTop: "2rem" }}
+                        >
+                            <CustomButton
+                                type="submit"
+                                background="#021098"
+                                // onClick={(e) => onSubmit(e)}
+                                // style={{ marginLeft: '7rem' }}
+                            >
+                                Save
+                            </CustomButton>
+                        </div>
+                    </ModalForm>
+                </Form>
             </div>
-          </ModalForm>
-        </form>
-      </div>
-    </ModalCus>
-  );
+        </ModalCus>
+    );
 };

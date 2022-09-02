@@ -3,21 +3,51 @@
   grid-template-columns: 0.1fr 0.8fr 0.1fr;
   margin-bottom: 1rem;
 }
+
 h5 {
   margin-bottom: 0.85rem;
 }
+
 h6 {
   color: #828282;
 }
-.date {
-  margin-top: 2rem;
-}
+
+.date {}
+
 .position {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
+  color: #525251;
+  font-size: 1rem;
+  font-weight: 600;
 }
+
 .title {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #323232;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
 }
+
 .img {
   cursor: pointer;
+}
+
+.moreDeets {
+  margin-top: 2rem;
+}
+
+.moreDeets>* {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #525151;
+}
+
+.moreDeets>h6 {
+  font-weight: 500;
 }

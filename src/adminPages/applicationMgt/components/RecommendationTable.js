@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from '../../../adminComponents';
 import apple from '../../../assets/images/apple.svg';
@@ -7,8 +7,17 @@ import { formatDate } from '../../../utils/helpers';
 import left from '../../../assets/icons/chervonLeft.svg';
 import styles from '../applicationMgt.module.css';
 import { EmptyState } from '../../../mentorComponents';
+import { PaginationData } from '../../../components';
 
-export const RecommendationTable = ({ recommended }) => {
+export const RecommendationTable = ({
+  recommended,
+  currentPage,
+  setCurrentPage,
+}) => {
+  useEffect(() => {
+    console.log(recommended);
+  }, []);
+
   const header = useMemo(
     () => [
       {
@@ -31,17 +40,25 @@ export const RecommendationTable = ({ recommended }) => {
     []
   );
 
+  let limit = 5;
+
   const data = useMemo(() =>
-    recommended?.startups?.map((item, i) => {
+    recommended?.data?.map((item, i) => {
       return {
         startup: (
           <div className='d-flex align-items-center space-out'>
             <img
-              src={item?.startUpProfile?.logo}
+              src={
+                item?.avatar ??
+                `https://ui-avatars.com/api/?name=${item?.startupname}`
+              }
               alt='user'
               className={styles.userPic}
             />
-            <p className='mb-0'>{item?.startUpProfile?.acceleratorName}</p>
+            <p className='mb-0'>
+              {' '}
+              {item?.startupname ?? item?.firstname + ' ' + item?.lastname}
+            </p>
           </div>
         ),
 
@@ -59,17 +76,14 @@ export const RecommendationTable = ({ recommended }) => {
     <div>
       <div>
         <Table headers={header} data={data} />
-        <div className='d-flex align-item-center pt-4 justify-content-end'>
-          <p className='page-num'>1 of 26</p>
-          <img
-            src={left}
-            alt='left'
-            className='mx-3'
-            style={{ transform: 'rotate(180deg)' }}
-            role='button'
-          />
-          <img src={left} alt='left' className='mx-3' role='button' />
-        </div>
+        <PaginationData
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          data={recommended?.startups || []}
+          limit={limit}
+          total={recommended?.metadata?.total}
+        />
+        {/* Pagination goes here */}
       </div>
     </div>
   );

@@ -1,0 +1,270 @@
+.card {
+  background: #ffffff;
+  padding: 2.3rem 2rem;
+  min-height: 250px;
+}
+
+.card p {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #323232;
+  margin-bottom: 14px !important;
+}
+
+.card .logo {
+  width: 80px;
+  min-width: 80px;
+  height: 80px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 30px;
+}
+
+.rec_btn {
+  color: #e21919 !important;
+  border-color: #e21919 !important;
+}
+
+.approve_btn {
+  color: #00adef !important;
+  border-color: #00adef !important;
+}
+
+.overviewCard {
+  background-color: #ffffff;
+  padding: 2.3rem 4rem;
+}
+
+.overviewEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 2.3rem 4rem;
+  margin-top: 5rem;
+  height: 20rem;
+}
+
+.eval_det * {
+  flex-basis: 46%;
+}
+
+.eval_det h6 {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 1.7rem;
+}
+
+.eval_det p {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.eval_det small {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #3e3e3e;
+}
+
+.totalCard {
+  background: #ffffff;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 253px;
+  text-align: center;
+  padding: 3.5rem 3rem;
+}
+
+.totalCard p {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.19rem;
+  line-height: 140%;
+  color: #262627;
+}
+
+.totalCard h1 {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 4.4rem;
+  line-height: 4.4rem;
+  color: #1c8050;
+  margin-bottom: 0;
+}
+
+.totalCard .small {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 140%;
+  color: #7f8084;
+  margin-bottom: 2rem !important;
+}
+
+.userPic {
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  border-radius: 50%;
+}
+
+.qa {
+  background: #e6e6ff;
+  border-radius: 5px;
+  padding: 4px 10px;
+  display: inline-block;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  color: #262626;
+}
+
+.assignment {
+  padding: 3.3rem;
+  background-color: white;
+}
+
+.assignment section:first-child h5 {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.31rem;
+  line-height: 100%;
+  color: #000000;
+}
+
+.assignment section:first-child > div:last-child small {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #525151;
+  margin-bottom: 11px;
+  display: block;
+}
+
+.assignment section:first-child span h6 {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
+  color: #3855b3;
+  margin: 0;
+  margin-right: 8px;
+  padding-right: 8px;
+  border-right: 1px solid #3855b3;
+}
+
+.assignment section:first-child span p {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #3855b3;
+  margin: 0;
+}
+
+.assignment section:last-child h5 {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  color: #2e3192;
+}
+
+.assignment section:last-child > div {
+  background: #fafafc;
+  border-radius: 4px;
+  padding: 1.9rem;
+  max-width: 680px;
+}
+
+.assignment section:last-child > div > span {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.assignment section:last-child > div > span > div {
+  margin-right: 1rem;
+  margin-left: 8px;
+}
+
+.assignment section:last-child > div > span > div > p {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 13px;
+  color: #525151;
+}
+
+.assignment section:last-child > div > span > div > small {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 11px;
+  color: #828282;
+}
+
+.assignment section:last-child > div > span > small {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 10px;
+  text-transform: capitalize;
+  color: #3855b3;
+}
+
+.assignment section:last-child > div > p {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #757575;
+}
+
+.assignment section:last-child > div > span > img {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}

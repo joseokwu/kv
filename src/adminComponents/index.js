@@ -15,3 +15,4 @@ export * from "./fullTab/FullTab";
 export * from "./selectionStartup/SelectionStartup";
 export * from "./assignmentFile/AssignmentFile";
 export * from "./checkbox/Checkbox";
+export * from "./criteriaEvaluationLayout/criteriaEvaluationLayout";

@@ -1,48 +1,48 @@
-import React from "react";
-import "./modal.css";
+import React from 'react';
+import './modal.css';
 
 export const Modal = ({
-  title = "",
+  title = '',
   children,
-  position = "",
-  id = "",
-  subTitle = "",
+  position = '',
+  id = '',
+  subTitle = '',
   withHeader = true,
   width = 847,
 }) => {
   return (
     <div
-      className="modal fade"
-      tabIndex="-1"
-      role="dialog"
+      className='modal fade'
+      tabIndex='-1'
+      role='dialog'
       id={id}
-      style={{ overflowY: "auto" }}
+      style={{ overflowY: 'auto' }}
     >
       <div
         className={`modal-dialog ${
-          position === "center" && "modal-dialog-centered"
+          position === 'center' && 'modal-dialog-centered'
         }`}
-        role="document"
+        role='document'
         style={{ maxWidth: width, marginTop: 200 }}
       >
-        <div className="modal-content kv-modal-content">
+        <div className='modal-content kv-modal-content'>
           {withHeader && (
-            <header style={{ border: title === "" ? "none" : "" }}>
-              <div className="w-100">
+            <header style={{ border: title === '' ? 'none' : '' }}>
+              <div className='w-100'>
                 <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
+                  type='button'
+                  className='close'
+                  data-dismiss='modal'
+                  aria-label='Close'
                 >
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden='true'>&times;</span>
                 </button>
               </div>
-              <p className="kv-modal-title">{title}</p>
-              {subTitle.length > 0 && <p className="mt-3">{subTitle}</p>}
+              <p className='kv-modal-title'>{title}</p>
+              {subTitle.length > 0 && <p className='mt-3'>{subTitle}</p>}
             </header>
           )}
-          <section className="modal-body text-left">{children}</section>
+          <section className='modal-body text-left'>{children}</section>
         </div>
       </div>
     </div>

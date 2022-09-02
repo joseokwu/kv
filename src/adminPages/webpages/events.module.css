@@ -1,0 +1,106 @@
+.eventCard {
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  padding: 1.31rem 2rem;
+}
+
+.eventCard h5 {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 140%;
+  color: rgba(24, 24, 25, 0.9);
+}
+
+.eventCard span {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #3855b3;
+}
+
+.eventCard h6 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 140%;
+  color: #3855b3;
+  border-right: 1px solid #3855b3;
+  margin-right: 8px;
+  padding-right: 8px;
+}
+
+.desc {
+  font-family: "DM Sans" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+  color: #525151 !important;
+}
+
+.eventVisual {
+  width: 100%;
+  max-height: 236px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.eventFullDesc {
+  background: rgba(220, 235, 255, 0.7);
+  padding: 1.5rem;
+}
+
+.eventFullDesc header {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.eventFullDesc p {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #525151;
+}
+
+.visible {
+  display: flex !important;
+  align-items: center !important;
+  width: 100%;
+  column-gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2.2rem;
+}
+
+.counter {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #e21919;
+}
+
+.copyLink {
+  background: #fafafc;
+  border-radius: 4px;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 3px 14px;
+  color: #d1d1d1;
+}
+

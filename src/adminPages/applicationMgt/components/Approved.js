@@ -8,11 +8,12 @@ import styles from '../applicationMgt.module.css';
 import { EmptyState } from './../../../mentorComponents/emptyState/EmptyState';
 import { applicationManagement } from '../../../services';
 import { toast } from 'react-hot-toast';
+import { PaginationData } from '../../../components';
 
 export const ApprovedTable = ({
   approved,
-  currentPending,
-  setCurrentPending,
+  currentPage,
+  setCurrentPage,
   setResetAccept,
 }) => {
   const [loading, setLoading] = useState({ type: 'none', id: '' });
@@ -24,6 +25,7 @@ export const ApprovedTable = ({
     success: false,
     id: '',
   });
+  let limit = 5;
 
   const manageAccount = async ({ type, value, userId }) => {
     try {
@@ -76,7 +78,7 @@ export const ApprovedTable = ({
   );
 
   const applicationData = useMemo(() =>
-    approved?.startups?.map((item, i) => {
+    approved?.data?.map((item, i) => {
       return {
         startup: (
           <div className='d-flex align-items-center space-out'>
@@ -168,17 +170,14 @@ export const ApprovedTable = ({
   return (
     <div>
       <Table headers={header} data={applicationData} />
-      <div className='d-flex align-item-center pt-4 justify-content-end'>
-        <p className='page-num'>1 of 26</p>
-        <img
-          src={left}
-          alt='left'
-          className='mx-3'
-          style={{ transform: 'rotate(180deg)' }}
-          role='button'
-        />
-        <img src={left} alt='left' className='mx-3' role='button' />
-      </div>
+      <PaginationData
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        data={approved?.startups || []}
+        limit={limit}
+        total={approved?.metadata?.total}
+      />
+      {/* Pagination goes here */}
     </div>
   );
 };

@@ -10,8 +10,9 @@ import digitalLogo from "../../assets/icons/digitalOceanLogo.png";
 import styles from "./viewPartner.module.css";
 import { Tabs } from "../../components";
 import { AppliedStartup, Offerings } from "./components";
-import { applicationManagement } from "../../services";
+import { applicationManagement, getOrCreateProfile } from "../../services";
 import { CircularLoader } from "../../mentorComponents/CircluarLoader";
+import { EmptyState } from "../../mentorComponents";
 
 export const ViewPartner = () => {
     const {
@@ -20,19 +21,27 @@ export const ViewPartner = () => {
     } = useHistory();
 
     const [partner, setPartner] = useState({});
+    const [loading, setLoading] = useState(false);
     const { id } = useParams();
 
     const getPartner = async () => {
-        const res = await applicationManagement({
-            userId: id,
-            action: "get_partner",
-        });
+        setLoading(true);
+        try {
+            const res = await getOrCreateProfile({
+                userId: id,
+                userType: "boosterpartner",
+            });
 
-        if (res?.success) {
-            setPartner(res?.data);
+            if (res?.success) {
+                setPartner(res?.data?.data);
+            }
+
+            console.log("res", res);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoading(false);
         }
-
-        console.log("res", res);
     };
 
     useEffect(() => {
@@ -53,7 +62,7 @@ export const ViewPartner = () => {
     };
 
     if (Object.keys(partner).length === 0) {
-        return (
+        return loading ? (
             <div
                 style={{
                     width: "100vw",
@@ -64,6 +73,25 @@ export const ViewPartner = () => {
             >
                 <CircularLoader color="#000000" />
             </div>
+        ) : (
+            <section>
+                <section className="d-flex align-items-center mb-3 p-5">
+                    <img
+                        src={left}
+                        alt="left"
+                        className="mr-2"
+                        style={{ transform: "rotate(180deg)" }}
+                    />
+                    <p
+                        className="bread-start"
+                        role="button"
+                        onClick={() => goBack()}
+                    >
+                        Go back
+                    </p>
+                </section>
+                <EmptyState message="Unable to find Booster Partner" />
+            </section>
         );
     }
     return (
@@ -90,14 +118,19 @@ export const ViewPartner = () => {
                     <div className="w-100">
                         <article className="d-flex align-items-center space-out mb-2 w-100">
                             <img
-                                src={partner?.logo || digitalLogo}
+                                src={
+                                    partner?.userId?.avatar ??
+                                    `https://ui-avatars.com/api/?name=${partner?.userId?.firstname} ${partner?.userId?.lastname}`
+                                }
                                 alt="user"
                                 className={styles.userDp}
                             />
                         </article>
 
                         <h4 className={styles.user_name}>
-                            {partner?.companyName}
+                            {partner?.companyName
+                                ? partner?.companyName
+                                : `${partner?.userId?.firstname} ${partner?.userId?.lastname}`}
                         </h4>
                         <div
                             className={`d-flex align-items-center mb-3 ${styles.partnerContact}`}
@@ -124,8 +157,17 @@ export const ViewPartner = () => {
                                 className={`d-flex align-items-center space-out mb-2 ml-4`}
                             >
                                 <img src={phone} alt="phone" />
-                                <a href="" className={styles.text}>
-                                    {partner?.phoneNumber}
+                                <a
+                                    href={`tel:${
+                                        partner?.phoneNumber
+                                            ? partner?.phoneNumber
+                                            : partner?.userId?.phone
+                                    }`}
+                                    className={styles.text}
+                                >
+                                    {partner?.phoneNumber
+                                        ? partner?.phoneNumber
+                                        : partner?.userId?.phone}
                                 </a>
                             </div>
 
@@ -133,7 +175,14 @@ export const ViewPartner = () => {
                                 className={`d-flex align-items-center space-out mb-2 ml-4`}
                             >
                                 <img src={web} alt="web" />
-                                <a href="" className={styles.text}>
+                                <a
+                                    href={
+                                        partner?.website
+                                            ? partner?.website
+                                            : null
+                                    }
+                                    className={styles.text}
+                                >
                                     {partner?.website}
                                 </a>
                             </div>
@@ -149,7 +198,9 @@ export const ViewPartner = () => {
                     <section>
                         <article className="d-flex justify-content-end mb-2">
                             <a
-                                href={partner?.twitter}
+                                href={
+                                    partner?.twitter ? partner?.twitter : null
+                                }
                                 rel="no-referrer no-opener"
                                 target="_blank"
                             >
@@ -160,7 +211,9 @@ export const ViewPartner = () => {
                                 />
                             </a>
                             <a
-                                href={partner?.linkedin}
+                                href={
+                                    partner?.linkedin ? partner?.linkedin : null
+                                }
                                 rel="no-referrer no-opener"
                                 target="_blank"
                             >

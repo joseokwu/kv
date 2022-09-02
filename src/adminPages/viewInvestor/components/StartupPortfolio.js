@@ -24,17 +24,17 @@ export const StartupPortfolio = ({ partnerData }) => {
     }, [portfolios]);
 
     useEffect(() => {
-        const getCommitments = async () => {
-            const res = await getInvestorCommitment({
-                page: 1,
-                limit: 3,
-                investorId: partnerData?.userId,
-            });
-            console.log(res?.data?.commitments);
-            setPortfolios(res?.data?.commitments);
-            setFetched(true);
-        };
-        getCommitments();
+        // const getCommitments = async () => {
+        //     const res = await getInvestorCommitment({
+        //         page: 1,
+        //         limit: 3,
+        //         investorId: partnerData?.userId,
+        //     });
+        //     console.log(res?.data?.commitments);
+        //     setPortfolios(res?.data?.commitments);
+        //     setFetched(true);
+        // };
+        // getCommitments();
     }, [refetch]);
 
     return (

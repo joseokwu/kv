@@ -5,6 +5,7 @@ import {
     LOGIN_FAILED,
     LOGIN_SUCCESS,
     USER_PROFILE,
+    USER_OBJ_UPDATE,
     USER_PROFILE_FAIL,
     SET_SIGNUP_STATUS,
     EDIT,
@@ -19,11 +20,14 @@ import {
     UPDATE_MENTOR_INFO,
     UPDATE_MENTOR_DATA,
     UPDATE_STARTUP_USER_PROFILE,
+    REMOVE_WORK_EXPERIENCE,
+    REMOVE_EDUCATION,
 } from "../actions.types";
 import {
     register,
     userLogin,
     profile,
+    user,
     updateFounderProfile,
     forgorPassword,
 } from "../../../services";
@@ -45,7 +49,8 @@ export const registerUser = async (value) => async (dispatch) => {
 
         return res;
     } catch (err) {
-        toast.success(err?.response?.data?.message ?? err?.response);
+        console.log(err?.response);
+        toast.error(err?.response?.data?.message ?? err?.response);
         console.log(err?.response?.data?.message ?? err?.response);
         dispatch({
             type: REGISTER_FAILED,
@@ -59,6 +64,7 @@ export const loginUser = async (value) => async (dispatch) => {
             type: AUTH_START,
         });
         const res = await userLogin(value);
+        console.log(res);
         console.log(res?.data?.user);
         if (!res?.success) {
             toast.error(res?.message);
@@ -66,8 +72,9 @@ export const loginUser = async (value) => async (dispatch) => {
                 type: LOGIN_FAILED,
             });
         } else {
+            console.log("continua");
             setAuthToken(res?.data?.token);
-            setType(res?.data?.user?.type[0]);
+            setType(res?.data?.user?.userType);
             console.log(res);
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -78,7 +85,10 @@ export const loginUser = async (value) => async (dispatch) => {
         }
     } catch (err) {
         console.log(err?.response?.data?.message, "err");
-        toast.error(err?.response?.data?.message ?? "Login error please try again");
+        console.log(err, "errorr");
+        toast.error(
+            err?.response?.data?.message ?? "Login error please try again"
+        );
         //console.log('error')
         dispatch({
             type: LOGIN_FAILED,
@@ -86,22 +96,28 @@ export const loginUser = async (value) => async (dispatch) => {
     }
 };
 
-export const dashboardProfile = async (value) => async (dispatch) => {
+export const dashboardProfile = async () => async (dispatch) => {
     try {
         dispatch({
             type: DASHBOARD_LOAD,
         });
-        const res = await profile(value);
-        if (res) {
+        console.log("function dashboardProfile");
+        const res = await profile();
+        if (res?.success) {
+            console.log("atThisPoint", res?.data);
             dispatch({
                 type: DASHBOARD_USER_PROFILE,
                 payload: res?.data,
             });
         }
+        return res;
     } catch (err) {
+        console.log("err", err);
+        console.log("failed to store user profile ");
         dispatch({
             type: USER_PROFILE_FAIL,
         });
+        return { success: false };
     }
 };
 
@@ -140,15 +156,17 @@ export const updateInvestorProfile =
 
 export const updateInvestorData = async (value) => async (dispatch) => {
     try {
-        const res = await profile(value);
+        const res = await profile();
         if (res) {
-            console.log(res?.data?.investorData);
+            // console.log(res?.data?.investorData);
+            console.log("updateInvestorData", res);
             dispatch({
                 type: UPDATE_INVESTOR_DATA,
                 payload: res?.data?.investorData,
             });
         }
     } catch (err) {
+        console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,
         });
@@ -157,14 +175,16 @@ export const updateInvestorData = async (value) => async (dispatch) => {
 
 export const updateStartupData = async (value) => async (dispatch) => {
     try {
-        const res = await profile(value);
+        const res = await profile();
         if (res) {
-            // console.log(res?.data?.startupData);
+            // console.log(res?.data?.profileData.startupRes);
             dispatch({
                 type: UPDATE_STARTUP_DATA,
             });
         }
     } catch (err) {
+        console.log("err", err);
+        console.log("failed to update startup bbb");
         dispatch({
             type: USER_PROFILE_FAIL,
         });
@@ -173,12 +193,12 @@ export const updateStartupData = async (value) => async (dispatch) => {
 
 export const updateStartupUserProfile = async (value) => async (dispatch) => {
     try {
-        const res = await updateFounderProfile(value);
+        // const res = await updateFounderProfile(value);
         dispatch({
             type: UPDATE_STARTUP_USER_PROFILE,
-            payload: res?.data,
+            payload: value,
         });
-        toast.success(res?.message);
+        // toast.success(res?.message);
     } catch (err) {
         toast.error(err?.response?.data?.message ?? "Unable to update profile");
     }
@@ -186,14 +206,17 @@ export const updateStartupUserProfile = async (value) => async (dispatch) => {
 
 export const updateMentorData = async (value) => async (dispatch) => {
     try {
-        const res = await profile(value);
-        if (res) {
+        console.log("function updateMentorData");
+        const res = await profile();
+        if (res.success) {
             dispatch({
                 type: UPDATE_MENTOR_DATA,
-                payload: res?.data?.mentorData,
+                payload: res?.data?.mentor_response,
             });
         }
     } catch (err) {
+        console.log("USER_PROFILE_FAIL");
+        console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,
         });
@@ -205,19 +228,45 @@ export const getProfile = async (value) => async (dispatch) => {
         dispatch({
             type: AUTH_START,
         });
-        const res = await profile(value);
+        const res1 = await user();
 
-        if (res) {
+        if (res1) {
+            console.log(res1);
+            console.log(value);
             dispatch({
                 type: USER_PROFILE,
-                payload: res?.data,
+                payload: res1?.data?.data,
             });
         }
+
+        if (res1?.data?.data?.userType !== "admin") {
+            const res2 = await profile();
+
+            if (res2) {
+                console.log(res2);
+                console.log(value);
+                dispatch({
+                    type: DASHBOARD_USER_PROFILE,
+                    payload: res2?.data,
+                });
+            }
+            return res2;
+        }
+        return res1;
     } catch (err) {
+        console.log("err", err);
         dispatch({
             type: USER_PROFILE_FAIL,
         });
+        return { success: false };
     }
+};
+
+export const updateUserObjAction = async (value) => async (dispatch) => {
+    dispatch({
+        type: USER_OBJ_UPDATE,
+        payload: value,
+    });
 };
 
 export const changeStatus = (value) => async (dispatch) => {
@@ -250,3 +299,16 @@ export const updateMentorProfile =
             },
         });
     };
+export const removeWorkExperienceAction = (id) => (dispatch) => {
+    dispatch({
+        type: REMOVE_WORK_EXPERIENCE,
+        payload: id,
+    });
+};
+
+export const removeEducationAction = (id) => (dispatch) => {
+    dispatch({
+        type: REMOVE_EDUCATION,
+        payload: id,
+    });
+};

@@ -132,6 +132,7 @@
   line-height: 140%;
   color: #323232;
 }
+
 .education p {
   font-family: DM Sans;
   font-style: normal;
@@ -163,4 +164,14 @@
   border-radius: 10px;
   padding: 9px 15px;
   border: none;
+}
+
+
+
+
+.founder_profile .icon:hover {
+  background: unset;
+  color: unset;
+  text-decoration: none;
+  border: unset;
 }

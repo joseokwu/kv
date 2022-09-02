@@ -1,3 +1,4 @@
+import { css } from "styled-components/macro";
 import { BodyWrapper, DownloadableButton, Terms } from "./financial.styled";
 import { useHistory } from "react-router-dom";
 import {
@@ -8,10 +9,14 @@ import Download from "../../../../../../assets/icons/downloadoutline.svg";
 import { useActivity } from "../../../../../../hooks/useBusiness";
 import { useAuth } from "../../../../../../hooks/useAuth";
 import { upload } from "./../../../../../../services/utils";
+import { editUser } from "../../../../../../services";
 import { useState } from "react";
 import { UploadFile } from "../../../../../../components";
 import { validate } from "./../../../../../../utils/helpers";
 import { startupValidation } from "./../../../../../../utils/utils";
+import toast from "react-hot-toast";
+import Form from "antd/lib/form/Form";
+import * as XLSX from "xlsx";
 
 export const FinancialProjection = () => {
     const {
@@ -22,16 +27,66 @@ export const FinancialProjection = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(stateAuth?.startupData);
-        console.log(validate(stateAuth?.startupData, startupValidation));
-        updateStartupInfo(validate(stateAuth?.startupData, startupValidation));
-        // window.open('/startup/dashboard', '_self');
+
+        if (
+            stateAuth?.profileData?.startupRes?.fundRaising?.financialProjection
+                ?.files?.length !== 0
+        ) {
+            console.log(stateAuth?.profileData?.startupRes);
+            console.log(
+                validate(stateAuth?.profileData?.startupRes, startupValidation)
+            );
+            // updateStartupInfo(
+            //     validate(stateAuth?.profileData?.startupRes, startupValidation)
+            // );
+            const profileReq = await updateStartupInfo();
+
+            if (
+                // profileReq?.success &&
+                stateAuth?.profileData?.startupRes?.startUpProfile
+                    ?.elevatorPitch &&
+                stateAuth?.profileData?.startupRes?.pitchDeck?.pitchDeckFile &&
+                stateAuth?.profileData?.startupRes?.team?.briefIntroduction &&
+                stateAuth?.profileData?.startupRes?.product?.description &&
+                stateAuth?.profileData?.startupRes?.fundRaising?.fundingAsk
+                    ?.instrumentForRound
+            ) {
+                console.log("registration actually  completed");
+                try {
+                    const completeReg = await editUser({
+                        payload: { isRegCompleted: true },
+                    });
+                    console.log(completeReg);
+                    if (completeReg?.success)
+                        window.open("/startup/registration/success", "_self");
+                } catch (e) {
+                    console.log(e);
+                }
+            } else {
+                toast.error(
+                    "Please go back and ensure you've completed your registration"
+                );
+            }
+        } else toast.error("Please provide a financial projection document");
     };
 
+    console.log("complll", stateAuth?.profileData?.startupRes);
+
     return (
-        <>
+        <form onSubmit={handleSubmit}>
             <BodyWrapper>
-                <div className="mt-5">
+                <span
+                    css={css`
+                        font-family: DM Sans;
+                        font-weight: 500;
+                        font-size: 24px;
+                        line-height: 30.83px;
+                        color: #2e3192;
+                    `}
+                >
+                    Financial Projection
+                </span>
+                <div className="pt-3">
                     <p>
                         A document containing all your financial plan and
                         statements for your business.
@@ -41,13 +96,18 @@ export const FinancialProjection = () => {
                 <hr />
 
                 <div className="my-5">
-                    <div className="col-12 my-3 mx-5">
-                        <DownloadableButton href="." className="mx-n5 mx-lg-n0">
+                    <div className="col-12 my-3 mx-0 px-0">
+                        <DownloadableButton
+                            href="/files/KV Utilisation Table.xlsx"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className=""
+                        >
                             <img className="pr-2" src={Download} alt="" />
                             Download fund utilization template here
                         </DownloadableButton>
                     </div>
-                    <div className="col-12 my-5">
+                    <div className="col-12 my-5 px-0">
                         <UploadFile
                             data={{
                                 maxFiles: 1,
@@ -60,29 +120,33 @@ export const FinancialProjection = () => {
                                 extension: "MB",
                             }}
                             initData={
-                                stateAuth?.startupData?.fundRaising
-                                    ?.financialProjection?.files
+                                stateAuth?.profileData?.startupRes?.fundRaising
+                                    ?.financialProjection?.file
                                     ? [
-                                          stateAuth?.startupData?.fundRaising
-                                              ?.financialProjection?.files,
+                                          stateAuth?.profileData?.startupRes
+                                              ?.fundRaising?.financialProjection
+                                              ?.file,
                                       ]
                                     : []
                             }
                             onUpload={async (filesInfo) => {
                                 const formData = new FormData();
-                                formData.append("dir", "kv");
-                                formData.append("ref", stateAuth.user?.userId);
+
                                 formData.append("type", "pdf");
-                                formData.append(0, filesInfo[0]?.file);
+                                formData.append("file", filesInfo[0]?.file);
 
                                 try {
                                     const response = await upload(formData);
                                     console.log(response);
                                     updateProfile("fundRaising", {
                                         financialProjection: {
-                                            files: response.path,
+                                            file: response?.path,
                                         },
                                     });
+
+                                    if (!response?.path) return [];
+
+                                    return [response?.path];
                                 } catch (error) {
                                     console.log(error);
                                 }
@@ -112,7 +176,6 @@ export const FinancialProjection = () => {
                 <div className="col-9 d-flex justify-content-end">
                     <OutlineButton
                         type="submit"
-                        onClick={(e) => handleSubmit(e)}
                         className="ms-2"
                         style={{ marginRight: "0rem" }}
                         background="none"
@@ -121,6 +184,6 @@ export const FinancialProjection = () => {
                     </OutlineButton>
                 </div>
             </div>
-        </>
+        </form>
     );
 };

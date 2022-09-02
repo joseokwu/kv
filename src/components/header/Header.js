@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/kvLogo.png";
+import logo from "../../assets/images/kvLogo.jpg";
 import notification from "../../assets/icons/notification.svg";
 import angleDown from "../../assets/icons/angleDown.svg";
 import ThreeDots from "../../assets/icons/3dots.svg";
@@ -14,17 +14,19 @@ import "./header.css";
 import { useAuth } from "../../hooks";
 import { getType } from "./../../utils/helpers";
 
-export const Header = ({ setOpen, open }) => {
+export const Header = ({ setOpen, open, disabled = false }) => {
     const {
         push,
         location: { pathname },
     } = useHistory();
 
     const getCurrentDashboard = () => {
-        if (pathname.includes("investor")) {
-            return "/investor/dashboard";
-        } else {
-            return "/boosterpartner/dashboard";
+        if (!disabled) {
+            if (pathname.includes("investor")) {
+                return "/investor/dashboard";
+            } else {
+                return "/boosterpartner/dashboard";
+            }
         }
     };
 
@@ -35,7 +37,7 @@ export const Header = ({ setOpen, open }) => {
     const [openNotice, setOpenNotice] = useState(false);
     return (
         <div className="header-main d-flex align-items-center justify-content-between">
-            <section className="d-flex align-items-center">
+            <section className="d-flex align-items-center h-100">
                 <div
                     className={`${open ? "hams-open" : "hams-close"} hams`}
                     onClick={() => setOpen(!open)}
@@ -44,7 +46,7 @@ export const Header = ({ setOpen, open }) => {
                     <span></span>
                     <span></span>
                 </div>
-                <Link to={getCurrentDashboard()}>
+                <Link to={getCurrentDashboard()} className="header-logo">
                     <img src={logo} alt="logo" />
                 </Link>
             </section>
@@ -69,7 +71,7 @@ export const Header = ({ setOpen, open }) => {
                     <span className="d-flex align-items-center header-profile d-none d-lg-flex">
                         <img
                             src={
-                                stateAuth?.logo ??
+                                stateAuth?.userObj?.avatar ??
                                 `https://ui-avatars.com/api/?name=${stateAuth?.username}`
                             }
                             alt="profile"

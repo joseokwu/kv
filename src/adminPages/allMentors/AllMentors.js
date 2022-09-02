@@ -7,70 +7,92 @@ import { Button, Modal, Tag } from "../../components";
 import userPic from "../../assets/images/sampleUser.png";
 import styles from "../userManagement/user.module.css";
 import { AddMentor } from "../userManagement/components";
-import { getStakeHolders } from "../../services";
-import { SkeletonLoader } from "../../components";
+import { getStakeHolders, getUserList } from "../../services";
+import { SkeletonLoader, SpinLoader } from "../../components";
+import { RoundLoader } from "../../components/RoundLoader/RoundLoader";
+import { EmptyState } from "../../mentorComponents";
+import { CircularLoader } from "../../mentorComponents/CircluarLoader";
 
 export const AllMentors = () => {
     const { push } = useHistory();
 
     const [mentors, setMentors] = useState([]);
     const [fetched, setFetched] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [deleteObj, setDeleteObj] = useState({});
 
     const getData = async () => {
-        const res = await getStakeHolders({
-            page: 1,
-            limit: 2,
-            type: "mentor",
-            query: { applicationCompleted: true },
-        });
-        if (res.success && res?.data?.mentors?.length > 0) {
-            setMentors(() =>
-                res?.data?.mentors.map((mentor) => ({
-                    name: (
-                        <div className="d-flex align-items-center space-out">
-                            <img
-                                src={mentor?.personalDetail?.logo ?? userPic}
-                                alt="user"
-                                className={styles.userPic}
-                            />
-                            <p className="mb-0">{`${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`}</p>
-                        </div>
-                    ),
-                    skills: (
-                        <div className="d-flex space-out flex-wrap">
-                            {mentor?.areaOfInterest?.skills?.map((skill, i) => (
-                                <Tag
-                                    name={skill}
-                                    color={i > 0 ? "#40439A" : "#058dc1"}
+        setLoading(true);
+        try {
+            const res = await getUserList("mentor");
+
+            if (res.success && res?.data?.data?.length > 0) {
+                setMentors(() =>
+                    res?.data?.data.map((mentor) => ({
+                        name: (
+                            <div className="d-flex align-items-center space-out">
+                                <img
+                                    src={
+                                        mentor?.userId?.avatar ??
+                                        `https://ui-avatars.com/api/?name=${mentor?.userId?.firstname} ${mentor?.userId?.lastname}`
+                                    }
+                                    alt="user"
+                                    className={styles.userPic}
                                 />
-                            ))}
-                        </div>
-                    ),
-                    company: "Seam Technologies Inc.",
-                    sessions: 3,
-                    actions: (
-                        <div className="d-flex align-items-center space-out">
-                            <Link
-                                to={`/admin/users/mentors/${mentor?.userId}`}
-                                className="view-link"
-                            >
-                                View
-                            </Link>
-                            <p
-                                role="button"
+                                <p className="mb-0">
+                                    {mentor?.personalDetail?.firstname
+                                        ? `${mentor?.personalDetail?.lastname} ${mentor?.personalDetail?.firstname}`
+                                        : `${mentor?.userId?.lastname} ${mentor?.userId?.firstname}`}
+                                </p>
+                            </div>
+                        ),
+                        skills: (
+                            <div className="d-flex space-out flex-wrap">
+                                {mentor?.areaOfInterest?.skills?.map(
+                                    (skill, i) => (
+                                        <Tag
+                                            name={skill}
+                                            color={
+                                                i > 0 ? "#40439A" : "#058dc1"
+                                            }
+                                            className={styles.smallTag}
+                                        />
+                                    )
+                                )}
+                            </div>
+                        ),
+                        company: mentor?.workExperience?.companyName,
+                        sessions: 0,
+                        actions: (
+                            <div className="d-flex align-items-center space-out">
+                                <Link
+                                    to={`/admin/users/mentors/${mentor?.userId?._id}`}
+                                    className="view-link"
+                                >
+                                    View
+                                </Link>
+                                {/* <p
                                 className="delete-link"
-                                data-target="#deleteMentor"
                                 data-toggle="modal"
+                                data-target="#deleteMentor"
+                                onClick={() => {
+                                    console.log("delete ittt");
+                                    setDeleteObj(mentor);
+                                }}
                             >
                                 Delete
-                            </p>
-                        </div>
-                    ),
-                }))
-            );
+                            </p> */}
+                            </div>
+                        ),
+                    }))
+                );
+            }
+            console.log("res", res);
+            setFetched(true);
+        } catch (e) {
+            console.log(e);
             setFetched(true);
         }
-        console.log("res", res);
     };
 
     useEffect(() => {
@@ -161,7 +183,7 @@ export const AllMentors = () => {
             <DeleteModal
                 id="deleteMentor"
                 title="Delete Mentor"
-                desc="Are you sure you want to delete Kate Mcbeth Joan"
+                desc={`Are you sure you want to delete ${deleteObj?.personalDetail?.lastname} ${deleteObj?.personalDetail?.firstname}`}
             />
             <section className="d-flex align-items-center mb-3">
                 <p
@@ -193,9 +215,13 @@ export const AllMentors = () => {
                 </div>
 
                 <div>
-                    <SkeletonLoader fetched={fetched}>
-                        <Table headers={headers} data={mentors} />
-                    </SkeletonLoader>
+                    {fetched && mentors?.length === 0 ? (
+                        <EmptyState message="No mentors yet." />
+                    ) : (
+                        <RoundLoader fetched={fetched} color="blue">
+                            <Table headers={headers} data={mentors} />
+                        </RoundLoader>
+                    )}
                 </div>
 
                 <div className="d-flex align-item-center pt-4 justify-content-end">

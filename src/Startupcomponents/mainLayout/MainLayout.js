@@ -1,10 +1,9 @@
-import React, { useState , useEffect, useCallback } from "react";
-import { Header, Sidebar , DashSidebar } from "../index";
+import React, { useState, useEffect, useCallback } from "react";
+import StartUpsProvider from "../../context/startups";
+import { Header, Sidebar, DashSidebar } from "../index";
 import "./mainLayout.css";
 
-export const DashboardLayout = ({children}) =>{
-
-
+export const DashboardLayout = ({ children }) => {
   const [open, setOpen] = useState(false);
   return (
     <div>
@@ -19,20 +18,18 @@ export const DashboardLayout = ({children}) =>{
       </section>
     </div>
   );
-}
+};
 
 export const WithStartupDashboardLayout = (Component) => {
-
- 
-
   return (props) => {
     return (
       <>
+        {/* <StartUpsProvider> */}
         <DashboardLayout>
           <Component {...props} />
         </DashboardLayout>
+        {/* </StartUpsProvider> */}
       </>
     );
   };
 };
-

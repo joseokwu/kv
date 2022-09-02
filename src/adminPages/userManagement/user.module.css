@@ -12,3 +12,8 @@
   object-fit: contain;
   object-position: center;
 }
+
+.smallTag {
+  font-size: 12px;
+  padding: 8px 10px;
+}

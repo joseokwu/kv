@@ -3,29 +3,62 @@
   grid-template-columns: 0.1fr 0.8fr 0.1fr;
   margin-bottom: 1rem;
 }
-.info{
+
+.info {
   display: block;
 }
+
 h5 {
   margin-bottom: 0.85rem;
 }
 
 h6 {
   color: #828282;
+  margin-bottom: 0.5rem;
 }
-.degree {
-  margin-bottom: 0.85rem;
-}
-.course {
-  margin-bottom: 0.85rem;
 
+.course {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
 }
+
+.degree {}
+
+
+
 .school {
-  margin-bottom: 0.85rem;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
+  color: #323232;
+  margin-bottom: 0.5rem;
 }
+
 .img {
   cursor: pointer;
 }
+
+.moreDeets {
+  margin-top: 2rem;
+}
+
+.moreDeets>* {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #525151;
+}
+
+.moreDeets>h6 {
+  font-weight: 500;
+}
+
 @media (max-width: 1024px) {
   .info {
     margin-left: 10px;

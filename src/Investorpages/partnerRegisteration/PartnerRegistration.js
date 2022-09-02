@@ -5,78 +5,65 @@ import hi from "../../assets/icons/hiEmoji.png";
 import { useHistory } from "react-router-dom";
 import CompanyOverview from "./components/companyOverview/CompanyOverview";
 import OurOffering from "./components/ourOffering/OurOffering";
-import { useAuth } from '../../hooks/useAuth';
-
+import { useAuth, useActivity } from "../../hooks";
 
 export const BoosterPartnerRegistration = () => {
-  const wrapRef = useRef();
-  const [progress, setProgress] = useState("50");
-  const { stateAuth  } = useAuth();
+    const wrapRef = useRef();
+    const [progress, setProgress] = useState("50");
+    const { stateAuth } = useAuth();
+    const {
+        changePath,
+        state: { path },
+    } = useActivity();
 
+    const {
+        location: { hash },
+        push,
+    } = useHistory();
 
-  const {
-    location: { hash },
-    push,
-  } = useHistory();
+    const switchForm = (currentHash) => {
+        push(currentHash);
+    };
 
-  const switchForm = (currentHash) => {
-    push(currentHash);
-  };
+    useEffect(() => {
+        wrapRef.current.scrollTop = 0;
+        if (hash === "#offerings") {
+            setProgress("100");
+            changePath(2);
+        } else {
+            setProgress("0");
+            changePath(1);
+        }
+    }, [hash]);
 
-  useEffect(() => {
-    wrapRef.current.scrollTop = 0;
-    if (hash === "#offerings") {
-      setProgress("90");
-    } else {
-      setProgress("0");
-    }
-  }, [hash]);
-
-  return (
-    <div className="register-wrap" ref={wrapRef}>
-      <section className="register-header">
-        <div>
-          <span>
-            <section
-              className="d-flex align-items-center"
-              style={{ columnGap: 12 }}
-            >
-              <h4>Hi { stateAuth.username }</h4>
-              <img src={hi} alt="hi" />
+    return (
+        <div className="register-wrap">
+            <section className="register-header mb-5">
+                <div className="pt-3">
+                    <span>
+                        <section
+                            className="d-flex align-items-center"
+                            style={{ columnGap: 12 }}
+                        >
+                            <h4>Hi {stateAuth.username}</h4>
+                            <img src={hi} alt="hi" />
+                        </section>
+                        <p>Customise your profile</p>
+                    </span>
+                    <ProgressBar progress={progress} />
+                </div>
             </section>
-            <p>Customise your profile</p>
-          </span>
-          <ProgressBar progress={progress} />
+            <section className="register-grid" ref={wrapRef}>
+                <div className="mt-2 d-flex">
+                    {hash === "#details" ? (
+                        <CompanyOverview />
+                    ) : hash === "#offerings" ? (
+                        <OurOffering />
+                    ) : (
+                        <CompanyOverview />
+                    )}
+                </div>
+            </section>
         </div>
-      </section>
-      <section className="register-grid">
-        <div className="d-none d-lg-flex">
-          <ul className="register-list tab-wrap">
-            <li
-              onClick={() => switchForm("#details")}
-              className={hash === "#details" || hash === "" ? "active-li" : ""}
-            >
-              Partner Details
-            </li>
-            <li
-              onClick={() => switchForm("#offerings")}
-              className={hash === "#offerings" ? "active-li" : ""}
-            >
-              Our Offerings
-            </li>
-          </ul>
-        </div>
-
-        <div className="mt-2 d-flex justify-content-end">
-          {hash === "#details" ? (
-            <CompanyOverview />
-          ) : hash === "#offerings" ? (
-            <OurOffering />
-          ) : (
-            <CompanyOverview />
-          )}
-        </div>
-      </section>
-    </div>
-  );
+    );
 };

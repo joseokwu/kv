@@ -4,10 +4,12 @@ import { DeleteModal, Table } from "../../../adminComponents";
 import styles from "../user.module.css";
 import down from "../../../assets/icons/chevronDown.svg";
 import filter from "../../../assets/icons/filterFunnel.svg";
-import { getStakeHolders } from "../../../services";
-import { SkeletonLoader } from "../../../components";
+import { getStakeHolders, getUserList } from "../../../services";
+import { SkeletonLoader, SpinLoader } from "../../../components";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import userPic from "../../../assets/images/sampleUser.png";
 import "react-loading-skeleton/dist/skeleton.css";
+import { EmptyState } from "../../../mentorComponents";
 
 export const Investor = () => {
     const header = [
@@ -19,20 +21,28 @@ export const Investor = () => {
         { title: "Action", accessor: "action" },
     ];
 
-    const [investorsData, setInvestors] = useState({});
+    const [investorsData, setInvestorsData] = useState([]);
     const [fetched, setFetched] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getData = async () => {
-            const res = await getStakeHolders({
-                page: 1,
-                limit: 5,
-                type: "investor",
-                query: { applicationCompleted: true },
-            });
-            console.log(res);
-
-            setInvestors(res?.data);
+            // const res = await getStakeHolders({
+            //     page: 1,
+            //     limit: 5,
+            //     type: "investor",
+            //     query: { applicationCompleted: true },
+            // });
+            setLoading(true);
+            try {
+                const res = await getUserList("investor");
+                console.log(res);
+                console.log(res?.data?.data);
+                setInvestorsData(res?.data);
+            } catch (e) {
+                console.log(e);
+            }
+            setLoading(false);
             setFetched(true);
         };
         getData();
@@ -40,43 +50,49 @@ export const Investor = () => {
     }, []);
 
     const data = useMemo(() =>
-        investorsData?.investors?.map((item, i) => {
+        investorsData?.data?.map((item, i) => {
             return {
                 name: (
                     <div className="d-flex align-items-center space-out">
                         <img
-                            src={item?.profile?.avatar}
+                            src={
+                                item?.userId?.avatar ??
+                                `https://ui-avatars.com/api/?name=${item?.userId?.firstname} ${item?.userId?.lastname}`
+                            }
                             alt="user"
                             className={styles.userPic}
                         />
                         <p className="mb-0">
-                            {" "}
-                            {item?.profile?.firstName +
-                                " " +
-                                item?.profile?.lastName}{" "}
+                            {item?.profile?.firstName
+                                ? `${item?.profile?.firstName} ${item?.profile?.lastName}`
+                                : `${item?.userId?.firstname} ${item?.userId?.lastname}`}
                         </p>
                     </div>
                 ),
-                email: item?.profile?.email,
-                phone: item?.profile?.mobile_number,
+                email: item?.profile?.email
+                    ? item?.profile?.email
+                    : item?.userId?.email,
+                phone: item?.profile?.mobile_number
+                    ? item?.profile?.mobile_number
+                    : item?.userId?.phone,
                 country: item?.profile?.country,
                 type: item?.investorApproach?.stage,
                 action: (
                     <div className="d-flex align-items-center space-out">
                         <Link
-                            to={`/admin/users/investors/${item?.userId}`}
+                            to={`/admin/users/investors/${item?.userId?._id}`}
                             className="view-link"
                         >
                             View
                         </Link>
-                        <p
+                        {/* <p
                             role="button"
                             data-target="#deleteInvestor"
                             data-toggle="modal"
                             className="delete-link"
                         >
                             Delete
-                        </p>
+                        </p> */}
                     </div>
                 ),
             };
@@ -92,7 +108,7 @@ export const Investor = () => {
             />
             <section className="d-flex align-items-center justify-content-between white-strip mb-3">
                 <h2 className="mb-0">
-                    Investors ({investorsData?.investors?.length || 0})
+                    Investors ({investorsData?.data?.length || 0})
                 </h2>
 
                 <div
@@ -104,9 +120,13 @@ export const Investor = () => {
             </section>
 
             <section>
-                <SkeletonLoader fetched={fetched}>
-                    <Table headers={header} data={data} />
-                </SkeletonLoader>
+                {!loading && investorsData?.length === 0 ? (
+                    <EmptyState message="No investors yet." />
+                ) : (
+                    <SpinLoader loading={loading} color="blue">
+                        <Table headers={header} data={data} />
+                    </SpinLoader>
+                )}
             </section>
         </div>
     );

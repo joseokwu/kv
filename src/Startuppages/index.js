@@ -1,6 +1,5 @@
 export * from "./dashboard/Dashboard";
 export * from "./partnerRegisteration/PartnerRegistration";
-export * from "./signUp/SignUp";
 export * from "./signIn/SignIn";
 export * from "./confirmEmail/ConfirmEmail";
 export * from "./signUpCompleted/SignUpCompleted";
@@ -15,6 +14,7 @@ export * from "./notification/Notification";
 export * from "./eAcademy/eAcademy";
 export * from "./todoList/todoList";
 export * from "./startupRegistration";
+export * from "./startupRegistration/startupRegistrationSuccess";
 export * from "./program";
 export * from "./fundraising";
 export * from "./boosterPartner/boosterPartner";

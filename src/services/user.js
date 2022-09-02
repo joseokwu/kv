@@ -1,78 +1,134 @@
 import { request } from "../utils/axios";
+import { BASE_URL } from "../config/env";
+import axios from "axios";
 
 export const register = async (values) => {
-  try {
-    const res = await request.post("register", values);
-    return res?.data;
-  } catch (err) {
-    console.log(err?.response?.data?.message , 'somethings went wrong')
-    throw err;
-  }
+    try {
+        const res = await request.post("v1/auth/register", values);
+        return res?.data;
+    } catch (err) {
+        console.log(err?.response?.data?.message, "somethings went wrong");
+        throw err;
+    }
 };
 
 export const userLogin = async (values) => {
-  try {
-    const res = await request.post("login", values);
-
-    return res?.data;
-  } catch (err) {
-    console.log(err?.response?.data?.message);
-    throw err;
-  }
+    try {
+        const res = await request.post("v1/auth/login", values);
+        console.log(res);
+        return res?.data;
+    } catch (err) {
+        console.log(err?.response?.data);
+        console.log(err?.response?.data?.message);
+        throw err;
+    }
 };
 
-export const profile = async (value) => {
-  try {
-    // console.log(value)
-    console.log("trying to make request");
-    const res = await request.post("getProfile", { type: value });
-    return res?.data;
-  } catch (err) {
-    console.log(err);
-    const error = err?.response?.data?.message || err?.message;
-    throw new Error(error);
-  }
+export const profile = async () => {
+    try {
+        // console.log(value)
+        console.log("trying to make profile request");
+        const res = await request.get("v1/profile");
+        console.log(res.data);
+        return res?.data;
+    } catch (err) {
+        console.log(err);
+        console.log(err?.response?.data?.message);
+        const error = err?.response?.data?.message || err?.message;
+        throw new Error(error);
+    }
+};
+
+export const user = async () => {
+    try {
+        // console.log(value)
+        console.log("trying to make request");
+        const res = await request.get("v1/user");
+        console.log(res);
+        return res?.data;
+    } catch (err) {
+        console.log(err);
+        const error = err?.response?.data?.message || err?.message;
+        throw new Error(error);
+    }
+};
+
+export const editUser = async (values) => {
+    // payload --- some variation of the user object. NOT profile object. they're different
+
+    try {
+        // console.log(value)
+        const res = await request.post("v1/user", values);
+        console.log(res);
+        // await user();
+        return res?.data;
+    } catch (err) {
+        console.log(err);
+        const error = err?.response?.data?.message || err?.message;
+        throw new Error(error);
+    }
 };
 
 export const forgotPassword = async (values) => {
-  try {
-    const res = await request.post("forgot", values);
-    console.log(res?.data);
-    return res?.data;
-  } catch (err) {
-    console.log(err?.response);
-    throw err;
-  }
+    try {
+        const res = await request.post("v1/auth/forgot-password", values);
+        console.log(res?.data);
+        return res?.data;
+    } catch (err) {
+        console.log(err?.response);
+        throw err;
+    }
 };
 
 export const resendEmail = async (value) => {
-  try {
-    const res = await request.post("resendEmail", value);
-    console.log(res?.data);
-    return res?.data;
-  } catch (err) {
-    throw err;
-  }
+    try {
+        const res = await request.post(
+            "v1/auth/resend-account-verification",
+            value
+        );
+        console.log(res);
+        return res?.data;
+    } catch (err) {
+        throw err;
+    }
 };
 
 export const verifyEmail = async (token) => {
-  try {
-    const res = await request.post("verifyEmail", { token });
-    console.log(res.data);
-    return res.data;
-  } catch (err) {
-    throw err;
-  }
+    try {
+        const res = await axios.post(
+            `${BASE_URL}/v1/auth/verify`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        // console.log("verifyEmail", token);
+        // const res = await request.post("v1/auth/verify");
+        console.log(res);
+        return res.data;
+    } catch (err) {
+        throw err;
+    }
 };
 
-export const resetPassword = async (value) => {
-  try {
-    const res = await request.post("reset", value);
-    console.log(res?.data);
-    return res?.data;
-  } catch (err) {
-    throw err;
-  }
+export const resetPassword = async (token, value) => {
+    try {
+        const res = await axios.post(
+            `${BASE_URL}/v1/auth/reset-password`,
+            value,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        console.log(res?.data);
+        return res?.data;
+    } catch (err) {
+        throw err;
+    }
 };
-
-

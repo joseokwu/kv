@@ -1,6 +1,5 @@
 export * from "./dashboard/Dashboard";
 export * from "./partnerRegisteration/PartnerRegistration";
-export * from "./signUp/SignUp";
 export * from "./signIn/SignIn";
 export * from "./confirmEmail/ConfirmEmail";
 export * from "./signUpCompleted/SignUpCompleted";
@@ -29,4 +28,4 @@ export * from "./dealRoom/DealRoom";
 export * from "./dealFolder/DealFolder";
 export * from "./scheduleCalendar/ScheduleCalendar";
 export * from "./investorProfile/InvestorProfile";
-export * from "./boosterNotification/boosterNotification"
+export * from "./boosterNotification/boosterNotification";

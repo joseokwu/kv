@@ -1,0 +1,73 @@
+.container {
+  padding: 40px 50px;
+  max-width: 1400px;
+
+  @media (max-width: 600px) {
+    padding: 20px 20px;
+  }
+
+  header {
+    margin-bottom: 39px;
+    display: flex;
+    align-items: center;
+    max-width: max-content;
+    cursor: pointer;
+    p {
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 140%;
+      text-transform: capitalize;
+      /* identical to box height, or 34px */
+
+      /* 900 */
+
+      color: #2e3192;
+    }
+  }
+}
+
+.asset_container {
+  display: grid;
+  gap: 18px;
+  row-gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.card_container {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(302px, 1fr));
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(auto-fit, minmax(302px, 1fr));
+  }
+}
+
+.card {
+  background: #f3f3fd;
+  border-radius: 20px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  padding: 33px;
+  cursor: pointer;
+
+  img {
+    width: 18px;
+    height: 18px;
+  }
+
+  span {
+    font-family: "DM Sans", sans-serif;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 140%;
+    margin-left: 26px;
+
+    color: #2e3192;
+  }
+}

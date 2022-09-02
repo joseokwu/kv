@@ -154,7 +154,6 @@ const EditAvailability = () => {
           <TextArea
             className="mb-4"
             label={"Please list here any notes / things you want us to know"}
-            placeholder={"e.g I was made a managing director...."}
             rows={"6"}
           />
         </section> */}

@@ -1,20 +1,43 @@
-import React from "react";
-import { RowOption, TextField, Button } from "../../../../components";
+import React, { useState } from "react";
+import { RowOption, Button } from "../../../../components";
+import { TextField } from "../../../../Startupcomponents";
 import FormCard from "../../../partnerRegisteration/components/formCard/FormCard";
 import { useHistory } from "react-router";
 import { sectors } from "../../../../utils/utils";
 import { Form, Select } from "antd";
-import { useAuth } from "../../../../hooks/useAuth";
+import { useAuth, useActivity } from "../../../../hooks";
+import toast from "react-hot-toast";
 
 const { Option } = Select;
 
 export const InvestorDetails2 = () => {
+    const [buttonClicked, setButtonClicked] = useState("Save");
+
     const { push } = useHistory();
     const { updateInvestorProfileData, stateAuth, updateInvestorInfo } =
         useAuth();
+    const {
+        changePath,
+        state: { path },
+    } = useActivity();
+
+    const next = () => {
+        changePath(path + 1);
+    };
+
     const onFinish = async (values) => {
-        updateInvestorInfo();
-        console.log(values);
+        const uploaded = updateInvestorInfo();
+
+        if (uploaded) {
+            toast.success("Saved Successfully");
+        } else {
+            toast.error("Something went wrong");
+        }
+
+        if (uploaded && buttonClicked === "Next") {
+            next();
+            push("#approach");
+        }
     };
     console.log(stateAuth);
 
@@ -32,10 +55,14 @@ export const InvestorDetails2 = () => {
         <div className="register-form-wrap">
             <h3 style={{ color: "#2e3192" }}>Investor Details</h3>
             <p>
-                This will help us provide startups personalised for your
+                This will help us provide startups, personalised for your
                 preferences
             </p>
-            <Form onFinish={onFinish} initialValues={{ remember: true }}>
+            <Form
+                onFinish={onFinish}
+                initialValues={{ remember: true }}
+                layout="vertical"
+            >
                 <FormCard>
                     <div className="row">
                         <section className="col-12 mb-4">
@@ -405,11 +432,19 @@ export const InvestorDetails2 = () => {
                         className="d-flex align-items-center"
                         style={{ columnGap: 9 }}
                     >
-                        <Button label="Save" variant="secondary" />
                         <Button
+                            type="submit"
+                            label="Save"
+                            variant="secondary"
+                            onClick={() => {
+                                setButtonClicked("Save");
+                            }}
+                        />
+                        <Button
+                            type="submit"
                             label="Next"
                             onClick={() => {
-                                push("#approach");
+                                setButtonClicked("Next");
                             }}
                         />
                     </div>

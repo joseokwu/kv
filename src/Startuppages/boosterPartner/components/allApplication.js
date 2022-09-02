@@ -15,19 +15,13 @@ import "../boosterPartner.css";
 import { EmptyState } from "../../../mentorComponents";
 
 export const AllApplication = ({ data }) => {
-  
-    console.log(data.data)
+    console.log(data.data);
 
-   
-    if (
-        data?.data?.length === 0
-    ) {
-        return <EmptyState message="No applications" />;
-    }
+    if (data?.length === 0) return <EmptyState message="No applications" />;
 
     return (
         <div className="row" style={{ columnGap: 10 }}>
-             {data?.data?.length > 0 &&
+            {data?.data?.length > 0 &&
                 data?.data.map((item, i) => (
                     <ApplicationCard
                         key={i}
@@ -64,20 +58,41 @@ export const AllApplication = ({ data }) => {
                             </p>
                         </div>
                         <div>
-                            <button className={` ${item?.status === 'APPROVED' ? 'approvedBtn' : item?.status === 'PENDING' ? 'cancelApp' : item?.status === 'DECLINED' ? 'declinedBtn' : ''}  mt-2 `}>
+                            <button
+                                className={` ${
+                                    item?.status === "APPROVED"
+                                        ? "approvedBtn"
+                                        : item?.status === "PENDING"
+                                        ? "cancelApp"
+                                        : item?.status === "DECLINED"
+                                        ? "declinedBtn"
+                                        : ""
+                                }  mt-2 `}
+                            >
                                 <img
                                     className="mr-2 mb-1"
-                                    src={item?.status === 'APPROVED' ? APPROVED : item?.status === 'PENDING' ? PENDING : item?.status === 'DECLINED' ? DECLINED : ''}
+                                    src={
+                                        item?.status === "APPROVED"
+                                            ? APPROVED
+                                            : item?.status === "PENDING"
+                                            ? PENDING
+                                            : item?.status === "DECLINED"
+                                            ? DECLINED
+                                            : ""
+                                    }
                                     alt="approved icon"
                                 />
-                                {item?.status === 'APPROVED' ? 'APPROVED' : item?.status === 'PENDING' ? 'PENDING' : item?.status === 'DECLINED' ? 'DECLINED' : ''}
+                                {item?.status === "APPROVED"
+                                    ? "APPROVED"
+                                    : item?.status === "PENDING"
+                                    ? "PENDING"
+                                    : item?.status === "DECLINED"
+                                    ? "DECLINED"
+                                    : ""}
                             </button>
                         </div>
                     </ApplicationCard>
-                ))} 
-
-            
-           
+                ))}
         </div>
     );
 };
@@ -169,8 +184,6 @@ export const AppliedModal = (data) => {
     );
 };
 
-
-
 export const YetToApplyModal = (data) => {
     return (
         <div className="applyModal px-4">
@@ -227,8 +240,6 @@ export const YetToApplyModal = (data) => {
         </div>
     );
 };
-
-
 
 //Approved Modal
 const ApprovedModal = ({ data = {} }) => {
@@ -324,5 +335,3 @@ const ApprovedModal = ({ data = {} }) => {
         </div>
     );
 };
-
-

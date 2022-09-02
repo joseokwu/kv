@@ -36,6 +36,70 @@ export const startUpRoutes = [
   },
 ];
 
+export const mentorRoutes = [
+  {
+    title: "Personal Details",
+    hash: "personal_details",
+    path: 1,
+  },
+  {
+    title: "Work Experience",
+    hash: "work_experience",
+    path: 2,
+  },
+  {
+    title: "Area of interest / skills",
+    hash: "area_of_interest",
+    path: 3,
+  },
+  {
+    title: "Consultant Offerings",
+    hash: "consulting",
+    path: 4,
+  },
+  {
+    title: "Assistant Info",
+    hash: "assistant_info",
+    path: 5,
+  },
+];
+
+export const investorRoutes = [
+  {
+    title: "Personal Details",
+    hash: "details",
+    path: 1,
+  },
+  {
+    title: "Investor Details",
+    hash: "investor",
+    path: 2,
+  },
+  {
+    title: "Investment Approach",
+    hash: "approach",
+    path: 3,
+  },
+  {
+    title: "Portfolio",
+    hash: "portfolio",
+    path: 4,
+  },
+];
+
+export const boosterPartnerRoutes = [
+  {
+    title: "Partner Details",
+    hash: "details",
+    path: 1,
+  },
+  {
+    title: "Our Offerings",
+    hash: "offerings",
+    path: 2,
+  },
+];
+
 export const dashboardRoutes = [
   {
     title: "Dashboard",
@@ -68,7 +132,12 @@ export const dashboardRoutes = [
     path: "/startup/events",
     icon: event,
   },
-
+  {
+    title: "E-Academy",
+    activator: "e-academy",
+    path: "/startup/e-academy",
+    icon: schedule,
+  },
 ];
 
 export const boosterNavigators = [

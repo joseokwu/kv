@@ -6,6 +6,7 @@ import {
     changeStatus,
     logout,
     edit,
+    updateUserObjAction,
     dashboardProfile,
     updateStartupData,
     updateStartupProfile,
@@ -15,6 +16,8 @@ import {
     updateMentorProfile,
     updateMentorData,
     updateStartupUserProfile,
+    removeWorkExperienceAction,
+    removeEducationAction,
 } from "../store/actions/auth";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
@@ -50,22 +53,25 @@ export const useAuth = () => {
 
     const userProfile = useCallback(
         async (value) => {
-            dispatch(await profile(value));
+            dispatch(await profile());
         },
         [dispatch]
     );
 
     const callUpdateStartupData = async (value) => {
-        console.log(value)
+        console.log(value);
         dispatch(updateStartupUserProfile(value));
     };
 
-    const getDashboardProfile = useCallback(
-        async (value) => {
-            dispatch(await dashboardProfile(value));
-        },
-        [dispatch]
-    );
+    const getUserData = useCallback(async () => {
+        console.log("function getUserData");
+        const res = await dispatch(profile());
+    }, [dispatch]);
+
+    const getDashboardProfile = useCallback(async () => {
+        const res = await dispatch(dashboardProfile());
+        return res;
+    }, [dispatch]);
 
     const editUser = () => {
         dispatch(edit());
@@ -89,14 +95,15 @@ export const useAuth = () => {
     const updateMentorInfo = async (lastPage = false) => {
         try {
             const dataToPost = {
-                accType: "mentor",
-                values: lastPage
+                id: stateAuth.mentorData?._id,
+                payload: lastPage
                     ? { ...stateAuth.mentorData, applicationCompleted: true }
                     : stateAuth.mentorData,
                 lastPage,
             };
 
             const res = await updateStartup(dataToPost);
+            console.log(res);
             return res?.success;
         } catch (error) {
             console.error(
@@ -116,17 +123,24 @@ export const useAuth = () => {
         history.push("/");
     };
 
+    const updateUserObj = async (values) => {
+        dispatch(updateUserObjAction(values));
+    };
+
     const updateStartupInfo = async (lastPage = false) => {
         try {
-            const payload = {
-                accType: stateAuth.type[0],
-                values: lastPage
-                    ? { ...stateAuth.startupData, applicationCompleted: true }
-                    : stateAuth.startupData,
-                lastPage,
+            const dataToPost = {
+                id: stateAuth.profileData?.startupRes?._id,
+                payload: lastPage
+                    ? {
+                          ...stateAuth.profileData?.startupRes,
+                          applicationCompleted: true,
+                      }
+                    : stateAuth.profileData?.startupRes,
+                // lastPage,
             };
-            console.log(payload);
-            const res = await updateStartup(payload);
+            console.log(dataToPost);
+            const res = await updateStartup(dataToPost);
             console.log(res);
             toast.success(res?.message);
             if (res?.success && lastPage) {
@@ -148,19 +162,23 @@ export const useAuth = () => {
 
     const updateInvestorInfo = async (lastPage = false) => {
         try {
-            const payload = {
-                accType: stateAuth.type[0],
-                values: lastPage
-                    ? { ...stateAuth.investorData, applicationCompleted: true }
+            const dataToPost = {
+                id: stateAuth.investorData?._id,
+                payload: lastPage
+                    ? {
+                          ...stateAuth.investorData,
+                          applicationCompleted: true,
+                      }
                     : stateAuth.investorData,
-                lastPage,
+                // lastPage,
             };
-            const res = await updateStartup(payload);
+
+            const res = await updateStartup(dataToPost);
             toast.success(res?.message);
             if (lastPage) {
                 history.push("/investor/dashboard");
             }
-            console.log(payload);
+            console.log(dataToPost);
         } catch (err) {
             console.log(err?.response);
             toast.error(err?.response?.data?.message ?? err?.response?.message);
@@ -173,24 +191,36 @@ export const useAuth = () => {
 
     const updatePartnerInfo = async (lastPage = false) => {
         try {
+            const newData = stateAuth?.partnerData;
             const payload = {
-                accType: stateAuth.type[0],
-                values: lastPage
-                    ? { ...stateAuth.partnerData, applicationCompleted: true }
-                    : stateAuth.partnerData,
-                lastPage,
+                id: stateAuth?.partnerData?._id,
+                payload: lastPage
+                    ? {
+                          ...stateAuth?.partnerData,
+                          applicationCompleted: true,
+                      }
+                    : stateAuth?.partnerData,
+                // lastPage,
             };
 
+            console.log("payload", payload);
             const res = await updateStartup(payload);
             toast.success(res?.message);
             if (lastPage) {
                 history.push("/boosterpartner/dashboard");
                 return;
             }
+            return res;
         } catch (err) {
             console.log(err?.response);
             toast.error(err?.response?.data?.message ?? err?.response?.message);
         }
+    };
+    const removeWorkExperience = (id) => {
+        dispatch(removeWorkExperienceAction(id));
+    };
+    const removeEducation = (id) => {
+        dispatch(removeEducationAction(id));
     };
 
     return {
@@ -201,10 +231,12 @@ export const useAuth = () => {
         changeSignup,
         userLogout,
         editUser,
+        updateUserObj,
         callUpdateStartupData,
         updatePartnerInfo,
         updatePartnerLocalData,
         getDashboardProfile,
+        getUserData,
         updateProfile,
         updateStartupInfo,
         updateInvestorProfileData,
@@ -213,5 +245,7 @@ export const useAuth = () => {
         updateMentorProfileState,
         getSavedMentorData,
         updateMentorInfo,
+        removeEducation,
+        removeWorkExperience,
     };
 };

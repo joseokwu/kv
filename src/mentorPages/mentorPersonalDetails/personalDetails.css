@@ -1,7 +1,6 @@
 .mentor_personal_details_wrap {
   /* padding: 48px 9%; */
-  padding: 0px 9% 48px 9%;
-  background-color: #fdfdfd;
+  /* padding: 0px 9% 48px 9%; */
   height: calc(100vh - 60px);
   /* overflow-y: auto; */
   scroll-behavior: smooth;
@@ -15,7 +14,7 @@
 
 .mentor_personal_details_header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: stretch;
   margin-bottom: 1.125rem;
   /* position:fixed; */
   /* overflow-x:hidden; */
@@ -57,8 +56,11 @@
 }
 
 .mentor_personal_details_grid {
-  display: grid;
-  grid-template-columns: minmax(220px, 250px) auto;
+  /* display: grid;
+  grid-template-columns: minmax(220px, 250px) auto; */
+  max-height: calc(-221px + 100vh);
+  /* max-height: calc(160px); */
+  overflow-y: auto;
 }
 
 @media (max-width: 768px) {

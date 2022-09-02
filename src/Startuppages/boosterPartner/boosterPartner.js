@@ -19,7 +19,7 @@ export const StartupBoosterPartner = () => {
     const [loading, setLoading] = useState(false);
     const [boosterData, setBoosterData] = useState([]);
     const [partners, setPartners] = useState({});
-    const [requests , setRequests] = useState([]);
+    const [requests, setRequests] = useState([]);
 
     const apply = (id) => {
         setPartners({
@@ -67,27 +67,31 @@ export const StartupBoosterPartner = () => {
         "Travel",
         "Virtual Assistant",
     ];
-    const approvedStartups = requests?.data?.filter(item => item?.status === 'APPROVED')?.length ;
-   
-
+    const approvedStartups = requests?.data?.filter(
+        (item) => item?.status === "APPROVED"
+    )?.length;
 
     useEffect(() => {
         const getData = async () => {
             setLoading(true);
-            const res = await getBoosterData({
-                page: currentPage,
-                limit: 4,
-                startupId: stateAuth?.startupData?.userId,
-            });
-            const allReq = await getStartupRequest({
-                startupId:stateAuth?.user?.userId,
-                page:1,
-                limit:5
-              })
-           
-            setRequests(allReq?.data);
-            setPartners(res?.data);
-            console.log(res?.data?.data);
+            try {
+                const res = await getBoosterData({
+                    page: currentPage,
+                    limit: 4,
+                    startupId: stateAuth?.profileData?.startupRes?.userId,
+                });
+                const allReq = await getStartupRequest({
+                    startupId: stateAuth?.user?.userId,
+                    page: 1,
+                    limit: 5,
+                });
+
+                setRequests(allReq?.data);
+                setPartners(res?.data);
+                console.log(res?.data?.data);
+            } catch (e) {
+                console.log(e);
+            }
             setLoading(false);
         };
         getData();
@@ -95,7 +99,6 @@ export const StartupBoosterPartner = () => {
 
     const history = useHistory();
 
-  
     const {
         location: { hash },
     } = history;
@@ -117,7 +120,16 @@ export const StartupBoosterPartner = () => {
             case "#My Applications":
                 return <MyApplications />;
             default:
-                return <AllOfferings />;
+                return (
+                    <AllOfferings
+                        setCurrentPage={setCurrentPage}
+                        data={partners}
+                        total={partners?.metadata && partners?.metadata?.total}
+                        currentPage={currentPage}
+                        partners={partners?.partners}
+                        apply={apply}
+                    />
+                );
         }
     };
 
@@ -153,7 +165,7 @@ export const StartupBoosterPartner = () => {
                     className="col-lg-4 col-md-12 col-12"
                     icon={newApp}
                     name={"Approved"}
-                    count={ approvedStartups ?? 0}
+                    count={approvedStartups ?? 0}
                     color={"#D5D6F4"}
                 />
                 {/* </> */}

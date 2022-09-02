@@ -1,4 +1,4 @@
-
+   
 import React, { useMemo, useEffect, useState } from 'react';
 import { Button, Modal, Tabs } from '../../components';
 import { CreateEvent, EventCard } from './components';
@@ -10,7 +10,7 @@ export const Events = () => {
     'Selection Day',
     'Demo day',
     'Pitching Session',
-    // "Others",
+    'Others',
   ];
   const [eventData, setEventData] = useState([]);
 
@@ -73,6 +73,7 @@ export const Events = () => {
                 );
               }
             })}
+
 
         </div>
         </section>
