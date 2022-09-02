@@ -161,7 +161,6 @@ export const CoFounder = ({
         try {
             const response = await upload(formData);
             setAvatar(response?.path);
-            updateField("avatar", avatar);
         } catch (error) {
             console.log(error);
             toast.error(
@@ -169,6 +168,7 @@ export const CoFounder = ({
             );
         }
         setLoading(false);
+        updateField("avatar", avatar);
     };
 
     const {
@@ -308,6 +308,7 @@ export const CoFounder = ({
                                     onChange={onChangeImage}
                                     id="found"
                                     hidden
+                                    accept="image/*"
                                 />
                                 <PlusOutlined style={{ color: "#ffffff" }} />
                             </CoInputWrapper>

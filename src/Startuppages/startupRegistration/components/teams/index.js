@@ -378,6 +378,7 @@ export const TeamProfile = () => {
                                 onChange={onChangeImage}
                                 id="found"
                                 hidden
+                                accept="image/*"
                             />
                             <PlusOutlined style={{ color: "#ffffff" }} />
                         </InputWrapper>
@@ -917,7 +918,7 @@ export const TeamProfile = () => {
                             <div className="sold w-100">
                                 <div className="d-flex justify-content-center">
                                     <div className="">
-                                        <div className="row">
+                                        <div className="row mb-4">
                                             {stateAuth?.profileData?.startupRes
                                                 ?.team?.coFounder &&
                                             stateAuth?.profileData?.startupRes
