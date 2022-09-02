@@ -24,6 +24,7 @@ import { updateFounderProfile } from "../../../../services";
 import { upload } from "../../../../services/utils";
 import { UploadFile } from "../../../../components/uploadFile";
 import { TextField } from "../../../../components";
+import { Form } from "antd";
 
 export const PitchDeck = () => {
     const { updateProfile, stateAuth, updateStartupInfo } = useAuth();
@@ -33,6 +34,8 @@ export const PitchDeck = () => {
     const [buttonClicked, setButtonClicked] = useState("Save");
 
     const history = useHistory();
+    const youtubeRegExp =
+        /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
 
     console.log(stateAuth?.profileData?.startupRes?.pitchDeck);
     const {
@@ -164,15 +167,21 @@ export const PitchDeck = () => {
                                     }}
                                 />
                             </div>
-                            <label> Paste Youtube Link of product Demo </label>
+                            <p className="my-4">
+                                Please enter a youtube link OR upload a video of
+                                your product demo
+                            </p>
+                            {/* <label> Paste Youtube Link of product Demo </label> */}
                             <div className="d-flex my-2">
                                 <div className="form-group form-group-spacee col-lg-6 col-12">
-                                    <TextField
+                                    {/* <TextField
                                         type={"url"}
                                         name={"youtubeDemoUrl"}
                                         value={youtube}
                                         onChange={(e) => {
-                                            setYoutube(e.target.value);
+                                            updateProfile("pitchDeck", {
+                                                pitchDeckVideo: e.target.value,
+                                            });
                                         }}
                                         className="form-control youtube-input ps-3"
                                         style={{
@@ -181,15 +190,46 @@ export const PitchDeck = () => {
                                         }}
                                         required={false}
                                         placeholder="https://youtube.com/"
-                                    />
+                                    /> */}
+                                    <Form.Item
+                                        name="youtubeDemoUrl"
+                                        label="Paste Youtube Link of product Demo"
+                                        initialValue={youtube}
+                                        rules={[
+                                            {
+                                                required: stateAuth?.profileData
+                                                    ?.startupRes?.pitchDeck
+                                                    ?.pitchDeckFile
+                                                    ? false
+                                                    : true,
+                                                message:
+                                                    "Please enter a valid youtube url or upload a video.",
+                                                pattern: youtubeRegExp,
+                                            },
+                                        ]}
+                                    >
+                                        <input
+                                            type="text"
+                                            name="youtubeDemoUrl"
+                                            onChange={(e) => {
+                                                updateProfile("pitchDeck", {
+                                                    pitchDeckVideo:
+                                                        e.target.value,
+                                                });
+                                            }}
+                                            value={youtube}
+                                            className="form-control youtube-input ps-3 w-100"
+                                            placeholder="Youtube link"
+                                        />
+                                    </Form.Item>
                                 </div>
-                                <button
+                                {/* <button
                                     type="button"
                                     className="button"
                                     onClick={addVid}
                                 >
                                     Upload
-                                </button>
+                                </button> */}
                             </div>
 
                             {!urls.includes("https://youtu.be/") ? (

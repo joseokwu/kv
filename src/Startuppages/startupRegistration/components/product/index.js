@@ -41,7 +41,10 @@ export const Product = () => {
 
     const history = useHistory();
     const handleChangeVids = (e) => {
-        setYoutube(e.target.value);
+        // setYoutube(e.target.value);
+        updateProfile("product", {
+            youtubeDemoUrl: e.target.value,
+        });
     };
     // console.log(stateAuth?.profileData?.startupRes?.product)
     const addVid = () => {
@@ -152,6 +155,11 @@ export const Product = () => {
                             </div>
                         </div>
 
+                        <p className="my-4">
+                            Please enter a youtube link OR upload a video of
+                            your product demo
+                        </p>
+
                         <div className="form-group col-12 mt-3">
                             <div className="d-flex flex-row align-items-center my-2 gap-4">
                                 <Form.Item
@@ -179,7 +187,7 @@ export const Product = () => {
                                         placeholder="Youtube link"
                                     />
                                 </Form.Item>
-                                <Button
+                                {/* <Button
                                     type="button"
                                     className="button"
                                     onClick={addVid}
@@ -188,7 +196,7 @@ export const Product = () => {
                                         !youtubeRegExp.test(youtube) &&
                                         youtube !== ""
                                     }
-                                />
+                                /> */}
                             </div>
                             {!urls.includes("https://youtu.be/") ? (
                                 <div className="form-group col-12 mt-3">
