@@ -109,6 +109,7 @@
 
 .componentHeader {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -120,7 +121,7 @@
 .addComponent {
   padding: 4rem 1rem;
   border: 1px dashed rgba(46, 49, 146, 1);
-  width: 30%;
+  /* width: 30%; */
   border-radius: 10px;
   margin-bottom: 1rem;
 }
@@ -174,7 +175,6 @@
 .subContainer {
   display: flex;
   align-items: center;
-  width: 100%;
 }
 
 .subLeft {
@@ -183,6 +183,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .img {

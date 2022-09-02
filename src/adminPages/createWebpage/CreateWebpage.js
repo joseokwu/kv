@@ -27,6 +27,7 @@ import { EditComponent } from '../webpages/components/EditComponent';
 import copy from '../../assets/icons/copy.svg';
 import success from '../../assets/icons/success-check.svg';
 import { logout } from '../../store/actions/auth';
+import deleteIcon from '../../assets/icons/del-red.svg';
 import toast from 'react-hot-toast';
 // import updateProfile
 
@@ -131,26 +132,27 @@ export const CreateWebpage = () => {
         if (trackHeader || trackText) {
           return;
         }
+        if (tempSections[sectionIndex][columnIndex]['components']) {
+          let tempHeaders =
+            tempSections[sectionIndex][columnIndex]['components']['headers'];
+          let tempTexts =
+            tempSections[sectionIndex][columnIndex]['components']['texts'];
+          let tempImages =
+            tempSections[sectionIndex][columnIndex]['components']['images'];
+          tempHeaders = [...tempHeaders, ...headers];
+          tempTexts = [...tempTexts, ...texts];
+          tempImages = [...tempImages, ...images];
+          tempSections[sectionIndex][columnIndex]['components'] = {
+            headers: tempHeaders,
+            texts: tempTexts,
+            images: tempImages,
+          };
 
-        let tempHeaders =
-          tempSections[sectionIndex][columnIndex]['components']['headers'];
-        let tempTexts =
-          tempSections[sectionIndex][columnIndex]['components']['texts'];
-        let tempImages =
-          tempSections[sectionIndex][columnIndex]['components']['images'];
-        tempHeaders = [...tempHeaders, ...headers];
-        tempTexts = [...tempTexts, ...texts];
-        tempImages = [...tempImages, ...images];
-        tempSections[sectionIndex][columnIndex]['components'] = {
-          headers: tempHeaders,
-          texts: tempTexts,
-          images: tempImages,
-        };
-
-        tempSections[sectionIndex][columnIndex]['data'] = {
-          ...tempSections[sectionIndex][columnIndex]['data'],
-          ...obj,
-        };
+          tempSections[sectionIndex][columnIndex]['data'] = {
+            ...tempSections[sectionIndex][columnIndex]['data'],
+            ...obj,
+          };
+        }
       } else {
         let obj = {};
         let trackEmptyHeader = false;
@@ -285,6 +287,24 @@ export const CreateWebpage = () => {
     }
   };
 
+  const deleteColumn = (sectionInd, columnInd) => {
+    let tempSections = [...sections];
+
+    tempSections[sectionInd]?.splice(columnInd, 1);
+
+    setSections([...tempSections]);
+    toast.success('Column Deleted');
+  };
+
+  const deleteSection = (ind) => {
+    let tempSections = [...sections];
+
+    tempSections.splice(ind, 1);
+
+    setSections(tempSections);
+    toast.success('Section Deleted');
+  };
+
   useEffect(() => {
     let timer;
     if (check) {
@@ -359,15 +379,24 @@ export const CreateWebpage = () => {
               <div className={styles.componentContainer} key={ind}>
                 <div className={styles.componentHeader}>
                   <h5 className='mb-5'>Section</h5>
+                  <img
+                    className='ml-2'
+                    src={deleteIcon}
+                    role='button'
+                    height={20}
+                    width={20}
+                    alt='delete'
+                    onClick={() => deleteSection(ind)}
+                  />
                 </div>
 
-                <div className='d-flex flex-wrap justify-content-between'>
+                <div className='d-flex flex-wrap gap-5'>
                   {section?.map((column, i) => {
                     return (
                       <div className={styles.subContainer} key={i}>
                         {getColumnLength(column['components']) > 0 ? (
                           <div className={styles.subLeft}>
-                            <span className='d-flex'>
+                            <span className='d-flex mb-2'>
                               <h6 className='mr-2'>
                                 Components -{' '}
                                 {getColumnLength(column['components'])}
@@ -398,7 +427,7 @@ export const CreateWebpage = () => {
                               </span>
                             </span>
                             <span>
-                              <div className='d-flex align-items-center space-out'>
+                              <div className='d-flex align-items-center justify-content-between'>
                                 <p
                                   className='view-link'
                                   role='button'
@@ -412,35 +441,41 @@ export const CreateWebpage = () => {
                                 >
                                   Edit
                                 </p>
-                                {/* <p className='view-link' role='button'>
-                                  Preview
-                                </p> */}
+                                <img
+                                  className='ml-2'
+                                  role='button'
+                                  src={deleteIcon}
+                                  alt='delete'
+                                  onClick={() => deleteColumn(ind, i)}
+                                />
                               </div>
                             </span>
                           </div>
                         ) : (
                           ''
                         )}
-                        <div key={i} className={styles.addComponent}>
-                          <img
-                            className={styles.img}
-                            src={plusCircle}
-                            alt='plus'
-                            width={20}
-                          />
-                          <button
-                            onClick={() => {
-                              setIsEditing(false);
-                              setColumnIndex(i);
-                              setSectionIndex(ind);
-                            }}
-                            className={styles.textButton}
-                            data-toggle='modal'
-                            data-target={`#addComponent`}
-                          >
-                            Add Component
-                          </button>
-                        </div>
+                        {getColumnLength(column['components']) <= 0 && (
+                          <div key={i} className={styles.addComponent}>
+                            <img
+                              className={styles.img}
+                              src={plusCircle}
+                              alt='plus'
+                              width={20}
+                            />
+                            <button
+                              onClick={() => {
+                                setIsEditing(false);
+                                setColumnIndex(i);
+                                setSectionIndex(ind);
+                              }}
+                              className={styles.textButton}
+                              data-toggle='modal'
+                              data-target={`#addComponent`}
+                            >
+                              Add Component
+                            </button>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
