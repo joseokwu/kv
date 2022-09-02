@@ -111,11 +111,9 @@ export const EditComponent = ({
 
   const deleteHeader = (i, oldVal) => {
     let tempData = { ...data };
-    for (let k in tempData) {
-      if (k === oldVal) {
-        delete tempData[k];
-      }
-    }
+
+    delete tempData[oldVal];
+
     const newVal = headers.filter((item, index) => index !== i);
     setHeaders((prev) => newVal);
     setData(tempData);
@@ -123,11 +121,9 @@ export const EditComponent = ({
 
   const deleteText = (i, oldVal) => {
     let tempData = { ...data };
-    for (let k in tempData) {
-      if (k === oldVal) {
-        delete tempData[k];
-      }
-    }
+
+    delete tempData[oldVal];
+
     const newVal = texts.filter((item, index) => index !== i);
     setTexts((prev) => newVal);
     setData(tempData);
@@ -162,6 +158,8 @@ export const EditComponent = ({
     if (
       sections.length > 0 &&
       sections[sectionIndex].length > 0 &&
+      sections[sectionIndex][columnIndex] &&
+      sections[sectionIndex][columnIndex]['components'] &&
       Object.keys(sections[sectionIndex][columnIndex]['components']).length > 0
     ) {
       setHeaders(sections[sectionIndex][columnIndex]['components']['headers']);
@@ -183,7 +181,7 @@ export const EditComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4>Header</h4>
+            <h4 onClick={() => console.log(sections)}>Header</h4>
             <button
               className={styles.textButton2}
               onClick={() => setHeaders([...headers, { key: '', title: '' }])}

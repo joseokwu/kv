@@ -65,13 +65,15 @@ export const AddComponent = ({
     setImages(mainImages);
   };
 
-  const deleteHeader = (i) => {
+  const deleteHeader = (i, key) => {
+    delete headers[key];
     const newVal = headers.filter((item, index) => index !== i);
 
     setHeaders((prev) => newVal);
   };
 
-  const deleteText = (i) => {
+  const deleteText = (i, key) => {
+    delete texts[key];
     const newVal = texts.filter((item, index) => index !== i);
     setTexts((prev) => newVal);
   };
@@ -113,7 +115,7 @@ export const AddComponent = ({
       >
         <section className=' my-4'>
           <div className='d-flex justify-content-between'>
-            <h4>Header</h4>
+            <h4 onClick={() => console.log(headers, texts)}>Header</h4>
             <button
               className={styles.textButton2}
               onClick={() => {
@@ -148,7 +150,7 @@ export const AddComponent = ({
                   className='ml-2'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteHeader(i)}
+                  onClick={() => deleteHeader(i, item?.key)}
                 />
               </div>
             );
@@ -193,7 +195,7 @@ export const AddComponent = ({
                   className='ml-2'
                   src={deleteIcon}
                   alt='delete'
-                  onClick={() => deleteText(i)}
+                  onClick={() => deleteText(i, item?.key)}
                 />
               </div>
             );

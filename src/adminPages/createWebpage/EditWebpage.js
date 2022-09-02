@@ -28,6 +28,8 @@ import copy from '../../assets/icons/copy.svg';
 import success from '../../assets/icons/success-check.svg';
 import { logout } from '../../store/actions/auth';
 import toast from 'react-hot-toast';
+import deleteIcon from '../../assets/icons/del-red.svg';
+
 // import updateProfile
 
 export const EditWebpage = () => {
@@ -131,26 +133,27 @@ export const EditWebpage = () => {
         if (trackHeader || trackText) {
           return;
         }
+        if (tempSections[sectionIndex][columnIndex]['components']) {
+          let tempHeaders =
+            tempSections[sectionIndex][columnIndex]['components']['headers'];
+          let tempTexts =
+            tempSections[sectionIndex][columnIndex]['components']['texts'];
+          let tempImages =
+            tempSections[sectionIndex][columnIndex]['components']['images'];
+          tempHeaders = [...tempHeaders, ...headers];
+          tempTexts = [...tempTexts, ...texts];
+          tempImages = [...tempImages, ...images];
+          tempSections[sectionIndex][columnIndex]['components'] = {
+            headers: tempHeaders,
+            texts: tempTexts,
+            images: tempImages,
+          };
 
-        let tempHeaders =
-          tempSections[sectionIndex][columnIndex]['components']['headers'];
-        let tempTexts =
-          tempSections[sectionIndex][columnIndex]['components']['texts'];
-        let tempImages =
-          tempSections[sectionIndex][columnIndex]['components']['images'];
-        tempHeaders = [...tempHeaders, ...headers];
-        tempTexts = [...tempTexts, ...texts];
-        tempImages = [...tempImages, ...images];
-        tempSections[sectionIndex][columnIndex]['components'] = {
-          headers: tempHeaders,
-          texts: tempTexts,
-          images: tempImages,
-        };
-
-        tempSections[sectionIndex][columnIndex]['data'] = {
-          ...tempSections[sectionIndex][columnIndex]['data'],
-          ...obj,
-        };
+          tempSections[sectionIndex][columnIndex]['data'] = {
+            ...tempSections[sectionIndex][columnIndex]['data'],
+            ...obj,
+          };
+        }
       } else {
         let obj = {};
         let trackEmptyHeader = false;
@@ -276,6 +279,21 @@ export const EditWebpage = () => {
     }
   };
 
+  const deleteColumn = (sectionInd, columnInd) => {
+    let tempSections = [...sections];
+    tempSections[sectionInd]?.splice(columnInd, 1);
+    console.log(tempSections);
+    setSections([...tempSections]);
+  };
+
+  const deleteSection = (ind) => {
+    let tempSections = [...sections];
+
+    tempSections.splice(ind, 1);
+
+    setSections(tempSections);
+  };
+
   useEffect(() => {
     if (state?.slug) {
       const getData = async () => {
@@ -363,6 +381,15 @@ export const EditWebpage = () => {
               <div className={styles.componentContainer} key={ind}>
                 <div className={styles.componentHeader}>
                   <h5 className='mb-5'>Section</h5>
+                  <img
+                    className='ml-2'
+                    src={deleteIcon}
+                    role='button'
+                    height={20}
+                    width={20}
+                    alt='delete'
+                    onClick={() => deleteSection(ind)}
+                  />
                 </div>
 
                 <div className='d-flex flex-wrap justify-content-between'>
@@ -416,35 +443,41 @@ export const EditWebpage = () => {
                                 >
                                   Edit
                                 </p>
-                                {/* <p className='view-link' role='button'>
-                                  Preview
-                                </p> */}
+                                <img
+                                  className='ml-2'
+                                  role='button'
+                                  src={deleteIcon}
+                                  alt='delete'
+                                  onClick={() => deleteColumn(ind, i)}
+                                />
                               </div>
                             </span>
                           </div>
                         ) : (
                           ''
                         )}
-                        <div key={i} className={styles.addComponent}>
-                          <img
-                            className={styles.img}
-                            src={plusCircle}
-                            alt='plus'
-                            width={20}
-                          />
-                          <button
-                            onClick={() => {
-                              setIsEditing(false);
-                              setColumnIndex(i);
-                              setSectionIndex(ind);
-                            }}
-                            className={styles.textButton}
-                            data-toggle='modal'
-                            data-target={`#addComponent`}
-                          >
-                            Add Component
-                          </button>
-                        </div>
+                        {getColumnLength(column['components']) <= 0 && (
+                          <div key={i} className={styles.addComponent}>
+                            <img
+                              className={styles.img}
+                              src={plusCircle}
+                              alt='plus'
+                              width={20}
+                            />
+                            <button
+                              onClick={() => {
+                                setIsEditing(false);
+                                setColumnIndex(i);
+                                setSectionIndex(ind);
+                              }}
+                              className={styles.textButton}
+                              data-toggle='modal'
+                              data-target={`#addComponent`}
+                            >
+                              Add Component
+                            </button>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
