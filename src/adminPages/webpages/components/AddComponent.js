@@ -70,12 +70,14 @@ export const AddComponent = ({
     const newVal = headers.filter((item, index) => index !== i);
 
     setHeaders((prev) => newVal);
+    toast.success('Header Deleted');
   };
 
   const deleteText = (i, key) => {
     delete texts[key];
     const newVal = texts.filter((item, index) => index !== i);
     setTexts((prev) => newVal);
+    toast.success('Text Deleted');
   };
 
   // const handleFiles = (value) => {

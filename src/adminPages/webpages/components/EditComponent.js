@@ -117,6 +117,7 @@ export const EditComponent = ({
     const newVal = headers.filter((item, index) => index !== i);
     setHeaders((prev) => newVal);
     setData(tempData);
+    toast.success('Header Deleted');
   };
 
   const deleteText = (i, oldVal) => {
@@ -127,6 +128,7 @@ export const EditComponent = ({
     const newVal = texts.filter((item, index) => index !== i);
     setTexts((prev) => newVal);
     setData(tempData);
+    toast.success('Text Deleted');
   };
 
   const handleFiles = (value) => {

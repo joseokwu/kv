@@ -289,10 +289,11 @@ export const CreateWebpage = () => {
 
   const deleteColumn = (sectionInd, columnInd) => {
     let tempSections = [...sections];
-    console.log(tempSections);
+
     tempSections[sectionInd]?.splice(columnInd, 1);
-    console.log(tempSections);
+
     setSections([...tempSections]);
+    toast.success('Column Deleted');
   };
 
   const deleteSection = (ind) => {
@@ -301,6 +302,7 @@ export const CreateWebpage = () => {
     tempSections.splice(ind, 1);
 
     setSections(tempSections);
+    toast.success('Section Deleted');
   };
 
   useEffect(() => {
@@ -388,7 +390,7 @@ export const CreateWebpage = () => {
                   />
                 </div>
 
-                <div className='d-flex flex-wrap justify-content-between'>
+                <div className='d-flex flex-wrap gap-5'>
                   {section?.map((column, i) => {
                     return (
                       <div className={styles.subContainer} key={i}>

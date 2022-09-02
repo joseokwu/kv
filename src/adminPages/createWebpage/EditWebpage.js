@@ -284,6 +284,7 @@ export const EditWebpage = () => {
     tempSections[sectionInd]?.splice(columnInd, 1);
     console.log(tempSections);
     setSections([...tempSections]);
+    toast.success('Column Deleted');
   };
 
   const deleteSection = (ind) => {
@@ -292,6 +293,7 @@ export const EditWebpage = () => {
     tempSections.splice(ind, 1);
 
     setSections(tempSections);
+    toast.success('Section Deleted');
   };
 
   useEffect(() => {
